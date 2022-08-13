@@ -1,0 +1,23 @@
+.order-custorm{
+    position: relative;
+}
+
+.search-custorm{
+    position: absolute;
+    top: 5px;
+    right: 1px;
+    border: none;
+    background: white;
+    outline: none;
+}
+.table-warehouse table{
+    font-size:12px!important; 
+    table-layout: auto;
+    width: 100%;
+}
+.table-warehouse table th{
+    border: 1px solid #f7eded;
+}
+.table-warehouse table td{
+    border: 1px solid #f7f1f1;
+}
