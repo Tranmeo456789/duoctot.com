@@ -16,13 +16,18 @@ class ShopFrontEndController extends Controller
     protected $pageTitle          = '';
     public function __construct()
     {
-        $this->middleware(function ($request, $next) {
-            view()->share([
-                'moduleName'                => $this->moduleName,
-                'controllerName'            => $this->controllerName,
-                'pageTitle'                 => $this->pageTitle
-            ]);
-            return $next($request);
-        });
+        // $this->middleware(function ($request, $next) {
+        //     view()->share([
+        //         'moduleName'                => $this->moduleName,
+        //         'controllerName'            => $this->controllerName,
+        //         'pageTitle'                 => $this->pageTitle
+        //     ]);
+        //     return $next($request);
+        // });
+        view()->share([
+            'moduleName'                => $this->moduleName,
+            'controllerName'            => $this->controllerName,
+            'pageTitle'                 => $this->pageTitle
+        ]);
     }
 }

@@ -5,16 +5,16 @@
 <ul class="clearfix">
     @php
         $items = [
-            [ 'name' => 'Siro bổ phế bối mẫu Forte Mom and Baby Tất thành<','price'  => '115.000đ','unit'=>'chai','image' => 'selling2.png'],
-            [ 'name' => 'Siro bổ phế bối mẫu Forte Mom and Baby Tất thành<','price'  => '115.000đ','unit'=>'chai','image' => 'selling3.png'],
-            [ 'name' => 'Siro bổ phế bối mẫu Forte Mom and Baby Tất thành<','price'  => '115.000đ','unit'=>'chai','image' => 'selling4.png'],
-            [ 'name' => 'Siro bổ phế bối mẫu Forte Mom and Baby Tất thành<','price'  => '115.000đ','unit'=>'chai','image' => 'selling2.png'],
-            [ 'name' => 'Siro bổ phế bối mẫu Forte Mom and Baby Tất thành<','price'  => '115.000đ','unit'=>'chai','image' => 'selling3.png'],
-            [ 'name' => 'Siro bổ phế bối mẫu Forte Mom and Baby Tất thành<','price'  => '115.000đ','unit'=>'chai','image' => 'selling4.png'],
-            [ 'name' => 'Siro bổ phế bối mẫu Forte Mom and Baby Tất thành<','price'  => '115.000đ','unit'=>'chai','image' => 'selling2.png'],
-            [ 'name' => 'Siro bổ phế bối mẫu Forte Mom and Baby Tất thành<','price'  => '115.000đ','unit'=>'chai','image' => 'selling3.png'],
-            [ 'name' => 'Siro bổ phế bối mẫu Forte Mom and Baby Tất thành<','price'  => '115.000đ','unit'=>'chai','image' => 'selling4.png'],
-            [ 'name' => 'Siro bổ phế bối mẫu Forte Mom and Baby Tất thành<','price'  => '115.000đ','unit'=>'chai','image' => 'selling2.png']
+            [ 'name' => 'Siro bổ phế bối mẫu Forte Mom and Baby Tất thành','price'  => '115.000đ','unit'=>'chai','image' => 'selling2.png'],
+            [ 'name' => 'Siro bổ phế bối mẫu Forte Mom and Baby Tất thành','price'  => '115.000đ','unit'=>'chai','image' => 'selling3.png'],
+            [ 'name' => 'Siro bổ phế bối mẫu Forte Mom and Baby Tất thành','price'  => '115.000đ','unit'=>'chai','image' => 'selling4.png'],
+            [ 'name' => 'Siro bổ phế bối mẫu Forte Mom and Baby Tất thành','price'  => '115.000đ','unit'=>'chai','image' => 'selling2.png'],
+            [ 'name' => 'Siro bổ phế bối mẫu Forte Mom and Baby Tất thành','price'  => '115.000đ','unit'=>'chai','image' => 'selling3.png'],
+            [ 'name' => 'Siro bổ phế bối mẫu Forte Mom and Baby Tất thành','price'  => '115.000đ','unit'=>'chai','image' => 'selling4.png'],
+            [ 'name' => 'Siro bổ phế bối mẫu Forte Mom and Baby Tất thành','price'  => '115.000đ','unit'=>'chai','image' => 'selling2.png'],
+            [ 'name' => 'Siro bổ phế bối mẫu Forte Mom and Baby Tất thành','price'  => '115.000đ','unit'=>'chai','image' => 'selling3.png'],
+            [ 'name' => 'Siro bổ phế bối mẫu Forte Mom and Baby Tất thành','price'  => '115.000đ','unit'=>'chai','image' => 'selling4.png'],
+            [ 'name' => 'Siro bổ phế bối mẫu Forte Mom and Baby Tất thành','price'  => '115.000đ','unit'=>'chai','image' => 'selling2.png']
         ];
     @endphp
     @foreach ($items as $item)
