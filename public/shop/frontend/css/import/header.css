@@ -1,0 +1,45 @@
+/*HEADER*/
+#head-top{ background:#072D94;}
+#head-top p{
+    font-size: 16px;
+}
+#head-top .btn-login{
+    color: black;
+    background-color: white;
+    padding: 2px 8px;
+    border: 1px solid #072D94;
+    border-radius: 20px;
+    font-weight: bold;
+}
+#head-top .btn-register{
+    color: white;
+    background-color: #DB2925;
+    padding: 2px 14px;
+    border: 1px solid #DB2925;
+    border-radius: 20px;
+    font-weight: bold;
+}
+#head-top #main-menu li a{
+    display: block;
+    color: #fff;
+    padding: 10px 15px;
+}
+#head-top #main-menu li{ float: left;}
+#head-top #payment-link{
+    position: relative;
+    display: block;
+    color: #fff;
+    padding: 10px 0px 10px 0px;
+}
+#head-body{ background: white;}
+#head-body #main-menu li{
+    padding: 10px;
+    margin-right: 10px;
+}
+#head-body #main-menu a{
+    font-size: 13px;
+    font-weight: bold;
+    color: #111111;
+    text-transform: uppercase; 
+}
+/* end */

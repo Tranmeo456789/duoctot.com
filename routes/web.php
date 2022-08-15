@@ -11,3 +11,4 @@
 |
 */
 include_once 'shopBackEnd.php';
+include_once 'shopFrontEnd.php';

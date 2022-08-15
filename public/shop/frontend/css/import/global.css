@@ -1,0 +1,23 @@
+/*GLOBAL*/
+body{
+    font-family: 'Helvetica Neue';
+    font-size: 14px;
+    line-height: normal;
+    color: #272727;
+    line-height: 24px;
+}
+.wp-inner{
+    width: 1170px;
+    margin: 0px auto;
+}
+img{
+    max-width: 100%;
+    height: auto;
+}
+.fl-left{ float: left;}
+.fl-right{ float: right;}
+a:hover{
+    text-decoration: none;
+}
+
+
