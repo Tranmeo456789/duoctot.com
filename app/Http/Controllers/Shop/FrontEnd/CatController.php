@@ -21,7 +21,4 @@ class CatController extends ShopFrontEndController
     public function index(){
         return view($this->pathViewController . 'index');
     }
-    public function view_full(){
-        return view($this->pathViewController . 'cat_level2_full');
-    }
 }
