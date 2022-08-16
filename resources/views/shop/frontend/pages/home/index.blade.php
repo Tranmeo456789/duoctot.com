@@ -1,6 +1,7 @@
 @extends('shop.layouts.frontend')
 
 @section('content')
+    
     <div style="">
         <img src="{{asset('images/shop/header1920.png')}}" alt="" class="img-fluid">
     </div>

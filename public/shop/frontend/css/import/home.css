@@ -6,10 +6,10 @@
 
 #form-search {
     position: absolute;
-    width: 1165px;
+    width: 87%;
     padding-bottom: 30px;
     left: 100px;
-    top: 365px;
+    transform: translateY(-30%);
     background: #FFFFFF;
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.05);
     border-radius: 50px;
@@ -41,6 +41,7 @@
     border: 1px solid #98FAFB;
     border-radius: 40px;
     font-size: 20px;
+    text-indent: 25px;
 }
 
 #form-search .form-search-inner li {

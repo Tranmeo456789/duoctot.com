@@ -1,7 +1,7 @@
 <div id="header-wp">
     <div id="head-top" class="clearfix">
         <div class="wp-inner">
-            <a href="" title="" id="payment-link" class="fl-left"><img style="width:213px" src="{{asset('images/shop/logo_topbar1.png')}}" alt=""></a>
+            <a href="" title="" id="payment-link" class="fl-left"><img style="width:213px" src="{{asset('images/shop/logo_topbar2.png')}}" alt=""></a>
             <div id="" class="fl-left" style="margin-left:300px; padding-top:5px">
                     <a href="" title="" id="payment-link" class="">
                         <div class="clearfix">
@@ -37,15 +37,14 @@
                     <div class="btn-login">Đăng nhập</div>
                 </a>
             </div>
-
         </div>
     </div>
     <div id="head-body">
-        <div class="wp-inner">
+        <div class="wp-inner clearfix">
             <div class="fl-left">
                 <ul id="main-menu" class="d-flex">
                     <li>
-                        <a href="">Thực phẩm chức năng</a>
+                        <a href="{{route('fe.category_level2')}}">Thực phẩm chức năng</a>
                     </li>
                     <li>
                         <a href="">Dược mỹ phẩm</a>
@@ -70,7 +69,6 @@
                     </li>
                 </ul>
             </div>
-
             <div class="fl-right d-flex pt-2">
                 <img src="{{asset('images/shop/flag.png')}}" alt="" srcset="">
                 <p class="pt-2">Tiếng Việt</p>
