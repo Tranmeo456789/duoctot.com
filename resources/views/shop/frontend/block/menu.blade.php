@@ -1,11 +1,8 @@
 <div id="header-wp">
-    <div class="head_topon d-flex justify-content-center py-2">
-        <div class="d-flex justify-content-center">
-            <div class="d-flex justify-content-center">
-                <img src="{{asset('images/shop/iconred.png')}}" alt="">
-                <span class="circle-ripple"></span>
-                <p>Kết nối khám chữa bệnh tại nhà với các bác sĩ online</p>
-            </div>
+    <div class="head_topon d-flex justify-content-center py-1">
+        <div class="d-flex justify-content-center align-middle">
+            <span class="circle-ripple"></span>
+            <p>Kết nối khám chữa bệnh tại nhà với các bác sĩ online</p>
             <a href="">Xem hướng dẫn</a>
         </div>
     </div>
@@ -69,7 +66,7 @@
                 <input type="text">
                 <img src="{{asset('images/shop/icsp.png')}}" alt="">
             </div>
-        </div>   
+        </div>
     </div>
     <div id="head-body">
         <div class="wp-inner clearfix">
