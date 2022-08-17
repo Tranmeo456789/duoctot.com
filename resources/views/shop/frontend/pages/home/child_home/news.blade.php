@@ -4,9 +4,9 @@
         <img src="{{asset('images/shop/news1.png')}}" alt="">
         <h1>Tin tức và góc sức khỏe</h1>
     </div>
-    <div class="row ">
-        <div class="col-md-6 news-content-right px-0">
-            <img src="{{asset('images/shop/news2.png')}}" alt="">
+    <div class="row px-2">
+        <div class="col-xl-6 col-lg-12 news-content-right px-0 mb-xl-0 mb-lg-3">
+            <img src="{{asset('images/shop/news2.png')}}" alt="" style="width:100%">
             <div class="px-3 py-3">
                 <a>Lupus ban đỏ và thai nghén: Bệnh Lupus Ảnh Hưởng Như Thế Nào Đến Quá Trình Mang Thai?</a>
                 <div class="text-mute d-flex mt-3">
@@ -14,9 +14,8 @@
                     <div class="ml-2">1 tuần trước</div>
                 </div>
             </div>
-
         </div>
-        <div class="col-md-6 news-content-left">
+        <div class="col-xl-6 col-lg-12 news-content-left">
             <ul>
                 <li class="d-flex">
                     <img src="{{asset('images/shop/news3.png')}}" alt="">

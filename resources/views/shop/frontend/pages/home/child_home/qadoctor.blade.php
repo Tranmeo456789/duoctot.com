@@ -1,7 +1,7 @@
 <div class="wp-inner">
     <h1 class="mb-3">Hỏi đáp bác sĩ</h1>
     <div class="row ml-0">
-        <div class="position-relative mesqa col-md-6">
+        <div class="position-relative mesqa col-xl-6 col-lg-12">
             <div class="row">
                 <div class="col-md-6 px-0">
                     <div class="qcustomer">
@@ -105,7 +105,7 @@
             </div>
         </div>
 
-        <div class="col-md-6 medical-faculty">
+        <div class="col-xl-6 col-lg-12 medical-faculty">
             <h6>Hơn <span class="lage-font">1000 bác sỹ</span> đang sẵn sàng giúp đỡ bạn</h6>
             <ul class="list-medical-faculty mt-2 clearfix">
                     <li class="position-relative">

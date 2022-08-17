@@ -1,6 +1,6 @@
 <div class="form-search-inner">
     <h1>Tra Cứu Thuốc, TPCN, Bệnh lý...</h1>
-    <div style="postion:relative">
+    <div class="position-relative">
         <input type="search" placeholder="Nhập từ khóa...">
         <button>
             <img src="{{asset('images/shop/icon-search.png')}}" alt="">

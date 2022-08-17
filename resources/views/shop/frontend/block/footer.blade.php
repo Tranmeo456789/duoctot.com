@@ -1,49 +1,51 @@
 <div id="footer-wp" class="pb-5">
     <div class="wp-inner">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-xl-3 col-lg-12">
                 <h1 class="mb-3">TDOCTOR</h1>
-                <p>Về chúng tôi</p>
-                <p>Liên hệ</p>
-                <p>Quy trình giải quyết tranh chấp</p>
-                <p>Chính sách bảo mật thông tin</p>
-                <p>Đăng ký bác sỹ</p>
-                <p>Đăng ký phòng khám</p>
+                <p><a href="">Về chúng tôi</a></p>
+                <p><a href="">Liên hệ</a></p>
+                <p><a href="">Quy trình giải quyết tranh chấp</a></p>
+                <p><a href="">Chính sách bảo mật thông tin</a></p>
+                <p><a href="">Đăng ký bác sỹ</a></p>
+                <p><a href="">Đăng ký phòng khám</a></p>
             </div>
-            <div class="col-md-3 social">
+            <div class="col-xl-3 col-lg-12">
                 <h1 class="mb-1">Liên hệ</h1>
-                <div class="d-flex">
-                    <div class="icon-social">
-                        <img src="{{asset('images/shop/fb.png')}}" alt="">
+                <div class="social">
+                    <div class="d-flex">
+                        <div class="icon-social">
+                            <a href=""><img src="{{asset('images/shop/fb.png')}}" alt=""></a>
+                        </div>
+                        <p>Facebook</p>
                     </div>
-                    <p>Facebook</p>
-                </div>
-                <div class="d-flex">
-                    <div class="icon-social">
-                        <img src="{{asset('images/shop/tw.png')}}" alt="">
+                    <div class="d-flex">
+                        <div class="icon-social">
+                            <a href=""><img src="{{asset('images/shop/tw.png')}}" alt=""></a>
+                        </div>
+                        <p>Twitter</p>
                     </div>
-                    <p>Twitter</p>
-                </div>
-                <div class="d-flex">
-                    <div class="icon-social">
-                        <img src="{{asset('images/shop/ins.png')}}" alt="">
+                    <div class="d-flex">
+                        <div class="icon-social">
+                            <a href=""><img src="{{asset('images/shop/ins.png')}}" alt=""></a>
+                        </div>
+                        <p>Linkedin</p>
                     </div>
-                    <p>Linkedin</p>
-                </div>
-                <div class="d-flex">
-                    <div class="icon-social">
-                        <img src="{{asset('images/shop/yt.png')}}" alt="">
+                    <div class="d-flex">
+                        <div class="icon-social">
+                            <a href=""><img src="{{asset('images/shop/yt.png')}}" alt=""></a>
+                        </div>
+                        <p>Youtube</p>
                     </div>
-                    <p>Youtube</p>
-                </div>
-                <div class="d-flex">
-                    <div class="icon-social">
-                        <img src="{{asset('images/shop/in.png')}}" alt="">
+                    <div class="d-flex">
+                        <div class="icon-social">
+                            <a href=""><img src="{{asset('images/shop/in.png')}}" alt=""></a>
+                        </div>
+                        <p>Instagram</p>
                     </div>
-                    <p>Instagram</p>
-                </div>
+                </div>             
             </div>
-            <div class="col-md-6 social">
+            <div class="col-md-6 social2">
                 <h1 class="mb-1">Địa chỉ</h1>
                 <div class="d-flex">
                     <div class="icon-social">

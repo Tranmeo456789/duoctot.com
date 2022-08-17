@@ -6,9 +6,13 @@
         <img src="{{asset('images/shop/header1920.png')}}" alt="" class="img-fluid">
     </div>
     <div class="wp-inner">
-        <div id="form-search" class="d-flex justify-content-center">
-            @include("$moduleName.pages.$controllerName.child_home.search")
-        </div>
+        <div id="hisd">
+            <div class="d-flex justify-content-center">
+                <div id="form-search" class="d-flex justify-content-center">
+                    @include("$moduleName.pages.$controllerName.child_home.search")
+                </div>
+            </div>
+        </div>  
         <div id="service-doctor">
             @include("$moduleName.pages.$controllerName.child_home.service")
         </div>

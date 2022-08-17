@@ -1,5 +1,5 @@
 <h1 class="text-center">Mua thuốc dễ dàng tại TDoctor</h1>
-<ul class="d-flex justify-content-between">
+<ul class="d-flex">
     <li>
         <a href="">
             <div class="d-flex justify-content-center"><img src="{{asset('images/shop/buy1.png')}}" alt="" srcset=""></div>
@@ -22,8 +22,8 @@
         </a>
     </li>
 </ul>
-<div class="text-center mt-5">
-    <button>MUA THUỐC NGAY</button>
+<div class="text-center mt-5 child_buy">
+    <div class="text-center btn-buynn"><a href="">MUA THUỐC NGAY</a></div>
     <span>Hoặc mua qua hostline 0393167234</span>
 </div>
 <div class="mt-5">
