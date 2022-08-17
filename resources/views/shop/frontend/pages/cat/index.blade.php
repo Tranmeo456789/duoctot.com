@@ -9,14 +9,14 @@
                 </div>
             </div>
             <div class="col-md-3 trademark">
-                @include("$moduleName.pages.$controllerName.child_index.list_box_select")                     
+                @include("$moduleName.pages.$controllerName.child_index.listbox_select")
             </div>
             <div class="col-md-9">
                 <div class="product-of-cat">
-                    @include("$moduleName.pages.$controllerName.child_index.product_of_cat") 
+                    @include("$moduleName.pages.$controllerName.child_index.product_of_cat")
                 </div>
                 <div id="product-covid" class="mt-5 p-4 sellingr">
-                    @include("$moduleName.pages.$controllerName.child_index.sellingr")                       
+                    @include("$moduleName.pages.$controllerName.child_index.sellingr")
                 </div>
                 <div class="cat-product-out mt-5">
                     @include("$moduleName.pages.$controllerName.child_index.cat_product")
@@ -28,20 +28,20 @@
          @include("$moduleName.pages.$controllerName.child_index.new_view")
     </div>
     <div class="info-tdoctor mt-5">
-        @include("$moduleName.pages.$controllerName.child_index.info_tdoctor")
+        @include("$moduleName.templates.info_tdoctor")
     </div>
     <div class="wp-inner mt-5" style="">
-        @include("$moduleName.pages.$controllerName.child_index.info_app")
+        @include("$moduleName.templates.info_app")
     </div>
     <div class="service-tdoctor mt-5">
-        @include("$moduleName.pages.$controllerName.child_index.info_service")
+        @include("$moduleName.templates.info_service")
     </div>
     <div class="local">
-        @include("$moduleName.pages.$controllerName.child_index.local_drugstore")
+        @include("$moduleName.templates.local_drugstore")
     </div>
     <div class="wp-inner mt-5" style="">
         <div class="feedback-customer">
-            @include("$moduleName.pages.$controllerName.child_index.feedback_customer")
+            @include("$moduleName.templates.feedback_customer")
         </div>
     </div>
 

@@ -75,7 +75,7 @@
             <div class="fl-left">
                 <ul id="main-menu" class="d-flex">
                     <li>
-                        <a href="{{route('fe.category_level2')}}">Thực phẩm chức năng</a>
+                        <a href="{{route('fe.cat')}}">Thực phẩm chức năng</a>
                     </li>
                     <li>
                         <a href="">Dược mỹ phẩm</a>
