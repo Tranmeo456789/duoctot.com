@@ -229,9 +229,10 @@
     border: none;
 }
 .new-view{
-    height: 520px;
     background: #F1F8FF;
     padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 15px;
 }
 #selling-product.viewnproduct li {
     float: left;

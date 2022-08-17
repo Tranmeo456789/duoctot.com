@@ -5,6 +5,7 @@
 }
 
 @media screen and (max-width: 1170px){
+   
     .wp-inner{
         width: 970px;
     }
@@ -135,10 +136,28 @@
 }
 
 @media screen and (max-width: 1024px){
+    #selling-product h1 p {
+        font-size: 18px;
+        padding-top: 10px;
+    }
+    .service-tdoctor img{
+        width: 44px;
+        height: 44px;
+    }
     .medical-faculty .list-medical-faculty li {
         margin-right: 4px;
     }
-    
+    .product-of-cat .body-cat-product>ul>li {
+        width: 100%;
+    }     
+    #product-covid.sellingr li {
+        width: 48.6%;
+        min-height: 280px;
+    }
+    .service-tdoctor .title-service p{display: none;}
+    #selling-product.viewnproduct li {
+        width: 48.6%;
+    }
 }
 
 @media screen and (max-width: 800px){

@@ -6,19 +6,13 @@
         <img src="{{asset('images/shop/header1920.png')}}" alt="" class="img-fluid">
     </div>
     <div class="wp-inner">
-<<<<<<< HEAD
         <div id="hisd">
             <div class="d-flex justify-content-center">
                 <div id="form-search" class="d-flex justify-content-center">
-                    @include("$moduleName.pages.$controllerName.child_home.search")
+                    @include("$moduleName.pages.$controllerName.child_index.search")
                 </div>
             </div>
         </div>  
-=======
-        <div id="form-search" class="d-flex justify-content-center">
-            @include("$moduleName.pages.$controllerName.child_index.search")
-        </div>
->>>>>>> 0993db1ee923d3cf16a6a3700e4cf6d69d0e2e1d
         <div id="service-doctor">
             @include("$moduleName.pages.$controllerName.child_index.service")
         </div>

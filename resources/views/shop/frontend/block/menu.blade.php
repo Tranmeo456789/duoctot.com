@@ -3,6 +3,7 @@
         <div class="d-flex justify-content-center">
             <div class="d-flex justify-content-center">
                 <img src="{{asset('images/shop/iconred.png')}}" alt="">
+                <span class="circle-ripple"></span>
                 <p>Kết nối khám chữa bệnh tại nhà với các bác sĩ online</p>
             </div>
             <a href="">Xem hướng dẫn</a>

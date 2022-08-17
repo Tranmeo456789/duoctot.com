@@ -292,22 +292,14 @@
 
 #selling-product .icon-product-round {
     border: 1px solid #05AFE3;
-    ;
     border-radius: 50%;
     background-color: #05AFE3;
-    ;
     padding: 5px 10px 1px 10px;
     margin-right: 15px;
 }
 
-#selling-product .icon-product-round2 {
-    border: 1px solid #05AFE3;
-    ;
-    border-radius: 50%;
-    background-color: #05AFE3;
-    ;
-    padding: 11px 8px 1px 8px;
-    margin-right: 15px;
+#selling-product .icon-product-round2 img{
+    width: 40px;
 }
 
 #selling-product .slect-customer {
@@ -982,7 +974,9 @@
     padding: 10px 10px 30px 10px;
     border: 1px solid transparent;
 }
-
+#qadoctor .qcustomer .q-content img{
+    width: 100%;
+}
 #feature-product-wp .section-detail .list-item li {
     border: 1px solid transparent;
 }
@@ -998,3 +992,12 @@
 #buy-medicine ul{
     justify-content: space-between;
    }
+   .circle-ripple {
+    background-color: #f53c3c;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: ripple 2s linear infinite;
+    display: inline-block;
+    margin-right: 13px;
+}
