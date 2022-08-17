@@ -57,6 +57,5 @@
             @include("$moduleName.templates.feedback_customer")
         </div>
     </div>
-
 @endsection
 
