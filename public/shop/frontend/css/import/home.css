@@ -301,7 +301,9 @@
 #selling-product .icon-product-round2 img{
     width: 40px;
 }
-
+.icon-product-round2{
+    padding-top: 6px;
+}
 #selling-product .slect-customer {
     font-size: 16px;
     margin-left: 185px;

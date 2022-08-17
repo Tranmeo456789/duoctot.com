@@ -66,7 +66,7 @@
                 </ul>
             </div>
             <div class="ipsp">
-                <input type="text">
+                <input type="text" placeholder="Nhập từ khóa...">
                 <img src="{{asset('images/shop/icsp.png')}}" alt="">
             </div>
         </div>   

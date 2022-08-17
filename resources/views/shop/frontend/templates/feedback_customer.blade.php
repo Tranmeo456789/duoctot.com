@@ -55,8 +55,8 @@
             <h1>Tải Ứng Dụng T Doctor</h1>
             <p>Mua thuốc trực tuyến, giao hàng tận nơi dễ dàng & nhanh chóng</p>
             <div class="dlapp2">
-                <div class="mb-2 mt-3 mr-xl-0 mr-lg-2"><img src="{{asset('images/shop/app1.png')}}" alt=""></div>
-                <div class="mb-4 mt-3"><img src="{{asset('images/shop/app2.png')}}" alt=""></div>
+                <div class="mb-2 mt-3 mr-xl-0 mr-lg-2"><a href="https://apps.apple.com/us/app/tdoctor/id1443310734"><img src="{{asset('images/shop/app1.png')}}" alt=""></a></div>
+                <div class="mb-4 mt-3"><a href="https://play.google.com/store/apps/details?id=com.app.khambenh.bacsiviet"><img src="{{asset('images/shop/app2.png')}}" alt=""></a></div>
             </div>        
         </div>     
         <div><img src="{{asset('images/shop/app3.png')}}" alt=""></div>
