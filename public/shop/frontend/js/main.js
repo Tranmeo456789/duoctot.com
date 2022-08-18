@@ -56,4 +56,7 @@ $(document).ready(function() {
         $('#body-nbox').css("display","none"); 
         $('.body-nb').css("display","block"); 
     });
+
+    // sub menu
+    $('#category-product-wp .list-item > li').find('.sub-menu1').after('<i class="fas fa-chevron-down arrow"></i>');
 });

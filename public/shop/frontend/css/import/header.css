@@ -77,8 +77,7 @@
 }
 
 #head-body #main-menu li {
-    padding: 10px;
-    margin-right: 10px;
+    /* padding-top: 3px; */
 }
 
 #head-body #main-menu a {

@@ -69,11 +69,315 @@
         </div>
     </div>
     <div id="head-body">
-        <div class="wp-inner clearfix">
+        <div class="wp-inner clearfix" id="category-product-wp">
             <div class="fl-left">
-                <ul id="main-menu" class="d-flex">
+                <ul id="main-menu" class="d-flex list-item">
                     <li>
                         <a href="{{route('fe.cat')}}">Thực phẩm chức năng</a>
+                        <ul class="sub-menu sub-menu1">
+                                <li>
+                                    <a href="{{route('fe.cat3')}}" title="">Sức khỏe tim mạch</a>
+                                    <ul class="sub-menu">
+                                        <div id="cat_detail">
+                                            <ul class="body_catdetail clearfix">
+                                                <li class="py-2">
+                                                    <a href="{{route('fe.cat4')}}">
+                                                        <div class="item_cat4">
+                                                            <div class="aimg">
+                                                                <img src="{{asset('images/shop/sl1.png')}}" alt="">  
+                                                            </div>    
+                                                            <span>Sinh lý nam</span> 
+                                                        </div>             
+                                                    </a>
+                                                </li>
+                                                <li class="py-2">
+                                                    <a href="{{route('fe.cat4')}}">
+                                                        <div class="item_cat4">
+                                                            <div class="aimg">
+                                                                <img src="{{asset('images/shop/sl2.png')}}" alt="">  
+                                                            </div>    
+                                                            <span>Sinh lý nữ</span> 
+                                                        </div>             
+                                                    </a>
+                                                </li>
+                                                <li class="py-2">
+                                                    <a href="{{route('fe.cat4')}}">
+                                                        <div class="item_cat4">
+                                                            <div class="aimg">
+                                                                <img src="{{asset('images/shop/sl3.png')}}" alt="">  
+                                                            </div>    
+                                                            <span>Hỗ trợ thần kinh</span> 
+                                                        </div>             
+                                                    </a>
+                                                </li>
+                                                <li class="py-2">
+                                                    <a href="{{route('fe.cat4')}}">
+                                                        <div class="item_cat4">
+                                                            <div class="aimg">
+                                                                <img src="{{asset('images/shop/sl4.png')}}" alt="">  
+                                                            </div>    
+                                                            <span>Cân bằng nội tiết tố</span> 
+                                                        </div>             
+                                                    </a>
+                                                </li>
+                                                <li class="py-2">
+                                                    <a href="{{route('fe.cat4')}}">
+                                                        <div class="item_cat4">
+                                                            <div class="aimg">
+                                                                <img src="{{asset('images/shop/sl5.png')}}" alt="">  
+                                                            </div>    
+                                                            <span>Sức khỏe tình dục</span> 
+                                                        </div>             
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="{{route('fe.cat3')}}" title="">Sinh lý nội tiết tố</a>
+                                    <ul class="sub-menu">
+                                        <div id="cat_detail">
+                                            <ul class="body_catdetail clearfix">
+                                                <li class="py-2">
+                                                    <a href="{{route('fe.cat4')}}">
+                                                        <div class="item_cat4">
+                                                            <div class="aimg">
+                                                                <img src="{{asset('images/shop/sl1.png')}}" alt="">  
+                                                            </div>    
+                                                            <span>Sinh lý nam</span> 
+                                                        </div>             
+                                                    </a>
+                                                </li>
+                                                <li class="py-2">
+                                                    <a href="{{route('fe.cat4')}}">
+                                                        <div class="item_cat4">
+                                                            <div class="aimg">
+                                                                <img src="{{asset('images/shop/sl2.png')}}" alt="">  
+                                                            </div>    
+                                                            <span>Sinh lý nữ</span> 
+                                                        </div>             
+                                                    </a>
+                                                </li>
+                                                <li class="py-2">
+                                                    <a href="{{route('fe.cat4')}}">
+                                                        <div class="item_cat4">
+                                                            <div class="aimg">
+                                                                <img src="{{asset('images/shop/sl3.png')}}" alt="">  
+                                                            </div>    
+                                                            <span>Hỗ trợ thần kinh</span> 
+                                                        </div>             
+                                                    </a>
+                                                </li>
+                                                <li class="py-2">
+                                                    <a href="{{route('fe.cat4')}}">
+                                                        <div class="item_cat4">
+                                                            <div class="aimg">
+                                                                <img src="{{asset('images/shop/sl4.png')}}" alt="">  
+                                                            </div>    
+                                                            <span>Cân bằng nội tiết tố</span> 
+                                                        </div>             
+                                                    </a>
+                                                </li>
+                                                <li class="py-2">
+                                                    <a href="{{route('fe.cat4')}}">
+                                                        <div class="item_cat4">
+                                                            <div class="aimg">
+                                                                <img src="{{asset('images/shop/sl5.png')}}" alt="">  
+                                                            </div>    
+                                                            <span>Sức khỏe tình dục</span> 
+                                                        </div>             
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="{{route('fe.cat3')}}" title="">Hỗ trợ tiêu hóa</a>
+                                    <ul class="sub-menu">
+                                        <div id="cat_detail">
+                                            <ul class="body_catdetail clearfix">
+                                                <li class="py-2">
+                                                    <a href="{{route('fe.cat4')}}">
+                                                        <div class="item_cat4">
+                                                            <div class="aimg">
+                                                                <img src="{{asset('images/shop/sl1.png')}}" alt="">  
+                                                            </div>    
+                                                            <span>Sinh lý nam</span> 
+                                                        </div>             
+                                                    </a>
+                                                </li>
+                                                <li class="py-2">
+                                                    <a href="{{route('fe.cat4')}}">
+                                                        <div class="item_cat4">
+                                                            <div class="aimg">
+                                                                <img src="{{asset('images/shop/sl2.png')}}" alt="">  
+                                                            </div>    
+                                                            <span>Sinh lý nữ</span> 
+                                                        </div>             
+                                                    </a>
+                                                </li>
+                                                <li class="py-2">
+                                                    <a href="{{route('fe.cat4')}}">
+                                                        <div class="item_cat4">
+                                                            <div class="aimg">
+                                                                <img src="{{asset('images/shop/sl3.png')}}" alt="">  
+                                                            </div>    
+                                                            <span>Hỗ trợ thần kinh</span> 
+                                                        </div>             
+                                                    </a>
+                                                </li>
+                                                <li class="py-2">
+                                                    <a href="{{route('fe.cat4')}}">
+                                                        <div class="item_cat4">
+                                                            <div class="aimg">
+                                                                <img src="{{asset('images/shop/sl4.png')}}" alt="">  
+                                                            </div>    
+                                                            <span>Cân bằng nội tiết tố</span> 
+                                                        </div>             
+                                                    </a>
+                                                </li>
+                                                <li class="py-2">
+                                                    <a href="{{route('fe.cat4')}}">
+                                                        <div class="item_cat4">
+                                                            <div class="aimg">
+                                                                <img src="{{asset('images/shop/sl5.png')}}" alt="">  
+                                                            </div>    
+                                                            <span>Sức khỏe tình dục</span> 
+                                                        </div>             
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="{{route('fe.cat3')}}" title="">Hỗ trợ điều trị</a></a>
+                                    <ul class="sub-menu">
+                                        <div id="cat_detail">
+                                            <ul class="body_catdetail clearfix">
+                                                <li class="py-2">
+                                                    <a href="{{route('fe.cat4')}}">
+                                                        <div class="item_cat4">
+                                                            <div class="aimg">
+                                                                <img src="{{asset('images/shop/sl1.png')}}" alt="">  
+                                                            </div>    
+                                                            <span>Sinh lý nam</span> 
+                                                        </div>             
+                                                    </a>
+                                                </li>
+                                                <li class="py-2">
+                                                    <a href="{{route('fe.cat4')}}">
+                                                        <div class="item_cat4">
+                                                            <div class="aimg">
+                                                                <img src="{{asset('images/shop/sl2.png')}}" alt="">  
+                                                            </div>    
+                                                            <span>Sinh lý nữ</span> 
+                                                        </div>             
+                                                    </a>
+                                                </li>
+                                                <li class="py-2">
+                                                    <a href="{{route('fe.cat4')}}">
+                                                        <div class="item_cat4">
+                                                            <div class="aimg">
+                                                                <img src="{{asset('images/shop/sl3.png')}}" alt="">  
+                                                            </div>    
+                                                            <span>Hỗ trợ thần kinh</span> 
+                                                        </div>             
+                                                    </a>
+                                                </li>
+                                                <li class="py-2">
+                                                    <a href="{{route('fe.cat4')}}">
+                                                        <div class="item_cat4">
+                                                            <div class="aimg">
+                                                                <img src="{{asset('images/shop/sl4.png')}}" alt="">  
+                                                            </div>    
+                                                            <span>Cân bằng nội tiết tố</span> 
+                                                        </div>             
+                                                    </a>
+                                                </li>
+                                                <li class="py-2">
+                                                    <a href="{{route('fe.cat4')}}">
+                                                        <div class="item_cat4">
+                                                            <div class="aimg">
+                                                                <img src="{{asset('images/shop/sl5.png')}}" alt="">  
+                                                            </div>    
+                                                            <span>Sức khỏe tình dục</span> 
+                                                        </div>             
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="{{route('fe.cat3')}}" title="">Hỗ trợ làm đẹp</a></a>
+                                    <ul class="sub-menu">
+                                        <div id="cat_detail">
+                                            <ul class="body_catdetail clearfix">
+                                                <li class="py-2">
+                                                    <a href="{{route('fe.cat4')}}">
+                                                        <div class="item_cat4">
+                                                            <div class="aimg">
+                                                                <img src="{{asset('images/shop/sl1.png')}}" alt="">  
+                                                            </div>    
+                                                            <span>Sinh lý nam</span> 
+                                                        </div>             
+                                                    </a>
+                                                </li>
+                                                <li class="py-2">
+                                                    <a href="{{route('fe.cat4')}}">
+                                                        <div class="item_cat4">
+                                                            <div class="aimg">
+                                                                <img src="{{asset('images/shop/sl2.png')}}" alt="">  
+                                                            </div>    
+                                                            <span>Sinh lý nữ</span> 
+                                                        </div>             
+                                                    </a>
+                                                </li>
+                                                <li class="py-2">
+                                                    <a href="{{route('fe.cat4')}}">
+                                                        <div class="item_cat4">
+                                                            <div class="aimg">
+                                                                <img src="{{asset('images/shop/sl3.png')}}" alt="">  
+                                                            </div>    
+                                                            <span>Hỗ trợ thần kinh</span> 
+                                                        </div>             
+                                                    </a>
+                                                </li>
+                                                <li class="py-2">
+                                                    <a href="{{route('fe.cat4')}}">
+                                                        <div class="item_cat4">
+                                                            <div class="aimg">
+                                                                <img src="{{asset('images/shop/sl4.png')}}" alt="">  
+                                                            </div>    
+                                                            <span>Cân bằng nội tiết tố</span> 
+                                                        </div>             
+                                                    </a>
+                                                </li>
+                                                <li class="py-2">
+                                                    <a href="{{route('fe.cat4')}}">
+                                                        <div class="item_cat4">
+                                                            <div class="aimg">
+                                                                <img src="{{asset('images/shop/sl5.png')}}" alt="">  
+                                                            </div>    
+                                                            <span>Sức khỏe tình dục</span> 
+                                                        </div>             
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="{{route('fe.cat3')}}" title="">Dinh dưỡng</a></a>
+                                </li>
+                                <li>
+                                    <a href="{{route('fe.cat3')}}" title="">Cải thiện tăng cường chức năng</a></a>
+                                </li>
+                            </ul>
+
                     </li>
                     <li>
                         <a href="{{route('fe.cat')}}">Dược mỹ phẩm</a>
@@ -98,7 +402,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="fl-right d-flex pt-2">
+            <div class="fl-right d-flex pt-1">
                 <img src="{{asset('images/shop/flag.png')}}" alt="" srcset="">
                 <p class="pt-2">Tiếng Việt <span><i class="fas fa-angle-down"></i></span></p>
             </div>
