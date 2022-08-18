@@ -206,6 +206,12 @@
     .presp{
         padding-bottom: 20px;
     }
+    #service-doctor .list_servicetdoctor li {
+        padding: 30px 15px;
+        width: 30%;
+        margin-bottom: 20px;
+    }
+
 }
 
 @media screen and (max-width: 600px){
@@ -223,7 +229,11 @@
     .wp-inner{
         width: 320px;
     }
-   
+    #service-doctor .list_servicetdoctor li {
+        padding: 20px 10px;
+        width: 45%;
+        margin-bottom: 10px;
+    }
 }
 
 @media screen and (max-width: 375px){

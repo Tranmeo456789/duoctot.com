@@ -85,7 +85,7 @@
     background: #6eeca3;
 }
 #slider  .owl-page span{background: rgb(177, 21, 21);}
-.owl-pagination { position: absolute;     right: 45%;bottom: 12px;}
+.owl-pagination { position: absolute;right: 45%;bottom: 12px;}
 #slider .owl-pagination{bottom: 10px; }
 
 .owl-theme .owl-controls .owl-page.active span,

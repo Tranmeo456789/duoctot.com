@@ -32,7 +32,7 @@
             @include("$moduleName.pages.$controllerName.child_index.featured_category")
         </div>
     </div>
-    <div id="productsl" class="mt-5 py-4">
+    <div id="productsl" class="mt-5 py-4 product_hcovid">
         <div class="wp-inner">
             @include("$moduleName.pages.$controllerName.child_index.product_hcovid")
         </div>

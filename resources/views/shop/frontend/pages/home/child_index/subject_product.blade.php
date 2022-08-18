@@ -1,6 +1,8 @@
-<h1 class="d-flex mb-5">
-    <div class="icon-product-round2"><img src="{{asset('images/shop/tp3.png')}}" alt="" srcset=""></div>
-    <p>Sản phẩm theo đối tượng</p>
+<h1 class="d-flex mb-5 flex-sm-wrap">
+    <div class="title_cathd mb-sm-2">
+        <h1>Sản phẩm theo đối tượng</h1>
+        <img src="{{asset('images/shop/tp3.png')}}" alt="">
+    </div>
     <div class="d-flex slect-customer">
         <span>Lọc theo</span>
         <div class="d-flex">

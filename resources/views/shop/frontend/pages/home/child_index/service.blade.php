@@ -1,4 +1,4 @@
-<ul class="d-flex justify-content-between">
+<ul class="d-flex justify-content-between list_servicetdoctor">
     <li>
         <a href="">
             <img src="{{asset('images/shop/doctor1.png')}}" alt="" srcset="">

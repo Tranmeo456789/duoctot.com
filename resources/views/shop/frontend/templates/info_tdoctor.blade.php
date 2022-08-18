@@ -1,26 +1,22 @@
 <div class="wp-inner">
-    <div class="list-info-tdoctor">
-        <ul class="d-flex justify-content-between">
-            <li>
-                <p>200</p><span>Phòng khám</span>
-            </li>
-            <li>
-                <p>1273</p><span>Bác sỹ</span>
-            </li>
-            <li>
-                <p>101</p><span>Nhà thuốc</span>
-            </li>
-            <li>
-                <p>13875</p><span>Bệnh nhân</span>
-            </li>
-            <li>
-                <p>4206</p><span>Câu hỏi</span>
-            </li>
-            <li>
-                <p>3956</p><span>Câu trả lời</span>
-            </li>
-        </ul>
+    <div class="list-info-tdoctor row">
+        <div class="col-lg-2 col-sm-4 mb-sm-2 text-center">
+            <p>200</p><span>Phòng khám</span>
+        </div>
+        <div class="col-lg-2 col-sm-4 text-center">
+            <p>1273</p><span>Bác sỹ</span>
+        </div>
+        <div class="col-lg-2 col-sm-4 text-center">
+            <p>101</p><span>Nhà thuốc</span>
+        </div>
+        <div class="col-lg-2 col-sm-4 text-center">
+            <p>13875</p><span>Bệnh nhân</span>
+        </div>
+        <div class="col-lg-2 col-sm-4 text-center">
+            <p>4206</p><span>Câu hỏi</span>
+        </div>
+        <div class="col-lg-2 col-sm-4 text-center">
+            <p>1056</p><span>Câu trả lời</span>
+        </div>
     </div>
-
 </div>
-<div class="opacty-back"></div>

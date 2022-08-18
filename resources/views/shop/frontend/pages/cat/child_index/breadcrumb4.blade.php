@@ -9,5 +9,8 @@
         <li>
             <a href="{{route('fe.cat3')}}" title="">Sinh lý - Nội tiết tố</a>
         </li>
+        <li>
+            <a href="" title="">Sinh lý Nam</a>
+        </li>
     </ul>
 </div>

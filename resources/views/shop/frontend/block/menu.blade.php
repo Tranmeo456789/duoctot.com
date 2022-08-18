@@ -76,25 +76,25 @@
                         <a href="{{route('fe.cat')}}">Thực phẩm chức năng</a>
                     </li>
                     <li>
-                        <a href="">Dược mỹ phẩm</a>
+                        <a href="{{route('fe.cat')}}">Dược mỹ phẩm</a>
                     </li>
                     <li>
-                        <a href="">Chăm sóc cá nhân</a>
+                        <a href="{{route('fe.cat')}}">Chăm sóc cá nhân</a>
                     </li>
                     <li>
                         <a href="">Thuốc</a>
                     </li>
                     <li>
-                        <a href="">Thiết bị y tế</a>
+                        <a href="{{route('fe.cat')}}">Thiết bị y tế</a>
                     </li>
                     <li>
-                        <a href="">Bệnh</a>
+                        <a href="{{route('fe.cat')}}">Bệnh</a>
                     </li>
                     <li>
-                        <a href="">Góc sức khỏe</a>
+                        <a href="{{route('fe.cat')}}">Góc sức khỏe</a>
                     </li>
                     <li>
-                        <a href="">Nhà thuốc</a>
+                        <a href="{{route('fe.cat')}}">Nhà thuốc</a>
                     </li>
                 </ul>
             </div>

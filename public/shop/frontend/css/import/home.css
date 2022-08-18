@@ -86,10 +86,12 @@
 #service-doctor li a {
     color: #1B1D2C;
 }
-
-#service-doctor li {
+#service-doctor .list_servicetdoctor{
+    flex-wrap: wrap;
+}
+#service-doctor .list_servicetdoctor li {
     padding: 30px 15px;
-    width: 148px;
+    width: 15%;
     background: #F7FAFF;
     border: 1px solid #F7FAFF;
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.05);
@@ -545,54 +547,47 @@
     text-align: justify;
     color: #000000;
 }
-
 .info-tdoctor {
-    background-image: url('../../images/shop/info-tdoctor.png');
-    height: 170px;
-    opacity: 0.7;
-    background-size: contain;
-    background-repeat: no-repeat;
-    vertical-align: middle;
     position: relative;
-}
-
-.info-tdoctor p {
+    overflow: hidden;
+    padding: 6rem 0;
     color: #fff;
+}
+.list-info-tdoctor p{
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 49px;
+    padding-bottom: 5px;
+}
+.list-info-tdoctor span{
+    font-weight: 700;
     font-size: 20px;
-    text-align: center;
-    font-weight: bold;
-    z-index: 1000;
+    line-height: 23px;
 }
-
-.info-tdoctor span {
-    color: #fff;
-    z-index: 1000;
-}
-
-.info-tdoctor .opacty-back {
-    background: #009BCB;
-    ;
+.info-tdoctor:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
     width: 100%;
     height: 100%;
-    opacity: 0.6;
+    content: '';
+    background: #05afe3;
+    opacity: 0.5;
+}
+.info-tdoctor:after {
     position: absolute;
-    z-index: 10;
+    content: '';
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-image: url('../../images/shop/info-tdoctor.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -1;
 }
 
-.info-tdoctor .list-info-tdoctor {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 100;
-}
-
-.info-tdoctor .list-info-tdoctor li {
-    margin-right: 160px;
-}
-
-.info-tdoctor .list-info-tdoctor li:last-child {
-    margin-right: 0px;
-}
 
 .info-app h1 {
     font-family: 'Roboto';

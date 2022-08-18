@@ -24,4 +24,7 @@ class CatController extends ShopFrontEndController
     public function cat_level3(){
         return view($this->pathViewController . 'cat_productlevel3');
     }
+    public function cat_level4(){
+        return view($this->pathViewController . 'cat_productlevel4');
+    }
 }
