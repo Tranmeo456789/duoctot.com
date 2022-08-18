@@ -10,6 +10,8 @@
             <ul class="d-flex">
                 <li><a href="">Bán chạy</a></li>
                 <li><a href="">Mới nhất</a></li>
+                <li><a href="">Giá thấp</a></li>
+                <li><a href="">Giá cao</a></li>
             </ul>
     </div>
     <div class="seclect_ol">

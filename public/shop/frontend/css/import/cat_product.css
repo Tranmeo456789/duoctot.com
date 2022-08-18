@@ -173,12 +173,17 @@
 }
 .seclect_ol{
     padding: 4px 6px 0px 6px;
-    background: #F1F8FF;
-    border-radius: 15px;
+
 }
 .seclect_ol a{
-    padding-right: 10px;
     cursor: pointer;
+    margin-right: 10px;
+    background: #F1F8FF;
+    padding: 4px 4px 0px 4px;
+    display: inline-block;
+}
+.seclect_ol a.ol1.activebtn,.seclect_ol a.ol2.activebtn{
+    background: #bed8f1;
 }
 .seclect_ol img{
     width: 25px;
@@ -395,7 +400,8 @@
     left: 0px;
 }
 #feature-product-wp .list-item li{
-    border-radius: 10px;min-height: 280px;
+    border-radius: 10px;min-height: 280px;background: #fff;
+    margin-right: 5px;
 }
 #feature-product-wp .list-item li p{
     color: #000;
