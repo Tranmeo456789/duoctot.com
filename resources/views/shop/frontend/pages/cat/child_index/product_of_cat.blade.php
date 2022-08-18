@@ -6,24 +6,25 @@
                     </div>
                     <div class="body-cat-product">
                         <ul class="clearfix">
-                            <li class="">
-                                <div class="d-flex">
-                                    <div class="item-cat-left text-center">
-                                        <img src="{{asset('images/shop/cp1.png')}}" alt="">
-                                        <h3>Sinh lý - Nội tiết tố</h3>
-                                        <span>44 sản phẩm</span>
-                                    </div>
-                                    <div class="item-cat-right">
-                                        <ul>
-                                            <li><a href="">Sinh lý Nam</a></li>
-                                            <li><a href="">Sinh lý Nữ</a></li>
-                                            <li><a href="">Hỗ trợ mãn kinh</a></li>
-                                            <li><a href="">Cân bằng nội tiết tố</a></li>
-                                            <li><a href="">Sức khỏe tình dục</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                
+                            <li class="">                               
+                                    <div class="d-flex">
+                                        <div class="item-cat-left text-center">
+                                            <a href="{{route('fe.cat3')}}">
+                                                <img src="{{asset('images/shop/cp1.png')}}" alt="">
+                                                <h3>Sinh lý - Nội tiết tố</h3>
+                                                <span>44 sản phẩm</span>
+                                            </a>
+                                        </div>
+                                        <div class="item-cat-right">
+                                            <ul>
+                                                <li><a href="">Sinh lý Nam</a></li>
+                                                <li><a href="">Sinh lý Nữ</a></li>
+                                                <li><a href="">Hỗ trợ mãn kinh</a></li>
+                                                <li><a href="">Cân bằng nội tiết tố</a></li>
+                                                <li><a href="">Sức khỏe tình dục</a></li>
+                                            </ul>
+                                        </div>
+                                    </div> 
                             </li>
                             <li class="">
                                 <div class="d-flex">

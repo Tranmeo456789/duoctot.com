@@ -161,6 +161,9 @@
 }
 
 @media screen and (max-width: 800px){
+    .info-app{
+        display: none;
+    }
     #selling-product .slect-customer{
         margin-left: 0px;
     }

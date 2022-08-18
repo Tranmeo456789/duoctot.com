@@ -1,9 +1,18 @@
 @extends('shop.layouts.frontend')
 
 @section('content')
-
-    <div style="">
-        <img src="{{asset('images/shop/header1920.png')}}" alt="" class="img-fluid">
+    <div class="section" id="slider-wp">
+        <div class="section-detail">
+            <div class="item">
+                <img src="https://images.fpt.shop/unsafe/fit-in/1600x400/filters:quality(80):fill(white)/nhathuoclongchau.com/upload/slide/1659455794-z9lu-chuyen-thuoc-dac-tri-ung-thu.png" alt="" class="img-fluid">
+            </div>
+            <div class="item">
+                <img src="https://images.fpt.shop/unsafe/fit-in/1600x400/filters:quality(80):fill(white)/nhathuoclongchau.com/upload/slide/1658467715-tm6o-dac-quyen-mua-hang-1k.png" alt="" class="img-fluid">
+            </div>
+            <div class="item">
+                <img src="https://images.fpt.shop/unsafe/fit-in/1600x400/filters:quality(80):fill(white)/nhathuoclongchau.com/upload/slide/1659455646-rU5F-sua-tam-em-be-cetaphil-uu-dai-doc-quyen.png" alt="" class="img-fluid">
+            </div>
+        </div>
     </div>
     <div class="wp-inner">
         <div id="hisd">
@@ -23,8 +32,11 @@
             @include("$moduleName.pages.$controllerName.child_index.featured_category")
         </div>
     </div>
-    <div id="product-covid" class="mt-5 py-4">
-        @include("$moduleName.pages.$controllerName.child_index.product_covid")
+    <div id="productsl" class="mt-5 py-4">
+        <div class="wp-inner">
+            @include("$moduleName.pages.$controllerName.child_index.product_hcovid")
+        </div>
+        
     </div>
     <div class="wp-inner mt-5">
         <div id="selling-product">
