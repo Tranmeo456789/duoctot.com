@@ -21,7 +21,7 @@
                     @include("$moduleName.pages.$controllerName.child_index.search")
                 </div>
             </div>
-        </div>  
+        </div>
         <div id="service-doctor">
             @include("$moduleName.pages.$controllerName.child_index.service")
         </div>
@@ -34,9 +34,8 @@
     </div>
     <div id="productsl" class="mt-5 py-4 product_hcovid">
         <div class="wp-inner">
-            @include("$moduleName.pages.$controllerName.child_index.product_hcovid")
+            @include("$moduleName.pages.$controllerName.child_index.product_covid")
         </div>
-        
     </div>
     <div class="wp-inner mt-5">
         <div id="selling-product">
