@@ -12,3 +12,4 @@
 <link href="{{ asset('/shop/frontend/css/import/footer.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('/shop/frontend/responsive.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('/shop/frontend/css/import/slider.css')}}" rel="stylesheet" type="text/css"/>
+<link href="{{ asset('/shop/frontend/css/import/product.css')}}" rel="stylesheet" type="text/css"/>

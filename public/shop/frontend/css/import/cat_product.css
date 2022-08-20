@@ -14,6 +14,9 @@
     line-height: 20px;
     color: #05AFE3;
 }
+#breadcrumb-wp .list-item li:last-child a{
+    color: #000;
+}
 #breadcrumb-wp .list-item li::after{
     content: "/";
     position: absolute;

@@ -1,6 +1,5 @@
 //slider
 $(document).ready(function () {
-
         var feature_productcovid = $('#feature-product-wp.product_sellhome .list-item');
         feature_productcovid.owlCarousel({
             autoPlay: true,
@@ -10,6 +9,20 @@ $(document).ready(function () {
             pagination: false,
             stopOnHover: true,
             items: 6, //10 items above 1000px browser width
+            itemsDesktop: [1000, 4], //5 items between 1000px and 901px
+            itemsDesktopSmall: [800, 3], // betweem 900px and 601px
+            itemsTablet: [600, 2], //2 items between 600 and 0
+            itemsMobile: [375, 1] // itemsMobile disabled - inherit from itemsTablet option
+        });
+        var feature_productcovid = $('#product-relate #feature-product-wp .list-item');
+        feature_productcovid.owlCarousel({
+            autoPlay: true,
+            navigation: true,
+            navigationText: false,
+            paginationNumbers: false,
+            pagination: false,
+            stopOnHover: true,
+            items: 5, //10 items above 1000px browser width
             itemsDesktop: [1000, 4], //5 items between 1000px and 901px
             itemsDesktopSmall: [800, 3], // betweem 900px and 601px
             itemsTablet: [600, 2], //2 items between 600 and 0
@@ -28,9 +41,7 @@ $(document).ready(function () {
             itemsDesktopSmall: [800, 3], // betweem 900px and 601px
             itemsTablet: [600, 2], //2 items between 600 and 0
             itemsMobile: [375, 1] // itemsMobile disabled - inherit from itemsTablet option
-        });
-        
-        
+        }); 
     var slider = $('#slider-wp .section-detail');
         slider.owlCarousel({
         autoPlay: 4500,
@@ -89,6 +100,12 @@ $(document).ready(function() {
             $('.content-submenu').css("display","none");
             $('.black-content').css("display","none");
         },
-    );
-    
+    );  
+    $('.plus1, .minus1').on('click', function(e) {
+        const isNegative = $(e.target).closest('.minus1').is('.minus1');
+        const input = $(e.target).closest('.input-number').find('input');
+        if (input.is('input')) {
+          input[0][isNegative ? 'stepDown' : 'stepUp']()
+        }
+      })  
 });

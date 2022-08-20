@@ -4,13 +4,13 @@
     <div class="section" id="slider-wp">
         <div class="section-detail">
             <div class="item">
-                <img src="https://images.fpt.shop/unsafe/fit-in/1600x400/filters:quality(80):fill(white)/nhathuoclongchau.com/upload/slide/1659455794-z9lu-chuyen-thuoc-dac-tri-ung-thu.png" alt="" class="img-fluid">
+                <img src="https://images.fpt.shop/unsafe/fit-in/1600x400/filters:quality(80):fill(white)/nhathuoclongchau.com/upload/slide/1659455794-z9lu-chuyen-thuoc-dac-tri-ung-thu.png" alt="" class="img-fluid" style="width:100%">
             </div>
             <div class="item">
-                <img src="https://images.fpt.shop/unsafe/fit-in/1600x400/filters:quality(80):fill(white)/nhathuoclongchau.com/upload/slide/1658467715-tm6o-dac-quyen-mua-hang-1k.png" alt="" class="img-fluid">
+                <img src="https://images.fpt.shop/unsafe/fit-in/1600x400/filters:quality(80):fill(white)/nhathuoclongchau.com/upload/slide/1658467715-tm6o-dac-quyen-mua-hang-1k.png" alt="" class="img-fluid" style="width:100%">
             </div>
             <div class="item">
-                <img src="https://images.fpt.shop/unsafe/fit-in/1600x400/filters:quality(80):fill(white)/nhathuoclongchau.com/upload/slide/1659455646-rU5F-sua-tam-em-be-cetaphil-uu-dai-doc-quyen.png" alt="" class="img-fluid">
+                <img src="https://images.fpt.shop/unsafe/fit-in/1600x400/filters:quality(80):fill(white)/nhathuoclongchau.com/upload/slide/1659455646-rU5F-sua-tam-em-be-cetaphil-uu-dai-doc-quyen.png" alt="" class="img-fluid" style="width:100%">
             </div>
         </div>
     </div>

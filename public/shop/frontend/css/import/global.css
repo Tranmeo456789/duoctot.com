@@ -19,5 +19,24 @@ img{
 a:hover{
     text-decoration: none;
 }
+.text-orange{
+    color: #DB8107;
+}
+.bg-orange{
+    background: #DB8107;
+}
+.roud-img{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #B0C1DB;
+    position: absolute;
+    top: 50%;
+    left: -60px;
+    border-radius: 50%;
+    transform: translateY(-50%);
+}
 
 
