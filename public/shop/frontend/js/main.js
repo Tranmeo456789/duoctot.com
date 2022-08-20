@@ -83,24 +83,14 @@ $(document).ready(function() {
     );
     $('.catc1').hover(
         function(){
-            $('.content-submenu').css("display","flex");
             $('.black-content').css("display","block");         
         },
         function(){
-            $('.content-submenu').css("display","none");
             $('.black-content').css("display","none");
         },
-    );
-    $('.content-submenu').hover(
-        function(){
-            $('.content-submenu').css("display","flex");
-            $('.black-content').css("display","block"); 
-        },
-        function(){
-            $('.content-submenu').css("display","none");
-            $('.black-content').css("display","none");
-        },
-    );  
+    ); 
+
+    // tang giam so luong san pham
     $('.plus1, .minus1').on('click', function(e) {
         const isNegative = $(e.target).closest('.minus1').is('.minus1');
         const input = $(e.target).closest('.input-number').find('input');

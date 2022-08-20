@@ -65,7 +65,7 @@
                                             <div class="price-new">97.750đ</div>
                                             <div class="manipulation">
                                                 <a href="" class="buy-after"><img src="{{asset('images/shop/ct4.png')}}" alt="">Để mua sau</a>
-                                                <span>  |  </span>
+                                                <span> | </span>
                                                 <a href="" class="delete-product"><img src="{{asset('images/shop/ct5.png')}}" alt="">Xóa</a>
                                             </div>
                                         </td>
@@ -85,62 +85,56 @@
                             <div class="payment-img"><img src="{{asset('images/shop/vnpay.png')}}" alt=""></div>
                         </div>
                     </div>
+                    <div class="wp-ttkh">
+                        <div class="ttkh d-flex justify-content-between">
+                            <p>Thông tin khách hàng</p>
+                            <div>
+                                <img src="{{asset('images/shop/ed1.png')}}" alt="">
+                                <span>Chỉnh sửa</span>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table ttdd mb-0">
+                        <tbody>
+                            <tr>
+                                <td style="width:30%">
+                                    <p>Họ và tên</p>
+                                </td>
+                                <td style="width:70%" class="text-left">
+                                   <span>Anh Nguyễn Xuân Quang</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:30%">
+                                    <p>Số điện thoại</p>
+                                </td>
+                                <td style="width:70%" class="text-left">
+                                   <span>09736745678</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:30%">
+                                    <p>Email</p>
+                                </td>
+                                <td style="width:70%" class="text-left">
+                                   <span>xuanquang2345@gmail.com</span>
+                                </td>
+                            </tr> 
+                        </tbody>
+                    </table>
                     <div class="info-customer-cart p-2">
                         <div class="row mx-0">
                             <div class="col-12">
                                 <div class="form-group">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="status" id="status1" value="Chờ duyệt" checked>
-                                        <label class="form-check-label" for="status1">
-                                            Anh
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="status" id="exampleRadios2" value="Công khai">
-                                        <label class="form-check-label" for="exampleRadios2">
-                                            Chị
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-5">
-                                <div class="form-group">
-                                    <input class="form-control" type="text" name="" autocomplete="off" placeholder="Nhập họ tên">
-                                    <small class="text-danger"><img src="{{asset('images/shop/gd1.png')}}" alt=""> Nhập họ và tên</small>
-                                </div>
-                            </div>
-                            <div class="col-5">
-                                <div class="form-group">
-                                    <input class="form-control" type="text" name="" autocomplete="off" placeholder="Nhập số điện thoại">
-                                    <small class="text-danger"><img src="{{asset('images/shop/gd1.png')}}" alt=""> Nhập số điện thoại</small>
-                                </div>
-                            </div>
-                            <div class="col-5">
-                                <div class="form-group">
-                                    <input class="form-control" type="text" name="" autocomplete="off" placeholder="Nhập Email (Không bắt buộc)">
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="" id="" value="" checked>
-                                        <label class="form-check-label" for="">
-                                            Yêu cầu xuất hóa đơn
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
                                     <p class="font-weight-bold">Chọn hình thức nhận hàng</p>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="status" id="status1" value="Chờ duyệt" checked>
+                                        <input class="form-check-input" type="radio" name="status" id="" value="Chờ duyệt">
                                         <label class="form-check-label" for="status1">
                                             Nhận tại nhà thuốc
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="status" id="exampleRadios2" value="Công khai">
+                                        <input class="form-check-input" type="radio" name="status" id="" value="Công khai" checked>
                                         <label class="form-check-label" for="exampleRadios2">
                                             Giao hàng tận nơi
                                         </label>
@@ -229,7 +223,8 @@
                     <div class="cmoder">
                         <a href="">HOÀN TẤT ĐẶT HÀNG</a>
                         <p>Bằng cách đặt hàng, bạn đồng ý với
-                           <span class="underline"> Điều khoản sử dụng </span>của T Doctor</p>
+                            <span class="underline"> Điều khoản sử dụng </span>của T Doctor
+                        </p>
                     </div>
                 </div>
             </div>

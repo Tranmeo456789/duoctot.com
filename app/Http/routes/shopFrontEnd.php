@@ -10,4 +10,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
 
     Route::get('/chi-tiet-san-pham','ProductController@detail_product')->name('fe.product.detail');
     Route::get('/gio-hang','CartController@cart_product')->name('fe.product.cart');
+    Route::get('/gio-hang-trong','CartController@cart_null')->name('fe.product.cart_null');
+    Route::get('/thanh-toan-tai-nha','CartController@pay_home')->name('fe.product.pay_home');
+    Route::get('/thanh-toan-tai-cua-hang','CartController@pay_shop')->name('fe.product.pay_shop');
 });

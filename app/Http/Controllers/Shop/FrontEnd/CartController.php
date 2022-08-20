@@ -21,4 +21,13 @@ class CartController extends ShopFrontEndController
     public function cart_product(){
         return view($this->pathViewController . 'cart');
     }
+    public function cart_null(){
+        return view($this->pathViewController . 'cart_null');
+    }
+    public function pay_home(){
+        return view($this->pathViewController . 'cart_pay_home');
+    }
+    public function pay_shop(){
+        return view($this->pathViewController . 'cart_pay_shop');
+    }
 }

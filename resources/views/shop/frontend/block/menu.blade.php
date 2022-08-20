@@ -75,7 +75,183 @@
                     <div class="position-relative">
                         <ul id="main-menu" class="d-flex list-item">
                             <li class="catc1">
-                                <a href="{{route('fe.cat')}}">Thực phẩm chức năng</a><i class="fas fa-chevron-down arrow"></i>
+                                <a href="{{route('fe.cat')}}">
+                                    Thực phẩm chức năng
+                                    <i class="fas fa-chevron-down arrow"></i>
+                                </a>
+                                <div class="content-submenu row">
+                                    <div class="col-md-4 px-0">
+                                        <ul class="sub-menu1">
+                                            <li>
+                                                <div class="himg-menu">
+                                                    <div class="rdimg"><img src="{{asset('images/shop/sm1.png')}}" alt=""></div>
+                                                    <a href="{{route('fe.cat3')}}" title="">Sinh lý nội tiết tố</a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="himg-menu">
+                                                    <div class="rdimg"><img src="{{asset('images/shop/sm2.png')}}" alt=""></div>
+                                                    <a href="{{route('fe.cat3')}}" title="">Sức khỏe tim mạch</a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="himg-menu">
+                                                    <div class="rdimg"><img src="{{asset('images/shop/sm3.png')}}" alt=""></div>
+                                                    <a href="{{route('fe.cat3')}}" title="">Hỗ trợ tiêu hóa</a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="himg-menu">
+                                                    <div class="rdimg"><img src="{{asset('images/shop/sm4.png')}}" alt=""></div>
+                                                    <a href="{{route('fe.cat3')}}" title="">Thần kinh não</a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="himg-menu">
+                                                    <div class="rdimg"><img src="{{asset('images/shop/sm5.png')}}" alt=""></div>
+                                                    <a href="{{route('fe.cat3')}}" title="">Hỗ trợ điều trị</a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="himg-menu">
+                                                    <div class="rdimg"><img src="{{asset('images/shop/sm6.png')}}" alt=""></div>
+                                                    <a href="{{route('fe.cat3')}}" title="">Cải thiện tăng cường chức năng</a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="himg-menu">
+                                                    <div class="rdimg"><img src="{{asset('images/shop/sm7.png')}}" alt=""></div>
+                                                    <a href="{{route('fe.cat3')}}" title="">Thảo dược và thực phẩm tự nhiên</a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="himg-menu">
+                                                    <div class="rdimg"><img src="{{asset('images/shop/sm8.png')}}" alt=""></div>
+                                                    <a href="{{route('fe.cat3')}}" title="">Hỗ trợ làm đẹp</a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="himg-menu">
+                                                    <div class="rdimg"><img src="{{asset('images/shop/sm9.png')}}" alt=""></div>
+                                                    <a href="{{route('fe.cat3')}}" title="">Vitamin và khoáng chất</a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="himg-menu">
+                                                    <div class="rdimg"><img src="{{asset('images/shop/sm10.png')}}" alt=""></div>
+                                                    <a href="{{route('fe.cat3')}}" title="">Dinh dưỡng</a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-8 content-submenu-right">
+                                        <div class="">
+                                            <div id="cat_detail">
+                                                <ul class="body_catdetail clearfix">
+                                                    <li class="py-2">
+                                                        <a href="{{route('fe.cat4')}}">
+                                                            <div class="item_cat4">
+                                                                <div class="aimg">
+                                                                    <img src="{{asset('images/shop/sl1.png')}}" alt="">
+                                                                </div>
+                                                                <span>Sinh lý nam</span>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li class="py-2">
+                                                        <a href="{{route('fe.cat4')}}">
+                                                            <div class="item_cat4">
+                                                                <div class="aimg">
+                                                                    <img src="{{asset('images/shop/sl2.png')}}" alt="">
+                                                                </div>
+                                                                <span>Sinh lý nữ</span>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li class="py-2">
+                                                        <a href="{{route('fe.cat4')}}">
+                                                            <div class="item_cat4">
+                                                                <div class="aimg">
+                                                                    <img src="{{asset('images/shop/sl3.png')}}" alt="">
+                                                                </div>
+                                                                <span>Hỗ trợ thần kinh</span>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li class="py-2">
+                                                        <a href="{{route('fe.cat4')}}">
+                                                            <div class="item_cat4">
+                                                                <div class="aimg">
+                                                                    <img src="{{asset('images/shop/sl4.png')}}" alt="">
+                                                                </div>
+                                                                <span>Cân bằng nội tiết tố</span>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li class="py-2">
+                                                        <a href="{{route('fe.cat4')}}">
+                                                            <div class="item_cat4">
+                                                                <div class="aimg">
+                                                                    <img src="{{asset('images/shop/sl5.png')}}" alt="">
+                                                                </div>
+                                                                <span>Sức khỏe tình dục</span>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                                <div class="title-product-out d-flex justify-content-between my-3">
+                                                    <div class="title_cathd">
+                                                        <h1>Sản phẩm nổi bật</h1>
+                                                        <img src="{{asset('images/shop/lua4.png')}}" alt="">
+                                                    </div>
+                                                    <a href="">Xem tất cả</a>
+                                                </div>
+                                                <div id="productimenu">
+                                                    <ul class="">
+                                                        <div class="row">
+                                                            <div class="col-3 pl-3">
+                                                                <li>
+                                                                    <div class="bimgm"><img src="{{asset('images/shop/sri1.png')}}" alt=""></div>
+                                                                    <div class="">
+                                                                        <a href="">Siro Bổ Phế Bối Mẫu Forte Mom And Baby...</a>
+                                                                        <h3 class="my-2">49.000đ/Chai</h3>
+                                                                    </div>
+                                                                </li>
+                                                            </div>
+                                                            <div class="col-3 pr-3">
+                                                                <li>
+                                                                    <div class="bimgm"><img src="{{asset('images/shop/sri1.png')}}" alt=""></div>
+                                                                    <div class="">
+                                                                        <a href="">Siro Bổ Phế Bối Mẫu Forte Mom And Baby...</a>
+                                                                        <h3 class="my-2">49.000đ/Chai</h3>
+                                                                    </div>
+                                                                </li>
+                                                            </div>
+                                                            <div class="col-3 pr-3">
+                                                                <li>
+                                                                    <div class="bimgm"><img src="{{asset('images/shop/sri1.png')}}" alt=""></div>
+                                                                    <div class="">
+                                                                        <a href="">Siro Bổ Phế Bối Mẫu Forte Mom And Baby...</a>
+                                                                        <h3 class="my-2">49.000đ/Chai</h3>
+                                                                    </div>
+                                                                </li>
+                                                            </div>
+                                                            <div class="col-3 pr-3">
+                                                                <li>
+                                                                    <div class="bimgm"><img src="{{asset('images/shop/sri1.png')}}" alt=""></div>
+                                                                    <div class="">
+                                                                        <a href="">Siro Bổ Phế Bối Mẫu Forte Mom And Baby...</a>
+                                                                        <h3 class="my-2">49.000đ/Chai</h3>
+                                                                    </div>
+                                                                </li>
+                                                            </div>
+                                                        </div>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </li>
                             <li class="">
                                 <a href="{{route('fe.cat')}}">Dược mỹ phẩm</a>
@@ -86,8 +262,154 @@
                             <li class="">
                                 <a href="">Thuốc</a>
                             </li>
-                            <li class="">
-                                <a href="{{route('fe.cat')}}">Thiết bị y tế</a>
+                            <li class="catc1">
+                                <a href="{{route('fe.cat')}}">Thiết bị y tế
+                                    <i class="fas fa-chevron-down arrow"></i>
+                                </a>
+                                <div class="content-submenu row">
+                                    <div class="col-md-4 px-0">
+                                        <ul class="sub-menu1">
+                                            <li>
+                                                <div class="himg-menu">
+                                                    <div class="rdimg"><img src="{{asset('images/shop/sm1.png')}}" alt=""></div>
+                                                    <a href="{{route('fe.cat3')}}" title="">Dụng cụ y tế</a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="himg-menu">
+                                                    <div class="rdimg"><img src="{{asset('images/shop/sm2.png')}}" alt=""></div>
+                                                    <a href="{{route('fe.cat3')}}" title="">Khẩu trang</a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="himg-menu">
+                                                    <div class="rdimg"><img src="{{asset('images/shop/sm3.png')}}" alt=""></div>
+                                                    <a href="{{route('fe.cat3')}}" title="">Dụng cụ theo dõi</a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="himg-menu">
+                                                    <div class="rdimg"><img src="{{asset('images/shop/sm4.png')}}" alt=""></div>
+                                                    <a href="{{route('fe.cat3')}}" title="">Dụng cụ sơ cứu</a>
+                                                </div>
+                                            </li>
+                                            
+                                            <li>
+                                                <div class="himg-menu">
+                                                    <div class="rdimg"><img src="{{asset('images/shop/sm10.png')}}" alt=""></div>
+                                                    <a href="{{route('fe.cat3')}}" title="">Dinh dưỡng</a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-8 content-submenu-right">
+                                        <div class="">
+                                            <div id="cat_detail">
+                                                <ul class="body_catdetail clearfix">
+                                                    <li class="py-2">
+                                                        <a href="{{route('fe.cat4')}}">
+                                                            <div class="item_cat4">
+                                                                <div class="aimg">
+                                                                    <img src="{{asset('images/shop/sl1.png')}}" alt="">
+                                                                </div>
+                                                                <span>Sinh lý nam</span>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li class="py-2">
+                                                        <a href="{{route('fe.cat4')}}">
+                                                            <div class="item_cat4">
+                                                                <div class="aimg">
+                                                                    <img src="{{asset('images/shop/sl2.png')}}" alt="">
+                                                                </div>
+                                                                <span>Sinh lý nữ</span>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li class="py-2">
+                                                        <a href="{{route('fe.cat4')}}">
+                                                            <div class="item_cat4">
+                                                                <div class="aimg">
+                                                                    <img src="{{asset('images/shop/sl3.png')}}" alt="">
+                                                                </div>
+                                                                <span>Hỗ trợ thần kinh</span>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li class="py-2">
+                                                        <a href="{{route('fe.cat4')}}">
+                                                            <div class="item_cat4">
+                                                                <div class="aimg">
+                                                                    <img src="{{asset('images/shop/sl4.png')}}" alt="">
+                                                                </div>
+                                                                <span>Cân bằng nội tiết tố</span>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li class="py-2">
+                                                        <a href="{{route('fe.cat4')}}">
+                                                            <div class="item_cat4">
+                                                                <div class="aimg">
+                                                                    <img src="{{asset('images/shop/sl5.png')}}" alt="">
+                                                                </div>
+                                                                <span>Sức khỏe tình dục</span>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                                <div class="title-product-out d-flex justify-content-between my-3">
+                                                    <div class="title_cathd">
+                                                        <h1>Sản phẩm nổi bật</h1>
+                                                        <img src="{{asset('images/shop/lua4.png')}}" alt="">
+                                                    </div>
+                                                    <a href="">Xem tất cả</a>
+                                                </div>
+                                                <div id="productimenu">
+                                                    <ul class="">
+                                                        <div class="row">
+                                                            <div class="col-3 pl-3">
+                                                                <li>
+                                                                    <div class="bimgm"><img src="{{asset('images/shop/sri1.png')}}" alt=""></div>
+                                                                    <div class="">
+                                                                        <a href="">Siro Bổ Phế Bối Mẫu Forte Mom And Baby...</a>
+                                                                        <h3 class="my-2">49.000đ/Chai</h3>
+                                                                    </div>
+                                                                </li>
+                                                            </div>
+                                                            <div class="col-3 pr-3">
+                                                                <li>
+                                                                    <div class="bimgm"><img src="{{asset('images/shop/sri1.png')}}" alt=""></div>
+                                                                    <div class="">
+                                                                        <a href="">Siro Bổ Phế Bối Mẫu Forte Mom And Baby...</a>
+                                                                        <h3 class="my-2">49.000đ/Chai</h3>
+                                                                    </div>
+                                                                </li>
+                                                            </div>
+                                                            <div class="col-3 pr-3">
+                                                                <li>
+                                                                    <div class="bimgm"><img src="{{asset('images/shop/sri1.png')}}" alt=""></div>
+                                                                    <div class="">
+                                                                        <a href="">Siro Bổ Phế Bối Mẫu Forte Mom And Baby...</a>
+                                                                        <h3 class="my-2">49.000đ/Chai</h3>
+                                                                    </div>
+                                                                </li>
+                                                            </div>
+                                                            <div class="col-3 pr-3">
+                                                                <li>
+                                                                    <div class="bimgm"><img src="{{asset('images/shop/sri1.png')}}" alt=""></div>
+                                                                    <div class="">
+                                                                        <a href="">Siro Bổ Phế Bối Mẫu Forte Mom And Baby...</a>
+                                                                        <h3 class="my-2">49.000đ/Chai</h3>
+                                                                    </div>
+                                                                </li>
+                                                            </div>
+                                                        </div>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </li>
                             <li class="">
                                 <a href="{{route('fe.cat')}}">Bệnh</a>
@@ -99,179 +421,6 @@
                                 <a href="{{route('fe.cat')}}">Nhà thuốc</a>
                             </li>
                         </ul>
-                        <div class="content-submenu row">
-                            <div class="col-md-4 px-0">
-                                <ul class="sub-menu1">
-                                    <li>
-                                        <div class="himg-menu">
-                                            <div class="rdimg"><img src="{{asset('images/shop/sm1.png')}}" alt=""></div>
-                                            <a href="{{route('fe.cat3')}}" title="">Sinh lý nội tiết tố</a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="himg-menu">
-                                            <div class="rdimg"><img src="{{asset('images/shop/sm2.png')}}" alt=""></div>
-                                            <a href="{{route('fe.cat3')}}" title="">Sức khỏe tim mạch</a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="himg-menu">
-                                            <div class="rdimg"><img src="{{asset('images/shop/sm3.png')}}" alt=""></div>
-                                            <a href="{{route('fe.cat3')}}" title="">Hỗ trợ tiêu hóa</a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="himg-menu">
-                                            <div class="rdimg"><img src="{{asset('images/shop/sm4.png')}}" alt=""></div>
-                                            <a href="{{route('fe.cat3')}}" title="">Thần kinh não</a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="himg-menu">
-                                            <div class="rdimg"><img src="{{asset('images/shop/sm5.png')}}" alt=""></div>
-                                            <a href="{{route('fe.cat3')}}" title="">Hỗ trợ điều trị</a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="himg-menu">
-                                            <div class="rdimg"><img src="{{asset('images/shop/sm6.png')}}" alt=""></div>
-                                            <a href="{{route('fe.cat3')}}" title="">Cải thiện tăng cường chức năng</a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="himg-menu">
-                                            <div class="rdimg"><img src="{{asset('images/shop/sm7.png')}}" alt=""></div>
-                                            <a href="{{route('fe.cat3')}}" title="">Thảo dược và thực phẩm tự nhiên</a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="himg-menu">
-                                            <div class="rdimg"><img src="{{asset('images/shop/sm8.png')}}" alt=""></div>
-                                            <a href="{{route('fe.cat3')}}" title="">Hỗ trợ làm đẹp</a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="himg-menu">
-                                            <div class="rdimg"><img src="{{asset('images/shop/sm9.png')}}" alt=""></div>
-                                            <a href="{{route('fe.cat3')}}" title="">Vitamin và khoáng chất</a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="himg-menu">
-                                            <div class="rdimg"><img src="{{asset('images/shop/sm10.png')}}" alt=""></div>
-                                            <a href="{{route('fe.cat3')}}" title="">Dinh dưỡng</a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-md-8 content-submenu-right">
-                                <div class="">
-                                    <div id="cat_detail">
-                                        <ul class="body_catdetail clearfix">
-                                            <li class="py-2">
-                                                <a href="{{route('fe.cat4')}}">
-                                                    <div class="item_cat4">
-                                                        <div class="aimg">
-                                                            <img src="{{asset('images/shop/sl1.png')}}" alt="">
-                                                        </div>
-                                                        <span>Sinh lý nam</span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="py-2">
-                                                <a href="{{route('fe.cat4')}}">
-                                                    <div class="item_cat4">
-                                                        <div class="aimg">
-                                                            <img src="{{asset('images/shop/sl2.png')}}" alt="">
-                                                        </div>
-                                                        <span>Sinh lý nữ</span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="py-2">
-                                                <a href="{{route('fe.cat4')}}">
-                                                    <div class="item_cat4">
-                                                        <div class="aimg">
-                                                            <img src="{{asset('images/shop/sl3.png')}}" alt="">
-                                                        </div>
-                                                        <span>Hỗ trợ thần kinh</span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="py-2">
-                                                <a href="{{route('fe.cat4')}}">
-                                                    <div class="item_cat4">
-                                                        <div class="aimg">
-                                                            <img src="{{asset('images/shop/sl4.png')}}" alt="">
-                                                        </div>
-                                                        <span>Cân bằng nội tiết tố</span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="py-2">
-                                                <a href="{{route('fe.cat4')}}">
-                                                    <div class="item_cat4">
-                                                        <div class="aimg">
-                                                            <img src="{{asset('images/shop/sl5.png')}}" alt="">
-                                                        </div>
-                                                        <span>Sức khỏe tình dục</span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                        <div class="title-product-out d-flex justify-content-between my-3">
-                                            <div class="title_cathd">
-                                                <h1>Sản phẩm nổi bật</h1>
-                                                <img src="{{asset('images/shop/lua4.png')}}" alt="">
-                                            </div>
-                                            <a href="">Xem tất cả</a>
-                                        </div>
-                                        <div id="productimenu">
-                                            <ul class="">
-                                                <div class="row">
-                                                    <div class="col-3 pl-3">
-                                                        <li>
-                                                            <div class="bimgm"><img src="{{asset('images/shop/sri1.png')}}" alt=""></div>
-                                                            <div class="">
-                                                                <a href="">Siro Bổ Phế Bối Mẫu Forte Mom And Baby...</a>
-                                                                <h3 class="my-2">49.000đ/Chai</h3>
-                                                            </div>
-                                                        </li>
-                                                    </div>
-                                                    <div class="col-3 pr-3">
-                                                        <li>
-                                                            <div class="bimgm"><img src="{{asset('images/shop/sri1.png')}}" alt=""></div>
-                                                            <div class="">
-                                                                <a href="">Siro Bổ Phế Bối Mẫu Forte Mom And Baby...</a>
-                                                                <h3 class="my-2">49.000đ/Chai</h3>
-                                                            </div>
-                                                        </li>
-                                                    </div>
-                                                    <div class="col-3 pr-3">
-                                                        <li>
-                                                            <div class="bimgm"><img src="{{asset('images/shop/sri1.png')}}" alt=""></div>
-                                                            <div class="">
-                                                                <a href="">Siro Bổ Phế Bối Mẫu Forte Mom And Baby...</a>
-                                                                <h3 class="my-2">49.000đ/Chai</h3>
-                                                            </div>
-                                                        </li>
-                                                    </div>
-                                                    <div class="col-3 pr-3">
-                                                        <li>
-                                                            <div class="bimgm"><img src="{{asset('images/shop/sri1.png')}}" alt=""></div>
-                                                            <div class="">
-                                                                <a href="">Siro Bổ Phế Bối Mẫu Forte Mom And Baby...</a>
-                                                                <h3 class="my-2">49.000đ/Chai</h3>
-                                                            </div>
-                                                        </li>
-                                                    </div>
-                                                </div>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="flag pt-2">

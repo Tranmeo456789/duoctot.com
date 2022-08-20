@@ -70,24 +70,27 @@
     color: #fff;
     padding: 10px 0px 10px 0px;
 }
-
+#menu-top1{
+    position: relative;
+}
 #head-body {
     background: white;
-    box-shadow: 0px 2px 4px 3px rgb(168 168 168 / 25%);
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
 }
 
 .sub-menu1{
     border-radius: 20px 20px 20px 20px;
     background: #FFFFFF;
+    padding-bottom: 15px;
 }
 #head-body #main-menu>li>a {
     font-size: 13px;
     font-weight: bold;
     color: #111111;
     text-transform: uppercase;
-    padding: 15px 17px 4px 17px;
+    padding: 15px 17px;
     display: block;
-    border-bottom: 5px solid white;
+    position: relative;
 }
 #head-body #main-menu>li:first-child>a{
     padding-left: 0px;
@@ -106,13 +109,28 @@
 #dropdownMenuButton.btn:focus {
     box-shadow: none;
 }
-#main-menu .catc1{
-    position: relative;
-    border-bottom: 5px solid white;
+
+#main-menu > li{
+    margin-right: 2px;
 }
-#main-menu .catc1:hover{
-    border-bottom: 5px solid red;
+#main-menu > li:last-child{margin-right: 0px;}
+#main-menu > li > a::after{
+    content: "";
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: 5px;
+    background:  #E9212D;
+    position: absolute;
+    transition: .25s;
+    display: none;
 }
+#main-menu > li:hover > a::after{
+    display: block;
+}
+
+#main-menu li.catc1:hover>.content-submenu{display: flex;}
+
 #main-menu .catc1 .arrow{
     position: absolute;
     top: 50%;
@@ -131,7 +149,7 @@
 }
 .content-submenu #cat_detail .body_catdetail li .item_cat4:hover{
     border: 1px solid #05AFE3;
-border-radius: 30px;
+    border-radius: 30px;
 }
 .content-submenu #cat_detail ul.body_catdetail{
     border-bottom: 1px solid #B0C1DB;
@@ -171,12 +189,10 @@ border-radius: 30px;
     position: absolute;
     top: 100%;
     left: 14px;
-    background: #05AFE3;
     z-index: 100;
-    height: 640px;
     border-radius: 0px 0px 20px 20px;
     background: #FFFFFF;
-    width: 100%;
+    width: 76vw;
     display: none;
 }
 
