@@ -9,16 +9,16 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
 
-class ProductController extends ShopFrontEndController
+class CartController extends ShopFrontEndController
 {
     public function __construct()
     {
-        $this->controllerName     = 'cat';
+        $this->controllerName     = 'product';
         $this->pathViewController = "$this->moduleName.pages.$this->controllerName.";
-        $this->pageTitle          = 'Chi tiết sản phẩm';
+        $this->pageTitle          = 'Giỏ hàng';
         parent::__construct();
     }
-    public function detail_product(){
-        return view($this->pathViewController . 'detail_product');
+    public function cart_product(){
+        return view($this->pathViewController . 'cart');
     }
 }

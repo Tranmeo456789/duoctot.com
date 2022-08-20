@@ -8,5 +8,6 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('/danh-muc-san-pham-cap-3','CatController@cat_level3')->name('fe.cat3');
     Route::get('/danh-muc-san-pham-cap-4','CatController@cat_level4')->name('fe.cat4');
 
-    Route::get('/chi-tiet-san-pham-id','ProductController@detail_product')->name('fe.product.detail');
+    Route::get('/chi-tiet-san-pham','ProductController@detail_product')->name('fe.product.detail');
+    Route::get('/gio-hang','CartController@cart_product')->name('fe.product.cart');
 });

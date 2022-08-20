@@ -658,7 +658,7 @@
     color: #FFFFFF;
     margin-left: 15px;
     width: 300px;
-    padding-top: 8px;
+    padding-top: 0px;
 }
 
 .local .list-drugstore {
@@ -675,7 +675,10 @@
     line-height: 19px;
     color: #05AFE3;
 }
-
+.local img{
+    width: 25px;
+    height: 35px;
+}
 .feedback-customer h1 {
     font-family: 'Helvetica Neue';
     font-style: normal;

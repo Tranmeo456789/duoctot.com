@@ -9,6 +9,7 @@
 <link href="{{ asset('/shop/frontend/css/import/home.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('/shop/frontend/css/import/cat_product.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('/shop/frontend/css/import/global.css')}}" rel="stylesheet" type="text/css"/>
+<link href="{{ asset('/shop/frontend/css/import/cart.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('/shop/frontend/css/import/footer.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('/shop/frontend/responsive.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('/shop/frontend/css/import/slider.css')}}" rel="stylesheet" type="text/css"/>

@@ -81,21 +81,29 @@
                         </div>
                         <div class="content-commit-tdoctor">
                             <ul class="d-flex justify-content-between flex-wrap">
-                                <li>
-                                    <div class="text-center"><img src="{{asset('images/shop/cm1.png')}}" alt=""></div>
-                                    <h3>Đổi trả trong 30 ngày</h3>
-                                    <p>kể từ ngày mua hàng</p>
+                                <li class="d-flex justify-content-center">
+                                    <div>
+                                        <div class="text-center"><img src="{{asset('images/shop/cm1.png')}}" alt=""></div>
+                                        <h3>Đổi trả trong 30 ngày</h3>
+                                        <p>kể từ ngày mua hàng</p>
+                                    </div>
                                 </li>
-                                <li>
-                                    <div class="text-center"><img src="{{asset('images/shop/cm1.png')}}" alt=""></div>
-                                    <h3>Đổi trả trong 30 ngày</h3>
-                                    <p>kể từ ngày mua hàng</p>
-                                </li>
-                                <li>
-                                    <div class="text-center"><img src="{{asset('images/shop/cm1.png')}}" alt=""></div>
-                                    <h3>Đổi trả trong 30 ngày</h3>
-                                    <p>kể từ ngày mua hàng</p>
-                                </li>
+                                    <li class="d-flex justify-content-center">
+                                        <div>
+                                        <div class="text-center"><img src="{{asset('images/shop/cm2.png')}}" alt=""></div>
+                                        <h3>Đổi trả trong 30 ngày</h3>
+                                        <p>kể từ ngày mua hàng</p>
+                                        </div>
+                                    </li>
+                                <div>
+                                    <li class="d-flex justify-content-center">
+                                        <div>
+                                        <div class="text-center"><img src="{{asset('images/shop/cm3.png')}}" alt=""></div>
+                                        <h3>Đổi trả trong 30 ngày</h3>
+                                        <p>kể từ ngày mua hàng</p>
+                                        </div>
+                                    </li>
+                                </div>
                             </ul>
                         </div>
                     </div>
@@ -127,7 +135,7 @@
         <div class="col-9 pl-3">
             <div class="title-content-detail-product d-flex justify-content-between flex-wrap">
                 <h1>Mô tả sản phẩm Sâm Nhung Bổ Thận NV</h1>
-                <div>
+                <div class="d-flex justify-content-center flex-wrap">
                     <span class="ktc">Kích thước chữ</span>
                     <span class="mdlh">
                         <a class="md" href="">Mặc định</a>
@@ -379,35 +387,35 @@
                                     <span class="tn"></span>
                                     <span class="str">5 <img src="{{asset('images/shop/Starred.png')}}" alt=""></span>
                                     <span class="ss">2</span>
-                                </span>                                
+                                </span>
                             </li>
                             <li>
                                 <span class="td">
                                     <span class="tn"></span>
                                     <span class="str">4 <img src="{{asset('images/shop/Starred.png')}}" alt=""></span>
                                     <span class="ss">2</span>
-                                </span>                                
+                                </span>
                             </li>
                             <li>
                                 <span class="td">
                                     <span class="tn"></span>
                                     <span class="str">3 <img src="{{asset('images/shop/Starred.png')}}" alt=""></span>
                                     <span class="ss">2</span>
-                                </span>                                
+                                </span>
                             </li>
                             <li>
                                 <span class="td">
                                     <span class="tn"></span>
                                     <span class="str">2 <img src="{{asset('images/shop/Starred.png')}}" alt=""></span>
                                     <span class="ss">2</span>
-                                </span>                                
+                                </span>
                             </li>
                             <li>
                                 <span class="td">
                                     <span class="tn"></span>
                                     <span class="str">1 <img src="{{asset('images/shop/Starred.png')}}" alt=""></span>
                                     <span class="ss">2</span>
-                                </span>                                
+                                </span>
                             </li>
                         </ul>
                     </div>

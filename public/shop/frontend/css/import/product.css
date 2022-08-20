@@ -515,8 +515,11 @@
 
 .average-rating {
     background: white;
-    padding: 20px 10px;
+    padding: 20px 15px;
 
+}
+.average-rating-center{
+    padding-left: 20px;
 }
 
 input[type="number"] {
@@ -526,7 +529,7 @@ input[type="number"] {
 }
 
 .average-rating-center .td {
-    width: 400px;
+    width: 30vw;
     height: 6px;
     background: #F1F8FF;
     display: inline-block;
@@ -545,7 +548,7 @@ input[type="number"] {
 }
 .average-rating-center .str{
     position: absolute;
-    left: -36px;
+    left: -27px;
     top: 50%;
     transform: translateY(-38%);
 }
@@ -561,9 +564,9 @@ input[type="number"] {
 }
 .average-rating-center .ss{
     position: absolute;
-    right: -12px;
+    right: -8px;
     top: 50%;
-    transform: translateY(-38%);
+    transform: translateY(-46%);
 }
 .average-rating-right a{
 font-family: 'Helvetica Neue';
