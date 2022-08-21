@@ -39,7 +39,7 @@
     </div>
     <div class="wp-inner mt-5">
         <div id="selling-product">
-            @include("$moduleName..templates.selling_product")
+            @include("$moduleName.templates.selling_product")
         </div>
         <div id="selling-product" class="mt-5">
             @include("$moduleName.pages.$controllerName.child_index.subject_product")

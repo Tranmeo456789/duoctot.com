@@ -10,7 +10,7 @@ body{
     width: 1200px;
     margin: 0px auto;
 }
-img{
+img {
     max-width: 100%;
     height: auto;
 }
@@ -47,5 +47,28 @@ a:hover{
     background: #B0C1DB;
     border-radius: 50%;
 }
+.rimg-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.black-screen {
+    width: 100%;
+    height: 10000px;
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 233;
+    transition: all 0.25s ease-in-out;
+    display: none;
+}
 
+.fixed-body{
+    position:fixed;top:0px;left:0px;width: 100%;
+}
+.fixed-hbd{
+    height: 1000px;
+    overflow: hidden;
+}
 
