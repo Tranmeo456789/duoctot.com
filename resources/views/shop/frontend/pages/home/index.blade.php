@@ -22,9 +22,9 @@
                 </div>
             </div>
         </div>
-        <div id="service-doctor">
+        <!-- <div id="service-doctor">
             @include("$moduleName.pages.$controllerName.child_index.service")
-        </div>
+        </div> -->
         <div id="buy-medicine" class="mt-5">
             @include("$moduleName.pages.$controllerName.child_index.buy_medicine")
         </div>

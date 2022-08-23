@@ -1,4 +1,4 @@
-<div id="footer-wp" class="pb-5">
+<div id="footer-wp">
     <div class="wp-inner">
         <div class="row">
             <div class="col-xl-3 col-lg-12">
@@ -47,37 +47,37 @@
             </div>
             <div class="col-md-6 social2">
                 <h1 class="mb-1">Địa chỉ</h1>
-                <div class="d-flex">
+                <div class="d-flex mb-2">
                     <div class="icon-social">
                         <img src="{{asset('images/shop/dc1.png')}}" alt="">
                     </div>
                     <p>Trụ sở chính: P.1108, tòa nhà Gold Tower, 275 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
                 </div>
-                <div class="d-flex">
+                <div class="d-flex mb-2">
                     <div class="icon-social">
                         <img src="{{asset('images/shop/dc1.png')}}" alt="">
                     </div>
                     <p>Chi nhánh: Phòng 6.28, tòa nhà Everich Infinity, 290 An Dương Vương, phường 4, quận 5, Hồ Chí Minh</p>
                 </div>
-                <div class="d-flex">
+                <div class="d-flex mb-2">
                     <div class="icon-social">
                         <img src="{{asset('images/shop/dc2.png')}}" alt="">
                     </div>
                     <p>Email: tdoctorvn@gmail.com</p>
                 </div>
-                <div class="d-flex">
+                <div class="d-flex mb-2">
                     <div class="icon-social">
                         <img src="{{asset('images/shop/dc3.png')}}" alt="">
                     </div>
                     <p>Nơi đăng ký: 7F Huỳnh Tấn Phát, Thị trấn Nhà Bè, Huyện Nhà Bè, Hồ Chí Minh</p>
                 </div>
-                <div class="d-flex">
+                <div class="d-flex mb-2">
                     <div class="icon-social">
                         <img src="{{asset('images/shop/dc4.png')}}" alt="">
                     </div>
                     <p>Hotline: +84n393 157 234</p>
                 </div>
-                <div class="d-flex">
+                <div class="d-flex mb-2">
                     <div class="icon-social">
                         <img src="{{asset('images/shop/dc5.png')}}" alt="">
                     </div>

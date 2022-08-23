@@ -115,7 +115,6 @@
     font-weight: 700;
     font-size: 32px;
     line-height: 39px;
-    /* identical to box height */
     text-align: center;
     color: #1E1E1E;
     margin-bottom: 40px;
@@ -133,14 +132,11 @@
 }
 
 #buy-medicine ul li {
+    flex-basis: 33%;
     text-align: center;
-    padding-right: 90px;
     border-right: 2px solid #D9D9D9;
 }
 
-#buy-medicine ul li:first-child {
-    padding-left: 0px;
-}
 
 #buy-medicine ul li:last-child {
     border: none;
@@ -159,7 +155,6 @@
 
 #buy-medicine ul li img {
     width: 120px;
-    height: 120px;
 }
 
 #buy-medicine .btn-buynn {
@@ -169,6 +164,7 @@
 #buy-medicine .child_buy {
     display: flex;
     justify-content: center;
+    margin-top: 30px;
 }
 
 .social p {
@@ -302,10 +298,10 @@
 }
 
 #selling-product .icon-product-round {
-    border: 1px solid #05AFE3;
     border-radius: 50%;
     background-color: #05AFE3;
-    padding: 5px 10px 1px 10px;
+    width: 34px;height: 34px;
+    display: flex;justify-content: center;align-items: center;
     margin-right: 15px;
 }
 
@@ -428,7 +424,7 @@
 
 .medical-faculty .list-medical-faculty li {
     float: left;
-    margin-right: 6px;
+    margin-right: 13px;
 }
 
 .medical-faculty .list-medical-faculty li .title-medical-faculty {
@@ -474,7 +470,7 @@
     color: #06AFE3;
     padding: 10px 30px;
 }
-
+.medical-faculty .list-medical-faculty li a{display: block;}
 #qadoctor .wp-inner .chatq {
     position: absolute;
     bottom: 3px;
@@ -483,7 +479,9 @@
 .newsh .title-news {
     margin-bottom: 20px;
 }
-
+.newsh .title-news img{
+    width: 35px;height: 35px;
+}
 .newsh .title-news h1 {
     font-family: 'Inter';
     font-style: normal;
@@ -521,9 +519,9 @@
 }
 
 .newsh .news-content-left li {
-    margin-bottom: 10px;
+    margin-bottom: 10px;;
 }
-
+.social2 img{width: 20px;}
 .newsh .news-content-left li:last-child {
     margin-bottom: 0px;
 }
@@ -643,7 +641,7 @@
     color: #072C94;
     margin-left: 15px;
 }
-
+.service-tdoctor .title-service  h2{align-items: center;display: flex;}
 .local {
     background-color: #05AFE3;
     padding: 10px 0px;
@@ -657,7 +655,6 @@
     line-height: 24px;
     color: #FFFFFF;
     margin-left: 15px;
-    width: 300px;
     padding-top: 0px;
 }
 
@@ -815,8 +812,6 @@
     border-radius: 50%;
     animation: ripple 2s linear infinite;
     display: inline-block;
-    margin-right: 5px;
-    margin-top: 13px;
 }
 
 @keyframes ripple {

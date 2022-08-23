@@ -2,30 +2,30 @@
 <ul class="d-flex">
     <li>
         <a href="">
-            <div class="d-flex justify-content-center"><img src="{{asset('images/shop/buy1.png')}}" alt="" srcset=""></div>
+            <div class="d-flex justify-content-center rimg-center"><img src="{{asset('images/shop/buy1.png')}}" alt="" srcset=""></div>
             <h2>CHỤP TOA THUỐC</h1>
-            <span>đơn giản & nhanh chóng</span>
+                <span>đơn giản & nhanh chóng</span>
         </a>
     </li>
     <li>
         <a href="">
-            <div class="d-flex justify-content-center"><img src="{{asset('images/shop/buy2.png')}}" alt="" srcset=""></div>
-            <h2>NHẬP THÔNG TIN LIÊN LẠC</h1>
-            <span>để được tư vấn</span>
+            <div class="d-flex justify-content-center rimg-center"><img src="{{asset('images/shop/buy2.png')}}" alt="" srcset=""></div>
+            <h2>NHẬP THÔNG TIN <span style="color: #375FBE;font-weight:bold;">LIÊN LẠC</span></h1>
+                <span>để được tư vấn</span>
         </a>
     </li>
     <li>
         <a href="">
-            <div class="d-flex justify-content-center"><img src="{{asset('images/shop/buy3.png')}}" alt="" srcset=""></div>
-            <h2>NHẬN BÁO GIÁ TỪ DƯỢC SỸ</h1>
-            <span>kèm theo báo giá miễn phí</span>
+            <div class="d-flex justify-content-center rimg-center"><img src="{{asset('images/shop/buy3.png')}}" alt="" srcset=""></div>
+            <h2>NHẬN BÁO GIÁ <span style="color: #375FBE;font-weight:bold;">TỪ DƯỢC SỸ</span></h1>
+                <span>kèm theo báo giá miễn phí</span>
         </a>
     </li>
 </ul>
-<div class="text-center mt-5 child_buy">
-    <div class="text-center btn-buynn"><a href="">MUA THUỐC NGAY</a></div>
+<div class="text-center child_buy">
+    <div class="text-center btn-buynn mb-3"><a href="">MUA THUỐC NGAY</a></div>
     <span>Hoặc mua qua hostline 0393167234</span>
 </div>
-<div class="mt-5">
+<div class="mt-5 rimg-center">
     <img src="{{asset('images/shop/baner.png')}}" alt="">
 </div>

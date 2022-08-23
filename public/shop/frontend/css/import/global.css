@@ -6,9 +6,14 @@ body{
     color: #272727;
     line-height: 24px;
 }
+#site{
+    overflow: hidden;
+}
 .wp-inner{
-    width: 1200px;
+    width: 1300px;
     margin: 0px auto;
+    padding-left: 12px;
+    padding-right: 12px;
 }
 img {
     max-width: 100%;
@@ -47,10 +52,20 @@ a:hover{
     background: #B0C1DB;
     border-radius: 50%;
 }
+.icon-social{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .rimg-center{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.rimg-start{
+    display: flex;
+    justify-content: center;
+    align-items:baseline;
 }
 .black-screen {
     width: 100%;

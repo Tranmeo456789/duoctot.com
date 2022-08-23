@@ -1,13 +1,28 @@
 <div id="header-wp" class="position-relative">
-    <div class="head_topon d-flex justify-content-center py-1">
-        <div class="d-flex justify-content-center align-middle">
-            <span class="circle-ripple"></span>
-            <p>Kết nối khám chữa bệnh tại nhà với các bác sĩ online</p>
-            <a href="">Xem hướng dẫn</a>
+    <div class="head_topon">
+        <div class="wp-inner">
+            <div class="d-flex justify-content-center">
+                <div class="d-flex justify-content-center">
+                    <div class="d-flex align-items-center"><span class="circle-ripple"></span></div>
+                    <p>Kết nối khám chữa bệnh tại nhà với các bác sĩ online</p>
+                    <a href="">Xem hướng dẫn</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="head_topon_reponsive">
+        <div class="wp-inner">
+            <div class="d-flex justify-content-center">
+                <div class="d-flex justify-content-center">
+                    <div><span class="circle-ripple"></span></div>
+                    <a href="">Hướng dẫn</a>
+                    <p>Kết nối khám chữa bệnh tại nhà</p>
+                </div>
+            </div>
         </div>
     </div>
     <div id="head-top" class="clearfix position-relative">
-        <div class="wp-inner">
+        <div class="wp-inner clearfix">
             <a href="{{route('home')}}" title="" id="payment-link" class="fl-left"><img style="width:213px" src="{{asset('images/shop/logo_topbar2.png')}}" alt=""></a>
             <div id="" class="fl-left" style="margin-left:300px; padding-top:5px">
                 <a title="" id="payment-link" class="search-history-order">
@@ -49,59 +64,76 @@
             @include('shop.frontend.block.form_login_register')
         </div>
         <div id="search-order">
-                <div class="header d-flex justify-content-between">
-                    <div class="tshorder">Tra cứu lịch sử đơn hàng</div>
-                    <button class="btn-closenk rimg-center"><img src="{{asset('images/shop/dn4.png')}}" alt=""></button>
-                </div>
-                <div class="d-flex justify-content-center">
-                    <div class="wp-content">
-                        <form action="" class="wp-content-shorder">
-                            <div class="content text-center">
-                                <div class="mb-3 rimg-center"><img src="{{asset('images/shop/tclsdh.png')}}" alt="" style="display:block"></div>
-                                <p class="nsdt">Nhập số điện thoại bạn dùng
-                                    để mua hàng tại T Doctor</p>
-                                <div class="phone-mail position-relative">
-                                    <input type="text" placeholder="Nhập số điện thoại / Email">
-                                    <div class="img-person"><img src="{{asset('images/shop/dn1.png')}}" alt=""></div>
-                                </div>
+            <div class="header d-flex justify-content-between">
+                <div class="tshorder">Tra cứu lịch sử đơn hàng</div>
+                <button class="btn-closenk rimg-center"><img src="{{asset('images/shop/dn4.png')}}" alt=""></button>
+            </div>
+            <div class="d-flex justify-content-center">
+                <div class="wp-content">
+                    <form action="" class="wp-content-shorder">
+                        <div class="content text-center">
+                            <div class="mb-3 rimg-center"><img src="{{asset('images/shop/tclsdh.png')}}" alt="" style="display:block"></div>
+                            <p class="nsdt">Nhập số điện thoại bạn dùng
+                                để mua hàng tại T Doctor</p>
+                            <div class="phone-mail position-relative">
+                                <input type="text" placeholder="Nhập số điện thoại / Email">
+                                <div class="img-person"><img src="{{asset('images/shop/dn1.png')}}" alt=""></div>
                             </div>
-                            <div class="text-center"><input type="submit" name="btn-forget" value="Tiếp tục" id="btn-forget"></div>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="text-center"><input type="submit" name="btn-forget" value="Tiếp tục" id="btn-forget"></div>
+                    </form>
                 </div>
+            </div>
         </div>
     </div>
     <div id="head-top-respon">
         <div class="wp-inner presp">
-            <div class="d-flex justify-content-between">
-                <div id="btnmenu-resp"><i class="fas fa-bars"></i></div>
-                <div class="logotop"><a href="{{route('home')}}"><img style="width:213px" src="{{asset('images/shop/logo_topbar2.png')}}" alt=""></a></div>
-                <ul class="d-flex">
-                    <li class="hrcart"><a href=""><img style="width:32px" src="{{asset('images/shop/cart.png')}}" alt="" srcset=""></a></li>
-                    <li class="hruse"><a href=""><i class="fas fa-user"></i></a></li>
-                    <li class="hrflag">
-                        <div class=" d-flex">
-                            <img src="{{asset('images/shop/coviet.png')}}" alt="" srcset="">
-                            <p class=""><span><i class="fas fa-angle-down"></i></span></p>
-                        </div>
-                    </li>
-                </ul>
+            <div class="wp-iconmn">
+                <div class="d-flex justify-content-between">
+                    <div id="btnmenu-resp" class="rimg-center"><img src="{{asset('images/shop/nb3.png')}}" alt=""></div>
+                    <div class="logotop"><a href="{{route('home')}}">
+                            <div class="rimg-center"><img src="{{asset('images/shop/logo_topbar2.png')}}" alt=""></div>
+                        </a></div>
+                    <ul class="d-flex align-items-center">
+                        <li class="hrcart"><a href="">
+                                <div class="rimg-center"><img src="{{asset('images/shop/cart.png')}}"></div>
+                            </a></li>
+                        <li class="hruse"><a href="">
+                                <div class="rimg-center"><img src="{{asset('images/shop/mr1.png')}}" alt=""></div>
+                            </a></li>
+                        <li class="hrflag">
+                            <div class="rimg-center">
+                                <img src="{{asset('images/shop/corp.png')}}" alt="" srcset="">
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div class="ipsp">
-                <input type="text" placeholder="Nhập từ khóa...">
+                <input type="text" placeholder="Nhập tìm thuốc, TPCN, bệnh lý ...">
                 <img src="{{asset('images/shop/icsp.png')}}" alt="">
             </div>
         </div>
     </div>
     <div id="head-body">
+        @php
+            $item_cat1s = [
+            [ 'name' => 'Thực phẩm chức năng', 'id' => 1],
+            [ 'name' => 'Dược mỹ phẩm', 'id' => 2],
+            [ 'name' => 'Chăm sóc cá nhân', 'id' => 3],
+            [ 'name' => 'Danh mục', 'id' => 4],
+            [ 'name' => 'Thiết bị y tế', 'id' => 5],
+            ];
+        @endphp
         <div class="wp-inner" id="category-product-wp">
             <div class="d-flex justify-content-between">
                 <div class="menu-top1">
                     <div class="position-relative">
                         <ul id="main-menu" class="d-flex list-item">
+                            @foreach ($item_cat1s as $item_cat1)
                             <li class="catc1">
                                 <a href="{{route('fe.cat')}}">
-                                    Thực phẩm chức năng
+                                    {{$item_cat1['name']}}
                                     <i class="fas fa-chevron-down arrow"></i>
                                 </a>
                                 <div class="content-submenu row">
@@ -278,17 +310,12 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="">
-                                <a href="{{route('fe.cat')}}">Dược mỹ phẩm</a>
-                            </li>
-                            <li class="">
-                                <a href="{{route('fe.cat')}}">Chăm sóc cá nhân</a>
-                            </li>
-                            <li class="">
-                                <a href="">Thuốc</a>
+                            @endforeach
+                            <li class="catc1">
+                                <a href="{{route('fe.cat')}}">Đặt khám bác sĩ<i class="fas fa-chevron-down arrow"></i></a>
                             </li>
                             <li class="catc1">
-                                <a href="{{route('fe.cat')}}">Thiết bị y tế
+                                <a href="{{route('fe.cat')}}">Thú y
                                     <i class="fas fa-chevron-down arrow"></i>
                                 </a>
                                 <div class="content-submenu row">
@@ -297,32 +324,64 @@
                                             <li>
                                                 <div class="himg-menu">
                                                     <div class="rdimg"><img src="{{asset('images/shop/sm1.png')}}" alt=""></div>
-                                                    <a href="{{route('fe.cat3')}}" title="">Dụng cụ y tế</a>
+                                                    <a href="{{route('fe.cat3')}}" title="">Hỗn dịch kháng sinh tiêm</a>
                                                 </div>
                                             </li>
                                             <li>
                                                 <div class="himg-menu">
                                                     <div class="rdimg"><img src="{{asset('images/shop/sm2.png')}}" alt=""></div>
-                                                    <a href="{{route('fe.cat3')}}" title="">Khẩu trang</a>
+                                                    <a href="{{route('fe.cat3')}}" title="">Dung dịch kháng sinh tiêm</a>
                                                 </div>
                                             </li>
                                             <li>
                                                 <div class="himg-menu">
                                                     <div class="rdimg"><img src="{{asset('images/shop/sm3.png')}}" alt=""></div>
-                                                    <a href="{{route('fe.cat3')}}" title="">Dụng cụ theo dõi</a>
+                                                    <a href="{{route('fe.cat3')}}" title="">Thuốc bột kháng sinh uống</a>
                                                 </div>
                                             </li>
                                             <li>
                                                 <div class="himg-menu">
                                                     <div class="rdimg"><img src="{{asset('images/shop/sm4.png')}}" alt=""></div>
-                                                    <a href="{{route('fe.cat3')}}" title="">Dụng cụ sơ cứu</a>
+                                                    <a href="{{route('fe.cat3')}}" title="">Dung dịch kháng sinh uống</a>
                                                 </div>
                                             </li>
 
                                             <li>
                                                 <div class="himg-menu">
                                                     <div class="rdimg"><img src="{{asset('images/shop/sm10.png')}}" alt=""></div>
-                                                    <a href="{{route('fe.cat3')}}" title="">Dinh dưỡng</a>
+                                                    <a href="{{route('fe.cat3')}}" title="">Thuốc chế phẩm bổ trợ, hạ sốt, tiêu viêm</a>
+                                                </div>
+                                            </li>
+                                            
+                                            <li>
+                                                <div class="himg-menu">
+                                                    <div class="rdimg"><img src="{{asset('images/shop/sm10.png')}}" alt=""></div>
+                                                    <a href="{{route('fe.cat3')}}" title="">Thuốc ký sinh trùng dạng dung dịch tiêm bột</a>
+                                                </div>
+                                            </li>
+                                            
+                                            <li>
+                                                <div class="himg-menu">
+                                                    <div class="rdimg"><img src="{{asset('images/shop/sm10.png')}}" alt=""></div>
+                                                    <a href="{{route('fe.cat3')}}" title="">Nhóm men đạm sữa</a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="himg-menu">
+                                                    <div class="rdimg"><img src="{{asset('images/shop/sm10.png')}}" alt=""></div>
+                                                    <a href="{{route('fe.cat3')}}" title="">Vitamin khoáng chất, dạng cốm hòa tan</a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="himg-menu">
+                                                    <div class="rdimg"><img src="{{asset('images/shop/sm10.png')}}" alt=""></div>
+                                                    <a href="{{route('fe.cat3')}}" title="">Nhóm thuốc điều tiết sinh sản</a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="himg-menu">
+                                                    <div class="rdimg"><img src="{{asset('images/shop/sm10.png')}}" alt=""></div>
+                                                    <a href="{{route('fe.cat3')}}" title="">Thuốc sát trùng</a>
                                                 </div>
                                             </li>
                                         </ul>
@@ -437,9 +496,6 @@
                                 </div>
                             </li>
                             <li class="">
-                                <a href="{{route('fe.cat')}}">Bệnh</a>
-                            </li>
-                            <li class="">
                                 <a href="{{route('fe.cat')}}">Góc sức khỏe</a>
                             </li>
                             <li class="">
@@ -462,6 +518,7 @@
                 </div>
             </div>
         </div>
+
     </div>
     <div class="black-content"></div>
     <div class="black-screen"></div>

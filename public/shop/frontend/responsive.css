@@ -1,163 +1,270 @@
 /*RESPONSIVE*/
 
-@media screen and (max-width: 1366px){
-    
+@media screen and (max-width: 1366px) {
+    #head-body #main-menu>li>a {
+        font-size: 10px;
+    }
 }
 
-@media screen and (max-width: 1170px){
-   
-    .wp-inner{
-        width: 970px;
+@media screen and (max-width: 1170px) {
+    .wp-inner{max-width: 995px;}
+    #buy-medicine .btn-buynn {
+        margin-right: 0px;
     }
-    #head-top-respon{
+    #head-top-respon {
         display: block;
         background: #072D94;
     }
-    #head-top{
+
+    #head-top {
         display: none;
     }
-    #head-top-respon i{
-        color: white;
-        font-size: 35px;
+
+    .wp-iconmn #btnmenu-resp img {
+        width: 40px
     }
-    #head-top-respon .logotop{
-        padding: 10px 0px 0px 0px;
+
+    .wp-iconmn .logotop img {
+        width: 200px
     }
-    #head-top-respon .hrcart{
-        padding: 20px 0px 0px 0px;
+
+    .wp-iconmn .hrcart img {
+        width: 40px
     }
-    #head-top-respon .hruse{
-        
-        padding: 20px 0px 0px 0px;
+
+    .wp-iconmn .hruse img {
+        width: 30px
     }
-    #head-top-respon .hruse i{
-        font-size: 28px;
+
+    .wp-iconmn .hrflag img {
+        width: 50px
     }
-    #head-top-respon .hrflag{
-        padding: 23px 0px 0px 0px;
+
+    #head-top-respon a {
+        display: block;
     }
-    #head-top-respon .hrflag img{
-        width: 30px;
-        height: 24px;
+
+    #head-top-respon .presp ul {
+        justify-content: space-between;
     }
-    #head-top-respon .hrflag i{
-        font-size: 19px;
+
+    #head-top-respon .presp ul li {
+        margin-right: 8px;
     }
-    #head-top-respon #btnmenu-resp{
-        padding: 16px 15px 0px 15px;
-    }
-    #head-top-respon  li{
-        margin-right: 20px;
-    }
-    #head-top-respon  li:last-child{
+
+    #head-top-respon .presp ul li:last-child {
         margin-right: 0px;
     }
-    #head-body{
+
+    #head-body {
         display: none;
     }
+
     #selling-product.viewnproduct li {
-       min-height: 245px;
+        min-height: 245px;
     }
+
     .info-tdoctor .list-info-tdoctor li {
         margin-right: 120px;
     }
+
     .info-tdoctor .list-info-tdoctor {
         top: 37%;
     }
+
     .info-tdoctor .opacty-back {
         height: 125px;
     }
-    #form-search {width: 100%;}
-    #form-search .form-search-inner input {height: 40px;}
-    #form-search .form-search-inner img{
+
+    #form-search {
+        width: 100%;
+    }
+
+    #form-search .form-search-inner input {
+        height: 40px;
+    }
+
+    #form-search .form-search-inner img {
         width: 23px;
         height: 23px;
     }
-    #form-search .form-search-inner button {height: 99%;padding-top: 7px;}
-    
-   #buy-medicine ul{
-    justify-content: center;
-   }
-   #buy-medicine ul li {
+
+    #form-search .form-search-inner button {
+        height: 99%;
+        padding-top: 7px;
+    }
+
+    #buy-medicine ul {
+        justify-content: space-between;
+    }
+
+    #buy-medicine ul li {
         text-align: center;
-        padding: 2px 20px;
         border-right: none;
         position: relative;
     }
-    #buy-medicine ul li::after{
-        content: "> >";
-        top: 30%;
-        right: -26px;
+    #buy-medicine ul li a .rimg-center{position: relative;}
+    #buy-medicine ul li a .rimg-center::after {
+        top: 50%;
+        transform: translateY(-50%);
+        right: -11px;
         position: absolute;
-        color: blue;
-        font-weight: bold;
+        content: '';
+        width: 40px;height: 25px;
+        background-image: url(../../images/shop/arrow2.png);
+        background-size: cover;
+        background-repeat: no-repeat;
     }
-    #buy-medicine ul li:last-child::after{content: "";}
-    #buy-medicine ul li span{display: none;}
-    #buy-medicine ul li h2{font-size: 16px;}
-    #buy-medicine .child_buy{display: block;}
-    #buy-medicine .child_buy .btn-buynn{margin: 25px;}
-    #buy-medicine .child_buy a{font-size: 24px;padding: 15px 30px;}
-    #service-doctor li p {font-size: 18px;}
-    #featured-category li{width: 23.5%;}
-    #product-covid li {width: 31.93%;}
-    #selling-product li {width: 31.5%;}
-    #selling-product h1 p {font-size: 22px;padding-top: 10px;}
-    .service-tdoctor ul{  flex-wrap: wrap;}
+
+    #buy-medicine ul li:last-child a .rimg-center::after {
+        content: "";
+        background-image:none;
+    }
+
+    #buy-medicine ul li span {
+        display: none;
+    }
+
+    #buy-medicine ul li h2 {
+        font-size: 16px;
+    }
+
+    #buy-medicine .child_buy {
+        display: block;margin-top: 30px;
+    }
+
+    #buy-medicine .child_buy a {
+        font-size: 24px;
+        padding: 15px 30px;display: inline-block;
+    }
+
+    #service-doctor li p {
+        font-size: 18px;
+    }
+
+    #featured-category li {
+        width: 23.5%;
+    }
+
+    #product-covid li {
+        width: 31.93%;
+    }
+
+    #selling-product li {
+        width: 31.5%;
+    }
+
+    #selling-product h1 p {
+        font-size: 22px;
+        padding-top: 5px;
+    }
+
+    .service-tdoctor ul {
+        flex-wrap: wrap;
+    }
+
     .service-tdoctor li {
         border-right: 1px solid #4D6394;
         padding: 20px 70px;
-        flex-basis: 48%; 
+        flex-basis: 48%;
         border: none;
     }
-    .service-tdoctor li:first-child {padding-left: 70px;}
-    .img-customer{display: none;}
-    .dlapp{display: flex;justify-content: center;}
-    .dlapp1{margin-right: 15px;}
-    .dlapp1 .dlapp2{display: flex;}
-    .social p{display: none;}
-    .social{display: flex;justify-content: space-between;}
-    .social .icon-social img{
+
+    .service-tdoctor li:first-child {
+        padding-left: 70px;
+    }
+
+    .img-customer {
+        display: none;
+    }
+
+    .dlapp {
+        display: flex;
+        justify-content: center;
+    }
+
+    .dlapp1 {
+        margin-right: 15px;
+    }
+
+    .dlapp1 .dlapp2 {
+        display: flex;
+    }
+
+    .social p {
+        display: none;
+    }
+
+    .social {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .social .icon-social img {
         width: 50px;
     }
+
     #product-covid.sellingr li {
         width: 23.6%;
         min-height: 280px;
     }
-    .ipsp{
+
+    .ipsp {
         display: none;
     }
-    #selling-product .slect-customer{
+
+    #selling-product .slect-customer {
         margin-left: 20px;
     }
-    #selling-product .icon-product-round2 img{
+
+    #selling-product .icon-product-round2 img {
         width: 30px;
     }
 }
 
-@media screen and (max-width: 1024px){
+@media screen and (max-width: 1024px) {
+    .service-tdoctor li:last-child {
+        padding-right: 0px;
+    }
+.service-tdoctor li {
+    padding: 0px;margin-bottom: 30px;
+}
+    .service-tdoctor li:first-child {
+        padding-left: 0px;
+    }
+    .service-tdoctor .title-service h1{text-align: center;margin-top: 8px;}
+    .service-tdoctor li{flex-direction: column;}
     #selling-product h1 p {
         font-size: 18px;
         padding-top: 10px;
     }
-    .service-tdoctor img{
+
+    .service-tdoctor img {
         width: 44px;
         height: 44px;
     }
+
     .medical-faculty .list-medical-faculty li {
-        margin-right: 4px;
+        margin-right: 12px;
     }
+
     .product-of-cat .body-cat-product>ul>li {
         width: 100%;
-    }     
+    }
+
     #product-covid.sellingr li {
         width: 48.6%;
         min-height: 280px;
     }
-    .service-tdoctor .title-service p{display: none;}
+
+    .service-tdoctor .title-service p {
+        display: none;
+    }
+
     #selling-product.viewnproduct li {
         width: 48.6%;
     }
+
     .slbuy a {
         font-size: 16px;
         padding: 3px 15px;
@@ -165,57 +272,134 @@
     }
 }
 
-@media screen and (max-width: 800px){
-    .info-app{
+@media screen and (max-width: 800px) {
+    
+    .app-store{margin-right: 8px;}
+    #selling-product .slect-customer span {
         display: none;
     }
-    #selling-product .slect-customer{
+    .medical-faculty{display: none;}
+    #selling-product .slect-customer {
+        padding:1px 1px;
+    }
+    #buy-medicine h1{font-size: 26px;}
+    #buy-medicine ul li img {
+        width: 80px;
+    }
+    #buy-medicine div span {
+        font-size: 20px;
+    }
+    #buy-medicine .child_buy a {
+        font-size: 20px;
+        padding: 10px 20px;
+        display: inline-block;
+    }
+    .wp-iconmn #btnmenu-resp img {
+        width: 30px
+    }
+
+    .wp-iconmn .logotop img {
+        width: 150px
+    }
+
+    .wp-iconmn .hrcart img {
+        width: 30px
+    }
+
+    .wp-iconmn .hruse img {
+        width: 20px
+    }
+
+    .wp-iconmn .hrflag img {
+        width: 40px
+    }
+
+    .head_topon {
+        display: none;
+    }
+
+    .head_topon_reponsive {
+        display: block;
+        background-image: url(../../images/shop/headbg.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding: 5px 0px;
+    }
+
+    .head_topon_reponsive a {
+        text-decoration: underline;
+        font-size: 12px;
+        display: inline;
+        margin-left: 17px;
+        margin-right: 5px;
+    }
+
+    .head_topon_reponsive p {
+        color: red;
+        font-size: 12px;
+    }
+
+    .info-app {
+        display: none;
+    }
+
+    #selling-product .slect-customer {
         margin-left: 0px;
     }
-    #selling-product .icon-product-round2 img{
+
+    #selling-product .icon-product-round2 img {
         width: 30px;
     }
+
     #featured-category li {
         width: 48.5%;
     }
+
     #product-covid li {
         width: 48.5%;
     }
+
     #selling-product li {
         width: 48.5%;
     }
-    .wp-inner{
-        width: 570px;
-    }
+
     #hisd {
         display: none;
     }
-    .ipsp{
+
+    .ipsp {
         display: block;
         position: relative;
     }
-    .ipsp input{
+
+    .ipsp input {
         width: 100%;
-        height: 45px;
+        height: 40px;
         text-indent: 45px;
-        font-size: 24px;
+        font-size: 20px;
         background: #FFFFFF;
         border: 1px solid #98FAFB;
         border-radius: 40px;
     }
-    .ipsp img{
+
+    .ipsp img {
         position: absolute;
-        top: 6px;
+        top: 50%;
+        transform: translateY(-50%);
         left: 12px;
+        width: 28px;
     }
-    .presp{
+
+    .presp {
         padding-bottom: 20px;
     }
+
     #service-doctor .list_servicetdoctor li {
         padding: 30px 15px;
         width: 30%;
         margin-bottom: 20px;
     }
+
     .slbuy a {
         font-size: 16px;
         padding: 3px 12px;
@@ -223,30 +407,146 @@
     }
 }
 
-@media screen and (max-width: 600px){
-    .wp-inner{
-        width: 500px;
+@media screen and (max-width: 600px) {
+    .service-tdoctor .title-service h1 {
+        font-size: 16px;
     }
-    
+    .newsh .news-content-left li {
+        flex-wrap: wrap;
+
+    }
+    .newsh .news-content-left ul li>img{width: 100%;}
+    .title_cathd {
+        margin-bottom: 15px;
+    }
+    .newsh .news-content-right {
+        border: none;
+    }
+    .newsh .news-content-right a{font-size: 14px;}
+    #buy-medicine h1{font-size: 20px;}
+    #buy-medicine ul li img {
+        width: 65px;
+    }
+    #buy-medicine ul li h2 {
+        font-size: 9px;
+        padding-top: 10px;
+    }
+    #buy-medicine ul li a .rimg-center::after{
+        width: 20px;height: 13px;
+    }
+    #buy-medicine .child_buy a {
+        font-size: 17px;
+        padding: 7px 15px;
+        display: inline-block;
+    }
+    #buy-medicine div span {
+        font-size: 18px;
+    }
+    .wp-iconmn #btnmenu-resp,
+    .wp-iconmn .logotop {
+        margin-right: 9vw;
+    }
+
     .info-tdoctor {
         display: none;
     }
+
     .slbuy a {
         font-size: 16px;
         padding: 2px 10px;
         color: black;
     }
+
+    .ipsp input {
+        width: 100%;
+        height: 37px;
+        font-size: 18px;
+
+    }
+
+    .ipsp img {
+        width: 26px;
+    }
+
+    .owl-pagination {
+        display: none;
+    }
+}
+@media screen and (max-width: 500px){
+    .dlapp1 h1{font-size: 16px;}
+    #qadoctor .listq {
+        padding: 5px 20px;
+    }
+#qadoctor .setq {display: none;}
+    #selling-product .slect-customer {
+        font-size: 12px;
+        padding-top: 10px;
+    }
+    #selling-product .slect-customer .slect-item-customer:first-child {
+        margin-left: 0px;
+    }
+    #selling-product .slect-customer .slect-item-customer{
+        margin-right: 10px;padding: 5px 5px 0px 5px;
+    }
 }
 
-@media screen and (max-width: 414px){
-    .wp-inner{
-        width: 320px;
+@media screen and (max-width: 450px) {
+    .service-tdoctor .title-service h1 {
+        font-size: 10px;
     }
+    .newsh .news-known a {
+        font-size: 12px;
+    }
+    .newsh .title-news h1 {
+        font-size: 18px;
+        padding-top: 5px;
+        margin-left: 10px;
+    }
+    #selling-product .slect-customer {
+        padding: 4px 0px;
+    }
+    .medical-faculty .lage-font {
+        font-size: 29px;
+    }
+    #featured-category h1 {
+        font-size: 25px;
+    }
+    .title_cathd h1 {
+        font-size: 16px;
+    }
+    #buy-medicine .child_buy {
+        margin-top: 15px;
+    }
+    #buy-medicine ul li a .rimg-center::after {
+        width: 15px;
+        height: 10px;
+    }
+    #buy-medicine .child_buy a {
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+    
+    #buy-medicine ul li img {
+        width: 40px;
+    }
+    .ipsp input {
+        width: 100%;
+        height: 30px;
+        font-size: 16px;
+        text-indent: 35px;
+    }
+
+    .ipsp img {
+        width: 20px;
+        left: 9px;
+    }
+
     #service-doctor .list_servicetdoctor li {
         padding: 20px 10px;
         width: 45%;
         margin-bottom: 10px;
     }
+
     .slbuy a {
         font-size: 14px;
         padding: 2px 8px;
@@ -254,8 +554,17 @@
     }
 }
 
-@media screen and (max-width: 375px){
-    .wp-inner{
-        width: 300px;
+@media screen and (max-width: 375px) {
+    #buy-medicine ul li h2 {
+        font-size: 8px;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    #selling-product li {
+        width: 98%;
+    }
+    .head_topon_reponsive {
+        display: none;
     }
 }

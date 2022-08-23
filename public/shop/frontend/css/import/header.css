@@ -1,18 +1,25 @@
 /*HEADER*/
 
+.head_topon_reponsive{display: none;}
 .head_topon {
     background-image: url(../../images/shop/headbg.png);
     background-size: cover;
     background-repeat: no-repeat;
+    padding: 5px 0px;
 }
-
+.head-top-respon .presp ul{
+    width: 25%;
+}
+.wp-iconmn{
+    padding: 10px 2px;
+}
 .head_topon p {
     font-weight: 500;
     font-size: 18px;
     line-height: 22px;
     text-align: center;
     color: #E9202C;
-    padding-top: 5px;
+    line-height: 30px;
     margin-left: 15px;
     margin-right: 15px;
 }
@@ -39,7 +46,7 @@
 #head-top a div.btn-login {
     color: black;
     background-color: white;
-    padding: 2px 8px;
+    padding: 5px 20px;
     border: 1px solid #072D94;
     border-radius: 20px;
     font-weight: bold;
@@ -49,7 +56,7 @@
 #head-top a>div.btn-register {
     color: white;
     background-color: #DB2925;
-    padding: 2px 14px;
+    padding: 5px 20px;
     border: 1px solid #DB2925;
     border-radius: 20px;
     font-weight: bold;
@@ -89,7 +96,7 @@
 }
 
 #head-body #main-menu>li>a {
-    font-size: 13px;
+    font-size: 11px;
     font-weight: bold;
     color: #111111;
     text-transform: uppercase;
@@ -177,9 +184,6 @@
     transition: all 0.5s ease-in-out;
 }
 
-#head-body .flag {
-    flex-basis: 10%;
-}
 
 #head-body .menu-top1 {
     flex-basis: 90%;
@@ -441,7 +445,9 @@
 .form-login input:focus {
     border: 1px solid #40D1EE;
 }
-
+.form-login input[type="password"]:focus{
+    border: 1px solid #40D1EE;
+}
 .form-login .dkfn a {
     font-weight: 400;
     font-size: 20px;

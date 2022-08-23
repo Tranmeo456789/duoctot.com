@@ -90,7 +90,8 @@ $(document).ready(function () {
     $('.btn-closenk').click(function () {
         $('.form-login').css("display", "none");
         $('.black-screen').css("display", "none");
-        $('.titlek').removeClass("fixed-hbd");
+        $('#container').removeClass("fixed-hbd");
+        
     });
     //hien form dang ky,dang nhap,quen mat khau
     $('.btn-login').click(function () {
