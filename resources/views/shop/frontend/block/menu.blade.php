@@ -251,12 +251,12 @@
         [ 'name' => 'Đặc trị cho tóc', 'id' => 109,'parent_id'=>19,'image'=>'cst1.png'],
         [ 'name' => 'Dầu gội dầu xả', 'id' => 110,'parent_id'=>19,'image'=>'cst2.png'],
         [ 'name' => 'Dưỡng tóc ủ tóc', 'id' => 111,'parent_id'=>19,'image'=>'cst3.png'],
-        
+
         [ 'name' => 'Trị nấm', 'id' => 112,'parent_id'=>20,'image'=>'tm1.png'],
 
         [ 'name' => 'Dưỡng da mặt', 'id' => 113,'parent_id'=>21,'image'=>'csvm1.png'],
         [ 'name' => 'Trị thâm quầng bộng mắt', 'id' => 114,'parent_id'=>21,'image'=>'csvm2.png'],
-         
+
         [ 'name' => 'Trang điểm mặt', 'id' => 115,'parent_id'=>22,'image'=>'mptd1.png'],
         [ 'name' => 'Dụng cụ trang điểm', 'id' => 116,'parent_id'=>22,'image'=>'mptd2.png'],
 
@@ -325,7 +325,7 @@
 
 
         @endphp
-        <div class="wp-inner" id="category-product-wp">
+        <div class="wp-inner1" id="category-product-wp">
             <div class="d-flex justify-content-between">
                 <div class="menu-top1">
                     <div class="position-relative ">
@@ -336,8 +336,8 @@
                                     {{$item_cat1['name']}}
                                     <i class="fas fa-chevron-down arrow"></i>
                                 </a>
-                                <div class="content-submenu row">
-                                    <div class="px-0 position-relative right-fol" style="width:30%">
+                                <div class="content-submenu">
+                                    <div class="px-0 position-relative right-fol" style="width:25%">
                                         <ul class="sub-menu1">
                                             @foreach ($item_sub_menu1s as $item_sub_menu1)
                                             @if ($item_sub_menu1['parent_id'] == (int)$item_cat1['id'] )
@@ -354,7 +354,7 @@
                                                             <ul class="body_catdetail clearfix">
                                                                 @foreach ($item_submenu2s as $item_submenu2)
                                                                 @if ($item_submenu2['parent_id'] == $item_sub_menu1['id'] )
-                                                                <li class=" mr-2 mb-1">
+                                                                <li class=" mr-2 mb-2">
                                                                     <a href="{{route('fe.cat4')}}">
                                                                         <div class="item_cat4 d-flex">
                                                                             <div class="aimg rimg-centerx mr-1">
@@ -375,12 +375,12 @@
                                                                 </div>
                                                                 <a href="">Xem tất cả</a>
                                                             </div>
-                                                            <div id="productimenu pb-3">
+                                                            <div class="productimenu">
                                                                 <ul class="">
                                                                     <div class="row">
                                                                         <div class="col-3 pl-3">
                                                                             <li>
-                                                                                <div class="bimgm"><img src="{{asset('images/shop/sri1.png')}}" alt=""></div>
+                                                                                <div class="bimgm"><a href="{{route('fe.product.detail')}}"><img src="{{asset('images/shop/sri1.png')}}" alt=""></a></div>
                                                                                 <div class="">
                                                                                     <a href="{{route('fe.product.detail')}}">Siro Bổ Phế Bối Mẫu Forte Mom And Baby...</a>
                                                                                     <h3 class="my-2">49.000đ/Chai</h3>
@@ -389,7 +389,7 @@
                                                                         </div>
                                                                         <div class="col-3 pl-3">
                                                                             <li>
-                                                                                <div class="bimgm"><img src="{{asset('images/shop/sri1.png')}}" alt=""></div>
+                                                                                <div class="bimgm"><a href="{{route('fe.product.detail')}}"><img src="{{asset('images/shop/sri1.png')}}" alt=""></a></div>
                                                                                 <div class="">
                                                                                     <a href="{{route('fe.product.detail')}}">Siro Bổ Phế Bối Mẫu Forte Mom And Baby...</a>
                                                                                     <h3 class="my-2">49.000đ/Chai</h3>
@@ -398,7 +398,7 @@
                                                                         </div>
                                                                         <div class="col-3 pl-3">
                                                                             <li>
-                                                                                <div class="bimgm"><img src="{{asset('images/shop/sri1.png')}}" alt=""></div>
+                                                                                <div class="bimgm"><a href="{{route('fe.product.detail')}}"><img src="{{asset('images/shop/sri1.png')}}" alt=""></a></div>
                                                                                 <div class="">
                                                                                     <a href="{{route('fe.product.detail')}}">Siro Bổ Phế Bối Mẫu Forte Mom And Baby...</a>
                                                                                     <h3 class="my-2">49.000đ/Chai</h3>
@@ -407,7 +407,7 @@
                                                                         </div>
                                                                         <div class="col-3 pl-3">
                                                                             <li>
-                                                                                <div class="bimgm"><img src="{{asset('images/shop/sri1.png')}}" alt=""></div>
+                                                                                <div class="bimgm"><a href="{{route('fe.product.detail')}}"><img src="{{asset('images/shop/sri1.png')}}" alt=""></a></div>
                                                                                 <div class="">
                                                                                     <a href="{{route('fe.product.detail')}}">Siro Bổ Phế Bối Mẫu Forte Mom And Baby...</a>
                                                                                     <h3 class="my-2">49.000đ/Chai</h3>
@@ -425,7 +425,6 @@
                                             @endforeach
                                         </ul>
                                     </div>
-                                   
                                 </div>
                             </li>
                             @endforeach
@@ -475,7 +474,7 @@
                                 <a href="{{route('fe.cat')}}">Thú y
                                     <i class="fas fa-chevron-down arrow"></i>
                                 </a>
-                                
+
                             </li>
                             <li class="">
                                 <a href="{{route('fe.cat')}}">Góc sức khỏe</a>
