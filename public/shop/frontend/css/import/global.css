@@ -10,7 +10,7 @@ body{
     overflow: hidden;
 }
 .wp-inner{
-    width: 1300px;
+    max-width: 1300px;
     margin: 0px auto;
     padding-left: 12px;
     padding-right: 12px;
@@ -61,6 +61,22 @@ a:hover{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.rimg-centerw{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    width: 40px;height: 40px;
+    border-radius: 50%;
+}
+.rimg-centerx{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #F1F8FF;
+    width: 35px;height: 35px;
+    border-radius: 50%;
 }
 .rimg-start{
     display: flex;

@@ -2,7 +2,7 @@
 
 @media screen and (max-width: 1366px) {
     #head-body #main-menu>li>a {
-        font-size: 10px;
+        font-size: 11px;
     }
 }
 
@@ -223,6 +223,7 @@
 }
 
 @media screen and (max-width: 1024px) {
+    .wp-inner{max-width: 900px;}
     .service-tdoctor li:last-child {
         padding-right: 0px;
     }
@@ -273,7 +274,7 @@
 }
 
 @media screen and (max-width: 800px) {
-    
+    .wp-inner{max-width: 93vw;}
     .app-store{margin-right: 8px;}
     #selling-product .slect-customer span {
         display: none;

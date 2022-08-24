@@ -367,20 +367,20 @@
     margin-bottom: 20px;
     
   }
-  #cat_detail .body_catdetail li .item_cat4{
+  /* #cat_detail .body_catdetail li .item_cat4{
     position: relative;
     padding: 10px 20px 10px 60px;
     border-radius: 30px;
     border: 1px solid #B0C1DB;
-  }
-  #cat_detail .body_catdetail li img{
+  } */
+  /* #cat_detail .body_catdetail li img{
     position: absolute;
     top: 1px;
     left: 10px;
     z-index: 100;
-  }
+  } */
   #cat_detail .body_catdetail li span{
-    font-size: 16px;
+    font-size: 12px;line-height: 35px;
     color: #000;
   }
   #cat_detail .body_catdetail .aimg{

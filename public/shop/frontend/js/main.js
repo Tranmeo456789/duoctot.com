@@ -81,9 +81,12 @@ $(document).ready(function () {
     $('.catc1').hover(
         function () {
             $('.black-content').css("display", "block");
+            $('.sub-menu1>li:first-child').addClass('active-menucat2');
+            $('.sub-menu1>li:first-child .sub-menu2').css("display", "block");
         },
         function () {
             $('.black-content').css("display", "none");
+            $('.sub-menu1>li:first-child .sub-menu2').css("display", "none");
         },
     );
     //dong form
