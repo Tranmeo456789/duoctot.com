@@ -111,7 +111,7 @@
             </div>
             <div class="ipsp">
                 <input type="text" placeholder="Nhập tìm thuốc, TPCN, bệnh lý ...">
-                <img src="{{asset('images/shop/icsp.png')}}" alt="">
+                <div class="rimg-center"></div><img src="{{asset('images/shop/icsp.png')}}" alt="">
             </div>
         </div>
     </div>
@@ -123,6 +123,7 @@
         [ 'name' => 'Chăm sóc cá nhân', 'id' => 3],
         [ 'name' => 'Danh mục', 'id' => 4],
         [ 'name' => 'Thiết bị y tế', 'id' => 5],
+        [ 'name' => 'Thú y', 'id' => 167],
         ];
         $item_sub_menu1s = [
         [ 'name' => 'Sinh lý - Nội tiết tố', 'id' => 6,'parent_id'=>1 ,'image'=>'sm1.png'],
@@ -163,6 +164,17 @@
         [ 'name' => 'Khẩu trang', 'id' => 37,'parent_id'=>5,'image'=>'tbyt2.png'],
         [ 'name' => 'Dụng cụ theo dõi', 'id' => 38,'parent_id'=>5,'image'=>'tbyt3.png'],
         [ 'name' => 'Dụng cụ sơ cứu', 'id' => 39,'parent_id'=>5,'image'=>'tbyt4.png'],
+
+        [ 'name' => 'Hỗn dịch kháng sinh tiêm', 'id' => 168,'parent_id'=>167,'image'=>'thy1.png'],
+        [ 'name' => 'Dung dịch kháng sinh tiêm', 'id' => 169,'parent_id'=>167,'image'=>'thy2.png'],
+        [ 'name' => 'Thuốc bột kháng sinh uống', 'id' => 170,'parent_id'=>167,'image'=>'thy3.png'],
+        [ 'name' => 'Dung dịch kháng sinh uống', 'id' => 171,'parent_id'=>167,'image'=>'thy4.png'],
+        [ 'name' => 'Thuốc chế phẩm bổ trợ hạ sốt,tiêu viêm', 'id' => 173,'parent_id'=>167,'image'=>'thy5.png'],
+        [ 'name' => 'Thuốc ký sinh trùng dạng dung dịch tiêm bột', 'id' => 174,'parent_id'=>167,'image'=>'thy6.png'],
+        [ 'name' => 'Nhóm men đạm sữa', 'id' => 175,'parent_id'=>167,'image'=>'thy7.png'],
+        [ 'name' => 'Vitamin khoáng chất dạng cốm hòa tan', 'id' => 176,'parent_id'=>167,'image'=>'thy8.png'],
+        [ 'name' => 'Nhóm thuốc điều tiết sinh sản hormones ', 'id' => 177,'parent_id'=>167,'image'=>'thy9.png'],
+        [ 'name' => 'Thuốc sát trùng', 'id' => 178,'parent_id'=>167,'image'=>'thy10.png'],
         ];
 
         $item_submenu2s = [
@@ -266,8 +278,8 @@
         [ 'name' => 'Nước súc miệng', 'id' => 119,'parent_id'=>24,'image'=>'csrm1.png'],
         [ 'name' => 'Chỉ nha khoa', 'id' => 120,'parent_id'=>24,'image'=>'csrm2.png'],
         [ 'name' => 'Kem đánh răng', 'id' => 122,'parent_id'=>24,'image'=>'csrm3.png'],
-        [ 'name' => 'Bàn chải đánh răng', 'id' => 123,'parent_id'=>24,'image'=>'csrm3.png'],
-        [ 'name' => 'Ngừa sâu răng', 'id' => 124,'parent_id'=>24,'image'=>'csrm3.png'],
+        [ 'name' => 'Bàn chải đánh răng', 'id' => 123,'parent_id'=>24,'image'=>'csrm4.png'],
+        [ 'name' => 'Ngừa sâu răng', 'id' => 124,'parent_id'=>24,'image'=>'csrm5.png'],
 
         [ 'name' => 'Nước rửa tay', 'id' => 125,'parent_id'=>25,'image'=>'vscn1.png'],
         [ 'name' => 'Dung dịch vệ sinh', 'id' => 126,'parent_id'=>25,'image'=>'vscn2.png'],
@@ -275,8 +287,8 @@
 
 
         [ 'name' => 'Đồ dùng em bé', 'id' => 129,'parent_id'=>26,'image'=>'ddgd1.png'],
-        [ 'name' => 'Đồ dùng cho mẹ', 'id' => 130,'parent_id'=>26,'image'=>'ddgd1.png'],
-        [ 'name' => 'Chống muỗi', 'id' => 131,'parent_id'=>26,'image'=>'ddgd1.png'],
+        [ 'name' => 'Đồ dùng cho mẹ', 'id' => 130,'parent_id'=>26,'image'=>'ddgd2.png'],
+        [ 'name' => 'Chống muỗi', 'id' => 131,'parent_id'=>26,'image'=>'ddgd3.png'],
 
         [ 'name' => 'Dầu dừa', 'id' => 132,'parent_id'=>27,'image'=>'tdcl1.png'],
         [ 'name' => 'Tinh dầu các loại', 'id' => 133,'parent_id'=>27,'image'=>'tdcl2.png'],
@@ -319,8 +331,8 @@
 
         [ 'name' => 'Băng y tế', 'id' => 163,'parent_id'=>39,'image'=>'dcsc1.png'],
         [ 'name' => 'Cồn và nước sát trùng', 'id' => 164,'parent_id'=>39,'image'=>'dcsc2.png'],
-        [ 'name' => 'Tăm bông', 'id' => 163,'parent_id'=>39,'image'=>'dcsc3.png'],
-        [ 'name' => 'Bông y tế', 'id' => 163,'parent_id'=>39,'image'=>'dcsc4.png'],
+        [ 'name' => 'Tăm bông', 'id' => 165,'parent_id'=>39,'image'=>'dcsc3.png'],
+        [ 'name' => 'Bông y tế', 'id' => 166,'parent_id'=>39,'image'=>'dcsc4.png'],
         ];
 
 
@@ -360,7 +372,7 @@
                                                                             <div class="aimg rimg-centerx mr-1">
                                                                                 <img src="{{asset('images/shop/' .  $item_submenu2['image'] )}}" alt="">
                                                                             </div>
-                                                                            <span>{{$item_submenu2['name']}}</span>
+                                                                            <div class="align-self-center"><span>{{$item_submenu2['name']}}</span></div>
                                                                         </div>
                                                                     </a>
                                                                 </li>
@@ -438,7 +450,6 @@
                                                     <div class="d-flex align-items-center pl-2">
                                                         <div class="rdimg rimg-centerw"><img src="{{asset('images/shop/dkbs1.png')}}" alt=""></div>
                                                     </div>
-
                                                     <a href="{{route('fe.cat3')}}" title="" class="titlec2">Hẹn bác sĩ đến nhà</a>
                                                 </div>
                                             </li>
@@ -469,12 +480,6 @@
                                         </ul>
                                     </div>
                                 </div>
-                            </li>
-                            <li class="catc1">
-                                <a href="{{route('fe.cat')}}">Thú y
-                                    <i class="fas fa-chevron-down arrow"></i>
-                                </a>
-
                             </li>
                             <li class="">
                                 <a href="{{route('fe.cat')}}">Góc sức khỏe</a>

@@ -1,0 +1,47 @@
+@media screen and (max-width: 800px) {
+    #sidebar {
+        transform: translateX(-100%);
+    }
+    
+    #sidebar.slider {
+        transform: translateX(0px);
+    }
+
+    #wp-content {
+        padding-left: 0px;
+    }
+.header-content{width: 100vw;}
+    .header-title {
+        padding-left: 50px;
+    }
+
+    .btnvis-sidebar {
+        display: inline-block;
+    }
+
+    .hide-sidebar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #logo-admin img {
+        width: 140px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .header-title {
+        font-size: 13px;
+        line-height: 15px;
+    }
+
+    .btn {
+        font-size: 13px;
+    }
+
+    .body-content {
+        font-size: 13px;
+    }
+    .header-content{padding: 0px;}
+}

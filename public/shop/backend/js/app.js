@@ -7,14 +7,36 @@ $(document).ready(function() {
         $(this).toggleClass('fa-angle-right fa-angle-down');
     });
 
-    // $("input[name='checkall']").click(function() {
-    //     var checked = $(this).is(':checked');
-    //     $('.table-checkall tbody tr td input:checkbox').prop('checked', checked);
-    // });
     //active status product
     $('.status-product a').click(function(){
         $('.status-product a').removeClass('active-status');
         $(this).addClass('active-status');
+    });
+    // button hien an sidebar
+    $(".btnvis-sidebar").click(function () {
+        $('#sidebar').addClass("slider");
+        $('#wp-opacity').css("display", "block");
+    });
+    
+    const wp_opacity=document.getElementById('wp-opacity');
+    const sidebar=document.getElementById('sidebar');
+    const hide_sidebar=document.getElementById('hide-sidebar');
+    hide_sidebar.addEventListener('click',()=>{
+        $('#sidebar').removeClass("slider");
+        $('#wp-opacity').css("display", "none");
+    });
+    wp_opacity.addEventListener('click',(e)=>{
+        if(!sidebar.contains(e.target)){
+            hide_sidebar.click();
+        }
+    });
+    $(window).scroll(function(event) {
+        $('#sidebar').removeClass("slider");
+        $('#wp-opacity').css("display", "none");
+    });
+    $(window).resize(function(event) {
+        $('#sidebar').removeClass("slider");
+        $('#wp-opacity').css("display", "none");
     });
     //choose multiple select
     var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
@@ -52,6 +74,7 @@ $(document).ready(function() {
             }
         }
     }
+    
   
 });
 function uploadImg(el) {
@@ -93,7 +116,8 @@ component_body.addEventListener('click',(e)=>{
         btn_search.classList.remove('border-button-search');
     }
 });
-// multiple input select
+
+
 
 
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,17 +12,21 @@
     <link rel="stylesheet" href="{{ asset('/shop/backend/css/product.css')}}">
     <link rel="stylesheet" href="{{ asset('/shop/backend/css/order.css')}}">
     <link rel="stylesheet" href="{{ asset('/shop/backend/css/modal.css')}}">
+    <link rel="stylesheet" href="{{ asset('/shop/backend/css/responsive.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
     <title>@yield('title')</title>
 </head>
+
 <body>
     <div id="warpper" class="nav-fixed">
+        <div id="wp-opacity"></div>
         <div id="page-body" class="d-flex">
             <div id="sidebar" style="background-color: #def3d4;">
-                <div id="logo-admin">
+                <div id="logo-admin" class="position-relative">
                     <a href="{{route('dashboard')}}">
                         <img src="{{ asset('/shop/images/logo.png')}}" alt="" srcset="" class="img-fluid">
                     </a>
+                    <div class="hide-sidebar" id="hide-sidebar"><i class="fas fa-times"></i></div>
                 </div>
                 <ul id="sidebar-menu">
                     <li class="nav-link">
@@ -70,7 +75,7 @@
                         <i class="arrow fas fa-angle-right"></i>
                         <ul class="sub-menu">
                             <li><a href="{{route('producer.list')}}">Danh sách NSX</a></li>
-                            <li><a href="{{route('producer.add')}}">Thêm nhà sản xuất</a></li>                          
+                            <li><a href="{{route('producer.add')}}">Thêm nhà sản xuất</a></li>
                         </ul>
                     </li>
                     <li class="nav-link">
@@ -142,15 +147,18 @@
                     </li>
                 </ul>
             </div>
+
             <div id="wp-content">
-                <div class="container-fluid px-0">
+
+                <div class="container-fluid px-0 position-relative">
                     <div class="header-content">
+                        <div class="btnvis-sidebar"><i class="fas fa-arrow-circle-right"></i></div>
                         <h3 class="header-title">@yield('header_title')</h3>
                         <div class="header-content-left">
                             <div class="item-header-content">
                                 <div class="btn-group">
                                     <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-user-circle"></i>
+                                        <i class="fas fa-user-circle"></i>
                                         ADMINTOR
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right">
@@ -164,7 +172,7 @@
                     <div class="body-content">
                         @yield('body_content')
                     </div>
-                </div>            
+                </div>
             </div>
         </div>
     </div>
@@ -180,4 +188,5 @@
     <script src="{{asset('/shop/backend/js/modal.js')}}"></script>
     <script src="{{asset('/shop/backend/js/modal_product.js')}}"></script>
 </body>
+
 </html>

@@ -5,7 +5,19 @@
 a:hover {
     text-decoration: none;
 }
-
+.btnvis-sidebar {
+    z-index: 994;
+    position: absolute;
+    color: red;
+    font-size: 23px;
+    left: 10px;cursor: pointer;
+    top: 8px;position: fixed;display: none;
+}
+.hide-sidebar{
+ display: none;position:absolute;top: 12px;right: 12px;font-size: 20px;cursor: pointer;color: red;
+}
+#warpper{position: relative;}
+#wp-opacity{position: absolute;background: white;opacity: 0;top:0px;left: 0px;width: 100%;height: 100%;z-index: 100;display: none;}
 .topnav .navbar-brand {
     width: 15rem;
     padding-left: 1rem;
@@ -52,8 +64,7 @@ table thead{
     height: 100vh;
     z-index: 500;
     position: fixed;
-    top: 0px;
-    left: 0;
+    transition: all 0.5s ease-in-out;  
 }
 .header-title{
     font-size: 1.3rem;
@@ -201,7 +212,7 @@ table thead{
     height: 52px;
     display: flex;
     padding: 0 32px;
-    z-index: 1001;
+    z-index: 98;
     position: sticky;
     background: #fff;
     box-shadow: 0px 2px 4px rgb(168 168 168 / 25%);
@@ -330,4 +341,5 @@ table a.btn-sm{
     right: -5px;
     color: #8c8c8c;
 }
-.mt-100{margin-top: 100px}body{background: #00B4DB;background: -webkit-linear-gradient(to right, #0083B0, #00B4DB);background: linear-gradient(to right, #0083B0, #00B4DB);color: #514B64;min-height: 100vh}
+.mt-100{margin-top: 100px}
+/* body{background: #00B4DB;background: -webkit-linear-gradient(to right, #0083B0, #00B4DB);background: linear-gradient(to right, #0083B0, #00B4DB);color: #514B64;min-height: 100vh} */

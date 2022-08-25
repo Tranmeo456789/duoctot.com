@@ -437,7 +437,7 @@
     text-align: center;
     background: #000000;
     opacity: 0.3;
-    width: 100%;
+    width: 100%;line-height: 13px;
     border-radius: 5px;
 }
 
@@ -663,6 +663,9 @@
     padding: 8px 14px;
     border-radius: 20px;
 }
+.local .list-drugstore:hover{
+    background-color: #0bc6ff;color: white;
+}
 
 .local .list-drugstore a {
     font-family: 'Inter';
@@ -671,6 +674,9 @@
     font-size: 16px;
     line-height: 19px;
     color: #05AFE3;
+}
+.local .list-drugstore:hover a{
+    color: white;
 }
 .local img{
     width: 25px;

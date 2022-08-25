@@ -1,6 +1,6 @@
 <h1 class="d-flex justify-content-between mb-5 flex-wrap ">
     <div class="title_cathd mb-sm-2">
-        <h1>Sản phẩm theo đối tượng</h1>
+        <div class="d-flex align-items-center"><h1>Sản phẩm theo đối tượng</h1></div>
         <img src="{{asset('images/shop/tp3.png')}}" alt="">
     </div>
     <div class="d-flex justify-content-between flex-wrap  slect-customer">
