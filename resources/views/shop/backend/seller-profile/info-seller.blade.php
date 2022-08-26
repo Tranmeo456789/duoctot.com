@@ -26,13 +26,13 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
                             <label for="name">Số điện thoại</label>
                             <input class="form-control" type="text" name="" id="" value="0986777888">
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
                             <label for="intro">Email</label>
                             <input class="form-control" type="text" name="" id="" value="nguoiban@gmail.com">
@@ -44,7 +44,7 @@
                     <input class="form-control" type="text" name="" id="" placeholder="Số nhà, tên đường" >
                 </div>
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="name">Tỉnh TP</label>
                             <select class="form-control" id="">
@@ -54,7 +54,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label for="intro">Quận/Huyện</label>
                             <select class="form-control" id="">
@@ -64,7 +64,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-lg-4 col-sm-12">
                         <div class="form-group">
                             <label for="intro">Phường/Xã</label>
                             <select class="form-control" id="">
@@ -85,13 +85,13 @@
                     </select>
                 </div>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
                             <label for="name">Mã số thuế</label>
                             <input class="form-control" type="text" name="" id="" value="" placeholder="Nhập mã số thuế">
                         </div>
-                    </div>
-                    <div class="col-6">
+                    </div> 
+                    <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
                             <label for="name">Người đại diện pháp luật</label>
                             <input class="form-control" type="text" name="" id="" value="" placeholder="Nhập người đại diện pháp luật">

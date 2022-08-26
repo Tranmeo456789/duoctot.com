@@ -9,13 +9,13 @@
         <div class="card-body">
             <form>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
                             <label for="name">Mật khẩu tài khoản đang đăng nhập<span class="text-danger" >*</span></label>
                             <input class="form-control" type="password" name="" id="" value="">
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
                             <label for="intro">Số điện thoại<span class="text-danger" >*</span></label>
                             <input class="form-control" type="text" name="" id="" value="09888666765" disabled>
@@ -23,13 +23,13 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
                             <label for="name">Mật khẩu mới<span class="text-danger" >*</span></label>
                             <input class="form-control" type="password" name="" id="" value="">
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
                             <label for="intro">Nhập lại mật khẩu mới<span class="text-danger" >*</span></label>
                             <input class="form-control" type="password" name="" id="" value="">

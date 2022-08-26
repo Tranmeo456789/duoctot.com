@@ -2,7 +2,7 @@
     color:#fff;
 } */
 
-
+.body-content{padding: 10px 10px 0px 10px;}
 a:hover {
     text-decoration: none;
 }
@@ -244,16 +244,18 @@ table thead{
 }
 .warehouse{
     list-style: none;
-    padding-left: 0px;
+    padding-left: 0px;margin-bottom: 0px;
 }
 .warehouse li{
-    margin: 8px 8px;
-    cursor: pointer;
     height: 72px;
-    padding: 13px 12px 15px;
     position: relative;
-    background: #F2F9FF;
-    border-radius: 5px;
+    margin-bottom: 10px;
+    
+}
+.titlehearder{margin-bottom: 0px;}
+.warehouse li:last-child{margin-bottom: 0px;}
+.warehouse li a{
+    display: block;padding: 13px 12px 15px;cursor: pointer;background: #F2F9FF;border-radius: 5px;
 }
 .nav-fixed .topnav {
     position: fixed;

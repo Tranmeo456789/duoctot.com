@@ -655,7 +655,7 @@
     line-height: 24px;
     color: #FFFFFF;
     margin-left: 15px;
-    padding-top: 0px;
+    padding-top: 0px;display: flex;align-items: center;
 }
 
 .local .list-drugstore {

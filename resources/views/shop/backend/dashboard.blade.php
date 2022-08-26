@@ -5,7 +5,7 @@
 @section('header_title', 'Tổng quan')
 
 @section('body_content')
-<div class="card m-3">
+<div class="card mb-3">
     <div class="card-header font-weight-bold">
         <h6>KẾT QUẢ KINH DOANH TRONG NGÀY</h6>
     </div>
@@ -53,7 +53,7 @@
 
     </div>
 </div>
-<div class="card m-3">
+<div class="card mb-3">
     <div class="card-header font-weight-bold d-flex justify-content-between align-item-center">
         <h6>ĐƠN HÀNG CHỜ XỬ LÝ</h6>
         <div class="header-content-left">
@@ -131,7 +131,7 @@
 
     </div>
 </div>
-<div class="card m-3">
+<div class="card mb-3">
     <div class="card-header font-weight-bold d-flex justify-content-between align-item-center">
         <h6>DOANH THU BÁN HÀNG</h6>
         <div class="header-content-left">
@@ -155,7 +155,7 @@
 
     </div>
 </div>
-<div class="card m-3">
+<div class="card">
     <div class="card-header font-weight-bold d-flex justify-content-between align-item-center">
         <h6>THÔNG TIN KHO</h6>
     </div>

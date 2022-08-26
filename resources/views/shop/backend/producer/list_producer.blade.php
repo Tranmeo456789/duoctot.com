@@ -4,13 +4,14 @@
 
 @section('header_title', 'Danh sách nhà sản xuất')
 
-@section('body_content') 
-    <div class="card mt-3 ml-1">
+@section('body_content')
+<div class="set-withscreen">
+    <div class="card list-productwp">
         @if (session('status'))
-            <div class="alert alert-success text-center">{{session('status')}}</div>
+        <div class="alert alert-success text-center">{{session('status')}}</div>
         @endif
         <div class="card-header font-weight-bold">
-             Danh sách nhà sản xuất
+            Danh sách nhà sản xuất
         </div>
         <div class="card-body">
             <table class="table table-striped">
@@ -22,26 +23,28 @@
                     </tr>
                 </thead>
                 @php
-                    $temp=0;
+                $temp=0;
                 @endphp
                 <tbody>
-                    
+
                     @foreach ($producers as $producer)
-                        @php
-                            $temp++;
-                        @endphp
-                        <tr>
-                            <th scope="row" style="width: 10%">{{$temp}}</th>
-                            <td style="width: 70%">{{$producer->name_producer}}</td>
-                            <td style="width: 20%">
-                                <a href="{{route('producer.edit',$producer->id_producer)}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit"></i></a>
-                                <a href="{{route('producer.delete',$producer->id_producer)}}" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Xóa" onclick="return confirm('Bạn có chắc chắn xóa bản ghi này ?')"><i class="fa fa-trash"></i></a>
-                            </td>
-                        </tr>
-                    @endforeach                    
-                 </tbody>
+                    @php
+                    $temp++;
+                    @endphp
+                    <tr>
+                        <th scope="row" style="width: 10%">{{$temp}}</th>
+                        <td style="width: 70%">{{$producer->name_producer}}</td>
+                        <td style="width: 20%">
+                            <a href="{{route('producer.edit',$producer->id_producer)}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit"></i></a>
+                            <a href="{{route('producer.delete',$producer->id_producer)}}" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Xóa" onclick="return confirm('Bạn có chắc chắn xóa bản ghi này ?')"><i class="fa fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
             </table>
             {{$producers->links()}}
         </div>
-     </div>
+    </div>
+</div>
+
 @endsection

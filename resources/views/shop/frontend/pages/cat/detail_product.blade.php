@@ -484,14 +484,6 @@
         </div>
     </div>
 </div>
-<div>
-    <div class="info-tdoctor mt-5">
-        @include("$moduleName.templates.info_tdoctor")
-    </div>
-    <div class="wp-inner mt-5">
-        @include("$moduleName.templates.info_app")
-    </div>
-</div>
 
 <div class="service-tdoctor mt-5">
     @include("$moduleName.templates.info_service")

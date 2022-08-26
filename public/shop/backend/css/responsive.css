@@ -9,10 +9,17 @@
     }
 }
 @media screen and (max-width: 800px) {
-    
+    .titlehearder{
+        margin-bottom: 10px;
+    }
+    .card .card-header h6{font-size: 14px;}
+    .body-content {padding: 0px;}
+    #wp-content{
+        overflow: hidden;
+    }
     .set-withscreen {
         width: 100vw;
-        overflow: scroll;
+        overflow-x: scroll;
     }
 
     .business-results {
@@ -74,4 +81,5 @@
     .header-content {
         padding: 0px;
     }
+    .business-results li .icon{font-size: 14px;}
 }

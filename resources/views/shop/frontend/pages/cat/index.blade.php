@@ -31,14 +31,14 @@
                 </div>
             </div>     
     </div>
-    <div>
+    <!-- <div>
         <div class="info-tdoctor mt-5">
             @include("$moduleName.templates.info_tdoctor")
         </div>
-        <div class="wp-inner mt-5" style="">
+        <div class="wp-inner mt-5">
             @include("$moduleName.templates.info_app")
         </div>
-    </div>
+    </div> -->
     
     <div class="service-tdoctor mt-5">
         @include("$moduleName.templates.info_service")
@@ -46,7 +46,7 @@
     <div class="local">
         @include("$moduleName.templates.local_drugstore")
     </div>
-    <div class="wp-inner mt-5" style="">
+    <div class="wp-inner mt-5">
         <div class="feedback-customer">
             @include("$moduleName.templates.feedback_customer")
         </div>

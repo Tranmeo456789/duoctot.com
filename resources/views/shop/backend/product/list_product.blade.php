@@ -6,17 +6,26 @@
 
 @section('body_content')
 <div class="card mt-3 ml-2">
-    <div class="set-withscreen ">
-        <div class="list-productwp">
-            <div class="card-header font-weight-bold d-flex justify-content-between align-items-center">
-                <h5 class="m-0 ">Danh sách sản phẩm</h5>
+
+    <div class="card-header font-weight-bold">
+        <div class="row">
+            <div class="col-lg-8 col-sm-12 titlehearder align-self-center d-flex">
+                <h5 class="m-0">Danh sách sản phẩm</h5>
+            </div>
+            <div class="col-lg-4 col-sm-12">
                 <div class="form-search form-inline">
-                    <form action="#">
-                        <input type="" id="input-search-after" style="width:300px" class="form-control form-search" placeholder="Nhập tên sản phẩm để tìm kiếm">
+                    <form action="#" style="width:100%">
+                        <input type="" id="input-search-after" style="width:100%" class="form-control form-search" placeholder="Nhập tên sản phẩm để tìm kiếm">
                         <button class="search-product"><i class="fas fa-search"></i></button>
                     </form>
                 </div>
             </div>
+        </div>
+
+
+    </div>
+    <div class="set-withscreen ">
+        <div class="list-productwp">
             <div class="card-body">
                 <div class="analytic status-product">
                     <a class="text-primary active-status">Tất cả<span class="text-muted">(10)</span></a>

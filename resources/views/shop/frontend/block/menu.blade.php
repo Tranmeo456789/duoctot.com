@@ -121,8 +121,6 @@
         [ 'name' => 'Thực phẩm chức năng', 'id' => 1],
         [ 'name' => 'Dược mỹ phẩm', 'id' => 2],
         [ 'name' => 'Chăm sóc cá nhân', 'id' => 3],
-        [ 'name' => 'Danh mục', 'id' => 4],
-        [ 'name' => 'Thiết bị y tế', 'id' => 5],
         [ 'name' => 'Thú y', 'id' => 167],
         ];
         $item_sub_menu1s = [
@@ -337,7 +335,7 @@
 
 
         @endphp
-        <div class="wp-inner1" id="category-product-wp">
+        <div class="wp-inner" id="category-product-wp">
             <div class="d-flex justify-content-between">
                 <div class="menu-top1">
                     <div class="position-relative ">
@@ -440,50 +438,6 @@
                                 </div>
                             </li>
                             @endforeach
-                            <li class="catc1 position-relative">
-                                <a href="{{route('fe.cat')}}">Đặt khám bác sĩ<i class="fas fa-chevron-down arrow"></i></a>
-                                <div class="content-submenu" style="width:250%;left:0px;">
-                                    <div class=" px-0">
-                                        <ul class="sub-menu1">
-                                            <li>
-                                                <div class="himg-menu d-flex">
-                                                    <div class="d-flex align-items-center pl-2">
-                                                        <div class="rdimg rimg-centerw"><img src="{{asset('images/shop/dkbs1.png')}}" alt=""></div>
-                                                    </div>
-                                                    <a href="{{route('fe.cat3')}}" title="" class="titlec2">Hẹn bác sĩ đến nhà</a>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="himg-menu d-flex">
-                                                    <div class="d-flex align-items-center pl-2">
-                                                        <div class="rdimg rimg-centerw"><img src="{{asset('images/shop/dkbs2.png')}}" alt=""></div>
-                                                    </div>
-                                                    <a href="{{route('fe.cat3')}}" title="" class="titlec2">Gọi video với bác sĩ</a>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="himg-menu d-flex">
-                                                    <div class="d-flex align-items-center pl-2">
-                                                        <div class="rdimg rimg-centerw"><img src="{{asset('images/shop/dkbs3.png')}}" alt=""></div>
-                                                    </div>
-                                                    <a href="{{route('fe.cat3')}}" title="" class="titlec2">Chat miễn phí với bác sĩ</a>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="himg-menu d-flex">
-                                                    <div class="d-flex align-items-center pl-2">
-                                                        <div class="rdimg rimg-centerw"><img src="{{asset('images/shop/dkbs1.png')}}" alt=""></div>
-                                                    </div>
-                                                    <a href="{{route('fe.cat3')}}" title="" class="titlec2">Đặt hẹn tại phòng khám</a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="">
-                                <a href="{{route('fe.cat')}}">Góc sức khỏe</a>
-                            </li>
                             <li class="">
                                 <a href="{{route('fe.cat')}}">Nhà thuốc</a>
                             </li>

@@ -16,7 +16,7 @@
                     <input class="form-control" type="text" name="" id="" placeholder="Nhập tên sản phẩm" >
                 </div>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
                             <label for="name">Loại sản phẩm<span class="text-danger" >*</span></label>
                             <select class="form-control" id="">
@@ -26,7 +26,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
                             <label for="intro">Mã sản phẩm<span class="text-danger" >*</span></label>
                             <input class="form-control" type="text" name="" id="">
@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
                             <label for="name">Ngành hàng<span class="text-danger" >*</span></label>
                             <select class="form-control" id="">
@@ -48,7 +48,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
                             <label for="intro">Nhà sản xuất<span class="text-danger" >*</span></label>
                             <select class="form-control" id="">
@@ -60,25 +60,25 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="name">Chiều dài (mm)</label>
                             <input class="form-control" type="text" name="" id="">
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="intro">Chiều rộng(mm)</label>
                             <input class="form-control" type="text" name="" id="">
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="name">Chiều cao (mm)</label>
                             <input class="form-control" type="text" name="" id="">
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="intro">Khối lượng (gram)</label>
                             <input class="form-control" type="text" name="" id="">
@@ -86,13 +86,13 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <input type="checkbox" name="checkall">
                             <label for="name">Hàng dễ vỡ</label>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <input type="checkbox" name="checkall">
                             <label for="intro">Hàng bảo quản lạnh</label>
@@ -100,7 +100,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
                             <label for="name">Loại giá bán hàng<span class="text-danger" >*</span></label>
                             <select class="form-control" id="">
@@ -109,7 +109,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
                             <label for="intro">Giá bán sản phẩm(chưa VAT)<span class="text-danger" >*</span></label>
                             <input class="form-control" type="text" name="" id="">
@@ -117,13 +117,13 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="intro">Hệ số VAT(%)</label>
                             <input class="form-control" type="text" name="" id="">
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="intro">Loại VAT</label>
                             <select class="form-control" id="">
@@ -132,7 +132,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
                             <label for="intro">Giá bán sản phẩm(chưa VAT)<span class="text-danger" >*</span></label>
                             <input class="form-control" type="text" name="" id="">
@@ -140,13 +140,13 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="intro">Quy cách đóng gói<span class="text-danger" >*</span></label>
                             <input class="form-control" type="text" name="" id="">
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-lg-3 col-sm-6">
                         <div class="form-group">
                             <label for="intro">Đơn vị<span class="text-danger" >*</span></label>
                             <select class="form-control" id="">
@@ -159,7 +159,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
                             <label for="intro">Đăng ký bán sản phẩm tại<span class="text-danger" >*</span></label>
                             <select id="choices-multiple-remove-button" placeholder="Chọn khu vực" multiple>
@@ -172,13 +172,13 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
                             <label for="intro">Số lượng đặt hàng tối đa</label>
                             <input class="form-control" type="text" name="" id="">
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
                             <label for="intro">Tồn trong kho của tôi<span class="text-danger" >*</span></label>
                             <input class="form-control" type="number" name="" id="">

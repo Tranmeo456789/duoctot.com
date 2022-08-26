@@ -25,7 +25,8 @@ class ProductController extends Controller
     }
     public function unit_store(Request $request){
         if($request->input('btn_add_unit')){
-            $request->validate(
+            $this->validate(
+                $request,
                 [
                 'name_unit' => 'required|string|min:1',
                 ],
