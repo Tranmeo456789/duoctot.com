@@ -2,6 +2,7 @@
     color:#fff;
 } */
 
+
 a:hover {
     text-decoration: none;
 }
@@ -112,7 +113,7 @@ table thead{
     width: 100%;
     display: flex;
     padding: 0px;
-    margin: 0px;
+    margin: 0px;flex-wrap: wrap;
 }
 .business-results li{
     height: 90px;
@@ -120,8 +121,7 @@ table thead{
     padding: 0 0 0 52px;
     align-items: center;
     flex-grow: 0;
-    max-width: 25%;
-    flex-basis: 25%;
+    width: 25%;
    
 }
 .business-results li:hover{

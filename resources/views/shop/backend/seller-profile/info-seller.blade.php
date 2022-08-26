@@ -12,13 +12,13 @@
         <div class="card-body">
             <form>
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-lg-4 col-sm-12">
                         <div class="form-group">
                             <label for="name">Mã thành viên</label>
                             <input class="form-control" type="text" name="" id="" value="200033">
                         </div>
                     </div>
-                    <div class="col-8">
+                    <div class="col-lg-8 col-sm-12">
                         <div class="form-group">
                             <label for="intro">Tên người bán(tên hiển thị)</label>
                             <input class="form-control" type="text" name="" id="" value="ADMINTOR">

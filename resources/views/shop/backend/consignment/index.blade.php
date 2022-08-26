@@ -5,6 +5,8 @@
 @section('header_title', 'Danh sách phiếu gửi hàng')
 
 @section('body_content') 
+<div class="set-withscreen">
+    <div class="list_orderm">
     <div class="card mt-3 ml-2">
         <div class="card-header font-weight-bold d-flex justify-content-between align-items-center">
             <div class="form-search form-inline">
@@ -85,4 +87,7 @@
             </nav>
         </div>
     </div>
+    </div>
+</div>
+    
 @endsection

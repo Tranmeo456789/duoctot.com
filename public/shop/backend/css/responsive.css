@@ -1,8 +1,31 @@
+@media screen and (max-width: 1400px) {
+    .business-results li {
+        width: 50%;
+    }
+}
+@media screen and (max-width: 1200px){
+    .list-productwp,.list_orderm{
+        width: 1000px;
+    }
+}
 @media screen and (max-width: 800px) {
+    
+    .set-withscreen {
+        width: 100vw;
+        overflow: scroll;
+    }
+
+    .business-results {
+        width: 733px;
+    }
+
+    .order-wait {
+        width: 1000px;
+    }
     #sidebar {
         transform: translateX(-100%);
     }
-    
+
     #sidebar.slider {
         transform: translateX(0px);
     }
@@ -10,7 +33,11 @@
     #wp-content {
         padding-left: 0px;
     }
-.header-content{width: 100vw;}
+
+    .header-content {
+        width: 100vw;
+    }
+
     .header-title {
         padding-left: 50px;
     }
@@ -43,5 +70,8 @@
     .body-content {
         font-size: 13px;
     }
-    .header-content{padding: 0px;}
+
+    .header-content {
+        padding: 0px;
+    }
 }

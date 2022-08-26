@@ -504,8 +504,74 @@
                 </div>
             </div>
         </div>
-
     </div>
+    <div id="head-body-respon">    
+            <div class="tlogo-menu position-relative">
+                <div class="rimg-startm"><img src="{{asset('images/shop/logo_topbar2.png')}}" alt=""></div>
+                <div class="rimg-center closem" id="closem"><img src="{{asset('images/shop/closem.png')}}" alt=""></div>
+            </div>
+            <div class="body-responhoder">
+                <div class="container-menures d-flex">
+                    <div class="rimg-center"><img src="{{asset('images/shop/news1.png')}}" alt=""></div>
+                    <h2>Tra cứu lịch sử đơn hàng</h2>
+                </div>
+            </div>
+            
+                <div class="list-menures">
+                    <h3>
+                        <div class="container-menures"><a href="">Trang chủ</a></div>
+                    </h3>
+                    <ul>
+                        @foreach ($item_cat1s as $item_catres1)
+
+                        <li>
+                            <div class="container-menures position-relative parentsmenu">
+                                <div class=" pr-4">
+
+                                    <a href="">{{$item_catres1['name']}}</a>
+
+                                </div>
+                                <div class="iconmnrhv"><img src="{{asset('images/shop/arrowd.png')}}" alt=""></div>
+                                <div class="submenu1res">
+                                    <ul>
+                                        @foreach ( $item_sub_menu1s as $item_catres2)
+                                        @if ($item_catres2['parent_id'] == $item_catres1['id'])
+                                        <li><a href="">{{$item_catres2['name']}}</a></li>
+                                        @endif
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+
+                        @endforeach
+                        <li>
+                            <div class="container-menures position-relative parentsmenu">
+                                <div class=" pr-4">
+                                    <a href="">Góc sức khỏe</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="container-menures position-relative parentsmenu">
+                                <div class=" pr-4">
+                                    <a href="">Nhà thuôc</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+          
+            <div class="btn-advice container-menures">
+                <a href="">
+                    <div class="d-flex">
+                        <div class="rimg-center mr-1"><img src="{{asset('images/shop/mess.png')}}" alt=""></div>
+                        <span>Nhận tư vấn miễn phí</span>
+                    </div>
+                </a>
+            </div>
+    </div>
+    
     <div class="black-content"></div>
     <div class="black-screen"></div>
 </div>

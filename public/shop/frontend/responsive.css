@@ -227,6 +227,11 @@
 }
 
 @media screen and (max-width: 1024px) {
+    #head-body-respon{
+        display: block;
+        transform: translateX(-100%);
+    }
+    #head-body-respon.slider{transform: translateX(0px);}
     .wp-inner{max-width: 900px;}
     .service-tdoctor li:last-child {
         padding-right: 0px;

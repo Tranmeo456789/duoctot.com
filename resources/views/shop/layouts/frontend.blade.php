@@ -14,6 +14,7 @@
                     @include('shop.frontend.block.footer')
                 </div>
             </div>
+            <div id="fixscreen-respon"></div>
         </div>
     </body>
     @include('shop.frontend.block.script')

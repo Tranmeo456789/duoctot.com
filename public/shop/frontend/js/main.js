@@ -146,8 +146,6 @@ $('.search-history-order').click(function () {
     $('.black-screen').css("display", "block");
     $('#container').addClass("fixed-hbd");
 });
-
-
     // tang giam so luong san pham
     $('.plus1, .minus1').on('click', function (e) {
         const isNegative = $(e.target).closest('.minus1').is('.minus1');
@@ -156,5 +154,40 @@ $('.search-history-order').click(function () {
             input[0][isNegative ? 'stepDown' : 'stepUp']()
         }
     })
+
+    //xoay arrow 180deg 
+    $('.iconmnrhv').click(function () {
+         $(this).parents('.parentsmenu').children('.submenu1res').toggleClass('display-vis');
+        $(this).toggleClass('arrow-rotate');
+    });
+    $('#btnmenu-resp').click(function () {
+        //$('#container').addClass("fixed-hbd");
+        $('#fixscreen-respon').css("display", "block");
+        $('#head-body-respon').addClass("slider");
+        
+    });
+    // $('.closem').click(function () {
+    //      //$('#fixscreen-respon').css("display", "none");
+    //     // $('#container').removeClass("fixed-hbd");
+    //     $('#head-body-respon').removeClass("slider");
+        
+    // });
+    $(window).resize(function(event) {
+        $('#head-body-respon').removeClass("slider");
+        $('#fixscreen-respon').css("display", "none");
+    });
+
+    const head_body_respon=document.getElementById('head-body-respon');
+    const fixscreen_respon=document.getElementById('fixscreen-respon');
+    const closem=document.getElementById('closem');
+    closem.addEventListener('click',()=>{
+        $('#head-body-respon').removeClass("slider");
+        $('#fixscreen-respon').css("display", "none");
+    });
+    fixscreen_respon.addEventListener('click',(e)=>{
+        if(!head_body_respon.contains(e.target)){
+            closem.click();
+        }
+    });
 });
 
