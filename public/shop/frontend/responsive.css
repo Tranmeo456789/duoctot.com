@@ -11,6 +11,15 @@
     }
 }
 @media screen and (max-width: 1200px) {
+    #head-body-respon{
+        display: block;
+        transform: translateX(-101%);
+    }
+    #head-body-respon.slider{transform: translateX(0px);}
+    #search-order{
+        width: 94vw;
+        transform: translate(-50%,-50%);
+    }
     .bodycat-productrespon{display: block;}
     .list-box-select{
         display: none;
@@ -239,11 +248,7 @@
     .btn-buy-search .btn-select-buy {
         padding: 6px 20px;
     }
-    #head-body-respon{
-        display: block;
-        transform: translateX(-100%);
-    }
-    #head-body-respon.slider{transform: translateX(0px);}
+    
     .wp-inner{max-width: 900px;}
     .service-tdoctor li:last-child {
         padding-right: 0px;
@@ -282,9 +287,6 @@
         display: none;
     }
 
-    #selling-product.viewnproduct li {
-        width: 31.8%;
-    }
 
     .slbuy a {
         font-size: 16px;
@@ -307,9 +309,16 @@
     .cat-content{
 display: none;
     }
-    #body-nbox ul li {
-        width: 30%;
+    .cat-product-out #body-nbox li, #selling-product.viewnproduct li {
+        width: 32%;margin-right: 2%;margin-bottom: 2%;
     }
+    .cat-product-out #body-nbox li:nth-child(3n), #selling-product.viewnproduct li:nth-child(3n) {
+        margin-right: 0;
+    }
+    .cat-product-out #body-nbox li:nth-child(4n), #selling-product.viewnproduct li:nth-child(4n) {
+        margin-right: 2%;
+    }
+    
     .fitler-respon{display: block;}
     .selectpp{display: none;}
     .product-of-cat .title-cat h1 {
@@ -450,7 +459,17 @@ display: none;
 }
 
 @media screen and (max-width: 600px) {
-    
+    .wp-left-cart .title-cart h1{font-size: 18px;}
+    .new-view{padding: 5px 0px;}
+    .cat-product-out #body-nbox li,#selling-product.viewnproduct li {
+        width: 49%;margin-right: 2%;margin-bottom: 2%;
+    }
+    .cat-product-out #body-nbox li:nth-child(2n), #selling-product.viewnproduct li:nth-child(2n){
+        margin-right: 0;
+    }
+    .cat-product-out #body-nbox li:nth-child(3n), #selling-product.viewnproduct li:nth-child(3n){
+        margin-right: 2%;
+    }
     #selling-product.viewnproduct li{
         height: 351px;
     }
@@ -476,9 +495,6 @@ display: none;
     }
     .rimg-center5 {width: 30px;height: 30px;}
     #cat_detail .body_catdetail li .itemct4 span{font-size: 13px;}
-    #selling-product.viewnproduct li {
-        width: 48.6%;
-    }
     #body-nbox ul li {
         width: 46%;
     }
@@ -547,6 +563,9 @@ display: none;
     }
 }
 @media screen and (max-width: 500px){
+    .wp-left-cart .title-cart h1 {
+        font-size: 15px;
+    }
     .payment h2{font-size: 16px;}
     .payment p {
         font-size: 13px;

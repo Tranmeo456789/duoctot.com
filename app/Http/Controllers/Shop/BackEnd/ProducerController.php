@@ -8,21 +8,14 @@ use App\Http\Controllers\Controller;
 
 class ProducerController extends Controller
 {
-    public function list_producer()
+    public function list()
     {
         $producers = Producer::paginate(10);
-        return view('shop.backend.producer.list_producer', compact('producers'));
+        return view('shop.backend.producer.list', compact('producers'));
     }
-    public function add_producer()
+    public function add(Request $request)
     {
-
-        return view('shop.backend.producer.add_producer');
-    }
-    function store_producer(Request $request)
-    {
-
         if ($request->input('btn_add_producer')) {
-
             $this->validate(
                 $request,
                 [
@@ -36,7 +29,6 @@ class ProducerController extends Controller
                 [
                         'name_producer'=>'Tên nhà sản xuất',
                ]
-
             );
             Producer::create(
                 [                
@@ -44,27 +36,26 @@ class ProducerController extends Controller
                 ]
               );
             return redirect('backend/danh-sach-nha-san-xuat')->with('status','Thêm nhà sản xuất thành công');
-        }
+        }else{
+            return view('shop.backend.producer.add');
+        }       
     }
-    public function edit_producer($id)
-    {
-        $producer = Producer::find($id);
-        return view('shop.backend.producer.edit_producer', compact('producer'));
-    }
-    function update_producer(Request $request, $id)
-    {
+    public function edit(Request $request, $id)
+    {     
         if ($request->input('btn_update_producer')) {
-            $request->validate(
+            $this->validate(
+                $request,
                 [
                     'name_producer' => 'required|string|min:1',
+
                 ],
                 [
                     'required' => ':attribute không được để trống',
                     'min' => ':attribute có độ dài ít nhất :min ký tự',
                 ],
                 [
-                    'name_producer' => 'Tên nhà sản xuất',
-                ]
+                        'name_producer'=>'Tên nhà sản xuất',
+               ]
             );
             Producer::where('id_producer', $id)->update(
                 [
@@ -73,9 +64,12 @@ class ProducerController extends Controller
                 ]
             );
             return redirect('backend/danh-sach-nha-san-xuat')->with('status', 'Cập nhật nhà sản xuất thành công');
-        }
+        }else{
+            $producer = Producer::find($id);
+            return view('shop.backend.producer.edit', compact('producer'));
+        }   
     }
-    function delete_producer($id)
+    function delete($id)
     {
         Producer::where('id_producer', $id)->forceDelete();
         return redirect('backend/danh-sach-nha-san-xuat')->with('status', 'Bản ghi đã xóa vĩnh viễn!');

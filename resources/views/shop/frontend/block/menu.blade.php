@@ -364,7 +364,7 @@
                                                             <ul class="body_catdetail clearfix">
                                                                 @foreach ($item_submenu2s as $item_submenu2)
                                                                 @if ($item_submenu2['parent_id'] == $item_sub_menu1['id'] )
-                                                                <li class=" mr-2 mb-2">
+                                                                <li class="">
                                                                     <a href="{{route('fe.cat4')}}">
                                                                         <div class="item_cat4 d-flex">
                                                                             <div class="aimg rimg-centerx mr-1">

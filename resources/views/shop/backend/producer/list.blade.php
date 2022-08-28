@@ -5,15 +5,16 @@
 @section('header_title', 'Danh sách nhà sản xuất')
 
 @section('body_content')
-<div class="set-withscreen">
-    <div class="card list-productwp">
-        @if (session('status'))
-        <div class="alert alert-success text-center">{{session('status')}}</div>
-        @endif
-        <div class="card-header font-weight-bold">
-            Danh sách nhà sản xuất
-        </div>
-        <div class="card-body">
+
+<div class="card">
+    @if (session('status'))
+    <div class="alert alert-success text-center export-noti">{{session('status')}}</div>
+    @endif
+    <div class="card-header font-weight-bold">
+        Danh sách nhà sản xuất
+    </div>
+    <div class="set-withscreen">
+        <div class="card-body list-productwp">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -46,5 +47,6 @@
         </div>
     </div>
 </div>
+
 
 @endsection

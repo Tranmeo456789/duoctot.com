@@ -5,7 +5,7 @@
 @section('header_title', 'Thêm nhà sản xuất')
 
 @section('body_content')
-<div class="card mt-2 ml-1">
+<div class="card">
     <div class="card-header font-weight-bold">
         Thêm nhà sản xuất
     </div>

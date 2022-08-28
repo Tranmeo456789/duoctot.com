@@ -267,11 +267,7 @@
     display: block;
     width: 32px;
 }
-#body-nbox ul li{
-    float: left;
-    margin-right: 10px;
-    width: 23.7%;
-}
+
 .fitler-respon{display: none;}
 .selectpp{display: flex;}
 .seclect_ol {
@@ -425,22 +421,23 @@ color: #072C94;
 
 .new-view {
     background: #F1F8FF;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding: 15px 10px;
 }
 
 #selling-product.viewnproduct li {
     float: left;
-    width: 18.5%;
+    width: 24.25%;
     height: 378px;
-    margin-right: 1.4%;
+    margin-right: 1%;
     margin-bottom: 1%;
     padding: 25px 3px;
     background: #fff;
     border: 1px solid #787878;
     border-radius: 10px;
 }
-
+#selling-product.viewnproduct li:nth-child(4n){
+    margin-right: 0px;
+}
 /* The switch - the box around the slider */
 .switch {
     position: relative;
@@ -614,8 +611,14 @@ input:checked+.slider:before {
     border: 1px solid #787878;
     border-radius: 10px;
     padding: 12px 10px;
-    margin-top: 10px;
+    margin-bottom: 1%;
     min-height: 400px;
+    float: left;
+    margin-right: 1%;
+    width: 24.25%;
+}
+.cat-product-out #body-nbox li:nth-child(4n) {
+    margin-right: 0;
 }
 .cat-product-out #body-nbox li:hover{
     border: 1px solid blue;

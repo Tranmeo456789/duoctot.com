@@ -146,6 +146,13 @@ $('.search-history-order').click(function () {
     $('.black-screen').css("display", "block");
     $('#container').addClass("fixed-hbd");
 });
+// $('.container-menures').click(function () {
+//     $('#search-order').css("display", "block");
+//      $('.black-screen').css("display", "block");
+//      $('#container').addClass("fixed-hbd");
+// });
+
+
     // tang giam so luong san pham
     $('.plus1, .minus1').on('click', function (e) {
         const isNegative = $(e.target).closest('.minus1').is('.minus1');

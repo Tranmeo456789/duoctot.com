@@ -15,31 +15,31 @@
                 <div class="social">
                     <div class="d-flex">
                         <div class="icon-social">
-                            <a href=""><img src="{{asset('images/shop/fb.png')}}" alt=""></a>
+                            <a href=""><img src="{{asset('images/shop/ict1.png')}}" alt=""></a>
                         </div>
                         <p>Facebook</p>
                     </div>
                     <div class="d-flex">
                         <div class="icon-social">
-                            <a href=""><img src="{{asset('images/shop/tw.png')}}" alt=""></a>
+                            <a href=""><img src="{{asset('images/shop/ict2.png')}}" alt=""></a>
                         </div>
                         <p>Twitter</p>
                     </div>
                     <div class="d-flex">
                         <div class="icon-social">
-                            <a href=""><img src="{{asset('images/shop/ins.png')}}" alt=""></a>
+                            <a href=""><img src="{{asset('images/shop/ict3.png')}}" alt=""></a>
                         </div>
                         <p>Linkedin</p>
                     </div>
                     <div class="d-flex">
                         <div class="icon-social">
-                            <a href=""><img src="{{asset('images/shop/yt.png')}}" alt=""></a>
+                            <a href=""><img src="{{asset('images/shop/ict4.png')}}" alt=""></a>
                         </div>
                         <p>Youtube</p>
                     </div>
                     <div class="d-flex">
                         <div class="icon-social">
-                            <a href=""><img src="{{asset('images/shop/in.png')}}" alt=""></a>
+                            <a href=""><img src="{{asset('images/shop/ict5.png')}}" alt=""></a>
                         </div>
                         <p>Instagram</p>
                     </div>
