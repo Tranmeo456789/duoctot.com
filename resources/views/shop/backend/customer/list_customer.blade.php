@@ -2,32 +2,27 @@
 
 @section('title', 'Danh sách khách hàng')
 
-@section('header_title', ' ')
+@section('header_title', 'Danh sách khách hàng')
 
 @section('body_content')
-<div class="set-withscreen">
-    <div class="list_orderm">
-        <div class="card mt-3 ml-2">
-            <div class="card-header font-weight-bold d-flex justify-content-between align-items-center">
-                <h5 class="m-0 ">Danh sách khách hàng</h5>
-                <div class="form-search form-inline" style="width:500px">
-                    <form action="">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <button id="btn-search" class="input-group-text"><i class="fas fa-search"></i></button>
-                                <!-- <span class="input-group-text"> Họ tên:</span> -->
-                            </div>
-                            <input type="search" id="input-search" style="width:450px" class="form-control form-search" placeholder="Nhập tên khách hàng để tìm kiếm">
-                        </div>
-
-                        <!-- <input type="" id="input-search" style="width:500px"  class="form-control form-search" placeholder="Nhập tên khách hàng để tìm kiếm">
-                    <button class="search-product" ><i class="fas fa-search"></i></button> -->
+<div class="card">
+    <div class="card-header font-weight-bold">
+        <div class="row">
+            <div class="col-xl-6 col-lg-12">
+                <div class="form-search form-inline">
+                    <form action="#" style="width:100%">
+                        <input type="" id="input-search-after" style="width:100%" class="form-control form-search" placeholder="Nhập tên sản phẩm để tìm kiếm">
+                        <button class="search-product"><i class="fas fa-search"></i></button>
                     </form>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="set-withscreen">
+        <div class="list_orderm">
             <div class="card-body">
                 <table class="table table-striped table-checkall" style="font-size:14px!important; border: none; table-layout: auto;width: 100%">
-                    <thead style="">
+                    <thead>
                         <tr>
                             <th scope="col">Mã khách hàng</th>
                             <th scope="col">Tên khách hàng</th>
@@ -68,7 +63,6 @@
                     </ul>
                 </nav>
             </div>
-
         </div>
     </div>
 </div>

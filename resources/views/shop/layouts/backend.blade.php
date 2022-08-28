@@ -19,6 +19,7 @@
 
 <body>
     <div id="warpper" class="nav-fixed">
+
         <div id="wp-opacity"></div>
         <div id="page-body" class="d-flex">
             <div id="sidebar" style="background-color: #def3d4;">
@@ -147,11 +148,9 @@
                     </li>
                 </ul>
             </div>
-
             <div id="wp-content">
-
                 <div class="container-fluid px-0 position-relative">
-                    <div class="header-content">
+                    <div class="header-content fixed-titleuserres">
                         <div class="btnvis-sidebar"><i class="fas fa-arrow-circle-right"></i></div>
                         <h3 class="header-title">@yield('header_title')</h3>
                         <div class="header-content-left">

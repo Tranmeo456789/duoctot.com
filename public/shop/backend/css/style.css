@@ -12,7 +12,7 @@ a:hover {
     color: red;
     font-size: 23px;
     left: 10px;cursor: pointer;
-    top: 8px;position: fixed;display: none;
+    top: 8px;position: absolute;display: none;
 }
 .hide-sidebar{
  display: none;position:absolute;top: 12px;right: 12px;font-size: 20px;cursor: pointer;color: red;
@@ -315,9 +315,6 @@ ul#sidebar-menu * {
     background-color: #e5e9f0;
 }
 
-.form-search {
-    width: 300px;
-}
 
 .table tr td {
     vertical-align: middle;

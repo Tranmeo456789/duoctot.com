@@ -5,25 +5,30 @@
 @section('header_title', 'Danh sách đơn hàng')
 
 @section('body_content')
-<div class="set-withscreen">
-    <div class="list_orderm">
-        <div class="card mt-3 ml-2">
-            <div class="card-header">
-                <h5 class=" ">Danh sách đơn hàng</h5>
-                <div class="font-weight-bold d-flex justify-content-between align-items-center">
+
+<div class="card">
+    <div class="card-header">
+        <div class=" font-weight-bold">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 titlehearder">
                     <div class="form-search form-inline">
-                        <form action="#">
-                            <input type="" id="input-search-after" style="width:300px" class="form-control form-search" placeholder="Nhập tên sản phẩm để tìm kiếm">
+                        <form action="#" style="width:100%">
+                            <input type="" id="input-search-after" style="width:100%" class="form-control form-search" placeholder="Nhập tên sản phẩm để tìm kiếm">
                             <button class="search-product"><i class="fas fa-search"></i></button>
                         </form>
                     </div>
-                    <div class="text-capitalize pr-5" style="font-size:14px">
-                        Thời gian:
+                </div>
+                <div class="col-xl-6 col-lg-12">
+                    <div class="text-capitalize">
+                        <label for="">Thời gian:</label>  
                         <input type="date" class="border-top-0 border-left-0 border-right-0"> ~ <input type="date" class="border-top-0 border-left-0 border-right-0">
                     </div>
                 </div>
-
             </div>
+        </div>
+    </div>
+    <div class="set-withscreen">
+        <div class="list_orderm">
             <div class="card-body">
                 <div class="analytic status-order status-product" style="font-size:14px">
                     <a class="text-primary active-status">Tất cả<span class="text-muted">(10)</span></a>
@@ -84,6 +89,8 @@
             </div>
         </div>
     </div>
+
+
 </div>
 
 @endsection

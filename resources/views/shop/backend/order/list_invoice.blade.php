@@ -5,98 +5,92 @@
 @section('header_title', 'Danh sách hóa đơn')
 
 @section('body_content')
-<div class="set-withscreen">
-    <div class="list_orderm">
-        <div class="card mt-2 ml-1">
-            <div class="card-body">
-                <form>
-                    <div class="row">
-                        <div class="col-2">
-                            <div class="form-group">
-                                <label for="name">Yêu cầu xuất hóa đơn</label>
-                                <select class="form-control" id="">
-                                    <option>Có</option>
-                                    <option>không</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="form-group">
-                                <label for="name">Mã hóa đơn</label>
-                                <input class="form-control" type="text" name="" id="">
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="form-group">
-                                <label for="name">Mã đơn hàng</label>
-                                <input class="form-control" type="text" name="" id="">
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="intro">Ngày hoàn thành</label>
-                                <div class="d-flex">
-                                    <input class="form-control mr-4" style="width:45%" type="date" name="" id="">
-                                    <input class="form-control mr-0" style="width:45%" type="date" name="" id="">
-                                </div>
-
-                            </div>
-                        </div>
-
+<div class="card">
+    <div class="card-body">
+        <form>
+            <div class="row">
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <div class="form-group">
+                        <label for="name">Yêu cầu xuất hóa đơn</label>
+                        <select class="form-control" id="">
+                            <option>Có</option>
+                            <option>không</option>
+                        </select>
                     </div>
-                    <div class="d-flex justify-content-end pr-4">
-                        <button id="" class="btn btn-primary">Áp dụng</button>
-                    </div>
-
-                </form>
-            </div>
-        </div>
-        <div class="card mt-3 ml-2">
-
-            <div class="card-body">
-                <div class="analytic status-order status-product" style="font-size:14px">
-                    <a class="text-primary active-status">Tất cả<span class="text-muted">(10)</span></a>
-                    <a class="text-primary">Chờ gửi hóa đơn<span class="text-muted">(5)</span></a>
-                    <a class="text-primary">Đã gửi hóa đơn<span class="text-muted">(20)</span></a>
-                    <a class="text-primary">Quá hạn gửi hóa đơn<span class="text-muted">(20)</span></a>
                 </div>
-                <table class="table table-striped table-checkall" style="font-size:13px!important; border: none; table-layout: auto;width: 100%">
-                    <thead>
-                        <tr>
-                            <th scope="col">Mã hóa đơn</th>
-                            <th scope="col">Mã đơn hàng</th>
-                            <th scope="col">Ngày hoàn tất đơn hàng</th>
-                            <th scope="col">Hạn gửi hóa đơn</th>
-                            <th scope="col">Ngày gửi hóa đơn</th>
-                            <th scope="col">Trạng thái</th>
-                            <th scope="col">YC xuất hóa đơn</th>
-                            <th scope="col">Thao tác</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="">
-                            <td><a href="{{route('invoice.detail')}}">112233</a></td>
-                            <td>345626</td>
-                            <td>24-09-2022 <p>20/:10:30</p>
-                            </td>
-                            <td>04-10-2022 <p>20/:10:30</p>
-                            </td>
-                            <td>
-                                <p>chờ cập nhật</p>
-                            </td>
-                            <td>
-                                <p>chờ gửi</p>
-                            </td>
-                            <td class="text-center"><input class="" type="checkbox" name="" id=""></td>
-
-                            <td>
-                                <a href="#" class="btn btn-info btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="xem chi tiết"><i class="fas fa-eye"></i></a>
-                                <a href="#" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Tải xuống"><i class="fas fa-download"></i></a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <div class="form-group">
+                        <label for="name">Mã hóa đơn</label>
+                        <input class="form-control" type="text" name="" id="">
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group">
+                        <label for="name">Mã đơn hàng</label>
+                        <input class="form-control" type="text" name="" id="">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="intro">Ngày hoàn thành</label>
+                        <div class="d-flex">
+                            <input class="form-control mr-4" style="width:45%" type="date" name="" id="">
+                            <input class="form-control mr-0" style="width:45%" type="date" name="" id="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center mb-2">
+                <button id="" class="btn btn-primary">Áp dụng</button>
+            </div>
+        </form>
+        <div class="card">
+            <div class="set-withscreen">
+                <div class="list_orderm">
+                    <div class="card-body">
+                        <div class="analytic status-order status-product" style="font-size:14px">
+                            <a class="text-primary active-status">Tất cả<span class="text-muted">(10)</span></a>
+                            <a class="text-primary">Chờ gửi hóa đơn<span class="text-muted">(5)</span></a>
+                            <a class="text-primary">Đã gửi hóa đơn<span class="text-muted">(20)</span></a>
+                            <a class="text-primary">Quá hạn gửi hóa đơn<span class="text-muted">(20)</span></a>
+                        </div>
+                        <table class="table table-striped table-checkall" style="font-size:13px!important; border: none; table-layout: auto;width: 100%">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Mã hóa đơn</th>
+                                    <th scope="col">Mã đơn hàng</th>
+                                    <th scope="col">Ngày hoàn tất đơn hàng</th>
+                                    <th scope="col">Hạn gửi hóa đơn</th>
+                                    <th scope="col">Ngày gửi hóa đơn</th>
+                                    <th scope="col">Trạng thái</th>
+                                    <th scope="col">YC xuất hóa đơn</th>
+                                    <th scope="col">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="">
+                                    <td><a href="{{route('invoice.detail')}}">112233</a></td>
+                                    <td>345626</td>
+                                    <td>24-09-2022 <p>20/:10:30</p>
+                                    </td>
+                                    <td>04-10-2022 <p>20/:10:30</p>
+                                    </td>
+                                    <td>
+                                        <p>chờ cập nhật</p>
+                                    </td>
+                                    <td>
+                                        <p>chờ gửi</p>
+                                    </td>
+                                    <td class="text-center"><input class="" type="checkbox" name="" id=""></td>
+                                    <td>
+                                        <a href="#" class="btn btn-info btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="xem chi tiết"><i class="fas fa-eye"></i></a>
+                                        <a href="#" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Tải xuống"><i class="fas fa-download"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
         <div id="modal-wrapper-product">
@@ -144,8 +138,6 @@
                                     <span>Đã thêm 2</span>
                                 </td>
                             </tr>
-
-
                         </tbody>
                     </table>
                 </div>

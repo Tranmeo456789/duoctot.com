@@ -10,7 +10,15 @@
         font-size: 11px;
     }
 }
-@media screen and (max-width: 1170px) {
+@media screen and (max-width: 1200px) {
+    .bodycat-productrespon{display: block;}
+    .list-box-select{
+        display: none;
+    }
+    .trademark{
+        display: none;
+    }
+    .body-cat-product{display: none;}
     .wp-inner{max-width: 995px;}
     #buy-medicine .btn-buynn {
         margin-right: 0px;
@@ -227,6 +235,10 @@
 }
 
 @media screen and (max-width: 1024px) {
+    
+    .btn-buy-search .btn-select-buy {
+        padding: 6px 20px;
+    }
     #head-body-respon{
         display: block;
         transform: translateX(-100%);
@@ -246,7 +258,6 @@
     .service-tdoctor li{flex-direction: column;}
     #selling-product h1 p {
         font-size: 18px;
-        padding-top: 10px;
     }
 
     .service-tdoctor img {
@@ -272,7 +283,7 @@
     }
 
     #selling-product.viewnproduct li {
-        width: 48.6%;
+        width: 31.8%;
     }
 
     .slbuy a {
@@ -283,6 +294,27 @@
 }
 
 @media screen and (max-width: 800px) {
+    .table-responsive{
+        overflow-x: scroll;
+    }
+    .set-widthtable{width: 800px;}
+    .cmoder a{
+        padding: 5px 15px;font-size: 18px;
+    }
+    .question-often .content-quest a {
+        padding: 2px 5px;
+    }
+    .cat-content{
+display: none;
+    }
+    #body-nbox ul li {
+        width: 30%;
+    }
+    .fitler-respon{display: block;}
+    .selectpp{display: none;}
+    .product-of-cat .title-cat h1 {
+        font-size: 20px;
+    }
     .wp-inner{max-width: 100vw;}
     .app-store{margin-right: 8px;}
     #selling-product .slect-customer span {
@@ -418,6 +450,38 @@
 }
 
 @media screen and (max-width: 600px) {
+    
+    #selling-product.viewnproduct li{
+        height: 351px;
+    }
+    .content-commit-tdoctorrespon{display: block;}
+    .content-commit-tdoctor{display: none;}
+    .pnote-view {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .comment span{display: none;}
+    .btn-buy-search .btn-select-buy {
+        font-size: 16px;
+        padding: 5px 20px;
+        border-radius: 30px;
+    }
+    .btn-buy-search .btn-search-house {
+        padding: 5px 20px;
+        background: #E9212D;
+        border-radius: 30px;
+    }
+    #cat_detail {
+        padding: 0px;
+    }
+    .rimg-center5 {width: 30px;height: 30px;}
+    #cat_detail .body_catdetail li .itemct4 span{font-size: 13px;}
+    #selling-product.viewnproduct li {
+        width: 48.6%;
+    }
+    #body-nbox ul li {
+        width: 46%;
+    }
     .service-tdoctor .title-service h1 {
         font-size: 16px;
     }
@@ -483,6 +547,10 @@
     }
 }
 @media screen and (max-width: 500px){
+    .payment h2{font-size: 16px;}
+    .payment p {
+        font-size: 13px;
+    }
     .local p{font-size:16px ;}
     .local img {
         width: 16px;

@@ -21,8 +21,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
     <div class="set-withscreen ">
         <div class="list-productwp">

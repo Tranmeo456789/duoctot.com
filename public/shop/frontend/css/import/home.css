@@ -300,7 +300,7 @@
 #selling-product .icon-product-round {
     border-radius: 50%;
     background-color: #05AFE3;
-    width: 34px;height: 34px;
+    width: 30px;height: 30px;
     display: flex;justify-content: center;align-items: center;
     margin-right: 15px;
 }

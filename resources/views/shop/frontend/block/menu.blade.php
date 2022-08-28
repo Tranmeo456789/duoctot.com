@@ -38,7 +38,7 @@
                 </a>
             </div>
             <div id="" class="fl-left" style="margin-left:30px;padding-top:15px;">
-                <a href="{{url('gio-hang')}}" title="" id="payment-link" class="">
+                <a href="{{route('fe.product.cart')}}" title="" id="payment-link" class="">
                     <div class="clearfix">
                         <div class="fl-left mr-2">
                             <img style="width:32px" src="{{asset('images/shop/cart.png')}}" alt="" srcset="">
@@ -95,7 +95,7 @@
                             <div class="rimg-center"><img src="{{asset('images/shop/logo_topbar2.png')}}" alt=""></div>
                         </a></div>
                     <ul class="d-flex align-items-center">
-                        <li class="hrcart"><a href="">
+                        <li class="hrcart"><a href="{{route('fe.product.cart')}}">
                                 <div class="rimg-center"><img src="{{asset('images/shop/cart.png')}}"></div>
                             </a></li>
                         <li class="hruse"><a href="">
@@ -482,7 +482,7 @@
                             <div class="container-menures position-relative parentsmenu">
                                 <div class=" pr-4">
 
-                                    <a href="">{{$item_catres1['name']}}</a>
+                                    <a href="{{route('fe.cat')}}">{{$item_catres1['name']}}</a>
 
                                 </div>
                                 <div class="iconmnrhv"><img src="{{asset('images/shop/arrowd.png')}}" alt=""></div>
@@ -490,7 +490,7 @@
                                     <ul>
                                         @foreach ( $item_sub_menu1s as $item_catres2)
                                         @if ($item_catres2['parent_id'] == $item_catres1['id'])
-                                        <li><a href="">{{$item_catres2['name']}}</a></li>
+                                        <li><a href="{{route('fe.cat3')}}">{{$item_catres2['name']}}</a></li>
                                         @endif
                                         @endforeach
                                     </ul>

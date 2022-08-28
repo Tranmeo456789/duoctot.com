@@ -69,12 +69,15 @@
                     </div>
                 </form>
                 <div class="commit-tdoctor text-center">
-                    <p class="pnote-view">
-                        <span class="position-relative text-orange">Sản phẩm đang được chú ý
-                            <span class="pnote-view-img"><img src="{{asset('images/shop/star2.png')}}" alt=""></span>
-                        </span>
-                        <span>, có 7 người thêm vào giỏ hàng & 16 người đang xem</span>
-                    </p>
+                    <div class="pnote-view d-flex">
+                        <div>
+                            <div class="roud25y-img"><img src="{{asset('images/shop/star2.png')}}" alt=""></div>
+                        </div>
+                        <div>
+                            <span class="position-relative text-orange">Sản phẩm đang được chú ý</span>
+                            <span>, có 7 người thêm vào giỏ hàng & 16 người đang xem</span>
+                        </div>
+                    </div>
                     <div class="commit-tdoctor-child">
                         <div class="title-commit-tdoctor text-center">
                             T doctor cam kết
@@ -88,22 +91,54 @@
                                         <p>kể từ ngày mua hàng</p>
                                     </div>
                                 </li>
-                                    <li class="d-flex justify-content-center">
-                                        <div>
+                                <li class="d-flex justify-content-center">
+                                    <div>
                                         <div class="text-center"><img src="{{asset('images/shop/cm2.png')}}" alt=""></div>
                                         <h3>Đổi trả trong 30 ngày</h3>
                                         <p>kể từ ngày mua hàng</p>
-                                        </div>
-                                    </li>
+                                    </div>
+                                </li>
                                 <div>
                                     <li class="d-flex justify-content-center">
                                         <div>
-                                        <div class="text-center"><img src="{{asset('images/shop/cm3.png')}}" alt=""></div>
-                                        <h3>Đổi trả trong 30 ngày</h3>
-                                        <p>kể từ ngày mua hàng</p>
+                                            <div class="text-center"><img src="{{asset('images/shop/cm3.png')}}" alt=""></div>
+                                            <h3>Đổi trả trong 30 ngày</h3>
+                                            <p>kể từ ngày mua hàng</p>
                                         </div>
                                     </li>
                                 </div>
+                            </ul>
+                        </div>
+                        <div class="content-commit-tdoctorrespon">
+                            <ul class="">
+                                <li class="pl-3 mb-2 pt-2">
+                                    <div class="d-flex">
+                                        <div class="roud1-img1 mr-1"><i class="fas fa-exchange-alt"></i></div>
+                                        <div class=" align-items-start">
+                                            <h3>Đổi trả trong 30 ngày</h3>
+                                            <p>kể từ ngày mua hàng</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="pl-3 mb-2">
+                                    <div class="d-flex">
+                                        <div class="roud1-img1 mr-1"><i class="fas fa-thumbs-up"></i></div>
+                                        <div class=" align-items-start">
+                                            <h3>Miễn phí 100%</h3>
+                                            <p>đổi thuốc</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="pl-3">
+                                    <div class="d-flex">
+                                        <div class="roud1-img1 mr-1"><i class="fas fa-truck"></i></div>
+                                        <div class=" align-items-start">
+                                            <h3>Miễn phí vận chuyển</h3>
+                                            <p>theo chính sách giao hàng</p>
+                                        </div>
+                                    </div>
+                                </li>
+
                             </ul>
                         </div>
                     </div>
@@ -116,7 +151,7 @@
 <div class="short-infohr mb-3"></div>
 <div class="wp-inner">
     <div id="content-detail-product" class="row">
-        <div class="col-3 cat-content px-0">
+        <div class="col-12 col-lg-3 cat-content px-0">
             <div class="main-content-product">
                 <h1>Nội dung chính
                     <div class="roud-img"><img src="{{asset('images/shop/3ngang.png')}}" alt=""></div>
@@ -132,7 +167,7 @@
                 <li>Bảo quản</li>
             </ul>
         </div>
-        <div class="col-9 pl-3">
+        <div class="col-12 col-lg-9">
             <div class="title-content-detail-product d-flex justify-content-between flex-wrap">
                 <h1>Mô tả sản phẩm Sâm Nhung Bổ Thận NV</h1>
                 <div class="d-flex justify-content-center flex-wrap">
@@ -222,64 +257,76 @@
                 <div>
                     <ul class="list-item">
                         <li>
-                            <div>
-                                <div class="rdimg d-flex justify-content-center"><img src="{{asset('images/shop/covid2.png')}}" alt="" srcset=""></div>
-                                <div class="pl-3">
-                                    <a>Viên sủi opimax Imunity</a>
-                                    <span class="text-info">115.000đ/tuýp</span>
-                                    <div class="slbuy text-center mt-4"><a href="">Chọn mua</a></div>
+                            <a href="{{route('fe.product.detail')}}">
+                                <div>
+                                    <div class="rdimg d-flex justify-content-center"><img src="{{asset('images/shop/covid2.png')}}" alt="" srcset=""></div>
+                                    <div class="pl-3">
+                                        <a>Viên sủi opimax Imunity</a>
+                                        <span class="text-info">115.000đ/tuýp</span>
+                                        <div class="slbuy text-center mt-4"><a href="">Chọn mua</a></div>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </li>
                         <li>
-                            <div>
-                                <div class="rdimg d-flex justify-content-center"><img src="{{asset('images/shop/covid2.png')}}" alt="" srcset=""></div>
-                                <div class="pl-3">
-                                    <a>Viên sủi opimax Imunity</a>
-                                    <span class="text-info">115.000đ/tuýp</span>
-                                    <div class="slbuy text-center mt-4"><a href="">Chọn mua</a></div>
+                            <a href="{{route('fe.product.detail')}}">
+                                <div>
+                                    <div class="rdimg d-flex justify-content-center"><img src="{{asset('images/shop/covid2.png')}}" alt="" srcset=""></div>
+                                    <div class="pl-3">
+                                        <a>Viên sủi opimax Imunity</a>
+                                        <span class="text-info">115.000đ/tuýp</span>
+                                        <div class="slbuy text-center mt-4"><a href="">Chọn mua</a></div>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </li>
                         <li>
-                            <div>
-                                <div class="rdimg d-flex justify-content-center"><img src="{{asset('images/shop/covid2.png')}}" alt="" srcset=""></div>
-                                <div class="pl-3">
-                                    <a>Viên sủi opimax Imunity</a>
-                                    <span class="text-info">115.000đ/tuýp</span>
-                                    <div class="slbuy text-center mt-4"><a href="">Chọn mua</a></div>
+                            <a href="{{route('fe.product.detail')}}">
+                                <div>
+                                    <div class="rdimg d-flex justify-content-center"><img src="{{asset('images/shop/covid2.png')}}" alt="" srcset=""></div>
+                                    <div class="pl-3">
+                                        <a>Viên sủi opimax Imunity</a>
+                                        <span class="text-info">115.000đ/tuýp</span>
+                                        <div class="slbuy text-center mt-4"><a href="">Chọn mua</a></div>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </li>
                         <li>
-                            <div>
-                                <div class="rdimg d-flex justify-content-center"><img src="{{asset('images/shop/covid2.png')}}" alt="" srcset=""></div>
-                                <div class="pl-3">
-                                    <a>Viên sủi opimax Imunity</a>
-                                    <span class="text-info">115.000đ/tuýp</span>
-                                    <div class="slbuy text-center mt-4"><a href="">Chọn mua</a></div>
+                            <a href="{{route('fe.product.detail')}}">
+                                <div>
+                                    <div class="rdimg d-flex justify-content-center"><img src="{{asset('images/shop/covid2.png')}}" alt="" srcset=""></div>
+                                    <div class="pl-3">
+                                        <a>Viên sủi opimax Imunity</a>
+                                        <span class="text-info">115.000đ/tuýp</span>
+                                        <div class="slbuy text-center mt-4"><a href="">Chọn mua</a></div>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </li>
                         <li>
-                            <div>
-                                <div class="rdimg d-flex justify-content-center"><img src="{{asset('images/shop/covid2.png')}}" alt="" srcset=""></div>
-                                <div class="pl-3">
-                                    <a>Viên sủi opimax Imunity</a>
-                                    <span class="text-info">115.000đ/tuýp</span>
-                                    <div class="slbuy text-center mt-4"><a href="">Chọn mua</a></div>
+                            <a href="{{route('fe.product.detail')}}">
+                                <div>
+                                    <div class="rdimg d-flex justify-content-center"><img src="{{asset('images/shop/covid2.png')}}" alt="" srcset=""></div>
+                                    <div class="pl-3">
+                                        <a>Viên sủi opimax Imunity</a>
+                                        <span class="text-info">115.000đ/tuýp</span>
+                                        <div class="slbuy text-center mt-4"><a href="">Chọn mua</a></div>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </li>
                         <li>
-                            <div>
-                                <div class="rdimg d-flex justify-content-center"><img src="{{asset('images/shop/covid2.png')}}" alt="" srcset=""></div>
-                                <div class="pl-3">
-                                    <a>Viên sủi opimax Imunity</a>
-                                    <span class="text-info">115.000đ/tuýp</span>
-                                    <div class="slbuy text-center mt-4"><a href="">Chọn mua</a></div>
+                            <a href="{{route('fe.product.detail')}}">
+                                <div>
+                                    <div class="rdimg d-flex justify-content-center"><img src="{{asset('images/shop/covid2.png')}}" alt="" srcset=""></div>
+                                    <div class="pl-3">
+                                        <a>Viên sủi opimax Imunity</a>
+                                        <span class="text-info">115.000đ/tuýp</span>
+                                        <div class="slbuy text-center mt-4"><a href="">Chọn mua</a></div>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </li>
                     </ul>
                 </div>

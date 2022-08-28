@@ -8,10 +8,10 @@
                         @include("$moduleName.pages.$controllerName.child_index.breadcrumb")
                     </div>
                 </div>
-                <div class="col-md-3 trademark">
+                <div class="col-xl-3 trademark">
                     @include("$moduleName.pages.$controllerName.child_index.listbox_select")
                 </div>
-                <div class="col-md-9">
+                <div class="col-xl-9 col-12">
                     <div class="product-of-cat">
                         @include("$moduleName.pages.$controllerName.child_index.product_of_cat")
                     </div>

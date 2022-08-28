@@ -177,6 +177,14 @@ $('.search-history-order').click(function () {
         $('#fixscreen-respon').css("display", "none");
     });
 
+
+    //xo danh muc cap 1
+    $('.vissubmenu').click(function () {
+        $(this).parents('.catparentc').children('.submenua1').toggleClass('display-vis');
+       $(this).toggleClass('arrow-rotate');
+   });
+
+    //
     const head_body_respon=document.getElementById('head-body-respon');
     const fixscreen_respon=document.getElementById('fixscreen-respon');
     const closem=document.getElementById('closem');

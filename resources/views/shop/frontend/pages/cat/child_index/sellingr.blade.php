@@ -7,7 +7,7 @@
                 <div class="">
                     <ul class="list-item">
                     <li>
-                        <a href="">
+                        <a href="{{route('fe.product.detail')}}">
                         <div class="rdimg d-flex justify-content-center"><img src="{{asset('images/shop/covid2.png')}}" alt="" srcset=""></div>
                             <div class="pl-3">
                                 <p>Viên sủi opimax Imunity</p>
@@ -16,7 +16,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="{{route('fe.product.detail')}}">
                         <div class="rdimg d-flex justify-content-center"><img src="{{asset('images/shop/covid3.png')}}" alt="" srcset=""></div>
                             <div class="pl-3">
                                 <p>Viên sủi opimax Imunity</p>
@@ -25,7 +25,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="{{route('fe.product.detail')}}">
                         <div class="rdimg d-flex justify-content-center"><img src="{{asset('images/shop/covid4.png')}}" alt="" srcset=""></div>
                             <div class="pl-3">
                                 <p>Viên sủi opimax Imunity</p>
@@ -34,7 +34,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="{{route('fe.product.detail')}}">
                         <div class="rdimg d-flex justify-content-center"><img src="{{asset('images/shop/covid5.png')}}" alt="" srcset=""></div>
                             <div class="pl-3">
                                 <p>Viên sủi opimax Imunity</p>
@@ -43,7 +43,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="{{route('fe.product.detail')}}">
                         <div class="rdimg d-flex justify-content-center"><img src="{{asset('images/shop/covid5.png')}}" alt="" srcset=""></div>
                             <div class="pl-3">
                                 <p>Viên sủi opimax Imunity</p>
@@ -52,7 +52,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="{{route('fe.product.detail')}}">
                         <div class="rdimg d-flex justify-content-center"><img src="{{asset('images/shop/covid5.png')}}" alt="" srcset=""></div>
                             <div class="pl-3">
                                 <p>Viên sủi opimax Imunity</p>

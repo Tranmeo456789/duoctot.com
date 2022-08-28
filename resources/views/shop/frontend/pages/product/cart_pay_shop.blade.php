@@ -12,66 +12,69 @@
                     </div>
                     <div class="info-product-cart">
                         <div class="table-responsive">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td style="width:20%">
-                                            <a href=""><img src="{{asset('images/shop/ct1.png')}}" alt="" style="width: 100px;"></a>
-                                        </td>
-                                        <td style="width:50%" class="text-left">
-                                            <div class="title-product-cart">
-                                                <a href="">Viên Sủi Optimax Immunity Booster Vid - Fighter Tăng Sức Đề Kháng 20 Viên</a>
-                                            </div>
-                                            <span>Đơn vị bán:</span><span class="font-weight-bold">Tuýp</span>
-                                            <p class="font-weight-bold">* Giảm ngay 15%</p>
-                                        </td>
-                                        <td style="width:30%" class="text-right">
-                                            <div class="input-number intable">
-                                                <span class="pm11">
-                                                    <span title="" class="minus1"><i class="fa fa-minus"></i></span>
-                                                    <input type="number" name="" min="0" value="1" class="num-order">
-                                                    <span title="" class="plus1"><i class="fa fa-plus"></i></span>
-                                                </span>
-                                            </div>
-                                            <div class="price-old"><s>115.000đ</s></div>
-                                            <div class="price-new">97.750đ</div>
-                                            <div class="manipulation">
-                                                <a href="" class="buy-after"><img src="{{asset('images/shop/ct4.png')}}" alt="">Để mua sau</a>
-                                                <span> | </span>
-                                                <a href="" class="delete-product"><img src="{{asset('images/shop/ct5.png')}}" alt="">Xóa</a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width:25%">
-                                            <a href=""><img src="{{asset('images/shop/ct1.png')}}" alt="" style="width: 100px;"></a>
-                                        </td>
-                                        <td style="width:45%" class="text-left">
-                                            <div class="title-product-cart">
-                                                <a href="">Viên Sủi Optimax Immunity Booster Vid - Fighter Tăng Sức Đề Kháng 20 Viên</a>
-                                            </div>
-                                            <span>Đơn vị bán:</span><span class="font-weight-bold">Tuýp</span>
-                                            <p class="font-weight-bold">* Giảm ngay 15%</p>
-                                        </td>
-                                        <td style="width:30%" class="text-right">
-                                            <div class="input-number intable">
-                                                <span class="pm11">
-                                                    <span title="" class="minus1"><i class="fa fa-minus"></i></span>
-                                                    <input type="number" name="" min="0" value="1" class="num-order">
-                                                    <span title="" class="plus1"><i class="fa fa-plus"></i></span>
-                                                </span>
-                                            </div>
-                                            <div class="price-old"><s>115.000đ</s></div>
-                                            <div class="price-new">97.750đ</div>
-                                            <div class="manipulation">
-                                                <a href="" class="buy-after"><img src="{{asset('images/shop/ct4.png')}}" alt="">Để mua sau</a>
-                                                <span> | </span>
-                                                <a href="" class="delete-product"><img src="{{asset('images/shop/ct5.png')}}" alt="">Xóa</a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="set-widthtable">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width:20%">
+                                                <a href=""><img src="{{asset('images/shop/ct1.png')}}" alt="" style="width: 100px;"></a>
+                                            </td>
+                                            <td style="width:50%" class="text-left">
+                                                <div class="title-product-cart">
+                                                    <a href="">Viên Sủi Optimax Immunity Booster Vid - Fighter Tăng Sức Đề Kháng 20 Viên</a>
+                                                </div>
+                                                <span>Đơn vị bán:</span><span class="font-weight-bold">Tuýp</span>
+                                                <p class="font-weight-bold">* Giảm ngay 15%</p>
+                                            </td>
+                                            <td style="width:30%" class="text-right">
+                                                <div class="input-number intable">
+                                                    <span class="pm11">
+                                                        <span title="" class="minus1"><i class="fa fa-minus"></i></span>
+                                                        <input type="number" name="" min="0" value="1" class="num-order">
+                                                        <span title="" class="plus1"><i class="fa fa-plus"></i></span>
+                                                    </span>
+                                                </div>
+                                                <div class="price-old"><s>115.000đ</s></div>
+                                                <div class="price-new">97.750đ</div>
+                                                <div class="manipulation">
+                                                    <a href="" class="buy-after"><img src="{{asset('images/shop/ct4.png')}}" alt="">Để mua sau</a>
+                                                    <span> | </span>
+                                                    <a href="" class="delete-product"><img src="{{asset('images/shop/ct5.png')}}" alt="">Xóa</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:25%">
+                                                <a href=""><img src="{{asset('images/shop/ct1.png')}}" alt="" style="width: 100px;"></a>
+                                            </td>
+                                            <td style="width:45%" class="text-left">
+                                                <div class="title-product-cart">
+                                                    <a href="">Viên Sủi Optimax Immunity Booster Vid - Fighter Tăng Sức Đề Kháng 20 Viên</a>
+                                                </div>
+                                                <span>Đơn vị bán:</span><span class="font-weight-bold">Tuýp</span>
+                                                <p class="font-weight-bold">* Giảm ngay 15%</p>
+                                            </td>
+                                            <td style="width:30%" class="text-right">
+                                                <div class="input-number intable">
+                                                    <span class="pm11">
+                                                        <span title="" class="minus1"><i class="fa fa-minus"></i></span>
+                                                        <input type="number" name="" min="0" value="1" class="num-order">
+                                                        <span title="" class="plus1"><i class="fa fa-plus"></i></span>
+                                                    </span>
+                                                </div>
+                                                <div class="price-old"><s>115.000đ</s></div>
+                                                <div class="price-new">97.750đ</div>
+                                                <div class="manipulation">
+                                                    <a href="" class="buy-after"><img src="{{asset('images/shop/ct4.png')}}" alt="">Để mua sau</a>
+                                                    <span> | </span>
+                                                    <a href="" class="delete-product"><img src="{{asset('images/shop/ct5.png')}}" alt="">Xóa</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
                         </div>
                     </div>
                     <div class="pay-cart">
@@ -246,8 +249,6 @@
         </div>
     </div>
 </div>
-
-
 <div class="service-tdoctor mt-5">
     @include("$moduleName.templates.info_service")
 </div>

@@ -187,7 +187,10 @@
 .commit-tdoctor-child .content-commit-tdoctor {
     padding: 20px 18px;
 }
-
+.content-commit-tdoctorrespon{
+    display: none;
+}
+.content-commit-tdoctorrespon i{color: blue;}
 .commit-tdoctor-child .content-commit-tdoctor h3 {
     font-weight: 700;
     font-size: 16px;
@@ -196,7 +199,13 @@
     color: #1E1E1E;
     margin-top: 13px;
 }
-
+.content-commit-tdoctorrespon h3{
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    color: #1E1E1E;
+}
 .commit-tdoctor-child .content-commit-tdoctor p {
     font-size: 16px;
     line-height: 20px;

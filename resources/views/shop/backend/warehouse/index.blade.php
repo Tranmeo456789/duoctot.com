@@ -5,21 +5,24 @@
 @section('header_title', 'Quản lý kho hàng')
 
 @section('body_content')
-<div class="set-withscreen">
-    <div class="list_orderm">
-        <div class="card mt-3 ml-2">
-            <div class="card-header font-weight-bold d-flex justify-content-between align-items-center">
-                <h5 class="m-0 ">Quản lý tồn kho</h5>
+<div class="card">
+    <div class="card-header font-weight-bold">
+        <div class="row">
+            <div class="col-xl-6 col-lg-6">
                 <div class="form-search form-inline">
-                    <form action="#">
-                        <input type="" id="input-search-after" style="width:300px" class="form-control form-search" placeholder="Nhập tên sản phẩm để tìm kiếm">
+                    <form action="#" style="width:100%">
+                        <input type="" id="input-search-after" style="width:100%" class="form-control form-search" placeholder="Nhập tên sản phẩm để tìm kiếm">
                         <button class="search-product"><i class="fas fa-search"></i></button>
                     </form>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="set-withscreen ">
+        <div class="list-productwp">
             <div class="card-body table-warehouse">
                 <table class="table table-striped table-checkall">
-                    <thead style="">
+                    <thead>
                         <tr>
                             <th scope="col" rowspan="2" class="text-center">Sản phẩm</th>
                             <th scope="col" colspan="2" class="text-center">KHO HỒ CHÍ MINH</th>
@@ -35,9 +38,9 @@
                     <tbody>
                         <tr class="">
                             <td style="width: 40%">
-                                <div style="" class="d-flex">
+                                <div class="d-flex">
                                     <img style="width:60px;height:60px" src="image/images.jpg" alt="">
-                                    <div style="" class="info-product ml-3">
+                                    <div class="info-product ml-3">
                                         <p class="text-success font-weight-bold">Tăm Bông Ráy Tai Hoa Trà My(12g)</p>
                                         <p>ID: 8866</p>
                                         <p>Mã: TB11</p>
@@ -51,9 +54,9 @@
                         </tr>
                         <tr class="">
                             <td style="width: 40%">
-                                <div style="" class="d-flex">
+                                <div class="d-flex">
                                     <img style="width:60px;height:60px" src="image/images.jpg" alt="">
-                                    <div style="" class="info-product ml-3">
+                                    <div class="info-product ml-3">
                                         <p class="text-success font-weight-bold">Tăm Bông Ráy Tai Hoa Trà My(12g)</p>
                                         <p>ID: 8866</p>
                                         <p>Mã: TB11</p>
