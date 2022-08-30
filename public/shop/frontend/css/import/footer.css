@@ -24,6 +24,8 @@
     margin-left: 6px;
     line-height: 20px;
 }
-
+label.error{
+    color: red;float: left;
+}
 
 

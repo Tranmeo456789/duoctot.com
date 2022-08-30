@@ -5,7 +5,7 @@
     </div>
     <ul class="body_catdetail">
         <div class="row">
-            <div class="col-lg-3 col-xl-3 col-6">
+            <div class="col-lg-3 col-xl-3 col-6 delplcol">
                 <li class="py-2">
                     <a href="{{route('fe.cat4')}}">
                         <div class="itemct4">
@@ -17,7 +17,7 @@
                     </a>
                 </li>
             </div>
-            <div class="col-lg-3 col-xl-3 col-6">
+            <div class="col-lg-3 col-xl-3 col-6 delplcol">
                 <li class="py-2">
                     <a href="{{route('fe.cat4')}}">
                         <div class="itemct4">
@@ -29,7 +29,7 @@
                     </a>
                 </li>
             </div>
-            <div class="col-lg-3 col-xl-3 col-6">
+            <div class="col-lg-3 col-xl-3 col-6 delplcol">
                 <li class="py-2">
                     <a href="{{route('fe.cat4')}}">
                         <div class="itemct4">
@@ -41,7 +41,7 @@
                     </a>
                 </li>
             </div>
-            <div class="col-lg-3 col-xl-3 col-6">
+            <div class="col-lg-3 col-xl-3 col-6 delplcol">
                 <li class="py-2">
                     <a href="{{route('fe.cat4')}}">
                         <div class="itemct4">
@@ -53,7 +53,7 @@
                     </a>
                 </li>
             </div>
-            <div class="col-lg-3 col-xl-3 col-6 ">
+            <div class="col-lg-3 col-xl-3 col-6 delplcol">
                 <li class="py-2">
                     <a href="{{route('fe.cat4')}}">
                         <div class="itemct4">

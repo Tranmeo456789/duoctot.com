@@ -32,7 +32,7 @@ class ProducerController extends Controller
             );
             Producer::create(
                 [                
-                    'name_producer' => $request->input('name_producer'),    
+                    'name_producer' => $request->input('name_producer'),
                 ]
               );
             return redirect('backend/danh-sach-nha-san-xuat')->with('status','Thêm nhà sản xuất thành công');

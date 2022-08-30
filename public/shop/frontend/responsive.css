@@ -11,6 +11,9 @@
     }
 }
 @media screen and (max-width: 1200px) {
+    .body_catdetail>div .delplcol:nth-child(2n){
+        padding-left: 0px!important;;
+    }
     #head-body-respon{
         display: block;
         transform: translateX(-101%);
@@ -459,6 +462,10 @@ display: none;
 }
 
 @media screen and (max-width: 600px) {
+    .service-tdoctor img {
+        width: 30px;
+        height: 30px;
+    }
     .wp-left-cart .title-cart h1{font-size: 18px;}
     .new-view{padding: 5px 0px;}
     .cat-product-out #body-nbox li,#selling-product.viewnproduct li {

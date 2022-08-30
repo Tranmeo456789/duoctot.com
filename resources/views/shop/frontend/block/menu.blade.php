@@ -49,6 +49,18 @@
                     </div>
                 </a>
             </div>
+            @if(Session::has('islogin'))
+            <div class="fl-right" style="margin-left:10px;padding-top:20px;">
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle text-light" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{Session::get('name')}}</button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Tài khoản</a>
+                        <a class="dropdown-item" href="{{route('user.logout')}}">Thoát</a>
+                    </div>
+                </div>
+            </div>
+
+            @else
             <div id="" class="fl-right" style="margin-left:10px;padding-top:15px;">
                 <a title="" id="payment-link" class="">
                     <div class="btn-register">Đăng ký</div>
@@ -59,6 +71,7 @@
                     <div class="btn-login">Đăng nhập</div>
                 </a>
             </div>
+            @endif
         </div>
         <div id="form-login-register">
             @include('shop.frontend.block.form_login_register')
@@ -459,73 +472,73 @@
             </div>
         </div>
     </div>
-    <div id="head-body-respon">    
-            <div class="tlogo-menu position-relative">
-                <div class="rimg-startm"><img src="{{asset('images/shop/logo_topbar2.png')}}" alt=""></div>
-                <div class="rimg-center closem" id="closem"><img src="{{asset('images/shop/closem.png')}}" alt=""></div>
+    <div id="head-body-respon">
+        <div class="tlogo-menu position-relative">
+            <div class="rimg-startm"><img src="{{asset('images/shop/logo_topbar2.png')}}" alt=""></div>
+            <div class="rimg-center closem" id="closem"><img src="{{asset('images/shop/closem.png')}}" alt=""></div>
+        </div>
+        <div class="body-responhoder">
+            <div class="container-menures d-flex">
+                <div class="rimg-center"><img src="{{asset('images/shop/news1.png')}}" alt=""></div>
+                <h2>Tra cứu lịch sử đơn hàng</h2>
             </div>
-            <div class="body-responhoder">
-                <div class="container-menures d-flex">
-                    <div class="rimg-center"><img src="{{asset('images/shop/news1.png')}}" alt=""></div>
-                    <h2>Tra cứu lịch sử đơn hàng</h2>
-                </div>
-            </div>
-            
-                <div class="list-menures">
-                    <h3>
-                        <div class="container-menures"><a href="">Trang chủ</a></div>
-                    </h3>
-                    <ul>
-                        @foreach ($item_cat1s as $item_catres1)
+        </div>
 
-                        <li>
-                            <div class="container-menures position-relative parentsmenu">
-                                <div class=" pr-4">
+        <div class="list-menures">
+            <h3>
+                <div class="container-menures"><a href="">Trang chủ</a></div>
+            </h3>
+            <ul>
+                @foreach ($item_cat1s as $item_catres1)
 
-                                    <a href="{{route('fe.cat')}}">{{$item_catres1['name']}}</a>
+                <li>
+                    <div class="container-menures position-relative parentsmenu">
+                        <div class=" pr-4">
 
-                                </div>
-                                <div class="iconmnrhv"><img src="{{asset('images/shop/arrowd.png')}}" alt=""></div>
-                                <div class="submenu1res">
-                                    <ul>
-                                        @foreach ( $item_sub_menu1s as $item_catres2)
-                                        @if ($item_catres2['parent_id'] == $item_catres1['id'])
-                                        <li><a href="{{route('fe.cat3')}}">{{$item_catres2['name']}}</a></li>
-                                        @endif
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
+                            <a href="{{route('fe.cat')}}">{{$item_catres1['name']}}</a>
 
-                        @endforeach
-                        <li>
-                            <div class="container-menures position-relative parentsmenu">
-                                <div class=" pr-4">
-                                    <a href="">Góc sức khỏe</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="container-menures position-relative parentsmenu">
-                                <div class=" pr-4">
-                                    <a href="">Nhà thuôc</a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-          
-            <div class="btn-advice container-menures">
-                <a href="">
-                    <div class="d-flex">
-                        <div class="rimg-center mr-1"><img src="{{asset('images/shop/mess.png')}}" alt=""></div>
-                        <span>Nhận tư vấn miễn phí</span>
+                        </div>
+                        <div class="iconmnrhv"><img src="{{asset('images/shop/arrowd.png')}}" alt=""></div>
+                        <div class="submenu1res">
+                            <ul>
+                                @foreach ( $item_sub_menu1s as $item_catres2)
+                                @if ($item_catres2['parent_id'] == $item_catres1['id'])
+                                <li><a href="{{route('fe.cat3')}}">{{$item_catres2['name']}}</a></li>
+                                @endif
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
-                </a>
-            </div>
+                </li>
+
+                @endforeach
+                <li>
+                    <div class="container-menures position-relative parentsmenu">
+                        <div class=" pr-4">
+                            <a href="">Góc sức khỏe</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="container-menures position-relative parentsmenu">
+                        <div class=" pr-4">
+                            <a href="">Nhà thuôc</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="btn-advice container-menures">
+            <a href="">
+                <div class="d-flex">
+                    <div class="rimg-center mr-1"><img src="{{asset('images/shop/mess.png')}}" alt=""></div>
+                    <span>Nhận tư vấn miễn phí</span>
+                </div>
+            </a>
+        </div>
     </div>
-    
+
     <div class="black-content"></div>
     <div class="black-screen"></div>
 </div>

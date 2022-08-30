@@ -1,5 +1,6 @@
 //slider
 $(document).ready(function () {
+    
     var feature_productcovid = $('#feature-product-wp.product_sellhome .list-item');
     feature_productcovid.owlCarousel({
         autoPlay: true,
@@ -93,7 +94,7 @@ $(document).ready(function () {
     $('.btn-closenk').click(function () {
         $('.form-login').css("display", "none");
         $('.black-screen').css("display", "none");
-        $('#container').removeClass("fixed-hbd");  
+        $('#container').removeClass("fixed-hbd");
     });
     //hien form dang ky,dang nhap,quen mat khau
     $('.btn-login').click(function () {
@@ -125,7 +126,7 @@ $(document).ready(function () {
         $('.wp-content-register').css("display", "none");
         $('#container').addClass("fixed-hbd");
     });
-    
+
     $('.password .imgm').click(function () {
         $(this).toggleClass('open');
         if ($(this).hasClass('open')) {
@@ -135,24 +136,37 @@ $(document).ready(function () {
             $('.password input').attr('type', 'password');
         }
     });
-//hien tra cuu order
-$('#search-order .btn-closenk').click(function () {
-    $('#search-order').css("display", "none");
-    $('.black-screen').css("display", "none");
-    $('.titlek').removeClass("fixed-hbd");
-});
-$('.search-history-order').click(function () {
-    $('#search-order').css("display", "block");
-    $('.black-screen').css("display", "block");
-    $('#container').addClass("fixed-hbd");
-});
-// $('.container-menures').click(function () {
-//     $('#search-order').css("display", "block");
-//      $('.black-screen').css("display", "block");
-//      $('#container').addClass("fixed-hbd");
-// });
+    //hien tra cuu order
+    $('#search-order .btn-closenk').click(function () {
+        $('#search-order').css("display", "none");
+        $('.black-screen').css("display", "none");
+        $('.titlek').removeClass("fixed-hbd");
+    });
+    $('.search-history-order').click(function () {
+        $('#search-order').css("display", "block");
+        $('.black-screen').css("display", "block");
+        $('#container').addClass("fixed-hbd");
+    });
+    // $('.container-menures').click(function () {
+    //     $('#search-order').css("display", "block");
+    //      $('.black-screen').css("display", "block");
+    //      $('#container').addClass("fixed-hbd");
+    // });
 
-
+    // validate form
+    $('#check-rules').click(function () {
+        if($(this).prop("checked") == true){
+            $('form input[type="submit"]').prop("disabled", false);
+            $('form input[type="submit"]').css("background", "#05AFE3");
+        }
+        else if($(this).prop("checked") == false){
+            $('form input[type="submit"]').prop("disabled", true);
+            $('form input[type="submit"]').css("background", "#96d4e7");
+        }
+       
+    });
+    
+  
     // tang giam so luong san pham
     $('.plus1, .minus1').on('click', function (e) {
         const isNegative = $(e.target).closest('.minus1').is('.minus1');
@@ -164,22 +178,22 @@ $('.search-history-order').click(function () {
 
     //xoay arrow 180deg 
     $('.iconmnrhv').click(function () {
-         $(this).parents('.parentsmenu').children('.submenu1res').toggleClass('display-vis');
+        $(this).parents('.parentsmenu').children('.submenu1res').toggleClass('display-vis');
         $(this).toggleClass('arrow-rotate');
     });
     $('#btnmenu-resp').click(function () {
         //$('#container').addClass("fixed-hbd");
         $('#fixscreen-respon').css("display", "block");
         $('#head-body-respon').addClass("slider");
-        
+
     });
     // $('.closem').click(function () {
     //      //$('#fixscreen-respon').css("display", "none");
     //     // $('#container').removeClass("fixed-hbd");
     //     $('#head-body-respon').removeClass("slider");
-        
+
     // });
-    $(window).resize(function(event) {
+    $(window).resize(function (event) {
         $('#head-body-respon').removeClass("slider");
         $('#fixscreen-respon').css("display", "none");
     });
@@ -188,19 +202,19 @@ $('.search-history-order').click(function () {
     //xo danh muc cap 1
     $('.vissubmenu').click(function () {
         $(this).parents('.catparentc').children('.submenua1').toggleClass('display-vis');
-       $(this).toggleClass('arrow-rotate');
-   });
+        $(this).toggleClass('arrow-rotate');
+    });
 
     //
-    const head_body_respon=document.getElementById('head-body-respon');
-    const fixscreen_respon=document.getElementById('fixscreen-respon');
-    const closem=document.getElementById('closem');
-    closem.addEventListener('click',()=>{
+    const head_body_respon = document.getElementById('head-body-respon');
+    const fixscreen_respon = document.getElementById('fixscreen-respon');
+    const closem = document.getElementById('closem');
+    closem.addEventListener('click', () => {
         $('#head-body-respon').removeClass("slider");
         $('#fixscreen-respon').css("display", "none");
     });
-    fixscreen_respon.addEventListener('click',(e)=>{
-        if(!head_body_respon.contains(e.target)){
+    fixscreen_respon.addEventListener('click', (e) => {
+        if (!head_body_respon.contains(e.target)) {
             closem.click();
         }
     });

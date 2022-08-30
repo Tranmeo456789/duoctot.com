@@ -486,8 +486,8 @@ border-radius: 100px;display: inline-block;padding: 5px 8px;color: white;
 
 .phone-mail .img-person {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 16px;
+    
     left: 16px;
     width: 24px;
     height: 25px;
@@ -495,8 +495,7 @@ border-radius: 100px;display: inline-block;padding: 5px 8px;color: white;
 
 .form-login .content .password .imgk {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 16px;
     left: 16px;
     width: 18px;
     height: 25px;
@@ -504,8 +503,7 @@ border-radius: 100px;display: inline-block;padding: 5px 8px;color: white;
 
 .form-login .content .password .imgm {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 26px;
     right: 24px;
     width: 20px;
     height: 12px;
@@ -556,7 +554,9 @@ border-radius: 100px;display: inline-block;padding: 5px 8px;color: white;
     border: none;
     padding: 13px 48px;
 }
-
+.form-login #dang-ky #btn-logint{
+    background: #96d4e7;
+}
 .form-login .dkfn p {
     font-family: 'Helvetica Neue';
     font-style: normal;
