@@ -4,11 +4,12 @@
 $prefixShopFrontend = '';
 Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], function () {
     Route::get('/','HomeController@index')->name('home');
-    Route::get('/danh-muc-san-pham','CatController@index')->name('fe.cat');
-    Route::get('/danh-muc-san-pham-cap-3','CatController@cat_level3')->name('fe.cat3');
-    Route::get('/danh-muc-san-pham-cap-4','CatController@cat_level4')->name('fe.cat4');
+    Route::get('/chi-tiet-san-pham/{id}','ProductController@detail_product')->name('fe.product.detail');
+    Route::get('/{slug}','CatController@index')->name('fe.cat');
+    Route::get('/{slug1}/{slug2}','CatController@cat_level2')->name('fe.cat2');
+    Route::get('/{slug1}/{slug2}/{slug3}','CatController@cat_level3')->name('fe.cat3');
 
-    Route::get('/chi-tiet-san-pham','ProductController@detail_product')->name('fe.product.detail');
+    
     Route::get('/gio-hang','CartController@cart_product')->name('fe.product.cart');
     Route::get('/gio-hang-trong','CartController@cart_null')->name('fe.product.cart_null');
     Route::get('/thanh-toan-tai-nha','CartController@pay_home')->name('fe.product.pay_home');

@@ -554,8 +554,18 @@ border-radius: 100px;display: inline-block;padding: 5px 8px;color: white;
     border: none;
     padding: 13px 48px;
 }
-.form-login #dang-ky #btn-logint{
+#dang-ky #btn-register{
     background: #96d4e7;
+    font-family: 'Helvetica Neue';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    color: #FFFFFF;
+    border-radius: 25px;
+    border: none;
+    padding: 13px 48px;
 }
 .form-login .dkfn p {
     font-family: 'Helvetica Neue';
@@ -695,7 +705,7 @@ border-radius: 100px;display: inline-block;padding: 5px 8px;color: white;
     width: 80%;
 }
 
-#btn-forget {
+#btn-forget, #btn-searchorder {
     background: #05AFE3;
     border-radius: 20px;
     font-family: 'Helvetica Neue';
@@ -712,7 +722,7 @@ border-radius: 100px;display: inline-block;padding: 5px 8px;color: white;
 }
 
 .right-fol {
-    min-height: 500px;
+    min-height: 520px;
 }
 
 .bimgm {

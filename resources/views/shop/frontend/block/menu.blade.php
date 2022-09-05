@@ -93,7 +93,7 @@
                                 <div class="img-person"><img src="{{asset('images/shop/dn1.png')}}" alt=""></div>
                             </div>
                         </div>
-                        <div class="text-center"><input type="submit" name="btn-forget" value="Tiếp tục" id="btn-forget"></div>
+                        <div class="text-center"><input type="submit" name="btn-searchorder" value="Tiếp tục" id="btn-searchorder"></div>
                     </form>
                 </div>
             </div>
@@ -345,43 +345,42 @@
         [ 'name' => 'Tăm bông', 'id' => 165,'parent_id'=>39,'image'=>'dcsc3.png'],
         [ 'name' => 'Bông y tế', 'id' => 166,'parent_id'=>39,'image'=>'dcsc4.png'],
         ];
-
-
         @endphp
         <div class="wp-inner" id="category-product-wp">
             <div class="d-flex justify-content-between">
                 <div class="menu-top1">
                     <div class="position-relative ">
                         <ul id="main-menu" class="d-flex list-item">
-                            @foreach ($item_cat1s as $item_cat1)
-                            <li class="catc1">
-                                <a href="{{route('fe.cat')}}">
+                            @foreach ($_SESSION['cat_product'] as $item_cat1)
+                            @if($item_cat1['parent_id']==0)
+                            <li class="catc1">                              
+                                <a href="{{route('fe.cat',$item_cat1->slug)}}">
                                     {{$item_cat1['name']}}
                                     <i class="fas fa-chevron-down arrow"></i>
-                                </a>
+                                </a>                             
                                 <div class="content-submenu">
                                     <div class="px-0 position-relative right-fol" style="width:25%">
                                         <ul class="sub-menu1">
-                                            @foreach ($item_sub_menu1s as $item_sub_menu1)
+                                            @foreach ($_SESSION['cat_product'] as $item_sub_menu1)
                                             @if ($item_sub_menu1['parent_id'] == (int)$item_cat1['id'] )
                                             <li>
                                                 <div class="himg-menu">
                                                     <div class="d-flex">
                                                         <div class="d-flex align-items-center pl-2">
-                                                            <div class="rdimg rimg-centerw"><img src="{{asset('images/shop/' .  $item_sub_menu1['image'] )}}" alt=""></div>
+                                                            <div class="rdimg rimg-centerw"><img src="{{asset($item_sub_menu1['image'])}}" alt=""></div>
                                                         </div>
-                                                        <a href="{{route('fe.cat3')}}" title="" class="titlec2">{{$item_sub_menu1['name']}}</a>
+                                                        <a href="{{route('fe.cat2',[$item_cat1->slug,$item_sub_menu1->slug])}}" title="" class="titlec2">{{$item_sub_menu1['name']}}</a>
                                                     </div>
                                                     <div class="sub-menu2 content-submenu-right">
                                                         <div id="cat_detail">
                                                             <ul class="body_catdetail clearfix">
-                                                                @foreach ($item_submenu2s as $item_submenu2)
+                                                                @foreach ($_SESSION['cat_product'] as $item_submenu2)
                                                                 @if ($item_submenu2['parent_id'] == $item_sub_menu1['id'] )
                                                                 <li class="">
-                                                                    <a href="{{route('fe.cat4')}}">
+                                                                    <a href="{{route('fe.cat3',[$item_cat1->slug,$item_sub_menu1->slug,$item_submenu2->slug])}}">
                                                                         <div class="item_cat4 d-flex">
                                                                             <div class="aimg rimg-centerx mr-1">
-                                                                                <img src="{{asset('images/shop/' .  $item_submenu2['image'] )}}" alt="">
+                                                                                <img src="{{asset($item_submenu2['image'])}}" alt="">
                                                                             </div>
                                                                             <div class="align-self-center"><span>{{$item_submenu2['name']}}</span></div>
                                                                         </div>
@@ -403,40 +402,14 @@
                                                                     <div class="row">
                                                                         <div class="col-3 pl-3">
                                                                             <li>
-                                                                                <div class="bimgm"><a href="{{route('fe.product.detail')}}"><img src="{{asset('images/shop/sri1.png')}}" alt=""></a></div>
+                                                                                <div class="bimgm"><a href=""><img src="{{asset('images/shop/sri1.png')}}" alt=""></a></div>
                                                                                 <div class="">
-                                                                                    <a href="{{route('fe.product.detail')}}">Siro Bổ Phế Bối Mẫu Forte Mom And Baby...</a>
+                                                                                    <a href="">Siro Bổ Phế Bối Mẫu Forte Mom And Baby...</a>
                                                                                     <h3 class="my-2">49.000đ/Chai</h3>
                                                                                 </div>
                                                                             </li>
                                                                         </div>
-                                                                        <div class="col-3 pl-3">
-                                                                            <li>
-                                                                                <div class="bimgm"><a href="{{route('fe.product.detail')}}"><img src="{{asset('images/shop/sri1.png')}}" alt=""></a></div>
-                                                                                <div class="">
-                                                                                    <a href="{{route('fe.product.detail')}}">Siro Bổ Phế Bối Mẫu Forte Mom And Baby...</a>
-                                                                                    <h3 class="my-2">49.000đ/Chai</h3>
-                                                                                </div>
-                                                                            </li>
-                                                                        </div>
-                                                                        <div class="col-3 pl-3">
-                                                                            <li>
-                                                                                <div class="bimgm"><a href="{{route('fe.product.detail')}}"><img src="{{asset('images/shop/sri1.png')}}" alt=""></a></div>
-                                                                                <div class="">
-                                                                                    <a href="{{route('fe.product.detail')}}">Siro Bổ Phế Bối Mẫu Forte Mom And Baby...</a>
-                                                                                    <h3 class="my-2">49.000đ/Chai</h3>
-                                                                                </div>
-                                                                            </li>
-                                                                        </div>
-                                                                        <div class="col-3 pl-3">
-                                                                            <li>
-                                                                                <div class="bimgm"><a href="{{route('fe.product.detail')}}"><img src="{{asset('images/shop/sri1.png')}}" alt=""></a></div>
-                                                                                <div class="">
-                                                                                    <a href="{{route('fe.product.detail')}}">Siro Bổ Phế Bối Mẫu Forte Mom And Baby...</a>
-                                                                                    <h3 class="my-2">49.000đ/Chai</h3>
-                                                                                </div>
-                                                                            </li>
-                                                                        </div>
+                                                                        
                                                                     </div>
                                                                 </ul>
                                                             </div>
@@ -450,9 +423,10 @@
                                     </div>
                                 </div>
                             </li>
+                            @endif
                             @endforeach
                             <li class="">
-                                <a href="{{route('fe.cat')}}">Nhà thuốc</a>
+                                <a href="">Nhà thuốc</a>
                             </li>
                         </ul>
                     </div>
@@ -495,7 +469,7 @@
                     <div class="container-menures position-relative parentsmenu">
                         <div class=" pr-4">
 
-                            <a href="{{route('fe.cat')}}">{{$item_catres1['name']}}</a>
+                            <a href="">{{$item_catres1['name']}}</a>
 
                         </div>
                         <div class="iconmnrhv"><img src="{{asset('images/shop/arrowd.png')}}" alt=""></div>
@@ -503,7 +477,7 @@
                             <ul>
                                 @foreach ( $item_sub_menu1s as $item_catres2)
                                 @if ($item_catres2['parent_id'] == $item_catres1['id'])
-                                <li><a href="{{route('fe.cat3')}}">{{$item_catres2['name']}}</a></li>
+                                <li><a href="">{{$item_catres2['name']}}</a></li>
                                 @endif
                                 @endforeach
                             </ul>

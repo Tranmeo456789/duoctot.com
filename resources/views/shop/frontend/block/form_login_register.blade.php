@@ -14,7 +14,7 @@
                         <div class="img-person"><img src="{{asset('images/shop/dn1.png')}}" alt=""></div>
                     </div>
                     <div class="password position-relative">
-                        <input type="password" name="password" placeholder="Nhập mật khẩu">
+                        <input id="password" type="password" name="password" placeholder="Nhập mật khẩu">
                         <div class="imgk rimg-center"><img src="{{asset('images/shop/dn2.png')}}" alt=""></div>
                         <div class="imgm rimg-center"><img src="{{asset('images/shop/dn3.png')}}" alt=""></div>
                     </div>
@@ -23,7 +23,8 @@
                 <div class="remember-login d-flex">
                     <input type="checkbox"><label for="">Giữ tôi đăng nhập</label>
                 </div>
-                <div id="user_login" class="text-center mb-5"><input type="submit" name="btn-login" value="Đăng nhập" id="btn-logint"></div>
+                <!-- <div id="user_login" class="text-center mb-5"><input type="" name="btn-login" value="Đăng nhập" id="btn-logint"></div> -->
+                <div id="user_login" class="text-center mb-5"><button type="submit" name="btn-login" value="1" id="btn-logint">Đăng nhập</button></div>
                 <p class="dkfn text-center btn-register">Để nhận ưu đãi hấp dẫn, <a class="dkfnc">Đăng ký thành viên</a></p>
             </form>
             <form action="{{route('user.register')}}" class="wp-content-register" id="user_register" method="POST">
@@ -81,7 +82,7 @@
                                 <label class="form-check-label" for="">Phòng khám</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="selectdk" id="sl4" value="Bệnh viện">
+                                <input class="form-check-input" type="radio" name="selectdk" id="sl5" value="Bệnh viện">
                                 <label class="form-check-label" for="">Bệnh viện</label>
                             </div>
                         </div>
@@ -110,7 +111,7 @@
                     <input id="check-rules" type="checkbox"><label for="">Tôi đã đọc và đồng ý với <a href="" class="text-info">Điều khoản sử dụng*</a></label>
                 </div>
                 <p class="dkfn text-center btn-login mb-4">Nếu đã có tài khoản, vui lòng <a class="dkfnc ">Đăng nhập</a></p>
-                <div class="text-center" id="dang-ky"><input type="submit" name="btn-register" value="Tạo tài khoản" id="btn-logint" disabled></div>
+                <div class="text-center" id="dang-ky"><input type="submit" name="btn-register" value="Tạo tài khoản" id="btn-register" disabled></div>
             </form>
             <form action="" class="wp-content-forgetpw">
                 <div class="content text-center">
@@ -120,7 +121,7 @@
                         <div class="img-person"><img src="{{asset('images/shop/dn1.png')}}" alt=""></div>
                     </div>
                 </div>
-                <div class="text-center"><input type="submit" name="btn-forget" value="Gửi" id="btn-logint"></div>
+                <div class="text-center"><input type="submit" name="btn-forget" value="Gửi" id="btn-forget"></div>
             </form>
         </div>
     </div>

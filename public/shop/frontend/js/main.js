@@ -106,7 +106,7 @@ $(document).ready(function () {
         $('.titlek').removeClass("active-formkn");
         $('.titlen').addClass("active-formkn");
         $('#container').addClass("fixed-hbd");
-        $('body,html').stop().animate({ scrollTop: 0 }, 0);
+        // $('body,html').stop().animate({ scrollTop: 0 }, 0);
     });
     $('.btn-register').click(function () {
         $('.form-login').css("display", "block");
@@ -156,12 +156,12 @@ $(document).ready(function () {
     // validate form
     $('#check-rules').click(function () {
         if($(this).prop("checked") == true){
-            $('form input[type="submit"]').prop("disabled", false);
-            $('form input[type="submit"]').css("background", "#05AFE3");
+            $('#dang-ky #btn-register').prop("disabled", false);
+            $('#dang-ky #btn-register').css("background", "#05AFE3");
         }
         else if($(this).prop("checked") == false){
-            $('form input[type="submit"]').prop("disabled", true);
-            $('form input[type="submit"]').css("background", "#96d4e7");
+            $('#dang-ky #btn-register').prop("disabled", true);
+            $('#dang-ky #btn-register').css("background", "#96d4e7");
         }
        
     });

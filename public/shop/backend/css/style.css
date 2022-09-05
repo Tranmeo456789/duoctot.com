@@ -6,6 +6,9 @@
 a:hover {
     text-decoration: none;
 }
+.choices{
+    margin-bottom: 0px;
+  }
 .btnvis-sidebar {
     z-index: 994;
     position: absolute;

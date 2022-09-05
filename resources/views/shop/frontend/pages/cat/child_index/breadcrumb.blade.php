@@ -4,7 +4,7 @@
             <a href="{{route('home')}}" title="">Trang chủ</a>
         </li>
         <li>
-            <a href="{{route('fe.cat')}}" title="">Thực phẩm chức năng</a>
+            <a href="" title="">{{$catc['name']}}</a>
         </li>
     </ul>
 </div>

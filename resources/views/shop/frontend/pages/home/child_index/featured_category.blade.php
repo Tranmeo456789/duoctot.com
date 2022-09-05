@@ -18,7 +18,7 @@
     @endphp
     @foreach ($items as $item)
         <li>
-            <a href="{{route('fe.product.detail')}}">
+            <a href="">
                 <div class="d-flex justify-content-center">
                     <img src="{{asset('images/shop/' . $item['image'])}}" alt="" srcset="">
                 </div>

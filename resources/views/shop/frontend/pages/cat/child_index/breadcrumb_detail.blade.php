@@ -1,13 +1,13 @@
 <div class="">
     <ul class="list-item clearfix">
         <li>
-            <a href="{{route('home')}}" title="">Trang chủ</a>
+            <a href="" title="">Trang chủ</a>
         </li>
         <li>
-            <a href="{{route('fe.cat')}}" title="">Thực phẩm chức năng</a>
+            <a href="" title="">Thực phẩm chức năng</a>
         </li>
         <li>
-            <a href="{{route('fe.cat3')}}" title="">Sinh lý - Nội tiết tố</a>
+            <a href="" title="">Sinh lý - Nội tiết tố</a>
         </li>
         <li>
             <a href="" title="">Sức khỏe tình dục</a>

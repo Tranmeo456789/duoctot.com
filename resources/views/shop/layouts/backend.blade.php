@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#">
     <link rel="stylesheet" href="{{ asset('/shop/backend/css/reset.css')}}?t=@php echo time() @endphp">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
@@ -14,12 +15,11 @@
     <link rel="stylesheet" href="{{ asset('/shop/backend/css/modal.css')}}?t=@php echo time() @endphp">
     <link rel="stylesheet" href="{{ asset('/shop/backend/css/responsive.css')}}?t=@php echo time() @endphp">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
+    <link rel="stylesheet" href="{{ asset('/shop/backend/css/dropzone.css')}}?t=@php echo time() @endphp">
     <title>@yield('title')</title>
 </head>
-
 <body>
     <div id="warpper" class="nav-fixed">
-
         <div id="wp-opacity"></div>
         <div id="page-body" class="d-flex">
             <div id="sidebar" style="background-color: #def3d4;">
@@ -50,6 +50,18 @@
                             <li><a href="{{route('seller.info')}}">Thông tin người bán</a></li>
                             <li><a href="{{route('seller.password')}}">Đổi mật khẩu</a></li>
                             <li><a href="{{route('seller.setting')}}">Thiết lập khác</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-link">
+                        <a href="">
+                            <div class="nav-link-icon d-inline-flex">
+                            <i class="fas fa-wallet"></i>
+                            </div>
+                            Quản lý danh mục
+                        </a>
+                        <i class="arrow fas fa-angle-right"></i>
+                        <ul class="sub-menu">
+                            <li><a href="{{route('cat_product.list')}}">Danh mục sản phẩm</a></li>
                         </ul>
                     </li>
                     <li class="nav-link">
@@ -88,7 +100,6 @@
                         </a>
                         <i class="arrow fas fa-angle-right"></i>
                         <ul class="sub-menu">
-
                             <li><a href="{{route('order.list')}}">Danh sách đơn hàng</a></li>
                             <li><a href="{{route('invoice.list')}}">Danh sách hóa đơn</a></li>
                         </ul>
@@ -108,6 +119,11 @@
                             </div>
                             Quản lý kho
                         </a>
+                        <i class="arrow fas fa-angle-right"></i>
+                        <ul class="sub-menu">
+                            <li><a href="{{route('warehouse.add')}}">Thêm kho hàng</a></li>
+                            <li><a href="{{route('warehouse.list')}}">Danh sách kho hàng</a></li>
+                        </ul>
                     </li>
                     <li class="nav-link">
                         <a href="">
@@ -177,15 +193,69 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
-
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
     <script src="{{asset('/shop/backend/js/app.js')}}?t=@php echo time() @endphp"></script>
     <script src="{{asset('/shop/backend/js/modal.js')}}?t=@php echo time() @endphp"></script>
     <script src="{{asset('/shop/backend/js/modal_product.js')}}?t=@php echo time() @endphp"></script>
-</body>
+    <script src="{{asset('/shop/backend/js/dropzone.js')}}?t=@php echo time() @endphp"></script>
+    <script src="https://cdn.tiny.cloud/1/cilgdefwwpjwph4t9r56jwn4kf0yp1sqhhl0l0sf7z400bng/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    
+     <script>tinymce.init({
+        selector: '#mytextarea',
+        height: 300,
+        plugins: [
+            'advlist autolink link image lists charmap print preview hr anchor pagebreak',
+            'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+            'table emoticons template paste help'
+        ],
+        toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | ' +
+            'bullist numlist outdent indent | link image | print preview media fullscreen | ' +
+            'forecolor backcolor emoticons | help',
+        menu: {
+            favs: {
+                title: 'My Favorites',
+                items: 'code visualaid | searchreplace | emoticons'
+            }
+        },
+        menubar: 'favs file edit view insert format tools table help',
+        content_css: 'css/content.css'
 
+        });</script>
+
+    <script>       
+        $(document).ready(function() {
+            $('#submit-all1').click(function() {
+                var x = document.getElementsByClassName("name-img");
+            var name_img = [];
+            for (i = 0; i < x.length; i++) {
+                name_img[i] = x[i].innerHTML;
+            }
+            var id_product = $('input[name="id_product"]').val();;
+            var _token =
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+            var _token = $('input[name="_token"]').val();
+            event.preventDefault();
+            $.ajax({
+                url: "{{route('dropzone.upload')}}",
+                method: 'POST',
+                dataType: 'json',
+                data: {
+                    name_img: name_img,
+                    _token: _token,
+                    id_product: id_product,
+                },
+                success: function(data) {
+                    $('#list-img').html(data.list_img);
+                }
+            });
+            });
+        });
+    </script>
+</body>
 </html>

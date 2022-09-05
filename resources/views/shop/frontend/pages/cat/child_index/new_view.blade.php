@@ -5,7 +5,7 @@
     </h1>
     <ul class="clearfix">
         <li class="position-relative">
-            <a href="{{route('fe.product.detail')}}">
+            <a href="">
                 <div class="d-flex justify-content-center"><img src="{{asset('images/shop/selling3.png')}}" alt="" srcset=""></div>
                 <div class="mt-3">
                     <p>Siro Bổ Phế Bối Mẫu Forte Mom And Baby</p>
@@ -15,49 +15,6 @@
             <div class="unit-top">Chai</div>
             <div class="text-center slbuy"><a href="">Chọn mua</a></div>
         </li>
-        <li class="position-relative">
-            <a href="{{route('fe.product.detail')}}">
-                <div class="d-flex justify-content-center"><img src="{{asset('images/shop/selling4.png')}}" alt="" srcset=""></div>
-                <div class="mt-3">
-                    <p>Siro bổ phế bối mẫu Forte Mom and Baby Tất thành</p>
-                    <span class="text-info">115.000đ/Chai</span>
-                </div>
-            </a>
-            <div class="unit-top">Chai</div>
-            <div class="text-center slbuy"><a href="">Chọn mua</a></div>
-        </li>
-        <li class="position-relative">
-            <a href="{{route('fe.product.detail')}}">
-                <div class="d-flex justify-content-center"><img src="{{asset('images/shop/selling2.png')}}" alt="" srcset=""></div>
-                <div class="mt-3">
-                    <p>Siro bổ phế bối mẫu Forte Mom and Baby Tất thành</p>
-                    <span class="text-info">115.000đ/Chai</span>
-                </div>
-            </a>
-            <div class="unit-top">Chai</div>
-            <div class="text-center slbuy"><a href="">Chọn mua</a></div>
-        </li>
-        <li class="position-relative">
-            <a href="{{route('fe.product.detail')}}">
-                <div class="d-flex justify-content-center"><img src="{{asset('images/shop/selling3.png')}}" alt="" srcset=""></div>
-                <div class="mt-3">
-                    <p>Siro bổ phế bối mẫu Forte Mom and Baby Tất thành</p>
-                    <span class="text-info">115.000đ/Chai</span>
-                </div>
-            </a>
-            <div class="unit-top">Chai</div>
-            <div class="text-center slbuy"><a href="">Chọn mua</a></div>
-        </li>
-        <li class="position-relative">
-            <a href="{{route('fe.product.detail')}}">
-                <div class="d-flex justify-content-center"><img src="{{asset('images/shop/selling4.png')}}" alt="" srcset=""></div>
-                <div class="mt-3">
-                    <p>Siro bổ phế bối mẫu Forte Mom and Baby Tất thành</p>
-                    <span class="text-info">115.000đ/Chai</span>
-                </div>
-            </a>
-            <div class="unit-top">Chai</div>
-            <div class="text-center slbuy"><a href="">Chọn mua</a></div>
-        </li>
+        
     </ul>
 </div>

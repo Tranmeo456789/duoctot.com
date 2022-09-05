@@ -12,15 +12,15 @@ class CreateUsersTable extends Migration
      * @return void
      */
     public function up()
-    { 
+    {
         Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name',400);
-            $table->string('email');
-            $table->unsignedBigInteger('phone');
-            $table->string('local',300);
+            $table->bigIncrements('id');
+            $table->string('name',200);
+            $table->string('email',200);
+            $table->string('phone',200);
+            $table->string('password',200);
+            $table->string('local',200);
             $table->string('customer_group',200);
-            $table->unsignedBigInteger('code');
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('users');
+        //
     }
 }

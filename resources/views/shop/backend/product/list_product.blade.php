@@ -5,8 +5,10 @@
 @section('header_title', 'Danh sách sản phẩm')
 
 @section('body_content')
-<div class="card mt-3 ml-2">
-
+<div class="card">
+@if (session('status'))
+    <div class="alert alert-success text-center export-noti">{{session('status')}}</div>
+    @endif
     <div class="card-header font-weight-bold">
         <div class="row">
             <div class="col-lg-8 col-sm-12 titlehearder align-self-center d-flex">
@@ -37,9 +39,9 @@
                 <table class="table table-striped table-checkall" style="font-size:14px!important; border: none; table-layout: auto;width: 100%">
                     <thead>
                         <tr>
+                            <th scope="col">#</th>
                             <th scope="col">Sản phẩm</th>
                             <th scope="col">Đơn vị</th>
-                            <th scope="col">Cập bậc</th>
                             <th scope="col">Ngày tạo</th>
                             <th scope="col">Tổng đơn đặt hàng</th>
                             <th scope="col">Tồn trong kho của tôi</th>
@@ -47,97 +49,44 @@
                             <th scope="col">Thao tác</th>
                         </tr>
                     </thead>
+                    @php
+                        $temp=0;
+                    @endphp
                     <tbody>
+                        @foreach ($products as $product)
+                        @php
+                        $temp++;
+                        @endphp
                         <tr class="">
+                            <td style="width: 3%">{{$temp}}</td>
                             <td style="width: 35%">
                                 <div class="d-flex">
-                                    <img style="width:60px;height:60px" src="image/images.jpg" alt="">
+                                    <div class="d-flex align-items-center">
+                                        <img style="width:40px" src="{{asset($product->imgs['0']['image'])}}" alt="">
+                                    </div>
                                     <div class="info-product ml-3">
-                                        <p class="text-success font-weight-bold">Tăm Bông Ráy Tai Hoa Trà My(12g)</p>
-                                        <p>ID: 8866</p>
-                                        <p>Mã: TB11</p>
+                                        <p class="text-success font-weight-bold">{{$product['name']}}</p>
+                                        <p>ID: {{$product['id']}}</p>
+                                        <p>Mã: {{$product['code']}}</p>
                                     </div>
                                 </div>
                             </td>
-                            <td style="width: 5%">Gói</td>
-                            <td style="width: 7%">Cấp bậc 3</td>
-                            <td style="width: 10%">03-03-2022</td>
+                            <td style="width: 5%">{{$product['unit']}}</td>
+                            <td style="width: 11%">{{$product['create_at']}}</td>
                             <td style="width: 10%">0</td>
-                            <td style="width: 10%">10000</td>
-                            <td style="width: 8%"><span class="badge badge-success">Còn hàng</span></td>
+                            <td style="width: 13%">{{$product['inventory']}}</td>
+                            <td style="width: 8%"><span class="badge badge-success">Chờ kiểm duyệt</span></td>
                             <td style="width: 15%">
-                                <a href="#" class="btn btn-info btn-sm rounded-0 text-white " type="button" data-toggle="tooltip" data-placement="top" title="Xem sản phẩm trên web"><i class="fas fa-eye rounded-circle"></i></a>
-                                <a href="#" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Sửa sản phẩm"><i class="fa fa-edit"></i></a>
-                                <a href="#" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></a>
+                                <a href="" class="btn btn-info btn-sm rounded-0 text-white " type="button" data-toggle="tooltip" data-placement="top" title="Xem sản phẩm trên web"><i class="fas fa-eye rounded-circle"></i></a>
+                                <a href="{{route('product.edit',$product->id)}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Sửa sản phẩm"><i class="fa fa-edit"></i></a>
+                                <a href="{{route('product.delete',$product->id)}}" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></a>
+                                <a href="{{route('product.img',$product->id)}}" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Thêm ảnh sản phẩm"><i class="fas fa-plus"></i></a>
                             </td>
                         </tr>
-                        <tr class="">
-                            <td style="width: 35%">
-                                <div class="d-flex">
-                                    <img style="width:60px;height:60px" src="image/images.jpg" alt="">
-                                    <div class="info-product ml-3">
-                                        <p class="text-success font-weight-bold">Tăm Bông Ráy Tai Hoa Trà My(12g)</p>
-                                        <p>ID: 8866</p>
-                                        <p>Mã: TB11</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td style="width: 5%">Gói</td>
-                            <td style="width: 7%">Cấp bậc 3</td>
-                            <td style="width: 10%">03-03-2022</td>
-                            <td style="width: 10%">0</td>
-                            <td style="width: 10%">10000</td>
-                            <td style="width: 8%"><span class="badge badge-success">Còn hàng</span></td>
-                            <td style="width: 15%">
-                                <a href="#" class="btn btn-info btn-sm rounded-0 text-white " type="button" data-toggle="tooltip" data-placement="top" title="Xem sản phẩm trên web"><i class="fas fa-eye rounded-circle"></i></a>
-                                <a href="#" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Sửa sản phẩm"><i class="fa fa-edit"></i></a>
-                                <a href="#" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></a>
-                            </td>
-                        </tr>
-                        <tr class="">
-                            <td style="width: 35%">
-                                <div class="d-flex">
-                                    <img style="width:60px;height:60px" src="image/images.jpg" alt="">
-                                    <div class="info-product ml-3">
-                                        <p class="text-success font-weight-bold">Tăm Bông Ráy Tai Hoa Trà My(12g)</p>
-                                        <p>ID: 8866</p>
-                                        <p>Mã: TB11</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td style="width: 5%">Gói</td>
-                            <td style="width: 7%">Cấp bậc 3</td>
-                            <td style="width: 10%">03-03-2022</td>
-                            <td style="width: 10%">0</td>
-                            <td style="width: 10%">10000</td>
-                            <td style="width: 8%"><span class="badge badge-success">Còn hàng</span></td>
-                            <td style="width: 15%">
-                                <a href="#" class="btn btn-info btn-sm rounded-0 text-white " type="button" data-toggle="tooltip" data-placement="top" title="Xem sản phẩm trên web"><i class="fas fa-eye rounded-circle"></i></a>
-                                <a href="#" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Sửa sản phẩm"><i class="fa fa-edit"></i></a>
-                                <a href="#" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></a>
-                            </td>
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">Trước</span>
-                                <span class="sr-only">Sau</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                {{$products->links()}}
             </div>
         </div>
     </div>
