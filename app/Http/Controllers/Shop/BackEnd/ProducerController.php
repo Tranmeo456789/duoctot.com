@@ -2,76 +2,47 @@
 
 namespace App\Http\Controllers\Shop\BackEnd;
 
-use App\Model\Shop\Producer;
+use App\Model\Shop\ProducerModel as MainModel;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-
-class ProducerController extends Controller
+use App\Http\Controllers\Shop\BackEnd\BackEndController;
+use App\Http\Requests\ProducerRequest as MainRequest;
+class ProducerController extends BackEndController
 {
-    public function list()
-    {
-        $producers = Producer::paginate(10);
-        return view('shop.backend.producer.list', compact('producers'));
-    }
-    public function add(Request $request)
-    {
-        if ($request->input('btn_add_producer')) {
-            $this->validate(
-                $request,
-                [
-                    'name_producer' => 'required|string|min:1',
 
-                ],
-                [
-                    'required' => ':attribute không được để trống',
-                    'min' => ':attribute có độ dài ít nhất :min ký tự',
-                ],
-                [
-                        'name_producer'=>'Tên nhà sản xuất',
-               ]
-            );
-            Producer::create(
-                [                
-                    'name_producer' => $request->input('name_producer'),
-                ]
-              );
-            return redirect('backend/danh-sach-nha-san-xuat')->with('status','Thêm nhà sản xuất thành công');
-        }else{
-            return view('shop.backend.producer.add');
-        }       
-    }
-    public function edit(Request $request, $id)
-    {     
-        if ($request->input('btn_update_producer')) {
-            $this->validate(
-                $request,
-                [
-                    'name_producer' => 'required|string|min:1',
-
-                ],
-                [
-                    'required' => ':attribute không được để trống',
-                    'min' => ':attribute có độ dài ít nhất :min ký tự',
-                ],
-                [
-                        'name_producer'=>'Tên nhà sản xuất',
-               ]
-            );
-            Producer::where('id_producer', $id)->update(
-                [
-                    'name_producer' => $request->input('name_producer'),
-
-                ]
-            );
-            return redirect('backend/danh-sach-nha-san-xuat')->with('status', 'Cập nhật nhà sản xuất thành công');
-        }else{
-            $producer = Producer::find($id);
-            return view('shop.backend.producer.edit', compact('producer'));
-        }   
-    }
-    function delete($id)
+    public function __construct()
     {
-        Producer::where('id_producer', $id)->forceDelete();
-        return redirect('backend/danh-sach-nha-san-xuat')->with('status', 'Bản ghi đã xóa vĩnh viễn!');
+        $this->controllerName     = 'producer';
+        $this->pathViewController = "$this->moduleName.pages.$this->controllerName.";
+        $this->pageTitle          = 'Nhà cung cấp';
+        $this->model = new MainModel();
+        parent::__construct();
+    }
+    public function save(MainRequest $request)
+    {
+        if (!$request->ajax()) return view("errors." .  'notfound', []);
+        if (isset($request->validator) && $request->validator->fails()) {
+            return response()->json([
+                'fail' => true,
+                'errors' => $request->validator->errors()
+            ]);
+        }
+        if ($request->method() == 'POST') {
+            $params = $request->all();
+
+            $task   = "add-item";
+            $notify = "Thêm mới $this->pageTitle thành công!";
+
+            if ($params['id'] != null) {
+                $task   = "edit-item";
+                $notify = "Cập nhật $this->pageTitle thành công!";
+            }
+            $this->model->saveItem($params, ['task' => $task]);
+            $request->session()->put('app_notify', $notify);
+            return response()->json([
+                'fail' => false,
+                'redirect_url' => route($this->controllerName),
+                'message'      => $notify,
+            ]);
+        }
     }
 }
