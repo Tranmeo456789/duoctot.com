@@ -38,8 +38,9 @@ class ProductController extends ShopFrontEndController
         
         $productcs=Product::find($id);
         $cat= $productcs->cat;
-        $img_products=$productcs->imgs;
-        //return($productcs->name);
+        $img_productcs=$productcs->imgs;
+        $img_products = explode(",", $img_productcs[0]->image);
+        //return($img_products);
         return view($this->pathViewController . 'detail_product',compact('productcs','img_products','cat'));
     }
 }

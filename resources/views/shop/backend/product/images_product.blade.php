@@ -42,18 +42,18 @@
                             </tr>
                         </thead>
                         @php
-                        $temp=0;
+                        $temp=0;                      
                         @endphp
                         <tbody id="list-img">
-                            @foreach($imgs as $img)
+                            @foreach($imgs as $k=>$img)
                             @php
                             $temp++;
                             @endphp
                             <tr>
                                 <th scope="row" style="width: 10%">{{$temp}}</th>
-                                <td style="width: 70%"><img style="width:60px;height:60px" src="{{asset($img['image'])}}" alt=""></td>
+                                <td style="width: 70%"><img style="width:60px;height:60px" src="{{asset('public/shop/uploads/images/product/'.$img)}}" alt=""></td>
                                 <td style="width: 20%">
-                                    <a href="{{route('product.img.delete',[$img->id,$products->id])}}" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></a>
+                                    <a href="{{route('product.img.delete',[$temp-1,$products->id])}}" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                             @endforeach

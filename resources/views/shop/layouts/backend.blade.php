@@ -61,7 +61,7 @@
                         </a>
                         <i class="arrow fas fa-angle-right"></i>
                         <ul class="sub-menu">
-                            <li><a href="{{route('cat_product.list')}}">Danh mục sản phẩm</a></li>
+                            <li><a href="{{route('cat_product.list')}}">Danh mục thuốc</a></li>
                         </ul>
                     </li>
                     <li class="nav-link">
@@ -69,12 +69,12 @@
                             <div class="nav-link-icon d-inline-flex">
                                 <i class="fas fa-dumpster-fire"></i>
                             </div>
-                            Quản lý sản phẩm
+                            Quản lý thuốc
                         </a>
                         <i class="arrow fas fa-angle-right"></i>
                         <ul class="sub-menu">
-                            <li><a href="{{route('product.list')}}">Danh sách sản phẩm</a></li>
-                            <li><a href="{{route('product.add')}}">Thêm sản phẩm</a></li>
+                            <li><a href="{{route('product.list')}}">Danh sách thuốc</a></li>
+                            <li><a href="{{route('product.add')}}">Thêm thuốc</a></li>
                             <li><a href="{{route('product.unit')}}">Đơn vị tính</a></li>
                         </ul>
                     </li>
@@ -252,6 +252,7 @@
                 },
                 success: function(data) {
                     $('#list-img').html(data.list_img);
+                    //console.log(data.img);
                 }
             });
             });

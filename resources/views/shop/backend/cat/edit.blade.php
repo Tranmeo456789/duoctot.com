@@ -29,8 +29,9 @@
                         <select id="" class="form-control" name="cat_parent">
                             <option value="0">Chọn danh mục</option>
                             @foreach($product_cats as $catp1)
-                                <option value="{{$catp1->id}}">{{ str_repeat('-', $catp1['level']) }}{{$catp1->name}}</option>
-                            @endforeach
+                            @if( $catp1['level'] < 2 ) <option value="{{$catp1->id}}">{{ str_repeat('-', $catp1['level']) }}{{$catp1->name}}</option>
+                                @endif
+                                @endforeach
                         </select>
                     </div>
                     <div class="form-group">
@@ -54,36 +55,39 @@
                 </div>
             </div>
             <div class="card-body">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                        <th scope="col">STT</th>
-                            <th scope="col">Tên danh mục</th>
-                            <th scope="col">Hình ảnh</th>
-                            <th scope="col">Tác vụ</th>
-                        </tr>
-                    </thead>
-                    @php
-                    $temp=0;
-                    @endphp
-                    <tbody>
-                    @foreach ($product_cats as $catp)
+                <div class="" style="height: 60vh;overflow-y: scroll;">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">STT</th>
+                                <th scope="col">Tên danh mục</th>
+                                <th scope="col">Hình ảnh</th>
+                                <th scope="col">Tác vụ</th>
+                            </tr>
+                        </thead>
                         @php
-                        $temp++;
+                        $temp=0;
                         @endphp
-                        <tr>
-                            <th scope="row" style="width: 10%">{{$temp}}</th>
-                            <td style="width: 50%">{{ str_repeat('-', $catp['level']) }}{{$catp['name']}}</td>
-                            <th scope="row" style="width: 20%"><div><img src="{{asset($catp['image'])}}" alt="" style="width:30px;"></div></th>
-                            <td style="width: 20%">
-                                <a href="{{route('cat_product.edit',$catp->slug)}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Sửa danh mục sản phẩm"><i class="fa fa-edit"></i></a>
-                                <a href="{{route('cat_product.delete',$catp->id)}}" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete" onclick="return confirm('Bạn có chắc chắn xóa bản ghi này ?')"><i class="fa fa-trash"></i></a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                {{$catps->links()}}
+                        <tbody>
+                            @foreach ($product_cats as $catp)
+                            @php
+                            $temp++;
+                            @endphp
+                            <tr>
+                                <th scope="row" style="width: 10%">{{$temp}}</th>
+                                <td style="width: 50%">{{ str_repeat('-', $catp['level']) }}{{$catp['name']}}</td>
+                                <th scope="row" style="width: 20%">
+                                    <div><img src="{{asset('public/shop/uploads/images/product/'.$catp['image'])}}" alt="" style="width:30px;"></div>
+                                </th>
+                                <td style="width: 20%">
+                                    <a href="{{route('cat_product.edit',$catp->slug)}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Sửa danh mục sản phẩm"><i class="fa fa-edit"></i></a>
+                                    <a href="{{route('cat_product.delete',$catp->id)}}" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete" onclick="return confirm('Bạn có chắc chắn xóa bản ghi này ?')"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

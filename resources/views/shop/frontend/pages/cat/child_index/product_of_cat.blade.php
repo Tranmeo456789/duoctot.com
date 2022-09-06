@@ -12,7 +12,7 @@
             <div class="d-flex">
                 <div class="item-cat-left text-center">
                     <a href="">
-                        <div><img src="{{asset($catp1['image'])}}" alt="" style="width:70%"></div>
+                        <div><img src="{{asset('public/shop/uploads/images/product/'.$catp1['image'])}}" alt="" style="width:70%"></div>
                         <h3>{{$catp1['name']}}</h3>
                         <span>44 sản phẩm</span>
                     </a>

@@ -79,7 +79,7 @@
                                 <th scope="row" style="width: 10%">{{$temp}}</th>          
                                 <td style="width: 50%">{{ str_repeat('-', $catp['level']) }}{{$catp['name']}}</td>
                                 <th scope="row" style="width: 20%">
-                                    <div><img src="{{asset($catp['image'])}}" alt="" style="width:30px;"></div>
+                                    <div><img src="{{asset('public/shop/uploads/images/product/'.$catp['image'])}}" alt="" style="width:30px;"></div>
                                 </th>
                                 <td style="width: 20%">
                                     <a href="{{route('cat_product.edit',$catp->slug)}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Sửa danh mục sản phẩm"><i class="fa fa-edit"></i></a>

@@ -13,8 +13,8 @@
                         <div class="clearfix" style="max-width:474px;">
                             <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
                                 @foreach($img_products as $img_product)
-                                <li data-thumb="{{asset($img_product->image)}}">
-                                    <img src="{{asset($img_product->image)}}" />
+                                <li data-thumb="{{asset('public/shop/uploads/images/product/'.$img_product)}}">
+                                    <img src="{{asset('public/shop/uploads/images/product/'.$img_product)}}" />
                                 </li>
                                 @endforeach
                             </ul>

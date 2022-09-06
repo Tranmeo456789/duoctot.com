@@ -367,7 +367,7 @@
                                                 <div class="himg-menu">
                                                     <div class="d-flex">
                                                         <div class="d-flex align-items-center pl-2">
-                                                            <div class="rdimg rimg-centerw"><img src="{{asset($item_sub_menu1['image'])}}" alt=""></div>
+                                                            <div class="rdimg rimg-centerw"><img src="{{asset('public/shop/uploads/images/product/'.$item_sub_menu1['image'])}}" alt=""></div>
                                                         </div>
                                                         <a href="{{route('fe.cat2',[$item_cat1->slug,$item_sub_menu1->slug])}}" title="" class="titlec2">{{$item_sub_menu1['name']}}</a>
                                                     </div>
@@ -380,7 +380,7 @@
                                                                     <a href="{{route('fe.cat3',[$item_cat1->slug,$item_sub_menu1->slug,$item_submenu2->slug])}}">
                                                                         <div class="item_cat4 d-flex">
                                                                             <div class="aimg rimg-centerx mr-1">
-                                                                                <img src="{{asset($item_submenu2['image'])}}" alt="">
+                                                                                <img src="{{asset('public/shop/uploads/images/product/'.$item_submenu2['image'])}}" alt="">
                                                                             </div>
                                                                             <div class="align-self-center"><span>{{$item_submenu2['name']}}</span></div>
                                                                         </div>

@@ -56,13 +56,14 @@
                         @foreach ($products as $product)
                         @php
                         $temp++;
+                        $img=explode(",", $product->imgs[0]['image']);
                         @endphp
                         <tr class="">
                             <td style="width: 3%">{{$temp}}</td>
                             <td style="width: 35%">
                                 <div class="d-flex">
                                     <div class="d-flex align-items-center">
-                                        <img style="width:40px" src="{{asset($product->imgs['0']['image'])}}" alt="">
+                                        <img style="width:40px" src="{{asset('public/shop/uploads/images/product/'.$img[0])}}" alt="">
                                     </div>
                                     <div class="info-product ml-3">
                                         <p class="text-success font-weight-bold">{{$product['name']}}</p>

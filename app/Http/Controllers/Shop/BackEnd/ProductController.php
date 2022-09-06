@@ -128,7 +128,7 @@ class ProductController extends Controller
                 $file = $request->images;              
                 $filename = $file->getClientOriginalName();             
                 $path = $file->move('public/shop/uploads/images/product', $file->getClientOriginalName());               
-                $image = 'public/shop/uploads/images/product/' . $filename;
+                $image = $filename;
                 Img_product::create(
                     [
                         'image' => $image,
@@ -329,6 +329,8 @@ class ProductController extends Controller
     // ảnh sản phẩm
     public function img_product($id){
         $imgs=Product::find($id)->imgs;
+        $imgs=$imgs[0]->image;
+        $imgs = explode(",",$imgs);
         $products=Product::find($id);  
         return view('shop.backend.product.images_product',compact('products','imgs'));
     }
@@ -347,27 +349,36 @@ class ProductController extends Controller
                     'images' => 'Hình ảnh',
                 ]
             );
-            if ($request->hasFile('images')) {
-                $file = $request->images;              
-                $filename = $file->getClientOriginalName();             
-                $path = $file->move('public/shop/uploads/images/product', $file->getClientOriginalName());               
-                $image = 'public/shop/uploads/images/product/' . $filename;
-                Img_product::create(
-                    [
-                        'image' => $image,
-                        'product_id'=>$id,
-                    ]
-                );
-                return redirect()->route('product.img', ['id'=>$id])->with('status','Thêm hình ảnh thành công');   
-            }
+            // if ($request->hasFile('images')) {
+            //     $file = $request->images;              
+            //     $filename = $file->getClientOriginalName();             
+            //     $path = $file->move('public/shop/uploads/images/product', $file->getClientOriginalName());               
+            //     $image = 'public/shop/uploads/images/product/' . $filename;
+            //     Img_product::create(
+            //         [
+            //             'image' => $image,
+            //             'product_id'=>$id,
+            //         ]
+            //     );
+            //     return redirect()->route('product.img', ['id'=>$id])->with('status','Thêm hình ảnh thành công');   
+            // }
         }
     }
-    public function deleteimg_product($id,$id_product){
-        $image=Img_product::find($id);      
-        $arrimg = explode("/", $image->image);
-        $i=count($arrimg);
-        \File::delete(public_path('shop/uploads/images/product/' .  $arrimg[$i-1]));
-        Img_product::where('id', $id)->forceDelete();
+    public function deleteimg_product($id,$id_product){       
+        $product=Product::find($id_product);
+        $imgs=$product->imgs;
+        $imgs=$imgs[0]->image;
+        $imgms = explode(",",$imgs);     
+        //\File::delete(public_path('shop/uploads/images/product/' .  $imgms[$id]));
+        unset($imgms[$id]);      
+        $imgs=implode(',', $imgms);
+        Img_product::where('product_id', $id_product)->update(
+            [
+                'image' => $imgs,  
+                'product_id'=>$id_product         
+
+            ]
+        );      
         return redirect()->route('product.img', ['id'=>$id_product])->with('status', 'Bản ghi đã xóa vĩnh viễn!');
     }
 }

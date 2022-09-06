@@ -1,13 +1,13 @@
 @extends('shop.layouts.backend')
 
-@section('title', 'Thêm sản phẩm')
+@section('title', 'Thêm thuốc')
 
-@section('header_title', 'Thêm sản phẩm')
+@section('header_title', 'Thêm thuốc')
 
 @section('body_content')
 <div class="card">
     <div class="card-header font-weight-bold">
-        Thêm sản phẩm
+        Thêm thuốc
     </div>
     <div class="card-body">
         <form action="{{route('product.store')}}" method="POST" enctype="multipart/form-data">
@@ -22,9 +22,9 @@
             <div class="row">
                 <div class="col-lg-6 col-sm-12">
                     <div class="form-group">
-                        <label for="name">Loại sản phẩm<span class="text-danger">*</span></label>
+                        <label for="name">Loại thuốc<span class="text-danger">*</span></label>
                         <select class="form-control" name="type_product" id="">
-                            <option value="">Chọn loại sản phẩm</option>
+                            <option value="">Chọn loại thuốc</option>
                             <option value="Sản phẩm loại thường">Sản phẩm loại thường</option>
                             <option value="Quà tặng">Quà tặng</option>
                         </select>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="col-lg-6 col-sm-12">
                     <div class="form-group">
-                        <label for="intro">Mã sản phẩm<span class="text-danger">*</span></label>
+                        <label for="intro">Mã thuốc<span class="text-danger">*</span></label>
                         <input class="form-control" type="text" name="code_product" value="{{old('code_product')}}" id="">
                         @if($errors->has('code_product'))
                         <small class="text-danger">{{$errors->first('code_product')}}</small>
@@ -46,7 +46,7 @@
             <div class="row">
                 <div class="col-lg-6 col-sm-12">
                     <div class="form-group">
-                        <label for="name">Danh mục sản phẩm<span class="text-danger">*</span></label>
+                        <label for="name">Danh mục thuốc<span class="text-danger">*</span></label>
                         <select id="" class="form-control" name="cat_product">
                             <option value="0">Chọn danh mục</option>
                             @foreach($product_cats as $catp1)
@@ -78,7 +78,7 @@
             <div class="row">
                 <div class="col-lg-6 col-sm-12">
                     <div class="form-group">
-                        <label for="intro">Thương hiệu sản phẩm<span class="text-danger">*</span></label>
+                        <label for="intro">Thương hiệu thuốc<span class="text-danger">*</span></label>
                         <input class="form-control" type="text" name="trademark" value="{{old('trademark')}}" id="">
                         @if($errors->has('trademark'))
                         <small class="text-danger">{{$errors->first('trademark')}}</small>
@@ -174,7 +174,7 @@
                 </div>
                 <div class="col-lg-6 col-sm-12">
                     <div class="form-group">
-                        <label for="intro">Giá bán sản phẩm(chưa VAT)<span class="text-danger">*</span></label>
+                        <label for="intro">Giá bán thuốc(chưa VAT)<span class="text-danger">*</span></label>
                         <input class="form-control" type="text" name="price" value="{{old('price')}}" id="">
                         @if($errors->has('price'))
                         <small class="text-danger">{{$errors->first('price')}}</small>
@@ -200,7 +200,7 @@
                 </div>
                 <div class="col-lg-6 col-sm-12">
                     <div class="form-group">
-                        <label for="intro">Giá bán sản phẩm(có VAT)<span class="text-danger">*</span></label>
+                        <label for="intro">Giá bán thuốc(có VAT)<span class="text-danger">*</span></label>
                         <input class="form-control" type="text" name="price_vat" value="{{old('price_vat')}}" id="">
                         @if($errors->has('price_vat'))
                         <small class="text-danger">{{$errors->first('price_vat')}}</small>
@@ -230,7 +230,7 @@
                 </div>
                 <div class="col-lg-6 col-sm-12">
                     <div class="form-group">
-                        <label for="intro">Đăng ký bán sản phẩm tại<span class="text-danger">*</span></label>
+                        <label for="intro">Đăng ký bán thuốc tại<span class="text-danger">*</span></label>
                         <select id="choices-multiple-remove-button" name="listlocals[]" placeholder="Chọn khu vực" multiple>
                             <option value="Toàn quốc" selected>Toàn quốc</option>
                             @foreach($warehouses as $warehouse)

@@ -48,7 +48,7 @@ class CatController extends ShopFrontEndController
     public function cat_level3($slug,$slug1,$slug2){
         $cat2cs=Cat_product::where('slug',$slug2)->get();
         $products=Product::where('cat_id',$cat2cs[0]['id'])->get();
-        //return($products);
+        
         $catc2s=Cat_product::where('slug',$slug2)->get();
         $catc2=$catc2s[0];
         return view($this->pathViewController . 'cat_productlevel4',compact('catc2','products'));

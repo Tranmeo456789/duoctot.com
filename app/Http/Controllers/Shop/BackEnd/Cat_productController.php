@@ -56,7 +56,7 @@ class Cat_productController extends Controller
                 $file = $request->image;
                 $filename = $file->getClientOriginalName();
                 $path = $file->move('public/shop/uploads/images/product', $file->getClientOriginalName());
-                $image = 'public/shop/uploads/images/product/' . $filename;
+                $image = $filename;
             }
             Cat_product::create(
                 [
@@ -115,7 +115,7 @@ class Cat_productController extends Controller
                 $file = $request->image;
                 $filename = $file->getClientOriginalName();
                 $path = $file->move('public/shop/uploads/images/product', $file->getClientOriginalName());
-                $image = 'public/shop/uploads/images/product/' . $filename;
+                $image = $filename;
             }
             Cat_product::where('slug', $slug)->update(
                 [

@@ -65,9 +65,12 @@
 <div id="body-nbox">
     <ul class="clearfix">
         @foreach($products as $product)
+        @php
+        $img=explode(",", $product->imgs[0]['image']);
+        @endphp
         <li class="text-center">
             <a href="{{route('fe.product.detail',$product->id)}}">
-                <img src="{{asset($product->imgs['0']['image'])}}" alt="">
+                <img src="{{asset('public/shop/uploads/images/product/'.$img[0])}}" alt="">
                 <div class="">
                     <a href="{{route('fe.product.detail',$product->id)}}" class="truncate2">{{$product['name']}}</a>
                     <h3 class="my-2">{{ number_format( $product['price'], 0, "" ,"." )}}đ/{{$product['unit']}}</h3>
