@@ -42,11 +42,10 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd'], fu
     Route::get('/xoa-don-vi-tinh/{id}', 'ProductController@unit_delete')->name('unit.delete');
     Route::post('/luu-don-vi-tinh', 'ProductController@unit_store')->name('unit.store');
 
-    Route::get('/danh-sach-nha-san-xuat', 'ProducerController@list')->name('producer.list');
-    Route::get('/them-nha-san-xuat', 'ProducerController@add')->name('producer.add');
-    Route::post('/luu-nha-san-xuat', 'ProducerController@add')->name('producer.store');
-    Route::get('/sua-nha-san-xuat/{id}', 'ProducerController@edit')->name('producer.edit');
-    Route::post('/cap-nhat-nha-san-xuat/{id}', 'ProducerController@edit')->name('producer.update');
+    Route::get('/danh-sach-nha-san-xuat', 'ProducerController@index')->name('producer');
+    Route::get('/them-nha-san-xuat', 'ProducerController@form')->name('producer.add');
+    Route::get('/sua-nha-san-xuat/{id}', 'ProducerController@form')->name('producer.edit');
+    Route::post('/luu-nha-san-xuat', 'ProducerController@save')->name('producer.save');
     Route::get('/xoa-nha-san-xuat/{id}', 'ProducerController@delete')->name('producer.delete');
 
     Route::get('/danh-sach-hoa-don', 'OrderController@list_invoice')->name('invoice.list');

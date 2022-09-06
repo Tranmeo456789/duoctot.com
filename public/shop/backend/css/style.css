@@ -2,26 +2,56 @@
     color:#fff;
 } */
 
-.body-content{padding: 10px 10px 0px 10px;}
+.body-content {
+    padding: 10px 10px 0px 10px;
+}
+
 a:hover {
     text-decoration: none;
 }
-.choices{
+
+.choices {
     margin-bottom: 0px;
-  }
+}
+
 .btnvis-sidebar {
     z-index: 994;
     position: absolute;
     color: red;
     font-size: 23px;
-    left: 10px;cursor: pointer;
-    top: 8px;position: absolute;display: none;
+    left: 10px;
+    cursor: pointer;
+    top: 8px;
+    position: absolute;
+    display: none;
 }
-.hide-sidebar{
- display: none;position:absolute;top: 12px;right: 12px;font-size: 20px;cursor: pointer;color: red;
+
+.hide-sidebar {
+    display: none;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 20px;
+    cursor: pointer;
+    color: red;
 }
-#warpper{position: relative;}
-#wp-opacity{position: absolute;background: white;opacity: 0;top:0px;left: 0px;width: 100%;height: 100%;z-index: 100;display: none;}
+
+#warpper {
+    position: relative;
+}
+
+#wp-opacity {
+    position: absolute;
+    background: white;
+    opacity: 0;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    display: none;
+}
+
 .topnav .navbar-brand {
     width: 15rem;
     padding-left: 1rem;
@@ -42,9 +72,11 @@ a:hover {
     border: 0;
     background-color: transparent;
 }
-table thead{
-    background:#dc35450a;
+
+table thead {
+    background: #dc35450a;
 }
+
 .plus-icon {
     font-size: 25px;
     color: #8f8f8f;
@@ -55,83 +87,98 @@ table thead{
     justify-content: space-between;
     display: flex;
 }
-#logo-admin{
+
+#logo-admin {
     border-bottom: 1px solid rgb(241, 236, 236);
     padding: 5px;
     padding-left: 20px;
 }
-#logo-admin img{
+
+#logo-admin img {
     width: 180px;
 }
+
 #sidebar {
     width: 15rem;
     height: 100vh;
     z-index: 500;
     position: fixed;
-    transition: all 0.5s ease-in-out;  
+    transition: all 0.5s ease-in-out;
 }
-.header-title{
+
+.header-title {
     font-size: 1.3rem;
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-weight: 400;
     line-height: 30px;
     margin-bottom: 0px;
     color: #252424;
 }
-.form-search button{
+
+.form-search button {
     outline: none;
     background-color: #fff;
     border-right: none;
 }
-.form-search button i{
+
+.form-search button i {
     color: gray;
 }
-#input-search{
+
+#input-search {
     border-left: none;
 }
-#input-search:focus{
+
+#input-search:focus {
     box-shadow: none;
     border-bottom: 1px solid blue;
     border-top: 1px solid blue;
     border-right: 1px solid blue;
     border-left: none;
 }
-#input-search-after:focus{
+
+#input-search-after:focus {
     box-shadow: none;
     border: 1px solid blue;
-    
 }
-.border-button-search{
+
+.border-button-search {
     border: 1px solid blue;
     border-right: none;
 }
+
+
 /* .border-search{
     border: 1px solid blue;
 } */
-.card-header{
-    background-color: rgba(0,0,0,.0);
-    border-bottom: 1px solid rgba(0,0,0,.125);
+
+.card-header {
+    background-color: rgba(0, 0, 0, .0);
+    border-bottom: 1px solid rgba(0, 0, 0, .125);
 }
-.business-results{
+
+.business-results {
     width: 100%;
     display: flex;
     padding: 0px;
-    margin: 0px;flex-wrap: wrap;
+    margin: 0px;
+    flex-wrap: wrap;
 }
-.business-results li{
+
+.business-results li {
     height: 90px;
     display: flex;
     padding: 0 0 0 52px;
     align-items: center;
     flex-grow: 0;
     width: 25%;
-   
 }
-.business-results li:hover{
+
+.business-results li:hover {
     background-color: #e6f5eb;
-   
 }
-.business-results li a{
+
+.business-results li a {
     width: 100%;
     height: 70px;
     display: flex;
@@ -139,23 +186,27 @@ table thead{
     text-align: center;
     border-right: 1px dashed #E8EAEB;
 }
-.business-results li:last-child>a{
+
+.business-results li:last-child>a {
     border-right: none;
 }
-.business-results li .icon{
-    color:rgb(109, 109, 231);
-     font-size:20px;
-    margin-right:10px;
+
+.business-results li .icon {
+    color: rgb(109, 109, 231);
+    font-size: 20px;
+    margin-right: 10px;
     padding: 5px;
     border-radius: 70px;
     border: 1px solid;
 }
-.order-wait{
+
+.order-wait {
     display: flex;
     padding: 0px;
     list-style: none;
 }
-.order-wait li{
+
+.order-wait li {
     display: flex;
     flex-wrap: wrap;
     text-align: center;
@@ -163,10 +214,12 @@ table thead{
     flex-basis: 16.5%;
     padding-top: 8px;
 }
-.order-wait li:hover{
+
+.order-wait li:hover {
     background-color: #e6f5eb;
 }
-.order-wait li a{
+
+.order-wait li a {
     color: unset;
     width: 100%;
     margin: 15px 0px;
@@ -175,42 +228,47 @@ table thead{
     justify-content: center;
     margin: 0px;
 }
-.order-wait li a p{
+
+.order-wait li a p {
     font-size: 0.9rem;
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-weight: 400;
     line-height: 19px;
     margin-bottom: 0px;
 }
-.order-wait li a .icon{
+
+.order-wait li a .icon {
     color: #0061f2;
-    
 }
-.order-wait li a .icon i{
+
+.order-wait li a .icon i {
     width: 30px;
     border: 1px solid rgb(216, 236, 230);
     border-radius: 50%;
     padding: 5px;
     background-color: rgb(216, 236, 230);
 }
-.order-wait li:last-child>a{
+
+.order-wait li:last-child>a {
     border-right: none;
 }
-.card .card-header h6{
+
+.card .card-header h6 {
     font-size: 1.125rem;
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-weight: 500;
     line-height: 20px;
     margin-bottom: 0px;
 }
+
 #wp-content {
     flex: auto;
     /* height: calc(100vh - 58px); */
     min-height: 100vh;
-    
     padding-left: 15rem;
 }
-.header-content{
+
+.header-content {
     top: 0;
     height: 52px;
     display: flex;
@@ -222,21 +280,25 @@ table thead{
     align-items: center;
     justify-content: space-between;
 }
-.header-content-left{
+
+.header-content-left {
     height: inherit;
     display: flex;
     align-items: center;
 }
-.item-header-content{
+
+.item-header-content {
     cursor: pointer;
     height: 100%;
     display: flex;
     padding: 16px 13px;
     align-items: center;
 }
-.item-header-content p{
+
+.item-header-content p {
     margin-bottom: 0px;
 }
+
 #content {
     padding-top: 0px;
     padding-bottom: 20px;
@@ -245,21 +307,35 @@ table thead{
 #content .card-header {
     text-transform: uppercase;
 }
-.warehouse{
+
+.warehouse {
     list-style: none;
-    padding-left: 0px;margin-bottom: 0px;
+    padding-left: 0px;
+    margin-bottom: 0px;
 }
-.warehouse li{
+
+.warehouse li {
     height: 72px;
     position: relative;
     margin-bottom: 10px;
-    
 }
-.titlehearder{margin-bottom: 0px;}
-.warehouse li:last-child{margin-bottom: 0px;}
-.warehouse li a{
-    display: block;padding: 13px 12px 15px;cursor: pointer;background: #F2F9FF;border-radius: 5px;
+
+.titlehearder {
+    margin-bottom: 0px;
 }
+
+.warehouse li:last-child {
+    margin-bottom: 0px;
+}
+
+.warehouse li a {
+    display: block;
+    padding: 13px 12px 15px;
+    cursor: pointer;
+    background: #F2F9FF;
+    border-radius: 5px;
+}
+
 .nav-fixed .topnav {
     position: fixed;
     top: 0;
@@ -318,14 +394,15 @@ ul#sidebar-menu * {
     background-color: #e5e9f0;
 }
 
-
 .table tr td {
     vertical-align: middle;
 }
-table a.btn-sm{
+
+table a.btn-sm {
     font-size: 12px;
-    padding: 2px ;
+    padding: 2px 4px;
 }
+
 .table-checkall input[type='checkbox'] {
     cursor: pointer;
 }
@@ -343,5 +420,10 @@ table a.btn-sm{
     right: -5px;
     color: #8c8c8c;
 }
-.mt-100{margin-top: 100px}
+
+.mt-100 {
+    margin-top: 100px
+}
+
+
 /* body{background: #00B4DB;background: -webkit-linear-gradient(to right, #0083B0, #00B4DB);background: linear-gradient(to right, #0083B0, #00B4DB);color: #514B64;min-height: 100vh} */

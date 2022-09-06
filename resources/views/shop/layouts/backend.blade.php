@@ -79,17 +79,12 @@
                         </ul>
                     </li>
                     <li class="nav-link">
-                        <a href="">
+                        <a href="{{route('producer')}}">
                             <div class="nav-link-icon d-inline-flex">
                                 <i class="fas fa-box-tissue"></i>
                             </div>
                             Quản lý nhà sản xuất
                         </a>
-                        <i class="arrow fas fa-angle-right"></i>
-                        <ul class="sub-menu">
-                            <li><a href="{{route('producer.list')}}">Danh sách NSX</a></li>
-                            <li><a href="{{route('producer.add')}}">Thêm nhà sản xuất</a></li>
-                        </ul>
                     </li>
                     <li class="nav-link">
                         <a href="">
@@ -190,6 +185,7 @@
                 </div>
             </div>
         </div>
+        @include('shop.backend.blocks.modal')
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -200,8 +196,9 @@
     <script src="{{asset('/shop/backend/js/modal.js')}}?t=@php echo time() @endphp"></script>
     <script src="{{asset('/shop/backend/js/modal_product.js')}}?t=@php echo time() @endphp"></script>
     <script src="{{asset('/shop/backend/js/dropzone.js')}}?t=@php echo time() @endphp"></script>
+    <script src="{{asset('/shop/backend/js/my-js.js')}}?t=@php echo time() @endphp"></script>
     <script src="https://cdn.tiny.cloud/1/cilgdefwwpjwph4t9r56jwn4kf0yp1sqhhl0l0sf7z400bng/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    
+
      <script>tinymce.init({
         selector: '#mytextarea',
         height: 300,
@@ -224,7 +221,7 @@
 
         });</script>
 
-    <script>       
+    <script>
         $(document).ready(function() {
             $('#submit-all1').click(function() {
                 var x = document.getElementsByClassName("name-img");
