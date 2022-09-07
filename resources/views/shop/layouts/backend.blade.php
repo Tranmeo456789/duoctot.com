@@ -61,7 +61,7 @@
                         </a>
                         <i class="arrow fas fa-angle-right"></i>
                         <ul class="sub-menu">
-                            <li><a href="{{route('cat_product.list')}}">Danh mục thuốc</a></li>
+                            <li><a href="{{route('cat_product')}}">Danh mục thuốc</a></li>
                         </ul>
                     </li>
                     <li class="nav-link">
@@ -73,9 +73,8 @@
                         </a>
                         <i class="arrow fas fa-angle-right"></i>
                         <ul class="sub-menu">
-                            <li><a href="{{route('product.list')}}">Danh sách thuốc</a></li>
-                            <li><a href="{{route('product.add')}}">Thêm thuốc</a></li>
-                            <li><a href="{{route('product.unit')}}">Đơn vị tính</a></li>
+                            <li><a href="{{route('product')}}">Danh sách thuốc</a></li>
+                            <li><a href="{{route('unit')}}">Đơn vị tính</a></li>
                         </ul>
                     </li>
                     <li class="nav-link">
@@ -108,7 +107,7 @@
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="{{route('warehouse')}}">
+                        <a href="{{route('qlwarehouse')}}">
                             <div class="nav-link-icon d-inline-flex">
                                 <i class="fas fa-store"></i>
                             </div>
@@ -116,8 +115,7 @@
                         </a>
                         <i class="arrow fas fa-angle-right"></i>
                         <ul class="sub-menu">
-                            <li><a href="{{route('warehouse.add')}}">Thêm kho hàng</a></li>
-                            <li><a href="{{route('warehouse.list')}}">Danh sách kho hàng</a></li>
+                            <li><a href="{{route('warehouse')}}">Danh sách kho hàng</a></li>
                         </ul>
                     </li>
                     <li class="nav-link">

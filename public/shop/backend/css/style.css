@@ -13,7 +13,12 @@ a:hover {
 .choices {
     margin-bottom: 0px;
 }
-
+.pagination li{
+    margin-right: 5px;
+}
+.pagination li:last-child{
+    margin-right: 0px;
+}
 .btnvis-sidebar {
     z-index: 994;
     position: absolute;

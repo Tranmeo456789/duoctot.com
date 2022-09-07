@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\Shop\BackEnd;
 
-use App\Model\Shop\WarehouseModel as MainModel;
+use App\Model\Shop\UnitModel as MainModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Shop\BackEnd\BackEndController;
-use App\Http\Requests\WarehouseRequest as MainRequest;
-class WarehouseController extends BackEndController
+use App\Http\Requests\UnitRequest as MainRequest;
+class UnitController extends BackEndController
 {
+
     public function __construct()
     {
-        $this->controllerName     = 'warehouse';
+        $this->controllerName     = 'unit';
         $this->pathViewController = "$this->moduleName.pages.$this->controllerName.";
-        $this->pageTitle          = 'Kho hàng';
+        $this->pageTitle          = 'Đơn vị tính';
         $this->model = new MainModel();
         parent::__construct();
     }
@@ -43,8 +44,5 @@ class WarehouseController extends BackEndController
                 'message'      => $notify,
             ]);
         }
-    }
-    public function qlwarehouse(){
-        return view('shop.backend.pages.warehouse.qlwarehouse');
     }
 }

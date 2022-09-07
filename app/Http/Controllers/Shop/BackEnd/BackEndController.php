@@ -3,6 +3,8 @@ namespace App\Http\Controllers\Shop\BackEnd;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
+
+
 class BackEndController extends Controller
 {
     protected $moduleName = 'shop.backend';
@@ -37,6 +39,7 @@ class BackEndController extends Controller
         $items              = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
         if ($items->currentPage() > $items->lastPage()) {
             $lastPage = $items->lastPage();
+
             Paginator::currentPageResolver(function () use ($lastPage) {
                 return $lastPage;
             });

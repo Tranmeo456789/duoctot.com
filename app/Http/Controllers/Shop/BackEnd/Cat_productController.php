@@ -1,19 +1,58 @@
 <?php
 
-namespace App\Http\Controllers\Shop\Backend;
+namespace App\Http\Controllers\Shop\BackEnd;
 
+use App\Model\Shop\Cat_productModel as MainModel;
 use Illuminate\Http\Request;
-use App\Model\Shop\Cat_product;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Str;
-
-class Cat_productController extends Controller
+use App\Http\Controllers\Shop\BackEnd\BackEndController;
+use App\Model\Shop\Cat_productModel;
+use App\Http\Requests\Cat_productRequest as MainRequest;
+class Cat_productController extends BackEndController
 {
-    public function index()
+
+    public function __construct()
     {
-        $catps = Cat_product::paginate(10);
-        $data = Cat_product::all();
+        $this->controllerName     = 'cat_product';
+        $this->pathViewController = "$this->moduleName.pages.$this->controllerName.";
+        $this->pageTitle          = 'Danh mục sản phẩm';
+        $this->model = new MainModel();
+        parent::__construct();
+    }
+    public function save(MainRequest $request)
+    {
+        if (!$request->ajax()) return view("errors." .  'notfound', []);
+        if (isset($request->validator) && $request->validator->fails()) {
+            return response()->json([
+                'fail' => true,
+                'errors' => $request->validator->errors()
+            ]);
+        }
+        
+        if ($request->method() == 'POST') {
+            $params = $request->all();       
+            $task   = "add-item";
+            $notify = "Thêm mới $this->pageTitle thành công!";
+            if ($params['id'] != null) {
+                $task   = "edit-item";
+                $notify = "Cập nhật $this->pageTitle thành công!";
+            }
+            $this->model->saveItem($params, ['task' => $task]);
+            $request->session()->put('app_notify', $notify);
+            return response()->json([
+                'fail' => false,
+                 'redirect_url' => route($this->controllerName),
+                 'message'      => $notify,
+             ]);
+        }
+    }
+    public function form(Request $request)
+    {
+        $item = null;
+        if ($request->id !== null) {
+            $params["id"] = $request->id;
+            $item = $this->model->getItem($params, ['task' => 'get-item']);
+        }
+        $data = Cat_productModel::all();
         function data_tree1($data, $parent_id = 0, $level = 0)
         {
             $result = [];
@@ -27,131 +66,7 @@ class Cat_productController extends Controller
             }
             return $result;
         }
-        $product_cats = data_tree1($data, 0);
-        $num_cat = Cat_product::all()->count();
-        return view('shop.backend.cat.index', compact('catps', 'num_cat', 'product_cats'));
-    }
-    public function add(Request $request)
-    {
-        if ($request->input('btn_add_catproduct')) {
-            $this->validate(
-                $request,
-                [
-                    'name' => 'required|unique:cat_products|string|min:1',
-                    'image'=>'image'
-                ],
-                [
-                    'unique' => ':attribute đã tồn tại',
-                    'required' => ':attribute không được để trống',
-                    'min' => ':attribute có độ dài ít nhất :min ký tự',
-                    'image' => ':attribute có dạng hình ảnh'
-                ],
-                [
-                    'name' => 'Tên danh mục',
-                    'image' => 'Trường này'
-                ]
-            );
-            $image = '';
-            if ($request->hasFile('image')) {
-                $file = $request->image;
-                $filename = $file->getClientOriginalName();
-                $path = $file->move('public/shop/uploads/images/product', $file->getClientOriginalName());
-                $image = $filename;
-            }
-            Cat_product::create(
-                [
-                    'name' => $request->input('name'),
-                    'image' => $image,
-                    'parent_id' => $request->input('cat_parent'),
-                    'slug'  => Str::slug($request->input('name')),
-                ]
-            );
-            return redirect('backend/danh-sach-danh-muc-san-pham')->with('status', 'Thêm danh mục thành công');
-        }
-    }
-    public function edit(Request $request, $slug)
-    {
-        if ($request->input('btn_update_catproduct')) {
-            $catpcs = Cat_product::where('slug', $slug)->get();
-            if($request->input('name')==$catpcs[0]->name){
-                $this->validate(
-                    $request,
-                    [
-                        'name' => 'required|string|min:1',
-                        'image' => 'image'
-                    ],
-                    [
-                        'required' => ':attribute không được để trống',
-                        'min' => ':attribute có độ dài ít nhất :min ký tự',
-                        'image' => ':attribute có dạng hình ảnh'
-                    ],
-                    [
-                        'name' => 'Tên danh mục',
-                        'image' => 'Trường này'
-                    ]
-                );
-            }else{
-                $this->validate(
-                    $request,
-                    [
-                        'name' => 'required|unique:cat_products|string|min:1',
-                        'image' => 'image'
-                    ],
-                    [
-                        'unique' => ':attribute đã tồn tại',
-                        'required' => ':attribute không được để trống',
-                        'min' => ':attribute có độ dài ít nhất :min ký tự',
-                        'image' => ':attribute có dạng hình ảnh'
-                    ],
-                    [
-                        'name' => 'Tên danh mục',
-                        'image' => 'Trường này'
-                    ]
-                );
-            }
-            
-            $image = '';
-            if ($request->hasFile('image')) {
-                $file = $request->image;
-                $filename = $file->getClientOriginalName();
-                $path = $file->move('public/shop/uploads/images/product', $file->getClientOriginalName());
-                $image = $filename;
-            }
-            Cat_product::where('slug', $slug)->update(
-                [
-                    'name' => $request->input('name'),
-                    'image' => $image,
-                    'parent_id' => $request->input('cat_parent'),
-                    'slug'  => Str::slug($request->input('name')),
-                ]
-            );
-            return redirect('backend/danh-sach-danh-muc-san-pham')->with('status', 'Cập nhật danh mục thành công');
-        } else {
-            $catps = Cat_product::paginate(10);
-            $catpcs = Cat_product::where('slug', $slug)->get();
-            $catpc = $catpcs[0];
-            $data = Cat_product::all();
-            function data_tree1($data, $parent_id = 0, $level = 0)
-            {
-                $result = [];
-                foreach ($data as $item) {
-                    if ($parent_id == $item['parent_id']) {
-                        $item['level'] = $level;
-                        $result[] = $item;
-                        $child = data_tree1($data, $item['id'], $level + 1);
-                        $result = array_merge($result, $child);
-                    }
-                }
-                return $result;
-            }
-            $product_cats = data_tree1($data, 0);
-            $num_cat = Cat_product::all()->count();
-            return view('shop.backend.cat.edit', compact('catps', 'catpc', 'num_cat', 'product_cats'));
-        }
-    }
-    public function delete($id)
-    {
-        Cat_product::where('id', $id)->forceDelete();
-        return redirect('backend/danh-sach-danh-muc-san-pham')->with('status', 'Xóa danh mục thành công');
+        $product_cats = data_tree1($data, 0);      
+        return view($this->pathViewController.'form',['item'=> $item,'product_cats'=>$product_cats]);
     }
 }

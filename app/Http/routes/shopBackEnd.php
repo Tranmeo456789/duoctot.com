@@ -20,27 +20,27 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd'], fu
     Route::get('/thay-doi-mat-khau', 'SellerProfileController@change_password')->name('seller.password');
     Route::get('/thiet-lap-cai-dat-khac', 'SellerProfileController@setting')->name('seller.setting');
 
-    Route::get('/danh-sach-danh-muc-san-pham', 'Cat_productController@index')->name('cat_product.list');
-    Route::post('/luu-danh-muc-san-pham', 'Cat_productController@add')->name('cat_product.add');
-    Route::get('/sua-danh-muc-san-pham/{slug}', 'Cat_productController@edit')->name('cat_product.edit');
-    Route::post('/luu-danh-muc-san-pham/{slug}', 'Cat_productController@edit')->name('cat_product.update');
-    Route::get('/xoa-danh-muc-san-pham/{id}', 'Cat_productController@delete')->name('cat_product.delete');
+    Route::get('/danh-sach-danh-muc', 'Cat_productController@index')->name('cat_product');
+    Route::get('/them-danh-muc', 'Cat_productController@form')->name('cat_product.add');
+    Route::get('/sua-danh-muc/{id}', 'Cat_productController@form')->name('cat_product.edit');
+    Route::post('/luu-danh-muc', 'Cat_productController@save')->name('cat_product.save');
+    Route::get('/xoa-danh-muc/{id}', 'Cat_productController@delete')->name('cat_product.delete');
 
-
-    Route::get('/danh-sach-san-pham', 'ProductController@list_product')->name('product.list');
-    Route::get('/them-san-pham', 'ProductController@add_product')->name('product.add');
-    Route::post('/luu-san-pham', 'ProductController@add_product')->name('product.store');
-    Route::get('/sua-san-pham/{id}', 'ProductController@edit_product')->name('product.edit');
-    Route::post('/cap-nhat-san-pham/{id}', 'ProductController@edit_product')->name('product.update');
-    Route::get('/xoa-san-pham/{id}', 'ProductController@delete_product')->name('product.delete');
+    Route::get('/danh-sach-san-pham', 'ProductController@index')->name('product');
+    Route::get('/them-san-pham', 'ProductController@form')->name('product.add');
+    Route::get('/sua-san-pham/{id}', 'ProductController@form')->name('product.edit');
+    Route::post('/luu-san-pham', 'ProductController@save')->name('product.save');
+    Route::get('/xoa-san-pham/{id}', 'ProductController@delete')->name('product.delete');
 
     Route::get('/anh-san-pham/{id}', 'ProductController@img_product')->name('product.img');
     Route::post('/them-anh-san-pham/{id}', 'ProductController@addimg_product')->name('product.img.add');
     Route::get('/xoa-anh-san-pham/{id}/{id_product}', 'ProductController@deleteimg_product')->name('product.img.delete');
 
-    Route::get('/don-vi-tinh', 'ProductController@unit')->name('product.unit');
-    Route::get('/xoa-don-vi-tinh/{id}', 'ProductController@unit_delete')->name('unit.delete');
-    Route::post('/luu-don-vi-tinh', 'ProductController@unit_store')->name('unit.store');
+    Route::get('/danh-sach-don-vi-tinh', 'UnitController@index')->name('unit');
+    Route::get('/them-don-vi-tinh', 'UnitController@form')->name('unit.add');
+    Route::get('/sua-don-vi-tinh/{id}', 'UnitController@form')->name('unit.edit');
+    Route::post('/luu-don-vi-tinh', 'UnitController@save')->name('unit.save');
+    Route::get('/xoa-don-vi-tinh/{id}', 'UnitController@delete')->name('unit.delete');
 
     Route::get('/danh-sach-nha-san-xuat', 'ProducerController@index')->name('producer');
     Route::get('/them-nha-san-xuat', 'ProducerController@form')->name('producer.add');
@@ -57,13 +57,12 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd'], fu
     Route::get('/tao-phieu-gui-hang', 'ConsignmentController@add')->name('consignment.add');
     Route::get('/chi-tiet-phieu-gui-hang', 'ConsignmentController@detail')->name('consignment.detail');
 
-    Route::get('/kho-hang', 'WarehouseController@index')->name('warehouse');
-    Route::get('/them-kho-hang', 'WarehouseController@add')->name('warehouse.add');
-    Route::post('/luu-kho-hang', 'WarehouseController@add')->name('warehouse.store');
-    Route::get('/danh-sach-kho-hang', 'WarehouseController@list')->name('warehouse.list');
+    Route::get('/kho-hang', 'WarehouseController@qlwarehouse')->name('qlwarehouse');
+    Route::get('/danh-sach-kho-hang', 'WarehouseController@index')->name('warehouse');
+    Route::get('/them-kho-hang', 'WarehouseController@form')->name('warehouse.add');
+    Route::get('/sua-kho-hang/{id}', 'WarehouseController@form')->name('warehouse.edit');
+    Route::post('/luu-kho-hang', 'WarehouseController@save')->name('warehouse.save');
     Route::get('/xoa-kho-hang/{id}', 'WarehouseController@delete')->name('warehouse.delete');
-    Route::get('/sua-kho-hang/{id}', 'WarehouseController@edit')->name('warehouse.edit');
-    Route::post('/cap-nhat-kho-hang/{id}', 'WarehouseController@edit')->name('warehouse.update');
 
     Route::get('/danh-sach-khach-hang', 'CustomerController@list_customer')->name('customer.list');
     Route::get('/them-khach-hang', 'CustomerController@add_customer')->name('customer.add');

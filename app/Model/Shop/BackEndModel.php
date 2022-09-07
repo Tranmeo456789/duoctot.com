@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth as Auth;
 
 class BackEndModel extends Model
 {
-
     public $timestamps = false;
     protected $controllerName   = '';
     protected $table            = '';
