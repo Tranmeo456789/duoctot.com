@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers\Shop\BackEnd;
 
-use App\Model\Shop\WarehouseModel as MainModel;
+use App\Model\Shop\TrademarkModel as MainModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Shop\BackEnd\BackEndController;
-use App\Model\Shop\Tinhthanhpho;
-use App\Http\Requests\WarehouseRequest as MainRequest;
-class WarehouseController extends BackEndController
+use App\Http\Requests\TrademarkRequest as MainRequest;
+class TrademarkController extends BackEndController
 {
     public function __construct()
     {
-        $this->controllerName     = 'warehouse';
+        $this->controllerName     = 'trademark';
         $this->pathViewController = "$this->moduleName.pages.$this->controllerName.";
-        $this->pageTitle          = 'Kho hàng';
+        $this->pageTitle          = 'Thương hiệu';
         $this->model = new MainModel();
         parent::__construct();
     }
@@ -44,20 +43,5 @@ class WarehouseController extends BackEndController
                 'message'      => $notify,
             ]);
         }
-    }
-    public function form(Request $request)
-    {
-        $item = null;
-        if ($request->id !== null) {
-            $params["id"] = $request->id;
-            $item = $this->model->getItem($params, ['task' => 'get-item']);
-        }
-        $locals=Tinhthanhpho::all();
-        return view($this->pathViewController .  'form', [
-            'item'        => $item, 'locals'=> $locals,
-        ]);
-    }
-    public function qlwarehouse(){
-        return view('shop.backend.pages.warehouse.qlwarehouse');
     }
 }

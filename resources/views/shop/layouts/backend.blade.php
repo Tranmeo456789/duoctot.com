@@ -75,6 +75,7 @@
                         <ul class="sub-menu">
                             <li><a href="{{route('product')}}">Danh sách thuốc</a></li>
                             <li><a href="{{route('unit')}}">Đơn vị tính</a></li>
+                            <li><a href="{{route('trademark')}}">Thương hiệu thuốc</a></li>
                         </ul>
                     </li>
                     <li class="nav-link">
@@ -216,7 +217,6 @@
         },
         menubar: 'favs file edit view insert format tools table help',
         content_css: 'css/content.css'
-
         });</script>
 
     <script>

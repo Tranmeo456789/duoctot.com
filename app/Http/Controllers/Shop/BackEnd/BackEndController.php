@@ -61,7 +61,6 @@ class BackEndController extends Controller
             'item'        => $item
         ]);
     }
-
     public function delete(Request $request)
     {
         $params["id"]             = $request->id;

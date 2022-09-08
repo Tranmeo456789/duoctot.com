@@ -1,5 +1,5 @@
 @php
-$title = 'Danh sách ';
+$title = '';
 $title = $title . $pageTitle;
 @endphp
 @extends('shop.layouts.backend')
@@ -11,7 +11,7 @@ $title = $title . $pageTitle;
 @section('body_content')
 <div class="card">
     @include("$moduleName.blocks.notify")
-    @include("$moduleName.blocks.title",['pageTitle' => $title,
+    @include("$moduleName.blocks.title",['pageTitle' => 'Danh sách '.$title,
     'pageIndex' => true])
     <div class="set-withscreen">
         <div class="card-body list-productwp">

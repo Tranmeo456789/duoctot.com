@@ -74,4 +74,7 @@ class Cat_productModel extends BackEndModel
             self::where('id', $params['id'])->delete();
         }
     }
+    public function products(){
+        return $this->hasMany('App\Model\Shop\ProductModel');
+   }
 }

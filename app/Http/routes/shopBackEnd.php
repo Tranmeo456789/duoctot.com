@@ -32,10 +32,6 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd'], fu
     Route::post('/luu-san-pham', 'ProductController@save')->name('product.save');
     Route::get('/xoa-san-pham/{id}', 'ProductController@delete')->name('product.delete');
 
-    Route::get('/anh-san-pham/{id}', 'ProductController@img_product')->name('product.img');
-    Route::post('/them-anh-san-pham/{id}', 'ProductController@addimg_product')->name('product.img.add');
-    Route::get('/xoa-anh-san-pham/{id}/{id_product}', 'ProductController@deleteimg_product')->name('product.img.delete');
-
     Route::get('/danh-sach-don-vi-tinh', 'UnitController@index')->name('unit');
     Route::get('/them-don-vi-tinh', 'UnitController@form')->name('unit.add');
     Route::get('/sua-don-vi-tinh/{id}', 'UnitController@form')->name('unit.edit');
@@ -47,6 +43,12 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd'], fu
     Route::get('/sua-nha-san-xuat/{id}', 'ProducerController@form')->name('producer.edit');
     Route::post('/luu-nha-san-xuat', 'ProducerController@save')->name('producer.save');
     Route::get('/xoa-nha-san-xuat/{id}', 'ProducerController@delete')->name('producer.delete');
+
+    Route::get('/danh-sach-thuong-hieu', 'TrademarkController@index')->name('trademark');
+    Route::get('/them-thuong-hieu', 'TrademarkController@form')->name('trademark.add');
+    Route::get('/sua-thuong-hieu/{id}', 'TrademarkController@form')->name('trademark.edit');
+    Route::post('/luu-thuong-hieu', 'TrademarkController@save')->name('trademark.save');
+    Route::get('/xoa-thuong-hieu/{id}', 'TrademarkController@delete')->name('trademark.delete');
 
     Route::get('/danh-sach-hoa-don', 'OrderController@list_invoice')->name('invoice.list');
     Route::get('/chi-tiet-hoa-don', 'OrderController@detail_invoice')->name('invoice.detail');
@@ -70,4 +72,7 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd'], fu
     Route::post('dropzone/upload', 'DropzoneController@upload')->name('dropzone.upload');
     Route::get('dropzone/fetch', 'DropzoneController@fetch')->name('dropzone.fetch');
     Route::post('dropzone/fupload', 'DropzoneController@fupload')->name('dropzone.fupload');
+    Route::get('anh-san-pham/{id}', 'DropzoneController@list_img')->name('dropzone.list_img');
+    Route::post('/them-anh-san-pham/{id}', 'ProductController@addimg_product')->name('product.img.add');
+    Route::get('/xoa-anh-san-pham/{id}/{id_product}', 'DropzoneController@deleteimg_product')->name('dropzone.img.delete');
 });

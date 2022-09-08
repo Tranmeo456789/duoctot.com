@@ -37,7 +37,7 @@ class AjaxFormRequest extends FormRequest
     public function messages()
     {
         return [
-            'required'    => ':attribute không được rỗng',
+            'required'    => ':attribute không được trống',
             'in'          => ':attribute không tồn tại',
             'between'     => ':attribute chiều dài phải có ít nhất :min ký tứ nhiều nhất :max ký tự',
             'unique'      => ':attribute đã tồn tại',
@@ -50,6 +50,8 @@ class AjaxFormRequest extends FormRequest
             'mimes'       => ':attribute không đúng định dạng file: :values',
             'regex'       => ':attribute không đúng định dạng',
             'size'        => ':attribute không đúng kích thước :size',
+            'image'      =>':attribute không đúng định dạng ảnh',
+            'numeric'=>':attribute có dạng số',
         ];
     }
     public function attributes()

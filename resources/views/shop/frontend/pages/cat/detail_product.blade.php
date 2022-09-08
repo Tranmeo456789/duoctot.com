@@ -213,14 +213,12 @@
                 <p>{{$productcs->dosage}}</p>
                 <div class="note-product mt-2">
                     <h2 style="font-size: 18px; font-weight: bold;">Lưu ý</h2>
-                    <p>{{$productcs->point}}</p>
+                    <p>{{$productcs->note}}</p>
                 </div>
                 <p class="font-weight-bold">
                     Bảo quản
                 </p>
-                <p>
-                    Bảo quản nơi khô ráo, thoáng mát, tránh ánh sáng trực tiếp.
-                    Để xa tầm tay trẻ em.</p>
+                <p>{{$productcs->preserve}}</p>
             </div>
         </div>
     </div>

@@ -7,10 +7,14 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Shop\BackEnd\BackEndController;
 use App\Model\Shop\ProductModel;
 use App\Model\Shop\Cat_productModel;
+use App\Model\Shop\ProducerModel;
+use App\Model\Shop\TrademarkModel;
 use App\Http\Requests\ProductRequest as MainRequest;
+use App\Model\Shop\UnitModel;
+use App\Model\Shop\WarehouseModel;
+
 class ProductController extends BackEndController
 {
-
     public function __construct()
     {
         $this->controllerName     = 'product';
@@ -28,9 +32,8 @@ class ProductController extends BackEndController
                 'errors' => $request->validator->errors()
             ]);
         }
-        
         if ($request->method() == 'POST') {
-            $params = $request->all();       
+            $params = $request->all();
             $task   = "add-item";
             $notify = "Thêm mới $this->pageTitle thành công!";
             if ($params['id'] != null) {
@@ -41,9 +44,9 @@ class ProductController extends BackEndController
             $request->session()->put('app_notify', $notify);
             return response()->json([
                 'fail' => false,
-                 'redirect_url' => route($this->controllerName),
-                 'message'      => $notify,
-             ]);
+                'redirect_url' => route($this->controllerName),
+                'message'      => $notify,
+            ]);
         }
     }
     public function form(Request $request)
@@ -67,7 +70,11 @@ class ProductController extends BackEndController
             }
             return $result;
         }
-        $product_cats = data_tree1($data, 0);      
-        return view($this->pathViewController.'form',['item'=> $item,'product_cats'=>$product_cats]);
+        $product_cats = data_tree1($data, 0);
+        $producers = ProducerModel::all();
+        $trademarks = TrademarkModel::all();
+        $units = UnitModel::all();
+        $warehouses = WarehouseModel::all();
+        return view($this->pathViewController . 'form', ['item' => $item, 'product_cats' => $product_cats, 'producers' => $producers, 'trademarks' => $trademarks, 'units' => $units,'warehouses' => $warehouses]);
     }
 }

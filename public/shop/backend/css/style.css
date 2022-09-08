@@ -9,7 +9,10 @@
 a:hover {
     text-decoration: none;
 }
-
+.help-block{
+    font-size: 13px;
+    color: red;
+}
 .choices {
     margin-bottom: 0px;
 }

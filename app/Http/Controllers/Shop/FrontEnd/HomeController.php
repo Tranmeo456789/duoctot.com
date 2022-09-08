@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Shop\FrontEnd;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
 use Illuminate\Support\Facades\Config;
-use App\Model\Shop\Cat_product;
+use App\Model\Shop\Cat_productModel;
 class HomeController extends ShopFrontEndController
 {
     public function __construct()
@@ -14,7 +14,7 @@ class HomeController extends ShopFrontEndController
         $this->pathViewController = "$this->moduleName.pages.$this->controllerName.";
         $this->pageTitle          = 'Trang chủ';
         parent::__construct();
-        $data = Cat_product::all();
+        $data = Cat_productModel::all();
         function data_tree1($data, $parent_id = 0, $level = 0)
         {
             $result = [];

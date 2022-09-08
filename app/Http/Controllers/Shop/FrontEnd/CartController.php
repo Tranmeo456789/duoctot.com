@@ -6,9 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
-
+use App\Model\Shop\Cat_productModel;
 class CartController extends ShopFrontEndController
 {
     public function __construct()
@@ -17,7 +16,7 @@ class CartController extends ShopFrontEndController
         $this->pathViewController = "$this->moduleName.pages.$this->controllerName.";
         $this->pageTitle          = 'Giỏ hàng';
         parent::__construct();
-        $data = Cat_product::all();
+        $data = Cat_productModel::all();
         function data_tree1($data, $parent_id = 0, $level = 0)
         {
             $result = [];

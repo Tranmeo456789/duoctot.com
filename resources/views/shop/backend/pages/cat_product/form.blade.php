@@ -27,7 +27,7 @@ $title = $title . $pageTitle;
         <div class="form-group">
             <label for="intro">Chọn danh mục cha</label>
             <select id="" class="form-control" name="parent_id">
-                <option value="1">Chọn danh mục</option>
+                <option value="0">Chọn danh mục</option>
                 @foreach($product_cats as $catp1)
                 @if($catp1['level'] == 0 )
                 <option value="{{$catp1->id}}" class="font-weight-bold">{{$catp1->name}}</option>
