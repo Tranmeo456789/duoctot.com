@@ -47,9 +47,7 @@ class Cat_productModel extends BackEndModel
         }       
         
         if ($options['task'] == 'add-item') {
-            $this->setCreatedHistory($params);
-            //self::insert($this->prepareParams($params));
-                    
+            $this->setCreatedHistory($params);  
              self::insert([
                  'name' => $params['name'],
                 'image' => $image,
@@ -59,7 +57,6 @@ class Cat_productModel extends BackEndModel
         }
         if ($options['task'] == 'edit-item') {
             $this->setModifiedHistory($params);
-            //self::where('id', $params['id'])->update($this->prepareParams($params));
             self::where('id', $params['id'])->update([
                 'name' => $params['name'],
                'image' => $image,

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
 use Illuminate\Support\Facades\Config;
 use App\Model\Shop\Cat_productModel;
+use App\Model\Shop\Tinhthanhpho;
 class HomeController extends ShopFrontEndController
 {
     public function __construct()
@@ -15,6 +16,7 @@ class HomeController extends ShopFrontEndController
         $this->pageTitle          = 'Trang chủ';
         parent::__construct();
         $data = Cat_productModel::all();
+        $_SESSION['local']=$local=Tinhthanhpho::all();
         function data_tree1($data, $parent_id = 0, $level = 0)
         {
             $result = [];

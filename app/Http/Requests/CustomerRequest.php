@@ -5,9 +5,9 @@ namespace App\Http\Requests;
 use App\Http\Requests\AjaxFormRequest;
 use Config;
 
-class WarehouseRequest extends AjaxFormRequest
+class CustomerRequest extends AjaxFormRequest
 {
-    private $table            = 'warehouses';
+    private $table            = 'customers';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -27,6 +27,10 @@ class WarehouseRequest extends AjaxFormRequest
     {
         $id = $this->id;
         $condName  = "bail|required|between:1,255|unique:$this->table,name";
+        $condCode_customer  = "bail|required";
+        $condPhone  = "bail|required|numeric";
+        $condPassword  = "bail|required";
+        $condAddress_detail  = "bail|required";
         $condProvince  = "bail|required";
         $condDistrict  = "bail|required";
         $condWards  = "bail|required";
@@ -35,17 +39,25 @@ class WarehouseRequest extends AjaxFormRequest
         }
         return  [
             'name'        => $condName,
-            'local'=>$condProvince,
+            'code_customer'=>$condCode_customer,
+            'phone'=>$condPhone,
+            'address_detail'=>$condAddress_detail,
+            'province'=>$condProvince,
             'district'=>$condDistrict,
             'wards'=>$condDistrict,
+            'password'=>$condPassword,
         ];
     }
     public function attributes()
     {
-        $arrAttr['name'] = 'Tên kho hàng';
-        $arrAttr['local'] = 'Tỉnh/thành phố';
+        $arrAttr['name'] = 'Tên khách hàng';
+        $arrAttr['code_customer'] = 'Mã khách hàng';
+        $arrAttr['phone'] = 'Số điện thoại';
+        $arrAttr['address_detail'] = 'Địa chỉ';
+        $arrAttr['province'] = 'Tỉnh/thành phố';
         $arrAttr['district'] = 'Quận/huyện';
         $arrAttr['wards'] = 'Xã/phường';
+        $arrAttr['password'] = 'Mật khẩu';
         return $arrAttr;
     }
 }

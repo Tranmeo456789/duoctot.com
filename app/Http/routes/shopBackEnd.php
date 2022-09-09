@@ -66,8 +66,12 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd'], fu
     Route::post('/luu-kho-hang', 'WarehouseController@save')->name('warehouse.save');
     Route::get('/xoa-kho-hang/{id}', 'WarehouseController@delete')->name('warehouse.delete');
 
-    Route::get('/danh-sach-khach-hang', 'CustomerController@list_customer')->name('customer.list');
-    Route::get('/them-khach-hang', 'CustomerController@add_customer')->name('customer.add');
+    Route::get('/danh-sach-khach-hang', 'CustomerController@index')->name('customer');
+    Route::get('/them-khach-hang', 'CustomerController@form')->name('customer.add');
+    Route::get('/sua-khach-hang/{id}', 'CustomerController@form')->name('customer.edit');
+    Route::post('/luu-khach-hang', 'CustomerController@save')->name('customer.save');
+    Route::get('/xoa-khach-hang/{id}', 'CustomerController@delete')->name('customer.delete');
+    Route::post('/dia-chi-khach-hang', 'CustomerController@locationAjax')->name('locationAjax');
 
     Route::post('dropzone/upload', 'DropzoneController@upload')->name('dropzone.upload');
     Route::get('dropzone/fetch', 'DropzoneController@fetch')->name('dropzone.fetch');

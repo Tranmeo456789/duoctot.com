@@ -59,7 +59,6 @@
                     </div>
                 </div>
             </div>
-
             @else
             <div id="" class="fl-right" style="margin-left:10px;padding-top:15px;">
                 <a title="" id="payment-link" class="">

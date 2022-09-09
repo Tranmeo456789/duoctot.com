@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -16,8 +17,10 @@
     <link rel="stylesheet" href="{{ asset('/shop/backend/css/responsive.css')}}?t=@php echo time() @endphp">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
     <link rel="stylesheet" href="{{ asset('/shop/backend/css/dropzone.css')}}?t=@php echo time() @endphp">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <title>@yield('title')</title>
 </head>
+
 <body>
     <div id="warpper" class="nav-fixed">
         <div id="wp-opacity"></div>
@@ -55,7 +58,7 @@
                     <li class="nav-link">
                         <a href="">
                             <div class="nav-link-icon d-inline-flex">
-                            <i class="fas fa-wallet"></i>
+                                <i class="fas fa-wallet"></i>
                             </div>
                             Quản lý danh mục
                         </a>
@@ -136,8 +139,7 @@
                         </a>
                         <i class="arrow fas fa-angle-right"></i>
                         <ul class="sub-menu">
-                            <li><a href="{{route('customer.list')}}">Danh sách khách hàng</a></li>
-                            <li><a href="{{route('customer.add')}}">Thêm khách hàng</a></li>
+                            <li><a href="{{route('customer')}}">Danh sách khách hàng</a></li>
                         </ul>
                     </li>
                     <li class="nav-link">
@@ -164,18 +166,30 @@
                         <div class="btnvis-sidebar"><i class="fas fa-arrow-circle-right"></i></div>
                         <h3 class="header-title">@yield('header_title')</h3>
                         <div class="header-content-left">
+                            @if(Session::has('islogin'))
                             <div class="item-header-content">
                                 <div class="btn-group">
                                     <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fas fa-user-circle"></i>
-                                        ADMINTOR
+                                        {{Session::get('name')}}
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right">
                                         <a class="dropdown-item" href="#">Tài khoản</a>
-                                        <a class="dropdown-item" href="https://tdoctor.vn/dang-xuat">Thoát</a>
+                                        <a class="dropdown-item" href="{{route('user.logoutbe')}}">Thoát</a>
                                     </div>
                                 </div>
                             </div>
+                            @else
+                            <div class="item-header-content">
+                                <div class="btn-group">
+                                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-user-circle"></i>
+                                        Chưa đăng nhập
+                                    </button>
+
+                                </div>
+                            </div>
+                            @endif
                         </div>
                     </div>
                     <div class="body-content">
@@ -197,61 +211,91 @@
     <script src="{{asset('/shop/backend/js/dropzone.js')}}?t=@php echo time() @endphp"></script>
     <script src="{{asset('/shop/backend/js/my-js.js')}}?t=@php echo time() @endphp"></script>
     <script src="https://cdn.tiny.cloud/1/cilgdefwwpjwph4t9r56jwn4kf0yp1sqhhl0l0sf7z400bng/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-
-     <script>tinymce.init({
-        selector: '#mytextarea',
-        height: 300,
-        plugins: [
-            'advlist autolink link image lists charmap print preview hr anchor pagebreak',
-            'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
-            'table emoticons template paste help'
-        ],
-        toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | ' +
-            'bullist numlist outdent indent | link image | print preview media fullscreen | ' +
-            'forecolor backcolor emoticons | help',
-        menu: {
-            favs: {
-                title: 'My Favorites',
-                items: 'code visualaid | searchreplace | emoticons'
-            }
-        },
-        menubar: 'favs file edit view insert format tools table help',
-        content_css: 'css/content.css'
-        });</script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: '#mytextarea',
+            height: 300,
+            plugins: [
+                'advlist autolink link image lists charmap print preview hr anchor pagebreak',
+                'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+                'table emoticons template paste help'
+            ],
+            toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | ' +
+                'bullist numlist outdent indent | link image | print preview media fullscreen | ' +
+                'forecolor backcolor emoticons | help',
+            menu: {
+                favs: {
+                    title: 'My Favorites',
+                    items: 'code visualaid | searchreplace | emoticons'
+                }
+            },
+            menubar: 'favs file edit view insert format tools table help',
+            content_css: 'css/content.css'
+        });
+    </script>
 
     <script>
         $(document).ready(function() {
             $('#submit-all1').click(function() {
                 var x = document.getElementsByClassName("name-img");
-            var name_img = [];
-            for (i = 0; i < x.length; i++) {
-                name_img[i] = x[i].innerHTML;
-            }
-            var id_product = $('input[name="id_product"]').val();;
-            var _token =
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                var name_img = [];
+                for (i = 0; i < x.length; i++) {
+                    name_img[i] = x[i].innerHTML;
+                }
+                var id_product = $('input[name="id_product"]').val();;
+                var _token =
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                var _token = $('input[name="_token"]').val();
+                event.preventDefault();
+                $.ajax({
+                    url: "{{route('dropzone.upload')}}",
+                    method: 'POST',
+                    dataType: 'json',
+                    data: {
+                        name_img: name_img,
+                        _token: _token,
+                        id_product: id_product,
+                    },
+                    success: function(data) {
+                        $('#list-img').html(data.list_img);
+                        //console.log(data.img);
                     }
                 });
-            var _token = $('input[name="_token"]').val();
-            event.preventDefault();
-            $.ajax({
-                url: "{{route('dropzone.upload')}}",
-                method: 'POST',
-                dataType: 'json',
-                data: {
-                    name_img: name_img,
-                    _token: _token,
-                    id_product: id_product,
-                },
-                success: function(data) {
-                    $('#list-img').html(data.list_img);
-                    //console.log(data.img);
+            });
+            $('.choose1').change(function() {
+                var action = $(this).attr('id');
+                var maid = $(this).val();
+                var _token = $('input[name="_token"]').val();
+                var result = '';
+                if (action == 'city') {
+                    result = 'province';
+                } else {
+                    result = 'wards';
                 }
+                $.ajax({
+                    url: "{{route('locationAjax')}}",
+                    method: "POST",
+                    dataType: 'html',
+                    data: {
+                        action: action,
+                        maid: maid,
+                        _token: _token
+                    },
+
+                    success: function(data) {
+                        $('#' + result).html(data);
+                    },
+                });            
             });
-            });
+            $('.js-select2').select2();
+
         });
     </script>
 </body>
+
 </html>

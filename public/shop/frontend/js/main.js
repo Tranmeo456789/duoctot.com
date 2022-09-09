@@ -56,6 +56,7 @@ $(document).ready(function () {
         itemsTablet: [600, 1], //2 items between 600 and 0
         itemsMobile: true // itemsMobile disabled - inherit from itemsTablet option
     });
+    $('.js-select2').select2();
     //box  or list product
     $('.ol1').click(function () {
         $('#body-nbox').css("display", "block");

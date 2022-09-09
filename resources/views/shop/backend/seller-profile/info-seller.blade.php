@@ -5,7 +5,7 @@
 @section('header_title', 'Thông tin người bán hàng')
 
 @section('body_content') 
-    <div class="card mt-2 ml-1">
+    <div class="card">
         <div class="card-header font-weight-bold">
             Thông tin chi tiết
         </div>
@@ -15,13 +15,13 @@
                     <div class="col-lg-4 col-sm-12">
                         <div class="form-group">
                             <label for="name">Mã thành viên</label>
-                            <input class="form-control" type="text" name="" id="" value="200033">
+                            <input class="form-control" type="text" name="code_customer" id="" value="{{$customer['code_customer']??''}}">
                         </div>
                     </div>
                     <div class="col-lg-8 col-sm-12">
                         <div class="form-group">
                             <label for="intro">Tên người bán(tên hiển thị)</label>
-                            <input class="form-control" type="text" name="" id="" value="ADMINTOR">
+                            <input class="form-control" type="text" name="name" id="" value="{{$customer['name']??''}}">
                         </div>
                     </div>
                 </div>
@@ -29,19 +29,19 @@
                     <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
                             <label for="name">Số điện thoại</label>
-                            <input class="form-control" type="text" name="" id="" value="0986777888">
+                            <input class="form-control" type="text" name="phone" id="" value="{{$customer['phone']??''}}">
                         </div>
                     </div>
                     <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
                             <label for="intro">Email</label>
-                            <input class="form-control" type="text" name="" id="" value="nguoiban@gmail.com">
+                            <input class="form-control" type="text" name="email" id="" value="{{$customer['email']??''}}">
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="name">Địa chỉ<span class="text-danger" >*</span></label>
-                    <input class="form-control" type="text" name="" id="" placeholder="Số nhà, tên đường" >
+                    <input class="form-control" type="text" name="address_detail" value="{{$customer->address_detail??''}}" id="" placeholder="Số nhà, tên đường" >
                 </div>
                 <div class="row">
                     <div class="col-lg-4 col-sm-6">

@@ -6,6 +6,8 @@ use App\Model\Shop\WarehouseModel as MainModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Shop\BackEnd\BackEndController;
 use App\Model\Shop\Tinhthanhpho;
+use App\Model\Shop\Quanhuyen;
+use App\Model\Shop\Xaphuongthitran;
 use App\Http\Requests\WarehouseRequest as MainRequest;
 class WarehouseController extends BackEndController
 {

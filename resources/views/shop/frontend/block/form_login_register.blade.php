@@ -50,9 +50,9 @@
                     <div class="phone-mail position-relative slectdk">
                         <div class="form-group mb-0">
                             <select class="form-control mb-0" name="local">
-                                <option value="Thành phố Hà Nội">Thành phố Hà Nội</option>
-                                <option value="Thành phố Hà Nội">Thành phố Hà Nội</option>
-                                <option value="Tỉnh Cao Bằng">Tỉnh Cao Bằng</option>
+                                @foreach($_SESSION['local'] as $local)
+                                <option value="{{$local->name}}">{{$local->name}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="img-person"><img src="{{asset('images/shop/dk2.png')}}" alt=""></div>
@@ -75,10 +75,6 @@
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="selectdk" id="sl3" value="Phòng khám">
-                                <label class="form-check-label" for="">Phòng khám</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="selectdk" id="sl4" value="Phòng khám">
                                 <label class="form-check-label" for="">Phòng khám</label>
                             </div>
                             <div class="form-check">
