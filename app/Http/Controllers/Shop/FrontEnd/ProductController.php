@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Shop\Cat_productModel;
 use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
 use App\Model\Shop\ProductModel;
+use App\Model\Shop\Tinhthanhpho;
 class ProductController extends ShopFrontEndController
 {
     public function __construct()
@@ -17,6 +18,7 @@ class ProductController extends ShopFrontEndController
         $this->pageTitle          = 'Chi tiết sản phẩm';
         parent::__construct();
         $data = Cat_productModel::all();
+        $_SESSION['local']=$local=Tinhthanhpho::all();
         function data_tree1($data, $parent_id = 0, $level = 0)
         {
             $result = [];
