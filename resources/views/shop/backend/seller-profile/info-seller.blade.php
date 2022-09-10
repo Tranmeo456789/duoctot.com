@@ -78,7 +78,7 @@
             </div>
             <div class="form-group">
                 <div><label for="name">Khu vực bán hàng</label></div>
-                <select id="" class="js-select2" placeholder="Chọn khu vực" multiple="multiple">
+                <select id="" class="form-control js-select2" placeholder="Chọn khu vực" multiple="multiple">
                     @foreach($locals as $local)
                     <option value="{{$local->name}}">{{$local->name}}</option>
                     @endforeach

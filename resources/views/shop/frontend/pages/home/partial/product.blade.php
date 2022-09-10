@@ -1,8 +1,12 @@
 <a href="">
-    <div class="d-flex justify-content-center">
-    <img src="{{asset('images/shop/' .  $item['image'] )}}" alt="" srcset=""></div>
-    <div class="pl-3">
-        <p>{{$item['name']}}</p>
+    @php
+    $img_product = explode(',', $item['image']);
+    @endphp
+    <div class="d-flex justify-content-center" style="height: 180px;padding: 5px;">
+        <img src="{{asset('public/shop/uploads/images/product/'.$img_product[0])}}" alt="" srcset="">
+    </div>
+    <div class="px-2">
+        <p class="truncate2">{{$item['name']}}</p>
         <span class="text-info">{{$item['price']}}/{{$item['unit']}}</span></span>
     </div>
 </a>

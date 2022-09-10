@@ -1,6 +1,6 @@
 //slider
 $(document).ready(function () {
-    
+
     var feature_productcovid = $('#feature-product-wp.product_sellhome .list-item');
     feature_productcovid.owlCarousel({
         autoPlay: true,
@@ -71,26 +71,7 @@ $(document).ready(function () {
         $('.ol1').removeClass("activebtn");
     });
     //sub menu
-    $('.sub-menu1>li').hover(
-        function () {
-            $('.sub-menu1>li').removeClass('active-menucat2');
-            $(this).addClass('active-menucat2');
-        },
-        function () {
-            $(this).addClass('active-menucat2');
-        }
-    );
-    $('.catc1').hover(
-        function () {
-            $('.black-content').css("display", "block");
-            $('.sub-menu1>li:first-child').addClass('active-menucat2');
-            $('.sub-menu1>li:first-child .sub-menu2').css("display", "block");
-        },
-        function () {
-            $('.black-content').css("display", "none");
-            $('.sub-menu1>li:first-child .sub-menu2').css("display", "none");
-        },
-    );
+
     //dong form
     $('.btn-closenk').click(function () {
         $('.form-login').css("display", "none");
@@ -156,18 +137,18 @@ $(document).ready(function () {
 
     // validate form
     $('#check-rules').click(function () {
-        if($(this).prop("checked") == true){
+        if ($(this).prop("checked") == true) {
             $('#dang-ky #btn-register').prop("disabled", false);
             $('#dang-ky #btn-register').css("background", "#05AFE3");
         }
-        else if($(this).prop("checked") == false){
+        else if ($(this).prop("checked") == false) {
             $('#dang-ky #btn-register').prop("disabled", true);
             $('#dang-ky #btn-register').css("background", "#96d4e7");
         }
-       
+
     });
-    
-  
+
+
     // tang giam so luong san pham
     $('.plus1, .minus1').on('click', function (e) {
         const isNegative = $(e.target).closest('.minus1').is('.minus1');

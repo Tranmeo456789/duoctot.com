@@ -1,8 +1,65 @@
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-<script src="{{ asset('/shop/frontend/js/main.js')}}?t=@php echo time() @endphp" type="text/javascript"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="{{ asset('/shop/frontend/js/jquery.validate.min.js')}}?t=@php echo time() @endphp" type="text/javascript"></script>
+<script src="{{ asset('/shop/frontend/js/main.js')}}?t=@php echo time() @endphp" type="text/javascript"></script>
 <script src="{{ asset('/shop/frontend/js/lightslider.js')}}?t=@php echo time() @endphp" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $('.sub-menu1>li').hover(
+        function() {
+            $('.sub-menu1>li').removeClass('active-menucat2');
+            $(this).addClass('active-menucat2');
+            var id_cat2 = $(this).attr('data-id');
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url: "{{route('ajaxcat3')}}",
+                method: 'POST',
+                dataType: 'json',
+                data: {
+                    id_cat2: id_cat2, 
+                    _token: _token,
+                },
+                success: function(data) {
+                    $('ul.body_catdetail').html(data['list_cat']);
+                    $('.list-productmn').html(data['list_product']);
+                    //console.log(data['id_cat2']);
+                },
+            });
+
+        },
+        function() {
+            $(this).removeClass('active-menucat2');
+        }
+    );
+</script>
+<script> 
+    $('.catc1').hover(
+        function () {
+            $('.black-content').css("display", "block");
+            $('.sub-menu1>li:first-child').addClass('active-menucat2');
+            $('.sub-menu1>li:first-child .sub-menu2').css("display", "block");
+            var id_cat1 = $(this).attr('data-id');
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url: "{{route('ajaxcat1')}}",
+                method: 'GET',
+                dataType: 'json',
+                data: {
+                    id_cat1: id_cat1,
+                    _token: _token
+                },
+                success: function(data) {
+                    $('ul.body_catdetail').html(data['list_cat']);
+                    $('.list-productmn').html(data['list_product']);
+                },
+            });
+        },
+        function () {
+            $('.black-content').css("display", "none");
+            $('.sub-menu1>li:first-child .sub-menu2').css("display", "none");
+        },
+    );
+</script>
 <script>
     jQuery.validator.addMethod("checkPhoneNumber",
         function() {
@@ -70,57 +127,56 @@
             return flag;
         }
     );
-$(document).ready(function(){
-    $("#user_login").validate({
-        rules: {
-            email: {
-                required: true,
-                checkPhoneNumber: true,
-            },
-            password: {
-                required: true,
-                minlength: 6
-            },
-        },
-        messages: {
-            email: {
-                required: "Nhập số điện thoại hoặc email",
-                checkPhoneNumber: "Số điện thoại hoặc email không đúng định dạng",
-            },
-            password: {
-                required: "Bạn cần nhập mật khẩu",
-                minlength: "Mật khẩu tối thiểu 6 ký tự"
-            },
-        },
-        submitHandler: function(form) {
-            
-            var emaip = $('#inputphel').val();
-            var password = $('#password').val();
-            var _token = $('input[name="_token"]').val();
-            var data1 =$(form).serializeArray();
-            //event.preventDefault();
-
-            $.ajax({             
-                url: 'http://localhost/shop.tdoctor.vn/dang-nhap',
-                type: "POST",
-                dataType: 'json',
-                data: data1,
-
-                success:function(data) {
-                    
-                    //data = JSON.parse(data);
-                   // console.log(data);
-                    
-                    //  if(response.status==0){
-                    //      alert('ok');
-                    //  }
-
+    $(document).ready(function() {
+        $("#user_login").validate({
+            rules: {
+                email: {
+                    required: true,
+                    checkPhoneNumber: true,
                 },
-            });          
-        }
+                password: {
+                    required: true,
+                    minlength: 6
+                },
+            },
+            messages: {
+                email: {
+                    required: "Nhập số điện thoại hoặc email",
+                    checkPhoneNumber: "Số điện thoại hoặc email không đúng định dạng",
+                },
+                password: {
+                    required: "Bạn cần nhập mật khẩu",
+                    minlength: "Mật khẩu tối thiểu 6 ký tự"
+                },
+            },
+            submitHandler: function(form) {
+
+                var emaip = $('#inputphel').val();
+                var password = $('#password').val();
+                var _token = $('input[name="_token"]').val();
+                var data1 = $(form).serializeArray();
+                //event.preventDefault();
+
+                $.ajax({
+                    url: 'http://localhost/shop.tdoctor.vn/dang-nhap',
+                    type: "POST",
+                    dataType: 'json',
+                    data: data1,
+
+                    success: function(data) {
+
+                        //data = JSON.parse(data);
+                        // console.log(data);
+
+                        //  if(response.status==0){
+                        //      alert('ok');
+                        //  }
+
+                    },
+                });
+            }
+        });
     });
-});
-    
 </script>
 <script>
     $("#user_register").validate({
@@ -155,32 +211,33 @@ $(document).ready(function(){
                 type: "POST",
                 url: "{{url('/dang-ky')}}",
                 data: $(form).serializeArray(),
-                success: function(response) {
-                }
+                success: function(response) {}
             });
         }
     });
 </script>
 <script>
-    	 $(document).ready(function() {
-			$("#content-slider").lightSlider({
-                loop:true,
-                keyPress:true
-            });
-            $('#image-gallery').lightSlider({
-                gallery:true,
-                item:1,
-                thumbItem:9,
-                slideMargin: 0,
-                speed:500,
-                auto:true,
-                loop:true,
-                onSliderLoad: function() {
-                    $('#image-gallery').removeClass('cS-hidden');
-                }  
-            });
-		});
-    </script>
+    $(document).ready(function() {
+        $("#content-slider").lightSlider({
+            loop: true,
+            keyPress: true
+        });
+        $('#image-gallery').lightSlider({
+            gallery: true,
+            item: 1,
+            thumbItem: 9,
+            slideMargin: 0,
+            speed: 500,
+            auto: true,
+            loop: true,
+            onSliderLoad: function() {
+                $('#image-gallery').removeClass('cS-hidden');
+            }
+        });
+
+    });
+</script>
+
 <script src="{{ asset('/shop/frontend/js/owl.carousel.js')}}?t=@php echo time() @endphp" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
