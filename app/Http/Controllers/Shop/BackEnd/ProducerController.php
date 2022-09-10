@@ -16,6 +16,7 @@ class ProducerController extends BackEndController
         $this->pageTitle          = 'Nhà cung cấp';
         $this->model = new MainModel();
         parent::__construct();
+        session(['module_active'=>'producer']);
     }
     public function save(MainRequest $request)
     {

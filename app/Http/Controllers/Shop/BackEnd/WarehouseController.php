@@ -18,6 +18,7 @@ class WarehouseController extends BackEndController
         $this->pageTitle          = 'Kho hàng';
         $this->model = new MainModel();
         parent::__construct();
+        session(['module_active'=>'warehouse']);
     }
     public function save(MainRequest $request)
     {

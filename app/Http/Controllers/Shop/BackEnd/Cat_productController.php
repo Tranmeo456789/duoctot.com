@@ -17,6 +17,7 @@ class Cat_productController extends BackEndController
         $this->pageTitle          = 'Danh mục sản phẩm';
         $this->model = new MainModel();
         parent::__construct();
+        session(['module_active'=>'catproduct']);
     }
     public function save(MainRequest $request)
     {

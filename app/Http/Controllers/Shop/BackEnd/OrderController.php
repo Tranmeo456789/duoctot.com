@@ -9,6 +9,9 @@ use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
 {
+    public function __construct(){
+        session(['module_active'=>'order']);
+    }
     public function add_order(){
         return view('shop.backend.order.add_order');
     }

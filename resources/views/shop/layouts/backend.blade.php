@@ -20,6 +20,9 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <title>@yield('title')</title>
 </head>
+@php
+$module_active=session('module_active');
+@endphp
 
 <body>
     <div id="warpper" class="nav-fixed">
@@ -33,7 +36,7 @@
                     <div class="hide-sidebar" id="hide-sidebar"><i class="fas fa-times"></i></div>
                 </div>
                 <ul id="sidebar-menu">
-                    <li class="nav-link">
+                    <li class="nav-link {{$module_active=='dashboard'?'active':''}}">
                         <a href="{{route('dashboard')}}">
                             <div class="nav-link-icon d-inline-flex">
                                 <i class="fas fa-building"></i>
@@ -41,47 +44,43 @@
                             Thống kê bán hàng
                         </a>
                     </li>
-                    <li class="nav-link">
-                        <a href="">
+                    <li class="nav-link {{$module_active=='sellerprofile'?'active':''}}">
+                        <a href="{{route('seller.info')}}">
                             <div class="nav-link-icon d-inline-flex">
                                 <i class="fas fa-chalkboard-teacher"></i>
                             </div>
                             Hồ sơ
                         </a>
-                        <i class="arrow fas fa-angle-right"></i>
+                        <i class="arrow fas {{$module_active=='sellerprofile'?'fa-angle-down':'fa-angle-right'}}"></i>
                         <ul class="sub-menu">
                             <li><a href="{{route('seller.info')}}">Thông tin người bán</a></li>
                             <li><a href="{{route('seller.password')}}">Đổi mật khẩu</a></li>
                             <li><a href="{{route('seller.setting')}}">Thiết lập khác</a></li>
                         </ul>
                     </li>
-                    <li class="nav-link">
-                        <a href="">
+                    <li class="nav-link {{$module_active=='catproduct'?'active':''}}">
+                        <a href="{{route('cat_product')}}">
                             <div class="nav-link-icon d-inline-flex">
                                 <i class="fas fa-wallet"></i>
                             </div>
-                            Quản lý danh mục
+                            Danh mục thuốc
                         </a>
-                        <i class="arrow fas fa-angle-right"></i>
-                        <ul class="sub-menu">
-                            <li><a href="{{route('cat_product')}}">Danh mục thuốc</a></li>
-                        </ul>
                     </li>
-                    <li class="nav-link">
-                        <a href="">
+                    <li class="nav-link {{$module_active=='product'?'active':''}}">
+                        <a href="{{route('product')}}">
                             <div class="nav-link-icon d-inline-flex">
                                 <i class="fas fa-dumpster-fire"></i>
                             </div>
                             Quản lý thuốc
                         </a>
-                        <i class="arrow fas fa-angle-right"></i>
+                        <i class="arrow fas {{$module_active=='product'?'fa-angle-down':'fa-angle-right'}}"></i>
                         <ul class="sub-menu">
                             <li><a href="{{route('product')}}">Danh sách thuốc</a></li>
                             <li><a href="{{route('unit')}}">Đơn vị tính</a></li>
                             <li><a href="{{route('trademark')}}">Thương hiệu thuốc</a></li>
                         </ul>
                     </li>
-                    <li class="nav-link">
+                    <li class="nav-link {{$module_active=='producer'?'active':''}}">
                         <a href="{{route('producer')}}">
                             <div class="nav-link-icon d-inline-flex">
                                 <i class="fas fa-box-tissue"></i>
@@ -89,20 +88,20 @@
                             Quản lý nhà sản xuất
                         </a>
                     </li>
-                    <li class="nav-link">
-                        <a href="">
+                    <li class="nav-link {{$module_active=='order'?'active':''}}">
+                        <a href="{{route('order.list')}}">
                             <div class="nav-link-icon d-inline-flex">
                                 <i class="fas fa-gifts"></i>
                             </div>
                             Quản lý đơn hàng
                         </a>
-                        <i class="arrow fas fa-angle-right"></i>
+                        <i class="arrow fas {{$module_active=='order'?'fa-angle-down':'fa-angle-right'}}"></i>
                         <ul class="sub-menu">
                             <li><a href="{{route('order.list')}}">Danh sách đơn hàng</a></li>
                             <li><a href="{{route('invoice.list')}}">Danh sách hóa đơn</a></li>
                         </ul>
                     </li>
-                    <li class="nav-link">
+                    <li class="nav-link {{$module_active=='consignment'?'active':''}}">
                         <a href="{{route('consignment.list')}}">
                             <div class="nav-link-icon d-inline-flex">
                                 <i class="fas fa-file-alt"></i>
@@ -110,14 +109,14 @@
                             Phiếu gửi hàng
                         </a>
                     </li>
-                    <li class="nav-link">
+                    <li class="nav-link {{$module_active=='warehouse'?'active':''}}">
                         <a href="{{route('qlwarehouse')}}">
                             <div class="nav-link-icon d-inline-flex">
                                 <i class="fas fa-store"></i>
                             </div>
                             Quản lý kho
                         </a>
-                        <i class="arrow fas fa-angle-right"></i>
+                        <i class="arrow fas {{$module_active=='warehouse'?'fa-angle-down':'fa-angle-right'}}"></i>
                         <ul class="sub-menu">
                             <li><a href="{{route('warehouse')}}">Danh sách kho hàng</a></li>
                         </ul>
@@ -130,17 +129,14 @@
                             Khuyến mãi
                         </a>
                     </li>
-                    <li class="nav-link">
-                        <a href="">
+                    <li class="nav-link {{$module_active=='customer'?'active':''}}">
+                        <a href="{{route('customer')}}">
                             <div class="nav-link-icon d-inline-flex">
                                 <i class="fas fa-person-booth"></i>
                             </div>
-                            Khách hàng
+                            Quản lý khách hàng
                         </a>
-                        <i class="arrow fas fa-angle-right"></i>
-                        <ul class="sub-menu">
-                            <li><a href="{{route('customer')}}">Danh sách khách hàng</a></li>
-                        </ul>
+                        
                     </li>
                     <li class="nav-link">
                         <a href="">
@@ -290,10 +286,10 @@
                     success: function(data) {
                         $('#' + result).html(data);
                     },
-                });            
+                });
             });
             $('.js-select2').select2();
-
+            $('.nav-link.active .sub-menu').slideDown();
         });
     </script>
 </body>

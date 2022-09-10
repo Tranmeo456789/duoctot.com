@@ -18,6 +18,7 @@ class CustomerController extends BackEndController
         $this->pageTitle          = 'Khách hàng';
         $this->model = new MainModel();
         parent::__construct();
+        session(['module_active'=>'customer']);
     }
     public function save(MainRequest $request)
     {

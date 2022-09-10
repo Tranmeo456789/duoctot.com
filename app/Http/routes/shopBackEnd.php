@@ -17,6 +17,7 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd'], fu
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
     Route::get('/thong-tin-nguoi-ban', 'SellerProfileController@index')->name('seller.info');
+    Route::post('/luu-thong-tin-nguoi-ban', 'SellerProfileController@save')->name('seller.save');
     Route::get('/thay-doi-mat-khau', 'SellerProfileController@change_password')->name('seller.password');
     Route::get('/thiet-lap-cai-dat-khac', 'SellerProfileController@setting')->name('seller.setting');
 

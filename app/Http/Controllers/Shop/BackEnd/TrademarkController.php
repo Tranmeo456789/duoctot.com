@@ -15,6 +15,7 @@ class TrademarkController extends BackEndController
         $this->pageTitle          = 'Thương hiệu';
         $this->model = new MainModel();
         parent::__construct();
+        session(['module_active'=>'product']);
     }
     public function save(MainRequest $request)
     {

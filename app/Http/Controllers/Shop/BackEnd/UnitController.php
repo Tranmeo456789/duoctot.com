@@ -16,6 +16,7 @@ class UnitController extends BackEndController
         $this->pageTitle          = 'Đơn vị tính';
         $this->model = new MainModel();
         parent::__construct();
+        session(['module_active'=>'product']);
     }
     public function save(MainRequest $request)
     {
