@@ -66,41 +66,33 @@ class UserController extends Controller
     }
     public function login(Request $request)
     {
-        //$data=$request->all();
-        //return $data['emaip'];
+        $data = $request->all();
+        $emaip = $request->emaip;
+        $password=$request->password;
+        $islogin=0;
         $users = User::all();
         $customers=CustomerModel::all();
-        //$islogin = 0;
         foreach ($users as $user) {
-            if ($user['email'] == $request->input('email') && $user['password'] ==  md5($request->input('password')) or $user['phone'] == $request->input('email') && $user['password'] ==  md5($request->input('password'))) {
+            if ($emaip == $user['email'] && $user['password'] ==  md5($password) or $user['phone'] == $emaip && $user['password'] ==  md5($password)) {
                 $request->session()->put('islogin', true);
                 $request->session()->put('id', $user['id']);
                 $request->session()->put('name', $user['name']);
                 $islogin = 1;
-                if ($user['customer_group'] == 'Nhà thuốc') {
-                    return redirect('/backend');
-                }
-                return redirect()->back();
             }
         }
         foreach ($customers as $customer) {
-            if ($customer['email'] == $request->input('email') && $customer['password'] ==  md5($request->input('password')) or $customer['phone'] == $request->input('email') && $customer['password'] ==  md5($request->input('password'))) {
+            if ($emaip == $customer['email'] && $customer['password'] ==  md5($password) or $customer['phone'] == $emaip && $customer['password'] ==  md5($password)) {
                 $request->session()->put('islogin', true);
                 $request->session()->put('id', $customer['id']);
                 $request->session()->put('name', $customer['name']);
                 $islogin = 1;
-                if ($customer['customer_group'] == 'Nhà thuốc') {
-                    return redirect('/backend');
-                }
-                return redirect()->back();
             }
         }
-        return redirect()->back();
-        $result = [
-            'status' => 0,
-            'message' => 'Thông tin đăng nhập không đúng',
-        ];
-        //echo json_encode($result);
+        $result = array(
+            'user' => $password,
+            'islogin'=>$islogin,      
+        );
+        return response()->json($result, 200);
     }
     public function logout(Request $request)
     {

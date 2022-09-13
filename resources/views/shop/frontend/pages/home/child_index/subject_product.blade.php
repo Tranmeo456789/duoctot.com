@@ -1,6 +1,8 @@
 <h1 class="d-flex justify-content-between mb-5 flex-wrap ">
     <div class="title_cathd mb-sm-2">
-        <div class="d-flex align-items-center"><h1>Sản phẩm theo đối tượng</h1></div>
+        <div class="d-flex align-items-center">
+            <h1>Sản phẩm theo đối tượng</h1>
+        </div>
         <img src="{{asset('images/shop/tp3.png')}}" alt="">
     </div>
     <div class="d-flex justify-content-between flex-wrap  slect-customer">
@@ -19,23 +21,24 @@
     </div>
 </h1>
 <ul class="clearfix">
-    @php
-        $items = [
-            [ 'name' => 'Siro bổ phế bối mẫu Forte Mom and Baby Tất thành','price'  => '115.000đ','unit'=>'chai','image' => 'selling2.png'],
-            [ 'name' => 'Siro bổ phế bối mẫu Forte Mom and Baby Tất thành','price'  => '115.000đ','unit'=>'chai','image' => 'selling3.png'],
-            [ 'name' => 'Siro bổ phế bối mẫu Forte Mom and Baby Tất thành','price'  => '115.000đ','unit'=>'chai','image' => 'selling4.png'],
-            [ 'name' => 'Siro bổ phế bối mẫu Forte Mom and Baby Tất thành','price'  => '115.000đ','unit'=>'chai','image' => 'selling2.png'],
-            [ 'name' => 'Siro bổ phế bối mẫu Forte Mom and Baby Tất thành','price'  => '115.000đ','unit'=>'chai','image' => 'selling3.png'],
-            [ 'name' => 'Siro bổ phế bối mẫu Forte Mom and Baby Tất thành','price'  => '115.000đ','unit'=>'chai','image' => 'selling4.png'],
-            [ 'name' => 'Siro bổ phế bối mẫu Forte Mom and Baby Tất thành','price'  => '115.000đ','unit'=>'chai','image' => 'selling2.png'],
-            [ 'name' => 'Siro bổ phế bối mẫu Forte Mom and Baby Tất thành','price'  => '115.000đ','unit'=>'chai','image' => 'selling3.png'],
-            [ 'name' => 'Siro bổ phế bối mẫu Forte Mom and Baby Tất thành','price'  => '115.000đ','unit'=>'chai','image' => 'selling4.png'],
-            [ 'name' => 'Siro bổ phế bối mẫu Forte Mom and Baby Tất thành','price'  => '115.000đ','unit'=>'chai','image' => 'selling2.png']
-        ];
-    @endphp
-    @foreach ($items as $item)
-        <li class="position-relative">
-            @include("$moduleName.pages.$controllerName.partial.product_unit_top",['item'=>$item])
-        </li>
+    @foreach($product_covids as $item)
+    <li class="position-relative">
+        <a href="{{route('fe.product.detail',$item['id'])}}">
+            @php
+            $img_product = explode(',', $item['image']);
+            @endphp
+            <div class="d-flex justify-content-center seth-img">
+                    <div class="d-flex">
+                        <img src="{{asset('public/shop/uploads/images/product/'.$img_product[0])}}">
+                    </div>
+
+            </div>
+            <div class="pl-3">
+                <p class="truncate2">{{$item['name']}}</p>
+                <span class="text-info">{{$item['price']}}/{{$item['unit']}}</span></span>
+            </div>
+        </a>
+        <div class="unit-top">{{$item['unit']}}</div>
+    </li>
     @endforeach
 </ul>

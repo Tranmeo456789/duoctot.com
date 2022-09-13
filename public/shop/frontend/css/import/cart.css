@@ -78,14 +78,17 @@
     color: #7991B7;
 
 }
-
+.info-product-cart .manipulation a:hover{
+    cursor: pointer;
+    color: #a2c0f0;
+}
 .cbh1 a {
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 19px;
     text-align: justify;
-    color: #1E1E1E;
+    color: blue;
 }
 .cbh1 a:hover{color: #05AFE3;}
 .cbh1 {
@@ -329,4 +332,109 @@
 }
 .local_drugstore a:hover{
     background: #05AFE3;color: white;
+}
+.number_cartmenu{
+    position: absolute;
+    top: 2px;
+    left: 22px;
+    height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: #f59e0b;
+    color: #1E1E1E;
+    border-radius: 100px;
+    padding: 4px 8px;
+    line-height: 100%;
+    font-weight: bold;
+}
+#dropdown{
+    box-shadow: 0 2px 12px rgb(0 0 0 / 15%);
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: calc(100% + 0px);
+    right: 0;
+    min-width: 360px;
+    background: #fff;
+    transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -webkit-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    z-index: 1000;
+    color: #334155;
+    padding: 8px 11px;
+    border-radius: 8px;
+    border: 1px solid #d8e0e8;
+    text-align: left;
+    font-family: Roboto,Arial;
+}
+
+.iconcartmenu:hover #dropdown{
+    visibility: visible;
+    opacity: 1;
+}
+.arrow-up{
+    position: absolute;
+    top: -16px;
+    right: 60px;
+    color: white;
+    font-size: 22px;
+    z-index: 1000;
+}
+.numberperp{
+    max-width: 40px;
+    padding: 1px;background-color: #fff;
+    outline: none;
+    font-weight: 500;
+    color: #334155;
+    border: 1px solid rgb(211, 203, 203);
+    border-radius: 10px;
+    font-size: 15px;text-align: center;
+}
+.deleteperp{
+    color: #05AFE3;
+    cursor: pointer;
+}
+.viewcartmini{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    user-select: none;
+    font-family: inherit;
+    transition: color .3s ease-in-out,background-color .3s ease-in-out,border-color .3s ease-in-out,box-shadow .3s ease-in-out;
+    border: 1px solid transparent;
+    cursor: pointer;
+    border-radius: 100px;
+    color: #fff;
+    background: #1d48ba;
+    outline: none;
+    font-size: 16px;
+    line-height: 16px;
+    padding: 0 32px;
+    height: 36px;
+    margin-top: 5px;
+}
+.viewcartmini:hover{
+    color: white;
+    background: #1448da;
+}
+.listp-cartmini li{
+padding: 5px;
+border-bottom: 1px solid gainsboro;
+}
+.notisucesscmn{
+    padding: 5px 0px;
+    border-bottom: 1px solid gainsboro;
+    text-align: center;
+}
+.notisucesscmn i{
+    font-size: 11px;
+    border-radius: 50%;
+    background: green;
+    color: #fff;
+    padding: 2px;
+    margin-right: 4px;
 }

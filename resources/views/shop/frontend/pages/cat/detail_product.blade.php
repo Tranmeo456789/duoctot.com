@@ -56,17 +56,18 @@
                     <p>Nhập mã VNPAYLC giảm ngay 3% tối đa 50,000đ khi thanh toán 100% qua VNPAY-QR <a href="">Xem chi tiết</a></p>
                     <div class="payment-img"><img src="{{asset('images/shop/vnpay.png')}}" alt=""></div>
                 </div>
-                <form action="">
+                <form action="" method="POST">
+                    {!! csrf_field() !!}
                     <div class="input-number">
-                        <span class="seclect-number">Chọn số lượng</span>
+                        <span class="seclect-number" data-id="{{$productcs['id']}}">Chọn số lượng</span>
                         <span class="pm11">
-                            <span title="" class="minus1"><i class="fa fa-minus"></i></span>
-                            <input type="number" name="" min="0" value="1" class="num-order">
+                            <span title="" class="minus1"><i class="fa fa-minus"></i></span>          
+                            <input type="number" name="number_perp" min="1" value="1" class="num-order">
                             <span title="" class="plus1"><i class="fa fa-plus"></i></span>
                         </span>
                     </div>
                     <div class="btn-buy-search d-flex justify-content-between flex-wrap">
-                        <input type="submit" value="Chọn mua" class="btn-select-buy btn btn-primary text-light mb-xs-2">
+                        <span name="btn_selectbuy"  class="btn-select-buy btn btn-primary text-light mb-xs-2">Chọn mua</span>
                         <a class="btn-search-house" href="">Tìm nhà thuốc</a>
                     </div>
                 </form>

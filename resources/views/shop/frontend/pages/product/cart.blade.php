@@ -3,76 +3,55 @@
 @section('content')
 <div class="cbr">
     <div class="wp-inner mt-2">
-        <div class="cbh1"><a href=""><i class="fas fa-angle-left"></i> Tiếp tục mua hàng</a></div>
+        @if(Cart::count() > 0)
+        <div class="cbh1"><a href="{{route('home')}}"><i class="fas fa-angle-left"></i> Tiếp tục mua hàng</a></div>
         <div class="row ">
             <div class="col-xl-9 col-lg-12 mb-1">
                 <div class="wp-left-cart">
                     <div class="title-cart">
-                        <h1>Có 3 sản phẩm trong giỏ hàng</h1>
+                        <h1>Có {{Cart::content()->count()}} sản phẩm trong giỏ hàng</h1>
                     </div>
                     <div class="info-product-cart">
                         <div class="table-responsive">
                             <div class="set-widthtable">
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <td style="width:20%">
-                                                <a href=""><img src="{{asset('images/shop/ct1.png')}}" alt="" style="width: 100px;"></a>
-                                            </td>
-                                            <td style="width:50%" class="text-left">
-                                                <div class="title-product-cart">
-                                                    <a href="">Viên Sủi Optimax Immunity Booster Vid - Fighter Tăng Sức Đề Kháng 20 Viên</a>
-                                                </div>
-                                                <span>Đơn vị bán:</span><span class="font-weight-bold">Tuýp</span>
-                                                <p class="font-weight-bold">* Giảm ngay 15%</p>
-                                            </td>
-                                            <td style="width:30%" class="text-right">
-                                                <div class="input-number intable">
-                                                    <span class="pm11">
-                                                        <span title="" class="minus1"><i class="fa fa-minus"></i></span>
-                                                        <input type="number" name="" min="0" value="1" class="num-order">
-                                                        <span title="" class="plus1"><i class="fa fa-plus"></i></span>
-                                                    </span>
-                                                </div>
-                                                <div class="price-old"><s>115.000đ</s></div>
-                                                <div class="price-new">97.750đ</div>
-                                                <div class="manipulation">
-                                                    <a href="" class="buy-after"><img src="{{asset('images/shop/ct4.png')}}" alt="">Để mua sau</a>
-                                                    <span> | </span>
-                                                    <a href="" class="delete-product"><img src="{{asset('images/shop/ct5.png')}}" alt="">Xóa</a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width:25%">
-                                                <a href=""><img src="{{asset('images/shop/ct1.png')}}" alt="" style="width: 100px;"></a>
-                                            </td>
-                                            <td style="width:45%" class="text-left">
-                                                <div class="title-product-cart">
-                                                    <a href="">Viên Sủi Optimax Immunity Booster Vid - Fighter Tăng Sức Đề Kháng 20 Viên</a>
-                                                </div>
-                                                <span>Đơn vị bán:</span><span class="font-weight-bold">Tuýp</span>
-                                                <p class="font-weight-bold">* Giảm ngay 15%</p>
-                                            </td>
-                                            <td style="width:30%" class="text-right">
-                                                <div class="input-number intable">
-                                                    <span class="pm11">
-                                                        <span title="" class="minus1"><i class="fa fa-minus"></i></span>
-                                                        <input type="number" name="" min="0" value="1" class="num-order">
-                                                        <span title="" class="plus1"><i class="fa fa-plus"></i></span>
-                                                    </span>
-                                                </div>
-                                                <div class="price-old"><s>115.000đ</s></div>
-                                                <div class="price-new">97.750đ</div>
-                                                <div class="manipulation">
-                                                    <a href="" class="buy-after"><img src="{{asset('images/shop/ct4.png')}}" alt="">Để mua sau</a>
-                                                    <span> | </span>
-                                                    <a href="" class="delete-product"><img src="{{asset('images/shop/ct5.png')}}" alt="">Xóa</a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <form action="" method="POST">
+                                    {!! csrf_field() !!}
+                                    <table class="table mb-0">
+                                        <tbody>
+                                            @foreach( Cart::content() as $row )
+                                            <tr>
+                                                <td style="width:20%">
+                                                    <a href="" style="display:block; text-align:center"><img src="{{asset('public/shop/uploads/images/product/' . $row->options->image)}}" alt="" style="width: 100px;"></a>
+                                                </td>
+                                                <td style="width:50%" class="text-left">
+                                                    <div class="title-product-cart">
+                                                        <a href="">{{$row->name}}</a>
+                                                    </div>
+                                                    <span>Đơn vị bán:</span><span class="font-weight-bold">{{$row->options->unit}}</span>
+                                                    <p class="font-weight-bold">* Giảm ngay 15%</p>
+                                                </td>
+                                                <td style="width:30%" class="text-right">
+                                                    <div class="input-number intable">
+                                                        <span class="pm11">
+                                                            <span title="" class="minus1 minus2"><i class="fa fa-minus"></i></span>
+                                                            <input type="number" max="999" min="1" value="{{$row->qty}}" data-id="{{$row->id}}" data-rowId="{{$row->rowId}}" name="qty[{{$row->rowId}}]" class="num-order number-ajax num-order{{$row->rowId}}">
+                                                            <span title="" class="plus1 plus2"><i class="fa fa-plus"></i></span>
+                                                        </span>
+                                                    </div>
+                                                    <div class="price-old"><s>{{number_format($row->price-10000,0,',','.')}}đ</s></div>
+                                                    <div class="price-new price-new{{$row->id}}">{{number_format($row->price*$row->qty,0,',','.')}}<span>đ</span></div>
+                                                    <div class="manipulation">
+                                                        <a href="" class="buy-after"><img src="{{asset('images/shop/ct4.png')}}" alt="">Để mua sau</a>
+                                                        <span> | </span>
+                                                        <a href="{{route('fe.cart.delete',$row->rowId)}}" class="delete-product"><img src="{{asset('images/shop/ct5.png')}}" alt="">Xóa</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </form>
+
                             </div>
                         </div>
                     </div>
@@ -92,14 +71,14 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="status" id="status1" value="Chờ duyệt" checked>
+                                        <input class="form-check-input" type="radio" name="status" id="status1" value="Nam" checked>
                                         <label class="form-check-label" for="status1">
                                             Anh
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="status" id="exampleRadios2" value="Công khai">
-                                        <label class="form-check-label" for="exampleRadios2">
+                                        <input class="form-check-input" type="radio" name="status" id="status2" value="Nữ">
+                                        <label class="form-check-label" for="status2">
                                             Chị
                                         </label>
                                     </div>
@@ -125,7 +104,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="" id="" value="" checked>
+                                        <input class="form-check-input" type="radio" name="" id="" value="Yêu cầu xuất hóa đơn" checked>
                                         <label class="form-check-label" for="">
                                             Yêu cầu xuất hóa đơn
                                         </label>
@@ -136,14 +115,14 @@
                                 <div class="form-group">
                                     <p class="font-weight-bold">Chọn hình thức nhận hàng</p>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="status" id="status1" value="Chờ duyệt" checked>
-                                        <label class="form-check-label" for="status1">
+                                        <input class="form-check-input" type="radio" name="re" id="re1" value="Nhận tại nhà thuốc" checked>
+                                        <label class="form-check-label" for="re1">
                                             Nhận tại nhà thuốc
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="status" id="exampleRadios2" value="Công khai">
-                                        <label class="form-check-label" for="exampleRadios2">
+                                        <input class="form-check-input" type="radio" name="re" id="re2" value="Giao hàng tận nơi">
+                                        <label class="form-check-label" for="re2">
                                             Giao hàng tận nơi
                                         </label>
                                     </div>
@@ -202,11 +181,11 @@
                         <tbody>
                             <tr>
                                 <td class="pl-2 py-2">Tổng tiền</td>
-                                <td class="text-right pr-2 py-2">1.625.000đ</td>
+                                <td class="text-right pr-2 py-2"><span class="totalt">{{number_format(Cart::total(),0,',','.')}}</span>đ</td>
                             </tr>
                             <tr>
                                 <td class="pl-2 py-2">Khuyến mãi giảm</td>
-                                <td class="text-right pr-2 py-2">17.250đ</td>
+                                <td class="text-right pr-2 py-2">10.000đ</td>
                             </tr>
                             <tr>
                                 <td class="pl-2 py-2">Phí giao dự kiến</td>
@@ -214,7 +193,7 @@
                             </tr>
                             <tr>
                                 <td class="pl-2 py-2 font-weight-bold">Cần thanh toán</td>
-                                <td class="text-right text-info pr-2 py-2">1.607.750đ</td>
+                                <td class="text-right text-info pr-2 py-2"><span class="totaltg">{{number_format(Cart::total()-10000,0,',','.')}}</span>đ</td>
                             </tr>
                         </tbody>
                     </table>
@@ -237,6 +216,17 @@
                 </div>
             </div>
         </div>
+        @else
+        <div class="pt-3">
+            <div class="wp-cart-null d-flex justify-content-center">
+                <div class="cart-null text-center">
+                    <div><img src="{{asset('images/shop/cn1.png')}}" alt=""></div>
+                    <h1>Chưa có sản phẩm nào trong giỏ hàng</h1>
+                    <a href="{{route('home')}}">TIẾP TỤC MUA SẮM</a>
+                </div>
+            </div>
+        </div>
+        @endif
         <div class="row">
             <div class="col-md-12">
                 <div class="new-view">

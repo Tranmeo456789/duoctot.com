@@ -5,61 +5,170 @@
 <script src="{{ asset('/shop/frontend/js/lightslider.js')}}?t=@php echo time() @endphp" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
-    $('.sub-menu1>li').hover(
-        function() {
-            $('.sub-menu1>li').removeClass('active-menucat2');
-            $(this).addClass('active-menucat2');
-            var id_cat2 = $(this).attr('data-id');
+    $(document).ready(function() {
+        $('.sub-menu1>li').hover(
+            function() {
+                $('.sub-menu1>li').removeClass('active-menucat2');
+                $(this).addClass('active-menucat2');
+                var id_cat2 = $(this).attr('data-id');
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url: "{{route('ajaxcat3')}}",
+                    method: 'POST',
+                    dataType: 'json',
+                    data: {
+                        id_cat2: id_cat2,
+                        _token: _token,
+                    },
+                    success: function(data) {
+                        $('ul.body_catdetail').html(data['list_cat']);
+                        $('.list-productmn').html(data['list_product']);
+                        //console.log(data['id_cat2']);
+                    },
+                });
+
+            },
+            function() {
+                $(this).removeClass('active-menucat2');
+            }
+        );
+        $('.catc1').hover(
+            function() {
+                $('.black-content').css("display", "block");
+                $('.sub-menu1>li:first-child').addClass('active-menucat2');
+                $('.sub-menu1>li:first-child .sub-menu2').css("display", "block");
+                var id_cat1 = $(this).attr('data-id');
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url: "{{route('ajaxcat1')}}",
+                    method: 'GET',
+                    dataType: 'json',
+                    data: {
+                        id_cat1: id_cat1,
+                        _token: _token
+                    },
+                    success: function(data) {
+                        $('ul.body_catdetail').html(data['list_cat']);
+                        $('.list-productmn').html(data['list_product']);
+                    },
+                });
+            },
+            function() {
+                $('.black-content').css("display", "none");
+                $('.sub-menu1>li:first-child .sub-menu2').css("display", "none");
+            },
+        );
+        $('.btn-select-buy').click(function() {
+            $('body,html').stop().animate({
+                scrollTop: 0
+            }, 800);
+
+            function hidden_reloal() {
+                $('#dropdown').css("opacity", 1);
+                $('#dropdown').css("visibility", "visible");
+            }
+            setTimeout(hidden_reloal, 1000);
+
+            function reloadpage() {
+                location.reload();
+            }
+            setInterval(reloadpage, 3000);
+
             var _token = $('input[name="_token"]').val();
+            var number_perp = $('input[name="number_perp"]').val();
+            var id_product = $('.seclect-number').attr('data-id');
             $.ajax({
-                url: "{{route('ajaxcat3')}}",
+                url: "{{route('fe.cart.addproduct')}}",
                 method: 'POST',
                 dataType: 'json',
                 data: {
-                    id_cat2: id_cat2, 
+                    id_product: id_product,
+                    number_perp: number_perp,
                     _token: _token,
                 },
                 success: function(data) {
-                    $('ul.body_catdetail').html(data['list_cat']);
-                    $('.list-productmn').html(data['list_product']);
-                    //console.log(data['id_cat2']);
+                    $('.number_cartmenu').html(data['number_product']);
+                    $('#cart-load').html(data['list_product']);
+                    $('.notisucess1').html(data['noti_success']);
+                    //console.log(data['number_product']);
                 },
             });
-
-        },
-        function() {
-            $(this).removeClass('active-menucat2');
-        }
-    );
-</script>
-<script> 
-    $('.catc1').hover(
-        function () {
-            $('.black-content').css("display", "block");
-            $('.sub-menu1>li:first-child').addClass('active-menucat2');
-            $('.sub-menu1>li:first-child .sub-menu2').css("display", "block");
-            var id_cat1 = $(this).attr('data-id');
+        });
+        $('.number-ajax').change(function() {
+            var qty = $(this).val();
+            var id = $(this).attr("data-id");
+            var rowId = $(this).attr("data-rowId");
             var _token = $('input[name="_token"]').val();
             $.ajax({
-                url: "{{route('ajaxcat1')}}",
-                method: 'GET',
+                url: "{{route('fe.cart.changenp')}}",
+                method: "POST",
                 dataType: 'json',
                 data: {
-                    id_cat1: id_cat1,
+                    qty: qty,
+                    id: id,
+                    rowId: rowId,
                     _token: _token
                 },
                 success: function(data) {
-                    $('ul.body_catdetail').html(data['list_cat']);
-                    $('.list-productmn').html(data['list_product']);
+                    $(".price-new" + id).text(data['sub_total']);
+                    $(".numberperp" + rowId).val(data['number_product']);
+                    $(".num-order" + rowId).val(data['number_product']);
+                    $(".totalt").text(data['total']);
+                    $(".totaltg").text(data['totalkm']);
                 },
             });
-        },
-        function () {
-            $('.black-content').css("display", "none");
-            $('.sub-menu1>li:first-child .sub-menu2').css("display", "none");
-        },
-    );
+        });
+        $('.minus2').on('click', function() {
+            var qty = $(this).next('.number-ajax').val();
+            var id = $(this).next('.number-ajax').attr("data-id");
+            var rowId = $(this).next('.number-ajax').attr("data-rowId");
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url: "{{route('fe.cart.changenp')}}",
+                method: "POST",
+                dataType: 'json',
+                data: {
+                    qty: qty,
+                    id: id,
+                    rowId: rowId,
+                    _token: _token
+                },
+                success: function(data) {
+                    $(".price-new" + id).text(data['sub_total']);
+                    $(".numberperp" + rowId).val(data['number_product']);
+                    $(".num-order" + rowId).val(data['number_product']);
+                    $(".totalt").text(data['total']);
+                    $(".totaltg").text(data['totalkm']);
+                },
+            });
+        });
+        $('.plus2').on('click', function() {
+            var qty = $(this).prev('.number-ajax').val();
+            var id = $(this).prev('.number-ajax').attr("data-id");
+            var rowId = $(this).prev('.number-ajax').attr("data-rowId");
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url: "{{route('fe.cart.changenp')}}",
+                method: "POST",
+                dataType: 'json',
+                data: {
+                    qty: qty,
+                    id: id,
+                    rowId: rowId,
+                    _token: _token
+                },
+                success: function(data) {
+                    $(".price-new" + id).text(data['sub_total']);
+                    $(".numberperp" + rowId).val(data['number_product']);
+                    $(".num-order" + rowId).val(data['number_product']);
+                    $(".totalt").text(data['total']);
+                    $(".totaltg").text(data['totalkm']);
+                },
+            });
+        });
+    });
 </script>
+
 <script>
     jQuery.validator.addMethod("checkPhoneNumber",
         function() {
@@ -154,24 +263,23 @@
                 var emaip = $('#inputphel').val();
                 var password = $('#password').val();
                 var _token = $('input[name="_token"]').val();
-                var data1 = $(form).serializeArray();
                 //event.preventDefault();
-
                 $.ajax({
-                    url: 'http://localhost/shop.tdoctor.vn/dang-nhap',
-                    type: "POST",
+                    url: "{{url('/dang-nhap')}}",
+                    method: "POST",
                     dataType: 'json',
-                    data: data1,
-
+                    data: {
+                        emaip: emaip,
+                        password: password,
+                        _token: _token,
+                    },
                     success: function(data) {
-
-                        //data = JSON.parse(data);
-                        // console.log(data);
-
-                        //  if(response.status==0){
-                        //      alert('ok');
-                        //  }
-
+                        if(data['islogin']==1){
+                            location.reload();
+                        }else{   
+                            alert('Thông tin đăng nhập không đúng !');
+                        }
+                       
                     },
                 });
             }
@@ -215,6 +323,12 @@
             });
         }
     });
+    // jQuery(document).ready(function($) {
+    //     $('.deleteperp').on('click', function(e) {
+    //         e.preventDefault();
+    //         alert('Xử lý sự kiện click!');
+    //     });
+    // });
 </script>
 <script>
     $(document).ready(function() {

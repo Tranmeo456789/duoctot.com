@@ -6,7 +6,6 @@
     <div class="">
         <ul class="list-item">
             @foreach ($product_covids as $item)
-            
             <li>
                 @include("$moduleName.pages.$controllerName.partial.product",['item'=>$item])
             </li>

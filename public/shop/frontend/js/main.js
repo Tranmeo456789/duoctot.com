@@ -200,5 +200,17 @@ $(document).ready(function () {
             closem.click();
         }
     });
+    $('.cat1name').hover(function () {
+        $('.sub-menu1>li:first-child').addClass('active-menucat2');
+    }
+    );
+    // $('.icon_cart').hover(
+    //     function () {
+    //         $('#dropdown').addClass('opacity1_cartmini');
+    //     },
+    //     function () {
+    //         $('#dropdown').removeClass('opacity1_cartmini');
+    //     },
+    // );
 });
 

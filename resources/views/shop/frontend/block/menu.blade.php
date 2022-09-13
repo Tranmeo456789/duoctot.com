@@ -37,24 +37,67 @@
                     </div>
                 </a>
             </div>
-            <div id="" class="fl-left" style="margin-left:30px;padding-top:15px;">
-                <a href="{{route('fe.product.cart')}}" title="" id="payment-link" class="">
-                    <div class="clearfix">
-                        <div class="fl-left mr-2">
-                            <img style="width:32px" src="{{asset('images/shop/cart.png')}}" alt="" srcset="">
+            <div id="cart-load" class="fl-left" style="margin-left:30px;padding-top:15px;">
+                <div class="position-relative iconcartmenu">
+                    <a href="{{route('fe.product.cart')}}" title="" id="payment-link" class="">
+                        <div class="clearfix icon_cart">
+                            <div class="fl-left mr-2">
+                                <img style="width:32px" src="{{asset('images/shop/cart.png')}}" alt="" srcset="">
+                            </div>
+                            <div class="fl-left pt-2">
+                                <p>Giỏ hàng</p>
+                            </div>
                         </div>
-                        <div class="fl-left pt-2">
-                            <p>Giỏ hàng</p>
+                    </a>
+                    @if(Cart::count() > 0 )
+                    <span class="number_cartmenu">{{Cart::content()->count()}}</span>                
+                    <div id="dropdown">
+                        <div class="position-relative">
+                            <span class="arrow-up"><i class="fas fa-sort-up"></i></span>
+                            <p class="text-success notisucess1"></p>
+                            <form action="" method="POST">
+                                {!! csrf_field() !!}
+                                <ul class="listp-cartmini">
+                                    @foreach (Cart::content() as $product)
+                                    @php
+                                    $imgm = explode(",", $product->options->image);
+                                    @endphp
+                                    <li>
+                                        <div class="d-flex">
+                                            <div title="" class="thumbperp">
+                                                <div class="rimg-center img-60">
+                                                    <img src="{{asset('public/shop/uploads/images/product/' . $imgm[0])}}">
+                                                </div>
+                                            </div>
+                                            <div class="infoperp">
+                                                <a href="" title="" class="nameprmn mb-1">{{$product->name}}</a>
+                                                <div class="clearfix">
+                                                    <div class="fl-left">
+                                                        <input type="text" value="{{$product->qty}}" maxlength="3" data-id="{{$product->id}}" data-rowId="{{$product->rowId}}" name="qty[{{$product->rowId}}]" class="numberperp  numberperp{{$product->rowId}} number-ajax">
+                                                    </div>
+                                                    <div class="fl-right">
+                                                        <strong class="mb-0 priceperp price-new{{$product->id}}">{{number_format($product->price*$product->qty, 0, ',', '.')}}đ</strong><span> | </span><a href="{{route('fe.cart.delete',$product->rowId)}}"><span class="deleteperp">Xóa</span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </form>
+
+                            <div class="text-center"><a href="{{route('fe.product.cart')}}" class="viewcartmini">Xem giỏ hàng</a></div>
                         </div>
                     </div>
-                </a>
+                    @endif
+                </div>
             </div>
             @if(Session::has('islogin'))
             <div class="fl-right" style="margin-left:10px;padding-top:20px;">
                 <div class="dropdown">
                     <button class="btn dropdown-toggle text-light" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{Session::get('name')}}</button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Tài khoản</a>
+                        <a class="dropdown-item" href="{{route('dashboard')}}">Tài khoản</a>
                         <a class="dropdown-item" href="{{route('user.logout')}}">Thoát</a>
                     </div>
                 </div>
@@ -108,8 +151,11 @@
                         </a></div>
                     <ul class="d-flex align-items-center">
                         <li class="hrcart"><a href="{{route('fe.product.cart')}}">
-                                <div class="rimg-center"><img src="{{asset('images/shop/cart.png')}}"></div>
-                            </a></li>
+                                <div class="rimg-center">
+                                    <img src="{{asset('images/shop/cart.png')}}">
+                                </div>
+                            </a>
+                        </li>
                         <li class="hruse"><a href="">
                                 <div class="rimg-center"><img src="{{asset('images/shop/mr1.png')}}" alt=""></div>
                             </a></li>
@@ -136,10 +182,10 @@
                             @foreach ($_SESSION['cat_product'] as $item_cat1)
                             @if($item_cat1['parent_id']==0)
                             <li class="catc1" data-id="{{$item_cat1['id']}}">
-                                <a href="{{route('fe.cat',$item_cat1->slug)}}">
+                                <a href="{{route('fe.cat',$item_cat1->slug)}}" class="cat1name">
                                     {{$item_cat1['name']}}
                                     <i class="fas fa-chevron-down arrow"></i>
-                                </a>       
+                                </a>
                                 <div class="content-submenu">
                                     <div class="px-0 position-relative right-fol" style="width:25%">
                                         <ul class="sub-menu1">

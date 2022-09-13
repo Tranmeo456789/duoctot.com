@@ -47,7 +47,7 @@ $title = $title . $pageTitle;
             <div class="col-lg-6 col-sm-12">
                 <div class="form-group">
                     <label for="name">Danh mục thuốc<span class="text-danger">*</span></label>
-                    <select id="" class="form-control" name="cat_id">
+                    <select id="" class="form-control js-select2" name="cat_id">
                         <option value="">Chọn danh mục</option>
                         @foreach($product_cats as $catp1)
                         @if($catp1['level'] == 2 )

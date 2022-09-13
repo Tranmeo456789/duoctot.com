@@ -95,6 +95,9 @@ a:hover{
     justify-content: center;
     align-items: center;
 }
+.img-60{
+    width: 60px;margin-right: 3px;
+}
 .rimg-startm{
     display: flex;
     justify-content: start;
@@ -132,6 +135,9 @@ a:hover{
     background: #fff;
     
     overflow: hidden;
+}
+.seth-img{
+    height: 200px;padding: 5px;
 }
 .rimg-start{
     display: flex;

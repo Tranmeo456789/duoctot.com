@@ -9,7 +9,8 @@
         "laravel/framework": "5.2.*",
         "unisharp/laravel-filemanager": "1.9.2",
         "doctrine/dbal": "^2.0",
-        "laravelcollective/html": "^5.2.0"
+        "laravelcollective/html": "^5.2.0",
+        "gloudemans/shoppingcart": "^2.6"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -51,6 +52,9 @@
         "preferred-install": "dist",
         "allow-plugins": {
             "kylekatarnls/update-helper": true
+        },
+        "platform": {
+            "php": "5.6"
         }
     }
 }
