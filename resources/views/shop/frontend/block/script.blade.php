@@ -69,10 +69,10 @@
             }
             setTimeout(hidden_reloal, 1000);
 
-            function reloadpage() {
-                location.reload();
-            }
-            setInterval(reloadpage, 3000);
+             function reloadpage() {
+                 location.reload();
+             }
+             setInterval(reloadpage, 3000);
 
             var _token = $('input[name="_token"]').val();
             var number_perp = $('input[name="number_perp"]').val();
@@ -90,7 +90,7 @@
                     $('.number_cartmenu').html(data['number_product']);
                     $('#cart-load').html(data['list_product']);
                     $('.notisucess1').html(data['noti_success']);
-                    //console.log(data['number_product']);
+                    console.log(data['rowId']);
                 },
             });
         });

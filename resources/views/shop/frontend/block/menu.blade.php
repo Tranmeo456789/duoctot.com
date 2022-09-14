@@ -49,8 +49,9 @@
                             </div>
                         </div>
                     </a>
-                    @if(Cart::count() > 0 )
-                    <span class="number_cartmenu">{{Cart::content()->count()}}</span>                
+                    @if(Session::has('cart'))
+                    @if(count(Session::get('cart')) > 0 )
+                    <span class="number_cartmenu">{{count(Session::get('cart'))}}</span>                
                     <div id="dropdown">
                         <div class="position-relative">
                             <span class="arrow-up"><i class="fas fa-sort-up"></i></span>
@@ -58,25 +59,23 @@
                             <form action="" method="POST">
                                 {!! csrf_field() !!}
                                 <ul class="listp-cartmini">
-                                    @foreach (Cart::content() as $product)
-                                    @php
-                                    $imgm = explode(",", $product->options->image);
-                                    @endphp
+                                    @foreach (Session::get('cart') as $product)
+                                       
                                     <li>
                                         <div class="d-flex">
                                             <div title="" class="thumbperp">
                                                 <div class="rimg-center img-60">
-                                                    <img src="{{asset('public/shop/uploads/images/product/' . $imgm[0])}}">
+                                                    <img src="{{asset('public/shop/uploads/images/product/' . $product['image'])}}">
                                                 </div>
                                             </div>
                                             <div class="infoperp">
-                                                <a href="" title="" class="nameprmn mb-1">{{$product->name}}</a>
+                                                <a href="" title="" class="nameprmn mb-1">{{$product['name']}}</a>
                                                 <div class="clearfix">
                                                     <div class="fl-left">
-                                                        <input type="text" value="{{$product->qty}}" maxlength="3" data-id="{{$product->id}}" data-rowId="{{$product->rowId}}" name="qty[{{$product->rowId}}]" class="numberperp  numberperp{{$product->rowId}} number-ajax">
+                                                        <input type="text" value="{{$product['qty']}}" maxlength="3" data-id="{{$product['id']}}" data-rowId="{{$product['rowId']}}" name="qty[{{$product['rowId']}}]" class="numberperp  numberperp{{$product['rowId']}} number-ajax">
                                                     </div>
                                                     <div class="fl-right">
-                                                        <strong class="mb-0 priceperp price-new{{$product->id}}">{{number_format($product->price*$product->qty, 0, ',', '.')}}đ</strong><span> | </span><a href="{{route('fe.cart.delete',$product->rowId)}}"><span class="deleteperp">Xóa</span></a>
+                                                        <strong class="mb-0 priceperp price-new{{$product['id']}}">{{number_format($product['price']*$product['qty'], 0, ',', '.')}}đ</strong><span> | </span><a href="{{route('fe.cart.delete',$product['rowId'])}}"><span class="deleteperp">Xóa</span></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -89,6 +88,7 @@
                             <div class="text-center"><a href="{{route('fe.product.cart')}}" class="viewcartmini">Xem giỏ hàng</a></div>
                         </div>
                     </div>
+                    @endif
                     @endif
                 </div>
             </div>

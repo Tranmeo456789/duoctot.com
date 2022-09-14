@@ -73,5 +73,7 @@ class Cat_productModel extends BackEndModel
     }
     public function products(){
         return $this->hasMany('App\Model\Shop\ProductModel');
-   }
+    }
+    
+      
 }
