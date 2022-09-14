@@ -12,7 +12,7 @@ use App\Model\Shop\TrademarkModel;
 use App\Http\Requests\ProductRequest as MainRequest;
 use App\Model\Shop\UnitModel;
 use App\Model\Shop\WarehouseModel;
-
+include "app/Helper/data.php";
 class ProductController extends BackEndController
 {
     public function __construct()
@@ -58,19 +58,6 @@ class ProductController extends BackEndController
             $item = $this->model->getItem($params, ['task' => 'get-item']);
         }
         $data = Cat_productModel::all();
-        function data_tree1($data, $parent_id = 0, $level = 0)
-        {
-            $result = [];
-            foreach ($data as $item) {
-                if ($parent_id == $item['parent_id']) {
-                    $item['level'] = $level;
-                    $result[] = $item;
-                    $child = data_tree1($data, $item['id'], $level + 1);
-                    $result = array_merge($result, $child);
-                }
-            }
-            return $result;
-        }
         $product_cats = data_tree1($data, 0);
         $producers = ProducerModel::all();
         $trademarks = TrademarkModel::all();

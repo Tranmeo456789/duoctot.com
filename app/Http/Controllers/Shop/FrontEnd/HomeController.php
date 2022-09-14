@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Config;
 use App\Model\Shop\Cat_productModel;
 use App\Model\Shop\ProductModel;
 use App\Model\Shop\Tinhthanhpho;
-
+include "app/Helper/data.php";
 class HomeController extends ShopFrontEndController
 {
     public function __construct()
@@ -19,19 +19,6 @@ class HomeController extends ShopFrontEndController
         parent::__construct();
         $data = Cat_productModel::all();
         $_SESSION['local'] = $local = Tinhthanhpho::all();
-        function data_tree1($data, $parent_id = 0, $level = 0)
-        {
-            $result = [];
-            foreach ($data as $item) {
-                if ($parent_id == $item['parent_id']) {
-                    $item['level'] = $level;
-                    $result[] = $item;
-                    $child = data_tree1($data, $item['id'], $level + 1);
-                    $result = array_merge($result, $child);
-                }
-            }
-            return $result;
-        }
         $_SESSION['cat_product'] = $catps = data_tree1($data, 0);
     }
     public function index()
