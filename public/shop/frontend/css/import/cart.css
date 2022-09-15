@@ -78,10 +78,12 @@
     color: #7991B7;
 
 }
-.info-product-cart .manipulation a:hover{
+
+.info-product-cart .manipulation a:hover {
     cursor: pointer;
     color: #a2c0f0;
 }
+
 .cbh1 a {
     font-style: normal;
     font-weight: 400;
@@ -90,7 +92,11 @@
     text-align: justify;
     color: blue;
 }
-.cbh1 a:hover{color: #05AFE3;}
+
+.cbh1 a:hover {
+    color: #05AFE3;
+}
+
 .cbh1 {
     margin-bottom: 14px;
     padding-top: 14px;
@@ -184,13 +190,15 @@
     font-size: 16px;
     font-family: 'Helvetica Neue';
     color: #787878;
-    border-bottom: 1px solid #787878;
+    border-bottom: 1px solid #bbb0b0;
+    ;
 
 }
 
 .discount-code {
     padding: 20px;
-    border-bottom: 1px solid #787878;
+    border-bottom: 1px solid #bbb0b0;
+    ;
 }
 
 .discount-code img {
@@ -317,6 +325,11 @@
     border: 1px solid #B0C1DB;
     border-radius: 5px;
     padding: 12px;
+    margin-bottom: 3px;
+}
+
+.form-check1 {
+    padding-left: 1.25rem;
 }
 
 .local_drugstore a {
@@ -330,10 +343,13 @@
     border-radius: 15px;
     padding: 4px 10px;
 }
-.local_drugstore a:hover{
-    background: #05AFE3;color: white;
+
+.local_drugstore a:hover {
+    background: #05AFE3;
+    color: white;
 }
-.number_cartmenu{
+
+.number_cartmenu {
     position: absolute;
     top: 2px;
     left: 22px;
@@ -349,7 +365,8 @@
     line-height: 100%;
     font-weight: bold;
 }
-#dropdown{
+
+#dropdown {
     box-shadow: 0 2px 12px rgb(0 0 0 / 15%);
     opacity: 0;
     visibility: hidden;
@@ -368,14 +385,68 @@
     border-radius: 8px;
     border: 1px solid #d8e0e8;
     text-align: left;
-    font-family: Roboto,Arial;
+    font-family: Roboto, Arial;
 }
 
-.iconcartmenu:hover #dropdown{
+.complete_order {
+    background: #05AFE3;
+    border: none;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 29px;
+    text-align: center;
+    padding: 12px 18px;
+    color: #FFFFFF;
+    cursor: pointer;
+    border-radius: 30px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.order-noislogin {
+    background: #05AFE3;
+    border: none;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 29px;
+    text-align: center;
+    padding: 12px 18px;
+    color: #FFFFFF;
+    cursor: pointer;
+    border-radius: 30px;
+    display: inline-block;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+#dcshop-error {
+    position: absolute;
+    bottom: -27px;
+    left: 0px;
+}
+
+.person {
+    display: none;
+}
+
+.hidden_noreqes {
+    display: none;
+}
+
+.de-store {
+    display: none;
+}
+
+.chtnh {
+    font-size: 18px;
+}
+
+.iconcartmenu:hover #dropdown {
     visibility: visible;
     opacity: 1;
 }
-.arrow-up{
+
+.arrow-up {
     position: absolute;
     top: -16px;
     right: 60px;
@@ -383,28 +454,33 @@
     font-size: 22px;
     z-index: 1000;
 }
-.numberperp{
+
+.numberperp {
     max-width: 40px;
-    padding: 1px;background-color: #fff;
+    padding: 1px;
+    background-color: #fff;
     outline: none;
     font-weight: 500;
     color: #334155;
     border: 1px solid rgb(211, 203, 203);
     border-radius: 10px;
-    font-size: 15px;text-align: center;
+    font-size: 15px;
+    text-align: center;
 }
-.deleteperp{
+
+.deleteperp {
     color: #05AFE3;
     cursor: pointer;
 }
-.viewcartmini{
+
+.viewcartmini {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     user-select: none;
     font-family: inherit;
-    transition: color .3s ease-in-out,background-color .3s ease-in-out,border-color .3s ease-in-out,box-shadow .3s ease-in-out;
+    transition: color .3s ease-in-out, background-color .3s ease-in-out, border-color .3s ease-in-out, box-shadow .3s ease-in-out;
     border: 1px solid transparent;
     cursor: pointer;
     border-radius: 100px;
@@ -417,20 +493,24 @@
     height: 36px;
     margin-top: 5px;
 }
-.viewcartmini:hover{
+
+.viewcartmini:hover {
     color: white;
     background: #1448da;
 }
-.listp-cartmini li{
-padding: 5px;
-border-bottom: 1px solid gainsboro;
+
+.listp-cartmini li {
+    padding: 5px;
+    border-bottom: 1px solid gainsboro;
 }
-.notisucesscmn{
+
+.notisucesscmn {
     padding: 5px 0px;
     border-bottom: 1px solid gainsboro;
     text-align: center;
 }
-.notisucesscmn i{
+
+.notisucesscmn i {
     font-size: 11px;
     border-radius: 50%;
     background: green;
@@ -438,3 +518,71 @@ border-bottom: 1px solid gainsboro;
     padding: 2px;
     margin-right: 4px;
 }
+
+.wp-order-success {
+    width: 800px;
+    font-size: 18px;
+    margin: 0px auto;
+    border: 1px solid #d3cccc;
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px 0px;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    font-family: sans-serif;
+}
+.title-dhtc{
+    font-size: 20px;
+    font-weight: bold;
+}
+.icon-order-success{
+    font-size: 22px;
+    background: #97f50794;;
+    border-radius: 50%;
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+}
+.icon-order-success{
+    font-size: 30px;
+    color: #343232;
+}
+.icon-order-success i{
+    color: green;
+}
+
+.box-dhtc{
+padding-top: 3px;
+padding-bottom: 10px;
+border-bottom: 1px solid #d3cccc;
+}
+.title-info-order{
+    padding: 10px 0px;
+    background: #F1F8FF;
+    
+}
+.title-info-order h1{font-weight: bold;}
+.pd-order{
+    padding: 0px 0.75rem 0px 0.75rem;
+}
+.bb_order{
+    border-bottom: 1px solid #e3d5d587;
+}
+.search-ttdh{
+    color: #fff;
+    background: blue;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+.exit-home-order{
+    display: inline-block;
+    color: #fff;
+    background: blue;
+    padding: 5px 15px;
+    border-radius: 20px;
+}
+.exit-home-order:hover{
+    color: #FFFFFF;
+}
+.namep-order{font-size: 15px;font-weight: bold;}

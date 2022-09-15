@@ -98,6 +98,9 @@ a:hover{
 .img-60{
     width: 60px;margin-right: 3px;
 }
+.img-50{
+    width: 50px;margin-right: 5px;
+}
 .rimg-startm{
     display: flex;
     justify-content: start;

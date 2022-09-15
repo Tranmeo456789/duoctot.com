@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
 use App\Model\Shop\Cat_productModel;
+use App\Model\Shop\CustomerModel;
 use App\Model\Shop\ProductModel;
 use App\Model\Shop\Tinhthanhpho;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -31,7 +32,13 @@ class CartController extends ShopFrontEndController
 
     public function cart_product()
     {
-        return view($this->pathViewController . 'cart');
+        $citys=Tinhthanhpho::all();
+        if(Session::has('islogin')){
+            $id=Session::get('id');
+            $customer=CustomerModel::find($id);
+            return view($this->pathViewController . 'cart',compact('citys','customer'));
+        }
+        return view($this->pathViewController . 'cart',compact('citys'));
     }
     public function cart_null()
     {

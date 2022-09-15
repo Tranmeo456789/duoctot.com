@@ -34,9 +34,7 @@
                         <input type="text" name="name" id="name" placeholder="Nhập tên *">
                         <div class="img-person"><img src="{{asset('images/shop/dn1.png')}}" alt=""></div>
                     </div>
-                    <!-- @if ($errors->has('name'))
-                    <small class="text-danger">{{$errors->first('name')}}</small>
-                    @endif -->
+                    
                     <div class="phone-mail position-relative">
                         <input id="inputphel1" type="text" name="email" placeholder="Nhập số điện thoại / Email *">
                         <div class="img-person"><img src="{{asset('images/shop/dk1.png')}}" alt=""></div>

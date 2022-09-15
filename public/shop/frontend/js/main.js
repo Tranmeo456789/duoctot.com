@@ -158,6 +158,9 @@ $(document).ready(function () {
         }
     })
 
+    $('.order-noislogin').on('click', function() {
+        alert('Vui lòng đăng nhập để mua hàng !')
+    });
     //xoay arrow 180deg 
     $('.iconmnrhv').click(function () {
         $(this).parents('.parentsmenu').children('.submenu1res').toggleClass('display-vis');
@@ -204,13 +207,356 @@ $(document).ready(function () {
         $('.sub-menu1>li:first-child').addClass('active-menucat2');
     }
     );
-    // $('.icon_cart').hover(
-    //     function () {
-    //         $('#dropdown').addClass('opacity1_cartmini');
-    //     },
-    //     function () {
-    //         $('#dropdown').removeClass('opacity1_cartmini');
-    //     },
-    // );
+    $('.icon_cart').hover(
+        function () {
+            $('#dropdown').addClass('opacity1_cartmini');
+        },
+        function () {
+            $('#dropdown').removeClass('opacity1_cartmini');
+        },
+    );
+    $('#reqexport').on('click', function () {
+        if ($(this).prop("checked") == true) {
+            $('.hidden_noreqes').css("display", "block");
+        }
+        else if ($(this).prop("checked") == false) {
+            $('.hidden_noreqes').css("display", "none");
+        }
+        var dcshop = $('input[type="radio"][name="dcshop"]:checked').val();
+    });
+    $('.identity').on('click', function () {
+        identity = $('input[type="radio"][name="identity"]:checked').val();
+        if (identity == 'Công ty') {
+            $('.company').css("display", "block");
+            $('.person').css("display", "none");
+           
+        } else {
+            $('.company').css("display", "none");
+            $('.person').css("display", "block");
+            
+        }
+    });
+    $('.local-re').on('click', function () {
+        local_re = $('input[type="radio"][name="local-re"]:checked').val();
+        if (local_re == 'Giao hàng tận nơi') {
+            $('.de-home').css("display", "block");
+            $('.de-store').css("display", "none");
+        } else {
+            $('.de-home').css("display", "none");
+            $('.de-store').css("display", "block");
+        }
+    });
 });
+jQuery.validator.addMethod("checkPhone",
+    function () {
+        var flag = false;
+        var phone = $('.phonecart1').val().trim();
+        phone = phone.replace('(+84)', '0');
+        phone = phone.replace('+84', '0');
+        phone = phone.replace('0084', '0');
+        phone = phone.replace(/ /g, '');
 
+        if (phone != '') {
+            var firstNumber = phone.substring(0, 2);
+            if ((firstNumber == '09' || firstNumber == '08') && phone.length == 10) {
+                if (phone.match(/^\d{10}/)) {
+                    flag = true;
+                }
+            } else if (firstNumber == '01' && phone.length == 11) {
+                if (phone.match(/^\d{11}/)) {
+                    flag = true;
+                }
+            }
+        }
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checkmail1",
+    function () {
+        var flag = false;
+        var email1 = $('.mailcart1').val().trim();
+        function isEmail(email) {
+            var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            return regex.test(email);
+        }
+        if(email1.length == 0 || isEmail(email1))
+        {
+            flag = true;
+        }
+        
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checknamecompany",
+    function () {
+        var flag = true;
+        var namecompany = $('#namecompany').val().trim();
+        local_re = $('input[type="radio"][name="identity"]:checked').val();
+            if (document.getElementById('reqexport').checked && local_re=='Công ty'){
+                if(namecompany.length > 0){
+                    flag=true;
+                }else{
+                    flag = false;
+                }           
+            }
+            else{
+                flag=true;
+            }
+        
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checktaxcode",
+    function () {
+        var flag = true;
+        var taxcode = $('#taxcode').val().trim();
+        local_re = $('input[type="radio"][name="identity"]:checked').val();
+            if (document.getElementById('reqexport').checked && local_re=='Công ty'){
+                if(taxcode.length > 0){
+                    flag=true;
+                }else{
+                    flag = false;
+                }           
+            }
+            else{
+                flag=true;
+            }     
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checkaddresscompany",
+    function () {
+        var flag = true;
+        var addresscompany = $('#addresscompany').val().trim();
+        local_re = $('input[type="radio"][name="identity"]:checked').val();
+            if (document.getElementById('reqexport').checked && local_re=='Công ty'){
+                if(addresscompany.length > 0){
+                    flag=true;
+                }else{
+                    flag = false;
+                }           
+            }
+            else{
+                flag=true;
+            }
+        
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checkname1",
+    function () {
+        var flag = true;
+        var name1 = $('#name1').val().trim();
+        local_re = $('input[type="radio"][name="identity"]:checked').val();
+            if (document.getElementById('reqexport').checked && local_re=='Cá nhân'){
+                if(name1.length > 0){
+                    flag=true;
+                }else{
+                    flag = false;
+                }           
+            }
+            else{
+                flag=true;
+            }     
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checkphone1",
+    function () {
+        var flag = true;
+        var phone1 = $('#phone1').val().trim();
+        local_re = $('input[type="radio"][name="identity"]:checked').val();
+            if (document.getElementById('reqexport').checked && local_re=='Cá nhân'){
+                if(phone1.length > 0){
+                    flag=true;
+                }else{
+                    flag = false;
+                }           
+            }
+            else{
+                flag=true;
+            }     
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checkaddress1",
+    function () {
+        var flag = true;
+        var address1 = $('#address1').val().trim();
+        local_re = $('input[type="radio"][name="identity"]:checked').val();
+            if (document.getElementById('reqexport').checked && local_re=='Cá nhân'){
+                if(address1.length > 0){
+                    flag=true;
+                }else{
+                    flag = false;
+                }           
+            }
+            else{
+                flag=true;
+            }     
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checkname2",
+    function () {
+        var flag = true;
+        var name2 = $('#name2').val().trim();
+        local_re = $('input[type="radio"][name="local-re"]:checked').val();
+            if (local_re=='Giao hàng tận nơi'){
+                if(name2.length > 0){
+                    flag=true;
+                }else{
+                    flag = false;
+                }           
+            }
+            else{
+                flag=true;
+            }     
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checkphone2",
+    function () {
+        var flag = true;
+        var phone2 = $('#phone2').val().trim();
+        local_re = $('input[type="radio"][name="local-re"]:checked').val();
+            if (local_re=='Giao hàng tận nơi'){
+                if(phone2.length > 0){
+                    flag=true;
+                }else{
+                    flag = false;
+                }           
+            }
+            else{
+                flag=true;
+            }     
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checkcity2",
+    function () {
+        var flag = true;
+        var city2 = $('#city').find(":selected").val();
+        local_re = $('input[type="radio"][name="local-re"]:checked').val();
+            if (local_re=='Giao hàng tận nơi'){
+                if(city2.length > 0){
+                    flag=true;
+                }else{
+                    flag = false;
+                }           
+            }
+            else{
+                flag=true;
+            }     
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checkdistrict2",
+    function () {
+        var flag = true;
+        var district2 = $('#district2').find(":selected").val();
+        local_re = $('input[type="radio"][name="local-re"]:checked').val();
+            if (local_re=='Giao hàng tận nơi'){
+                if(district2.length > 0){
+                    flag=true;
+                }else{
+                    flag = false;
+                }           
+            }
+            else{
+                flag=true;
+            }     
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checkwards2",
+    function () {
+        var flag = true;
+        var wards2 = $('#wards2').find(":selected").val();
+        local_re = $('input[type="radio"][name="local-re"]:checked').val();
+            if (local_re=='Giao hàng tận nơi'){
+                if(wards2.length > 0){
+                    flag=true;
+                }else{
+                    flag = false;
+                }           
+            }
+            else{
+                flag=true;
+            }     
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checkaddressdetail2",
+    function () {
+        var flag = true;
+        var addressdetail2 = $('#addressdetail2').val().trim();
+        local_re = $('input[type="radio"][name="local-re"]:checked').val();
+            if (local_re=='Giao hàng tận nơi'){
+                if(addressdetail2.length > 0){
+                    flag=true;
+                }else{
+                    flag = false;
+                }           
+            }
+            else{
+                flag=true;
+            }     
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checkcity3",
+    function () {
+        var flag = true;
+        var city3 = $('#city3').val().trim();
+        local_re = $('input[type="radio"][name="local-re"]:checked').val();
+            if (local_re=='Nhận tại nhà thuốc'){
+                if(city3.length > 0){
+                    flag=true;
+                }else{
+                    flag = false;
+                }           
+            }
+            else{
+                flag=true;
+            }     
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checkdistrict3",
+    function () {
+        var flag = true;
+        var district3 = $('#district3').val().trim();
+        local_re = $('input[type="radio"][name="local-re"]:checked').val();
+            if (local_re=='Nhận tại nhà thuốc'){
+                if(district3.length > 0){
+                    flag=true;
+                }else{
+                    flag = false;
+                }           
+            }
+            else{
+                flag=true;
+            }     
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checkdcshop",
+    function () {
+        var flag = true;
+        var dcshop ='';
+        var dcshop = $('input[type="radio"][name="dcshop"]:checked').val();
+        local_re = $('input[type="radio"][name="local-re"]:checked').val();
+            if (local_re=='Nhận tại nhà thuốc'){
+                if(dcshop !== undefined){
+                    flag=true;
+                }else{
+                    flag = false;
+                }           
+            }
+            else{
+                flag=true;
+            }     
+        return flag;
+    }
+);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 13, 2022 at 11:25 AM
+-- Generation Time: Sep 15, 2022 at 09:40 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.28
 
@@ -201,7 +201,7 @@ INSERT INTO `customers` (`id`, `name`, `code_customer`, `email`, `phone`, `gende
 (10, 'Mai Thu Hậu', 'HAU890', 'Hauthanhbyu@gmail.com', '0987656376', 'Nam', 'e10adc3949ba59abbe56e057f20f883e', 'số 55, đường Võ Thị Sáu', 'Phường Tứ Liên,Quận Tây Hồ,Thành phố Hà Nội', NULL, NULL, NULL, 'Nhà thuốc', NULL, NULL, NULL),
 (11, 'Lưu Phương Đông', 'DONG8765', 'Dongculu@gmail.com', '0987888654', 'Nam', 'e10adc3949ba59abbe56e057f20f883e', 'số 33, đường Nguyễn Công Trứ', 'Xã Phúc Yên,Huyện Lâm Bình,Tỉnh Tuyên Quang', NULL, NULL, NULL, 'Phòng khám', NULL, NULL, NULL),
 (13, 'Nguyễn Văn Chung', NULL, NULL, '0975666543', NULL, 'e10adc3949ba59abbe56e057f20f883e', NULL, 'Tỉnh Cao Bằng', NULL, NULL, NULL, 'Thẩm mỹ viện', '99999', NULL, NULL),
-(14, 'Từ Thanh Thuận', NULL, 'thuanthanh@gmail.com', NULL, NULL, 'e10adc3949ba59abbe56e057f20f883e', NULL, 'Thành phố Hải Phòng', NULL, NULL, NULL, 'Nhà thuốc', '22222', NULL, NULL);
+(14, 'Thanh Thuận', NULL, 'thuanthanh@gmail.com', '0977666545', 'Nam', 'e10adc3949ba59abbe56e057f20f883e', NULL, 'Thành phố Hải Phòng', NULL, NULL, NULL, 'Nhà thuốc', '22222', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -236,7 +236,43 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (16, '2022_09_04_162407_create_feature_products_table', 14),
 (17, '2022_09_04_163545_create_feature_products_table', 15),
 (18, '2022_09_08_021557_create_trademarks_table', 16),
-(19, '2022_09_09_040410_create_customers_table', 17);
+(19, '2022_09_09_040410_create_customers_table', 17),
+(20, '2022_09_12_041236_create_shoppingcart_table', 18),
+(21, '2022_09_15_055028_create_orders_table', 19);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `code_order` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `customer_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `total` bigint(20) UNSIGNED DEFAULT NULL,
+  `qty_total` bigint(20) UNSIGNED DEFAULT NULL,
+  `qty_per` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `product_id` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `phone` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `address` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `address_detail` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `delivery_form` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `request_invoice` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `code_order`, `customer_id`, `total`, `qty_total`, `qty_per`, `product_id`, `name`, `phone`, `address`, `address_detail`, `delivery_form`, `request_invoice`, `status`, `created_at`, `updated_at`) VALUES
+(2, 'TDOCTOR2RWLPG0', 14, 498000, 8, '5,2,1', '49,47,50', 'Thanh Thuận', '0977666545', 'Phường Đồng Xuân,Quận Hoàn Kiếm,Thành phố Hà Nội', 'số 43, Phan Chu Trinh', 'Giao hàng tận nơi', NULL, 'Đang chờ duyệt', '2022-09-15 10:50:48', '2022-09-15 10:50:48'),
+(3, 'TDOCTOR3T0BYZX', 14, 498000, 8, '5,2,1', '49,47,50', 'Thanh Thuận', '0977666545', 'Phường Bình Ngọc,Thành phố Móng Cái,Tỉnh Quảng Ninh', '33 Nguyễn Trãi', 'Giao hàng tận nơi', NULL, 'Đang chờ duyệt', '2022-09-15 10:59:17', '2022-09-15 10:59:17'),
+(4, 'TDOCTOR4GHJT8Q', 14, 580000, 9, '5,2,2', '49,47,50', 'Thanh Thuận', '0977666545', 'Phường Nghĩa Đô,Quận Cầu Giấy,Thành phố Hà Nội', '66 TT', 'Giao hàng tận nơi', NULL, 'Đang chờ duyệt', '2022-09-15 11:06:37', '2022-09-15 11:06:37');
 
 -- --------------------------------------------------------
 
@@ -12450,6 +12486,13 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `orders_customer_id_foreign` (`customer_id`);
+
+--
 -- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
@@ -12531,7 +12574,13 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `producers`
@@ -12572,6 +12621,12 @@ ALTER TABLE `warehouses`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_customer_id_foreign` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `products`

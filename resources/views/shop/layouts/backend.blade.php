@@ -23,7 +23,6 @@
 @php
 $module_active=session('module_active');
 @endphp
-
 <body>
     <div id="warpper" class="nav-fixed">
         <div id="wp-opacity"></div>
@@ -282,7 +281,6 @@ $module_active=session('module_active');
                         maid: maid,
                         _token: _token
                     },
-
                     success: function(data) {
                         $('#' + result).html(data);
                     },

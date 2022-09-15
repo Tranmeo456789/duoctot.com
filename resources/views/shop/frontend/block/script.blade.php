@@ -69,10 +69,10 @@
             }
             setTimeout(hidden_reloal, 1000);
 
-             function reloadpage() {
-                 location.reload();
-             }
-             setInterval(reloadpage, 3000);
+            function reloadpage() {
+                location.reload();
+            }
+            setInterval(reloadpage, 3000);
 
             var _token = $('input[name="_token"]').val();
             var number_perp = $('input[name="number_perp"]').val();
@@ -166,6 +166,7 @@
                 },
             });
         });
+
     });
 </script>
 
@@ -259,7 +260,6 @@
                 },
             },
             submitHandler: function(form) {
-
                 var emaip = $('#inputphel').val();
                 var password = $('#password').val();
                 var _token = $('input[name="_token"]').val();
@@ -274,12 +274,12 @@
                         _token: _token,
                     },
                     success: function(data) {
-                        if(data['islogin']==1){
+                        if (data['islogin'] == 1) {
                             location.reload();
-                        }else{   
+                        } else {
                             alert('Thông tin đăng nhập không đúng !');
                         }
-                       
+
                     },
                 });
             }
@@ -323,12 +323,157 @@
             });
         }
     });
-    // jQuery(document).ready(function($) {
-    //     $('.deleteperp').on('click', function(e) {
-    //         e.preventDefault();
-    //         alert('Xử lý sự kiện click!');
-    //     });
-    // });
+</script>
+<script>
+    $(document).ready(function() {
+        $("#order-complete").validate({
+            rules: {
+                name: {
+                    required: true,
+                },
+                phone: {
+                    required: true,
+                    checkPhone: true,
+                },
+                email: {
+                    checkmail1: true,
+                },
+                namecompany: {
+                    checknamecompany: true,
+                },
+                taxcode: {
+                    checktaxcode: true,
+                },
+                addresscompany: {
+                    checkaddresscompany: true,
+                },
+                name1: {
+                    checkname1: true,
+                },
+                phone1: {
+                    checkphone1: true,
+                    checkPhone: true,
+                },
+                address1: {
+                    checkaddress1: true,
+                },
+                name2: {
+                    checkname2: true
+                },
+                phone2: {
+                    checkphone2: true
+                },
+                city2: {
+                    checkcity2: true
+                },
+                district2: {
+                    checkdistrict2: true
+                },
+                wards2: {
+                    checkwards2: true
+                },
+                addressdetail2: {
+                    checkaddressdetail2: true
+                },
+                city3: {
+                    checkcity3: true
+                },
+                district3: {
+                    checkdistrict3: true
+                },
+                dcshop: {
+                    checkdcshop: true
+                }
+            },
+            messages: {
+                name: {
+                    required: "Thông tin bắt buộc",
+                },
+                phone: {
+                    required: "Thông tin bắt buộc",
+                    checkPhone: "Số điện thoại không đúng định dạng",
+                },
+                email: {
+                    checkmail1: "Email không hợp lệ",
+                },
+                namecompany: {
+                    checknamecompany: "Thông tin bắt buộc",
+                },
+                taxcode: {
+                    checktaxcode: "Thông tin bắt buộc",
+                },
+                addresscompany: {
+                    checkaddresscompany: "Thông tin bắt buộc",
+                },
+                name1: {
+                    checkname1: "Thông tin bắt buộc",
+                },
+                phone1: {
+                    checkphone1: "Thông tin bắt buộc",
+                    checkPhone: "Số điện thoại không đúng định dạng",
+                },
+                address1: {
+                    checkaddress1: "Thông tin bắt buộc"
+                },
+                name2: {
+                    checkname2: "Thông tin bắt buộc"
+                },
+                phone2: {
+                    checkphone2: "Thông tin bắt buộc",
+                    checkPhone: "Số điện thoại không đúng định dạng",
+                },
+                city2: {
+                    checkcity2: "Thông tin bắt buộc"
+                },
+                district2: {
+                    checkdistrict2: "Thông tin bắt buộc"
+                },
+                wards2: {
+                    checkwards2: "Thông tin bắt buộc"
+                },
+                addressdetail2: {
+                    checkaddressdetail2: "Vui lòng nhập địa chỉ"
+                },
+                city3: {
+                    checkcity3: "Thông tin bắt buộc"
+                },
+                district3: {
+                    checkdistrict3: "Thông tin bắt buộc"
+                },
+                dcshop: {
+                    checkdcshop: "Bạn chưa chọn cửa hàng"
+                }
+            },
+            //submitHandler: function(form) {               
+                // var  _token = $('input[name="_token"]').val();
+                // var gender = $('input[type="radio"][name="gender"]:checked').val();
+                // var name = $('.name').val();
+                // var phone = $('.phone').val();
+                // var email = $('.email').val();
+                // var req_export = $('input[type="checkbox"][name="req_export"]:checked').val();
+                // if(req_export == undefined){
+                //     var req_export='';
+                // }
+                // var local_re = $('input[type="radio"][name="local-re"]:checked').val();
+                // var name2 = $('.name2').val();
+                // var phone2 = $('.phone2').val();city2
+                // var city2 = $('.city2').find(":selected").val();
+                // var district2 = $('.district2').find(":selected").val();
+                // var wards2 = $('.wards2').find(":selected").val();
+                // var addressdetail2 = $('.addressdetail2').val();
+                //alert(addressdetail2);
+                // $.ajax({
+                //     url: "{{route('fe.order.completed')}}",
+                //     method: "POST",
+                //     dataType: 'json',
+                //     data: $(form).serializeArray(),
+                //     success: function(data) {                     
+                //         console.log(data['test']);
+                //     }
+                // });
+            //}
+        });
+    });
 </script>
 <script>
     $(document).ready(function() {
@@ -348,7 +493,30 @@
                 $('#image-gallery').removeClass('cS-hidden');
             }
         });
-
+        $('.choose').change(function() {
+            var action = $(this).attr('id');
+            var maid = $(this).val();
+            var _token = $('input[name="_token"]').val();
+            var result = '';
+            if (action == 'city') {
+                result = 'district2';
+            } else {
+                result = 'wards2';
+            }
+            $.ajax({
+                url: "{{route('locationAjax')}}",
+                method: "POST",
+                dataType: 'html',
+                data: {
+                    action: action,
+                    maid: maid,
+                    _token: _token
+                },
+                success: function(data) {
+                    $('#' + result).html(data);
+                },
+            });
+        });
     });
 </script>
 
