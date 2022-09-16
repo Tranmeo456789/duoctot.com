@@ -32,15 +32,12 @@
             <div class="card-body">
                 <div class="analytic status-order status-product" style="font-size:14px">
                     <a class="text-primary active-status">Tất cả<span class="text-muted">(10)</span></a>
-                    <a class="text-primary">Chờ xác nhận<span class="text-muted">(5)</span></a>
                     <a class="text-primary">Đã xác nhận<span class="text-muted">(20)</span></a>
                     <a class="text-primary">Đang xử lý<span class="text-muted">(20)</span></a>
-                    <a class="text-primary">Chờ giao hàng<span class="text-muted">(20)</span></a>
                     <a class="text-primary">Đang giao hàng<span class="text-muted">(20)</span></a>
                     <a class="text-primary">Đã giao hàng<span class="text-muted">(20)</span></a>
                     <a class="text-primary">Hoàn tất<span class="text-muted">(20)</span></a>
                     <a class="text-primary">Đã hủy<span class="text-muted">(20)</span></a>
-                    <a class="text-primary">Giỏ hàng<span class="text-muted">(20)</span></a>
                 </div>
                 <table class="table table-striped table-checkall" style="font-size:14px!important; border: none; table-layout: auto;width: 100%">
                     <thead>
@@ -55,37 +52,21 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($orders as $order)
                         <tr class="">
-                            <td style="width: 20%"><a href="{{route('order.detail')}}">112233</a></td>
-                            <td style="width: 16%">3,435,333đ</td>
-                            <td style="width: 16%">03-03-2022</td>
-                            <td style="width: 16%"><span class="badge badge-success">Chờ xác nhận</span></td>
-                            <td style="width: 16%" class="text-success">Đã thanh toán</td>
+                            <td style="width: 20%"><a href="{{route('order.detail',$order->code_order)}}">{{$order->code_order}}</a></td>
+                            <td style="width: 16%">{{ number_format( $order['total'], 0, "" ,"." )}}đ</td>
+                            <td style="width: 16%">{{substr($order->created_at, 0, 10)}}</td>
+                            <td style="width: 16%"><span class="badge {{$order->status == 'Đang xử lý'?'badge-warning':'badge-success'}}">{{$order->status}}</span></td>
+                            <td style="width: 16%" class="{{$order->status == 'Đã thanh toán'?'text-success':'text-danger'}}">{{$order->status_control}}</td>
                             <td style="width: 16%" class="text-center">
-                                <a href="{{url('shop/chi-tiet-don-hang')}}" class="btn btn-info btn-sm rounded-0 text-white " type="button" data-toggle="tooltip" data-placement="top" title="Xem chi tiết đơn hàng"><i class="fas fa-eye rounded-circle"></i></a>
+                                <a href="{{route('order.detail',$order->code_order)}}" class="btn btn-info btn-sm rounded-0 text-white " type="button" data-toggle="tooltip" data-placement="top" title="Xem chi tiết đơn hàng"><i class="fas fa-eye rounded-circle"></i></a>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">Trước</span>
-                                <span class="sr-only">Sau</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                {{$orders->links()}}
             </div>
         </div>
     </div>

@@ -5,7 +5,17 @@
 .body-content {
     padding: 10px 10px 0px 10px;
 }
-
+img{
+    max-width: 100%;
+}
+.img-60{
+    width: 60px;
+}
+.rimg-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 a:hover {
     text-decoration: none;
 }

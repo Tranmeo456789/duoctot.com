@@ -85,13 +85,14 @@ class OrderController extends ShopFrontEndController
             'address_detail' =>  $request->input('addressdetail2'),
             'delivery_form' =>  $request->input('local-re'),
             'request_invoice' =>  $request->input('req_export'),
-            'status' => 'Đang chờ duyệt',
+            'status' => 'Đang xử lý',
+            'status_control'=>'Chưa thanh toán'
         ]);
         return redirect()->route('fe.order.success', ['code' => $code_order]);
     }
     public function success($code)
     {
-        $list_pr=[];
+        $list_pr=[];$list_qty=[];
         $orders=OrderModel::where('code_order',$code)->get();
         $customer=CustomerModel::find($orders[0]->customer_id);
         
@@ -100,8 +101,7 @@ class OrderController extends ShopFrontEndController
         $ls_product_order=[];
         foreach($list_pr as $list_product){
             $ls_product_order[]=ProductModel::find($list_product);
-        }
-        
+        }     
         return view($this->pathViewController . 'order_success',compact('customer','orders','list_qty','ls_product_order'));
     }
 }

@@ -53,7 +53,7 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd'], fu
 
     Route::get('/danh-sach-hoa-don', 'OrderController@list_invoice')->name('invoice.list');
     Route::get('/chi-tiet-hoa-don', 'OrderController@detail_invoice')->name('invoice.detail');
-    Route::get('/chi-tiet-don-hang', 'OrderController@detail_order')->name('order.detail');
+    Route::get('/chi-tiet-don-hang/{code}', 'OrderController@detail_order')->name('order.detail');
     Route::get('/danh-sach-don-hang', 'OrderController@list_order')->name('order.list');
 
     Route::get('/phieu-gui-hang', 'ConsignmentController@index')->name('consignment.list');

@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Session as FacadesSession;
 
 session_start();
 include "app/Helper/data.php";
+include_once "app/Helper/data_cart.php";
 class CartController extends ShopFrontEndController
 {
     public function __construct()
@@ -98,63 +99,15 @@ class CartController extends ShopFrontEndController
         $request->session()->put('cart', $cart);
 
         $number_product = count($request->session()->get('cart'));
-        $request->session()->flash('statuscart', '<p class="text-success notisucesscmn"><i class="fas fa-check"></i>Thêm thành công sản phẩm vào giỏ hàng</p>');
+        $request->session()->flash('statuscart', notisuccess());
         $list_product = '';
         $list_cartload = '';
-        $list_cartload .= '
-                <div class="position-relative iconcartmenu">
-                        <a href="' . route("fe.product.cart") . '" id="payment-link" class="">
-                            <div class="clearfix icon_cart">
-                                <div class="fl-left mr-2">
-                                    <img style="width:32px" src="' . asset('images/shop/cart.png') . '">
-                                </div>
-                                <div class="fl-left pt-2">
-                                    <p>Giỏ hàng</p>
-                                </div>
-                            </div>
-                        </a>
-                ';
-        $list_cartload .= '
-                        <span class="number_cartmenu">' . count($request->session()->get('cart')) . '</span>                
-                        <div id="dropdown">
-                            <div class="position-relative">
-                                <span class="arrow-up"><i class="fas fa-sort-up"></i></span>
-                                <p class="text-success notisucess1"></p>
-                                <form action="" method="POST">
-                                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-                                    <ul class="listp-cartmini">
-                ';
+        $list_cartload .= list_cartloadhed($number_product);
         foreach ($request->session()->get('cart') as $product) {
-            $list_product .= '<li>
-                <div class="d-flex">
-                    <div title="" class="thumbperp">
-                        <div class="rimg-center img-60">
-                            <img src="' . asset('public/shop/uploads/images/product/' . $product['image']) . '">
-                        </div>
-                    </div>
-                    <div class="infoperp">
-                        <a href="" title="" class="nameprmn mb-1">' . $product['name'] . '</a>
-                        <div class="clearfix">
-                            <div class="fl-left">
-                                <input type="text" maxlength="3" value="' . $product['qty'] . '" data-id="' . $product['id'] . '" data-rowId="' . $product['rowId'] . '" name="qty[' . $product['rowId'] . ']" class="numberperp numberperp' . $product['rowId'] . ' number-ajax">
-                            </div>
-                            <div class="fl-right">
-                                <strong class="mb-0 priceperp">' . number_format($product['price'] * $product['qty'], 0, ',', '.') . 'đ</strong><span> | </span><span class="deleteperp">Xóa</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>';
+            $list_product .= list_product($product);
         }
         $list_cartload .= $list_product;
-        $list_cartload .= '
-            </ul>
-            </form>
-            <div class="text-center"><a href="' . route("fe.product.cart") . '" class="viewcartmini">Xem giỏ hàng</a></div>
-            </div>
-        </div>
-        </div>
-            ';
+        $list_cartload .= list_cartloadfoter();
         $result = array(
             'list_product' => $list_cartload,
             'number_product' => $number_product,
