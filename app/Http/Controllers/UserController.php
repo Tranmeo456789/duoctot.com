@@ -62,7 +62,10 @@ class UserController extends Controller
                 ]
             );
         }
-        return redirect()->back();
+        $result = array(
+            'noity' => 'Đăng ký thành công',     
+        );
+        return response()->json($result, 200);
     }
     public function login(Request $request)
     {

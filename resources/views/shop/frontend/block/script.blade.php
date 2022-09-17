@@ -314,12 +314,15 @@
 
         },
         submitHandler: function(form) {
-            alert('Đăng ký tài khoản thành công');
+            
             $.ajax({
                 type: "POST",
                 url: "{{url('/dang-ky')}}",
                 data: $(form).serializeArray(),
-                success: function(response) {}
+                success: function(data) {
+                    alert(data.noity);
+                    location.reload();
+                }
             });
         }
     });
