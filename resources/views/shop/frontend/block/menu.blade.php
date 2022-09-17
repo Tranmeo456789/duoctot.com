@@ -59,8 +59,7 @@
                             <form action="" method="POST">
                                 {!! csrf_field() !!}
                                 <ul class="listp-cartmini">
-                                    @foreach (Session::get('cart') as $product)
-                                       
+                                    @foreach (Session::get('cart') as $product)    
                                     <li>
                                         <div class="d-flex">
                                             <div title="" class="thumbperp">
@@ -84,7 +83,6 @@
                                     @endforeach
                                 </ul>
                             </form>
-
                             <div class="text-center"><a href="{{route('fe.product.cart')}}" class="viewcartmini">Xem giỏ hàng</a></div>
                         </div>
                     </div>

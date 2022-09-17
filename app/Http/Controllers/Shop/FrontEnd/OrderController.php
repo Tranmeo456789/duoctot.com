@@ -52,7 +52,11 @@ class OrderController extends ShopFrontEndController
         if (OrderModel::latest('id')->first() == null) {
             $order_id_last['id'] = 0;
         }
-        $code_order = 'TDOCTOR' . ($order_id_last['id'] + 1) . Str::upper(Str::random(6));
+        $year= getdate()['year'];
+        $month = sprintf("%02d", getdate()['mon']);
+        $day = sprintf("%02d", getdate()['mday']);
+        $id_order = sprintf("%05d", $order_id_last['id'] + 1);
+        $code_order='DHTD'.$year.$month.$day.$id_order;
         $total = 0;
         $qty = 0;
         $listm_id = [];
@@ -103,5 +107,15 @@ class OrderController extends ShopFrontEndController
             $ls_product_order[]=ProductModel::find($list_product);
         }     
         return view($this->pathViewController . 'order_success',compact('customer','orders','list_qty','ls_product_order'));
+    }
+    public function test(){
+        $id=99;
+        $date = getdate();
+        $year= getdate()['year'];
+        $month = sprintf("%02d", getdate()['mon']);
+        $day = sprintf("%02d", getdate()['mday']);
+        $id=sprintf("%05d", $id);
+        $code_order='DHTD'.$year.$month.$day.$id;
+        return($code_order);
     }
 }

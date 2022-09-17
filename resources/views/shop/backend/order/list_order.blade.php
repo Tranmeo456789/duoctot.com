@@ -20,12 +20,15 @@
                 </div>
                 <div class="col-xl-6 col-lg-12">
                     <div class="text-capitalize">
-                        <label for="">Thời gian:</label>  
+                        <label for="">Thời gian:</label>
                         <input type="date" class="border-top-0 border-left-0 border-right-0"> ~ <input type="date" class="border-top-0 border-left-0 border-right-0">
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="text-center py-2">
+        <span class="noti-statusorrder text-success"></span>
     </div>
     <div class="set-withscreen">
         <div class="list_orderm">
@@ -57,7 +60,28 @@
                             <td style="width: 20%"><a href="{{route('order.detail',$order->code_order)}}">{{$order->code_order}}</a></td>
                             <td style="width: 16%">{{ number_format( $order['total'], 0, "" ,"." )}}đ</td>
                             <td style="width: 16%">{{substr($order->created_at, 0, 10)}}</td>
-                            <td style="width: 16%"><span class="badge {{$order->status == 'Đang xử lý'?'badge-warning':'badge-success'}}">{{$order->status}}</span></td>
+                            <td style="width: 16%">
+                                @php
+                                $status_curent = $order->status;
+                                foreach ($list_status as $k => $item) {
+                                if ($status_curent == $item) {
+                                unset($list_status[$k]);
+                                }
+                                }
+                                @endphp
+                                <form action="" method="POST">
+                                    {!! csrf_field() !!}
+                                    <select name="status_order" data-id="{{$order->id}}" class="label-order custom-select sources update-status">
+                                        <option value="{{$order->status}}">{{$order->status}}</option>
+                                        @foreach ($list_status as $item9)
+                                        <option value="{{$item9}}">{{$item9}}</option>
+                                        @endforeach
+                                    </select>
+                                </form>
+                                @php
+                                $list_status[]=$order->status;
+                                @endphp
+                            </td>
                             <td style="width: 16%" class="{{$order->status == 'Đã thanh toán'?'text-success':'text-danger'}}">{{$order->status_control}}</td>
                             <td style="width: 16%" class="text-center">
                                 <a href="{{route('order.detail',$order->code_order)}}" class="btn btn-info btn-sm rounded-0 text-white " type="button" data-toggle="tooltip" data-placement="top" title="Xem chi tiết đơn hàng"><i class="fas fa-eye rounded-circle"></i></a>
@@ -67,11 +91,10 @@
                     </tbody>
                 </table>
                 {{$orders->links()}}
+
             </div>
         </div>
     </div>
-
-
 </div>
 
 @endsection

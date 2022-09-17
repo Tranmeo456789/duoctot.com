@@ -50,10 +50,8 @@ $(document).ready(function() {
     Dropzone.options.dropzoneForm = {
         autoProcessQueue : false,
         acceptedFiles : ".png,.jpg,.gif,.bmp,.jpeg",
-       
-      
     }; 
-      
+    
 });
 
 

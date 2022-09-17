@@ -10,8 +10,11 @@
     <div class="card-header font-weight-bold bg-info text-light">
         Thông tin đơn hàng
     </div>
-    <div class="card-body">
-        <div class="row">
+    <div class="card-body pt-0">
+        <div class="row">         
+            <div class="col-12 text-center py-2">
+                <span class="noti-statusorrder text-success"></span>
+            </div>
             <div class="col-4">
                 <div class="form-group">
                     <label for="intro">Mã đơn hàng</label>
@@ -19,11 +22,20 @@
                 </div>
             </div>
             <div class="col-4">
-                <div class="form-group">
-                    <label for="intro">Trạng thái</label>
-                    <input class="form-control" type="text" name="" id="" value="{{$order[0]->status}}" disabled>
-                </div>
+                <form action="" method="POST">
+                    {!! csrf_field() !!}
+                    <div class="form-group">
+                        <label for="intro"  class="label-order">Trạng thái</label>
+                        <select name="status_order" data-id="{{$order[0]->id}}" class="form-control update-status">
+                            <option value="{{$order[0]->status}}">{{$order[0]->status}}</option>
+                            @foreach ($list_status as $item9)
+                                <option value="{{$item9}}" >{{$item9}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </form>
             </div>
+
             <div class="col-4">
                 <div class="form-group">
                     <label for="intro">Tổng tiền</label>
@@ -103,7 +115,9 @@
                     <td style="width: 7%">{{$product->id}}</td>
                     <td style="width: 13%">{{$product->code}}</td>
                     <td style="width: 22%" class="font-weight-bold">{{$product->name}}</td>
-                    <td style="width: 10%"><div class="rimg-center img-60"><img src="{{asset('public/shop/uploads/images/product/'.$img_product[0])}}" alt=""></div></td>
+                    <td style="width: 10%">
+                        <div class="rimg-center img-60"><img src="{{asset('public/shop/uploads/images/product/'.$img_product[0])}}" alt=""></div>
+                    </td>
                     <td style="width: 10%">{{ number_format( $product['price'], 0, "" ,"." )}}đ</td>
                     <td style="width: 12%" class="text-center">{{$list_qty[$index]}}</td>
                     <td style="width: 12%">{{$list_qty[$index]}}</td>
