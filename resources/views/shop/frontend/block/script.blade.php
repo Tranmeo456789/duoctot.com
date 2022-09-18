@@ -14,7 +14,7 @@
                 var _token = $('input[name="_token"]').val();
                 $.ajax({
                     url: "{{route('ajaxcat3')}}",
-                    method: 'POST',
+                    method: 'GET',
                     dataType: 'json',
                     data: {
                         id_cat2: id_cat2,
@@ -29,14 +29,11 @@
 
             },
             function() {
-                $(this).removeClass('active-menucat2');
+                //$(this).removeClass('active-menucat2');
             }
         );
-        $('.catc1').hover(
+        $('.cat1name').hover(
             function() {
-                $('.black-content').css("display", "block");
-                $('.sub-menu1>li:first-child').addClass('active-menucat2');
-                $('.sub-menu1>li:first-child .sub-menu2').css("display", "block");
                 var id_cat1 = $(this).attr('data-id');
                 var _token = $('input[name="_token"]').val();
                 $.ajax({
@@ -50,11 +47,21 @@
                     success: function(data) {
                         $('ul.body_catdetail').html(data['list_cat']);
                         $('.list-productmn').html(data['list_product']);
+
+                        function visibale_cat() {
+                            //$('.black-content').css("display", "block");
+                            $('.sub-menu1>li').removeClass('active-menucat2');
+                            $('.sub-menu1>li:first-child').addClass('active-menucat2');
+                            //$('.content-submenu').css("display", "block");
+                        }
+                        setTimeout(visibale_cat, 1);
                     },
                 });
+
             },
             function() {
-                $('.black-content').css("display", "none");
+                //$('.content-submenu').css("display", "none");
+                //$('.black-content').css("display", "none");
                 $('.sub-menu1>li:first-child .sub-menu2').css("display", "none");
             },
         );
@@ -314,7 +321,7 @@
 
         },
         submitHandler: function(form) {
-            
+
             $.ajax({
                 type: "POST",
                 url: "{{url('/dang-ky')}}",
@@ -448,32 +455,32 @@
                 }
             },
             //submitHandler: function(form) {               
-                // var  _token = $('input[name="_token"]').val();
-                // var gender = $('input[type="radio"][name="gender"]:checked').val();
-                // var name = $('.name').val();
-                // var phone = $('.phone').val();
-                // var email = $('.email').val();
-                // var req_export = $('input[type="checkbox"][name="req_export"]:checked').val();
-                // if(req_export == undefined){
-                //     var req_export='';
-                // }
-                // var local_re = $('input[type="radio"][name="local-re"]:checked').val();
-                // var name2 = $('.name2').val();
-                // var phone2 = $('.phone2').val();city2
-                // var city2 = $('.city2').find(":selected").val();
-                // var district2 = $('.district2').find(":selected").val();
-                // var wards2 = $('.wards2').find(":selected").val();
-                // var addressdetail2 = $('.addressdetail2').val();
-                //alert(addressdetail2);
-                // $.ajax({
-                //     url: "{{route('fe.order.completed')}}",
-                //     method: "POST",
-                //     dataType: 'json',
-                //     data: $(form).serializeArray(),
-                //     success: function(data) {                     
-                //         console.log(data['test']);
-                //     }
-                // });
+            // var  _token = $('input[name="_token"]').val();
+            // var gender = $('input[type="radio"][name="gender"]:checked').val();
+            // var name = $('.name').val();
+            // var phone = $('.phone').val();
+            // var email = $('.email').val();
+            // var req_export = $('input[type="checkbox"][name="req_export"]:checked').val();
+            // if(req_export == undefined){
+            //     var req_export='';
+            // }
+            // var local_re = $('input[type="radio"][name="local-re"]:checked').val();
+            // var name2 = $('.name2').val();
+            // var phone2 = $('.phone2').val();city2
+            // var city2 = $('.city2').find(":selected").val();
+            // var district2 = $('.district2').find(":selected").val();
+            // var wards2 = $('.wards2').find(":selected").val();
+            // var addressdetail2 = $('.addressdetail2').val();
+            //alert(addressdetail2);
+            // $.ajax({
+            //     url: "{{route('fe.order.completed')}}",
+            //     method: "POST",
+            //     dataType: 'json',
+            //     data: $(form).serializeArray(),
+            //     success: function(data) {                     
+            //         console.log(data['test']);
+            //     }
+            // });
             //}
         });
     });

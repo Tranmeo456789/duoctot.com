@@ -98,6 +98,14 @@ a:hover{
 .img-60{
     width: 60px;margin-right: 3px;
 }
+.image-60{
+    width: 75px;
+    height: 100px;
+    padding: 5px;
+}
+.image-60 img{
+    width: 100%;
+}
 .img-50{
     width: 50px;margin-right: 5px;
 }

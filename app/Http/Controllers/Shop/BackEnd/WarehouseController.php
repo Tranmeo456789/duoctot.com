@@ -7,8 +7,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Shop\BackEnd\BackEndController;
 use App\Model\Shop\Tinhthanhpho;
 use App\Model\Shop\Quanhuyen;
+use App\Model\Shop\WarehouseModel;
+use App\Model\Shop\ProducerModel;
 use App\Model\Shop\Xaphuongthitran;
 use App\Http\Requests\WarehouseRequest as MainRequest;
+use App\Model\Shop\ProductModel;
+use Session;
 class WarehouseController extends BackEndController
 {
     public function __construct()
@@ -61,6 +65,22 @@ class WarehouseController extends BackEndController
         ]);
     }
     public function qlwarehouse(){
-        return view('shop.backend.pages.warehouse.qlwarehouse');
+        $id=0;
+        if(Session::has('islogin')){
+            $id=Session::get('id');
+        }
+        $products=ProductModel::where('customer_id',$id)->get();
+        $warehouses=WarehouseModel::where('customer_id',$id)->get();
+        $numper_products=[];
+        foreach($warehouses as $k => $warehouse) {
+            $qty_per=explode(',', $warehouse['qty']);
+            $product_id = explode(',', $warehouse['product_id']);
+            foreach($product_id as $i => $product_id1){             
+                   $numper_products[$k][$product_id1]=(int)$qty_per[$i];                             
+            }                 
+        }
+
+       //return($numper_products[1][50]);
+        return view('shop.backend.pages.warehouse.qlwarehouse',compact('warehouses','products','numper_products'));
     }
 }
