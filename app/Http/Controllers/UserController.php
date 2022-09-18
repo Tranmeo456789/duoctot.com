@@ -108,8 +108,7 @@ class UserController extends Controller
     }
     public function logout(Request $request)
     {
-        $request->session()->forget('islogin');
-        $request->session()->forget('name');
+        $request->session()->forget('user');
         return redirect()->back();
     }
     public function logoutbe(Request $request)
