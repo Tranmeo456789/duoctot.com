@@ -296,44 +296,7 @@
         });
     });
 </script>
-<script>
 
-<<<<<<< HEAD
-            },
-            password: {
-                required: true,
-                minlength: 6
-            },
-        },
-        messages: {
-            name: "Bạn chưa nhập tên đăng nhập",
-            email: {
-                required: "Nhập số điện thoại hoặc email",
-                checkPhoneNumber1: "Số điện thoại hoặc email không đúng định dạng",
-                remote: "Số điện thoại hoặc mail đã tồn tại"
-            },
-            password: {
-                required: "Bạn cần nhập mật khẩu",
-                minlength: "Mật khẩu tối thiểu 6 ký tự"
-            },
-
-        },
-        submitHandler: function(form) {
-
-            $.ajax({
-                type: "POST",
-                url: "{{url('/dang-ky')}}",
-                data: $(form).serializeArray(),
-                success: function(data) {
-                    alert(data.noity);
-                    location.reload();
-                }
-            });
-        }
-    });
-=======
->>>>>>> deb9e10477f7db5319e77776f2952788233e7b5d
-</script>
 <script>
     $(document).ready(function() {
         $("#order-complete").validate({
@@ -454,35 +417,7 @@
                     checkdcshop: "Bạn chưa chọn cửa hàng"
                 }
             },
-<<<<<<< HEAD
-            //submitHandler: function(form) {               
-            // var  _token = $('input[name="_token"]').val();
-            // var gender = $('input[type="radio"][name="gender"]:checked').val();
-            // var name = $('.name').val();
-            // var phone = $('.phone').val();
-            // var email = $('.email').val();
-            // var req_export = $('input[type="checkbox"][name="req_export"]:checked').val();
-            // if(req_export == undefined){
-            //     var req_export='';
-            // }
-            // var local_re = $('input[type="radio"][name="local-re"]:checked').val();
-            // var name2 = $('.name2').val();
-            // var phone2 = $('.phone2').val();city2
-            // var city2 = $('.city2').find(":selected").val();
-            // var district2 = $('.district2').find(":selected").val();
-            // var wards2 = $('.wards2').find(":selected").val();
-            // var addressdetail2 = $('.addressdetail2').val();
-            //alert(addressdetail2);
-            // $.ajax({
-            //     url: "{{route('fe.order.completed')}}",
-            //     method: "POST",
-            //     dataType: 'json',
-            //     data: $(form).serializeArray(),
-            //     success: function(data) {                     
-            //         console.log(data['test']);
-            //     }
-            // });
-=======
+
             //submitHandler: function(form) {
                 // var  _token = $('input[name="_token"]').val();
                 // var gender = $('input[type="radio"][name="gender"]:checked').val();
@@ -510,7 +445,6 @@
                 //         console.log(data['test']);
                 //     }
                 // });
->>>>>>> deb9e10477f7db5319e77776f2952788233e7b5d
             //}
         });
     });
