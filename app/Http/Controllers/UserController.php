@@ -54,12 +54,12 @@ class UserController extends Controller
                 ], 200);
             }else{
                 return response()->json([
-                    'status' => 400,
+                    'status' => 200,
                     'success' => false,
                     'data' => null,
                     'errors' => null,
                     'message' => 'Có lỗi xảy ra, vui lòng thử lại'
-                ],400);
+                ],200);
             }
         }
         return redirect()->route('errors/notfound');
