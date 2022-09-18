@@ -53,7 +53,7 @@
                         console.log(data.test);
                         $('ul.body_catdetail').html(data['list_cat']);
                         $('.list-productmn').html(data['list_product']);
-                        $('.black-content').css("display", "block");
+                       
                         $('.sub-menu1>li').removeClass('active-menucat2');
                         $('.sub-menu1>li:first-child').addClass('active-menucat2');
                     },
