@@ -28,7 +28,7 @@ class HomeController extends ShopFrontEndController
     {
         $product_covids = ProductModel::inRandomOrder()->limit(8)->get();
         $itemsProvince = [];
-        $provinceRequest = config("myconfig.url.api") . config("myconfig.baseRequest.getListProvince");
+        $provinceRequest = env("APP_URL_API") . config("myconfig.baseRequest.getListProvince");
         $provinceResponse = HttpClient::get($provinceRequest);
 
         if (isset($provinceResponse['success']) && ($provinceResponse['success'])){

@@ -10,7 +10,7 @@
         'baseRequest' => [
             'login' => 'api/v0.4/login',
             'register' => 'api/v0.4/register',
-            'getListProvince' => 'api/v0.3/province/get-list',
+            'getListProvince' => '/api/v0.3/province/get-list',
         ],
         'template' => [
             'form_element' => [
