@@ -9,8 +9,9 @@ use App\Model\Shop\Cat_productModel;
 use App\Model\Shop\ProductModel;
 use App\Model\Shop\Tinhthanhpho;
 
-include "app/Helper/data_cat.php";
-include "app/Helper/data.php";
+include "app/Helpers/data_cat.php";
+include "app/Helpers/data.php";
+use App\Helpers\HttpClient;
 class HomeController extends ShopFrontEndController
 {
     public function __construct()
@@ -26,7 +27,15 @@ class HomeController extends ShopFrontEndController
     public function index()
     {
         $product_covids = ProductModel::inRandomOrder()->limit(8)->get();
-        return view($this->pathViewController . 'index', compact('product_covids'));
+        $itemsProvince = [];
+        $provinceRequest = env("APP_URL_API") . config("myconfig.baseRequest.getListProvince");
+        $provinceResponse = HttpClient::get($provinceRequest);
+
+        if (isset($provinceResponse['success']) && ($provinceResponse['success'])){
+            $itemsProvince = array_pluck($provinceResponse['data'],'name','id');
+        }
+        return view($this->pathViewController . 'index',
+                    compact('product_covids','itemsProvince'));
     }
     public function ajaxcat3(Request $request)
     {

@@ -1,9 +1,12 @@
 <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="{{ asset('/shop/frontend/js/jquery.validate.min.js')}}?t=@php echo time() @endphp" type="text/javascript"></script>
-<script src="{{ asset('/shop/frontend/js/main.js')}}?t=@php echo time() @endphp" type="text/javascript"></script>
+<script src="{{ asset('/shop/frontend/js/jquery-3.1.1.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+<script src="{{ asset('/shop/frontend/js/jquery.validate.min.js')}}" type="text/javascript"></script>
+<script src="{{ asset('/shop/frontend/js/additional-methods.min.js')}}" type="text/javascript"></script>
+
 <script src="{{ asset('/shop/frontend/js/lightslider.js')}}?t=@php echo time() @endphp" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="{{ asset('/shop/frontend/js/main.js')}}?t=@php echo time() @endphp" type="text/javascript"></script>
 <script>
     $(document).ready(function() {
         $('.sub-menu1>li').hover(
@@ -178,7 +181,7 @@
 </script>
 
 <script>
-    jQuery.validator.addMethod("checkPhoneNumber",
+    jQuery.validator.addMethod("checkPhoneNumber2",
         function() {
             var flag = false;
             var phone = $('#inputphel').val().trim();
@@ -294,13 +297,8 @@
     });
 </script>
 <script>
-    $("#user_register").validate({
-        rules: {
-            name: "required",
-            email: {
-                required: true,
-                checkPhoneNumber1: true,
 
+<<<<<<< HEAD
             },
             password: {
                 required: true,
@@ -333,6 +331,8 @@
             });
         }
     });
+=======
+>>>>>>> deb9e10477f7db5319e77776f2952788233e7b5d
 </script>
 <script>
     $(document).ready(function() {
@@ -454,6 +454,7 @@
                     checkdcshop: "Bạn chưa chọn cửa hàng"
                 }
             },
+<<<<<<< HEAD
             //submitHandler: function(form) {               
             // var  _token = $('input[name="_token"]').val();
             // var gender = $('input[type="radio"][name="gender"]:checked').val();
@@ -481,6 +482,35 @@
             //         console.log(data['test']);
             //     }
             // });
+=======
+            //submitHandler: function(form) {
+                // var  _token = $('input[name="_token"]').val();
+                // var gender = $('input[type="radio"][name="gender"]:checked').val();
+                // var name = $('.name').val();
+                // var phone = $('.phone').val();
+                // var email = $('.email').val();
+                // var req_export = $('input[type="checkbox"][name="req_export"]:checked').val();
+                // if(req_export == undefined){
+                //     var req_export='';
+                // }
+                // var local_re = $('input[type="radio"][name="local-re"]:checked').val();
+                // var name2 = $('.name2').val();
+                // var phone2 = $('.phone2').val();city2
+                // var city2 = $('.city2').find(":selected").val();
+                // var district2 = $('.district2').find(":selected").val();
+                // var wards2 = $('.wards2').find(":selected").val();
+                // var addressdetail2 = $('.addressdetail2').val();
+                //alert(addressdetail2);
+                // $.ajax({
+                //     url: "{{route('fe.order.completed')}}",
+                //     method: "POST",
+                //     dataType: 'json',
+                //     data: $(form).serializeArray(),
+                //     success: function(data) {
+                //         console.log(data['test']);
+                //     }
+                // });
+>>>>>>> deb9e10477f7db5319e77776f2952788233e7b5d
             //}
         });
     });
@@ -532,4 +562,5 @@
 
 <script src="{{ asset('/shop/frontend/js/owl.carousel.js')}}?t=@php echo time() @endphp" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+
+<script src="{{ asset('/shop/frontend/js/my-js.js')}}?t=@php echo time() @endphp" type="text/javascript"></script>

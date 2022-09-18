@@ -4,7 +4,7 @@
     </div>
     <p>Sản phẩm bán chạy nhất</p>
 </h1>
-<ul class="clearfix">
+<ul class="clearfix list-unstyled">
     @foreach($product_covids as $item)
     <li class="position-relative">
         <a href="{{route('fe.product.detail',$item['id'])}}">

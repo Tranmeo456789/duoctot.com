@@ -17,7 +17,7 @@ use Session;
 use Illuminate\Support\Str;
 
 session_start();
-include "app/Helper/data.php";
+include "app/Helpers/data.php";
 class OrderController extends ShopFrontEndController
 {
     public function __construct()
@@ -99,13 +99,13 @@ class OrderController extends ShopFrontEndController
         $list_pr=[];$list_qty=[];
         $orders=OrderModel::where('code_order',$code)->get();
         $customer=CustomerModel::find($orders[0]->customer_id);
-        
+
         $list_qty=explode(",", $orders[0]['qty_per']);
         $list_pr = explode(",", $orders[0]['product_id']);
         $ls_product_order=[];
         foreach($list_pr as $list_product){
             $ls_product_order[]=ProductModel::find($list_product);
-        }     
+        }
         return view($this->pathViewController . 'order_success',compact('customer','orders','list_qty','ls_product_order'));
     }
     public function test(){

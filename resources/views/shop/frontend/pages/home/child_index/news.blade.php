@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="col-xl-6 col-lg-12 news-content-left">
-            <ul>
+            <ul class="list-unstyled">
                 <li class="d-flex">
                     <img src="{{asset('images/shop/news3.png')}}" alt="">
                     <div class="px-3">

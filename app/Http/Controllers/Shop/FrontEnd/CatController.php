@@ -9,7 +9,7 @@ use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
 use App\Model\Shop\Cat_productModel;
 use App\Model\Shop\Tinhthanhpho;
 use App\Model\Shop\ProductModel;
-include "app/Helper/data.php";
+include "app/Helpers/data.php";
 class CatController extends ShopFrontEndController
 {
     public function __construct()
@@ -34,9 +34,9 @@ class CatController extends ShopFrontEndController
         return view($this->pathViewController . 'cat_productlevel3',compact('catc1'));
     }
     public function cat_level3($slug,$slug1,$slug2){
-        
-        $cat2cs=Cat_productModel::where('slug',$slug2)->get();     
-        $products=ProductModel::where('cat_id',$cat2cs[0]['id'])->get();   
+
+        $cat2cs=Cat_productModel::where('slug',$slug2)->get();
+        $products=ProductModel::where('cat_id',$cat2cs[0]['id'])->get();
        if($products->count() > 0){
         $product=$products[0];$img = explode(",", $product->image);
        }else{

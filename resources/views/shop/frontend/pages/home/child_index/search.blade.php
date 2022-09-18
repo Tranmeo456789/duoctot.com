@@ -7,7 +7,7 @@
         </button>
     </div>
     <h2>Tra cứu hàng đầu</h5>
-    <ul class="d-flex">
+    <ul class="d-flex list-unstyled">
         <li>
             <a>đau đầu</a>
         </li>

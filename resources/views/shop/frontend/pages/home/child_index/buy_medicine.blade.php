@@ -1,5 +1,5 @@
 <h1 class="text-center">Mua thuốc dễ dàng tại TDoctor</h1>
-<ul class="d-flex">
+<ul class="d-flex list-unstyled">
     <li>
         <a href="">
             <div class="d-flex justify-content-center rimg-center"><img src="{{asset('images/shop/buy1.png')}}" alt="" srcset=""></div>
