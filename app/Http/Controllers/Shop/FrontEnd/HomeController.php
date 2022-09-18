@@ -9,7 +9,7 @@ use App\Model\Shop\Cat_productModel;
 use App\Model\Shop\ProductModel;
 use App\Model\Shop\Tinhthanhpho;
 
-include "app/Helper/data_cat.php";
+include "app/Helpers/data_cat.php";
 include "app/Helpers/data.php";
 use App\Helpers\HttpClient;
 class HomeController extends ShopFrontEndController

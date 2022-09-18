@@ -15,8 +15,8 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Session as FacadesSession;
 
 session_start();
-include "app/Helper/data.php";
-include_once "app/Helper/data_cart.php";
+include "app/Helpers/data.php";
+include_once "app/Helpers/data_cart.php";
 class CartController extends ShopFrontEndController
 {
     public function __construct()
@@ -27,7 +27,7 @@ class CartController extends ShopFrontEndController
         parent::__construct();
         $data = Cat_productModel::all();
         $_SESSION['local'] = $local = Tinhthanhpho::all();
-        
+
         $_SESSION['cat_product'] = $catps = data_tree1($data, 0);
     }
 
@@ -140,7 +140,7 @@ class CartController extends ShopFrontEndController
         $sub_total = number_format($price_next*$qty_next, 0, ',', '.');
         $totals = number_format($total, 0, ',', '.');
         $totalkm = number_format($total-10000, 0, ',', '.');
-        
+
         $result = array(
             //'list_product' => $list_product,
             'number_product' => $qty,
@@ -154,8 +154,8 @@ class CartController extends ShopFrontEndController
     }
     public function delete(Request $request,$rowId)
     {
-        $cart = Session::get('cart');       
-        foreach ($cart as $key => $item1) {   
+        $cart = Session::get('cart');
+        foreach ($cart as $key => $item1) {
             if ($item1['rowId'] == $rowId) {
                 unset($cart[$key]);
             }
