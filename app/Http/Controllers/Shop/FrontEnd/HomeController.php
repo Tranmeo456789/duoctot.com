@@ -76,45 +76,45 @@ class HomeController extends ShopFrontEndController
     }
     public function ajaxcat1(Request $request)
     {
-        //$cats = Cat_productModel::all();
+        $cats = Cat_productModel::all();
         $data = $request->all();
         $id_cat1 = $request->id_cat1;
-        // $slugcat1 = Cat_productModel::find($id_cat1)->slug;
-        // $temp = 0;
-        // $catcs2 = [];
-        // foreach ($cats as $cat2) {
-        //     if ($cat2['parent_id'] == $id_cat1) {
-        //         $catcs2[] = $cat2;
-        //     }
-        // }
-        // $id_cat2 = $catcs2[0]->id;
-        // $slugcat2 = Cat_productModel::find($id_cat2)->slug;
-        // $list_idcat3 = [];
-        // foreach ($_SESSION['cat_product'] as $cat3) {
-        //     if ($id_cat2 == $cat3['parent_id']) {
-        //         $list_idcat3[] = $cat3['id'];
-        //     }
-        // }
-        // $products = ProductModel::whereIn('cat_id', $list_idcat3)->inRandomOrder()->limit(4)->get();
-        // $list_cat = '';
-        // foreach ($_SESSION['cat_product'] as $item_submenu2) {
-        //     if ($item_submenu2['parent_id'] == $id_cat2) {
-        //         $list_cat .= list_cat2($slugcat1, $slugcat2, $item_submenu2);
-        //     }
-        // }
-        // $list_product = '';
-        // if ($products->count() > 0) {
-        //     $list_product .= list_productheader();
-        //     foreach ($products as $product) {
-        //         $imgm = explode(",", $product['image']);
-        //         $list_product .= list_productcontent($product,$imgm);
-        //     }
-        //     $list_product .= list_productfooter();
-        // }
+        $slugcat1 = Cat_productModel::find($id_cat1)->slug;
+        $temp = 0;
+        $catcs2 = [];
+        foreach ($cats as $cat2) {
+            if ($cat2['parent_id'] == $id_cat1) {
+                $catcs2[] = $cat2;
+            }
+        }
+        $id_cat2 = $catcs2[0]->id;
+        $slugcat2 = Cat_productModel::find($id_cat2)->slug;
+        $list_idcat3 = [];
+        foreach ($_SESSION['cat_product'] as $cat3) {
+            if ($id_cat2 == $cat3['parent_id']) {
+                $list_idcat3[] = $cat3['id'];
+            }
+        }
+        $products = ProductModel::whereIn('cat_id', $list_idcat3)->inRandomOrder()->limit(4)->get();
+        $list_cat = '';
+        foreach ($_SESSION['cat_product'] as $item_submenu2) {
+            if ($item_submenu2['parent_id'] == $id_cat2) {
+                $list_cat .= list_cat2($slugcat1, $slugcat2, $item_submenu2);
+            }
+        }
+        $list_product = '';
+        if ($products->count() > 0) {
+            $list_product .= list_productheader();
+            foreach ($products as $product) {
+                $imgm = explode(",", $product['image']);
+                $list_product .= list_productcontent($product,$imgm);
+            }
+            $list_product .= list_productfooter();
+        }
         $result = array(
-            //'list_cat' => $list_cat,
-            //'list_product' => $list_product,
-            'test'=> $id_cat1
+            'list_cat' => $list_cat,
+            'list_product' => $list_product,
+            'test'=> $list_product
         );
         return response()->json($result, 200);
     }

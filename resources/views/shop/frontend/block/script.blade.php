@@ -39,7 +39,7 @@
             function() {
                 var id_cat1 = $(this).attr('data-id');
                 var _token = $('input[name="_token"]').val();
-    
+                //alert(id_cat1);
                 $.ajax({
                     url: "{{route('ajaxcat1')}}",
                     method: 'GET',
@@ -50,16 +50,11 @@
                     },
                     success: function(data) {
                         console.log(data.test);
-                        //$('ul.body_catdetail').html(data['list_cat']);
-                        //$('.list-productmn').html(data['list_product']);
-
-                       // function visibale_cat() {
-                            //$('.black-content').css("display", "block");
-                            //$('.sub-menu1>li').removeClass('active-menucat2');
-                            //$('.sub-menu1>li:first-child').addClass('active-menucat2');
-                            //$('.content-submenu').css("display", "block");
-                       // }
-                        //setTimeout(visibale_cat, 1);
+                        $('ul.body_catdetail').html(data['list_cat']);
+                        $('.list-productmn').html(data['list_product']);
+                        $('.black-content').css("display", "block");
+                        $('.sub-menu1>li').removeClass('active-menucat2');
+                        $('.sub-menu1>li:first-child').addClass('active-menucat2');
                     },
                 });
 

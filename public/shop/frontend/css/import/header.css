@@ -252,7 +252,7 @@
     padding-bottom: 15px;
 } */
 
-.sub-menu2 {
+/* .sub-menu2 {
     padding: 10px 20px;
     height: 100%;
     position: absolute;
@@ -261,11 +261,11 @@
     width: 300%;
     z-index: 10000;
     display: none;
-}
+} */
 
-.sub-menu1>li:hover .sub-menu2 {
+/* .sub-menu1>li:hover .sub-menu2 {
     display: block;
-}
+} */
 
 #head-body #main-menu>li>a {
     color: #111111;

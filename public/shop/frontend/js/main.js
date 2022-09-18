@@ -70,8 +70,7 @@ $(document).ready(function () {
         $(this).addClass("activebtn");
         $('.ol1').removeClass("activebtn");
     });
-    //sub menu
-
+    
     //dong form
     $('.btn-closenk').click(function () {
         $('.form-login').css("display", "none");
@@ -200,24 +199,22 @@ $(document).ready(function () {
             closem.click();
         }
     });
-    $('.content-submenu').hover(
-        function () {
-            $('.black-content').css("display", "block");
-            //$('.content-submenu').css("display", "block");
-        },
-        function () {
-            $('.black-content').css("display", "none");
-            //$('.content-submenu').css("display", "none");
-        }
-    );
+    // $('.content-submenu').hover(
+    //     function () {
+    //         $('.black-content').css("display", "block");
+    //         //$('.content-submenu').css("display", "block");
+    //     },
+    //     function () {
+    //         $('.black-content').css("display", "none");
+    //         //$('.content-submenu').css("display", "none");
+    //     }
+    // );
     $('.catc1').hover(
         function () {
             $('.black-content').css("display", "block");
-            //$('.content-submenu').css("display", "block");
         },
         function () {
             $('.black-content').css("display", "none");
-            //$('.content-submenu').css("display", "none");
         }
     );
     $('.icon_cart').hover(
