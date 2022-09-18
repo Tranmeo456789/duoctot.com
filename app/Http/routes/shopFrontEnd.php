@@ -10,6 +10,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
 
     Route::post('/hoan-tat-dat-hang','OrderController@completed')->name('fe.order.completed');
     Route::get('/dat-hang/thanh-cong/{code}','OrderController@success')->name('fe.order.success');
+    Route::get('/thu-test','OrderController@test');
 
     Route::get('/gio-hang','CartController@cart_product')->name('fe.product.cart');
     Route::get('/gio-hang-trong','CartController@cart_null')->name('fe.product.cart_null');

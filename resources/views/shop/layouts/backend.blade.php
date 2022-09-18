@@ -286,6 +286,26 @@ $module_active=session('module_active');
                     },
                 });
             });
+            $('.update-status').change(function() {
+                status = $(this).find(":selected").val();
+                var _token = $('input[name="_token"]').val();
+                var id = $(this).attr('data-id');
+                $.ajax({
+                    url: "{{route('order.update_status')}}",
+                    method: 'POST',
+                    dataType: 'json',
+                    data: {
+                        status: status,
+                        id: id,
+                        _token: _token,
+                    },
+                    success: function(data) {
+                        $('.noti-statusorrder').html(data.noti_success);
+                        //console.log(data.id);
+                    }
+                });
+
+            }); 
             $('.js-select2').select2();
             $('.nav-link.active .sub-menu').slideDown();
         });

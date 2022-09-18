@@ -21,3 +21,25 @@
 .table-warehouse table td{
     border: 1px solid #f7f1f1;
 }
+#liststatus-order{
+    box-shadow: 0 0.5rem 2rem 0.25rem rgb(124 147 165 / 34%);
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    width: 250px;
+    z-index: 100;
+    position: fixed;
+    top: 50vh;
+    right: 50vw;transform: translate(50%, -50%);
+}
+
+  
+  /** Custom Select **/
+  .sources{
+    height: 27px;
+    padding: 1px 22px 1px 8px;
+    font-size: 15px;
+    background-color:rgb(162 238 90 / 23%);
+    text-align: center;
+    color: #580deb;
+  }

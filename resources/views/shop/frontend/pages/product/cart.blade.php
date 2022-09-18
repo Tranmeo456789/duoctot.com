@@ -331,9 +331,9 @@
                             <a href="" class="">Sử dụng mã giảm giá</a>
                         </h4>
                         <!-- <small class="text-danger d-flex justify-content-center">
-                                <img src="{{asset('images/shop/gd1.png')}}" alt="">
-                                <span>Vui lòng nhập đầy đủ tên và số điện thoại mua hàng để áp dụng mã giảm giá</span>
-                            </small> -->
+                                    <img src="{{asset('images/shop/gd1.png')}}" alt="">
+                                    <span>Vui lòng nhập đầy đủ tên và số điện thoại mua hàng để áp dụng mã giảm giá</span>
+                                </small> -->
                     </div>
                     <div class="cmoder">
                         @if(Session::has('islogin'))
@@ -360,6 +360,16 @@
             </div>
         </div>
         @endif
+        @else
+        <div class="pt-3">
+            <div class="wp-cart-null d-flex justify-content-center">
+                <div class="cart-null text-center">
+                    <div><img src="{{asset('images/shop/cn1.png')}}" alt=""></div>
+                    <h1>Chưa có sản phẩm nào trong giỏ hàng</h1>
+                    <a href="{{route('home')}}">TIẾP TỤC MUA SẮM</a>
+                </div>
+            </div>
+        </div>
         @endif
 
         <div class="row">

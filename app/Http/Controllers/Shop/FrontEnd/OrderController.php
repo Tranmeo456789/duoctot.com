@@ -52,7 +52,11 @@ class OrderController extends ShopFrontEndController
         if (OrderModel::latest('id')->first() == null) {
             $order_id_last['id'] = 0;
         }
-        $code_order = 'TDOCTOR' . ($order_id_last['id'] + 1) . Str::upper(Str::random(6));
+        $year= getdate()['year'];
+        $month = sprintf("%02d", getdate()['mon']);
+        $day = sprintf("%02d", getdate()['mday']);
+        $id_order = sprintf("%05d", $order_id_last['id'] + 1);
+        $code_order='DHTD'.$year.$month.$day.$id_order;
         $total = 0;
         $qty = 0;
         $listm_id = [];
@@ -85,13 +89,14 @@ class OrderController extends ShopFrontEndController
             'address_detail' =>  $request->input('addressdetail2'),
             'delivery_form' =>  $request->input('local-re'),
             'request_invoice' =>  $request->input('req_export'),
-            'status' => 'Đang chờ duyệt',
+            'status' => 'Đang xử lý',
+            'status_control'=>'Chưa thanh toán'
         ]);
         return redirect()->route('fe.order.success', ['code' => $code_order]);
     }
     public function success($code)
     {
-        $list_pr=[];
+        $list_pr=[];$list_qty=[];
         $orders=OrderModel::where('code_order',$code)->get();
         $customer=CustomerModel::find($orders[0]->customer_id);
         
@@ -100,8 +105,17 @@ class OrderController extends ShopFrontEndController
         $ls_product_order=[];
         foreach($list_pr as $list_product){
             $ls_product_order[]=ProductModel::find($list_product);
-        }
-        
+        }     
         return view($this->pathViewController . 'order_success',compact('customer','orders','list_qty','ls_product_order'));
+    }
+    public function test(){
+        $id=99;
+        $date = getdate();
+        $year= getdate()['year'];
+        $month = sprintf("%02d", getdate()['mon']);
+        $day = sprintf("%02d", getdate()['mday']);
+        $id=sprintf("%05d", $id);
+        $code_order='DHTD'.$year.$month.$day.$id;
+        return($code_order);
     }
 }

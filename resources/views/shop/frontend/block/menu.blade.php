@@ -84,7 +84,6 @@
                                     @endforeach
                                 </ul>
                             </form>
-
                             <div class="text-center"><a href="{{route('fe.product.cart')}}" class="viewcartmini">Xem giỏ hàng</a></div>
                         </div>
                     </div>

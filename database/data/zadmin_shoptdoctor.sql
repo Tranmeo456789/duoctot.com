@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 15, 2022 at 09:40 PM
+-- Generation Time: Sep 17, 2022 at 04:53 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.28
 
@@ -200,7 +200,7 @@ CREATE TABLE `customers` (
 INSERT INTO `customers` (`id`, `name`, `code_customer`, `email`, `phone`, `gender`, `password`, `address_detail`, `address`, `sale_area`, `tax_code`, `legal_representative`, `customer_group`, `referral_code`, `created_at`, `updated_at`) VALUES
 (10, 'Mai Thu Hậu', 'HAU890', 'Hauthanhbyu@gmail.com', '0987656376', 'Nam', 'e10adc3949ba59abbe56e057f20f883e', 'số 55, đường Võ Thị Sáu', 'Phường Tứ Liên,Quận Tây Hồ,Thành phố Hà Nội', NULL, NULL, NULL, 'Nhà thuốc', NULL, NULL, NULL),
 (11, 'Lưu Phương Đông', 'DONG8765', 'Dongculu@gmail.com', '0987888654', 'Nam', 'e10adc3949ba59abbe56e057f20f883e', 'số 33, đường Nguyễn Công Trứ', 'Xã Phúc Yên,Huyện Lâm Bình,Tỉnh Tuyên Quang', NULL, NULL, NULL, 'Phòng khám', NULL, NULL, NULL),
-(13, 'Nguyễn Văn Chung', NULL, NULL, '0975666543', NULL, 'e10adc3949ba59abbe56e057f20f883e', NULL, 'Tỉnh Cao Bằng', NULL, NULL, NULL, 'Thẩm mỹ viện', '99999', NULL, NULL),
+(13, 'Nguyễn Văn Chung', NULL, NULL, '0975666543', 'Nam', 'e10adc3949ba59abbe56e057f20f883e', NULL, 'Tỉnh Cao Bằng', NULL, NULL, NULL, 'Thẩm mỹ viện', '99999', NULL, NULL),
 (14, 'Thanh Thuận', NULL, 'thuanthanh@gmail.com', '0977666545', 'Nam', 'e10adc3949ba59abbe56e057f20f883e', NULL, 'Thành phố Hải Phòng', NULL, NULL, NULL, 'Nhà thuốc', '22222', NULL, NULL);
 
 -- --------------------------------------------------------
@@ -261,6 +261,8 @@ CREATE TABLE `orders` (
   `delivery_form` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `request_invoice` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status_control` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `payment` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -269,10 +271,13 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `code_order`, `customer_id`, `total`, `qty_total`, `qty_per`, `product_id`, `name`, `phone`, `address`, `address_detail`, `delivery_form`, `request_invoice`, `status`, `created_at`, `updated_at`) VALUES
-(2, 'TDOCTOR2RWLPG0', 14, 498000, 8, '5,2,1', '49,47,50', 'Thanh Thuận', '0977666545', 'Phường Đồng Xuân,Quận Hoàn Kiếm,Thành phố Hà Nội', 'số 43, Phan Chu Trinh', 'Giao hàng tận nơi', NULL, 'Đang chờ duyệt', '2022-09-15 10:50:48', '2022-09-15 10:50:48'),
-(3, 'TDOCTOR3T0BYZX', 14, 498000, 8, '5,2,1', '49,47,50', 'Thanh Thuận', '0977666545', 'Phường Bình Ngọc,Thành phố Móng Cái,Tỉnh Quảng Ninh', '33 Nguyễn Trãi', 'Giao hàng tận nơi', NULL, 'Đang chờ duyệt', '2022-09-15 10:59:17', '2022-09-15 10:59:17'),
-(4, 'TDOCTOR4GHJT8Q', 14, 580000, 9, '5,2,2', '49,47,50', 'Thanh Thuận', '0977666545', 'Phường Nghĩa Đô,Quận Cầu Giấy,Thành phố Hà Nội', '66 TT', 'Giao hàng tận nơi', NULL, 'Đang chờ duyệt', '2022-09-15 11:06:37', '2022-09-15 11:06:37');
+INSERT INTO `orders` (`id`, `code_order`, `customer_id`, `total`, `qty_total`, `qty_per`, `product_id`, `name`, `phone`, `address`, `address_detail`, `delivery_form`, `request_invoice`, `status`, `status_control`, `payment`, `created_at`, `updated_at`) VALUES
+(2, 'DHTD2022091600002', 14, 498000, 8, '5,2,1', '49,47,50', 'Thanh Thuận', '0977666545', 'Phường Đồng Xuân,Quận Hoàn Kiếm,Thành phố Hà Nội', 'số 43, Phan Chu Trinh', 'Giao hàng tận nơi', NULL, 'Đã giao hàng', 'Chưa thanh toán', 'Thanh toán bằng tiền mặt khi nhận hàng', '2022-09-15 10:50:48', '2022-09-16 19:27:51'),
+(3, 'DHTD2022091600003', 14, 498000, 8, '5,2,1', '49,47,50', 'Thanh Thuận', '0977666545', 'Phường Bình Ngọc,Thành phố Móng Cái,Tỉnh Quảng Ninh', '33 Nguyễn Trãi', 'Giao hàng tận nơi', NULL, 'Đang xử lý', 'Chưa thanh toán', 'Thanh toán bằng tiền mặt khi nhận hàng', '2022-09-15 10:59:17', '2022-09-16 19:26:50'),
+(4, 'DHTD2022091600004', 14, 580000, 9, '5,2,2', '49,47,50', 'Thanh Thuận', '0977666545', 'Phường Nghĩa Đô,Quận Cầu Giấy,Thành phố Hà Nội', '66 TT', 'Giao hàng tận nơi', NULL, 'Đang xử lý', 'Chưa thanh toán', 'Thanh toán bằng tiền mặt khi nhận hàng', '2022-09-15 11:06:37', '2022-09-15 11:06:37'),
+(5, 'DHTD2022091600005', 14, 5500000, 7, '5,2', '46,48', 'Thanh Thuậncity', '0977666545', 'Phường Lương Châu,Thành phố Sông Công,Tỉnh Thái Nguyên', 'số 88 Cao Long', 'Giao hàng tận nơi', NULL, 'Đã giao hàng', 'Chưa thanh toán', 'Thanh toán bằng tiền mặt khi nhận hàng', '2022-09-15 19:08:00', '2022-09-16 19:26:42'),
+(6, 'DHTD2022091600006', 13, 1480000, 7, '2,5', '46,49', 'Nguyễn Văn Chung', '0975666543', 'Xã Vô Tranh,Huyện Phú Lương,Tỉnh Thái Nguyên', 'Số 22, Hoàng Diệu', 'Giao hàng tận nơi', NULL, 'Đang xử lý', 'Chưa thanh toán', NULL, '2022-09-16 08:38:52', '2022-09-16 08:38:52'),
+(7, 'DHTD2022091600007', 13, 3428000, 9, '5,4', '46,49', 'Nguyễn Văn Chung', '0975666543', 'Xã Ea Sar,Huyện Ea Kar,Tỉnh Đắk Lắk', 'Số 99, Võ Thị Sáu', 'Giao hàng tận nơi', NULL, 'Đang xử lý', 'Chưa thanh toán', NULL, '2022-09-16 08:53:44', '2022-09-16 08:53:44');
 
 -- --------------------------------------------------------
 
@@ -12580,7 +12585,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `producers`

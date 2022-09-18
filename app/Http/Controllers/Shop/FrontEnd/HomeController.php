@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Config;
 use App\Model\Shop\Cat_productModel;
 use App\Model\Shop\ProductModel;
 use App\Model\Shop\Tinhthanhpho;
+
+include "app/Helper/data_cat.php";
 include "app/Helpers/data.php";
 use App\Helpers\HttpClient;
 class HomeController extends ShopFrontEndController
@@ -53,45 +55,17 @@ class HomeController extends ShopFrontEndController
         $list_cat = '';
         foreach ($_SESSION['cat_product'] as $item_submenu2) {
             if ($item_submenu2['parent_id'] == $id_cat2) {
-                $list_cat .= '<li>
-                    <a href="' . route("fe.cat3", [$slugcat1, $slugcat2, $item_submenu2->slug]) . '">
-                        <div class="item_cat4 d-flex">
-                            <div class="aimg rimg-centerx mr-1">
-                                <img src="' . asset('public/shop/uploads/images/product/' . $item_submenu2['image']) . '">
-                            </div>
-                            <div class="align-self-center"><span>' . $item_submenu2['name'] . '</span></div>
-                        </div>
-                    </a>
-                </li>';
+                $list_cat .= list_cat2($slugcat1, $slugcat2, $item_submenu2);
             }
         }
         $list_product = '';
         if ($products->count() > 0) {
-            $list_product .= '<div class="title-product-out d-flex justify-content-between my-3">
-                                <div class="title_cathd">
-                                    <h1>Sản phẩm nổi bật</h1>
-                                    <img src="' . asset('images/shop/lua4.png') . '">
-                                </div>
-                                <a href="">Xem tất cả</a>
-                            </div>';
-            $list_product .= '<div class="productimenu">
-                                <ul>
-                                    <div class="row">';
+            $list_product .= list_productheader();
             foreach ($products as $product) {
-                $imgm=explode(",", $product['image']);
-                $list_product .= '<div class="col-3 pl-3">
-                <li>
-                    <div class="bimgm"><a href="'.route("fe.product.detail",$product->id).'"><img src="' . asset('public/shop/uploads/images/product/' . $imgm[0]) . '" alt=""></a></div>
-                    <div class="">
-                        <a href="'.route("fe.product.detail",$product->id).'" class="truncate2">'.$product->name.'</a>
-                        <h3 class="my-2">'.number_format($product['price'], 0, "" ,"." ).'đ/'.$product['unit'].'</h3>
-                    </div>
-                </li>
-            </div>';
+                $imgm = explode(",", $product['image']);
+                $list_product .= list_productcontent($product,$imgm);
             }
-            $list_product .= '</div>
-                            </ul>
-                        </div>';
+            $list_product .= list_productfooter();
         }
         $result = array(
             'list_cat' => $list_cat,
@@ -125,45 +99,17 @@ class HomeController extends ShopFrontEndController
         $list_cat = '';
         foreach ($_SESSION['cat_product'] as $item_submenu2) {
             if ($item_submenu2['parent_id'] == $id_cat2) {
-                $list_cat .= '<li>
-                    <a href="' . route("fe.cat3", [$slugcat1, $slugcat2, $item_submenu2->slug]) . '">
-                        <div class="item_cat4 d-flex">
-                            <div class="aimg rimg-centerx mr-1">
-                                <img src="' . asset('public/shop/uploads/images/product/' . $item_submenu2['image']) . '">
-                            </div>
-                            <div class="align-self-center"><span>' . $item_submenu2['name'] . '</span></div>
-                        </div>
-                    </a>
-                </li>';
+                $list_cat .= list_cat2($slugcat1, $slugcat2, $item_submenu2);
             }
         }
         $list_product = '';
         if ($products->count() > 0) {
-            $list_product .= '<div class="title-product-out d-flex justify-content-between my-3">
-                                <div class="title_cathd">
-                                    <h1>Sản phẩm nổi bật</h1>
-                                    <img src="' . asset('images/shop/lua4.png') . '">
-                                </div>
-                                <a href="">Xem tất cả</a>
-                            </div>';
-            $list_product .= '<div class="productimenu">
-                                <ul>
-                                    <div class="row">';
+            $list_product .= list_productheader();
             foreach ($products as $product) {
-                $imgm=explode(",", $product['image']);
-                $list_product .= '<div class="col-3 pl-3">
-                <li>
-                    <div class="bimgm"><a href=""><img src="' . asset('public/shop/uploads/images/product/' . $imgm[0]) . '" alt=""></a></div>
-                    <div class="">
-                        <a href="" class="truncate2">'.$product->name.'</a>
-                        <h3 class="my-2">'.number_format($product['price'], 0, "" ,"." ).'đ/'.$product['unit'].'</h3>
-                    </div>
-                </li>
-            </div>';
+                $imgm = explode(",", $product['image']);
+                $list_product .= list_productcontent($product,$imgm);
             }
-            $list_product .= '</div>
-                            </ul>
-                        </div>';
+            $list_product .= list_productfooter();
         }
         $result = array(
             'list_cat' => $list_cat,
