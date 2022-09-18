@@ -247,54 +247,6 @@
             return flag;
         }
     );
-    $(document).ready(function() {
-        $("#user_login").validate({
-            rules: {
-                email: {
-                    required: true,
-                    checkPhoneNumber: true,
-                },
-                password: {
-                    required: true,
-                    minlength: 6
-                },
-            },
-            messages: {
-                email: {
-                    required: "Nhập số điện thoại hoặc email",
-                    checkPhoneNumber: "Số điện thoại hoặc email không đúng định dạng",
-                },
-                password: {
-                    required: "Bạn cần nhập mật khẩu",
-                    minlength: "Mật khẩu tối thiểu 6 ký tự"
-                },
-            },
-            submitHandler: function(form) {
-                var emaip = $('#inputphel').val();
-                var password = $('#password').val();
-                var _token = $('input[name="_token"]').val();
-                //event.preventDefault();
-                $.ajax({
-                    url: "{{url('/dang-nhap')}}",
-                    method: "POST",
-                    dataType: 'json',
-                    data: {
-                        emaip: emaip,
-                        password: password,
-                        _token: _token,
-                    },
-                    success: function(data) {
-                        if (data['islogin'] == 1) {
-                            location.reload();
-                        } else {
-                            alert('Thông tin đăng nhập không đúng !');
-                        }
-
-                    },
-                });
-            }
-        });
-    });
 </script>
 
 <script>

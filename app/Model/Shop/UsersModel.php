@@ -22,9 +22,22 @@ class UsersModel extends BackEndModel
         $result = null;
 
         if($options['task'] == 'get-item') {
-            $query = self::where('user_id', $params['user_id']);
+            $result = self::where('user_id', $params['user_id'])->first();
         }
-        $result = $query->first();
+        if($options['task'] == 'user-login') {
+            if (isset($params['email'])){
+                $result = self::where('email', $params['email'])->first();
+            }else{
+                $result = self::where('phone', $params['phone'])->first();
+            }
+            if ($result) {
+                if (Hash::check($params['password'],$result['password'])){
+                    return $result;
+                }else{
+                    return null;
+                }
+            }
+        }
         return $result;
     }
     public function saveItem($params = null, $options = null) {
