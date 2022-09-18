@@ -91,16 +91,19 @@
                     @endif
                 </div>
             </div>
-            @if(Session::has('islogin'))
-            <div class="fl-right" style="margin-left:10px;padding-top:20px;">
-                <div class="dropdown">
-                    <button class="btn dropdown-toggle text-light" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{Session::get('name')}}</button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="{{route('dashboard')}}">Tài khoản</a>
-                        <a class="dropdown-item" href="{{route('user.logout')}}">Thoát</a>
+
+            @if(Session::has('user'))
+                <div class="float-right" style="margin-left:10px;padding-top:20px;">
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle text-light" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+                            {{Session::get('user')['fullname']}}
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="{{route('dashboard')}}">Tài khoản</a>
+                            <a class="dropdown-item" href="{{route('user.logout')}}">Thoát</a>
+                        </div>
                     </div>
                 </div>
-            </div>
             @else
             <div id="" class="fl-right" style="margin-left:10px;padding-top:15px;">
                 <a title="" id="payment-link" class="">
