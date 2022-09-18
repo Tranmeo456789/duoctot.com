@@ -51,7 +51,7 @@
                     </a>
                     @if(Session::has('cart'))
                     @if(count(Session::get('cart')) > 0 )
-                    <span class="number_cartmenu">{{count(Session::get('cart'))}}</span>                
+                    <span class="number_cartmenu">{{count(Session::get('cart'))}}</span>
                     <div id="dropdown">
                         <div class="position-relative">
                             <span class="arrow-up"><i class="fas fa-sort-up"></i></span>
@@ -60,7 +60,7 @@
                                 {!! csrf_field() !!}
                                 <ul class="listp-cartmini">
                                     @foreach (Session::get('cart') as $product)
-                                       
+
                                     <li>
                                         <div class="d-flex">
                                             <div title="" class="thumbperp">
@@ -178,7 +178,7 @@
             <div class="d-flex justify-content-between">
                 <div class="menu-top1">
                     <div class="position-relative ">
-                        <ul id="main-menu" class="d-flex list-item">
+                        <ul id="main-menu" class="d-flex list-item list-unstyled">
                             @foreach ($_SESSION['cat_product'] as $item_cat1)
                             @if($item_cat1['parent_id']==0)
                             <li class="catc1" data-id="{{$item_cat1['id']}}">
@@ -188,7 +188,7 @@
                                 </a>
                                 <div class="content-submenu">
                                     <div class="px-0 position-relative right-fol" style="width:25%">
-                                        <ul class="sub-menu1">
+                                        <ul class="sub-menu1 list-unstyled">
                                             @foreach ($_SESSION['cat_product'] as $item_sub_menu1)
                                             @if ($item_sub_menu1['parent_id'] == (int)$item_cat1['id'] )
                                             <li data-id="{{$item_sub_menu1['id']}}">
@@ -203,7 +203,7 @@
                                                         </div>
                                                         <div class="sub-menu2 content-submenu-right">
                                                             <div class="cat_detail">
-                                                                <ul class="body_catdetail clearfix">
+                                                                <ul class="body_catdetail list-unstyled clearfix">
                                                                     <!-- @foreach ($_SESSION['cat_product'] as $item_submenu2)
                                                                     @if ($item_submenu2['parent_id'] == $item_sub_menu1['id'])
                                                                     <li class="">

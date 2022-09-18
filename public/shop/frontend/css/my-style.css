@@ -1,0 +1,110 @@
+p,
+label,
+ul {
+    margin-bottom: 0px;
+}
+
+#user_register .form-group {
+    font-size: 18px;
+    display: inline-block;
+    width: 100%;
+}
+
+.form-group.has-border .input-group {
+    border: 1px solid #7991B7;
+    border-radius: 10px;
+}
+
+.form-group.h-35 {
+    height: 35px !important;
+    line-height: 35px !important;
+}
+
+
+/* #user_register .form-group {
+    height: 55px;
+    line-height: 55px;
+    margin-bottom: 10px;
+} */
+
+#user_register .form-group input[type='radio'] {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.form-group input[type='radio']+label {
+    align-self: center !important;
+}
+
+#user_register .form-group .form-control,
+#user_register .form-group .select2 {
+    border: none;
+    font-size: 1.25rem;
+    padding: 0px;
+    align-self: center !important;
+}
+
+#user_register .form-group .select2 {
+    text-align: justify;
+}
+
+#user_register .form-group .select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: none;
+    border-radius: 0;
+    height: 51px;
+}
+
+#user_register .form-group .select2-container--default .select2-selection--single .select2-selection__rendered {
+    height: 51px;
+    line-height: 51px;
+    padding-left: 0px;
+}
+
+.select2-results__options {
+    font-size: 1.25rem;
+}
+
+.select2-results__options li {
+    padding: 10px 6px;
+}
+
+#user_register .form-group .select2-container--default .select2-selection--single .select2-selection__arrow {
+    font-size: 1.25rem;
+    height: 53px;
+    line-height: 53px;
+}
+
+#user_register .form-group .input-group {
+    height: 53px;
+}
+
+#user_register .form-group .changeTypePassword {
+    color: #0AAEE2;
+    cursor: pointer;
+}
+
+#user_register .form-group .input-group .input-group-text {
+    background-color: transparent;
+    border: none;
+}
+
+#user_register .form-group.has-border .input-group:focus-within {
+    border: 1px solid #40D1EE;
+    box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+}
+
+#user_register .form-group .form-control:focus {
+    border: none;
+    box-shadow: none;
+}
+
+label.error {
+    font-size: 14px;
+    text-align: left;
+}
+
+.input-group.has-error {
+    border-color: red !important;
+}

@@ -13,7 +13,7 @@
 
 //Route::auth();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/dang-ky', 'UserController@register')->name('user.register');
 Route::post('/dang-nhap', 'UserController@login')->name('user.login');
 Route::get('/dang-xuat', 'UserController@logout')->name('user.logout');

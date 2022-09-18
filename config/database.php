@@ -65,7 +65,19 @@ return [
             'strict' => false,
             'engine' => null,
         ],
-
+        'mysql_share_data' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST', 'localhost'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE_SHARE_DATA', 'forge'),
+            'username' => env('DB_USERNAME_SHARE_DATA', 'forge'),
+            'password' => env('DB_PASSWORD_SHARE_DATA', ''),
+            'charset' => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix' => '',
+            'strict' => false,
+            'engine' => null,
+        ],
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', 'localhost'),

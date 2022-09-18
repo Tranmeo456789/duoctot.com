@@ -1,5 +1,5 @@
 <h1 class="text-center mb-5">Danh mục thuốc nổi bật</h1>
-<ul class="clearfix">
+<ul class="clearfix list-unstyled">
     @php
         $items = [
             [ 'name' => 'Sinh lý - Nội tiết tố','qty'  => '36','image' => 'cat1.png'],

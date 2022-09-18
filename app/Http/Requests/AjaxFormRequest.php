@@ -39,19 +39,19 @@ class AjaxFormRequest extends FormRequest
         return [
             'required'    => ':attribute không được trống',
             'in'          => ':attribute không tồn tại',
-            'between'     => ':attribute chiều dài phải có ít nhất :min ký tứ nhiều nhất :max ký tự',
+            'between'     => ':attribute phải có ít nhất :min ký tứ nhiều nhất :max ký tự',
             'unique'      => ':attribute đã tồn tại',
-            'min'         => ':attribute chiều dài phải có ít nhất :min ký tứ',
+            'min'         => ':attribute phải có ít nhất :min ký tứ',
             'exists'      => ':attribute phải tồn tại',
             'date_format' => ':attribute không đúng định dạng quy định :format',
-            'max'         => ':attribute chiều dài phải có lớn nhất :max ký tứ',
+            'max'         => ':attribute phải có lớn nhất :max ký tứ',
             'confirmed'   => ':attribute không đúng',
             'file'        => ':attribute không đúng định dạng file',
             'mimes'       => ':attribute không đúng định dạng file: :values',
             'regex'       => ':attribute không đúng định dạng',
             'size'        => ':attribute không đúng kích thước :size',
-            'image'      =>':attribute không đúng định dạng ảnh',
-            'numeric'=>':attribute có dạng số',
+            'image'       => ':attribute không đúng định dạng ảnh',
+            'numeric'     => ':attribute có dạng số',
         ];
     }
     public function attributes()
