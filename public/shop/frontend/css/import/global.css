@@ -10,7 +10,12 @@ body{
 #site{
     overflow: hidden;
 }
-
+ul li{
+    list-style: none;
+}
+ul{
+    padding: 0px;
+}
 .wp-inner1{max-width: 1400px;margin: 0px auto;
     padding-left: 10px;
     padding-right: 10px;}
