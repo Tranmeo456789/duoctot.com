@@ -60,8 +60,8 @@
     'method'         => 'POST',
     'url'            => route('user.register'),
     'accept-charset' => 'UTF-8',
-    'class'          => 'wp-content-register',
-    'id'             => 'user_register' ])  }}
+    'class'          => 'wp-content-register form-input-group form-in-modal',
+    'id'             => 'main-form' ])  }}
     <div class="content text-center">
         <div class="row">
             {!! FormTemplate::show($elements,$formInputWidth)  !!}
