@@ -4,7 +4,7 @@
 $prefixShopFrontend = '';
 Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], function () {
     Route::get('/','HomeController@index')->name('home');
-    Route::post('/ajaxcat3','HomeController@ajaxcat3')->name('ajaxcat3');
+    Route::get('/ajaxcat3','HomeController@ajaxcat3')->name('ajaxcat3');
     Route::get('/ajaxcat1','HomeController@ajaxcat1')->name('ajaxcat1');
     Route::get('/chi-tiet-san-pham/{id}','ProductController@detail_product')->name('fe.product.detail');
 

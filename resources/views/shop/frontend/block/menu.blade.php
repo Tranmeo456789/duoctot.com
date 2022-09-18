@@ -60,7 +60,10 @@
                                 {!! csrf_field() !!}
                                 <ul class="listp-cartmini">
                                     @foreach (Session::get('cart') as $product)
+<<<<<<< HEAD
+=======
 
+>>>>>>> deb9e10477f7db5319e77776f2952788233e7b5d
                                     <li>
                                         <div class="d-flex">
                                             <div title="" class="thumbperp">
@@ -181,11 +184,19 @@
                             @foreach ($_SESSION['cat_product'] as $item_cat1)
                             @if($item_cat1['parent_id']==0)
                             <li class="catc1" data-id="{{$item_cat1['id']}}">
-                                <a href="{{route('fe.cat',$item_cat1->slug)}}" class="cat1name">
+                                <a href="{{route('fe.cat',$item_cat1->slug)}}" data-id="{{$item_cat1['id']}}"  class="cat1name">
                                     {{$item_cat1['name']}}
                                     <i class="fas fa-chevron-down arrow"></i>
                                 </a>
                                 <div class="content-submenu">
+<<<<<<< HEAD
+                                    <div class="row mx-0">
+                                        <div class="px-0 col-3 right-fol">
+                                            <ul class="sub-menu1">
+                                                @foreach ($_SESSION['cat_product'] as $item_sub_menu1)
+                                                @if ($item_sub_menu1['parent_id'] == (int)$item_cat1['id'] )
+                                                <li data-id="{{$item_sub_menu1['id']}}">
+=======
                                     <div class="px-0 position-relative right-fol" style="width:25%">
                                         <ul class="sub-menu1 list-unstyled">
                                             @foreach ($_SESSION['cat_product'] as $item_sub_menu1)
@@ -193,6 +204,7 @@
                                             <li data-id="{{$item_sub_menu1['id']}}">
                                                 <form action="" method="POST">
                                                     {!! csrf_field() !!}
+>>>>>>> deb9e10477f7db5319e77776f2952788233e7b5d
                                                     <div class="himg-menu">
                                                         <div class="d-flex">
                                                             <div class="d-flex align-items-center pl-2">
@@ -200,6 +212,8 @@
                                                             </div>
                                                             <a href="{{route('fe.cat2',[$item_cat1->slug,$item_sub_menu1->slug])}}" title="" class="titlec2">{{$item_sub_menu1['name']}}</a>
                                                         </div>
+<<<<<<< HEAD
+=======
                                                         <div class="sub-menu2 content-submenu-right">
                                                             <div class="cat_detail">
                                                                 <ul class="body_catdetail list-unstyled clearfix">
@@ -243,12 +257,22 @@
                                                                 </div> -->
                                                             </div>
                                                         </div>
+>>>>>>> deb9e10477f7db5319e77776f2952788233e7b5d
                                                     </div>
-                                                </form>
-                                            </li>
-                                            @endif
-                                            @endforeach
-                                        </ul>
+                                                </li>
+                                                @endif
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        <div class="col-9 px-0 content-submenu-right">
+                                            <div class="sub-menu2 ">
+                                                <div class="cat_detail">
+                                                    <ul class="body_catdetail clearfix">
+                                                    </ul>
+                                                    <div class="list-productmn"></div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </li>

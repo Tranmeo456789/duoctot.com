@@ -20,6 +20,8 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd'], fu
     Route::post('/luu-thong-tin-nguoi-ban', 'SellerProfileController@save')->name('seller.save');
     Route::get('/thay-doi-mat-khau', 'SellerProfileController@change_password')->name('seller.password');
     Route::get('/thiet-lap-cai-dat-khac', 'SellerProfileController@setting')->name('seller.setting');
+    Route::post('/thiet-lap-lai-mat-khau', 'SellerProfileController@change_password')->name('seller.change_password');
+    
 
     Route::get('/danh-sach-danh-muc', 'Cat_productController@index')->name('cat_product');
     Route::get('/them-danh-muc', 'Cat_productController@form')->name('cat_product.add');

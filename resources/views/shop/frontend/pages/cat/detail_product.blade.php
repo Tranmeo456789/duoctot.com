@@ -27,7 +27,7 @@
                     <p class="trademark_product">Thương hiệu: <span class="text-info">{{$productcs['trademark']}}</span></p>
                     <h1>{{$productcs['name']}}</h1>
                     <div class="comment d-flex justify-content-between flex-wrap">
-                        <span class="text-muted">(00011059)</span>
+                        <span class="text-muted">({{$customer_id}})</span>
                         <div class="position-relative">
                             <span class="star-befor">
                                 <img src="{{asset('images/shop/star.png')}}" alt="">

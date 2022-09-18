@@ -25,70 +25,42 @@
                     <thead>
                         <tr>
                             <th scope="col" rowspan="2" class="text-center">Sản phẩm</th>
-                            <th scope="col" colspan="2" class="text-center">KHO HỒ CHÍ MINH</th>
-                            <th scope="col" colspan="2" class="text-center">KHO HÀ NỘI</th>
+                            @foreach($warehouses as $warehouse)
+                            <th scope="col" colspan="2" class="text-center">{{$warehouse['name']}}</th>
+                            @endforeach
                         </tr>
                         <tr>
+                            @foreach($warehouses as $warehouse)
                             <th scope="col" class="text-center">TỒN KHO KHẢ DỤNG</th>
                             <th scope="col" class="text-center">SỐ LƯỢNG CẦN NHẬP</th>
-                            <th scope="col" class="text-center">TỒN KHO KHẢ DỤNG</th>
-                            <th scope="col" class="text-center">SỐ LƯỢNG CẦN NHẬP</th>
+                            @endforeach
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($products as $product)
+                        @php
+                        $img_product = explode(',', $product['image']);
+                        @endphp
                         <tr class="">
                             <td style="width: 40%">
                                 <div class="d-flex">
-                                    <img style="width:60px;height:60px" src="image/images.jpg" alt="">
+                                    <img style="width:60px;height:60px" src="{{asset('public/shop/uploads/images/product/'.$img_product[0])}}" alt="">
                                     <div class="info-product ml-3">
-                                        <p class="text-success font-weight-bold">Tăm Bông Ráy Tai Hoa Trà My(12g)</p>
-                                        <p>ID: 8866</p>
-                                        <p>Mã: TB11</p>
+                                        <p class="text-success font-weight-bold">{{$product['name']}}</p>
+                                        <p>ID: {{$product['id']}}</p>
+                                        <p>Mã: {{$product['code']}}</p>
                                     </div>
                                 </div>
                             </td>
-                            <td style="width: 15%" class="text-center">1</td>
-                            <td style="width: 15%" class="text-center">3</td>
-                            <td style="width: 15%" class="text-center">2</td>
-                            <td style="width: 15%" class="text-center">0</td>
+                            @foreach($warehouses as $k=>$warehouse)
+                            <td style="width: 15%" class="text-center">{{$numper_products[$k][$product['id']]}}</td>
+                            <td style="width: 15%" class="text-center text-danger">3</td>
+                            @endforeach
                         </tr>
-                        <tr class="">
-                            <td style="width: 40%">
-                                <div class="d-flex">
-                                    <img style="width:60px;height:60px" src="image/images.jpg" alt="">
-                                    <div class="info-product ml-3">
-                                        <p class="text-success font-weight-bold">Tăm Bông Ráy Tai Hoa Trà My(12g)</p>
-                                        <p>ID: 8866</p>
-                                        <p>Mã: TB11</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td style="width: 15%" class="text-center">1</td>
-                            <td style="width: 15%" class="text-center">3</td>
-                            <td style="width: 15%" class="text-center">2</td>
-                            <td style="width: 15%" class="text-center">0</td>
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">Trước</span>
-                                <span class="sr-only">Sau</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+
             </div>
         </div>
     </div>

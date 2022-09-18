@@ -301,13 +301,14 @@ $module_active=session('module_active');
                     },
                     success: function(data) {
                         $('.noti-statusorrder').html(data.noti_success);
-                        //console.log(data.id);
+                        console.log(data.pro);
                     }
                 });
 
             }); 
             $('.js-select2').select2();
             $('.nav-link.active .sub-menu').slideDown();
+           
         });
     </script>
 </body>

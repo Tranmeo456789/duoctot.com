@@ -158,7 +158,7 @@ $(document).ready(function () {
         }
     })
 
-    $('.order-noislogin').on('click', function() {
+    $('.order-noislogin').on('click', function () {
         alert('Vui lòng đăng nhập để mua hàng !')
     });
     //xoay arrow 180deg 
@@ -176,13 +176,11 @@ $(document).ready(function () {
     //      //$('#fixscreen-respon').css("display", "none");
     //     // $('#container').removeClass("fixed-hbd");
     //     $('#head-body-respon').removeClass("slider");
-
     // });
     $(window).resize(function (event) {
         $('#head-body-respon').removeClass("slider");
         $('#fixscreen-respon').css("display", "none");
     });
-
 
     //xo danh muc cap 1
     $('.vissubmenu').click(function () {
@@ -190,7 +188,6 @@ $(document).ready(function () {
         $(this).toggleClass('arrow-rotate');
     });
 
-    //
     const head_body_respon = document.getElementById('head-body-respon');
     const fixscreen_respon = document.getElementById('fixscreen-respon');
     const closem = document.getElementById('closem');
@@ -203,9 +200,25 @@ $(document).ready(function () {
             closem.click();
         }
     });
-    $('.cat1name').hover(function () {
-        $('.sub-menu1>li:first-child').addClass('active-menucat2');
-    }
+    $('.content-submenu').hover(
+        function () {
+            $('.black-content').css("display", "block");
+            //$('.content-submenu').css("display", "block");
+        },
+        function () {
+            $('.black-content').css("display", "none");
+            //$('.content-submenu').css("display", "none");
+        }
+    );
+    $('.catc1').hover(
+        function () {
+            $('.black-content').css("display", "block");
+            //$('.content-submenu').css("display", "block");
+        },
+        function () {
+            $('.black-content').css("display", "none");
+            //$('.content-submenu').css("display", "none");
+        }
     );
     $('.icon_cart').hover(
         function () {
@@ -229,11 +242,11 @@ $(document).ready(function () {
         if (identity == 'Công ty') {
             $('.company').css("display", "block");
             $('.person').css("display", "none");
-           
+
         } else {
             $('.company').css("display", "none");
             $('.person').css("display", "block");
-            
+
         }
     });
     $('.local-re').on('click', function () {
@@ -279,11 +292,10 @@ jQuery.validator.addMethod("checkmail1",
             var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
             return regex.test(email);
         }
-        if(email1.length == 0 || isEmail(email1))
-        {
+        if (email1.length == 0 || isEmail(email1)) {
             flag = true;
         }
-        
+
         return flag;
     }
 );
@@ -292,17 +304,17 @@ jQuery.validator.addMethod("checknamecompany",
         var flag = true;
         var namecompany = $('#namecompany').val().trim();
         local_re = $('input[type="radio"][name="identity"]:checked').val();
-            if (document.getElementById('reqexport').checked && local_re=='Công ty'){
-                if(namecompany.length > 0){
-                    flag=true;
-                }else{
-                    flag = false;
-                }           
+        if (document.getElementById('reqexport').checked && local_re == 'Công ty') {
+            if (namecompany.length > 0) {
+                flag = true;
+            } else {
+                flag = false;
             }
-            else{
-                flag=true;
-            }
-        
+        }
+        else {
+            flag = true;
+        }
+
         return flag;
     }
 );
@@ -311,16 +323,16 @@ jQuery.validator.addMethod("checktaxcode",
         var flag = true;
         var taxcode = $('#taxcode').val().trim();
         local_re = $('input[type="radio"][name="identity"]:checked').val();
-            if (document.getElementById('reqexport').checked && local_re=='Công ty'){
-                if(taxcode.length > 0){
-                    flag=true;
-                }else{
-                    flag = false;
-                }           
+        if (document.getElementById('reqexport').checked && local_re == 'Công ty') {
+            if (taxcode.length > 0) {
+                flag = true;
+            } else {
+                flag = false;
             }
-            else{
-                flag=true;
-            }     
+        }
+        else {
+            flag = true;
+        }
         return flag;
     }
 );
@@ -329,17 +341,17 @@ jQuery.validator.addMethod("checkaddresscompany",
         var flag = true;
         var addresscompany = $('#addresscompany').val().trim();
         local_re = $('input[type="radio"][name="identity"]:checked').val();
-            if (document.getElementById('reqexport').checked && local_re=='Công ty'){
-                if(addresscompany.length > 0){
-                    flag=true;
-                }else{
-                    flag = false;
-                }           
+        if (document.getElementById('reqexport').checked && local_re == 'Công ty') {
+            if (addresscompany.length > 0) {
+                flag = true;
+            } else {
+                flag = false;
             }
-            else{
-                flag=true;
-            }
-        
+        }
+        else {
+            flag = true;
+        }
+
         return flag;
     }
 );
@@ -348,16 +360,16 @@ jQuery.validator.addMethod("checkname1",
         var flag = true;
         var name1 = $('#name1').val().trim();
         local_re = $('input[type="radio"][name="identity"]:checked').val();
-            if (document.getElementById('reqexport').checked && local_re=='Cá nhân'){
-                if(name1.length > 0){
-                    flag=true;
-                }else{
-                    flag = false;
-                }           
+        if (document.getElementById('reqexport').checked && local_re == 'Cá nhân') {
+            if (name1.length > 0) {
+                flag = true;
+            } else {
+                flag = false;
             }
-            else{
-                flag=true;
-            }     
+        }
+        else {
+            flag = true;
+        }
         return flag;
     }
 );
@@ -366,16 +378,16 @@ jQuery.validator.addMethod("checkphone1",
         var flag = true;
         var phone1 = $('#phone1').val().trim();
         local_re = $('input[type="radio"][name="identity"]:checked').val();
-            if (document.getElementById('reqexport').checked && local_re=='Cá nhân'){
-                if(phone1.length > 0){
-                    flag=true;
-                }else{
-                    flag = false;
-                }           
+        if (document.getElementById('reqexport').checked && local_re == 'Cá nhân') {
+            if (phone1.length > 0) {
+                flag = true;
+            } else {
+                flag = false;
             }
-            else{
-                flag=true;
-            }     
+        }
+        else {
+            flag = true;
+        }
         return flag;
     }
 );
@@ -384,16 +396,16 @@ jQuery.validator.addMethod("checkaddress1",
         var flag = true;
         var address1 = $('#address1').val().trim();
         local_re = $('input[type="radio"][name="identity"]:checked').val();
-            if (document.getElementById('reqexport').checked && local_re=='Cá nhân'){
-                if(address1.length > 0){
-                    flag=true;
-                }else{
-                    flag = false;
-                }           
+        if (document.getElementById('reqexport').checked && local_re == 'Cá nhân') {
+            if (address1.length > 0) {
+                flag = true;
+            } else {
+                flag = false;
             }
-            else{
-                flag=true;
-            }     
+        }
+        else {
+            flag = true;
+        }
         return flag;
     }
 );
@@ -402,16 +414,16 @@ jQuery.validator.addMethod("checkname2",
         var flag = true;
         var name2 = $('#name2').val().trim();
         local_re = $('input[type="radio"][name="local-re"]:checked').val();
-            if (local_re=='Giao hàng tận nơi'){
-                if(name2.length > 0){
-                    flag=true;
-                }else{
-                    flag = false;
-                }           
+        if (local_re == 'Giao hàng tận nơi') {
+            if (name2.length > 0) {
+                flag = true;
+            } else {
+                flag = false;
             }
-            else{
-                flag=true;
-            }     
+        }
+        else {
+            flag = true;
+        }
         return flag;
     }
 );
@@ -420,16 +432,16 @@ jQuery.validator.addMethod("checkphone2",
         var flag = true;
         var phone2 = $('#phone2').val().trim();
         local_re = $('input[type="radio"][name="local-re"]:checked').val();
-            if (local_re=='Giao hàng tận nơi'){
-                if(phone2.length > 0){
-                    flag=true;
-                }else{
-                    flag = false;
-                }           
+        if (local_re == 'Giao hàng tận nơi') {
+            if (phone2.length > 0) {
+                flag = true;
+            } else {
+                flag = false;
             }
-            else{
-                flag=true;
-            }     
+        }
+        else {
+            flag = true;
+        }
         return flag;
     }
 );
@@ -438,16 +450,16 @@ jQuery.validator.addMethod("checkcity2",
         var flag = true;
         var city2 = $('#city').find(":selected").val();
         local_re = $('input[type="radio"][name="local-re"]:checked').val();
-            if (local_re=='Giao hàng tận nơi'){
-                if(city2.length > 0){
-                    flag=true;
-                }else{
-                    flag = false;
-                }           
+        if (local_re == 'Giao hàng tận nơi') {
+            if (city2.length > 0) {
+                flag = true;
+            } else {
+                flag = false;
             }
-            else{
-                flag=true;
-            }     
+        }
+        else {
+            flag = true;
+        }
         return flag;
     }
 );
@@ -456,16 +468,16 @@ jQuery.validator.addMethod("checkdistrict2",
         var flag = true;
         var district2 = $('#district2').find(":selected").val();
         local_re = $('input[type="radio"][name="local-re"]:checked').val();
-            if (local_re=='Giao hàng tận nơi'){
-                if(district2.length > 0){
-                    flag=true;
-                }else{
-                    flag = false;
-                }           
+        if (local_re == 'Giao hàng tận nơi') {
+            if (district2.length > 0) {
+                flag = true;
+            } else {
+                flag = false;
             }
-            else{
-                flag=true;
-            }     
+        }
+        else {
+            flag = true;
+        }
         return flag;
     }
 );
@@ -474,16 +486,16 @@ jQuery.validator.addMethod("checkwards2",
         var flag = true;
         var wards2 = $('#wards2').find(":selected").val();
         local_re = $('input[type="radio"][name="local-re"]:checked').val();
-            if (local_re=='Giao hàng tận nơi'){
-                if(wards2.length > 0){
-                    flag=true;
-                }else{
-                    flag = false;
-                }           
+        if (local_re == 'Giao hàng tận nơi') {
+            if (wards2.length > 0) {
+                flag = true;
+            } else {
+                flag = false;
             }
-            else{
-                flag=true;
-            }     
+        }
+        else {
+            flag = true;
+        }
         return flag;
     }
 );
@@ -492,16 +504,16 @@ jQuery.validator.addMethod("checkaddressdetail2",
         var flag = true;
         var addressdetail2 = $('#addressdetail2').val().trim();
         local_re = $('input[type="radio"][name="local-re"]:checked').val();
-            if (local_re=='Giao hàng tận nơi'){
-                if(addressdetail2.length > 0){
-                    flag=true;
-                }else{
-                    flag = false;
-                }           
+        if (local_re == 'Giao hàng tận nơi') {
+            if (addressdetail2.length > 0) {
+                flag = true;
+            } else {
+                flag = false;
             }
-            else{
-                flag=true;
-            }     
+        }
+        else {
+            flag = true;
+        }
         return flag;
     }
 );
@@ -510,16 +522,16 @@ jQuery.validator.addMethod("checkcity3",
         var flag = true;
         var city3 = $('#city3').val().trim();
         local_re = $('input[type="radio"][name="local-re"]:checked').val();
-            if (local_re=='Nhận tại nhà thuốc'){
-                if(city3.length > 0){
-                    flag=true;
-                }else{
-                    flag = false;
-                }           
+        if (local_re == 'Nhận tại nhà thuốc') {
+            if (city3.length > 0) {
+                flag = true;
+            } else {
+                flag = false;
             }
-            else{
-                flag=true;
-            }     
+        }
+        else {
+            flag = true;
+        }
         return flag;
     }
 );
@@ -528,35 +540,35 @@ jQuery.validator.addMethod("checkdistrict3",
         var flag = true;
         var district3 = $('#district3').val().trim();
         local_re = $('input[type="radio"][name="local-re"]:checked').val();
-            if (local_re=='Nhận tại nhà thuốc'){
-                if(district3.length > 0){
-                    flag=true;
-                }else{
-                    flag = false;
-                }           
+        if (local_re == 'Nhận tại nhà thuốc') {
+            if (district3.length > 0) {
+                flag = true;
+            } else {
+                flag = false;
             }
-            else{
-                flag=true;
-            }     
+        }
+        else {
+            flag = true;
+        }
         return flag;
     }
 );
 jQuery.validator.addMethod("checkdcshop",
     function () {
         var flag = true;
-        var dcshop ='';
+        var dcshop = '';
         var dcshop = $('input[type="radio"][name="dcshop"]:checked').val();
         local_re = $('input[type="radio"][name="local-re"]:checked').val();
-            if (local_re=='Nhận tại nhà thuốc'){
-                if(dcshop !== undefined){
-                    flag=true;
-                }else{
-                    flag = false;
-                }           
+        if (local_re == 'Nhận tại nhà thuốc') {
+            if (dcshop !== undefined) {
+                flag = true;
+            } else {
+                flag = false;
             }
-            else{
-                flag=true;
-            }     
+        }
+        else {
+            flag = true;
+        }
         return flag;
     }
 );
