@@ -66,14 +66,15 @@
         <div class="row">
             {!! FormTemplate::show($elements,$formInputWidth)  !!}
 
-        <p class="dkgp py-2">Để tài khoản được kích hoạt, quý khách hàng vui lòng cung cấp cho TDoctor đầy đủ các giấy phép theo quy định của pháp luật.</p>
+            <p class="dkgp py-2">Để tài khoản được kích hoạt, quý khách hàng vui lòng cung cấp cho TDoctor đầy đủ các giấy phép theo quy định của pháp luật.</p>
 
-        <div class="remember-login d-flex">
-            <input id="check-rules" type="checkbox"><label for="">Tôi đã đọc và đồng ý với <a href="" class="text-info">Điều khoản sử dụng*</a></label>
-        </div>
-        <p class="dkfn text-center btn-login mb-2">Nếu đã có tài khoản, vui lòng <a class="dkfnc ">Đăng nhập</a></p>
-        <div class="col-12 text-center" id="dang-ky">
-            <input type="submit" name="btn-register" value="Tạo tài khoản" id="btn-register" disabled>
+            <div class="remember-login d-flex">
+                <input id="check-rules" type="checkbox"><label for="">Tôi đã đọc và đồng ý với <a href="" class="text-info">Điều khoản sử dụng*</a></label>
+            </div>
+            <p class="dkfn text-center btn-login mb-2">Nếu đã có tài khoản, vui lòng <a class="dkfnc ">Đăng nhập</a></p>
+            <div class="col-12 text-center" id="dang-ky">
+                <input type="submit" name="btn-register" value="Tạo tài khoản" id="btn-register" disabled>
+            </div>
         </div>
     </div>
 {{ Form::close() }}
