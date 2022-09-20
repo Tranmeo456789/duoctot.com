@@ -78,6 +78,18 @@
     text-align: center;
 }
 
+form div[class*=col-]:last-child .form-group {
+    margin-bottom: 0rem;
+}
+
 .table-striped tbody tr:nth-of-type(odd) {
     background-color: rgba(0, 0, 0, 0.05);
+}
+
+.my-card-pagination {
+    padding: 0.5rem !important;
+}
+
+.card-body {
+    padding: 1rem;
 }

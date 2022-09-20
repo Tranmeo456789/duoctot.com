@@ -90,6 +90,17 @@ class Form {
                             </div>", $widthElement, $element['element'],$element['label']
                         );
                         break;
+                case 'btn-submit-center':
+                    $xhtml .= sprintf(
+                        '<div class="%s">
+                                <div class="form-group d-flex justify-content-center">
+                                <div class="%s text-center" >
+                                    %s
+                                </div>
+                            </div>
+                        </div>',$widthElement, $widthInput,$element['element']
+                    );
+                    break;
         }
         return $xhtml;
     }

@@ -13,6 +13,7 @@
             'getListProvince' => '/api/v0.3/province/get-list',
         ],
         'template' => [
+            'star' => "<span class='text-red ml-2'>*</span>",
             'form_element' => [
                 'label' => ['class'=>'col-form-label'],
                 'input' => [
