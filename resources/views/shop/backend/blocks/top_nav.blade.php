@@ -12,23 +12,14 @@
     </ul>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-        @if (Auth::check())
-            @php
-                $user = Auth::user();
-                // asset("fileUpload/user/" . $user->avatar)  ;
-                $fullName = $user->fullName;
-            @endphp
+        @if (!Session::has('user'))
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                <!-- <img src="{{$avatar}}" class="user-image img-circle elevation-2" alt="User Image"> -->
-                <span class="d-none d-md-inline">{{ $fullName }}</span>
+                    <span class="d-none d-md-inline">Nguyễn Trường Giang</span>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <!-- Menu Footer-->
-                    <li class="user-footer">
-                        <a href="{{route('user/user-info',['id'=>$user->id])}}" class="btn btn-primary btn-flat">Thông tin cá nhân</a>
-                        <a href="{{route('auth/adminLogout')}}" class="btn btn-danger btn-flat float-right">Đăng xuất</a>
-                    </li>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="#">Tài khoản</a>
+                    <a class="dropdown-item" href="{{route('user.logout')}}">Thoát</a>
                 </ul>
             </li>
         @endif

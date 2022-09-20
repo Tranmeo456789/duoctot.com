@@ -61,3 +61,7 @@
 .my-sidebar .nav-treeview {
     background-color: #aee9e9;
 }
+
+.navbar-nav>.user-menu>.dropdown-menu {
+    width: 180px;
+}
