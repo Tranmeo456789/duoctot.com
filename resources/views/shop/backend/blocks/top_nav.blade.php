@@ -12,10 +12,14 @@
     </ul>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-        @if (!Session::has('user'))
+        @if (Session::has('user'))
+            @php
+                $user = Session::has('user');
+                $fullName = $user->fullName;
+            @endphp
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                    <span class="d-none d-md-inline">Nguyễn Trường Giang</span>
+                    <span class="d-none d-md-inline">{{$fullName}}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" href="#">Tài khoản</a>
