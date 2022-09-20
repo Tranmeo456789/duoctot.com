@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Shop\BackEnd;
 
 use App\Model\Shop\UnitModel as MainModel;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\Shop\BackEnd\BackEndController;
 use App\Http\Requests\UnitRequest as MainRequest;
 class UnitController extends BackEndController
@@ -16,11 +16,10 @@ class UnitController extends BackEndController
         $this->pageTitle          = 'Đơn vị tính';
         $this->model = new MainModel();
         parent::__construct();
-        session(['module_active'=>'product']);
     }
     public function save(MainRequest $request)
     {
-        if (!$request->ajax()) return view("errors." .  'notfound', []);
+        if (!Request::ajax()) return view("errors." .  'notfound', []);
         if (isset($request->validator) && $request->validator->fails()) {
             return response()->json([
                 'fail' => true,

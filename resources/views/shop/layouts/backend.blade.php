@@ -14,6 +14,7 @@
         <div class="content-wrapper" id="content-wrapper">
             @yield('content')
         </div>
+        @include('shop.backend.blocks.modal')
     </div>
     @include("$moduleName.blocks.script")
     @stack('additionalJS')
