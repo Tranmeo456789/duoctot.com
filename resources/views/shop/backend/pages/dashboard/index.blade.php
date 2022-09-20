@@ -2,7 +2,7 @@
 @section('title',$pageTitle)
 
 @section('content')
-<section class="content">
+<section class="content pt-3">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">

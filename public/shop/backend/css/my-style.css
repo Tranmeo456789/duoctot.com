@@ -67,6 +67,17 @@
     width: 180px;
 }
 
-.content-wrapper>.content {
-    padding-top: 15px;
+.card-body>.table {
+    margin-bottom: 0;
+}
+
+.table thead .row-heading th {
+    background-color: #3c8dbc !important;
+    color: #fff;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
 }
