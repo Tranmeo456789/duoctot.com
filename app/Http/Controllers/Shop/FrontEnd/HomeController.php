@@ -114,6 +114,7 @@ class HomeController extends ShopFrontEndController
         $result = array(
             'list_cat' => $list_cat,
             'list_product' => $list_product,
+            'test'=> $list_product
         );
         return response()->json($result, 200);
     }

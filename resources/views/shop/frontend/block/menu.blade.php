@@ -60,7 +60,6 @@
                                 {!! csrf_field() !!}
                                 <ul class="listp-cartmini">
                                     @foreach (Session::get('cart') as $product)
-
                                     <li>
                                         <div class="d-flex">
                                             <div title="" class="thumbperp">
@@ -131,7 +130,7 @@
                         <div class="content text-center">
                             <div class="mb-3 rimg-center"><img src="{{asset('images/shop/tclsdh.png')}}" alt="" style="display:block"></div>
                             <p class="nsdt">Nhập số điện thoại bạn dùng
-                                để mua hàng tại TDoctor</p>
+                                để mua hàng tại T Doctor</p>
                             <div class="phone-mail position-relative">
                                 <input type="text" placeholder="Nhập số điện thoại / Email">
                                 <div class="img-person"><img src="{{asset('images/shop/dn1.png')}}" alt=""></div>
@@ -180,22 +179,21 @@
             <div class="d-flex justify-content-between">
                 <div class="menu-top1">
                     <div class="position-relative ">
-                        <ul id="main-menu" class="d-flex list-item list-unstyled">
+                        <ul id="main-menu" class="d-flex list-item">
                             @foreach ($_SESSION['cat_product'] as $item_cat1)
                             @if($item_cat1['parent_id']==0)
                             <li class="catc1" data-id="{{$item_cat1['id']}}">
-                                <a href="{{route('fe.cat',$item_cat1->slug)}}" class="cat1name">
+                                <a href="{{route('fe.cat',$item_cat1->slug)}}" data-id="{{$item_cat1['id']}}"  class="cat1name">
                                     {{$item_cat1['name']}}
                                     <i class="fas fa-chevron-down arrow"></i>
                                 </a>
                                 <div class="content-submenu">
-                                    <div class="px-0 position-relative right-fol" style="width:25%">
-                                        <ul class="sub-menu1 list-unstyled">
-                                            @foreach ($_SESSION['cat_product'] as $item_sub_menu1)
-                                            @if ($item_sub_menu1['parent_id'] == (int)$item_cat1['id'] )
-                                            <li data-id="{{$item_sub_menu1['id']}}">
-                                                <form action="" method="POST">
-                                                    {!! csrf_field() !!}
+                                    <div class="row mx-0">
+                                        <div class="px-0 col-3 right-fol">
+                                            <ul class="sub-menu1">
+                                                @foreach ($_SESSION['cat_product'] as $item_sub_menu1)
+                                                @if ($item_sub_menu1['parent_id'] == (int)$item_cat1['id'] )
+                                                <li data-id="{{$item_sub_menu1['id']}}">
                                                     <div class="himg-menu">
                                                         <div class="d-flex">
                                                             <div class="d-flex align-items-center pl-2">
@@ -203,55 +201,21 @@
                                                             </div>
                                                             <a href="{{route('fe.cat2',[$item_cat1->slug,$item_sub_menu1->slug])}}" title="" class="titlec2">{{$item_sub_menu1['name']}}</a>
                                                         </div>
-                                                        <div class="sub-menu2 content-submenu-right">
-                                                            <div class="cat_detail">
-                                                                <ul class="body_catdetail list-unstyled clearfix">
-                                                                    <!-- @foreach ($_SESSION['cat_product'] as $item_submenu2)
-                                                                    @if ($item_submenu2['parent_id'] == $item_sub_menu1['id'])
-                                                                    <li class="">
-                                                                        <a href="{{route('fe.cat3',[$item_cat1->slug,$item_sub_menu1->slug,$item_submenu2->slug])}}">
-                                                                            <div class="item_cat4 d-flex">
-                                                                                <div class="aimg rimg-centerx mr-1">
-                                                                                    <img src="{{asset('public/shop/uploads/images/product/'.$item_submenu2['image'])}}" alt="">
-                                                                                </div>
-                                                                                <div class="align-self-center"><span>{{$item_submenu2['name']}}</span></div>
-                                                                            </div>
-                                                                        </a>
-                                                                    </li>
-                                                                    @endif
-                                                                    @endforeach -->
-                                                                </ul>
-                                                                <div class="list-productmn"></div>
-                                                                <!-- <div class="title-product-out d-flex justify-content-between my-3">
-                                                                    <div class="title_cathd">
-                                                                        <h1>Sản phẩm nổi bật</h1>
-                                                                        <img src="{{asset('images/shop/lua4.png')}}" alt="">
-                                                                    </div>
-                                                                    <a href="">Xem tất cả</a>
-                                                                </div>
-                                                                <div class="productimenu">
-                                                                    <ul class="">
-                                                                        <div class="row">
-                                                                            <div class="col-3 pl-3">
-                                                                                <li>
-                                                                                    <div class="bimgm"><a href=""><img src="{{asset('images/shop/sri1.png')}}" alt=""></a></div>
-                                                                                    <div class="">
-                                                                                        <a href="">Siro Bổ Phế Bối Mẫu Forte Mom And Baby...</a>
-                                                                                        <h3 class="my-2">49.000đ/Chai</h3>
-                                                                                    </div>
-                                                                                </li>
-                                                                            </div>
-                                                                        </div>
-                                                                    </ul>
-                                                                </div> -->
-                                                            </div>
-                                                        </div>
                                                     </div>
-                                                </form>
-                                            </li>
-                                            @endif
-                                            @endforeach
-                                        </ul>
+                                                </li>
+                                                @endif
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        <div class="col-9 px-0 content-submenu-right">
+                                            <div class="sub-menu2 ">
+                                                <div class="cat_detail">
+                                                    <ul class="body_catdetail clearfix">
+                                                    </ul>
+                                                    <div class="list-productmn"></div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </li>
