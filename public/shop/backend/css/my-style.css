@@ -22,6 +22,7 @@
 .brand-link {
     text-align: center;
     padding: 0.5rem 0.5rem;
+    background-color: #def3d4;
 }
 
 .brand-link .brand-image {
@@ -64,4 +65,8 @@
 
 .navbar-nav>.user-menu>.dropdown-menu {
     width: 180px;
+}
+
+.content-wrapper>.content {
+    padding-top: 15px;
 }

@@ -4,7 +4,7 @@
     @include("$moduleName.blocks.head")
     @stack('additionalResources')
 </head>
-<body class="sidebar-mini layout-fixed">
+<body class="sidebar-mini layout-fixed layout-navbar-fixed">
     <div class="wrapper">
         @include("$moduleName.blocks.top_nav")
         <aside class="main-sidebar elevation-4 my-sidebar">

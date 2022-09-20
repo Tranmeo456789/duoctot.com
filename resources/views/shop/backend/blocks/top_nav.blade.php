@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<nav class="main-header navbar navbar-expand-md">
+<nav class="main-header navbar navbar-expand-md navbar-white">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
         <li class="nav-item">
@@ -7,7 +7,7 @@
                 role="button"><i class="fas fa-bars" style="color: #212529;"></i></a>
         </li>
         <li class="nav-item d-none d-md-block">
-            <a class="nav-link text-uppercase"><strong>@yield('header_title')</strong></a>
+            <a class="nav-link text-uppercase"><strong>{{$pageTitle}}</strong></a>
         </li>
     </ul>
     <!-- Right navbar links -->
