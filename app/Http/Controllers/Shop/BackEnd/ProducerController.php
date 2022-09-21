@@ -19,7 +19,7 @@ class ProducerController extends BackEndController
     }
     public function save(MainRequest $request)
     {
-        if (!$request->ajax()) return view("errors." .  'notfound', []);
+        if (!Request::ajax()) return view("errors." .  'notfound', []);
         if (isset($request->validator) && $request->validator->fails()) {
             return response()->json([
                 'fail' => true,

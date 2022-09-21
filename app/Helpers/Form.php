@@ -26,6 +26,7 @@ class Form {
                             %s
                             <div class='%s'>
                                 %s
+                                <span class='help-block'></span>
                             </div>
                         </div>
                     </div>", $widthElement, $element['label'], $widthInput,$element['element']
