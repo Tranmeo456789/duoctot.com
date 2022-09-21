@@ -1,9 +1,9 @@
-<table class="table table-striped" id="tbList">
+<table class="table table-bordered table-striped table-hover table-head-fixed text-wrap" id="tbList">
     <thead>
-        <tr>
-            <th scope="col">STT</th>
-            <th scope="col">Tên thương hiệu</th>
-            <th scope="col">Tác vụ</th>
+        <tr class="row-heading">
+            <th>STT</th>
+            <th>Tên Thương hiệu</th>
+            <th>Tác vụ</th>
         </tr>
     </thead>
     @php
