@@ -26,7 +26,7 @@
     $elements = [
         [
             'label'   => HTML::decode(Form::label('member_id', $label['member_id'] .  $star, $formLabelAttr)),
-            'element' => Form::text('details[member_id]', $details['member_id']??null, array_merge($formInputAttr,['placeholder'=>$label['member_id']])),
+            'element' => Form::text('details[member_id]', $details['member_id']??null, array_merge($formInputAttr,['placeholder'=>$label['member_id'],'readonly' => 'readonly'])),
             'widthElement' => 'col-4'
         ],[
             'label'   => HTML::decode(Form::label('fullname', 'Họ tên' .  $star, $formLabelAttr)),

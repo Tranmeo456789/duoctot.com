@@ -28,7 +28,7 @@
     'method'         => 'POST',
     'url'            => route('user.login'),
     'accept-charset' => 'UTF-8',
-    'class'          => 'wp-content-login form-input-group form-in-modal',
+    'class'          => 'wp-content-login form-input-group form-in-modal user-login',
     'id'             => 'main-form' ])  }}
     <div class="content text-center">
         <div class="row">

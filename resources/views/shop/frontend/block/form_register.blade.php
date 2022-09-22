@@ -60,7 +60,7 @@
     'method'         => 'POST',
     'url'            => route('user.register'),
     'accept-charset' => 'UTF-8',
-    'class'          => 'wp-content-register form-input-group form-in-modal',
+    'class'          => 'wp-content-register form-input-group form-in-modal user-register',
     'id'             => 'main-form' ])  }}
     <div class="content text-center">
         <div class="row">
