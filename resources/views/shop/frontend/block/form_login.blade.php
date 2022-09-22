@@ -5,6 +5,7 @@
     $formInputAttr    = config('myconfig.template.form_element.input');
     $formInputWidth['widthInput']  =  'col-12 p-0';
 
+    $inputHiddenTask    = Form::hidden('task', 'login');
     $elements = [
         [
             'label'   => '',
@@ -37,6 +38,7 @@
                 <input type="checkbox"><label for="">Giữ tôi đăng nhập</label>
             </div>
             <div id="user_login" class="text-center mb-5 col-12">
+                {{$inputHiddenTask }}
                 <button type="submit" name="btn-login" value="1" id="btn-logint">Đăng nhập</button>
             </div>
             <p class="dkfn text-center btn-register">Để nhận ưu đãi hấp dẫn, <a class="dkfnc">Đăng ký thành viên</a></p>

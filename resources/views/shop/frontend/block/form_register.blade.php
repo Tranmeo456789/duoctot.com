@@ -5,7 +5,7 @@
     $formInputAttr    = config('myconfig.template.form_element.input');
     $formSelect2Attr  = config('myconfig.template.form_element.select2');
     $formInputWidth['widthInput']  =  'col-12 p-0';
-
+    $inputHiddenTask    = Form::hidden('task', 'register');
     $elements = [
         [
             'label'   => '',
@@ -73,6 +73,7 @@
             </div>
             <p class="dkfn text-center btn-login mb-2">Nếu đã có tài khoản, vui lòng <a class="dkfnc ">Đăng nhập</a></p>
             <div class="col-12 text-center" id="dang-ky">
+                {{$inputHiddenTask}}
                 <input type="submit" name="btn-register" value="Tạo tài khoản" id="btn-register" disabled>
             </div>
         </div>

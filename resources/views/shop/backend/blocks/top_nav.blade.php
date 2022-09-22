@@ -14,8 +14,8 @@
     <ul class="navbar-nav ml-auto">
         @if (Session::has('user'))
             @php
-                $user = Session::has('user');
-                $fullName = $user->fullName;
+                $user = Session::get('user');
+                $fullName = $user->fullname;
             @endphp
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">

@@ -14,14 +14,13 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator as FacadesValidator;
 use Symfony\Component\HttpFoundation\Session\Session;
 use App\Helpers\HttpClient;
-use App\Http\Requests\RegisterRequest as RegisterRequest;
-use App\Http\Requests\LoginRequest as LoginRequest;
+use App\Http\Requests\UserRequest as MainRequest;
 use App\Model\Shop\UsersModel as MainModel;
 class UserController extends Controller
 {
-    public function register(RegisterRequest $request)
+    public function register(MainRequest $request)
     {
-        //if (!$request->ajax())  return redirect()->route('errors/notfound');
+        if (!$request->ajax())  return redirect()->route('errors/notfound');
 
         if (isset($request->validator) && $request->validator->fails()) {
             return response()->json([
@@ -65,9 +64,9 @@ class UserController extends Controller
         return redirect()->route('errors/notfound');
     }
 
-    public function login(LoginRequest $request)
+    public function login(MainRequest $request)
     {
-       // if (!$request->ajax())  return redirect()->route('errors/notfound');
+        if (!$request->ajax())  return redirect()->route('errors/notfound');
         if (isset($request->validator) && $request->validator->fails()) {
             return response()->json([
                 'status' => 200,
