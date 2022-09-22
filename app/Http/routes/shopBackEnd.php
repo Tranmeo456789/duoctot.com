@@ -16,12 +16,11 @@ $prefixShopBackEnd = '/backend';
 Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd'], function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
-    Route::get('/thong-tin-nguoi-ban', 'SellerProfileController@index')->name('seller.info');
-    Route::post('/luu-thong-tin-nguoi-ban', 'SellerProfileController@save')->name('seller.save');
-    Route::get('/thay-doi-mat-khau', 'SellerProfileController@change_password')->name('seller.password');
-    Route::get('/thiet-lap-cai-dat-khac', 'SellerProfileController@setting')->name('seller.setting');
-    Route::post('/thiet-lap-lai-mat-khau', 'SellerProfileController@change_password')->name('seller.change_password');
-    
+    Route::get('/thong-tin-nguoi-dung', 'ProfileController@info')->name('profile.info');
+    Route::post('/luu-thong-tin-nguoi-dung', 'ProfileController@save')->name('profile.save');
+    Route::get('/thay-doi-mat-khau', 'ProfileController@change_password')->name('profile.password');
+    Route::post('/thay-doi-mat-khau', 'ProfileController@change_password')->name('profile.password');
+    Route::get('/thiet-lap-cai-dat-khac', 'ProfileController@setting')->name('profile.setting');
 
     Route::get('/danh-sach-danh-muc', 'Cat_productController@index')->name('cat_product');
     Route::get('/them-danh-muc', 'Cat_productController@form')->name('cat_product.add');
@@ -83,4 +82,7 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd'], fu
     Route::get('anh-san-pham/{id}', 'DropzoneController@list_img')->name('dropzone.list_img');
     Route::post('/them-anh-san-pham/{id}', 'ProductController@addimg_product')->name('product.img.add');
     Route::get('/xoa-anh-san-pham/{id}/{id_product}', 'DropzoneController@deleteimg_product')->name('dropzone.img.delete');
+
+    Route::get('district/get-list', 'DistrictController@getListByParentID')->name('district.getListByParentID');
+    Route::get('ward/get-list', 'WardController@getListByParentID')->name('ward.getListByParentID');
 });

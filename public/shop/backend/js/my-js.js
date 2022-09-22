@@ -16,22 +16,22 @@ $(document).on('submit', 'form#main-form', function(event) {
         cache: false,
         contentType: false,
         processData: false,
-        success: function(data) {
+        success: function(response) {
             $msg = '';
-            if (data.fail) {
-                form.find("input[type='submit']").val("Lưu");
-                for (control in data.errors) {
-                    $('[name=' + control + ']').addClass("is-invalid")
-                    $('[name=' + control + ']').parents('div.form-group').addClass("has-error");
-                    $('[name=' + control + ']').siblings('span.help-block').html(data.errors[control]).addClass("help-block-show");
-                    $msg += "<br/>" + data.errors[control];
+            if (response.success == false) {
+                if (response.error != null) {
+                    for (control in response.errors) {
+                        eleError = "<label id='" + control + "-error' class='error invalid-feedback' for='" + control + "' style='display:inline-block'>" + response.errors[control] + "</label>";
+                        $('[name=' + control + ']').closest(".form-group").find("label[for='" + control + "']").remove();
+                        $('[name=' + control + ']').closest(".input-group").addClass('has-error').after(eleError);
+                        $('[name=' + control + ']').addClass("is-invalid").removeClass('is-valid');
+                    }
+                } else {
+                    alert(response.message);
                 }
-                // $msg = $msg.substring(5);
-                // toastr.error($msg);
             } else {
-                // $.pjax({ url: data.redirect_url, container: pjaxContainer });
-                window.location.replace(data.redirect_url);
-                //   toastr.success(data.message);
+                alert(response.message);
+                window.location.replace(response.redirect_url);
             }
         },
         error: function(xhr, textStatus, errorThrown) {
@@ -89,8 +89,74 @@ function ajaxDelete(url, token, content) {
     });
 }
 
+$(document).on('change', "select.get_child", function(event) {
+    event.preventDefault();
+    url = $(this).data('href');
+    target = $(this).data('target');
 
+    $selectValue = $(this).val();
+    if (($selectValue == '') && (url.indexOf('value_new') !== -1)) {
+        options = $(target).find('option')[0].outerHTML;
+        $(target).html(options);
+        $(target).trigger("change");
+    } else {
+        url = url.replace('value_new', $selectValue);
+        let addtion = $(this).data('addtion');
+        if (addtion !== undefined) {
+            addtion = addtion.split('|');
+            addtion.forEach(function(elem, index) {
+                elemValue = $('#' + elem).val();
+                if (elemValue != '') {
+                    if (url.indexOf('?') === -1) {
+                        url += "?filter_" + elem + "=" + elemValue;
+                    } else {
+                        url += "&filter_" + elem + "=" + elemValue;
+                    }
+                }
+            });
+        }
+
+        $.get({
+            url: url,
+            cache: false,
+            dataType: 'json',
+            success: function(data) {
+                options = '';
+                if ($(target + " option").length > 0) {
+                    options = $(target).find('option')[0].outerHTML;
+                }
+                $.each(data, function(id, item) {
+                    options += "<option value= '" + id + "'>" + item + "</option>";
+                });
+
+                $(target).html(options);
+                // if ($(target).hasClass('get_data')) $(target).trigger("change");
+                if ($(target).hasClass('get_child')) $(target).trigger("change");
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                alert("Error: " + errorThrown);
+            }
+        });
+    }
+});
+$(document).on('click', ".changeTypePassword", function(event) {
+    parent = $(this).parents('.form-group');
+    parent.toggleClass('open');
+    if (parent.hasClass('open')) {
+        parent.find("input[name='password']").attr('type', 'text');
+        parent.find("input[name='password_old']").attr('type', 'text');
+        parent.find("input[name='password_confirmation']").attr('type', 'text');
+        $(this).html("<i class='fa fa-eye-slash'></i>");
+    } else {
+        parent.find("input[name='password']").attr('type', 'password');
+        parent.find("input[name='password_old']").attr('type', 'password');
+        parent.find("input[name='password_confirmation']").attr('type', 'password');
+        $(this).html("<i class='fa fa-eye'></i>");
+    }
+});
 $(document).ready(function() {
+    $(".select2").select2();
+
     $('#submit-all1').click(function() {
         var x = document.getElementsByClassName("name-img");
         var name_img = [];
@@ -121,30 +187,30 @@ $(document).ready(function() {
             }
         });
     });
-    $('.choose1').change(function() {
-        var action = $(this).attr('id');
-        var maid = $(this).val();
-        var _token = $('input[name="_token"]').val();
-        var result = '';
-        if (action == 'city') {
-            result = 'province';
-        } else {
-            result = 'wards';
-        }
-        $.ajax({
-            url: "{{route('locationAjax')}}",
-            method: "POST",
-            dataType: 'html',
-            data: {
-                action: action,
-                maid: maid,
-                _token: _token
-            },
-            success: function(data) {
-                $('#' + result).html(data);
-            },
-        });
-    });
+    // $('.choose1').change(function() {
+    //     var action = $(this).attr('id');
+    //     var maid = $(this).val();
+    //     var _token = $('input[name="_token"]').val();
+    //     var result = '';
+    //     if (action == 'city') {
+    //         result = 'province';
+    //     } else {
+    //         result = 'wards';
+    //     }
+    //     $.ajax({
+    //         url: "{{route('locationAjax')}}",
+    //         method: "POST",
+    //         dataType: 'html',
+    //         data: {
+    //             action: action,
+    //             maid: maid,
+    //             _token: _token
+    //         },
+    //         success: function(data) {
+    //             $('#' + result).html(data);
+    //         },
+    //     });
+    // });
     $('.update-status').change(function() {
         status = $(this).find(":selected").val();
         var _token = $('input[name="_token"]').val();

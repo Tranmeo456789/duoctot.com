@@ -5,11 +5,13 @@
                 <h1>{{ $pageTitle }}</h1>
             </div>
             <div class="col-md-6 d-flex justify-content-end">
-                @if (isset($pageIndex) && ($pageIndex))
-                <a href='{{route("$controllerName.add")}}' class="btn btn-primary btn-info float-right">Thêm mới</a>
-            @else
-                <a href='{{route("$controllerName")}}' class="btn btn-primary btn-info float-right">Quay về</a>
-            @endif
+                @if (!isset($hidePageIndex) || !$hidePageIndex)
+                    @if (isset($pageIndex) && ($pageIndex))
+                        <a href='{{route("$controllerName.add")}}' class="btn btn-primary btn-info float-right">Thêm mới</a>
+                    @else
+                        <a href='{{route("$controllerName")}}' class="btn btn-primary btn-info float-right">Quay về</a>
+                    @endif
+                @endif
             </div>
         </div> <!-- /.row -->
     </div><!-- /.container-fluid -->

@@ -52,6 +52,8 @@ class AjaxFormRequest extends FormRequest
             'size'        => ':attribute không đúng kích thước :size',
             'image'       => ':attribute không đúng định dạng ảnh',
             'numeric'     => ':attribute có dạng số',
+            'same'       => ':attribute và :other phải giống nhau',
+            'old_password' => 'Mật khẩu cũ không đúng'
         ];
     }
     public function attributes()

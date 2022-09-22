@@ -60,16 +60,13 @@ class Form {
                     $widthElement, $element['label'],$widthInput,$element['image'],$element['element']
                 );
                 break;
-            case 'password-with-image-before':
+            case 'input-password':
                     $xhtml = sprintf("
                         <div class='%s'>
-                            <div class='form-group row $styleFormGroup'>
+                            <div class='form-group row'>
                                 %s
                                 <div class='%s'>
                                     <div class='input-group align-self-center'>
-                                        <div class='input-group-prepend'>
-                                            <span class='input-group-text'><img src='%s'></span>
-                                        </div>
                                         %s
                                         <div class='input-group-append'>
                                             <span class='input-group-text changeTypePassword'><i class='fa fa-eye'></i></span>
@@ -78,9 +75,30 @@ class Form {
                                 </div>
                             </div>
                         </div>",
-                        $widthElement, $element['label'],$widthInput,$element['image'],$element['element']
+                        $widthElement, $element['label'],$widthInput,$element['element']
                     );
                     break;
+            case 'password-with-image-before':
+                        $xhtml = sprintf("
+                            <div class='%s'>
+                                <div class='form-group row $styleFormGroup'>
+                                    %s
+                                    <div class='%s'>
+                                        <div class='input-group align-self-center'>
+                                            <div class='input-group-prepend'>
+                                                <span class='input-group-text'><img src='%s'></span>
+                                            </div>
+                                            %s
+                                            <div class='input-group-append'>
+                                                <span class='input-group-text changeTypePassword'><i class='fa fa-eye'></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>",
+                            $widthElement, $element['label'],$widthInput,$element['image'],$element['element']
+                        );
+                        break;
                 case 'inline-text-right':
                         $xhtml .= sprintf(
                             "<div class='%s'>

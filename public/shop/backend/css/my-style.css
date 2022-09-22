@@ -93,3 +93,17 @@ form div[class*=col-]:last-child .form-group {
 .card-body {
     padding: 1rem;
 }
+
+.form-group {
+    margin-bottom: 0.5rem;
+}
+
+.form-group .input-group:has(.changeTypePassword) .form-group {
+    border-right-width: 0px;
+}
+
+.form-group .changeTypePassword {
+    color: #0AAEE2;
+    cursor: pointer;
+    background-color: #fff;
+}

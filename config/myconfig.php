@@ -21,13 +21,24 @@
                 ],
                 'select2' => [
                     'class' => 'form-control col-md-12 col-xs-12 select2'
+                ],
+                'get_child' =>[
+                    'class' => 'get_child'
                 ]
-            ]
-,
+            ],
             'label' => [
                 'fullname' => 'Họ tên',
                 'password' => 'Mật khẩu',
-                'phone' => 'Số điện thoại'
+                'phone' => 'Số điện thoại',
+                'email' => 'Email',
+                'member_id' => 'Mã thành viên',
+                'province_id' => 'Tỉnh, thành phố',
+                'district_id' => 'Quận, Huyện',
+                'ward_id' => 'Xã, phường, thị trấn',
+                'sell_area' => 'Khu vực bán hàng',
+                'tax_code' => 'Mã số thuế',
+                'person_represent' =>'Người đại diện pháp luật',
+                'address' => 'Địa chỉ'
             ],
             'type_user' => [
                 '1' => 'Bệnh nhân',

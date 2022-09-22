@@ -25,7 +25,7 @@
                     <li class="nav-item">
                         <a href="{{route('profile.info')}}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
-                            <p>Thông tin người bán</p>
+                            <p>Thông tin tài khoản</p>
                         </a>
                     </li>
                     <li class="nav-item">

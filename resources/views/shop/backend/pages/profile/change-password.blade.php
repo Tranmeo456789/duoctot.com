@@ -17,7 +17,7 @@
 @endif
 <div class="card">
     <div class="card-body">
-        <form action="{{route('seller.change_password')}}" method="POST">
+        <form action="{{route('profile.change_password')}}" method="POST">
             {!! csrf_field() !!}
             <div class="row">
                 <div class="col-lg-6 col-sm-12">

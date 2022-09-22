@@ -16,7 +16,7 @@ class UsersModel extends BackEndModel
     public function __construct() {
         $this->table               = 'user';
         $this->folderUpload        = '' ;
-        $this->crudNotAccepted     = ['_token','isnumber','password_confirmation','password_old','submit','btn-register'];
+        $this->crudNotAccepted     = ['_token','isnumber','password_confirmation','password_old','submit','btn-register','details','task'];
     }
     public function getItem($params = null, $options = null) {
         $result = null;
@@ -47,13 +47,72 @@ class UsersModel extends BackEndModel
             if (!isset($params['user_type_id']) || $params['user_type_id'] == ''){
                 $params['user_type_id'] = 1;
             }
-            $params['user_id'] = $this->insertGetId($this->prepareParams($params));
+           $params['user_id'] = $this->insertGetId($this->prepareParams($params));
+
             if (is_numeric($params['user_id'])){
+                $paramsCode = [
+                    'type' => 'user_type_id',
+                    'value' => $params[ 'user_type_id']
+                ];
+                $member_id = self::getMaxCode($paramsCode);
+                $paramsUserValue =[
+                    'user_id' =>$params['user_id'],
+                    'user_field' =>'member_id',
+                    'value' =>$member_id
+                ];
+                \App\Model\Shop\UserValuesModel::insert($this->prepareParams($paramsUserValue));
                 return self::getItem(['user_id'=>$params['user_id']],['task' => 'get-item']);
             }
             return false;
         }
+        if($options['task'] == 'update-item'){
+            $details = $params['details'];
+            $params['province_id'] =$details['province_id'];
+            DB::beginTransaction();
+            try {
+                $details = $params['details'];
+                if (isset($details['sell_area'])){
+                    $details['sell_area'] = ($details['sell_area'] != '')? json_encode($details['sell_area'],JSON_NUMERIC_CHECK ): NULL;;
+                }
+                $params['province_id'] = $details['province_id'];
+                $user = self::where('user_id', $params['user_id'])->first();
+                self::where('user_id', $params['user_id'])->update($this->prepareParams($params));
+                $paramsUserValue =[];
+                \App\Model\Shop\UserValuesModel::where('user_id', $params['user_id'])->delete();
+                foreach ($details as $key => $value){
+                    $paramsUserValue =[
+                        'user_id' =>$params['user_id'],
+                        'user_field' =>$key,
+                        'value' =>$value
+                    ];
+                    \App\Model\Shop\UserValuesModel::insert($this->prepareParams($paramsUserValue));
+                }
+                DB::commit();
+                return true;
+            } catch (\Throwable $th) {
+                DB::rollback();
+                return false;
+                throw $th;
+            }
+        }
+        if($options['task'] == 'change-password') {
+            DB::beginTransaction();
+            try {
+                $password       = Hash::make($params['password']);
+                self::where('user_id', $params['user_id'])->update(['password' => $password]);
+                DB::commit();
+                return true;
+            } catch (\Throwable $th) {
+                DB::rollback();
+                return false;
+                throw $th;
+            }
+
+        }
     }
-
-
+    public function details()
+    {
+        return $this->hasMany(\App\Model\Shop\UserValuesModel::class,'user_id','user_id')
+                    ->select('user_id','user_field','value');
+    }
 }
