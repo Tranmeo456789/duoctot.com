@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card card-primary">
-                    @include("$moduleName.blocks.x_title", ['title' => $title])
+                    @include("$moduleName.blocks.x_title", ['title' => 'Cập nhật thông tin'])
                     <div class="card-body">
                         @if ($item->user_type_id == 4)
                             @include("$moduleName.pages.$controllerName.child_info.info_drugstore")

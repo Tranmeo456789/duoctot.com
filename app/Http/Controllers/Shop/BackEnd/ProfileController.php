@@ -70,7 +70,7 @@ class ProfileController extends BackEndController
             if ($this->model->saveItem($params, ['task' => $task])){
                 $request->session()->put('app_notify', $notify);
                 $userModel = new MainModel();
-                $current_user = $this->model->(['user_id']=>$params['user_id'], ['task' => 'get-item']);
+                $current_user = $this->model->getItem(['user_id'=>$params['user_id']], ['task' => 'get-item']);
                 $request->session()->put('user', $current_user);
                 return response()->json([
                     'status' => 200,

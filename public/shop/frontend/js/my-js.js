@@ -29,7 +29,7 @@ $.validator.methods.checkPhoneOrEmail = function(value, element, param) {
 };
 $(document).ready(function() {
     $(".select2").select2();
-    $("#user_register").validate({
+    $(".user-register").validate({
         rules: {
             fullname: "required",
             email: {
@@ -70,7 +70,7 @@ $(document).ready(function() {
             $(element).closest(".input-group").removeClass('has-error');
         }
     });
-    $("#user_login").validate({
+    $(".user-login").validate({
         rules: {
             email: {
                 required: true,
