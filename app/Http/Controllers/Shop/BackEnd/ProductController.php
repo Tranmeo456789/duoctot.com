@@ -12,7 +12,7 @@ use App\Model\Shop\TrademarkModel;
 use App\Http\Requests\ProductRequest as MainRequest;
 use App\Model\Shop\UnitModel;
 use App\Model\Shop\WarehouseModel;
-include "app/Helper/data.php";
+include "app/Helpers/data.php";
 class ProductController extends BackEndController
 {
     public function __construct()
@@ -21,8 +21,8 @@ class ProductController extends BackEndController
         $this->pathViewController = "$this->moduleName.pages.$this->controllerName.";
         $this->pageTitle          = 'Thuốc';
         $this->model = new MainModel();
-        parent::__construct();     
-        session(['module_active'=>'product']);         
+        parent::__construct();
+        session(['module_active'=>'product']);
     }
     public function save(MainRequest $request)
     {

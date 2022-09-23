@@ -154,9 +154,12 @@ $(document).on('click', ".changeTypePassword", function(event) {
         $(this).html("<i class='fa fa-eye'></i>");
     }
 });
+
 $(document).ready(function() {
     $(".select2").select2();
+    $('#btn-image').filemanager('image');
 
+    $("#choices-multiple-remove-button").select2();
     $('#submit-all1').click(function() {
         var x = document.getElementsByClassName("name-img");
         var name_img = [];

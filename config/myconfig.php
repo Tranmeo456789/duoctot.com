@@ -38,7 +38,8 @@
                 'sell_area' => 'Khu vực bán hàng',
                 'tax_code' => 'Mã số thuế',
                 'person_represent' =>'Người đại diện pháp luật',
-                'address' => 'Địa chỉ'
+                'address' => 'Địa chỉ',
+                'parent_id' => 'Danh mục cha'
             ],
             'type_user' => [
                 '1' => 'Bệnh nhân',
@@ -51,6 +52,7 @@
                 '8' => 'Thẩm mỹ viện',
                 '9' => 'Công ty dược phẩm'
             ],
+            'char_level' => "|---",
         ]
     ];
 ?>
