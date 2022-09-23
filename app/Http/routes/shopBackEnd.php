@@ -13,7 +13,7 @@
 
 //shop tdoctor
 $prefixShopBackEnd = '/backend';
-Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd'], function () {
+Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd','middleware' => ['check.login']], function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
     Route::get('/thong-tin-nguoi-dung', 'ProfileController@info')->name('profile.info');
@@ -22,11 +22,12 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd'], fu
     Route::post('/thay-doi-mat-khau', 'ProfileController@change_password')->name('profile.password');
     Route::get('/thiet-lap-cai-dat-khac', 'ProfileController@setting')->name('profile.setting');
 
-    Route::get('/danh-sach-danh-muc', 'Cat_productController@index')->name('cat_product');
-    Route::get('/them-danh-muc', 'Cat_productController@form')->name('cat_product.add');
-    Route::get('/sua-danh-muc/{id}', 'Cat_productController@form')->name('cat_product.edit');
-    Route::post('/luu-danh-muc', 'Cat_productController@save')->name('cat_product.save');
-    Route::get('/xoa-danh-muc/{id}', 'Cat_productController@delete')->name('cat_product.delete');
+    Route::get('/danh-sach-danh-muc-thuoc', 'CatProductController@index')->name('catProduct');
+    Route::get('/them-danh-muc-thuoc', 'CatProductController@form')->name('catProduct.add');
+    Route::get('/sua-danh-muc-thuoc/{id}', 'CatProductController@form')->name('catProduct.edit');
+    Route::post('/luu-danh-muc-thuoc', 'CatProductController@save')->name('catProduct.save');
+    Route::get('/xoa-danh-muc-thuoc/{id}', 'CatProductController@delete')->name('catProduct.delete');
+    Route:: get('move-{type}/{id}',   'CatProductController@move')->name('catProduct.move');
 
     Route::get('/danh-sach-san-pham', 'ProductController@index')->name('product');
     Route::get('/them-san-pham', 'ProductController@form')->name('product.add');

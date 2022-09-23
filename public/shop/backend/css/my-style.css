@@ -107,3 +107,11 @@ form div[class*=col-]:last-child .form-group {
     cursor: pointer;
     background-color: #fff;
 }
+
+#btn-image {
+    color: #fff;
+}
+
+.img-in-table img {
+    max-height: 50px;
+}
