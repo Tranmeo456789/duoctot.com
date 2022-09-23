@@ -13,7 +13,7 @@
 
 //shop tdoctor
 $prefixShopBackEnd = '/backend';
-Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd'], function () {
+Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd','middleware' => ['check.login']], function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
     Route::get('/thong-tin-nguoi-dung', 'ProfileController@info')->name('profile.info');
