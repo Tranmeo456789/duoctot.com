@@ -5,36 +5,57 @@
         font-size: 15px;
     }
 }
+
 @media screen and (max-width: 1330px) {
     #head-body #main-menu>li>a {
         font-size: 11px;
     }
 }
+
 @media screen and (max-width: 1200px) {
-    .body_catdetail>div .delplcol:nth-child(2n){
-        padding-left: 0px!important;;
+    .body_catdetail>div .delplcol:nth-child(2n) {
+        padding-left: 0px !important;
+        ;
     }
-    #head-body-respon{
+
+    #head-body-respon {
         display: block;
         transform: translateX(-101%);
     }
-    #head-body-respon.slider{transform: translateX(0px);}
-    #search-order{
+
+    #head-body-respon.slider {
+        transform: translateX(0px);
+    }
+
+    #search-order {
         width: 94vw;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
     }
-    .bodycat-productrespon{display: block;}
-    .list-box-select{
+
+    .bodycat-productrespon {
+        display: block;
+    }
+
+    .list-box-select {
         display: none;
     }
-    .trademark{
+
+    .trademark {
         display: none;
     }
-    .body-cat-product{display: none;}
-    .wp-inner{max-width: 995px;}
+
+    .body-cat-product {
+        display: none;
+    }
+
+    .wp-inner {
+        max-width: 995px;
+    }
+
     #buy-medicine .btn-buynn {
         margin-right: 0px;
     }
+
     #head-top-respon {
         display: block;
         background: #072D94;
@@ -127,14 +148,19 @@
         border-right: none;
         position: relative;
     }
-    #buy-medicine ul li a .rimg-center{position: relative;}
+
+    #buy-medicine ul li a .rimg-center {
+        position: relative;
+    }
+
     #buy-medicine ul li a .rimg-center::after {
         top: 50%;
         transform: translateY(-50%);
         right: -11px;
         position: absolute;
         content: '';
-        width: 40px;height: 25px;
+        width: 40px;
+        height: 25px;
         background-image: url(../../images/shop/arrow2.png);
         background-size: cover;
         background-repeat: no-repeat;
@@ -142,7 +168,7 @@
 
     #buy-medicine ul li:last-child a .rimg-center::after {
         content: "";
-        background-image:none;
+        background-image: none;
     }
 
     #buy-medicine ul li span {
@@ -154,12 +180,14 @@
     }
 
     #buy-medicine .child_buy {
-        display: block;margin-top: 30px;
+        display: block;
+        margin-top: 30px;
     }
 
     #buy-medicine .child_buy a {
         font-size: 24px;
-        padding: 15px 30px;display: inline-block;
+        padding: 15px 30px;
+        display: inline-block;
     }
 
     #service-doctor li p {
@@ -247,23 +275,70 @@
 }
 
 @media screen and (max-width: 1024px) {
-    
+    .btnnk-respon {
+        margin-top: 20px;
+    }
+
+    .btn-register-res {
+        color: blue;
+        padding: 2px 9px;
+        background: #95e195;
+        font-weight: 700;
+        border-radius: 100px;
+        display: inline-block;
+        margin-right: 20px;
+    }
+
+    .btn-register-res:hover {
+        background: #94ec94;
+        color: blue;
+    }
+
+    .btn-login-res {
+        color: #FFFFFF;
+        padding: 2px 9px;
+        background: rgb(231, 90, 85);
+        font-weight: 700;
+        border-radius: 100px;
+        display: inline-block;
+
+    }
+
+    .btn-login-res:hover {
+        background: rgb(233, 52, 46);
+        color: #FFFFFF;
+    }
+
     .btn-buy-search .btn-select-buy {
         padding: 6px 20px;
     }
-    
-    .wp-inner{max-width: 900px;}
+
+    .wp-inner {
+        max-width: 900px;
+    }
+
     .service-tdoctor li:last-child {
         padding-right: 0px;
     }
-.service-tdoctor li {
-    padding: 0px;margin-bottom: 30px;
-}
+
+    .service-tdoctor li {
+        padding: 0px;
+        margin-bottom: 30px;
+    }
+
     .service-tdoctor li:first-child {
         padding-left: 0px;
     }
-    .service-tdoctor .title-service h1{text-align: center;margin-top: 8px;}
-    .service-tdoctor li{flex-direction: column;}
+
+    .service-tdoctor .title-service h1 {
+        text-align: center;
+        margin-top: 8px;
+    }
+
+    .service-tdoctor li {
+        flex-direction: column;
+    }
+
     #selling-product h1 p {
         font-size: 18px;
     }
@@ -299,55 +374,100 @@
 }
 
 @media screen and (max-width: 800px) {
-    .table-responsive{
+    .table-responsive {
         overflow-x: scroll;
     }
-    .set-widthtable{width: 800px;}
-    .cmoder a{
-        padding: 5px 15px;font-size: 18px;
+
+    .form-login {
+        width: 95vw;
     }
+.form-login .header a{
+    font-size: 8px;
+}
+    .set-widthtable {
+        width: 800px;
+    }
+
+    .cmoder a {
+        padding: 5px 15px;
+        font-size: 18px;
+    }
+
     .question-often .content-quest a {
         padding: 2px 5px;
     }
-    .cat-content{
-display: none;
+
+    .cat-content {
+        display: none;
     }
-    .cat-product-out #body-nbox li, #selling-product.viewnproduct li {
-        width: 32%;margin-right: 2%;margin-bottom: 2%;
+
+    .cat-product-out #body-nbox li,
+    #selling-product.viewnproduct li {
+        width: 32%;
+        margin-right: 2%;
+        margin-bottom: 2%;
     }
-    .cat-product-out #body-nbox li:nth-child(3n), #selling-product.viewnproduct li:nth-child(3n) {
+
+    .cat-product-out #body-nbox li:nth-child(3n),
+    #selling-product.viewnproduct li:nth-child(3n) {
         margin-right: 0;
     }
-    .cat-product-out #body-nbox li:nth-child(4n), #selling-product.viewnproduct li:nth-child(4n) {
+
+    .cat-product-out #body-nbox li:nth-child(4n),
+    #selling-product.viewnproduct li:nth-child(4n) {
         margin-right: 2%;
     }
-    
-    .fitler-respon{display: block;}
-    .selectpp{display: none;}
+
+    .fitler-respon {
+        display: block;
+    }
+
+    .selectpp {
+        display: none;
+    }
+
     .product-of-cat .title-cat h1 {
         font-size: 20px;
     }
-    .wp-inner{max-width: 100vw;}
-    .app-store{margin-right: 8px;}
+
+    .wp-inner {
+        max-width: 100vw;
+    }
+
+    .app-store {
+        margin-right: 8px;
+    }
+
     #selling-product .slect-customer span {
         display: none;
     }
-    .medical-faculty{display: none;}
-    #selling-product .slect-customer {
-        padding:1px 1px;
+
+    .medical-faculty {
+        display: none;
     }
-    #buy-medicine h1{font-size: 26px;}
+
+    #selling-product .slect-customer {
+        padding: 1px 1px;
+    }
+
+    #buy-medicine h1 {
+        font-size: 26px;
+    }
+
     #buy-medicine ul li img {
         width: 80px;
     }
+
     #buy-medicine div span {
         font-size: 20px;
     }
+
     #buy-medicine .child_buy a {
         font-size: 20px;
         padding: 10px 20px;
         display: inline-block;
     }
+
     .wp-iconmn #btnmenu-resp img {
         width: 30px
     }
@@ -466,79 +586,135 @@ display: none;
         width: 30px;
         height: 30px;
     }
-    .wp-left-cart .title-cart h1{font-size: 18px;}
-    .new-view{padding: 5px 0px;}
-    .cat-product-out #body-nbox li,#selling-product.viewnproduct li {
-        width: 49%;margin-right: 2%;margin-bottom: 2%;
+
+    .wp-left-cart .title-cart h1 {
+        font-size: 18px;
     }
-    .cat-product-out #body-nbox li:nth-child(2n), #selling-product.viewnproduct li:nth-child(2n){
+
+    .new-view {
+        padding: 5px 0px;
+    }
+
+    .cat-product-out #body-nbox li,
+    #selling-product.viewnproduct li {
+        width: 49%;
+        margin-right: 2%;
+        margin-bottom: 2%;
+    }
+
+    .cat-product-out #body-nbox li:nth-child(2n),
+    #selling-product.viewnproduct li:nth-child(2n) {
         margin-right: 0;
     }
-    .cat-product-out #body-nbox li:nth-child(3n), #selling-product.viewnproduct li:nth-child(3n){
+
+    .cat-product-out #body-nbox li:nth-child(3n),
+    #selling-product.viewnproduct li:nth-child(3n) {
         margin-right: 2%;
     }
-    #selling-product.viewnproduct li{
+
+    #selling-product.viewnproduct li {
         height: 351px;
     }
-    .content-commit-tdoctorrespon{display: block;}
-    .content-commit-tdoctor{display: none;}
+
+    .content-commit-tdoctorrespon {
+        display: block;
+    }
+
+    .content-commit-tdoctor {
+        display: none;
+    }
+
     .pnote-view {
         margin-top: 10px;
         margin-bottom: 10px;
     }
-    .comment span{display: none;}
+
+    .comment span {
+        display: none;
+    }
+
     .btn-buy-search .btn-select-buy {
         font-size: 16px;
         padding: 5px 20px;
         border-radius: 30px;
     }
+
     .btn-buy-search .btn-search-house {
         padding: 5px 20px;
         background: #E9212D;
         border-radius: 30px;
     }
+
     #cat_detail {
         padding: 0px;
     }
-    .rimg-center5 {width: 30px;height: 30px;}
-    #cat_detail .body_catdetail li .itemct4 span{font-size: 13px;}
+
+    .rimg-center5 {
+        width: 30px;
+        height: 30px;
+    }
+
+    #cat_detail .body_catdetail li .itemct4 span {
+        font-size: 13px;
+    }
+
     #body-nbox ul li {
         width: 46%;
     }
+
     .service-tdoctor .title-service h1 {
         font-size: 16px;
     }
+
     .newsh .news-content-left li {
         flex-wrap: wrap;
 
     }
-    .newsh .news-content-left ul li>img{width: 100%;}
+
+    .newsh .news-content-left ul li>img {
+        width: 100%;
+    }
+
     .title_cathd {
         margin-bottom: 15px;
     }
+
     .newsh .news-content-right {
         border: none;
     }
-    .newsh .news-content-right a{font-size: 14px;}
-    #buy-medicine h1{font-size: 20px;}
+
+    .newsh .news-content-right a {
+        font-size: 14px;
+    }
+
+    #buy-medicine h1 {
+        font-size: 20px;
+    }
+
     #buy-medicine ul li img {
         width: 65px;
     }
+
     #buy-medicine ul li h2 {
         font-size: 9px;
         padding-top: 10px;
     }
-    #buy-medicine ul li a .rimg-center::after{
-        width: 20px;height: 13px;
+
+    #buy-medicine ul li a .rimg-center::after {
+        width: 20px;
+        height: 13px;
     }
+
     #buy-medicine .child_buy a {
         font-size: 17px;
         padding: 7px 15px;
         display: inline-block;
     }
+
     #buy-medicine div span {
         font-size: 18px;
     }
+
     .wp-iconmn #btnmenu-resp,
     .wp-iconmn .logotop {
         margin-right: 9vw;
@@ -569,42 +745,71 @@ display: none;
         display: none;
     }
 }
-@media screen and (max-width: 500px){
+
+@media screen and (max-width: 500px) {
     .wp-left-cart .title-cart h1 {
         font-size: 15px;
     }
-    .payment h2{font-size: 16px;}
+
+    .payment h2 {
+        font-size: 16px;
+    }
+
     .payment p {
         font-size: 13px;
     }
-    .local p{font-size:16px ;}
+
+    .local p {
+        font-size: 16px;
+    }
+
     .local img {
         width: 16px;
         height: 26px;
     }
+
     #selling-product li {
-        height: 300px;}
-    #selling-product li {
-        
-        padding: 10px 3px;
-        
+        height: 300px;
     }
-    .hrflag{display: none;}
-    .hruse{display: none;}
-    .dlapp1 h1{font-size: 16px;}
+
+    #selling-product li {
+
+        padding: 10px 3px;
+
+    }
+
+    .hrflag {
+        display: none;
+    }
+
+    .hruse {
+        display: none;
+    }
+
+    .dlapp1 h1 {
+        font-size: 16px;
+    }
+
     #qadoctor .listq {
         padding: 5px 20px;
     }
-#qadoctor .setq {display: none;}
+
+    #qadoctor .setq {
+        display: none;
+    }
+
     #selling-product .slect-customer {
         font-size: 12px;
         padding-top: 10px;
     }
+
     #selling-product .slect-customer .slect-item-customer:first-child {
         margin-left: 0px;
     }
-    #selling-product .slect-customer .slect-item-customer{
-        margin-right: 10px;padding:3px 5px;
+
+    #selling-product .slect-customer .slect-item-customer {
+        margin-right: 10px;
+        padding: 3px 5px;
     }
 }
 
@@ -612,41 +817,51 @@ display: none;
     .service-tdoctor .title-service h1 {
         font-size: 10px;
     }
+
     .newsh .news-known a {
         font-size: 12px;
     }
+
     .newsh .title-news h1 {
         font-size: 18px;
         padding-top: 5px;
         margin-left: 10px;
     }
+
     #selling-product .slect-customer {
         padding: 4px 0px;
     }
+
     .medical-faculty .lage-font {
         font-size: 29px;
     }
+
     #featured-category h1 {
         font-size: 25px;
     }
+
     .title_cathd h1 {
         font-size: 16px;
     }
+
     #buy-medicine .child_buy {
         margin-top: 15px;
     }
+
     #buy-medicine ul li a .rimg-center::after {
         width: 15px;
         height: 10px;
     }
+
     #buy-medicine .child_buy a {
         font-size: 12px;
         padding: 5px 10px;
     }
-    
+
     #buy-medicine ul li img {
         width: 40px;
     }
+
     .ipsp input {
         width: 100%;
         height: 30px;
@@ -674,7 +889,8 @@ display: none;
 
 @media screen and (max-width: 375px) {
     #selling-product li {
-        height: 260px;}
+        height: 260px;
+    }
 
     #buy-medicine ul li h2 {
         font-size: 8px;
@@ -685,6 +901,7 @@ display: none;
     #selling-product li {
         width: 98%;
     }
+
     .head_topon_reponsive {
         display: none;
     }

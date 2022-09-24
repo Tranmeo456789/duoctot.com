@@ -76,6 +76,7 @@ $(document).ready(function () {
         $('.form-login').css("display", "none");
         $('.black-screen').css("display", "none");
         $('#container').removeClass("fixed-hbd");
+        $('#fixscreen-respon').css("display", "none");
     });
     //hien form dang ky,dang nhap,quen mat khau
     $('.btn-login').click(function () {
@@ -89,6 +90,17 @@ $(document).ready(function () {
         $('#container').addClass("fixed-hbd");
         // $('body,html').stop().animate({ scrollTop: 0 }, 0);
     });
+    $('.btn-login-res').click(function () {
+        $('#head-body-respon').removeClass("slider");
+        $('.form-login').css("display", "block");
+        $('.titlek').removeClass("active-formkn");
+        $('.titlen').addClass("active-formkn");
+        $('#container').addClass("fixed-hbd");
+        $('.wp-content-login').css("display", "block");
+        $('.wp-content-register').css("display", "none");
+        $('.wp-content-forgetpw').css("display", "none");
+        $('.titlek').removeClass("active-formkn");
+    });
     $('.btn-register').click(function () {
         $('.form-login').css("display", "block");
         $('.black-screen').css("display", "block");
@@ -98,6 +110,17 @@ $(document).ready(function () {
         $('.titlen').removeClass("active-formkn");
         $('.titlek').addClass("active-formkn");
         $('#container').addClass("fixed-hbd");
+    });
+    $('.btn-register-res').click(function () {
+        $('#head-body-respon').removeClass("slider");
+        $('.form-login').css("display", "block");
+        $('#container').addClass("fixed-hbd");
+        $('.wp-content-login').css("display", "none");
+        $('.wp-content-register').css("display", "block");
+        $('.wp-content-forgetpw').css("display", "none");
+
+        $('.titlen').removeClass("active-formkn");
+        $('.titlek').addClass("active-formkn");
     });
     $('.qpassword').click(function () {
         $('.form-login').css("display", "block");
@@ -197,6 +220,7 @@ $(document).ready(function () {
     fixscreen_respon.addEventListener('click', (e) => {
         if (!head_body_respon.contains(e.target)) {
             closem.click();
+            $('.form-login').css("display", "none");
         }
     });
     // $('.content-submenu').hover(

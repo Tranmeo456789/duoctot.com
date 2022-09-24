@@ -52,7 +52,7 @@
     background: #F1F8FF;
 }
 
-#head-body-respon .btn-advice a {
+#head-body-respon .btn-advice .btn-refree {
     background: #06AFE3;
     border-radius: 100px;
     display: inline-block;
@@ -457,9 +457,9 @@
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
     position: absolute;
-    top: 0px;
+    top: 30px;
     left: 50%;
-    z-index: 250;
+    z-index: 901;
     transform: translateX(-50%);
     padding-bottom: 25px;
     display: none;

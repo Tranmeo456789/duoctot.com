@@ -90,19 +90,18 @@
                     @endif
                 </div>
             </div>
-
             @if(Session::has('user'))
-                <div class="float-right" style="margin-left:10px;padding-top:20px;">
-                    <div class="dropdown">
-                        <button class="btn dropdown-toggle text-light" type="button" id="dropdownMenuButton" data-toggle="dropdown">
-                            {{Session::get('user')['fullname']}}
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="{{route('dashboard')}}">Tài khoản</a>
-                            <a class="dropdown-item" href="{{route('user.logout')}}">Thoát</a>
-                        </div>
+            <div class="float-right" style="margin-left:10px;padding-top:20px;">
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle text-light" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+                        {{Session::get('user')['fullname']}}
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="{{route('dashboard')}}">Tài khoản</a>
+                        <a class="dropdown-item" href="{{route('user.logout')}}">Thoát</a>
                     </div>
                 </div>
+            </div>
             @else
             <div id="" class="fl-right" style="margin-left:10px;padding-top:15px;">
                 <a title="" id="payment-link" class="">
@@ -116,9 +115,7 @@
             </div>
             @endif
         </div>
-        <div id="form-login-register">
-            @include('shop.frontend.block.form_login_register')
-        </div>
+
         <div id="search-order">
             <div class="header d-flex justify-content-between">
                 <div class="tshorder">Tra cứu lịch sử đơn hàng</div>
@@ -141,6 +138,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div id="form-login-register">
+        @include('shop.frontend.block.form_login_register')
     </div>
     <div id="head-top-respon">
         <div class="wp-inner presp">
@@ -183,7 +183,7 @@
                             @foreach ($_SESSION['cat_product'] as $item_cat1)
                             @if($item_cat1['parent_id']==0)
                             <li class="catc1" data-id="{{$item_cat1['id']}}">
-                                <a href="{{route('fe.cat',$item_cat1->slug)}}" data-id="{{$item_cat1['id']}}"  class="cat1name">
+                                <a href="{{route('fe.cat',$item_cat1->slug)}}" data-id="{{$item_cat1['id']}}" class="cat1name">
                                     {{$item_cat1['name']}}
                                     <i class="fas fa-chevron-down arrow"></i>
                                 </a>
@@ -291,13 +291,20 @@
         </div>
 
         <div class="btn-advice container-menures">
-            <a href="">
+            <a href="" class="btn-refree">
                 <div class="d-flex">
                     <div class="rimg-center mr-1"><img src="{{asset('images/shop/mess.png')}}" alt=""></div>
                     <span>Nhận tư vấn miễn phí</span>
                 </div>
             </a>
+            @if(!Session::has('user'))
+            <div class="btnnk-respon">
+                <a class="btn-register-res">Đăng ký</a>
+                <a class="btn-login-res">Đăng nhập</a>
+            </div>
+            @endif
         </div>
+
     </div>
 
     <div class="black-content"></div>
