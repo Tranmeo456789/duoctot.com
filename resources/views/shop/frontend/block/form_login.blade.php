@@ -37,7 +37,7 @@
             <div class="remember-login d-flex">
                 <input type="checkbox"><label for="">Giữ tôi đăng nhập</label>
             </div>
-            <div id="user_login" class="text-center mb-5 col-12">
+            <div id="user_login" class="text-center col-12">
                 {{$inputHiddenTask }}
                 <button type="submit" name="btn-login" value="1" id="btn-logint">Đăng nhập</button>
             </div>

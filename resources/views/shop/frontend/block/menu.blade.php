@@ -287,6 +287,37 @@
                         </div>
                     </div>
                 </li>
+                @if(Session::has('user'))
+                <li>
+                    <div class="container-menures position-relative parentsmenu">
+                        <div class=" pr-4">
+                            <a href="{{route('dashboard')}}">Tài khoản</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="container-menures position-relative parentsmenu">
+                        <div class=" pr-4">
+                            <a href="{{route('user.logout')}}">Đăng xuất</a>
+                        </div>
+                    </div>
+                </li>
+                @else
+                <li>
+                    <div class="container-menures position-relative parentsmenu">
+                        <div class=" pr-4">
+                            <a class="btn-register-res">Đăng ký</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="container-menures position-relative parentsmenu">
+                        <div class=" pr-4">
+                            <a class="btn-login-res">Đăng nhập</a>
+                        </div>
+                    </div>
+                </li>
+                @endif
             </ul>
         </div>
 
@@ -297,12 +328,6 @@
                     <span>Nhận tư vấn miễn phí</span>
                 </div>
             </a>
-            @if(!Session::has('user'))
-            <div class="btnnk-respon">
-                <a class="btn-register-res">Đăng ký</a>
-                <a class="btn-login-res">Đăng nhập</a>
-            </div>
-            @endif
         </div>
 
     </div>

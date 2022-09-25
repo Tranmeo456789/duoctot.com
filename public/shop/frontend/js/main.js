@@ -100,6 +100,9 @@ $(document).ready(function () {
         $('.wp-content-register').css("display", "none");
         $('.wp-content-forgetpw').css("display", "none");
         $('.titlek').removeClass("active-formkn");
+        $('.black-screen').css("display", "block");
+        $('#container').addClass("fixed-hbd");
+        $('#fixscreen-respon').css("display", "none");
     });
     $('.btn-register').click(function () {
         $('.form-login').css("display", "block");
@@ -114,13 +117,14 @@ $(document).ready(function () {
     $('.btn-register-res').click(function () {
         $('#head-body-respon').removeClass("slider");
         $('.form-login').css("display", "block");
-        $('#container').addClass("fixed-hbd");
         $('.wp-content-login').css("display", "none");
         $('.wp-content-register').css("display", "block");
         $('.wp-content-forgetpw').css("display", "none");
-
         $('.titlen').removeClass("active-formkn");
         $('.titlek').addClass("active-formkn");
+        $('.black-screen').css("display", "block");
+        $('#container').addClass("fixed-hbd");
+        $('#fixscreen-respon').css("display", "none");
     });
     $('.qpassword').click(function () {
         $('.form-login').css("display", "block");

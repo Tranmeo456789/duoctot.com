@@ -279,36 +279,6 @@
         margin-top: 20px;
     }
 
-    .btn-register-res {
-        color: blue;
-        padding: 2px 9px;
-        background: #95e195;
-        font-weight: 700;
-        border-radius: 100px;
-        display: inline-block;
-        margin-right: 20px;
-    }
-
-    .btn-register-res:hover {
-        background: #94ec94;
-        color: blue;
-    }
-
-    .btn-login-res {
-        color: #FFFFFF;
-        padding: 2px 9px;
-        background: rgb(231, 90, 85);
-        font-weight: 700;
-        border-radius: 100px;
-        display: inline-block;
-
-    }
-
-    .btn-login-res:hover {
-        background: rgb(233, 52, 46);
-        color: #FFFFFF;
-    }
-
     .btn-buy-search .btn-select-buy {
         padding: 6px 20px;
     }
@@ -377,12 +347,59 @@
     .table-responsive {
         overflow-x: scroll;
     }
-
     .form-login {
-        width: 95vw;
+        width: 93vw;
+        border-radius: 10px;
+
     }
+    .form-login .header .titlek{
+        border-radius: 10px 0px 0px;
+    }
+
 .form-login .header a{
-    font-size: 8px;
+    font-size: 18px;
+}
+.form-input-group .form-group input[type="radio"] {
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+}
+.form-login .remember-login label{
+    font-size: 14px;
+}
+.form-login .form-group input[type='radio']+label {
+    font-size: 14px;
+}
+.form-login .remember-login input {
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+}
+.form-login input::placeholder{
+    font-size: 14px;
+}
+#user_login{
+    margin-bottom: 15px;
+}
+#dang-ky #btn-register{
+    padding: 6px 30px;font-size: 18px;
+}
+.form-login #btn-logint {
+    padding: 6px 30px;font-size: 18px;
+}
+.form-login .header a{
+    padding: 9px;
+}
+.btn-closenk {
+    width: 40px;
+    height: 40px;
+    border-radius: 0px 10px 0px 0px;
+}
+.text-member{
+    display: none;
+}
+.form-login .header .titlek{
+    flex-grow: 0;
 }
     .set-widthtable {
         width: 800px;
@@ -586,7 +603,9 @@
         width: 30px;
         height: 30px;
     }
-
+    .form-input-group .form-group .select2 {
+        width: 84%!important;
+    }
     .wp-left-cart .title-cart h1 {
         font-size: 18px;
     }
