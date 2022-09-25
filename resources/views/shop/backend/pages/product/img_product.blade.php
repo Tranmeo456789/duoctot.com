@@ -4,7 +4,7 @@
 
 @section('header_title', 'Ảnh sản phẩm')
 
-@section('body_content')
+@section('content')
 <div class="row m-0">
     <div class="col-lg-5 col-sm-12 px-0">
         <div class="card">
@@ -42,7 +42,7 @@
                             </tr>
                         </thead>
                         @php
-                        $temp=0;                      
+                        $temp=0;
                         @endphp
                         <tbody id="list-img">
                             @foreach($imgs as $k=>$img)

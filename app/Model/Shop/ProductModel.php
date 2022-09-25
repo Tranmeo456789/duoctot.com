@@ -20,7 +20,13 @@ class ProductModel extends BackEndModel
     {
         $result = null;
         if ($options['task'] == "user-list-items") {
-            $query = $this::select('id','name','type','code','cat_id','producer_id','tick','type_price','price','price_vat','coefficient','type_vat','packing','unit','local_buy','amout_max','inventory','general_info','point','dosage','trademark','dosage_forms','made_country','specification','benefit','preserve','note','image','feature','longs','wides','highs','mass', 'created_at', 'updated_at');
+            $query = $this::select('id','name','type','code','cat_product_id','producer_id',
+                                    'tick','type_price','price','price_vat','coefficient',
+                                    'type_vat','packing','unit_id','sell_area','amout_max',
+                                    'inventory','inventory_min','general_info','prescribe','dosage','trademark',
+                                    'dosage_forms','country_id','specification','benefit',
+                                    'preserve','note','image','featurer','long','wide','high',
+                                    'mass', 'created_at', 'updated_at');
             $result =  $query->orderBy('id', 'desc')
                 ->paginate($params['pagination']['totalItemsPerPage']);
         }
@@ -30,31 +36,38 @@ class ProductModel extends BackEndModel
     {
         $result = null;
         if ($options['task'] == 'get-item') {
-            $result = self::select('id','name','type','code','cat_id','producer_id','tick','type_price','price','price_vat','coefficient','type_vat','packing','unit','local_buy','amout_max','inventory','general_info','point','dosage','trademark','dosage_forms','made_country','specification','benefit','preserve','note','image','feature','longs','wides','highs','mass')
-                ->where('id', $params['id'])->first();
+            $result = self::select('id','name','type','code','cat_product_id','producer_id',
+                                    'tick','type_price','price','price_vat','coefficient',
+                                    'type_vat','packing','unit_id','sell_area','amout_max',
+                                    'inventory','inventory_min','general_info','prescribe','dosage','trademark',
+                                    'dosage_forms','country_id','specification','benefit',
+                                    'preserve','note','image','featurer','long','wide','high',
+                                    'mass')
+                            ->where('id', $params['id'])
+                            ->first();
         }
         return $result;
     }
     public function saveItem($params = null, $options = null)
     {
-        $image = ''; 
+        $image = '';
         if(isset($params['image'])) {
             $file = $params['image'];
             $filename = $file->getClientOriginalName();
             $path = $file->move('public/shop/uploads/images/product', $file->getClientOriginalName());
-            $image = $filename; 
-        }   
+            $image = $filename;
+        }
         $local_buy = implode(',', $params['local_buy']);
              $feature='';
              if(isset($params['feature'])){
                 $feature=implode(',', $params['feature']);
-             } 
-             $tick='';       
+             }
+             $tick='';
              if(isset($params['tick'])){
                 $tick=implode(',', $params['tick']);
-             }              
+             }
         if ($options['task'] == 'add-item') {
-            $this->setCreatedHistory($params);                    
+            $this->setCreatedHistory($params);
              self::insert([
                  'name' => $params['name'],
                  'type' => $params['type'],
@@ -79,13 +92,13 @@ class ProductModel extends BackEndModel
                  'specification' => $params['specification'],
                  'benefit' => $params['benefit'],
                  'preserve' => $params['preserve'],
-                 'note' => $params['note'], 
+                 'note' => $params['note'],
                  'image'=>$image,
-                'feature'=>$feature, 
-                  'longs'=>$params['longs'], 
-                  'wides'=>$params['wides'], 
-                 'highs'=>$params['highs'], 
-                 'mass'=>$params['mass'], 
+                'feature'=>$feature,
+                  'longs'=>$params['longs'],
+                  'wides'=>$params['wides'],
+                 'highs'=>$params['highs'],
+                 'mass'=>$params['mass'],
              ]);
         }
         if ($options['task'] == 'edit-item') {
@@ -114,13 +127,13 @@ class ProductModel extends BackEndModel
                 'specification' => $params['specification'],
                 'benefit' => $params['benefit'],
                 'preserve' => $params['preserve'],
-                'note' => $params['note'], 
+                'note' => $params['note'],
                 'image'=>$image,
-               'feature'=>$feature, 
-                 'longs'=>$params['longs'], 
-                 'wides'=>$params['wides'], 
-                'highs'=>$params['highs'], 
-                'mass'=>$params['mass'],              
+               'feature'=>$feature,
+                 'longs'=>$params['longs'],
+                 'wides'=>$params['wides'],
+                'highs'=>$params['highs'],
+                'mass'=>$params['mass'],
             ]);
         }
     }

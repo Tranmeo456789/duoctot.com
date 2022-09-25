@@ -1,32 +1,29 @@
 @php
-$title = '';
-$title = $title . $pageTitle;
+    use App\Helpers\Template;
 @endphp
 @extends('shop.layouts.backend')
 
-@section('title', 'Danh sách ' . $title)
-
-@section('header_title', $title)
-
-@section('body_content')
-<div class="card">
+@section('title',$pageTitle)
+@section('content')
+@include ("$moduleName.blocks.page_header", ['pageIndex' => true])
+<section class="content">
     @include("$moduleName.blocks.notify")
-    @include("$moduleName.blocks.title",['pageTitle' => 'Danh sách '.$title,
-    'pageIndex' => true])
-    <div class="set-withscreen">
-        <div class="card-body list-productwp">
-            <div class="analytic status-product">
-                <a class="text-primary active-status">Tất cả<span class="text-muted">(10)</span></a>
-                <a class="text-primary">Đang bán<span class="text-muted">(5)</span></a>
-                <a class="text-primary">Ngừng bán<span class="text-muted">(20)</span></a>
-                <a class="text-primary">Tạm hết hàng<span class="text-muted">(20)</span></a>
-                <a class="text-primary">Gần hết hàng<span class="text-muted">(20)</span></a>
-                <a class="text-primary">Chờ kiểm duyệt<span class="text-muted">(20)</span></a>
-                <a class="text-primary">Từ chối<span class="text-muted">(20)</span></a>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-outline card-primary">
+                    @include("$moduleName.blocks.x_title", ['title' => 'Danh sách'])
+                    <div class="card-body p-0">
+                        {!! Template::showTabFilter($controllerName, [], $params['filter']['typeProduct'], $params,'typeProduct'); !!}
+
+                        @include("$moduleName.pages.$controllerName.list")
+                    </div>
+                    <div class="card-footer my-card-pagination clearfix">
+                        @include("$moduleName.blocks.pagination",['paginator'=>$items])
+                    </div>
+                </div>
             </div>
-            @include("$moduleName.pages.$controllerName.list")
-            {{$items->links()}}
         </div>
     </div>
-</div>
+</section>
 @endsection

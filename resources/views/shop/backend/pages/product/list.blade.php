@@ -1,51 +1,50 @@
-<table class="table table-striped" id="tbList" style="font-size:14px!important; border: none; table-layout: auto;width: 100%">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Sản phẩm</th>
-            <th scope="col">Đơn vị</th>
-            <th scope="col">Ngày tạo</th>
-            <th scope="col">Tổng đơn đặt hàng</th>
-            <th scope="col">Tồn trong kho của tôi</th>
-            <th scope="col">Trạng thái</th>
-            <th scope="col">Thao tác</th>
-        </tr>
-    </thead>
+@php
+    use App\Helpers\Template;
+@endphp
+    <table class="table table-bordered table-striped table-hover table-head-fixed text-wrap" id="tbList">
+        <thead>
+            <tr class="row-heading">
+                <th>STT</th>
+                <th>Thuốc</th>
+                <th>Đơn vị</th>
+                <th>Tổng đơn <br/>đặt hàng</th>
+                <th>Tồn trong kho <br/> của tôi</th>
+                <th>Trạng thái</th>
+                <th>Tác vụ</th>
+            </tr>
+        </thead>
     @php
     $temp=0;
     @endphp
     <tbody>
         @foreach ($items as $val)
         @php
-        $temp++;
-        $arr_images=explode(",",$val->image);
+            $temp++;
+            $arr_images=explode(",",$val->image);
+            $image = Template::showImagePreview($controllerName,$val['image'], $val['name'], $val['slug']??$val['name']);
         @endphp
         <tr>
             <td style="width: 3%">{{$temp}}</td>
-            <td style="width: 35%">
+            <td style="width: 35%" class="img-in-table">
                 <div class="d-flex">
-                    <div class="d-flex align-items-center">
-                        <img style="width:40px" src="{{asset('public/shop/uploads/images/product/'.$arr_images[0])}}" alt="">
+                    <div class="align-items-center"  style="width:15%">
+                        {!! $image !!}
                     </div>
-                    <div class="info-product ml-3">
-                        <p class="text-success font-weight-bold">{{$val->name}}</p>
-                        <p>ID: {{$val->id}}</p>
-                        <p>Mã: {{$val->code}}</p>
+                    <div class="info-product ml-1">
+                        <p class="text-primary font-weight-bold mb-1">{{$val->name}}</p>
+                        <p mb-1>Mã: {{$val->code}}</p>
                     </div>
                 </div>
             </td>
             <td style="width: 5%">{{$val->unit}}</td>
-            <td style="width: 11%">{{$val->create_at}}</td>
-            <td style="width: 10%">0</td>
-            <td style="width: 13%">{{$val->inventory}}</td>
+            <td style="width: 5%" class="text-right">0</td>
+            <td style="width: 7%" class="text-right">{{$val->inventory}}</td>
             <td style="width: 8%"><span class="badge badge-success">Chờ kiểm duyệt</span></td>
-            <td style="width: 15%">
-                <a href="{{route('fe.product.detail',$val->id)}}" class="btn btn-info btn-sm rounded-0 text-white " type="button" data-toggle="tooltip" data-placement="top" title="Xem sản phẩm trên web"><i class="fas fa-eye rounded-circle"></i></a>
+            <td style="width: 8%">
                 <a href="{{route("$controllerName.edit",$val->id)}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit"></i></a>
                 <a data-href="{{route("$controllerName.delete",$val->id)}}" class="btn btn-sm btn-danger btn-delete text-white" data-id="{{$val->id}}" data-toggle="tooltip" data-placement="top" title="Xóa" data-token="{{csrf_token()}}">
                     <i class="fa fa-trash"></i>
                 </a>
-                <a href="{{route('dropzone.list_img',$val->id)}}" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Thêm ảnh sản phẩm"><i class="fas fa-plus"></i></a>
             </td>
         </tr>
         @endforeach

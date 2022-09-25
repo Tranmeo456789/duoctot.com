@@ -109,6 +109,20 @@ class Form {
                             </div>", $widthElement, $element['element'],$element['label']
                         );
                         break;
+                case 'fileAttachPreview':
+                    $fileAttach = ($element['fileAttach'] == null)?null:$element['fileAttach'];
+                    $xhtml .= sprintf(
+                        "<div class='%s'>
+                            <div class='form-group row'>
+                                %s
+                                <div class='%s'>
+                                    $fileAttach
+                                    %s
+                                </div>
+                            </div>
+                        </div>", $widthElement, $element['label'],$widthInput, $element['element']
+                    );
+                    break;
                 case 'btn-submit-center':
                     $xhtml .= sprintf(
                         '<div class="%s">
