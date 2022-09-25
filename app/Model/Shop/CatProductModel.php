@@ -45,6 +45,15 @@ class CatProductModel extends BackEndModel
                 $result[$value['id']] = str_repeat(config('myconfig.template.char_level'),$value['depth']) . $value['name'];
             }
         }
+        if($options['task'] == "admin-list-items-in-selectbox") {
+            $query= self::select('id','name')
+                        ->withDepth()->defaultOrder()
+                        ->where('id','<>',1);
+            $nodes = $query->get()->toFlatTree();
+            foreach ($nodes as $value) {
+                $result[$value['id']] = str_repeat(config('myconfig.template.char_level'),$value['depth']-1) . $value['name'];
+            }
+        }
         return $result;
     }
     public function countItems($params = null, $options  = null) {

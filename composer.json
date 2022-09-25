@@ -10,7 +10,7 @@
         "guzzlehttp/guzzle": "~6.0",
         "laravel/framework": "5.2.*",
         "laravelcollective/html": "^5.2.0",
-        "unisharp/laravel-filemanager": "1.9.2",
+        "unisharp/laravel-filemanager": "~1.8",
         "kalnoy/nestedset": "^4.3",
         "barryvdh/laravel-debugbar": "^2.4"
     },

@@ -3,6 +3,7 @@
 <script src="{{ asset('shop/template/js/toastr.min.js') }}"></script>
 <script src="{{ asset('shop/template/js/bootstrap-datepicker.min.js') }}"></script>
 <script src="{{ asset('shop/template/js/bootstrap-datepicker.vi.min.js') }}"></script>
+<script src="{{ asset('shop/template/js/summernote-bs4.min.js') }}"></script>
 <script src="{{ asset('shop/template/js/select2.full.min.js') }}"></script>
 <script src="{{ asset('shop/template/js/jquery.uploadPreviewer.js') }}"></script>
 <script src="{{ asset('shop/template/js/bootstrap.bundle.min.js') }}"></script>

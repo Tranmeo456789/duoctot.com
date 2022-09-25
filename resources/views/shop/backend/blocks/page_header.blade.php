@@ -7,9 +7,9 @@
             <div class="col-md-6 d-flex justify-content-end">
                 @if (!isset($hidePageIndex) || !$hidePageIndex)
                     @if (isset($pageIndex) && ($pageIndex))
-                        <a href='{{route("$controllerName.add")}}' class="btn btn-primary btn-info float-right">Thêm mới</a>
+                        <a href='{{route("$controllerName.add")}}' class="btn btn-primary loat-right">Thêm mới</a>
                     @else
-                        <a href='{{route("$controllerName")}}' class="btn btn-primary btn-info float-right">Quay về</a>
+                        <a href='{{route("$controllerName")}}' class="btn btn-primary float-right">Quay về</a>
                     @endif
                 @endif
             </div>

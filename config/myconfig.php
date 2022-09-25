@@ -19,6 +19,9 @@
                 'input' => [
                     'class' => 'form-control'
                 ],
+                'editor' => [
+                    'class' => 'form-control editor'
+                ],
                 'select2' => [
                     'class' => 'form-control col-md-12 col-xs-12 select2'
                 ],
@@ -39,7 +42,32 @@
                 'tax_code' => 'Mã số thuế',
                 'person_represent' =>'Người đại diện pháp luật',
                 'address' => 'Địa chỉ',
-                'parent_id' => 'Danh mục cha'
+                'parent_id' => 'Danh mục cha',
+                'cat_product_id' => 'Danh mục thuốc',
+                'producer_id' => 'Nhà sản xuất',
+                'trademark_id' =>'Thương hiệu',
+                'dosage_forms' => 'Dạng bào chế',
+                'specification' => 'Quy cách',
+                'country_id' => 'Nước sản xuất',
+                'long' => 'Chiều dài (mm)',
+                'wide' => 'Chiều rộng (mm)',
+                'high' => 'Chiều cao (mm)',
+                'mass' => 'Khối lượng (g)',
+                'coefficient' => 'Hệ số VAT (%)',
+                'price' => 'Giá bán thuốc (chưa VAT)',
+                'price_vat' => 'Giá bán thuốc (có VAT)',
+                'type_vat' => 'Loại VAT',
+                'packing' => 'Quy cách đóng gói',
+                'unit_id' => 'Đơn vị',
+                'amout_max' => 'Số lượng đặt hàng lớn nhất',
+                'inventory_min' => 'Số lượng tồn tối thiếu',
+                'type_price' => 'Loại giá bán hàng',
+                'general_info' =>'Thông tin chung',
+                'benefit' => 'Công dụng',
+                'prescribe' => 'Chỉ định',
+                'dosage' => 'Liều lượng',
+                'note' => 'Lưu ý',
+                'preserve' => 'Bảo quản'
             ],
             'type_user' => [
                 '1' => 'Bệnh nhân',
@@ -52,7 +80,44 @@
                 '8' => 'Thẩm mỹ viện',
                 '9' => 'Công ty dược phẩm'
             ],
+            'type_product' => [
+                '1' => 'Sản phẩm loại thường',
+                '2' => 'Quà tặng'
+            ],
+            'tick'=>[
+                '1' => 'Hàng dễ vỡ',
+                '2' => 'Hàng bảo quản lạnh'
+            ],
+            'yes_no' => [
+                'yes' => 'Có',
+                'no' => 'Không'
+            ],
+            'type_price' => [
+                '1' => 'Giá bán hàng niêm yết',
+                '2' => 'Giá theo doanh thu'
+            ],
+            'type_featurer' => [
+                'noi_bat' => 'Sản phẩm nổi bật',
+                'hau_covid' => 'Sản phẩm hậu covid',
+                'tre_em' => 'Trẻ em',
+                'nguoi_cao_tuoi' => 'Người cao tuổi',
+                'phu_nu_cho_con_bu' => 'Phụ nữ cho con bú'
+            ],
             'char_level' => "|---",
+            'column' => [
+                'typeProduct'      => [
+                    'all'           => ['name' => 'Tất cả', 'class' => 'item-tab'],
+                    'dang_ban'      => ['name' => 'Đang bán', 'class'      => 'item-tab'],
+                    'ngung_ban'   => ['name' => 'Ngừng bán', 'class' => 'item-tab'],
+                    'tam_het_hang' => ['name' => 'Tạm hết hàng', 'class' => 'item-tab'],
+                    'gan_het_hang' => ['name' => 'Gần hết hàng', 'class' => 'item-tab'],
+                    'cho_kiem_duyet' => ['name' => 'Chờ kiểm duyệt', 'class' => 'item-tab'],
+                    'tu_choi' => ['name' => 'Từ chối', 'class' => 'item-tab'],
+                ],
+            ],
+        ],
+        'folderUpload' => [
+            'mainFolder' =>'fileUpload'
         ]
     ];
 ?>

@@ -115,3 +115,62 @@ form div[class*=col-]:last-child .form-group {
 .img-in-table img {
     max-height: 50px;
 }
+
+.bar_tabs {
+    border: 0px;
+    margin-top: 5px;
+}
+
+.bar_tabs li.btn-primary a.btn-filter {
+    color: #fff;
+}
+
+.bar_tabs li a.btn-filter {
+    color: #007bff;
+    border: none;
+}
+
+.bar_tabs li:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+
+.bar_tabs li:hover a.btn-filter {
+    color: #fff;
+}
+
+.bar_tabs li .badge {
+    background-color: #007bff !important;
+    color: #fff !important;
+    font-size: 95%;
+}
+
+.bar_tabs li:hover .badge {
+    background-color: #fff !important;
+    color: #007bff !important;
+}
+
+.bar_tabs li:not(:last-child) {
+    border-right: 1px solid #c3c3c3 !important;
+}
+
+.remove-file {
+    text-align: right;
+}
+
+.file-preview-table tr td {
+    padding: 3px
+}
+
+.file-preview-table .file-preview-placeholder {
+    width: 64px;
+    height: auto;
+}
+
+.note-toolbar {
+    padding: 5px !important;
+}
+
+img[src=''] {
+    display: none !important;
+}

@@ -154,10 +154,69 @@ $(document).on('click', ".changeTypePassword", function(event) {
         $(this).html("<i class='fa fa-eye'></i>");
     }
 });
-
+$(document).on('click', "a.btn-filter", function(event) {
+    event.preventDefault();
+    $('.loading').show();
+    url = $(this).data('href');
+    window.location.replace(url);
+});
 $(document).ready(function() {
     $(".select2").select2();
     $('#btn-image').filemanager('image');
+    if ($("input[name='album_image_attach[]']").length) {
+        myUploadImage = $("input[name='album_image_attach[]']").uploadPreviewer({
+            buttonText: " Tải album ảnh",
+        });
+    }
+    console.log($(".file-preview-table").find('td').length);
+    if ($(".file-preview-table").find('td').length == 0) {
+
+        $(".file-preview-table").css({
+            "margin-top": "0px",
+            "margin-bottom": "0px"
+        });
+    }
+
+    var lfm = function(options, cb) {
+        var route_prefix = (options && options.prefix) ? options.prefix : '/laravel-filemanager';
+        window.open(route_prefix + '?type=' + options.type || 'file', 'FileManager', 'width=900,height=600');
+        window.SetUrl = cb;
+    };
+
+    // Define LFM summernote button
+    var LFMButton = function(context) {
+        var ui = $.summernote.ui;
+        var button = ui.button({
+            contents: '<i class="note-icon-picture"></i> ',
+            tooltip: 'Insert image',
+            click: function() {
+                lfm({ type: 'image', prefix: '/laravel-filemanager' }, function(url, path) {
+                    context.invoke('insertImage', url);
+                });
+            }
+        });
+        return button.render();
+    };
+
+    // Initialize summernote with LFM button in the popover button group
+    // Please note that you can add this button to any other button group you'd like
+    $('.editor').summernote({
+        tabsize: 2,
+        height: 100,
+
+        callbacks: {
+            onPaste: function(e) {
+                var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+
+                e.preventDefault();
+
+                // Firefox fix
+                setTimeout(function() {
+                    document.execCommand('insertText', false, bufferText);
+                }, 10);
+            }
+        }
+    })
 
     $("#choices-multiple-remove-button").select2();
     $('#submit-all1').click(function() {

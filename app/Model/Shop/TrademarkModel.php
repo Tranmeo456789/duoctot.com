@@ -21,6 +21,11 @@ class TrademarkModel extends BackEndModel
                             ->paginate($params['pagination']['totalItemsPerPage']);
 
         }
+        if($options['task'] == "admin-list-items-in-selectbox") {
+            $query = $this->select('id', 'name')
+                        ->orderBy('name', 'asc');
+            $result = $query->pluck('name', 'id')->toArray();
+        }
         return $result;
     }
     public function getItem($params = null, $options = null) {
