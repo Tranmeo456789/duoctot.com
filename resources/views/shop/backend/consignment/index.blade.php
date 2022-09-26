@@ -1,11 +1,11 @@
+
 @extends('shop.layouts.backend')
 
-@section('title', 'Danh sách phiếu gửi hàng')
+@section('title',$pageTitle)
+@section('content')
 
-@section('header_title', 'Danh sách phiếu gửi hàng')
-
-@section('body_content')
-
+<section class="content">
+    @include("$moduleName.blocks.notify")
 <div class="card">
     <div class="card-header font-weight-bold">
         <div class="row">
@@ -13,7 +13,7 @@
                 <div class="form-search form-inline">
                     <form action="#" style="width:100%">
                         <input type="" id="input-search-after" style="width:100%" class="form-control form-search" placeholder="Nhập mã phiếu gửi hàng">
-                        <button class="search-product"><i class="fas fa-search"></i></button>
+                        <!-- <button class="search-product"><i class="fas fa-search"></i></button> -->
                     </form>
                 </div>
             </div>
@@ -96,5 +96,4 @@
         </div>
     </div>
 </div>
-
 @endsection

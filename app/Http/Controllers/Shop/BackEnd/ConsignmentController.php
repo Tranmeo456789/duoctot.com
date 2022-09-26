@@ -9,13 +9,20 @@ use App\Http\Controllers\Controller;
 
 class ConsignmentController extends Controller
 {
+    
     public function index(){
-        return view('shop.backend.consignment.index');
+        $pageTitle='Danh sách phiếu gửi hàng';
+        $moduleName='shop.backend';
+        return view('shop.backend.consignment.index',compact('pageTitle','moduleName'));
     }
     public function add(){
-        return view('shop.backend.consignment.add_consignment');
+        $pageTitle='Thêm phiếu gửi hàng';
+        $moduleName='shop.backend';
+        return view('shop.backend.consignment.add_consignment',compact('pageTitle','moduleName'));
     }
     public function detail(){
-        return view('shop.backend.consignment.detail_consignment');
+        $pageTitle='Chi tiết phiếu gửi hàng';
+        $moduleName='shop.backend';
+        return view('shop.backend.consignment.detail_consignment',compact('pageTitle','moduleName'));
     }
 }

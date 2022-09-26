@@ -15,7 +15,7 @@ class CustomerController extends BackEndController
     {
         $this->controllerName     = 'customer';
         $this->pathViewController = "$this->moduleName.pages.$this->controllerName.";
-        $this->pageTitle          = 'Khách hàng';
+        $this->pageTitle          = 'Danh sách Khách hàng';
         $this->model = new MainModel();
         parent::__construct();
         session(['module_active'=>'customer']);

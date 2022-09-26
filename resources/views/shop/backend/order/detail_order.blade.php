@@ -1,10 +1,7 @@
 @extends('shop.layouts.backend')
 
-@section('title', 'Chi tiết đơn hàng')
-
-@section('header_title', 'Chi tiết đơn hàng')
-
-@section('body_content')
+@section('title',$pageTitle)
+@section('content')
 
 <div class="card mt-2 ml-1">
     <div class="card-header font-weight-bold bg-info text-light">
@@ -131,6 +128,4 @@
         </table>
     </div>
 </div>
-
-
 @endsection

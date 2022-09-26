@@ -10,14 +10,22 @@ use App\Model\Shop\ProductModel;
 use App\Model\Shop\WarehouseModel;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Model\Shop\OrderModel as MainModel;
+
 use Session;
 
 class OrderController extends Controller
 {
     public function __construct()
     {
+        $this->controllerName     = 'order';
+        //$this->pathViewController = "$this->moduleName.pages.$this->controllerName.";
+        //$this->pageTitle          = 'Danh sách đơn hàng';
+        //$this->model = new MainModel();
+        //parent::__construct();
         session(['module_active' => 'order']);
     }
+    
     public function add_order()
     {
         return view('shop.backend.order.add_order');
@@ -26,10 +34,14 @@ class OrderController extends Controller
     {
         $list_status = ['Đang xử lý', 'Đã xác nhận', 'Đang giao hàng', 'Đã giao hàng', 'Hoàn tất', 'Đã hủy'];
         $orders = OrderModel::paginate(10);
-        return view('shop.backend.order.list_order', compact('orders', 'list_status'));
+        $pageTitle='Danh sách đơn hàng';
+        $moduleName='shop.backend';
+        return view('shop.backend.order.list_order', compact('orders', 'list_status','pageTitle','moduleName'));
     }
     public function detail_order($code)
     {
+        $pageTitle='Chi tiết đơn hàng';
+        $moduleName='shop.backend';
         $order = OrderModel::where('code_order', $code)->get();
         $list_pr = [];
         $list_qty = [];
@@ -46,11 +58,13 @@ class OrderController extends Controller
                 unset($list_status[$k]);
             }
         }
-        return view('shop.backend.order.detail_order', compact('order', 'list_qty', 'ls_product_order', 'list_status'));
+        return view('shop.backend.order.detail_order', compact('order', 'list_qty', 'ls_product_order', 'list_status','pageTitle','moduleName'));
     }
     public function list_invoice()
     {
-        return view('shop.backend.order.list_invoice');
+        $pageTitle='Danh sách hóa đơn';
+        $moduleName='shop.backend';
+        return view('shop.backend.order.list_invoice',compact('pageTitle','moduleName'));
     }
     public function detail_invoice()
     {

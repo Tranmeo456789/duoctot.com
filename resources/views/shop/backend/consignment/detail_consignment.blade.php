@@ -1,10 +1,10 @@
 @extends('shop.layouts.backend')
 
-@section('title', 'Chi tiết phiếu gửi hàng')
+@section('title',$pageTitle)
+@section('content')
 
-@section('header_title', 'Chi tiết phiếu gửi hàng')
-
-@section('body_content') 
+<section class="content">
+    @include("$moduleName.blocks.notify")
     <div class="card mt-2 ml-1">
         <div class="card-body">
             <div class="mb-3 font-weight-bold">
@@ -73,4 +73,5 @@
             </table>
         </div>
     </div>
+    </section>
 @endsection
