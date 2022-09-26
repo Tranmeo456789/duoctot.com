@@ -7,7 +7,12 @@ use Config;
 
 class ProductRequest extends AjaxFormRequest
 {
-    private $table            = 'products';
+    private $table           = 'products';
+    private $tableCatProduct = 'cat_product';
+    private $tableProducer   = 'producers';
+    private $tableTrademark  = 'trademarks';
+    private $tableCountry    = 'country';
+    private $tableUnit = 'units';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -27,19 +32,21 @@ class ProductRequest extends AjaxFormRequest
     {
         $id = $this->id;
         $condName  = "bail|required|between:1,255|unique:$this->table,name";
-        $condType  = "bail|required";
+        $condType  = "bail|required|in:" . implode(',',array_keys(config('myconfig.template.type_product')));
         $condCode  =  "bail|required";
-        $condCatid  =  "bail|required";
-        $condProducerid  =  "bail|required";
-        $condTrademark  =  "bail|required";
-        $condMade_country  =  "bail|required";
-        $condPrice  =  "bail|required";
-        $condInventory  =  "bail|required";
-        $condPrice_vat  =  "bail|required";
-        $condGeneral_info  =  "bail|required";
+        $condImage  =  "bail|required";
+        $condCatPrduct  = "";
+        //$condCatPrduct  =  "bail|required|exists:$this->tableCatProduct,id";
+        $condProducer  =  "bail|required|exists:$this->tableProducer,id";
+        $condTrademark  =  "bail|required|exists:$this->tableTrademark,id";
+        $condCountry  =  "bail|required|exists:$this->tableCountry,id";
+        $condPrice  =  "bail|required|numeric";
+        $condTypePrice  =  "bail|required|in:"  . implode(',',array_keys(config('myconfig.template.type_price')));
+        $condInventory  =  ($this->invenotry_min != '')?"bail|required|numeric":'';
+        $condPriceVat  =  "bail|required|numeric";
+        $condGeneralInfo  =  "bail|required";
         $condBenefit  =  "bail|required";
-        $condImage = "image";
-        $condUnit  =  "bail|required";
+        $condUnit  =  "bail|required|exists:$this->tableUnit,id";
         $condLongs  =  "bail|numeric";
         $condWides  =  "bail|numeric";
         $condHighs  =  "bail|numeric";
@@ -47,44 +54,43 @@ class ProductRequest extends AjaxFormRequest
         if (!empty($id)) { // edit
             $condName  .= ",$id";
         }
-        return  [
-            'name'              => $condName,
-            'type'              => $condType,
-            'image'             => $condImage,
-            'code'              => $condCode,
-            'cat_id'            => $condCatid,
-            'producer_id'        => $condProducerid,
-            'trademark'         => $condTrademark,
-            'made_country'      => $condMade_country,
-            'price'             => $condPrice,
-            'unit'              => $condUnit,
-            'inventory'         => $condInventory,
-            'price_vat'             => $condPrice_vat,
-            'general_info'         => $condGeneral_info,
-            'benefit'         => $condBenefit,
-            'longs' => $condLongs,
-            'wides' => $condWides,
-            'highs' => $condHighs,
-            'mass' => $condMass,
+        $rulesAlbumImage = array();
+        $condAlbumImage = "image";
+        if ((!empty($this->albumImage)) && count($this->albumImage) > 0) {
+            $albumImage = $this->albumImage;
+            foreach ($albumImage as $key => $file) {
+                $rulesAlbumImage['albumImage.'.$key] = $condAlbumImage;
+            }
+        }
+
+        $rules =  [
+            'name'           => $condName,
+            'type'           => $condType,
+            'image'          => $condImage,
+            'code'           => $condCode,
+            'cat_product_id' => $condCatPrduct,
+            'producer_id'    => $condProducer,
+            'trademark_id'   => $condTrademark,
+            'country_id'     => $condCountry,
+            'price'          => $condPrice,
+            'type_price'          => $condTypePrice,
+            'unit_id'        => $condUnit,
+            'inventory_min'  => $condInventory,
+            'price_vat'      => $condPriceVat,
+            'general_info'   => $condGeneralInfo,
+            'benefit'        => $condBenefit,
+            'longs'          => $condLongs,
+            'wides'          => $condWides,
+            'highs'          => $condHighs,
+            'mass'           => $condMass,
         ];
+        return array_merge($rules, $rulesAlbumImage);
     }
     public function attributes()
     {
+        $arrAttr = config('myconfig.template.label');
         $arrAttr['name'] = 'Tên thuốc';
-        $arrAttr['image'] = 'Trường';
-        $arrAttr['type'] = 'Loại thuốc';
         $arrAttr['code'] = 'Mã thuốc';
-        $arrAttr['cat_id'] = 'Danh mục';
-        $arrAttr['producer_id'] = 'Nhà sản xuất';
-        $arrAttr['trademark'] = 'Thương hiệu thuốc';
-        $arrAttr['made_country'] = 'Nước sản xuất';
-        $arrAttr['price'] = 'Giá bán';
-        $arrAttr['inventory'] = 'Tồn kho';
-        $arrAttr['price_vat'] = 'Giá bán';
-        $arrAttr['general_info'] = 'Thông tin chung';
-        $arrAttr['benefit'] = 'Công dụng';
-        $arrAttr['unit'] = 'Đơn vị';
-
         return $arrAttr;
     }
 }

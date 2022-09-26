@@ -12,6 +12,7 @@
     $star             = config('myconfig.template.star');
     $formInputWidth['widthInput']  =  'col-12';
     $inputHiddenID    = Form::hidden('id', $item['id']??null);
+    $inputFileDel     = isset($item['id'])?Form::hidden('file-del'):'';
     $formSelect2Attr  = config('myconfig.template.form_element.select2');
     $itemsTypeProduct = config('myconfig.template.type_product');
     $elements = [
@@ -73,7 +74,7 @@
     foreach($arrTick as $key_tick => $type_tick){
         $elements[] = [
             'label'   => Form::label('', $type_tick, $formLabelAttr),
-            'element' => Form::checkbox('tick[]', $key_tick,false ,array_merge($formInputAttr)),
+            'element' => Form::checkbox('tick[]', $key_tick,isset($item['tick']) && in_array($key_tick,$item['tick']) ,array_merge($formInputAttr)),
             'type' =>'inline-text-right',
             'widthElement' => 'col-3',
             'styleFormGroup' => 'mb-1',
@@ -123,7 +124,7 @@
                 'widthElement' => 'col-3'
             ],[
                 'label'   => HTML::decode(Form::label('type_price', $label['type_price'] .  $star , $formLabelAttr)),
-                'element' => Form::select('type_price',[null=>"Chọn {$label['type_price']}"]+ $itemsUnit, $item['type_price']??null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
+                'element' => Form::select('type_price',[null=>"Chọn {$label['type_price']}"]+ $itemsTypePrice, $item['type_price']??null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
                 'widthElement' => 'col-6'
             ],[
                 'label'   => HTML::decode(Form::label('sell_area', $label['sell_area'] .  $star , $formLabelAttr)),
@@ -140,7 +141,7 @@
     foreach($arrFeaturer as $key_featurer => $type_featurer){
         $elements[] = [
             'label'   => Form::label('', $type_featurer, $formLabelAttr),
-            'element' => Form::checkbox('featurer[]', $key_featurer,false ,array_merge($formInputAttr)),
+            'element' => Form::checkbox('featurer[]', $key_featurer,isset($item['featurer']) && in_array($key_featurer,$item['featurer']??'') ,array_merge($formInputAttr)),
             'type' =>'inline-text-right',
             'widthElement' => 'col-3',
             'styleFormGroup' => 'mb-1',
@@ -157,9 +158,9 @@
                 'element' => Template::createFileManager('image', $item['image']?? null),
                 'widthInput' => 'col-11',
             ],[
-                'label'   => Form::label('album_image_attach', 'Album ảnh', ['class' => 'col-1 col-form-label']),
-                'element' => Form::file('album_image_attach[]', array_merge($formInputAttr,['multiple'=>'multiple','accept'=>'image/*'])),
-                'fileAttach'   => (!empty($item['id'])) ? Template::showImageAttachPreview($controllerName, $item['album_image_attach'],$item['album_image_hash'], $item['id'],['btn' => 'delete']) : null ,
+                'label'   => Form::label('albumImage', 'Album ảnh', ['class' => 'col-1 col-form-label']),
+                'element' => Form::file('albumImage[]', array_merge($formInputAttr,['multiple'=>'multiple','accept'=>'image/*'])),
+                'fileAttach'   => (!empty($item['id'])) ? Template::showImageAttachPreview($controllerName, $item['albumImage'],$item['albumImageHash'], $item['id'],['btn' => 'delete']) : null ,
                 'type'    => "fileAttachPreview",
                 'widthInput' => 'col-11',
             ],[
@@ -181,7 +182,7 @@
                 'label'   => Form::label('preserve', $label['preserve'], $formLabelAttr),
                 'element' => Form::textarea('preserve', $item['preserve']?? null, array_merge($formInputAttr,['placeholder'=>$label['preserve'],"rows"=>"5"]))
             ],[
-                'element' => $inputHiddenID .Form::submit('Lưu', ['class'=>'btn btn-primary']),
+                'element' => $inputHiddenID . $inputFileDel .Form::submit('Lưu', ['class'=>'btn btn-primary']),
                 'type'    => "btn-submit-center"
             ]
         ]
@@ -204,6 +205,7 @@
                             'url'            => route("$controllerName.save"),
                             'accept-charset' => 'UTF-8',
                             'class'          => 'form-horizontal form-label-left',
+                            'enctype'        => 'multipart/form-data',
                             'id'             => 'main-form' ])  }}
                             <div class="row">
                                 {!! FormTemplate::show($elements,$formInputWidth)  !!}

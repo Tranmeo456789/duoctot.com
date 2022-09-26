@@ -6,7 +6,14 @@ $(document).on('submit', 'form#main-form', function(event) {
     var form = $(this);
     form.find("input[type='submit']").val("Đang lưu....");
     var data = new FormData($(this)[0]);
-
+    if (data.has('albumImage]')) {
+        data.delete('albumImage[]');
+        for (var i = 0; i < myUploadImage.fileList().length; i++) {
+            var file = myUploadImage.fileList()[i];
+            // Add the file to the request.
+            data.append('albumImage[]', file, file.name);
+        }
+    }
     var url = form.attr("action");
 
     $.ajax({
@@ -16,22 +23,39 @@ $(document).on('submit', 'form#main-form', function(event) {
         cache: false,
         contentType: false,
         processData: false,
-        success: function(response) {
+        success: function(data) {
             $msg = '';
-            if (response.success == false) {
-                if (response.error != null) {
-                    for (control in response.errors) {
-                        eleError = "<label id='" + control + "-error' class='error invalid-feedback' for='" + control + "' style='display:inline-block'>" + response.errors[control] + "</label>";
-                        $('[name=' + control + ']').closest(".form-group").find("label[for='" + control + "']").remove();
-                        $('[name=' + control + ']').closest(".input-group").addClass('has-error').after(eleError);
-                        $('[name=' + control + ']').addClass("is-invalid").removeClass('is-valid');
-                    }
-                } else {
-                    alert(response.message);
+            // if (response.success == false) {
+            //     if (response.error != null) {
+            //         for (control in response.errors) {
+            //             eleError = "<label id='" + control + "-error' class='error invalid-feedback' for='" + control + "' style='display:inline-block'>" + response.errors[control] + "</label>";
+            //             $('[name=' + control + ']').closest(".form-group").find("label[for='" + control + "']").remove();
+            //             $('[name=' + control + ']').closest(".input-group").addClass('has-error').after(eleError);
+            //             $('[name=' + control + ']').addClass("is-invalid").removeClass('is-valid');
+            //         }
+            //     } else {
+            //         alert(response.message);
+            //     }
+            // } else {
+            //     alert(response.message);
+            //     window.location.replace(response.redirect_url);
+            // }
+
+            if (data.fail) {
+                form.find("input[type='submit']").val("Lưu");
+                for (control in data.errors) {
+                    $('[name=' + control + ']').addClass("is-invalid")
+                    $('[name=' + control + ']').parents('div.form-group').addClass("has-error");
+                    $('[name=' + control + ']').siblings('span.help-block').html(data.errors[control]).addClass("help-block-show");
+                    $msg += "<br/>" + data.errors[control];
                 }
+                $msg = $msg.substring(5);
+                alert($msg);
             } else {
-                alert(response.message);
-                window.location.replace(response.redirect_url);
+                // $.pjax({ url: data.redirect_url, container: pjaxContainer });
+                alert(data.message);
+                location.href = data.redirect_url;
+                // window.location.replace(data.redirect_url);
             }
         },
         error: function(xhr, textStatus, errorThrown) {
@@ -160,17 +184,28 @@ $(document).on('click', "a.btn-filter", function(event) {
     url = $(this).data('href');
     window.location.replace(url);
 });
+$(document).on('click', "#btnDeleteFile", function(event) {
+    if ($("input[name='file-del']").length) {
+        if ($("input[name='file-del']").val() != '') {
+            $val = $("input[name='file-del']").val() + '|' + $(this).attr('data-href');
+            $("input[name='file-del']").attr('value', $val);
+        } else {
+            $("input[name='file-del']").attr('value', $(this).attr('data-href'));
+        }
+    }
+    $(this).closest("li").fadeOut(500);
+    event.preventDefault();
+});
 $(document).ready(function() {
     $(".select2").select2();
     $('#btn-image').filemanager('image');
-    if ($("input[name='album_image_attach[]']").length) {
-        myUploadImage = $("input[name='album_image_attach[]']").uploadPreviewer({
+    if ($("input[name='albumImage[]']").length) {
+        myUploadImage = $("input[name='albumImage[]']").uploadPreviewer({
             buttonText: " Tải album ảnh",
         });
     }
-    console.log($(".file-preview-table").find('td').length);
-    if ($(".file-preview-table").find('td').length == 0) {
-
+    if (($(".file-preview-table").length > 0) &&
+        ($(".file-preview-table").find('td').length == 0)) {
         $(".file-preview-table").css({
             "margin-top": "0px",
             "margin-bottom": "0px"

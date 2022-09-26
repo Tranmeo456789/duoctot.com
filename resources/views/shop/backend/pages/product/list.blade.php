@@ -21,7 +21,7 @@
         @php
             $temp++;
             $arr_images=explode(",",$val->image);
-            $image = Template::showImagePreview($controllerName,$val['image'], $val['name'], $val['slug']??$val['name']);
+            $image = Template::showImagePreviewFileManager($val['image'],$val['slug']??$val['name']);
         @endphp
         <tr>
             <td style="width: 3%">{{$temp}}</td>

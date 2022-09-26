@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Config;
 use App\Model\Shop\Cat_productModel;
 use App\Model\Shop\ProductModel;
 use App\Model\Shop\Tinhthanhpho;
-
+use App\Model\Shop\ProvinceModel;
 include "app/Helpers/data_cat.php";
 include "app/Helpers/data.php";
 use App\Helpers\HttpClient;
@@ -27,13 +27,7 @@ class HomeController extends ShopFrontEndController
     public function index()
     {
         $product_covids = ProductModel::inRandomOrder()->limit(8)->get();
-        $itemsProvince = [];
-        $provinceRequest = env("APP_URL_API") . config("myconfig.baseRequest.getListProvince");
-        $provinceResponse = HttpClient::get($provinceRequest);
-
-        if (isset($provinceResponse['success']) && ($provinceResponse['success'])){
-            $itemsProvince = array_pluck($provinceResponse['data'],'name','id');
-        }
+        $itemsProvince = (new ProvinceModel())->listItems(null,['task' => 'admin-list-items-in-selectbox']);
         return view($this->pathViewController . 'index',
                     compact('product_covids','itemsProvince'));
     }

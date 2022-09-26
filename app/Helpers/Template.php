@@ -74,22 +74,14 @@ class Template {
             foreach ($fileName as $keyFile => $valFile) {
                 $params = ['id'=>$id,'stt'=>$keyFile,'fileName'=>$fileHash[$keyFile]];
                 if (isset($options['subFolder'])) $params['subFolder'] = $options['subFolder'];
-                $link = route("{$controllerName}/download",$params) ;
-                $linkView = route("{$controllerName}/view",$params) ;
-                $label = $valFile;
 
+                $label = $valFile;
+                $path = "public/" . config("myconfig.folderUpload.mainFolder") . "/" . $controllerName . "/";
+                $filePath = asset($path . $fileHash[$keyFile]);
                 $xhtml .= sprintf("<li>
-                                    <a href='$linkView' target='_blank'
-                                        data-toggle='tooltip' data-placement='top'
-                                        data-original-title='Tải về: {$label} ' >
-                                        {$label}
-                                    </a>
+                                    <img src='%s' class='img-fuild' style='margin-top:5px; max-height:100px;'>
                                     <span class='float-right'>
-                                    <a href='$link' data-toggle='tooltip' data-placement='top'
-                                        data-original-title='Tải về: {$label} '
-                                        class='btn btn-success btn-sm'>
-                                        <i class='fa fa-download'></i>
-                                    </a>");
+                                    ",$filePath);
 
                 if (isset($options['btn']) && ($options['btn'] == 'delete')){
                     $xhtml .= sprintf("<a href='javascript:void(0)' data-toggle='tooltip' data-placement='top'

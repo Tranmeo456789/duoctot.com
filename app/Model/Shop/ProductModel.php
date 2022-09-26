@@ -9,12 +9,17 @@ use App\Model\Shop\Size;
 use Illuminate\Support\Str;
 class ProductModel extends BackEndModel
 {
+    protected $casts = [
+        'tick'   => 'array',
+        'featurer' =>'array',
+        'sell_area' => 'array'
+    ];
     public function __construct()
     {
         $this->table               = 'products';
         $this->controllerName      = 'product';
-        $this->folderUpload        = '';
-        $this->crudNotAccepted     = ['_token', 'btn_save'];
+        $this->folderUpload        = 'product';
+        $this->crudNotAccepted     = ['_token', 'btn_save','file-del','files'];
     }
     public function listItems($params = null, $options = null)
     {
@@ -23,7 +28,7 @@ class ProductModel extends BackEndModel
             $query = $this::select('id','name','type','code','cat_product_id','producer_id',
                                     'tick','type_price','price','price_vat','coefficient',
                                     'type_vat','packing','unit_id','sell_area','amout_max',
-                                    'inventory','inventory_min','general_info','prescribe','dosage','trademark',
+                                    'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit',
                                     'preserve','note','image','featurer','long','wide','high',
                                     'mass', 'created_at', 'updated_at');
@@ -39,9 +44,9 @@ class ProductModel extends BackEndModel
             $result = self::select('id','name','type','code','cat_product_id','producer_id',
                                     'tick','type_price','price','price_vat','coefficient',
                                     'type_vat','packing','unit_id','sell_area','amout_max',
-                                    'inventory','inventory_min','general_info','prescribe','dosage','trademark',
+                                    'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit',
-                                    'preserve','note','image','featurer','long','wide','high',
+                                    'preserve','note','image','albumImage','albumImageHash','featurer','long','wide','high',
                                     'mass')
                             ->where('id', $params['id'])
                             ->first();
@@ -50,100 +55,39 @@ class ProductModel extends BackEndModel
     }
     public function saveItem($params = null, $options = null)
     {
-        $image = '';
-        if(isset($params['image'])) {
-            $file = $params['image'];
-            $filename = $file->getClientOriginalName();
-            $path = $file->move('public/shop/uploads/images/product', $file->getClientOriginalName());
-            $image = $filename;
-        }
-        $local_buy = implode(',', $params['local_buy']);
-             $feature='';
-             if(isset($params['feature'])){
-                $feature=implode(',', $params['feature']);
-             }
-             $tick='';
-             if(isset($params['tick'])){
-                $tick=implode(',', $params['tick']);
-             }
         if ($options['task'] == 'add-item') {
             $this->setCreatedHistory($params);
-             self::insert([
-                 'name' => $params['name'],
-                 'type' => $params['type'],
-                 'code' => $params['code'],
-                 'cat_id' => (int)$params['cat_id'],
-                 'producer_id' => (int)$params['producer_id'],
-                 'tick' => $tick,
-                  'type_price' => $params['type_price'],
-                  'price' => $params['price'],
-                  'price_vat' => $params['price_vat'],
-                 'coefficient' => $params['coefficient'],
-                 'type_vat' => $params['type_vat'],
-                 'packing' => $params['packing'],
-                 'unit' => $params['unit'],
-                 'local_buy' => $local_buy,
-                 'amout_max' => $params['amout_max'],
-                 'inventory' => $params['inventory'],
-                 'general_info' => $params['general_info'],
-                 'trademark' => $params['trademark'],
-                 'dosage_forms' => $params['dosage_forms'],
-                 'made_country' => $params['made_country'],
-                 'specification' => $params['specification'],
-                 'benefit' => $params['benefit'],
-                 'preserve' => $params['preserve'],
-                 'note' => $params['note'],
-                 'image'=>$image,
-                'feature'=>$feature,
-                  'longs'=>$params['longs'],
-                  'wides'=>$params['wides'],
-                 'highs'=>$params['highs'],
-                 'mass'=>$params['mass'],
-             ]);
+            $params['tick'] = isset($params['tick'])?json_encode($params['tick']): NULL;
+            $params['featurer'] = isset($params['featurer'])?json_encode($params['featurer']): NULL;
+            $params['user_id'] = \Session::get('user')['user_id'];
+
+            if (isset($params['albumImage'])) {
+                $resultFileUpload       = $this->uploadFile($params['albumImage']);
+                $params['albumImage']   = $resultFileUpload['fileAttach'];
+                $params['albumImageHash']     = $resultFileUpload['fileHash'];
+            }
+
+            $params['sell_area'] = ($params['sell_area'] != '')? json_encode($params['sell_area'],JSON_NUMERIC_CHECK ): NULL;
+            self::insert($this->prepareParams($params));
         }
         if ($options['task'] == 'edit-item') {
             $this->setModifiedHistory($params);
-            self::where('id', $params['id'])->update([
-                'name' => $params['name'],
-                'type' => $params['type'],
-                'code' => $params['code'],
-                'cat_id' => (int)$params['cat_id'],
-                'producer_id' => (int)$params['producer_id'],
-                'tick' => $tick,
-                 'type_price' => $params['type_price'],
-                 'price' => $params['price'],
-                 'price_vat' => $params['price_vat'],
-                'coefficient' => $params['coefficient'],
-                'type_vat' => $params['type_vat'],
-                'packing' => $params['packing'],
-                'unit' => $params['unit'],
-                'local_buy' => $local_buy,
-                'amout_max' => $params['amout_max'],
-                'inventory' => $params['inventory'],
-                'general_info' => $params['general_info'],
-                'trademark' => $params['trademark'],
-                'dosage_forms' => $params['dosage_forms'],
-                'made_country' => $params['made_country'],
-                'specification' => $params['specification'],
-                'benefit' => $params['benefit'],
-                'preserve' => $params['preserve'],
-                'note' => $params['note'],
-                'image'=>$image,
-               'feature'=>$feature,
-                 'longs'=>$params['longs'],
-                 'wides'=>$params['wides'],
-                'highs'=>$params['highs'],
-                'mass'=>$params['mass'],
-            ]);
+            $item = self::getItem($params,['task'=>'get-item']);
+            $this->updateFileUpload($item,$params,'albumImage');
+            $params['tick'] = isset($params['tick'])?json_encode($params['tick']): NULL;
+            $params['featurer'] = isset($params['featurer'])?json_encode($params['featurer']): NULL;
+            $params['sell_area'] = ($params['sell_area'] != '')? json_encode($params['sell_area'],JSON_NUMERIC_CHECK ): NULL;
+
+            self::where('id', $params['id'])->update($this->prepareParams($params));
         }
+    }
+    public function catProduct(){
+        return $this->belongsTo('App\Model\Shop\CatProductModel');
     }
     public function deleteItem($params = null, $options = null)
     {
-        if ($options['task'] == 'delete-item') {
-            self::where('id', $params['id'])->delete();
+        if($options['task'] == 'delete-item') {
+           self::where('id', $params['id'])->delete();
         }
-    }
-    public function cat(){
-        return $this->belongsTo('App\Model\Shop\Cat_productModel');
     }
 }

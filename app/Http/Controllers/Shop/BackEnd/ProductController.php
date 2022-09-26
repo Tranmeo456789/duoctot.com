@@ -13,7 +13,6 @@ use App\Model\Shop\CountryModel;
 use App\Http\Requests\ProductRequest as MainRequest;
 use App\Model\Shop\UnitModel;
 use App\Model\Shop\ProvinceModel;
-include "app/Helpers/data.php";
 class ProductController extends BackEndController
 {
     public function __construct()
@@ -56,7 +55,7 @@ class ProductController extends BackEndController
     }
     public function save(MainRequest $request)
     {
-        if (!$request->ajax()) return view("errors." .  'notfound', []);
+       // if (!$request->ajax()) return view("errors." .  'notfound', []);
         if (isset($request->validator) && $request->validator->fails()) {
             return response()->json([
                 'fail' => true,

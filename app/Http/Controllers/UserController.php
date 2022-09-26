@@ -20,7 +20,7 @@ class UserController extends Controller
 {
     public function register(MainRequest $request)
     {
-        if (!$request->ajax())  return redirect()->route('errors/notfound');
+        //if (!$request->ajax())  return redirect()->route('errors/notfound');
 
         if (isset($request->validator) && $request->validator->fails()) {
             return response()->json([
@@ -66,7 +66,7 @@ class UserController extends Controller
 
     public function login(MainRequest $request)
     {
-        if (!$request->ajax())  return redirect()->route('errors/notfound');
+        //if (!$request->ajax())  return redirect()->route('errors/notfound');
         if (isset($request->validator) && $request->validator->fails()) {
             return response()->json([
                 'status' => 200,
