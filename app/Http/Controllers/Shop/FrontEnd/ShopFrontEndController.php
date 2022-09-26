@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Shop\FrontEnd;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Model\Shop\ProvinceModel;
 class ShopFrontEndController extends Controller
 {
     protected $moduleName = 'shop.frontend';
@@ -24,10 +25,12 @@ class ShopFrontEndController extends Controller
         //     ]);
         //     return $next($request);
         // });
+        $itemsProvince = (new ProvinceModel())->listItems(null,['task' => 'admin-list-items-in-selectbox']);
         view()->share([
-            'moduleName'                => $this->moduleName,
-            'controllerName'            => $this->controllerName,
-            'pageTitle'                 => $this->pageTitle
+            'moduleName'     => $this->moduleName,
+            'controllerName' => $this->controllerName,
+            'pageTitle'      => $this->pageTitle,
+            'itemsProvince'  => $itemsProvince
         ]);
     }
 }

@@ -6,9 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
 use Illuminate\Support\Facades\Config;
 use App\Model\Shop\Cat_productModel;
-use App\Model\Shop\ProductModel;
 use App\Model\Shop\Tinhthanhpho;
-use App\Model\Shop\ProvinceModel;
 include "app/Helpers/data_cat.php";
 include "app/Helpers/data.php";
 use App\Helpers\HttpClient;
@@ -27,9 +25,9 @@ class HomeController extends ShopFrontEndController
     public function index()
     {
         $product_covids = ProductModel::inRandomOrder()->limit(8)->get();
-        $itemsProvince = (new ProvinceModel())->listItems(null,['task' => 'admin-list-items-in-selectbox']);
+
         return view($this->pathViewController . 'index',
-                    compact('product_covids','itemsProvince'));
+                    compact('product_covids'));
     }
     public function ajaxcat3(Request $request)
     {
