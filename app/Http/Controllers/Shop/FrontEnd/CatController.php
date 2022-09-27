@@ -10,6 +10,7 @@ use App\Model\Shop\Cat_productModel;
 use App\Model\Shop\Tinhthanhpho;
 use App\Model\Shop\ProductModel;
 include "app/Helpers/data.php";
+
 class CatController extends ShopFrontEndController
 {
     public function __construct()

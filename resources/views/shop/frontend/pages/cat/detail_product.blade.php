@@ -12,11 +12,11 @@
                     <div class="item">
                         <div class="clearfix" style="max-width:474px;">
                             <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
-                                @foreach($img_products as $img_product)
-                                <li data-thumb="{{asset('public/shop/uploads/images/product/'.$img_product)}}">
-                                    <img src="{{asset('public/shop/uploads/images/product/'.$img_product)}}" />
+                                
+                                <li data-thumb="{{asset($productcs['image'])}}">
+                                    <img src="{{asset($productcs['image'])}}"/>
                                 </li>
-                                @endforeach
+                                
                             </ul>
                         </div>
                     </div>
@@ -27,7 +27,11 @@
                     <p class="trademark_product">Thương hiệu: <span class="text-info">{{$productcs['trademark']}}</span></p>
                     <h1>{{$productcs['name']}}</h1>
                     <div class="comment d-flex justify-content-between flex-wrap">
-                        <span class="text-muted">({{$customer_id}})</span>
+                        @if(isset($productcs->customerProduct))
+                        <span class="text-muted">({{sprintf("%08d", $productcs->customerProduct->id)}})</span>
+                        @else
+                        <span class="text-muted"></span>
+                        @endif
                         <div class="position-relative">
                             <span class="star-befor">
                                 <img src="{{asset('images/shop/star.png')}}" alt="">
@@ -43,8 +47,8 @@
                     </div>
                 </div>
                 <div class="desc_product">
-                    <div class="price_product mb-2"><span class="font-weight-bold">{{ number_format( $productcs['price'], 0, "" ,"." )}}/</span>{{$productcs['unit']}}</div>
-                    <p><span class="font-weight-bold bcn">Danh mục: </span><span class="text-info">{{$cat->name}}</span></p>
+                    <div class="price_product mb-2"><span class="font-weight-bold">{{ number_format( $productcs['price'], 0, "" ,"." )}}đ /</span>h</div>
+                    <p><span class="font-weight-bold bcn">Danh mục: </span><span class="text-info">{{$productcs->catProduct->name}}</span></p>
                     <p><span class="font-weight-bold">Dạng bào chế: </span>{{$productcs['dosage_forms']}}</p>
                     <p><span class="font-weight-bold">Quy cách: </span>{{$productcs['specification']}}</p>
                     <p><span class="font-weight-bold">Xuất xứ thương hiệu: </span>{{$productcs['made_country']}}</p>

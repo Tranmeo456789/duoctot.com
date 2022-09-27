@@ -64,7 +64,7 @@
                                         <div class="d-flex">
                                             <div title="" class="thumbperp">
                                                 <div class="rimg-center img-60">
-                                                    <img src="{{asset('public/shop/uploads/images/product/' . $product['image'])}}">
+                                                    <img src="{{asset($product['image'])}}">
                                                 </div>
                                             </div>
                                             <div class="infoperp">

@@ -8,12 +8,10 @@
     @foreach($product_covids as $item)
     <li class="position-relative">
         <a href="{{route('fe.product.detail',$item['id'])}}">
-            @php
-            $img_product = explode(',', $item['image']);
-            @endphp
+           
             <div class="d-flex justify-content-center seth-img">
                 <div class="d-flex">
-                    <img src="{{asset('public/shop/uploads/images/product/'.$img_product[0])}}">
+                    <img src="{{asset($item['image'])}}">
                 </div>
             </div>
             <div class="pl-3">

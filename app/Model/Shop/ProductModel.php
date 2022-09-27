@@ -81,13 +81,21 @@ class ProductModel extends BackEndModel
             self::where('id', $params['id'])->update($this->prepareParams($params));
         }
     }
-    public function catProduct(){
-        return $this->belongsTo('App\Model\Shop\CatProductModel');
-    }
     public function deleteItem($params = null, $options = null)
     {
         if($options['task'] == 'delete-item') {
            self::where('id', $params['id'])->delete();
         }
     }
+    public function unitProduct(){
+        return $this->belongsTo('App\Model\Shop\UnitModel');
+    }
+    public function catProduct(){
+        return $this->belongsTo('App\Model\Shop\CatProductModel');
+    }
+    public function customerProduct(){
+        return $this->belongsTo('App\Model\Shop\CustomerModel');
+    }
+    
+    
 }

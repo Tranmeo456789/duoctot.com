@@ -28,7 +28,7 @@
                                             @endphp
                                             <tr>
                                                 <td style="width:20%">
-                                                    <a href="" style="display:block; text-align:center"><img src="{{asset('public/shop/uploads/images/product/' . $row['image'])}}" alt="" style="width: 100px;"></a>
+                                                    <a href="" style="display:block; text-align:center"><img src="{{asset($row['image'])}}" alt="" style="width: 100px;"></a>
                                                 </td>
                                                 <td style="width:50%" class="text-left">
                                                     <div class="title-product-cart">
