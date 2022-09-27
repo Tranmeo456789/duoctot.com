@@ -24,13 +24,13 @@
             </div>
             <div class="col-md-7">
                 <div class="title_product">
-                    <p class="trademark_product">Thương hiệu: <span class="text-info">{{$productcs['trademark']}}</span></p>
+                    <p class="trademark_product">Thương hiệu: <span class="text-info">{{$productcs->trademarkProduct->name}}</span></p>
                     <h1>{{$productcs['name']}}</h1>
                     <div class="comment d-flex justify-content-between flex-wrap">
-                        @if(isset($productcs->customerProduct))
+                        @if(isset($productcs->userProduct))
                         <span class="text-muted">({{sprintf("%08d", $productcs->customerProduct->id)}})</span>
                         @else
-                        <span class="text-muted"></span>
+                        <span class="text-muted">00000000000</span>
                         @endif
                         <div class="position-relative">
                             <span class="star-befor">
@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 <div class="desc_product">
-                    <div class="price_product mb-2"><span class="font-weight-bold">{{ number_format( $productcs['price'], 0, "" ,"." )}}đ /</span>h</div>
+                    <div class="price_product mb-2"><span class="font-weight-bold">{{ number_format( $productcs['price'], 0, "" ,"." )}}đ /</span> {{$productcs->unitProduct->name}}</div>
                     <p><span class="font-weight-bold bcn">Danh mục: </span><span class="text-info">{{$productcs->catProduct->name}}</span></p>
                     <p><span class="font-weight-bold">Dạng bào chế: </span>{{$productcs['dosage_forms']}}</p>
                     <p><span class="font-weight-bold">Quy cách: </span>{{$productcs['specification']}}</p>

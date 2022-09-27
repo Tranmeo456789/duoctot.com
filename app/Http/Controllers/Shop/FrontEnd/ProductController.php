@@ -28,6 +28,8 @@ class ProductController extends ShopFrontEndController
     public function detail_product($id){
         $params['id'] = $id;
         $productcs= $this->model->getItem($params,['task' => 'get-item']);
+        $user=$productcs->trademarkProduct;
+        //return($user);
         return view($this->pathViewController . 'detail_product',compact('productcs'));
     }
 }

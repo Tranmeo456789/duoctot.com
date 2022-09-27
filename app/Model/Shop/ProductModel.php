@@ -90,12 +90,15 @@ class ProductModel extends BackEndModel
     public function unitProduct(){
         return $this->belongsTo('App\Model\Shop\UnitModel','unit_id','id');
     }
+    public function trademarkProduct(){
+        return $this->belongsTo('App\Model\Shop\TrademarkModel','trademark_id','id');
+    }
     public function catProduct(){
         return $this->belongsTo('App\Model\Shop\CatProductModel');
     }
-    public function customerProduct(){
-        return $this->belongsTo('App\Model\Shop\CustomerModel');
-    }
+    // public function userProduct(){
+    //     return $this->belongsTo('App\Model\Shop\UsersModel','user_id','id');
+    // }
 
 
 }

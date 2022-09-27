@@ -336,7 +336,7 @@
                                 </small> -->
                     </div>
                     <div class="cmoder">
-                        @if(Session::has('islogin'))
+                        @if(Session::has('user'))
                         <button value="1" class="complete_order">HOÀN TẤT ĐẶT HÀNG</button>
                         @else
                         <span class="order-noislogin">HOÀN TẤT ĐẶT HÀNG</span>

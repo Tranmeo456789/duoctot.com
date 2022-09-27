@@ -32,10 +32,10 @@
             </div>
             <div class="pl-3">
                 <p class="truncate2">{{$item['name']}}</p>
-                <span class="text-info">{{$item['price']}}/{{$item['unit']}}</span></span>
+                <span class="text-info">{{$item['price']}}/{{$item->unitProduct->name}}</span></span>
             </div>
         </a>
-        <div class="unit-top">{{$item['unit']}}</div>
+        <div class="unit-top">{{$item->unitProduct->name}}</div>
     </li>
     @endforeach
 </ul>

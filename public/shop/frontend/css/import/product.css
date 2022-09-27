@@ -345,6 +345,7 @@
     border: 1px solid #B0C1DB;
     border-radius: 15px;
     padding: 0px 0px;
+    align-self: center;
 }
 
 .content-detail-product table {

@@ -24,11 +24,11 @@
                         </tr>
                         <tr class="bb_order">
                             <td style="width: 30%">Họ và tên người đặt</td>
-                            <td style="width: 70%" class='name'>{{$customer['name']}}</td>
+                            <td style="width: 70%" class='name'>{{$orders[0]['name']}}</td>
                         </tr>
                         <tr class="bb_order pb-1">
                             <td style="width: 30%">Số điện thoại người đặt</td>
-                            <td style="width: 70%" class='name'>{{$customer['phone']}}</td>
+                            <td style="width: 70%" class='name'>{{$orders[0]['phone']}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -77,11 +77,9 @@
                         $index=0;
                         @endphp
                         @foreach($ls_product_order as $product)
-                        @php
-                        $img_product = explode(',', $product['image']);
-                        @endphp
+                       
                         <tr class="bb_order">
-                        <td style="width: 10%" class='name'><div class="rimg-center img-60"><div><img src="{{asset('public/shop/uploads/images/product/'.$img_product[0])}}" alt=""></div></div></td>
+                        <td style="width: 10%" class='name'><div class="rimg-center img-60"><div><img src="{{asset($product['image'])}}" alt=""></div></div></td>
                             <td style="width: 48%">
                                 <div class="d-flex">
                                     <p class="namep-order">{{$product['name']}}</p>

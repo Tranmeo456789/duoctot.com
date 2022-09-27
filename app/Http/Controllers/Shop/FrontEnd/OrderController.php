@@ -33,21 +33,22 @@ class OrderController extends ShopFrontEndController
     }
     public function completed(Request $request)
     {
-        if (Session::has('islogin')) {
-            $id = Session::get('id');
-            $customer = CustomerModel::find($id);
-        }
-        $mail = $request->input('email');
-        if (!empty($mail)) {
-            CustomerModel::where('id', $id)->update([
-                'email' => $mail
-            ]);
-        }
-        CustomerModel::where('id', $id)->update([
-            'gender' => $request->input('gender'),
-            'name' => $request->input('name'),
-            'phone' => $request->input('phone'),
-        ]);
+        // if (Session::has('islogin')) {
+        //     $id = Session::get('id');
+        //     $customer = CustomerModel::find($id);
+        // }
+        // $mail = $request->input('email');
+        // if (!empty($mail)) {
+        //     CustomerModel::where('id', $id)->update([
+        //         'email' => $mail
+        //     ]);
+        // }
+        // CustomerModel::where('id', $id)->update([
+        //     'gender' => $request->input('gender'),
+        //     'name' => $request->input('name'),
+        //     'phone' => $request->input('phone'),
+        // ]);
+        //return(Session::get('user')['user_id']);
         $order_id_last = OrderModel::latest('id')->first();
         if (OrderModel::latest('id')->first() == null) {
             $order_id_last['id'] = 0;
@@ -78,7 +79,7 @@ class OrderController extends ShopFrontEndController
         $local = $ward . ',' . $district . ',' . $local1;
         OrderModel::create([
             'code_order' =>  $code_order,
-            'customer_id' =>  (int)$id,
+            //'customer_id' =>  11,
             'total' =>  $total,
             'qty_total' =>  $qty,
             'qty_per' =>  $list_qty,
