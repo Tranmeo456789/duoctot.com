@@ -113,7 +113,7 @@
                     <td style="width: 13%">{{$product->code}}</td>
                     <td style="width: 22%" class="font-weight-bold">{{$product->name}}</td>
                     <td style="width: 10%">
-                        <div class="rimg-center img-60"><img src="{{asset('public/shop/uploads/images/product/'.$img_product[0])}}" alt=""></div>
+                        <div class="rimg-center img-60"><img src="{{asset($product['image'])}}" alt=""></div>
                     </td>
                     <td style="width: 10%">{{ number_format( $product['price'], 0, "" ,"." )}}đ</td>
                     <td style="width: 12%" class="text-center">{{$list_qty[$index]}}</td>
