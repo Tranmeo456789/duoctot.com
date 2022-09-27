@@ -48,7 +48,7 @@
                     <ul>   
                     @if(!empty($product))         
                         <li class="d-flex">
-                            <div class="rimg-center"><img src="{{asset('public/shop/uploads/images/product/'.$img[0])}}" alt=""></div>
+                            <div class="rimg-center"><img src="{{asset($product['image'])}}" alt=""></div>
                             <div class="rightcnb">
                                 <a href="" class="truncate2">{{$product['name']}}</a>
                                 <h3 class="my-2">{{ number_format( $product['price'], 0, "" ,"." )}}đ/{{$product['unit']}}</h3>
@@ -66,7 +66,7 @@
                     @if(!empty($product))
                         <li class="text-center">
                             <a href="{{route('fe.product.detail',$product->id)}}">
-                                <img src="{{asset('public/shop/uploads/images/product/'.$img[0])}}" alt="">
+                                <img src="{{asset($product['image'])}}" alt="">
                                 <div class="">
                                     <a href="{{route('fe.product.detail',$product->id)}}" class="truncate2">{{$product['name']}}</a>
                                     <h3 class="my-2">{{ number_format( $product['price'], 0, "" ,"." )}}đ/{{$product['unit']}}</h3>

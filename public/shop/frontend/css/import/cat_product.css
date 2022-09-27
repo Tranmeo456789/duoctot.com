@@ -172,21 +172,30 @@
 }
 
 .product-of-cat .title-cat {
-    margin-bottom: 21px;
+    margin-bottom: 20px;
+    align-self: center;
 }
-
+.fitter-wp{
+    align-self: center;
+}
 .product-of-cat .title-cat h1 {
     font-size: 22px;
     line-height: 27px;
     color: #1E1E1E;
     font-weight: bold;
+    margin-bottom: 0px;
 }
 
 .product-of-cat .title-cat .icon-cat-product {
     background: #05AFE3;
-    padding: 5px 7px 0px 7px;
     border-radius: 50%;
-    margin-right: 15px;
+    margin-right: 10px;
+    padding: 6px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .product-of-cat .body-cat-product>ul>li {

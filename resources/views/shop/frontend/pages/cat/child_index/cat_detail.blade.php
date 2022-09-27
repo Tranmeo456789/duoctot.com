@@ -12,7 +12,7 @@
                     <a href="">
                         <div class="itemct4">
                             <div class="rimg-center5">
-                                <img src="{{asset('public/shop/uploads/images/product/'.$catp2['image'])}}" alt="">
+                                <img src="{{asset($catp2['image'])}}" alt="">
                             </div>
                             <div class="align-self-center"><span>{{$catp2['name']}}</span> </div>
                         </div>

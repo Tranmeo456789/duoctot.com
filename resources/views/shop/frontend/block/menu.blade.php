@@ -181,7 +181,7 @@
                     <div class="position-relative ">
                         <ul id="main-menu" class="d-flex list-item">
                             @foreach ($_SESSION['cat_product'] as $item_cat1)
-                            @if($item_cat1['parent_id']==0)
+                            @if($item_cat1['parent_id']==1)
                             <li class="catc1" data-id="{{$item_cat1['id']}}">
                                 <a href="{{route('fe.cat',$item_cat1->slug)}}" data-id="{{$item_cat1['id']}}" class="cat1name">
                                     {{$item_cat1['name']}}
@@ -197,7 +197,7 @@
                                                     <div class="himg-menu">
                                                         <div class="d-flex">
                                                             <div class="d-flex align-items-center pl-2">
-                                                                <div class="rdimg rimg-centerw"><img src="{{asset('public/shop/uploads/images/product/'.$item_sub_menu1['image'])}}" alt=""></div>
+                                                                <div class="rdimg rimg-centerw"><img src="{{asset($item_sub_menu1['image'])}}" alt=""></div>
                                                             </div>
                                                             <a href="{{route('fe.cat2',[$item_cat1->slug,$item_sub_menu1->slug])}}" title="" class="titlec2">{{$item_sub_menu1['name']}}</a>
                                                         </div>

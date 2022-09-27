@@ -40,7 +40,6 @@
             function() {
                 var id_cat1 = $(this).attr('data-id');
                 var _token = $('input[name="_token"]').val();
-                //alert(id_cat1);
                 $.ajax({
                     url: "{{route('ajaxcat1')}}",
                     method: 'GET',
@@ -50,10 +49,9 @@
                         _token: _token
                     },
                     success: function(data) {
-                        console.log(data.test);
+                        //console.log(data.test);
                         $('ul.body_catdetail').html(data['list_cat']);
                         $('.list-productmn').html(data['list_product']);
-                       
                         $('.sub-menu1>li').removeClass('active-menucat2');
                         $('.sub-menu1>li:first-child').addClass('active-menucat2');
                     },

@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
 use App\Model\Shop\Cat_productModel;
+use App\Model\Shop\CatProductModel;
 use App\Model\Shop\CustomerModel;
 use App\Model\Shop\ProductModel;
 use App\Model\Shop\Tinhthanhpho;
@@ -25,7 +26,7 @@ class CartController extends ShopFrontEndController
         $this->pathViewController = "$this->moduleName.pages.$this->controllerName.";
         $this->pageTitle          = 'Giỏ hàng';
         parent::__construct();
-        $data = Cat_productModel::all();
+        $data = CatProductModel::all();
         $_SESSION['local'] = $local = Tinhthanhpho::all();
 
         $_SESSION['cat_product'] = $catps = data_tree1($data, 0);

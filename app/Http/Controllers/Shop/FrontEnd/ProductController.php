@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Model\Shop\Cat_productModel;
+use App\Model\Shop\CatProductModel;
 use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
 
 use App\Model\Shop\ProductModel as MainModel;
@@ -21,7 +22,7 @@ class ProductController extends ShopFrontEndController
         $this->pageTitle          = 'Chi tiết sản phẩm';
         $this->model = new MainModel();
         parent::__construct();
-        $data = Cat_productModel::all();
+        $data = CatProductModel::all();
         $_SESSION['local']=$local=Tinhthanhpho::all();
         $_SESSION['cat_product']= $catps = data_tree1($data, 0);
     }
