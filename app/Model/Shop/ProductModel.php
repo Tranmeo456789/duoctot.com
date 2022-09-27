@@ -88,7 +88,7 @@ class ProductModel extends BackEndModel
         }
     }
     public function unitProduct(){
-        return $this->belongsTo('App\Model\Shop\UnitModel');
+        return $this->belongsTo('App\Model\Shop\UnitModel','unit_id','id');
     }
     public function catProduct(){
         return $this->belongsTo('App\Model\Shop\CatProductModel');
@@ -96,6 +96,6 @@ class ProductModel extends BackEndModel
     public function customerProduct(){
         return $this->belongsTo('App\Model\Shop\CustomerModel');
     }
-    
-    
+
+
 }

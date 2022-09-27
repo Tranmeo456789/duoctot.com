@@ -4,6 +4,7 @@
     </div>
     <div class="pl-3 text-center">
         <p>{{$item['name']}}</p>
-        <span class="text-info">{{$item['price']}}/{{$item['unit']}}</span>
+
+        <span class="text-info">{{$item['price']}}/{{$item->unitProduct->name}}</span>
     </div>
 </a>

@@ -3,7 +3,7 @@
     <img src="{{asset('images/shop/' .  $item['image'] )}}" alt="" srcset=""></div>
     <div class="pl-3">
         <p>{{$item['name']}}</p>
-        <span class="text-info">{{$item['price']}}/{{$item['unit']}}</span></span>
+        <span class="text-info">{{$item['price']}}/{{$item->unitProduct->name}}</span></span>
     </div>
 </a>
-<div class="unit-top">{{$item['unit']}}</div>
+<div class="unit-top">{{$item->unitProduct->name}}</div>
