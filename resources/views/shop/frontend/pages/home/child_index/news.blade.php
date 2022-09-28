@@ -15,11 +15,12 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-6 col-lg-12 news-content-left">
+        <div class="col-xl-6 col-lg-12 px-0">
+            <div class="news-content-left">
             <ul class="list-unstyled">
                 <li class="d-flex">
                     <img src="{{asset('images/shop/news3.png')}}" alt="">
-                    <div class="px-3">
+                    <div class="nctright">
                         <a class="title-new-left">Tiêm Rãnh Cười Có Hại Không? Có Những Phương Pháp Xóa Rãnh Cười</a>
                         <div class="text-mute d-flex">
                             <img src="{{asset('images/shop/oclock.png')}}" alt="">
@@ -33,7 +34,7 @@
                 </li>
                 <li class="d-flex">
                     <img src="{{asset('images/shop/news4.png')}}" alt="">
-                    <div class="px-3">
+                    <div class="nctright">
                         <a class="title-new-left">Siêu âm đầu dò bị chảy máu có đáng ngại không?</a>
                         <div class="text-mute d-flex">
                             <img src="{{asset('images/shop/oclock.png')}}" alt="">
@@ -47,7 +48,7 @@
                 </li>
                 <li class="d-flex">
                     <img src="{{asset('images/shop/news5.png')}}" alt="">
-                    <div class="px-3">
+                    <div class="nctright">
                         <a class="title-new-left">Tổng quan về phương pháp tiêm rãnh cười</a>
                         <div class="text-mute d-flex">
                             <img src="{{asset('images/shop/oclock.png')}}" alt="">
@@ -61,7 +62,7 @@
                 </li>
                 <li class="d-flex">
                     <img src="{{asset('images/shop/news6.png')}}" alt="">
-                    <div class="px-3">
+                    <div class="nctright">
                         <a class="title-new-left">FPL Long Châu thu cũ đổi mới mmieenx phí 10.000 máy đo đường huyết</a>
                         <div class="text-mute d-flex">
                             <img src="{{asset('images/shop/oclock.png')}}" alt="">
@@ -74,6 +75,8 @@
                     </div>
                 </li>
             </ul>
+            </div>
+            
         </div>
     </div>
 </div>

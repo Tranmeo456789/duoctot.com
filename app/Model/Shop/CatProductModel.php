@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Model\Shop\BackEndModel;
 use Illuminate\Support\Str;
 use Kalnoy\Nestedset\NodeTrait;
+use App\Model\Shop\ProductModel;
 use DB;
 class CatProductModel extends BackEndModel
 {
@@ -19,51 +20,52 @@ class CatProductModel extends BackEndModel
         $result = null;
         $result = null;
 
-        if($options['task'] == "admin-list-items") {
+        if ($options['task'] == "admin-list-items") {
             $query = self::withDepth()
-                        ->having('depth','>',0)
-                        ->defaultOrder();
+                ->having('depth', '>', 0)
+                ->defaultOrder();
 
             $query = $query->get()
-                            ->toFlatTree();
+                ->toFlatTree();
 
             $result = $query;
         }
-        if($options['task'] == "admin-list-items-in-selectbox-quan-ly") {
-            $query= self::select('id','name')
-                        ->withDepth()->defaultOrder();
-            if (isset($params['id'])){
+        if ($options['task'] == "admin-list-items-in-selectbox-quan-ly") {
+            $query = self::select('id', 'name')
+                ->withDepth()->defaultOrder();
+            if (isset($params['id'])) {
                 $currNode = self::find($params['id']);
-                $query= self::select('id','name')
-                            ->where('_lft','<',$currNode->_lft)
-                            ->orWhere('_lft','>',$currNode->_rgt);
+                $query = self::select('id', 'name')
+                    ->where('_lft', '<', $currNode->_lft)
+                    ->orWhere('_lft', '>', $currNode->_rgt);
             }
-          //  $query->OfGetChild();
+            //  $query->OfGetChild();
             $nodes = $query->get()->toFlatTree();
             // $parentDepth = \Auth::user()->getCurrentToChuc()->depth;
             foreach ($nodes as $value) {
-                $result[$value['id']] = str_repeat(config('myconfig.template.char_level'),$value['depth']) . $value['name'];
+                $result[$value['id']] = str_repeat(config('myconfig.template.char_level'), $value['depth']) . $value['name'];
             }
         }
-        if($options['task'] == "admin-list-items-in-selectbox") {
-            $query= self::select('id','name')
-                        ->withDepth()->defaultOrder()
-                        ->where('id','<>',1);
+        if ($options['task'] == "admin-list-items-in-selectbox") {
+            $query = self::select('id', 'name')
+                ->withDepth()->defaultOrder()
+                ->where('id', '<>', 1);
             $nodes = $query->get()->toFlatTree();
             foreach ($nodes as $value) {
-                $result[$value['id']] = str_repeat(config('myconfig.template.char_level'),$value['depth']-1) . $value['name'];
+                $result[$value['id']] = str_repeat(config('myconfig.template.char_level'), $value['depth'] - 1) . $value['name'];
             }
         }
         return $result;
     }
-    public function countItems($params = null, $options  = null) {
+    public function countItems($params = null, $options  = null)
+    {
 
         $result = null;
 
-        if($options['task'] == 'admin-count-items-group-by-status') {
+        if ($options['task'] == 'admin-count-items-group-by-status') {
             $query = $this::groupBy('status')
-                        ->select(DB::raw('status , COUNT(id) as count') )
-                        ->where('id','<>',1);
+                ->select(DB::raw('status , COUNT(id) as count'))
+                ->where('id', '<>', 1);
 
             $result = $query->get()->toArray();
         }
@@ -88,15 +90,15 @@ class CatProductModel extends BackEndModel
             $params['created_by'] = \Session::get('user')['user_id'];
 
             $parent = self::find($params['parent_id']);
-            self::create($this->prepareParams($params),$parent);
+            self::create($this->prepareParams($params), $parent);
         }
 
-        if($options['task'] == 'edit-item') {
+        if ($options['task'] == 'edit-item') {
             $this->setModifiedHistory($params);
             $params['slug'] =  Str::slug($params['name']);
             $params['updated_by'] = \Session::get('user')['user_id'];
             $parent = self::find($params['parent_id']);
-            $query = $current= self::find($params['id']);
+            $query = $current = self::find($params['id']);
             $query->update($this->prepareParams($params));
             if ($current->parent_id != $params['parent_id']) $query->prependToNode($params)->save();
         }
@@ -107,22 +109,25 @@ class CatProductModel extends BackEndModel
             self::where('id', $params['id'])->delete();
         }
     }
-    public function move($params = null, $options = null) {
+    public function move($params = null, $options = null)
+    {
         $this->setModifiedHistory($params);
         $params['updated_by'] = \Session::get('user')['user_id'];
         $node = self::find($params['id']);
-        self::where('id',$params['id'])
+        self::where('id', $params['id'])
             ->update(
-                    ['updated_at'=>$params['updated_at'],
-                    'updated_by'=> $params['updated_by']
-            ]);
-        if ($params['type']=='down') $node->down();
-        if ($params['type']=='up') $node->up();
+                [
+                    'updated_at' => $params['updated_at'],
+                    'updated_by' => $params['updated_by']
+                ]
+            );
+        if ($params['type'] == 'down') $node->down();
+        if ($params['type'] == 'up') $node->up();
     }
 
-    public function products(){
+    public function products()
+    {
         return $this->hasMany('App\Model\Shop\ProductModel');
     }
-
-
+   
 }

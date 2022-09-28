@@ -278,7 +278,10 @@
     .btnnk-respon {
         margin-top: 20px;
     }
-
+    .newsh .news-content-left {
+        padding-top: 6px;
+        padding-left: 0px;
+    }
     .btn-buy-search .btn-select-buy {
         padding: 6px 20px;
     }
@@ -599,6 +602,9 @@
 }
 
 @media screen and (max-width: 600px) {
+    .nctright {
+        padding-left: 0px;
+    }
     .service-tdoctor img {
         width: 30px;
         height: 30px;

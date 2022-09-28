@@ -2,7 +2,7 @@
 
 <ul class="clearfix list-unstyled">
     @foreach ($_SESSION['cat_product'] as $item_sub_menu1)
-    @if($item_sub_menu1['level'] == 1)
+    @if($item_sub_menu1['level'] == 2)
     @php
         foreach($_SESSION['cat_product'] as $cat1){
             if($item_sub_menu1['parent_id']==$cat1['id'])
@@ -13,10 +13,10 @@
     <li>
         <a href="{{route('fe.cat2',[$item_cat1->slug,$item_sub_menu1->slug])}}">
             <div class="d-flex justify-content-center">
-                <div class="image-60"><img src="{{asset('public/shop/uploads/images/product/'.$item_sub_menu1['image'])}}"></div>
+                <div class="image-60"><img src="{{asset($item_sub_menu1['image'])}}"></div>
             </div>
             <p>{{$item_sub_menu1['name']}}</p>
-            <h2>12 SẢN PHẨM</h2>
+            <h2>{{count(product_of_cat($item_sub_menu1['id']))}} SẢN PHẨM</h2>
         </a>
     </li>
     @endif
