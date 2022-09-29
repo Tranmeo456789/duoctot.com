@@ -4,10 +4,10 @@
             <a href="{{route('home')}}" title="">Trang chủ</a>
         </li>
         <li>
-            <a href="" title="">Thực phẩm chức năng</a>
+            <a href="" title="">{{parent_cat($catc1->id)->name}}</a>
         </li>
         <li>
-            <a href="" title="">Sinh lý - Nội tiết tố</a>
+            <a href="" title="">{{$catc1['name']}}</a>
         </li>
     </ul>
 </div>

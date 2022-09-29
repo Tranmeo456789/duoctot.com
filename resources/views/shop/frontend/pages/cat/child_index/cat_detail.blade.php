@@ -3,13 +3,14 @@
         <div class="roud25b-img"><img src="{{asset('images/shop/Cntn.png')}}" alt=""></div>
         <span>{{$catc1['name']}}</span>
     </div>
-    <ul class="body_catdetail">
+    
+    <ul class="body_catdetail1">
         <div class="row">
         @foreach($_SESSION['cat_product'] as $catp2)
         @if($catc1['id']==$catp2['parent_id'])
             <div class="col-lg-3 col-xl-3 col-6 delplcol">
                 <li class="py-2">
-                    <a href="">
+                    <a href="{{route('fe.cat3',[parent_cat($catc1->id)->slug,$catc1->slug,$catp2->slug])}}">
                         <div class="itemct4">
                             <div class="rimg-center5">
                                 <img src="{{asset($catp2['image'])}}" alt="">

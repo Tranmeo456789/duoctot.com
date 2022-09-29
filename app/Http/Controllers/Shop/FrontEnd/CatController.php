@@ -29,26 +29,23 @@ class CatController extends ShopFrontEndController
     {
         $catcs = CatProductModel::where('slug', $slug)->get();
         $catc = $catcs[0];
-        return view($this->pathViewController . 'index', compact('catc'));
+        $products=product_of_cat($catc->id);
+        return view($this->pathViewController . 'index', compact('catc','products'));
     }
     public function cat_level2($slug, $slug1)
-    {
+    {      
+        
         $catc1s = CatProductModel::where('slug', $slug1)->get();
         $catc1 = $catc1s[0];
-        return view($this->pathViewController . 'cat_productlevel3', compact('catc1'));
+        //return(parent_cat($catc1->id)->name);
+        $products=product_of_cat($catc1->id);
+        return view($this->pathViewController . 'cat_productlevel3', compact('catc1','products'));
     }
     public function cat_level3($slug, $slug1, $slug2)
     {
         $cat2cs = CatProductModel::where('slug', $slug2)->get();
-        $products = ProductModel::where('cat_product_id', $cat2cs[0]['id'])->get();
-        if ($products->count() > 0) {
-            $product = $products[0];
-            $img = explode(",", $product->image);
-        } else {
-            $product = [];
-            $img = [];
-        }
         $catc2 = $cat2cs[0];
-        return view($this->pathViewController . 'cat_productlevel4', compact('catc2', 'product', 'img'));
+        $products=product_of_cat($catc2->id);
+        return view($this->pathViewController . 'cat_productlevel4', compact('catc2', 'products'));
     }
 }

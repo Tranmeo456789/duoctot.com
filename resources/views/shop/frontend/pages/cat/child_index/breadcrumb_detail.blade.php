@@ -4,13 +4,13 @@
             <a href="" title="">Trang chủ</a>
         </li>
         <li>
-            <a href="" title="">Thực phẩm chức năng</a>
+            <a href="" title="">{{parent_cat($productcs->catProduct->id,2)->name}}</a>
         </li>
         <li>
-            <a href="" title="">Sinh lý - Nội tiết tố</a>
+            <a href="" title="">{{parent_cat($productcs->catProduct->id)->name}}</a>
         </li>
         <li>
-            <a href="" title="">Sức khỏe tình dục</a>
+            <a href="" title="">{{$productcs->catProduct->name}}</a>
         </li>
     </ul>
 </div>

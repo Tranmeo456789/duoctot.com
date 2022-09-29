@@ -278,16 +278,22 @@
     .btnnk-respon {
         margin-top: 20px;
     }
+
     .newsh .news-content-left {
         padding-top: 6px;
         padding-left: 0px;
     }
+
     .btn-buy-search .btn-select-buy {
         padding: 6px 20px;
     }
 
     .wp-inner {
         max-width: 900px;
+    }
+
+    .cart-null {
+        width: 93vw;
     }
 
     .service-tdoctor li:last-child {
@@ -350,60 +356,77 @@
     .table-responsive {
         overflow-x: scroll;
     }
+
     .form-login {
         width: 93vw;
         border-radius: 10px;
 
     }
-    .form-login .header .titlek{
+
+    .form-login .header .titlek {
         border-radius: 10px 0px 0px;
     }
 
-.form-login .header a{
-    font-size: 18px;
-}
-.form-input-group .form-group input[type="radio"] {
-    width: 15px;
-    height: 15px;
-    margin-right: 5px;
-}
-.form-login .remember-login label{
-    font-size: 14px;
-}
-.form-login .form-group input[type='radio']+label {
-    font-size: 14px;
-}
-.form-login .remember-login input {
-    width: 15px;
-    height: 15px;
-    margin-right: 5px;
-}
-.form-login input::placeholder{
-    font-size: 14px;
-}
-#user_login{
-    margin-bottom: 15px;
-}
-#dang-ky #btn-register{
-    padding: 6px 30px;font-size: 18px;
-}
-.form-login #btn-logint {
-    padding: 6px 30px;font-size: 18px;
-}
-.form-login .header a{
-    padding: 9px;
-}
-.btn-closenk {
-    width: 40px;
-    height: 40px;
-    border-radius: 0px 10px 0px 0px;
-}
-.text-member{
-    display: none;
-}
-.form-login .header .titlek{
-    flex-grow: 0;
-}
+    .form-login .header a {
+        font-size: 18px;
+    }
+
+    .form-input-group .form-group input[type="radio"] {
+        width: 15px;
+        height: 15px;
+        margin-right: 5px;
+    }
+
+    .form-login .remember-login label {
+        font-size: 14px;
+    }
+
+    .form-login .form-group input[type='radio']+label {
+        font-size: 14px;
+    }
+
+    .form-login .remember-login input {
+        width: 15px;
+        height: 15px;
+        margin-right: 5px;
+    }
+
+    .form-login input::placeholder {
+        font-size: 14px;
+    }
+
+    #user_login {
+        margin-bottom: 15px;
+    }
+
+    #dang-ky #btn-register {
+        padding: 6px 30px;
+        font-size: 18px;
+    }
+
+    .form-login #btn-logint {
+        padding: 6px 30px;
+        font-size: 18px;
+    }
+
+    .form-login .header a {
+        padding: 9px;
+    }
+
+    .btn-closenk {
+        width: 40px;
+        height: 40px;
+        border-radius: 0px 10px 0px 0px;
+    }
+
+    .text-member {
+        display: none;
+    }
+
+    .form-login .header .titlek {
+        flex-grow: 0;
+    }
+
     .set-widthtable {
         width: 800px;
     }
@@ -605,13 +628,25 @@
     .nctright {
         padding-left: 0px;
     }
+    .cart-null h1{
+        font-size: 16px;
+    }
+    .cart-null a {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 8px 20px;
+        font-size: 16px;
+        line-height: 10px;               
+    }
     .service-tdoctor img {
         width: 30px;
         height: 30px;
     }
+
     .form-input-group .form-group .select2 {
-        width: 84%!important;
+        width: 84% !important;
     }
+
     .wp-left-cart .title-cart h1 {
         font-size: 18px;
     }

@@ -31,38 +31,38 @@
 </div>
 <div class="body-nb">
     <ul>
-        <li class="d-flex">
-            <div class="rimg-center"><img src="{{asset('images/shop/sri1.png')}}" alt=""></div>
-            <div class="rightcnb">
-                <a href="">Siro Bổ Phế Bối Mẫu Forte Mom And Baby...</a>
-                <h3 class="my-2">49.000đ/Chai</h3>
-                <a class="noteheth">Sức khỏe hô hấp</a>
-                <p>Dạng bào chế: Dung dịch</p>
-                <p>Thành phần: Tô điệp</p>
-            </div>
-        </li>
-       
-    </ul>
-    <div class="view-addpr text-center"><a href="">Xem thêm 500 sản phẩm <i class="fas fa-angle-down"></i></a></div>
-</div>
-
-<div id="body-nbox">
-    <ul class="clearfix">
-
-        <li class="text-center">
-            <a href="">
-                <img src="{{asset('images/shop/sri1.png')}}" alt="">
-                <div class="">
-                    <a href="">Siro Bổ Phế Bối Mẫu Forte Mom And Baby...</a>
-                    <h3 class="my-2">49.000đ/Chai</h3>
-                    <a class="">Sức khỏe hô hấp</a>
-                    <p>Dạng bào chế: Dung dịch</p>
+        @foreach($products as $item)
+        <li>
+            <a href="{{route('fe.product.detail',$item['id'])}}" class="d-flex">
+                <div class="rimg-center1"><img src="{{asset($item['image'])}}" alt=""></div>
+                <div class="rightcnb">
+                    <p class="truncate2 nb-name-product">{{$item['name']}}</p>
+                    <h3>{{ number_format( $item['price'], 0, "" ,"." )}}đ / {{$item->unitProduct->name}}</h3>
+                    <p class="noteheth">{{$item->catProduct->name}}</p>
+                    <p>Dạng bào chế: {{$item['dosage_forms']}}</p>
                     <p>Thành phần: Tô điệp</p>
                 </div>
             </a>
-
         </li>
-       
+        @endforeach
     </ul>
-    <div class="view-addpr text-center mt-2"><a href="">Xem thêm 500 sản phẩm <i class="fas fa-angle-down"></i></a></div>
 </div>
+<div id="body-nbox">
+    <ul class="clearfix">
+    @foreach($products as $item)
+        <li class="text-center">
+            <a href="{{route('fe.product.detail',$item['id'])}}">
+                <div class="rdimg"><img src="{{asset($item['image'])}}" alt=""></div>
+                <div class="">
+                    <p class="name-body-nbox truncate2">{{$item['name']}}</p>
+                    <h3 class="my-1">{{ number_format( $item['price'], 0, "" ,"." )}}đ / {{$item->unitProduct->name}}</h3>
+                    <p class="name-body-nbox">{{$item->catProduct->name}}</p>
+                    <p>Dạng bào chế: {{$item['dosage_forms']}}</p>
+                    <p>Thành phần: Tô điệp</p>
+                </div>
+            </a>
+        </li>
+        @endforeach
+    </ul>
+</div>
+<div class="view-addpr text-center mt-2"><a href="">Xem thêm 500 sản phẩm <i class="fas fa-angle-down"></i></a></div>

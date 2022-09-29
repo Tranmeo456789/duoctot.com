@@ -25,10 +25,7 @@
     <li class="position-relative">
         <a href="{{route('fe.product.detail',$item['id'])}}" class="d-block">
             <div class="seth-img">
-                    <div class="p-3">
-                        <img src="{{asset($item['image'])}}">
-                    </div>
-
+                <img src="{{asset($item['image'])}}">
             </div>
             <div class="pl-3">
                 <p class="truncate2">{{$item['name']}}</p>

@@ -28,6 +28,7 @@ ul{
 img {
     max-width: 100%;
     height: auto;
+    max-height: 100%;
 }
 .fl-left{ float: left;}
 .fl-right{ float: right;}
@@ -62,6 +63,14 @@ a:hover{
     background: #05AFE3;
     border-radius: 50%;margin-right: 6px;
 }
+.rdimg{
+    height: 170px;
+    overflow: hidden;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .roud25y-img{
     width: 20px;
     height: 20px;
@@ -74,9 +83,10 @@ a:hover{
 .img-around-180{
     overflow: hidden;
     width: 100%;
-    padding:15px;
+    padding:10px;
     height: 180px;
     display: flex;
+    justify-content: center;
     align-items: center;
 }
 
@@ -107,6 +117,12 @@ a:hover{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.rimg-center1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
 }
 .img-60{
     width: 60px;margin-right: 3px;
@@ -164,9 +180,9 @@ a:hover{
     height: 200px;
     overflow: hidden;
     width: 100%;
-    padding:15px;
-    height: 180px;
+    padding:10px;
     display: flex;
+    justify-content: center;
     align-items: center;
 }
 .rimg-start{

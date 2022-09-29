@@ -260,7 +260,7 @@
             </h3>
             <ul>
                 @foreach ($_SESSION['cat_product'] as $item_cat1)
-                @if($item_cat1['parent_id']==0)
+                @if($item_cat1['parent_id']==1)
                 <li>
                     <div class="container-menures position-relative parentsmenu">
                         <div class=" pr-4">

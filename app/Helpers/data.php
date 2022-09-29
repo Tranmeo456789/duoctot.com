@@ -1,6 +1,8 @@
 <?php
+
 use App\Model\Shop\ProductModel;
 use App\Model\Shop\CatProductModel;
+
 function data_tree1($data, $parent_id = 0, $level = 0)
 {
     $result = [];
@@ -14,7 +16,7 @@ function data_tree1($data, $parent_id = 0, $level = 0)
     }
     return $result;
 }
-function child_cat($data=null, $id=null)
+function child_cat($data = null, $id = null)
 {
     $result = [];
     foreach ($data as $item) {
@@ -27,8 +29,17 @@ function child_cat($data=null, $id=null)
     }
     return $result;
 }
-
-function product_of_cat($id=null)
+function parent_cat($id_child = null, $up_level = 1)
+{
+    $data = CatProductModel::all();
+    $cat_current = CatProductModel::find($id_child);
+    $cat_parent = CatProductModel::find($cat_current->parent_id);
+    for ($i = 1; $i < $up_level; $i++){
+        $cat_parent=parent_cat($cat_parent->id);
+    }
+    return $cat_parent;
+}
+function product_of_cat($id = null)
 {
     $data = CatProductModel::all();
     $list_cat = child_cat($data, $id);
@@ -39,4 +50,3 @@ function product_of_cat($id=null)
     $products = ProductModel::whereIn('cat_product_id', $list_id_cat)->get();
     return ($products);
 }
-

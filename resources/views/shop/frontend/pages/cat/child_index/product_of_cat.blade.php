@@ -11,10 +11,10 @@
         <li class="">
             <div class="d-flex">
                 <div class="item-cat-left text-center">
-                    <a href="">
+                    <a href="{{route('fe.cat2',[$catc->slug,$catp1->slug])}}">
                         <div><img src="{{asset($catp1['image'])}}" alt="" style="width:70%"></div>
                         <h3>{{$catp1['name']}}</h3>
-                        <span>44 sản phẩm</span>
+                        <span>{{count(product_of_cat($catp1['id']))}} sản phẩm</span>
                     </a>
                 </div>
                 @php
@@ -32,7 +32,7 @@
                     <ul>
                         @foreach($_SESSION['cat_product'] as $catp2)
                         @if($catp1['id'] == $catp2['parent_id'])
-                        <li><a href="">{{$catp2['name']}}</a></li>
+                        <li><a href="{{route('fe.cat2',[$catc->slug,$catp1->slug,$catp2->slug])}}">{{$catp2['name']}}</a></li>
                         @endif
                         @endforeach
                     </ul>
@@ -40,7 +40,7 @@
                     <ul class="d-flex flex-wrap">
                         @foreach($_SESSION['cat_product'] as $catp2)
                         @if($catp1['id'] == $catp2['parent_id'])
-                        <li style="width:48%"><a href="">{{$catp2['name']}}</a></li>
+                        <li style="width:48%"><a href="{{route('fe.cat2',[$catc->slug,$catp1->slug,$catp2->slug])}}">{{$catp2['name']}}</a></li>
                         @endif
                         @endforeach
                     </ul>
