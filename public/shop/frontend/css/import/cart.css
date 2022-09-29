@@ -18,7 +18,23 @@
     text-align: center;
     color: #1E1E1E;
 }
-
+.iconcartmenu{
+    position: relative;
+}
+.hrcart{
+    position: relative;
+}
+.black-res-screen{
+    width: 100%;
+    height: 1000px;
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 233;
+    transition: all 0.25s ease-in-out 0s;
+    display: none;
+}
 .wp-left-cart .title-cart {
     border-bottom: 1px solid #B0C1DB;
     padding: 20px;
@@ -387,7 +403,33 @@
     text-align: left;
     font-family: Roboto, Arial;
 }
-
+.dropdown {
+    box-shadow: 0 2px 12px rgb(0 0 0 / 15%);
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    right: 50%;
+    transform: translateX(50%);
+    min-width: 360px;
+    background: #fff;
+    transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -webkit-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    z-index: 1000;
+    color: #334155;
+    padding: 8px 11px;
+    border-radius: 8px;
+    border: 1px solid #d8e0e8;
+    text-align: left;
+    font-family: Roboto, Arial;
+}
+.close-cart{
+    position: absolute;
+    right: -8px;
+    top: -5px;
+    cursor: pointer;
+}
 .complete_order {
     background: #05AFE3;
     border: none;
@@ -445,7 +487,10 @@
     visibility: visible;
     opacity: 1;
 }
-
+.iconcartmenu:hover .dropdown {
+    visibility: visible;
+    opacity: 1;
+}
 .arrow-up {
     position: absolute;
     top: -16px;

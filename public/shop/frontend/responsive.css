@@ -15,14 +15,20 @@
 @media screen and (max-width: 1200px) {
     .body_catdetail>div .delplcol:nth-child(2n) {
         padding-left: 0px !important;
-        ;
     }
-
+    .number_cartmenu{
+        top: -3px;    
+    }
     #head-body-respon {
         display: block;
         transform: translateX(-101%);
     }
-
+    .arrow-up{
+        display: none;
+    }
+    .viewcartmini{
+        padding: 10px 29px;
+    }
     #head-body-respon.slider {
         transform: translateX(0px);
     }
@@ -59,6 +65,7 @@
     #head-top-respon {
         display: block;
         background: #072D94;
+        position: relative;
     }
 
     #head-top {
@@ -284,10 +291,10 @@
         padding-left: 0px;
     }
 
-    .btn-buy-search .btn-select-buy {
-        padding: 6px 20px;
+    .btn-select-buy {
+        padding: 10px 20px;
+        align-self: center;
     }
-
     .wp-inner {
         max-width: 900px;
     }
@@ -783,7 +790,7 @@
     .info-tdoctor {
         display: none;
     }
-
+    
     .slbuy a {
         font-size: 16px;
         padding: 2px 10px;
@@ -816,7 +823,10 @@
     .payment h2 {
         font-size: 16px;
     }
-
+    .dropdown{
+        width: 94vw;
+        min-width: 150px;
+    }
     .payment p {
         font-size: 13px;
     }

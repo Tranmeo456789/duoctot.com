@@ -24,10 +24,10 @@ function isPhoneNumberVN(value) {
     }
     return flag;
 }
-$.validator.methods.checkPhoneOrEmail = function(value, element, param) {
+$.validator.methods.checkPhoneOrEmail = function (value, element, param) {
     return isEmail(value.trim()) || isPhoneNumberVN(value.trim());
 };
-$(document).ready(function() {
+$(document).ready(function () {
     $(".select2").select2();
     $(".user-register").validate({
         rules: {
@@ -52,7 +52,7 @@ $(document).ready(function() {
                 minlength: "Mật khẩu tối thiểu 6 ký tự"
             },
         },
-        errorPlacement: function(error, element) {
+        errorPlacement: function (error, element) {
             // Add the `invalid-feedback` class to the error element
             error.addClass("invalid-feedback");
             element.closest(".input-group").addClass('has-error');
@@ -62,10 +62,10 @@ $(document).ready(function() {
                 error.insertAfter(element.closest(".input-group"));
             }
         },
-        highlight: function(element, errorClass, validClass) {
+        highlight: function (element, errorClass, validClass) {
             $(element).addClass("is-invalid").removeClass("is-valid");
         },
-        unhighlight: function(element, errorClass, validClass) {
+        unhighlight: function (element, errorClass, validClass) {
             $(element).addClass("is-valid").removeClass("is-invalid");
             $(element).closest(".input-group").removeClass('has-error');
         }
@@ -91,7 +91,7 @@ $(document).ready(function() {
                 minlength: "Mật khẩu tối thiểu 6 ký tự"
             },
         },
-        errorPlacement: function(error, element) {
+        errorPlacement: function (error, element) {
             // Add the `invalid-feedback` class to the error element
             error.addClass("invalid-feedback");
             element.closest(".input-group").addClass('has-error');
@@ -101,16 +101,16 @@ $(document).ready(function() {
                 error.insertAfter(element.closest(".input-group"));
             }
         },
-        highlight: function(element, errorClass, validClass) {
+        highlight: function (element, errorClass, validClass) {
             $(element).addClass("is-invalid").removeClass("is-valid");
         },
-        unhighlight: function(element, errorClass, validClass) {
+        unhighlight: function (element, errorClass, validClass) {
             $(element).addClass("is-valid").removeClass("is-invalid");
             $(element).closest(".input-group").removeClass('has-error');
         }
     });
 });
-$(document).on('submit', "#main-form", function(event) {
+$(document).on('submit', "#main-form", function (event) {
     event.preventDefault();
     url = $(this).attr("action");
     method = $(this).attr('method');
@@ -122,7 +122,7 @@ $(document).on('submit', "#main-form", function(event) {
         cache: false,
         contentType: false,
         processData: false,
-        success: function(response) {
+        success: function (response) {
             if (response.success == false) {
                 if (response.error != null) {
                     for (control in response.errors) {
@@ -139,12 +139,12 @@ $(document).on('submit', "#main-form", function(event) {
                 window.location.replace(response.redirect_url);
             }
         },
-        error: function(xhr, textStatus, errorThrown) {
+        error: function (xhr, textStatus, errorThrown) {
             alert("Error: " + errorThrown);
         }
     });
 });
-$(document).on('click', ".changeTypePassword", function(event) {
+$(document).on('click', ".changeTypePassword", function (event) {
     parent = $(this).parents('.form-group');
     parent.toggleClass('open');
     if (parent.hasClass('open')) {
@@ -154,4 +154,9 @@ $(document).on('click', ".changeTypePassword", function(event) {
         parent.find("input[name='password']").attr('type', 'password');
         $(this).html("<i class='fa fa-eye'></i>");
     }
+});
+$(document).on('click', ".close-cart", function (event) {
+    $('.dropdown').css("opacity", 0);
+    $('.dropdown').css("visibility", "hidden");
+    $('.black-res-screen').css("display", "none");
 });

@@ -38,7 +38,7 @@
                 </a>
             </div>
             <div id="cart-load" class="fl-left" style="margin-left:30px;padding-top:15px;">
-                <div class="position-relative iconcartmenu">
+                <div class="iconcartmenu">
                     <a href="{{route('fe.product.cart')}}" title="" id="payment-link" class="">
                         <div class="clearfix icon_cart">
                             <div class="fl-left mr-2">
@@ -52,6 +52,10 @@
                     @if(Session::has('cart'))
                     @if(count(Session::get('cart')) > 0 )
                     <span class="number_cartmenu">{{count(Session::get('cart'))}}</span>
+                    @endif
+                    @endif
+                    @if(Session::has('cart'))
+                    @if(count(Session::get('cart')) > 0 )
                     <div id="dropdown">
                         <div class="position-relative">
                             <span class="arrow-up"><i class="fas fa-sort-up"></i></span>
@@ -151,11 +155,17 @@
                             <div class="rimg-center"><img src="{{asset('images/shop/logo_topbar2.png')}}" alt=""></div>
                         </a></div>
                     <ul class="d-flex align-items-center">
-                        <li class="hrcart"><a href="{{route('fe.product.cart')}}">
+                        <li class="hrcart">
+                            <a href="{{route('fe.product.cart')}}">
                                 <div class="rimg-center">
                                     <img src="{{asset('images/shop/cart.png')}}">
                                 </div>
                             </a>
+                            @if(Session::has('cart'))
+                            @if(count(Session::get('cart')) > 0 )
+                            <span class="number_cartmenu">{{count(Session::get('cart'))}}</span>
+                            @endif
+                            @endif
                         </li>
                         <li class="hruse"><a href="">
                                 <div class="rimg-center"><img src="{{asset('images/shop/mr1.png')}}" alt=""></div>
@@ -173,6 +183,46 @@
                 <div class="rimg-center"></div><img src="{{asset('images/shop/icsp.png')}}" alt="">
             </div>
         </div>
+        @if(Session::has('cart'))
+        @if(count(Session::get('cart')) > 0 )
+        <div class="dropdown">
+            <div class="position-relative">
+                <span class="arrow-up"><i class="fas fa-sort-up"></i></span>
+                <p class="text-success notisucess1"></p>
+                <div class="close-cart"><img src="{{asset('images/shop/dn4.png')}}" alt=""></div>
+                <form action="" method="POST">
+                    {!! csrf_field() !!}
+                    <ul class="listp-cartmini">
+                        @foreach (Session::get('cart') as $product)
+                        <li>
+                            <div class="d-flex">
+                                <div title="" class="thumbperp">
+                                    <div class="rimg-center img-60">
+                                        <img src="{{asset($product['image'])}}">
+                                    </div>
+                                </div>
+                                <div class="infoperp">
+                                    <a href="" title="" class="nameprmn mb-1">{{$product['name']}}</a>
+                                    <div class="clearfix">
+                                        <div class="fl-left">
+                                            <input type="text" value="{{$product['qty']}}" maxlength="3" data-id="{{$product['id']}}" data-rowId="{{$product['rowId']}}" name="qty[{{$product['rowId']}}]" class="numberperp  numberperp{{$product['rowId']}} number-ajax">
+                                        </div>
+                                        <div class="fl-right d-flex">
+                                            <strong class="mb-0 priceperp price-new{{$product['id']}}">{{number_format($product['price']*$product['qty'], 0, ',', '.')}}đ</strong><span> | </span><a href="{{route('fe.cart.delete',$product['rowId'])}}"><span class="deleteperp">Xóa</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        @endforeach
+                    </ul>
+                </form>
+                <div class="text-center"><a href="{{route('fe.product.cart')}}" class="viewcartmini">Xem giỏ hàng</a></div>
+            </div>
+        </div>
+        @endif
+        @endif
+        <div class="black-res-screen"></div>
     </div>
     <div id="head-body">
         <div class="wp-inner" id="category-product-wp">
@@ -283,7 +333,7 @@
                 <li>
                     <div class="container-menures position-relative parentsmenu">
                         <div class=" pr-4">
-                            <a href="">Nhà thuôc</a>
+                            <a href="">Nhà thuốc</a>
                         </div>
                     </div>
                 </li>

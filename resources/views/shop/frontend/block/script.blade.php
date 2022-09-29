@@ -64,22 +64,29 @@
                 $('.sub-menu1>li:first-child .sub-menu2').css("display", "none");
             },
         );
+
+        function reloadpage() {
+            location.reload();
+        }
+
+        function hidden_reloal() {
+            $('#dropdown').css("opacity", 1);
+            $('#dropdown').css("visibility", "visible");
+        }
         $('.btn-select-buy').click(function() {
             $('body,html').stop().animate({
                 scrollTop: 0
             }, 800);
-
-            function hidden_reloal() {
-                $('#dropdown').css("opacity", 1);
-                $('#dropdown').css("visibility", "visible");
+            var with_screen = window.outerWidth;
+            //alert(with_screen);
+            if (with_screen < 1200) {
+                $('.dropdown').css("opacity", 1);
+                $('.dropdown').css("visibility", "visible");
+                $('.black-res-screen').css("display", "block");
+            } else {
+                setTimeout(hidden_reloal, 1000);
+                setInterval(reloadpage, 3000);
             }
-            setTimeout(hidden_reloal, 1000);
-
-            function reloadpage() {
-                location.reload();
-            }
-            setInterval(reloadpage, 3000);
-
             var _token = $('input[name="_token"]').val();
             var number_perp = $('input[name="number_perp"]').val();
             var id_product = $('.seclect-number').attr('data-id');
@@ -367,32 +374,32 @@
             },
 
             //submitHandler: function(form) {
-                // var  _token = $('input[name="_token"]').val();
-                // var gender = $('input[type="radio"][name="gender"]:checked').val();
-                // var name = $('.name').val();
-                // var phone = $('.phone').val();
-                // var email = $('.email').val();
-                // var req_export = $('input[type="checkbox"][name="req_export"]:checked').val();
-                // if(req_export == undefined){
-                //     var req_export='';
-                // }
-                // var local_re = $('input[type="radio"][name="local-re"]:checked').val();
-                // var name2 = $('.name2').val();
-                // var phone2 = $('.phone2').val();city2
-                // var city2 = $('.city2').find(":selected").val();
-                // var district2 = $('.district2').find(":selected").val();
-                // var wards2 = $('.wards2').find(":selected").val();
-                // var addressdetail2 = $('.addressdetail2').val();
-                //alert(addressdetail2);
-                // $.ajax({
-                //     url: "{{route('fe.order.completed')}}",
-                //     method: "POST",
-                //     dataType: 'json',
-                //     data: $(form).serializeArray(),
-                //     success: function(data) {
-                //         console.log(data['test']);
-                //     }
-                // });
+            // var  _token = $('input[name="_token"]').val();
+            // var gender = $('input[type="radio"][name="gender"]:checked').val();
+            // var name = $('.name').val();
+            // var phone = $('.phone').val();
+            // var email = $('.email').val();
+            // var req_export = $('input[type="checkbox"][name="req_export"]:checked').val();
+            // if(req_export == undefined){
+            //     var req_export='';
+            // }
+            // var local_re = $('input[type="radio"][name="local-re"]:checked').val();
+            // var name2 = $('.name2').val();
+            // var phone2 = $('.phone2').val();city2
+            // var city2 = $('.city2').find(":selected").val();
+            // var district2 = $('.district2').find(":selected").val();
+            // var wards2 = $('.wards2').find(":selected").val();
+            // var addressdetail2 = $('.addressdetail2').val();
+            //alert(addressdetail2);
+            // $.ajax({
+            //     url: "{{route('fe.order.completed')}}",
+            //     method: "POST",
+            //     dataType: 'json',
+            //     data: $(form).serializeArray(),
+            //     success: function(data) {
+            //         console.log(data['test']);
+            //     }
+            // });
             //}
         });
     });
