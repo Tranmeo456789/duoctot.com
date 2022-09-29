@@ -410,12 +410,12 @@
     }
 
     .form-login .header a {
-        padding: 9px;
+        padding: 15px 3px;
     }
 
     .btn-closenk {
-        width: 40px;
-        height: 40px;
+        width: 52px;
+        height: 52px;
         border-radius: 0px 10px 0px 0px;
     }
 
@@ -810,7 +810,9 @@
     .wp-left-cart .title-cart h1 {
         font-size: 15px;
     }
-
+    .form-login .dkfn a {
+        font-size: 16px;
+    }
     .payment h2 {
         font-size: 16px;
     }

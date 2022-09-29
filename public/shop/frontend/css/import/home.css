@@ -262,7 +262,7 @@
 }
 
 #selling-product h1 p {
-    font-size: 32px;
+    font-size: 25px;
 }
 
 #selling-product li {
@@ -302,7 +302,8 @@
     background-color: #05AFE3;
     width: 30px;height: 30px;
     display: flex;justify-content: center;align-items: center;
-    margin-right: 15px;
+    margin-right: 10px;
+    padding: 4px;
 }
 #selling-product .icon-product-round img{
     width: 18px;

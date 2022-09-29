@@ -1,7 +1,7 @@
 <div id="feature-product-wp">
-    <div class="mb-3 headf position-relative pl-5">
-        <h1>Bán chạy nhất</h1>
-        <img src="{{asset('images/shop/lua1.png')}}" alt="" srcset="">
+    <div class="mb-3 headf d-flex">
+        <div><img src="{{asset('images/shop/lua1.png')}}" alt=""></div>
+        <h1>Bán chạy nhất</h1>      
     </div>
     <div class="">
         <ul class="list-item">

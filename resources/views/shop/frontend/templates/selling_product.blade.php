@@ -1,6 +1,6 @@
 <h1 class="d-flex mb-5">
     <div class="d-flex align-items-center">
-        <div class="icon-product-round"><img src="{{asset('images/shop/selling1.png')}}" alt="" srcset=""></div>
+        <div class="icon-product-round"><img src="{{asset('images/shop/selling1.png')}}" alt=""></div>
     </div>
     <p>Sản phẩm bán chạy nhất</p>
 </h1>

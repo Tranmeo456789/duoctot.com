@@ -17,11 +17,11 @@ function list_cat2($slugcat1, $slugcat2, $item_submenu2)
 function list_productheader()
 {
     return '<div class="title-product-out d-flex justify-content-between my-3">
-            <div class="title_cathd">
-                <h1>Sản phẩm nổi bật</h1>
-                <img src="' . asset('images/shop/lua4.png') . '">
-            </div>
-            <a href="">Xem tất cả</a>
+                <div class="title_cathd d-flex">
+                    <div><img src="' . asset('images/shop/lua4.png') . '"></div>
+                    <h1>Sản phẩm nổi bật</h1>             
+                </div>
+                <div><a href="">Xem tất cả</a></div>           
             </div>
             <div class="productimenu">
             <ul>

@@ -206,6 +206,7 @@
     color: #1E1E1E;
     font-weight: bold;
     margin-bottom: 0px;
+    align-self: center;
 }
 
 .product-of-cat .title-cat .icon-cat-product {
@@ -278,26 +279,24 @@
 }
 
 .title_cathd {
-    padding-left: 40px;
-    position: relative;
+    /* padding-left: 40px;
+    position: relative; */
 }
 
 .title_cathd h1 {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 25px;
     line-height: 30px;
     color: #1E1E1E;
+    margin-left: 10px;
+    margin-bottom: 0px;
+    align-self: center;
 }
 
 .title_cathd img {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 0px;
-    display: block;
-    width: 32px;
+    width: 32px;height: 32px;
 }
 
 .fitler-respon {
@@ -367,13 +366,16 @@
 .seclect_ol a.ol2.activebtn {
     background: #13508b;
 }
-
-
-.cat-product-out .title-product-out h1 {
-    font-size: 20px;
-    font-weight: bold;
-    font-family: 'Inter';
-    padding-top: 3px;
+.title_catdetail .icon-cat-product{
+    background: #05AFE3;
+    border-radius: 50%;
+    margin-right: 10px;
+    padding: 6px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .cat-product-out .title-product-out .selectpp p {
@@ -573,6 +575,7 @@ input:checked+.slider:before {
     font-size: 22px;
     line-height: 22px;
     color: #1E1E1E;
+    align-self: center;
 }
 
 .cat_detail {
@@ -622,6 +625,7 @@ input:checked+.slider:before {
     padding: 3px 10px 3px 6px;
     border-radius: 30px;
     border: 1px solid #B0C1DB;
+    align-items: center;
 }
 
 .cat_detail .body_catdetail li span {
@@ -674,12 +678,15 @@ input:checked+.slider:before {
     font-size: 24px;
     line-height: 29px;
     color: #FFFFFF;
+    padding-left: 10px;
+    margin-bottom: 0px;
 }
 
 #feature-product-wp .headf img {
-    position: absolute;
+    /* position: absolute;
     top: 0px;
-    left: 0px;
+    left: 0px; */
+    width: 30px;
 }
 
 #feature-product-wp .list-item li {
