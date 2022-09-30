@@ -7,8 +7,8 @@
         @if(count(Session::get('cart')) > 0)
         <div class="cbh1"><a href="{{route('home')}}"><i class="fas fa-angle-left"></i> Tiếp tục mua hàng</a></div>
         <div class="row ">
-            <div class="col-xl-9 col-lg-12 mb-1">
-                <div class="wp-left-cart">
+            <div class="col-xl-9 col-lg-12 mb-1 pd800-0">
+                <div class="wp-left-cart border-radius-800">
                     <div class="title-cart">
                         <h1>Có {{count(Session::get('cart'))}} sản phẩm trong giỏ hàng</h1>
                     </div>
@@ -27,12 +27,12 @@
                                             $total+=$row['price']*$row['qty'];
                                             @endphp
                                             <tr>
-                                                <td style="width:20%">
+                                                <td style="width:10%">
                                                     <a href="" style="display:block; text-align:center"><img src="{{asset($row['image'])}}" alt="" style="width: 100px;"></a>
                                                 </td>
-                                                <td style="width:50%" class="text-left">
+                                                <td style="width:60%" class="text-left">
                                                     <div class="title-product-cart">
-                                                        <a href="">{{$row['name']}}</a>
+                                                        <a href="" class="truncate2">{{$row['name']}}</a>
                                                     </div>
                                                     <span>Đơn vị bán:</span><span class="font-weight-bold">{{$row['unit']}}</span>
                                                     <p class="font-weight-bold">* Giảm ngay 15%</p>
@@ -45,7 +45,7 @@
                                                             <span title="" class="plus1 plus2"><i class="fa fa-plus"></i></span>
                                                         </span>
                                                     </div>
-                                                    <div class="price-old"><s>{{number_format($row['price']+10000,0,',','.')}}đ</s></div>
+                                                    <!-- <div class="price-old"><s>{{number_format($row['price']+10000,0,',','.')}}đ</s></div> -->
                                                     <div class="price-new price-new{{$row['id']}}">{{number_format($row['price']*$row['qty'],0,',','.')}}<span>đ</span></div>
                                                     <div class="manipulation">
                                                         <a href="" class="buy-after"><img src="{{asset('images/shop/ct4.png')}}" alt="">Để mua sau</a>
@@ -299,8 +299,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-lg-12">
-                <div class="info-order">
+            <div class="col-xl-3 col-lg-12 pd800-0">
+                <div class="info-order border-radius-800">
                     <div class="title-order d-flex justify-content-center">
                         <img src="{{asset('images/shop/ode1.png')}}" alt="">
                         <h2 class="">THÔNG TIN ĐƠN HÀNG </h2>

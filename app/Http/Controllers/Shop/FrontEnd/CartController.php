@@ -103,14 +103,19 @@ class CartController extends ShopFrontEndController
         $request->session()->flash('statuscart', notisuccess());
         $list_product = '';
         $list_cartload = '';
+        $list_product_res='';
         $list_cartload .= list_cartloadhed($number_product);
+        $list_product_res.=list_cart_resheader();
         foreach ($request->session()->get('cart') as $product) {
             $list_product .= list_product($product);
         }
         $list_cartload .= $list_product;
+        $list_product_res.=$list_product;
         $list_cartload .= list_cartloadfoter();
+        $list_product_res.=list_cart_resfooter();
         $result = array(
             'list_product' => $list_cartload,
+            'list_product_res'=>$list_product_res,
             'number_product' => $number_product,
             'noti_success' => session('statuscart'),
             'rowId' => $request->session()->get('cart'),

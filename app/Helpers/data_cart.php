@@ -1,8 +1,10 @@
 <?php
-function notisuccess(){
-return '<p class="text-success notisucesscmn"><i class="fas fa-check"></i>Thêm thành công sản phẩm vào giỏ hàng</p>';
+function notisuccess()
+{
+    return '<p class="text-success notisucesscmn"><i class="fas fa-check"></i>Thêm thành công sản phẩm vào giỏ hàng</p>';
 }
-function list_cartloadhed($number_product){
+function list_cartloadhed($number_product)
+{
     return ' <div class="position-relative iconcartmenu">
     <a href="' . route("fe.product.cart") . '" id="payment-link" class="">
         <div class="clearfix icon_cart">
@@ -23,7 +25,8 @@ function list_cartloadhed($number_product){
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                 <ul class="listp-cartmini">';
 }
-function list_product($product){
+function list_product($product)
+{
     return '<li>
     <div class="d-flex">
         <div title="" class="thumbperp">
@@ -32,7 +35,7 @@ function list_product($product){
             </div>
         </div>
         <div class="infoperp">
-            <a href="" title="" class="nameprmn mb-1">' . $product['name'] . '</a>
+            <a href="" title="" class="nameprmn mb-1 truncate2">' . $product['name'] . '</a>
             <div class="clearfix">
                 <div class="fl-left">
                     <input type="text" maxlength="3" value="' . $product['qty'] . '" data-id="' . $product['id'] . '" data-rowId="' . $product['rowId'] . '" name="qty[' . $product['rowId'] . ']" class="numberperp numberperp' . $product['rowId'] . ' number-ajax">
@@ -45,11 +48,29 @@ function list_product($product){
     </div>
 </li>';
 }
-function list_cartloadfoter(){
+function list_cartloadfoter()
+{
     return '</ul>
         </form>
         <div class="text-center"><a href="' . route("fe.product.cart") . '" class="viewcartmini">Xem giỏ hàng</a></div>
         </div>
     </div>
     </div>';
+}
+function list_cart_resheader(){
+    return '<div class="position-relative">
+    <span class="arrow-up"><i class="fas fa-sort-up"></i></span>
+    <p class="text-success notisucess1"></p>
+    <div class="close-cart"><img src="'.asset("images/shop/dn4.png").'" alt=""></div>
+    <form action="" method="POST">
+        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+        <ul class="listp-cartmini">';
+}
+function list_cart_resfooter()
+{
+    return '</ul>
+    </form>
+    <div class="text-center"><a href="' . route("fe.product.cart") . '" class="viewcartmini">Xem giỏ hàng</a></div>
+    <div class="cbh2"><a href="'.route('home').'">Tiếp tục mua hàng</a></div>
+</div>';
 }

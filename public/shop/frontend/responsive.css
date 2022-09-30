@@ -16,6 +16,30 @@
     .body_catdetail>div .delplcol:nth-child(2n) {
         padding-left: 0px !important;
     }
+    .head_topon {
+        display: none;
+    }
+
+    .head_topon_reponsive {
+        display: block;
+        background-image: url(../../images/shop/headbg.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding: 5px 0px;
+    }
+
+    .head_topon_reponsive .tt-respon {
+        text-decoration: underline;
+        font-size: 12px;
+        display: inline;
+        margin-left: 17px;
+        margin-right: 5px;
+    }
+
+    .head_topon_reponsive p {
+        color: red;
+        font-size: 12px;
+    }
     .number_cartmenu{
         top: -3px;    
     }
@@ -363,7 +387,12 @@
     .table-responsive {
         overflow-x: scroll;
     }
-
+    .pd800-0{
+        padding: 0px!important;
+    }
+    .border-radius-800{
+        border-radius: 0px;
+    }
     .form-login {
         width: 93vw;
         border-radius: 10px;
@@ -538,30 +567,7 @@
         width: 40px
     }
 
-    .head_topon {
-        display: none;
-    }
-
-    .head_topon_reponsive {
-        display: block;
-        background-image: url(../../images/shop/headbg.png);
-        background-size: cover;
-        background-repeat: no-repeat;
-        padding: 5px 0px;
-    }
-
-    .head_topon_reponsive a {
-        text-decoration: underline;
-        font-size: 12px;
-        display: inline;
-        margin-left: 17px;
-        margin-right: 5px;
-    }
-
-    .head_topon_reponsive p {
-        color: red;
-        font-size: 12px;
-    }
+    
 
     .info-app {
         display: none;
@@ -823,8 +829,8 @@
     .payment h2 {
         font-size: 16px;
     }
-    .dropdown{
-        width: 94vw;
+    .dropdown_cart{
+        width: 100vw;
         min-width: 150px;
     }
     .payment p {

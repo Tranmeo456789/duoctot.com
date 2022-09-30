@@ -69,9 +69,13 @@
             location.reload();
         }
 
-        function hidden_reloal() {
+        function visible_cart() {
             $('#dropdown').css("opacity", 1);
             $('#dropdown').css("visibility", "visible");
+        }
+        function hidden_cart() {
+            $('#dropdown').css("opacity", 0);
+            $('#dropdown').css("visibility", "hidden");
         }
         $('.btn-select-buy').click(function() {
             $('body,html').stop().animate({
@@ -80,11 +84,14 @@
             var with_screen = window.outerWidth;
             //alert(with_screen);
             if (with_screen < 1200) {
-                $('.dropdown').css("opacity", 1);
-                $('.dropdown').css("visibility", "visible");
+                $('.dropdown_cart').css("opacity", 1);
+                $('.dropdown_cart').css("visibility", "visible");
                 $('.black-res-screen').css("display", "block");
+                $('#site').addClass('fix-1vh');
             } else {
-                setTimeout(hidden_reloal, 1000);
+                // $('#dropdown').css("opacity", 1);
+                // $('#dropdown').css("visibility", "visible");
+                setTimeout(visible_cart, 1000);
                 setInterval(reloadpage, 3000);
             }
             var _token = $('input[name="_token"]').val();
@@ -93,6 +100,7 @@
             $.ajax({
                 url: "{{route('fe.cart.addproduct')}}",
                 method: 'POST',
+                cache: false,
                 dataType: 'json',
                 data: {
                     id_product: id_product,
@@ -102,8 +110,9 @@
                 success: function(data) {
                     $('.number_cartmenu').html(data['number_product']);
                     $('#cart-load').html(data['list_product']);
+                    $('.dropdown_cart').html(data['list_product_res']);
                     $('.notisucess1').html(data['noti_success']);
-                    console.log(data['rowId']);
+                    //console.log(data['rowId']);
                 },
             });
         });

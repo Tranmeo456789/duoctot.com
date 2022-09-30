@@ -155,8 +155,14 @@ $(document).on('click', ".changeTypePassword", function (event) {
         $(this).html("<i class='fa fa-eye'></i>");
     }
 });
+
+// $(document).on('click', ".btn-select-buy", function (event) {
+//     alert('ok');
+// });
 $(document).on('click', ".close-cart", function (event) {
-    $('.dropdown').css("opacity", 0);
-    $('.dropdown').css("visibility", "hidden");
+    $('.dropdown_cart').css("opacity", 0);
+    $('.dropdown_cart').css("visibility", "hidden");
     $('.black-res-screen').css("display", "none");
+    $('#site').removeClass("fix-1vh");
+    location.reload();
 });

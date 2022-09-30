@@ -15,7 +15,7 @@
             <div class="d-flex justify-content-center">
                 <div class="image-60"><img src="{{asset($item_sub_menu1['image'])}}"></div>
             </div>
-            <p>{{$item_sub_menu1['name']}}</p>
+            <p class="truncate2">{{$item_sub_menu1['name']}}</p>
             <h2>{{count(product_of_cat($item_sub_menu1['id']))}} SẢN PHẨM</h2>
         </a>
     </li>
