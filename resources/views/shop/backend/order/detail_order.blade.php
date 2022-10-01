@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="col-4">
-                <form action="" method="POST">
+                <form action="" method="GET">
                     {!! csrf_field() !!}
                     <div class="form-group">
                         <label for="intro"  class="label-order">Trạng thái</label>

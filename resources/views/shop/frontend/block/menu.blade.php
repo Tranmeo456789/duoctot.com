@@ -19,12 +19,8 @@
                     <p>Kết nối khám chữa bệnh tại nhà</p>
                 </div>
             </div>
-        </div>
-        @if(Session::has('cart'))
-        @if(count(Session::get('cart')) > 0 )
+        </div>      
         <div class="dropdown_cart"></div>
-        @endif
-        @endif
         <div class="black-res-screen"></div>
     </div>
     <div id="head-top" class="clearfix position-relative">
@@ -188,7 +184,7 @@
                 <input type="text" placeholder="Nhập tìm thuốc, TPCN, bệnh lý ...">
                 <div class="rimg-center"></div><img src="{{asset('images/shop/icsp.png')}}" alt="">
             </div>
-        </div>     
+        </div>
     </div>
     <div id="head-body">
         <div class="wp-inner" id="category-product-wp">

@@ -73,6 +73,14 @@
             $('#dropdown').css("opacity", 1);
             $('#dropdown').css("visibility", "visible");
         }
+
+        function visible_cart_respon() {
+            $('.dropdown_cart').css("opacity", 1);
+            $('.dropdown_cart').css("visibility", "visible");
+            $('.black-res-screen').css("display", "block");
+            $('#site').addClass('fix-1vh');
+        }
+
         function hidden_cart() {
             $('#dropdown').css("opacity", 0);
             $('#dropdown').css("visibility", "hidden");
@@ -84,10 +92,7 @@
             var with_screen = window.outerWidth;
             //alert(with_screen);
             if (with_screen < 1200) {
-                $('.dropdown_cart').css("opacity", 1);
-                $('.dropdown_cart').css("visibility", "visible");
-                $('.black-res-screen').css("display", "block");
-                $('#site').addClass('fix-1vh');
+                setTimeout(visible_cart_respon, 100);
             } else {
                 // $('#dropdown').css("opacity", 1);
                 // $('#dropdown').css("visibility", "visible");

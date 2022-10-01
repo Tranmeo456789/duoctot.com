@@ -12,3 +12,51 @@
 <script src="{{ asset('shop/template/js/adminlte.min.js') }}"></script>
 <script src="{{asset('vendor/laravel-filemanager/js/lfm.js')}}"> </script>
 <script src="{{ asset('shop/backend/js/my-js.js') }}?ts={{time()}}"></script>
+<script>
+    $(document).ready(function() {
+        $(document).on('click', '#btnadd-productwarehouse', function(event) {
+            var _token = $('input[name="_token"]').val();
+            var warehouse_id = $(this).attr('warehouse_id');
+            var product_id = $(this).attr('product_id');
+            var number_change = $(this).prev('.number-addwarehouse').val();
+            if (number_change > 0) {
+                $.ajax({
+                    url: "{{route('warehouse.add_product')}}",
+                    method: 'POST',
+                    dataType: 'json',
+                    data: {
+                        warehouse_id: warehouse_id,
+                        product_id: product_id,
+                        number_change: number_change,
+                        _token: _token,
+                    },
+                    success: function(data) {
+                        $(".number-productwar" + warehouse_id + product_id).text(data['number']);
+                        $(".number-addwarehouse" + warehouse_id + product_id).val(data['']);
+                        console.log(data['test']);
+                    },
+                });
+            }
+        });
+        $('.update-status').change(function() {
+            status1 = $(this).find(":selected").val();
+            var _token = $('input[name="_token"]').val();
+            var id = $(this).attr('data-id');
+            $.ajax({
+                url: "{{route('order.update_status')}}",
+                method: 'GET',
+                dataType: 'json',
+                data: {
+                    status: status1,
+                    id: id,
+                    _token: _token,
+                },
+                success: function(data) {
+                    $('.noti-statusorrder').html(data.noti_success);
+                   // console.log(data.pro);
+                }
+            });
+
+        });
+    });
+</script>

@@ -70,7 +70,7 @@
                                                 }
                                                 }
                                                 @endphp
-                                                <form action="" method="POST">
+                                                <form action="" method="GET">
                                                     {!! csrf_field() !!}
                                                     <select name="status_order" data-id="{{$order->id}}" class="label-order custom-select sources update-status">
                                                         <option value="{{$order->status}}">{{$order->status}}</option>

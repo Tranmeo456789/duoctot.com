@@ -17,7 +17,7 @@ class Cat_productRequest extends AjaxFormRequest
     {
         return true;
     }
-
+    
     /**
      * Get the validation rules that apply to the request.
      *

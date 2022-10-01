@@ -66,21 +66,36 @@ class WarehouseController extends BackEndController
     }
     public function qlwarehouse(){
         $id=0;
-        if(Session::has('islogin')){
-            $id=Session::get('id');
-        }
-        $products=ProductModel::where('customer_id',$id)->get();
-        $warehouses=WarehouseModel::where('customer_id',$id)->get();
+        // if(Session::has('islogin')){
+        //     $id=Session::get('id');
+        // }
+        //$products=ProductModel::where('customer_id',$id)->get();
+        $products=ProductModel::whereIn('id',[50,51,46,47,48,49,52])->get();
+        // $warehouses=WarehouseModel::where('customer_id',$id)->get();
+        $warehouses=WarehouseModel::all();
         $numper_products=[];
-        foreach($warehouses as $k => $warehouse) {
-            $qty_per=explode(',', $warehouse['qty']);
-            $product_id = explode(',', $warehouse['product_id']);
-            foreach($product_id as $i => $product_id1){             
-                   $numper_products[$k][$product_id1]=(int)$qty_per[$i];                             
-            }                 
-        }
-
-       //return($numper_products[1][50]);
+       //return(json_decode($warehouses[0]['product_id'],true)[50]);
         return view('shop.backend.pages.warehouse.qlwarehouse',compact('warehouses','products','numper_products'));
+    }
+    public function add_product(Request $request){
+        $data = $request->all();
+        $product_id = $request->product_id;
+        $number_change =$request->number_change;
+        $warehouse_id=$request->warehouse_id;
+        $warehouses=WarehouseModel::where('id',$warehouse_id)->get();
+        $warehouse=$warehouses[0];
+        $product=json_decode($warehouse->product_id,true);
+        $qty=$product[$product_id] + $number_change;
+        $product[$product_id]=$qty;
+        WarehouseModel::where('id',$warehouse_id)->update(
+            [
+                'product_id' => json_encode($product)
+            ]
+            );
+        $result = array(
+            'number' => $qty,
+            'test' =>json_encode($product),
+        );
+        return response()->json($result, 200);
     }
 }

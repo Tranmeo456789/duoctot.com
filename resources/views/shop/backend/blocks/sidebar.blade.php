@@ -113,14 +113,20 @@
                 </a>
             </li>
             <li class="nav-item has-treeview">
-                <a href="{{route('qlwarehouse')}}" class="nav-link">
+                <a href="" class="nav-link">
                     <i class="nav-icon fas fa-store"></i>
                     <p>
-                        Quản lý kho
+                        Kho hàng
                         <i class="right fas fa-angle-left"></i>
                     </p>
                 </a>
                 <ul class="nav nav-treeview">
+                <li class="nav-item">
+                        <a href="{{route('qlwarehouse')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Quản lý kho hàng</p>
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a href="{{route('warehouse')}}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>

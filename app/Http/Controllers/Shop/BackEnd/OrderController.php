@@ -81,62 +81,50 @@ class OrderController extends Controller
         $list_pr = [];
         $list_qty = [];
         if ($status == 'Hoàn tất') {
-            $order = OrderModel::where('id', $id)->get();
-            
+            $order = OrderModel::where('id', $id)->get();      
             $list_qty = explode(",", $order[0]['qty_per']);
             $list_pr = explode(",", $order[0]['product_id']);
             $list_porder = [];
             foreach ($list_pr as $k => $pr) {
                 $list_porder[$pr] = (int)$list_qty[$k];
             }
-
-
-            $id_cus = 0;
-            if (Session::has('islogin')) {
-                $id_cus = Session::get('id');
-            }
-            $products = ProductModel::where('customer_id', $id_cus)->get();
-            $warehouses = WarehouseModel::where('customer_id', $id_cus)->get();
-            $numper_products = [];
-            foreach ($warehouses as $k => $warehouse) {
-                $qty_per = explode(',', $warehouse['qty']);
-                $product_id = explode(',', $warehouse['product_id']);
-                foreach ($product_id as $i => $product_id1) {
-                    $numper_products[$k][$product_id1] = (int)$qty_per[$i];
-                }
-            }
-        
-            foreach($numper_products[0] as $k=>$numware){
+            // $id_cus = 0;
+            // if (Session::has('islogin')) {
+            //     $id_cus = Session::get('id');
+            // }
+            // $products = ProductModel::where('customer_id', $id_cus)->get();
+            $products=ProductModel::whereIn('id',[50,51,46,47,48,49,52])->get();
+            //$warehouses = WarehouseModel::where('customer_id', $id_cus)->get();
+            $warehouses = WarehouseModel::all();
+            $numper_products=json_decode($warehouses[0]['product_id'],true);
+       
+            foreach($numper_products as $k=>$numware){
                 foreach($list_porder as $i=>$numorder){
                     if($k==$i){
                         $qty_product=$numware-$numorder;
-                        $numper_products[0][$k]=$qty_product;
+                        $numper_products1[$k]=$qty_product;
                     }
                 }
             }
-            $list_product='';
-            $t=0;
-            foreach($numper_products[0] as $k=>$numper_product){  
-                      if($t==0)  {
-                        $list_product.= $numper_product;
-                      }else{
-                        $list_product.= ','.$numper_product;
-                      }
-                $t++;
+            foreach($numper_products as $k=>$numware){
+                foreach($numper_products1 as $i=>$numorder){
+                    if($k==$i){
+                        $numper_products[$k]=$numorder;
+                    }
+                }
             }
          
                 WarehouseModel::where('id', $warehouses[0]['id'])->update(
                     [
-                        'qty' => $list_product
+                        'product_id' => json_encode($numper_products),
                     ]
                     );     
 
-        }
+         }
         $request->session()->flash('statusorder', 'Cập nhật trạng thái thành công !');
         $result = array(
-            'status' => $status,
             'noti_success' => session('statusorder'),
-            //'pro' => $list_product
+            //'pro' =>  json_encode($numper_products),
         );
         return response()->json($result, 200);
     }

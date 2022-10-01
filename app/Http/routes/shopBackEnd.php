@@ -57,7 +57,7 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd','mid
     Route::get('/chi-tiet-hoa-don', 'OrderController@detail_invoice')->name('invoice.detail');
     Route::get('/chi-tiet-don-hang/{code}', 'OrderController@detail_order')->name('order.detail');
     Route::get('/danh-sach-don-hang', 'OrderController@list_order')->name('order.list');
-    Route::post('/cap-nhat-trang-thai-don-hang', 'OrderController@update_status')->name('order.update_status');
+    Route::get('/cap-nhat-trang-thai-don-hang', 'OrderController@update_status')->name('order.update_status');
 
     Route::get('/phieu-gui-hang', 'ConsignmentController@index')->name('consignment.list');
     Route::get('/tao-phieu-gui-hang', 'ConsignmentController@add')->name('consignment.add');
@@ -69,7 +69,8 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd','mid
     Route::get('/sua-kho-hang/{id}', 'WarehouseController@form')->name('warehouse.edit');
     Route::post('/luu-kho-hang', 'WarehouseController@save')->name('warehouse.save');
     Route::get('/xoa-kho-hang/{id}', 'WarehouseController@delete')->name('warehouse.delete');
-
+    Route::post('/them-san-pham-kho-hang', 'WarehouseController@add_product')->name('warehouse.add_product');
+    
     Route::get('/danh-sach-khach-hang', 'CustomerController@index')->name('customer');
     Route::get('/them-khach-hang', 'CustomerController@form')->name('customer.add');
     Route::get('/sua-khach-hang/{id}', 'CustomerController@form')->name('customer.edit');

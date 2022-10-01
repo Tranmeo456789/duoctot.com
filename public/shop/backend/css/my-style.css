@@ -174,3 +174,144 @@ form div[class*=col-]:last-child .form-group {
 img[src=''] {
     display: none !important;
 }
+@media screen and (max-width: 1400px) {
+    .business-results li {
+        width: 50%;
+    }
+    .mabinput{margin-bottom: 0px;}
+}
+@media screen and (max-width: 1200px){
+    #sidebar {
+        transform: translateX(-100%);
+    }
+
+    #sidebar.slider {
+        transform: translateX(0px);
+    }
+.export-noti{width: 100vw;}
+    #wp-content {
+        padding-left: 0px;
+    }
+
+    .header-content {
+        width: 100vw;
+    }
+    .list-productwp,.list_orderm{
+        width: 1110px;
+    }
+    #wp-content{
+        overflow: hidden;
+    }
+    .set-withscreen {
+        width: 100vw;
+        overflow-x: scroll;
+    }
+    .header-title {
+        padding-left: 50px;
+    }
+
+    .btnvis-sidebar {
+        display: inline-block;
+    }
+
+    .hide-sidebar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #logo-admin img {
+        width: 140px;
+    }
+    .titlehearder{
+        margin-bottom: 10px;
+    }
+    .body-content {padding: 0px;}
+    #wp-content{
+        overflow: hidden;
+    }
+}
+@media screen and (max-width: 1000px) {
+    .content-wrapper > .content{
+        padding: 0px;
+    }
+    .container-fluid{
+        padding: 0px;
+    }
+    table{
+font-size: 12px;
+    }
+}
+@media screen and (max-width: 800px) {
+    
+    .card .card-header h6{font-size: 14px;}
+    .body-content {padding: 0px;}
+    #wp-content{
+        overflow: hidden;
+    }
+    .set-withscreen {
+        width: 100vw;
+        overflow-x: scroll;
+    }
+
+    .business-results {
+        width: 733px;
+    }
+
+    .order-wait {
+        width: 1000px;
+    }
+    #sidebar {
+        transform: translateX(-100%);
+    }
+
+    #sidebar.slider {
+        transform: translateX(0px);
+    }
+
+    #wp-content {
+        padding-left: 0px;
+    }
+
+    .header-content {
+        width: 100vw;
+    }
+
+    .header-title {
+        padding-left: 50px;
+    }
+
+    .btnvis-sidebar {
+        display: inline-block;
+    }
+
+    .hide-sidebar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #logo-admin img {
+        width: 140px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .header-title {
+        font-size: 13px;
+        line-height: 15px;
+    }
+
+    .btn {
+        font-size: 13px;
+    }
+
+    .body-content {
+        font-size: 13px;
+    }
+
+    .header-content {
+        padding: 0px;
+    }
+    .business-results li .icon{font-size: 14px;}
+}
