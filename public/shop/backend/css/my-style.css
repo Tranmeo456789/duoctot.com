@@ -161,7 +161,18 @@ form div[class*=col-]:last-child .form-group {
 .file-preview-table tr td {
     padding: 3px
 }
+.table thead th {
+    vertical-align: middle;
+}
 
+.sources {
+    height: 27px;
+    padding: 1px 22px 1px 8px;
+    font-size: 15px;
+    background-color: rgb(162 238 90 / 23%);
+    text-align: center;
+    color: #580deb;
+}
 .file-preview-table .file-preview-placeholder {
     width: 64px;
     height: auto;

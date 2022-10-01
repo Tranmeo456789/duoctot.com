@@ -16,7 +16,7 @@
                                     <table class="table table-striped table-checkall table-bordered ">
                                         <thead>
                                             <tr>
-                                                <th scope="col" rowspan="2" class="text-center">Sản phẩm</th>
+                                                <th scope="col" rowspan="2" class="text-center">Thuốc</th>
                                                 @foreach($warehouses as $warehouse)
                                                 <th scope="col" colspan="2" class="text-center">{{$warehouse['name']}}</th>
                                                 @endforeach
@@ -31,9 +31,9 @@
                                         <tbody>
                                             @foreach($products as $product)
                                             <tr class="">
-                                                <td style="">
+                                                <td>
                                                     <div class="d-flex">
-                                                        <img style="width:60px;height:60px" src="{{asset($product['image'])}}" alt="">
+                                                        <div class="align-self-center"><img style="width:60px" src="{{asset($product['image'])}}" alt=""></div>             
                                                         <div class="info-product ml-3">
                                                             <p class="text-success font-weight-bold">{{$product['name']}}</p>
                                                             <p>ID: {{$product['id']}}</p>
