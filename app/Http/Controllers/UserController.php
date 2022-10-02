@@ -6,7 +6,6 @@ use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Validator;
 use App\Http\Requests;
-use App\Model\Shop\User;
 use App\Model\Shop\CustomerModel;
 use Illuminate\Session\SessionInterface;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +14,7 @@ use Illuminate\Support\Facades\Validator as FacadesValidator;
 use Symfony\Component\HttpFoundation\Session\Session;
 use App\Helpers\HttpClient;
 use App\Http\Requests\UserRequest as MainRequest;
-use App\Model\Shop\UsersModel as MainModel;
+use App\Users as MainModel;
 class UserController extends Controller
 {
     public function register(MainRequest $request)
