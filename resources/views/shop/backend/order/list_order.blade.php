@@ -60,7 +60,7 @@
                                         <tr class="">
                                             <td style="width: 20%"><a href="{{route('order.detail',$order->code_order)}}">{{$order->code_order}}</a></td>
                                             <td style="width: 16%">{{ number_format( $order['total'], 0, "" ,"." )}}đ</td>
-                                            <td style="width: 16%">{{substr($order->created_at, 0, 10)}}</td>
+                                            <td style="width: 16%">{{substr($order->created_at, 8, 2)}}-{{substr($order->created_at, 5, 2)}}-{{substr($order->created_at, 0, 4)}}</td>
                                             <td style="width: 16%">
                                                 @php
                                                 $status_curent = $order->status;

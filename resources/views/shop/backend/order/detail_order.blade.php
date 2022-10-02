@@ -76,7 +76,7 @@
             <div class="col-4">
                 <div class="form-group">
                     <label for="intro">Thời gian đặt hàng</label>
-                    <input class="form-control" type="text" name="" id="" value="{{$order[0]->created_at}}" disabled>
+                    <input class="form-control" type="text" name="" id="" value="{{substr($order[0]->created_at, 10, 9)}} {{substr($order[0]->created_at, 8, 2)}}-{{substr($order[0]->created_at, 5, 2)}}-{{substr($order[0]->created_at, 0, 4)}}" disabled>
                 </div>
             </div>
         </div>

@@ -165,18 +165,18 @@
                 </h1>
             </div>
             <ul class="list-content-product">
-                <li>Mô tả sản phẩm</li>
-                <li>Thành phần</li>
-                <li>Công dụng</li>
-                <li>Liều dùng</li>
-                <li>Tác dụng phụ</li>
-                <li>Lưu ý</li>
-                <li>Bảo quản</li>
+                <li><a href="#desc-product">Mô tả sản phẩm</a></li>
+                <li><a href="#element-product">Thành phần</a></li>
+                <li><a href="#func-product">Công dụng</a></li>
+                <li><a href="#alternate-product">Cách dùng</a></li>
+                <li><a href="#ide-effects">Tác dụng phụ</a></li>
+                <li><a href="#note-product">Lưu ý</a></li>
+                <li><a href="#preserve-product">Bảo quản</a></li>
             </ul>
         </div>
         <div class="col-12 col-lg-9">
             <div class="title-content-detail-product d-flex justify-content-between flex-wrap">
-                <h1>Mô tả sản phẩm Sâm Nhung Bổ Thận NV</h1>
+                <h1 id="desc-product">Mô tả sản phẩm</h1>
                 <div class="d-flex justify-content-center flex-wrap">
                     <span class="ktc">Kích thước chữ</span>
                     <span class="mdlh">
@@ -187,7 +187,7 @@
             </div>
             <div class="content-detail-product">
                 {!!$productcs->general_info!!}
-                <h2>Thành phần của Sâm nhung Bổ thận</h2>
+                <h2 id="element-product">Thành phần</h2>
                 <table>
                     <thead>
                         <th class="pl-2 py-2">Thành phần</th>
@@ -212,17 +212,17 @@
                         </tr>
                     </tbody>
                 </table>
-                <h2 class="mt-2" style="font-size: 18px; font-weight: bold;">Công dụng</h2>
+                <h2 id="func-product" class="mt-2" style="font-size: 18px; font-weight: bold;">Công dụng</h2>
                 <p>{{$productcs->benefit}}</p>
-                <h2 class="mt-2" style="font-size: 18px; font-weight: bold;">Cách dùng</h2>
+                <h2 id="alternate-product" class="mt-2" style="font-size: 18px; font-weight: bold;">Cách dùng</h2>
                 <p>{{$productcs->dosage}}</p>
-                <div class="note-product mt-2">
+                <h2 id="ide-effects">Tác dụng phụ</h2>
+                <p>Chưa có tác dụng không mong muốn</p>
+                <div id="note-product" class="note-product mt-2">
                     <h2 style="font-size: 18px; font-weight: bold;">Lưu ý</h2>
                     <p>{{$productcs->note}}</p>
                 </div>
-                <p class="font-weight-bold">
-                    Bảo quản
-                </p>
+                <h2 id="preserve-product" class="font-weight-bold">Bảo quản</h2>
                 <p>{{$productcs->preserve}}</p>
             </div>
         </div>
@@ -232,9 +232,9 @@
     <div class="wp-inner">
         <div id="product-relate">
             <div id="feature-product-wp">
-                <div class="mb-3 headf position-relative pl-5">
+                <div class="mb-3 headf pl-5 d-flex">
+                    <div><img src="{{asset('images/shop/lua1.png')}}" alt="" srcset=""></div>
                     <h1>Sản phẩm Liên Quan</h1>
-                    <img src="{{asset('images/shop/lua1.png')}}" alt="" srcset="">
                 </div>
                 <div>
                     <ul class="list-item">
@@ -242,7 +242,7 @@
                             <a href="">
                                 <div>
                                     <div class="rdimg d-flex justify-content-center"><img src="{{asset('images/shop/covid2.png')}}" alt="" srcset=""></div>
-                                    <div class="pl-3">
+                                    <div class="text-center">
                                         <a>Viên sủi opimax Imunity</a>
                                         <span class="text-info">115.000đ/tuýp</span>
                                         <div class="slbuy text-center mt-4"><a href="">Chọn mua</a></div>

@@ -285,15 +285,8 @@
     padding: 15px;
 }
 
-.cat-content .list-content-product li {
-    font-family: 'Helvetica Neue';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
-    color: #1E1E1E;
-    padding: 15px 20px;
-    cursor: pointer;
+.cat-content .list-content-product li{
+    
     border-radius: 10px;
 }
 
@@ -317,6 +310,7 @@
     color: #4D6394;
     padding: 6px 15px;
     display: inline-block;
+    align-self: center;
 }
 
 .title-content-detail-product .md {
@@ -375,7 +369,7 @@
 }
 
 #product-relate #feature-product-wp .list-item li {
-    min-height: 280px;
+    min-height: 290px;
     background: #fff;
     margin-right: 5px;
     border: 1px solid #787878;

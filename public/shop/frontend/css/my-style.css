@@ -14,7 +14,21 @@ ul {
     border: 1px solid #7991B7;
     border-radius: 10px;
 }
-
+.content-detail-product{
+    font-size: 18px;
+    font-family: sans-serif;
+}
+.cat-content .list-content-product li a{
+    font-family: 'Helvetica Neue';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #1E1E1E;
+    padding: 15px 20px;
+    cursor: pointer;
+    display: block;
+}
 .form-group.h-35 {
     height: 35px !important;
     line-height: 35px !important;

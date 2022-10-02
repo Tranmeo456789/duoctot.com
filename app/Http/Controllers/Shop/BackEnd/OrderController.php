@@ -33,7 +33,7 @@ class OrderController extends Controller
     public function list_order()
     {
         $list_status = ['Đang xử lý', 'Đã xác nhận', 'Đang giao hàng', 'Đã giao hàng', 'Hoàn tất', 'Đã hủy'];
-        $orders = OrderModel::paginate(10);
+        $orders = OrderModel::orderBy('id', 'DESC')->paginate(10);
         $pageTitle='Danh sách đơn hàng';
         $moduleName='shop.backend';
         return view('shop.backend.order.list_order', compact('orders', 'list_status','pageTitle','moduleName'));
