@@ -1,5 +1,6 @@
 <?php
     return [
+        'token_check_login' => 'UAqaYzPVrCW56UgKumKdSN7t',
         'url' => [
             'api' => 'http://tdoctor.xyz/',
             'prod' => 'shop.tdoctor.vn',
@@ -10,7 +11,8 @@
         'baseRequest' => [
             'login' => 'api/v0.4/login',
             'register' => 'api/v0.4/register',
-            'getListProvince' => '/api/v0.3/province/get-list',
+            'getListProvince' => 'api/v0.3/province/get-list',
+            'checkLoginStatus' => 'api/v0.3/checkLoginStatus',
         ],
         'template' => [
             'star' => "<span class='text-red ml-2'>*</span>",
