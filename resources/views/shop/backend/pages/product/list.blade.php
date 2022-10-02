@@ -8,7 +8,7 @@
                 <th>Thuốc</th>
                 <th>Đơn vị</th>
                 <th>Tổng đơn <br/>đặt hàng</th>
-                <th>Tồn trong kho <br/> của tôi</th>
+                <!-- <th>Tồn trong kho <br/> của tôi</th> -->
                 <th>Trạng thái</th>
                 <th>Tác vụ</th>
             </tr>
@@ -36,9 +36,9 @@
                     </div>
                 </div>
             </td>
-            <td style="width: 5%">{{$val->unit}}</td>
-            <td style="width: 5%" class="text-right">0</td>
-            <td style="width: 7%" class="text-right">{{$val->inventory}}</td>
+            <td style="width: 5%">{{$val->unitProduct->name}}</td>
+            <td style="width: 12%" class="text-center">0</td>
+            <!-- <td style="width: 7%" class="text-right">{{$val->inventory}}</td> -->
             <td style="width: 8%"><span class="badge badge-success">Chờ kiểm duyệt</span></td>
             <td style="width: 8%">
                 <a href="{{route("$controllerName.edit",$val->id)}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit"></i></a>

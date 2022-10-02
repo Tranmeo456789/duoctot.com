@@ -74,8 +74,7 @@ class WarehouseController extends BackEndController
         if ($session->has('user')) {
             $user = $request->session()->get('user');
         }
-        //$products=ProductModel::where('customer_id',$id)->get();
-        $products = ProductModel::whereIn('id', [50, 51, 46, 47, 48, 49, 52])->get();
+        $products = ProductModel::where('user_id', $user->user_id)->get();
         $warehouses = WarehouseModel::where('user_id', $user->user_id)->get();
         return view('shop.backend.pages.warehouse.qlwarehouse', compact('warehouses', 'products'));
     }
@@ -157,11 +156,11 @@ class WarehouseController extends BackEndController
             if ($session->has('user')) {
                 $user = $request->session()->get('user');
             }
-            $products = ProductModel::all();
+            $products = ProductModel::where('user_id', $user->user_id)->get();
             $warehouses = WarehouseModel::where('user_id', $user->user_id)->get();
             $units = UnitModel::all();
             $producers = ProducerModel::all();
-            $coupon_imports = CouponImportModel::all();
+            $coupon_imports = CouponImportModel::where('user_id', $user->user_id)->get();
             return view($this->pathViewController .  'importWarehouse', compact('products', 'warehouses', 'units', 'producers', 'coupon_imports'));
         }
     }

@@ -28,12 +28,12 @@
                     <h1>{{$productcs['name']}}</h1>
                     <div class="comment d-flex justify-content-between flex-wrap">
                         @if(isset($productcs->userProduct))
-                        <span class="text-muted">({{sprintf("%08d", $productcs->customerProduct->id)}})</span>
+                        <span class="text-muted">({{$productcs->userProduct->user_id}})</span>
                         @else
                         <span class="text-muted">00000000000</span>
                         @endif
                         <div class="position-relative">
-                            <span class="star-befor">
+                            <span class="">
                                 <img src="{{asset('images/shop/star.png')}}" alt="">
                                 <img src="{{asset('images/shop/star.png')}}" alt="">
                                 <img src="{{asset('images/shop/star.png')}}" alt="">
@@ -51,8 +51,8 @@
                     <p><span class="font-weight-bold bcn">Danh mục: </span><span class="text-info">{{$productcs->catProduct->name}}</span></p>
                     <p><span class="font-weight-bold">Dạng bào chế: </span>{{$productcs['dosage_forms']}}</p>
                     <p><span class="font-weight-bold">Quy cách: </span>{{$productcs['specification']}}</p>
-                    <p><span class="font-weight-bold">Xuất xứ thương hiệu: </span>{{$productcs['made_country']}}</p>
-                    <p><span class="font-weight-bold">Nước sản xuất: </span>{{$productcs['made_country']}}</p>
+                    <p><span class="font-weight-bold">Xuất xứ thương hiệu: </span>{{$productcs->countryProduct->name}}</p>
+                    <p><span class="font-weight-bold">Nước sản xuất: </span>{{$productcs->countryProduct->name}}</p>
                     <p><span class="font-weight-bold">Công dụng: </span>{{$productcs['benefit']}}</p>
                 </div>
                 <div class="payment position-relative">

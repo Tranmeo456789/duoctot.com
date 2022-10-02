@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="cbr py-4">
-    <div class="wp-inner">
+    <div class="">
         <div class="wp-order-success">
             <div class="text-center box-dhtc">
                 <span class="icon-order-success">
@@ -57,7 +57,7 @@
                         </tr>
                         <tr class="bb_order">
                             <td style="width: 30%">Thời gian dự kiến</td>
-                            <td style="width: 70%" class='name'>Có hàng trước 15h00 ngày 20/9/2022</td>
+                            <td style="width: 70%" class='name'>Có hàng trước ...</td>
                         </tr>
                     </tbody>
                 </table>
@@ -79,10 +79,10 @@
                         @foreach($ls_product_order as $product)
                        
                         <tr class="bb_order">
-                        <td style="width: 10%" class='name'><div class="rimg-center img-60"><div><img src="{{asset($product['image'])}}" alt=""></div></div></td>
-                            <td style="width: 48%">
+                        <td style="width: 20%" class='name'><div class="rimg-center"><div><img src="{{asset($product['image'])}}" alt=""></div></div></td>
+                            <td style="width: 50%">
                                 <div class="d-flex">
-                                    <p class="namep-order">{{$product['name']}}</p>
+                                    <p class="namep-order truncate2">{{$product['name']}}</p>
                                 </div>
                             </td>
                             <td style="width: 16%" class='name'>{{$product['unit']}}</td>

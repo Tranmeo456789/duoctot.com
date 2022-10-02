@@ -398,7 +398,12 @@
         border-radius: 10px;
 
     }
-
+.wp-order-success {
+    font-size: 12px;width: 100vw;border-radius: 0px;
+}
+.title-info-order h1 {
+    font-size: 14px;
+}
     .form-login .header .titlek {
         border-radius: 10px 0px 0px;
     }
@@ -643,6 +648,9 @@
     }
     .cart-null h1{
         font-size: 16px;
+    }
+    .namep-order{
+        font-size: 12px;
     }
     .cart-null a {
         display: inline-block;

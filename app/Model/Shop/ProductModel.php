@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Model\Shop;
-
+use Session;
 use App\Http\Requests\Request;
 use Illuminate\Database\Eloquent\Model;
 use App\Model\Shop\BackEndModel;
@@ -24,15 +24,16 @@ class ProductModel extends BackEndModel
     public function listItems($params = null, $options = null)
     {
         $result = null;
+        $user = Session::get('user');
         if ($options['task'] == "user-list-items") {
             $query = $this::select('id','name','type','code','cat_product_id','producer_id',
                                     'tick','type_price','price','price_vat','coefficient',
                                     'type_vat','packing','unit_id','sell_area','amout_max',
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit',
-                                    'preserve','note','image','featurer','long','wide','high',
+                                    'preserve','note','image','featurer','long','user_id','wide','high',
                                     'mass', 'created_at', 'updated_at');
-            $result =  $query->orderBy('id', 'desc')
+            $result =  $query->orderBy('id', 'desc')->where('user_id',$user->user_id)
                 ->paginate($params['pagination']['totalItemsPerPage']);
         }
         return $result;
@@ -46,7 +47,7 @@ class ProductModel extends BackEndModel
                                     'type_vat','packing','unit_id','sell_area','amout_max',
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit',
-                                    'preserve','note','image','albumImage','albumImageHash','featurer','long','wide','high',
+                                    'preserve','note','image','albumImage','albumImageHash','user_id','featurer','long','wide','high',
                                     'mass')
                             ->where('id', $params['id'])
                             ->first();
@@ -95,6 +96,12 @@ class ProductModel extends BackEndModel
     }
     public function catProduct(){
         return $this->belongsTo('App\Model\Shop\CatProductModel');
+    }
+    public function countryProduct(){
+        return $this->belongsTo('App\Model\Shop\CountryModel','country_id','id');
+    }
+    public function userProduct(){
+        return $this->belongsTo('App\Model\Shop\UsersModel','user_id','user_id');
     }
     // public function userProduct(){
     //     return $this->belongsTo('App\Model\Shop\UsersModel','user_id','id');

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Model\Shop\BackEndModel;
 use App\Model\Shop\Tinhthanhpho;
 use App\Model\Shop\Quanhuyen;
+use Session;
 use App\Model\Shop\Xaphuongthitran;
 class WarehouseModel extends BackEndModel
 {
@@ -18,10 +19,11 @@ class WarehouseModel extends BackEndModel
 
     public function listItems($params = null, $options = null) {
         $result = null;
+        $user = Session::get('user');
         if($options['task'] == "user-list-items") {
             $query = $this::select('id', 'name','local', 'created_at', 'updated_at');
 
-            $result =  $query->orderBy('id', 'desc')
+            $result =  $query->orderBy('id', 'desc')->where('user_id',$user->user_id)
                             ->paginate($params['pagination']['totalItemsPerPage']);
 
         }

@@ -26,7 +26,7 @@ class HomeController extends ShopFrontEndController
     }
     public function index()
     {
-        $product_covids = ProductModel::inRandomOrder()->limit(8)->get();
+        $product_covids = ProductModel::all();
 
         return view($this->pathViewController . 'index',
                     compact('product_covids'));

@@ -62,9 +62,8 @@ class CartController extends ShopFrontEndController
         }    
         $citys=Tinhthanhpho::all();   
         if ($session->has('user')){       
-            //return($details['ward_id']);  
-            $wardc=$details['ward_id'];
-            return view($this->pathViewController . 'cart',compact('itemsProvince' ,'itemsDistrict','itemsWard','item','details','wardc','citys'));
+            //return($item);  
+            return view($this->pathViewController . 'cart',compact('itemsProvince' ,'itemsDistrict','itemsWard','item','details','citys'));
         }
         return view($this->pathViewController . 'cart',compact('itemsProvince','itemsDistrict','itemsWard','citys'));
     }

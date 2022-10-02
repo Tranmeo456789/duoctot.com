@@ -21,6 +21,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @if($coupon_imports!=null)
                                     @foreach($coupon_imports as $coupon_import)
                                     <tr class="">
                                         <td><a href="">{{$coupon_import->code_coupon}}</a></td>
@@ -31,7 +32,7 @@
                                         </td>
                                     </tr>
                                     @endforeach
-                                    
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

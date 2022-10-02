@@ -628,6 +628,7 @@ border-bottom: 1px solid #d3cccc;
     padding: 4px 10px;
     border-radius: 20px;
     font-size: 14px;
+    display: inline-block;
 }
 .exit-home-order{
     display: inline-block;
