@@ -70,6 +70,8 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd','mid
     Route::post('/luu-kho-hang', 'WarehouseController@save')->name('warehouse.save');
     Route::get('/xoa-kho-hang/{id}', 'WarehouseController@delete')->name('warehouse.delete');
     Route::post('/them-san-pham-kho-hang', 'WarehouseController@add_product')->name('warehouse.add_product');
+    Route::get('/phieu-nhap-hang-vao-kho', 'WarehouseController@import')->name('warehouse.import');
+    Route::post('/nhap-hang-vao-kho', 'WarehouseController@import')->name('warehouse.save.import');
     
     Route::get('/danh-sach-khach-hang', 'CustomerController@index')->name('customer');
     Route::get('/them-khach-hang', 'CustomerController@form')->name('customer.add');

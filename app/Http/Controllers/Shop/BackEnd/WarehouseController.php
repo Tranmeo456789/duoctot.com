@@ -9,10 +9,15 @@ use App\Model\Shop\Tinhthanhpho;
 use App\Model\Shop\Quanhuyen;
 use App\Model\Shop\WarehouseModel;
 use App\Model\Shop\ProducerModel;
+use App\Model\Shop\CouponImportModel;
+use App\Model\Shop\UnitModel;
 use App\Model\Shop\Xaphuongthitran;
 use App\Http\Requests\WarehouseRequest as MainRequest;
+use App\Model\Shop\CountryModel;
 use App\Model\Shop\ProductModel;
 use Session;
+use DB;
+
 class WarehouseController extends BackEndController
 {
     public function __construct()
@@ -22,7 +27,6 @@ class WarehouseController extends BackEndController
         $this->pageTitle          = 'Kho hàng';
         $this->model = new MainModel();
         parent::__construct();
-        session(['module_active'=>'warehouse']);
     }
     public function save(MainRequest $request)
     {
@@ -59,43 +63,106 @@ class WarehouseController extends BackEndController
             $params["id"] = $request->id;
             $item = $this->model->getItem($params, ['task' => 'get-item']);
         }
-        $locals=Tinhthanhpho::all();
+        $locals = Tinhthanhpho::all();
         return view($this->pathViewController .  'form', [
-            'item'        => $item, 'locals'=> $locals,
+            'item'        => $item, 'locals' => $locals,
         ]);
     }
-    public function qlwarehouse(){
-        $id=0;
-        // if(Session::has('islogin')){
-        //     $id=Session::get('id');
-        // }
+    public function qlwarehouse(Request $request)
+    {
+        $session = $request->session();
+        if ($session->has('user')) {
+            $user = $request->session()->get('user');
+        }
         //$products=ProductModel::where('customer_id',$id)->get();
-        $products=ProductModel::whereIn('id',[50,51,46,47,48,49,52])->get();
-        // $warehouses=WarehouseModel::where('customer_id',$id)->get();
-        $warehouses=WarehouseModel::all();
-        $numper_products=[];
-       //return(json_decode($warehouses[0]['product_id'],true)[50]);
-        return view('shop.backend.pages.warehouse.qlwarehouse',compact('warehouses','products','numper_products'));
+        $products = ProductModel::whereIn('id', [50, 51, 46, 47, 48, 49, 52])->get();
+        $warehouses = WarehouseModel::where('user_id', $user->user_id)->get();
+        return view('shop.backend.pages.warehouse.qlwarehouse', compact('warehouses', 'products'));
     }
-    public function add_product(Request $request){
+    public function add_product(Request $request)
+    {
         $data = $request->all();
         $product_id = $request->product_id;
-        $number_change =$request->number_change;
-        $warehouse_id=$request->warehouse_id;
-        $warehouses=WarehouseModel::where('id',$warehouse_id)->get();
-        $warehouse=$warehouses[0];
-        $product=json_decode($warehouse->product_id,true);
-        $qty=$product[$product_id] + $number_change;
-        $product[$product_id]=$qty;
-        WarehouseModel::where('id',$warehouse_id)->update(
+        $number_change = $request->number_change;
+        $warehouse_id = $request->warehouse_id;
+        $warehouses = WarehouseModel::where('id', $warehouse_id)->get();
+        $warehouse = $warehouses[0];
+        $product = json_decode($warehouse->product_id, true);
+        $qty = $product[$product_id] + $number_change;
+        $product[$product_id] = $qty;
+        WarehouseModel::where('id', $warehouse_id)->update(
             [
                 'product_id' => json_encode($product)
             ]
-            );
+        );
         $result = array(
             'number' => $qty,
-            'test' =>json_encode($product),
+            'test' => json_encode($product),
         );
         return response()->json($result, 200);
+    }
+    public function import(Request $request)
+    {
+        if ($request->input('add_warehouse')) {
+            $warehouse_id = $request->input('warehouse');
+            $ls_product_old = json_decode(WarehouseModel::find($warehouse_id)->product_id, true);
+            $producer_id = $request->input('producer');
+            $ls_product = $request->input('ls_qty');
+
+            $isset_number = 0;
+            foreach ($ls_product_old as $k => $item) {
+                if ($ls_product[$k] != null && $ls_product[$k] > 0) {
+                    $ls_product_old[$k] = (int)$item + (int)$ls_product[$k];
+                    $isset_number++;
+                }
+            }
+            if ($isset_number > 0) {
+                $coupon_id_last = CouponImportModel::latest('id')->first();
+                if (CouponImportModel::latest('id')->first() == null) {
+                    $coupon_id_last['id'] = 0;
+                }
+                $year = getdate()['year'];
+                $month = sprintf("%02d", getdate()['mon']);
+                $day = sprintf("%02d", getdate()['mday']);
+                $id_coupon = sprintf("%05d", $coupon_id_last['id'] + 1);
+                $code_coupon = 'PNK' . $year . $month . $day . $id_coupon;
+                $session = $request->session();
+                if ($session->has('user')) {
+                    $user = $request->session()->get('user');
+                }
+                $qty_total=0;
+                foreach($ls_product as $item){
+                    if ($item != null && $item > 0) {
+                        $qty_total+=$item;
+                    }                 
+                }
+                CouponImportModel::create([
+                    'code_coupon' => $code_coupon,
+                    'warehouse_id' => $warehouse_id,
+                    'user_id' => $user->user_id,
+                    'qty_total'=>$qty_total,
+                    'list_product'=>json_encode($ls_product)
+                ]);
+                WarehouseModel::where('id', $warehouse_id)->update(
+                    [
+                        'product_id' => json_encode($ls_product_old)
+                    ]
+                );
+                return back()->with('app_notify', 'Nhập thêm hàng vào kho hàng thành công');
+            } else {
+                return back()->withInput();
+            }
+        } else {
+            $session = $request->session();
+            if ($session->has('user')) {
+                $user = $request->session()->get('user');
+            }
+            $products = ProductModel::all();
+            $warehouses = WarehouseModel::where('user_id', $user->user_id)->get();
+            $units = UnitModel::all();
+            $producers = ProducerModel::all();
+            $coupon_imports = CouponImportModel::all();
+            return view($this->pathViewController .  'importWarehouse', compact('products', 'warehouses', 'units', 'producers', 'coupon_imports'));
+        }
     }
 }

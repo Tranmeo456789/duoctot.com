@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Shop\FrontEnd;
 
 use Illuminate\Http\Request;
 use Session;
+use DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
@@ -12,10 +13,14 @@ use App\Model\Shop\CatProductModel;
 use App\Model\Shop\CustomerModel;
 use App\Model\Shop\ProductModel;
 use App\Model\Shop\Tinhthanhpho;
+use App\Http\Requests\UserRequest as MainRequest;
+use App\Model\Shop\UsersModel as MainModel;
+use App\Model\Shop\ProvinceModel;
+use App\Model\Shop\DistrictModel;
+use App\Model\Shop\WardModel;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Session as FacadesSession;
 
-session_start();
 include "app/Helpers/data.php";
 include_once "app/Helpers/data_cart.php";
 class CartController extends ShopFrontEndController
@@ -28,19 +33,40 @@ class CartController extends ShopFrontEndController
         parent::__construct();
         $data = CatProductModel::all();
         $_SESSION['local'] = $local = Tinhthanhpho::all();
-
+        $this->model = new MainModel();
         $_SESSION['cat_product'] = $catps = data_tree1($data, 0);
     }
 
-    public function cart_product()
+    public function cart_product(Request $request)
     {
-        $citys=Tinhthanhpho::all();
-        if(Session::has('islogin')){
-            $id=Session::get('id');
-            $customer=CustomerModel::find($id);
-            return view($this->pathViewController . 'cart',compact('citys','customer'));
+       
+        $session = $request->session();
+        $item = [];
+        if ($session->has('user')){
+            $item = $this->model->getItem(['user_id'=>$session->get('user.user_id')],['task' => 'get-item']);
+            $details = $item->details->pluck('value','user_field')->toArray()??[];
         }
-        return view($this->pathViewController . 'cart',compact('citys'));
+        $itemsProvince = (new ProvinceModel())->listItems(null,['task'=>'admin-list-items-in-selectbox']);
+        $params['province_id'] = (isset($details['province_id']) && ($details['province_id']!=0))?$details['province_id']:((isset($item->province_id) && ($item->province_id != 0)) ? $item->province_id:0);
+        $itemsDistrict = [];
+        if ($params['province_id']  != 0){
+            $itemsDistrict = (new DistrictModel())->listItems(['parentID' => $params['province_id']],
+                                                                ['task'=>'admin-list-items-in-selectbox']);
+        }
+
+        $params['district_id'] = (isset($details['district_id']) && ($details['district_id'] != 0))?$details['district_id']:((isset($item->district_id) && ($item->district_id != 0)) ? $item->district_id:0);
+        $itemsWard = [];
+        if ($params['district_id']  != 0){
+            $itemsWard = (new WardModel())->listItems(['parentID' => $params['district_id']],
+                                                                ['task'=>'admin-list-items-in-selectbox']);
+        }    
+        $citys=Tinhthanhpho::all();   
+        if ($session->has('user')){       
+            //return($details['ward_id']);  
+            $wardc=$details['ward_id'];
+            return view($this->pathViewController . 'cart',compact('itemsProvince' ,'itemsDistrict','itemsWard','item','details','wardc','citys'));
+        }
+        return view($this->pathViewController . 'cart',compact('itemsProvince','itemsDistrict','itemsWard','citys'));
     }
     public function cart_null()
     {

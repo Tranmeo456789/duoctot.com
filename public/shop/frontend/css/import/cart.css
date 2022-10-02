@@ -617,6 +617,7 @@ border-bottom: 1px solid #d3cccc;
 .title-info-order h1{font-weight: bold;}
 .pd-order{
     padding: 0px 0.75rem 0px 0.75rem;
+    margin: 0px;
 }
 .bb_order{
     border-bottom: 1px solid #e3d5d587;

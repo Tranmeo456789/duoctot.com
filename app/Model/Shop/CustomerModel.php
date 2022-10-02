@@ -19,7 +19,7 @@ class CustomerModel extends BackEndModel
     public function listItems($params = null, $options = null) {
         $result = null;
         if($options['task'] == "user-list-items") {
-            $query = $this::select('id','name','code_customer','email','phone','gender','password','address_detail','address','sale_area','tax_code','legal_representative','customer_group', 'created_at', 'updated_at');
+            $query = $this::select('id','name','code_customer','email','phone','gender','password','address_detail','address','user_id','sale_area','tax_code','legal_representative','customer_group', 'created_at', 'updated_at');
 
             $result =  $query->orderBy('id', 'desc')
                             ->paginate($params['pagination']['totalItemsPerPage']);
@@ -30,7 +30,7 @@ class CustomerModel extends BackEndModel
     public function getItem($params = null, $options = null) {
         $result = null;
         if($options['task'] == 'get-item') {
-            $result = self::select('id','name','code_customer','email','phone','gender','password','address_detail','address','sale_area','tax_code','legal_representative','customer_group')
+            $result = self::select('id','name','code_customer','email','phone','gender','password','address_detail','address','user_id','sale_area','tax_code','legal_representative','customer_group')
                             ->where('id', $params['id'])->first();
         }
         return $result;

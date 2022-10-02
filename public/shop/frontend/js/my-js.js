@@ -166,3 +166,52 @@ $(document).on('click', ".close-cart", function (event) {
     $('#site').removeClass("fix-1vh");
     location.reload();
 });
+$(document).on('change', "select.get_child", function(event) {
+    event.preventDefault();
+    url = $(this).data('href');
+    target = $(this).data('target');
+
+    $selectValue = $(this).val();
+    if (($selectValue == '') && (url.indexOf('value_new') !== -1)) {
+        options = $(target).find('option')[0].outerHTML;
+        $(target).html(options);
+        $(target).trigger("change");
+    } else {
+        url = url.replace('value_new', $selectValue);
+        let addtion = $(this).data('addtion');
+        if (addtion !== undefined) {
+            addtion = addtion.split('|');
+            addtion.forEach(function(elem, index) {
+                elemValue = $('#' + elem).val();
+                if (elemValue != '') {
+                    if (url.indexOf('?') === -1) {
+                        url += "?filter_" + elem + "=" + elemValue;
+                    } else {
+                        url += "&filter_" + elem + "=" + elemValue;
+                    }
+                }
+            });
+        }
+        $.get({
+            url: url,
+            cache: false,
+            dataType: 'json',
+            success: function(data) {
+                options = '';
+                if ($(target + " option").length > 0) {
+                    options = $(target).find('option')[0].outerHTML;
+                }
+                $.each(data, function(id, item) {
+                    options += "<option value= '" + id + "'>" + item + "</option>";
+                });
+
+                $(target).html(options);
+                // if ($(target).hasClass('get_data')) $(target).trigger("change");
+                if ($(target).hasClass('get_child')) $(target).trigger("change");
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                alert("Error: " + errorThrown);
+            }
+        });
+    }
+});

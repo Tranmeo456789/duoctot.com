@@ -95,17 +95,17 @@
                                 </div>
                                 <div class="col-xl-5 col-lg-12">
                                     <div class="form-group">
-                                        <input class="form-control name" type="text" name="name" value="{{$customer->name??''}}" autocomplete="off" placeholder="Nhập họ tên">
+                                        <input class="form-control name" type="text" name="name" value="{{$item->fullname??''}}" autocomplete="off" placeholder="Nhập họ tên">
                                     </div>
                                 </div>
                                 <div class="col-xl-5 col-lg-12">
                                     <div class="form-group">
-                                        <input class="form-control phonecart1 phone" type="text" name="phone" value="{{$customer->phone??''}}" id="phonecart1" autocomplete="off" placeholder="Nhập số điện thoại">
+                                        <input class="form-control phonecart1 phone" type="text" name="phone" value="{{$item->phone??''}}" id="phonecart1" autocomplete="off" placeholder="Nhập số điện thoại">
                                     </div>
                                 </div>
                                 <div class="col-xl-5 col-lg-12">
                                     <div class="form-group">
-                                        <input class="form-control mailcart1 email" type="text" name="email" value="{{$customer->email??''}}" autocomplete="off" placeholder="Nhập Email (Không bắt buộc)">
+                                        <input class="form-control mailcart1 email" type="text" name="email" value="{{$item->email??''}}" autocomplete="off" placeholder="Nhập Email (Không bắt buộc)">
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -156,7 +156,6 @@
                                                 <div class="col-xl-5 col-lg-12">
                                                     <div class="form-group">
                                                         <input class="form-control" type="text" id="name1" name="name1" autocomplete="off" placeholder="Nhập tên">
-
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-5 col-lg-12">
@@ -197,21 +196,23 @@
                                         <div class="row">
                                             <div class="col-xl-5 col-lg-12">
                                                 <div class="form-group">
-                                                    <input class="form-control name2" type="text" id="name2" name="name2" value="{{$customer->name??''}}" autocomplete="off" placeholder="Nhập họ tên">
+                                                    <input class="form-control name2" type="text" id="name2" name="name2" value="{{$item->fullname??''}}" autocomplete="off" placeholder="Nhập họ tên">
                                                 </div>
                                             </div>
                                             <div class="col-xl-5 col-lg-12">
                                                 <div class="form-group">
-                                                    <input class="form-control phone2" type="text" id="phone2" name="phone2" value="{{$customer->phone??''}}" autocomplete="off" placeholder="Nhập số điện thoại">
+                                                    <input class="form-control phone2" type="text" id="phone2" name="phone2" value="{{$item->phone??''}}" autocomplete="off" placeholder="Nhập số điện thoại">
                                                 </div>
                                             </div>
                                             <div class="col-xl-5 col-lg-12">
                                                 <div class="form-group">
                                                     <select name="city2" class="form-control choose city2" id="city">
                                                         <option value="">Chọn Tỉnh/Thành phố</option>
-                                                        @foreach($citys as $city)
-                                                        <option value="{{$city->matp}}">{{$city->name}}</option>
+                                                        @if(isset($item))
+                                                        @foreach($itemsProvince as $key => $city)
+                                                        <option value="{{$key}}" {{$item->province_id==$key? 'selected' : ''}}>{{$city}}</option>
                                                         @endforeach
+                                                        @endif
                                                     </select>
                                                 </div>
                                             </div>
@@ -219,6 +220,11 @@
                                                 <div class="form-group">
                                                     <select name="district2" class="form-control choose district2" id="district2">
                                                         <option value="">Chọn Quận/Huyện</option>
+                                                        @if(isset($item))
+                                                        @foreach($itemsDistrict as $key => $district)
+                                                        <option value="{{$key}}" {{$item->district_id==$key? 'selected' : ''}}>{{$district}}</option>
+                                                        @endforeach
+                                                        @endif
                                                     </select>
                                                 </div>
                                             </div>
@@ -226,6 +232,11 @@
                                                 <div class="form-group">
                                                     <select name="wards2" class="form-control wards2" id="wards2">
                                                         <option value="">Chọn Phường/Xã</option>
+                                                        @if(isset($wardc))
+                                                        @foreach($itemsWard as $key => $ward)
+                                                        <option value="{{$key}}" {{$wardc==$key?'selected':''}}>{{$ward}}</option>
+                                                        @endforeach
+                                                        @endif
                                                     </select>
                                                 </div>
                                             </div>
@@ -244,8 +255,8 @@
                                                 <div class="form-group">
                                                     <select name="city3" class="form-control choose" id="city3">
                                                         <option value="">Chọn Tỉnh/Thành phố</option>
-                                                        @foreach($citys as $city)
-                                                        <option value="{{$city->matp}}">{{$city->name}}</option>
+                                                        @foreach($itemsProvince as $key => $city)
+                                                        <option value="{{$key}}">{{$city}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>

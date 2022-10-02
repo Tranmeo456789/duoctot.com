@@ -13,7 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Shop\OrderModel as MainModel;
 
 use Session;
-
+use DB;
 class OrderController extends Controller
 {
     public function __construct()
@@ -58,7 +58,10 @@ class OrderController extends Controller
                 unset($list_status[$k]);
             }
         }
-        return view('shop.backend.order.detail_order', compact('order', 'list_qty', 'ls_product_order', 'list_status','pageTitle','moduleName'));
+        $customer_id = $order[0]->customer_id;
+        $customers = DB::table('customers')->where('id',$customer_id)->get();
+        $customer=$customers[0];
+        return view('shop.backend.order.detail_order', compact('order', 'list_qty','customer', 'ls_product_order', 'list_status','pageTitle','moduleName'));
     }
     public function list_invoice()
     {

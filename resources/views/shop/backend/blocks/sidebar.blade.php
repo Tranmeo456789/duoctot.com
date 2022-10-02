@@ -133,6 +133,12 @@
                             <p>Danh sách kho hàng</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{route('warehouse.import')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Phiếu nhập kho</p>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li class="nav-item">

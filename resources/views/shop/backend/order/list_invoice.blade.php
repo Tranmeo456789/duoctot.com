@@ -1,5 +1,4 @@
 
-
 @extends('shop.layouts.backend')
 
 @section('title',$pageTitle)

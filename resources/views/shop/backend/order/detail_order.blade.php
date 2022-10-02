@@ -75,11 +75,36 @@
             </div>
             <div class="col-4">
                 <div class="form-group">
-                    <label for="intro">Ngày tạo</label>
+                    <label for="intro">Thời gian đặt hàng</label>
                     <input class="form-control" type="text" name="" id="" value="{{$order[0]->created_at}}" disabled>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<div class="card mt-2 ml-1">
+    <div class="card-header font-weight-bold bg-info text-light">
+        Thông tin khách hàng
+    </div>
+    <div class="card-body">
+        <table class="table table-striped table-checkall" style="font-size:14px!important; border: none; table-layout: auto;width: 100%">
+            <thead>
+                <tr>
+                    <th scope="col">Họ và tên</th>
+                    <th scope="col">Số điện thoại</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Địa chỉ</th>
+                </tr>
+            </thead>
+            <tbody>   
+                <tr class="">
+                    <td style="width: 20%">{{$customer->name}}</td>
+                    <td style="width: 20%">{{$customer->phone}}</td>
+                    <td style="width: 20%">{{$customer->email}}</td>
+                    <td style="width: 40%">{{$customer->address_detail}}<span>,</span>{{$customer->address}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 <div class="card mt-2 ml-1">
