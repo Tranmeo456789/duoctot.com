@@ -30,7 +30,7 @@
                 <a title="" id="payment-link" class="search-history-order">
                     <div class="clearfix">
                         <div class="fl-left mr-2 pt-2">
-                            <img style="width:26px" src="{{asset('images/shop/history.png')}}" alt="" srcset="">
+                            <img style="width:26px" src="{{asset('images/shop/history.png')}}" alt="">
                         </div>
                         <div class="fl-left">
                             <p>Tra cứu</p>
@@ -109,12 +109,12 @@
                 </div>
             </div>
             @else
-            <div id="" class="fl-right" style="margin-left:10px;padding-top:15px;">
+            <div id="" class="fl-right" style="margin-left:10px;padding-top:12px;">
                 <a title="" id="payment-link" class="">
                     <div class="btn-register">Đăng ký</div>
                 </a>
             </div>
-            <div id="" class="fl-right" style="padding-top:15px;">
+            <div id="" class="fl-right" style="padding-top:12px;">
                 <a title="" id="payment-link" class="">
                     <div class="btn-login">Đăng nhập</div>
                 </a>

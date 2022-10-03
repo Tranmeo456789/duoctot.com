@@ -12,6 +12,8 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('/dat-hang/thanh-cong/{code}','OrderController@success')->name('fe.order.success');
     Route::get('/thu-test','OrderController@test');
 
+    Route::get('/don-thuoc','PrescripController@index')->name('fe.prescrip.index');
+
     Route::get('/gio-hang','CartController@cart_product')->name('fe.product.cart');
     Route::get('/gio-hang-trong','CartController@cart_null')->name('fe.product.cart_null');
     Route::get('/thanh-toan-tai-nha','CartController@pay_home')->name('fe.product.pay_home');

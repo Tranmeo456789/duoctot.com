@@ -19,7 +19,6 @@ use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
 use Session;
 use DB;
 use Illuminate\Support\Str;
-
 session_start();
 include "app/Helpers/data.php";
 class OrderController extends ShopFrontEndController

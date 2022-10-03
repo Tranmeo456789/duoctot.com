@@ -23,7 +23,7 @@
     </li>
 </ul>
 <div class="text-center child_buy">
-    <div class="text-center btn-buynn mb-3"><a href="">MUA THUỐC NGAY</a></div>
+    <div class="text-center btn-buynn mb-3"><a href="{{route('fe.prescrip.index')}}">MUA THUỐC NGAY</a></div>
     <span>Hoặc mua qua hostline 0393167234</span>
 </div>
 <div class="mt-5 rimg-center">

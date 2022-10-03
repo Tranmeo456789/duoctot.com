@@ -74,9 +74,16 @@ $(document).ready(function () {
     //dong form
     $('.btn-closenk').click(function () {
         $('.form-login').css("display", "none");
+        $('.form-search-product').css("display", "none");
         $('.black-screen').css("display", "none");
         $('#container').removeClass("fixed-hbd");
         $('#fixscreen-respon').css("display", "none");
+    });
+
+    $('.addy-product').click(function () {
+        $('.form-search-product').css("display", "block");
+        $('.black-screen').css("display", "block");
+        $('#container').addClass("fixed-hbd");
     });
     //hien form dang ky,dang nhap,quen mat khau
     $('.btn-login').click(function () {
@@ -90,6 +97,7 @@ $(document).ready(function () {
         $('#container').addClass("fixed-hbd");
         // $('body,html').stop().animate({ scrollTop: 0 }, 0);
     });
+
     $('.btn-login-res').click(function () {
         $('#head-body-respon').removeClass("slider");
         $('.form-login').css("display", "block");
