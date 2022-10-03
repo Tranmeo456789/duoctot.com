@@ -1,5 +1,5 @@
 @extends('shop.layouts.backend')
-@section('title',$pageTitle)
+@section('title','Quản lý nhà thuốc Tdoctor')
 
 @section('content')
 <section class="content pt-3">

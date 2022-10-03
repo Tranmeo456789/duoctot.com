@@ -1,15 +1,17 @@
 /*GLOBAL*/
+html{
+    scroll-behavior: smooth;
+}
 body{
     font-family: 'Helvetica Neue';
     font-size: 14px;
     line-height: normal;
     color: #272727;
     line-height: 24px;
+    
 }
 .container-menures{padding: 0px 14px;}
-#site{
-    overflow: hidden;
-}
+
 ul li{
     list-style: none;
 }

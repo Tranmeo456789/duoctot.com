@@ -12,11 +12,11 @@
                     <div class="item">
                         <div class="clearfix" style="max-width:474px;">
                             <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
-                                
+
                                 <li data-thumb="{{asset($productcs['image'])}}">
-                                    <img src="{{asset($productcs['image'])}}"/>
+                                    <img src="{{asset($productcs['image'])}}" />
                                 </li>
-                                
+
                             </ul>
                         </div>
                     </div>
@@ -65,13 +65,13 @@
                     <div class="input-number">
                         <span class="seclect-number" data-id="{{$productcs['id']}}">Chọn số lượng</span>
                         <span class="pm11">
-                            <span title="" class="minus1"><i class="fa fa-minus"></i></span>          
+                            <span title="" class="minus1"><i class="fa fa-minus"></i></span>
                             <input type="number" name="number_perp" min="1" value="1" class="num-order">
                             <span title="" class="plus1"><i class="fa fa-plus"></i></span>
                         </span>
                     </div>
                     <div class="btn-buy-search d-flex justify-content-between flex-wrap">
-                        <span name="btn_selectbuy"  class="btn-select-buy btn btn-primary text-light mb-xs-2">Chọn mua</span>
+                        <span name="btn_selectbuy" class="btn-select-buy btn btn-primary text-light mb-xs-2">Chọn mua</span>
                         <a class="btn-search-house" href="">Tìm nhà thuốc</a>
                     </div>
                 </form>
@@ -158,21 +158,23 @@
 <div class="short-infohr mb-3"></div>
 <div class="wp-inner">
     <div id="content-detail-product" class="row">
-        <div class="col-12 col-lg-3 cat-content px-0">
-            <div class="main-content-product">
-                <h1>Nội dung chính
-                    <div class="roud-img"><img src="{{asset('images/shop/3ngang.png')}}" alt=""></div>
-                </h1>
-            </div>
-            <ul class="list-content-product">
-                <li><a href="#desc-product">Mô tả sản phẩm</a></li>
-                <li><a href="#element-product">Thành phần</a></li>
-                <li><a href="#func-product">Công dụng</a></li>
-                <li><a href="#alternate-product">Cách dùng</a></li>
-                <li><a href="#ide-effects">Tác dụng phụ</a></li>
-                <li><a href="#note-product">Lưu ý</a></li>
-                <li><a href="#preserve-product">Bảo quản</a></li>
-            </ul>
+        <div class="col-12 col-lg-3 px-0">
+                <div class="cat-content">
+                    <div class="main-content-product">
+                        <h1>Nội dung chính
+                            <div class="roud-img"><img src="{{asset('images/shop/3ngang.png')}}" alt=""></div>
+                        </h1>
+                    </div>
+                    <ul class="list-content-product">
+                        <li><a href="#desc-product">Mô tả sản phẩm</a></li>
+                        <li><a href="#element-product">Thành phần</a></li>
+                        <li><a href="#func-product">Công dụng</a></li>
+                        <li><a href="#alternate-product">Cách dùng</a></li>
+                        <li><a href="#ide-effects">Tác dụng phụ</a></li>
+                        <li><a href="#note-product">Lưu ý</a></li>
+                        <li><a href="#preserve-product">Bảo quản</a></li>
+                    </ul>
+                </div>
         </div>
         <div class="col-12 col-lg-9">
             <div class="title-content-detail-product d-flex justify-content-between flex-wrap">

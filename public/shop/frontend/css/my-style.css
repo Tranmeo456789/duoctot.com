@@ -29,6 +29,12 @@ ul {
     cursor: pointer;
     display: block;
 }
+.cat-content{
+    position: sticky;
+    top: 10px;
+    z-index: 100;
+}
+
 .form-group.h-35 {
     height: 35px !important;
     line-height: 35px !important;
