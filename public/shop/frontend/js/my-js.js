@@ -155,7 +155,10 @@ $(document).on('click', ".changeTypePassword", function (event) {
         $(this).html("<i class='fa fa-eye'></i>");
     }
 });
-
+$(document).on('click', ".cat-content .list-content-product li a", function (event) {
+    $('.cat-content .list-content-product li a').removeClass("active-ndsp");
+    $(this).addClass("active-ndsp");
+});
 // $(document).on('click', ".btn-select-buy", function (event) {
 //     alert('ok');
 // });

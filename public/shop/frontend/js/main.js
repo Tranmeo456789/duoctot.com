@@ -304,7 +304,55 @@ jQuery.validator.addMethod("checkPhone",
 
         if (phone != '') {
             var firstNumber = phone.substring(0, 2);
-            if ((firstNumber == '09' || firstNumber == '08') && phone.length == 10) {
+            if ((firstNumber == '09' || firstNumber == '08' || firstNumber == '03' || firstNumber == '07') && phone.length == 10) {
+                if (phone.match(/^\d{10}/)) {
+                    flag = true;
+                }
+            } else if (firstNumber == '01' && phone.length == 11) {
+                if (phone.match(/^\d{11}/)) {
+                    flag = true;
+                }
+            }
+        }
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checkPhone1",
+    function () {
+        var flag = false;
+        var phone = $('.phonecart2').val().trim();
+        phone = phone.replace('(+84)', '0');
+        phone = phone.replace('+84', '0');
+        phone = phone.replace('0084', '0');
+        phone = phone.replace(/ /g, '');
+
+        if (phone != '') {
+            var firstNumber = phone.substring(0, 2);
+            if ((firstNumber == '09' || firstNumber == '08' || firstNumber == '03' || firstNumber == '07') && phone.length == 10) {
+                if (phone.match(/^\d{10}/)) {
+                    flag = true;
+                }
+            } else if (firstNumber == '01' && phone.length == 11) {
+                if (phone.match(/^\d{11}/)) {
+                    flag = true;
+                }
+            }
+        }
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checkPhone2",
+    function () {
+        var flag = false;
+        var phone = $('.phonecart3').val().trim();
+        phone = phone.replace('(+84)', '0');
+        phone = phone.replace('+84', '0');
+        phone = phone.replace('0084', '0');
+        phone = phone.replace(/ /g, '');
+
+        if (phone != '') {
+            var firstNumber = phone.substring(0, 2);
+            if ((firstNumber == '09' || firstNumber == '08' || firstNumber == '03' || firstNumber == '07') && phone.length == 10) {
                 if (phone.match(/^\d{10}/)) {
                     flag = true;
                 }

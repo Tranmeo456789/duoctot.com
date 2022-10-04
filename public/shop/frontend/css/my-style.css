@@ -92,6 +92,10 @@ font-weight: 600;
     cursor: pointer;
     display: block;
 }
+.cat-content .list-content-product li a.active-ndsp{
+    border-radius: 10px;
+    background: #fdfdfd;
+}
 .cat-content{
     position: sticky;
     top: 10px;

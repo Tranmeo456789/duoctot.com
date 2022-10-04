@@ -221,9 +221,9 @@
 
 #featured-category li {
     float: left;
-    width: 15.26%;
+    width: 15.83%;
     height: 210px;
-    margin-right: 1.4%;
+    margin-right: 1%;
     margin-bottom: 1%;
     padding: 25px 3px;
     background: #F1F8FF;
@@ -234,7 +234,9 @@
 #featured-category li:nth-child(even) {
     background: #FFFBEA;
 }
-
+#featured-category li:nth-child(6n) {
+    margin-right: 0px;
+}
 #product-covid {
     background-color: #072D94;
 }
@@ -259,6 +261,7 @@
     background: white;
     border: 1px solid white;
     border-radius: 10px;
+    overflow: hidden;
 }
 
 #selling-product h1 p {
@@ -267,16 +270,19 @@
 
 #selling-product li {
     float: left;
-    width: 18.5%;
+    width: 19.2%;
     height: 330px;
-    margin-right: 1.4%;
+    margin-right: 1%;
     margin-bottom: 1%;
     padding: 25px 3px;
     background: #fff;
     border: 1px solid #787878;
     border-radius: 10px;
+    overflow: hidden;
 }
-
+#selling-product li:nth-child(5n){
+    margin-right: 0px;
+}
 #selling-product li:hover {
     border: 1px solid #05AFE3;
 }

@@ -303,7 +303,8 @@
                     checkname2: true
                 },
                 phone2: {
-                    checkphone2: true
+                    checkphone2: true,
+                    checkPhone2: true,
                 },
                 city2: {
                     checkcity2: true
@@ -362,7 +363,7 @@
                 },
                 phone2: {
                     checkphone2: "Thông tin bắt buộc",
-                    checkPhone: "Số điện thoại không đúng định dạng",
+                    checkPhone2: "Số điện thoại không đúng định dạng",
                 },
                 city2: {
                     checkcity2: "Thông tin bắt buộc"

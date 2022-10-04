@@ -160,7 +160,7 @@
                                                 </div>
                                                 <div class="col-xl-5 col-lg-12">
                                                     <div class="form-group">
-                                                        <input class="form-control phonecart1" type="text" id="phone1" name="phone1" autocomplete="off" placeholder="Nhập số điện thoại">
+                                                        <input class="form-control phonecart2" type="text" id="phone1" name="phone1" autocomplete="off" placeholder="Nhập số điện thoại">
 
                                                     </div>
                                                 </div>
@@ -201,7 +201,7 @@
                                             </div>
                                             <div class="col-xl-5 col-lg-12">
                                                 <div class="form-group">
-                                                    <input class="form-control phone2" type="text" id="phone2" name="phone2" value="{{$item->phone??''}}" autocomplete="off" placeholder="Nhập số điện thoại">
+                                                    <input class="form-control phone2 phonecart3" type="text" id="phone2" name="phone2" value="{{$item->phone??''}}" autocomplete="off" placeholder="Nhập số điện thoại">
                                                 </div>
                                             </div>
                                             <div class="col-xl-5 col-lg-12">

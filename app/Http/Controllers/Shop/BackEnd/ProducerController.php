@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Shop\BackEnd;
 
 use App\Model\Shop\ProducerModel as MainModel;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\Shop\BackEnd\BackEndController;
 use App\Http\Requests\ProducerRequest as MainRequest;
+
 class ProducerController extends BackEndController
 {
 

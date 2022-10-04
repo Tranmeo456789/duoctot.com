@@ -628,7 +628,10 @@ input:checked+.slider:before {
     border: 1px solid #B0C1DB;
     align-items: center;
 }
-
+.sub-menu2 .cat_detail .body_catdetail li span {
+    line-height: 15px;
+    display: inline-block;
+}
 .cat_detail .body_catdetail li span {
     font-size: 13px;
     line-height: 35px;

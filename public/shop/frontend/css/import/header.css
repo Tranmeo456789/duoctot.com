@@ -172,7 +172,7 @@
 
 .head_topon p {
     font-weight: 500;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 22px;
     text-align: center;
     color: #E9202C;
@@ -351,7 +351,7 @@
     margin-right: 1%;
 }
 
-.body_catdetail>li:nth-child(4) {
+.body_catdetail>li:nth-child(4n) {
     margin-right: 0px;
 }
 
