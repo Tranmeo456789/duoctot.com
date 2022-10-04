@@ -8,6 +8,8 @@ use App\Model\Shop\BackEndModel;
 use Illuminate\Support\Str;
 use Kalnoy\Nestedset\NodeTrait;
 use App\Model\Shop\ProductModel;
+use App\Model\Shop\CollaboratorsUserModel;
+use App\Model\Shop\CollaboratorsClinicDoctor;
 use DB;
 class CatProductModel extends BackEndModel
 {
@@ -15,6 +17,29 @@ class CatProductModel extends BackEndModel
     protected $table  = 'cat_product';
     protected $guarded = [];
 
+    public function scopeOfCollaboratorCode($query)
+    {
+        if (\Session::has('user')){
+            $user = \Session::get('user');
+
+            $refer_id = $user->refer_id ;
+            $collaborator = CollaboratorsUserModel::where('code',$refer_id)->first();
+
+            if ($collaborator)  {
+                $collaborator_code = $collaborator->code;
+
+                $arrUserID = CollaboratorsClinicDoctor::select("user_id")
+                                ->where("collaborators_clinic_doctor.collaborator_code",$collaborator_code)
+                                ->first();
+
+                if (!empty($arrUserID)) {
+                    $query->whereIn('user_id',$arrUserID['user_id']);
+                }
+            }
+        }
+
+        return $query;
+    }
     public function listItems($params = null, $options = null)
     {
         $result = null;
@@ -54,6 +79,52 @@ class CatProductModel extends BackEndModel
             foreach ($nodes as $value) {
                 $result[$value['id']] = str_repeat(config('myconfig.template.char_level'), $value['depth'] - 1) . $value['name'];
             }
+        }
+        if ($options['task'] == "frontend-list-items-level-2"){
+            $user = \Session::get('user');
+
+            $refer_id = $user->refer_id ;
+            $collaborator = CollaboratorsUserModel::where('code',$refer_id)->first();
+            $whereProduct = "";
+            if ($collaborator)  {
+                $collaborator_code = $collaborator->code;
+
+                $arrUserID = CollaboratorsClinicDoctor::select("user_id")
+                                ->where("collaborators_clinic_doctor.collaborator_code",$collaborator_code)
+                                ->first();
+
+                if (!empty($arrUserID)) {
+                    $arrUserID = "(". implode(',',$arrUserID['user_id']).")";
+                    $whereProduct = "AND `user_id` IN $arrUserID";
+                }
+            }
+
+            $query = self::select(DB::raw("cat_product.id,cat_product.name,cat_product.image,cat_product.slug,
+                                (  select count(1) - 1
+                                    from `cat_product` as `_d`
+                                    where `cat_product`.`_lft` between `_d`.`_lft` and `_d`.`_rgt`
+                                ) as `depth`,
+                                (  select count(p.id)
+                                    from `products` as `p`
+                                    where `p`.`cat_product_parent_id` = `cat_product`.`id`
+                                    $whereProduct
+                                ) as `number_product`
+                           "))
+                         ->where('cat_product.status','=','active')
+                         ->having('depth','=',2)
+                         ->orderBy('cat_product._lft');
+            $result = $query->get()
+                            ->toArray();
+        }
+        if ($options['task'] == "frontend-list-items-by-parent-id"){
+
+
+            $query = self::select('id','name','image','slug')
+                         ->where('status','=','active')
+                         ->where('parent_id',$params['parent_id'])
+                         ->orderBy('_lft');
+            $result = $query->get()
+                            ->toArray();
         }
         return $result;
     }
@@ -124,10 +195,25 @@ class CatProductModel extends BackEndModel
         if ($params['type'] == 'down') $node->down();
         if ($params['type'] == 'up') $node->up();
     }
+    // public function child()
+    // {
+    //     return $this->hasMany('App\Model\Shop\CatProductModel','parent_id');
+    // }
+    // public function products()
+    // {
+    //     return $this->hasMany('App\Model\Shop\ProductModel','cat_product_id');
+    // }
+    // public function productsOfChild(){
+    //     return $this->hasManyThrough('App\Model\Shop\ProductModel',
+    //                         'App\Model\Shop\CatProductModel',
+    //                         'parent_id','cat_product_id','id')
+    //                         ->selectRaw('COUNT(products.id) as total')
+    //                         ->groupBy('parent_id');
+    //             ;
 
-    public function products()
+    // }
+     public function productsOfChild()
     {
-        return $this->hasMany('App\Model\Shop\ProductModel');
+        return $this->hasMany('App\Model\Shop\ProductModel','cat_product_parent_id');
     }
-   
 }

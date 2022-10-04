@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\Model\Shop\BackEndModel;
 use App\Model\Shop\Size;
 use Illuminate\Support\Str;
+use App\Model\Shop\CollaboratorsUserModel;
+use App\Model\Shop\CatProductModel;
 class ProductModel extends BackEndModel
 {
     protected $casts = [
@@ -23,19 +25,17 @@ class ProductModel extends BackEndModel
     }
     public function scopeOfCollaboratorCode($query)
     {
-        if (\Session::has('user')){
-            $user = \Session::get('user');
-
-            $refer_id = $user->refer_id ;
+        if (isset($params['user'])){
+            $user = json_decode(json_encode($params['user']));
+            $refer_id = $params['user']->refer_id ;
             $collaborator = CollaboratorsUserModel::where('code',$refer_id)->first();
 
             if ($collaborator)  {
                 $collaborator_code = $collaborator->code;
 
-                $arrUserID = CollaboratorsClinicDoctor::select("user_id")
-                                ->where("collaborators_clinic_doctor.collaborator_code",$collaborator_code)
-                                ->first();
-
+                $arrUserID = \App\CollaboratorsClinicDoctor::select("user_id")
+                                                ->where("collaborators_clinic_doctor.collaborator_code",$collaborator_code)
+                                                ->first();
                 if (!empty($arrUserID)) {
                     $query->whereIn('user_id',$arrUserID->user_id);
                 }
@@ -59,65 +59,24 @@ class ProductModel extends BackEndModel
             $result =  $query->orderBy('id', 'desc')->where('user_id',$user->user_id)
                 ->paginate($params['pagination']['totalItemsPerPage']);
         }
-        if ($options['task'] == "frontend-list-items") {
+        if ($options['task'] == "fronend-list-items") {
             $query = $this::select('id','name','type','code','cat_product_id','producer_id',
                                     'tick','type_price','price','price_vat','coefficient',
                                     'type_vat','packing','unit_id','sell_area','amout_max',
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit',
-                                    'preserve','note','image','albumImage','albumImageHash','user_id','featurer','long','wide','high',
-                                    'mass');
-            if (isset($params['cat_product_id'])){
-                $query->where('cat_product_id',$params['cat_product_id']);
-            }
-            $query->OfCollaboratorCode();
+                                    'preserve','note','image','featurer','long','user_id','wide','high',
+                                    'mass', 'created_at', 'updated_at')
+                                ->OfCollaboratorCode();
             $result =  $query->orderBy('id', 'desc')
-                             ->paginate($params['limit']);
+                ->paginate($params['pagination']['totalItemsPerPage']);
         }
-        return $result;
-    }
-    public function listItemsNoPaginate(){
-        $result = null;
-        $user = Session::get('user');
-        $query = $this::select('id','name','type','code','cat_product_id','producer_id',
-        'tick','type_price','price','price_vat','coefficient',
-        'type_vat','packing','unit_id','sell_area','amout_max',
-        'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
-        'dosage_forms','country_id','specification','benefit',
-        'preserve','note','image','featurer','long','user_id','wide','high',
-        'mass', 'created_at', 'updated_at');
-        $result =  $query->orderBy('id', 'desc')->where('user_id',$user->user_id)->get();
-        return $result;
-    }
-    public function listItemsAllNoPaginate(){
-        $result = null;
-        $user = Session::get('user');
-        $query = $this::select('id','name','type','code','cat_product_id','producer_id',
-        'tick','type_price','price','price_vat','coefficient',
-        'type_vat','packing','unit_id','sell_area','amout_max',
-        'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
-        'dosage_forms','country_id','specification','benefit',
-        'preserve','note','image','featurer','long','user_id','wide','high',
-        'mass', 'created_at', 'updated_at');
-        $result =  $query->orderBy('id', 'desc')->get();
         return $result;
     }
     public function getItem($params = null, $options = null)
     {
         $result = null;
         if ($options['task'] == 'get-item') {
-            $result = self::select('id','name','type','code','cat_product_id','producer_id',
-                                    'tick','type_price','price','price_vat','coefficient',
-                                    'type_vat','packing','unit_id','sell_area','amout_max',
-                                    'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
-                                    'dosage_forms','country_id','specification','benefit',
-                                    'preserve','note','image','albumImage','albumImageHash','user_id','featurer','long','wide','high',
-                                    'mass')
-                            ->where('id', $params['id'])
-                            ->OfCollaboratorCode()
-                            ->first();
-        }
-        if ($options['task'] == 'frontend-get-item') {
             $result = self::select('id','name','type','code','cat_product_id','producer_id',
                                     'tick','type_price','price','price_vat','coefficient',
                                     'type_vat','packing','unit_id','sell_area','amout_max',
