@@ -37,9 +37,12 @@ class BackEndController extends Controller
         $session->put('params.pagination.totalItemsPerPage', $this->totalItemsPerPage);
         $this->params =  $session->get('params');
         $items              = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
-        if ($items->currentPage() > $items->lastPage()) {
-            $lastPage = $items->lastPage();
 
+        if($items->lastPage()==0){
+            $items=[];
+        }
+        elseif ($items->currentPage() > $items->lastPage()) {
+            $lastPage = $items->lastPage();
             Paginator::currentPageResolver(function () use ($lastPage) {
                 return $lastPage;
             });

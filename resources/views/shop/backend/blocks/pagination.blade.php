@@ -1,3 +1,4 @@
+@if ($items!=null)
 @if ($paginator->hasPages())
 <div class="row justify-content-end">
     <div class="float-right">
@@ -50,4 +51,5 @@
         </ul>
     </div>
 </div>
+@endif
 @endif

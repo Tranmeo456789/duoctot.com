@@ -42,7 +42,15 @@ class WarehouseController extends BackEndController
 
             $task   = "add-item";
             $notify = "Thêm mới $this->pageTitle thành công!";
-
+            $products = (new ProductModel)->listItemsNoPaginate();
+            $product_id=[];
+            if ($products != null) {
+                foreach($products as $product){
+                    $product_id[$product['id']]=0;
+                }
+            }
+            $product_id=json_encode($product_id);
+            $params['product_id']=$product_id;
             if ($params['id'] != null) {
                 $task   = "edit-item";
                 $notify = "Cập nhật $this->pageTitle thành công!";
@@ -76,6 +84,7 @@ class WarehouseController extends BackEndController
         }
         $products = ProductModel::where('user_id', $user->user_id)->get();
         $warehouses = WarehouseModel::where('user_id', $user->user_id)->get();
+        //return($warehouses);
         return view('shop.backend.pages.warehouse.qlwarehouse', compact('warehouses', 'products'));
     }
     public function add_product(Request $request)

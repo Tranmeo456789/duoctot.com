@@ -29,10 +29,17 @@ class WarehouseModel extends BackEndModel
         }
         return $result;
     }
+    public function listItemsNoPaginate(){
+        $result = null;
+        $user = Session::get('user');
+        $query = $this::select('id', 'name','local','user_id','product_id', 'created_at', 'updated_at');
+        $result =  $query->orderBy('id', 'desc')->where('user_id',$user->user_id)->get();
+        return $result;
+    }
     public function getItem($params = null, $options = null) {
         $result = null;
         if($options['task'] == 'get-item') {
-            $result = self::select('id', 'name','local')
+            $result = self::select('id', 'name','user_id','product_id','local')
                             ->where('id', $params['id'])->first();
         }
         return $result;
@@ -48,15 +55,25 @@ class WarehouseModel extends BackEndModel
              $local1s=Tinhthanhpho::where('matp',(int)$params['local'])->get(); 
              $local1=$local1s[0]->name;
             $local=$ward.','.$district.','.$local1;
+            $user = Session::get('user');
             self::insert([
                 'name' => $params['name'],
-                'local' => $local,      
+                'local' => $local,
+                'user_id'=> $user->user_id,
+                'product_id' => $params['product_id']
             ]);
         }
 
         if($options['task'] == 'edit-item') {
             $this->setModifiedHistory($params);
             self::where('id', $params['id'])->update($this->prepareParams($params));
+        }
+        if($options['task'] == 'update-product') {
+            self::where('id', $params['id'])->update(
+                [
+                    'product_id' => $params['product_id']
+                ]
+            );
         }
     }
     public function deleteItem($params = null, $options = null)

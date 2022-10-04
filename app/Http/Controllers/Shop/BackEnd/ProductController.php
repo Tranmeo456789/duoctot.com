@@ -9,10 +9,13 @@ use App\Model\Shop\ProductModel;
 use App\Model\Shop\CatProductModel;
 use App\Model\Shop\ProducerModel;
 use App\Model\Shop\TrademarkModel;
+use App\Model\Shop\WarehouseModel;
 use App\Model\Shop\CountryModel;
 use App\Http\Requests\ProductRequest as MainRequest;
 use App\Model\Shop\UnitModel;
 use App\Model\Shop\ProvinceModel;
+use DB;
+
 class ProductController extends BackEndController
 {
     public function __construct()
@@ -26,36 +29,38 @@ class ProductController extends BackEndController
     public function index(Request $request)
     {
         $session = $request->session();
-        if ($session->has('currentController') &&  ($session->get('currentController') != $this->controllerName) ) {
+        if ($session->has('currentController') &&  ($session->get('currentController') != $this->controllerName)) {
             $session->forget('params');
-        }else{
+        } else {
             $session->put('currentController', $this->controllerName);
         }
-        $session->put('params.filter.typeProduct',$request->has('filter_typeProduct')? $request->get('filter_typeProduct'):($session->has('params.filter.typeProduct')? $session->get('params.filter.typeProduct'):'dang_ban'));
+        $session->put('params.filter.typeProduct', $request->has('filter_typeProduct') ? $request->get('filter_typeProduct') : ($session->has('params.filter.typeProduct') ? $session->get('params.filter.typeProduct') : 'dang_ban'));
 
         $session->put('params.pagination.totalItemsPerPage', $this->totalItemsPerPage);
         $this->params     = $session->get('params');
 
         $items            = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
-
-        if ($items->currentPage() > $items->lastPage()) {
+        //return $items->lastPage();
+        if ($items->lastPage() == 0) {
+            $items = [];
+        } elseif ($items->currentPage() > $items->lastPage()) {
             $lastPage = $items->lastPage();
             Paginator::currentPageResolver(function () use ($lastPage) {
                 return $lastPage;
             });
             $items              = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
         }
-       // $itemsHieuLucVanBanCount   = $this->model->countItems($this->params, ['task' => 'admin-count-items-group-by-hieu-luc-van-ban']); // [ ['status', 'count']]
+        // $itemsHieuLucVanBanCount   = $this->model->countItems($this->params, ['task' => 'admin-count-items-group-by-hieu-luc-van-ban']); // [ ['status', 'count']]
         $pathView = ($request->ajax()) ? 'ajax' : 'index';
         return view($this->pathViewController .  $pathView, [
             'params'           => $this->params,
             'items'            => $items
-          //  'itemsHieuLucVanBanCount' => $itemsHieuLucVanBanCount
+            //  'itemsHieuLucVanBanCount' => $itemsHieuLucVanBanCount
         ]);
     }
     public function save(MainRequest $request)
     {
-       // if (!$request->ajax()) return view("errors." .  'notfound', []);
+        // if (!$request->ajax()) return view("errors." .  'notfound', []);
         if (isset($request->validator) && $request->validator->fails()) {
             return response()->json([
                 'fail' => true,
@@ -66,6 +71,22 @@ class ProductController extends BackEndController
             $params = $request->all();
             $task   = "add-item";
             $notify = "Thêm mới $this->pageTitle thành công!";
+            $product = (new ProductModel)->listItemsAllNoPaginate();
+            $id_product = 1;
+            if ($product != null) {
+                $id_product = DB::table('products')->max('id') + 1;
+            }
+            $warehouses = (new WarehouseModel)->listItemsNoPaginate();
+            if ($warehouses != null) {
+                $ls_product_curent=[];$params_warehouse['product_id']='';
+                foreach($warehouses as $warehouse){
+                    $ls_product_curent=json_decode($warehouse['product_id'], true);
+                    $ls_product_curent[$id_product]=0;
+                    $params_warehouse['product_id'] = json_encode($ls_product_curent);
+                    $params_warehouse['id']=$warehouse['id'];
+                    (new WarehouseModel)->saveItem($params_warehouse,['task' => 'update-product']);
+                }                
+            }
             if ($params['id'] != null) {
                 $task   = "edit-item";
                 $notify = "Cập nhật $this->pageTitle thành công!";
@@ -86,18 +107,20 @@ class ProductController extends BackEndController
             $params["id"] = $request->id;
             $item = $this->model->getItem($params, ['task' => 'get-item']);
         }
-        $itemsCatProduct = (new CatProductModel())->listItems(null,['task' => 'admin-list-items-in-selectbox']);
-        $itemsProducer = (new ProducerModel())->listItems(null,['task' => 'admin-list-items-in-selectbox']);
-        $itemsTrademark = (new TrademarkModel())->listItems(null,['task' => 'admin-list-items-in-selectbox']);
-        $itemsCountry = (new CountryModel())->listItems(null,['task' => 'admin-list-items-in-selectbox']);
-        $itemsUnit = (new UnitModel())->listItems(null,['task' => 'admin-list-items-in-selectbox']);
-        $itemsProvince = (new ProvinceModel())->listItems(null,['task' => 'admin-list-items-in-selectbox']);
+        $itemsCatProduct = (new CatProductModel())->listItems(null, ['task' => 'admin-list-items-in-selectbox']);
+        $itemsProducer = (new ProducerModel())->listItems(null, ['task' => 'admin-list-items-in-selectbox']);
+        $itemsTrademark = (new TrademarkModel())->listItems(null, ['task' => 'admin-list-items-in-selectbox']);
+        $itemsCountry = (new CountryModel())->listItems(null, ['task' => 'admin-list-items-in-selectbox']);
+        $itemsUnit = (new UnitModel())->listItems(null, ['task' => 'admin-list-items-in-selectbox']);
+        $itemsProvince = (new ProvinceModel())->listItems(null, ['task' => 'admin-list-items-in-selectbox']);
         return view($this->pathViewController . 'form', compact(
             'item',
             'itemsCatProduct',
             'itemsProducer',
             'itemsTrademark',
             'itemsCountry',
-            'itemsUnit','itemsProvince'));
+            'itemsUnit',
+            'itemsProvince'
+        ));
     }
 }

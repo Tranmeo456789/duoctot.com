@@ -17,6 +17,7 @@
     $temp=0;
     @endphp
     <tbody>
+    @if ($items!=null)
         @foreach ($items as $val)
         @php
             $temp++;
@@ -48,5 +49,8 @@
             </td>
         </tr>
         @endforeach
+        @else
+        <td colspan="6">Danh sách sản phẩm trống</td>
+        @endif
     </tbody>
 </table>
