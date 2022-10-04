@@ -35,5 +35,6 @@ Route::get('/kiem-tra-email', 'UserController@isunique')->name('user.isunique');
 Route::group(['prefix' => 'laravel-filemanager','middleware' => ['check.login']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
+include_once 'routes/shopApi.php';
 include_once 'routes/shopBackEnd.php';
 include_once 'routes/shopFrontEnd.php';

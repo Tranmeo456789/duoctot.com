@@ -3,7 +3,8 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
-
+include 'FirebaseJWT/JWTCustom.php';
+use \Firebase\JWTCustom\JWTCustom as JWTCustom;
 class Kernel extends HttpKernel
 {
     /**
@@ -50,5 +51,6 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'check.login' => \App\Http\Middleware\CheckLogin::class,
+        'jwt.auth' => JWTCustom::class,
     ];
 }
