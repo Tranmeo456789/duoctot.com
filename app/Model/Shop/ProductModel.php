@@ -21,6 +21,27 @@ class ProductModel extends BackEndModel
         $this->folderUpload        = 'product';
         $this->crudNotAccepted     = ['_token', 'btn_save','file-del','files'];
     }
+    public function scopeOfCollaboratorCode($query)
+    {
+        if (isset($params['user'])){
+            $user = json_decode(json_encode($params['user']));
+            $refer_id = $params['user']->refer_id ;
+            $collaborator = CollaboratorsUserModel::where('code',$refer_id)->first();
+
+            if ($collaborator)  {
+                $collaborator_code = $collaborator->code;
+
+                $arrUserID = \App\CollaboratorsClinicDoctor::select("user_id")
+                                                ->where("collaborators_clinic_doctor.collaborator_code",$collaborator_code)
+                                                ->first();
+                if (!empty($arrUserID)) {
+                    $query->whereIn('user_id',$arrUserID->user_id);
+                }
+            }
+        }
+
+        return $query;
+    }
     public function listItems($params = null, $options = null)
     {
         $result = null;
@@ -34,6 +55,18 @@ class ProductModel extends BackEndModel
                                     'preserve','note','image','featurer','long','user_id','wide','high',
                                     'mass', 'created_at', 'updated_at');
             $result =  $query->orderBy('id', 'desc')->where('user_id',$user->user_id)
+                ->paginate($params['pagination']['totalItemsPerPage']);
+        }
+        if ($options['task'] == "fronend-list-items") {
+            $query = $this::select('id','name','type','code','cat_product_id','producer_id',
+                                    'tick','type_price','price','price_vat','coefficient',
+                                    'type_vat','packing','unit_id','sell_area','amout_max',
+                                    'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
+                                    'dosage_forms','country_id','specification','benefit',
+                                    'preserve','note','image','featurer','long','user_id','wide','high',
+                                    'mass', 'created_at', 'updated_at')
+                                ->OfCollaboratorCode();
+            $result =  $query->orderBy('id', 'desc')
                 ->paginate($params['pagination']['totalItemsPerPage']);
         }
         return $result;
@@ -84,7 +117,7 @@ class ProductModel extends BackEndModel
     {
         if ($options['task'] == 'add-item') {
             $this->setCreatedHistory($params);
-            $params['tick'] = isset($params['tick'])?json_encode($params['tick']): NULL;
+            $params['tick'] = isset($params['tick'])?json_encode($params['tick'],JSON_NUMERIC_CHECK ): NULL;
             $params['featurer'] = isset($params['featurer'])?json_encode($params['featurer']): NULL;
             $params['user_id'] = \Session::get('user')['user_id'];
 
@@ -95,16 +128,23 @@ class ProductModel extends BackEndModel
             }
 
             $params['sell_area'] = ($params['sell_area'] != '')? json_encode($params['sell_area'],JSON_NUMERIC_CHECK ): NULL;
+            $catProduct = CatProductModel::find($params['cat_product_id']);
+            if ($catProduct){
+                $params['cat_product_parent_id'] = $catProduct->parent_id;
+            }
             self::insert($this->prepareParams($params));
         }
         if ($options['task'] == 'edit-item') {
             $this->setModifiedHistory($params);
             $item = self::getItem($params,['task'=>'get-item']);
             $this->updateFileUpload($item,$params,'albumImage');
-            $params['tick'] = isset($params['tick'])?json_encode($params['tick']): NULL;
+            $params['tick'] = isset($params['tick'])?json_encode($params['tick'],JSON_NUMERIC_CHECK ): NULL;
             $params['featurer'] = isset($params['featurer'])?json_encode($params['featurer']): NULL;
             $params['sell_area'] = ($params['sell_area'] != '')? json_encode($params['sell_area'],JSON_NUMERIC_CHECK ): NULL;
-
+            $catProduct = CatProductModel::find($params['cat_product_id']);
+            if ($catProduct){
+                $params['cat_product_parent_id'] = $catProduct->parent_id;
+            }
             self::where('id', $params['id'])->update($this->prepareParams($params));
         }
     }
