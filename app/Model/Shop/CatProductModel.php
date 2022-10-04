@@ -112,8 +112,17 @@ class CatProductModel extends BackEndModel
                            "))
                          ->where('cat_product.status','=','active')
                          ->having('depth','=',2)
-
                          ->orderBy('cat_product._lft');
+            $result = $query->get()
+                            ->toArray();
+        }
+        if ($options['task'] == "frontend-list-items-by-parent-id"){
+
+
+            $query = self::select('id','name','image','slug')
+                         ->where('status','=','active')
+                         ->where('parent_id',$params['parent_id'])
+                         ->orderBy('_lft');
             $result = $query->get()
                             ->toArray();
         }
