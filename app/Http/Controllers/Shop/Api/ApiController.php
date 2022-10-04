@@ -12,7 +12,7 @@ class ApiController extends Controller
 
     protected $sortByAble = ['ASC', 'DESC'];
     protected $orderByAble = ['updated_at', 'created_at'];
-
+    protected $jwt_key = 'anHAzy7CeVuL8ybwt4epOUH5NQXYocpBXQwWGalzU6xRSkD0lAUOsRChzC8fTS6ETSH2J3KpgQbnlPvdMVe7oNcuPQzTkPHfUx88';
     protected $res = [
         'status' => 200,
         'data' => [],

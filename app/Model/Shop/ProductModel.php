@@ -23,17 +23,19 @@ class ProductModel extends BackEndModel
     }
     public function scopeOfCollaboratorCode($query)
     {
-        if (isset($params['user'])){
-            $user = json_decode(json_encode($params['user']));
-            $refer_id = $params['user']->refer_id ;
+        if (\Session::has('user')){
+            $user = \Session::get('user');
+
+            $refer_id = $user->refer_id ;
             $collaborator = CollaboratorsUserModel::where('code',$refer_id)->first();
 
             if ($collaborator)  {
                 $collaborator_code = $collaborator->code;
 
-                $arrUserID = \App\CollaboratorsClinicDoctor::select("user_id")
-                                                ->where("collaborators_clinic_doctor.collaborator_code",$collaborator_code)
-                                                ->first();
+                $arrUserID = CollaboratorsClinicDoctor::select("user_id")
+                                ->where("collaborators_clinic_doctor.collaborator_code",$collaborator_code)
+                                ->first();
+
                 if (!empty($arrUserID)) {
                     $query->whereIn('user_id',$arrUserID->user_id);
                 }
@@ -57,17 +59,20 @@ class ProductModel extends BackEndModel
             $result =  $query->orderBy('id', 'desc')->where('user_id',$user->user_id)
                 ->paginate($params['pagination']['totalItemsPerPage']);
         }
-        if ($options['task'] == "fronend-list-items") {
+        if ($options['task'] == "frontend-list-items") {
             $query = $this::select('id','name','type','code','cat_product_id','producer_id',
                                     'tick','type_price','price','price_vat','coefficient',
                                     'type_vat','packing','unit_id','sell_area','amout_max',
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit',
-                                    'preserve','note','image','featurer','long','user_id','wide','high',
-                                    'mass', 'created_at', 'updated_at')
-                                ->OfCollaboratorCode();
+                                    'preserve','note','image','albumImage','albumImageHash','user_id','featurer','long','wide','high',
+                                    'mass');
+            if (isset($params['cat_product_id'])){
+                $query->where('cat_product_id',$params['cat_product_id']);
+            }
+            $query->OfCollaboratorCode();
             $result =  $query->orderBy('id', 'desc')
-                ->paginate($params['pagination']['totalItemsPerPage']);
+                             ->paginate($params['limit']);
         }
         return $result;
     }
@@ -101,6 +106,18 @@ class ProductModel extends BackEndModel
     {
         $result = null;
         if ($options['task'] == 'get-item') {
+            $result = self::select('id','name','type','code','cat_product_id','producer_id',
+                                    'tick','type_price','price','price_vat','coefficient',
+                                    'type_vat','packing','unit_id','sell_area','amout_max',
+                                    'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
+                                    'dosage_forms','country_id','specification','benefit',
+                                    'preserve','note','image','albumImage','albumImageHash','user_id','featurer','long','wide','high',
+                                    'mass')
+                            ->where('id', $params['id'])
+                            ->OfCollaboratorCode()
+                            ->first();
+        }
+        if ($options['task'] == 'frontend-get-item') {
             $result = self::select('id','name','type','code','cat_product_id','producer_id',
                                     'tick','type_price','price','price_vat','coefficient',
                                     'type_vat','packing','unit_id','sell_area','amout_max',
