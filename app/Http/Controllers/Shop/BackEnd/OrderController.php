@@ -23,7 +23,6 @@ class OrderController extends Controller
         //$this->pageTitle          = 'Danh sách đơn hàng';
         //$this->model = new MainModel();
         //parent::__construct();
-        session(['module_active' => 'order']);
     }
     
     public function add_order()
@@ -42,26 +41,19 @@ class OrderController extends Controller
     {
         $pageTitle='Chi tiết đơn hàng';
         $moduleName='shop.backend';
-        $order = OrderModel::where('code_order', $code)->get();
-        $list_pr = [];
-        $list_qty = [];
-        $list_qty = explode(",", $order[0]['qty_per']);
-        $list_pr = explode(",", $order[0]['product_id']);
-        $ls_product_order = [];
-        foreach ($list_pr as $list_product) {
-            $ls_product_order[] = ProductModel::find($list_product);
-        }
+        $orders = OrderModel::where('code_order', $code)->get();
+        $order=$orders[0];
         $list_status = ['Đang xử lý', 'Đã xác nhận', 'Đang giao hàng', 'Đã giao hàng', 'Hoàn tất', 'Đã hủy'];
-        $status_curent = $order[0]->status;
+        $status_curent = $order->status;
         foreach ($list_status as $k => $item) {
             if ($status_curent == $item) {
                 unset($list_status[$k]);
             }
         }
-        $customer_id = $order[0]->customer_id;
-        $customers = DB::table('customers')->where('id',$customer_id)->get();
-        $customer=$customers[0];
-        return view('shop.backend.order.detail_order', compact('order', 'list_qty','customer', 'ls_product_order', 'list_status','pageTitle','moduleName'));
+        $params['id']=$order->customer_id;
+        $customer=(new CustomerModel)->getItem($params, ['task' => 'get-item']);
+        $info_product=json_decode($order->info_product,true);
+        return view('shop.backend.order.detail_order', compact('order','info_product','customer', 'list_status','pageTitle','moduleName'));
     }
     public function list_invoice()
     {
@@ -81,49 +73,6 @@ class OrderController extends Controller
         OrderModel::where('id', $id)->update([
             'status' => $status
         ]);
-        $list_pr = [];
-        $list_qty = [];
-        if ($status == 'Hoàn tất') {
-            $order = OrderModel::where('id', $id)->get();      
-            $list_qty = explode(",", $order[0]['qty_per']);
-            $list_pr = explode(",", $order[0]['product_id']);
-            $list_porder = [];
-            foreach ($list_pr as $k => $pr) {
-                $list_porder[$pr] = (int)$list_qty[$k];
-            }
-            // $id_cus = 0;
-            // if (Session::has('islogin')) {
-            //     $id_cus = Session::get('id');
-            // }
-            // $products = ProductModel::where('customer_id', $id_cus)->get();
-            $products=ProductModel::whereIn('id',[50,51,46,47,48,49,52])->get();
-            //$warehouses = WarehouseModel::where('customer_id', $id_cus)->get();
-            $warehouses = WarehouseModel::all();
-            $numper_products=json_decode($warehouses[0]['product_id'],true);
-       
-            foreach($numper_products as $k=>$numware){
-                foreach($list_porder as $i=>$numorder){
-                    if($k==$i){
-                        $qty_product=$numware-$numorder;
-                        $numper_products1[$k]=$qty_product;
-                    }
-                }
-            }
-            foreach($numper_products as $k=>$numware){
-                foreach($numper_products1 as $i=>$numorder){
-                    if($k==$i){
-                        $numper_products[$k]=$numorder;
-                    }
-                }
-            }
-         
-                WarehouseModel::where('id', $warehouses[0]['id'])->update(
-                    [
-                        'product_id' => json_encode($numper_products),
-                    ]
-                    );     
-
-         }
         $request->session()->flash('statusorder', 'Cập nhật trạng thái thành công !');
         $result = array(
             'noti_success' => session('statusorder'),

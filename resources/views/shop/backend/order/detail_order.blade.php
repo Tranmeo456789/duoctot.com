@@ -15,7 +15,7 @@
             <div class="col-4">
                 <div class="form-group">
                     <label for="intro">Mã đơn hàng</label>
-                    <input class="form-control" type="text" name="" id="" value="{{$order[0]->code_order}}" disabled>
+                    <input class="form-control" type="text" name="" id="" value="{{$order->code_order}}" disabled>
                 </div>
             </div>
             <div class="col-4">
@@ -23,8 +23,8 @@
                     {!! csrf_field() !!}
                     <div class="form-group">
                         <label for="intro"  class="label-order">Trạng thái</label>
-                        <select name="status_order" data-id="{{$order[0]->id}}" class="form-control update-status">
-                            <option value="{{$order[0]->status}}">{{$order[0]->status}}</option>
+                        <select name="status_order" data-id="{{$order->id}}" class="form-control update-status">
+                            <option value="{{$order->status}}">{{$order->status}}</option>
                             @foreach ($list_status as $item9)
                                 <option value="{{$item9}}" >{{$item9}}</option>
                             @endforeach
@@ -36,7 +36,7 @@
             <div class="col-4">
                 <div class="form-group">
                     <label for="intro">Tổng tiền</label>
-                    <input class="form-control" type="text" name="" id="" value="{{ number_format( $order[0]['total'], 0, '' ,'.' )}}đ" disabled>
+                    <input class="form-control" type="text" name="" id="" value="{{ number_format( $order['total'], 0, '' ,'.' )}}đ" disabled>
                 </div>
             </div>
         </div>
@@ -44,19 +44,19 @@
             <div class="col-4">
                 <div class="form-group">
                     <label for="intro">Số lượng sản phẩm</label>
-                    <input class="form-control" type="text" name="" id="" value="{{$order[0]->qty_total}}" disabled>
+                    <input class="form-control" type="text" name="" id="" value="{{$order->qty_total}}" disabled>
                 </div>
             </div>
             <div class="col-4">
                 <div class="form-group">
                     <label for="intro">Số lượng mặt hàng</label>
-                    <input class="form-control" type="text" name="" id="" value="{{count($list_qty)}}" disabled>
+                    <input class="form-control" type="text" name="" id="" value="{{count($info_product)}}" disabled>
                 </div>
             </div>
             <div class="col-4">
                 <div class="form-group">
                     <label for="intro">Hình thức thanh toán</label>
-                    <input class="form-control" type="text" name="" id="" value="{{$order[0]->payment}}" disabled>
+                    <input class="form-control" type="text" name="" id="" value="{{$order->payment}}" disabled>
                 </div>
             </div>
         </div>
@@ -76,7 +76,7 @@
             <div class="col-4">
                 <div class="form-group">
                     <label for="intro">Thời gian đặt hàng</label>
-                    <input class="form-control" type="text" name="" id="" value="{{substr($order[0]->created_at, 10, 9)}} {{substr($order[0]->created_at, 8, 2)}}-{{substr($order[0]->created_at, 5, 2)}}-{{substr($order[0]->created_at, 0, 4)}}" disabled>
+                    <input class="form-control" type="text" name="" id="" value="{{substr($order->created_at, 10, 9)}} {{substr($order->created_at, 8, 2)}}-{{substr($order->created_at, 5, 2)}}-{{substr($order->created_at, 0, 4)}}" disabled>
                 </div>
             </div>
         </div>
@@ -126,28 +126,22 @@
                 </tr>
             </thead>
             <tbody>
-                @php
-                $index=0;
-                @endphp
-                @foreach($ls_product_order as $product)
-                @php
-                $img_product = explode(',', $product['image']);
+                @foreach($info_product as $k => $item)
+                @php              
+                $product = json_decode($item,true);
                 @endphp
                 <tr class="">
-                    <td style="width: 7%">{{$product->id}}</td>
-                    <td style="width: 13%">{{$product->code}}</td>
-                    <td style="width: 22%" class="font-weight-bold">{{$product->name}}</td>
+                    <td style="width: 7%">{{$k}}</td>
+                    <td style="width: 13%">{{$product['code']}}</td>
+                    <td style="width: 22%" class="font-weight-bold">{{$product['name']}}</td>
                     <td style="width: 10%">
                         <div class="rimg-center img-60"><img src="{{asset($product['image'])}}" alt=""></div>
                     </td>
                     <td style="width: 10%">{{ number_format( $product['price'], 0, "" ,"." )}}đ</td>
-                    <td style="width: 12%" class="text-center">{{$list_qty[$index]}}</td>
-                    <td style="width: 12%">{{$list_qty[$index]}}</td>
-                    <td style="width: 14%">{{ number_format( $product['price']*$list_qty[$index], 0, "" ,"." )}}đ</td>
+                    <td style="width: 12%" class="text-center">{{$product['qty_per']}}</td>
+                    <td style="width: 12%">{{$product['qty_per']}}</td>
+                    <td style="width: 14%">{{ number_format( $product['sub_total'], 0, "" ,"." )}}đ</td>
                 </tr>
-                @php
-                $index++;
-                @endphp
                 @endforeach
             </tbody>
         </table>

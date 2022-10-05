@@ -33,6 +33,10 @@ class CustomerModel extends BackEndModel
             $result = self::select('id','name','code_customer','email','phone','gender','password','address_detail','address','user_id','sale_area','tax_code','legal_representative','customer_group')
                             ->where('id', $params['id'])->first();
         }
+        if($options['task'] == 'get-item-userId') {
+            $result = self::select('id','name','code_customer','email','phone','gender','password','address_detail','address','user_id','sale_area','tax_code','legal_representative','customer_group')
+                            ->where('user_id', $params['user_id'])->first();
+        }
         return $result;
     }
     public function saveItem($params = null, $options = null) {

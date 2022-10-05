@@ -73,25 +73,25 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($info_product as $k => $item)
                         @php
-                        $index=0;
+                        $product = json_decode($item,true);
                         @endphp
-                        @foreach($ls_product_order as $product)
-                       
                         <tr class="bb_order">
-                        <td style="width: 20%" class='name'><div class="rimg-center"><div><img src="{{asset($product['image'])}}" alt=""></div></div></td>
+                            <td style="width: 20%" class='name'>
+                                <div class="rimg-center">
+                                    <div><img src="{{asset($product['image'])}}" alt=""></div>
+                                </div>
+                            </td>
                             <td style="width: 50%">
                                 <div class="d-flex">
                                     <p class="namep-order truncate2">{{$product['name']}}</p>
                                 </div>
                             </td>
                             <td style="width: 16%" class='name'>{{$product['unit']}}</td>
-                            <td style="width: 10%">{{$list_qty[$index]}}</td>
-                            <td style="width: 16%" class='text-right'>{{ number_format( $product['price']*$list_qty[$index], 0, "" ,"." )}}đ</td>
-                        </tr>
-                        @php
-                        $index++;
-                        @endphp
+                            <td style="width: 10%">{{$product['qty_per']}}</td>
+                            <td style="width: 16%" class='text-right'>{{ number_format( $product['sub_total'], 0, "" ,"." )}}đ</td>
+                        </tr>                   
                         @endforeach
                         <tr class="bb_order">
                             <td colspan="3" style="width: 16%" class="text-right">Tổng tiền</td>

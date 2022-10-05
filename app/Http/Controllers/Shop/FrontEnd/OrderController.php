@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Shop\FrontEnd;
-
 use Illuminate\Http\Request;
 use App\Model\Shop\CustomerModel;
 use App\Model\Shop\OrderModel;
@@ -36,10 +35,9 @@ class OrderController extends ShopFrontEndController
         $_SESSION['cat_product'] = $catps = data_tree1($data, 0);
     }
     public function completed(Request $request)
-    {
-       
+    {  
         $session = $request->session();
-        $item = [];
+        $item = [];$params=[];
         if ($session->has('user')){
             $item = $this->model->getItem(['user_id'=>$session->get('user.user_id')],['task' => 'get-item']);
             $details = $item->details->pluck('value','user_field')->toArray()??[];
@@ -51,45 +49,52 @@ class OrderController extends ShopFrontEndController
         $local1s = Tinhthanhpho::where('matp', (int)$request->input('city2'))->get();
         $local1 = $local1s[0]->name;
         $local = $ward . ',' . $district . ',' . $local1;
-       //return($request->input('gender'));
-        DB::table('customers')->insert([
-            'gender' => $request->input('gender'),
-            'name' => $request->input('name'),
-            'phone' => $request->input('phone'),
-            'user_id'=>$item->user_id,
-            'address'=>$local,
-            'address_detail'=>$request->input('addressdetail2'),
-        ]);
-       
-        $order_id_last = OrderModel::latest('id')->first();
+        $order_id_last = DB::table('orders')->max('id');
         if (OrderModel::latest('id')->first() == null) {
             $order_id_last['id'] = 0;
         }
         $year= getdate()['year'];
         $month = sprintf("%02d", getdate()['mon']);
         $day = sprintf("%02d", getdate()['mday']);
-        $id_order = sprintf("%05d", $order_id_last['id'] + 1);
+        $id_order = sprintf("%05d", $order_id_last + 1);
         $code_order='DHTD'.$year.$month.$day.$id_order;
-        $total = 0;
-        $qty = 0;
-        $listm_id = [];
-        $listm_qty = [];
+        $params['user_id']=$item->user_id;
+         $total = 0;
+         $qty = 0;
+         $info_product=[];$product_item=[];
         foreach ($request->session()->get('cart') as $item) {
             $total += $item['price'] * $item['qty'];
+            $price=$item['price'];$qty_per=$item['qty'];$sub_total=$price*$qty_per;$image=$item['image'];$name=$item['name'];$unit=(ProductModel::find($item['id']))->unitProduct->name;
+            $code=(ProductModel::find($item['id']))->code;
             $qty += $item['qty'];
-            $listm_id[] = $item['id'];
-            $listm_qty[] = (int)$item['qty'];
+            $product_item['name']=$name;
+            $product_item['qty_per']=$qty_per;
+            $product_item['price']=$price;
+            $product_item['sub_total']=$sub_total;
+            $product_item['unit']=$unit;
+            $product_item['image']=$image;
+            $product_item['code']=$code;
+            $info_product[$item['id']]= json_encode($product_item);
+        }    
+        $isCustomerExist = (new CustomerModel)->getItem($params, ['task' => 'get-item-userId']);
+        $customer_id=$isCustomerExist->id;
+        if(!$isCustomerExist){
+            DB::table('customers')->insert([
+                'gender' => $request->input('gender'),
+                'name' => $request->input('name'),
+                'phone' => $request->input('phone'),
+                'user_id'=>$item->user_id,
+                'address'=>$local,
+                'address_detail'=>$request->input('addressdetail2'),
+            ]);
+            $customer_id=DB::table('customers')->max('id');
         }
-        $list_id = implode(',', $listm_id);
-        $list_qty = implode(',', $listm_qty);
-        
         OrderModel::create([
             'code_order' =>  $code_order,
-            'customer_id' =>  DB::table('customers')->max('id'),
+            'customer_id' =>  $customer_id,
             'total' =>  $total,
+            'info_product' => json_encode($info_product),
             'qty_total' =>  $qty,
-            'qty_per' =>  $list_qty,
-            'product_id' =>  $list_id,
             'name' =>  $request->input('name2'),
             'phone' =>  $request->input('phone2'),
             'address' =>  $local,
@@ -103,17 +108,14 @@ class OrderController extends ShopFrontEndController
     }
     public function success($code)
     {
-        $list_pr=[];$list_qty=[];
         $orders=OrderModel::where('code_order',$code)->get();
-        $customer=CustomerModel::find($orders[0]->customer_id);
+        $order=$orders[0];
+        $params['id']=$orders[0]->customer_id;
+        $customer=(new CustomerModel)->getItem($params, ['task' => 'get-item']);
+        $info_product=json_decode($order->info_product,true);
 
-        $list_qty=explode(",", $orders[0]['qty_per']);
-        $list_pr = explode(",", $orders[0]['product_id']);
-        $ls_product_order=[];
-        foreach($list_pr as $list_product){
-            $ls_product_order[]=ProductModel::find($list_product);
-        }
-        return view($this->pathViewController . 'order_success',compact('customer','orders','list_qty','ls_product_order'));
+        //return(json_decode($info_product[46],true));
+        return view($this->pathViewController . 'order_success',compact('customer','orders','info_product'));
     }
     public function test(Request $request){
         $session = $request->session();
