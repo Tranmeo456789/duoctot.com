@@ -15,7 +15,7 @@ use App\Http\Requests\ProductRequest as MainRequest;
 use App\Model\Shop\UnitModel;
 use App\Model\Shop\ProvinceModel;
 use DB;
-
+use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 class ProductController extends BackEndController
 {
     public function __construct()
@@ -40,22 +40,19 @@ class ProductController extends BackEndController
         $this->params     = $session->get('params');
 
         $items            = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
-        //return $items->lastPage();
-        if ($items->lastPage() == 0) {
-            $items = [];
-        } elseif ($items->currentPage() > $items->lastPage()) {
+
+        if ($items->currentPage() > $items->lastPage()) {
             $lastPage = $items->lastPage();
             Paginator::currentPageResolver(function () use ($lastPage) {
                 return $lastPage;
             });
             $items              = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
         }
-        // $itemsHieuLucVanBanCount   = $this->model->countItems($this->params, ['task' => 'admin-count-items-group-by-hieu-luc-van-ban']); // [ ['status', 'count']]
+
         $pathView = ($request->ajax()) ? 'ajax' : 'index';
         return view($this->pathViewController .  $pathView, [
             'params'           => $this->params,
             'items'            => $items
-            //  'itemsHieuLucVanBanCount' => $itemsHieuLucVanBanCount
         ]);
     }
     public function save(MainRequest $request)
@@ -85,7 +82,7 @@ class ProductController extends BackEndController
                     $params_warehouse['product_id'] = json_encode($ls_product_curent);
                     $params_warehouse['id']=$warehouse['id'];
                     (new WarehouseModel)->saveItem($params_warehouse,['task' => 'update-product']);
-                }                
+                }
             }
             if ($params['id'] != null) {
                 $task   = "edit-item";
