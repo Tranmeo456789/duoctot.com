@@ -14,7 +14,6 @@
                     <div class="card-body p-0">
                         @include("$moduleName.pages.$controllerName.list")
                     </div>
-
                 </div>
             </div>
         </div>

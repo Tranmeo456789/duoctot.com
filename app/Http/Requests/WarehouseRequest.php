@@ -26,26 +26,24 @@ class WarehouseRequest extends AjaxFormRequest
     public function rules()
     {
         $id = $this->id;
-        $condName  = "bail|required|between:1,255|unique:$this->table,name";
-        $condProvince  = "bail|required";
-        $condDistrict  = "bail|required";
-        $condWards  = "bail|required";
+        $condName  = "bail|required|between:1,255";
+        $condProvince = "bail|required|exists:mysql_share_data.province,id";
+        $condDistrict  = "bail|required|exists:mysql_share_data.district,id";
+        $condWards  = "bail|required|exists:mysql_share_data.ward,id";
         if(!empty($id)){ // edit
             $condName  .= ",$id";
         }
         return  [
             'name'        => $condName,
-            'local'=>$condProvince,
-            'district'=>$condDistrict,
-            'wards'=>$condDistrict,
+            'province_id' => $condProvince,
+            'district_id' => $condDistrict,
+            'ward_id'     => $condWards,
         ];
     }
     public function attributes()
     {
+        $arrAttr = config('myconfig.template.label');
         $arrAttr['name'] = 'Tên kho hàng';
-        $arrAttr['local'] = 'Tỉnh/thành phố';
-        $arrAttr['district'] = 'Quận/huyện';
-        $arrAttr['wards'] = 'Xã/phường';
         return $arrAttr;
     }
 }

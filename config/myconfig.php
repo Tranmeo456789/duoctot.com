@@ -69,7 +69,9 @@
                 'prescribe' => 'Chỉ định',
                 'dosage' => 'Liều lượng',
                 'note' => 'Lưu ý',
-                'preserve' => 'Bảo quản'
+                'preserve' => 'Bảo quản',
+                'local' => 'Số nhà, đường, ấp, khóm',
+                'warehouse_id' => 'Kho hàng'
             ],
             'type_user' => [
                 '1' => 'Bệnh nhân',

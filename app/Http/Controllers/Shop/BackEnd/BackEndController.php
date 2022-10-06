@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Shop\BackEnd;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 
 class BackEndController extends Controller
 {
@@ -38,15 +38,12 @@ class BackEndController extends Controller
         $this->params =  $session->get('params');
         $items              = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
 
-        if($items->lastPage()==0){
-            $items=[];
-        }
-        elseif ($items->currentPage() > $items->lastPage()) {
+        if ($items->currentPage() > $items->lastPage()) {
             $lastPage = $items->lastPage();
             Paginator::currentPageResolver(function () use ($lastPage) {
                 return $lastPage;
             });
-            $items              = $this->model->listItems($this->params, ['task'  => 'admin-list-items']);
+            $items              = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
         }
         return view($this->pathViewController .  'index', [
             'params'           => $this->params,

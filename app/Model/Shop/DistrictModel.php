@@ -27,10 +27,10 @@ class DistrictModel extends BackEndModel
     }
 
     public function province(){
-        return $this->belongsTo('App\Models\ProvinceModel','province_id')->select(array('id', 'name'));
+        return $this->belongsTo('App\Model\Shop\ProvinceModel','province_id','id');
     }
     public function ward(){
-        return $this->hasMany('App\Models\WardModel', 'district_id', 'id');
+        return $this->hasMany('App\Model\Shop\WardModel', 'district_id', 'id');
     }
 }
 

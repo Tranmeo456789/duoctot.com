@@ -16,12 +16,19 @@ class WarehouseModel extends BackEndModel
         $this->folderUpload        = '' ;
         $this->crudNotAccepted     = ['_token','btn_save'];
     }
-
+    public function scopeOfUser($query)
+    {
+        if (\Session::has('user')){
+            $user = \Session::get('user');
+            return  $query->where('user_id',$user->user_id);
+        }
+        return $query;
+    }
     public function listItems($params = null, $options = null) {
         $result = null;
         $user = Session::get('user');
         if($options['task'] == "user-list-items") {
-            $query = $this::select('id', 'name','local', 'created_at', 'updated_at');
+            $query = $this::select('id', 'name','address', 'created_at', 'updated_at');
 
             $result =  $query->orderBy('id', 'desc')->where('user_id',$user->user_id)
                             ->paginate($params['pagination']['totalItemsPerPage']);
@@ -39,33 +46,31 @@ class WarehouseModel extends BackEndModel
     public function getItem($params = null, $options = null) {
         $result = null;
         if($options['task'] == 'get-item') {
-            $result = self::select('id', 'name','user_id','product_id','local')
-                            ->where('id', $params['id'])->first();
+            $user = Session::get('user');
+            $query = self::select('id', 'name','local','address','province_id','district_id','ward_id')
+                            ->where('id', $params['id'])
+                            ->OfUser();
+            $result =  $query->first();
         }
-        return $result;
+        return $result ;
     }
     public function saveItem($params = null, $options = null) {
 
         if($options['task'] == 'add-item') {
             $this->setCreatedHistory($params);
-            $wards=Xaphuongthitran::where('xaid',(int)$params['wards'])->get();      
-             $ward=$wards[0]->name; 
-             $districts=Quanhuyen::where('maqh',(int)$params['district'])->get(); 
-             $district=$districts[0]->name;
-             $local1s=Tinhthanhpho::where('matp',(int)$params['local'])->get(); 
-             $local1=$local1s[0]->name;
-            $local=$ward.','.$district.','.$local1;
+            $itemWard = (new WardModel())->getItem(['id'=>$params['ward_id']],['task' => 'get-item-full']);
+            $params['address'] = ($params['local'] != '')?$params['local'] . ', ':'';
+            $params['address'] .= $itemWard->name . ', ' . $itemWard->district->name . ', ' . $itemWard->district->province->name;
             $user = Session::get('user');
-            self::insert([
-                'name' => $params['name'],
-                'local' => $local,
-                'user_id'=> $user->user_id,
-                'product_id' => $params['product_id']
-            ]);
+            $params['user_id'] = $user->user_id;
+            self::insert($this->prepareParams($params));
         }
 
         if($options['task'] == 'edit-item') {
             $this->setModifiedHistory($params);
+            $itemWard = (new WardModel())->getItem(['id'=>$params['ward_id']],['task' => 'get-item-full']);
+            $params['address'] = ($params['local'] != '')?$params['local'] . ', ':'';
+            $params['address'] .= $itemWard->name . ', ' . $itemWard->district->name . ', ' . $itemWard->district->province->name;
             self::where('id', $params['id'])->update($this->prepareParams($params));
         }
         if($options['task'] == 'update-product') {

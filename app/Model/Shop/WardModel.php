@@ -25,9 +25,17 @@ class WardModel extends BackEndModel
 
         return $result;
     }
-
+    public function getItem($params = null, $options = null) {
+        $result = null;
+        if($options['task'] == 'get-item-full') {
+            $result = self::with(['district','district.province'])
+                            ->select('id', 'name','district_id')
+                            ->where('id', $params['id'])->first();
+        }
+        return $result;
+    }
     public function district(){
-        return $this->belongsTo('App\Models\DistrictModel','district_id')->select(array('id', 'name'));
+        return $this->belongsTo('App\Model\Shop\DistrictModel','district_id');
     }
 }
 

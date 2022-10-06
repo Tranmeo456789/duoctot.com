@@ -26,7 +26,7 @@ class ProvinceModel extends BackEndModel
     }
 
     public function district(){
-        return $this->hasMany('App\Models\DistrictModel', 'province_id', 'id');
+        return $this->hasMany('App\Model\Shop\DistrictModel', 'province_id', 'id');
     }
 }
 
