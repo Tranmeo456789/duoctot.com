@@ -23,40 +23,40 @@ $(document).on('submit', 'form#main-form', function(event) {
         cache: false,
         contentType: false,
         processData: false,
-        success: function(data) {
+        success: function(response) {
             $msg = '';
-            // if (response.success == false) {
-            //     if (response.error != null) {
-            //         for (control in response.errors) {
-            //             eleError = "<label id='" + control + "-error' class='error invalid-feedback' for='" + control + "' style='display:inline-block'>" + response.errors[control] + "</label>";
-            //             $('[name=' + control + ']').closest(".form-group").find("label[for='" + control + "']").remove();
-            //             $('[name=' + control + ']').closest(".input-group").addClass('has-error').after(eleError);
-            //             $('[name=' + control + ']').addClass("is-invalid").removeClass('is-valid');
-            //         }
-            //     } else {
-            //         alert(response.message);
-            //     }
-            // } else {
-            //     alert(response.message);
-            //     window.location.replace(response.redirect_url);
-            // }
-
-            if (data.fail) {
-                form.find("input[type='submit']").val("Lưu");
-                for (control in data.errors) {
-                    $('[name=' + control + ']').addClass("is-invalid")
-                    $('[name=' + control + ']').parents('div.form-group').addClass("has-error");
-                    $('[name=' + control + ']').siblings('span.help-block').html(data.errors[control]).addClass("help-block-show");
-                    $msg += "<br/>" + data.errors[control];
+            if (response.success == false) {
+                if (response.error != null) {
+                    for (control in response.errors) {
+                        eleError = "<label id='" + control + "-error' class='error invalid-feedback' for='" + control + "' style='display:inline-block'>" + response.errors[control] + "</label>";
+                        $('[name=' + control + ']').closest(".form-group").find("label[for='" + control + "']").remove();
+                        $('[name=' + control + ']').closest(".input-group").addClass('has-error').after(eleError);
+                        $('[name=' + control + ']').addClass("is-invalid").removeClass('is-valid');
+                    }
+                } else {
+                    alert(response.message);
                 }
-                $msg = $msg.substring(5);
-                alert($msg);
             } else {
-                // $.pjax({ url: data.redirect_url, container: pjaxContainer });
-                alert(data.message);
-                location.href = data.redirect_url;
-                // window.location.replace(data.redirect_url);
+                alert(response.message);
+                window.location.replace(response.redirect_url);
             }
+
+            // if (data.fail) {
+            //     form.find("input[type='submit']").val("Lưu");
+            //     for (control in data.errors) {
+            //         $('[name=' + control + ']').addClass("is-invalid")
+            //         $('[name=' + control + ']').parents('div.form-group').addClass("has-error");
+            //         $('[name=' + control + ']').siblings('span.help-block').html(data.errors[control]).addClass("help-block-show");
+            //         $msg += "<br/>" + data.errors[control];
+            //     }
+            //     $msg = $msg.substring(5);
+            //     alert($msg);
+            // } else {
+            //     // $.pjax({ url: data.redirect_url, container: pjaxContainer });
+            //     alert(data.message);
+            //     location.href = data.redirect_url;
+            //     // window.location.replace(data.redirect_url);
+            // }
         },
         error: function(xhr, textStatus, errorThrown) {
             alert("Error: " + errorThrown);
@@ -112,12 +112,77 @@ function ajaxDelete(url, token, content) {
         }
     });
 }
+$(document).on('change', "select[name^='list_products[product_id]']", function(event) {
+    event.preventDefault();
+    url = $(this).data('href');
+    $selectValue = $(this).val();
+    $rowCurrent = $(this).closest('.row-detail');
+    if (($selectValue != '') && ($selectValue != 'null')) {
+        url = url.replace('value_new', $selectValue);
+        $.get({
+            url: url,
+            cache: false,
+            dataType: 'json',
+            success: function(data) {
+                option = "<option value= '" + data.unit_product.id + "'>" + data.unit_product.name + "</option>";
+                $($rowCurrent).find("select[name='list_products[unit_id][]']").html('').html(option);
+                $($rowCurrent).find("input[name='list_products[price_import][]']").val(data.price.toLocaleString("vi-VN"));
+                $($rowCurrent).find("input[name^='list_products[quantity]']").val(1);
+                updateDetailImportCoupon($rowCurrent);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                alert("Error: " + errorThrown);
+            }
+        });
+    }
+});
+$(document).on('blur', "input[name^='list_products[price_import]']", function(event) {
+    $rowCurrent = $(this).closest('.row-detail');
 
+    updateDetailImportCoupon($rowCurrent);
+});
+$(document).on('blur', "input[name^='list_products[quantity]']", function(event) {
+    $rowCurrent = $(this).closest('.row-detail');
+    updateDetailImportCoupon($rowCurrent);
+});
+
+function updateDetailImportCoupon($rowCurrent) {
+    $quantity = $($rowCurrent).find("input[name^='list_products[quantity]']").val();
+    $price_import = $($rowCurrent).find("input[name='list_products[price_import][]']").val();
+    $total_money_old = $($rowCurrent).find("input[name='list_products[total_money][]']").val();
+    $total = $("input[name='total']").val();
+    $quantity = ($quantity != '') ? parseInt($quantity.replaceAll('.', '')) : 0;
+    $price_import = ($price_import != '') ? parseInt($price_import.replaceAll('.', '')) : 0;
+    $total = ($total != '') ? parseInt($total.replaceAll('.', '')) : 0;
+    $total_money_old = ($total_money_old != '') ? parseInt($total_money_old.replaceAll('.', '')) : 0;
+
+    $total_money = $quantity * $price_import;
+    $total = $total - $total_money_old + $total_money;
+    $($rowCurrent).find("input[name='list_products[total_money][]']").val($total_money.toLocaleString("vi-VN"));
+    $("input[name='total']").val($total.toLocaleString("vi-VN"))
+}
+
+$(".number").on('keyup', function(evt) {
+    if ($(this).val() != '') {
+        if (evt.which != 110) { //not a fullstop
+            var n;
+
+            if ($(this).attr('id') != 'giamGia') {
+                n = parseFloat($(this).val().replaceAll('.', '')
+                    .replace(/\,/g, ''), 10);
+            } else {
+                if (evt.which != 188) {
+                    n = parseFloat($(this).val().replaceAll(',', '.'));
+                }
+            }
+            $(this).val(n.toLocaleString("vi-VN"));
+        }
+    }
+});
 $(document).on('change', "select.get_child", function(event) {
     event.preventDefault();
     url = $(this).data('href');
     target = $(this).data('target');
-
     $selectValue = $(this).val();
     if (($selectValue == '') && (url.indexOf('value_new') !== -1)) {
         options = $(target).find('option')[0].outerHTML;
@@ -184,6 +249,23 @@ $(document).on('click', "a.btn-filter", function(event) {
     url = $(this).data('href');
     window.location.replace(url);
 });
+$(document).on('click', ".btn-add-row", function(event) {
+    event.preventDefault();
+    rowCurrent = $(this).closest('.row-detail');
+    rowNew = rowCurrent.clone();
+    $(rowNew).find("input").val(0);
+    rowNew.insertAfter(rowCurrent);
+    rowNew.find('.select2').parent().find('span.select2-container').remove();
+    $(rowNew).find('.select2').removeAttr('tabindex');
+    $('.select2').select2();
+    $(rowNew).find('.select2').val('null').trigger("change");
+});
+$(document).on('click', '.btn-delete-row', function() {
+    if ($('.row-detail').length <= 1) {
+        return false;
+    }
+    $(this).closest('.row-detail').remove();
+});
 $(document).on('click', "#btnDeleteFile", function(event) {
     if ($("input[name='file-del']").length) {
         if ($("input[name='file-del']").val() != '') {
@@ -211,6 +293,12 @@ $(document).ready(function() {
             "margin-bottom": "0px"
         });
     }
+
+    $('.datemask').datepicker({
+        format: 'dd/mm/yyyy',
+        autoclose: true,
+        language: 'vi'
+    });
 
     var lfm = function(options, cb) {
         var route_prefix = (options && options.prefix) ? options.prefix : '/laravel-filemanager';

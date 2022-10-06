@@ -23,9 +23,12 @@ class UnitModel extends BackEndModel
 
         }
         if($options['task'] == "admin-list-items-in-selectbox") {
-            $query = $this->select('id', 'name')
-                        ->orderBy('name', 'asc');
-            $result = $query->pluck('name', 'id')->toArray();
+            $query = $this->select('id', 'name');
+            if (isset($params['arrID'])){
+                $query->whereIn('id', $params['arrID']);
+            }
+            $result = $query->orderBy('name', 'asc')
+                            ->pluck('name', 'id')->toArray();
         }
         return $result;
     }

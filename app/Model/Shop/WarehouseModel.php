@@ -8,6 +8,7 @@ use App\Model\Shop\Tinhthanhpho;
 use App\Model\Shop\Quanhuyen;
 use Session;
 use App\Model\Shop\Xaphuongthitran;
+use App\Model\Shop\ProductModel;
 class WarehouseModel extends BackEndModel
 {
     public function __construct() {
@@ -26,13 +27,27 @@ class WarehouseModel extends BackEndModel
     }
     public function listItems($params = null, $options = null) {
         $result = null;
-        $user = Session::get('user');
         if($options['task'] == "user-list-items") {
-            $query = $this::select('id', 'name','address', 'created_at', 'updated_at');
-
-            $result =  $query->orderBy('id', 'desc')->where('user_id',$user->user_id)
+            $query = $this::select('id', 'name','address', 'created_at', 'updated_at')
+                                ->where('id','>',1)
+                                ->OfUser();
+            $result =  $query->orderBy('id', 'desc')
                             ->paginate($params['pagination']['totalItemsPerPage']);
 
+        }
+        if ($options['task'] == 'user-list-all-items'){
+            $result = $this::selectRaw("id as warehouse_id")
+                                    ->where('id','>',1)
+                                    ->ofUser()
+                                    ->get()
+                                    ->toArray();
+        }
+        if($options['task'] == "admin-list-items-in-selectbox") {
+            $query = $this->select('id', 'name')
+                        ->where('id','>',1)
+                        ->OfUser()
+                        ->orderBy('name', 'asc');
+            $result = $query->pluck('name', 'id')->toArray();
         }
         return $result;
     }
@@ -63,7 +78,9 @@ class WarehouseModel extends BackEndModel
             $params['address'] .= $itemWard->name . ', ' . $itemWard->district->name . ', ' . $itemWard->district->province->name;
             $user = Session::get('user');
             $params['user_id'] = $user->user_id;
-            self::insert($this->prepareParams($params));
+            $id = self::insertGetId ($this->prepareParams($params));
+            $productIDs = (new ProductModel())->listItems(null,['task' =>'user-list-all-items']);
+            self::find($id)->productWarehouse()->attach($productIDs);
         }
 
         if($options['task'] == 'edit-item') {
@@ -73,6 +90,7 @@ class WarehouseModel extends BackEndModel
             $params['address'] .= $itemWard->name . ', ' . $itemWard->district->name . ', ' . $itemWard->district->province->name;
             self::where('id', $params['id'])->update($this->prepareParams($params));
         }
+
         if($options['task'] == 'update-product') {
             self::where('id', $params['id'])->update(
                 [
@@ -86,5 +104,9 @@ class WarehouseModel extends BackEndModel
         if($options['task'] == 'delete-item') {
            self::where('id', $params['id'])->delete();
         }
+    }
+    public function productWarehouse()
+    {
+        return $this->belongsToMany(ProductModel::class,'product_warehouse','warehouse_id','product_id');
     }
 }

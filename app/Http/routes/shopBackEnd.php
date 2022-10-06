@@ -27,13 +27,14 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd','mid
     Route::get('/sua-danh-muc-thuoc/{id}', 'CatProductController@form')->name('catProduct.edit');
     Route::post('/luu-danh-muc-thuoc', 'CatProductController@save')->name('catProduct.save');
     Route::get('/xoa-danh-muc-thuoc/{id}', 'CatProductController@delete')->name('catProduct.delete');
-    Route:: get('move-{type}/{id}',   'CatProductController@move')->name('catProduct.move');
+    Route::get('move-{type}/{id}',   'CatProductController@move')->name('catProduct.move');
 
     Route::get('/danh-sach-san-pham', 'ProductController@index')->name('product');
     Route::get('/them-san-pham', 'ProductController@form')->name('product.add');
     Route::get('/sua-san-pham/{id}', 'ProductController@form')->name('product.edit');
     Route::post('/luu-san-pham', 'ProductController@save')->name('product.save');
     Route::get('/xoa-san-pham/{id}', 'ProductController@delete')->name('product.delete');
+    Route::get('/chi-tiet-san-pham/{id}', 'ProductController@getItem')->name('product.getItem');
 
     Route::get('/danh-sach-don-vi-tinh', 'UnitController@index')->name('unit');
     Route::get('/them-don-vi-tinh', 'UnitController@form')->name('unit.add');
@@ -64,15 +65,23 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd','mid
     Route::get('/chi-tiet-phieu-gui-hang', 'ConsignmentController@detail')->name('consignment.detail');
 
     Route::get('/kho-hang', 'WarehouseController@qlwarehouse')->name('qlwarehouse');
+
     Route::get('/danh-sach-kho-hang', 'WarehouseController@index')->name('warehouse');
     Route::get('/them-kho-hang', 'WarehouseController@form')->name('warehouse.add');
     Route::get('/sua-kho-hang/{id}', 'WarehouseController@form')->name('warehouse.edit');
     Route::post('/luu-kho-hang', 'WarehouseController@save')->name('warehouse.save');
     Route::get('/xoa-kho-hang/{id}', 'WarehouseController@delete')->name('warehouse.delete');
-    Route::post('/them-san-pham-kho-hang', 'WarehouseController@add_product')->name('warehouse.add_product');
-    Route::get('/phieu-nhap-hang-vao-kho', 'WarehouseController@import')->name('warehouse.import');
-    Route::post('/nhap-hang-vao-kho', 'WarehouseController@import')->name('warehouse.save.import');
-    
+
+    Route::get('/danh-sach-phieu-nhap-hang', 'ImportCouponController@index')->name('importCoupon');
+    Route::get('/them-phieu-nhap-hang', 'ImportCouponController@form')->name('importCoupon.add');
+    Route::get('/sua-phieu-nhap-hang/{id}', 'ImportCouponController@form')->name('importCoupon.edit');
+    Route::post('/luu-phieu-nhap-hang', 'ImportCouponController@save')->name('importCoupon.save');
+    Route::get('/xoa-phieu-nhap-hang/{id}', 'ImportCouponController@delete')->name('importCoupon.delete');
+
+    // Route::post('/them-san-pham-kho-hang', 'WarehouseController@add_product')->name('warehouse.add_product');
+    // Route::get('/phieu-nhap-hang-vao-kho', 'WarehouseController@import')->name('warehouse.import');
+    // Route::post('/nhap-hang-vao-kho', 'WarehouseController@import')->name('warehouse.save.import');
+
     Route::get('/danh-sach-khach-hang', 'CustomerController@index')->name('customer');
     Route::get('/them-khach-hang', 'CustomerController@form')->name('customer.add');
     Route::get('/sua-khach-hang/{id}', 'CustomerController@form')->name('customer.edit');

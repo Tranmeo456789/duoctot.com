@@ -120,4 +120,9 @@ class ProductController extends BackEndController
             'itemsProvince'
         ));
     }
+    public function getItem(Request $request){
+        $params["id"] = intval($request->id);
+        $item = $this->model->getItem($params, ['task' => 'get-item-simple']);
+        return json_encode($item->toArray());
+    }
 }

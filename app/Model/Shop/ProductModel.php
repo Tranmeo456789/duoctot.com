@@ -5,6 +5,7 @@ use Session;
 use App\Http\Requests\Request;
 use Illuminate\Database\Eloquent\Model;
 use App\Model\Shop\BackEndModel;
+use App\Model\Shop\WarehouseModel;
 use App\Model\Shop\Size;
 use Illuminate\Support\Str;
 class ProductModel extends BackEndModel
@@ -44,6 +45,14 @@ class ProductModel extends BackEndModel
 
         return $query;
     }
+    public function scopeOfUser($query)
+    {
+        if (\Session::has('user')){
+            $user = \Session::get('user');
+            return  $query->where('user_id',$user->user_id);
+        }
+        return $query;
+    }
     public function listItems($params = null, $options = null)
     {
         $result = null;
@@ -57,7 +66,15 @@ class ProductModel extends BackEndModel
                                     'preserve','note','image','featurer','long','user_id','wide','high',
                                     'mass', 'created_at', 'updated_at');
             $result =  $query->orderBy('id', 'desc')->where('user_id',$user->user_id)
-                ->paginate($params['pagination']['totalItemsPerPage']);
+                              ->paginate($params['pagination']['totalItemsPerPage']);
+        }
+        if ($options['task'] == 'user-list-all-items'){
+
+            $result = $this::selectRaw("id as product_id")
+                                    ->where('id','>',1)
+                                    ->ofUser()
+                                    ->get()
+                                    ->toArray();
         }
         if ($options['task'] == "frontend-list-items") {
             $query = $this::select('id','name','type','code','cat_product_id','producer_id',
@@ -67,12 +84,38 @@ class ProductModel extends BackEndModel
                                     'dosage_forms','country_id','specification','benefit',
                                     'preserve','note','image','albumImage','albumImageHash','user_id','featurer','long','wide','high',
                                     'mass');
-            if (isset($params['cat_product_id'])){
+            if (isset($params['cat_product_id']) && ($params['cat_product_id'] != 0)){
                 $query->where('cat_product_id',$params['cat_product_id']);
             }
-            $query->OfCollaboratorCode();
+        //    $query->OfCollaboratorCode();
             $result =  $query->orderBy('id', 'desc')
                              ->paginate($params['limit']);
+        }
+        // if ($options['task'] == "frontend-list-itemss-featurer") {
+        //     $type = $params['type'];
+        //     $query = $this::select('id','name','type','code','cat_product_id','producer_id',
+        //                             'tick','type_price','price','price_vat','coefficient',
+        //                             'type_vat','packing','unit_id','sell_area','amout_max',
+        //                             'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
+        //                             'dosage_forms','country_id','specification','benefit',
+        //                             'preserve','note','image','albumImage','albumImageHash','user_id','featurer','long','wide','high',
+        //                             'mass')
+        //                             //->whereRaw("JSON_CONTAINS(`featurer`, '" . $params['type'] . "')");;
+        //                             ->whereRaw("FIND_IN_SET('$type',REPLACE(REPLACE(`featurer`, '[',''),']',''))");
+        //     if (isset($params['cat_product_id']) && ($params['cat_product_id'] != 0)){
+        //         $query->where('cat_product_id',$params['cat_product_id']);
+        //     }
+
+        //    // $query->OfCollaboratorCode();
+        //     $result =  $query->orderBy('id', 'desc')
+        //                      ->paginate($params['limit']);
+        // }
+        if($options['task'] == "admin-list-items-in-selectbox") {
+            $query = $this->select('id', 'name')
+                        ->where('id','>',1)
+                        ->OfUser()
+                        ->orderBy('name', 'asc');
+            $result = $query->pluck('name', 'id')->toArray();
         }
         return $result;
     }
@@ -117,6 +160,13 @@ class ProductModel extends BackEndModel
                             ->OfCollaboratorCode()
                             ->first();
         }
+        if ($options['task'] == 'get-item-simple') {
+            $result = self::with('unitProduct')->select('id','name','unit_id','price')
+                            ->where('id', $params['id'])
+                            ->OfUser()
+                            ->first();
+        }
+
         if ($options['task'] == 'frontend-get-item') {
             $result = self::select('id','name','type','code','cat_product_id','producer_id',
                                     'tick','type_price','price','price_vat','coefficient',
@@ -143,13 +193,14 @@ class ProductModel extends BackEndModel
                 $params['albumImage']   = $resultFileUpload['fileAttach'];
                 $params['albumImageHash']     = $resultFileUpload['fileHash'];
             }
-
             $params['sell_area'] = ($params['sell_area'] != '')? json_encode($params['sell_area'],JSON_NUMERIC_CHECK ): NULL;
             $catProduct = CatProductModel::find($params['cat_product_id']);
             if ($catProduct){
                 $params['cat_product_parent_id'] = $catProduct->parent_id;
             }
-            self::insert($this->prepareParams($params));
+            $id = self::insertGetId ($this->prepareParams($params));
+            $wareHouseIDs = (new WarehouseModel())->listItems(null,['task' =>'user-list-all-items']);
+            self::find($id)->productWarehouse()->attach($wareHouseIDs);
         }
         if ($options['task'] == 'edit-item') {
             $this->setModifiedHistory($params);
@@ -189,6 +240,9 @@ class ProductModel extends BackEndModel
     // public function userProduct(){
     //     return $this->belongsTo('App\Model\Shop\UsersModel','user_id','id');
     // }
-
+    public function productWarehouse()
+    {
+        return $this->belongsToMany(WarehouseModel::class,'product_warehouse','product_id','warehouse_id');
+    }
 
 }

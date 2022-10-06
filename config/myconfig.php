@@ -1,6 +1,15 @@
 <?php
     return [
         'token_check_login' => 'UAqaYzPVrCW56UgKumKdSN7t',
+        'format'           => [
+            'long_time'         => 'd/m/Y H:i:s',
+            'short_time'        => 'd/m/Y',
+            'my_sql_date'       => 'Y-m-d',
+            'my_sql_date_time'  => 'Y-m-d H:i:s',
+            'number_decimals'   => 0,
+            'dec_point'       => ',',
+            'thousands_sep'   => '.',
+        ],
         'url' => [
             'api' => 'http://tdoctor.xyz/',
             'prod' => 'shop.tdoctor.vn',
@@ -21,11 +30,20 @@
                 'input' => [
                     'class' => 'form-control'
                 ],
+                'input_number' => [
+                    'class' => 'form-control number'
+                ],
                 'editor' => [
                     'class' => 'form-control editor'
                 ],
                 'select2' => [
                     'class' => 'form-control col-md-12 col-xs-12 select2'
+                ],
+                'input_datemask' => [
+                    'class' => 'form-control datemask',
+                    'data-inputmask-alias'=>"dd/mm/yyyy",
+                    'data-inputmask-inputformat'=>"dd/mm/yyyy",
+                    'im-insert'=>"false"
                 ],
                 'get_child' =>[
                     'class' => 'get_child'
@@ -71,7 +89,9 @@
                 'note' => 'Lưu ý',
                 'preserve' => 'Bảo quản',
                 'local' => 'Số nhà, đường, ấp, khóm',
-                'warehouse_id' => 'Kho hàng'
+                'warehouse_id' => 'Kho hàng',
+                'quantity' => 'Số lượng',
+                'price_import' => 'Giá nhập'
             ],
             'type_user' => [
                 '1' => 'Bệnh nhân',

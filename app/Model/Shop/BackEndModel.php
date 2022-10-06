@@ -26,11 +26,11 @@ class BackEndModel extends Model
         return array_diff_key($params, array_flip($this->crudNotAccepted));
     }
     public function setCreatedHistory(&$params){
-      $params['created_at']    = date('Y-m-d');
+      $params['created_at']    = date('Y-m-d H:i:s');
       $params['created_by'] = \Session::get('user')['user_id'];
     }
     public function setModifiedHistory(&$params){
-      $params['updated_at']    = date('Y-m-d');
+      $params['updated_at']    = date('Y-m-d H:i:s');
       $params['updated_by'] = \Session::get('user')['user_id'];
     }
     public function getMaxCode($params = null, $options = null){
