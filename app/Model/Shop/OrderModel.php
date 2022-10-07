@@ -15,7 +15,6 @@ class OrderModel extends BackEndModel
     use NodeTrait;
     protected $table  = 'orders';
     protected $guarded = [];
-    public $timestamps = true;
     protected $fieldSearchAccepted   = [
         'id','code_order','customer_id','total','info_product','qty_total','name','phone','address','address_detail','delivery_form','request_invoice','status','status_control','payment','created_at','updated_at'
       ];
@@ -25,7 +24,13 @@ class OrderModel extends BackEndModel
         $this->folderUpload        = '' ;
         $this->crudNotAccepted     = ['_token','btn_save'];
     }
-
+    public function saveItem($params = null, $options = null)
+    { 
+        if ($options['task'] == 'save-item-frontend'){
+            $params['created_at']    = date('Y-m-d H:i:s');
+            self::insert($params);
+        }        
+    }
     public function getItem($params = null, $options = null) {
         $result = null;
         if($options['task'] == 'get-item') {

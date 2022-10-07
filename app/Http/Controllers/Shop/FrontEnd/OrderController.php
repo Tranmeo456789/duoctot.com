@@ -8,11 +8,12 @@ use App\Model\Shop\CatProductModel;
 use App\Model\Shop\ProductModel;
 use App\Http\Requests;
 use App\Http\Requests\UserRequest as MainRequest;
-use App\Model\Shop\UsersModel as MainModel;
+use App\Model\Shop\OrderModel as MainModel;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
 use App\Model\Shop\DistrictModel;
 use App\Model\Shop\WardModel;
+use App\Helpers\MyFunction;
 use Session;
 use DB;
 use Illuminate\Support\Str;
@@ -32,19 +33,16 @@ class OrderController extends ShopFrontEndController
     }
     public function completed(Request $request)
     {  
-        $session = $request->session();
-        $item = [];$params=[];
-        if ($session->has('user')){
-            $item = $this->model->getItem(['user_id'=>$session->get('user.user_id')],['task' => 'get-item']);
-            $details = $item->details->pluck('value','user_field')->toArray()??[];
-            $params['user_id']=$item->user_id;
-        }
+        $params=$request->all();
+        $item = Session::get('user');
+        $params['user_id']=$item->user_id;
+        $params['address_detail']=$request->input('addressdetail2');
         $wards=(new WardModel)->getItem(['id'=>(int)$request->input('wards2')],['task' => 'get-item-full']);
         $ward=$wards->name;
         $district=$wards->district->name;
         $local1=$wards->district->province->name;
         $local = $ward . ',' . $district . ',' . $local1;
-       
+        $params['address']=$local;
         $order_id_last = DB::table('orders')->max('id');
         if (OrderModel::latest('id')->first() == null) {
             $order_id_last['id'] = 0;
@@ -71,19 +69,17 @@ class OrderController extends ShopFrontEndController
             $product_item['code']=$code;
             $info_product[$item['id']]= json_encode($product_item);
         }    
-        $isCustomerExist = (new CustomerModel)->getItem($params, ['task' => 'get-item-userId']);
+        $customers=new CustomerModel;
+        $isCustomerExist = $customers->getItem($params, ['task' => 'get-item-userId']);
         $customer_id=$isCustomerExist->id;
+        $params_customer=MyFunction::array_child(['gender','name','phone','user_id','address','address_detail'],$params);
+        $params_customer['ward_id']=$params['wards2'];$params_customer['district_id']=$params['district2'];$params_customer['province_id']=$params['city2']; 
         if(!$isCustomerExist){
-            DB::table('customers')->insert([
-                'gender' => $request->input('gender'),
-                'name' => $request->input('name'),
-                'phone' => $request->input('phone'),
-                'user_id'=>$item->user_id,
-                'address'=>$local,
-                'address_detail'=>$request->input('addressdetail2'),
-            ]);
+            $customers->saveItem($params_customer, ['task' => 'save-item-order']);
             $customer_id=DB::table('customers')->max('id');
-        }       
+        }else{
+            $customers->saveItem($params_customer, ['task' => 'edit-item-order']);
+        }      
         OrderModel::insert([
             'code_order' =>  $code_order,
             'customer_id' =>  $customer_id,

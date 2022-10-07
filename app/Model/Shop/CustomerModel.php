@@ -40,15 +40,12 @@ class CustomerModel extends BackEndModel
         return $result;
     }
     public function saveItem($params = null, $options = null) {
-
         if($options['task'] == 'add-item') {
             $this->setCreatedHistory($params);
-            $wards=Xaphuongthitran::where('xaid',(int)$params['wards'])->get();      
-            $ward=$wards[0]->name; 
-            $districts=Quanhuyen::where('maqh',(int)$params['district'])->get(); 
-            $district=$districts[0]->name;
-            $local1s=Tinhthanhpho::where('matp',(int)$params['province'])->get(); 
-            $local1=$local1s[0]->name;
+            $wards=(new WardModel)->getItem(['id'=>(int)$params['wards']],['task' => 'get-item-full']);    
+            $ward=$wards->name; 
+            $district=$wards->district->name;
+            $local1=$wards->district->province->name;
            $local=$ward.','.$district.','.$local1;
             self::insert([
                 'name' => $params['name'],
@@ -58,16 +55,24 @@ class CustomerModel extends BackEndModel
                 'customer_group'=>$params['customer_group'],
                 'gender' => $params['gender'],
                 'password' => md5($params['password']),
-                 'address_detail' => $params['address_detail'],
+                'address_detail' => $params['address_detail'],
                 'address' => $local, 
                 //'sale_area' => $params['sale_area'], 
                 //'tax_code' => $params['tax_code'],
                 //'legal_representative' => $params['legal_representative'],                 
             ]);
         }
+        if($options['task'] == 'save-item-order') {
+            $params['created_at']    = date('Y-m-d H:i:s');
+            self::insert($params);
+        }
         if($options['task'] == 'edit-item') {
             $this->setModifiedHistory($params);
             self::where('id', $params['id'])->update($this->prepareParams($params));
+        }
+        if($options['task'] == 'edit-item-order') {
+            $params['updated_at']    = date('Y-m-d H:i:s');
+            self::where('user_id', $params['user_id'])->update($params);
         }
     }
     public function deleteItem($params = null, $options = null)

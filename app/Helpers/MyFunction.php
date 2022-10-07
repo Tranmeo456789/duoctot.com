@@ -22,4 +22,11 @@ class MyFunction {
     {
         return number_format ($number, Config::get('myconfig.format.number_decimals'),Config::get('myconfig.format.dec_point'),Config::get('myconfig.format.thousands_sep'));
     }
+    public static function array_child($arrData,$arrParrent){
+        $arrChild=[];
+        foreach($arrData as $value){
+            $arrChild[$value]=$arrParrent[$value];
+        }
+        return $arrChild;
+    }
 }

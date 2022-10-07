@@ -98,10 +98,10 @@
             </thead>
             <tbody>   
                 <tr class="">
-                    <td style="width: 20%">{{$customer->name}}</td>
-                    <td style="width: 20%">{{$customer->phone}}</td>
+                    <td style="width: 20%">{{$order->name}}</td>
+                    <td style="width: 20%">{{$order->phone}}</td>
                     <td style="width: 20%">{{$customer->email}}</td>
-                    <td style="width: 40%">{{$customer->address_detail}}<span>,</span>{{$customer->address}}</td>
+                    <td style="width: 40%">{{$order->address_detail}}<span>,</span>{{$order->address}}</td>
                 </tr>
             </tbody>
         </table>
