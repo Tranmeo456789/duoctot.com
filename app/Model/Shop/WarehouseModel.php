@@ -80,7 +80,7 @@ class WarehouseModel extends BackEndModel
             $params['user_id'] = $user->user_id;
             $id = self::insertGetId ($this->prepareParams($params));
             $productIDs = (new ProductModel())->listItems(null,['task' =>'user-list-all-items']);
-            self::find($id)->productWarehouse()->attach($productIDs);
+            self::find($id)->products()->attach($productIDs);
         }
 
         if($options['task'] == 'edit-item') {
@@ -105,7 +105,7 @@ class WarehouseModel extends BackEndModel
            self::where('id', $params['id'])->delete();
         }
     }
-    public function productWarehouse()
+    public function products()
     {
         return $this->belongsToMany(ProductModel::class,'product_warehouse','warehouse_id','product_id');
     }

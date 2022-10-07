@@ -106,7 +106,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item">
+            <li class="nav-item d-none" >
                 <a href="{{route('consignment.list')}}" class="nav-link">
                     <i class="nav-icon fas fa-file-alt"></i>
                     <p>Phiếu gửi hàng</p>
@@ -122,7 +122,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                 <li class="nav-item">
-                        <a href="{{route('qlwarehouse')}}" class="nav-link">
+                        <a href="{{route('warehouse.info')}}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Quản lý kho hàng</p>
                         </a>
