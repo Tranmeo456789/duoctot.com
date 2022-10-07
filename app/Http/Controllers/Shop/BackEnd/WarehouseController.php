@@ -25,7 +25,7 @@ class WarehouseController extends BackEndController
     }
     public function save(MainRequest $request)
     {
-        //if (!$request->ajax()) return view("errors." .  'notfound', []);
+        if (!$request->ajax()) return view("errors." .  'notfound', []);
         if (isset($request->validator) && $request->validator->fails()) {
             return response()->json([
                 'fail' => true,
@@ -82,16 +82,18 @@ class WarehouseController extends BackEndController
         return view($this->pathViewController .  'form',
             compact('item', 'itemsProvince' ,'itemsDistrict','itemsWard'));
     }
-    public function qlwarehouse(Request $request)
+    public function info(Request $request)
     {
         $session = $request->session();
-        if ($session->has('user')) {
-            $user = $request->session()->get('user');
-        }
-        $products = ProductModel::where('user_id', $user->user_id)->get();
-        $warehouses = WarehouseModel::where('user_id', $user->user_id)->get();
-        //return($warehouses);
-        return view('shop.backend.pages.warehouse.qlwarehouse', compact('warehouses', 'products'));
+        $session->put('params.pagination.totalItemsPerPage', $this->totalItemsPerPage);
+        $this->params =  $session->get('params');
+        $pageTitle          = 'Thông tin Kho hàng';
+
+        $itemsProduct = (new ProductModel())->listItems($this->params, ['task' => 'user-list-items-in-warehouse']);
+
+        $itemsWarehouses = $this->model->listItems(null,['task' => 'admin-list-items-in-selectbox']);
+        return view($this->pathViewController .  'info',
+            compact('pageTitle','itemsProduct' ,'itemsWarehouses'));
     }
     // public function add_product(Request $request)
     // {

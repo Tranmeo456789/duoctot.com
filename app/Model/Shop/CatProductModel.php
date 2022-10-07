@@ -194,6 +194,15 @@ class CatProductModel extends BackEndModel
         if ($params['type'] == 'down') $node->down();
         if ($params['type'] == 'up') $node->up();
     }
+    public static function getChild($id='')
+    {
+        $item = self::find($id);
+        $query = self::select('id','name')
+                    ->where('_lft','>=',$item->_lft)
+                    ->where('_lft','<=',$item->_rgt);
+
+        return $result = $query->pluck('id')->toArray();
+    }
     // public function child()
     // {
     //     return $this->hasMany('App\Model\Shop\CatProductModel','parent_id');
@@ -211,7 +220,7 @@ class CatProductModel extends BackEndModel
     //             ;
 
     // }
-     public function productsOfChild()
+    public function productsOfChild()
     {
         return $this->hasMany('App\Model\Shop\ProductModel','cat_product_parent_id');
     }

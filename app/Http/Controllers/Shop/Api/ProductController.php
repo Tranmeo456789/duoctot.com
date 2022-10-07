@@ -53,4 +53,22 @@ class ProductController extends ApiController
 
         return $this->setResponse($this->res);
     }
+    public function getListFeaturer(Request $request)
+    {
+        $this->res['data'] = null;
+        $params['parent_id'] = $request->parent_id;
+        $token = $request->header('Tdoctor-Token');
+        $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
+        if ($data_token['message'] == 'OK') {
+            $params['user'] =  json_decode(json_encode($data_token['payload']));
+            $params['cat_product_id'] = intval($request->cat_product_id);
+            $params['type'] = $request->type;
+            $params['limit']        = $this->limit;
+            $request->session()->put('user', $params['user']);
+            $this->res['data']  = $this->model->listItems($params,['task'=>'frontend-list-items-featurer']);
+        }
+
+        return $this->setResponse($this->res);
+    }
+
 }

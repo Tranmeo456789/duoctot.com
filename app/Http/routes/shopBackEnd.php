@@ -64,13 +64,12 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd','mid
     Route::get('/tao-phieu-gui-hang', 'ConsignmentController@add')->name('consignment.add');
     Route::get('/chi-tiet-phieu-gui-hang', 'ConsignmentController@detail')->name('consignment.detail');
 
-    Route::get('/kho-hang', 'WarehouseController@qlwarehouse')->name('qlwarehouse');
-
     Route::get('/danh-sach-kho-hang', 'WarehouseController@index')->name('warehouse');
     Route::get('/them-kho-hang', 'WarehouseController@form')->name('warehouse.add');
     Route::get('/sua-kho-hang/{id}', 'WarehouseController@form')->name('warehouse.edit');
     Route::post('/luu-kho-hang', 'WarehouseController@save')->name('warehouse.save');
     Route::get('/xoa-kho-hang/{id}', 'WarehouseController@delete')->name('warehouse.delete');
+    Route::get('/thong-tin-kho-hang', 'WarehouseController@info')->name('warehouse.info');
 
     Route::get('/danh-sach-phieu-nhap-hang', 'ImportCouponController@index')->name('importCoupon');
     Route::get('/them-phieu-nhap-hang', 'ImportCouponController@form')->name('importCoupon.add');
@@ -78,9 +77,7 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd','mid
     Route::post('/luu-phieu-nhap-hang', 'ImportCouponController@save')->name('importCoupon.save');
     Route::get('/xoa-phieu-nhap-hang/{id}', 'ImportCouponController@delete')->name('importCoupon.delete');
 
-    // Route::post('/them-san-pham-kho-hang', 'WarehouseController@add_product')->name('warehouse.add_product');
-    // Route::get('/phieu-nhap-hang-vao-kho', 'WarehouseController@import')->name('warehouse.import');
-    // Route::post('/nhap-hang-vao-kho', 'WarehouseController@import')->name('warehouse.save.import');
+
 
     Route::get('/danh-sach-khach-hang', 'CustomerController@index')->name('customer');
     Route::get('/them-khach-hang', 'CustomerController@form')->name('customer.add');
