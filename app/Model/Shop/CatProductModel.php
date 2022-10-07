@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Model\Shop;
-
 use App\Http\Requests\Request;
 use Illuminate\Database\Eloquent\Model;
 use App\Model\Shop\BackEndModel;
