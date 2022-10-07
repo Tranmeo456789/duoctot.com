@@ -45,7 +45,6 @@
                                                             <span title="" class="plus1 plus2"><i class="fa fa-plus"></i></span>
                                                         </span>
                                                     </div>
-                                                    <!-- <div class="price-old"><s>{{number_format($row['price']+10000,0,',','.')}}đ</s></div> -->
                                                     <div class="price-new price-new{{$row['id']}}">{{number_format($row['price']*$row['qty'],0,',','.')}}<span>đ</span></div>
                                                     <div class="manipulation">
                                                         <a href="" class="buy-after"><img src="{{asset('images/shop/ct4.png')}}" alt="">Để mua sau</a>
@@ -62,7 +61,13 @@
                             </div>
                         </div>
                     </div>
-                    @include("$moduleName.block.payment_vnpay")
+                    <div class="pay-cart">
+                        <div class="position-relative titanh">
+                            <h3>Áp dụng ưu đãi</h3>
+                            <img src="{{asset('images/shop/ad1.png')}}" alt="">
+                        </div>
+                        @include("$moduleName.block.payment_vnpay")
+                    </div>
                     <div class="info-customer-cart p-2">
                         <form action="{{route('fe.order.completed')}}" method="POST" id="order-complete">
                             {!! csrf_field() !!}
@@ -196,7 +201,7 @@
                                             </div>
                                             <div class="col-xl-5 col-lg-12">
                                                 <div class="form-group">
-                                                    <select name="city2" class="form-control choose city2" id="city">
+                                                    <select name="city2" class="form-control choose city2 select2" id="city">
                                                         <option value="">Chọn Tỉnh/Thành phố</option>
                                                         @if(isset($item))
                                                         @foreach($itemsProvince as $key => $city)
@@ -208,7 +213,7 @@
                                             </div>
                                             <div class="col-xl-5 col-lg-12">
                                                 <div class="form-group">
-                                                    <select name="district2" class="form-control choose district2" id="district2">
+                                                    <select name="district2" class="form-control choose district2 select2" id="district2">
                                                         <option value="">Chọn Quận/Huyện</option>
                                                         @if(isset($item))
                                                         @foreach($itemsDistrict as $key => $district)
@@ -220,7 +225,7 @@
                                             </div>
                                             <div class="col-xl-10 col-lg-12">
                                                 <div class="form-group">
-                                                    <select name="wards2" class="form-control wards2" id="wards2">
+                                                    <select name="wards2" class="form-control wards2 select2" id="wards2">
                                                         <option value="">Chọn Phường/Xã</option>
                                                         @if(isset($wardc))
                                                         @foreach($itemsWard as $key => $ward)

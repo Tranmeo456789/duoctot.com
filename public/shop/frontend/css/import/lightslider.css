@@ -23,7 +23,7 @@
 .lSSlideWrapper {
     max-width: 100%;
     overflow: hidden;
-    position: relative;
+    position: relative;margin-bottom: 15px;
 }
 .lSSlideWrapper > .lightSlider:after {
     clear: both;
@@ -384,6 +384,9 @@
   cursor: -ms-grab;
   cursor: grab;
 }
+.demo{
+    padding: 10px;
+}
 .lightSlider.lsGrabbing > * {
   cursor: move;
   cursor: -webkit-grabbing;
@@ -393,5 +396,5 @@
   cursor: grabbing;
 }
 #image-gallery li img{
-    width: 100%;
+   max-width: 100%;
 }

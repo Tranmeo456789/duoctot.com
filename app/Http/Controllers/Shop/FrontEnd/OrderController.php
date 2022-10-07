@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Shop\FrontEnd;
 use Illuminate\Http\Request;
 use App\Model\Shop\CustomerModel;
@@ -20,7 +19,6 @@ use Illuminate\Support\Str;
 include "app/Helpers/data.php";
 class OrderController extends ShopFrontEndController
 {
-   
     public function __construct()
     {
         $this->controllerName     = 'product';

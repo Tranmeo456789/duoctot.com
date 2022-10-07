@@ -13,10 +13,12 @@
                         <div class="clearfix" style="max-width:474px;">
                             <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
 
-                                <li data-thumb="{{asset($productcs['image'])}}">
+                                <li data-thumb="{{asset($productcs['image'])}}" class="text-center">
                                     <img src="{{asset($productcs['image'])}}" />
                                 </li>
-
+                                <li data-thumb="{{asset($productcs['image'])}}" class="text-center">
+                                    <img src="{{asset($productcs['image'])}}" />
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -55,11 +57,7 @@
                     <p><span class="font-weight-bold">Nước sản xuất: </span>{{$productcs->countryProduct->name}}</p>
                     <p><span class="font-weight-bold">Công dụng: </span>{{$productcs['benefit']}}</p>
                 </div>
-                <div class="payment position-relative">
-                    <h2>Thanh toán VNPAY-QR</h2>
-                    <p>Nhập mã VNPAYLC giảm ngay 3% tối đa 50,000đ khi thanh toán 100% qua VNPAY-QR <a href="">Xem chi tiết</a></p>
-                    <div class="payment-img"><img src="{{asset('images/shop/vnpay.png')}}" alt=""></div>
-                </div>
+                @include("$moduleName.block.payment_vnpay")
                 <form action="" method="POST">
                     {!! csrf_field() !!}
                     <div class="input-number">
@@ -214,17 +212,17 @@
                         </tr>
                     </tbody>
                 </table>
-                <h2 id="func-product" class="mt-2" style="font-size: 18px; font-weight: bold;">Công dụng</h2>
+                <h2 id="func-product" class="mt-2">Công dụng</h2>
                 <p>{{$productcs->benefit}}</p>
-                <h2 id="alternate-product" class="mt-2" style="font-size: 18px; font-weight: bold;">Cách dùng</h2>
+                <h2 id="alternate-product" class="mt-2">Cách dùng</h2>
                 <p>{{$productcs->dosage}}</p>
                 <h2 id="ide-effects">Tác dụng phụ</h2>
                 <p>Chưa có tác dụng không mong muốn</p>
                 <div id="note-product" class="note-product mt-2">
-                    <h2 style="font-size: 18px; font-weight: bold;">Lưu ý</h2>
+                    <h2>Lưu ý</h2>
                     <p>{{$productcs->note}}</p>
                 </div>
-                <h2 id="preserve-product" class="font-weight-bold">Bảo quản</h2>
+                <h2 id="preserve-product">Bảo quản</h2>
                 <p>{{$productcs->preserve}}</p>
             </div>
         </div>
