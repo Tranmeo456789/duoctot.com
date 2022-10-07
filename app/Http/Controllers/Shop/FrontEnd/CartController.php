@@ -39,7 +39,6 @@ class CartController extends ShopFrontEndController
 
     public function cart_product(Request $request)
     {
-       
         $session = $request->session();
         $item = [];
         if ($session->has('user')){
@@ -53,7 +52,6 @@ class CartController extends ShopFrontEndController
             $itemsDistrict = (new DistrictModel())->listItems(['parentID' => $params['province_id']],
                                                                 ['task'=>'admin-list-items-in-selectbox']);
         }
-
         $params['district_id'] = (isset($details['district_id']) && ($details['district_id'] != 0))?$details['district_id']:((isset($item->district_id) && ($item->district_id != 0)) ? $item->district_id:0);
         $itemsWard = [];
         if ($params['district_id']  != 0){
