@@ -64,7 +64,7 @@ class ProductModel extends BackEndModel
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit',
                                     'preserve','note','image','featurer','long','user_id','wide','high',
-                                    'mass', 'created_at', 'updated_at');
+                                    'mass','quantity_in_stock','created_at', 'updated_at');
             $result =  $query->orderBy('id', 'desc')->where('user_id',$user->user_id)
                               ->paginate($params['pagination']['totalItemsPerPage']);
         }
@@ -237,9 +237,7 @@ class ProductModel extends BackEndModel
     public function userProduct(){
         return $this->belongsTo('App\Model\Shop\UsersModel','user_id','user_id');
     }
-    // public function userProduct(){
-    //     return $this->belongsTo('App\Model\Shop\UsersModel','user_id','id');
-    // }
+
     public function productWarehouse()
     {
         return $this->belongsToMany(WarehouseModel::class,'product_warehouse','product_id','warehouse_id');
