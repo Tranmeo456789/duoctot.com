@@ -408,9 +408,7 @@
     opacity: 0;
     visibility: hidden;
     position: absolute;
-    right: 50%;
-    top: 100vh;
-    transform: translate(50%, -100%);
+    bottom: 0px;
     min-width: 360px;
     background: #fff;
     transition: all .3s ease;

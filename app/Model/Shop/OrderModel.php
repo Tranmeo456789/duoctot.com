@@ -1,14 +1,39 @@
 <?php
-
 namespace App\Model\Shop;
-
+use App\Http\Requests\Request;
 use Illuminate\Database\Eloquent\Model;
-
-class OrderModel extends Model
+use App\Model\Shop\BackEndModel;
+use Illuminate\Support\Str;
+use Kalnoy\Nestedset\NodeTrait;
+use App\Model\Shop\ProductModel;
+use App\Model\Shop\CollaboratorsUserModel;
+use App\Model\Shop\CollaboratorsClinicDoctor;
+use DB;
+use Session;
+class OrderModel extends BackEndModel
 {
-    protected $fillable = [
-        'id','code_order','customer_id','total','info_product','qty_total','name','phone','address','address_detail','delivery_form','request_invoice','status','status_control','payment'
-    ];
-    protected $primaryKey = 'id';
-    protected $table = 'orders';
+    use NodeTrait;
+    protected $table  = 'orders';
+    protected $guarded = [];
+    public $timestamps = true;
+    protected $fieldSearchAccepted   = [
+        'id','code_order','customer_id','total','info_product','qty_total','name','phone','address','address_detail','delivery_form','request_invoice','status','status_control','payment','created_at','updated_at'
+      ];
+    public function __construct() {
+        $this->table               = 'orders';
+        $this->controllerName      = 'order';
+        $this->folderUpload        = '' ;
+        $this->crudNotAccepted     = ['_token','btn_save'];
+    }
+
+    public function getItem($params = null, $options = null) {
+        $result = null;
+        if($options['task'] == 'get-item') {
+            $result = self::select('id','code_order','customer_id','total','info_product','qty_total','name','phone','address','address_detail','delivery_form','request_invoice','status','status_control','payment','created_at','updated_at')
+                            ->where('code_order', $params['code_order'])->first();
+        }
+        return $result;
+    }
+   
+   
 }

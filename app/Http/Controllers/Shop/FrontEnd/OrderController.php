@@ -4,10 +4,6 @@ namespace App\Http\Controllers\Shop\FrontEnd;
 use Illuminate\Http\Request;
 use App\Model\Shop\CustomerModel;
 use App\Model\Shop\OrderModel;
-use App\Model\Shop\Tinhthanhpho;
-use App\Model\Shop\Xaphuongthitran;
-use App\Model\Shop\Quanhuyen;
-use App\Model\Shop\Cat_productModel;
 use App\Model\Shop\CatProductModel;
 use App\Model\Shop\ProductModel;
 use App\Http\Requests;
@@ -15,13 +11,15 @@ use App\Http\Requests\UserRequest as MainRequest;
 use App\Model\Shop\UsersModel as MainModel;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
+use App\Model\Shop\DistrictModel;
+use App\Model\Shop\WardModel;
 use Session;
 use DB;
 use Illuminate\Support\Str;
-session_start();
 include "app/Helpers/data.php";
 class OrderController extends ShopFrontEndController
 {
+   
     public function __construct()
     {
         $this->controllerName     = 'product';
@@ -30,8 +28,6 @@ class OrderController extends ShopFrontEndController
         $this->model = new MainModel();
         parent::__construct();
         $data = CatProductModel::all();
-        $_SESSION['local'] = $local = Tinhthanhpho::all();
-
         $_SESSION['cat_product'] = $catps = data_tree1($data, 0);
     }
     public function completed(Request $request)
@@ -41,14 +37,14 @@ class OrderController extends ShopFrontEndController
         if ($session->has('user')){
             $item = $this->model->getItem(['user_id'=>$session->get('user.user_id')],['task' => 'get-item']);
             $details = $item->details->pluck('value','user_field')->toArray()??[];
+            $params['user_id']=$item->user_id;
         }
-        $wards = Xaphuongthitran::where('xaid', (int)$request->input('wards2'))->get();
-        $ward = $wards[0]->name;
-        $districts = Quanhuyen::where('maqh', (int)$request->input('district2'))->get();
-        $district = $districts[0]->name;
-        $local1s = Tinhthanhpho::where('matp', (int)$request->input('city2'))->get();
-        $local1 = $local1s[0]->name;
+        $wards=(new WardModel)->getItem(['id'=>(int)$request->input('wards2')],['task' => 'get-item-full']);
+        $ward=$wards->name;
+        $district=$wards->district->name;
+        $local1=$wards->district->province->name;
         $local = $ward . ',' . $district . ',' . $local1;
+       
         $order_id_last = DB::table('orders')->max('id');
         if (OrderModel::latest('id')->first() == null) {
             $order_id_last['id'] = 0;
@@ -57,8 +53,7 @@ class OrderController extends ShopFrontEndController
         $month = sprintf("%02d", getdate()['mon']);
         $day = sprintf("%02d", getdate()['mday']);
         $id_order = sprintf("%05d", $order_id_last + 1);
-        $code_order='DHTD'.$year.$month.$day.$id_order;
-        $params['user_id']=$item->user_id;
+        $code_order='DHTD'.$year.$month.$day.$id_order;      
          $total = 0;
          $qty = 0;
          $info_product=[];$product_item=[];
@@ -88,8 +83,8 @@ class OrderController extends ShopFrontEndController
                 'address_detail'=>$request->input('addressdetail2'),
             ]);
             $customer_id=DB::table('customers')->max('id');
-        }
-        OrderModel::create([
+        }       
+        OrderModel::insert([
             'code_order' =>  $code_order,
             'customer_id' =>  $customer_id,
             'total' =>  $total,
@@ -102,7 +97,8 @@ class OrderController extends ShopFrontEndController
             'delivery_form' =>  $request->input('local-re'),
             'request_invoice' =>  $request->input('req_export'),
             'status' => 'Đang xử lý',
-            'status_control'=>'Chưa thanh toán'
+            'status_control'=>'Chưa thanh toán',
+            'created_at'=>date('Y-m-d')
         ]);
         return redirect()->route('fe.order.success', ['code' => $code_order]);
     }
@@ -113,16 +109,6 @@ class OrderController extends ShopFrontEndController
         $params['id']=$orders[0]->customer_id;
         $customer=(new CustomerModel)->getItem($params, ['task' => 'get-item']);
         $info_product=json_decode($order->info_product,true);
-
-        //return(json_decode($info_product[46],true));
         return view($this->pathViewController . 'order_success',compact('customer','orders','info_product'));
-    }
-    public function test(Request $request){
-        $session = $request->session();
-        $item = [];
-        if ($session->has('user')) {
-            $item = $this->model->getItem(['user_id'=>$session->get('user.user_id')],['task' => 'get-item']);
-        }
-        return($item);
     }
 }

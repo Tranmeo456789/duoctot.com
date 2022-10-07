@@ -19,8 +19,12 @@
                     <p>Kết nối khám chữa bệnh tại nhà</p>
                 </div>
             </div>
-        </div>      
-        <div class="dropdown_cart"></div>
+        </div>
+        <div class="fix1screen">
+            <div class="wp-cart-res">
+                <div class="dropdown_cart"></div>
+            </div>
+        </div>
         <div class="black-res-screen"></div>
     </div>
     <div id="head-top" class="clearfix position-relative">
@@ -244,9 +248,9 @@
                         <img src="{{asset('images/shop/flag.png')}}" alt="" srcset="">
                         <div class="dropdown">
                             <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tiếng Việt</button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Tiếng Anh</a>
-                                <a class="dropdown-item" href="#">Tiếng Pháp</a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="{{route('dashboard')}}">Tiếng Anh</a>
+                                <a class="dropdown-item" href="{{route('user.logout')}}">Tiếng Pháp</a>
                             </div>
                         </div>
                     </div>

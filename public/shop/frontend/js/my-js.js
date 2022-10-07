@@ -166,6 +166,7 @@ $(document).on('click', ".close-cart", function (event) {
     $('.dropdown_cart').css("opacity", 0);
     $('.dropdown_cart').css("visibility", "hidden");
     $('.black-res-screen').css("display", "none");
+    $('.fix1screen').css("display", "none");
     $('#site').removeClass("fix-1vh");
     location.reload();
 });

@@ -73,11 +73,13 @@
             $('#dropdown').css("opacity", 1);
             $('#dropdown').css("visibility", "visible");
         }
-
+        var height_screen = $(window).height();
         function visible_cart_respon() {
             $('.dropdown_cart').css("opacity", 1);
             $('.dropdown_cart').css("visibility", "visible");
             $('.black-res-screen').css("display", "block");
+            $('.fix1screen').css("display", "block");
+            $('.fix1screen').css("height", height_screen);
             $('#site').addClass('fix-1vh');
         }
 
@@ -89,7 +91,7 @@
             $('body,html').stop().animate({
                 scrollTop: 0
             }, 800);
-            var with_screen = window.outerWidth;
+            var with_screen = $(window).width();
             //alert(with_screen);
             if (with_screen < 1200) {
                 setTimeout(visible_cart_respon, 100);
