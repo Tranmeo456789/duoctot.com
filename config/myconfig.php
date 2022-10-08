@@ -30,6 +30,9 @@
                 'input' => [
                     'class' => 'form-control'
                 ],
+                'input_radio' => [
+                    'class' => 'form-check-input'
+                ],
                 'input_number' => [
                     'class' => 'form-control number'
                 ],
@@ -103,6 +106,10 @@
                 '7' => 'Nha khoa',
                 '8' => 'Thẩm mỹ viện',
                 '9' => 'Công ty dược phẩm'
+            ],
+            'type_gender' => [
+                '1' => 'Anh',
+                '2' => 'Chị',
             ],
             'type_product' => [
                 '1' => 'Sản phẩm loại thường',

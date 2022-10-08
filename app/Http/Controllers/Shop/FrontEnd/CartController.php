@@ -58,11 +58,11 @@ class CartController extends ShopFrontEndController
             $itemsWard = (new WardModel())->listItems(['parentID' => $params['district_id']],
                                                                 ['task'=>'admin-list-items-in-selectbox']);
         }    
-        $citys=Tinhthanhpho::all();   
-        if ($session->has('user')){       
-            //return($item);  
+        $citys=Tinhthanhpho::all();  
+        if ($session->has('user')){         
             return view($this->pathViewController . 'cart',compact('itemsProvince' ,'itemsDistrict','itemsWard','item','details','citys'));
         }
+        
         return view($this->pathViewController . 'cart',compact('itemsProvince','itemsDistrict','itemsWard','citys'));
     }
     public function cart_null()
@@ -84,7 +84,7 @@ class CartController extends ShopFrontEndController
         $id = (int)$request->id_product;
         $qtyper = (int)$request->number_perp;
         $product = ProductModel::find($id);
-        $image = explode(",", $product->image);
+        $image = $product->image;
         $row_Id = substr(md5(microtime()), rand(0, 26), 6);
         //$request->session()->forget('cart');
         $cart = $request->session()->get('cart');
@@ -104,7 +104,7 @@ class CartController extends ShopFrontEndController
                     'name' => $product->name,
                     'price' => (int)$product->price,
                     'qty' => (int)$qtyper,
-                    'image' => $image[0],
+                    'image' => $image,
                     'unit' => $product->unit,
                 );
                 $request->session()->put('cart', $cart);
@@ -116,7 +116,7 @@ class CartController extends ShopFrontEndController
                 'name' => $product->name,
                 'price' => (int)$product->price,
                 'qty' => (int)$qtyper,
-                'image' => $image[0],
+                'image' => $image,
                 'unit' => $product->unit,
             );
         }
