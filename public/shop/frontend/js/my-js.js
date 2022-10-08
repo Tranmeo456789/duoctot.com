@@ -174,7 +174,6 @@ $(document).on('change', "select.get_child", function(event) {
     event.preventDefault();
     url = $(this).data('href');
     target = $(this).data('target');
-
     $selectValue = $(this).val();
     if (($selectValue == '') && (url.indexOf('value_new') !== -1)) {
         options = $(target).find('option')[0].outerHTML;

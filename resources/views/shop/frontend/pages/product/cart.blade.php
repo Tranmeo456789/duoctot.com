@@ -6,17 +6,17 @@
         @if(Session::has('cart'))
         @if(count(Session::get('cart')) > 0)
         <div class="cbh1"><a href="{{route('home')}}"><i class="fas fa-angle-left"></i> Tiếp tục mua hàng</a></div>
-        <div class="row ">
-            <div class="col-xl-9 col-lg-12 mb-1 pd800-0">
-                <div class="wp-left-cart border-radius-800">
-                    <div class="title-cart">
-                        <h1>Có {{count(Session::get('cart'))}} sản phẩm trong giỏ hàng</h1>
-                    </div>
-                    <div class="info-product-cart">
-                        <div class="table-responsive">
-                            <div class="set-widthtable">
-                                <form action="" method="POST">
-                                    {!! csrf_field() !!}
+        <form action="{{route('fe.order.completed')}}" method="POST" id="order-complete">
+            {!! csrf_field() !!}
+            <div class="row ">
+                <div class="col-xl-9 col-lg-12 mb-1 pd800-0">
+                    <div class="wp-left-cart border-radius-800">
+                        <div class="title-cart">
+                            <h1>Có {{count(Session::get('cart'))}} sản phẩm trong giỏ hàng</h1>
+                        </div>
+                        <div class="info-product-cart">
+                            <div class="table-responsive">
+                                <div class="set-widthtable">
                                     <table class="table mb-0">
                                         <tbody>
                                             @php
@@ -56,21 +56,17 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-                                </form>
-
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="pay-cart">
-                        <div class="position-relative titanh">
-                            <h3>Áp dụng ưu đãi</h3>
-                            <img src="{{asset('images/shop/ad1.png')}}" alt="">
+                        <div class="pay-cart">
+                            <div class="position-relative titanh">
+                                <h3>Áp dụng ưu đãi</h3>
+                                <img src="{{asset('images/shop/ad1.png')}}" alt="">
+                            </div>
+                            @include("$moduleName.block.payment_vnpay")
                         </div>
-                        @include("$moduleName.block.payment_vnpay")
-                    </div>
-                    <div class="info-customer-cart p-2">
-                        <form action="{{route('fe.order.completed')}}" method="POST" id="order-complete">
-                            {!! csrf_field() !!}
+                        <div class="info-customer-cart p-2">
                             <div class="row mx-0">
                                 <div class="col-12">
                                     <div class="form-group">
@@ -199,8 +195,8 @@
                                                     <input class="form-control phone2 phonecart3" type="text" id="phone2" name="phone2" value="{{$item->phone??''}}" autocomplete="off" placeholder="Nhập số điện thoại">
                                                 </div>
                                             </div>
-                                            <div class="col-xl-5 col-lg-12">
-                                                <div class="form-group">
+                                            <div class="col-xl-5 col-lg-12 marb-form">
+                                                <div class="form-group form-position-relative">
                                                     <select name="city2" class="form-control choose city2 select2" id="city">
                                                         <option value="">Chọn Tỉnh/Thành phố</option>
                                                         @if(isset($item))
@@ -211,10 +207,10 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-5 col-lg-12">
-                                                <div class="form-group">
+                                            <div class="col-xl-5 col-lg-12 marb-form">
+                                                <div class="form-group form-position-relative">
                                                     <select name="district2" class="form-control choose district2 select2" id="district2">
-                                                        <option value="">Chọn Quận/Huyện</option>
+                                                        <option value="">--Chọn quận huyện--</option>
                                                         @if(isset($item))
                                                         @foreach($itemsDistrict as $key => $district)
                                                         <option value="{{$key}}" {{$item->district_id==$key? 'selected' : ''}}>{{$district}}</option>
@@ -223,10 +219,10 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-10 col-lg-12">
-                                                <div class="form-group">
+                                            <div class="col-xl-10 col-lg-12 marb-form">
+                                                <div class="form-group form-position-relative">
                                                     <select name="wards2" class="form-control wards2 select2" id="wards2">
-                                                        <option value="">Chọn Phường/Xã</option>
+                                                        <option value="">--Chọn xã phường--</option>
                                                         @if(isset($wardc))
                                                         @foreach($itemsWard as $key => $ward)
                                                         <option value="{{$key}}" {{$wardc==$key?'selected':''}}>{{$ward}}</option>
@@ -246,9 +242,9 @@
                                 <div class="de-store col-12">
                                     <div class="col-12">
                                         <div class="row">
-                                            <div class="col-xl-5 col-lg-12">
+                                            <div class="col-xl-5 col-lg-12 marb-form">
                                                 <div class="form-group">
-                                                    <select name="city3" class="form-control choose" id="city3">
+                                                    <select name="city3" class="form-control choose city2 select2" id="city2">
                                                         <option value="">Chọn Tỉnh/Thành phố</option>
                                                         @foreach($itemsProvince as $key => $city)
                                                         <option value="{{$key}}">{{$city}}</option>
@@ -256,12 +252,10 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-5 col-lg-12">
+                                            <div class="col-xl-5 col-lg-12 marb-form">
                                                 <div class="form-group">
-                                                    <select name="district3" class="form-control choose" id="district3">
+                                                    <select name="district3" class="form-control choose district2 select2" id="district3">
                                                         <option value="">Chọn Quận/Huyện</option>
-                                                        <option value="3">Huyện Thanh Oai</option>
-                                                        <option value="4">Ba Đình</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -302,59 +296,59 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xl-3 col-lg-12 pd800-0">
-                <div class="info-order border-radius-800">
-                    <div class="title-order d-flex justify-content-center">
-                        <img src="{{asset('images/shop/ode1.png')}}" alt="">
-                        <h2 class="">THÔNG TIN ĐƠN HÀNG </h2>
-                    </div>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td class="pl-2 py-2">Tổng tiền</td>
-                                <td class="text-right pr-2 py-2"><span class="totalt">{{number_format($total,0,',','.')}}</span>đ</td>
-                            </tr>
-                            <tr>
-                                <td class="pl-2 py-2">Khuyến mãi giảm</td>
-                                <td class="text-right pr-2 py-2">10.000đ</td>
-                            </tr>
-                            <tr>
-                                <td class="pl-2 py-2">Phí giao dự kiến</td>
-                                <td class="text-right pr-2 py-2">0đ</td>
-                            </tr>
-                            <tr>
-                                <td class="pl-2 py-2 font-weight-bold">Cần thanh toán</td>
-                                <td class="text-right text-info pr-2 py-2"><span class="totaltg">{{number_format($total-10000,0,',','.')}}</span>đ</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="discount-code">
-                        <h4 class="text-info d-flex justify-content-center py-2">
-                            <img src="{{asset('images/shop/ode2.png')}}" alt="">
-                            <a href="" class="">Sử dụng mã giảm giá</a>
-                        </h4>
-                        <!-- <small class="text-danger d-flex justify-content-center">
+                <div class="col-xl-3 col-lg-12 pd800-0">
+                    <div class="info-order border-radius-800">
+                        <div class="title-order d-flex justify-content-center">
+                            <img src="{{asset('images/shop/ode1.png')}}" alt="">
+                            <h2 class="">THÔNG TIN ĐƠN HÀNG </h2>
+                        </div>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="pl-2 py-2">Tổng tiền</td>
+                                    <td class="text-right pr-2 py-2"><span class="totalt">{{number_format($total,0,',','.')}}</span>đ</td>
+                                </tr>
+                                <tr>
+                                    <td class="pl-2 py-2">Khuyến mãi giảm</td>
+                                    <td class="text-right pr-2 py-2">10.000đ</td>
+                                </tr>
+                                <tr>
+                                    <td class="pl-2 py-2">Phí giao dự kiến</td>
+                                    <td class="text-right pr-2 py-2">0đ</td>
+                                </tr>
+                                <tr>
+                                    <td class="pl-2 py-2 font-weight-bold">Cần thanh toán</td>
+                                    <td class="text-right text-info pr-2 py-2"><span class="totaltg">{{number_format($total-10000,0,',','.')}}</span>đ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="discount-code">
+                            <h4 class="text-info d-flex justify-content-center py-2">
+                                <img src="{{asset('images/shop/ode2.png')}}" alt="">
+                                <a href="" class="">Sử dụng mã giảm giá</a>
+                            </h4>
+                            <!-- <small class="text-danger d-flex justify-content-center">
                                     <img src="{{asset('images/shop/gd1.png')}}" alt="">
                                     <span>Vui lòng nhập đầy đủ tên và số điện thoại mua hàng để áp dụng mã giảm giá</span>
                                 </small> -->
-                    </div>
-                    <div class="cmoder">
-                        @if(Session::has('user'))
-                        <button value="1" class="complete_order">HOÀN TẤT ĐẶT HÀNG</button>
-                        @else
-                        <span class="order-noislogin">HOÀN TẤT ĐẶT HÀNG</span>
-                        @endif
-                        <p>Bằng cách đặt hàng, bạn đồng ý với
-                            <span class="underline"> Điều khoản sử dụng </span>của T Doctor
-                        </p>
+                        </div>
+                        <div class="cmoder">
+                            @if(Session::has('user'))
+                            <button value="1" class="complete_order">HOÀN TẤT ĐẶT HÀNG</button>
+                            @else
+                            <span class="order-noislogin">HOÀN TẤT ĐẶT HÀNG</span>
+                            @endif
+                            <p>Bằng cách đặt hàng, bạn đồng ý với
+                                <span class="underline"> Điều khoản sử dụng </span>của T Doctor
+                            </p>
+                        </div>
                     </div>
                 </div>
-                </form>
             </div>
-        </div>
+        </form>
         @else
         <div class="pt-3">
             <div class="wp-cart-null d-flex justify-content-center">
@@ -377,7 +371,6 @@
             </div>
         </div>
         @endif
-
         <div class="row">
             <div class="col-md-12">
                 <div class="new-view">

@@ -443,12 +443,23 @@
             var action = $(this).attr('id');
             var maid = $(this).val();
             var _token = $('input[name="_token"]').val();
+            var district2 = $('#select2-district2-container').attr('title');
+            var wards2= $('#select2-wards2-container').attr('title');
+             if(district2 === "--Chọn quận huyện--"){
+                 $("#district2-error").css("display", "none");
+             }
+            if(wards2 != "--Chọn xã phường--"){
+                $("#wards2-error").css("display", "none");
+            }
             var result = '';
             if (action == 'city') {
                 result = 'district2';
             } else {
                 result = 'wards2';
             }
+            if (action == 'city2') {
+                result = 'district3';
+            } 
             $.ajax({
                 url: "{{route('locationAjax')}}",
                 method: "POST",

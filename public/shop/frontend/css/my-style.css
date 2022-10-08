@@ -208,3 +208,16 @@ label.error {
 .input-group.has-error {
     border-color: red !important;
 }
+.de-store .select2{
+    width: 100%!important;
+}
+.form-position-relative{
+    position: relative;
+}
+.form-position-relative .error{
+    position: absolute;
+    bottom: -21px;
+}
+.marb-form{
+    margin-bottom: 10px;
+}
