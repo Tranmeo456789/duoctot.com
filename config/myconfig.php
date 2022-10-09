@@ -42,6 +42,9 @@
                 'select2' => [
                     'class' => 'form-control col-md-12 col-xs-12 select2'
                 ],
+                'select' => [
+                    'class' => 'form-control col-md-12 col-xs-12'
+                ],
                 'input_datemask' => [
                     'class' => 'form-control datemask',
                     'data-inputmask-alias'=>"dd/mm/yyyy",

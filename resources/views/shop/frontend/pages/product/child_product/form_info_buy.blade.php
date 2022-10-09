@@ -5,15 +5,17 @@ $label = config('myconfig.template.label');
 $formLabelAttr = config('myconfig.template.form_element.label');
 $formInputAttr = config('myconfig.template.form_element.input');
 $formInputRadioAttr = config('myconfig.template.form_element.input_radio');
+
 $formSelect2Attr = config('myconfig.template.form_element.select2');
 $formSelect2GetChildAttr = array_merge_recursive(
 config('myconfig.template.form_element.select2'),
 config('myconfig.template.form_element.get_child')
 );
 $formSelect2GetChildAttr = MyFunction::array_fill_muti_values($formSelect2GetChildAttr);
-$details = $item->details->pluck('value','user_field')->toArray()??[];
+$details = isset($item) ? $item->details->pluck('value','user_field')->toArray() : [];
 $linkGetListDistrict = route('district.getListByParentID',['parentID' => 'value_new']);
 $linkGetListWard = route('ward.getListByParentID',['parentID' => 'value_new']);
+
 $formInputWidth['widthInput'] = 'col-12 p-0';
 $inputHiddenTask = Form::hidden('task', 'register');
 $arrTypeGender = config('myconfig.template.type_gender');
@@ -136,56 +138,11 @@ $element_homes = [
                     <div class="de-home mt-3">
                         <div class="col-12">
                             <div class="row">
-                                <div class="col-xl-5 col-lg-12">
-                                    <div class="form-group">
-                                        <input class="form-control name2" type="text" id="name2" name="name2" value="{{$item->fullname??''}}" autocomplete="off" placeholder="Nhập họ tên">
-                                    </div>
-                                </div>
-                                <div class="col-xl-5 col-lg-12">
-                                    <div class="form-group">
-                                        <input class="form-control phone2 phonecart3" type="text" id="phone2" name="phone2" value="{{$item->phone??''}}" autocomplete="off" placeholder="Nhập số điện thoại">
-                                    </div>
-                                </div>
-                                <div class="col-xl-5 col-lg-12 marb-form">
-                                    <div class="form-group form-position-relative">
-                                        <select name="city2" class="form-control choose city2 select2" id="city">
-                                            @if(isset($item))
-                                            @foreach($itemsProvince as $key => $city)
-                                            <option value="{{$key}}" {{$item->province_id==$key? 'selected' : ''}}>{{$city}}</option>
-                                            @endforeach
-                                            @endif
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-xl-5 col-lg-12 marb-form">
-                                    <div class="form-group form-position-relative">
-                                        <select name="district2" class="form-control choose district2 select2" id="district2">
-                                            <option value="">--Chọn quận huyện--</option>
-                                            @if(isset($item))
-                                            @foreach($itemsDistrict as $key => $district)
-                                            <option value="{{$key}}" {{$item->district_id==$key? 'selected' : ''}}>{{$district}}</option>
-                                            @endforeach
-                                            @endif
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-xl-10 col-lg-12 marb-form">
-                                    <div class="form-group form-position-relative">
-                                        <select name="wards2" class="form-control wards2 select2" id="wards2">
-                                            <option value="">--Chọn xã phường--</option>
-                                            @if(isset($wardc))
-                                            @foreach($itemsWard as $key => $ward)
-                                            <option value="{{$key}}" {{$wardc==$key?'selected':''}}>{{$ward}}</option>
-                                            @endforeach
-                                            @endif
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-xl-10 col-lg-12">
-                                    <div class="form-group">
-                                        <input class="form-control addressdetail2" type="text" id="addressdetail2" name="addressdetail2" autocomplete="off" placeholder="Nhập địa chỉ *">
-                                    </div>
-                                </div>
+                                <!-- @php
+                                    $formInputWidth['widthInput'] = 'col-12';
+                                @endphp
+                                {!! FormTemplate::show($element_homes,$formInputWidth) !!} -->
+                                @include("$moduleName.pages.$controllerName.child_product.receive_home")                                  
                             </div>
                         </div>
                     </div>
