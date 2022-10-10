@@ -323,6 +323,9 @@
                 city3: {
                     checkcity3: true
                 },
+                count_store:{
+                    checknumbershop:true
+                },
                 dcshop: {
                     checkdcshop: true
                 }
@@ -381,7 +384,10 @@
                 },
                 dcshop: {
                     checkdcshop: "Bạn chưa chọn cửa hàng"
-                }
+                },
+                count_store:{
+                    checknumbershop:"Bạn chưa chọn cửa hàng"
+                },
             },
 
             //submitHandler: function(form) {

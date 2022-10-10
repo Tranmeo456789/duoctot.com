@@ -25,7 +25,9 @@ use App\Model\Shop\WardModel;
         <div class="col-xl-10 col-lg-12">
             <div class="position-relative list-local-store">
                 <div>
-                    <p class="font-weight-bold mt-2">Có <span class="number-store-local">{{count($storeHCM)}}</span> nhà thuốc tại <span class="dcadrress">Hồ Chí Minh</span></p>
+                    <p class="font-weight-bold mt-2">Có <span class="number-store-local">
+                        <input class="count-store" type="text" name="count_store" value="{{count($storeHCM)}}" readonly>
+                    </span> nhà thuốc tại <span class="dcadrress">Hồ Chí Minh</span></p>   
                 </div>
                 @foreach($storeHCM as $item)
                     @php

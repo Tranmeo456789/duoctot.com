@@ -641,7 +641,26 @@ jQuery.validator.addMethod("checkdcshop",
         var dcshop = $('input[type="radio"][name="dcshop"]:checked').val();
         local_re = $('input[type="radio"][name="local-re"]:checked').val();
         if (local_re == 'Nhận tại nhà thuốc') {
-            if (dcshop !== undefined) {
+            if (dcshop != undefined) {
+                flag = true;
+            } else {
+                flag = false;
+            }
+        }
+        else {
+            flag = true;
+        }
+        return flag;
+    }
+);
+
+jQuery.validator.addMethod("checknumbershop",
+    function () {
+        var flag = true;
+        var count_store = $('.count-store').val().trim();
+        local_re = $('input[type="radio"][name="local-re"]:checked').val();
+        if (local_re == 'Nhận tại nhà thuốc') {
+            if (count_store > 0) {
                 flag = true;
             } else {
                 flag = false;

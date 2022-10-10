@@ -221,3 +221,14 @@ label.error {
 .marb-form{
     margin-bottom: 10px;
 }
+.count-store{
+    background: #fff;
+    outline: none;border: none;
+    font-weight: 700;
+    width: 15px;
+}
+#count_store-error{
+    position: absolute;
+    top: 26px;
+    left: 1px;
+}
