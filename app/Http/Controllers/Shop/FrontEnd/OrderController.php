@@ -34,13 +34,6 @@ class OrderController extends ShopFrontEndController
         $params=$request->all();
         $item = Session::get('user');
         $params['user_id']=$item->user_id;
-        $params['address_detail']=$request->input('addressdetail2');
-        $wards=(new WardModel)->getItem(['id'=>(int)$request->input('wards2')],['task' => 'get-item-full']);
-        $ward=$wards->name;
-        $district=$wards->district->name;
-        $local1=$wards->district->province->name;
-        $local = $ward . ',' . $district . ',' . $local1;
-        $params['address']=$local;
         $order_id_last = DB::table('orders')->max('id');
         if (OrderModel::latest('id')->first() == null) {
             $order_id_last['id'] = 0;
@@ -66,34 +59,67 @@ class OrderController extends ShopFrontEndController
             $product_item['image']=$image;
             $product_item['code']=$code;
             $info_product[$item['id']]= json_encode($product_item);
-        }    
+        }  
         $customers=new CustomerModel;
         $isCustomerExist = $customers->getItem($params, ['task' => 'get-item-userId']);
         $customer_id=$isCustomerExist->id;
-        $params_customer=MyFunction::array_child(['gender','name','phone','user_id','address','address_detail'],$params);
-        $params_customer['ward_id']=$params['wards2'];$params_customer['district_id']=$params['district2'];$params_customer['province_id']=$params['city2']; 
-        if(!$isCustomerExist){
-            $customers->saveItem($params_customer, ['task' => 'save-item-order']);
-            $customer_id=DB::table('customers')->max('id');
-        }else{
-            $customers->saveItem($params_customer, ['task' => 'edit-item-order']);
-        }      
-        OrderModel::insert([
-            'code_order' =>  $code_order,
-            'customer_id' =>  $customer_id,
-            'total' =>  $total,
-            'info_product' => json_encode($info_product),
-            'qty_total' =>  $qty,
-            'name' =>  $request->input('name2'),
-            'phone' =>  $request->input('phone2'),
-            'address' =>  $local,
-            'address_detail' =>  $request->input('addressdetail2'),
-            'delivery_form' =>  $request->input('local-re'),
-            'request_invoice' =>  $request->input('req_export'),
-            'status' => 'Đang xử lý',
-            'status_control'=>'Chưa thanh toán',
-            'created_at'=>date('Y-m-d')
-        ]);
+        //return($params);
+        if($request->input('local-re')=='Giao hàng tận nơi'){
+            $params['address_detail']=$request->input('addressdetail2');
+            $wards=(new WardModel)->getItem(['id'=>(int)$request->input('wards2')],['task' => 'get-item-full']);
+            $ward=$wards->name;
+            $district=$wards->district->name;
+            $local1=$wards->district->province->name;
+            $local = $ward . ',' . $district . ',' . $local1;
+            $params['address']=$local;
+            $params_customer=MyFunction::array_child(['gender','name','phone','user_id','address','address_detail'],$params);
+            $params_customer['ward_id']=$params['wards2'];$params_customer['district_id']=$params['district2'];$params_customer['province_id']=$params['city2']; 
+            if(!$isCustomerExist){
+                $customers->saveItem($params_customer, ['task' => 'save-item-order']);
+                $customer_id=DB::table('customers')->max('id');
+            }else{
+                $customers->saveItem($params_customer, ['task' => 'edit-item-order']);
+            }    
+            OrderModel::insert([
+                'code_order' =>  $code_order,
+                'customer_id' =>  $customer_id,
+                'total' =>  $total,
+                'info_product' => json_encode($info_product),
+                'qty_total' =>  $qty,
+                'name' =>  $request->input('name2'),
+                'phone' =>  $request->input('phone2'),
+                'address' =>  $local,
+                'address_detail' =>  $request->input('addressdetail2'),
+                'delivery_form' =>  $request->input('local-re'),
+                'request_invoice' =>  $request->input('req_export'),
+                'status' => 'Đang xử lý',
+                'status_control'=>'Chưa thanh toán',
+                'created_at'=>date('Y-m-d')
+            ]);
+        }       
+        if($request->input('local-re')=='Nhận tại nhà thuốc'){
+            $params_customer=MyFunction::array_child(['gender','name','phone','user_id'],$params);
+            if(!$isCustomerExist){
+                $customers->saveItem($params_customer, ['task' => 'save-item-order']);
+                $customer_id=DB::table('customers')->max('id');
+            }
+            OrderModel::insert([
+                'code_order' =>  $code_order,
+                'customer_id' =>  $customer_id,
+                'shop_id'=>$request->input('shop_id'),
+                'total' =>  $total,
+                'info_product' => json_encode($info_product),
+                'qty_total' =>  $qty,
+                'name' =>  $request->input('name2'),
+                'phone' =>  $request->input('phone'),
+                'address_detail' =>  $request->input('dcshop'),
+                'delivery_form' =>  $request->input('local-re'),
+                'request_invoice' =>  $request->input('req_export'),
+                'status' => 'Đang xử lý',
+                'status_control'=>'Chưa thanh toán',
+                'created_at'=>date('Y-m-d')
+            ]);
+        }
         return redirect()->route('fe.order.success', ['code' => $code_order]);
     }
     public function success($code)

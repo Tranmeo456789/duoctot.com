@@ -15,6 +15,8 @@
             @foreach($itemsProvince as $key => $city)
             <option value="{{$key}}" {{$item->province_id==$key? 'selected' : ''}}>{{$city}}</option>
             @endforeach
+            @else
+            <option value="">--Chọn tỉnh, thành phố--</option>
             @endif
         </select>
     </div>

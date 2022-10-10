@@ -6,6 +6,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('/','HomeController@index')->name('home');
     Route::get('/ajaxcat3','HomeController@ajaxcat3')->name('ajaxcat3');
     Route::get('/ajaxcat1','HomeController@ajaxcat1')->name('ajaxcat1');
+    Route::get('/ajaxlocal-store','HomeController@ajaxlocal')->name('fe.ajaxlocal');
     Route::get('/chi-tiet-san-pham/{id}','ProductController@detail_product')->name('fe.product.detail');
 
     Route::post('/hoan-tat-dat-hang','OrderController@completed')->name('fe.order.completed');

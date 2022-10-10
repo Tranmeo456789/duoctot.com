@@ -170,7 +170,7 @@ $(document).on('click', ".close-cart", function (event) {
     $('#site').removeClass("fix-1vh");
     location.reload();
 });
-$(document).on('change', "select.get_child", function(event) {
+$(document).on('change', "select.get_child", function (event) {
     event.preventDefault();
     url = $(this).data('href');
     target = $(this).data('target');
@@ -184,7 +184,7 @@ $(document).on('change', "select.get_child", function(event) {
         let addtion = $(this).data('addtion');
         if (addtion !== undefined) {
             addtion = addtion.split('|');
-            addtion.forEach(function(elem, index) {
+            addtion.forEach(function (elem, index) {
                 elemValue = $('#' + elem).val();
                 if (elemValue != '') {
                     if (url.indexOf('?') === -1) {
@@ -199,12 +199,12 @@ $(document).on('change', "select.get_child", function(event) {
             url: url,
             cache: false,
             dataType: 'json',
-            success: function(data) {
+            success: function (data) {
                 options = '';
                 if ($(target + " option").length > 0) {
                     options = $(target).find('option')[0].outerHTML;
                 }
-                $.each(data, function(id, item) {
+                $.each(data, function (id, item) {
                     options += "<option value= '" + id + "'>" + item + "</option>";
                 });
 
@@ -212,9 +212,33 @@ $(document).on('change', "select.get_child", function(event) {
                 // if ($(target).hasClass('get_data')) $(target).trigger("change");
                 if ($(target).hasClass('get_child')) $(target).trigger("change");
             },
-            error: function(xhr, textStatus, errorThrown) {
+            error: function (xhr, textStatus, errorThrown) {
                 alert("Error: " + errorThrown);
             }
         });
     }
+});
+$(document).on('change', ".choose-store", function (event) {
+    var action = $(this).attr('id');
+    var maid = $(this).val();
+    var _token = $('input[name="_token"]').val();
+    var result = '';
+    
+    $.ajax({
+        url: "http://localhost/shop.tdoctor.vn/ajaxlocal-store",
+        method: "GET",
+        dataType: 'json',
+        data: {
+            action: action,
+            maid: maid,
+            _token: _token
+        },
+        success: function(data) {
+            if (action == 'city3') {
+                $('#district3').html(data['list_district']);
+            } 
+            $('.list-local-store').html(data['list_store']);
+            //console.log(data['test']);
+        },
+    });
 });

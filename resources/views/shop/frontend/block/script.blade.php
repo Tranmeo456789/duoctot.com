@@ -323,9 +323,6 @@
                 city3: {
                     checkcity3: true
                 },
-                district3: {
-                    checkdistrict3: true
-                },
                 dcshop: {
                     checkdcshop: true
                 }
@@ -381,9 +378,6 @@
                 },
                 city3: {
                     checkcity3: "Thông tin bắt buộc"
-                },
-                district3: {
-                    checkdistrict3: "Thông tin bắt buộc"
                 },
                 dcshop: {
                     checkdcshop: "Bạn chưa chọn cửa hàng"

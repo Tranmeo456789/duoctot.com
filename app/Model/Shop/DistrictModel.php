@@ -25,7 +25,13 @@ class DistrictModel extends BackEndModel
 
         return $result;
     }
-
+    public function getItem($params = null, $options = null) {
+        $result = null;
+        if($options['task'] == 'get-item-full') {
+            $result = self::where('id', $params['id'])->first();
+        }
+        return $result;
+    }
     public function province(){
         return $this->belongsTo('App\Model\Shop\ProvinceModel','province_id','id');
     }

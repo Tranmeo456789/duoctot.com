@@ -58,12 +58,15 @@ class CartController extends ShopFrontEndController
             $itemsWard = (new WardModel())->listItems(['parentID' => $params['district_id']],
                                                                 ['task'=>'admin-list-items-in-selectbox']);
         }    
-        $citys=Tinhthanhpho::all();  
+        $itemsDistrictHCM=(new DistrictModel())->listItems(['parentID' => 79],['task'=>'admin-list-items-in-selectbox']);
+        $params['user_type_id'] = 4;
+        $params['province_id'] = 79;
+        $storeHCM=$this->model->listItems($params, ['task' => 'list-store-select-province']);
         if ($session->has('user')){         
-            return view($this->pathViewController . 'cart',compact('itemsProvince' ,'itemsDistrict','itemsWard','item','details','citys'));
+            return view($this->pathViewController . 'cart',compact('itemsProvince' ,'itemsDistrict','itemsWard','item','details','itemsDistrictHCM','storeHCM'));
         }
         
-        return view($this->pathViewController . 'cart',compact('itemsProvince','itemsDistrict','itemsWard','citys'));
+        return view($this->pathViewController . 'cart',compact('itemsProvince','itemsDistrict','itemsWard','itemsDistrictHCM','storeHCM'));
     }
     public function cart_null()
     {
