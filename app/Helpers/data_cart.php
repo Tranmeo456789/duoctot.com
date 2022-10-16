@@ -16,14 +16,14 @@ function list_cartloadhed($number_product)
             </div>
         </div>
     </a>
-    <span class="number_cartmenu">' . $number_product . '</span>                
+    <span class="number_cartmenu">' . $number_product . '</span>
     <div id="dropdown">
         <div class="position-relative">
             <span class="arrow-up"><i class="fas fa-sort-up"></i></span>
             <p class="text-success notisucess1"></p>
             <form action="" method="POST">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-                <ul class="listp-cartmini">';
+                <ul class="list-cart-mini">';
 }
 function list_product($product)
 {
@@ -34,7 +34,7 @@ function list_product($product)
                 <img src="' . asset($product['image']) . '">
             </div>
         </div>
-        <div class="infoperp">
+        <div class="cart-info">
             <a href="" title="" class="nameprmn mb-1 truncate2">' . $product['name'] . '</a>
             <div class="clearfix">
                 <div class="fl-left">
@@ -64,7 +64,7 @@ function list_cart_resheader(){
     <div class="close-cart"><img src="'.asset("images/shop/dn4.png").'" alt=""></div>
     <form action="" method="POST">
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-        <ul class="listp-cartmini">';
+        <ul class="list-cart-mini">';
 }
 function list_cart_resfooter()
 {

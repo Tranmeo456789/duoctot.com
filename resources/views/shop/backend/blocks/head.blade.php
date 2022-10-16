@@ -16,6 +16,5 @@
 <link rel="stylesheet" href="{{ asset('shop/template/css/summernote-bs4.css') }}">
 <!-- Theme style AdminLTE v3.0.5-->
 <link rel="stylesheet" href="{{ asset('shop/template/css/adminlte.css') }}">
-<link rel="stylesheet" href="{{ asset('shop/backend/backup/css/style.css') }}">
 <link rel="stylesheet" href="{{ asset('shop/backend/css/style.css') }}?ts={{time()}}">
 <link rel="stylesheet" href="{{ asset('shop/backend/css/my-style.css') }}?ts={{time()}}">

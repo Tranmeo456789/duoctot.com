@@ -10,6 +10,7 @@
             'dec_point'       => ',',
             'thousands_sep'   => '.',
         ],
+        'time_cookie' => 10*365*24*60*60,
         'url' => [
             'api' => 'http://tdoctor.xyz/',
             'prod' => 'shop.tdoctor.vn',
@@ -42,9 +43,6 @@
                 'select2' => [
                     'class' => 'form-control col-md-12 col-xs-12 select2'
                 ],
-                'select' => [
-                    'class' => 'form-control col-md-12 col-xs-12'
-                ],
                 'input_datemask' => [
                     'class' => 'form-control datemask',
                     'data-inputmask-alias'=>"dd/mm/yyyy",
@@ -53,7 +51,10 @@
                 ],
                 'get_child' =>[
                     'class' => 'get_child'
-                ]
+                ],
+                'get_data' =>[
+                    'class' => 'get_data'
+                ],
             ],
             'label' => [
                 'fullname' => 'Họ tên',

@@ -93,6 +93,4 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd','mid
     Route::post('/them-anh-san-pham/{id}', 'ProductController@addimg_product')->name('product.img.add');
     Route::get('/xoa-anh-san-pham/{id}/{id_product}', 'DropzoneController@deleteimg_product')->name('dropzone.img.delete');
 
-    Route::get('district/get-list', 'DistrictController@getListByParentID')->name('district.getListByParentID');
-    Route::get('ward/get-list', 'WardController@getListByParentID')->name('ward.getListByParentID');
 });

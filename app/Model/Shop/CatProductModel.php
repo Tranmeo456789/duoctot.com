@@ -92,7 +92,7 @@ class CatProductModel extends BackEndModel
                                 ->where("collaborators_clinic_doctor.collaborator_code",$collaborator_code)
                                 ->first();
 
-                if (!empty($arrUserID)) {
+                if (!empty($arrUserID['user_id'])) {
                     $arrUserID = "(". implode(',',$arrUserID['user_id']).")";
                     $whereProduct = "AND `user_id` IN $arrUserID";
                 }

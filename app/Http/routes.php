@@ -30,11 +30,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/dang-ky', 'UserController@register')->name('user.register');
 Route::post('/dang-nhap', 'UserController@login')->name('user.login');
 Route::get('/dang-xuat', 'UserController@logout')->name('user.logout');
-Route::get('/dang-xuat-be', 'UserController@logoutbe')->name('user.logoutbe');
 Route::get('/kiem-tra-email', 'UserController@isunique')->name('user.isunique');
 Route::group(['prefix' => 'laravel-filemanager','middleware' => ['check.login']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
+
+Route::get('district/get-list', 'Shop\BackEnd\DistrictController@getListByParentID')->name('district.getListByParentID');
+Route::get('ward/get-list', 'Shop\BackEnd\WardController@getListByParentID')->name('ward.getListByParentID');
+
 include_once 'routes/shopApi.php';
 include_once 'routes/shopBackEnd.php';
 include_once 'routes/shopFrontEnd.php';

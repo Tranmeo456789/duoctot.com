@@ -17,19 +17,18 @@ class ProductController extends ShopFrontEndController
 {
     public function __construct()
     {
-        $this->controllerName     = 'cat';
+        $this->controllerName     = 'product';
         $this->pathViewController = "$this->moduleName.pages.$this->controllerName.";
         $this->pageTitle          = 'Chi tiết sản phẩm';
         $this->model = new MainModel();
         parent::__construct();
         $data = CatProductModel::all();
-        $_SESSION['local']=$local=Tinhthanhpho::all();
         $_SESSION['cat_product']= $catps = data_tree1($data, 0);
     }
-    public function detail_product($id){
-        $params['id'] = $id;
+    public function detail(Request $request){
+        //unset($_COOKIE['cart']);
+        $params['id'] = intval($request->id);
         $productcs= $this->model->getItem($params,['task' => 'get-item']);
-        $user=$productcs->trademarkProduct;
-        return view($this->pathViewController . 'detail_product',compact('productcs'));
+        return view($this->pathViewController . 'detail',compact('productcs'));
     }
 }

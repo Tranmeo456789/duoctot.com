@@ -7,19 +7,11 @@ use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
 use Illuminate\Support\Facades\Config;
 use App\Model\Shop\ProductModel;
 use App\Model\Shop\Tinhthanhpho;
-use App\Model\Shop\DistrictModel;
-use App\Model\Shop\WardModel;
-use App\Model\Shop\UsersModel;
 use App\Model\Shop\Cat_productModel;
 use App\Model\Shop\CatProductModel;
-
 include "app/Helpers/data_cat.php";
 include "app/Helpers/data.php";
-
 use App\Helpers\HttpClient;
-use App\Helpers\StrData;
-use App\Model\Shop\ProvinceModel;
-
 class HomeController extends ShopFrontEndController
 {
     public function __construct()
@@ -32,14 +24,13 @@ class HomeController extends ShopFrontEndController
         $_SESSION['local'] = $local = Tinhthanhpho::all();
         $_SESSION['cat_product'] = $catps = data_tree1($data, 0);
     }
-    public function index()
+    public function index(Request $request)
     {
         $product_covids = ProductModel::all();
 
-        return view(
-            $this->pathViewController . 'index',
-            compact('product_covids')
-        );
+
+        return view($this->pathViewController . 'index',
+                    compact('product_covids'));
     }
     public function ajaxcat3(Request $request)
     {
@@ -99,7 +90,7 @@ class HomeController extends ShopFrontEndController
                 $list_idcat3[] = $cat3['id'];
             }
         }
-        $products = ProductModel::whereIn('cat_product_id', $list_idcat3)->inRandomOrder()->limit(4)->get();
+         $products = ProductModel::whereIn('cat_product_id', $list_idcat3)->inRandomOrder()->limit(4)->get();
         $list_cat = '';
         foreach ($_SESSION['cat_product'] as $item_submenu2) {
             if ($item_submenu2['parent_id'] == $id_cat2) {
@@ -136,7 +127,7 @@ class HomeController extends ShopFrontEndController
                 $stores = (new UsersModel())->listItems($params, ['task' => 'list-store-select-province']);
                 $province_select = (new ProvinceModel)->getItem(['id' => $maid], ['task' => 'get-item-full'])->name;
                 $temp = count($stores);
-                $list_store .= StrData::count_store($temp, $province_select, $district_select);             
+                $list_store .= StrData::count_store($temp, $province_select, $district_select);
                 $output .= '<option value="">--Chọn quận huyện--</option>';
                 $itemsDistrict = (new DistrictModel())->listItems(['parentID' => $maid], ['task' => 'admin-list-items-in-selectbox']);
                 foreach ($itemsDistrict as $key => $value) {
@@ -149,7 +140,7 @@ class HomeController extends ShopFrontEndController
                 $province_select = (new DistrictModel)->getItem(['id' => $maid], ['task' => 'get-item-full'])->province->name;
                 $stores = (new UsersModel())->listItems($params, ['task' => 'list-store-select-district']);
                 $temp = count($stores);
-                $list_store= StrData::count_store($temp, $province_select, $district_select);  
+                $list_store= StrData::count_store($temp, $province_select, $district_select);
             }
             foreach ($stores as $item) {
                 $details = $item->details->pluck('value', 'user_field')->toArray();

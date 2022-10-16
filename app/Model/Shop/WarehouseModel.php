@@ -49,6 +49,20 @@ class WarehouseModel extends BackEndModel
                         ->orderBy('name', 'asc');
             $result = $query->pluck('name', 'id')->toArray();
         }
+        if ($options['task'] == 'frontend-list-items'){
+            $query = $this::with(['province','district'])
+                                ->select('id', 'name','address','province_id','district_id')
+                                ->where('id','>',1)
+                                ->where('user_id',$params['user_id']);
+            if (isset($params['filter']['province_id']) && ($params['filter']['province_id'] != 0)){
+                $query->where('province_id',$params['filter']['province_id']);
+            }
+            if (isset($params['filter']['district_id']) && ($params['filter']['district_id'] != 0)){
+                $query->where('district_id',$params['filter']['district_id']);
+            }
+
+            $result = $query->get();
+        }
         return $result;
     }
     public function listItemsNoPaginate(){
@@ -108,5 +122,11 @@ class WarehouseModel extends BackEndModel
     public function products()
     {
         return $this->belongsToMany(ProductModel::class,'product_warehouse','warehouse_id','product_id');
+    }
+    public function district(){
+        return $this->belongsTo('App\Model\Shop\DistrictModel','district_id');
+    }
+    public function province(){
+        return $this->belongsTo('App\Model\Shop\ProvinceModel','province_id','id');
     }
 }

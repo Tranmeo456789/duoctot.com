@@ -33,8 +33,8 @@ class CatController extends ShopFrontEndController
         return view($this->pathViewController . 'index', compact('catc','products'));
     }
     public function cat_level2($slug, $slug1)
-    {      
-        
+    {
+
         $catc1s = CatProductModel::where('slug', $slug1)->get();
         $catc1 = $catc1s[0];
         //return(parent_cat($catc1->id)->name);

@@ -81,12 +81,6 @@
     margin-bottom: 30px;
 }
 
-.input-number .pm11 {
-    display: inline-block;
-    position: relative;
-    margin-left: 40px;
-}
-
 .plus1 {
     padding: 5px 12px;
     background: white;
@@ -125,7 +119,6 @@
 
 .btn-buy-search {
     font-size: 20px;
-
 }
 
 .btn-buy-search .btn-select-buy {
@@ -187,10 +180,15 @@
 .commit-tdoctor-child .content-commit-tdoctor {
     padding: 20px 18px;
 }
-.content-commit-tdoctorrespon{
+
+.content-commit-tdoctorrespon {
     display: none;
 }
-.content-commit-tdoctorrespon i{color: blue;}
+
+.content-commit-tdoctorrespon i {
+    color: blue;
+}
+
 .commit-tdoctor-child .content-commit-tdoctor h3 {
     font-weight: 700;
     font-size: 16px;
@@ -199,13 +197,15 @@
     color: #1E1E1E;
     margin-top: 13px;
 }
-.content-commit-tdoctorrespon h3{
+
+.content-commit-tdoctorrespon h3 {
     font-weight: 700;
     font-size: 16px;
     line-height: 20px;
     text-align: center;
     color: #1E1E1E;
 }
+
 .commit-tdoctor-child .content-commit-tdoctor p {
     font-size: 16px;
     line-height: 20px;
@@ -240,7 +240,6 @@
 
 .short-infohr {
     border-bottom: 1px solid #B0C1DB;
-
 }
 
 .cat-content {
@@ -285,8 +284,7 @@
     padding: 15px;
 }
 
-.cat-content .list-content-product li{
-    
+.cat-content .list-content-product li {
     border-radius: 10px;
 }
 
@@ -413,7 +411,6 @@
     top: 50%;
     left: 0px;
     transform: translateY(-50%);
-
 }
 
 .question-often .list-question h3 i {
@@ -465,7 +462,6 @@
     font-weight: 700;
     font-size: 20px;
     line-height: 24px;
-
     color: #1E1E1E;
 }
 
@@ -520,9 +516,9 @@
 .average-rating {
     background: white;
     padding: 20px 15px;
-
 }
-.average-rating-center{
+
+.average-rating-center {
     padding-left: 20px;
 }
 
@@ -540,6 +536,7 @@ input[type="number"] {
     border-radius: 3px;
     position: relative;
 }
+
 .average-rating-center .tn {
     position: absolute;
     top: 0px;
@@ -550,53 +547,63 @@ input[type="number"] {
     display: inline-block;
     border-radius: 3px;
 }
-.average-rating-center .str{
+
+.average-rating-center .str {
     position: absolute;
     left: -27px;
     top: 50%;
     transform: translateY(-38%);
 }
-.average-rating-left p{
+
+.average-rating-left p {
     font-size: 20px;
 }
-.average-rating-left .sst{
+
+.average-rating-left .sst {
     font-weight: 700;
     font-size: 64px;
     line-height: 78px;
     text-align: center;
     color: #05AFE3;
 }
-.average-rating-center .ss{
+
+.average-rating-center .ss {
     position: absolute;
     right: -8px;
     top: 50%;
     transform: translateY(-46%);
 }
-.average-rating-right a{
-font-family: 'Helvetica Neue';
-font-style: normal;
-font-weight: 700;
-font-size: 16px;
-line-height: 20px;
-text-align: center;
-color: #FFFFFF;
-padding: 8px 15px;
-background: #05AFE3;
-border-radius: 20px;
+
+.average-rating-right a {
+    font-family: 'Helvetica Neue';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    color: #FFFFFF;
+    padding: 8px 15px;
+    background: #05AFE3;
+    border-radius: 20px;
 }
-.content-quest.average-rating{
+
+.content-quest.average-rating {
     background: white;
 }
-.average-rating-left{
+
+.average-rating-left {
     padding-left: 20px;
 }
-.average-rating-right{
+
+.average-rating-right {
     padding-right: 20px;
 }
-.average-rating img{
+
+.average-rating img {
     width: 15px;
-    height:15px;
+    height: 15px;
 }
+
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;

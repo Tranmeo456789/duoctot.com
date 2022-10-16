@@ -5,6 +5,7 @@ namespace App\Model\Shop;
 use Illuminate\Database\Eloquent\Model;
 use App\Model\Shop\BackEndModel;
 use App\Model\Shop\WarehouseModel;
+use App\Model\Shop\ProductWarehouseModel;
 use DB;
 use App\Helpers\MyFunction;
 class ImportCouponModel extends BackEndModel
@@ -89,7 +90,7 @@ class ImportCouponModel extends BackEndModel
                 (new ProductWarehouseModel())->saveItem(['warehouse_id'=>$params['warehouse_id'],
                                                             'list_products'=>$list_products],
                                                         ['task' => 'input-warehouse']);
-
+                DB::commit();
                 return true;
             } catch (\Throwable $th) {
                 DB::rollback();
@@ -130,7 +131,7 @@ class ImportCouponModel extends BackEndModel
                 (new ProductWarehouseModel())->saveItem(['warehouse_id'=>$params['warehouse_id'],
                                                             'list_products'=>$list_products],
                                                         ['task' => 'input-warehouse']);
-
+                DB::commit();
                 return true;
             } catch (\Throwable $th) {
                 DB::rollback();

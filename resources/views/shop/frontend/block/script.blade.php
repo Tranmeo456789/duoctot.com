@@ -92,106 +92,36 @@
                 scrollTop: 0
             }, 800);
             var with_screen = $(window).width();
-            //alert(with_screen);
-            if (with_screen < 1200) {
-                setTimeout(visible_cart_respon, 100);
-            } else {
-                // $('#dropdown').css("opacity", 1);
-                // $('#dropdown').css("visibility", "visible");
-                setTimeout(visible_cart, 1000);
-                setInterval(reloadpage, 3000);
-            }
+
+            // if (with_screen < 1200) {
+            //     setTimeout(visible_cart_respon, 100);
+            // } else {
+            //     setTimeout(visible_cart, 1000);
+            //     setInterval(reloadpage, 3000);
+            // }
+            // alert('vao day');
             var _token = $('input[name="_token"]').val();
-            var number_perp = $('input[name="number_perp"]').val();
-            var id_product = $('.seclect-number').attr('data-id');
+            var quantity = $('input[name="qty_product"]').val();
+            //var id_product = $('.seclect-number').attr('data-id');
+            var product_id = $('#product_id').val();
+            var user_sell = $('#user_sell').val();
             $.ajax({
                 url: "{{route('fe.cart.addproduct')}}",
                 method: 'POST',
                 cache: false,
                 dataType: 'json',
                 data: {
-                    id_product: id_product,
-                    number_perp: number_perp,
+                    product_id: product_id,
+                    quantity: quantity,
+                    user_sell: user_sell,
                     _token: _token,
                 },
                 success: function(data) {
                     $('.number_cartmenu').html(data['number_product']);
                     $('#cart-load').html(data['list_product']);
                     $('.dropdown_cart').html(data['list_product_res']);
-                    $('.notisucess1').html(data['noti_success']);
+                    $('.noti-cart').html(data['message']);
                     //console.log(data['rowId']);
-                },
-            });
-        });
-        $('.number-ajax').change(function() {
-            var qty = $(this).val();
-            var id = $(this).attr("data-id");
-            var rowId = $(this).attr("data-rowId");
-            var _token = $('input[name="_token"]').val();
-            $.ajax({
-                url: "{{route('fe.cart.changenp')}}",
-                method: "POST",
-                dataType: 'json',
-                data: {
-                    qty: qty,
-                    id: id,
-                    rowId: rowId,
-                    _token: _token
-                },
-                success: function(data) {
-                    $(".price-new" + id).text(data['sub_total']);
-                    $(".numberperp" + rowId).val(data['number_product']);
-                    $(".num-order" + rowId).val(data['number_product']);
-                    $(".totalt").text(data['total']);
-                    $(".totaltg").text(data['totalkm']);
-                },
-            });
-        });
-        $('.minus2').on('click', function() {
-            var qty = $(this).next('.number-ajax').val();
-            var id = $(this).next('.number-ajax').attr("data-id");
-            var rowId = $(this).next('.number-ajax').attr("data-rowId");
-            var _token = $('input[name="_token"]').val();
-            $.ajax({
-                url: "{{route('fe.cart.changenp')}}",
-                method: "POST",
-                dataType: 'json',
-                data: {
-                    qty: qty,
-                    id: id,
-                    rowId: rowId,
-                    _token: _token
-                },
-                success: function(data) {
-                    $(".price-new" + id).text(data['sub_total']);
-                    $(".numberperp" + rowId).val(data['number_product']);
-                    $(".num-order" + rowId).val(data['number_product']);
-                    $(".totalt").text(data['total']);
-                    $(".totaltg").text(data['totalkm']);
-                },
-            });
-        });
-        $('.plus2').on('click', function() {
-            var qty = $(this).prev('.number-ajax').val();
-            var id = $(this).prev('.number-ajax').attr("data-id");
-            var rowId = $(this).prev('.number-ajax').attr("data-rowId");
-            var _token = $('input[name="_token"]').val();
-            $.ajax({
-                url: "{{route('fe.cart.changenp')}}",
-                method: "POST",
-                dataType: 'json',
-                data: {
-                    qty: qty,
-                    id: id,
-                    rowId: rowId,
-                    _token: _token
-                },
-                success: function(data) {
-                    $(".price-new" + id).text(data['sub_total']);
-                    $(".numberperp" + rowId).val(data['number_product']);
-                    $(".num-order" + rowId).val(data['number_product']);
-                    $(".totalt").text(data['total']);
-                    $(".totaltg").text(data['totalkm']);
                 },
             });
         });
@@ -323,8 +253,8 @@
                 city3: {
                     checkcity3: true
                 },
-                count_store:{
-                    checknumbershop:true
+                district3: {
+                    checkdistrict3: true
                 },
                 dcshop: {
                     checkdcshop: true
@@ -382,12 +312,12 @@
                 city3: {
                     checkcity3: "Thông tin bắt buộc"
                 },
+                district3: {
+                    checkdistrict3: "Thông tin bắt buộc"
+                },
                 dcshop: {
                     checkdcshop: "Bạn chưa chọn cửa hàng"
-                },
-                count_store:{
-                    checknumbershop:"Bạn chưa chọn cửa hàng"
-                },
+                }
             },
 
             //submitHandler: function(form) {
@@ -459,7 +389,7 @@
             }
             if (action == 'city2') {
                 result = 'district3';
-            } 
+            }
             $.ajax({
                 url: "{{route('locationAjax')}}",
                 method: "POST",

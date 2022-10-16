@@ -91,7 +91,8 @@ class ProductModel extends BackEndModel
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit',
                                     'preserve','note','image','albumImage','albumImageHash','user_id','featurer','long','wide','high',
-                                    'mass');
+                                    'mass')
+                                ->where('id','>',1);
             if (isset($params['cat_product_id']) && ($params['cat_product_id'] != 0)){
                 $query->whereIn('cat_product_id', CatProductModel::getChild($params['cat_product_id']));
             }
@@ -108,7 +109,8 @@ class ProductModel extends BackEndModel
                                     'dosage_forms','country_id','specification','benefit',
                                     'preserve','note','image','albumImage','albumImageHash','user_id','featurer','long','wide','high',
                                     'mass')
-                                    ->whereRaw("JSON_CONTAINS(`featurer`, '\"{$params['type']}\"')");
+                                 //   ->whereRaw("JSON_CONTAINS(`featurer`, '\"{$params['type']}\"')");
+                                    ->whereRaw("FIND_IN_SET('\"{$params['type']}\"',REPLACE(REPLACE(`featurer`, '[',''),']',''))");
             if (isset($params['cat_product_id']) && ($params['cat_product_id'] != 0)){
                 $query->whereIn('cat_product_id', CatProductModel::getChild($params['cat_product_id']));
             }

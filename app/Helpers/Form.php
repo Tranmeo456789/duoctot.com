@@ -41,17 +41,6 @@ class Form
                     $element['element']
                 );
                 break;
-                case 'input-cart':
-                    $xhtml .= sprintf(
-                        "<div class='%s'>
-                            <div class='form-group $styleFormGroup'>
-                                %s
-                            </div>
-                        </div>",
-                        $widthElement,
-                        $element['element']
-                    );
-                    break;
             case 'inline':
                 $xhtml .= sprintf(
                     "<div class='%s'>
@@ -144,19 +133,6 @@ class Form
                                     %s
                                 </div>
                             </div>",
-                    $widthElement,
-                    $element['element'],
-                    $element['label']
-                );
-                break;
-            case 'input-radio-cart':
-                $xhtml .= sprintf(
-                    "<div class='%s'>
-                        <div class='form-group form-check $styleFormGroup'>
-                            %s
-                            %s
-                        </div>
-                    </div>",     
                     $widthElement,
                     $element['element'],
                     $element['label']

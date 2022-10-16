@@ -95,6 +95,7 @@ class WarehouseController extends BackEndController
         return view($this->pathViewController .  'info',
             compact('pageTitle','itemsProduct' ,'itemsWarehouses'));
     }
+
     // public function add_product(Request $request)
     // {
     //     $data = $request->all();
