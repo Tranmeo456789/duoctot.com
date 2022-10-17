@@ -1,7 +1,7 @@
 @php
     use App\Helpers\MyFunction;
 @endphp
-<li data-id="{{$item['product_id']}}" class="item-product">
+<li data-id="{{$item['product_id']}}" class="item-product item-product-{{$item['product_id']}}">
     <div class="d-flex">
         <div class="col-2 thumb-img-product px-0">
             <img src="{{asset($item['image'])}}">
@@ -19,7 +19,7 @@
                     <div class="input-group-append total-money">
                       <span class="input-group-text money">{{ MyFunction::formatNumber($item['price']*$item['quantity'])}} đ</span>
                       <span class="input-group-text px-0" >
-                        <span>|</span>
+                        <span>|&nbsp;</span>
                         <span class="delele-item-in-cart" data-href="{{route('fe.cart.delete',['user_sell'=>$user_sell,'id'=>$item['product_id']])}}">Xóa</span>
                       </span>
                     </div>

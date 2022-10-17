@@ -1,5 +1,6 @@
 @php
     use App\Helpers\MyFunction;
+
 @endphp
 <div class="title-order d-flex justify-content-center">
     <img src="{{asset('images/shop/ode1.png')}}" alt="">
@@ -9,7 +10,7 @@
     <tbody>
         <tr>
             <td class="pl-2 py-2">Tổng tiền</td>
-            <td class="text-right pr-2 py-2"><span class="totalt">{{MyFunction::formatNumber($item['total'])}}</span> đ</td>
+            <td class="text-right pr-2 py-2"><span class="total">{{MyFunction::formatNumber($item['total'])}}</span> đ</td>
         </tr>
         <tr>
             <td class="pl-2 py-2">Khuyến mãi giảm</td>
@@ -21,7 +22,7 @@
         </tr>
         <tr>
             <td class="pl-2 py-2 font-weight-bold">Cần thanh toán</td>
-            <td class="text-right text-info pr-2 py-2"><span class="totaltg">{{MyFunction::formatNumber($item['total'])}}</span> đ</td>
+            <td class="text-right text-info pr-2 py-2"><span class="total_thanh_toan">{{MyFunction::formatNumber($item['total'])}}</span> đ</td>
         </tr>
     </tbody>
 </table>

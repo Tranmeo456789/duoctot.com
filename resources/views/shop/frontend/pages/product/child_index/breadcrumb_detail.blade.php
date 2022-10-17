@@ -4,13 +4,13 @@
             <a href="" title="">Trang chủ</a>
         </li>
         <li>
-            <a href="" title="">{{parent_cat($productcs->catProduct->id,2)->name}}</a>
+            <a href="" title="">{{parent_cat($item->catProduct->id,2)->name}}</a>
         </li>
         <li>
-            <a href="" title="">{{parent_cat($productcs->catProduct->id)->name}}</a>
+            <a href="" title="">{{parent_cat($item->catProduct->id)->name}}</a>
         </li>
         <li>
-            <a href="" title="">{{$productcs->catProduct->name}}</a>
+            <a href="" title="">{{$item->catProduct->name}}</a>
         </li>
     </ul>
 </div>

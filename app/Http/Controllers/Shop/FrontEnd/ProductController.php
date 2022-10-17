@@ -26,9 +26,8 @@ class ProductController extends ShopFrontEndController
         $_SESSION['cat_product']= $catps = data_tree1($data, 0);
     }
     public function detail(Request $request){
-        //unset($_COOKIE['cart']);
         $params['id'] = intval($request->id);
-        $productcs= $this->model->getItem($params,['task' => 'get-item']);
-        return view($this->pathViewController . 'detail',compact('productcs'));
+        $item= $this->model->getItem($params,['task' => 'frontend-get-item']);
+        return view($this->pathViewController . 'detail',compact('item'));
     }
 }

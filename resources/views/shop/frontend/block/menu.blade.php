@@ -97,7 +97,7 @@
                         <div class="content text-center">
                             <div class="mb-3 rimg-center"><img src="{{asset('images/shop/tclsdh.png')}}" alt="" style="display:block"></div>
                             <p class="nsdt">Nhập số điện thoại bạn dùng
-                                để mua hàng tại T Doctor</p>
+                                để mua hàng tại TDoctor</p>
                             <div class="phone-mail position-relative">
                                 <input type="text" placeholder="Nhập số điện thoại / Email">
                                 <div class="img-person"><img src="{{asset('images/shop/dn1.png')}}" alt=""></div>

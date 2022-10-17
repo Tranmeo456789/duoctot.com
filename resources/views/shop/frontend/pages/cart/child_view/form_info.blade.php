@@ -19,18 +19,20 @@
     $linkGetListWard = route('ward.getListByParentID',['parentID' => 'value_new']);
     $linkGetListWareHouse = route('fe.warehouse.getList',['user_id'=>$item['user_sell'],'filter_district_id' => 'value_new']);
     $formInputWidth['widthInput'] = 'col-12';
-    $inputHiddenTask = Form::hidden('task', 'register');
+    $inputUserSellHidden = Form::hidden('user_sell', $item['user_sell']);
+    $inputUserIDHidden = Form::hidden('user_id', \Session::get('user')['user_id']??'');
     $arrTypeGender = config('myconfig.template.type_gender');
+
     $elements = [
         [
-            'label' => Form::label('gender', 'Anh',$formLabelAttr),
-            'element' => Form::radio('gender', '1',true),
+            'label' => Form::label('buyer[gender]', 'Anh',$formLabelAttr),
+            'element' => Form::radio('buyer[gender]', '1',(!isset($user->gender) || ($user->gender==1) || ($user->gender != 2)) ? true: false),
             'type' =>'inline-text-right',
             'widthElement' => 'col-1',
             'styleFormGroup' => 'mb-1',
         ],[
-            'label' => Form::label('gender', ' Chị',$formLabelAttr),
-            'element' => Form::radio('gender', '2',false),
+            'label' => Form::label('buyer[gender]', ' Chị',$formLabelAttr),
+            'element' => Form::radio('buyer[gender]', '2',(isset($user->gender) && ($user->gender==1)) ? true: false),
             'type' =>'inline-text-right',
             'widthElement' => 'col-1',
             'styleFormGroup' => 'mb-1',
@@ -40,11 +42,11 @@
             'widthElement' => 'col-10',
         ],[
             'label' => '',
-            'element' => Form::text('fullname', $user->fullname??null,array_merge($formInputAttr,['placeholder'=>'Nhập Họ tên'])),
+            'element' => Form::text('buyer[fullname]', $user->fullname??null,array_merge($formInputAttr,['placeholder'=>'Nhập Họ tên'])),
             'widthElement' => 'col-4',
         ],[
             'label' => '',
-            'element' => Form::text('phone', $user->phone??null,array_merge($formInputAttr,['placeholder'=>'Nhập Số điện thoại'])),
+            'element' => Form::text('buyer[phone]', $user->phone??null,array_merge($formInputAttr,['placeholder'=>'Nhập Số điện thoại'])),
             'widthElement' => 'col-4',
         ],[
             'label' => '',
@@ -52,7 +54,7 @@
             'widthElement' => 'col-4',
         ],[
             'label' => '',
-            'element' => Form::text('email', $user->email??null,array_merge($formInputAttr,['placeholder'=>'Nhập Email'])),
+            'element' => Form::text('buyer[email]', $user->email??null,array_merge($formInputAttr,['placeholder'=>'Nhập Email'])),
             'widthElement' => 'col-4',
         ],[
             'label' => '',
@@ -66,6 +68,17 @@
             'styleFormGroup' => 'mb-1',
         ]
     ];
+    $formInputIgnoreAttr    = array_merge_recursive(
+                                    config('myconfig.template.form_element.input'),
+                                    ['class' => 'ignore']
+                                    );
+    $formInputIgnoreAttr = MyFunction::array_fill_muti_values($formInputIgnoreAttr);
+
+    $formSelect2GetChildIgnoreAttr    = array_merge_recursive(
+                                        $formSelect2GetChildAttr,
+                                    ['class' => 'ignore']
+                                    );
+    $formSelect2GetChildIgnoreAttr = MyFunction::array_fill_muti_values($formSelect2GetChildIgnoreAttr);
     $elementInvoice = [
         [
             'label' => Form::label('', 'Công ty',$formLabelAttr),
@@ -87,15 +100,15 @@
             'styleFormGroup' => 'mb-1',
         ],[
             'label' => '',
-            'element' => Form::text('invoice[name]', null,array_merge($formInputAttr,['placeholder'=>'Nhập Họ tên'])),
+            'element' => Form::text('invoice[name]', $user->fullname??null,array_merge($formInputIgnoreAttr,['placeholder'=>'Nhập Họ tên'])),
             'widthElement' => 'col-4',
         ],[
             'label' => '',
-            'element' => Form::text('invoice[phone]', null,array_merge($formInputAttr,['placeholder'=>'Nhập Số điện thoại'])),
+            'element' => Form::text('invoice[phone]', $user->phone??null,array_merge($formInputIgnoreAttr,['placeholder'=>'Nhập Số điện thoại'])),
             'widthElement' => 'col-4',
         ],[
             'label' => '',
-            'element' => Form::text('invoice[tax_code]', null,array_merge($formInputAttr,['placeholder'=>'Nhập Mã số thuế'])),
+            'element' => Form::text('invoice[tax_code]', null,array_merge($formInputIgnoreAttr,['placeholder'=>'Nhập Mã số thuế'])),
             'widthElement' => 'col-4',
         ],[
             'label' => '',
@@ -103,7 +116,7 @@
             'widthElement' => 'col-4',
         ],[
             'label' => '',
-            'element' => Form::text('invoice[address]', null,array_merge($formInputAttr,['placeholder'=>'Nhập Địa chỉ'])),
+            'element' => Form::text('invoice[address]', null,array_merge($formInputIgnoreAttr,['placeholder'=>'Nhập Địa chỉ'])),
             'widthElement' => 'col-4',
         ]
     ];
@@ -131,22 +144,22 @@
     $elementPharmacy = [
         [
             'label'   => '',
-            'element' => Form::select('pharmacy_province_id',[null=>"-- Chọn {$label['province_id']} --"] + $itemsProvince, null, array_merge($formSelect2GetChildAttr,['id' =>'pharmacy_province_id','style' =>'width:100%','data-href'=>$linkGetListDistrict,'data-target' => '#pharmacy_district_id'])),
+            'element' => Form::select('pharmacy[province_id]',[null=>"-- Chọn {$label['province_id']} --"] + $itemsProvince, null, array_merge($formSelect2GetChildAttr,['id' =>'pharmacy_province_id','style' =>'width:100%','data-href'=>$linkGetListDistrict,'data-target' => '#pharmacy_district_id'])),
             'widthElement' => 'col-4',
         ],[
             'label'   => '',
-            'element' => Form::select('pharmacy_district_id',[null=>"-- Chọn {$label['district_id']} --"] +  $itemsDistrict,  null, array_merge($formSelect2GetDataAttr,['id' =>'pharmacy_district_id','style' =>'width:100%','data-href'=>$linkGetListWareHouse,'data-target' =>'.receive_store','data-addtion' => 'pharmacy_province_id'])),
+            'element' => Form::select('pharmacy[district_id]',[null=>"-- Chọn {$label['district_id']} --"] +  $itemsDistrict,  null, array_merge($formSelect2GetDataAttr,['id' =>'pharmacy_district_id','style' =>'width:100%','data-href'=>$linkGetListWareHouse,'data-target' =>'.receive_store','data-addtion' => 'pharmacy_province_id'])),
             'widthElement' => 'col-4'
         ]
     ];
     $elementHome = [
         [
             'label' => '',
-            'element' => Form::text('fullname', $user->fullname??null,array_merge($formInputAttr,['placeholder'=>'Nhập Họ tên'])),
+            'element' => Form::text('receive[fullname]', $user->fullname??null,array_merge($formInputAttr,['placeholder'=>'Nhập Họ tên'])),
             'widthElement' => 'col-4'
         ],[
             'label' => '',
-            'element' => Form::text('phone', $user->phone??null,array_merge($formInputAttr,['placeholder'=>'Nhập Số điện thoại'])),
+            'element' => Form::text('receive[phone]', $user->phone??null,array_merge($formInputAttr,['placeholder'=>'Nhập Số điện thoại'])),
             'widthElement' => 'col-4'
         ],[
             'label'   => '',
@@ -154,11 +167,11 @@
             'widthElement' => 'col-4'
         ],[
             'label'   => '',
-            'element' => Form::select('province_id',$itemsProvince, null, array_merge($formSelect2GetChildAttr,['id' =>'province_id','style' =>'width:100%','data-href'=>$linkGetListDistrict,'data-target' => '#district_id'])),
+            'element' => Form::select('receive[province_id]',$itemsProvince, $user->province_id??null, array_merge($formSelect2GetChildIgnoreAttr,['id' =>'province_id','style' =>'width:100%','data-href'=>$linkGetListDistrict,'data-target' => '#district_id'])),
             'widthElement' => 'col-4'
         ],[
             'label'   => '',
-            'element' => Form::select('district_id',[null=>"-- Chọn {$label['district_id']} --"] +  $itemsDistrict,  null, array_merge($formSelect2GetChildAttr,['id' =>'district_id','data-href'=>$linkGetListDistrict,'data-target' => '#ward_id','style' =>'width:100%'])),
+            'element' => Form::select('receive[district_id]',[null=>"-- Chọn {$label['district_id']} --"] +  $itemsDistrict, $details['district_id']??null, array_merge($formSelect2GetChildIgnoreAttr,['id' =>'district_id','data-href'=>$linkGetListWard,'data-target' => '#ward_id','style' =>'width:100%'])),
             'widthElement' => 'col-4'
         ],[
             'label'   => '',
@@ -166,7 +179,7 @@
             'widthElement' => 'col-4'
         ],[
             'label'   => '',
-            'element' => Form::select('ward_id',[null=>"-- Chọn {$label['ward_id']} --"] +  $itemsWard,  null, array_merge($formSelect2GetChildAttr,['id' =>'ward_id','style' =>'width:100%'])),
+            'element' => Form::select('receive[ward_id]',[null=>"-- Chọn {$label['ward_id']} --"] +  $itemsWard,  $details['ward_id']??null, array_merge($formSelect2GetChildIgnoreAttr,['id' =>'ward_id','style' =>'width:100%'])),
             'widthElement' => 'col-8'
         ],[
             'label'   => '',
@@ -174,7 +187,7 @@
             'widthElement' => 'col-4'
         ],[
             'label' => '',
-            'element' => Form::text('address', $user->phone??null,array_merge($formInputAttr,['placeholder'=>'Địa chỉ'])),
+            'element' => Form::text('receive[address]', $details['address']??null,array_merge($formInputIgnoreAttr,['placeholder'=>'Địa chỉ'])),
             'widthElement' => 'col-8',
         ],
     ];
@@ -183,8 +196,8 @@
     'method'         => 'POST',
     'url'            => route('fe.order.completed'),
     'accept-charset' => 'UTF-8',
-    'class'          => '',
-    'id'             => 'order-complete'])  }}
+    'class'          => 'order-complete',
+    'id'             => 'main-form1'])  }}
     <div class="row">
         <div class="col-xl-9 col-lg-12 col-12">
             <div class="col-left-cart">
@@ -209,7 +222,7 @@
                     <div class="row rowPharmacy px-3 py-0">
                         {!!FormTemplate::show($elementPharmacy,$formInputWidth)   !!}
                         <div class="col-12 receive_store">
-
+                            @include("$moduleName.pages.$controllerName.child_view.receive_store",['items'=>$itemsStore])
                         </div>
                     </div>
                     <div class="row rowHome px-3 py-0 d-none">
@@ -222,9 +235,10 @@
             <div class="col-right-cart">
                 @include("$moduleName.pages.$controllerName.child_view.header_info_order_cart")
                 <div class="cmoder">
+                    {{$inputUserSellHidden}}
+                    {{$inputUserIDHidden}}
                     @if(Session::has('user'))
-                    {{$inputHiddenTask}}
-                    <button value="1" class="complete_order">HOÀN TẤT ĐẶT HÀNG</button>
+                    <button type="submit"  value="1" class="complete_order">HOÀN TẤT ĐẶT HÀNG</button>
                     @else
                     <span class="order-noislogin">HOÀN TẤT ĐẶT HÀNG</span>
                     @endif

@@ -12,11 +12,11 @@
                     <div class="item">
                         <div class="clearfix" style="max-width:474px;">
                             <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
-                                <li data-thumb="{{asset($productcs['image'])}}" class="text-center">
-                                    <img src="{{asset($productcs['image'])}}" />
+                                <li data-thumb="{{asset($item['image'])}}" class="text-center">
+                                    <img src="{{asset($item['image'])}}" />
                                 </li>
-                                <li data-thumb="{{asset($productcs['image'])}}" class="text-center">
-                                    <img src="{{asset($productcs['image'])}}" />
+                                <li data-thumb="{{asset($item['image'])}}" class="text-center">
+                                    <img src="{{asset($item['image'])}}" />
                                 </li>
                             </ul>
                         </div>
@@ -25,14 +25,10 @@
             </div>
             <div class="col-md-7">
                 <div class="title_product">
-                    <p class="trademark_product">Thương hiệu: <span class="text-info">{{$productcs->trademarkProduct->name}}</span></p>
-                    <h1>{{$productcs['name']}}</h1>
+                    <p class="trademark_product">Thương hiệu: <span class="text-info">{{$item->trademarkProduct->name}}</span></p>
+                    <h1>{{$item['name']}}</h1>
                     <div class="comment d-flex justify-content-between flex-wrap">
-                        @if(isset($productcs->userProduct))
-                        <span class="text-muted">({{$productcs->userProduct->user_id}})</span>
-                        @else
-                        <span class="text-muted">00000000000</span>
-                        @endif
+                        <span class="text-muted">({{$item->code??''}})</span>
                         <div class="position-relative">
                             <span class="">
                                 <img src="{{asset('images/shop/star.png')}}" alt="">
@@ -48,30 +44,44 @@
                     </div>
                 </div>
                 <div class="desc_product">
-                    <div class="price_product mb-2"><span class="font-weight-bold">{{ number_format( $productcs['price'], 0, "" ,"." )}}đ /</span> {{$productcs->unitProduct->name}}</div>
-                    <p><span class="font-weight-bold bcn">Danh mục: </span><span class="text-info">{{$productcs->catProduct->name}}</span></p>
-                    <p><span class="font-weight-bold">Dạng bào chế: </span>{{$productcs['dosage_forms']}}</p>
-                    <p><span class="font-weight-bold">Quy cách: </span>{{$productcs['specification']}}</p>
-                    <p><span class="font-weight-bold">Xuất xứ thương hiệu: </span>{{$productcs->countryProduct->name}}</p>
-                    <p><span class="font-weight-bold">Nước sản xuất: </span>{{$productcs->countryProduct->name}}</p>
-                    <p><span class="font-weight-bold">Công dụng: </span>{{$productcs['benefit']}}</p>
+                    <div class="price_product mb-2"><span class="font-weight-bold">{{ number_format( $item['price'], 0, "" ,"." )}}đ /</span> {{$item->unitProduct->name}}</div>
+                    <p><span class="font-weight-bold bcn">Danh mục: </span><span class="text-info">{{$item->catProduct->name}}</span></p>
+                    <p><span class="font-weight-bold">Dạng bào chế: </span>{{$item['dosage_forms']}}</p>
+                    <p><span class="font-weight-bold">Quy cách: </span>{{$item['specification']}}</p>
+                    <p><span class="font-weight-bold">Xuất xứ thương hiệu: </span>{{$item->countryProduct->name}}</p>
+                    <p><span class="font-weight-bold">Nước sản xuất: </span>{{$item->countryProduct->name}}</p>
+                    <p><span class="font-weight-bold">Công dụng: </span>{{$item['benefit']}}</p>
                 </div>
                 @include("$moduleName.block.payment_vnpay")
                 <div>
                     {!! csrf_field() !!}
-                    <div class="input-number">
-                        <span class="seclect-number" data-id="{{$productcs['id']}}">Chọn số lượng</span>
+                    {{-- <div class="input-number">
+                        <span class="seclect-number" data-id="{{$item['id']}}">Chọn số lượng</span>
                         <span class="pm11">
                             <span title="" class="minus1"><i class="fa fa-minus"></i></span>
                             <input type="number" name="qty_product" min="1" value="1" class="num-order">
                             <span title="" class="plus1"><i class="fa fa-plus"></i></span>
                         </span>
+                    </div> --}}
+                    <div class="form-group mb-3 d-flex" >
+                        <label class="col-form-label" style="font-size:16px;">Chọn số lượng</label>
+                        <div class="input-group" style="width:125px;margin-left:10px">
+                            <div class="input-group-prepend">
+
+                              <span class="input-group-text minus"><i class="fa fa-minus"></i></span>
+                            </div>
+                            <input type="number"  max="999" min="1"  name="qty_product" value="1"
+                                 class="form-control number-product">
+                            <div class="input-group-append">
+                                <span class="input-group-text plus"><i class="fa fa-plus"></i></span>
+                            </div>
+                        </div>
                     </div>
                     <div class="btn-buy-search d-flex justify-content-between flex-wrap">
-                        <span name="btn_selectbuy" class="btn-select-buy btn btn-primary text-light mb-xs-2">Chọn mua</span>
+                        <span name="btn_selectbuy" class="btn-select-buy btn btn-primary text-light mb-xs-2" data-href="{{route('fe.cart.addproduct')}}">Chọn mua</span>
                         <a class="btn-search-house" href="">Tìm nhà thuốc</a>
-                        <input type="hidden" id="product_id" value="{{$productcs['id']}}">
-                        <input type="hidden" id="user_sell" value="{{$productcs->userProduct->user_id}}">
+                        <input type="hidden" id="product_id" value="{{$item['id']}}">
+                        <input type="hidden" id="user_sell" value="{{$item->userProduct->user_id}}">
                     </div>
                 </div>
                 <div class="commit-tdoctor text-center">
@@ -187,7 +197,7 @@
                 </div>
             </div>
             <div class="content-detail-product">
-                {!!$productcs->general_info!!}
+                {!!$item->general_info!!}
                 <h2 id="element-product">Thành phần</h2>
                 <table>
                     <thead>
@@ -214,17 +224,17 @@
                     </tbody>
                 </table>
                 <h2 id="func-product" class="mt-2">Công dụng</h2>
-                <p>{{$productcs->benefit}}</p>
+                <p>{{$item->benefit}}</p>
                 <h2 id="alternate-product" class="mt-2">Cách dùng</h2>
-                <p>{{$productcs->dosage}}</p>
+                <p>{{$item->dosage}}</p>
                 <h2 id="ide-effects">Tác dụng phụ</h2>
                 <p>Chưa có tác dụng không mong muốn</p>
                 <div id="note-product" class="note-product mt-2">
                     <h2>Lưu ý</h2>
-                    <p>{{$productcs->note}}</p>
+                    <p>{{$item->note}}</p>
                 </div>
                 <h2 id="preserve-product">Bảo quản</h2>
-                <p>{{$productcs->preserve}}</p>
+                <p>{{$item->preserve}}</p>
             </div>
         </div>
     </div>

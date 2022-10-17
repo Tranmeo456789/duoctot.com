@@ -32,8 +32,6 @@ class ProductController extends ApiController
 
             $this->res['data']  = $this->model->listItems($params,['task'=>'frontend-list-items']);
         }
-
-        $this->res['data']  = $this->model->listItems($params,['task'=>'frontend-list-items']);
         return $this->setResponse($this->res);
     }
 

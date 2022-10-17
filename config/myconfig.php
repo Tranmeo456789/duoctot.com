@@ -138,6 +138,14 @@
                 'nguoi_cao_tuoi' => 'Người cao tuổi',
                 'phu_nu_cho_con_bu' => 'Phụ nữ cho con bú'
             ],
+            'status_order' => [
+                'dangXuLy' => 'Đang xử lý',
+                'dangGiaoHang' => 'Đang giao hàng',
+                'daXacNhan' => 'Đã xác nhận',
+                'daGiaoHang' => 'Đã giao hàng',
+                'daHuy' => 'Đã hủy',
+                'hoanTat' => 'Hoàn tất',
+            ],
             'char_level' => "|---",
             'column' => [
                 'typeProduct'      => [

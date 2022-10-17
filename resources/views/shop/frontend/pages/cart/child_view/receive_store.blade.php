@@ -10,10 +10,11 @@
                 $address = isset($params['filter']['district_id'])?$items[0]->district->name . ', ':'';
                 $address .= $items[0]->province->name;
                 $xhtml = "";
+                $i = 1;
                 foreach ($items as $val){
                     $elements = [
                         'label' => Form::label('', $val['address'],''),
-                        'element' => Form::radio('warehouse_id',$val['id'],false),
+                        'element' => Form::radio('pharmacy[warehouse_id]',$val['id'],($i==1)),
                         'type' =>'inline-text-right',
                         'widthElement' => 'col-10 p-0',
                         'styleFormGroup' => 'mb-0'
@@ -23,6 +24,7 @@
                     $xhtml .= '     <div class="col-2 p-0 text-right"><a href="">Xem bản đồ</a></div>';
                     $xhtml .= '    <div class="col-12 p-0"><span class="text-success">Có hàng</span></div>';
                     $xhtml .= '</div>';
+                    $i++;
                 }
             @endphp
             <p class="font-weight-bold mt-2">Có {{count($items)}} nhà thuốc tại <span class="">{{$address}}</span></p>

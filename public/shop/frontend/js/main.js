@@ -1,5 +1,5 @@
 //slider
-$(document).ready(function () {
+$(document).ready(function() {
 
     var feature_productcovid = $('#feature-product-wp.product_sellhome .list-item');
     feature_productcovid.owlCarousel({
@@ -58,21 +58,21 @@ $(document).ready(function () {
     });
     $('.js-select2').select2();
     //box  or list product
-    $('.ol1').click(function () {
+    $('.ol1').click(function() {
         $('#body-nbox').css("display", "block");
         $('.body-nb').css("display", "none");
         $(this).addClass("activebtn");
         $('.ol2').removeClass("activebtn");
     });
-    $('.ol2').click(function () {
+    $('.ol2').click(function() {
         $('#body-nbox').css("display", "none");
         $('.body-nb').css("display", "block");
         $(this).addClass("activebtn");
         $('.ol1').removeClass("activebtn");
     });
-    
+
     //dong form
-    $('.btn-closenk').click(function () {
+    $('.btn-closenk').click(function() {
         $('.form-login').css("display", "none");
         $('.form-search-product').css("display", "none");
         $('.black-screen').css("display", "none");
@@ -80,13 +80,13 @@ $(document).ready(function () {
         $('#fixscreen-respon').css("display", "none");
     });
 
-    $('.addy-product').click(function () {
+    $('.addy-product').click(function() {
         $('.form-search-product').css("display", "block");
         $('.black-screen').css("display", "block");
         $('#container').addClass("fixed-hbd");
     });
     //hien form dang ky,dang nhap,quen mat khau
-    $('.btn-login').click(function () {
+    $('.btn-login').click(function() {
         $('.form-login').css("display", "block");
         $('.black-screen').css("display", "block");
         $('.wp-content-login').css("display", "block");
@@ -98,7 +98,7 @@ $(document).ready(function () {
         // $('body,html').stop().animate({ scrollTop: 0 }, 0);
     });
 
-    $('.btn-login-res').click(function () {
+    $('.btn-login-res').click(function() {
         $('#head-body-respon').removeClass("slider");
         $('.form-login').css("display", "block");
         $('.titlek').removeClass("active-formkn");
@@ -112,7 +112,7 @@ $(document).ready(function () {
         $('#container').addClass("fixed-hbd");
         $('#fixscreen-respon').css("display", "none");
     });
-    $('.btn-register').click(function () {
+    $('.btn-register').click(function() {
         $('.form-login').css("display", "block");
         $('.black-screen').css("display", "block");
         $('.wp-content-login').css("display", "none");
@@ -122,7 +122,7 @@ $(document).ready(function () {
         $('.titlek').addClass("active-formkn");
         $('#container').addClass("fixed-hbd");
     });
-    $('.btn-register-res').click(function () {
+    $('.btn-register-res').click(function() {
         $('#head-body-respon').removeClass("slider");
         $('.form-login').css("display", "block");
         $('.wp-content-login').css("display", "none");
@@ -134,7 +134,7 @@ $(document).ready(function () {
         $('#container').addClass("fixed-hbd");
         $('#fixscreen-respon').css("display", "none");
     });
-    $('.qpassword').click(function () {
+    $('.qpassword').click(function() {
         $('.form-login').css("display", "block");
         $('.black-screen').css("display", "block");
         $('.wp-content-forgetpw').css("display", "block");
@@ -143,22 +143,21 @@ $(document).ready(function () {
         $('#container').addClass("fixed-hbd");
     });
 
-    $('.password .imgm').click(function () {
+    $('.password .imgm').click(function() {
         $(this).toggleClass('open');
         if ($(this).hasClass('open')) {
             $('.password input').attr('type', 'text');
-        }
-        else {
+        } else {
             $('.password input').attr('type', 'password');
         }
     });
     //hien tra cuu order
-    $('#search-order .btn-closenk').click(function () {
+    $('#search-order .btn-closenk').click(function() {
         $('#search-order').css("display", "none");
         $('.black-screen').css("display", "none");
         $('.titlek').removeClass("fixed-hbd");
     });
-    $('.search-history-order').click(function () {
+    $('.search-history-order').click(function() {
         $('#search-order').css("display", "block");
         $('.black-screen').css("display", "block");
         $('#container').addClass("fixed-hbd");
@@ -170,12 +169,11 @@ $(document).ready(function () {
     // });
 
     // validate form
-    $('#check-rules').click(function () {
+    $('#check-rules').click(function() {
         if ($(this).prop("checked") == true) {
             $('#dang-ky #btn-register').prop("disabled", false);
             $('#dang-ky #btn-register').css("background", "#05AFE3");
-        }
-        else if ($(this).prop("checked") == false) {
+        } else if ($(this).prop("checked") == false) {
             $('#dang-ky #btn-register').prop("disabled", true);
             $('#dang-ky #btn-register').css("background", "#96d4e7");
         }
@@ -184,7 +182,7 @@ $(document).ready(function () {
 
 
     // tang giam so luong san pham
-    $('.plus1, .minus1').on('click', function (e) {
+    $('.plus1, .minus1').on('click', function(e) {
         const isNegative = $(e.target).closest('.minus1').is('.minus1');
         const input = $(e.target).closest('.input-number').find('input');
         if (input.is('input')) {
@@ -192,15 +190,15 @@ $(document).ready(function () {
         }
     })
 
-    $('.order-noislogin').on('click', function () {
+    $('.order-noislogin').on('click', function() {
         alert('Vui lòng đăng nhập để mua hàng !')
     });
-    //xoay arrow 180deg 
-    $('.iconmnrhv').click(function () {
+    //xoay arrow 180deg
+    $('.iconmnrhv').click(function() {
         $(this).parents('.parentsmenu').children('.submenu1res').toggleClass('display-vis');
         $(this).toggleClass('arrow-rotate');
     });
-    $('#btnmenu-resp').click(function () {
+    $('#btnmenu-resp').click(function() {
         //$('#container').addClass("fixed-hbd");
         $('#fixscreen-respon').css("display", "block");
         $('#head-body-respon').addClass("slider");
@@ -211,13 +209,13 @@ $(document).ready(function () {
     //     // $('#container').removeClass("fixed-hbd");
     //     $('#head-body-respon').removeClass("slider");
     // });
-    $(window).resize(function (event) {
+    $(window).resize(function(event) {
         $('#head-body-respon').removeClass("slider");
         $('#fixscreen-respon').css("display", "none");
     });
 
     //xo danh muc cap 1
-    $('.vissubmenu').click(function () {
+    $('.vissubmenu').click(function() {
         $(this).parents('.catparentc').children('.submenua1').toggleClass('display-vis');
         $(this).toggleClass('arrow-rotate');
     });
@@ -246,31 +244,30 @@ $(document).ready(function () {
     //     }
     // );
     $('.catc1').hover(
-        function () {
+        function() {
             $('.black-content').css("display", "block");
         },
-        function () {
+        function() {
             $('.black-content').css("display", "none");
         }
     );
     $('.icon_cart').hover(
-        function () {
+        function() {
             $('#dropdown').addClass('opacity1_cartmini');
         },
-        function () {
+        function() {
             $('#dropdown').removeClass('opacity1_cartmini');
         },
     );
-    $('#reqexport').on('click', function () {
+    $('#reqexport').on('click', function() {
         if ($(this).prop("checked") == true) {
             $('.hidden_noreqes').css("display", "block");
-        }
-        else if ($(this).prop("checked") == false) {
+        } else if ($(this).prop("checked") == false) {
             $('.hidden_noreqes').css("display", "none");
         }
         var dcshop = $('input[type="radio"][name="dcshop"]:checked').val();
     });
-    $('.identity').on('click', function () {
+    $('.identity').on('click', function() {
         identity = $('input[type="radio"][name="identity"]:checked').val();
         if (identity == 'Công ty') {
             $('.company').css("display", "block");
@@ -282,7 +279,7 @@ $(document).ready(function () {
 
         }
     });
-    $('.local-re').on('click', function () {
+    $('.local-re').on('click', function() {
         local_re = $('input[type="radio"][name="local-re"]:checked').val();
         if (local_re == 'Giao hàng tận nơi') {
             $('.de-home').css("display", "block");
@@ -294,7 +291,7 @@ $(document).ready(function () {
     });
 });
 jQuery.validator.addMethod("checkPhone",
-    function () {
+    function() {
         var flag = false;
         var phone = $('.phonecart1').val().trim();
         phone = phone.replace('(+84)', '0');
@@ -318,7 +315,7 @@ jQuery.validator.addMethod("checkPhone",
     }
 );
 jQuery.validator.addMethod("checkPhone1",
-    function () {
+    function() {
         var flag = false;
         var phone = $('.phonecart2').val().trim();
         phone = phone.replace('(+84)', '0');
@@ -342,7 +339,7 @@ jQuery.validator.addMethod("checkPhone1",
     }
 );
 jQuery.validator.addMethod("checkPhone2",
-    function () {
+    function() {
         var flag = false;
         var phone = $('.phonecart3').val().trim();
         phone = phone.replace('(+84)', '0');
@@ -365,23 +362,9 @@ jQuery.validator.addMethod("checkPhone2",
         return flag;
     }
 );
-jQuery.validator.addMethod("checkmail1",
-    function () {
-        var flag = false;
-        var email1 = $('.mailcart1').val().trim();
-        function isEmail(email) {
-            var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-            return regex.test(email);
-        }
-        if (email1.length == 0 || isEmail(email1)) {
-            flag = true;
-        }
 
-        return flag;
-    }
-);
 jQuery.validator.addMethod("checknamecompany",
-    function () {
+    function() {
         var flag = true;
         var namecompany = $('#namecompany').val().trim();
         local_re = $('input[type="radio"][name="identity"]:checked').val();
@@ -391,53 +374,50 @@ jQuery.validator.addMethod("checknamecompany",
             } else {
                 flag = false;
             }
-        }
-        else {
+        } else {
             flag = true;
         }
 
         return flag;
     }
 );
-jQuery.validator.addMethod("checktaxcode",
-    function () {
-        var flag = true;
-        var taxcode = $('#taxcode').val().trim();
-        local_re = $('input[type="radio"][name="identity"]:checked').val();
-        if (document.getElementById('reqexport').checked && local_re == 'Công ty') {
-            if (taxcode.length > 0) {
-                flag = true;
-            } else {
-                flag = false;
-            }
-        }
-        else {
-            flag = true;
-        }
-        return flag;
-    }
-);
-jQuery.validator.addMethod("checkaddresscompany",
-    function () {
-        var flag = true;
-        var addresscompany = $('#addresscompany').val().trim();
-        local_re = $('input[type="radio"][name="identity"]:checked').val();
-        if (document.getElementById('reqexport').checked && local_re == 'Công ty') {
-            if (addresscompany.length > 0) {
-                flag = true;
-            } else {
-                flag = false;
-            }
-        }
-        else {
-            flag = true;
-        }
+// jQuery.validator.addMethod("checktaxcode",
+//     function() {
+//         var flag = true;
+//         var taxcode = $('#taxcode').val().trim();
+//         local_re = $('input[type="radio"][name="identity"]:checked').val();
+//         if (document.getElementById('reqexport').checked && local_re == 'Công ty') {
+//             if (taxcode.length > 0) {
+//                 flag = true;
+//             } else {
+//                 flag = false;
+//             }
+//         } else {
+//             flag = true;
+//         }
+//         return flag;
+//     }
+// );
+// jQuery.validator.addMethod("checkaddresscompany",
+//     function() {
+//         var flag = true;
+//         var addresscompany = $('#addresscompany').val().trim();
+//         local_re = $('input[type="radio"][name="identity"]:checked').val();
+//         if (document.getElementById('reqexport').checked && local_re == 'Công ty') {
+//             if (addresscompany.length > 0) {
+//                 flag = true;
+//             } else {
+//                 flag = false;
+//             }
+//         } else {
+//             flag = true;
+//         }
 
-        return flag;
-    }
-);
+//         return flag;
+//     }
+// );
 jQuery.validator.addMethod("checkname1",
-    function () {
+    function() {
         var flag = true;
         var name1 = $('#name1').val().trim();
         local_re = $('input[type="radio"][name="identity"]:checked').val();
@@ -447,15 +427,14 @@ jQuery.validator.addMethod("checkname1",
             } else {
                 flag = false;
             }
-        }
-        else {
+        } else {
             flag = true;
         }
         return flag;
     }
 );
 jQuery.validator.addMethod("checkphone1",
-    function () {
+    function() {
         var flag = true;
         var phone1 = $('#phone1').val().trim();
         local_re = $('input[type="radio"][name="identity"]:checked').val();
@@ -465,15 +444,14 @@ jQuery.validator.addMethod("checkphone1",
             } else {
                 flag = false;
             }
-        }
-        else {
+        } else {
             flag = true;
         }
         return flag;
     }
 );
 jQuery.validator.addMethod("checkaddress1",
-    function () {
+    function() {
         var flag = true;
         var address1 = $('#address1').val().trim();
         local_re = $('input[type="radio"][name="identity"]:checked').val();
@@ -483,15 +461,14 @@ jQuery.validator.addMethod("checkaddress1",
             } else {
                 flag = false;
             }
-        }
-        else {
+        } else {
             flag = true;
         }
         return flag;
     }
 );
 jQuery.validator.addMethod("checkname2",
-    function () {
+    function() {
         var flag = true;
         var name2 = $('#name2').val().trim();
         local_re = $('input[type="radio"][name="local-re"]:checked').val();
@@ -501,15 +478,14 @@ jQuery.validator.addMethod("checkname2",
             } else {
                 flag = false;
             }
-        }
-        else {
+        } else {
             flag = true;
         }
         return flag;
     }
 );
 jQuery.validator.addMethod("checkphone2",
-    function () {
+    function() {
         var flag = true;
         var phone2 = $('#phone2').val().trim();
         local_re = $('input[type="radio"][name="local-re"]:checked').val();
@@ -519,15 +495,14 @@ jQuery.validator.addMethod("checkphone2",
             } else {
                 flag = false;
             }
-        }
-        else {
+        } else {
             flag = true;
         }
         return flag;
     }
 );
 jQuery.validator.addMethod("checkcity2",
-    function () {
+    function() {
         var flag = true;
         var city2 = $('#city').find(":selected").val();
         local_re = $('input[type="radio"][name="local-re"]:checked').val();
@@ -537,15 +512,14 @@ jQuery.validator.addMethod("checkcity2",
             } else {
                 flag = false;
             }
-        }
-        else {
+        } else {
             flag = true;
         }
         return flag;
     }
 );
 jQuery.validator.addMethod("checkdistrict2",
-    function () {
+    function() {
         var flag = true;
         var district2 = $('#district2').find(":selected").val();
         local_re = $('input[type="radio"][name="local-re"]:checked').val();
@@ -555,15 +529,14 @@ jQuery.validator.addMethod("checkdistrict2",
             } else {
                 flag = false;
             }
-        }
-        else {
+        } else {
             flag = true;
         }
         return flag;
     }
 );
 jQuery.validator.addMethod("checkwards2",
-    function () {
+    function() {
         var flag = true;
         var wards2 = $('#wards2').find(":selected").val();
         local_re = $('input[type="radio"][name="local-re"]:checked').val();
@@ -573,15 +546,14 @@ jQuery.validator.addMethod("checkwards2",
             } else {
                 flag = false;
             }
-        }
-        else {
+        } else {
             flag = true;
         }
         return flag;
     }
 );
 jQuery.validator.addMethod("checkaddressdetail2",
-    function () {
+    function() {
         var flag = true;
         var addressdetail2 = $('#addressdetail2').val().trim();
         local_re = $('input[type="radio"][name="local-re"]:checked').val();
@@ -591,15 +563,14 @@ jQuery.validator.addMethod("checkaddressdetail2",
             } else {
                 flag = false;
             }
-        }
-        else {
+        } else {
             flag = true;
         }
         return flag;
     }
 );
 jQuery.validator.addMethod("checkcity3",
-    function () {
+    function() {
         var flag = true;
         var city3 = $('#city3').val().trim();
         local_re = $('input[type="radio"][name="local-re"]:checked').val();
@@ -609,15 +580,14 @@ jQuery.validator.addMethod("checkcity3",
             } else {
                 flag = false;
             }
-        }
-        else {
+        } else {
             flag = true;
         }
         return flag;
     }
 );
 jQuery.validator.addMethod("checkdistrict3",
-    function () {
+    function() {
         var flag = true;
         var district3 = $('#district3').val().trim();
         local_re = $('input[type="radio"][name="local-re"]:checked').val();
@@ -627,15 +597,14 @@ jQuery.validator.addMethod("checkdistrict3",
             } else {
                 flag = false;
             }
-        }
-        else {
+        } else {
             flag = true;
         }
         return flag;
     }
 );
 jQuery.validator.addMethod("checkdcshop",
-    function () {
+    function() {
         var flag = true;
         var dcshop = '';
         var dcshop = $('input[type="radio"][name="dcshop"]:checked').val();
@@ -646,8 +615,7 @@ jQuery.validator.addMethod("checkdcshop",
             } else {
                 flag = false;
             }
-        }
-        else {
+        } else {
             flag = true;
         }
         return flag;
@@ -655,7 +623,7 @@ jQuery.validator.addMethod("checkdcshop",
 );
 
 jQuery.validator.addMethod("checknumbershop",
-    function () {
+    function() {
         var flag = true;
         var count_store = $('.count-store').val().trim();
         local_re = $('input[type="radio"][name="local-re"]:checked').val();
@@ -665,8 +633,7 @@ jQuery.validator.addMethod("checknumbershop",
             } else {
                 flag = false;
             }
-        }
-        else {
+        } else {
             flag = true;
         }
         return flag;

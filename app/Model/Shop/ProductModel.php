@@ -177,7 +177,8 @@ class ProductModel extends BackEndModel
         }
 
         if ($options['task'] == 'frontend-get-item') {
-            $result = self::select('id','name','type','code','cat_product_id','producer_id',
+            $result = self::with('unitProduct')
+                            ->select('id','name','type','code','cat_product_id','producer_id',
                                     'tick','type_price','price','price_vat','coefficient',
                                     'type_vat','packing','unit_id','sell_area','amout_max',
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
@@ -192,6 +193,7 @@ class ProductModel extends BackEndModel
     public function saveItem($params = null, $options = null)
     {
         if ($options['task'] == 'add-item') {
+
             $this->setCreatedHistory($params);
             $params['tick'] = isset($params['tick'])?json_encode($params['tick'],JSON_NUMERIC_CHECK ): NULL;
             $params['featurer'] = isset($params['featurer'])?json_encode($params['featurer']): NULL;

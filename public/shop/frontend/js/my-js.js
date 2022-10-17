@@ -24,6 +24,12 @@ function isPhoneNumberVN(value) {
     }
     return flag;
 }
+$.validator.methods.checkEmail = function(value, element, param) {
+    return (value.trim() == '') || (isEmail(value.trim()));
+};
+$.validator.methods.checkPhone = function(value, element, param) {
+    return isPhoneNumberVN(value.trim());
+};
 $.validator.methods.checkPhoneOrEmail = function(value, element, param) {
     return isEmail(value.trim()) || isPhoneNumberVN(value.trim());
 };
@@ -110,6 +116,104 @@ $(document).ready(function() {
             $(element).closest(".input-group").removeClass('has-error');
         }
     });
+    $(".order-complete").validate({
+        ignore: ".ignore",
+        rules: {
+            name: {
+                required: true,
+            },
+            phone: {
+                required: true,
+                checkPhone: true,
+            },
+            email: {
+                checkEmail: true,
+            },
+            "invoice[name]": {
+                required: true,
+            },
+            "invoice[phone]": {
+                required: true,
+                checkPhone: true,
+            },
+            "invoice[tax_code]": {
+                required: true,
+            },
+            "invoice[address]": {
+                required: true
+            },
+            warehouse_id: {
+                required: true
+            },
+            "receive[fullname]": {
+                required: true
+            },
+            "receive[phone]": {
+                required: true,
+                checkPhone: true
+            },
+            "receive[province_id]": {
+                required: true
+            },
+            "receive[district_id]": {
+                required: true
+            },
+            "receive[ward_id]": {
+                required: true
+            },
+            "receive[address]": {
+                required: true
+            },
+        },
+        messages: {
+            name: {
+                required: "Thông tin bắt buộc"
+            },
+            phone: {
+                required: "Thông tin bắt buộc",
+                checkPhone: "Số điện thoại không đúng định dạng",
+            },
+            email: {
+                checkEmail: "Email không đúng định dạng",
+            },
+            "invoice[name]": {
+                required: "Thông tin bắt buộc",
+            },
+            "invoice[phone]": {
+                required: "Thông tin bắt buộc",
+                checkPhone: true,
+            },
+            "invoice[tax_code]": {
+                required: "Thông tin bắt buộc"
+            },
+            "invoice[address]": {
+                required: "Thông tin bắt buộc"
+            },
+            warehouse_id: {
+                required: "Thông tin bắt buộc"
+            },
+            "receive[fullname]": {
+                required: "Thông tin bắt buộc"
+            },
+            "receive[phone]": {
+                required: "Thông tin bắt buộc",
+                checkPhone: true
+            },
+            "receive[province_id]": {
+                required: "Thông tin bắt buộc"
+            },
+            "receive[district_id]": {
+                required: "Thông tin bắt buộc"
+            },
+            "receive[ward_id]": {
+                required: "Thông tin bắt buộc"
+            },
+            "receive[address]": {
+                required: "Thông tin bắt buộc"
+            }
+        },
+
+    });
 });
 
 $(document).on('submit', "#main-form", function(event) {
@@ -161,9 +265,46 @@ $(document).on('click', ".cat-content .list-content-product li a", function(even
     $('.cat-content .list-content-product li a').removeClass("active-ndsp");
     $(this).addClass("active-ndsp");
 });
-// $(document).on('click', ".btn-select-buy", function (event) {
-//     alert('ok');
-// });
+
+$(document).on('click', '.btn-select-buy', function(event) {
+    $('body,html').stop().animate({
+        scrollTop: 0
+    }, 800);
+    //  var with_screen = $(window).width();
+
+    // if (with_screen < 1200) {
+    //     setTimeout(visible_cart_respon, 100);
+    // } else {
+    //     setTimeout(visible_cart, 1000);
+    //     setInterval(reloadpage, 3000);
+    // }
+    // alert('vao day');
+    var _token = $('input[name="_token"]').val();
+    var quantity = $('input[name="qty_product"]').val();
+    var product_id = $('#product_id').val();
+    var user_sell = $('#user_sell').val();
+    url = $(this).data('href');
+    $.ajax({
+        url: url,
+        method: 'POST',
+        cache: false,
+        dataType: 'html',
+        data: {
+            product_id: product_id,
+            quantity: quantity,
+            user_sell: user_sell,
+            _token: _token,
+        },
+        success: function(data) {
+            console.log(data);
+            $(".dropdown-cart-info").html(data);
+            $(".dropdown-cart-info #dropdown-cart").css({ 'opacity': 1, 'visibility': 'visible' });
+            setTimeout(function() {
+                $(".dropdown-cart-info #dropdown-cart").removeAttr('style');
+            }, 3000);
+        },
+    });
+});
 $(document).on('click', ".close-cart", function(event) {
     $('.dropdown_cart').css("opacity", 0);
     $('.dropdown_cart').css("visibility", "hidden");
@@ -244,7 +385,6 @@ $(document).on('change', "select.get_data", function(event) {
         cache: false,
         dataType: 'html',
         success: function(data) {
-            console.log(data);
             $(target).html(data);
         },
         error: function(xhr, textStatus, errorThrown) {
@@ -257,22 +397,54 @@ $(document).on('change', "select.get_data", function(event) {
 $(document).on('change', "input.number-product", function(event) {
     $value = $(this).val();
     url = $(this).data('href');
-    url = url.replace('value_new', $value);
-    $parent = $(this).parents('.item-product');
-    $.post({
-        url: url,
-        cache: false,
-        dataType: 'json',
-        success: function(data) {
-            product_id = $parent.data('id');
-            $($parent).find('.price').html(data.product[product_id]['price'].toLocaleString("vi-VN"));
-            $($parent).find('.money').html(data.product[product_id]['total_money'].toLocaleString("vi-VN"));
-            $($parent).parents('table').find('.total_product').html(data.total_product);
-        },
-        error: function(xhr, textStatus, errorThrown) {
-            alert("Error: " + errorThrown);
-        }
-    });
+    if (url) {
+        url = url.replace('value_new', $value);
+        $current = $(this);
+        $.post({
+            url: url,
+            cache: false,
+            dataType: 'json',
+            success: function(data) {
+                $parent = $($current).parents('.item-product');
+                product_id = $parent.data('id');
+                $($parent).find('.price').html(data.product[product_id]['price'].toLocaleString("vi-VN"));
+                $($parent).find('.money').html(data.product[product_id]['total_money'].toLocaleString("vi-VN"));
+
+                if (($parent.parents('#dropdown-cart').length > 0) &&
+                    ($(".info-product-cart").length > 0)) { //Thay đổi trên menu
+                    if ($(".info-product-cart").find("tr[data-id=" + product_id + "]").length > 0) {
+                        alert('menu');
+                        $(".info-product-cart").find('.total_product').html(data.total_product);
+                        product = $(".info-product-cart").find("tr[data-id=" + product_id + "]");
+                        console.log($(product).find('.money').html());
+                        $(product).find('.price').html(data.product[product_id]['price'].toLocaleString("vi-VN"));
+                        $(product).find('.number-product').val($value);
+                        $(product).find('.money').html(data.product[product_id]['total_money'].toLocaleString("vi-VN"));
+                    }
+                } else {
+                    $($parent).parents('table').find('.total_product').html(data.total_product);
+                }
+
+                //Cập nhật cho menu giỏ hàng
+                $seller = $("#dropdown-cart").find(".user-seller-" + data.user_sell);
+                $product = $seller.find('.item-product-' + product_id);
+                $old_qty = parseInt($product.find('.number-product').val());
+                $product.find('.number-product').val($value);
+                $product.find('.money').html(data.product[product_id]['total_money'].toLocaleString("vi-VN"));
+                $new_qty = parseInt($value);
+                $total_product = parseInt($(".number_cartmenu").html());
+                $(".number_cartmenu").html($total_product - $old_qty + $new_qty);
+                if (($("input[name=user_sell]").length > 0) &&
+                    ($("input[name=user_sell]").val() == data.user_sell)) {
+                    $(".col-right-cart").find(".total").html(data.total.toLocaleString("vi-VN"));
+                    $(".col-right-cart").find(".total_thanh_toan").html(data.total.toLocaleString("vi-VN"));
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                alert("Error: " + errorThrown);
+            }
+        })
+    };
 });
 $(document).on('change', "input[name='delivery_method']", function(event) {
     event.preventDefault();
@@ -288,19 +460,29 @@ $(document).on('change', "input[name='delivery_method']", function(event) {
 $(document).on('change', "#export_tax", function(event) {
     event.preventDefault();
     $value = $(this).val();
-    if ($value == 1) {
+    if ($(this).is(":checked")) {
         $(".rowInovice").removeClass('d-none');
         valueObject = $("input[name='invoice[object]']:checked").val();
         if (valueObject == 1) { //Công ty
             $("input[name='invoice[name]']").attr('placeholder', 'Nhập tên công ty');
             $("input[name='invoice[phone]']").parents('.col-4').addClass('d-none');
+            $("input[name='invoice[tax_code]']").removeClass('.ignore');
+            $("input[name='invoice[phone]']").addClass('.ignore');
             $("input[name='invoice[tax_code]']").parents('.col-4').removeClass('d-none');
         } else {
+            $("input[name='invoice[tax_code]']").addClass('.ignore');
+            $("input[name='invoice[phone]']").removeClass('.ignore');
             $("input[name='invoice[name]']").attr('placeholder', 'Nhập Họ tên');
             $("input[name='invoice[tax_code]']").parents('.col-4').addClass('d-none');
             $("input[name='invoice[phone]']").parents('.col-4').removeClass('d-none');
         }
+        $("input[name='invoice[name]']").removeClass('.ignore');
+        $("input[name='invoice[address]']").removeClass('.ignore');
     } else {
+        $("input[name='invoice[name]']").addClass('.ignore');
+        $("input[name='invoice[phone]']").addClass('.ignore');
+        $("input[name='invoice[tax_code]']").addClass('.ignore');
+        $("input[name='invoice[address]']").addClass('.ignore');
         $(".rowInovice").addClass('d-none');
     }
 });
@@ -311,58 +493,40 @@ $(document).on('change', "input[name='invoice[object]']", function(event) {
         $("input[name='invoice[name]']").attr('placeholder', 'Nhập tên công ty');
         $("input[name='invoice[phone]']").parents('.col-4').addClass('d-none');
         $("input[name='invoice[tax_code]']").parents('.col-4').removeClass('d-none');
+        $("input[name='invoice[tax_code]']").removeClass('.ignore');
+        $("input[name='invoice[phone]']").addClass('.ignore');
     } else {
         $("input[name='invoice[name]']").attr('placeholder', 'Nhập Họ tên');
         $("input[name='invoice[tax_code]']").parents('.col-4').addClass('d-none');
         $("input[name='invoice[phone]']").parents('.col-4').removeClass('d-none');
+        $("input[name='invoice[tax_code]']").addClass('.ignore');
+        $("input[name='invoice[phone]']").removeClass('.ignore');
     }
 
 });
-// $('.minus2').on('click', function() {
-//     var qty = $(this).next('.number-ajax').val();
-//     var id = $(this).next('.number-ajax').attr("data-id");
-//     var rowId = $(this).next('.number-ajax').attr("data-rowId");
-//     var _token = $('input[name="_token"]').val();
-//     $.ajax({
-//         url: "{{route('fe.cart.changenp')}}",
-//         method: "POST",
-//         dataType: 'json',
-//         data: {
-//             qty: qty,
-//             id: id,
-//             rowId: rowId,
-//             _token: _token
-//         },
-//         success: function(data) {
-//             $(".price-new" + id).text(data['sub_total']);
-//             $(".numberperp" + rowId).val(data['number_product']);
-//             $(".num-order" + rowId).val(data['number_product']);
-//             $(".totalt").text(data['total']);
-//             $(".totaltg").text(data['totalkm']);
-//         },
-//     });
-// });
-// $('.plus2').on('click', function() {
-//     var qty = $(this).prev('.number-ajax').val();
-//     var id = $(this).prev('.number-ajax').attr("data-id");
-//     var rowId = $(this).prev('.number-ajax').attr("data-rowId");
-//     var _token = $('input[name="_token"]').val();
-//     $.ajax({
-//         url: "{{route('fe.cart.changenp')}}",
-//         method: "POST",
-//         dataType: 'json',
-//         data: {
-//             qty: qty,
-//             id: id,
-//             rowId: rowId,
-//             _token: _token
-//         },
-//         success: function(data) {
-//             $(".price-new" + id).text(data['sub_total']);
-//             $(".numberperp" + rowId).val(data['number_product']);
-//             $(".num-order" + rowId).val(data['number_product']);
-//             $(".totalt").text(data['total']);
-//             $(".totaltg").text(data['totalkm']);
-//         },
-//     });
-// });
+
+$(document).on('click', '.plus', function() {
+    qty = parseInt($(this).parents('.input-group').find('.number-product').val()) + 1;
+    $(this).parents('.input-group').find('.number-product').val(qty);
+    $(this).parents('.input-group').find('.number-product').change();
+});
+$(document).on('click', '.minus', function() {
+    qty = parseInt($(this).parents('.input-group').find('.number-product').val()) - 1;
+    $(this).parents('.input-group').find('.number-product').val(qty);
+    $(this).parents('.input-group').find('.number-product').change();
+});
+$(document).on('click', '.delele-item-in-cart', function() {
+
+    url = $(this).data('href');
+    $.get({
+        url: url,
+        cache: false,
+        dataType: 'json',
+        success: function(data) {
+            window.location.reload();
+        },
+        error: function(xhr, textStatus, errorThrown) {
+            alert("Error: " + errorThrown);
+        }
+    });
+})
