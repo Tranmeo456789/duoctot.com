@@ -33,7 +33,11 @@ $.validator.methods.checkPhone = function(value, element, param) {
 $.validator.methods.checkPhoneOrEmail = function(value, element, param) {
     return isEmail(value.trim()) || isPhoneNumberVN(value.trim());
 };
-
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
 $(document).ready(function() {
     $(".select2").select2();
     $(".user-register").validate({
@@ -402,6 +406,7 @@ $(document).on('change', "input.number-product", function(event) {
         $current = $(this);
         $.post({
             url: url,
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
             cache: false,
             dataType: 'json',
             success: function(data) {
@@ -413,7 +418,7 @@ $(document).on('change', "input.number-product", function(event) {
                 if (($parent.parents('#dropdown-cart').length > 0) &&
                     ($(".info-product-cart").length > 0)) { //Thay đổi trên menu
                     if ($(".info-product-cart").find("tr[data-id=" + product_id + "]").length > 0) {
-                        alert('menu');
+
                         $(".info-product-cart").find('.total_product').html(data.total_product);
                         product = $(".info-product-cart").find("tr[data-id=" + product_id + "]");
                         console.log($(product).find('.money').html());

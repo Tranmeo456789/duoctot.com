@@ -152,6 +152,7 @@ class CartController extends ShopFrontEndController
         $id = intval($request->id);
         $quantity = intval($request->quantity);
         $user_sell = intval($request->user_sell);
+
         $cart = $request->session()->get('cart');
         $cart[$user_sell]['total_product'] = $cart[$user_sell]['total_product'] - $cart[$user_sell]['product'][$id]['quantity'] +  $quantity;
         $cart[$user_sell]['product'][$id]['quantity'] =  $quantity;
@@ -172,10 +173,8 @@ class CartController extends ShopFrontEndController
         unset($cart[$user_sell]['product'][$id]);
         if (count($cart[$user_sell]['product']) == 0){
             unset($cart[$user_sell]);
-            $request->session()->forget('cart');
-        }else{
-            $request->session()->put('cart', $cart);
         }
+        $request->session()->put('cart', $cart);
         if (empty($cart)){
             setcookie("cart",null, time() -3600, "/", $_SERVER['SERVER_NAME']);
         }else{

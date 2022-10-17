@@ -7,7 +7,7 @@ use App\Model\Shop\ProductModel;
 use App\Http\Requests;
 use App\Http\Controllers\Shop\BackEnd\BackEndController;
 use App\Model\Shop\OrderModel as MainModel;
-
+use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 class OrderController extends BackEndController
 {
     public function __construct()

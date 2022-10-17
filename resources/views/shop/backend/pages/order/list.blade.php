@@ -53,7 +53,7 @@
             </tr>
         @endforeach
         @else
-            @include("$moduleName.blocks.list_empty", ['colspan' => 6])
+            @include("$moduleName.blocks.list_empty", ['colspan' => 8])
         @endif
     </tbody>
 </table>

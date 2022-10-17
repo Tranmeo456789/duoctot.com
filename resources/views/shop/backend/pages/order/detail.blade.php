@@ -75,7 +75,7 @@
                             'accept-charset' => 'UTF-8',
                             'class'          => 'form-horizontal form-label-left',
                             'enctype'        => 'multipart/form-data',
-                            'id'             => 'main-form1' ])  }}
+                            'id'             => 'main-form' ])  }}
                             <div class="row">
                                 {!! FormTemplate::show($elements,$formInputWidth)  !!}
                             </div>
