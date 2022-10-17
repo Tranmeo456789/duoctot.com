@@ -159,7 +159,7 @@ class OrderModel extends BackEndModel
                 }
 
                 // $params['info_product'] = $cart[$params['user_sell']]['product'];
-                 $params['info_product'] = json_encode($params['info_product']);
+                $params['info_product'] = json_encode($params['info_product']);
                 //$params['total'] = $cart[$params['user_sell']]['total'];
                 //$params['total_product'] = $cart[$params['user_sell']]['total_product'];
                 $paramsCode = [
