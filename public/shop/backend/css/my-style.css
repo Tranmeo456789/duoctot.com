@@ -171,7 +171,6 @@ form div[class*=col-]:last-child .form-group {
     padding: 1px 22px 1px 8px;
     font-size: 15px;
     background-color: rgb(162 238 90 / 23%);
-    text-align: center;
     color: #580deb;
 }
 

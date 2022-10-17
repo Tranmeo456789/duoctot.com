@@ -21,7 +21,6 @@
         @foreach ($items as $val)
             @php
                 $temp++;
-                $arr_images=explode(",",$val->image);
                 $image = Template::showImagePreviewFileManager($val['image'],$val['slug']??$val['name']);
 
             @endphp

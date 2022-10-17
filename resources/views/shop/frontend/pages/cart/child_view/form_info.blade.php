@@ -26,13 +26,13 @@
     $elements = [
         [
             'label' => Form::label('buyer[gender]', 'Anh',$formLabelAttr),
-            'element' => Form::radio('buyer[gender]', '1',(!isset($user->gender) || ($user->gender==1) || ($user->gender != 2)) ? true: false),
+            'element' => Form::radio('buyer[gender]', 1,(!isset($user->gender) || ($user->gender==1) || ($user->gender != 2)) ? true: false),
             'type' =>'inline-text-right',
             'widthElement' => 'col-1',
             'styleFormGroup' => 'mb-1',
         ],[
             'label' => Form::label('buyer[gender]', ' Chị',$formLabelAttr),
-            'element' => Form::radio('buyer[gender]', '2',(isset($user->gender) && ($user->gender==1)) ? true: false),
+            'element' => Form::radio('buyer[gender]', 2,(isset($user->gender) && ($user->gender==1)) ? true: false),
             'type' =>'inline-text-right',
             'widthElement' => 'col-1',
             'styleFormGroup' => 'mb-1',

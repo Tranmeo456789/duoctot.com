@@ -14,26 +14,6 @@
 <script src="{{ asset('shop/backend/js/my-js.js') }}?ts={{time()}}"></script>
 <script>
     $(document).ready(function() {
-        $('.update-status').change(function() {
-            status1 = $(this).find(":selected").val();
-            var _token = $('input[name="_token"]').val();
-            var id = $(this).attr('data-id');
-            $.ajax({
-                url: "{{route('order.update_status')}}",
-                method: 'GET',
-                dataType: 'json',
-                data: {
-                    status: status1,
-                    id: id,
-                    _token: _token,
-                },
-                success: function(data) {
-                    $('.noti-statusorrder').html(data.noti_success);
-                   // console.log(data.pro);
-                }
-            });
-
-        });
         $('.choose1').change(function() {
         var action = $(this).attr('id');
         var maid = $(this).val();

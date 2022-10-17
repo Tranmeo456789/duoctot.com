@@ -98,7 +98,9 @@
                 'local' => 'Số nhà, đường, ấp, khóm',
                 'warehouse_id' => 'Kho hàng',
                 'quantity' => 'Số lượng',
-                'price_import' => 'Giá nhập'
+                'price_import' => 'Giá nhập',
+                'code_order' => 'Mã đơn hàng',
+                'status_order' => 'Trạng thái đơn hàng'
             ],
             'type_user' => [
                 '1' => 'Bệnh nhân',
@@ -138,14 +140,7 @@
                 'nguoi_cao_tuoi' => 'Người cao tuổi',
                 'phu_nu_cho_con_bu' => 'Phụ nữ cho con bú'
             ],
-            'status_order' => [
-                'dangXuLy' => 'Đang xử lý',
-                'dangGiaoHang' => 'Đang giao hàng',
-                'daXacNhan' => 'Đã xác nhận',
-                'daGiaoHang' => 'Đã giao hàng',
-                'daHuy' => 'Đã hủy',
-                'hoanTat' => 'Hoàn tất',
-            ],
+
             'char_level' => "|---",
             'column' => [
                 'typeProduct'      => [
@@ -156,6 +151,15 @@
                     'gan_het_hang' => ['name' => 'Gần hết hàng', 'class' => 'item-tab'],
                     'cho_kiem_duyet' => ['name' => 'Chờ kiểm duyệt', 'class' => 'item-tab'],
                     'tu_choi' => ['name' => 'Từ chối', 'class' => 'item-tab'],
+                ],
+                'status_order' => [
+                    'all'          => ['name' => 'Tất cả', 'class' => 'item-tab'],
+                    'dangXuLy'     => ['name' => 'Đang xử lý', 'class' => 'item-tab'],
+                    'dangGiaoHang' => ['name' => 'Đang giao hàng', 'class' => 'item-tab'],
+                    'daXacNhan'    => ['name' => 'Đã xác nhận', 'class' => 'item-tab'],
+                    'daGiaoHang'   => ['name' => 'Đã giao hàng', 'class' => 'item-tab'],
+                    'daHuy'        => ['name' => 'Đã hủy', 'class' => 'item-tab'],
+                    'hoanTat'      => ['name' => 'Hoàn tất', 'class' => 'item-tab']
                 ],
             ],
         ],

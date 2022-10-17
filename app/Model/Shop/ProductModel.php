@@ -59,15 +59,24 @@ class ProductModel extends BackEndModel
         $result = null;
         $user = Session::get('user');
         if ($options['task'] == "user-list-items") {
-            $query = $this::select('id','name','type','code','cat_product_id','producer_id',
+            $query = $this::with('unitProduct')
+                            ->select('id','name','type','code','cat_product_id','producer_id',
                                     'tick','type_price','price','price_vat','coefficient',
                                     'type_vat','packing','unit_id','sell_area','amout_max',
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit',
                                     'preserve','note','image','featurer','long','user_id','wide','high',
                                     'mass','quantity_in_stock','created_at', 'updated_at');
-            $result =  $query->orderBy('id', 'desc')->where('user_id',$user->user_id)
-                              ->paginate($params['pagination']['totalItemsPerPage']);
+            if (isset($params['group_id'])){
+                $query->whereIn('id',$params['group_id']);
+            }
+            $query->orderBy('id', 'desc')->where('user_id',$user->user_id);
+            if (isset($params['pagination']['totalItemsPerPage'])){
+                $result =  $query->paginate($params['pagination']['totalItemsPerPage']);
+            }else{
+                $result = $query->get();
+            }
+
         }
         if ($options['task'] == "user-list-items-in-warehouse") {
             $query = $this::with('productWarehouse')

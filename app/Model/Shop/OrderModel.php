@@ -9,16 +9,92 @@ use App\Model\Shop\ProductModel;
 use App\Model\Shop\CollaboratorsUserModel;
 use App\Model\Shop\CollaboratorsClinicDoctor;
 use App\Model\Shop\CustomerShopModel;
+use App\Model\Shop\ProductWarehouseModel;
 use DB;
 use Session;
 class OrderModel extends BackEndModel
 {
-
+    protected $casts = [
+        'info_product'   => 'array',
+        'pharmacy' =>'array',
+        'receive' => 'array'
+    ];
     public function __construct() {
         $this->table               = 'orders';
         $this->controllerName      = 'order';
         $this->folderUpload        = '' ;
-        $this->crudNotAccepted     = ['_token','btn_save','quantity'];
+        $this->crudNotAccepted     = ['_token','btn_save','quantity','currentValue','warehouse_id'];
+    }
+    public function search($query,$params){
+        if (isset($params['search']['value'] ) && ($params['search']['value'] !== "")) {
+            if($params['search']['field'] == "all") {
+                $query->where(function($query) use ($params){
+                    foreach($this->fieldSearchAccepted as $column){
+                        $query->orWhereRaw("LOWER($column)" . ' LIKE BINARY ' .  "LOWER('%{$params['search']['value']}%')" );
+                    }
+                });
+            } else if(in_array($params['search']['field'], $this->fieldSearchAccepted)) {
+                    $query->whereRaw("LOWER({$params['search']['field']})" . " LIKE BINARY " .  "LOWER('%{$params['search']['value']}%')" );
+            }
+        }
+        return $query;
+    }
+    public function scopeOfUser($query)
+    {
+        if (\Session::has('user')){
+            $user = \Session::get('user');
+            return  $query->where('user_sell',$user->user_id);
+        }
+        return $query;
+    }
+
+    public function listItems($params = null, $options = null)
+    {
+        $result = null;
+        if ($options['task'] == "user-list-items") {
+            $query = $this::with('userBuy')
+                                ->select('id','code_order','total','created_at','status_order','user_id')
+                                ->where('id','>',1)
+                                ->OfUser();
+            if ((isset($params['filter']['status_order'])) && ($params['filter']['status_order'] != 'all')) {
+                $query = $query->where('status_order',$params['filter']['status_order']);
+            }
+            $result =  $query->orderBy('id', 'desc')
+                              ->paginate($params['pagination']['totalItemsPerPage']);
+        }
+        return $result;
+    }
+    public function getItem($params = null, $options = null)
+    {
+        $result = null;
+        if ($options['task'] == 'get-item') {
+            $result = self::select('id','code_order','total','created_at','status_order','user_id',
+                            'info_product','pharmacy','total_product')
+                            ->where('id', $params['id'])
+                            ->OfUser()
+                            ->first();
+
+        }
+        if ($options['task'] == 'get-item-for-update-product-in-store') {
+            $result = self::select('id','info_product')
+                            ->where('id', $params['id'])
+                            ->OfUser()
+                            ->first();
+        }
+        return $result;
+    }
+    public function countItems($params = null, $options  = null) {
+
+        $result = null;
+        if($options['task'] == 'admin-count-items-group-by-status-order') {
+            $query = $this::groupBy('status_order')
+                            ->select(DB::raw('status_order , COUNT(id) as count') )
+                            ->where('id','>',1)
+                            ->OfUser();
+            $query = $this->search($query, $params);
+            $result = $query->get()->toArray();
+        }
+        return $result;
     }
     public function saveItem($params = null, $options = null)
     {
@@ -66,15 +142,37 @@ class OrderModel extends BackEndModel
                 return false;
             }
         }
-    }
-    public function getItem($params = null, $options = null) {
-        $result = null;
-        if($options['task'] == 'get-item') {
-            $result = self::select('id','code_order','customer_id','total','info_product','qty_total','name','phone','address','address_detail','delivery_form','request_invoice','status','status_control','payment','created_at','updated_at')
-                            ->where('code_order', $params['code_order'])->first();
+        if($options['task'] == 'change-status-order') {
+            $params['status_order'] = $params['currentValue'];
+            $this->setModifiedHistory($params);
+            self::where('id', $params['id'])->update($this->prepareParams($params));
+            if ($params['currentValue'] == 'hoanTat'){ // Cập nhật lại số lượng đơn hàng
+
+            }
         }
-        return $result;
+        if ($options['task'] == 'update-item'){
+            DB::beginTransaction();
+            try {
+                $this->setModifiedHistory($params);
+                self::where('id', $params['id'])->update($this->prepareParams($params));
+                $item = self::getItem(['id' => $params['id']], ['task' => 'get-item']);
+                if ($params['status_order'] == 'hoanTat'){ // Cập nhật lại số lượng đơn hàng
+                    (new ProductWarehouseModel())->saveItem(['warehouse_id'=>$params['warehouse_id'],
+                    'list_products'=>$item->info_product],
+                    ['task' => 'output-warehouse']);
+                }
+                DB::commit();
+                return true;
+            } catch (\Throwable $th) {
+                DB::rollback();
+                throw $th;
+                return false;
+            }
+        }
     }
 
+    public function userBuy(){
+        return $this->belongsTo('App\Model\Shop\UsersModel','user_id','user_id');
+    }
 
 }

@@ -68,22 +68,22 @@ class ProductController extends BackEndController
             $params = $request->all();
             $task   = "add-item";
             $notify = "Thêm mới $this->pageTitle thành công!";
-            $product = (new ProductModel)->listItemsAllNoPaginate();
-            $id_product = 1;
-            if ($product != null) {
-                $id_product = DB::table('products')->max('id') + 1;
-            }
-            $warehouses = (new WarehouseModel)->listItemsNoPaginate();
-            if ($warehouses != null) {
-                $ls_product_curent=[];$params_warehouse['product_id']='';
-                foreach($warehouses as $warehouse){
-                    $ls_product_curent=json_decode($warehouse['product_id'], true);
-                    $ls_product_curent[$id_product]=0;
-                    $params_warehouse['product_id'] = json_encode($ls_product_curent);
-                    $params_warehouse['id']=$warehouse['id'];
-                    (new WarehouseModel)->saveItem($params_warehouse,['task' => 'update-product']);
-                }
-            }
+            // $product = (new ProductModel)->listItemsAllNoPaginate();
+            // $id_product = 1;
+            // if ($product != null) {
+            //     $id_product = DB::table('products')->max('id') + 1;
+            // }
+            // $warehouses = (new WarehouseModel)->listItemsNoPaginate();
+            // if ($warehouses != null) {
+            //     $ls_product_curent=[];$params_warehouse['product_id']='';
+            //     foreach($warehouses as $warehouse){
+            //         $ls_product_curent=json_decode($warehouse['product_id'], true);
+            //         $ls_product_curent[$id_product]=0;
+            //         $params_warehouse['product_id'] = json_encode($ls_product_curent);
+            //         $params_warehouse['id']=$warehouse['id'];
+            //         (new WarehouseModel)->saveItem($params_warehouse,['task' => 'update-product']);
+            //     }
+            // }
             if ($params['id'] != null) {
                 $task   = "edit-item";
                 $notify = "Cập nhật $this->pageTitle thành công!";

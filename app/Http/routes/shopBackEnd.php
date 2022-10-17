@@ -56,9 +56,12 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd','mid
 
     Route::get('/danh-sach-hoa-don', 'OrderController@list_invoice')->name('invoice.list');
     Route::get('/chi-tiet-hoa-don', 'OrderController@detail_invoice')->name('invoice.detail');
-    Route::get('/chi-tiet-don-hang/{code}', 'OrderController@detail_order')->name('order.detail');
-    Route::get('/danh-sach-don-hang', 'OrderController@list_order')->name('order.list');
-    Route::get('/cap-nhat-trang-thai-don-hang', 'OrderController@update_status')->name('order.update_status');
+
+    Route::get('/danh-sach-don-hang', 'OrderController@index')->name('order');
+    Route::get('/chi-tiet-don-hang/{id}', 'OrderController@detail')->name('order.detail');
+    Route::get('/cap-nhat-trang-thai-don-hang-{value}/{id}', 'OrderController@changeStatusOrder')->name('order.changeStatusOrder'); Route::get('/cap-nhat-trang-thai-don-hang-{value}/{id}', 'OrderController@changeStatusOrder')->name('order.changeStatusOrder');
+    Route::post('/luu-don-hang', 'OrderController@save')->name('order.save');
+
 
     Route::get('/phieu-gui-hang', 'ConsignmentController@index')->name('consignment.list');
     Route::get('/tao-phieu-gui-hang', 'ConsignmentController@add')->name('consignment.add');
@@ -76,8 +79,6 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd','mid
     Route::get('/sua-phieu-nhap-hang/{id}', 'ImportCouponController@form')->name('importCoupon.edit');
     Route::post('/luu-phieu-nhap-hang', 'ImportCouponController@save')->name('importCoupon.save');
     Route::get('/xoa-phieu-nhap-hang/{id}', 'ImportCouponController@delete')->name('importCoupon.delete');
-
-
 
     Route::get('/danh-sach-khach-hang', 'CustomerController@index')->name('customer');
     Route::get('/them-khach-hang', 'CustomerController@form')->name('customer.add');

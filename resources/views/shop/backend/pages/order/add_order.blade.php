@@ -4,7 +4,7 @@
 
 @section('header_title', 'Tạo đơn hàng')
 
-@section('body_content') 
+@section('body_content')
 
     <div class="card mt-2 ml-1">
         <div class="card-body">

@@ -93,7 +93,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('order.list')}}" class="nav-link">
+                        <a href="{{route('order')}}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Danh sách đơn hàng</p>
                         </a>

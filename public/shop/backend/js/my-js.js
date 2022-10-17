@@ -278,6 +278,13 @@ $(document).on('click', "#btnDeleteFile", function(event) {
     $(this).closest("li").fadeOut(500);
     event.preventDefault();
 });
+$(document).on('change', '.select_change_attr', function() {
+    let selectValue = $(this).val();
+    let url = $(this).data('href');
+    console.log(url.replace('value_new', selectValue));
+    window.location.href = url.replace('value_new', selectValue);
+});
+
 $(document).ready(function() {
     $(".select2").select2();
     $('#btn-image').filemanager('image');
