@@ -127,7 +127,53 @@ class OrderModel extends BackEndModel
                 $customer = CustomerShopModel::where('user_id',$params['user_id'])
                                             ->where('user_sell',$params['user_sell'])
                                             ->first();
-                if (!empty($customer)){
+                if (empty($customer)){
+                    CustomerShopModel::insert([
+                        'user_id' => $params['user_id'],
+                        'user_sell' => $params['user_sell']
+                    ]);
+                }
+
+                DB::commit();
+                return true;
+            } catch (\Throwable $th) {
+                DB::rollback();
+                throw $th;
+                return false;
+            }
+        }
+        if ($options['task'] == 'api-save-item'){
+            DB::beginTransaction();
+            try {
+                $params['created_at']    = date('Y-m-d H:i:s');
+                $params['created_by'] =  $params['user_id'];
+
+                $params['buyer'] = json_encode($params['buyer']);
+                $params['invoice'] = (isset($params['export_tax']) && ($params['export_tax'] == 1))?$params['invoice'] :null;
+                if ($params['delivery_method'] == 1){ //Nhận hàng tại nhà thuốc
+                    $params['pharmacy'] = json_encode($params['pharmacy']);
+                    $params['receive'] = null;
+                }else{
+                    $params['pharmacy'] = null;
+                    $params['receive'] = json_encode($params['receive']);
+                }
+
+                // $params['info_product'] = $cart[$params['user_sell']]['product'];
+                 $params['info_product'] = json_encode($params['info_product']);
+                //$params['total'] = $cart[$params['user_sell']]['total'];
+                //$params['total_product'] = $cart[$params['user_sell']]['total_product'];
+                $paramsCode = [
+                    'type' => 'order',
+                    'value' => date('Ymd')
+                ];
+                $params['code_order'] ='DHTD' . date('Ymd') . sprintf("%05d",self::getMaxCode($paramsCode));
+                self::insert($this->prepareParams($params));
+
+                //Cập nhật khách hàng
+                $customer = CustomerShopModel::where('user_id',$params['user_id'])
+                                            ->where('user_sell',$params['user_sell'])
+                                            ->first();
+                if (empty($customer)){
                     CustomerShopModel::insert([
                         'user_id' => $params['user_id'],
                         'user_sell' => $params['user_sell']

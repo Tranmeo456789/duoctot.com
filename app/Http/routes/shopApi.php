@@ -6,4 +6,6 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
     Route::get('/get-list-product/{cat_product_id?}', 'ProductController@index')->name('product.getList')->where('cat_product_id', '[0-9]+');
     Route::get('/detail-product/{id}', 'ProductController@detail')->name('product.detail')->where('cat_product_id', '[0-9]+');
     Route::get('/get-list-product-featurer', 'ProductController@getListFeaturer')->name('product.feather');
+    Route::post('/dat-hang','OrderController@completed')->name('order.completed');
+    Route::get('/get-list-warehouse','WarehouseController@getList')->name('warehouse.getList');
 });
