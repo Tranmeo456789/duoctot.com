@@ -300,7 +300,6 @@ $(document).on('click', '.btn-select-buy', function(event) {
             _token: _token,
         },
         success: function(data) {
-            console.log(data);
             $(".dropdown-cart-info").html(data);
             $(".dropdown-cart-info #dropdown-cart").css({ 'opacity': 1, 'visibility': 'visible' });
             setTimeout(function() {
@@ -421,7 +420,7 @@ $(document).on('change', "input.number-product", function(event) {
 
                         $(".info-product-cart").find('.total_product').html(data.total_product);
                         product = $(".info-product-cart").find("tr[data-id=" + product_id + "]");
-                        console.log($(product).find('.money').html());
+
                         $(product).find('.price').html(data.product[product_id]['price'].toLocaleString("vi-VN"));
                         $(product).find('.number-product').val($value);
                         $(product).find('.money').html(data.product[product_id]['total_money'].toLocaleString("vi-VN"));

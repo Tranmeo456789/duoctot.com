@@ -197,7 +197,7 @@
     'url'            => route('fe.order.completed'),
     'accept-charset' => 'UTF-8',
     'class'          => 'order-complete',
-    'id'             => 'main-form1'])  }}
+    'id'             => 'main-form'])  }}
     <div class="row">
         <div class="col-xl-9 col-lg-12 col-12">
             <div class="col-left-cart">

@@ -594,5 +594,9 @@ input[type="radio"] {
     left: 1px;
 }
 
+.delele-item-in-cart {
+    cursor: pointer;
+}
+
 
 /*** END CART **/

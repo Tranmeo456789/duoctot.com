@@ -45,14 +45,12 @@ class ProductWarehouseModel extends BackEndModel
         }
 
         if ($options['task'] == 'output-warehouse') {
-
             $arrProductID = array_column($params['list_products'],'product_id');
-            $item = self::where('warehouse_id',$params['warehouse_id'])
+            $items = self::where('warehouse_id',$params['warehouse_id'])
                         ->whereIn('product_id',$arrProductID)
                         ->get()->toArray();
-
             $listProducts = $params['list_products'];
-            foreach($item as $key => $val) {
+            foreach($items as $key => $val) {
                 if (isset($listProducts[$val['product_id']])){
                     self::where('warehouse_id',$params['warehouse_id'])
                         ->where('product_id',$val['product_id'])
