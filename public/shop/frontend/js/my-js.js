@@ -508,6 +508,26 @@ $(document).on('change', "input[name='invoice[object]']", function(event) {
     }
 
 });
+$(document).on('click', ".slect-item-customer", function (event) {
+    $('.slect-item-customer').removeClass("active-slect");
+    $(this).addClass("active-slect");
+    var object_product = $(this).attr("data-object");
+    var url = $(this).attr("data-href");
+    var _token = $('input[name="_token"]').val();
+    $.ajax({
+        url: url,
+        cache: false,
+        method: "GET",
+        dataType: 'html',
+        data: {
+            object_product: object_product,
+            _token: _token
+        },
+        success: function(data) {
+            $('.list-product-object').html(data);
+        },
+    }); 
+});
 
 $(document).on('click', '.plus', function() {
     qty = parseInt($(this).parents('.input-group').find('.number-product').val()) + 1;

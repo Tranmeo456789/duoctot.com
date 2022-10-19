@@ -5,7 +5,7 @@
     <p>Sản phẩm bán chạy nhất</p>
 </h1>
 <ul class="clearfix list-unstyled">
-    @foreach($product_covids as $item)
+    @foreach($product_selling as $item)
     <li class="position-relative">
         <a href="{{route('fe.product.detail',$item['id'])}}" class="d-block">   
             <div class="seth-img"><img src="{{asset($item['image'])}}"></div>

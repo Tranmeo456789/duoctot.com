@@ -5,7 +5,7 @@
     </div>
     <div class="">
         <ul class="list-item list-unstyled">
-            @foreach ($product_covids as $item)
+            @foreach ($product_covid as $item)
             <li>
                 @include("$moduleName.pages.$controllerName.partial.product",['item'=>$item])
             </li>

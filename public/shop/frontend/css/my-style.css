@@ -9,8 +9,11 @@ ul {
     top: 0px;
     left: 0px;
     z-index: -1;
+    width: 100%;
 }
-
+.bg-prescrip picture img{
+    width: 100%;
+}
 .header-prescrip h1 {
     font-weight: 500;
 }

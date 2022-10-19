@@ -340,19 +340,25 @@
 }
 
 #selling-product .slect-customer .slect-item-customer {
-    border: 1px solid gray;
+    border: 1px solid #d8e0e8;
     border-radius: 20px;
     padding: 3px 10px;
-    margin-right: 20px;
+    margin-right: 20px;cursor: pointer;
+    transition: all 0.5ms ease-in-out;
 }
 
 #selling-product .slect-customer .slect-item-customer a {
-    color: #1E1E1E;
+    color: #718198;
 }
-
+#selling-product .slect-customer .slect-item-customer:hover{
+    background: #718198;  
+}
+#selling-product .slect-customer .slect-item-customer:hover a{
+    color: #fff;
+}
 #selling-product .slect-customer .slect-item-customer.active-slect {
     border: 1px solid #05AFE3;
-    background-color: #05AFE3;
+    background-color: #05AFE3;cursor: pointer;
 }
 
 #selling-product .slect-customer .slect-item-customer.active-slect a {

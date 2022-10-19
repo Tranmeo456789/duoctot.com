@@ -26,11 +26,13 @@ class HomeController extends ShopFrontEndController
     }
     public function index(Request $request)
     {
-        $product_covids = ProductModel::all();
-
-
-        return view($this->pathViewController . 'index',
-                    compact('product_covids'));
+        $product_selling = ProductModel::all();
+        $product_covid=(new ProductModel())->listItems(['type'=>'hau_covid','limit'=>10], ['task' => 'frontend-list-items-featurer']);
+        $product=(new ProductModel())->listItems(['type'=>'tre_em','limit'=>10], ['task' => 'frontend-list-items-featurer']);
+        return view(
+            $this->pathViewController . 'index',
+            compact('product_selling','product_covid','product')
+        );
     }
     public function ajaxcat3(Request $request)
     {
@@ -110,7 +112,8 @@ class HomeController extends ShopFrontEndController
             'list_product' => $list_product,
             //'test'=> $products->count()
         );
-        return response()->json($result, 200);
+        return view("$this->moduleName.templates.menu_cart",compact('itemsCart'));
+        //return response()->json($result, 200);
     }
     public function ajaxlocal(Request $request)
     {
@@ -162,6 +165,18 @@ class HomeController extends ShopFrontEndController
             'list_store' => $list_store,
             'test'=>$temp
         );
+        return response()->json($result, 200);
+    }
+    public function ajax_filter(Request $request){
+        $data = $request->all();
+        $ls_product='';
+        $object_product = $request->object_product;
+        $params['type']=$object_product;$params['limit']=10;
+        $product=(new ProductModel())->listItems($params, ['task' => 'frontend-list-items-featurer']);
+        $result = array(  
+            'test'=>$object_product
+        );
+        return view("$this->pathViewController.partial.product_object",compact('product'));
         return response()->json($result, 200);
     }
 }

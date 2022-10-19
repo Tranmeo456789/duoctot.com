@@ -1,3 +1,10 @@
+@php
+$object_product=[
+    ['name'=>'Trẻ em','slug'=>'tre_em'],
+    ['name'=>'Người cao tuổi','slug'=>'nguoi_cao_tuoi'],
+    ['name'=>'Phụ nữ cho con bú','slug'=>'phu_nu_cho_con_bu'],
+]
+@endphp
 <h1 class="d-flex justify-content-between mb-5 flex-wrap ">
     <div class="title_cathd mb-sm-2">
         <div class="d-flex align-items-center">
@@ -9,33 +16,15 @@
         <div class="d-flex justify-content-between flex-wrap  slect-customer">
             <span>Lọc theo</span>
             <div class="d-flex justify-content-between flex-wrap">
-                <div class="slect-item-customer active-slect">
-                    <a href="">Trẻ em</a>
+                @foreach($object_product as $k=>$item)
+                <div class="slect-item-customer {{$k==0?'active-slect':''}}" data-object ="{{$item['slug']}}" data-href="{{route('fe.home.ajaxfilter')}}">
+                    <a>{{$item['name']}}</a>
                 </div>
-                <div class="slect-item-customer">
-                    <a href="">Người cao tuổi</a>
-                </div>
-                <div class="slect-item-customer">
-                    <a href="">Phụ nữ cho con bú</a>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
-
 </h1>
-<ul class="clearfix list-unstyled">
-    @foreach($product_covids as $item)
-    <li class="position-relative">
-        <a href="{{route('fe.product.detail',$item['id'])}}" class="d-block">
-            <div class="seth-img">
-                <img src="{{asset($item['image'])}}">
-            </div>
-            <div class="pl-3">
-                <p class="truncate2">{{$item['name']}}</p>
-                <span class="text-info">{{ number_format( $item['price'], 0, "" ,"." )}}đ / {{$item->unitProduct->name}}</span></span>
-            </div>
-        </a>
-        <div class="unit-top">{{$item->unitProduct->name}}</div>
-    </li>
-    @endforeach
+<ul class="clearfix list-unstyled list-product-object">
+    @include("$moduleName.pages.$controllerName.partial.product_object")
 </ul>
