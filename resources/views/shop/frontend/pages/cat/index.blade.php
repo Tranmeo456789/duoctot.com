@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="new-view mt-5">
-                        @include("$moduleName.pages.$controllerName.child_index.new_view")
+                    @include("$moduleName.templates.new_view")
                     </div>
                 </div>
             </div>     
