@@ -1,10 +1,9 @@
+@if(isset($_COOKIE['productNewView']))
 <div id="selling-product" class="viewnproduct">
     <h1 class="d-flex mb-3">
         <div class="align-self-center"><div class="icon-product-round"><img src="{{asset('images/shop/eye1.png')}}" alt="" srcset=""></div></div>
         <p>Vừa mới xem</p>
     </h1>
-    
-    @if(isset($_COOKIE['productNewView']))
     @php
         $product_new_views= json_decode($_COOKIE['productNewView'],true);
     @endphp
@@ -23,5 +22,5 @@
         </li>
         @endforeach
     </ul>
-    @endif
 </div>
+@endif
