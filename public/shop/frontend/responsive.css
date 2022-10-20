@@ -16,6 +16,7 @@
     .body_catdetail>div .delplcol:nth-child(2n) {
         padding-left: 0px !important;
     }
+
     .head_topon {
         display: none;
     }
@@ -40,19 +41,24 @@
         color: red;
         font-size: 12px;
     }
-    .number_cartmenu{
-        top: -3px;    
+
+    .number_cartmenu {
+        top: -3px;
     }
+
     #head-body-respon {
         display: block;
         transform: translateX(-101%);
     }
-    .arrow-up{
+
+    .arrow-up {
         display: none;
     }
-    .viewcartmini{
+
+    .viewcartmini {
         padding: 10px 29px;
     }
+
     #head-body-respon.slider {
         transform: translateX(0px);
     }
@@ -228,12 +234,15 @@
     #featured-category li {
         width: 24.25%;
     }
+
     #featured-category li:nth-child(6n) {
         margin-right: 1%;
     }
+
     #featured-category li:nth-child(4n) {
         margin-right: 0px;
     }
+
     #product-covid li {
         width: 31.93%;
     }
@@ -241,12 +250,15 @@
     #selling-product li {
         width: 32.666%;
     }
+
     #selling-product li:nth-child(5n) {
         margin-right: 1%;
     }
+
     #selling-product li:nth-child(3n) {
         margin-right: 0px;
     }
+
     #selling-product h1 p {
         font-size: 22px;
         padding-top: 5px;
@@ -329,6 +341,7 @@
         padding: 10px 20px;
         align-self: center;
     }
+
     .wp-inner {
         max-width: 900px;
     }
@@ -391,32 +404,57 @@
         padding: 3px 15px;
         color: black;
     }
+
+    .mb1024-5 {
+        margin-bottom: 5px;
+    }
+
+    .img-footer-prescrip {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 800px) {
+    .header-prescrip {
+        font-size: 16px;
+    }
+
+    .header-prescrip h1 {
+        font-size: 20px;
+    }
+
     .table-responsive {
         overflow-x: scroll;
     }
-    .owl-buttons{
+
+    .owl-buttons {
         display: none;
     }
-    .pd800-0{
-        padding: 0px!important;
+
+    .pd800-0 {
+        padding: 0px !important;
     }
-    .border-radius-800{
+
+    .border-radius-800 {
         border-radius: 0px;
     }
+
     .form-login {
         width: 93vw;
         border-radius: 10px;
 
     }
-.wp-order-success {
-    font-size: 12px;width: 100vw;border-radius: 0px;
-}
-.title-info-order h1 {
-    font-size: 14px;
-}
+
+    .wp-order-success {
+        font-size: 12px;
+        width: 100vw;
+        border-radius: 0px;
+    }
+
+    .title-info-order h1 {
+        font-size: 14px;
+    }
+
     .form-login .header .titlek {
         border-radius: 10px 0px 0px;
     }
@@ -585,7 +623,7 @@
         width: 40px
     }
 
-    
+
 
     .info-app {
         display: none;
@@ -602,9 +640,11 @@
     #featured-category li {
         width: 49.5%;
     }
-    #featured-category li:nth-child(2n){
+
+    #featured-category li:nth-child(2n) {
         margin-right: 0px;
     }
+
     #product-covid li {
         width: 48.5%;
     }
@@ -612,13 +652,15 @@
     #selling-product li {
         width: 49.5%;
     }
+
     #selling-product li:nth-child(3n) {
         margin-right: 1%;
     }
+
     #selling-product li:nth-child(2n) {
         margin-right: 0px;
     }
-    
+
     #hisd {
         display: none;
     }
@@ -663,26 +705,62 @@
     }
 }
 
+@media screen and (max-width: 768px) {
+    .btn-form-submit {
+        padding: 0 20px;
+        height: 46px;
+        font-size: 14px;
+    }
+    .form-search-product {
+        width: 100vw;
+    }
+    .tcy-upload {
+        border: none;
+    }
+
+    .py1024-15 {
+        padding: 15px;
+        border: 2px dashed #d8e0e8;
+        display: flex;
+    }
+
+    .mb1024-5 {
+        margin-bottom: 5px;
+    }
+
+    .seth-img-100 {
+        width: 60px;
+        margin-right: 5px;
+        height: auto;
+        display: block;
+    }
+}
+
 @media screen and (max-width: 600px) {
-    #site{
+    #site {
         overflow-x: hidden;
     }
+
     .nctright {
         padding-left: 0px;
     }
-    .cart-null h1{
+
+    .cart-null h1 {
         font-size: 16px;
     }
-    .namep-order{
+
+    .namep-order {
         font-size: 12px;
     }
+
     .cart-null a {
         display: inline-block;
         margin-top: 20px;
         padding: 8px 20px;
         font-size: 16px;
-        line-height: 10px;               
+        line-height: 10px;
     }
+
     .service-tdoctor img {
         width: 30px;
         height: 30px;
@@ -706,16 +784,18 @@
         margin-right: 1%;
         margin-bottom: 1%;
     }
+
     .cat-product-out #body-nbox li:nth-child(3n),
     #selling-product.viewnproduct li:nth-child(3n) {
         margin-right: 1%;
     }
+
     .cat-product-out #body-nbox li:nth-child(2n),
     #selling-product.viewnproduct li:nth-child(2n) {
         margin-right: 0;
     }
 
-    
+
 
     #selling-product.viewnproduct li {
         height: 351px;
@@ -828,7 +908,7 @@
     .info-tdoctor {
         display: none;
     }
-    
+
     .slbuy a {
         font-size: 16px;
         padding: 2px 10px;
@@ -852,19 +932,63 @@
 }
 
 @media screen and (max-width: 500px) {
+    .header-prescrip {
+        font-size: 12px;
+        line-height: 14px;
+    }
+
+    .header-prescrip h1 {
+        font-size: 16px;
+    }
+
+    .qprescrip {
+        font-size: 16px;
+    }
+
+    .body-prescrip,
+    .footer-prescrip {
+        font-size: 12px;
+    }
+
+    .tcy-upload {
+        padding: 0px;
+        margin-bottom: 10px;
+    }
+
+    .tcy {
+        margin-bottom: 5px;
+    }
+
+    .tcy-upload-content a {
+        font-size: 12px;
+    }
+
+    .tcy {
+        line-height: 14px;
+    }
+
+    .seth-img-100 {
+        width: 60px;
+        margin-right: 5px;
+    }
+
     .wp-left-cart .title-cart h1 {
         font-size: 15px;
     }
+
     .form-login .dkfn a {
         font-size: 16px;
     }
+
     .payment h2 {
         font-size: 16px;
     }
-    .dropdown_cart{
+
+    .dropdown_cart {
         width: 100vw;
         min-width: 150px;
     }
+
     .payment p {
         font-size: 13px;
     }
@@ -880,6 +1004,15 @@
 
     #selling-product li {
         height: 300px;
+    }
+
+    .btn-form-submit {
+        padding: 0px 10px;
+        height: 30px;
+    }
+
+    .form-info-buy {
+        font-size: 16px;
     }
 
     #selling-product li {
