@@ -22,7 +22,7 @@
         </div>
         <div class="fix1screen">
             <div class="wp-cart-res">
-                <div class="dropdown_cart"></div>
+                @include("$moduleName.templates.menu_cart")
             </div>
         </div>
         <div class="black-res-screen"></div>
@@ -48,7 +48,7 @@
                     <a href="{{route('fe.product.cart')}}" title="" id="payment-link" class="">
                         <div class="clearfix icon_cart">
                             <div class="fl-left mr-2">
-                                <img style="width:32px" src="{{asset('images/shop/cart.png')}}" alt="" srcset="">
+                                <img style="width:32px" src="{{asset('images/shop/cart.png')}}" alt="">
                             </div>
                             <div class="fl-left pt-2">
                                 <p>Giỏ hàng</p>

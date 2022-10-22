@@ -268,7 +268,7 @@ label.error {
     position: relative;
 }
 
-.icon-cart-menu:hover #dropdown-cart {
+.icon-cart-menu:hover .dropdown-cart {
     visibility: visible;
     opacity: 1;
 }
@@ -276,13 +276,13 @@ label.error {
 .arrow-up {
     position: absolute;
     top: -9px;
-    right: 60px;
+    right: 80px;
     color: white;
     font-size: 22px;
     z-index: 1000;
 }
 
-#dropdown-cart {
+.dropdown-cart {
     box-shadow: 0 2px 12px rgb(0 0 0 / 15%);
     opacity: 0;
     visibility: hidden;
@@ -303,7 +303,6 @@ label.error {
     text-align: left;
     font-family: Roboto, Arial;
 }
-
 .noti-cart {
     padding: 5px 0px;
     border-bottom: 1px solid gainsboro;

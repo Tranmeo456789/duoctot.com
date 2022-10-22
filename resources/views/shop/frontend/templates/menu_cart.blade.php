@@ -15,7 +15,8 @@
     $classNumberCartMenu = ($number_product != '')?'d-block':'d-none';
 @endphp
 <span class="number_cartmenu {{$classNumberCartMenu}}">{{$number_product}}</span>
-<div id="dropdown-cart">
+<div class="dropdown-cart">
+<div class="close-cart"><img src="{{asset('images/shop/dn4.png')}}" alt=""></div>
     <span class="arrow-up"><i class="fas fa-sort-up"></i></span>
     <p class="text-success noti-cart {{$classMessage}}">{{$message}}</p>
     <ul class="list-cart-mini">
@@ -32,4 +33,5 @@
         @endforeach
     </ul>
     <div class="text-center"><a href="{{route('fe.product.cart')}}" class="viewcartmini">Xem giỏ hàng</a></div>
+    <div class="cbh2"><a href="{{route('home')}}">Tiếp tục mua hàng</a></div>
 </div>

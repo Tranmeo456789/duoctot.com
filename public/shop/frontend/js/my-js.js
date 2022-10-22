@@ -269,20 +269,19 @@ $(document).on('click', ".cat-content .list-content-product li a", function(even
     $('.cat-content .list-content-product li a').removeClass("active-ndsp");
     $(this).addClass("active-ndsp");
 });
-
+function visible_cart_respon() {
+    $('.dropdown_cart').css("opacity", 1);
+    $('.dropdown_cart').css("visibility", "visible");
+    $('.black-res-screen').css("display", "block");
+    $('.fix1screen').css("display", "block");
+    $('.fix1screen').css("height", '100vh');
+    $('#site').addClass('fix-1vh');
+}
 $(document).on('click', '.btn-select-buy', function(event) {
     $('body,html').stop().animate({
         scrollTop: 0
     }, 800);
-    //  var with_screen = $(window).width();
-
-    // if (with_screen < 1200) {
-    //     setTimeout(visible_cart_respon, 100);
-    // } else {
-    //     setTimeout(visible_cart, 1000);
-    //     setInterval(reloadpage, 3000);
-    // }
-    // alert('vao day');
+    
     var _token = $('input[name="_token"]').val();
     var quantity = $('input[name="qty_product"]').val();
     var product_id = $('#product_id').val();
@@ -301,9 +300,13 @@ $(document).on('click', '.btn-select-buy', function(event) {
         },
         success: function(data) {
             $(".dropdown-cart-info").html(data);
-            $(".dropdown-cart-info #dropdown-cart").css({ 'opacity': 1, 'visibility': 'visible' });
+            $(".wp-cart-res").html(data);
+            $(".dropdown-cart").css({ 'opacity': 1, 'visibility': 'visible' });
+            if ($(window).width() < 1200) {
+                visible_cart_respon();
+             }           
             setTimeout(function() {
-                $(".dropdown-cart-info #dropdown-cart").removeAttr('style');
+                $(".dropdown-cart-info .dropdown-cart").removeAttr('style');
             }, 3000);
         },
     });
@@ -314,7 +317,6 @@ $(document).on('click', ".close-cart", function(event) {
     $('.black-res-screen').css("display", "none");
     $('.fix1screen').css("display", "none");
     $('#site').removeClass("fix-1vh");
-    location.reload();
 });
 $(document).on('change', "select.get_child", function(event) {
     event.preventDefault();
@@ -414,7 +416,7 @@ $(document).on('change', "input.number-product", function(event) {
                 $($parent).find('.price').html(data.product[product_id]['price'].toLocaleString("vi-VN"));
                 $($parent).find('.money').html(data.product[product_id]['total_money'].toLocaleString("vi-VN"));
 
-                if (($parent.parents('#dropdown-cart').length > 0) &&
+                if (($parent.parents('.dropdown-cart').length > 0) &&
                     ($(".info-product-cart").length > 0)) { //Thay đổi trên menu
                     if ($(".info-product-cart").find("tr[data-id=" + product_id + "]").length > 0) {
 
@@ -430,7 +432,7 @@ $(document).on('change', "input.number-product", function(event) {
                 }
 
                 //Cập nhật cho menu giỏ hàng
-                $seller = $("#dropdown-cart").find(".user-seller-" + data.user_sell);
+                $seller = $(".dropdown-cart").find(".user-seller-" + data.user_sell);
                 $product = $seller.find('.item-product-' + product_id);
                 $old_qty = parseInt($product.find('.number-product').val());
                 $product.find('.number-product').val($value);

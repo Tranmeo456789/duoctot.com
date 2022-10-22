@@ -41,11 +41,24 @@
         color: red;
         font-size: 12px;
     }
-
+    .close-cart{
+        display: block;
+    }
+    .cbh2 {
+        display: block;
+    }
     .number_cartmenu {
         top: -3px;
     }
-
+    .dropdown-cart {
+        width: 100vw;
+        min-width: 150px;
+        border-radius: 8px 8px 0px 0px;
+        bottom: 0px;top: auto;right: auto;
+    }
+    .wp-cart-res .number_cartmenu{
+        display: none !important;
+    }
     #head-body-respon {
         display: block;
         transform: translateX(-101%);
@@ -982,11 +995,6 @@
 
     .payment h2 {
         font-size: 16px;
-    }
-
-    .dropdown_cart {
-        width: 100vw;
-        min-width: 150px;
     }
 
     .payment p {
