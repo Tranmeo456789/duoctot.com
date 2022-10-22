@@ -54,7 +54,7 @@
         width: 100vw;
         min-width: 150px;
         border-radius: 8px 8px 0px 0px;
-        bottom: 0px;top: auto;right: auto;
+       position: static;
     }
     .wp-cart-res .number_cartmenu{
         display: none !important;
@@ -63,7 +63,12 @@
         display: block;
         transform: translateX(-101%);
     }
-
+    .wp-cart-res {
+        position: static;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+    }
     .arrow-up {
         display: none;
     }
