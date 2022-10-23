@@ -1,8 +1,4 @@
 @php
-    // echo '<pre>';
-    // print_r($item);
-    // echo '</pre>';
-    // die();
     use App\Helpers\MyFunction;
 @endphp
 

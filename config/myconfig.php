@@ -10,7 +10,7 @@
             'dec_point'       => ',',
             'thousands_sep'   => '.',
         ],
-        'time_cookie' => 10*365*24*60*60,
+        'time_cookie' => 30*24*60*60,
         'url' => [
             'api' => 'http://tdoctor.xyz/',
             'prod' => 'shop.tdoctor.vn',
