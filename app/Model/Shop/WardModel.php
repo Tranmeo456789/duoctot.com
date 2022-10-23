@@ -22,7 +22,14 @@ class WardModel extends BackEndModel
             }
             $result = $query->pluck('name', 'id')->toArray();
         }
-
+        if($options['task'] == "list-items-in-selectbox-api") {
+            $query = $this->select('id', 'name')
+                        ->orderBy('name', 'asc');
+            if (isset($params['parentID'])){
+                $query->where('district_id', $params['parentID']);
+            }
+            $result = $query->get()->toArray();
+        }
         return $result;
     }
     public function getItem($params = null, $options = null) {

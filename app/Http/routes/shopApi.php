@@ -9,3 +9,7 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
     Route::post('/dat-hang','OrderController@completed')->name('order.completed');
     Route::get('/get-list-warehouse','WarehouseController@getList')->name('warehouse.getList');
 });
+
+Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' => []], function () {
+    Route::get('/get-list-ward/{parentID}','WardController@getList')->name('ward.getList');
+});
