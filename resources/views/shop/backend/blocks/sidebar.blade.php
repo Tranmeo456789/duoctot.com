@@ -148,6 +148,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{route('user')}}" class="nav-link">
+                <i class="fas fa-users"></i>
+                    <p>Quản lý User</p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{route('customer')}}" class="nav-link">
                     <i class="nav-icon fas fa-person-booth"></i>
                     <p>Quản lý khách hàng</p>

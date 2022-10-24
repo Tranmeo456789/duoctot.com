@@ -87,6 +87,13 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd','mid
     Route::get('/xoa-khach-hang/{id}', 'CustomerController@delete')->name('customer.delete');
     Route::post('/dia-chi-khach-hang', 'CustomerController@locationAjax')->name('locationAjax');
 
+    Route::get('/danh-sach-nguoi-dung', 'UserController@index')->name('user');
+    Route::get('/them-nguoi-dung', 'UserController@form')->name('user.add');
+    Route::get('/sua-nguoi-dung/{id}', 'UserController@form')->name('user.edit');
+    Route::post('/luu-nguoi-dung', 'UserController@save')->name('user.save');
+    Route::get('/xoa-nguoi-dung/{id}', 'UserController@delete')->name('user.delete');
+    Route::get('/chi-tiet-nguoi-dung/{id}', 'UserController@getItem')->name('user.getItem');
+
     Route::post('dropzone/upload', 'DropzoneController@upload')->name('dropzone.upload');
     Route::get('dropzone/fetch', 'DropzoneController@fetch')->name('dropzone.fetch');
     Route::post('dropzone/fupload', 'DropzoneController@fupload')->name('dropzone.fupload');

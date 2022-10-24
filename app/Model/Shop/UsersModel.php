@@ -130,6 +130,36 @@ class UsersModel extends BackEndModel
                 ['district_id', $params['district_id']]
             ])->get();                    
         }
+        if($options['task'] == "list-user-all") {
+            $query = $this::select('user_id','email','fullname','phone','user_type_id','gender');
+            $query->orderBy('user_id', 'desc');
+            if (isset($params['pagination']['totalItemsPerPage'])){
+                $result =  $query->paginate($params['pagination']['totalItemsPerPage']);
+            }else{
+                $result = $query->get();
+            }              
+        }
         return $result;
+    }
+    public function type_user($type_user_id=1)
+    {
+        $type_user = '';
+        switch ($type_user_id)
+        {
+            case 2 :
+                $type_user = 'Bác sĩ';
+                break;
+            case 3:
+                $type_user = 'Phòng khám';
+                break;
+            case 4:
+                $type_user = 'Nhà thuốc';
+                break;
+            default:
+            $type_user = 'Bệnh nhân';
+                break;
+        }
+        return $type_user;
+
     }
 }
