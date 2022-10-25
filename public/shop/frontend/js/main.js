@@ -152,16 +152,16 @@ $(document).ready(function() {
         }
     });
     //hien tra cuu order
-    $('#search-order .btn-closenk').click(function() {
-        $('#search-order').css("display", "none");
-        $('.black-screen').css("display", "none");
-        $('.titlek').removeClass("fixed-hbd");
-    });
-    $('.search-history-order').click(function() {
-        $('#search-order').css("display", "block");
-        $('.black-screen').css("display", "block");
-        $('#container').addClass("fixed-hbd");
-    });
+    // $('#search-order .btn-closenk').click(function() {
+    //     $('#search-order').css("display", "none");
+    //     $('.black-screen').css("display", "none");
+    //     $('.titlek').removeClass("fixed-hbd");
+    // });
+    // $('.search-history-order').click(function() {
+    //     $('#search-order').css("display", "block");
+    //     $('.black-screen').css("display", "block");
+    //     $('#container').addClass("fixed-hbd");
+    // });
     // $('.container-menures').click(function () {
     //     $('#search-order').css("display", "block");
     //      $('.black-screen').css("display", "block");

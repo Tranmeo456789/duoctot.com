@@ -1,150 +1,97 @@
 @php
-$title = !isset($item['id'])?"Thêm mới ":"Sửa ";
-$title = $title . $pageTitle;
+    use App\Helpers\Form as FormTemplate;
+    use App\Helpers\Template as Template;
+    use App\Helpers\MyFunction;
+    $label            = config('myconfig.template.label');
+    $formLabelAttr    = MyFunction::array_fill_muti_values(array_merge_recursive(
+                            config('myconfig.template.form_element.label'),
+                            ['class' => 'col-12 ']));
+
+    $formInputAttr    = config('myconfig.template.form_element.input');
+    $formEditorAttr = config('myconfig.template.form_element.editor');
+    $star             = config('myconfig.template.star');
+    $formInputWidth['widthInput']  =  'col-12';
+    $inputHiddenID    = Form::hidden('id', $item['id']??null);
+    $inputFileDel     = isset($item['id'])?Form::hidden('file-del'):'';
+    $formSelect2Attr  = config('myconfig.template.form_element.select2');
+    $formSelect2GetChildAttr  = array_merge_recursive(
+                                config('myconfig.template.form_element.select2'),
+                                config('myconfig.template.form_element.get_child')
+                            );
+    $formSelect2GetChildAttr = MyFunction::array_fill_muti_values($formSelect2GetChildAttr);
+    
+
+    $linkGetListDistrict = route('district.getListByParentID',['parentID' => 'value_new']);
+    $linkGetListWard = route('ward.getListByParentID',['parentID' => 'value_new']);
+    $itemsTypeUser = [
+                '1' => 'Bệnh nhân',
+                '2' => 'Phòng khám',
+                '3' => 'Bác sĩ',
+                '4' => 'Nhà thuốc'
+            ];
+    $elements = [
+        [
+            'label'   => HTML::decode(Form::label('fullname', 'Họ và tên người dùng' .  $star, $formLabelAttr)),
+            'element' => Form::text('fullname', $item['fullname']??null, array_merge($formInputAttr,['placeholder'=>'Họ và tên người dùng'])),
+            'widthElement' => 'col-12'
+        ],[
+            'label'   => HTML::decode(Form::label('phone', 'Số điện thoại' .  $star, $formLabelAttr)),
+            'element' => Form::text('phone', $item['phone']??null, array_merge($formInputAttr,['placeholder'=>'Số điện thoại'])),
+            'widthElement' => 'col-6'
+        ],[
+            'label'   => HTML::decode(Form::label('email', 'Email' .  $star, $formLabelAttr)),
+            'element' => Form::text('email', $item['email']??null, array_merge($formInputAttr,['placeholder'=>'Email'])),
+            'widthElement' => 'col-6'
+        ],
+        [
+            'label'   => HTML::decode(Form::label('user_type_id', $label['user_type_id'] .  $star , $formLabelAttr)),
+            'element' => Form::select('user_type_id',$itemsTypeUser, $item['user_type_id']??null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
+            'widthElement' => 'col-6'
+        ],
+        [
+            'label'   => HTML::decode(Form::label('details[province_id]', $label['province_id'] , $formLabelAttr)),
+            'element' => Form::select('details[province_id]',$itemsProvince, $details['province_id']??($item['province_id']??null), array_merge($formSelect2GetChildAttr,['id' =>'details[province_id]','style' =>'width:100%','data-href'=>$linkGetListDistrict,'data-target' => '#district_id'])),
+            'widthElement' => 'col-4'
+        ]
+    ];
+    
+    $elements = array_merge($elements,
+        [
+            [
+                'element' => $inputHiddenID . $inputFileDel .Form::submit('Lưu', ['class'=>'btn btn-primary']),
+                'type'    => "btn-submit-center"
+            ]
+        ]
+    );
+   
+    $title = (!isset($item['id']) || $item['id'] == '')  ?'Thêm mới':'Sửa thông tin';
 @endphp
 @extends('shop.layouts.backend')
-
-@section('title', $title )
-
-@section('header_title', $pageTitle)
-
-@section('body_content')
-<div class="card">
-    @include("$moduleName.blocks.notify")
-    @include("$moduleName.blocks.title",['pageTitle' => $title ])
-    <div class="card-body">
-        {{ Form::open([
-            'method'         => 'POST',
-            'url'            => route("$controllerName.save"),
-            'accept-charset' => 'UTF-8',
-            'class'          => 'form-horizontal form-label-left',
-            'id'             => 'main-form' ])  }}
-
-        <div class="card">
-            <div class="card-header font-weight-bold">
-                Thông tin chung
-            </div>
-            <div class="card-body">
-                <label for="name">Tên khách hàng<span class="text-danger">*</span></label>
-                <input class="form-control" type="text" name="name" id="" value="{{$item['name']??''}}" placeholder="Nhập tên khách hàng" autocomplete="off">
-                <span class='help-block'></span>
-                <div class="row">
-                    <div class="col-xl-6 col-lg-12">
-                        <div class="form-group">
-                            <label for="name">Mã khách hàng<span class="text-danger">*</span></label>
-                            <input class="form-control" type="text" name="code_customer" value="{{$item['code_customer']??''}}" id="">
-                            <span class='help-block'></span>
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-lg-12">
-                        <div class="form-group">
-                            <label for="intro">Nhóm khách hàng</label>
-                            <select class="form-control" id="" name="customer_group">
-                                <option value="Nhà thuốc">Nhà thuốc</option>
-                                <option value="Bệnh nhân">Bệnh nhân</option>
-                                <option value="Phòng khám">Phòng khám</option>
-                                <option value="Bệnh viện">Bệnh viện</option>
-                                <option value="Trung tâm y tế">Trung tâm y tế</option>
-                                <option value="Nha khoa">Nha khoa</option>
-                                <option value="Thẩm mỹ viện">Thẩm mỹ viện</option>
-                                <option value="Công ty dược">Công ty dược</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-6 col-lg-12">
-                        <div class="form-group">
-                            <label for="name">Số điện thoại<span class="text-danger">*</span></label>
-                            <input class="form-control" type="text" name="phone" value="{{$item['phone']??''}}" id="">
-                            <span class='help-block'></span>
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-lg-12">
-                        <div class="form-group">
-                            <label for="name">Mật khẩu<span class="text-danger">*</span></label>
-                            <input class="form-control" type="password" name="password" value="{{$item['password']??''}}" id="">
-                            <span class='help-block'></span>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="form-group">
-                            <label for="intro">Email</label>
-                            <input class="form-control" type="text" name="email" value="{{$item['email']??''}}" id="">
-                            <span class='help-block'></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-6 col-lg-12">
-                        <div class="form-group">
-                            <label for="name">Địa chỉ<span class="text-danger">*</span></span></label>
-                            <input class="form-control" type="text" name="address_detail" value="{{$item['address_detail']??''}}" id="" placeholder="Số nhà,tên đường...">
-                            <span class='help-block'></span>
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-lg-12">
-                        <div class="form-group">
-                            <label for="intro">Tỉnh/Thành phố<span class="text-danger">*</span></label>
-                            <select class="form-control choose1 city js-select2" id="city" name="province">
-                                <option value="">Chọn Tỉnh/Thành phố</option>
-                                @foreach($locals as $local)
-                                <option value="{{$local->matp}}">{{$local->name}}</option>
-                                @endforeach
-                            </select>
-                            <span class='help-block'></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-6 col-lg-12">
-                        <div class="form-group">
-                            <label for="name">Quận/huyện<span class="text-danger">*</span></label>
-                            <select class="form-control choose1 province js-select2" id="province" name="district">
-                                <option value="">Chọn Quận/huyện</option>
-                            </select>
-                            <span class='help-block'></span>
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-lg-12">
-                        <div class="form-group">
-                            <label for="intro">Phường xã<span class="text-danger">*</span></label>
-                            <select class="form-control wards js-select2" id="wards" name="wards">
-                                <option value="">Chọn Phường xã</option>
-                            </select>
-                            <span class='help-block'></span>
-                        </div>
+@section('title',$pageTitle)
+@section('content')
+@include ("$moduleName.blocks.page_header", ['pageIndex' => false])
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-primary">
+                    @include("$moduleName.blocks.x_title", ['title' => $title])
+                    <div class="card-body">
+                        {{ Form::open([
+                            'method'         => 'POST',
+                            'url'            => route("$controllerName.save"),
+                            'accept-charset' => 'UTF-8',
+                            'class'          => 'form-horizontal form-label-left',
+                            'enctype'        => 'multipart/form-data',
+                            'id'             => 'main-form1' ])  }}
+                            <div class="row">
+                                {!! FormTemplate::show($elements,$formInputWidth)  !!}
+                            </div>
+                        {{ Form::close() }}
                     </div>
                 </div>
             </div>
         </div>
-        <div class="card mt-2">
-            <div class="card-header font-weight-bold">
-                Thông bổ sung
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-xl-6 col-lg-12">
-                        <div class="form-group">
-                            <label for="intro">Giới tính</label>
-                            <select class="form-control" id="" name="gender">
-                                <option value="Nam">Nam</option>
-                                <option value="Nữ">Nữ</option>
-                                <option value="Khác">Khác</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="text-center">
-            <input type="hidden" name="id" value="{{$item['id']??null}}">
-            <button type="submit" name="btn_save" class="btn btn-primary">
-                Thêm mới
-            </button>
-        </div>
-        {{ Form::close() }}
     </div>
-</div>
-
+</section>
 @endsection

@@ -71,6 +71,7 @@
                 'address' => 'Địa chỉ',
                 'parent_id' => 'Danh mục cha',
                 'cat_product_id' => 'Danh mục thuốc',
+                'user_type_id' => 'Đối tượng',
                 'producer_id' => 'Nhà sản xuất',
                 'trademark_id' =>'Thương hiệu',
                 'dosage_forms' => 'Dạng bào chế',

@@ -29,6 +29,9 @@ class OrderController extends ShopFrontEndController
         $data = CatProductModel::all();
         $_SESSION['cat_product'] = $catps = data_tree1($data, 0);
     }
+    public function list(){
+        return('danh sách dơn hàng');
+    }
     public function completed(Request $request)
     {
       //  if (!$request->ajax()) return view("errors." .  'notfound', []);
