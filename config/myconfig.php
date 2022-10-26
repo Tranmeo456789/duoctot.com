@@ -163,9 +163,21 @@
                     'hoanTat'      => ['name' => 'Hoàn tất', 'class' => 'item-tab']
                 ],
             ],
+            'search'       => [
+                'all'      => ['name'=>'Tìm kiếm Tất cả'],
+                'name'     => ['name'=>'Tìm kiếm theo Tên'],
+                'fullname' => ['name'=>'Tìm kiếm theo Họ tên'],
+                'email' => ['name'=>'Tìm kiếm theo Email'],
+            ],
         ],
         'folderUpload' => [
             'mainFolder' =>'fileUpload'
+        ],
+        'config' => [
+            'search' => [
+                'default'  => ['name'],
+                'user' => ['email','fullname']
+            ]
         ]
     ];
 ?>

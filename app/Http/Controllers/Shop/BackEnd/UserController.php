@@ -16,7 +16,7 @@ class UserController extends BackEndController
     {
         $this->controllerName     = 'user';
         $this->pathViewController = "$this->moduleName.pages.$this->controllerName.";
-        $this->pageTitle          = 'Danh sách user';
+        $this->pageTitle          = 'Danh sách Người dùng';
         $this->model = new MainModel();
         parent::__construct();
     }
@@ -33,7 +33,7 @@ class UserController extends BackEndController
         $session->put('params.search.value', $request->has('search_value') ? $request->get('search_value') : ($session->has('params.search.value') ? $session->get('params.search.value') : ''));
         $session->put('params.pagination.totalItemsPerPage', $this->totalItemsPerPage);
         $this->params =  $session->get('params');
-        $items              = $this->model->listItems($this->params, ['task'  => 'list-user-all']);
+        $items              = $this->model->listItems($this->params, ['task'  => 'admin-list-items-of-shop']);
         if ($items->currentPage() > $items->lastPage()) {
             $lastPage = $items->lastPage();
             Paginator::currentPageResolver(function () use ($lastPage) {
@@ -44,22 +44,22 @@ class UserController extends BackEndController
         return view($this->pathViewController .  'index', [
             'params'           => $this->params,
             'items'            => $items,
-        ]);  
-    }   
+        ]);
+    }
     public function form(Request $request)
     {
-        $item = null; $details=[];
+        $item = null;
+        $details=[];
         if ($request->id !== null) {
             $params["user_id"] = $request->id;
             $item = $this->model->getItem($params, ['task' => 'get-item']);
-            $details = $item->details->pluck('value','user_field')->toArray()??[];      
+            $details = $item->details->pluck('value','user_field')->toArray()??[];
         }
         $itemsProvince = (new ProvinceModel())->listItems(null,['task'=>'admin-list-items-in-selectbox']);
-        //return($details);
         return view($this->pathViewController . 'form', compact(
             'item','itemsProvince','details'
-            
+
         ));
     }
-    
+
 }

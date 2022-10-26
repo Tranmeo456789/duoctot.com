@@ -191,6 +191,11 @@ img[src=''] {
     text-align: right !important;
 }
 
+span.highlight {
+    background: yellow;
+    font-weight: bold;
+}
+
 @media screen and (max-width: 1400px) {
     .business-results li {
         width: 50%;

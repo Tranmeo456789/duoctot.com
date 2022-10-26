@@ -383,3 +383,49 @@ $(document).ready(function() {
     $('.nav-link.active .sub-menu').slideDown();
 
 });
+$(document).on('click', "button#btn-search", function(event) {
+    let $inputSearchField = $("input[name  = search_field]");
+    let $inputSearchValue = $("input[name  = search_value]");
+    let pathname = window.location.pathname;
+    let params = ['filter_status'];
+    let searchParams = new URLSearchParams(window.location.search); // ?filter_status=active
+
+    let link = "";
+    $.each(params, function(key, param) { // filter_status
+        if (searchParams.has(param)) {
+            link += param + "=" + searchParams.get(param) + "&" // filter_status=active
+        }
+    });
+    let search_field = $inputSearchField.val();
+    let search_value = $inputSearchValue.val();
+    if (search_value.replace(/\s/g, "") == "") {
+        alert("Nhập vào giá trị cần tìm !!");
+    } else {
+        event.preventDefault();
+        url = pathname + "?" + link + 'search_field=' + search_field + '&search_value=' + search_value;
+        window.location.replace(url);
+    }
+});
+$(document).on('click', "button#btn-clear-search", function(event) {
+    var pathname = window.location.pathname;
+    let searchParams = new URLSearchParams(window.location.search);
+    params = ['filter_status'];
+    let link = "";
+    $.each(params, function(key, param) {
+        if (searchParams.has(param)) {
+            link += param + "=" + searchParams.get(param) + "&"
+        }
+    });
+    if (link == '') {
+        url = pathname
+    } else {
+        url = pathname + "?" + link.slice(0, -1);
+    }
+    window.location.replace(url);
+});
+$(document).on('keypress', "input[name='search_value']", function(event) {
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    if (keycode == '13') {
+        $("button#btn-search").click();
+    }
+});

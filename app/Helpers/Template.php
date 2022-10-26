@@ -156,4 +156,39 @@ class Template {
         $xhtml = sprintf("<img src='%s' alt='%s'  $strAttr />",$link,$fileAlt);
         return $xhtml;
     }
+    public static function showAreaSearch ($controllerName, $paramsSearch) {
+        $xhtml = null;
+        $tmplField         = config('myconfig.template.search');
+        $fieldInController = config('myconfig.config.search');
+        $controllerName = (array_key_exists($controllerName, $fieldInController)) ? $controllerName : 'default';
+        $xhtmlField = null;
+
+        foreach($fieldInController[$controllerName] as $field)  {// all id
+            $xhtmlField .= sprintf('<a href="#" class="select-field dropdown-item" data-field="%s">%s</a>', $field, $tmplField[$field]['name']);
+        }
+        if (count($fieldInController[$controllerName]) == 1){
+            $searchField = $fieldInController[$controllerName][0];
+        }else{
+            $searchField = (in_array($paramsSearch['field'],$fieldInController[$controllerName] )) ? $paramsSearch['field'] : "all";
+        }
+        $xhtml = sprintf('
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <button type="button" class="btn btn-info dropdown-toggle btn-active-field" data-toggle="dropdown">
+                            %s
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" role="menu">
+                            %s
+                        </div>
+                    </div>
+                    <input type="text" name="search_value" value="%s" class="form-control" >
+                    <input type="hidden" name="search_field" value="%s">
+                    <div class="input-group-prepend">
+                        <button id="btn-clear-search" type="button" class="btn btn-danger" style="margin-right: 0px"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        <button id="btn-search" type="button" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </div>
+                </div>',$tmplField[$searchField]['name'], $xhtmlField, $paramsSearch['value'],$searchField
+        );
+        return $xhtml;
+    }
 }

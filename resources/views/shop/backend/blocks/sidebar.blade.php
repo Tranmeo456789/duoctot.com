@@ -7,12 +7,14 @@
     <!-- Sidebar Menu -->
     <nav>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            @if ((Session::has('user') && Session::get('user')['user_type_id'] > 3))
             <li class="nav-item">
                 <a href="{{ route('dashboard') }}" class="nav-link">
                     <i class="far fa-list-alt nav-icon"></i>
                     <p>Thống kê bán hàng</p>
                 </a>
             </li>
+            @endif
             <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-chalkboard-teacher"></i>
@@ -42,6 +44,7 @@
                     </li>
                 </ul>
             </li>
+            @if ((Session::has('user') && Session::get('user')['user_type_id'] > 3))
             <li class="nav-item">
                 <a href="{{ route('catProduct') }}" class="nav-link">
                     <i class="nav-icon fas fa-wallet"></i>
@@ -148,12 +151,6 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{route('user')}}" class="nav-link">
-                <i class="fas fa-users"></i>
-                    <p>Quản lý User</p>
-                </a>
-            </li>
-            <li class="nav-item">
                 <a href="{{route('customer')}}" class="nav-link">
                     <i class="nav-icon fas fa-person-booth"></i>
                     <p>Quản lý khách hàng</p>
@@ -165,10 +162,19 @@
                     <p>Quản lý gian hàng</p>
                 </a>
             </li>
+            @endif
+            @if ((Session::has('user') && Session::get('user')['is_admin'] == 1))
+            <li class="nav-item">
+                <a href="{{route('user')}}" class="nav-link">
+                <i class="nav-icon fas fa-users"></i>
+                    <p>Quản lý Người dùng</p>
+                </a>
+            </li>
+            @endif
             <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-user-md"></i>
-                    <p>  Hỗ trợ</p>
+                    <p>Hỗ trợ</p>
                 </a>
             </li>
         </ul>
