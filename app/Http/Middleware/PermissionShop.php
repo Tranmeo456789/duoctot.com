@@ -18,7 +18,7 @@ class PermissionShop
         if($request->session()->has('user'))  {
             $userInfo = $request->session()->get('user');
 
-            if ($userInfo['user_type_id'] < 3)  return $next($request);
+            if ($userInfo['user_type_id'] > 3)  return $next($request);
             return redirect()->route('notify/noPermission');
         }
 
