@@ -103,7 +103,8 @@ class OrderModel extends BackEndModel
                             ->first();
         }
         if ($options['task'] == 'get-item') {
-            $result = self::select('id','code_order','total','created_at','status_order','user_id',
+            $result = self::with('userBuy')
+                            ->select('id','code_order','total','created_at','status_order','user_id',
                             'info_product','pharmacy','total_product')
                             ->where('id', $params['id'])
                             ->OfUser()

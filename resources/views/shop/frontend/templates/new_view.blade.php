@@ -4,8 +4,8 @@
     if (isset($_COOKIE['productViewed'])){
         $productViewed = json_decode($_COOKIE['productViewed'],true);
         if (isset($params['id']) && $params['id'] == array_key_first($productViewed)){
-                unset($productViewed[$params['id']]);
-            }     
+            unset($productViewed[$params['id']]);
+        }
     }
 @endphp
 @if(count($productViewed) > 0)
