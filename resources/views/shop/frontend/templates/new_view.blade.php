@@ -3,7 +3,7 @@
     $productViewed = [];
     if (isset($_COOKIE['productViewed'])){
         $productViewed = json_decode($_COOKIE['productViewed'],true);
-        if ($params['id'] == array_key_first($productViewed)){
+        if (isset($params['id']) && $params['id'] == array_key_first($productViewed)){
             unset($productViewed[$params['id']]);
         }
     }
