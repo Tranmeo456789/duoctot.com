@@ -20,15 +20,15 @@
                     <tbody>
                         <tr class="bb_order">
                             <td style="width: 30%">Số đơn hàng</td>
-                            <td style="width: 70%" class='name'>{{$orders[0]['code_order']}}<a href=""><span class="search-ttdh">Tra cứu đơn hàng</span></a></td>
+                            <td style="width: 70%" class='name'><a href=""><span class="search-ttdh">Tra cứu đơn hàng</span></a></td>
                         </tr>
                         <tr class="bb_order">
                             <td style="width: 30%">Họ và tên người đặt</td>
-                            <td style="width: 70%" class='name'>{{$orders[0]['name']}}</td>
+                            <td style="width: 70%" class='name'></td>
                         </tr>
                         <tr class="bb_order pb-1">
                             <td style="width: 30%">Số điện thoại người đặt</td>
-                            <td style="width: 70%" class='name'>{{$orders[0]['phone']}}</td>
+                            <td style="width: 70%" class='name'></td>
                         </tr>
                     </tbody>
                 </table>
@@ -41,15 +41,15 @@
                     <tbody>
                         <tr class="bb_order">
                             <td style="width: 30%">Họ và tên người nhận</td>
-                            <td style="width: 70%" class='name'>{{$orders[0]['name']}}</td>
+                            <td style="width: 70%" class='name'></td>
                         </tr>
                         <tr class="bb_order">
                             <td style="width: 30%">Số điện thoại người nhận</td>
-                            <td style="width: 70%" class='name'>{{$orders[0]['phone']}}</td>
+                            <td style="width: 70%" class='name'></td>
                         </tr>
                         <tr class="bb_order">
                             <td style="width: 30%">Nhận hàng tại</td>
-                            <td style="width: 70%" class='name'>{{$orders[0]['address_detail']}},{{$orders[0]['address']}}</td>
+                            <td style="width: 70%" class='name'></td>
                         </tr>
                         <tr class="bb_order">
                             <td style="width: 30%">Phương thức thanh toán</td>
@@ -73,10 +73,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($info_product as $k => $item)
-                        @php
-                        $product = json_decode($item,true);
-                        @endphp
+                        @foreach($info_product as $k => $product)
                         <tr class="bb_order">
                             <td style="width: 20%" class='name'>
                                 <div class="rimg-center">
@@ -85,21 +82,21 @@
                             </td>
                             <td style="width: 50%">
                                 <div class="d-flex">
-                                    <p class="namep-order truncate2">{{$product['name']}}</p>
+                                    <p class="namep-order truncate2"></p>
                                 </div>
                             </td>
-                            <td style="width: 16%" class='name'>{{$product['unit']}}</td>
-                            <td style="width: 10%">{{$product['qty_per']}}</td>
-                            <td style="width: 16%" class='text-right'>{{ number_format( $product['sub_total'], 0, "" ,"." )}}đ</td>
+                            <td style="width: 16%" class='name'></td>
+                            <td style="width: 10%"></td>
+                            <td style="width: 16%" class='text-right'></td>
                         </tr>                   
                         @endforeach
                         <tr class="bb_order">
                             <td colspan="3" style="width: 16%" class="text-right">Tổng tiền</td>
-                            <td style="width: 16%" class='text-right'>{{ number_format( $orders[0]['total'], 0, "" ,"." )}}đ</td>
+                            <td style="width: 16%" class='text-right'></td>
                         </tr>
                         <tr class="bb_order">
                             <td colspan="3" style="width: 16%" class="text-right font-weight-bold">Cần thanh toán</td>
-                            <td style="width: 16%" class='text-right font-weight-bold'>{{ number_format( $orders[0]['total'], 0, "" ,"." )}}đ</td>
+                            <td style="width: 16%" class='text-right font-weight-bold'></td>
                         </tr>
                     </tbody>
                 </table>

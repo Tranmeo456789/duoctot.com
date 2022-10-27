@@ -147,6 +147,146 @@ ul {
     height: 20px;
     margin-right: 5px;
 }
+/* ORDER */
+.wp-detail-order{
+    display: none;
+    position: absolute;
+    top: 10px;
+    left: 50vw;
+    transform: translateX(-50%);
+    z-index: 300;
+    background: #FFFFFF;
+    box-shadow: 0px 5px 5px rgb(0 0 0 / 10%);
+    border-radius: 20px;
+    width: 800px;
+    padding-bottom: 20px;
+}
+.wp-detail-order .header{
+    border-bottom: 1px solid #f3f3f3;
+}
+.wp-detail-order .wp-content .top-tab-order{
+    padding:15px;
+}
+.wp-detail-order .wp-content .top-tab-order h4{
+    font-weight: 600;
+}
+.wp-detail-order .tab-header{
+    padding: 15px;
+    background-color: #edf2f8;
+    box-shadow: inset 0px -1px 0px #d8e0e8;
+}
+.wp-detail-order .tab-header p{
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 600;
+}
+
+.wp-detail-order .tshorder{
+    color: #1e293b;
+    font-size: 20px;
+    padding: 18px;
+    font-weight: 600;
+}
+.table-list-order{
+    box-shadow: 0 0 0 1px #d8e0e8;
+    background-color: #fff;
+    overflow: hidden;
+    border-radius: 12px
+}
+.header-list-order,.content-list-order{
+    padding: 12px 20px;
+    box-shadow: inset 0px -1px 0px #d8e0e8;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+
+}
+.wp-status-order{
+    padding: 15px;
+}
+.wp-status-order .ls-status-order .stepper-circle{
+    width: 20px;
+    height: 20px;
+    cursor: default;
+    transition: all 0.3s ease-in-out;
+    font-size: 15px;
+    color: #fff;
+    border-radius: 100%;
+    background: #fff;
+    border: 1px solid;
+    border-color: #b6c0ce;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 3;
+}
+.wp-status-order .ls-status-order li:not(:last-child) {
+    padding-bottom: 38px;
+    position: relative;
+}
+.wp-content .item-info{
+    padding-left: 10px;padding-right: 10px;
+    font-size: 16px;margin-top: -1px;
+}
+.wp-content .item-info td{
+    color: #718198;
+}
+.wp-content .item-info thead{
+    padding: 15px;
+    background-color: #edf2f8;
+    box-shadow: inset 0px -1px 0px #d8e0e8;
+}
+.wp-status-order .ls-status-order li:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    box-shadow: inset 0px -1px 0px #e4eaf1;
+    width: calc(100% - 28px);
+    bottom: 18px;
+    right: 0;
+    height: 1px;
+}
+.wp-status-order .ls-status-order li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 9px;
+    z-index: 1;
+    width: 2px;
+    height: 100%;
+    background: #d8e0e8;
+}
+.stepper-circle .stepper-circle-icon{
+    width: 12px;
+    height: 12px;
+    background-color: blue;
+    border-radius: 100%;
+}
+.wp-status-order .stepper-label{
+    font-weight: 600;
+    color: #52637a;
+    padding-right: 250px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;font-size: 16px;
+    line-height: 21px;
+}
+.header-list-order p{
+    font-size: 16px;
+    font-weight: 600;
+    color: #718198;
+}
+.content-list-order p{
+    font-size: 16px;
+    color: #718198;
+}
+.content-list-order p a{
+    color: rgb(18, 18, 233)!important;
+    cursor: pointer;
+}
 
 .form-group input[type='radio']+label {
     align-self: center !important;
@@ -485,13 +625,14 @@ input[type="radio"] {
 }
 
 .col-right-cart .title-order h2 {
-    font-weight: 700;
+    font-weight: 600;
     font-size: 18px;
     line-height: 27px;
-    text-align: justify;
     color: #05AFE3;
-    padding-left: 16px;
+    padding-left:2px;
     text-align: center;
+    margin-bottom: 0px;
+    align-self: center;
 }
 
 .col-right-cart table {

@@ -30,7 +30,36 @@ class OrderController extends ShopFrontEndController
         $_SESSION['cat_product'] = $catps = data_tree1($data, 0);
     }
     public function list(){
-        return('danh sách dơn hàng');
+        $params['status']='tat_ca';
+        $params['user_id']='';
+        if(Session::has('user')){
+            $user_login=Session::get('user');
+            $params['user_id']=$user_login->user_id;
+        }
+        $order=$this->model->listItems($params, ['task' => 'user-list-items-frontend']);
+        return view($this->moduleName.'.pages.order.index',compact('order'));
+    }
+    public function ajaxFliter(Request $request){
+        $data = $request->all();
+        $params['user_id']='';
+        if(Session::has('user')){
+            $user_login=Session::get('user');
+            $params['user_id']=$user_login->user_id;
+        }
+        $params['status']=$request->status;
+        $order=$this->model->listItems($params, ['task' => 'user-list-items-frontend']);
+        return view("$this->moduleName.pages.order.partial.product_order_frontend",compact('order'));
+    }
+    public function detail(Request $request){
+        $data = $request->all();
+        $params['id']=intval($request->id);
+        $order_detail=$this->model->getItem($params, ['task' => 'get-item-frontend']);
+        $info_buyer=json_decode($order_detail['buyer'], true);
+        return view("$this->moduleName.pages.order.child_index.detail_order",compact('order_detail'));
+        //  $result = array(  
+        //      'test'=>$info_buyer
+        //   );
+        //   return response()->json($result, 200);
     }
     public function completed(Request $request)
     {
@@ -71,11 +100,11 @@ class OrderController extends ShopFrontEndController
     }
     public function success($code)
     {
-        $orders=OrderModel::where('code_order',$code)->get();
-        $order=$orders[0];
-        $params['id']=$orders[0]->customer_id;
+        $order=$this->model->getItem(['code_order'=>$code], ['task' => 'get-item-frontend-code']);
+        $info_product=$order->info_product;
+        $params['id']=$order->customer_id;
         $customer=(new CustomerModel)->getItem($params, ['task' => 'get-item']);
-        $info_product=json_decode($order->info_product,true);
-        return view($this->pathViewController . 'order_success',compact('customer','orders','info_product'));
+        //return($order);
+        return view($this->pathViewController . 'order_success',compact('customer','order','info_product'));
     }
 }

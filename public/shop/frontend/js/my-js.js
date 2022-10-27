@@ -24,13 +24,13 @@ function isPhoneNumberVN(value) {
     }
     return flag;
 }
-$.validator.methods.checkEmail = function(value, element, param) {
+$.validator.methods.checkEmail = function (value, element, param) {
     return (value.trim() == '') || (isEmail(value.trim()));
 };
-$.validator.methods.checkPhone = function(value, element, param) {
+$.validator.methods.checkPhone = function (value, element, param) {
     return isPhoneNumberVN(value.trim());
 };
-$.validator.methods.checkPhoneOrEmail = function(value, element, param) {
+$.validator.methods.checkPhoneOrEmail = function (value, element, param) {
     return isEmail(value.trim()) || isPhoneNumberVN(value.trim());
 };
 $.ajaxSetup({
@@ -38,7 +38,7 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
-$(document).ready(function() {
+$(document).ready(function () {
     $(".select2").select2();
     $(".user-register").validate({
         rules: {
@@ -63,7 +63,7 @@ $(document).ready(function() {
                 minlength: "Mật khẩu tối thiểu 6 ký tự"
             },
         },
-        errorPlacement: function(error, element) {
+        errorPlacement: function (error, element) {
             // Add the `invalid-feedback` class to the error element
             error.addClass("invalid-feedback");
             element.closest(".input-group").addClass('has-error');
@@ -73,10 +73,10 @@ $(document).ready(function() {
                 error.insertAfter(element.closest(".input-group"));
             }
         },
-        highlight: function(element, errorClass, validClass) {
+        highlight: function (element, errorClass, validClass) {
             $(element).addClass("is-invalid").removeClass("is-valid");
         },
-        unhighlight: function(element, errorClass, validClass) {
+        unhighlight: function (element, errorClass, validClass) {
             $(element).addClass("is-valid").removeClass("is-invalid");
             $(element).closest(".input-group").removeClass('has-error');
         }
@@ -102,7 +102,7 @@ $(document).ready(function() {
                 minlength: "Mật khẩu tối thiểu 6 ký tự"
             },
         },
-        errorPlacement: function(error, element) {
+        errorPlacement: function (error, element) {
             // Add the `invalid-feedback` class to the error element
             error.addClass("invalid-feedback");
             element.closest(".input-group").addClass('has-error');
@@ -112,10 +112,10 @@ $(document).ready(function() {
                 error.insertAfter(element.closest(".input-group"));
             }
         },
-        highlight: function(element, errorClass, validClass) {
+        highlight: function (element, errorClass, validClass) {
             $(element).addClass("is-invalid").removeClass("is-valid");
         },
-        unhighlight: function(element, errorClass, validClass) {
+        unhighlight: function (element, errorClass, validClass) {
             $(element).addClass("is-valid").removeClass("is-invalid");
             $(element).closest(".input-group").removeClass('has-error');
         }
@@ -220,7 +220,7 @@ $(document).ready(function() {
     });
 });
 
-$(document).on('submit', "#main-form", function(event) {
+$(document).on('submit', "#main-form", function (event) {
     event.preventDefault();
     url = $(this).attr("action");
     method = $(this).attr('method');
@@ -232,7 +232,7 @@ $(document).on('submit', "#main-form", function(event) {
         cache: false,
         contentType: false,
         processData: false,
-        success: function(response) {
+        success: function (response) {
             if (response.success == false) {
                 if (response.error != null) {
                     for (control in response.errors) {
@@ -249,12 +249,12 @@ $(document).on('submit', "#main-form", function(event) {
                 window.location.replace(response.redirect_url);
             }
         },
-        error: function(xhr, textStatus, errorThrown) {
+        error: function (xhr, textStatus, errorThrown) {
             alert("Error: " + errorThrown);
         }
     });
 });
-$(document).on('click', ".changeTypePassword", function(event) {
+$(document).on('click', ".changeTypePassword", function (event) {
     parent = $(this).parents('.form-group');
     parent.toggleClass('open');
     if (parent.hasClass('open')) {
@@ -265,7 +265,7 @@ $(document).on('click', ".changeTypePassword", function(event) {
         $(this).html("<i class='fa fa-eye'></i>");
     }
 });
-$(document).on('click', ".cat-content .list-content-product li a", function(event) {
+$(document).on('click', ".cat-content .list-content-product li a", function (event) {
     $('.cat-content .list-content-product li a').removeClass("active-ndsp");
     $(this).addClass("active-ndsp");
 });
@@ -277,11 +277,11 @@ function visible_cart_respon() {
     $('.fix1screen').css("height", '100vh');
     $('#site').addClass('fix-1vh');
 }
-$(document).on('click', '.btn-select-buy', function(event) {
+$(document).on('click', '.btn-select-buy', function (event) {
     $('body,html').stop().animate({
         scrollTop: 0
     }, 800);
-    
+
     var _token = $('input[name="_token"]').val();
     var quantity = $('input[name="qty_product"]').val();
     var product_id = $('#product_id').val();
@@ -298,27 +298,27 @@ $(document).on('click', '.btn-select-buy', function(event) {
             user_sell: user_sell,
             _token: _token,
         },
-        success: function(data) {
+        success: function (data) {
             $(".dropdown-cart-info").html(data);
             $(".wp-cart-res").html(data);
             $(".dropdown-cart").css({ 'opacity': 1, 'visibility': 'visible' });
             if ($(window).width() < 1200) {
                 visible_cart_respon();
-             }           
-            setTimeout(function() {
+            }
+            setTimeout(function () {
                 $(".dropdown-cart-info .dropdown-cart").removeAttr('style');
             }, 3000);
         },
     });
 });
-$(document).on('click', ".close-cart", function(event) {
+$(document).on('click', ".close-cart", function (event) {
     $('.dropdown_cart').css("opacity", 0);
     $('.dropdown_cart').css("visibility", "hidden");
     $('.black-res-screen').css("display", "none");
     $('.fix1screen').css("display", "none");
     $('#site').removeClass("fix-1vh");
 });
-$(document).on('change', "select.get_child", function(event) {
+$(document).on('change', "select.get_child", function (event) {
     event.preventDefault();
     url = $(this).data('href');
 
@@ -334,7 +334,7 @@ $(document).on('change', "select.get_child", function(event) {
         let addtion = $(this).data('addtion');
         if (addtion !== undefined) {
             addtion = addtion.split('|');
-            addtion.forEach(function(elem, index) {
+            addtion.forEach(function (elem, index) {
                 elemValue = $('#' + elem).val();
                 if (elemValue != '') {
                     if (url.indexOf('?') === -1) {
@@ -349,12 +349,12 @@ $(document).on('change', "select.get_child", function(event) {
             url: url,
             cache: false,
             dataType: 'json',
-            success: function(data) {
+            success: function (data) {
                 options = '';
                 if ($(target + " option").length > 0) {
                     options = $(target).find('option')[0].outerHTML;
                 }
-                $.each(data, function(id, item) {
+                $.each(data, function (id, item) {
                     options += "<option value= '" + id + "'>" + item + "</option>";
                 });
 
@@ -362,13 +362,13 @@ $(document).on('change', "select.get_child", function(event) {
                 if ($(target).hasClass('get_data')) $(target).trigger("change");
                 if ($(target).hasClass('get_child')) $(target).trigger("change");
             },
-            error: function(xhr, textStatus, errorThrown) {
+            error: function (xhr, textStatus, errorThrown) {
                 alert("Error: " + errorThrown);
             }
         });
     }
 });
-$(document).on('change', "select.get_data", function(event) {
+$(document).on('change', "select.get_data", function (event) {
     event.preventDefault();
     let selectValue = $(this).val();
     target = $(this).data('target');
@@ -379,7 +379,7 @@ $(document).on('change', "select.get_data", function(event) {
     let addtion = $(this).data('addtion');
     if (addtion !== undefined) {
         addtion = addtion.split('|');
-        addtion.forEach(function(elem) {
+        addtion.forEach(function (elem) {
             elemValue = $('#' + elem).val();
             url += "&filter_" + elem + "=" + elemValue;
         });
@@ -389,17 +389,17 @@ $(document).on('change', "select.get_data", function(event) {
         url: url,
         cache: false,
         dataType: 'html',
-        success: function(data) {
+        success: function (data) {
             $(target).html(data);
         },
-        error: function(xhr, textStatus, errorThrown) {
+        error: function (xhr, textStatus, errorThrown) {
             alert("Error: " + errorThrown);
         }
     });
 
 
 });
-$(document).on('change', "input.number-product", function(event) {
+$(document).on('change', "input.number-product", function (event) {
     $value = $(this).val();
     url = $(this).data('href');
     if (url) {
@@ -410,7 +410,7 @@ $(document).on('change', "input.number-product", function(event) {
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
             cache: false,
             dataType: 'json',
-            success: function(data) {
+            success: function (data) {
                 $parent = $($current).parents('.item-product');
                 product_id = $parent.data('id');
                 $($parent).find('.price').html(data.product[product_id]['price'].toLocaleString("vi-VN"));
@@ -446,13 +446,13 @@ $(document).on('change', "input.number-product", function(event) {
                     $(".col-right-cart").find(".total_thanh_toan").html(data.total.toLocaleString("vi-VN"));
                 }
             },
-            error: function(xhr, textStatus, errorThrown) {
+            error: function (xhr, textStatus, errorThrown) {
                 alert("Error: " + errorThrown);
             }
         })
     };
 });
-$(document).on('change', "input[name='delivery_method']", function(event) {
+$(document).on('change', "input[name='delivery_method']", function (event) {
     event.preventDefault();
     $value = $(this).val();
     if ($value == 1) {
@@ -463,7 +463,7 @@ $(document).on('change', "input[name='delivery_method']", function(event) {
         $(".rowHome").removeClass('d-none');
     }
 });
-$(document).on('change', "#export_tax", function(event) {
+$(document).on('change', "#export_tax", function (event) {
     event.preventDefault();
     $value = $(this).val();
     if ($(this).is(":checked")) {
@@ -492,7 +492,7 @@ $(document).on('change', "#export_tax", function(event) {
         $(".rowInovice").addClass('d-none');
     }
 });
-$(document).on('change', "input[name='invoice[object]']", function(event) {
+$(document).on('change', "input[name='invoice[object]']", function (event) {
     event.preventDefault();
     $value = $(this).val();
     if ($value == 1) { //Công ty
@@ -525,33 +525,79 @@ $(document).on('click', ".slect-item-customer", function (event) {
             object_product: object_product,
             _token: _token
         },
-        success: function(data) {
+        success: function (data) {
             $('.list-product-object').html(data);
+        },
+    });
+});
+$(document).on('click', ".select-status-order", function (event) {
+    var status = $(this).attr("data-status");
+    var url = $(this).attr("data-href");
+    var _token = $('input[name="_token"]').val();
+    $.ajax({
+        url: url,
+        cache: false,
+        method: "GET",
+        dataType: 'html',
+        data: {
+            status: status,
+            _token: _token
+        },
+        success: function(data) {
+            //console.log(data);
+            $('.table-order-frontend').html(data);
         },
     }); 
 });
-
-$(document).on('click', '.plus', function() {
+$(document).on('click', ".view-detail-order", function (event) {
+    $('.wp-detail-order').css("display", "block");
+    $('.black-screen').css("display", "block");
+    $('#container').addClass("fixed-hbd");
+    var id = $(this).attr("data-id");
+    var url = $(this).attr("data-href");
+    var _token = $('input[name="_token"]').val();
+    $.ajax({
+        url: url,
+        cache: false,
+        method: "GET",
+        dataType: 'html',
+        data: {
+            id: id,
+            _token: _token,
+        },
+        success: function(data) {
+            //console.log(data['test']['fullname']);
+            $('.wp-detail-order').html(data);
+        },
+    }); 
+});
+$(document).on('click', ".btn-closenk", function (event) {
+    $('.wp-detail-order').css("display", "none");
+    $('.black-screen').css("display", "none");
+    $('.titlek').removeClass("fixed-hbd");
+   
+});
+$(document).on('click', '.plus', function () {
     qty = parseInt($(this).parents('.input-group').find('.number-product').val()) + 1;
     $(this).parents('.input-group').find('.number-product').val(qty);
     $(this).parents('.input-group').find('.number-product').change();
 });
-$(document).on('click', '.minus', function() {
+$(document).on('click', '.minus', function () {
     qty = parseInt($(this).parents('.input-group').find('.number-product').val()) - 1;
     $(this).parents('.input-group').find('.number-product').val(qty);
     $(this).parents('.input-group').find('.number-product').change();
 });
-$(document).on('click', '.delele-item-in-cart', function() {
+$(document).on('click', '.delele-item-in-cart', function () {
 
     url = $(this).data('href');
     $.get({
         url: url,
         cache: false,
         dataType: 'json',
-        success: function(data) {
+        success: function (data) {
             window.location.reload();
         },
-        error: function(xhr, textStatus, errorThrown) {
+        error: function (xhr, textStatus, errorThrown) {
             alert("Error: " + errorThrown);
         }
     });

@@ -61,7 +61,6 @@ class CartController extends ShopFrontEndController
 
         $item = $session->has("cart." . $params['user_sell'])?$session->get("cart." . $params['user_sell']):[];
         $itemsStore = (new WarehouseModel())->listItems(['user_id'=>$params['user_sell']],['task' => 'frontend-list-items']);
-
         return view($this->pathViewController . 'view',
                compact('item','user','itemsProvince' ,'itemsDistrict','itemsWard','details','itemsStore'));
     }

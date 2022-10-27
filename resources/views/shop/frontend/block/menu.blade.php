@@ -31,7 +31,7 @@
         <div class="wp-inner clearfix">
             <a href="{{route('home')}}" title="" id="payment-link" class="fl-left"><img style="width:213px" src="{{asset('images/shop/logo_topbar2.png')}}" alt=""></a>
             <div id="" class="fl-left" style="margin-left:300px; padding-top:5px">
-                <a title="" id="payment-link" class="search-history-order">
+                <a href="{{route('fe.order.list')}}" id="payment-link" class="search-history-order">
                     <div class="clearfix">
                         <div class="fl-left mr-2 pt-2">
                             <img style="width:26px" src="{{asset('images/shop/history.png')}}" alt="">
@@ -86,10 +86,12 @@
             @endif
         </div>
 
-        <div id="search-order">
+        <!-- <div id="search-order">
             <div class="header d-flex justify-content-between">
-                <div class="tshorder">Tra cứu lịch sử đơn hàng</div>
-                <button class="btn-closenk rimg-center"><img src="{{asset('images/shop/dn4.png')}}" alt=""></button>
+                <a href="{{route('fe.order.list')}}">
+                    <div class="tshorder">Tra cứu lịch sử đơn hàng</div>
+                    <button class="btn-closenk rimg-center"><img src="{{asset('images/shop/dn4.png')}}" alt=""></button>
+                </a>
             </div>
             <div class="d-flex justify-content-center">
                 <div class="wp-content">
@@ -107,7 +109,7 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
     <div id="form-login-register">
         @include('shop.frontend.block.form_login_register')

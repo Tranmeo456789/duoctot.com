@@ -41,6 +41,7 @@ class OrderController extends BackEndController
             $items              = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
         }
         $itemStatusOrderCount = $this->model->countItems($this->params, ['task' => 'admin-count-items-group-by-status-order']);
+        
         return view($this->pathViewController .  'index', [
             'params'           => $this->params,
             'items'            => $items,

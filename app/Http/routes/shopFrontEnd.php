@@ -12,7 +12,9 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
 
     Route::post('/hoan-tat-dat-hang','OrderController@completed')->name('fe.order.completed');
     Route::get('/dat-hang/thanh-cong/{code}','OrderController@success')->name('fe.order.success');
-    Route::post('/don-hang-cua-toi','OrderController@list')->name('fe.order.list');
+    Route::get('/don-hang-cua-toi','OrderController@list')->name('fe.order.list');
+    Route::get('/chi-tiet-don-hang-cua-toi','OrderController@detail')->name('fe.order.detail');
+    Route::get('/loc-don-hang-cua-toi','OrderController@ajaxFliter')->name('fe.order.ajaxFliter');
     Route::get('/thu-test','OrderController@test');
 
     Route::get('/don-thuoc','PrescripController@index')->name('fe.prescrip.index');

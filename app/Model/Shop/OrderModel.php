@@ -51,6 +51,29 @@ class OrderModel extends BackEndModel
     public function listItems($params = null, $options = null)
     {
         $result = null;
+        if($options['task'] == "user-list-items-frontend"){
+            $query = $this::select('id','code_order','total','total_product','created_at','status_order','user_id')
+                                ->where('user_id',$params['user_id']);                           
+            switch ($params['status'])
+            {
+                case 'chua_hoan_tat' :
+                    $query = $query->whereIn('status_order',['dangXuLy','daXacNhan','dangGiaoHang','daGiaoHang']); 
+                    break;
+                case 'hoan_tat' :
+                    $query = $query->whereIn('status_order',['hoanTat']); 
+                    break;
+                case 'da_huy' :
+                    $query = $query->whereIn('status_order',['daHuy']); 
+                    break;
+                case 'tra_hang' :
+                    $query = $query->whereIn('status_order',['traHang']); 
+                    break;
+                default:
+                $query = $query;
+                    break;
+            }
+            $result =  $query->orderBy('id', 'desc')->get();
+        }
         if ($options['task'] == "user-list-items") {
             $query = $this::with('userBuy')
                                 ->select('id','code_order','total','created_at','status_order','user_id')
@@ -67,6 +90,18 @@ class OrderModel extends BackEndModel
     public function getItem($params = null, $options = null)
     {
         $result = null;
+        if ($options['task'] == 'get-item-frontend') {
+            $result = self::select('id','code_order','total','created_at','status_order','user_id',
+                            'info_product','buyer','pharmacy','total_product')
+                            ->where('id', $params['id'])
+                            ->first();
+        }
+        if ($options['task'] == 'get-item-frontend-code') {
+            $result = self::select('id','code_order','total','created_at','status_order','user_id',
+                            'info_product','buyer','pharmacy','total_product')
+                            ->where('code_order', $params['code_order'])
+                            ->first();
+        }
         if ($options['task'] == 'get-item') {
             $result = self::select('id','code_order','total','created_at','status_order','user_id',
                             'info_product','pharmacy','total_product')
@@ -220,5 +255,5 @@ class OrderModel extends BackEndModel
     public function userBuy(){
         return $this->belongsTo('App\Model\Shop\UsersModel','user_id','user_id');
     }
-
+    
 }

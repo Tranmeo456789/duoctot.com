@@ -8,7 +8,9 @@
         @if (count($items) > 0)
             @php
                 $address = isset($params['filter']['district_id'])?$items[0]->district->name . ', ':'';
-                $address .= $items[0]->province->name;
+                if(isset($items[0]->province->name)){
+                    $address .= $items[0]->province->name;
+                }
                 $xhtml = "";
                 $i = 1;
                 foreach ($items as $val){
