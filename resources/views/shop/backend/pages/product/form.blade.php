@@ -120,7 +120,7 @@
                 'widthElement' => 'col-3'
             ],[
                 'label'   => HTML::decode(Form::label('inventory_min',$label['inventory_min'], $formLabelAttr)),
-                'element' => Form::text('price_vat', $item['inventory_min']??null, array_merge($formInputAttr,['placeholder'=>$label['inventory_min']])),
+                'element' => Form::text('inventory_min', $item['inventory_min']??null, array_merge($formInputAttr,['placeholder'=>$label['inventory_min']])),
                 'widthElement' => 'col-3'
             ],[
                 'label'   => HTML::decode(Form::label('type_price', $label['type_price'] .  $star , $formLabelAttr)),
@@ -206,7 +206,7 @@
                             'accept-charset' => 'UTF-8',
                             'class'          => 'form-horizontal form-label-left',
                             'enctype'        => 'multipart/form-data',
-                            'id'             => 'main-form1' ])  }}
+                            'id'             => 'main-form' ])  }}
                             <div class="row">
                                 {!! FormTemplate::show($elements,$formInputWidth)  !!}
                             </div>
