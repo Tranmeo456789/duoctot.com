@@ -24,11 +24,11 @@
                         </tr>
                         <tr class="bb_order">
                             <td style="width: 30%">Họ và tên người đặt</td>
-                            <td style="width: 70%" class='name'></td>
+                            <td style="width: 70%" class='name'>{{$customer['fullname']}}</td>
                         </tr>
                         <tr class="bb_order pb-1">
                             <td style="width: 30%">Số điện thoại người đặt</td>
-                            <td style="width: 70%" class='name'></td>
+                            <td style="width: 70%" class='name'>{{$customer['phone']}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -41,15 +41,15 @@
                     <tbody>
                         <tr class="bb_order">
                             <td style="width: 30%">Họ và tên người nhận</td>
-                            <td style="width: 70%" class='name'></td>
+                            <td style="width: 70%" class='name'>{{$customer['fullname']}}</td>
                         </tr>
                         <tr class="bb_order">
                             <td style="width: 30%">Số điện thoại người nhận</td>
-                            <td style="width: 70%" class='name'></td>
+                            <td style="width: 70%" class='name'>{{$customer['phone']}}</td>
                         </tr>
                         <tr class="bb_order">
                             <td style="width: 30%">Nhận hàng tại</td>
-                            <td style="width: 70%" class='name'></td>
+                            <td style="width: 70%" class='name'>{{$address}}</td>
                         </tr>
                         <tr class="bb_order">
                             <td style="width: 30%">Phương thức thanh toán</td>
@@ -62,6 +62,11 @@
                     </tbody>
                 </table>
             </div>
+            @php
+                use App\Helpers\Template as Template;
+                use App\Helpers\MyFunction;
+                use App\Model\Shop\UnitModel;
+            @endphp
             <div class="item-info">
                 <table class="table pd-order mb-0" id="tbList">
                     <thead>
@@ -73,30 +78,34 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($info_product as $k => $product)
+                        @foreach($info_product as $k => $val)
+                        @php
+                        $unit=(new UnitModel())->getItem(['id'=>$val['unit_id']],['task' => 'get-item'])->name;
+                        $image = Template::showImagePreviewFileManager($val['image'],$val['slug']??$val['name']);
+                        $price = MyFunction::formatNumber($val['price']) . ' đ';
+                        $total_money = MyFunction::formatNumber($val['total_money']) . ' đ';
+                        @endphp
                         <tr class="bb_order">
-                            <td style="width: 20%" class='name'>
-                                <div class="rimg-center">
-                                    <div><img src="{{asset($product['image'])}}" alt=""></div>
-                                </div>
+                            <td style="width:12%" class='name'>
+                            {!! $image !!}
                             </td>
-                            <td style="width: 50%">
+                            <td style="width: 40%">
                                 <div class="d-flex">
-                                    <p class="namep-order truncate2"></p>
+                                    <p class="namep-order truncate2 text-info">{{$val['name']}}</p>
                                 </div>
                             </td>
-                            <td style="width: 16%" class='name'></td>
-                            <td style="width: 10%"></td>
-                            <td style="width: 16%" class='text-right'></td>
-                        </tr>                   
+                            <td style="width: 16%" class='name'>{{$unit}}</td>
+                            <td style="width: 10%">{{$val['quantity']}}</td>
+                            <td style="width: 22%" class='text-right'>{{$total_money}}</td>
+                        </tr>
                         @endforeach
                         <tr class="bb_order">
                             <td colspan="3" style="width: 16%" class="text-right">Tổng tiền</td>
-                            <td style="width: 16%" class='text-right'></td>
+                            <td style="width: 16%" class='text-right'>{{MyFunction::formatNumber($order['total'])}} đ</td>
                         </tr>
                         <tr class="bb_order">
                             <td colspan="3" style="width: 16%" class="text-right font-weight-bold">Cần thanh toán</td>
-                            <td style="width: 16%" class='text-right font-weight-bold'></td>
+                            <td style="width: 16%" class='text-right font-weight-bold'>{{MyFunction::formatNumber($order['total'])}} đ</td>
                         </tr>
                     </tbody>
                 </table>

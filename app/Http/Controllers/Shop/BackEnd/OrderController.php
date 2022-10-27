@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Shop\BackEnd;
 use Illuminate\Http\Request;
 use App\Model\Shop\WarehouseModel;
 use App\Model\Shop\ProductModel;
+use App\Model\Shop\WardModel;
 use App\Http\Requests;
 use App\Http\Controllers\Shop\BackEnd\BackEndController;
 use App\Model\Shop\OrderModel as MainModel;
@@ -41,7 +42,6 @@ class OrderController extends BackEndController
             $items              = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
         }
         $itemStatusOrderCount = $this->model->countItems($this->params, ['task' => 'admin-count-items-group-by-status-order']);
-        
         return view($this->pathViewController .  'index', [
             'params'           => $this->params,
             'items'            => $items,
@@ -56,7 +56,6 @@ class OrderController extends BackEndController
         $itemsWarehouse = (new WarehouseModel())->listItems(['user_id'=>$item['user_sell']],['task' => 'admin-list-items-in-selectbox']);
         $params['group_id'] = array_keys($item['info_product']);
         $itemsProduct = (new ProductModel())->listItems($params,['task' => 'user-list-items']);
-
         return view($this->pathViewController .  'detail',
                  compact('item','itemsWarehouse','itemsProduct','pageTitle'));
     }

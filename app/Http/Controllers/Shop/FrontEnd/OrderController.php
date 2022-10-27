@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
 use App\Model\Shop\DistrictModel;
 use App\Model\Shop\WardModel;
+use App\Model\Shop\WarehouseModel;
 use App\Helpers\MyFunction;
 use Session;
 use DB;
@@ -55,7 +56,16 @@ class OrderController extends ShopFrontEndController
         $params['id']=intval($request->id);
         $order_detail=$this->model->getItem($params, ['task' => 'get-item-frontend']);
         $info_buyer=json_decode($order_detail['buyer'], true);
-        return view("$this->moduleName.pages.order.child_index.detail_order",compact('order_detail'));
+        $address='';
+        if($order_detail->delivery_method ==1){
+            $warehouse_id=$order_detail['pharmacy']['warehouse_id'];
+            $address=(new WarehouseModel())->getItem(['id'=>$warehouse_id],['task' => 'get-item-of-id'])->address;
+        }else{
+            $ward_detail=(new WardModel())->getItem(['id'=>$order_detail->receive['ward_id']],['task' => 'get-item-full']);
+            $ward=$ward_detail['name'];$district=$ward_detail['district']['name'];$province=$ward_detail['district']['province']['name'];
+            $address=$order_detail->receive['address'].', '.$ward.', '.$district.', '.$province;
+        }
+        return view("$this->moduleName.pages.order.child_index.detail_order",compact('order_detail','address'));
         //  $result = array(  
         //      'test'=>$info_buyer
         //   );
@@ -82,9 +92,11 @@ class OrderController extends ShopFrontEndController
                 unset($cart[$params['user_sell']]);
                 $request->session()->put('cart', $cart);
                 setcookie("cart", json_encode($cart),time() + config('myconfig.time_cookie'), "/", $_SERVER['SERVER_NAME']);
+                $code_order=$this->model->getItem(null, ['task' => 'get-item-last'])['code_order'];
+                //return redirect()->route('fe.order.success', ['code' => $code_order]);
                 return response()->json([
                     'fail' => false,
-                    'redirect_url' => route("home"),
+                    'redirect_url' =>route("fe.order.success",['code' => $code_order]),
                     'message'      => $notify,
                 ]);
             }
@@ -96,15 +108,23 @@ class OrderController extends ShopFrontEndController
             ]);
         }
 
-        return redirect()->route('fe.order.success', ['code' => $code_order]);
+        
     }
     public function success($code)
     {
         $order=$this->model->getItem(['code_order'=>$code], ['task' => 'get-item-frontend-code']);
-        $info_product=$order->info_product;
+        $info_product=$order['info_product'];
         $params['id']=$order->customer_id;
-        $customer=(new CustomerModel)->getItem($params, ['task' => 'get-item']);
-        //return($order);
-        return view($this->pathViewController . 'order_success',compact('customer','order','info_product'));
+        $customer=json_decode($order->buyer, true);
+        $address='';
+        if($order->delivery_method ==1){
+            $warehouse_id=$order['pharmacy']['warehouse_id'];
+            $address=(new WarehouseModel())->getItem(['id'=>$warehouse_id],['task' => 'get-item-of-id'])->address;
+        }else{
+            $ward_detail=(new WardModel())->getItem(['id'=>$order->receive['ward_id']],['task' => 'get-item-full']);
+            $ward=$ward_detail['name'];$district=$ward_detail['district']['name'];$province=$ward_detail['district']['province']['name'];
+            $address=$order->receive['address'].', '.$ward.', '.$district.', '.$province;
+        }
+        return view($this->pathViewController . 'order_success',compact('customer','order','info_product','address'));
     }
 }

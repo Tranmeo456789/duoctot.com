@@ -16,7 +16,7 @@
     $elements = [
         [
             'label'   => HTML::decode(Form::label('code_order', $label['code_order'], $formLabelAttr)),
-            'element' => Form::text('code_order', $item['code']??null, array_merge($formInputAttr,['placeholder'=>$label['code_order'],'readonly' =>true])),
+            'element' => Form::text('code_order', $item['code_order']??null, array_merge($formInputAttr,['placeholder'=>$label['code_order'],'readonly' =>true])),
             'widthElement' => 'col-4'
         ],[
             'label'   => HTML::decode(Form::label('', $label['status_order'], $formLabelAttr)),

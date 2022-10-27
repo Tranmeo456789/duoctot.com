@@ -81,6 +81,11 @@ class WarehouseModel extends BackEndModel
                             ->OfUser();
             $result =  $query->first();
         }
+        if($options['task'] == 'get-item-of-id') {
+            $query = self::select('id', 'name','local','address','province_id','district_id','ward_id')
+                            ->where('id', $params['id']);
+            $result =  $query->first();
+        }
         return $result ;
     }
     public function saveItem($params = null, $options = null) {

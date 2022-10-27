@@ -2,6 +2,10 @@
 @section('title','Quản lý nhà thuốc Tdoctor')
 
 @section('content')
+@php
+use App\Model\Shop\OrderModel;
+use App\Helpers\MyFunction;
+@endphp
 <section class="content pt-3">
     <div class="container-fluid">
         <div class="row">
@@ -15,7 +19,7 @@
                                     <div class="icon"><i class="fas fa-hand-holding-usd"></i></div>
                                     <div>
                                         <h6>Doanh thu</h6>
-                                        <h5>0</h5>
+                                        <h5>{{MyFunction::formatNumber($sum) . ' đ'}}</h5>
                                     </div>
                                 </a>
                             </li>
@@ -24,7 +28,7 @@
                                     <div class="icon"><i class="far fa-newspaper"></i></i></div>
                                     <div>
                                         <h6>Đơn hàng mới</h6>
-                                        <h5>0</h5>
+                                        <h5>{{count($order_day)}}</h5>
                                     </div>
                                 </a>
                             </li>
@@ -53,17 +57,21 @@
                     @include("$moduleName.blocks.x_title", ['title' => 'ĐƠN HÀNG'])
                     <div class="card-body p-0">
                         @php
-                            $status_oreder=[
-                                ['name'=>'Đang xử lý','slug'=>'dangXuLy','icon'=>'fa-business-time'],
-                                ['name'=>'Đã xác nhận','slug'=>'daXacNhan','icon'=>'fa-business-time'],
-                                ['name'=>'Đang giao hàng','slug'=>'dangGiaoHang','icon'=>'fa-business-time'],
-                                ['name'=>'Đã giao hàng','slug'=>'dangGiaoHang','icon'=>'fa-business-time'],
-                                ['name'=>'Đã hủy','slug'=>'dangHuy','icon'=>'fa-business-time'],
-                                ['name'=>'Hoàn tất','slug'=>'hoanTat','icon'=>'fa-business-time'],                              
-                                ]
+                        $status_oreder=[
+                        ['name'=>'Đang xử lý','slug'=>'dangXuLy','icon'=>'fa-business-time'],
+                        ['name'=>'Đã xác nhận','slug'=>'daXacNhan','icon'=>'fa-business-time'],
+                        ['name'=>'Đang giao hàng','slug'=>'dangGiaoHang','icon'=>'fa-business-time'],
+                        ['name'=>'Đã giao hàng','slug'=>'daGiaoHang','icon'=>'fa-business-time'],
+                        ['name'=>'Đã hủy','slug'=>'daHuy','icon'=>'fa-business-time'],
+                        ['name'=>'Hoàn tất','slug'=>'hoanTat','icon'=>'fa-business-time'],
+                        ]
                         @endphp
                         <ul class="order-wait mb-0">
                             @foreach($status_oreder as $item)
+                                @php                          
+                                $params['status_order']=$item['slug'];
+                                $itemStatus = (new OrderModel)->countItems($params, ['task' => 'admin-count-items-status-order']);
+                                @endphp
                             <li class="">
                                 <a href="" style="color:black">
                                     <div class="icon">
@@ -71,7 +79,7 @@
                                     </div>
                                     <div>
                                         <p>{{$item['name']}}</p>
-                                        <h6>0</h6>
+                                        <h6>{{$itemStatus[0]['count']??0}}</h6>
                                     </div>
                                 </a>
                             </li>

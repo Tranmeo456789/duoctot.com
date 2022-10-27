@@ -1,6 +1,7 @@
 @php
 use App\Helpers\Template as Template;
 use App\Helpers\MyFunction;
+use App\Model\Shop\UnitModel;
 $status_order=[
 ['name'=>'Đang xử lý','slug'=>'dangXuLy'],
 ['name'=>'Đã xác nhận','slug'=>'daXacNhan'],
@@ -16,11 +17,12 @@ $status_order=[
 @if(isset($order_detail))
 @php
 $info_buyer=json_decode($order_detail['buyer'], true);
+$ngayDatHang = MyFunction::formatDateFrontend($order_detail['created_at']);
 @endphp
 <div class="wp-content">
     <div class="top-tab-order">
         <h4 class="mb-0">Đơn hàng <span class="text-info">{{$order_detail['code_order']}}</span></h4>
-        <p>Đặt hàng lúc: 21:34, Thứ Hai ngày 24/10/2022</p>
+        <p>Đặt hàng ngày {{$ngayDatHang}}</p>
     </div>
     <div class="tab-header">
         <p>Trạng thái đơn hàng</p>
@@ -76,7 +78,7 @@ $info_buyer=json_decode($order_detail['buyer'], true);
                 </tr>
                 <tr class="bb_order pb-1">
                     <td style="width: 30%">Nhận hàng tại</td>
-                    <td style="width: 70%" class='name'>oooooo</td>
+                    <td style="width: 70%" class='name'>{{$address}}</td>
                 </tr>
                 <tr class="bb_order pb-1">
                     <td style="width: 30%">Phương thức thanh toán</td>
@@ -109,6 +111,7 @@ $info_buyer=json_decode($order_detail['buyer'], true);
                     $image = Template::showImagePreviewFileManager($val['image'],$val['slug']??$val['name']);
                     $price = MyFunction::formatNumber($val['price']) . ' đ';
                     $total_money = MyFunction::formatNumber($val['total_money']) . ' đ';
+                    $unit=(new UnitModel())->getItem(['id'=>$val['unit_id']],['task' => 'get-item'])->name;
                 @endphp
                 <tr class="bb_order">
                     <td style="width: 10%" class='name'>
@@ -119,7 +122,7 @@ $info_buyer=json_decode($order_detail['buyer'], true);
                             <p class="namep-order truncate2">{{$val['name']}}</p>
                         </div>
                     </td>
-                    <td style="width: 14%" class='name'>Hộp</td>
+                    <td style="width: 14%" class='name'>{{$unit}}</td>
                     <td style="width: 10%">{{$val['quantity']}}</td>
                     <td style="width: 20%">{{$total_money}}</td>
                 </tr>

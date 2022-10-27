@@ -85,6 +85,13 @@ class OrderModel extends BackEndModel
             $result =  $query->orderBy('id', 'desc')
                               ->paginate($params['pagination']['totalItemsPerPage']);
         }
+        if($options['task'] == "user-list-items-in-day"){
+            $query = $this::with('userBuy')
+            ->select('id','code_order','total','created_at','status_order','user_id')
+            ->where('id','>',1)->where('created_at','like', "%2022-10-28%")
+            ->OfUser();
+            $result =  $query->orderBy('id', 'desc')->get();
+        }
         return $result;
     }
     public function getItem($params = null, $options = null)
@@ -92,12 +99,12 @@ class OrderModel extends BackEndModel
         $result = null;
         if ($options['task'] == 'get-item-frontend') {
             $result = self::select('id','code_order','total','created_at','status_order','user_id',
-                            'info_product','buyer','pharmacy','total_product')
+                            'info_product','buyer','pharmacy','total_product','delivery_method','receive')
                             ->where('id', $params['id'])
                             ->first();
         }
         if ($options['task'] == 'get-item-frontend-code') {
-            $result = self::select('id','code_order','total','created_at','status_order','user_id',
+            $result = self::select('id','code_order','total','created_at','status_order','user_id','delivery_method','receive',
                             'info_product','buyer','pharmacy','total_product')
                             ->where('code_order', $params['code_order'])
                             ->first();
@@ -117,6 +124,9 @@ class OrderModel extends BackEndModel
                             ->OfUser()
                             ->first();
         }
+        if ($options['task'] == 'get-item-last') {
+            $result = self::select('id','code_order')->orderBy('id', 'DESC')->first()->toArray();
+        }
         return $result;
     }
     public function countItems($params = null, $options  = null) {
@@ -128,6 +138,13 @@ class OrderModel extends BackEndModel
                             ->where('id','>',1)
                             ->OfUser();
             $query = $this->search($query, $params);
+            $result = $query->get()->toArray();
+        }
+        if($options['task'] == 'admin-count-items-status-order') {
+            $query = $this::groupBy('status_order')
+                            ->select(DB::raw('status_order , COUNT(id) as count') )
+                            ->where('id','>',1)->where('status_order',$params['status_order'])
+                            ->OfUser();
             $result = $query->get()->toArray();
         }
         return $result;
