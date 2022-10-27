@@ -25,13 +25,20 @@ $(document).on('submit', 'form#main-form', function(event) {
         processData: false,
         success: function(response) {
             $msg = '';
-            if (response.success == false) {
-                if (response.error != null) {
+            if (response.fail == true) {
+                if (response.errors != null) {
+                    // for (control in response.errors) {
+                    //     eleError = "<label id='" + control + "-error' class='error invalid-feedback' for='" + control + "' style='display:inline-block'>" + response.errors[control] + "</label>";
+                    //     $('[name=' + control + ']').closest(".form-group").find("label[for='" + control + "']").remove();
+                    //     $('[name=' + control + ']').closest(".input-group").addClass('has-error').after(eleError);
+                    //     $('[name=' + control + ']').addClass("is-invalid").removeClass('is-valid');
+                    // }
+                    form.find("input[type='submit']").val("Lưu");
                     for (control in response.errors) {
-                        eleError = "<label id='" + control + "-error' class='error invalid-feedback' for='" + control + "' style='display:inline-block'>" + response.errors[control] + "</label>";
-                        $('[name=' + control + ']').closest(".form-group").find("label[for='" + control + "']").remove();
-                        $('[name=' + control + ']').closest(".input-group").addClass('has-error').after(eleError);
-                        $('[name=' + control + ']').addClass("is-invalid").removeClass('is-valid');
+                        $('[name=' + control + ']').addClass("is-invalid")
+                        $('[name=' + control + ']').parents('div.form-group').addClass("has-error");
+                        $('[name=' + control + ']').siblings('span.help-block').html(response.errors[control]).addClass("help-block-show");
+                        //  $msg += "<br/>" + data.errors[control];
                     }
                 } else {
                     alert(response.message);
