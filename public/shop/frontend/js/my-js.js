@@ -133,6 +133,10 @@ $(document).ready(function () {
             email: {
                 checkEmail: true,
             },
+            "buyer[phone]": {
+                required: true,
+                checkPhone: true,
+            },
             "invoice[name]": {
                 required: true,
             },
@@ -180,12 +184,16 @@ $(document).ready(function () {
             email: {
                 checkEmail: "Email không đúng định dạng",
             },
+            "buyer[phone]": {
+                required: "Thông tin bắt buộc",
+                checkPhone: "Số điện thoại không đúng định dạng",
+            },
             "invoice[name]": {
                 required: "Thông tin bắt buộc",
             },
             "invoice[phone]": {
                 required: "Thông tin bắt buộc",
-                checkPhone: true,
+                checkPhone: "Số điện thoại không đúng định dạng",
             },
             "invoice[tax_code]": {
                 required: "Thông tin bắt buộc"
@@ -201,7 +209,7 @@ $(document).ready(function () {
             },
             "receive[phone]": {
                 required: "Thông tin bắt buộc",
-                checkPhone: true
+                checkPhone: "Số điện thoại không đúng định dạng",
             },
             "receive[province_id]": {
                 required: "Thông tin bắt buộc"
@@ -217,6 +225,22 @@ $(document).ready(function () {
             }
         },
 
+    });
+    $("#content-slider").lightSlider({
+        loop: true,
+        keyPress: true
+    });
+    $('#image-gallery').lightSlider({
+        gallery: true,
+        item: 1,
+        thumbItem: 9,
+        slideMargin: 0,
+        speed: 500,
+        auto: true,
+        loop: true,
+        onSliderLoad: function() {
+            $('#image-gallery').removeClass('cS-hidden');
+        }
     });
 });
 
@@ -458,9 +482,11 @@ $(document).on('change', "input[name='delivery_method']", function (event) {
     if ($value == 1) {
         $(".rowPharmacy").removeClass('d-none');
         $(".rowHome").addClass('d-none');
+        $("input[name='receive[phone]']").addClass('ignore');
     } else {
         $(".rowPharmacy").addClass('d-none');
         $(".rowHome").removeClass('d-none');
+        $("input[name='receive[phone]']").removeClass('ignore');
     }
 });
 $(document).on('change', "#export_tax", function (event) {

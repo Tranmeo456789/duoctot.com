@@ -43,7 +43,12 @@ class OrderModel extends BackEndModel
     {
         if (\Session::has('user')){
             $user = \Session::get('user');
-            return  $query->where('user_sell',$user->user_id);
+            if($user['is_admin']==1){
+                return  $query;
+            }else{
+                return  $query->where('user_sell',$user->user_id);
+            }
+            
         }
         return $query;
     }
@@ -88,7 +93,7 @@ class OrderModel extends BackEndModel
         if($options['task'] == "user-list-items-in-day"){
             $query = $this::with('userBuy')
             ->select('id','code_order','total','created_at','status_order','user_id')
-            ->where('id','>',1)->where('created_at','like', "%2022-10-28%")
+            ->where('id','>',1)->where('created_at','LIKE', "%{$params['day']}%")
             ->OfUser();
             $result =  $query->orderBy('id', 'desc')->get();
         }

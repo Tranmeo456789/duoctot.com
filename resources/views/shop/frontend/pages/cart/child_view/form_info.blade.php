@@ -159,7 +159,7 @@
             'widthElement' => 'col-4'
         ],[
             'label' => '',
-            'element' => Form::text('receive[phone]', $user->phone??null,array_merge($formInputAttr,['placeholder'=>'Nhập Số điện thoại'])),
+            'element' => Form::text('receive[phone]', $user->phone??null,array_merge(['class'=>'form-control ignore'],['placeholder'=>'Nhập Số điện thoại'])),
             'widthElement' => 'col-4'
         ],[
             'label'   => '',

@@ -93,7 +93,7 @@
                 'general_info' =>'Thông tin chung',
                 'benefit' => 'Công dụng',
                 'prescribe' => 'Chỉ định',
-                'dosage' => 'Liều lượng',
+                'dosage' => 'Cách dùng, liều lượng',
                 'note' => 'Lưu ý',
                 'preserve' => 'Bảo quản',
                 'local' => 'Số nhà, đường, ấp, khóm',

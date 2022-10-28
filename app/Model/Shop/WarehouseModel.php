@@ -21,7 +21,11 @@ class WarehouseModel extends BackEndModel
     {
         if (\Session::has('user')){
             $user = \Session::get('user');
-            return  $query->where('user_id',$user->user_id);
+            if($user['is_admin']==1){
+                return  $query;
+            }else{
+                return  $query->where('user_id',$user->user_id);
+            }        
         }
         return $query;
     }

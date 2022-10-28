@@ -50,7 +50,11 @@ class ProductModel extends BackEndModel
     {
         if (\Session::has('user')){
             $user = \Session::get('user');
-            return  $query->where('user_id',$user->user_id);
+            if($user['is_admin']==1){
+                return  $query;
+            }else{
+                return  $query->where('user_id',$user->user_id);
+            }      
         }
         return $query;
     }
@@ -85,6 +89,14 @@ class ProductModel extends BackEndModel
                             ->ofUser();
             $result =  $query->orderBy('id', 'desc')
                               ->paginate($params['pagination']['totalItemsPerPage']);
+        }
+        if ($options['task'] == "user-list-items-in-warehouse-no-pagination") {
+            $query = $this::with('productWarehouse')
+                            ->select('id','name','code','price','image','quantity_in_stock')
+                            ->where('id','>',1)
+                            ->ofUser();
+            $result =  $query->orderBy('id', 'desc')
+                              ->get();
         }
         if ($options['task'] == 'user-list-all-items'){
             $result = $this::selectRaw("id as product_id")

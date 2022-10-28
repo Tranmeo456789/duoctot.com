@@ -19,7 +19,7 @@ use App\Helpers\MyFunction;
                                     <div class="icon"><i class="fas fa-hand-holding-usd"></i></div>
                                     <div>
                                         <h6>Doanh thu</h6>
-                                        <h5>{{MyFunction::formatNumber($sum) . ' đ'}}</h5>
+                                        <h5>{{MyFunction::formatNumber($sum_money_day) . ' đ'}}</h5>
                                     </div>
                                 </a>
                             </li>
@@ -106,13 +106,13 @@ use App\Helpers\MyFunction;
                             <li class="">
                                 <a href="" style="color:black">
                                     <h6>Số tồn kho</h6>
-                                    <span>666</span>
+                                    <span>{{$sum_quantity}}</span>
                                 </a>
                             </li>
                             <li class="">
                                 <a href="" style="color:black">
                                     <h6>Giá trị tồn kho</h6>
-                                    <span>666,888</span>
+                                    <span>{{MyFunction::formatNumber($sum_money) . ' đ'}}</span>
                                 </a>
                             </li>
                         </ul>
