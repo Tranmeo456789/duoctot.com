@@ -430,6 +430,54 @@ $(document).on('click', "button#btn-clear-search", function(event) {
     }
     window.location.replace(url);
 });
+$(document).on('click', ".filter-in-time", function(event) {
+    day_start = $("input[name='date_start']").val();
+    day_end = $("input[name='date_end']").val();
+    var _token = $('input[name="_token"]').val();
+    let url = $(this).data('href');
+    var controller_name=$(this).data('controller');
+    if(day_start != '' && day_end != ''){
+        $.ajax({
+            url: url,
+            method: 'GET',
+            dataType: 'html',
+            data: {
+                day_start: day_start,
+                _token: _token,
+                day_end: day_end,
+                controller_name:controller_name,
+            },
+            success: function(data) {
+                $('.list-user-admin').html(data);
+                //console.log(data['test']);
+            }
+        });
+    }
+    
+});
+$(document).on('click', ".filter-revenue-in-time", function(event) {
+    day_start = $("input[name='date_start']").val();
+    day_end = $("input[name='date_end']").val();
+    var _token = $('input[name="_token"]').val();
+    let url = $(this).data('href');
+    if(day_start != '' && day_end != ''){
+        $.ajax({
+            url: url,
+            method: 'GET',
+            dataType: 'json',
+            data: {
+                day_start: day_start,
+                _token: _token,
+                day_end: day_end,
+            },
+            success: function(data) {
+                $('.total-revenue').html(new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(data['total_revenue']));
+                //console.log(data['test']);
+            }
+        });
+    }
+    
+});
 $(document).on('keypress', "input[name='search_value']", function(event) {
     var keycode = (event.keyCode ? event.keyCode : event.which);
     if (keycode == '13') {

@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Shop\BackEnd;
 use Illuminate\Http\Request;
 use App\Model\Shop\OrderModel;
 use App\Model\Shop\ProductModel;
+use App\Helpers\MyFunction;
 use App\Http\Controllers\Shop\BackEnd\BackEndController;
 use DB;
 class DashboardController extends BackEndController
@@ -27,9 +28,30 @@ class DashboardController extends BackEndController
         if(!empty($itemsProduct)){
             $sum_quantity=$itemsProduct->sum('quantity_in_stock');
             $sum_money=$itemsProduct->sum('price');
+        }    
+         $itemOrder=(new OrderModel())->listItems(null, ['task' => 'user-list-items']);
+         if(!empty($itemOrder)){
+             $total_revenue=$itemOrder->sum('total');
+         }
+        return view($this->pathViewController .  'index',compact('order_day','sum_money_day','sum_quantity','sum_money','total_revenue'));
+    }
+    public function filterInDay(Request $request){
+        $data = $request->all();
+        $day_start=$request->day_start;
+        $day_end=$request->day_end;
+        $params['filter_in_day']['day_start']=MyFunction::formatDateLikeMySQL($day_start);
+        $params['filter_in_day']['day_end']=MyFunction::formatDateLikeMySQL($day_end);
+        $itemOrder=(new OrderModel())->listItems($params, ['task' => 'user-list-items']);
+        $total_revenue=0;
+        if(!empty($itemOrder)){
+            $total_revenue=$itemOrder->sum('total');
         }
-        
-        //return($sum_money);
-        return view($this->pathViewController .  'index',compact('order_day','sum_money_day','sum_quantity','sum_money'));
+        $result = array(  
+             'total_revenue'=>$total_revenue
+          );
+          return response()->json($result, 200);
+        //   return view($this->pathViewController.'child_index.revenue_sell', [
+        //     'total_revenue' => $total_revenue,
+        // ]);
     }
 }

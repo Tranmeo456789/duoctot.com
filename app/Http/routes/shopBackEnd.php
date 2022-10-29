@@ -15,7 +15,6 @@
 $prefixShopBackEnd = '/backend';
 Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd','middleware' => ['check.login']], function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
-
     Route::get('/thong-tin-nguoi-dung', 'ProfileController@info')->name('profile.info');
     Route::post('/luu-thong-tin-nguoi-dung', 'ProfileController@save')->name('profile.save');
     Route::get('/thay-doi-mat-khau', 'ProfileController@change_password')->name('profile.password');
@@ -87,19 +86,19 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd','mid
         Route::get('/xoa-khach-hang/{id}', 'CustomerController@delete')->name('customer.delete');
         Route::post('/dia-chi-khach-hang', 'CustomerController@locationAjax')->name('locationAjax');
     });
-    // Route::post('dropzone/upload', 'DropzoneController@upload')->name('dropzone.upload');
-    // Route::get('dropzone/fetch', 'DropzoneController@fetch')->name('dropzone.fetch');
-    // Route::post('dropzone/fupload', 'DropzoneController@fupload')->name('dropzone.fupload');
-    // Route::get('anh-san-pham/{id}', 'DropzoneController@list_img')->name('dropzone.list_img');
-    // Route::post('/them-anh-san-pham/{id}', 'ProductController@addimg_product')->name('product.img.add');
-    // Route::get('/xoa-anh-san-pham/{id}/{id_product}', 'DropzoneController@deleteimg_product')->name('dropzone.img.delete');
+   
 
     Route::group(['middleware' => ['permission.admin']], function () {
         Route::get('/danh-sach-nguoi-dung', 'UserController@index')->name('user');
+        Route::get('/quan-ly-thuoc-admin', 'ProductController@index_admin')->name('admin.product');
+        Route::get('/quan-ly-don-hang-admin', 'OrderController@index_admin')->name('admin.order');
+        Route::get('/loc-user-theo-thoi-gian', 'UserController@filterInDay')->name('user.filterInDay');
+        
         // Route::get('/them-nguoi-dung', 'UserController@form')->name('user.add');
         // Route::get('/sua-nguoi-dung/{id}', 'UserController@form')->name('user.edit');
         // Route::post('/luu-nguoi-dung', 'UserController@save')->name('user.save');
         // Route::get('/xoa-nguoi-dung/{id}', 'UserController@delete')->name('user.delete');
         // Route::get('/chi-tiet-nguoi-dung/{id}', 'UserController@getItem')->name('user.getItem');
     });
+    Route::get('/loc-doanh-thu-theo-thoi-gian', 'DashboardController@filterInDay')->name('dashboard.filterInDay');
 });

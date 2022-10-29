@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Model\Shop\WarehouseModel;
 use App\Model\Shop\ProductModel;
 use App\Model\Shop\WardModel;
+use App\Model\Shop\UsersModel;
 use App\Http\Requests;
 use App\Http\Controllers\Shop\BackEnd\BackEndController;
 use App\Model\Shop\OrderModel as MainModel;
@@ -46,6 +47,23 @@ class OrderController extends BackEndController
             'params'           => $this->params,
             'items'            => $items,
             'itemStatusOrderCount' => $itemStatusOrderCount
+        ]);
+    }
+    public function index_admin(Request $request){
+        $session = $request->session();
+        if ($session->has('currentController') &&  ($session->get('currentController') != $this->controllerName)) {
+            $session->forget('params');
+        } else {
+            $session->put('currentController', $this->controllerName);
+        }
+        $session->put('params.pagination.totalItemsPerPage', $this->totalItemsPerPage);
+        $this->params     = $session->get('params');
+        $pageTitle='Quản lý đơn hàng';$this->params['user_type_id']=3;
+        $items=(new UsersModel)->listItems($this->params, ['task'  => 'admin-list-items-of-shop']);
+         return view($this->pathViewController .  'index_admin', [
+            //'params'           => $this->params,
+            'items'            => $items,
+            'pageTitle'=>$pageTitle
         ]);
     }
     public function detail(Request $request)

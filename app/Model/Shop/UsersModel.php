@@ -134,9 +134,14 @@ class UsersModel extends BackEndModel
             ])->get();
         }
         if($options['task'] == "admin-list-items-of-shop") {
-            $query = $this::select('user_id','email','fullname','phone','user_type_id','gender')
+            $query = $this::select('user_id','email','fullname','phone','user_type_id','gender','created_at')
                          ->where('domain_register',"shop.tdoctor.vn");
-
+            if(isset($params['filter_in_day'])){
+                $query->whereBetween('created_at', ["{$params['filter_in_day']['day_start']}", "{$params['filter_in_day']['day_end']}"]);
+            }
+            if(isset($params['user_type_id'])){
+                $query->where('user_type_id','>',$params['user_type_id']);
+            }
             if (isset($params['search']['value']) && ($params['search']['value'] !== ""))  {
                 if($params['search']['field'] == "all") {
                     $query->where(function($query) use ($params){
@@ -154,6 +159,11 @@ class UsersModel extends BackEndModel
             }else{
                 $result = $query->get();
             }
+        }
+        if($options['task'] == "list-item-user-type-id-up3-of-shop") {
+            $query = $this::select('user_id','email','fullname','phone','user_type_id','gender')
+            ->where('domain_register',"shop.tdoctor.vn")->where('user_type_id','>',3);
+            $result = $query->get();
         }
         return $result;
     }

@@ -18,6 +18,10 @@ class MyFunction {
     {
         return date_format(date_create_from_format(Config::get('myconfig.format.short_time'),$dateTime), Config::get('myconfig.format.my_sql_date'));
     }
+    public static function formatDateLikeMySQL($dateTime)
+    {
+        return substr($dateTime,6, 4).'-'.substr($dateTime,3, 2).'-'.substr($dateTime,0, 2);
+    }
     public static function formatNumber($number)
     {
         return number_format ($number, Config::get('myconfig.format.number_decimals'),Config::get('myconfig.format.dec_point'),Config::get('myconfig.format.thousands_sep'));

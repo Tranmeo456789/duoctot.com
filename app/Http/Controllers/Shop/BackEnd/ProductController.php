@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Shop\BackEnd\BackEndController;
 use App\Model\Shop\ProductModel;
 use App\Model\Shop\CatProductModel;
+use App\Model\Shop\UsersModel;
 use App\Model\Shop\ProducerModel;
 use App\Model\Shop\TrademarkModel;
 use App\Model\Shop\WarehouseModel;
@@ -14,7 +15,9 @@ use App\Model\Shop\CountryModel;
 use App\Http\Requests\ProductRequest as MainRequest;
 use App\Model\Shop\UnitModel;
 use App\Model\Shop\ProvinceModel;
+use App\Helpers\MyFunction;
 use DB;
+use Session;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 class ProductController extends BackEndController
 {
@@ -28,6 +31,7 @@ class ProductController extends BackEndController
     }
     public function index(Request $request)
     {
+
         $session = $request->session();
         if ($session->has('currentController') &&  ($session->get('currentController') != $this->controllerName)) {
             $session->forget('params');
@@ -48,11 +52,27 @@ class ProductController extends BackEndController
             });
             $items              = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
         }
-
-        $pathView = ($request->ajax()) ? 'ajax' : 'index';
+        $pathView = $request->ajax() ? 'ajax' : 'index';
         return view($this->pathViewController .  $pathView, [
             'params'           => $this->params,
             'items'            => $items
+         ]);     
+    }
+    public function index_admin(Request $request){
+        $session = $request->session();
+        if ($session->has('currentController') &&  ($session->get('currentController') != $this->controllerName)) {
+            $session->forget('params');
+        } else {
+            $session->put('currentController', $this->controllerName);
+        }
+        $session->put('params.pagination.totalItemsPerPage', $this->totalItemsPerPage);
+        $this->params     = $session->get('params');
+        $pageTitle='Quản lý thuốc';$this->params['user_type_id']=3;
+        $items=(new UsersModel)->listItems($this->params, ['task'  => 'admin-list-items-of-shop']);
+         return view($this->pathViewController .  'index_admin', [
+            //'params'           => $this->params,
+            'items'            => $items,
+            'pageTitle'=>$pageTitle
         ]);
     }
     public function save(MainRequest $request)
@@ -125,4 +145,5 @@ class ProductController extends BackEndController
         $item = $this->model->getItem($params, ['task' => 'get-item-simple']);
         return json_encode($item->toArray());
     }
+   
 }

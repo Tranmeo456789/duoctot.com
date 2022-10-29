@@ -87,8 +87,17 @@ class OrderModel extends BackEndModel
             if ((isset($params['filter']['status_order'])) && ($params['filter']['status_order'] != 'all')) {
                 $query = $query->where('status_order',$params['filter']['status_order']);
             }
-            $result =  $query->orderBy('id', 'desc')
+            if(isset($params['filter_in_day'])){
+                $query->whereBetween('created_at', ["{$params['filter_in_day']['day_start']}", "{$params['filter_in_day']['day_end']}"]);
+            }
+            if(isset($params['pagination'])){
+                $query=$query->orderBy('id', 'desc')
                               ->paginate($params['pagination']['totalItemsPerPage']);
+            }else{
+                $query=$query->orderBy('id', 'desc')->get();
+            }
+            
+            $result =  $query;
         }
         if($options['task'] == "user-list-items-in-day"){
             $query = $this::with('userBuy')
@@ -97,6 +106,7 @@ class OrderModel extends BackEndModel
             ->OfUser();
             $result =  $query->orderBy('id', 'desc')->get();
         }
+
         return $result;
     }
     public function getItem($params = null, $options = null)
@@ -134,6 +144,16 @@ class OrderModel extends BackEndModel
         }
         return $result;
     }
+    // public function sumItems($params = null, $options  = null){
+    //     $result = null;
+    //     if($options['task'] == 'admin-sum-money-items-group-by-total') {
+    //         $query = $this::select('total', DB::raw('SUM(total) as sum') )
+    //         ->groupBy('total')
+    //                         ->where('id','>',1)
+    //                         ->OfUser();
+    //         $result = $query->get()->toArray();
+    //     }
+    // }
     public function countItems($params = null, $options  = null) {
 
         $result = null;
@@ -150,6 +170,15 @@ class OrderModel extends BackEndModel
                             ->select(DB::raw('status_order , COUNT(id) as count') )
                             ->where('id','>',1)->where('status_order',$params['status_order'])
                             ->OfUser();
+            $result = $query->get()->toArray();
+        }
+        if($options['task'] == 'admin-count-items-of-user-sell') {
+            $query = $this::groupBy('user_sell')
+                            ->select(DB::raw('user_sell , COUNT(id) as count') )
+                            ->where('id','>',1)->where('user_sell',$params['user_sell']);
+            if(isset($params['filter_in_day'])){
+                $query->whereBetween('created_at', ["{$params['filter_in_day']['day_start']}", "{$params['filter_in_day']['day_end']}"]);
+            }
             $result = $query->get()->toArray();
         }
         return $result;

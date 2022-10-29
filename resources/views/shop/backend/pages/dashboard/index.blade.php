@@ -87,18 +87,9 @@ use App\Helpers\MyFunction;
                         </ul>
                     </div>
                 </div>
-                <div class="card card-outline card-primary">
-                    @include("$moduleName.blocks.x_title", ['title' => 'DOANH THU BÁN HÀNG'])
-                    <div class="card-body p-5">
-                        <div class="row">
-                            <div class="col-12 text-center">
-                                <img src="{{asset('shop/images/productnull.PNG')}}" alt="">
-                                <h6 class="text-center">Chưa có dữ liệu</h6>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
+                <div class="data-revenue">
+                        @include("$moduleName.pages.$controllerName.child_index.revenue_sell")
+                </div>                
                 <div class="card card-outline card-primary">
                     @include("$moduleName.blocks.x_title", ['title' => 'THÔNG TIN KHO'])
                     <div class="card-body">

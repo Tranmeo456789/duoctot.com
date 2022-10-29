@@ -3,11 +3,11 @@
 <a href="{{ route('dashboard') }}" class="brand-link">
     <img src="{{asset('shop/images/logo.png')}}" alt="Tdoctor" class="brand-image img-fluid">
 </a>
-<div class="sidebar" >
+<div class="sidebar">
     <!-- Sidebar Menu -->
     <nav>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            @if ((Session::has('user') && Session::get('user')['user_type_id'] > 3))
+            @if (((Session::has('user') && Session::get('user')['user_type_id'] > 3)) || ((Session::has('user') && Session::get('user')['is_admin'] == 1)) )
             <li class="nav-item">
                 <a href="{{ route('dashboard') }}" class="nav-link">
                     <i class="far fa-list-alt nav-icon"></i>
@@ -109,7 +109,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item d-none" >
+            <li class="nav-item d-none">
                 <a href="{{route('consignment.list')}}" class="nav-link">
                     <i class="nav-icon fas fa-file-alt"></i>
                     <p>Phiếu gửi hàng</p>
@@ -124,7 +124,7 @@
                     </p>
                 </a>
                 <ul class="nav nav-treeview">
-                <li class="nav-item">
+                    <li class="nav-item">
                         <a href="{{route('warehouse.info')}}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Quản lý kho hàng</p>
@@ -165,8 +165,20 @@
             @endif
             @if ((Session::has('user') && Session::get('user')['is_admin'] == 1))
             <li class="nav-item">
+                <a href="{{route('admin.product')}}" class="nav-link">
+                    <i class="nav-icon fas fa-dumpster-fire"></i>
+                    <p>Quản lý Thuốc</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{route('admin.order')}}" class="nav-link">
+                    <i class="nav-icon fas fa-gifts"></i>
+                    <p>Quản lý đơn hàng</p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{route('user')}}" class="nav-link">
-                <i class="nav-icon fas fa-users"></i>
+                    <i class="nav-icon fas fa-users"></i>
                     <p>Quản lý Người dùng</p>
                 </a>
             </li>
@@ -175,6 +187,12 @@
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-user-md"></i>
                     <p>Hỗ trợ</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{route('user.logout')}}" class="nav-link">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <p>Đăng xuất</p>
                 </a>
             </li>
         </ul>

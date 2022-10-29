@@ -9,6 +9,7 @@ use App\Model\Shop\WarehouseModel;
 use App\Model\Shop\CatProductModel;
 use App\Model\Shop\Size;
 use Illuminate\Support\Str;
+use DB;
 class ProductModel extends BackEndModel
 {
     protected $casts = [
@@ -70,11 +71,12 @@ class ProductModel extends BackEndModel
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit',
                                     'preserve','note','image','featurer','long','user_id','wide','high',
-                                    'mass','quantity_in_stock','created_at', 'updated_at');
+                                    'mass','quantity_in_stock','created_at', 'updated_at')->where('id','>',1)
+                                    ->ofUser();
             if (isset($params['group_id'])){
                 $query->whereIn('id',$params['group_id']);
             }
-            $query->orderBy('id', 'desc')->where('user_id',$user->user_id);
+            $query->orderBy('id', 'desc');
             if (isset($params['pagination']['totalItemsPerPage'])){
                 $result =  $query->paginate($params['pagination']['totalItemsPerPage']);
             }else{
@@ -82,6 +84,7 @@ class ProductModel extends BackEndModel
             }
 
         }
+
         if ($options['task'] == "user-list-items-in-warehouse") {
             $query = $this::with('productWarehouse')
                             ->select('id','name','code','image','quantity_in_stock')
@@ -208,6 +211,20 @@ class ProductModel extends BackEndModel
                                     'mass')
                             ->where('id', $params['id'])
                             ->first();
+        }
+        return $result;
+    }
+    public function countItems($params = null, $options  = null) {
+
+        $result = null;
+        if($options['task'] == 'admin-count-items-group-by-user-id') {
+            $query = $this::groupBy('user_id')
+                            ->select(DB::raw('user_id , COUNT(id) as count'))
+                            ->where('id','>',1)->where('user_id',$params['user_id']);
+            if(isset($params['filter_in_day'])){
+                $query->whereBetween('created_at', ["{$params['filter_in_day']['day_start']}", "{$params['filter_in_day']['day_end']}"]);
+            }
+            $result = $query->get()->toArray();
         }
         return $result;
     }

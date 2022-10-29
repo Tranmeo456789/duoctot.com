@@ -8,6 +8,7 @@ use App\Http\Controllers\Shop\BackEnd\BackEndController;
 use App\Model\Shop\ProvinceModel;
 use App\Model\Shop\DistrictModel;
 use App\Model\Shop\WardModel;
+use App\Helpers\MyFunction;
 use DB;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 class UserController extends BackEndController
@@ -61,5 +62,30 @@ class UserController extends BackEndController
 
         ));
     }
-
+    public function filterInDay(Request $request){
+        $data = $request->all();
+        $day_start=$request->day_start;
+        $day_end=$request->day_end;
+        $session = $request->session();
+        if ($session->has('currentController') &&  ($session->get('currentController') != $this->controllerName)) {
+            $session->forget('params');
+        } else {
+            $session->put('currentController', $this->controllerName);
+        }
+        $session->put('params.pagination.totalItemsPerPage', $this->totalItemsPerPage);
+        $params     = $session->get('params');
+        $params['user_type_id']=3;
+        $params['filter_in_day']['day_start']=MyFunction::formatDateLikeMySQL($day_start);
+        $params['filter_in_day']['day_end']=MyFunction::formatDateLikeMySQL($day_end);
+        $items=$this->model->listItems($params, ['task'  => 'admin-list-items-of-shop']);
+        //  $result = array(  
+        //      'test'=>$items
+        //   );
+        //   return response()->json($result, 200);
+        $controller_name=$request->controller_name;
+          return view($this->moduleName.'.pages.'.$controller_name.'.list_admin', [
+            'params'           => $params,
+            'items'            => $items,
+        ]);
+    }
 }
