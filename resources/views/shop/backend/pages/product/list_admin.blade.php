@@ -11,7 +11,7 @@
             <tr class="row-heading">
                 <th>#</th>
                 <th>Họ tên</th>
-                <th>Số lượng sản phẩm</th>
+                <th>Số lượng thuốc</th>
                 <th>Thuộc đối tượng</th>
                 <th>Thao tác</th>
             </tr>

@@ -35,7 +35,7 @@
                     <div class="card-body my-card-filter">
                         <div class="row">
                             <div class="col-12"><h6>Thời gian:</h6></div>
-                            <div class="col-6">
+                            <div class="col-12 col-md-8">
                                 <div class="row">
                                 {!! FormTemplate::show($elements,$formInputWidth)  !!}
                                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">

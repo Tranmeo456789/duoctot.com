@@ -11,7 +11,7 @@
             <tr class="row-heading">
                 <th>#</th>
                 <th>Họ tên</th>
-                <th>Số lượng đơn hàng</th>
+                <th>SL đơn người bán</th>
                 <th>Thuộc đối tượng</th>
                 <th>Thao tác</th>
             </tr>
@@ -27,9 +27,9 @@
                     <tr>
                         <th scope="row" style="width: 5%">{{$temp}}</th>
                         <td style="width: 30%">{{$val->fullname}}</td>
-                        <td style="width: 20%" class="text-center">{{$countItems[0]['count']??0}}</td>
+                        <td style="width: 30%" class="text-center">{{$countItems[0]['count']??0}}</td>
                         <td style="width: 25%">{{$arrTypeUser[$val->user_type_id]}}</td>
-                        <td style="width: 20%"></td>
+                        <td style="width: 10%"></td>
                 </tr>
                 @endforeach
             @else

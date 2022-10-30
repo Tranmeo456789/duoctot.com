@@ -230,10 +230,6 @@ span.highlight {
     #wp-content {
         overflow: hidden;
     }
-    .set-withscreen {
-        width: 100vw;
-        overflow-x: scroll;
-    }
     .header-title {
         padding-left: 50px;
     }
@@ -266,9 +262,6 @@ span.highlight {
     .content-wrapper>.content {
         padding: 0px;
     }
-    .container-fluid {
-        padding: 0px;
-    }
     table {
         font-size: 12px;
     }
@@ -285,8 +278,11 @@ span.highlight {
         overflow: hidden;
     }
     .set-withscreen {
-        width: 100vw;
+        width: 100%;
         overflow-x: scroll;
+    }
+    .set-withscreen  .table{
+        width: 800px;
     }
     #sidebar {
         transform: translateX(-100%);

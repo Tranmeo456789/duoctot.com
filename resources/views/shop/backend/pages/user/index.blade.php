@@ -18,8 +18,8 @@
                 <div class="card card-outline card-primary">
                     <div class="card-body my-card-filter">
                         <div class="row">
-                            <div class="col-7 col-button-filter">{!! $xhtmlButtonFilter !!}</div>
-                            <div class="col-5">{!! $xhtmlAreaSeach !!}</div>
+                            <!-- <div class="col-7 col-button-filter">{!! $xhtmlButtonFilter !!}</div> -->
+                            <div class="col-12 col-md-7">{!! $xhtmlAreaSeach !!}</div>
                         </div>
                     </div>
                 </div>

@@ -5,6 +5,7 @@
     $arrTypeUser = config('myconfig.template.type_user');
     $temp=0;
 @endphp
+<div class="set-withscreen">
     <table class="table table-bordered table-striped table-hover table-head-fixed text-wrap" id="tbList">
         <thead>
             <tr class="row-heading">
@@ -29,10 +30,10 @@
                         <th scope="row" style="width: 5%">{{$temp}}</th>
                         <td style="width: 15%">{{$val->user_id}}</td>
                         <td style="width: 20%">{!! $fullname !!}</td>
-                        <td style="width: 20%">{!! $email !!}</td>
-                        <td style="width: 20%">{{$val->phone}}</td>
+                        <td style="width: 15%">{!! $email !!}</td>
+                        <td style="width: 15%">{{$val->phone}}</td>
                         <td style="width: 20%">{{$arrTypeUser[$val->user_type_id]}}</td>
-                        <td>
+                        <td style="width: 10%">
                             {{-- <a href="{{route("$controllerName.edit",$val->user_id)}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit"></i></a>
                             <a data-href="{{route("$controllerName.delete",$val->id)}}" class="btn btn-sm btn-danger btn-delete text-white" data-id="{{$val->id}}" data-toggle="tooltip" data-placement="top" title="Xóa" data-token="{{csrf_token()}}">
                                 <i class="fa fa-trash"></i>
@@ -44,4 +45,5 @@
                 @include("$moduleName.blocks.list_empty", ['colspan' => 6])
             @endif
         </tbody>
-</table>
+    </table>
+</div>
