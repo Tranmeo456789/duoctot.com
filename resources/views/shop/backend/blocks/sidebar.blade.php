@@ -36,12 +36,12 @@
                             <p>Đổi mật khẩu</p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a href="{{route('profile.setting')}}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Thiết lập khác</p>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </li>
             @if ((Session::has('user') && Session::get('user')['user_type_id'] > 3))
@@ -183,12 +183,12 @@
                 </a>
             </li>
             @endif
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-user-md"></i>
                     <p>Hỗ trợ</p>
                 </a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a href="{{route('user.logout')}}" class="nav-link">
                     <i class="fas fa-sign-out-alt"></i>

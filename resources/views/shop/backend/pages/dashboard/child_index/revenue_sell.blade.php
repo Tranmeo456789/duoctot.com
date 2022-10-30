@@ -9,12 +9,12 @@
             [
             'label'   => '',
             'element' => Form::text('date_start', $date, array_merge($formDateMaskAttr,['placeholder'=>'Từ ngày'])),
-            'widthElement' => 'col-3'
+            'widthElement' => 'col-4'
             ],
             [
             'label'   => '',
             'element' => Form::text('date_end', $date, array_merge($formDateMaskAttr,['placeholder'=>'Đến ngày'])),
-            'widthElement' => 'col-3'
+            'widthElement' => 'col-4'
             ],
             
         ];

@@ -257,6 +257,9 @@ span.highlight {
     #wp-content {
         overflow: hidden;
     }
+    .order-wait li {
+        flex-basis: 33.334%;
+    }
 }
 
 @media screen and (max-width: 1000px) {
@@ -285,12 +288,6 @@ span.highlight {
         width: 100vw;
         overflow-x: scroll;
     }
-    .business-results {
-        width: 733px;
-    }
-    .order-wait {
-        width: 1000px;
-    }
     #sidebar {
         transform: translateX(-100%);
     }
@@ -317,6 +314,9 @@ span.highlight {
     #logo-admin img {
         width: 140px;
     }
+    .order-wait li {
+        flex-basis: 50%;
+    }
 }
 
 @media screen and (max-width: 600px) {
@@ -335,5 +335,14 @@ span.highlight {
     }
     .business-results li .icon {
         font-size: 14px;
+    }
+    .business-results li{
+        width: 100%;
+    }
+    .order-wait li {
+        flex-basis: 100%;
+    }
+    .card-title {
+        font-size: 1rem;
     }
 }
