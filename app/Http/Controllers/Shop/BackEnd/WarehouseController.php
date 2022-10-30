@@ -12,7 +12,7 @@ use App\Model\Shop\ProductModel;
 use App\Model\Shop\ProvinceModel;
 use App\Model\Shop\DistrictModel;
 use App\Model\Shop\WardModel;
-
+use App\Model\Shop\UsersModel;
 class WarehouseController extends BackEndController
 {
     public function __construct()
@@ -95,5 +95,20 @@ class WarehouseController extends BackEndController
         return view($this->pathViewController .  'info',
             compact('pageTitle','itemsProduct' ,'itemsWarehouses'));
     }
-
+    public function index_admin(Request $request){
+        $session = $request->session();
+        if ($session->has('currentController') &&  ($session->get('currentController') != $this->controllerName)) {
+            $session->forget('params');
+        } else {
+            $session->put('currentController', $this->controllerName);
+        }
+        $session->put('params.pagination.totalItemsPerPage', $this->totalItemsPerPage);
+        $this->params     = $session->get('params');
+        $pageTitle='Quản kho hàng';$this->params['user_type_id']=3;
+        $items=(new UsersModel)->listItems($this->params, ['task'  => 'admin-list-items-of-shop']);
+         return view($this->pathViewController .  'index_admin', [
+            'items'            => $items,
+            'pageTitle'=>$pageTitle
+        ]);
+    }
 }

@@ -155,7 +155,6 @@ class OrderModel extends BackEndModel
     //     }
     // }
     public function countItems($params = null, $options  = null) {
-
         $result = null;
         if($options['task'] == 'admin-count-items-group-by-status-order') {
             $query = $this::groupBy('status_order')
@@ -176,6 +175,11 @@ class OrderModel extends BackEndModel
             $query = $this::groupBy('user_sell')
                             ->select(DB::raw('user_sell , COUNT(id) as count') )
                             ->where('id','>',1)->where('user_sell',$params['user_sell']);
+            if(isset($params['status_order'])){
+                if($params['status_order']!='all'){
+                    $query->where('status_order',$params['status_order']);
+                }             
+            }
             if(isset($params['filter_in_day'])){
                 $query->whereBetween('created_at', ["{$params['filter_in_day']['day_start']}", "{$params['filter_in_day']['day_end']}"]);
             }

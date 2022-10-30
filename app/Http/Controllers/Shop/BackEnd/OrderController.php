@@ -61,7 +61,6 @@ class OrderController extends BackEndController
         $pageTitle='Quản lý đơn hàng';$this->params['user_type_id']=3;
         $items=(new UsersModel)->listItems($this->params, ['task'  => 'admin-list-items-of-shop']);
          return view($this->pathViewController .  'index_admin', [
-            //'params'           => $this->params,
             'items'            => $items,
             'pageTitle'=>$pageTitle
         ]);

@@ -7,6 +7,7 @@ use App\Model\Shop\BackEndModel;
 use App\Model\Shop\Tinhthanhpho;
 use App\Model\Shop\Quanhuyen;
 use App\Model\Shop\Xaphuongthitran;
+use DB;
 class CustomerModel extends BackEndModel
 {
     public function __construct() {
@@ -20,11 +21,17 @@ class CustomerModel extends BackEndModel
         $result = null;
         if($options['task'] == "user-list-items") {
             $query = $this::select('id','name','code_customer','email','phone','gender','password','address_detail','address','user_id','sale_area','tax_code','legal_representative','customer_group', 'created_at', 'updated_at');
-
             $result =  $query->orderBy('id', 'desc')
                             ->paginate($params['pagination']['totalItemsPerPage']);
 
         }
+        if($options['task'] == "list-items-in-user-sell") {
+            $query = DB::table('customer_shop')->select('id','user_id','user_sell');
+            if($params['user_sell']){
+                $query->where('user_sell',$params['user_sell']);
+            }
+            $result =  $query->get();
+        } 
         return $result;
     }
     public function getItem($params = null, $options = null) {

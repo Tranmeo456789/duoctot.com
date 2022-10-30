@@ -95,7 +95,7 @@ class ProductModel extends BackEndModel
         }
         if ($options['task'] == "user-list-items-in-warehouse-no-pagination") {
             $query = $this::with('productWarehouse')
-                            ->select('id','name','code','price','image','quantity_in_stock')
+                            ->select('id','name','code','price','image','quantity_in_stock','user_id')
                             ->where('id','>',1)
                             ->ofUser();
             $result =  $query->orderBy('id', 'desc')
@@ -225,6 +225,33 @@ class ProductModel extends BackEndModel
                 $query->whereBetween('created_at', ["{$params['filter_in_day']['day_start']}", "{$params['filter_in_day']['day_end']}"]);
             }
             $result = $query->get()->toArray();
+        }
+        return $result;
+    }
+    public function sumNumberItems($params = null, $options  = null){
+        if ($options['task'] == "sum-quantity-product-in-warehouse-of-user-id") {
+            $query = $this::with('productWarehouse')
+                            ->select('id','price','quantity_in_stock','user_id','created_at')
+                            ->where('id','>',1);
+            if(isset($params['user_id'])){
+                $query->where('user_id', $params['user_id']);
+            }
+            if(isset($params['filter_in_day'])){
+                $query->whereBetween('created_at', ["{$params['filter_in_day']['day_start']}", "{$params['filter_in_day']['day_end']}"]);
+            }
+            $result =  $query->get()->sum('quantity_in_stock');
+        }
+        if ($options['task'] == "sum-money-product-in-warehouse-of-user-id") {
+            $query = $this::with('productWarehouse')
+                            ->select('id','price','quantity_in_stock','user_id','created_at')
+                            ->where('id','>',1);
+            if(isset($params['user_id'])){
+                $query->where('user_id', $params['user_id']);
+            }
+            if(isset($params['filter_in_day'])){
+                $query->whereBetween('created_at', ["{$params['filter_in_day']['day_start']}", "{$params['filter_in_day']['day_end']}"]);
+            }
+            $result =  $query->get()->sum('price');
         }
         return $result;
     }

@@ -313,6 +313,9 @@ span.highlight {
     .order-wait li {
         flex-basis: 50%;
     }
+    .card-body.p-0 .table thead > tr > th:first-of-type,.card-body.p-0 .table thead > tr > th:last-of-type{
+        padding: 00.5rem;
+    }
 }
 
 @media screen and (max-width: 600px) {

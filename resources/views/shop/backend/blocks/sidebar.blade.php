@@ -15,6 +15,8 @@
                 </a>
             </li>
             @endif
+            
+            @if ((Session::has('user') && Session::get('user')['user_type_id'] > 3))
             <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-chalkboard-teacher"></i>
@@ -44,7 +46,6 @@
                     </li> -->
                 </ul>
             </li>
-            @if ((Session::has('user') && Session::get('user')['user_type_id'] > 3))
             <li class="nav-item">
                 <a href="{{ route('catProduct') }}" class="nav-link">
                     <i class="nav-icon fas fa-wallet"></i>
@@ -176,10 +177,22 @@
                     <p>Quản lý đơn hàng</p>
                 </a>
             </li>
+            <div class="nav-item">
+                <a href="{{route('admin.warehouse')}}" class="nav-link">
+                    <i class="nav-icon fas fa-store"></i>
+                    <p>Kho hàng</p>
+                </a>
+            </div>
             <li class="nav-item">
                 <a href="{{route('user')}}" class="nav-link">
                     <i class="nav-icon fas fa-users"></i>
                     <p>Quản lý Người dùng</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{route('admin.customer')}}" class="nav-link">
+                <i class="nav-icon fas fa-person-booth"></i>
+                    <p>Quản lý khách hàng</p>
                 </a>
             </li>
             @endif

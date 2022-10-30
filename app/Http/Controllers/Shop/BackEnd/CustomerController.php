@@ -8,6 +8,7 @@ use App\Http\Controllers\Shop\BackEnd\BackEndController;
 use App\Model\Shop\Tinhthanhpho;
 use App\Model\Shop\Xaphuongthitran;
 use App\Model\Shop\Quanhuyen;
+use App\Model\Shop\UsersModel;
 use App\Http\Requests\CustomerRequest as MainRequest;
 class CustomerController extends BackEndController
 {
@@ -59,6 +60,25 @@ class CustomerController extends BackEndController
         $districts=Quanhuyen::all();
         return view($this->pathViewController .  'form', [
             'item'        => $item, 'locals'=> $locals,'districts'=>$districts
+        ]);
+    }
+    public function index_admin(Request $request){
+        $session = $request->session();
+        if ($session->has('currentController') &&  ($session->get('currentController') != $this->controllerName)) {
+            $session->forget('params');
+        } else {
+            $session->put('currentController', $this->controllerName);
+        }
+        $session->put('params.pagination.totalItemsPerPage', $this->totalItemsPerPage);
+        $this->params     = $session->get('params');
+        $pageTitle='Quản lý khách hàng';$this->params['user_type_id']=3;
+        $items=(new UsersModel)->listItems($this->params, ['task'  => 'admin-list-items-of-shop']);
+        $params['user_sell']=864108238;
+        $customer=$this->model->listItems($params, ['task'  => 'list-items-in-user-sell']);
+        //return(count($customer));
+         return view($this->pathViewController .  'index_admin', [
+            'items'            => $items,
+            'pageTitle'=>$pageTitle
         ]);
     }
     public function locationAjax(Request $request){

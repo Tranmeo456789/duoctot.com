@@ -7,6 +7,7 @@ use App\Model\Shop\BackEndModel;
 use App\Model\Shop\Tinhthanhpho;
 use App\Model\Shop\Quanhuyen;
 use Session;
+use DB;
 use App\Model\Shop\Xaphuongthitran;
 use App\Model\Shop\ProductModel;
 class WarehouseModel extends BackEndModel
@@ -74,6 +75,22 @@ class WarehouseModel extends BackEndModel
         $user = Session::get('user');
         $query = $this::select('id', 'name','local','user_id','product_id', 'created_at', 'updated_at');
         $result =  $query->orderBy('id', 'desc')->where('user_id',$user->user_id)->get();
+        return $result;
+    }
+    public function countItems($params = null, $options  = null) {
+        $result = null;
+        if($options['task'] == 'admin-count-items-group-by-user-id') {
+            $query = $this::groupBy('user_id')
+                            ->select(DB::raw('user_id , COUNT(id) as count'))
+                            ->where('id','>',1);
+            if(isset($params['user_id'])){
+                $query->where('user_id',$params['user_id']);
+            }           
+            if(isset($params['filter_in_day'])){
+                $query->whereBetween('created_at', ["{$params['filter_in_day']['day_start']}", "{$params['filter_in_day']['day_end']}"]);
+            }
+            $result = $query->get()->toArray();
+        }
         return $result;
     }
     public function getItem($params = null, $options = null) {
