@@ -543,9 +543,17 @@ label.error {
     line-height: 29px;
     text-align: center;
     color: #1E1E1E;
-    margin: 1rem auto;
+    margin:0px;
+    
 }
-
+ .info-product-cart .title-cart{
+    padding: 15px;
+    border-bottom: 1px solid #7991B7;
+ }
+ .info-product-cart .item-product{
+    border-bottom: 1px solid #7991B7;
+    padding-bottom: 10px ;
+ }
 .contine_order {
     font-style: normal;
     font-weight: 400;

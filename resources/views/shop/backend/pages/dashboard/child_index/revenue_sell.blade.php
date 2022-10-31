@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="col-12 mt-3">
-                <h4>Tổng giá trị: <span class="total-revenue text-info">{{MyFunction::formatNumber($total_revenue) . ' đ' ?? '0'}}</span></h4>
+                <h4 class="text-gray">Tổng giá trị: <span class="total-revenue text-info">{{MyFunction::formatNumber($total_revenue) . ' đ' ?? '0'}}</span></h4>
             </div>
             <!-- <div class="col-12 text-center">
                 <img src="{{asset('shop/images/productnull.PNG')}}" alt="">

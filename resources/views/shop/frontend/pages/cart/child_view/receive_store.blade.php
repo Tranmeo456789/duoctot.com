@@ -4,7 +4,7 @@
     $formInputWidth['widthInput'] = 'col-12';
 @endphp
 <div class="row">
-    <div class="col-10">
+    <div class="col-12 col-lg-10">
         @if (count($items) > 0)
             @php
                 $address = isset($params['filter']['district_id'])?$items[0]->district->name . ', ':'';
@@ -18,12 +18,12 @@
                         'label' => Form::label('', $val['address'],''),
                         'element' => Form::radio('pharmacy[warehouse_id]',$val['id'],($i==1)),
                         'type' =>'inline-text-right',
-                        'widthElement' => 'col-10 p-0',
+                        'widthElement' => 'col-12 col-md-10 p-0',
                         'styleFormGroup' => 'mb-0'
                     ];
                     $xhtml .= '<div class="local_drugstore d-flex justify-content-between flex-wrap">';
                     $xhtml .=     FormTemplate::formGroup($elements,$formInputWidth);
-                    $xhtml .= '     <div class="col-2 p-0 text-right"><a href="">Xem bản đồ</a></div>';
+                    $xhtml .= '     <div class="col-12 col-md-2 p-0 text-right"><a href="">Xem bản đồ</a></div>';
                     $xhtml .= '    <div class="col-12 p-0"><span class="text-success">Có hàng</span></div>';
                     $xhtml .= '</div>';
                     $i++;

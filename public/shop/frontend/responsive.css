@@ -16,11 +16,19 @@
     .body_catdetail>div .delplcol:nth-child(2n) {
         padding-left: 0px !important;
     }
-
+    .pd-xl-0{
+        padding-left: 0px!important;
+        padding-right: 0px!important;
+    }
     .head_topon {
         display: none;
     }
-
+    .col-left-cart{
+        border-radius: 0px;
+    }
+    .col-right-cart{
+        border-radius: 0px;
+    }
     .head_topon_reponsive {
         display: block;
         background-image: url(../../images/shop/headbg.png);
@@ -358,10 +366,6 @@
     .btn-select-buy {
         padding: 10px 20px;
         align-self: center;
-    }
-
-    .wp-inner {
-        max-width: 900px;
     }
 
     .cart-null {
@@ -947,6 +951,23 @@
     .owl-pagination {
         display: none;
     }
+    .col-left-cart .title-cart h1{
+        margin: 0px;
+        font-size: 20px;
+    }
+    .info-product-cart .item-product .title-product{
+        font-size: 13px;
+    }
+    .info-product-cart .manipulation {
+        padding-right: 5px;
+        font-size: 12px;
+    }
+    .info-product-cart .manipulation a {
+        font-size: 10px;
+    }
+    .local_drugstore{
+        font-size: 12px;
+    }
 }
 
 @media screen and (max-width: 500px) {
@@ -1000,6 +1021,7 @@
 
     .payment h2 {
         font-size: 16px;
+        margin-bottom: 2px;
     }
 
     .payment p {
