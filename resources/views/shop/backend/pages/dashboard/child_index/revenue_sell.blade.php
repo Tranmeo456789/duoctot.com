@@ -19,7 +19,7 @@
             
         ];
 @endphp
-<div class="card card-outline card-primary">
+<div class="card card-outline card-primary mb800-0">
     @include("$moduleName.blocks.x_title", ['title' => 'DOANH THU BÁN HÀNG'])
     <div class="card-body p-3">
         <div class="row">

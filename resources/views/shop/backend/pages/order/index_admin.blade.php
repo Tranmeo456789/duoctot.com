@@ -28,10 +28,8 @@
 @include ("$moduleName.blocks.page_header", ['pageIndex' => true,'hidePageIndex' => true])
 <section class="content">
     <div class="container-fluid">
-        <div class="row">
             @include("$moduleName.blocks.notify")
-            <div class="col-12">
-                <div class="card card-outline card-primary">
+                <div class="card card-outline card-primary mb800-0">
                     <div class="card-body my-card-filter">
                         <div class="row">
                             <div class="col-12"><h6>Thời gian:</h6></div>
@@ -45,10 +43,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
                 <div class="card card-outline card-primary">
                     @include("$moduleName.blocks.x_title", ['title' => 'Quản lý đơn hàng'])
                     <div class="card-body p-0">
@@ -60,8 +54,6 @@
                         @include("$moduleName.blocks.pagination",['paginator'=>$items])
                     </div>
                 </div>
-            </div>
-        </div>
     </div>
 </section>
 @endsection

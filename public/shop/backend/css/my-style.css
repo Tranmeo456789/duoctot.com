@@ -277,6 +277,9 @@ span.highlight {
         padding-left: 0px!important;
         padding-right: 0px!important;
     }
+    .mb800-0{
+        margin-bottom: 0px!important;
+    }
     .card .card-header h6 {
         font-size: 14px;
     }
@@ -292,6 +295,9 @@ span.highlight {
     }
     .set-withscreen  .table{
         width: 800px;
+    }
+    .card{
+        border-radius: 0px;
     }
     #sidebar {
         transform: translateX(-100%);
