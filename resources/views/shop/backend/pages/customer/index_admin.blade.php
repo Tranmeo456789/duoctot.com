@@ -37,7 +37,7 @@
                                 <div class="row">
                                 {!! FormTemplate::show($elements,$formInputWidth)  !!}
                                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-                                <div class="text-center col-12"><button class="btn btn-primary filter-in-time" data-href="{{route('user.filterInDay')}}" data-controller="customer">Lọc theo thời gian</button></div>
+                                <div class="text-center col-12"><button class="btn btn-primary filter-in-time" data-href="{{route('user.filterInDay')}}" data-controller="customer">Lọc kết quả</button></div>
                                 </div>                            
                             </div>
                         </div>

@@ -749,5 +749,7 @@ input[type="radio"] {
     cursor: pointer;
 }
 
-
+.bb_order .unit-order{
+    font-size: 14px;
+}
 /*** END CART **/

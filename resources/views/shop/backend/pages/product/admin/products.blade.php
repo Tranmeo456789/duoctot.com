@@ -10,7 +10,7 @@ use App\Helpers\Template;
     @include("$moduleName.blocks.notify")
     <div class="container-fluid">
         <div class="card card-outline card-primary">
-            @include("$moduleName.blocks.x_title", ['title' => 'Danh sách'])
+            @include("$moduleName.blocks.x_title", ['title' => 'Danh sách thuốc'])
             <div class="card-body p-0">
                 {!! Template::showTabFilterAdmin($controllerName, $itemStatusProductCount, $params['filter']['status_product'], $params,'status_product'); !!}
                 @include("$moduleName.pages.$controllerName.admin.list")

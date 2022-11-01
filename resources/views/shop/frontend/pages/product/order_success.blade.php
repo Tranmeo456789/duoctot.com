@@ -68,13 +68,13 @@
                 use App\Model\Shop\UnitModel;
             @endphp
             <div class="item-info">
+                <div class="set-screen-375">
                 <table class="table pd-order mb-0" id="tbList">
                     <thead>
                         <tr>
                             <th scope="col" colspan="2">Thông tin đơn hàng</th>
-                            <th scope="col">Đơn vị</th>
-                            <th scope="col">Số lượng</th>
-                            <th scope="col">Thành tiền</th>
+                            <th scope="col" class="text-center">Số lượng</th>
+                            <th scope="col" class="text-center">Thành tiền</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -89,26 +89,28 @@
                             <td style="width:12%" class='name'>
                             {!! $image !!}
                             </td>
-                            <td style="width: 40%">
-                                <div class="d-flex">
+                            <td style="width: 47%">
+                                <div class="">
                                     <p class="namep-order truncate2 text-info">{{$val['name']}}</p>
+                                    <p class="unit-order">Đơn vị: <span>{{$unit}}</span></p>
                                 </div>
                             </td>
-                            <td style="width: 16%" class='name'>{{$unit}}</td>
-                            <td style="width: 10%">{{$val['quantity']}}</td>
-                            <td style="width: 22%" class='text-right'>{{$total_money}}</td>
+                            <td style="width: 16%" class="text-center">{{$val['quantity']}}</td>
+                            <td style="width: 25%" class='text-center'>{{$total_money}}</td>
                         </tr>
                         @endforeach
                         <tr class="bb_order">
-                            <td colspan="3" style="width: 16%" class="text-right">Tổng tiền</td>
-                            <td style="width: 16%" class='text-right'>{{MyFunction::formatNumber($order['total'])}} đ</td>
+                            <td colspan="2" style="width: 16%" class="text-right">Tổng tiền</td>
+                            <td colspan="2" style="width: 16%" class='text-left'>{{MyFunction::formatNumber($order['total'])}} đ</td>
                         </tr>
                         <tr class="bb_order">
-                            <td colspan="3" style="width: 16%" class="text-right font-weight-bold">Cần thanh toán</td>
-                            <td style="width: 16%" class='text-right font-weight-bold'>{{MyFunction::formatNumber($order['total'])}} đ</td>
+                            <td colspan="2" style="width: 16%" class="text-right font-weight-bold">Cần thanh toán</td>
+                            <td colspan="2" style="width: 16%" class='text-left font-weight-bold'>{{MyFunction::formatNumber($order['total'])}} đ</td>
                         </tr>
                     </tbody>
                 </table>
+                </div>
+                
             </div>
             <div class="text-center mt-2">
                 <a href="{{route('home')}}" class="exit-home-order">VỀ TRANG CHỦ</a>

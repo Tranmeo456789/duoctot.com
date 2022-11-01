@@ -739,7 +739,7 @@
     .tcy-upload {
         border: none;
     }
-
+    
     .py1024-15 {
         padding: 15px;
         border: 2px dashed #d8e0e8;
@@ -756,13 +756,25 @@
         height: auto;
         display: block;
     }
+    .view-detail-order a{
+        font-size: 12px;
+    }
+    .header-tab{
+        font-size: 12px;
+    }
+    .header-list-order p{
+        font-size: 12px;
+    }
+    .content-list-order p{
+        font-size: 12px;
+    }
 }
 
 @media screen and (max-width: 600px) {
     #site {
         overflow-x: hidden;
     }
-
+   
     .nctright {
         padding-left: 0px;
     }
@@ -817,7 +829,13 @@
         margin-right: 0;
     }
 
-
+    .set-screen-600{
+        width: 100%;
+        overflow-x: scroll;
+    }
+    .set-screen-600 .nav-pills{
+        width: 600px;
+    }
 
     #selling-product.viewnproduct li {
         height: 351px;
@@ -968,6 +986,9 @@
     .local_drugstore{
         font-size: 12px;
     }
+    .bb_order .unit-order {
+        font-size: 12px;
+    }
 }
 
 @media screen and (max-width: 500px) {
@@ -975,7 +996,13 @@
         font-size: 12px;
         line-height: 14px;
     }
-
+    .set-screen-500{
+        width: 100%;
+        overflow-x: scroll;
+    }
+    .set-screen-500 .table{
+        width: 500px;
+    }
     .header-prescrip h1 {
         font-size: 16px;
     }
@@ -1169,7 +1196,13 @@
     #selling-product li {
         height: 260px;
     }
-
+    .set-screen-375{
+        width: 100%;
+        overflow-x: scroll;
+    }
+    .set-screen-375 .table{
+        width: 375px;
+    }
     #buy-medicine ul li h2 {
         font-size: 8px;
     }

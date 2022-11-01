@@ -226,10 +226,12 @@
             <div class="rimg-center closem" id="closem"><img src="{{asset('images/shop/closem.png')}}" alt=""></div>
         </div>
         <div class="body-responhoder">
-            <div class="container-menures d-flex">
-                <div class="rimg-center"><img src="{{asset('images/shop/news1.png')}}" alt=""></div>
-                <h2>Tra cứu lịch sử đơn hàng</h2>
-            </div>
+            <a href="{{route('fe.order.list')}}">
+                <div class="container-menures d-flex">
+                    <div class="rimg-center"><img src="{{asset('images/shop/news1.png')}}" alt=""></div>
+                    <h2>Tra cứu lịch sử đơn hàng</h2>
+                </div>
+            </a>       
         </div>
 
         <div class="list-menures">

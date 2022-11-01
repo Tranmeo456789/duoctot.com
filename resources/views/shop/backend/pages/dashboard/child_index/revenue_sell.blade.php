@@ -27,7 +27,7 @@
                 <div class="row">
                     {!! FormTemplate::show($elements,$formInputWidth) !!}
                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-                    <div class="text-center col-4"><button class="btn btn-primary filter-revenue-in-time" data-href="{{route('dashboard.filterInDay')}}">Áp dụng</button></div>
+                    <div class="text-center col-4"><button class="btn btn-primary filter-revenue-in-time" data-href="{{route('dashboard.filterInDay')}}">Lọc kết quả</button></div>
                 </div>
             </div>
             <div class="col-12 mt-3">

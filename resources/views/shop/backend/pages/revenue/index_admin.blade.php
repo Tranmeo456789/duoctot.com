@@ -39,14 +39,14 @@ $elements =[
                         <div class="row">
                             {!! FormTemplate::show($elements,$formInputWidth) !!}
                             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-                            <div class="text-center col-12"><button class="btn btn-primary filter-in-time" data-href="{{route('user.filterInDay')}}" data-controller="revenue">Lọc theo thời gian</button></div>
+                            <div class="text-center col-12"><button class="btn btn-primary filter-in-time" data-href="{{route('user.filterInDay')}}" data-controller="revenue">Lọc kết quả</button></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="card card-outline card-primary">
-            @include("$moduleName.blocks.x_title", ['title' => 'Quản lý thuốc'])
+            @include("$moduleName.blocks.x_title", ['title' => $pageTitle])
             <div class="card-body p-0">
                 <div class="list-user-admin">
                     @include("$moduleName.pages.$controllerName.list_admin")

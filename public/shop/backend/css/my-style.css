@@ -123,7 +123,6 @@ form div[class*=col-]:last-child .form-group {
 
 .bar_tabs {
     border: 0px;
-    margin-top: 5px;
 }
 
 .bar_tabs li.btn-primary a.btn-filter {
@@ -297,7 +296,10 @@ span.highlight {
         width: 800px;
     }
     .card{
-        border-radius: 0px;
+        border-radius: 0px;  
+    }
+    .card-primary.card-outline{
+        border-top: 1px solid #007bff;
     }
     #sidebar {
         transform: translateX(-100%);

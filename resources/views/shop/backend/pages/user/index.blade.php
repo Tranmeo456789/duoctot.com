@@ -9,7 +9,7 @@ $xhtmlAreaSeach = Template::showAreaSearch($controllerName, $params['search']);
 
 @section('title',$pageTitle)
 @section('content')
-@include ("$moduleName.blocks.page_header", ['pageIndex' => true,'hidePageIndex' => true])
+
 <section class="content">
     <div class="container-fluid">
         @include("$moduleName.blocks.notify")
@@ -22,7 +22,7 @@ $xhtmlAreaSeach = Template::showAreaSearch($controllerName, $params['search']);
             </div>
         </div>
         <div class="card card-outline card-primary">
-            @include("$moduleName.blocks.x_title", ['title' => 'Danh sách'])
+            @include("$moduleName.blocks.x_title", ['title' => 'Danh sách người dùng'])
             <div class="card-body p-0">
                 @include("$moduleName.pages.$controllerName.list")
             </div>
