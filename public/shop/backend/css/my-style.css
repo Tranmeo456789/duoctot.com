@@ -24,14 +24,19 @@
     padding: 0.5rem 0.5rem;
     background-color: #def3d4;
 }
-
+.content-wrapper > .content {
+    padding: 0.5rem;
+}
 .brand-link .brand-image {
     float: none;
     max-height: 45px;
     margin-left: auto;
     margin-right: auto;
 }
-
+.sidebar ul li a>i{
+    font-size: 20px;
+    width: 30px;
+}
 .my-sidebar {
     background-color: #def3d4;
 }

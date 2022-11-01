@@ -144,16 +144,21 @@ class OrderModel extends BackEndModel
         }
         return $result;
     }
-    // public function sumItems($params = null, $options  = null){
-    //     $result = null;
-    //     if($options['task'] == 'admin-sum-money-items-group-by-total') {
-    //         $query = $this::select('total', DB::raw('SUM(total) as sum') )
-    //         ->groupBy('total')
-    //                         ->where('id','>',1)
-    //                         ->OfUser();
-    //         $result = $query->get()->toArray();
-    //     }
-    // }
+    public function sumColumItems($params = null, $options  = null){
+        $result = null;
+        if($options['task'] == 'admin-sum-money-items-group-by-total-in-user-sell') {
+            $query = $this::select('id','total','created_at','status_order','user_sell')
+                            ->where('id','>',1);
+            if(isset($params['user_sell'])){
+                $query->where('user_sell',$params['user_sell']);
+            } 
+            if(isset($params['filter_in_day'])){
+                $query->whereBetween('created_at', ["{$params['filter_in_day']['day_start']}", "{$params['filter_in_day']['day_end']}"]);
+            }
+            $result = $query->get()->sum('total');
+        }
+        return $result;
+    }
     public function countItems($params = null, $options  = null) {
         $result = null;
         if($options['task'] == 'admin-count-items-group-by-status-order') {

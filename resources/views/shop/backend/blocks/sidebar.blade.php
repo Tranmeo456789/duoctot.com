@@ -168,13 +168,33 @@
             <li class="nav-item">
                 <a href="{{route('admin.product')}}" class="nav-link">
                     <i class="nav-icon fas fa-dumpster-fire"></i>
-                    <p>Quản lý Thuốc</p>
+                    <p>Quản lý Thuốc <i class="right fas fa-angle-left"></i></p>
                 </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('admin.product.list')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Danh sách thuốc</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.product')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Quản lý chung</p>
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li class="nav-item">
                 <a href="{{route('admin.order')}}" class="nav-link">
                     <i class="nav-icon fas fa-gifts"></i>
                     <p>Quản lý đơn hàng</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{route('admin.revenue')}}" class="nav-link">
+                    <i class="fas fa-search-dollar"></i>
+                    <p>Quản lý doanh thu</p>
                 </a>
             </li>
             <div class="nav-item">

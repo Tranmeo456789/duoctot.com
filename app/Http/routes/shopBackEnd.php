@@ -91,9 +91,12 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd','mid
     Route::group(['middleware' => ['permission.admin']], function () {
         Route::get('/danh-sach-nguoi-dung', 'UserController@index')->name('user');
         Route::get('/quan-ly-thuoc-admin', 'ProductController@index_admin')->name('admin.product');
+        Route::get('/danh-sach-thuoc-admin', 'ProductController@listProductAdmin')->name('admin.product.list');
+        Route::get('/thay-doi-trang-thai-thuoc-admin/{id}/{status}', 'ProductController@changeProductInAdmin')->name('admin.product.change.status');
         Route::get('/quan-ly-don-hang-admin', 'OrderController@index_admin')->name('admin.order');
         Route::get('/quan-ly-kho-hang-admin', 'WarehouseController@index_admin')->name('admin.warehouse');
         Route::get('/quan-ly-khách-hàng-admin', 'CustomerController@index_admin')->name('admin.customer');
+        Route::get('/quan-ly-doanh-thu-admin', 'RevenueController@index_admin')->name('admin.revenue');
         Route::get('/loc-user-theo-thoi-gian', 'UserController@filterInDay')->name('user.filterInDay');
         
         // Route::get('/them-nguoi-dung', 'UserController@form')->name('user.add');

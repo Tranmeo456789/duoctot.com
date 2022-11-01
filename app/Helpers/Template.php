@@ -63,6 +63,45 @@ class Template {
         }
         return $xhtml;
     }
+    public static function showTabFilterAdmin ($controllerName, $itemsStatusCount, $currentFilterStatus, $params,$column='status') { // $currentFilterStatus active inactive all
+        $xhtml = null;
+        $tmplStatus = Config::get('myconfig.template.column.' .$column);
+
+        if (count($tmplStatus) > 0) {
+            array_unshift($itemsStatusCount , [
+                "$column"  => 'all',
+                'count'   => array_sum(array_column($itemsStatusCount, 'count'))
+            ]);
+
+            $xhtml =  "<ul class='nav nav-tabs bar_tabs'>";
+            foreach ($tmplStatus as $keyStatus => $itemStatus) { 
+                $count = in_array($keyStatus,array_column($itemsStatusCount,$column))?$itemsStatusCount[array_search($keyStatus,array_column($itemsStatusCount,$column))]['count']:0;
+                $currentTemplateStatus = $tmplStatus[$keyStatus]; // $value['status'] inactive block active
+                $link = route('admin.'.$controllerName.'.list') . "?filter_" . $column ."=" .  $keyStatus;
+                $paramsSearch = (isset($params['search']))?$params['search']:[];
+                $paramsFilter = (isset($params['filter']))?$params['filter']:[];
+
+                if(isset($paramsSearch['value']) && $paramsSearch['value'] !== ''){
+                    $link .= "&search_field=" . $paramsSearch['field'] . "&search_value=" .  $paramsSearch['value'];
+                }
+                if (count($paramsFilter) > 0){
+                    foreach($paramsFilter as $keyFilter => $valueFilter) {
+                        if ($keyFilter == $column) continue;
+                        $link .= "&filter_" . $keyFilter ."=" .  $valueFilter ;
+                    }
+                }
+                $class  = ($currentFilterStatus == $keyStatus) ? 'btn-primary':'';
+                //$class = '';
+                $xhtml  .= sprintf('<li class="%s">
+                                        <a data-href="%s" class="btn btn-filter" role="tab">
+                                            %s <span class="badge bg-white ml-1">%s</span>
+                                        </a>
+                                    </li>',$class , $link,  $currentTemplateStatus['name'], $count);
+            }
+            $xhtml .= '</ul>';
+        }
+        return $xhtml;
+    }
     public static function showImageAttachPreview ($controllerName, $fileName, $fileHash, $id,$options = array()) {
         if ($fileName != ''){
             $fileName= explode('|', $fileName);

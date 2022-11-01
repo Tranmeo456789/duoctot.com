@@ -26,7 +26,7 @@ class HomeController extends ShopFrontEndController
     }
     public function index(Request $request)
     {
-        $product_selling = ProductModel::all();
+        $product_selling = (new ProductModel())->listItems(null, ['task' => 'frontend-list-items']);
         $product_covid=(new ProductModel())->listItems(['type'=>'hau_covid','limit'=>10], ['task' => 'frontend-list-items-featurer']);
         $product=(new ProductModel())->listItems(['type'=>'tre_em','limit'=>10], ['task' => 'frontend-list-items-featurer']);
         return view(

@@ -75,6 +75,34 @@ class ProductController extends BackEndController
             'pageTitle'=>$pageTitle
         ]);
     }
+    public function listProductAdmin(Request $request){
+        $session = $request->session();
+        if ($session->has('currentController') &&  ($session->get('currentController') != $this->controllerName)) {
+            if(!$request->get('page')){
+                $session->forget('params');
+            }         
+        } else {
+            $session->put('currentController', $this->controllerName);
+        }
+        $session->put('params.filter.status_product', $request->has('filter_status_product') ? $request->get('filter_status_product') : ($session->has('params.filter.status_product') ? $session->get('params.filter.status_product') : 'cho_kiem_duyet'));
+        $session->put('params.pagination.totalItemsPerPage', $this->totalItemsPerPage);
+        $this->params     = $session->get('params');
+        $items            = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
+        if ($items->currentPage() > $items->lastPage()) {
+            $lastPage = $items->lastPage();
+            Paginator::currentPageResolver(function () use ($lastPage) {
+                return $lastPage;
+            });
+            $items              = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
+        }
+        $itemStatusProductCount = $this->model->countItems($this->params, ['task' => 'admin-count-items-group-by-status-product']);
+        //return($request->get('page'));
+        return view($this->pathViewController .'admin.products', [
+            'params'           => $this->params,
+            'items'            => $items,
+            'itemStatusProductCount' => $itemStatusProductCount
+         ]);     
+    }
     public function save(MainRequest $request)
     {
         // if (!$request->ajax()) return view("errors." .  'notfound', []);
@@ -145,5 +173,11 @@ class ProductController extends BackEndController
         $item = $this->model->getItem($params, ['task' => 'get-item-simple']);
         return json_encode($item->toArray());
     }
-   
+   public function changeProductInAdmin(Request $request,$id,$status){
+        $params['id']=$request->id;
+        $params['status_product']=$request->status;
+        $this->model->saveItem($params, ['task' => 'update-status-item-of-admin']);
+        $request->session()->put('app_notify', 'Thay đổi trạng thái thuốc thành công!');
+        return back()->withInput();
+   }
 }

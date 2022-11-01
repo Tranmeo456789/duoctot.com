@@ -451,7 +451,7 @@ ul#sidebar-menu * {
 
 table a.btn-sm {
     font-size: 12px;
-    padding: 2px 4px;
+    padding: 2px 4px;margin-bottom: 5px;
 }
 
 .table-checkall input[type='checkbox'] {

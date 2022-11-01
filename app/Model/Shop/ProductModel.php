@@ -70,13 +70,16 @@ class ProductModel extends BackEndModel
                                     'type_vat','packing','unit_id','sell_area','amout_max',
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit',
-                                    'preserve','note','image','featurer','long','user_id','wide','high',
+                                    'preserve','note','image','featurer','long','user_id','status_product','wide','high',
                                     'mass','quantity_in_stock','created_at', 'updated_at')->where('id','>',1)
                                     ->ofUser();
             if (isset($params['group_id'])){
                 $query->whereIn('id',$params['group_id']);
             }
-            $query->orderBy('id', 'desc');
+            if ((isset($params['filter']['status_product'])) && ($params['filter']['status_product'] != 'all')) {
+                $query = $query->where('status_product',$params['filter']['status_product']);
+            }
+            $query->orderBy('created_at', 'desc');
             if (isset($params['pagination']['totalItemsPerPage'])){
                 $result =  $query->paginate($params['pagination']['totalItemsPerPage']);
             }else{
@@ -116,13 +119,17 @@ class ProductModel extends BackEndModel
                                     'dosage_forms','country_id','specification','benefit',
                                     'preserve','note','image','albumImage','albumImageHash','user_id','featurer','long','wide','high',
                                     'mass')
-                                ->where('id','>',1);
+                                ->where('id','>',1)->where('status_product','da_duyet');
             if (isset($params['cat_product_id']) && ($params['cat_product_id'] != 0)){
                 $query->whereIn('cat_product_id', CatProductModel::getChild($params['cat_product_id']));
             }
-            $query->OfCollaboratorCode();
-            $result =  $query->orderBy('id', 'desc')
-                             ->paginate($params['limit']);
+            $query->OfCollaboratorCode()->orderBy('id', 'desc');
+            if(isset($params['limit'])){
+                $result=$query->paginate($params['limit']);
+            }else{
+                $result =  $query->get();
+            }
+            
         }
         if ($options['task'] == "frontend-list-items-featurer") {
             $type = $params['type'];
@@ -134,7 +141,7 @@ class ProductModel extends BackEndModel
                                     'preserve','note','image','albumImage','albumImageHash','user_id','featurer','long','wide','high',
                                     'mass')
                                  //   ->whereRaw("JSON_CONTAINS(`featurer`, '\"{$params['type']}\"')");
-                                    ->whereRaw("FIND_IN_SET('\"{$params['type']}\"',REPLACE(REPLACE(`featurer`, '[',''),']',''))");
+                                    ->whereRaw("FIND_IN_SET('\"{$params['type']}\"',REPLACE(REPLACE(`featurer`, '[',''),']',''))")->where('status_product','da_duyet');
             if (isset($params['cat_product_id']) && ($params['cat_product_id'] != 0)){
                 $query->whereIn('cat_product_id', CatProductModel::getChild($params['cat_product_id']));
             }
@@ -226,6 +233,14 @@ class ProductModel extends BackEndModel
             }
             $result = $query->get()->toArray();
         }
+        if($options['task'] == 'admin-count-items-group-by-status-product') {
+            $query = $this::groupBy('status_product')
+                            ->select(DB::raw('status_product , COUNT(id) as count') )
+                            ->where('id','>',1)
+                            ->OfUser();
+            
+            $result = $query->get()->toArray();
+        }
         return $result;
     }
     public function sumNumberItems($params = null, $options  = null){
@@ -269,6 +284,7 @@ class ProductModel extends BackEndModel
                 $params['albumImage']   = $resultFileUpload['fileAttach'];
                 $params['albumImageHash']     = $resultFileUpload['fileHash'];
             }
+            $params['status_product'] = 'cho_kiem_duyet';
             $params['sell_area'] = ($params['sell_area'] != '')? json_encode($params['sell_area'],JSON_NUMERIC_CHECK ): NULL;
             $catProduct = CatProductModel::find($params['cat_product_id']);
             if ($catProduct){
@@ -290,6 +306,9 @@ class ProductModel extends BackEndModel
                 $params['cat_product_parent_id'] = $catProduct->parent_id;
             }
             self::where('id', $params['id'])->update($this->prepareParams($params));
+        }
+        if($options['task'] == 'update-status-item-of-admin'){
+            self::where('id', $params['id'])->update(['status_product' => $params['status_product']]);
         }
     }
     public function deleteItem($params = null, $options = null)
