@@ -96,9 +96,9 @@ $ngayDatHang = MyFunction::formatDateFrontend($order_detail['created_at']);
             <thead>
                 <tr>
                     <th scope="col" colspan="2">Thông tin đơn hàng</th>
-                    <th scope="col">Đơn vị</th>
-                    <th scope="col">Số lượng</th>
-                    <th scope="col">Thành tiền</th>
+                    <th scope="col" class="d-none d-md-table-cell">Đơn vị</th>
+                    <th scope="col" class="d-none d-md-table-cell">Số lượng</th>
+                    <th scope="col" class="text-center">Thành tiền</th>
                 </tr>
             </thead>
             <tbody>
@@ -118,25 +118,27 @@ $ngayDatHang = MyFunction::formatDateFrontend($order_detail['created_at']);
                         {!! $image !!}
                     </td>
                     <td style="width: 40%">
-                        <div class="d-flex">
+                        <div>
                             <p class="namep-order truncate2">{{$val['name']}}</p>
+                            <p class="namep-order d-block d-md-none">Đơn vị: {{$unit}}</p>
+                            <p class="namep-order d-block d-md-none">Số lượng: {{$val['quantity']}}</p>
                         </div>
                     </td>
-                    <td style="width: 14%" class='name'>{{$unit}}</td>
-                    <td style="width: 10%">{{$val['quantity']}}</td>
-                    <td style="width: 20%">{{$total_money}}</td>
+                    <td style="width: 14%" class="d-none d-md-table-cell">{{$unit}}</td>
+                    <td style="width: 10%" class="d-none d-md-table-cell">{{$val['quantity']}}</td>
+                    <td style="width: 20%" class="text-center font-md-14">{{$total_money}}</td>
                 </tr>
                 @endforeach
-                <tr class="bb_order">
-                    <td colspan="3" style="width: 16%" class="text-right">Tổng tiền</td>
-                    <td style="width: 16%" class='text-right'>{{MyFunction::formatNumber($order_detail['total'])}} đ</td>
-                </tr>
-                <tr class="bb_order">
-                    <td colspan="3" style="width: 16%" class="text-right font-weight-bold">Cần thanh toán</td>
-                    <td style="width: 16%" class='text-right font-weight-bold'>{{MyFunction::formatNumber($order_detail['total'])}} đ</td>
-                </tr>
+                
             </tbody>
+            
         </table>
+        <div class="money-order-detail">
+            <ul>
+                <li><div class="font-md-14 text-right">Tổng tiền: {{MyFunction::formatNumber($order_detail['total'])}} đ</div></li>
+                <li><div class="font-md-14 text-right font-weight-bold">Cần thanh toán: {{MyFunction::formatNumber($order_detail['total'])}} đ</div></li>
+            </ul>
+        </div>
     </div>
 </div>
 @endif

@@ -644,9 +644,17 @@
     .wp-iconmn .hrflag img {
         width: 40px
     }
-
-
-
+    .wp-detail-order{
+        width: 100%;
+        border-radius: 0px;
+    }
+    .wp-detail-order .tshorder{
+        padding: 14px;
+        font-size: 18px;
+    }
+    .wp-detail-order .wp-content .top-tab-order h4{
+        font-size: 18px;
+    }
     .info-app {
         display: none;
     }
@@ -739,7 +747,9 @@
     .tcy-upload {
         border: none;
     }
-    
+    .font-md-14{
+        font-size: 14px!important;
+    }
     .py1024-15 {
         padding: 15px;
         border: 2px dashed #d8e0e8;
@@ -768,13 +778,39 @@
     .content-list-order p{
         font-size: 12px;
     }
+    .wp-detail-order .btn-closenk{
+        background-color: white;
+    }
 }
 
 @media screen and (max-width: 600px) {
     #site {
         overflow-x: hidden;
     }
-   
+    .wp-detail-order .tab-header{
+        padding: 10px;
+    }
+    .wp-detail-order .wp-content .top-tab-order h4{
+        font-size: 16px;
+    }
+    .font-size-600-14{
+        font-size: 14px!important;
+    }
+    .wp-detail-order .tab-header p {
+        font-size: 15px;
+    }
+    .wp-content .item-info{
+        font-size: 14px;
+    }
+    .wp-status-order .stepper-label{
+        font-size: 14px;
+    }
+    .wp-status-order .ls-status-order li:not(:last-child){
+        padding-bottom: 20px;
+    }
+    .wp-status-order .ls-status-order li:not(:last-child)::before{
+        content: none;
+    }
     .nctright {
         padding-left: 0px;
     }

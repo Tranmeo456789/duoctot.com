@@ -152,7 +152,7 @@ ul {
     display: none;
     position: absolute;
     top: 10px;
-    left: 50vw;
+    left: 50%;
     transform: translateX(-50%);
     z-index: 300;
     background: #FFFFFF;
@@ -266,18 +266,21 @@ ul {
 .wp-status-order .stepper-label{
     font-weight: 600;
     color: #52637a;
-    padding-right: 250px;
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 100%;font-size: 16px;
-    line-height: 21px;
+    width: 100%;
+    line-height: 21px;font-size: 16px;
 }
 .header-list-order p{
     font-size: 16px;
     font-weight: 600;
     color: #718198;
+}
+.wp-status-order .ls-status-order li:not(:last-child) {
+    padding-bottom: 38px;
+    position: relative;
 }
 .content-list-order p{
     font-size: 16px;
@@ -287,7 +290,10 @@ ul {
     color: rgb(18, 18, 233)!important;
     cursor: pointer;
 }
-
+.money-order-detail ul li{
+    padding: 15px;
+    color: #718198;
+}
 .form-group input[type='radio']+label {
     align-self: center !important;
 }
