@@ -273,6 +273,10 @@ span.highlight {
 }
 
 @media screen and (max-width: 800px) {
+    .container-fluid{
+        padding-left: 0px!important;
+        padding-right: 0px!important;
+    }
     .card .card-header h6 {
         font-size: 14px;
     }

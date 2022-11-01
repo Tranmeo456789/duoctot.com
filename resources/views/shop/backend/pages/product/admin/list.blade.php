@@ -8,8 +8,8 @@
             <tr class="row-heading">
                 <th>STT</th>
                 <th>Thuốc</th>
-                <th>Đơn vị</th>
                 <th>Giá bán</th>
+                <th>Người bán</th>
                 <th>Trạng thái</th>
                 <th>Tác vụ</th>
             </tr>
@@ -35,12 +35,12 @@
                             </div>
                             <div class="info-product ml-1">
                                 <p class="text-primary font-weight-bold mb-1">{{$val->name}}</p>
-                                <p mb-1>Mã: {{$val->code}}</p>
+                                <p mb-1><span>Đơn vị: {{$val->unitProduct->name}}</span></p>
                             </div>
                         </div>
                     </td>
-                    <td style="width: 5%">{{$val->unitProduct->name}}</td>
-                    <td style="width: 10%" class="text-center">{{MyFunction::formatNumber($val->price) . ' đ'}}</td>            
+                    <td style="width: 10%" class="text-center">{{MyFunction::formatNumber($val->price) . ' đ'}}</td>
+                    <td style="width: 17%" >{{$val->userProduct['fullname']}}</td>            
                     <td style="width: 10%" class="text-center"><span class="badge {{$val->status_product=='da_duyet'?'badge-success':'badge-warning'}} ">{!! $statusProductValue[$val['status_product']]!!}</span></td>
                     <td style="width: 15%" class="text-center">
                     @if($val->status_product=='cho_kiem_duyet')
