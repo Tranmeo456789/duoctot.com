@@ -608,6 +608,8 @@ $(document).on('click', "#btn-searchorder", function (event) {
     $('.black-screen').css("display", "none");
     $('#container').removeClass("fixed-hbd");
     $('#fixscreen-respon').css("display", "none");
+    listProduct=document.getElementsByClassName('ls-product-select').innerHTML;
+    //console.log(listProduct);
 });
 $(document).on('click', '.plus', function () {
     qty = parseInt($(this).parents('.input-group').find('.number-product').val()) + 1;
@@ -661,7 +663,11 @@ $(document).on('click', ".btn-add-item", function (event) {
     var id = $(this).attr("data-id");
     rowCurrent = $(this).closest('.item-search');
     rowCurrent.remove();
-    temp=$('.ls-product-select li').length+1;
+    if($('.ls-product-select li').length==0){
+        temp=$('.ls-product-select li').length+1;
+    }else{
+        temp=($('.ls-product-select li').length)/2+1;
+    }
     nameProduct=rowCurrent.find('.name-product').text();
     $('.title-list-select').text("Tên thuốc đã nhập: ");
     itemSelect="<li class='item-select'><div class='d-flex'><div class='wp-10 text-center number_select'>"+temp+"</div><div class='wp-70 text-left'>"+nameProduct+"</div><div class='wp-20  text-center'><div class='btn'><input type='hidden'  name='listId[]' value='"+id+"'><span class='btn-remove'>Xóa</span></div></div></div></li>";
