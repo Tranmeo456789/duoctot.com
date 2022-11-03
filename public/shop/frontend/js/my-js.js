@@ -603,6 +603,12 @@ $(document).on('click', ".btn-closenk", function (event) {
     $('.titlek').removeClass("fixed-hbd");
    
 });
+$(document).on('click', "#btn-searchorder", function (event) {
+    $('.form-search-product').css("display", "none");
+    $('.black-screen').css("display", "none");
+    $('#container').removeClass("fixed-hbd");
+    $('#fixscreen-respon').css("display", "none");
+});
 $(document).on('click', '.plus', function () {
     qty = parseInt($(this).parents('.input-group').find('.number-product').val()) + 1;
     $(this).parents('.input-group').find('.number-product').val(qty);
@@ -627,4 +633,63 @@ $(document).on('click', '.delele-item-in-cart', function () {
             alert("Error: " + errorThrown);
         }
     });
-})
+});
+$(document).on('keyup', ".search-product-keyup", function (event) {
+    var keyword = $(this).val();
+    if(keyword=='' || keyword[0]==' '){
+        $('.ls-product-search').html("<div class='mb-3 rimg-center'><img src='images/shop/pescrip5.png'></div>");
+    }else{
+        var url = $(this).attr("data-href");
+        var _token = $('input[name="_token"]').val();
+        $.ajax({
+            url: url,
+            cache: false,
+            method: "GET",
+            dataType: 'html',
+            data: {
+                keyword: keyword,
+                _token: _token
+             },
+            success: function(data) {
+                $('.ls-product-search').html(data);
+            },
+            }); 
+    }      
+});
+$(document).on('click', ".btn-add-item", function (event) {
+    $('.ls-product-select').css("display", "block");
+    var id = $(this).attr("data-id");
+    rowCurrent = $(this).closest('.item-search');
+    rowCurrent.remove();
+    temp=$('.ls-product-select li').length+1;
+    nameProduct=rowCurrent.find('.name-product').text();
+    $('.title-list-select').text("Tên thuốc đã nhập: ");
+    itemSelect="<li class='item-select'><div class='d-flex'><div class='wp-10 text-center number_select'>"+temp+"</div><div class='wp-70 text-left'>"+nameProduct+"</div><div class='wp-20  text-center'><div class='btn'><input type='hidden'  name='listId[]' value='"+id+"'><span class='btn-remove'>Xóa</span></div></div></div></li>";
+    $('.ls-product-select').append(itemSelect); 
+});
+$('.addy-product').click(function() {
+    const position = $("#form-search-product").offset().top;
+    $("HTML, BODY").animate({ scrollTop: position }, 200);
+    $('.form-search-product').css("display", "block");
+    $('.black-screen').css("display", "block");
+    $('#container').addClass("fixed-hbd");
+});
+$(document).on('click', ".btn-remove", function (event) {
+    if($('.ls-product-select li').length ==1){
+        $('.title-list-select').text("");
+        $('.ls-product-select').css("display", "none");
+    }
+    numLast=$('.ls-product-select li').length;
+    rowCurrent = $(this).closest('.item-select');
+    rowCurrent.remove();
+    indexCurent=rowCurrent.find('.number_select').text();
+    listItemSelect=document.querySelectorAll('.ls-product-select li.item-select');
+    
+    for(let i=0; i< listItemSelect.length; i++) { 
+        listItemSelect[i].querySelector('.number_select').innerText=i+1;    
+    }
+    // itemLast=$('.ls-product-select li:last');
+    
+    
+    
+});

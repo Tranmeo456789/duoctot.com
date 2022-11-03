@@ -785,7 +785,7 @@
 }
 .form-search-product .header {
     border-bottom: 1px solid #CBDCFA;
-    margin-bottom: 15px;
+    margin-bottom: 40px;
 }
 .form-search-product .btn-closenk {
     width: 50px;
@@ -794,9 +794,7 @@
 #search-order .wp-content {
     width: 80%;
 }
-.form-search-product .wp-content {
-    width: 90%;
-}
+
 #btn-forget,
 #btn-searchorder {
     background: #05AFE3;

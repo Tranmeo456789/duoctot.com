@@ -157,6 +157,17 @@ class ProductModel extends BackEndModel
                         ->orderBy('name', 'asc');
             $result = $query->pluck('name', 'id')->toArray();
         }
+        if($options['task'] == "list-items-search") {
+            $query = $this->select('id', 'name');
+            if(isset($params['keyword'])){
+                $query->where('name','LIKE', "%{$params['keyword']}%");
+            }
+            $query->orderBy('id', 'asc');
+            if(isset($params['limit'])){
+                $query->limit($params['limit']);
+            }
+            $result = $query->get()->toArray();
+        }
         return $result;
     }
     public function listItemsNoPaginate(){

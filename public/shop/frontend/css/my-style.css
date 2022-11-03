@@ -90,7 +90,10 @@ ul {
     border-radius: 12px;
     transition: all .3s;
 }
-
+.input-prescrip:focus{
+    border: 1px solid blue;
+    outline: none;
+}
 .img-search-product {
     position: absolute;
     top: 50%;
@@ -759,3 +762,63 @@ input[type="radio"] {
     font-size: 14px;
 }
 /*** END CART **/
+/*** PRODUCT **/
+.wp-content-shorder .ls-product-search li:not(:last-child){
+    box-shadow: inset 0px -1px 0px #d8e0e8;
+}
+.form-search-product .wp-content {
+    width: 90%;
+}
+.wp-content-shorder .content{
+    border: 1px solid #d8e0e8;
+    padding-top: 15px;
+    border-top: none;position: relative;
+    border-radius: 10px;
+}
+.wp-content-shorder .content .content-top-2{
+    position: absolute;
+    top: -24px;
+    width: 100%;
+}
+
+.ls-product-select .btn-remove,.product-item-search .btn-add-item{
+    font-size: 14px;
+    line-height: 14px;
+    color: #52637a ;
+    border: solid 1px #d8e0e8;
+    border-radius: 8px;
+    padding: 5px 8px;
+}
+.product-item-search .btn-add-item:hover,.ls-product-select .btn-remove:hover{
+    color: #fff;
+    background-color: #718198;
+    cursor: pointer;
+}
+
+.ls-product-search .product-item-search{
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.ls-product-select{
+    display: none;
+    border-radius: 12px;
+    border: 1px solid #d8e0e8;
+    padding: 10px;
+}
+.ls-product-select li{
+    padding-top: 10px;
+}
+.ls-product-select li:not(:last-child){
+    border-bottom:1px solid #d8e0e8;
+    padding-bottom: 10px;
+}
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+

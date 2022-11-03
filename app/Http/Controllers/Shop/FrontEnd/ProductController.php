@@ -54,4 +54,15 @@ class ProductController extends ShopFrontEndController
 
         return view($this->pathViewController . 'detail',compact('item','params'));
     }
+    public function searchProductAjax(Request $request){
+        $data = $request->all();
+        $params['keyword']=$request->keyword;$params['limit']=5;
+        $keyword=$params['keyword'];
+        $items=$this->model->listItems($params,['task' => 'list-items-search']);
+        return view("$this->moduleName.pages.prescrip.child_index.ls_product_search",compact('items','keyword'));
+        //   $result = array(  
+        //      'test'=>$items
+        //   );
+        //   return response()->json($result, 200);
+    }
 }

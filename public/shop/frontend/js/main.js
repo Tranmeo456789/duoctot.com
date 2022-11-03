@@ -80,11 +80,6 @@ $(document).ready(function() {
         $('#fixscreen-respon').css("display", "none");
     });
 
-    $('.addy-product').click(function() {
-        $('.form-search-product').css("display", "block");
-        $('.black-screen').css("display", "block");
-        $('#container').addClass("fixed-hbd");
-    });
     //hien form dang ky,dang nhap,quen mat khau
     $('.btn-login').click(function() {
         $('.form-login').css("display", "block");
