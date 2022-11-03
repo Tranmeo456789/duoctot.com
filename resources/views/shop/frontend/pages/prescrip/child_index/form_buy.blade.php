@@ -38,12 +38,16 @@
             'styleFormGroup' => 'mb-1',
         ],[
             'label' => '',
-            'element' => Form::text('buyer[fullname]', $user->fullname??null,array_merge(['class'=>'input-prescrip','placeholder'=>'Nhập họ tên'])),
+            'element' => Form::text('fullname', $user->fullname??null,array_merge(['class'=>'input-prescrip','placeholder'=>'Nhập họ tên'])),
+            'type' =>'input-border-radius-blue',
             'widthElement' => 'col-lg-6 col-md-12 mb1024-5',
+            'styleFormGroup' => 'has-border'
         ],[
             'label' => '',
-            'element' => Form::text('buyer[phone]', $user->phone??null,array_merge(['class'=>'input-prescrip','placeholder'=>'Nhập số điện thoại'])),
+            'element' => Form::text('phone', $user->phone??null,array_merge(['class'=>'input-prescrip','placeholder'=>'Nhập số điện thoại'])),
+            'type' =>'input-border-radius-blue',
             'widthElement' => 'col-lg-6 col-md-12',
+            'styleFormGroup' => 'has-border',
         ],
     ];
     $formInputIgnoreAttr    = array_merge_recursive(
@@ -59,20 +63,22 @@
     $elementLocals = [
         [
             'label'   => '',
-            'element' => Form::select('receive[province_id]',$itemsProvince, $user->province_id??null, array_merge($formSelect2GetChildIgnoreAttr,['id' =>'province_id','style' =>'width:100%','data-href'=>$linkGetListDistrict,'data-target' => '#district_id'])),
+            'element' => Form::select('province_id',$itemsProvince, $user->province_id??null, array_merge($formSelect2GetChildIgnoreAttr,['id' =>'province_id','style' =>'width:100%','data-href'=>$linkGetListDistrict,'data-target' => '#district_id'])),
             'widthElement' => 'col-lg-6 col-md-12 mb1024-5'
         ],[
             'label'   => '',
-            'element' => Form::select('receive[district_id]',[null=>"-- Chọn {$label['district_id']} --"], $details['district_id']??null, array_merge($formSelect2GetChildIgnoreAttr,['id' =>'district_id','data-href'=>$linkGetListWard,'data-target' => '#ward_id','style' =>'width:100%'])),
+            'element' => Form::select('district_id',[null=>"-- Chọn {$label['district_id']} --"], $details['district_id']??null, array_merge($formSelect2GetChildIgnoreAttr,['id' =>'district_id','data-href'=>$linkGetListWard,'data-target' => '#ward_id','style' =>'width:100%'])),
             'widthElement' => 'col-lg-6 col-md-12 mb1024-5'
         ],[
             'label'   => '',
-            'element' => Form::select('receive[ward_id]',[null=>"-- Chọn {$label['ward_id']} --"],  $details['ward_id']??null, array_merge($formSelect2GetChildIgnoreAttr,['id' =>'ward_id','style' =>'width:100%'])),
+            'element' => Form::select('ward_id',[null=>"-- Chọn {$label['ward_id']} --"],  $details['ward_id']??null, array_merge($formSelect2GetChildIgnoreAttr,['id' =>'ward_id','style' =>'width:100%'])),
             'widthElement' => 'col-12 my-1'
         ],[
             'label' => '',
-            'element' => Form::text('receive[address]', $details['address']??null,array_merge(['class'=>'input-prescrip','placeholder'=>'Nhập địa chỉ'])),
+            'element' => Form::text('address', $details['address']??null,array_merge(['class'=>'input-prescrip','placeholder'=>'Nhập địa chỉ'])),
+            'type' =>'input-border-radius-blue',
             'widthElement' => 'col-12',
+            'styleFormGroup' => 'has-border'
         ],
     ];
 @endphp
@@ -80,8 +86,8 @@
     'method'         => 'POST',
     'url'            => route('fe.prescrip.save'),
     'accept-charset' => 'UTF-8',
-    'class'          => '',
-    'id'             => 'form-main-prescrip'])  }}
+    'class'          => 'form-main-prescrip  form-in-modal',
+    'id'             => 'main-form'])  }}
     <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
             @include("$moduleName.pages.$controllerName.child_index.form_yes_prescrip")
@@ -105,6 +111,7 @@
                 <h6 class="mt-2 font-weight-bold">Địa chỉ nhận hàng</h6>
             </div>
             {!! FormTemplate::show($elementLocals,$formInputWidth)  !!}
+            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             <div class="text-center mt-2 col-12"><button class="btn-form-submit">GỬI CHO DƯỢC SĨ</button></div>
         </div>
     </div>

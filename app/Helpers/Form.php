@@ -41,6 +41,19 @@ class Form
                     $element['element']
                 );
                 break;
+                case 'input-border-radius-blue':
+                    $xhtml .= sprintf(
+                        "<div class='%s'>
+                            <div class='form-group $styleFormGroup'>                           
+                                <div class='wp-input'>
+                                    %s                                  
+                                </div>
+                            </div>
+                        </div>",
+                        $widthElement,                     
+                        $element['element']
+                    );
+                    break;
             case 'inline':
                 $xhtml .= sprintf(
                     "<div class='%s'>

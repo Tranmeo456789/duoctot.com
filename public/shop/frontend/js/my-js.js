@@ -24,6 +24,7 @@ function isPhoneNumberVN(value) {
     }
     return flag;
 }
+
 $.validator.methods.checkEmail = function (value, element, param) {
     return (value.trim() == '') || (isEmail(value.trim()));
 };
@@ -225,6 +226,46 @@ $(document).ready(function () {
             }
         },
 
+    });
+    $(".form-main-prescrip").validate({
+        rules: {
+            fullname:{
+                required: true,
+            },
+            phone: {
+                required: true,
+                checkPhone: true,
+            },
+            address:{
+                required: true,
+            },
+           
+        },
+        messages: {
+            fullname: "Thông tin bắt buộc",
+            phone: {
+                required: "Thông tin bắt buộc", 
+                checkPhone: "Số điện thoại không đúng định dạng",             
+            },
+            address:{
+                required: "Thông tin bắt buộc",
+            },
+            
+           
+        },
+        errorPlacement: function (error, element) {
+            // Add the `invalid-feedback` class to the error element
+            error.addClass("invalid-feedback");
+            element.closest(".wp-input").addClass('has-error');                  
+            error.insertAfter(element.closest(".wp-input"));          
+        },
+        highlight: function (element, errorClass, validClass) {
+            $(element).addClass("is-invalid").removeClass("is-valid");
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).addClass("is-valid").removeClass("is-invalid");
+            $(element).closest(".wp-input").removeClass('has-error');
+        }
     });
     $("#content-slider").lightSlider({
         loop: true,
