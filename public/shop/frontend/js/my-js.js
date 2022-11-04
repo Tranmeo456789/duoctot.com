@@ -646,12 +646,14 @@ $(document).on('click', ".btn-closenk", function (event) {
    
 });
 $(document).on('click', "#btn-searchorder", function (event) {
+    listProduct=$('.ls-product-select').html();
+    $('.ls-product-select-prescrip').html(listProduct);
+    $('.ls-product-select-prescrip').css("display", "block");
     $('.form-search-product').css("display", "none");
     $('.black-screen').css("display", "none");
     $('#container').removeClass("fixed-hbd");
     $('#fixscreen-respon').css("display", "none");
-    listProduct=document.getElementsByClassName('ls-product-select').innerHTML;
-    //console.log(listProduct);
+    
 });
 $(document).on('click', '.plus', function () {
     qty = parseInt($(this).parents('.input-group').find('.number-product').val()) + 1;
@@ -705,11 +707,7 @@ $(document).on('click', ".btn-add-item", function (event) {
     var id = $(this).attr("data-id");
     rowCurrent = $(this).closest('.item-search');
     rowCurrent.remove();
-    if($('.ls-product-select li').length==0){
-        temp=$('.ls-product-select li').length+1;
-    }else{
-        temp=($('.ls-product-select li').length)/2+1;
-    }
+    temp=$('.ls-product-select li').length+1;     
     nameProduct=rowCurrent.find('.name-product').text();
     $('.title-list-select').text("Tên thuốc đã nhập: ");
     itemSelect="<li class='item-select'><div class='d-flex'><div class='wp-10 text-center number_select'>"+temp+"</div><div class='wp-70 text-left'>"+nameProduct+"</div><div class='wp-20  text-center'><div class='btn'><input type='hidden'  name='info_product["+id+"]' value='"+nameProduct+"'><span class='btn-remove'>Xóa</span></div></div></div></li>";
@@ -722,7 +720,7 @@ $('.addy-product').click(function() {
     $('.black-screen').css("display", "block");
     $('#container').addClass("fixed-hbd");
 });
-$(document).on('click', ".btn-remove", function (event) {
+$(document).on('click', ".ls-product-select .btn-remove", function (event) {
     if($('.ls-product-select li').length ==1){
         $('.title-list-select').text("");
         $('.ls-product-select').css("display", "none");
@@ -732,12 +730,22 @@ $(document).on('click', ".btn-remove", function (event) {
     rowCurrent.remove();
     indexCurent=rowCurrent.find('.number_select').text();
     listItemSelect=document.querySelectorAll('.ls-product-select li.item-select');
+    for(let i=0; i< listItemSelect.length; i++) { 
+        listItemSelect[i].querySelector('.number_select').innerText=i+1;    
+    }
+});
+$(document).on('click', ".ls-product-select-prescrip .btn-remove", function (event) {
+    if($('.ls-product-select-prescrip li').length ==1){
+        $('.title-list-select').text("");
+        $('.ls-product-select-prescrip').css("display", "none");
+    }
+    numLast=$('.ls-product-select-prescrip li').length;
+    rowCurrent = $(this).closest('.item-select');
+    rowCurrent.remove();
+    indexCurent=rowCurrent.find('.number_select').text();
+    listItemSelect=document.querySelectorAll('.ls-product-select-prescrip li.item-select');
     
     for(let i=0; i< listItemSelect.length; i++) { 
         listItemSelect[i].querySelector('.number_select').innerText=i+1;    
     }
-    // itemLast=$('.ls-product-select li:last');
-    
-    
-    
 });

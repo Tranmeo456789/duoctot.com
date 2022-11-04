@@ -101,9 +101,7 @@
         <div class="tshorder">
             <p class="title-list-select font-weight-bold"></p>
         </div>
-        <div>
-            <ul class="ls-product-select"></ul>
-        </div>
+        <ul class="ls-product-select-prescrip"></ul>
     </div>
     <div class="form-info-buy">
         <div class="row">
