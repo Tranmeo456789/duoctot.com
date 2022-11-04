@@ -23,7 +23,7 @@ class PrescripModel extends BackEndModel
         $this->table               = 'prescrips';
         $this->controllerName      = 'prescrip';
         $this->folderUpload        = '' ;
-        $this->crudNotAccepted     = ['_token','task'];
+        $this->crudNotAccepted     = ['_token','task','number_product'];
     }
     public function scopeOfUser($query)
     {

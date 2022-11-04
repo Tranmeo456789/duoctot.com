@@ -41,6 +41,20 @@ class Form
                     $element['element']
                 );
                 break;
+                case 'select':
+                    $xhtml .= sprintf(
+                        "<div class='%s'>
+                            <div class='form-group $styleFormGroup'>
+                                <div class='%s'>
+                                    %s
+                                </div>
+                            </div>
+                        </div>",
+                        $widthElement,
+                        $widthInput,
+                        $element['element']
+                    );
+                    break;
                 case 'input-border-radius-blue':
                     $xhtml .= sprintf(
                         "<div class='%s'>

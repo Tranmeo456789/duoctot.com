@@ -24,7 +24,16 @@ function isPhoneNumberVN(value) {
     }
     return flag;
 }
-
+jQuery.validator.addMethod("isProductSelect",
+    function() {
+        var flag = false;
+        numProductSelect=$('.ls-product-select-prescrip li').length;
+        if(numProductSelect > 0){
+            flag = true;
+        }
+        return flag;
+    }
+);
 $.validator.methods.checkEmail = function (value, element, param) {
     return (value.trim() == '') || (isEmail(value.trim()));
 };
@@ -34,6 +43,7 @@ $.validator.methods.checkPhone = function (value, element, param) {
 $.validator.methods.checkPhoneOrEmail = function (value, element, param) {
     return isEmail(value.trim()) || isPhoneNumberVN(value.trim());
 };
+
 $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -237,10 +247,21 @@ $(document).ready(function () {
                 required: true,
                 checkPhone: true,
             },
-            address:{
+            number_product:{
+                isProductSelect: true,
+            },
+            province_id:{
                 required: true,
             },
-           
+            district_id:{
+                required: true,
+            },
+            ward_id:{
+                required: true,
+            },
+            address:{
+                required: true,
+            },    
         },
         messages: {
             "buyer[fullname]": "Thông tin bắt buộc",
@@ -248,9 +269,22 @@ $(document).ready(function () {
                 required: "Thông tin bắt buộc", 
                 checkPhone: "Số điện thoại không đúng định dạng",             
             },
+            number_product:{
+                isProductSelect: "Vui lòng chọn thêm thuốc"
+            },
+            province_id:{
+                required:"Thông tin bắt buộc",
+            },
+            district_id:{
+                required: "Thông tin bắt buộc",
+            },
+            ward_id:{
+                required: "Thông tin bắt buộc",
+            },
             address:{
                 required: "Thông tin bắt buộc",
             },
+            
             
            
         },
@@ -653,6 +687,7 @@ $(document).on('click', "#btn-searchorder", function (event) {
     $('.black-screen').css("display", "none");
     $('#container').removeClass("fixed-hbd");
     $('#fixscreen-respon').css("display", "none");
+    $('.title-list-select').text("Tên thuốc đã nhập:");
     
 });
 $(document).on('click', '.plus', function () {
@@ -748,4 +783,14 @@ $(document).on('click', ".ls-product-select-prescrip .btn-remove", function (eve
     for(let i=0; i< listItemSelect.length; i++) { 
         listItemSelect[i].querySelector('.number_select').innerText=i+1;    
     }
+});
+$(document).on('click', "#pills-no-prescrip", function (event) {
+    $('.title-list-select').text("");
+    $('.ls-product-select-prescrip').html(' ');
+    $('.ls-product-select-prescrip').css("display", "none");
+    $('.number_product').addClass("ignore");
+});
+$(document).on('click', "#pills-yes-prescrip", function (event) {
+    numLast=$('.ls-product-select-prescrip li').length;
+    $('.number_product').removeClass("ignore");
 });

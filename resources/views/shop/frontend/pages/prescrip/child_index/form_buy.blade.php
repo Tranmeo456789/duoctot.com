@@ -50,29 +50,34 @@
             'styleFormGroup' => 'has-border',
         ],
     ];
+    
     $formInputIgnoreAttr    = array_merge_recursive(
                                     config('myconfig.template.form_element.input'),
-                                    ['class' => 'ignore']
+                                    ['class' => '']
                                     );
     $formInputIgnoreAttr = MyFunction::array_fill_muti_values($formInputIgnoreAttr);
     $formSelect2GetChildIgnoreAttr    = array_merge_recursive(
                                         $formSelect2GetChildAttr,
-                                    ['class' => 'ignore']
+                                    ['class' => '']
                                     );
     $formSelect2GetChildIgnoreAttr = MyFunction::array_fill_muti_values($formSelect2GetChildIgnoreAttr);
     $inputHiddenTask    = Form::hidden('task', 'save_data');
+    $formInputWidth['widthInput'] = 'wp-input';
     $elementLocals = [
         [
             'label'   => '',
             'element' => Form::select('province_id',$itemsProvince, $user->province_id??null, array_merge($formSelect2GetChildIgnoreAttr,['id' =>'province_id','style' =>'width:100%','data-href'=>$linkGetListDistrict,'data-target' => '#district_id'])),
+            'type' =>'select',
             'widthElement' => 'col-lg-6 col-md-12 mb1024-5'
         ],[
             'label'   => '',
             'element' => Form::select('district_id',[null=>"-- Chọn {$label['district_id']} --"], $details['district_id']??null, array_merge($formSelect2GetChildIgnoreAttr,['id' =>'district_id','data-href'=>$linkGetListWard,'data-target' => '#ward_id','style' =>'width:100%'])),
+            'type' =>'select',
             'widthElement' => 'col-lg-6 col-md-12 mb1024-5'
         ],[
             'label'   => '',
             'element' => Form::select('ward_id',[null=>"-- Chọn {$label['ward_id']} --"],  $details['ward_id']??null, array_merge($formSelect2GetChildIgnoreAttr,['id' =>'ward_id','style' =>'width:100%'])),
+            'type' =>'select',
             'widthElement' => 'col-12 my-1'
         ],[
             'label' => '',
@@ -90,10 +95,14 @@
     'class'          => 'form-main-prescrip',
     'id'             => ''])  }}
     <div class="tab-content" id="pills-tabContent">
-        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-yes-prescrip">
             @include("$moduleName.pages.$controllerName.child_index.form_yes_prescrip")
+            <div class="wp-input has-error">
+                <input type="hidden" class="number_product" name="number_product" value="">
+            </div>
+            
         </div>
-        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-no-prescrip">
             @include("$moduleName.pages.$controllerName.child_index.form_no_prescrip")
         </div>
     </div>
