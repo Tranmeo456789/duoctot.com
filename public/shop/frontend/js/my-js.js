@@ -228,11 +228,12 @@ $(document).ready(function () {
 
     });
     $(".form-main-prescrip").validate({
+        ignore: ".ignore",
         rules: {
-            fullname:{
+            "buyer[fullname]":{
                 required: true,
             },
-            phone: {
+            "buyer[phone]": {
                 required: true,
                 checkPhone: true,
             },
@@ -242,8 +243,8 @@ $(document).ready(function () {
            
         },
         messages: {
-            fullname: "Thông tin bắt buộc",
-            phone: {
+            "buyer[fullname]": "Thông tin bắt buộc",
+            "buyer[phone]": {
                 required: "Thông tin bắt buộc", 
                 checkPhone: "Số điện thoại không đúng định dạng",             
             },
@@ -711,7 +712,7 @@ $(document).on('click', ".btn-add-item", function (event) {
     }
     nameProduct=rowCurrent.find('.name-product').text();
     $('.title-list-select').text("Tên thuốc đã nhập: ");
-    itemSelect="<li class='item-select'><div class='d-flex'><div class='wp-10 text-center number_select'>"+temp+"</div><div class='wp-70 text-left'>"+nameProduct+"</div><div class='wp-20  text-center'><div class='btn'><input type='hidden'  name='listId[]' value='"+id+"'><span class='btn-remove'>Xóa</span></div></div></div></li>";
+    itemSelect="<li class='item-select'><div class='d-flex'><div class='wp-10 text-center number_select'>"+temp+"</div><div class='wp-70 text-left'>"+nameProduct+"</div><div class='wp-20  text-center'><div class='btn'><input type='hidden'  name='info_product["+id+"]' value='"+nameProduct+"'><span class='btn-remove'>Xóa</span></div></div></div></li>";
     $('.ls-product-select').append(itemSelect); 
 });
 $('.addy-product').click(function() {

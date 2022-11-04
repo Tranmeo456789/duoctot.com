@@ -14,9 +14,10 @@ use App\Model\Shop\CatProductModel;
 use App\Model\Shop\ProductModel;
 use App\Http\Requests;
 use App\Http\Requests\UserRequest as MainRequest;
-use App\Model\Shop\UsersModel as MainModel;
+use App\Model\Shop\PrescripModel as MainModel;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
+use App\Model\Shop\PrescripModel;
 use Session;
 use DB;
 use Illuminate\Support\Str;
@@ -60,7 +61,22 @@ class PrescripController extends ShopFrontEndController
         return view($this->pathViewController . 'index',compact('user'));
     }
     public function save(Request $request){
-        return('luu');
+        if ($request->method() == 'POST') {
+            $params = $request->all();
+            $this->model->saveItem($params,['task'=>'frontend-save-item']);
+            $last_record = PrescripModel::latest('id')->first()->toArray();
+            return redirect()->route('fe.prescrip.prescripCustomer', ['id' => $last_record['id']]);
+        }     
     }
+    public function prescripCustomer(Request $request,$id){
+        $params['id']=$id;
+        $prescrip=$this->model->getItem($params,['task'=>'get-item-frontend']); 
+        $address='';
+        $ward_detail=(new WardModel())->getItem(['id'=>$prescrip['ward_id']],['task' => 'get-item-full']);
+        $ward=$ward_detail['name'];$district=$ward_detail['district']['name'];$province=$ward_detail['district']['province']['name'];
+        $address=$prescrip['address'].', '.$ward.', '.$district.', '.$province;
+        return view($this->pathViewController . 'prescrip_customer',compact('prescrip','address'));
+    }
+
     
 }

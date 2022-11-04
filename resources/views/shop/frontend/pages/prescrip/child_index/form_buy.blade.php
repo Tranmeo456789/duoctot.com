@@ -38,13 +38,13 @@
             'styleFormGroup' => 'mb-1',
         ],[
             'label' => '',
-            'element' => Form::text('fullname', $user->fullname??null,array_merge(['class'=>'input-prescrip','placeholder'=>'Nhập họ tên'])),
+            'element' => Form::text('buyer[fullname]', $user->fullname??null,array_merge(['class'=>'input-prescrip','placeholder'=>'Nhập họ tên'])),
             'type' =>'input-border-radius-blue',
             'widthElement' => 'col-lg-6 col-md-12 mb1024-5',
             'styleFormGroup' => 'has-border'
         ],[
             'label' => '',
-            'element' => Form::text('phone', $user->phone??null,array_merge(['class'=>'input-prescrip','placeholder'=>'Nhập số điện thoại'])),
+            'element' => Form::text('buyer[phone]', $user->phone??null,array_merge(['class'=>'input-prescrip','placeholder'=>'Nhập số điện thoại'])),
             'type' =>'input-border-radius-blue',
             'widthElement' => 'col-lg-6 col-md-12',
             'styleFormGroup' => 'has-border',
@@ -60,6 +60,7 @@
                                     ['class' => 'ignore']
                                     );
     $formSelect2GetChildIgnoreAttr = MyFunction::array_fill_muti_values($formSelect2GetChildIgnoreAttr);
+    $inputHiddenTask    = Form::hidden('task', 'save_data');
     $elementLocals = [
         [
             'label'   => '',
@@ -86,8 +87,8 @@
     'method'         => 'POST',
     'url'            => route('fe.prescrip.save'),
     'accept-charset' => 'UTF-8',
-    'class'          => 'form-main-prescrip  form-in-modal',
-    'id'             => 'main-form'])  }}
+    'class'          => 'form-main-prescrip',
+    'id'             => ''])  }}
     <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
             @include("$moduleName.pages.$controllerName.child_index.form_yes_prescrip")
@@ -111,8 +112,8 @@
                 <h6 class="mt-2 font-weight-bold">Địa chỉ nhận hàng</h6>
             </div>
             {!! FormTemplate::show($elementLocals,$formInputWidth)  !!}
-            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-            <div class="text-center mt-2 col-12"><button class="btn-form-submit">GỬI CHO DƯỢC SĨ</button></div>
+            {{$inputHiddenTask }}
+            <div class="text-center mt-2 col-12"><button type="submit" class="btn-form-submit" value="1">GỬI CHO DƯỢC SĨ</button></div>
         </div>
     </div>
     

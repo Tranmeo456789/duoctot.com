@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use DB;
+use Session;
 use Illuminate\Support\Facades\Auth as Auth;
 
 class BackEndModel extends Model
@@ -27,7 +28,10 @@ class BackEndModel extends Model
     }
     public function setCreatedHistory(&$params){
       $params['created_at']    = date('Y-m-d H:i:s');
-      $params['created_by'] = \Session::get('user')['user_id'];
+      if(Session::has('user')){
+        $params['created_by'] = \Session::get('user')['user_id'];
+      }
+      
     }
     public function setModifiedHistory(&$params){
       $params['updated_at']    = date('Y-m-d H:i:s');

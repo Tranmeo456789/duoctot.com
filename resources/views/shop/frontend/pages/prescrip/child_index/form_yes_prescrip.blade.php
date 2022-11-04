@@ -23,7 +23,7 @@
             </div>
             <div class="tcy-upload-content text-center f-w-600">
                 <p>Gửi ảnh chụp đơn thuốc</p>
-                <input type="file" name="file" id="file" class="inputfile" />
+                <input type="file" name="image" id="file" class="inputfile" />
                 <label for="file" class="btn btn-primary btn-sm border-r-1000">Thêm ảnh</label>
             </div>
         </div>

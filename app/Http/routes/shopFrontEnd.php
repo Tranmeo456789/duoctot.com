@@ -19,7 +19,8 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('/thu-test','OrderController@test');
 
     Route::get('/don-thuoc','PrescripController@index')->name('fe.prescrip.index');
-    Route::post('/luu-don-thuoc','PrescripController@save')->name('fe.prescrip.save');
+    Route::post('/luu-don-thuoc-khach-hang','PrescripController@save')->name('fe.prescrip.save');
+    Route::get('/don-thuoc-khach-hang/{id}','PrescripController@prescripCustomer')->name('fe.prescrip.prescripCustomer');
 
     Route::get('/gio-hang/{user_sell}','CartController@view')->name('fe.product.viewcart');
 
