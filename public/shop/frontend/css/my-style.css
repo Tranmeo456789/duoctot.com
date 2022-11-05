@@ -824,4 +824,14 @@ input[type="radio"] {
 	position: absolute;
 	z-index: -1;
 }
-
+.image-prescrip{
+    max-width: 206px;
+    margin: auto;
+}
+.image-prescrip picture{
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: calc((0.80583 * 100%) + 0px);
+}

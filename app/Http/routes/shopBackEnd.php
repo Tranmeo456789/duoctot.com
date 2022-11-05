@@ -13,8 +13,7 @@
 
 //shop tdoctor
 $prefixShopBackEnd = '/backend';
-Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd','middleware' => ['check.login']], function () {
-    Route::get('/', 'DashboardController@index')->name('dashboard');
+Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'middleware' => ['check.login']], function () { 
     Route::get('/thong-tin-nguoi-dung', 'ProfileController@info')->name('profile.info');
     Route::post('/luu-thong-tin-nguoi-dung', 'ProfileController@save')->name('profile.save');
     Route::get('/thay-doi-mat-khau', 'ProfileController@change_password')->name('profile.password');
@@ -58,7 +57,8 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd','mid
 
         Route::get('/danh-sach-don-hang', 'OrderController@index')->name('order');
         Route::get('/chi-tiet-don-hang/{id}', 'OrderController@detail')->name('order.detail');
-        Route::get('/cap-nhat-trang-thai-don-hang-{value}/{id}', 'OrderController@changeStatusOrder')->name('order.changeStatusOrder'); Route::get('/cap-nhat-trang-thai-don-hang-{value}/{id}', 'OrderController@changeStatusOrder')->name('order.changeStatusOrder');
+        Route::get('/cap-nhat-trang-thai-don-hang-{value}/{id}', 'OrderController@changeStatusOrder')->name('order.changeStatusOrder');
+        Route::get('/cap-nhat-trang-thai-don-hang-{value}/{id}', 'OrderController@changeStatusOrder')->name('order.changeStatusOrder');
         Route::post('/luu-don-hang', 'OrderController@save')->name('order.save');
 
 
@@ -85,9 +85,14 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd','mid
         Route::post('/luu-khach-hang', 'CustomerController@save')->name('customer.save');
         Route::get('/xoa-khach-hang/{id}', 'CustomerController@delete')->name('customer.delete');
         Route::post('/dia-chi-khach-hang', 'CustomerController@locationAjax')->name('locationAjax');
-    });
-   
 
+        Route::get('/don-thuoc-theo-toa', 'PrescripController@index')->name('prescrip');
+        Route::get('/chi-tiet-don-thuoc-theo-toa/{id}', 'PrescripController@detail')->name('prescrip.detail');
+    });
+
+    Route::group(['middleware' => ['permission.dashboard']], function () {
+        Route::get('/', 'DashboardController@index')->name('dashboard');
+    });
     Route::group(['middleware' => ['permission.admin']], function () {
         Route::get('/danh-sach-nguoi-dung', 'UserController@index')->name('user');
         Route::get('/quan-ly-thuoc-admin', 'ProductController@index_admin')->name('admin.product');
@@ -98,7 +103,7 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd','mid
         Route::get('/quan-ly-khách-hàng-admin', 'CustomerController@index_admin')->name('admin.customer');
         Route::get('/quan-ly-doanh-thu-admin', 'RevenueController@index_admin')->name('admin.revenue');
         Route::get('/loc-user-theo-thoi-gian', 'UserController@filterInDay')->name('user.filterInDay');
-        
+
         // Route::get('/them-nguoi-dung', 'UserController@form')->name('user.add');
         // Route::get('/sua-nguoi-dung/{id}', 'UserController@form')->name('user.edit');
         // Route::post('/luu-nguoi-dung', 'UserController@save')->name('user.save');

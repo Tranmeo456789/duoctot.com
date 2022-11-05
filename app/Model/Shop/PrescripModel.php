@@ -38,13 +38,37 @@ class PrescripModel extends BackEndModel
         }
         return $query;
     }
-
+    public function listItems($params = null, $options = null)
+    {
+        $result = null;     
+        if ($options['task'] == "user-list-items") {
+            $query = $this::select('id','info_product','is_prescrip','user_id','user_sell','buyer','province_id','district_id','ward_id','address','image','created_at')
+                                ->where('id','>',1)
+                                ->OfUser();
+            
+            if(isset($params['is_prescrip'])){
+                $query->where('is_prescrip', $params['is_prescrip']);
+            }
+            if(isset($params['pagination'])){
+                $query=$query->orderBy('id', 'desc')
+                              ->paginate($params['pagination']['totalItemsPerPage']);
+            }else{
+                $query=$query->orderBy('id', 'desc')->get();
+            }            
+            $result =  $query;
+        }
+        return $result;
+    }
     public function getItem($params = null, $options = null)
     {
         $result = null;
         if ($options['task'] == 'get-item-frontend') {
-            $result = self::select('id','info_product','user_id','user_sell','buyer','province_id',
-                            'district_id','ward_id','address')
+            $result = self::select('id','info_product','user_id','user_sell','buyer','province_id','district_id','ward_id','address')
+                            ->where('id', $params['id'])
+                            ->first();
+        }
+        if ($options['task'] == 'get-item-backend') {
+            $result = self::select('id','info_product','user_id','user_sell','buyer','province_id','district_id','ward_id','address','created_at')
                             ->where('id', $params['id'])
                             ->first();
         }

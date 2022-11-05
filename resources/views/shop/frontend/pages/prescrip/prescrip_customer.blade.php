@@ -8,11 +8,22 @@
             <img src="{{asset('images/shop/bg-donthuoc.png')}}" alt="">
         </picture>
     </div>
-    <div class="cbr py-4">
+    <div class="py-4">
+        <div class="winner">
+            <div class="header-prescrip">
+                <h1>Mua Thuốc Dễ Dàng Tại Tdoctor</h1>
+                <p>Đến với Tdoctor, bạn sẽ mua được đúng loại thuốc <br> theo đơn cùng dịch vụ tư vấn đến từ đội ngũ dược sĩ</p>
+            </div>
+        </div>
         <div class="">
             <div class="wp-order-success">
+                <div class="image-prescrip">
+                    <picture class="txt-center">
+                        <img src="{{asset('images/shop/nhapdonthuoc-final.png')}}" alt="">
+                    </picture>
+                </div>
                 <div class="text-center box-dhtc">
-                    <h2 class="title-dhtc">Nhà thuốc Tdoctor đã nhận được thông tin của quý khách</h2>
+                    <p class="font-weight-bold">Nhà thuốc Tdoctor đã nhận được thông tin của quý khách</p>
                     <p>Dược sỹ nhà thuốc sẽ liên hệ trong vòng</p>
                     <p> 3- 10 phút để tư vấn và xác nhận đặt hàng của bạn</p>
                 </div>

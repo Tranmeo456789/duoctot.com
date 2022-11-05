@@ -53,6 +53,7 @@ class Kernel extends HttpKernel
         'check.login' => \App\Http\Middleware\CheckLogin::class,
         'permission.admin' => \App\Http\Middleware\PermissionAdmin::class,
         'permission.shop' => \App\Http\Middleware\PermissionShop::class,
+        'permission.dashboard' => \App\Http\Middleware\PermissionDashboard::class,
         'jwt.auth' => JWTCustom::class,
     ];
 }
