@@ -133,6 +133,12 @@ class UsersModel extends BackEndModel
                 ['district_id', $params['district_id']]
             ])->get();
         }
+        if($options['task'] == "list-store-select-of-shop") {
+            $result =  self::where([
+                ['user_type_id',$params['user_type_id']],
+                ['domain_register',"shop.tdoctor.vn"]
+            ])->get();
+        }
         if($options['task'] == "admin-list-items-of-shop") {
             $query = $this::select('user_id','email','fullname','phone','user_type_id','gender','created_at')
                          ->where('domain_register',"shop.tdoctor.vn");

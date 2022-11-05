@@ -2,6 +2,22 @@
     <div class="tshorder">Nhập theo tên thuốc</div>
     <button class="btn-closenk rimg-center"><img src="{{asset('images/shop/dn4.png')}}" alt=""></button>
 </div>
+<div class="d-flex justify-content-center form-group mb-5">
+    <div class=" wp-content">
+        <label for="" class="font-weight-bold text-gray">Chọn nhà thuốc:</label>
+        <div class="row">
+            <div class="col-12 wp-input">
+                <select name="name_store" id="name-store" class="form-control select2">
+                    @foreach($stores as $item)
+                        <option value="{{$item['user_id']}}">{{$item['fullname']}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
 <div class="d-flex justify-content-center">
     <div class="wp-content">
         <div action="" class="wp-content-shorder">

@@ -806,7 +806,9 @@ input[type="radio"] {
     border: 1px solid #d8e0e8;
     padding: 10px;
 }
-
+.select2{
+    width: 100%!important;
+}
 .ls-product-select li,.ls-product-select-prescrip li{
     padding-top: 10px;
 }

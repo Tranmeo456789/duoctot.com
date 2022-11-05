@@ -162,6 +162,9 @@ class ProductModel extends BackEndModel
             if(isset($params['keyword'])){
                 $query->where('name','LIKE', "%{$params['keyword']}%");
             }
+            if(isset($params['user_sell'])){
+                $query->where('user_id',$params['user_sell']);
+            }
             $query->orderBy('id', 'asc');
             if(isset($params['limit'])){
                 $query->limit($params['limit']);

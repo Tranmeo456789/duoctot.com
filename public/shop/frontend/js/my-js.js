@@ -680,15 +680,18 @@ $(document).on('click', ".btn-closenk", function (event) {
    
 });
 $(document).on('click', "#btn-searchorder", function (event) {
-    listProduct=$('.ls-product-select').html();
-    $('.ls-product-select-prescrip').html(listProduct);
-    $('.ls-product-select-prescrip').css("display", "block");
-    $('.form-search-product').css("display", "none");
-    $('.black-screen').css("display", "none");
-    $('#container').removeClass("fixed-hbd");
-    $('#fixscreen-respon').css("display", "none");
-    $('.title-list-select').text("Tên thuốc đã nhập:");
-    
+    if($('.ls-product-select li').length > 0){
+        listProduct=$('.ls-product-select').html();
+        $('.ls-product-select-prescrip').html(listProduct);
+        $('.ls-product-select-prescrip').css("display", "block");
+        $('.form-search-product').css("display", "none");
+        $('.black-screen').css("display", "none");
+        $('#container').removeClass("fixed-hbd");
+        $('#fixscreen-respon').css("display", "none");
+        $('.title-list-select').text("Tên thuốc đã nhập:");
+        user_sell=$('#name-store').val();
+        $('input[name="user_sell"]').val(user_sell);
+    }
 });
 $(document).on('click', '.plus', function () {
     qty = parseInt($(this).parents('.input-group').find('.number-product').val()) + 1;
@@ -722,6 +725,7 @@ $(document).on('keyup', ".search-product-keyup", function (event) {
     }else{
         var url = $(this).attr("data-href");
         var _token = $('input[name="_token"]').val();
+        var user_sell = $('#name-store').val();
         $.ajax({
             url: url,
             cache: false,
@@ -729,6 +733,7 @@ $(document).on('keyup', ".search-product-keyup", function (event) {
             dataType: 'html',
             data: {
                 keyword: keyword,
+                user_sell: user_sell,
                 _token: _token
              },
             success: function(data) {
@@ -785,12 +790,18 @@ $(document).on('click', ".ls-product-select-prescrip .btn-remove", function (eve
     }
 });
 $(document).on('click', "#pills-no-prescrip", function (event) {
-    $('.title-list-select').text("");
+    $('.form-buy .title-list-select').text("");
     $('.ls-product-select-prescrip').html(' ');
     $('.ls-product-select-prescrip').css("display", "none");
     $('.number_product').addClass("ignore");
+    $('input[name="is_prescrip"]').val('');
 });
 $(document).on('click', "#pills-yes-prescrip", function (event) {
     numLast=$('.ls-product-select-prescrip li').length;
     $('.number_product').removeClass("ignore");
+});
+$(document).on('change', "#name-store", function (event) {
+    $('.wp-content-shorder .title-list-select').text("");
+    $('.ls-product-select').html(' ');
+    $('.ls-product-select').css("display", "none");
 });

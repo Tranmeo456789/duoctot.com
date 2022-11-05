@@ -21,7 +21,6 @@ use App\Model\Shop\PrescripModel;
 use Session;
 use DB;
 use Illuminate\Support\Str;
-session_start();
 include "app/Helpers/data.php";
 class PrescripController extends ShopFrontEndController
 {
@@ -58,11 +57,18 @@ class PrescripController extends ShopFrontEndController
             $itemsWard = (new WardModel())->listItems(['parentID' => $params['district_id']],
                                                                 ['task'=>'admin-list-items-in-selectbox']);
         }
-        return view($this->pathViewController . 'index',compact('user'));
+        $stores = (new UsersModel())->listItems(['user_type_id'=>4],['task'=>'list-store-select-of-shop']);
+        return view($this->pathViewController . 'index',compact('user','stores'));
     }
     public function save(Request $request){
         if ($request->method() == 'POST') {
             $params = $request->all();
+            $params['user_id']=null;
+            if (Session::has('user')){
+                $user = Session::get('user');
+               $params['user_id']=$user->user_id;
+                
+            }  
             $this->model->saveItem($params,['task'=>'frontend-save-item']);
             $last_record = PrescripModel::latest('id')->first()->toArray();
             return redirect()->route('fe.prescrip.prescripCustomer', ['id' => $last_record['id']]);

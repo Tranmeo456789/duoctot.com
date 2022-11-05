@@ -58,6 +58,7 @@ class ProductController extends ShopFrontEndController
         $data = $request->all();
         $params['keyword']=$request->keyword;$params['limit']=5;
         $keyword=$params['keyword'];
+        $params['user_sell']=$request->user_sell;
         $items=$this->model->listItems($params,['task' => 'list-items-search']);
         return view("$this->moduleName.pages.prescrip.child_index.ls_product_search",compact('items','keyword'));
         //   $result = array(  

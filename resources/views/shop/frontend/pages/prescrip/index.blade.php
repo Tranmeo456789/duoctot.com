@@ -19,7 +19,7 @@
                     <h5 class="qprescrip">Bạn đã có đơn thuốc chưa ?</h5>
                     <ul class="nav nav-pills mb-3 header-tab" id="pills-tab" role="tablist">
                         <li class="nav-item wp-50" role="presentation">
-                            <button class="nav-link active wp-100 yes-prescrip" id="pills-yes-prescrip" data-toggle="pill" data-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Đã có đơn thuốc</button>
+                            <button class="nav-link active wp-100 yes-prescrip" id="pills-yes-prescrip" name="is_prescrip" value="1" data-toggle="pill" data-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Đã có đơn thuốc</button>
                         </li>
                         <li class="nav-item wp-50" role="presentation">
                             <button class="nav-link wp-100" id="pills-no-prescrip" data-toggle="pill" data-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Chưa có cần tư vấn</button>

@@ -100,7 +100,8 @@
             <div class="wp-input has-error">
                 <input type="hidden" class="number_product" name="number_product" value="">
             </div>
-            
+            <input type="hidden" class="" name="user_sell" value="">
+            <input type="hidden" class="" name="is_prescrip" value="1">
         </div>
         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-no-prescrip">
             @include("$moduleName.pages.$controllerName.child_index.form_no_prescrip")
