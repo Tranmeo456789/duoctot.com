@@ -158,26 +158,26 @@
                 <div class="menu-top1">
                     <div class="position-relative ">
                         <ul id="main-menu" class="d-flex list-item">
-                            @foreach ($_SESSION['cat_product'] as $item_cat1)
-                            @if($item_cat1['parent_id']==1)
-                            <li class="catc1" data-id="{{$item_cat1['id']}}">
-                                <a href="{{route('fe.cat',$item_cat1->slug)}}" data-id="{{$item_cat1['id']}}" class="cat1name">
-                                    {{$item_cat1['name']}}
+                            @foreach ($_SESSION['cat_product'] as $itemLevel1)
+                            @if($itemLevel1['parent_id']==1)
+                            <li class="catc1" data-id="{{$itemLevel1['id']}}">
+                                <a href="{{route('fe.cat',$itemLevel1->slug)}}" data-id="{{$itemLevel1['id']}}" data-href="{{route('ajaxHoverCatLevel1')}}" class="cat1name">
+                                    {{$itemLevel1['name']}}
                                     <i class="fas fa-chevron-down arrow"></i>
                                 </a>
                                 <div class="content-submenu">
                                     <div class="row mx-0">
                                         <div class="px-0 col-3 right-fol">
                                             <ul class="sub-menu1">
-                                                @foreach ($_SESSION['cat_product'] as $item_sub_menu1)
-                                                @if ($item_sub_menu1['parent_id'] == (int)$item_cat1['id'] )
-                                                <li data-id="{{$item_sub_menu1['id']}}">
+                                                @foreach ($_SESSION['cat_product'] as $itemLevel2)
+                                                @if ($itemLevel2['parent_id'] == (int)$itemLevel1['id'] )
+                                                <li data-id="{{$itemLevel2['id']}}" data-href="{{route('ajaxHoverCatLevel2')}}">
                                                     <div class="himg-menu">
                                                         <div class="d-flex">
                                                             <div class="d-flex align-items-center pl-2">
-                                                                <div class="rdimg rimg-centerw"><img src="{{asset($item_sub_menu1['image'])}}" alt=""></div>
+                                                                <div class="rdimg rimg-centerw"><img src="{{asset($itemLevel2['image'])}}" alt=""></div>
                                                             </div>
-                                                            <a href="{{route('fe.cat2',[$item_cat1->slug,$item_sub_menu1->slug])}}" title="" class="titlec2">{{$item_sub_menu1['name']}}</a>
+                                                            <a href="{{route('fe.cat2',[$itemLevel1->slug,$itemLevel2->slug])}}" title="" class="titlec2">{{$itemLevel2['name']}}</a>
                                                         </div>
                                                     </div>
                                                 </li>
@@ -187,10 +187,8 @@
                                         </div>
                                         <div class="col-9 px-0 content-submenu-right">
                                             <div class="sub-menu2 ">
-                                                <div class="cat_detail">
-                                                    <ul class="body_catdetail clearfix">
-                                                    </ul>
-                                                    <div class="list-productmn"></div>
+                                                <div class="cat_detail list_cat_level3_products">
+                                                    @include('shop.frontend.block.ls_cat_level3_and_product')
                                                 </div>
                                             </div>
                                         </div>
@@ -239,18 +237,18 @@
                 <div class="container-menures"><a href="">Trang chủ</a></div>
             </h3>
             <ul>
-                @foreach ($_SESSION['cat_product'] as $item_cat1)
-                @if($item_cat1['parent_id']==1)
+                @foreach ($_SESSION['cat_product'] as $itemLevel1)
+                @if($itemLevel1['parent_id']==1)
                 <li>
                     <div class="container-menures position-relative parentsmenu">
                         <div class=" pr-4">
-                            <a href="">{{$item_cat1['name']}}</a>
+                            <a href="">{{$itemLevel1['name']}}</a>
                         </div>
                         <div class="iconmnrhv"><img src="{{asset('images/shop/arrowd.png')}}" alt=""></div>
                         <div class="submenu1res">
                             <ul>
                                 @foreach ( $_SESSION['cat_product'] as $item_catres2)
-                                @if ($item_catres2['parent_id'] == $item_cat1['id'])
+                                @if ($item_catres2['parent_id'] == $itemLevel1['id'])
                                 <li><a href="">{{$item_catres2['name']}}</a></li>
                                 @endif
                                 @endforeach

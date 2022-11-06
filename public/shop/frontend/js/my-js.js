@@ -319,7 +319,54 @@ $(document).ready(function () {
         }
     });
 });
+//  Cat hover
+$('.cat1name').hover(
+    function() {
+        var idCatLevel1 = $(this).attr('data-id');
+        var _token = $('input[name="_token"]').val();
+        var url=$(this).attr('data-href');
+        $.ajax({
+            url: url,
+            cache: false,
+            method: "GET",
+            dataType: 'html',
+            data: {
+                idCatLevel1: idCatLevel1,
+                _token: _token,
+             },
+            success: function(data) {
+                $('.list_cat_level3_products').html(data);
+                $('.sub-menu1>li').removeClass('active-menucat2');
+                $('.sub-menu1>li:first-child').addClass('active-menucat2');
+            },
+        }); 
+    },
+);
+$('.sub-menu1>li').hover(
+    function() {
+        $('.sub-menu1>li').removeClass('active-menucat2');
+        $(this).addClass('active-menucat2');
+        var idCatLevel2 = $(this).attr('data-id');
+        var _token = $('input[name="_token"]').val();
+        var url=$(this).attr('data-href');
+        $.ajax({
+            url: url,
+            cache: false,
+            method: "GET",
+            dataType: 'html',
+            data: {
+                idCatLevel2: idCatLevel2,
+                _token: _token,
+             },
+            success: function(data) {
+                $('.list_cat_level3_products').html(data);
+               
+            },
+        }); 
+    },
+);
 
+//end Cat
 $(document).on('submit', "#main-form", function (event) {
     event.preventDefault();
     url = $(this).attr("action");

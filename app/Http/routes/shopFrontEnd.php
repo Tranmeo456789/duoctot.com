@@ -4,8 +4,8 @@
 $prefixShopFrontend = '';
 Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], function () {
     Route::get('/','HomeController@index')->name('home');
-    Route::get('/ajaxcat3','HomeController@ajaxcat3')->name('ajaxcat3');
-    Route::get('/ajaxcat1','HomeController@ajaxcat1')->name('ajaxcat1');
+    Route::get('/ajaxHoverCatLevel2','HomeController@ajaxHoverCatLevel2')->name('ajaxHoverCatLevel2');
+    Route::get('/ajaxHoverCatLevel1','HomeController@ajaxHoverCatLevel1')->name('ajaxHoverCatLevel1');
     Route::get('/ajaxlocal-store','HomeController@ajaxlocal')->name('fe.ajaxlocal');
     Route::get('/chi-tiet-san-pham/{id}','ProductController@detail')->name('fe.product.detail');
     Route::get('/tim-kiem-san-pham-theo-ten','ProductController@searchProductAjax')->name('fe.product.searchProductAjax');

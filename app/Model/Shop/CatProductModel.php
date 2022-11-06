@@ -116,8 +116,6 @@ class CatProductModel extends BackEndModel
                             ->toArray();
         }
         if ($options['task'] == "frontend-list-items-by-parent-id"){
-
-
             $query = self::select('id','name','image','slug')
                          ->where('status','=','active')
                          ->where('parent_id',$params['parent_id'])
@@ -129,9 +127,7 @@ class CatProductModel extends BackEndModel
     }
     public function countItems($params = null, $options  = null)
     {
-
         $result = null;
-
         if ($options['task'] == 'admin-count-items-group-by-status') {
             $query = $this::groupBy('status')
                 ->select(DB::raw('status , COUNT(id) as count'))
@@ -147,6 +143,10 @@ class CatProductModel extends BackEndModel
         if ($options['task'] == 'get-item') {
             $result = self::select('id', 'name', 'parent_id', 'image', 'slug')
                 ->where('id', $params['id'])->first();
+        }
+        if ($options['task'] == 'get-item-parent') {
+            $result = self::select('id', 'name', 'parent_id', 'image', 'slug')
+                ->where('parent_id', $params['parent_id'])->first();
         }
         return $result;
     }

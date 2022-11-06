@@ -7,9 +7,7 @@ use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
 use Illuminate\Support\Facades\Config;
 use App\Model\Shop\ProductModel;
 use App\Model\Shop\Tinhthanhpho;
-use App\Model\Shop\Cat_productModel;
 use App\Model\Shop\CatProductModel;
-include "app/Helpers/data_cat.php";
 include "app/Helpers/data.php";
 use App\Helpers\HttpClient;
 class HomeController extends ShopFrontEndController
@@ -34,86 +32,41 @@ class HomeController extends ShopFrontEndController
             compact('product_selling','product_covid','product')
         );
     }
-    public function ajaxcat3(Request $request)
+    public function ajaxHoverCatLevel1(Request $request)
     {
         $cats = CatProductModel::all();
         $data = $request->all();
-        $id_cat2 = $request->id_cat2;
-        $id_cat1 = CatProductModel::find($id_cat2)->parent_id;
-        $slugcat1 = CatProductModel::find($id_cat1)->slug;
-        $slugcat2 = CatProductModel::find($id_cat2)->slug;
-        $list_idcat3 = [];
-        foreach ($_SESSION['cat_product'] as $cat3) {
-            if ($id_cat2 == $cat3['parent_id']) {
-                $list_idcat3[] = $cat3['id'];
-            }
-        }
-        $products = ProductModel::whereIn('cat_product_id', $list_idcat3)->inRandomOrder()->limit(4)->get();
-        $list_cat = '';
-        foreach ($_SESSION['cat_product'] as $item_submenu2) {
-            if ($item_submenu2['parent_id'] == $id_cat2) {
-                $list_cat .= list_cat2($slugcat1, $slugcat2, $item_submenu2);
-            }
-        }
-        $list_product = '';
-        if ($products->count() > 0) {
-            $list_product .= list_productheader();
-            foreach ($products as $product) {
-                //$imgm = explode(",", $product['image']);
-                $list_product .= list_productcontent($product);
-            }
-            $list_product .= list_productfooter();
-        }
-        $result = array(
-            'list_cat' => $list_cat,
-            'list_product' => $list_product,
-
-        );
-        return response()->json($result, 200);
+        $idCatLevel1 = $request->idCatLevel1;
+        $itemCatCurent=(new CatProductModel())->getItem(['id'=>$idCatLevel1],['task'=>'get-item']);
+        $slugCatLevel1=$itemCatCurent['slug'];
+        $params['parent_id']=$itemCatCurent['id'];
+        $listItemLevel2=(new CatProductModel())->listItems($params,['task'=>'frontend-list-items-by-parent-id']);
+        $itemLevel2First=$listItemLevel2[0];
+        $slugCatLevel2=$itemLevel2First['slug'];
+        $params['parent_id']=$itemLevel2First['id'];
+        $listItemLevel3=(new CatProductModel())->listItems($params,['task'=>'frontend-list-items-by-parent-id']);
+        unset($params['parent_id']);
+        $params['cat_product_id']=$itemLevel2First['id'];
+        $params['limit']=4;
+        $listProductCatLevel2=(new ProductModel())->listItems($params,['task'=>'frontend-list-items']);
+        return view("$this->moduleName.block.ls_cat_level3_and_product",compact('listItemLevel3','listProductCatLevel2','slugCatLevel1','slugCatLevel2'));
     }
-    public function ajaxcat1(Request $request)
+    public function ajaxHoverCatLevel2(Request $request)
     {
         $cats = CatProductModel::all();
         $data = $request->all();
-        $id_cat1 = $request->id_cat1;
-        $slugcat1 = CatProductModel::find($id_cat1)->slug;
-        $temp = 0;
-        $catcs2 = [];
-        foreach ($cats as $cat2) {
-            if ($cat2['parent_id'] == $id_cat1) {
-                $catcs2[] = $cat2;
-            }
-        }
-        $id_cat2 = $catcs2[0]->id;
-        $slugcat2 = CatProductModel::find($id_cat2)->slug;
-        $list_idcat3 = [];
-        foreach ($_SESSION['cat_product'] as $cat3) {
-            if ($id_cat2 == $cat3['parent_id']) {
-                $list_idcat3[] = $cat3['id'];
-            }
-        }
-         $products = ProductModel::whereIn('cat_product_id', $list_idcat3)->inRandomOrder()->limit(4)->get();
-        $list_cat = '';
-        foreach ($_SESSION['cat_product'] as $item_submenu2) {
-            if ($item_submenu2['parent_id'] == $id_cat2) {
-                $list_cat .= list_cat2($slugcat1, $slugcat2, $item_submenu2);
-            }
-        }
-        $list_product = '';
-        if ($products->count() > 0) {
-            $list_product .= list_productheader();
-            foreach ($products as $product) {
-                $list_product .= list_productcontent($product);
-            }
-            $list_product .= list_productfooter();
-        }
-        $result = array(
-            'list_cat' => $list_cat,
-            'list_product' => $list_product,
-            //'test'=> $products->count()
-        );
-        return view("$this->moduleName.templates.menu_cart",compact('itemsCart'));
-        //return response()->json($result, 200);
+        $idCatLevel2 = $request->idCatLevel2;
+        $itemCatCurent=(new CatProductModel())->getItem(['id'=>$idCatLevel2],['task'=>'get-item']);
+        $slugCatLevel2=$itemCatCurent['slug'];
+        $itemCatParent=(new CatProductModel())->getItem(['parent_id'=>$itemCatCurent['parent_id']],['task'=>'get-item-parent']);
+        $slugCatLevel1=$itemCatParent['slug'];
+        $params['parent_id']=$idCatLevel2;
+        $listItemLevel3=(new CatProductModel())->listItems($params,['task'=>'frontend-list-items-by-parent-id']);
+        unset($params['parent_id']);
+        $params['cat_product_id']=$idCatLevel2;
+        $params['limit']=4;
+        $listProductCatLevel2=(new ProductModel())->listItems($params,['task'=>'frontend-list-items']);
+        return view("$this->moduleName.block.ls_cat_level3_and_product",compact('listItemLevel3','listProductCatLevel2','slugCatLevel1','slugCatLevel2'));
     }
     public function ajaxlocal(Request $request)
     {

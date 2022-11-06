@@ -8,67 +8,6 @@
 <script src="{{ asset('/shop/frontend/js/lightslider.js')}}?t=@php echo time() @endphp" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="{{ asset('/shop/frontend/js/main.js')}}?t=@php echo time() @endphp" type="text/javascript"></script>
-<script>
-    $(document).ready(function() {
-        $('.sub-menu1>li').hover(
-            function() {
-                $('.sub-menu1>li').removeClass('active-menucat2');
-                $(this).addClass('active-menucat2');
-                var id_cat2 = $(this).attr('data-id');
-                var _token = $('input[name="_token"]').val();
-                $.ajax({
-                    url: "{{route('ajaxcat3')}}",
-                    method: 'GET',
-                    dataType: 'json',
-                    data: {
-                        id_cat2: id_cat2,
-                        _token: _token,
-                    },
-                    success: function(data) {
-                        $('ul.body_catdetail').html(data['list_cat']);
-                        $('.list-productmn').html(data['list_product']);
-                        //console.log(data['id_cat2']);
-                    },
-                });
-
-            },
-            function() {
-                //$(this).removeClass('active-menucat2');
-            }
-        );
-        $('.cat1name').hover(
-            function() {
-                var id_cat1 = $(this).attr('data-id');
-                var _token = $('input[name="_token"]').val();
-                $.ajax({
-                    url: "{{route('ajaxcat1')}}",
-                    method: 'GET',
-                    dataType: 'json',
-                    data: {
-                        id_cat1: id_cat1,
-                        _token: _token
-                    },
-                    success: function(data) {
-                        //console.log(data.test);
-                        $('ul.body_catdetail').html(data['list_cat']);
-                        $('.list-productmn').html(data['list_product']);
-                        $('.sub-menu1>li').removeClass('active-menucat2');
-                        $('.sub-menu1>li:first-child').addClass('active-menucat2');
-                    },
-                });
-
-            },
-            function() {
-                //$('.content-submenu').css("display", "none");
-                //$('.black-content').css("display", "none");
-                $('.sub-menu1>li:first-child .sub-menu2').css("display", "none");
-            },
-        );
-
-
-    });
-</script>
-
 
 <script>
     $(document).ready(function() {    
