@@ -266,6 +266,12 @@ ul {
     background-color: blue;
     border-radius: 100%;
 }
+.stepper-circle .stepper-circle-icon-old{
+    width: 12px;
+    height: 12px;
+    background-color:#b6c0ce;
+    border-radius: 100%;
+}
 .wp-status-order .stepper-label{
     font-weight: 600;
     color: #52637a;

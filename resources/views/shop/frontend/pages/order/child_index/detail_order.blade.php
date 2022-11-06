@@ -3,11 +3,11 @@ use App\Helpers\Template as Template;
 use App\Helpers\MyFunction;
 use App\Model\Shop\UnitModel;
 $status_order=[
-['name'=>'Đang xử lý','slug'=>'dangXuLy'],
-['name'=>'Đã xác nhận','slug'=>'daXacNhan'],
-['name'=>'Đang giao hàng','slug'=>'dangGiaoHang'],
-['name'=>'Đã giao hàng','slug'=>'daGiaoHang'],
-['name'=>'Hoàn tất','slug'=>'hoanTat'],
+    ['temp'=>5,'name'=>'Hoàn tất','slug'=>'hoanTat'],
+    ['temp'=>4,'name'=>'Đã giao hàng','slug'=>'daGiaoHang'],
+    ['temp'=>3,'name'=>'Đang giao hàng','slug'=>'dangGiaoHang'],
+    ['temp'=>2,'name'=>'Đã xác nhận','slug'=>'daXacNhan'],
+    ['temp'=>1,'name'=>'Đang xử lý','slug'=>'dangXuLy'],
 ];
 @endphp
 <div class="header d-flex justify-content-between">
@@ -18,6 +18,12 @@ $status_order=[
 @php
 $info_buyer=json_decode($order_detail['buyer'], true);
 $ngayDatHang = MyFunction::formatDateFrontend($order_detail['created_at']);
+foreach($status_order as $value){
+    if($value['slug']==$order_detail['status_order']){
+        $indexCurent=$value['temp'];
+        break;
+    }
+}
 @endphp
 <div class="wp-content">
     <div class="top-tab-order">
@@ -33,7 +39,7 @@ $ngayDatHang = MyFunction::formatDateFrontend($order_detail['created_at']);
             <li>
                 <div class="d-flex">
                     <div class="stepper-circle">
-                        <div class="{{$item['slug']==$order_detail['status_order']?'stepper-circle-icon':''}}"></div>
+                        <div class="{{$item['slug']==$order_detail['status_order']?'stepper-circle-icon':''}} {{$item['temp'] < $indexCurent?'stepper-circle-icon-old':''}}"></div>
                     </div>
                     <div class="stepper-label ml-2">{{$item['name']}}</div>
                 </div>
