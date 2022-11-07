@@ -5,15 +5,15 @@
     <div class="row">
         <div class="col-md-12">
             <div class="" id="breadcrumb-wp">
-                @include("$moduleName.pages.$controllerName.child_index.breadcrumb4")
+                @include("$moduleName.pages.$controllerName.child_cat_level3.breadcrumb")
             </div>
         </div>
         <div class="col-xl-3 trademark">
-            @include("$moduleName.pages.$controllerName.child_index.listbox_select")
+            @include("$moduleName.pages.$controllerName.partial.listbox_select")
         </div>
         <div class="col-12 col-xl-9">
             <div class="cat-product-out">
-                @include("$moduleName.pages.$controllerName.child_index.cat_product")
+                @include("$moduleName.pages.$controllerName.partial.product_highlight")
             </div>
         </div>
     </div>

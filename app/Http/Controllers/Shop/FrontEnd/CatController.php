@@ -25,27 +25,27 @@ class CatController extends ShopFrontEndController
         $_SESSION['local'] = $local = Tinhthanhpho::all();
         $_SESSION['cat_product'] = $catps = data_tree1($data, 0);
     }
-    public function index($slug)
+    public function catLevel1($slug)
     {
-        $catcs = CatProductModel::where('slug', $slug)->get();
-        $catc = $catcs[0];
-        $products=product_of_cat($catc->id);
-        return view($this->pathViewController . 'index', compact('catc','products'));
+        $itemCatCurent = (new CatProductModel())->getItem(['slug'=>$slug],['task'=>'get-item-slug']);
+        $products=(new ProductModel())->listItems(['cat_product_id'=>$itemCatCurent['id']],['task'=>'frontend-list-items']);
+        return view($this->pathViewController . 'cat_level1', compact('itemCatCurent','products'));
     }
-    public function cat_level2($slug, $slug1)
+    public function catLevel2($slug, $slug1)
     {
-
-        $catc1s = CatProductModel::where('slug', $slug1)->get();
-        $catc1 = $catc1s[0];
-        //return(parent_cat($catc1->id)->name);
-        $products=product_of_cat($catc1->id);
-        return view($this->pathViewController . 'cat_productlevel3', compact('catc1','products'));
+        $itemCatCurent = (new CatProductModel())->getItem(['slug'=>$slug1],['task'=>'get-item-slug']); 
+        $products=(new ProductModel())->listItems(['cat_product_id'=>$itemCatCurent['id']],['task'=>'frontend-list-items']);
+        $itemCatParent=(new CatProductModel)->getItem(['parent_id'=>$itemCatCurent['parent_id']],['task'=>'get-item-parent']);
+        return view($this->pathViewController . 'cat_level2', compact('itemCatCurent','products','itemCatParent'));
     }
-    public function cat_level3($slug, $slug1, $slug2)
+    public function catLevel3($slug, $slug1, $slug2)
     {
-        $cat2cs = CatProductModel::where('slug', $slug2)->get();
-        $catc2 = $cat2cs[0];
-        $products=product_of_cat($catc2->id);
-        return view($this->pathViewController . 'cat_productlevel4', compact('catc2', 'products'));
+        $itemCatCurent = (new CatProductModel())->getItem(['slug'=>$slug2],['task'=>'get-item-slug']);
+        $params['parent_id']=$itemCatCurent['parent_id'];
+        $itemCatParentLevel1=(new CatProductModel)->getItem($params,['task'=>'get-item-parent']);
+        $params['up_level']=2;
+        $itemCatParentLevel2=(new CatProductModel)->getItem($params,['task'=>'get-item-parent']);
+        $products=(new ProductModel())->listItems(['cat_product_id'=>$itemCatCurent['id']],['task'=>'frontend-list-items']);
+        return view($this->pathViewController . 'cat_level3', compact('itemCatCurent','itemCatParentLevel1','itemCatParentLevel2', 'products'));
     }
 }

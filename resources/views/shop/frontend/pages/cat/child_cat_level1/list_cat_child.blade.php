@@ -1,27 +1,33 @@
+@php
+use App\Helpers\MyFunction;
+use App\Model\Shop\CatProductModel;
+
+$listCatAll=CatProductModel::all();
+@endphp
 <div class="title-cat d-flex">
     <div class="icon-cat-product">
         <img src="{{asset('images/shop/vuongwin.png')}}" alt="">
     </div>
-    <h1>{{$catc['name']}}</h1>
+    <h1>{{$itemCatCurent['name']}}</h1>
 </div>
 <div class="body-cat-product">
     <ul class="clearfix">
-        @foreach($_SESSION['cat_product'] as $catp1)
-        @if($catc['id']==$catp1['parent_id'])
+        @foreach($listCatAll as $item)
+        @if($itemCatCurent['id']==$item['parent_id'])
         <li class="">
             <div class="d-flex">
                 <div class="item-cat-left text-center">
-                    <a href="{{route('fe.cat2',[$catc->slug,$catp1->slug])}}">
-                        <div><img src="{{asset($catp1['image'])}}" alt="" style="width:70%"></div>
-                        <h3>{{$catp1['name']}}</h3>
-                        <span>{{count(product_of_cat($catp1['id']))}} sản phẩm</span>
+                    <a href="{{route('fe.cat2',[$itemCatCurent->slug,$item->slug])}}">
+                        <div><img src="{{asset($item['image'])}}" alt="" style="width:70%"></div>
+                        <h3>{{$item['name']}}</h3>
+                        <span>{{count(product_of_cat($item['id']))}} sản phẩm</span>
                     </a>
                 </div>
                 @php
                     $temp=0;
                 @endphp
-                @foreach($_SESSION['cat_product'] as $catp2)
-                @if($catp1['id'] == $catp2['parent_id'])
+                @foreach($listCatAll as $catp2)
+                @if($item['id'] == $catp2['parent_id'])
                 @php
                     $temp++;
                 @endphp
@@ -30,17 +36,17 @@
                 <div class="item-cat-right">
                     @if($temp < 6 )
                     <ul>
-                        @foreach($_SESSION['cat_product'] as $catp2)
-                        @if($catp1['id'] == $catp2['parent_id'])
-                        <li><a href="{{route('fe.cat2',[$catc->slug,$catp1->slug,$catp2->slug])}}">{{$catp2['name']}}</a></li>
+                        @foreach($listCatAll as $catp2)
+                        @if($item['id'] == $catp2['parent_id'])
+                        <li><a href="{{route('fe.cat2',[$itemCatCurent->slug,$item->slug,$catp2->slug])}}">{{$catp2['name']}}</a></li>
                         @endif
                         @endforeach
                     </ul>
                     @else
                     <ul class="d-flex flex-wrap">
-                        @foreach($_SESSION['cat_product'] as $catp2)
-                        @if($catp1['id'] == $catp2['parent_id'])
-                        <li style="width:48%"><a href="{{route('fe.cat2',[$catc->slug,$catp1->slug,$catp2->slug])}}">{{$catp2['name']}}</a></li>
+                        @foreach($listCatAll as $catp2)
+                        @if($item['id'] == $catp2['parent_id'])
+                        <li style="width:48%"><a href="{{route('fe.cat2',[$itemCatCurent->slug,$item->slug,$catp2->slug])}}">{{$catp2['name']}}</a></li>
                         @endif
                         @endforeach
                     </ul>

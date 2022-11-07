@@ -79,6 +79,7 @@ class CatProductModel extends BackEndModel
                 $result[$value['id']] = str_repeat(config('myconfig.template.char_level'), $value['depth'] - 1) . $value['name'];
             }
         }
+    
         if ($options['task'] == "frontend-list-items-level-2"){
             $user = \Session::get('user');
 
@@ -116,7 +117,7 @@ class CatProductModel extends BackEndModel
                             ->toArray();
         }
         if ($options['task'] == "frontend-list-items-by-parent-id"){
-            $query = self::select('id','name','image','slug')
+            $query = self::select('id','name','image','slug','parent_id')
                          ->where('status','=','active')
                          ->where('parent_id',$params['parent_id'])
                          ->orderBy('_lft');
@@ -145,8 +146,18 @@ class CatProductModel extends BackEndModel
                 ->where('id', $params['id'])->first();
         }
         if ($options['task'] == 'get-item-parent') {
+            $result = self::select('id', 'name', 'parent_id', 'image', 'slug')->where('id', $params['parent_id'])->first();
+            if(isset($params['up_level'])){
+                $catParent=$result;
+                for ($i = 1; $i < $params['up_level']; $i++){
+                     $catParent = self::getParent($catParent['parent_id']);
+                }
+                $result=$catParent; 
+            }                   
+        }
+        if ($options['task'] == 'get-item-slug') {
             $result = self::select('id', 'name', 'parent_id', 'image', 'slug')
-                ->where('parent_id', $params['parent_id'])->first();
+                ->where('slug', $params['slug'])->first();
         }
         return $result;
     }
@@ -202,6 +213,11 @@ class CatProductModel extends BackEndModel
                     ->where('_lft','<=',$item->_rgt);
 
         return $result = $query->pluck('id')->toArray();
+    }
+    public static function getParent($parent_id='')
+    {
+        $item = self::where('id', $parent_id)->first();
+        return $item;
     }
     // public function child()
     // {

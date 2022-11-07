@@ -5,33 +5,32 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="" id="breadcrumb-wp">
-                        @include("$moduleName.pages.$controllerName.child_index.breadcrumb3")
+                        @include("$moduleName.pages.$controllerName.child_cat_level1.breadcrumb")
                     </div>
                 </div>
                 <div class="col-xl-3 trademark">
-                    @include("$moduleName.pages.$controllerName.child_index.listbox_select")
+                    @include("$moduleName.pages.$controllerName.partial.listbox_select")
                 </div>
-                <div class="col-12 col-xl-9">
-                    <div id="cat_detail" class="">
-                        @include("$moduleName.pages.$controllerName.child_index.cat_detail")
+                <div class="col-xl-9 col-12">
+                    <div class="product-of-cat">
+                        @include("$moduleName.pages.$controllerName.child_cat_level1.list_cat_child")
                     </div>
                     <div id="productsl" class="mt-5 p-4">
-                        @include("$moduleName.pages.$controllerName.child_index.sellingr")
+                        @include("$moduleName.pages.$controllerName.partial.product_selling")
                     </div>
                     <div class="cat-product-out mt-5">
-                        @include("$moduleName.pages.$controllerName.child_index.cat_product")
+                        @include("$moduleName.pages.$controllerName.partial.product_highlight")
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="new-view mt-3">
+                    <div class="new-view mt-5">
                     @include("$moduleName.templates.new_view")
                     </div>
                 </div>
             </div>     
     </div>
-    
     <div class="service-tdoctor mt-5">
         @include("$moduleName.templates.info_service")
     </div>

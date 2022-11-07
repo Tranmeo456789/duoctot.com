@@ -23,7 +23,6 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('/don-thuoc-khach-hang/{id}','PrescripController@prescripCustomer')->name('fe.prescrip.prescripCustomer');
 
     Route::get('/gio-hang/{user_sell}','CartController@view')->name('fe.product.viewcart');
-
     Route::get('/gio-hang-full','CartController@cart_product')->name('fe.product.cart');
     Route::get('/gio-hang-trong','CartController@cart_null')->name('fe.product.cart_null');
     Route::post('/them-san-pham-gio-hang','CartController@addproduct')->name('fe.cart.addproduct');
@@ -32,7 +31,8 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('/danh-sach-kho-hang','WarehouseController@getList')->name('fe.warehouse.getList');
 
     Route::get('/xoa-san-pham-gio-hang/{user_sell}-{id}','CartController@delete')->name('fe.cart.delete');
-    Route::get('/{slug}','CatController@index')->name('fe.cat');
-    Route::get('/{slug1}/{slug2}','CatController@cat_level2')->name('fe.cat2');
-    Route::get('/{slug1}/{slug2}/{slug3}','CatController@cat_level3')->name('fe.cat3');
+    
+    Route::get('/{slug}','CatController@catLevel1')->name('fe.cat');
+    Route::get('/{slug1}/{slug2}','CatController@catLevel2')->name('fe.cat2');
+    Route::get('/{slug1}/{slug2}/{slug3}','CatController@catLevel3')->name('fe.cat3');
 });
