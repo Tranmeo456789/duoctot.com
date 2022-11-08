@@ -150,6 +150,7 @@ class ProductModel extends BackEndModel
             $result =  $query->orderBy('id', 'desc')
                              ->paginate($params['limit']);
         }
+        
         if($options['task'] == "admin-list-items-in-selectbox") {
             $query = $this->select('id', 'name')
                         ->where('id','>',1)
@@ -254,6 +255,13 @@ class ProductModel extends BackEndModel
                             ->OfUser();
             
             $result = $query->get()->toArray();
+        }
+        if ($options['task'] == "count-number-product-in-cat") {
+            $query = $this::select('id','name')
+                            ->where('status_product','da_duyet')
+                            ->whereIn('cat_product_id', CatProductModel::getChild($params['cat_product_id']))->get();
+
+            $result =  count($query);
         }
         return $result;
     }

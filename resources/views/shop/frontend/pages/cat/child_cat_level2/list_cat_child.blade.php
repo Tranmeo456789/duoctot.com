@@ -1,8 +1,7 @@
 @php
-use App\Helpers\MyFunction;
 use App\Model\Shop\CatProductModel;
 
-$listCatAll=CatProductModel::all();
+$listCatAll=(new CatProductModel())->listItems(null, ['task'  => 'list-items-front-end']);
 @endphp
 <div class="">
     <div class="title_catdetail mb-2 d-flex">

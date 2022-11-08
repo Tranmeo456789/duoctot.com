@@ -1,18 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\Shop\FrontEnd;
-
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
-use App\Model\Shop\Cat_productModel;
 use App\Model\Shop\CatProductModel;
-use App\Model\Shop\Tinhthanhpho;
 use App\Model\Shop\ProductModel;
-
-include "app/Helpers/data.php";
-
 class CatController extends ShopFrontEndController
 {
     public function __construct()
@@ -21,9 +15,6 @@ class CatController extends ShopFrontEndController
         $this->pathViewController = "$this->moduleName.pages.$this->controllerName.";
         $this->pageTitle          = 'danh mục';
         parent::__construct();
-        $data = CatProductModel::all();
-        $_SESSION['local'] = $local = Tinhthanhpho::all();
-        $_SESSION['cat_product'] = $catps = data_tree1($data, 0);
     }
     public function catLevel1($slug)
     {

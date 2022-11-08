@@ -2,7 +2,7 @@
 @section('content')
 <div class="wp-inner mt-2">
     <div class="" id="breadcrumb-wp">
-        @include("$moduleName.pages.$controllerName.child_index.breadcrumb_detail")
+        @include("$moduleName.pages.$controllerName.child_detail.breadcrumb")
     </div>
     <div id="detail_product">
         <div class="row">

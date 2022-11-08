@@ -1,8 +1,8 @@
 @php
-use App\Helpers\MyFunction;
 use App\Model\Shop\CatProductModel;
+use App\Model\Shop\ProductModel;
 
-$listCatAll=CatProductModel::all();
+$listCatAll=(new CatProductModel())->listItems(null, ['task'  => 'list-items-front-end']);
 @endphp
 <div class="title-cat d-flex">
     <div class="icon-cat-product">
@@ -12,22 +12,25 @@ $listCatAll=CatProductModel::all();
 </div>
 <div class="body-cat-product">
     <ul class="clearfix">
-        @foreach($listCatAll as $item)
-        @if($itemCatCurent['id']==$item['parent_id'])
+        @foreach($listCatAll as $itemLevel2)
+        @if($itemCatCurent['id']==$itemLevel2['parent_id'])
+        @php
+            $countProduct=(new ProductModel())->countItems(['cat_product_id'=> $itemLevel2['id']],['task' => 'count-number-product-in-cat']);
+        @endphp
         <li class="">
             <div class="d-flex">
                 <div class="item-cat-left text-center">
-                    <a href="{{route('fe.cat2',[$itemCatCurent->slug,$item->slug])}}">
-                        <div><img src="{{asset($item['image'])}}" alt="" style="width:70%"></div>
-                        <h3>{{$item['name']}}</h3>
-                        <span>{{count(product_of_cat($item['id']))}} sản phẩm</span>
+                    <a href="{{route('fe.cat2',[$itemCatCurent['slug'],$itemLevel2['slug']])}}">
+                        <div><img src="{{asset($itemLevel2['image'])}}" alt="" style="width:70%"></div>
+                        <h3>{{$itemLevel2['name']}}</h3>
+                        <span>{{$countProduct}} sản phẩm</span>
                     </a>
                 </div>
                 @php
                     $temp=0;
                 @endphp
-                @foreach($listCatAll as $catp2)
-                @if($item['id'] == $catp2['parent_id'])
+                @foreach($listCatAll as $itemLevel3)
+                @if($itemLevel2['id'] == $itemLevel3['parent_id'])
                 @php
                     $temp++;
                 @endphp
@@ -36,17 +39,17 @@ $listCatAll=CatProductModel::all();
                 <div class="item-cat-right">
                     @if($temp < 6 )
                     <ul>
-                        @foreach($listCatAll as $catp2)
-                        @if($item['id'] == $catp2['parent_id'])
-                        <li><a href="{{route('fe.cat2',[$itemCatCurent->slug,$item->slug,$catp2->slug])}}">{{$catp2['name']}}</a></li>
+                        @foreach($listCatAll as $itemLevel3)
+                        @if($itemLevel2['id'] == $itemLevel3['parent_id'])
+                        <li><a href="{{route('fe.cat2',[$itemCatCurent['slug'],$itemLevel2['slug'],$itemLevel3['slug']])}}">{{$itemLevel3['name']}}</a></li>
                         @endif
                         @endforeach
                     </ul>
                     @else
                     <ul class="d-flex flex-wrap">
-                        @foreach($listCatAll as $catp2)
-                        @if($item['id'] == $catp2['parent_id'])
-                        <li style="width:48%"><a href="{{route('fe.cat2',[$itemCatCurent->slug,$item->slug,$catp2->slug])}}">{{$catp2['name']}}</a></li>
+                        @foreach($listCatAll as $itemLevel3)
+                        @if($itemLevel2['id'] == $itemLevel3['parent_id'])
+                        <li style="width:48%"><a href="{{route('fe.cat2',[$itemCatCurent['slug'],$itemLevel2['slug'],$itemLevel3['slug']])}}">{{$itemLevel3['name']}}</a></li>
                         @endif
                         @endforeach
                     </ul>
@@ -61,7 +64,7 @@ $listCatAll=CatProductModel::all();
 </div>
 <div class="bodycat-productrespon">
     @php
-    $item_sub_menu1s = [
+    $itemLevel2_sub_menu1s = [
     [ 'name' => 'Sinh lý - Nội tiết tố', 'id' => 6,'parent_id'=>1 ,'image'=>'sm1.png','quanty'=>44],
     [ 'name' => 'Sức khỏe tim mạch', 'id' => 7,'parent_id'=>1,'image'=>'sm2.png','quanty'=>44],
     [ 'name' => 'Hỗ trợ tiêu hóa', 'id' => 8,'parent_id'=>1,'image'=>'sm3.png','quanty'=>49],
@@ -74,7 +77,7 @@ $listCatAll=CatProductModel::all();
     [ 'name' => 'Dinh dưỡng', 'id' => 15,'parent_id'=>1,'image'=>'sm10.png','quanty'=>99],
     ];
 
-    $item_submenu2s = [
+    $itemLevel2_submenu2s = [
     [ 'name' => 'Sinh lý nam', 'id' => 40,'parent_id'=>6,'image'=>'sl1.png'],
     [ 'name' => 'Sinh lý nữ', 'id' => 41,'parent_id'=>6,'image'=>'sl2.png'],
     [ 'name' => 'Hỗ trợ mãn kinh', 'id' => 42,'parent_id'=>6,'image'=>'sl3.png'],
@@ -137,22 +140,22 @@ $listCatAll=CatProductModel::all();
     ];
     @endphp
     <ul>
-        @foreach ($item_sub_menu1s as $item_sub_menu1)
+        @foreach ($itemLevel2_sub_menu1s as $itemLevel2_sub_menu1)
         <li>
             <div class=" position-relative catparentc">
                 <div class="d-flex titlet">
-                    <div class="rimg-center4"><img src="{{asset('images/shop/' .  $item_sub_menu1['image'] )}}" alt=""></div>
+                    <div class="rimg-center4"><img src="{{asset('images/shop/' .  $itemLevel2_sub_menu1['image'] )}}" alt=""></div>
                     <div>
-                        <h1>{{$item_sub_menu1['name']}}</h1>
-                        <p>{{$item_sub_menu1['quanty']}} sản phẩm</p>
+                        <h1>{{$itemLevel2_sub_menu1['name']}}</h1>
+                        <p>{{$itemLevel2_sub_menu1['quanty']}} sản phẩm</p>
                     </div>
                 </div>
                 <div class="vissubmenu"><img src="{{asset('images/shop/arrow.png')}}" alt=""></div>
                 <div class="submenua1">
                     <ul>
-                        @foreach ($item_submenu2s as $item_submenu2)
-                        @if ($item_submenu2['parent_id'] == $item_sub_menu1['id'] )
-                        <li><a href="">{{$item_submenu2['name']}}</a></li>
+                        @foreach ($itemLevel2_submenu2s as $itemLevel2_submenu2)
+                        @if ($itemLevel2_submenu2['parent_id'] == $itemLevel2_sub_menu1['id'] )
+                        <li><a href="">{{$itemLevel2_submenu2['name']}}</a></li>
                         @endif
                         @endforeach
                     </ul>

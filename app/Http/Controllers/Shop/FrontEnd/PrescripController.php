@@ -9,7 +9,6 @@ use App\Model\Shop\UsersModel;
 use App\Model\Shop\ProvinceModel;
 use App\Model\Shop\WardModel;
 use App\Model\Shop\DistrictModel;
-use App\Model\Shop\Cat_productModel;
 use App\Model\Shop\CatProductModel;
 use App\Model\Shop\ProductModel;
 use App\Http\Requests;
@@ -21,7 +20,6 @@ use App\Model\Shop\PrescripModel;
 use Session;
 use DB;
 use Illuminate\Support\Str;
-include "app/Helpers/data.php";
 class PrescripController extends ShopFrontEndController
 {
     public function __construct()
@@ -31,9 +29,6 @@ class PrescripController extends ShopFrontEndController
         $this->pageTitle          = 'Đơn thuốc';
         $this->model = new MainModel();
         parent::__construct();
-        $data = CatProductModel::all();
-
-        $_SESSION['cat_product'] = $catps = data_tree1($data, 0);
     }
     public function index(Request $request)
     {

@@ -3,8 +3,7 @@ use App\Helpers\MyFunction;
 use App\Model\Shop\CatProductModel;
 
 $listCatLevel1=(new CatProductModel())->listItems(['parent_id' => 1],['task'=>'frontend-list-items-by-parent-id']);
-
-$listCatAll=CatProductModel::all();
+$listCatAll=(new CatProductModel())->listItems(null, ['task'  => 'list-items-front-end']);
 @endphp
 <ul id="main-menu" class="d-flex list-item">
     @foreach ($listCatLevel1 as $itemLevel1)

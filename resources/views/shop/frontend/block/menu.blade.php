@@ -186,74 +186,11 @@
                     <div class="rimg-center"><img src="{{asset('images/shop/news1.png')}}" alt=""></div>
                     <h2>Tra cứu lịch sử đơn hàng</h2>
                 </div>
-            </a>       
+            </a>
         </div>
 
         <div class="list-menures">
-            <h3>
-                <div class="container-menures"><a href="">Trang chủ</a></div>
-            </h3>
-            <ul>
-                @foreach ($_SESSION['cat_product'] as $itemLevel1)
-                @if($itemLevel1['parent_id']==1)
-                <li>
-                    <div class="container-menures position-relative parentsmenu">
-                        <div class=" pr-4">
-                            <a href="">{{$itemLevel1['name']}}</a>
-                        </div>
-                        <div class="iconmnrhv"><img src="{{asset('images/shop/arrowd.png')}}" alt=""></div>
-                        <div class="submenu1res">
-                            <ul>
-                                @foreach ( $_SESSION['cat_product'] as $item_catres2)
-                                @if ($item_catres2['parent_id'] == $itemLevel1['id'])
-                                <li><a href="">{{$item_catres2['name']}}</a></li>
-                                @endif
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-                @endif
-                @endforeach
-                <li>
-                    <div class="container-menures position-relative parentsmenu">
-                        <div class=" pr-4">
-                            <a href="">Nhà thuốc</a>
-                        </div>
-                    </div>
-                </li>
-                @if(Session::has('user'))
-                <li>
-                    <div class="container-menures position-relative parentsmenu">
-                        <div class=" pr-4">
-                            <a href="{{route('dashboard')}}">Tài khoản</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="container-menures position-relative parentsmenu">
-                        <div class=" pr-4">
-                            <a href="{{route('user.logout')}}">Đăng xuất</a>
-                        </div>
-                    </div>
-                </li>
-                @else
-                <li>
-                    <div class="container-menures position-relative parentsmenu">
-                        <div class=" pr-4">
-                            <a class="btn-register-res">Đăng ký</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="container-menures position-relative parentsmenu">
-                        <div class=" pr-4">
-                            <a class="btn-login-res">Đăng nhập</a>
-                        </div>
-                    </div>
-                </li>
-                @endif
-            </ul>
+            @include('shop.frontend.block.submenu_responsive')
         </div>
 
         <div class="btn-advice container-menures">

@@ -17,18 +17,15 @@ use App\Helpers\MyFunction;
 use Session;
 use DB;
 use Illuminate\Support\Str;
-include "app/Helpers/data.php";
 class OrderController extends ShopFrontEndController
 {
     public function __construct()
     {
-        $this->controllerName     = 'product';
+        $this->controllerName     = 'order';
         $this->pathViewController = "$this->moduleName.pages.$this->controllerName.";
         $this->pageTitle          = 'Đơn hàng';
         $this->model = new MainModel();
         parent::__construct();
-        $data = CatProductModel::all();
-        $_SESSION['cat_product'] = $catps = data_tree1($data, 0);
     }
     public function list(){
         $params['status']='tat_ca';
@@ -106,9 +103,7 @@ class OrderController extends ShopFrontEndController
                 'redirect_url' => route("home"),
                 'message'      => $notify,
             ]);
-        }
-
-        
+        }    
     }
     public function success($code)
     {

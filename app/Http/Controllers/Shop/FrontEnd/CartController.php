@@ -8,7 +8,6 @@ use DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
-use App\Model\Shop\Cat_productModel;
 use App\Model\Shop\CatProductModel;
 use App\Model\Shop\ProductModel;
 use App\Model\Shop\ProvinceModel;
@@ -16,8 +15,6 @@ use App\Model\Shop\DistrictModel;
 use App\Model\Shop\WardModel;
 use App\Model\Shop\UsersModel;
 use App\Model\Shop\WarehouseModel;
-include "app/Helpers/data.php";
-include_once "app/Helpers/data_cart.php";
 class CartController extends ShopFrontEndController
 {
     public function __construct()
@@ -25,10 +22,8 @@ class CartController extends ShopFrontEndController
         $this->controllerName     = 'cart';
         $this->pathViewController = "$this->moduleName.pages.$this->controllerName.";
         $this->pageTitle          = 'Giỏ hàng';
-
         parent::__construct();
-        $data = CatProductModel::all();
-        $_SESSION['cat_product'] = $catps = data_tree1($data, 0);
+       
     }
     public function view(Request $request)
     {
