@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
-class CreatePrescripsTable extends Migration
+class CreateKeywordSearchTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,12 @@ class CreatePrescripsTable extends Migration
      */
     public function up()
     {
-        Schema::create('prescrips', function (Blueprint $table) {
+        Schema::create('keyword_search', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('info_product',500)->nullable($value = true);
-            $table->unsignedBigInteger('user_id')->nullable($value = true);
-            $table->unsignedBigInteger('user_sell')->nullable($value = true);
-            $table->string('buyer',500)->nullable($value = true);
-            
+            $table->string('keyword',500)->nullable($value = true);
+            $table->unsignedBigInteger('number_search')->nullable($value = true);
+            $table->unsignedBigInteger('created_by')->nullable($value = true);
+            $table->unsignedBigInteger('update_by')->nullable($value = true);
             $table->timestamps();
         });
     }

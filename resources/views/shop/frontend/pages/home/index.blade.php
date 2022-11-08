@@ -15,16 +15,13 @@
         </div>
     </div>
     <div class="wp-inner">
-        <div id="hisd">
+        <div id="hisd" class="position-relative">
             <div class="d-flex justify-content-center">
                 <div id="form-search" class="d-flex justify-content-center">
                     @include("$moduleName.pages.$controllerName.child_index.search")
                 </div>
             </div>
         </div>
-        <!-- <div id="service-doctor">
-            @include("$moduleName.pages.$controllerName.child_index.service")
-        </div> -->
         <div id="buy-medicine" class="mt-5">
             @include("$moduleName.pages.$controllerName.child_index.buy_medicine")
         </div>

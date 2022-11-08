@@ -30,6 +30,9 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
 
     Route::get('/danh-sach-kho-hang','WarehouseController@getList')->name('fe.warehouse.getList');
 
+    Route::post('/luu-noi-dung-tim-kiem-trang-chu','SearchController@saveHome')->name('fe.search.saveHome');
+    Route::get('/tim-kiem/{keyword}','SearchController@viewHome')->name('fe.search.viewHome');
+
     Route::get('/xoa-san-pham-gio-hang/{user_sell}-{id}','CartController@delete')->name('fe.cart.delete');
     
     Route::get('/{slug}','CatController@catLevel1')->name('fe.cat');
