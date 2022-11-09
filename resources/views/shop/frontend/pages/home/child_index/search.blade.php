@@ -19,7 +19,7 @@
         <ul class="d-flex justify-content-between">
             @foreach($listKeywordHight as $val)
                 <li>
-                    <a>{{$val['keyword']}}</a>
+                    <a href="{{route('fe.search.viewHome',$val['keyword'])}}">{{$val['keyword']}}</a>
                 </li> 
             @endforeach     
         </ul>

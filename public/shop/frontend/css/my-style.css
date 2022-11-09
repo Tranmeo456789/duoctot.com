@@ -846,6 +846,40 @@ input[type="radio"] {
     font-size: 20px;
     padding: 15px 0px;
 }
-
-
+.wp-search-menu{
+    padding-top: 20px;
+    margin-left: 150px;
+    width: 30%;
+}
+.wp-search-menu .wp-input-search{
+    border-radius: 100px 0 0 100px;
+    padding: 0 8px 0 16px;
+    min-height: 36px;
+    position: relative;
+    display: flex;
+    width: 100%;
+    font-family: inherit;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #d8e0e8;
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.wp-input-search input{
+    outline: none;
+    border: none;
+    width: 100%;
+    font-size: 14px;
+    line-height: 20px;
+}
+.wp-search-menu .wp-btn-search{
+    margin-left: -1px;
+    z-index: 2;
+}
+.wp-search-menu .wp-btn-search .btn-search-home{
+    background: #f59e0b;
+    outline: none;
+    border-radius: 0px 100px 100px 0px;
+    padding: 0 28px;
+    height: 100%;
+}
 

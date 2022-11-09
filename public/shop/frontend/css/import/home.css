@@ -58,8 +58,14 @@
     border-radius: 25px;
     text-align: center;
     padding: 3px 8px;
+    cursor: pointer;
 }
-
+#form-search .form-search-inner li a{
+    color: #1B1D2C;
+}
+#form-search .form-search-inner li:hover{
+    background: #e1e6eb;
+}
 #head-top-respon {
     display: none;
 }
