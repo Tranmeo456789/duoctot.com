@@ -851,3 +851,11 @@ $(document).on('change', "#name-store", function (event) {
     $('.ls-product-select').html(' ');
     $('.ls-product-select').css("display", "none");
 });
+$(document).on('keyup', ".input-search-info", function (event) {
+    var keyword = $(this).val();
+    if(keyword=='' || keyword[0]==' '){
+        $('.btn-search-home').attr("disabled","disabled");
+    }else{
+        $('.btn-search-home').removeAttr("disabled");
+    }      
+});

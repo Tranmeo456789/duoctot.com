@@ -39,7 +39,7 @@
             @include("$moduleName.templates.selling_product")
         </div>
         <div id="selling-product" class="mt-5">
-            @include("$moduleName.pages.$controllerName.child_index.subject_product")
+            @include("$moduleName.pages.$controllerName.child_index.product_in_object")
         </div>
     </div>
     <!-- <div id="qadoctor" class="mt-3 pb-5">

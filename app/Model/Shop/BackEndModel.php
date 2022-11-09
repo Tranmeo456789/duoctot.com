@@ -35,7 +35,9 @@ class BackEndModel extends Model
     }
     public function setModifiedHistory(&$params){
       $params['updated_at']    = date('Y-m-d H:i:s');
-      $params['updated_by'] = \Session::get('user')['user_id'];
+      if(Session::has('user')){
+        $params['updated_by'] = \Session::get('user')['user_id'];
+      }
     }
     public function getMaxCode($params = null, $options = null){
       $member =  DB::connection('mysql_share_data')

@@ -42,11 +42,14 @@
     height: 46px;
     background: #FFFFFF;
     border: 1px solid #98FAFB;
+    outline: none;
     border-radius: 40px;
     font-size: 20px;
     text-indent: 25px;
 }
-
+#form-search .form-search-inner input:focus {
+    border: 1px solid #83dddf;
+}
 #form-search .form-search-inner li {
     font-weight: 400;
     font-size: 15px;
