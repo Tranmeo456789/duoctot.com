@@ -6,7 +6,7 @@
     <body>
         <div id="site">
             <div id="container">
-                @include('shop.frontend.block.menu_yes_search')
+                @include('shop.frontend.block.menu.menu_yes_search')
                 <div id="main-content-wp" class="home-page clearfix">
                     @yield('content')
                 </div>

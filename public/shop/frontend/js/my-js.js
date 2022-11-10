@@ -859,7 +859,7 @@ $(document).on('keyup', ".input-search-info", function (event) {
         $('.btn-search-home').removeAttr("disabled");
     }      
 });
-$(document).on('click', ".wp-search-menu .wp-input-search input", function (event) {
+$(document).on('click', ".wp-input-search input", function (event) {
     $('.lc-mask-search').css("opacity", 1);
     $('.lc-mask-search').css("visibility", "visible"); 
     $('.ls-history').css("display", "block");

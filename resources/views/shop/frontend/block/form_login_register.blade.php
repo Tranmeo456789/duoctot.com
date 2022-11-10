@@ -6,8 +6,8 @@
     </div>
     <div class="d-flex justify-content-center">
         <div class="wp-content">
-            @include("$moduleName.block.form_login")
-            @include("$moduleName.block.form_register")
+            @include("$moduleName.block.child_form_login_register.form_login")
+            @include("$moduleName.block.child_form_login_register.form_register")
             <form action="" class="wp-content-forgetpw">
                 <div class="content text-center">
                     <div class="qpassword mb-3"><a>Quên mật khẩu</a></div>

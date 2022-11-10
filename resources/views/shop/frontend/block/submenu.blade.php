@@ -35,7 +35,7 @@ $listCatAll=(new CatProductModel())->listItems(null, ['task'  => 'list-items-fro
                 <div class="col-9 px-0 content-submenu-right">
                     <div class="sub-menu2 ">
                         <div class="cat_detail list_cat_level3_products">
-                            @include('shop.frontend.block.ls_cat_level3_and_product')
+                            @include('shop.frontend.block.child_submenu.ls_cat_level3_and_product')
                         </div>
                     </div>
                 </div>

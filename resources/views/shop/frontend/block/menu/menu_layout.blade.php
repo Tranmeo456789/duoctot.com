@@ -28,43 +28,31 @@
         <div class="black-res-screen"></div>
     </div>
     <div id="head-top" class="clearfix position-relative">
-        <div class="wp-inner clearfix">
-            <a href="{{route('home')}}" title="" id="payment-link" class="fl-left"><img style="width:213px" src="{{asset('images/shop/logo_topbar2.png')}}" alt=""></a>
-            <div class="fl-left wp-search-menu">
-                @include('shop.frontend.block.child_menu_yes_search.form_search')
-            </div>
-            <div id="cart-load" class="fl-right" style="padding-top:15px;">
-                <div class="icon-cart-menu">
-                    <a href="{{route('fe.product.cart')}}" title="" id="payment-link" class="">
-                        <div class="clearfix icon_cart">
-                            <div class="fl-left mr-2">
-                                <img style="width:32px" src="{{asset('images/shop/cart.png')}}" alt="">
-                            </div>
-                            <div class="fl-left pt-2">
-                                <p>Giỏ hàng</p>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="dropdown-cart-info">
-                        @include("$moduleName.templates.menu_cart")
-                    </div>
-                </div>
-            </div>
-            <div id="" class="fl-right" style="margin-right:50px; padding-top:5px">
-                <a href="{{route('fe.order.list')}}" id="payment-link" class="search-history-order">
-                    <div class="clearfix">
-                        <div class="fl-left mr-2 pt-2">
-                            <img style="width:26px" src="{{asset('images/shop/history.png')}}" alt="">
-                        </div>
-                        <div class="fl-left">
-                            <p>Tra cứu</p>
-                            <p>Lịch sử đơn hàng</p>
-                        </div>
-                    </div>
+        @yield('header_top')
+        <!-- <div id="search-order">
+            <div class="header d-flex justify-content-between">
+                <a href="{{route('fe.order.list')}}">
+                    <div class="tshorder">Tra cứu lịch sử đơn hàng</div>
+                    <button class="btn-closenk rimg-center"><img src="{{asset('images/shop/dn4.png')}}" alt=""></button>
                 </a>
             </div>
-
-        </div>
+            <div class="d-flex justify-content-center">
+                <div class="wp-content">
+                    <form action="" class="wp-content-shorder">
+                        <div class="content text-center">
+                            <div class="mb-3 rimg-center"><img src="{{asset('images/shop/tclsdh.png')}}" alt="" style="display:block"></div>
+                            <p class="nsdt">Nhập số điện thoại bạn dùng
+                                để mua hàng tại TDoctor</p>
+                            <div class="phone-mail position-relative">
+                                <input type="text" placeholder="Nhập số điện thoại / Email">
+                                <div class="img-person"><img src="{{asset('images/shop/dn1.png')}}" alt=""></div>
+                            </div>
+                        </div>
+                        <div class="text-center"><input type="submit" name="btn-searchorder" value="Tiếp tục" id="btn-searchorder"></div>
+                    </form>
+                </div>
+            </div>
+        </div> -->
     </div>
     <div id="form-login-register">
         @include('shop.frontend.block.form_login_register')

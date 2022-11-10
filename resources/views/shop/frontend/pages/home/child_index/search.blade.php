@@ -8,7 +8,9 @@
     <form action="{{route('fe.search.saveHome')}}" method="POST">
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
         <div class="position-relative">
-            <input type="search" name="keyword" class="input-search-info" value="" placeholder="Nhập từ khóa...">
+            <div class="wp-input-search">
+                <input type="search" name="keyword" class="input-search-info" value="" placeholder="Nhập từ khóa...">
+            </div>   
             <button type="submit" class="btn-search-home" name="btn_search" value="1" disabled="disabled">
                 <img src="{{asset('images/shop/icon-search.png')}}" alt="">
             </button>

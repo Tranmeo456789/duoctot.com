@@ -45,7 +45,7 @@ class HomeController extends ShopFrontEndController
         $params['cat_product_id']=$itemLevel2First['id'];
         $params['limit']=4;
         $listProductCatLevel2=(new ProductModel())->listItems($params,['task'=>'frontend-list-items']);
-        return view("$this->moduleName.block.ls_cat_level3_and_product",compact('listItemLevel3','listProductCatLevel2','slugCatLevel1','slugCatLevel2'));
+        return view("$this->moduleName.block.child_submenu.ls_cat_level3_and_product",compact('listItemLevel3','listProductCatLevel2','slugCatLevel1','slugCatLevel2'));
     }
     public function ajaxHoverCatLevel2(Request $request)
     {
@@ -62,7 +62,7 @@ class HomeController extends ShopFrontEndController
         $params['cat_product_id']=$idCatLevel2;
         $params['limit']=4;
         $listProductCatLevel2=(new ProductModel())->listItems($params,['task'=>'frontend-list-items']);
-        return view("$this->moduleName.block.ls_cat_level3_and_product",compact('listItemLevel3','listProductCatLevel2','slugCatLevel1','slugCatLevel2'));
+        return view("$this->moduleName.block.child_submenu.ls_cat_level3_and_product",compact('listItemLevel3','listProductCatLevel2','slugCatLevel1','slugCatLevel2'));
     }
     // public function ajaxlocal(Request $request)
     // {
