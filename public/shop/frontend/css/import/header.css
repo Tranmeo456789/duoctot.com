@@ -388,11 +388,6 @@
 }
 
 
-/* .sub-menu1>li:hover{
-    background: #F1F8FF;
-
-} */
-
 .active-menucat2 {
     background: #F1F8FF;
 }
@@ -401,27 +396,13 @@
     position: absolute;
     top: 100%;
     left: 0px;
-    z-index: 100;
+    z-index: 504;
     border-radius: 0px 0px 20px 20px;
     background: #FFFFFF;
     width: 100%;
     display: none;
 }
 
-
-/* .himg-menu .rdimg {
-    position: absolute;
-    top: 6px;
-    left: 14px;
-    width: 49px;
-    height: 49px;
-    border-radius: 50%;
-    background: #FFFFFF;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    z-index: 100966;
-} */
 
 .content-submenu-right {
     background: #F1F8FF;

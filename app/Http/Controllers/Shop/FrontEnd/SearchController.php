@@ -65,6 +65,6 @@ class SearchController extends ShopFrontEndController
     public function deleteHistory(Request $request){
         $data = $request->all();
         setcookie( "keywordHistory", "", time()- 60, "/","", 0);
-        return view("$this->moduleName.block.menu.child_menu_yes_search.form_search");
+        return view("$this->moduleName.block.menu.child_menu_yes_search.list_history_keyword");
     }
 }

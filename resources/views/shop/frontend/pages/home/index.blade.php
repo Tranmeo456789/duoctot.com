@@ -65,5 +65,6 @@
             @include("$moduleName.templates.feedback_customer")
         </div>
     </div>
+    <div class="lc-mask-search"></div>
 @endsection
 

@@ -270,7 +270,7 @@ a:hover{
     position: absolute;
     top: 0px;
     left: 0px;
-    z-index: 233;
+    z-index: 503;
     transition: all 0.25s ease-in-out;
     display: none;
 }

@@ -863,6 +863,8 @@ $(document).on('click', ".wp-input-search input", function (event) {
     $('.lc-mask-search').css("opacity", 1);
     $('.lc-mask-search').css("visibility", "visible"); 
     $('.ls-history').css("display", "block");
+    const position = $("#form-search").offset().top;
+    $("HTML, BODY").animate({ scrollTop: position }, 500);
 });
 
 $(document).on('click', ".lc-mask-search", function (event) {
@@ -882,7 +884,7 @@ $(document).on('click', ".delete-history-keyword", function (event) {
             _token: _token
         },
         success: function(data) {
-            $('.wp-search-menu').html(data);
+            $('.data-history').html(data);
         },
     }); 
 });

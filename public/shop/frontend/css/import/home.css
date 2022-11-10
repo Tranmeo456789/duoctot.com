@@ -16,6 +16,7 @@
     border-radius: 50px;
     position: absolute;
     top: -120px;
+    z-index: 501;
 }
 
 #form-search .form-search-inner {
@@ -51,7 +52,7 @@
 #form-search .form-search-inner input:focus {
     border: 1px solid #83dddf;
 }
-#form-search .form-search-inner li {
+#form-search .form-search-inner .list-hight-home li {
     font-weight: 400;
     font-size: 15px;
     height: 30px;
