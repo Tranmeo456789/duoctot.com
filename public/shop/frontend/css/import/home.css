@@ -2,6 +2,7 @@
 
 #main-content-wp {
     padding-bottom: 75px;
+    position: relative;
 }
 #hisd{
     position: relative;
@@ -318,7 +319,7 @@
     color: white;
     border: 1px solid #05AFE3;
     border-radius: 12px;
-    z-index: 100;
+    z-index: 10;
 }
 
 #selling-product .icon-product-round {

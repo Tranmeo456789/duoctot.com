@@ -241,6 +241,9 @@ $(document).ready(function() {
     $('.catc1').hover(
         function() {
             $('.black-content').css("display", "block");
+            $('.lc-mask-search').css("opacity", 0);
+            $('.lc-mask-search').css("visibility", "hidden");
+            $('.ls-history').css("display", "none");
         },
         function() {
             $('.black-content').css("display", "none");

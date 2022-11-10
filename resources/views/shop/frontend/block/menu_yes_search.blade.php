@@ -31,20 +31,7 @@
         <div class="wp-inner clearfix">
             <a href="{{route('home')}}" title="" id="payment-link" class="fl-left"><img style="width:213px" src="{{asset('images/shop/logo_topbar2.png')}}" alt=""></a>
             <div class="fl-left wp-search-menu">
-                <form action="{{route('fe.search.saveHome')}}" method="POST">
-                    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-                    <div class="d-flex">
-                        <div class="wp-input-search">
-                            <input type="text" name="keyword" class="input-search-info" value="{{$keyword??''}}" placeholder="Nhập tìm thuốc, TPCN, bệnh lý...">
-                        </div>
-                        <div class="wp-btn-search">
-                            <button type="submit" class="btn-search-home btn" name="btn_search" value="1" disabled="disabled">
-                                <img src="{{asset('images/shop/icon-search.png')}}" alt="">
-                            </button>
-                        </div>
-                        
-                    </div>
-                </form>
+                @include('shop.frontend.block.child_menu_yes_search.form_search')
             </div>
             <div id="cart-load" class="fl-right" style="padding-top:15px;">
                 <div class="icon-cart-menu">

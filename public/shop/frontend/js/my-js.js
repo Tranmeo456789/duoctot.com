@@ -859,3 +859,30 @@ $(document).on('keyup', ".input-search-info", function (event) {
         $('.btn-search-home').removeAttr("disabled");
     }      
 });
+$(document).on('click', ".wp-search-menu .wp-input-search input", function (event) {
+    $('.lc-mask-search').css("opacity", 1);
+    $('.lc-mask-search').css("visibility", "visible"); 
+    $('.ls-history').css("display", "block");
+});
+
+$(document).on('click', ".lc-mask-search", function (event) {
+    $('.lc-mask-search').css("opacity", 0);
+    $('.lc-mask-search').css("visibility", "hidden"); 
+    $('.ls-history').css("display", "none");
+});
+$(document).on('click', ".delete-history-keyword", function (event) {
+    var url = $(this).attr("data-href");
+    var _token = $('input[name="_token"]').val();
+    $.ajax({
+        url: url,
+        cache: false,
+        method: "GET",
+        dataType: 'html',
+        data: {
+            _token: _token
+        },
+        success: function(data) {
+            $('.wp-search-menu').html(data);
+        },
+    }); 
+});
