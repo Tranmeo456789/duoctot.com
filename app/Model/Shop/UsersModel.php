@@ -135,7 +135,7 @@ class UsersModel extends BackEndModel
         }
         if($options['task'] == "list-store-select-of-shop") {
             $result =  self::where([
-                ['user_type_id',$params['user_type_id']],
+                ['user_type_id',">=",$params['user_type_id']],
                 ['domain_register',"shop.tdoctor.vn"]
             ])->get();
         }

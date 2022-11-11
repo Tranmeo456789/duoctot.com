@@ -866,7 +866,14 @@ $(document).on('click', ".wp-input-search input", function (event) {
     const position = $("#form-search").offset().top;
     $("HTML, BODY").animate({ scrollTop: position }, 500);
 });
-
+$(document).on('click', ".ipsp", function (event) {
+    $('#box-search-fixed').css("display", "block");
+});
+$(document).on('click', ".icon-back-search", function (event) {
+    $('#box-search-fixed').css("display", "none");
+    $('.lc-mask-search').css("opacity", 0);
+    $('.lc-mask-search').css("visibility", "hidden");
+});
 $(document).on('click', ".lc-mask-search", function (event) {
     $('.lc-mask-search').css("opacity", 0);
     $('.lc-mask-search').css("visibility", "hidden"); 

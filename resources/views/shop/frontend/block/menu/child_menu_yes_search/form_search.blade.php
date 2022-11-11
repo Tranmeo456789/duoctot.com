@@ -2,7 +2,7 @@
 <form action="{{route('fe.search.saveHome')}}" method="POST">
     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
     <div class="d-flex">
-        <div class="wp-input-search">
+        <div class="wp-input-search input-search-small">
             <input type="text" name="keyword" class="input-search-info" value="{{$keyword??''}}" placeholder="Nhập tìm thuốc, TPCN, bệnh lý..." autocomplete="off">
         </div>
         <div class="wp-btn-search">

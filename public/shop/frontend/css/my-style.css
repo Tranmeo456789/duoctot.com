@@ -861,7 +861,8 @@ input[type="radio"] {
     position: relative;
     z-index: 502;
 }
-.wp-search-menu .wp-input-search{
+
+.input-search-small{
     border-radius: 100px 0 0 100px;
     padding: 0 8px 0 16px;
     min-height: 36px;
@@ -881,12 +882,19 @@ input[type="radio"] {
     font-size: 14px;
     line-height: 20px;
 }
-.wp-search-menu .wp-btn-search{
+.wp-btn-search{
     margin-left: -1px;
     z-index: 2;
 }
 .wp-search-menu .wp-btn-search .btn-search-home{
     background: #f59e0b;
+    outline: none;
+    border-radius: 0px 100px 100px 0px;
+    padding: 0 28px;
+    height: 100%;
+}
+.btn-search-respon.btn-search-home{
+    background: #2d6ee6c0;
     outline: none;
     border-radius: 0px 100px 100px 0px;
     padding: 0 28px;
@@ -903,6 +911,15 @@ input[type="radio"] {
     margin-top: -18px;
     max-width: calc(100% - 76px);
     display: none;
+}
+#box-search-fixed .ls-history{
+    position: static;
+    box-shadow: none;
+    border-radius:0px;
+    padding-top: 18px;
+    margin-top: 0px;
+    max-width: calc(100%);
+    display: block;
 }
 .form-search-inner .ls-history{
     max-width: calc(100% - 89px);
@@ -979,4 +996,14 @@ input[type="radio"] {
 }
 .lc-searchpost-inner{
     box-shadow: inset 0px 1px 0px #e4eaf1;
+}
+.icon-back-search{
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    color: #444242;
+    font-size: 16px;
+    padding: 2px 10px;
+    cursor: pointer;
 }
