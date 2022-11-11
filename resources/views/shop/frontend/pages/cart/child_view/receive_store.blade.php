@@ -23,8 +23,8 @@
                     ];
                     $xhtml .= '<div class="local_drugstore d-flex justify-content-between flex-wrap">';
                     $xhtml .=     FormTemplate::formGroup($elements,$formInputWidth);
-                    $xhtml .= '     <div class="col-12 col-md-2 p-0 text-right"><a href="">Xem bản đồ</a></div>';
-                    $xhtml .= '    <div class="col-12 p-0"><span class="text-success">Có hàng</span></div>';
+                    $xhtml .= '     <div class="col-6 col-md-2 p-0"><a href="">Xem bản đồ</a></div>';
+                    $xhtml .= '    <div class="col-6 p-0"><span class="text-success">Có hàng</span></div>';
                     $xhtml .= '</div>';
                     $i++;
                 }

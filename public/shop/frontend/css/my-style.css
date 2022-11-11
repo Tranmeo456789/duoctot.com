@@ -672,7 +672,10 @@ input[type="radio"] {
     padding: 12px;
     margin-bottom: 3px;
 }
-
+.local_drugstore input[type="radio"] {
+    margin-top: 5px;
+    align-self: self-start;
+}
 .local_drugstore a {
     font-style: normal;
     font-weight: 700;
@@ -725,15 +728,13 @@ input[type="radio"] {
 }
 
 .discount-code img {
-    position: absolute;
-    top: 35px;
-    left: 15px;
     width: 22px;
     height: 16px;
 }
 
 .discount-code a {
-    padding-left: 20px;
+    padding-left: 5px;
+    font-size: 18px;
 }
 
 .discount-code small img {

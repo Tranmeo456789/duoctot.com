@@ -96,7 +96,7 @@
             'label' => '',
             'element' => '',
             'type' =>'inline-text-right',
-            'widthElement' => 'col-12 col-md-8',
+            'widthElement' => 'col-12 col-md-6',
             'styleFormGroup' => 'mb-1',
         ],[
             'label' => '',
@@ -106,17 +106,23 @@
             'label' => '',
             'element' => Form::text('invoice[phone]', $user->phone??null,array_merge($formInputIgnoreAttr,['placeholder'=>'Nhập Số điện thoại'])),
             'widthElement' => 'col-12 col-md-4',
-        ],[
+        ],
+        [
+            'label' => '',
+            'element' => '',
+            'widthElement' => 'col-12 col-md-4',
+        ],
+        [
             'label' => '',
             'element' => Form::text('invoice[tax_code]', null,array_merge($formInputIgnoreAttr,['placeholder'=>'Nhập Mã số thuế'])),
             'widthElement' => 'col-12 col-md-4',
         ],[
             'label' => '',
-            'element' =>'',
+            'element' => Form::text('invoice[address]', null,array_merge($formInputIgnoreAttr,['placeholder'=>'Nhập Địa chỉ'])),
             'widthElement' => 'col-12 col-md-4',
         ],[
             'label' => '',
-            'element' => Form::text('invoice[address]', null,array_merge($formInputIgnoreAttr,['placeholder'=>'Nhập Địa chỉ'])),
+            'element' => '',
             'widthElement' => 'col-12 col-md-4',
         ]
     ];

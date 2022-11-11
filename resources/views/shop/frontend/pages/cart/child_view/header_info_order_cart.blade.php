@@ -28,7 +28,7 @@
 </table>
 <div class="discount-code">
     <h4 class="text-info d-flex justify-content-center py-2">
-        <img src="{{asset('images/shop/ode2.png')}}" alt="">
+        <div class="d-flex justify-content-center align-items-center"><img src="{{asset('images/shop/ode2.png')}}" alt=""></div>
         <a href="" class="">Sử dụng mã giảm giá</a>
     </h4>
     <!-- <small class="text-danger d-flex justify-content-center">

@@ -801,6 +801,9 @@
     .wp-detail-order .btn-closenk{
         background-color: white;
     }
+    .input-group-number-product{
+        margin-left: 0px;
+    }
 }
 
 @media screen and (max-width: 600px) {
@@ -1029,21 +1032,30 @@
         margin: 0px;
         font-size: 20px;
     }
-    .info-product-cart .item-product .title-product{
-        font-size: 13px;
-    }
+    
     .info-product-cart .manipulation {
         padding-right: 5px;
         font-size: 12px;
     }
-    .info-product-cart .manipulation a {
-        font-size: 10px;
-    }
+    
     .local_drugstore{
         font-size: 12px;
     }
     .bb_order .unit-order {
         font-size: 12px;
+    }
+    .input-group-number-product {
+        width: 105px;
+    }
+    .input-group-number-product .input-group-text{
+        padding: 3px 9px;
+        height: 30px;
+    }
+    .input-group-number-product .number-product{
+        height: 30px;width: 30px;
+    }
+    .info-product-cart .total_money{
+        font-size: 16px;
     }
 }
 
