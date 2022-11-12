@@ -275,7 +275,19 @@ $(document).ready(function () {
                 required: "Thông tin bắt buộc"
             }
         },
-
+        errorPlacement: function (error, element) {
+            // Add the `invalid-feedback` class to the error element
+            error.addClass("invalid-feedback");
+            element.closest(".wp-input").addClass('has-error');                  
+            error.insertAfter(element.closest(".wp-input"));          
+        },
+        highlight: function (element, errorClass, validClass) {
+            $(element).addClass("is-invalid").removeClass("is-valid");
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).addClass("is-valid").removeClass("is-invalid");
+            $(element).closest(".wp-input").removeClass('has-error');
+        }
     });
     $(".form-main-prescrip").validate({
         ignore: ".ignore",
@@ -323,10 +335,7 @@ $(document).ready(function () {
             },
             address:{
                 required: "Thông tin bắt buộc",
-            },
-            
-            
-           
+            },                             
         },
         errorPlacement: function (error, element) {
             // Add the `invalid-feedback` class to the error element
@@ -597,6 +606,7 @@ $(document).on('change', "input[name='delivery_method']", function (event) {
     if ($value == 1) {
         $(".rowPharmacy").removeClass('d-none');
         $(".rowHome").addClass('d-none');
+        $("input[name='receive[fullname]']").addClass('ignore');
         $("input[name='receive[phone]']").addClass('ignore');
         $("input[name='receive[address]']").addClass('ignore');
         $("select[name='receive[ward_id]']").addClass('ignore');
@@ -604,6 +614,7 @@ $(document).on('change', "input[name='delivery_method']", function (event) {
     } else {
         $(".rowPharmacy").addClass('d-none');
         $(".rowHome").removeClass('d-none');
+        $("input[name='receive[fullname]']").removeClass('ignore');
         $("input[name='receive[phone]']").removeClass('ignore');
         $("input[name='receive[address]']").removeClass('ignore');
         $("select[name='receive[ward_id]']").removeClass('ignore');

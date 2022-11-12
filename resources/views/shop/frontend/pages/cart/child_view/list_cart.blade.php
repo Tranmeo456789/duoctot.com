@@ -31,7 +31,7 @@ use App\Helpers\MyFunction;
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text minus"><i class="fa fa-minus"></i></span>
                                                     </div>
-                                                    <input type="number" max="999" min="1" value="{{$val['quantity']}}" name="quantity" class="form-control number-product" data-href="{{route('fe.cart.change_quatity',['user_sell' => $item['user_sell'],'id' => $val['product_id'],'value'=>'value_new'])}}">
+                                                    <input type="number" max="999" min="1" value="{{$val['quantity']}}" name="quantity" class="number-product" data-href="{{route('fe.cart.change_quatity',['user_sell' => $item['user_sell'],'id' => $val['product_id'],'value'=>'value_new'])}}">
                                                     <div class="input-group-append">
                                                         <span class="input-group-text plus"><i class="fa fa-plus"></i></span>
                                                     </div>

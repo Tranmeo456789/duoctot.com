@@ -3,7 +3,14 @@
     use App\Helpers\MyFunction;
     $label = config('myconfig.template.label');
     $formLabelAttr    = config('myconfig.template.form_element.label');
-    $formInputAttr = config('myconfig.template.form_element.input');
+    $formInputAttr = config('myconfig.template.form_element.input_frontend');
+    $formInputWidth['widthInput'] = 'wp-input';
+    $formInputIgnoreAttr    = array_merge_recursive(
+                                    config('myconfig.template.form_element.input_frontend'),
+                                    ['class' => 'ignore']
+                                    );
+
+
     $formSelect2Attr = config('myconfig.template.form_element.select2');
     $formSelect2GetChildAttr = array_merge_recursive(
                                     config('myconfig.template.form_element.select2'),
@@ -18,7 +25,6 @@
     $linkGetListDistrict = route('district.getListByParentID',['parentID' => 'value_new']);
     $linkGetListWard = route('ward.getListByParentID',['parentID' => 'value_new']);
     $linkGetListWareHouse = route('fe.warehouse.getList',['user_id'=>$item['user_sell'],'filter_district_id' => 'value_new']);
-    $formInputWidth['widthInput'] = 'col-12';
     $inputUserSellHidden = Form::hidden('user_sell', $item['user_sell']);
     $inputUserIDHidden = Form::hidden('user_id', \Session::get('user')['user_id']??'');
     $arrTypeGender = config('myconfig.template.type_gender');
@@ -28,38 +34,35 @@
             'label' => Form::label('buyer[gender]', 'Anh',$formLabelAttr),
             'element' => Form::radio('buyer[gender]', 1,(!isset($user->gender) || ($user->gender==1) || ($user->gender != 2)) ? true: false),
             'type' =>'inline-text-right',
-            'widthElement' => 'col-6 col-md-2',
+            'widthElement' => 'col-6 col-md-5',
             'styleFormGroup' => 'mb-1',
         ],[
             'label' => Form::label('buyer[gender]', ' Chị',$formLabelAttr),
             'element' => Form::radio('buyer[gender]', 2,(isset($user->gender) && ($user->gender==1)) ? true: false),
             'type' =>'inline-text-right',
-            'widthElement' => 'col-6 col-md-2',
+            'widthElement' => 'col-6 col-md-5',
             'styleFormGroup' => 'mb-1',
-        ],[
-            'label' => '',
-            'element' => '',
-            'widthElement' => 'col-12 col-md-10',
-        ],[
+        ],
+        [
             'label' => '',
             'element' => Form::text('buyer[fullname]', $user->fullname??null,array_merge($formInputAttr,['placeholder'=>'Nhập Họ tên'])),
-            'widthElement' => 'col-12 col-md-4',
-        ],[
+            'type' =>'input-border-radius-blue',
+            'widthElement' => 'col-lg-5 col-md-12 mb1024-5',
+            'styleFormGroup' => 'has-border'
+        ],
+        [
             'label' => '',
             'element' => Form::text('buyer[phone]', $user->phone??null,array_merge($formInputAttr,['placeholder'=>'Nhập Số điện thoại'])),
-            'widthElement' => 'col-12 col-md-4',
-        ],[
-            'label' => '',
-            'element' => '',
-            'widthElement' => 'col-12 col-md-4',
-        ],[
+            'type' =>'input-border-radius-blue',
+            'widthElement' => 'col-lg-5 col-md-12 mb1024-5',
+            'styleFormGroup' => 'has-border'
+        ],
+        [
             'label' => '',
             'element' => Form::text('buyer[email]', $user->email??null,array_merge($formInputAttr,['placeholder'=>'Nhập Email'])),
-            'widthElement' => 'col-12 col-md-4',
-        ],[
-            'label' => '',
-            'element' => '',
-            'widthElement' => 'col-12 col-md-8',
+            'type' =>'input-border-radius-blue',
+            'widthElement' => 'col-lg-5 col-md-12 mb1024-5',
+            'styleFormGroup' => 'has-border'
         ],[
             'label' => HTML::decode(Form::label('export_tax', '&nbsp;Yêu cầu xuất hóa đơn',$formLabelAttr)),
             'element' => Form::checkbox('export_tax',1,false,['id' => 'export_tax']),
@@ -84,46 +87,42 @@
             'label' => Form::label('', 'Công ty',$formLabelAttr),
             'element' => Form::radio('invoice[object]',1,false),
             'type' =>'inline-text-right',
-            'widthElement' => 'col-6 col-md-3',
+            'widthElement' => 'col-6 col-md-5',
             'styleFormGroup' => 'mb-1',
         ],[
             'label' => Form::label('', 'Cá nhân',$formLabelAttr),
             'element' => Form::radio('invoice[object]',2,true),
             'type' =>'inline-text-right',
-            'widthElement' => 'col-6 col-md-3',
+            'widthElement' => 'col-6 col-md-5',
             'styleFormGroup' => 'mb-1',
-        ],[
-            'label' => '',
-            'element' => '',
-            'type' =>'inline-text-right',
-            'widthElement' => 'col-12 col-md-6',
-            'styleFormGroup' => 'mb-1',
-        ],[
-            'label' => '',
-            'element' => Form::text('invoice[name]', $user->fullname??null,array_merge($formInputIgnoreAttr,['placeholder'=>'Nhập Họ tên'])),
-            'widthElement' => 'col-12 col-md-4',
-        ],[
-            'label' => '',
-            'element' => Form::text('invoice[phone]', $user->phone??null,array_merge($formInputIgnoreAttr,['placeholder'=>'Nhập Số điện thoại'])),
-            'widthElement' => 'col-12 col-md-4',
         ],
         [
             'label' => '',
-            'element' => '',
-            'widthElement' => 'col-12 col-md-4',
+            'element' => Form::text('invoice[name]', $user->fullname??null,array_merge($formInputIgnoreAttr,['placeholder'=>'Nhập Họ tên'])),
+            'type' =>'input-border-radius-blue',
+            'widthElement' => 'col-lg-5 col-md-12 mb1024-5',
+            'styleFormGroup' => 'has-border'
+        ],
+       [
+            'label' => '',
+            'element' => Form::text('invoice[phone]', $user->phone??null??null,array_merge($formInputIgnoreAttr,['placeholder'=>'Nhập Số điện thoại'])),
+            'type' =>'input-border-radius-blue',
+            'widthElement' => 'col-lg-5 col-md-12 mb1024-5',
+            'styleFormGroup' => 'has-border'
         ],
         [
             'label' => '',
             'element' => Form::text('invoice[tax_code]', null,array_merge($formInputIgnoreAttr,['placeholder'=>'Nhập Mã số thuế'])),
-            'widthElement' => 'col-12 col-md-4',
-        ],[
+            'type' =>'input-border-radius-blue',
+            'widthElement' => 'col-lg-5 col-md-12 mb1024-5',
+            'styleFormGroup' => 'has-border'
+        ],
+        [
             'label' => '',
             'element' => Form::text('invoice[address]', null,array_merge($formInputIgnoreAttr,['placeholder'=>'Nhập Địa chỉ'])),
-            'widthElement' => 'col-12 col-md-4',
-        ],[
-            'label' => '',
-            'element' => '',
-            'widthElement' => 'col-12 col-md-4',
+            'type' =>'input-border-radius-blue',
+            'widthElement' => 'col-lg-5 col-md-12 mb1024-5',
+            'styleFormGroup' => 'has-border'
         ]
     ];
     $elementChoosePharmacy = [
@@ -131,72 +130,71 @@
             'label' => Form::label('', 'Nhận tại nhà thuốc',$formLabelAttr),
             'element' => Form::radio('delivery_method', '1',true),
             'type' =>'inline-text-right',
-            'widthElement' => 'col-12 col-md-4',
+            'widthElement' => 'col-12 col-md-5',
             'styleFormGroup' => 'mb-1',
         ],[
             'label' => Form::label('', 'Giao hàng tận nơi',$formLabelAttr),
             'element' => Form::radio('delivery_method', '2',false),
             'type' =>'inline-text-right',
-            'widthElement' => 'col-12 col-md-4',
+            'widthElement' => 'col-12 col-md-5',
             'styleFormGroup' => 'mb-1',
-        ],[
-            'label' => '',
-            'element' => '',
-            'type' =>'inline-text-right',
-            'widthElement' => 'col-12 col-md-4',
-            'styleFormGroup' => 'mb-1',
-        ],
-    ];
-    $elementPharmacy = [
-        [
-            'label'   => '',
-            'element' => Form::select('pharmacy[province_id]',[null=>"-- Chọn {$label['province_id']} --"] + $itemsProvince, null, array_merge($formSelect2GetChildAttr,['id' =>'pharmacy_province_id','style' =>'width:100%','data-href'=>$linkGetListDistrict,'data-target' => '#pharmacy_district_id'])),
-            'widthElement' => 'col-12 col-md-4',
-        ],[
-            'label'   => '',
-            'element' => Form::select('pharmacy[district_id]',[null=>"-- Chọn {$label['district_id']} --"] +  $itemsDistrict,  null, array_merge($formSelect2GetDataAttr,['id' =>'pharmacy_district_id','style' =>'width:100%','data-href'=>$linkGetListWareHouse,'data-target' =>'.receive_store','data-addtion' => 'pharmacy_province_id'])),
-            'widthElement' => 'col-12 col-md-4'
         ]
     ];
-    $elementHome = [
+
+    $elementPharmacy = [
         [
+        'label'   => '',
+        'element' => Form::select('pharmacy[province_id]',[null=>"-- Chọn {$label['province_id']} --"] + $itemsProvince, null, array_merge($formSelect2GetChildAttr,['id' =>'pharmacy_province_id','style' =>'width:100%','data-href'=>$linkGetListDistrict,'data-target' => '#pharmacy_district_id'])),
+        'type' =>'select',
+        'widthElement' => 'col-lg-5 col-md-12 mb1024-5'
+    ], [
+            'label'   => '',
+            'element' => Form::select('pharmacy[district_id]',[null=>"-- Chọn {$label['district_id']} --"] +  $itemsDistrict,  null, array_merge($formSelect2GetDataAttr,['id' =>'pharmacy_district_id','style' =>'width:100%','data-href'=>$linkGetListWareHouse,'data-target' =>'.receive_store','data-addtion' => 'pharmacy_province_id'])),
+            'type' =>'select',
+            'widthElement' => 'col-lg-5 col-md-12 mb1024-5'
+        ]
+    ];
+   
+
+    $elementHome = [
+            [
             'label' => '',
-            'element' => Form::text('receive[fullname]', $user->fullname??null,array_merge($formInputAttr,['placeholder'=>'Nhập Họ tên'])),
-            'widthElement' => 'col-12 col-md-4'
+            'element' => Form::text('receive[fullname]', $user->fullname??null,array_merge($formInputIgnoreAttr,['placeholder'=>'Nhập Họ tên'])),
+            'type' =>'input-border-radius-blue',
+            'widthElement' => 'col-lg-5 col-md-12 mb1024-5',
+            'styleFormGroup' => 'has-border'
         ],[
             'label' => '',
-            'element' => Form::text('receive[phone]', $user->phone??null,array_merge(['class'=>'form-control ignore'],['placeholder'=>'Nhập Số điện thoại'])),
-            'widthElement' => 'col-12 col-md-4'
+            'element' => Form::text('receive[phone]', $user->phone??null,array_merge($formInputIgnoreAttr,['placeholder'=>'Nhập Số điện thoại'])),
+            'type' =>'input-border-radius-blue',
+            'widthElement' => 'col-lg-5 col-md-12 mb1024-5',
+            'styleFormGroup' => 'has-border'
         ],[
             'label'   => '',
-            'element' => '',
-            'widthElement' => 'col-12 col-md-4'
+            'element' => Form::select('receive[province_id]',$itemsProvince, $user->province_id??null, array_merge($formSelect2GetChildIgnoreAttr,['id' =>'province_id','style' =>'width:100%','data-href'=>$linkGetListDistrict,'data-target' => '#receive-district-id'])),
+            'type' =>'select',
+            'widthElement' => 'col-lg-5 col-md-12 mb1024-5'
         ],[
             'label'   => '',
-            'element' => Form::select('receive[province_id]',$itemsProvince, $user->province_id??null, array_merge($formSelect2GetChildIgnoreAttr,['id' =>'province_id','style' =>'width:100%','data-href'=>$linkGetListDistrict,'data-target' => '#district_id'])),
-            'widthElement' => 'col-12 col-md-4'
-        ],[
-            'label'   => '',
-            'element' => Form::select('receive[district_id]',[null=>"-- Chọn {$label['district_id']} --"] +  $itemsDistrict, $details['district_id']??null, array_merge($formSelect2GetChildIgnoreAttr,['id' =>'receive-district-id','data-href'=>$linkGetListWard,'data-target' => '#ward_id','style' =>'width:100%'])),
-            'widthElement' => 'col-12 col-md-4 mb-2'
-        ],[
-            'label'   => '',
-            'element' => '',
-            'widthElement' => 'col-12 col-md-4'
+            'element' => Form::select('receive[district_id]',[null=>"-- Chọn {$label['district_id']} --"] +  $itemsDistrict, $details['district_id']??null, array_merge($formSelect2GetChildIgnoreAttr,['id' =>'receive-district-id','data-href'=>$linkGetListWard,'data-target' => '#receive-ward-id','style' =>'width:100%'])),
+            'type' =>'select',
+            'widthElement' => 'col-lg-5 col-md-12 mb1024-5'
         ],[
             'label'   => '',
             'element' => Form::select('receive[ward_id]',[null=>"-- Chọn {$label['ward_id']} --"] +  $itemsWard,  $details['ward_id']??null, array_merge($formSelect2GetChildIgnoreAttr,['id' =>'receive-ward-id','style' =>'width:100%'])),
-            'widthElement' => 'col-12 col-md-8'
-        ],[
-            'label'   => '',
-            'element' => '',
-            'widthElement' => 'col-12 col-md-8'
+            'type' =>'select',
+            'widthElement' => 'col-lg-5 col-md-12 my-1'
         ],[
             'label' => '',
             'element' => Form::text('receive[address]', $details['address']??null,array_merge($formInputIgnoreAttr,['placeholder'=>'Địa chỉ'])),
-            'widthElement' => 'col-12 col-md-8',
-        ],
-    ];
+            'type' =>'input-border-radius-blue',
+            'widthElement' => 'col-lg-10 col-md-12 mb1024-5',
+            'styleFormGroup' => 'has-border'
+        ]
+    ];   
+
+    
+        
 @endphp
 {{ Form::open([
     'method'         => 'POST',

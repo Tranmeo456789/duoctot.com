@@ -31,6 +31,9 @@
                 'input' => [
                     'class' => 'form-control'
                 ],
+                'input_frontend' => [
+                    'class' => 'input-frontend form-control'
+                ],
                 'input_radio' => [
                     'class' => 'form-check-input'
                 ],
