@@ -1008,3 +1008,7 @@ input[type="radio"] {
     padding: 2px 10px;
     cursor: pointer;
 }
+#receive-ward-id-error,#receive-district-id-error{
+    position: absolute;
+    bottom: -22px;
+}

@@ -181,20 +181,17 @@ $(document).ready(function () {
     $(".order-complete").validate({
         ignore: ".ignore",
         rules: {
-            name: {
+            "buyer[fullname]": {
                 required: true,
-            },
-            phone: {
-                required: true,
-                checkPhone: true,
-            },
-            email: {
-                checkEmail: true,
             },
             "buyer[phone]": {
                 required: true,
                 checkPhone: true,
             },
+            "buyer[email]": {
+                checkEmail: true,
+            },
+            
             "invoice[name]": {
                 required: true,
             },
@@ -232,19 +229,15 @@ $(document).ready(function () {
             },
         },
         messages: {
-            name: {
-                required: "Thông tin bắt buộc"
-            },
-            phone: {
+            "buyer[fullname]": {
                 required: "Thông tin bắt buộc",
-                checkPhone: "Số điện thoại không đúng định dạng",
-            },
-            email: {
-                checkEmail: "Email không đúng định dạng",
             },
             "buyer[phone]": {
                 required: "Thông tin bắt buộc",
                 checkPhone: "Số điện thoại không đúng định dạng",
+            },
+            "buyer[email]": {
+                checkEmail: "Email không đúng định dạng",
             },
             "invoice[name]": {
                 required: "Thông tin bắt buộc",
@@ -605,10 +598,16 @@ $(document).on('change', "input[name='delivery_method']", function (event) {
         $(".rowPharmacy").removeClass('d-none');
         $(".rowHome").addClass('d-none');
         $("input[name='receive[phone]']").addClass('ignore');
+        $("input[name='receive[address]']").addClass('ignore');
+        $("select[name='receive[ward_id]']").addClass('ignore');
+        $("select[name='receive[district_id]']").addClass('ignore');
     } else {
         $(".rowPharmacy").addClass('d-none');
         $(".rowHome").removeClass('d-none');
         $("input[name='receive[phone]']").removeClass('ignore');
+        $("input[name='receive[address]']").removeClass('ignore');
+        $("select[name='receive[ward_id]']").removeClass('ignore');
+        $("select[name='receive[district_id]']").removeClass('ignore');
     }
 });
 $(document).on('change', "#export_tax", function (event) {

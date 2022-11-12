@@ -177,15 +177,15 @@
             'widthElement' => 'col-12 col-md-4'
         ],[
             'label'   => '',
-            'element' => Form::select('receive[district_id]',[null=>"-- Chọn {$label['district_id']} --"] +  $itemsDistrict, $details['district_id']??null, array_merge($formSelect2GetChildIgnoreAttr,['id' =>'district_id','data-href'=>$linkGetListWard,'data-target' => '#ward_id','style' =>'width:100%'])),
-            'widthElement' => 'col-12 col-md-4'
+            'element' => Form::select('receive[district_id]',[null=>"-- Chọn {$label['district_id']} --"] +  $itemsDistrict, $details['district_id']??null, array_merge($formSelect2GetChildIgnoreAttr,['id' =>'receive-district-id','data-href'=>$linkGetListWard,'data-target' => '#ward_id','style' =>'width:100%'])),
+            'widthElement' => 'col-12 col-md-4 mb-2'
         ],[
             'label'   => '',
             'element' => '',
             'widthElement' => 'col-12 col-md-4'
         ],[
             'label'   => '',
-            'element' => Form::select('receive[ward_id]',[null=>"-- Chọn {$label['ward_id']} --"] +  $itemsWard,  $details['ward_id']??null, array_merge($formSelect2GetChildIgnoreAttr,['id' =>'ward_id','style' =>'width:100%'])),
+            'element' => Form::select('receive[ward_id]',[null=>"-- Chọn {$label['ward_id']} --"] +  $itemsWard,  $details['ward_id']??null, array_merge($formSelect2GetChildIgnoreAttr,['id' =>'receive-ward-id','style' =>'width:100%'])),
             'widthElement' => 'col-12 col-md-8'
         ],[
             'label'   => '',
