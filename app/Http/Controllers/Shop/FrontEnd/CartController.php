@@ -29,7 +29,6 @@ class CartController extends ShopFrontEndController
     {
         $params['user_sell'] = intval($request->user_sell);
         $session = $request->session();
-
         $user = [];
         $details =[];
         if ($session->has('user')){
@@ -59,45 +58,13 @@ class CartController extends ShopFrontEndController
         return view($this->pathViewController . 'view',
                compact('item','user','itemsProvince' ,'itemsDistrict','itemsWard','details','itemsStore'));
     }
-    public function cart_product(Request $request)
+    public function cartFull(Request $request)
     {
-        $session = $request->session();
-        $item = [];
-        if ($session->has('user')){
-            $item = $this->model->getItem(['user_id'=>$session->get('user.user_id')],['task' => 'get-item']);
-            $details = $item->details->pluck('value','user_field')->toArray()??[];
-        }
-        $itemsProvince = (new ProvinceModel())->listItems(null,['task'=>'admin-list-items-in-selectbox']);
-        $params['province_id'] = (isset($details['province_id']) && ($details['province_id']!=0))?$details['province_id']:((isset($item->province_id) && ($item->province_id != 0)) ? $item->province_id:0);
-        $itemsDistrict = [];
-        if ($params['province_id']  != 0){
-            $itemsDistrict = (new DistrictModel())->listItems(['parentID' => $params['province_id']],
-                                                                ['task'=>'admin-list-items-in-selectbox']);
-        }
-        $params['district_id'] = (isset($details['district_id']) && ($details['district_id'] != 0))?$details['district_id']:((isset($item->district_id) && ($item->district_id != 0)) ? $item->district_id:0);
-        $itemsWard = [];
-        if ($params['district_id']  != 0){
-            $itemsWard = (new WardModel())->listItems(['parentID' => $params['district_id']],
-                                                                ['task'=>'admin-list-items-in-selectbox']);
-        }
-        if ($session->has('user')){
-            return view($this->pathViewController . 'cart',compact('itemsProvince' ,'itemsDistrict','itemsWard','item','details'));
-        }
+        
 
-        return view($this->pathViewController . 'cart',compact('itemsProvince','itemsDistrict','itemsWard'));
+        return view($this->pathViewController . 'cart_full');
     }
-    public function cart_null()
-    {
-        return view($this->pathViewController . 'cart_null');
-    }
-    public function pay_home()
-    {
-        return view($this->pathViewController . 'cart_pay_home');
-    }
-    public function pay_shop()
-    {
-        return view($this->pathViewController . 'cart_pay_shop');
-    }
+   
 
     public function addproduct(Request $request)
     {

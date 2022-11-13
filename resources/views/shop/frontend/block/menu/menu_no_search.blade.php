@@ -18,7 +18,7 @@
             </div>
             <div id="cart-load" class="fl-left" style="margin-left:30px;padding-top:15px;">
                 <div class="icon-cart-menu">
-                    <a href="{{route('fe.product.cart')}}" title="" id="payment-link" class="">
+                    <a href="{{route('fe.product.cartFull')}}" title="" id="payment-link" class="">
                         <div class="clearfix icon_cart">
                             <div class="fl-left mr-2">
                                 <img style="width:32px" src="{{asset('images/shop/cart.png')}}" alt="">

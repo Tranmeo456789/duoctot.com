@@ -7,7 +7,7 @@
             <img src="{{asset($item['image'])}}">
         </div>
         <div class="col-10 cart-info pl-1 pr-0">
-            <a href="" class="name mb-1 d-block">{{$item['name']}}</a>
+            <a href="" class="name mb-1 d-block"><p class="truncate2">{{$item['name']}}</p></a>
             <div class="d-block">
                 <div class="input-group mb-0">
                     <div class="input-group-prepend price-product">
@@ -18,7 +18,7 @@
                         data-href="{{route('fe.cart.change_quatity',['user_sell' => $user_sell,'id' => $item['product_id'],'value'=>'value_new'])}}">
                     <div class="input-group-append total-money">
                       <span class="input-group-text money">{{ MyFunction::formatNumber($item['price']*$item['quantity'])}} đ</span>
-                      <span class="input-group-text px-0" >
+                      <span class="input-group-text px-0">
                         <span>|&nbsp;</span>
                         <span class="delele-item-in-cart" data-href="{{route('fe.cart.delete',['user_sell'=>$user_sell,'id'=>$item['product_id']])}}">Xóa</span>
                       </span>

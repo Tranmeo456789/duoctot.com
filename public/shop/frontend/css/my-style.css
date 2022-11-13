@@ -513,7 +513,10 @@ label.error {
     width: calc(60% - 40px);
     justify-content: right;
 }
-
+.wp-cart-full{
+    background: #fff;
+    padding: 15px;
+}
 .thumb-img-product img {
     width: 100%;
 }

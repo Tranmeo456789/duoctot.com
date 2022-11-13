@@ -23,8 +23,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('/don-thuoc-khach-hang/{id}','PrescripController@prescripCustomer')->name('fe.prescrip.prescripCustomer');
 
     Route::get('/gio-hang/{user_sell}','CartController@view')->name('fe.product.viewcart');
-    Route::get('/gio-hang-full','CartController@cart_product')->name('fe.product.cart');
-    Route::get('/gio-hang-trong','CartController@cart_null')->name('fe.product.cart_null');
+    Route::get('/gio-hang-full','CartController@cartFull')->name('fe.product.cartFull');
     Route::post('/them-san-pham-gio-hang','CartController@addproduct')->name('fe.cart.addproduct');
     Route::post('/thay-doi-so-luong-san-pham/{user_sell}-{id}-{quantity}','CartController@changeQuatity')->name('fe.cart.change_quatity');
 

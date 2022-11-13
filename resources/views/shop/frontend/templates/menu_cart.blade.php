@@ -33,7 +33,7 @@
             </li>
             @endforeach
         </ul>
-        <div class="text-center"><a href="{{route('fe.product.cart')}}" class="viewcartmini">Xem giỏ hàng</a></div>
+        <div class="text-center"><a href="{{route('fe.product.cartFull')}}" class="viewcartmini">Xem giỏ hàng</a></div>
         <div class="cbh2"><a href="{{route('home')}}">Tiếp tục mua hàng</a></div>
     </div>  
 </div>

@@ -7,7 +7,7 @@
                 </a></div>
             <ul class="d-flex align-items-center">
                 <li class="hrcart">
-                    <a href="{{route('fe.product.cart')}}">
+                    <a href="{{route('fe.product.cartFull')}}">
                         <div class="rimg-center">
                             <img src="{{asset('images/shop/cart.png')}}">
                         </div>
