@@ -145,9 +145,9 @@ class CartController extends ShopFrontEndController
         }else{
             setcookie("cart", json_encode($cart), time() + config('myconfig.time_cookie'), "/", $_SERVER['SERVER_NAME']);
         }
-
+        return redirect()->back();
         $result = [
-            'message' => "Đã xóa sản phẩm thành công"
+            'redirect_url' =>route("fe.product.viewcart",['user_sell' => $user_sell]),
         ];
         return response()->json($result, 200);
     }

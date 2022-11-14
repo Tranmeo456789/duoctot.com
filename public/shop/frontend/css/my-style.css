@@ -766,6 +766,7 @@ input[type="radio"] {
 
 .delele-item-in-cart {
     cursor: pointer;
+    padding: 3px;
 }
 
 .bb_order .unit-order{

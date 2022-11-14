@@ -1,4 +1,4 @@
-@extends('shop.layouts.frontend')
+@extends('shop.layouts.frontend_search_in_menu')
 @section('content')
 <div class="cbr">
         <div class="d-block py-3 wp-inner">

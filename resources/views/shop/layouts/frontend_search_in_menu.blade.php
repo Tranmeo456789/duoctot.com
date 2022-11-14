@@ -9,6 +9,7 @@
             @include('shop.frontend.block.menu.menu_yes_search')
             <div id="main-content-wp" class="home-page clearfix">
                 @yield('content')
+                <div class="lc-mask-search"></div>
             </div>
             <div id="footer-wp" class="pb-5">
                 @include('shop.frontend.block.footer')

@@ -574,7 +574,7 @@ $(document).on('change', "input.number-product", function (event) {
                          $(product).find('.money').html(data.product[product_id]['total_money'].toLocaleString("vi-VN"));
                     }
                 } else {
-                    $($parent).parents('table').find('.total_product').html(data.total_product);
+                    $(".info-product-cart").find('.total_product').html(data.total_product);
                 }
 
                 //Cập nhật cho menu giỏ hàng
@@ -763,13 +763,13 @@ $(document).on('click', '.delele-item-in-cart', function () {
     $.get({
         url: url,
         cache: false,
-        dataType: 'json',
+        dataType: 'html',
         success: function (data) {
             window.location.reload();
         },
-        error: function (xhr, textStatus, errorThrown) {
-            alert("Error: " + errorThrown);
-        }
+        // error: function (xhr, textStatus, errorThrown) {
+        //     alert("Error: " + errorThrown);
+        // }
     });
 });
 $(document).on('keyup', ".search-product-keyup", function (event) {

@@ -14,6 +14,8 @@ $message = "Thêm thành công sản phẩm vào giỏ hàng";
 $classMessage = ($message != '')?'d-block':'d-none';
 $classNumberCartMenu = ($number_product != '')?'d-block':'d-none';
 @endphp
+
+@if($number_product > 0)
 <div class="wp-cart-full">
     <div class="position-relative">
         <ul class="list-cart-mini">
@@ -31,3 +33,6 @@ $classNumberCartMenu = ($number_product != '')?'d-block':'d-none';
         </ul>
     </div>
 </div>
+@else
+@include("$moduleName.pages.$controllerName.child_view.cart_null")
+@endif

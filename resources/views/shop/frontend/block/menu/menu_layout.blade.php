@@ -16,7 +16,7 @@
                 <div class="d-flex justify-content-center">
                     <div><span class="circle-ripple"></span></div>
                     <a href="" class="tt-respon">Hướng dẫn</a>
-                    <p>Kết nối khám chữa bệnh tại nhà</p>
+                    <p class="p-head-topon">Kết nối khám chữa bệnh tại nhà</p>
                 </div>
             </div>
         </div>

@@ -15,6 +15,7 @@
     $classNumberCartMenu = ($number_product != '')?'d-block':'d-none';
 @endphp
 <span class="number_cartmenu {{$classNumberCartMenu}}">{{$number_product}}</span>
+@if($number_product > 0)
 <div class="dropdown-cart">
     <div class="position-relative">
         <div class="close-cart"><img src="{{asset('images/shop/dn4.png')}}" alt=""></div>
@@ -37,3 +38,4 @@
         <div class="cbh2"><a href="{{route('home')}}">Tiếp tục mua hàng</a></div>
     </div>  
 </div>
+@endif
