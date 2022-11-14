@@ -553,6 +553,7 @@ $(document).on('change', "input.number-product", function (event) {
     if (url) {
         url = url.replace('value_new', $value);
         $current = $(this);
+
         $.post({
             url: url,
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -564,16 +565,13 @@ $(document).on('change', "input.number-product", function (event) {
                 $($parent).find('.price').html(data.product[product_id]['price'].toLocaleString("vi-VN"));
                 $($parent).find('.money').html(data.product[product_id]['total_money'].toLocaleString("vi-VN"));
 
-                if (($parent.parents('.dropdown-cart').length > 0) &&
-                    ($(".info-product-cart").length > 0)) { //Thay đổi trên menu
-                    if ($(".info-product-cart").find("tr[data-id=" + product_id + "]").length > 0) {
-
-                        $(".info-product-cart").find('.total_product').html(data.total_product);
-                        product = $(".info-product-cart").find("tr[data-id=" + product_id + "]");
-
-                        $(product).find('.price').html(data.product[product_id]['price'].toLocaleString("vi-VN"));
-                        $(product).find('.number-product').val($value);
-                        $(product).find('.money').html(data.product[product_id]['total_money'].toLocaleString("vi-VN"));
+                if (($parent.parents('.dropdown-cart').length > 0) && ($(".info-product-cart").length > 0)) { //Thay đổi trên menu
+                    if ($(".info-product-cart").find(".item-product[data-id=" + product_id + "]").length > 0) {
+                         $(".info-product-cart").find('.total_product').html(data.total_product);
+                         product = $(".info-product-cart").find(".item-product[data-id=" + product_id + "]");
+                         $(product).find('.price').html(data.product[product_id]['price'].toLocaleString("vi-VN"));
+                         $(product).find('.number-product').val($value);
+                         $(product).find('.money').html(data.product[product_id]['total_money'].toLocaleString("vi-VN"));
                     }
                 } else {
                     $($parent).parents('table').find('.total_product').html(data.total_product);
@@ -588,11 +586,11 @@ $(document).on('change', "input.number-product", function (event) {
                 $new_qty = parseInt($value);
                 $total_product = parseInt($(".number_cartmenu").html());
                 $(".number_cartmenu").html($total_product - $old_qty + $new_qty);
-                if (($("input[name=user_sell]").length > 0) &&
-                    ($("input[name=user_sell]").val() == data.user_sell)) {
-                    $(".col-right-cart").find(".total").html(data.total.toLocaleString("vi-VN"));
-                    $(".col-right-cart").find(".total_thanh_toan").html(data.total.toLocaleString("vi-VN"));
-                }
+                //tổng thanh toán
+                 if (($("input[name=user_sell]").length > 0) && ($("input[name=user_sell]").val() == data.user_sell)) {
+                     $(".col-right-cart").find(".total").html(data.total.toLocaleString("vi-VN"));
+                     $(".col-right-cart").find(".total_thanh_toan").html(data.total.toLocaleString("vi-VN"));
+                 }
             },
             error: function (xhr, textStatus, errorThrown) {
                 alert("Error: " + errorThrown);

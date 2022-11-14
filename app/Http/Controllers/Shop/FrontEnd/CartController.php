@@ -113,7 +113,6 @@ class CartController extends ShopFrontEndController
         $id = intval($request->id);
         $quantity = intval($request->quantity);
         $user_sell = intval($request->user_sell);
-
         $cart = $request->session()->get('cart');
         $cart[$user_sell]['total_product'] = $cart[$user_sell]['total_product'] - $cart[$user_sell]['product'][$id]['quantity'] +  $quantity;
         $cart[$user_sell]['product'][$id]['quantity'] =  $quantity;
@@ -122,6 +121,10 @@ class CartController extends ShopFrontEndController
         $request->session()->put('cart', $cart);
         setcookie("cart", json_encode($cart), time() + config('myconfig.time_cookie'), "/", $_SERVER['SERVER_NAME']);
         return response()->json($cart[$user_sell], 200);
+        //    $result = array(  
+        //       'test'=>$cart[$user_sell] 
+        //    );
+        //    return response()->json($result, 200);
     }
     public function delete(Request $request)
     {
