@@ -113,5 +113,5 @@
     </div>
 
     <div class="black-content"></div>
-    <div class="black-screen"></div>
+    
 </div>

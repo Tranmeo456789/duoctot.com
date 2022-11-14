@@ -20,6 +20,7 @@
             @include('shop.frontend.block.box_responsive.box_search_responsive')
         </div>
         <div id="fixscreen-respon"></div>
+        <div class="black-screen"></div>
     </div>
 </body>
 @include('shop.frontend.block.script')

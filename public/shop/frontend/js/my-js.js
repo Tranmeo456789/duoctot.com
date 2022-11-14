@@ -708,7 +708,7 @@ $(document).on('click', ".select-status-order", function (event) {
 $(document).on('click', ".view-detail-order", function (event) {
     $('.wp-detail-order').css("display", "block");
     $('.black-screen').css("display", "block");
-    $('#container').addClass("fixed-hbd");
+    //$('#container').addClass("fixed-hbd");
     var id = $(this).attr("data-id");
     var url = $(this).attr("data-href");
     var _token = $('input[name="_token"]').val();

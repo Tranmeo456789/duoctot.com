@@ -1,3 +1,16 @@
+@php
+    $number_product = '';
+    if (!isset($itemsCart)){
+        $itemsCart = [];
+        if (isset($_COOKIE['cart'])){
+            $itemsCart = json_decode($_COOKIE['cart'],true);
+            $number_product = array_sum(array_column($itemsCart, 'total_product'));
+        }
+    }else{
+        $number_product = array_sum(array_column($itemsCart, 'total_product'));
+    }
+    $classNumberCartMenu = ($number_product != '')?'d-block':'d-none';
+@endphp
 <div class="wp-inner presp">
     <div class="wp-iconmn">
         <div class="d-flex justify-content-between">
@@ -12,11 +25,7 @@
                             <img src="{{asset('images/shop/cart.png')}}">
                         </div>
                     </a>
-                    @if(Session::has('cart'))
-                    @if(count(Session::get('cart')) > 0 )
-                    <span class="number_cartmenu">{{count(Session::get('cart'))}}</span>
-                    @endif
-                    @endif
+                    <span class="number_cartmenu">{{$number_product}}</span>
                 </li>
                 <li class="hruse"><a href="">
                         <div class="rimg-center"><img src="{{asset('images/shop/mr1.png')}}" alt=""></div>

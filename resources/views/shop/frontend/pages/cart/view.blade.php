@@ -11,12 +11,8 @@
             @include("$moduleName.pages.$controllerName.child_view.cart_null")
         @endif
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="new-view">
-                    @include("$moduleName.templates.new_view")
-                </div>
-            </div>
+        <div class="new-view">
+             @include("$moduleName.templates.new_view")
         </div>
     </div>
 </div>
