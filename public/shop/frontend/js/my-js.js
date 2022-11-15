@@ -72,6 +72,9 @@ $(document).ready(function () {
                 },
             }); 
         },
+        function(){
+            
+        }
     );
     $('.sub-menu1>li').hover(
         function() {
@@ -95,6 +98,9 @@ $(document).ready(function () {
                 },
             }); 
         },
+        function(){
+            
+        }
     );
 //end Cat
     $(".select2").select2();

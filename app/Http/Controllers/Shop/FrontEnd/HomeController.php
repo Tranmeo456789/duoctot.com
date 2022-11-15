@@ -64,58 +64,7 @@ class HomeController extends ShopFrontEndController
         $listProductCatLevel2=(new ProductModel())->listItems($params,['task'=>'frontend-list-items']);
         return view("$this->moduleName.block.child_submenu.ls_cat_level3_and_product",compact('listItemLevel3','listProductCatLevel2','slugCatLevel1','slugCatLevel2'));
     }
-    // public function ajaxlocal(Request $request)
-    // {
-    //     $data = $request->all();
-    //     $maid = $request->maid;
-    //     $output = '';
-    //     $params = [];
-    //     $list_store = '';
-    //     $district_select = null;
-    //     if ($data['action']) {
-    //         $params['user_type_id'] = 4;
-    //         if ($data['action'] == 'city3') {
-    //             $params['province_id'] = $maid;
-    //             $stores = (new UsersModel())->listItems($params, ['task' => 'list-store-select-province']);
-    //             $province_select = (new ProvinceModel)->getItem(['id' => $maid], ['task' => 'get-item-full'])->name;
-    //             $temp = count($stores);
-    //             $list_store .= StrData::count_store($temp, $province_select, $district_select);
-    //             $output .= '<option value="">--Chọn quận huyện--</option>';
-    //             $itemsDistrict = (new DistrictModel())->listItems(['parentID' => $maid], ['task' => 'admin-list-items-in-selectbox']);
-    //             foreach ($itemsDistrict as $key => $value) {
-    //                 $output .= '<option value="' . $key . '">' . $value . '</option>';
-    //             }
-    //         }
-    //         if ($data['action'] == 'district3') {
-    //             $params['district_id'] = $maid;
-    //             $district_select=(new DistrictModel)->getItem(['id' => $maid], ['task' => 'get-item-full'])->name;
-    //             $province_select = (new DistrictModel)->getItem(['id' => $maid], ['task' => 'get-item-full'])->province->name;
-    //             $stores = (new UsersModel())->listItems($params, ['task' => 'list-store-select-district']);
-    //             $temp = count($stores);
-    //             $list_store= StrData::count_store($temp, $province_select, $district_select);
-    //         }
-    //         foreach ($stores as $item) {
-    //             $details = $item->details->pluck('value', 'user_field')->toArray();
-    //             if ($details != null) {
-    //                 if ($details['address'] != null) {
-    //                     $wards = (new WardModel)->getItem(['id' => $details['ward_id']], ['task' => 'get-item-full']);
-    //                     $ward = $wards->name;
-    //                     $district = $wards->district->name;
-    //                     $province = $wards->district->province->name;
-    //                     $address_store = $details['address'] . ', ' . $ward . ', ' . $district . ', ' . $province;
-    //                     $store_id = $item['user_id'];
-    //                     $list_store .= StrData::list_store($store_id, $address_store);
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     $result = array(
-    //         'list_district' => $output,
-    //         'list_store' => $list_store,
-    //         'test'=>$temp
-    //     );
-    //     return response()->json($result, 200);
-    // }
+    
     public function ajax_filter(Request $request){
         $data = $request->all();
         $ls_product='';

@@ -764,7 +764,7 @@
     background: black;
     left: 0px;
     top: 100%;
-    z-index: 88;
+    z-index: 502;
     opacity: 0.7;
     transition: all 0.25s ease-in-out;
     display: none;
