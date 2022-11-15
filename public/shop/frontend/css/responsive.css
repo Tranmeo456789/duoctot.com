@@ -31,7 +31,7 @@
     }
     .head_topon_reponsive {
         display: block;
-        background-image: url(../../images/shop/headbg.png);
+        background-image: url(../../../images/shop/headbg.png);
         background-size: cover;
         background-repeat: no-repeat;
         padding: 5px 0px;

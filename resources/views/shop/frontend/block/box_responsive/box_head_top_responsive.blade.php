@@ -25,7 +25,9 @@
                             <img src="{{asset('images/shop/cart.png')}}">
                         </div>
                     </a>
+                    @if($number_product > 0)
                     <span class="number_cartmenu">{{$number_product}}</span>
+                    @endif
                 </li>
                 <li class="hruse"><a href="">
                         <div class="rimg-center"><img src="{{asset('images/shop/mr1.png')}}" alt=""></div>

@@ -17,7 +17,7 @@
 <link href="{{ asset('/shop/frontend/css/import/lightslider.css')}}?t=@php echo time() @endphp" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('/shop/frontend/css/import/slider.css')}}?t=@php echo time() @endphp" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('/shop/frontend/css/my-style.css')}}?t=@php echo time() @endphp" rel="stylesheet" type="text/css"/>
-<link href="{{ asset('/shop/frontend/responsive.css')}}?t=@php echo time() @endphp" rel="stylesheet" type="text/css"/>
+<link href="{{ asset('/shop/frontend/css/responsive.css')}}?t=@php echo time() @endphp" rel="stylesheet" type="text/css"/>
 
 
 

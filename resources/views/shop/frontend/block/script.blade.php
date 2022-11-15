@@ -9,46 +9,6 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="{{ asset('/shop/frontend/js/main.js')}}?t=@php echo time() @endphp" type="text/javascript"></script>
 
-<script>
-    $(document).ready(function() {    
-        $('.choose').change(function() {
-            var action = $(this).attr('id');
-            var maid = $(this).val();
-            var _token = $('input[name="_token"]').val();
-            var district2 = $('#select2-district2-container').attr('title');
-            var wards2= $('#select2-wards2-container').attr('title');
-             if(district2 === "--Chọn quận huyện--"){
-                 $("#district2-error").css("display", "none");
-             }
-            if(wards2 != "--Chọn xã phường--"){
-                $("#wards2-error").css("display", "none");
-            }
-            var result = '';
-            if (action == 'city') {
-                result = 'district2';
-            } else {
-                result = 'wards2';
-            }
-            if (action == 'city2') {
-                result = 'district3';
-            }
-            $.ajax({
-                url: "{{route('locationAjax')}}",
-                method: "POST",
-                dataType: 'html',
-                data: {
-                    action: action,
-                    maid: maid,
-                    _token: _token
-                },
-                success: function(data) {
-                    $('#' + result).html(data);
-                },
-            });
-        });
-    });
-</script>
-
 <script src="{{ asset('/shop/frontend/js/owl.carousel.js')}}?t=@php echo time() @endphp" type="text/javascript"></script>
 
 
