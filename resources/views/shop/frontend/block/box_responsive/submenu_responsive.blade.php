@@ -5,7 +5,7 @@
     $listCatAll=(new CatProductModel())->listItems(null, ['task'  => 'list-items-front-end']);
 @endphp
 <h3>
-    <div class="container-menures"><a href="">Trang chủ</a></div>
+    <div class="container-menures"><a href="{{route('home')}}">Trang chủ</a></div>
 </h3>
 <ul>
     @foreach ($listCatLevel1 as $itemLevel1)
@@ -13,14 +13,14 @@
     <li>
         <div class="container-menures position-relative parentsmenu">
             <div class=" pr-4">
-                <a href="">{{$itemLevel1['name']}}</a>
+                <a href="{{route('fe.cat',$itemLevel1['slug'])}}">{{$itemLevel1['name']}}</a>
             </div>
             <div class="iconmnrhv"><img src="{{asset('images/shop/arrowd.png')}}" alt=""></div>
             <div class="submenu1res">
                 <ul>
                     @foreach ($listCatAll as $itemLevel2)
                     @if ($itemLevel2['parent_id'] == $itemLevel1['id'])
-                    <li><a href="">{{$itemLevel2['name']}}</a></li>
+                    <li><a href="{{route('fe.cat2',[$itemLevel1['slug'],$itemLevel2['slug']])}}">{{$itemLevel2['name']}}</a></li>
                     @endif
                     @endforeach
                 </ul>

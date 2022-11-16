@@ -61,7 +61,6 @@ class CartController extends ShopFrontEndController
     public function cartFull(Request $request)
     {
         
-
         return view($this->pathViewController . 'cart_full');
     }
    

@@ -14,6 +14,9 @@
                 <div class="col-xl-9 col-12">
                     <div class="product-of-cat">
                         @include("$moduleName.pages.$controllerName.child_cat_level1.list_cat_child")
+                        <div class="bodycat-productrespon">
+                            @include("$moduleName.pages.$controllerName.child_cat_level1.list_cat_child_responsive")
+                        </div>
                     </div>
                     <div id="productsl" class="mt-5 p-4">
                         @include("$moduleName.pages.$controllerName.partial.product_selling")

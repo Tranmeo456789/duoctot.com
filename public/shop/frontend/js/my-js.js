@@ -438,6 +438,9 @@ $(document).on('click', '.btn-select-buy', function (event) {
 
     var _token = $('input[name="_token"]').val();
     var quantity = $('input[name="qty_product"]').val();
+    var total_product = $('.hrcart .number_cartmenu').text();
+    total_product = Number(total_product) + Number(quantity);
+    $('.hrcart .number_cartmenu').text(total_product);
     var product_id = $('#product_id').val();
     var user_sell = $('#user_sell').val();
     url = $(this).data('href');
