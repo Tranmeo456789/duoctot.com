@@ -138,11 +138,21 @@ class ProductController extends BackEndController
             }
             $this->model->saveItem($params, ['task' => $task]);
             $request->session()->put('app_notify', $notify);
-            return response()->json([
-                'fail' => false,
-                'redirect_url' => route($this->controllerName),
-                'message'      => $notify,
-            ]);
+            if(Session::get('user')['is_admin'] == 1 || Session::get('user')['is_admin'] == 2){
+                $notify='Cập nhật thông tin thuốc thành công!';
+                $request->session()->put('app_notify', 'Cập nhật thông tin thuốc thành công!');
+                return response()->json([
+                    'fail' => false,
+                    'redirect_url' => route('admin.product.list'),
+                    'message'      => $notify,
+                ]);
+            }
+                return response()->json([
+                    'fail' => false,
+                    'redirect_url' => route($this->controllerName),
+                    'message'      => $notify,
+                ]);
+            
         }
     }
     public function form(Request $request)

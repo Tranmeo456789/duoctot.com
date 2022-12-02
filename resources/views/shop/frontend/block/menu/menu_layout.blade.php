@@ -88,15 +88,16 @@
             <div class="rimg-startm"><img src="{{asset('images/shop/logo_topbar2.png')}}" alt=""></div>
             <div class="rimg-center closem" id="closem"><img src="{{asset('images/shop/closem.png')}}" alt=""></div>
         </div>
-        <div class="body-responhoder">
-            <a href="{{route('fe.order.list')}}">
-                <div class="container-menures d-flex">
-                    <div class="rimg-center"><img src="{{asset('images/shop/news1.png')}}" alt=""></div>
-                    <h2>Tra cứu lịch sử đơn hàng</h2>
-                </div>
-            </a>
-        </div>
-
+        @if((Session::has('user') && Session::get('user')['user_type_id'] != 9) || Session::get('user')==null)
+            <div class="body-responhoder">
+                <a href="{{route('fe.order.list')}}">
+                    <div class="container-menures d-flex">
+                        <div class="rimg-center"><img src="{{asset('images/shop/news1.png')}}" alt=""></div>
+                        <h2>Tra cứu lịch sử đơn hàng</h2>
+                    </div>
+                </a>
+            </div>
+        @endif
         <div class="list-menures">
             @include('shop.frontend.block.box_responsive.submenu_responsive')
         </div>

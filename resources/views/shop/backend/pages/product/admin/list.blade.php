@@ -43,14 +43,15 @@
                     <td style="width: 17%" >{{$val->userProduct['fullname']}}</td>            
                     <td style="width: 10%" class="text-center"><span class="badge {{$val->status_product=='da_duyet'?'badge-success':'badge-warning'}} ">{!! $statusProductValue[$val['status_product']]!!}</span></td>
                     <td style="width: 15%" class="text-center">
-                    @if($val->status_product=='cho_kiem_duyet')
-                        <a href="{{route('admin.product.change.status',[$val->id,'da_duyet'])}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top">Phê duyệt</a>
-                        <a href="{{route('admin.product.change.status',[$val->id,'tu_choi'])}}" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top">Từ chối</a>
-                    @elseif($val->status_product=='da_duyet')
-                        <a href="{{route('admin.product.change.status',[$val->id,'cho_kiem_duyet'])}}" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top">Hủy duyệt</a>
-                    @else
-                        <a href="{{route('admin.product.change.status',[$val->id,'cho_kiem_duyet'])}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top">Hoàn tác</a>
-                    @endif  
+                        @if($val->status_product=='cho_kiem_duyet')
+                            <a href="{{route('admin.product.change.status',[$val->id,'da_duyet'])}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top">Phê duyệt</a>
+                            <a href="{{route('admin.product.change.status',[$val->id,'tu_choi'])}}" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top">Từ chối</a>
+                        @elseif($val->status_product=='da_duyet')
+                            <a href="{{route('admin.product.change.status',[$val->id,'cho_kiem_duyet'])}}" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top">Hủy duyệt</a>
+                        @else
+                            <a href="{{route('admin.product.change.status',[$val->id,'cho_kiem_duyet'])}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top">Hoàn tác</a>
+                        @endif  
+                        <a href="{{route('product.edit',$val->id)}}" class="btn btn-primary btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top">Chỉnh sửa</a>
                     </td>
                 </tr>
             @endforeach

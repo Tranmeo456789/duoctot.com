@@ -44,13 +44,15 @@
                     </li> -->
                 </ul>
             </li>
-            @if ((Session::has('user') && Session::get('user')['user_type_id'] > 3))         
+            @if ((Session::has('user') && Session::get('user')['is_admin'] == 1) || (Session::has('user') && Session::get('user')['is_admin'] == 2) )         
             <li class="nav-item">
                 <a href="{{ route('catProduct') }}" class="nav-link">
                     <i class="nav-icon fas fa-wallet"></i>
                     <p>Danh mục thuốc</p>
                 </a>
             </li>
+            @endif
+            @if ((Session::has('user') && Session::get('user')['user_type_id'] > 3)) 
             <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-dumpster-fire"></i>
@@ -150,28 +152,28 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a href="{{route('warehouse')}}" class="nav-link">
                     <i class="nav-icon fas fa-bullhorn"></i>
                     <p>Khuyến mãi</p>
                 </a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a href="{{route('customer')}}" class="nav-link">
                     <i class="nav-icon fas fa-person-booth"></i>
                     <p>Quản lý khách hàng</p>
                 </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-id-card-alt"></i>
                     <p>Quản lý gian hàng</p>
                 </a>
-            </li>
+            </li> -->
             @endif
-            @if ((Session::has('user') && Session::get('user')['is_admin'] == 1))
+            @if ((Session::has('user') && Session::get('user')['is_admin'] == 1) || (Session::has('user') && Session::get('user')['is_admin'] == 2))
             <li class="nav-item">
-                <a href="{{route('admin.product')}}" class="nav-link">
+                <a href="{{route('admin.product.list')}}" class="nav-link">
                     <i class="nav-icon fas fa-dumpster-fire"></i>
                     <p>Quản lý Thuốc <i class="right fas fa-angle-left"></i></p>
                 </a>
@@ -182,14 +184,18 @@
                             <p>Danh sách thuốc</p>
                         </a>
                     </li>
+                    @if ((Session::has('user') && Session::get('user')['is_admin'] == 1))
                     <li class="nav-item">
                         <a href="{{route('admin.product')}}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Quản lý chung</p>
                         </a>
                     </li>
+                    @endif
                 </ul>
             </li>
+            @endif
+            @if ((Session::has('user') && Session::get('user')['is_admin'] == 1))
             <li class="nav-item">
                 <a href="{{route('admin.order')}}" class="nav-link">
                     <i class="nav-icon fas fa-gifts"></i>

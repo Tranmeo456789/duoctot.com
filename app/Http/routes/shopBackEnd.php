@@ -20,17 +20,9 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
     Route::post('/thay-doi-mat-khau', 'ProfileController@change_password')->name('profile.password');
     Route::get('/thiet-lap-cai-dat-khac', 'ProfileController@setting')->name('profile.setting');
     Route::group(['middleware' => ['permission.shop']], function () {
-        Route::get('/danh-sach-danh-muc-thuoc', 'CatProductController@index')->name('catProduct');
-        Route::get('/them-danh-muc-thuoc', 'CatProductController@form')->name('catProduct.add');
-        Route::get('/sua-danh-muc-thuoc/{id}', 'CatProductController@form')->name('catProduct.edit');
-        Route::post('/luu-danh-muc-thuoc', 'CatProductController@save')->name('catProduct.save');
-        Route::get('/xoa-danh-muc-thuoc/{id}', 'CatProductController@delete')->name('catProduct.delete');
-        Route::get('move-{type}/{id}',   'CatProductController@move')->name('catProduct.move');
 
         Route::get('/danh-sach-san-pham', 'ProductController@index')->name('product');
         Route::get('/them-san-pham', 'ProductController@form')->name('product.add');
-        Route::get('/sua-san-pham/{id}', 'ProductController@form')->name('product.edit');
-        Route::post('/luu-san-pham', 'ProductController@save')->name('product.save');
         Route::get('/xoa-san-pham/{id}', 'ProductController@delete')->name('product.delete');
         Route::get('/chi-tiet-san-pham/{id}', 'ProductController@getItem')->name('product.getItem');
 
@@ -93,11 +85,25 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
     Route::group(['middleware' => ['permission.dashboard']], function () {
         Route::get('/', 'DashboardController@index')->name('dashboard');
     });
-    Route::group(['middleware' => ['permission.admin']], function () {
-        Route::get('/danh-sach-nguoi-dung', 'UserController@index')->name('user');
-        Route::get('/quan-ly-thuoc-admin', 'ProductController@index_admin')->name('admin.product');
+    Route::group(['middleware' => ['permission.editProduct']], function () {
+        Route::get('/sua-san-pham/{id}', 'ProductController@form')->name('product.edit');
+        Route::post('/luu-san-pham', 'ProductController@save')->name('product.save');
+    });
+    Route::group(['middleware' => ['permission.editorOrAdmin']], function () {
+        Route::get('/danh-sach-danh-muc-thuoc', 'CatProductController@index')->name('catProduct');
+        Route::get('/them-danh-muc-thuoc', 'CatProductController@form')->name('catProduct.add');
+        Route::get('/sua-danh-muc-thuoc/{id}', 'CatProductController@form')->name('catProduct.edit');
+        Route::post('/luu-danh-muc-thuoc', 'CatProductController@save')->name('catProduct.save');
+        Route::get('/xoa-danh-muc-thuoc/{id}', 'CatProductController@delete')->name('catProduct.delete');
+        Route::get('move-{type}/{id}',   'CatProductController@move')->name('catProduct.move');
+
         Route::get('/danh-sach-thuoc-admin', 'ProductController@listProductAdmin')->name('admin.product.list');
         Route::get('/thay-doi-trang-thai-thuoc-admin/{id}/{status}', 'ProductController@changeProductInAdmin')->name('admin.product.change.status');
+    });
+    Route::group(['middleware' => ['permission.admin']], function () {
+        Route::get('/danh-sach-nguoi-dung', 'UserController@index')->name('user');
+
+        Route::get('/quan-ly-thuoc-admin', 'ProductController@index_admin')->name('admin.product');
         Route::get('/quan-ly-don-hang-admin', 'OrderController@index_admin')->name('admin.order');
         Route::get('/quan-ly-kho-hang-admin', 'WarehouseController@index_admin')->name('admin.warehouse');
         Route::get('/quan-ly-khách-hàng-admin', 'CustomerController@index_admin')->name('admin.customer');

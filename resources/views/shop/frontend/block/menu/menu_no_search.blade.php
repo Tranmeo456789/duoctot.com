@@ -3,6 +3,7 @@
 @section('header_top')
         <div class="wp-inner clearfix">
             <a href="{{route('home')}}" title="" id="payment-link" class="fl-left"><img style="width:213px" src="{{asset('images/shop/logo_topbar2.png')}}" alt=""></a>
+            @if((Session::has('user') && Session::get('user')['user_type_id'] != 9) || Session::get('user')==null)
             <div id="" class="fl-left" style="margin-left:300px; padding-top:5px">
                 <a href="{{route('fe.order.list')}}" id="payment-link" class="search-history-order">
                     <div class="clearfix">
@@ -33,6 +34,7 @@
                     </div>
                 </div>
             </div>
+            @endif
             @if(Session::has('user'))
             <div class="float-right" style="margin-left:10px;padding-top:20px;">
                 <div class="dropdown">

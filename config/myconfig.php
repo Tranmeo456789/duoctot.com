@@ -107,7 +107,7 @@
                 'status_order' => 'Trạng thái đơn hàng'
             ],
             'type_user' => [
-                '1' => 'Bệnh nhân',
+                '1' => 'Thành viên',
                 '2' => 'Bác sĩ',
                 '3' => 'Phòng khám',
                 '4' => 'Nhà thuốc',

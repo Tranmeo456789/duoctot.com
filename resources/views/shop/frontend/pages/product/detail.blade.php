@@ -51,6 +51,7 @@
                     <p><span class="font-weight-bold">Nước sản xuất: </span>{{$item->countryProduct->name}}</p>
                     <p><span class="font-weight-bold">Công dụng: </span>{{$item['benefit']}}</p>
                 </div>
+                @if((Session::has('user') && Session::get('user')['user_type_id'] != 9) || Session::get('user')==null)
                 @include("$moduleName.block.payment_vnpay")
                 <div>
                     {!! csrf_field() !!}
@@ -73,6 +74,7 @@
                         <input type="hidden" id="user_sell" value="{{$item->userProduct->user_id}}">
                     </div>
                 </div>
+                @endif
                 <div class="commit-tdoctor text-center">
                     @include("$moduleName.pages.$controllerName.child_detail.commit_tdoctor")
                 </div>

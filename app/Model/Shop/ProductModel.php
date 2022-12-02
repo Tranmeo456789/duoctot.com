@@ -51,7 +51,7 @@ class ProductModel extends BackEndModel
     {
         if (\Session::has('user')){
             $user = \Session::get('user');
-            if($user['is_admin']==1){
+            if($user['is_admin']==1 || $user['is_admin']==2){
                 return  $query;
             }else{
                 return  $query->where('user_id',$user->user_id);
