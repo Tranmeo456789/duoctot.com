@@ -11,8 +11,8 @@
 
     $elements = [
         [
-            'label'   => HTML::decode(Form::label('name', 'Tên Nhà sản xuất' .  $star, $formLabelAttr)),
-            'element' => Form::text('name', $item['name']??null, array_merge($formInputAttr,['placeholder'=>'Tên Nhà sản xuất'])),
+            'label'   => HTML::decode(Form::label('name', 'Tên danh mục' .  $star, $formLabelAttr)),
+            'element' => Form::text('name', $item['name']??null, array_merge($formInputAttr,['placeholder'=>'Tên danh mục'])),
             'widthElement' => 'col-12'
         ],[
             'label'   => HTML::decode(Form::label('parent_id', $label['parent_id'] , $formLabelAttr)),
