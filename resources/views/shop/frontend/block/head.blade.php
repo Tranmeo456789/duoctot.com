@@ -3,9 +3,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="shortcut icon" href="favicon.ico">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/solid.min.css">
+<link href="{{ asset('/shop/template/css/bootstrap.min.css')}}">
+<link href="{{ asset('/shop/template/css/all.min.css') }}"/>
+<link rel="stylesheet" href="{{ asset('/shop/template/css/solid.min.css')}}">
 <link rel="stylesheet" href="{{ asset('shop/template/css/select2.min.css')}}?t=@php echo time() @endphp">
 <link href="{{ asset('/shop/frontend/css/import/header.css')}}?t=@php echo time() @endphp" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('/shop/frontend/css/import/home.css')}}?t=@php echo time() @endphp" rel="stylesheet" type="text/css"/>
@@ -14,7 +14,7 @@
 <link href="{{ asset('/shop/frontend/css/import/cart.css')}}?t=@php echo time() @endphp" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('/shop/frontend/css/import/footer.css')}}?t=@php echo time() @endphp" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('/shop/frontend/css/import/product.css')}}?t=@php echo time() @endphp" rel="stylesheet" type="text/css"/>
-<link href="{{ asset('/shop/frontend/css/import/lightslider.css')}}?t=@php echo time() @endphp" rel="stylesheet" type="text/css"/>
+<link href="{{ asset('/shop/frontend/css/import/lightslider.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('/shop/frontend/css/import/slider.css')}}?t=@php echo time() @endphp" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('/shop/frontend/css/my-style.css')}}?t=@php echo time() @endphp" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('/shop/frontend/css/responsive.css')}}?t=@php echo time() @endphp" rel="stylesheet" type="text/css"/>
