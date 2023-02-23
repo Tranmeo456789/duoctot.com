@@ -38,7 +38,9 @@ ul {
 .prescrip-content {
     max-width: 700px;
 }
-
+#buy-medicine{
+    margin-top: 200px;
+}
 .img-footer-prescrip {
     margin-right: 15px;
 }

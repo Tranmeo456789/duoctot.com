@@ -3,14 +3,14 @@
 @section('content')
     <div class="section" id="slider-wp">
         <div class="section-detail">
-        <div class="item">
-                <img src="https://images.fpt.shop/unsafe/fit-in/1600x400/filters:quality(80):fill(white)/nhathuoclongchau.com/upload/slide/1658467715-tm6o-dac-quyen-mua-hang-1k.png" alt="" class="img-fluid" style="width:100%">
+            <div class="item">
+                <img src="{{asset('images/shop/banner1.png')}}" alt="" class="img-fluid" style="width:100%">
             </div>
             <div class="item">
-                <img src="https://images.fpt.shop/unsafe/fit-in/1600x400/filters:quality(80):fill(white)/nhathuoclongchau.com/upload/slide/1658467715-tm6o-dac-quyen-mua-hang-1k.png" alt="" class="img-fluid" style="width:100%">
+                <img src="{{asset('images/shop/banner2.png')}}" alt="" class="img-fluid" style="width:100%">
             </div>
             <div class="item">
-                <img src="https://images.fpt.shop/unsafe/fit-in/1600x400/filters:quality(80):fill(white)/nhathuoclongchau.com/upload/slide/1659455646-rU5F-sua-tam-em-be-cetaphil-uu-dai-doc-quyen.png" alt="" class="img-fluid" style="width:100%">
+                <img src="{{asset('images/shop/banner3.png')}}" alt="" class="img-fluid" style="width:100%">
             </div>
         </div>
     </div>
@@ -22,7 +22,7 @@
                 </div>
             </div>
         </div>
-        <div id="buy-medicine" class="mt-5">
+        <div id="buy-medicine">
             @include("$moduleName.pages.$controllerName.child_index.buy_medicine")
         </div>
         <div id="featured-category" class="mt-5">
