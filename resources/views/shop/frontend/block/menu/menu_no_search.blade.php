@@ -11,8 +11,8 @@
                             <img style="width:26px" src="{{asset('images/shop/history.png')}}" alt="">
                         </div>
                         <div class="fl-left">
-                            <p>Tra cứu</p>
-                            <p>Lịch sử đơn hàng</p>
+                            <p>@lang('lang.look_up')</p>
+                            <p>@lang('lang.order_history')</p>
                         </div>
                     </div>
                 </a>
@@ -25,7 +25,7 @@
                                 <img style="width:32px" src="{{asset('images/shop/cart.png')}}" alt="">
                             </div>
                             <div class="fl-left pt-2">
-                                <p>Giỏ hàng</p>
+                                <p>@lang('lang.cart')</p>
                             </div>
                         </div>
                     </a>
@@ -50,12 +50,12 @@
             @else
             <div id="" class="fl-right" style="margin-left:10px;padding-top:12px;">
                 <a title="" id="payment-link" class="">
-                    <div class="btn-register">Đăng ký</div>
+                    <div class="btn-register">@lang('lang.register')</div>
                 </a>
             </div>
             <div id="" class="fl-right" style="padding-top:12px;">
                 <a title="" id="payment-link" class="">
-                    <div class="btn-login">Đăng nhập</div>
+                    <div class="btn-login">@lang('lang.login')</div>
                 </a>
             </div>
             @endif

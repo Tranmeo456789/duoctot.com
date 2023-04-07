@@ -4,8 +4,8 @@
             <div class="d-flex justify-content-center">
                 <div class="d-flex justify-content-center">
                     <div class="d-flex align-items-center"><span class="circle-ripple"></span></div>
-                    <p>Kết nối khám chữa bệnh tại nhà với các bác sĩ online</p>
-                    <a href="">Xem hướng dẫn</a>
+                    <p>@lang('lang.connecting_home_medical_with_online_doctors')</p>
+                    <a href="">@lang('lang.instruction')</a>
                 </div>
             </div>
         </div>
@@ -70,12 +70,16 @@
                 </div>
                 <div class="flag pt-2">
                     <div class="position-relative">
-                        <img src="{{asset('images/shop/flag.png')}}" alt="" srcset="">
+                        @if(session()->has('locale'))
+                            <img src="{{asset('images/shop/')}}/fg_{{session()->get('locale')}}.png">
+                        @else
+                            <img src="{{asset('images/shop/flag.png')}}">
+                        @endif
                         <div class="dropdown">
-                            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tiếng Việt</button>
+                            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('lang.language')</button>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="{{route('dashboard')}}">Tiếng Anh</a>
-                                <a class="dropdown-item" href="{{route('user.logout')}}">Tiếng Pháp</a>
+                                <a class="dropdown-item" href="{{url('lang/vi')}}">@lang('lang.vietnam')</a>
+                                <a class="dropdown-item" href="{{url('lang/en')}}">@lang('lang.english')</a>
                             </div>
                         </div>
                     </div>

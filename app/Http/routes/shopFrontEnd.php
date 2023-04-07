@@ -35,7 +35,16 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
 
     Route::get('/xoa-san-pham-gio-hang/{user_sell}-{id}','CartController@delete')->name('fe.cart.delete');
     
+    Route::get('lang/{locale}',function($locale){
+        if(! in_array($locale,['en','vi'])){
+            abort(404);
+        }
+        session()->put('locale',$locale);
+        return redirect()->back();
+    });
+
     Route::get('/{slug}','CatController@catLevel1')->name('fe.cat');
     Route::get('/{slug1}/{slug2}','CatController@catLevel2')->name('fe.cat2');
     Route::get('/{slug1}/{slug2}/{slug3}','CatController@catLevel3')->name('fe.cat3');
+
 });
