@@ -36,7 +36,12 @@
         background-repeat: no-repeat;
         padding: 5px 0px;
     }
-
+.social .icon-social{
+    width: 35px;
+}
+.social2{
+    margin-top: 15px;
+}
     .head_topon_reponsive .tt-respon {
         text-decoration: underline;
         font-size: 12px;

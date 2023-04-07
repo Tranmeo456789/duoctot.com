@@ -42,18 +42,9 @@
         @include("$moduleName.pages.$controllerName.child_index.product_in_object")
     </div>
 </div>
-<!-- <div id="qadoctor" class="mt-3 pb-5">
-        @include("$moduleName.pages.$controllerName.child_index.qadoctor")
-    </div> -->
 <div class="wp-inner">
     @include("$moduleName.pages.$controllerName.child_index.news")
 </div>
-<!-- <div class="info-tdoctor mt-5">
-        @include("$moduleName.templates.info_tdoctor")
-    </div> -->
-<!-- <div class="wp-inner mt-5">
-        @include("$moduleName.templates.info_app")
-    </div> -->
 <div class="service-tdoctor mt-5">
     @include("$moduleName.templates.info_service")
 </div>

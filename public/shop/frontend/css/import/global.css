@@ -176,10 +176,12 @@ a:hover{
     background: #F1F8FF;
     border-radius: 50%;
 }
+
 .icon-social{
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
+    width: 20px;
 }
 .rimg-center{
     display: flex;

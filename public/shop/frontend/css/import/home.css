@@ -3,6 +3,7 @@
 #main-content-wp {
     padding-bottom: 75px;
     position: relative;
+    overflow: hidden;
 }
 #hisd{
     position: relative;
