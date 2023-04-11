@@ -36,6 +36,11 @@
             </div>
         </div>
     </li>
+    <li class="">
+        <div class="container-menures position-relative parentsmenu">
+            <a href="https://tdoctor.vn/booking-online">@lang('lang.onlinebooking')</a>
+        </div>
+    </li>
     @if(Session::has('user'))
     <li>
         <div class="container-menures position-relative parentsmenu">
