@@ -9,6 +9,7 @@
     'english'=>'Tiếng Anh',
     'vietnam'=>'Tiếng Việt',
     'connecting_home_medical_with_online_doctors'=>'Kết nối khám chữa bệnh tại nhà với các bác sĩ online',
-    'instruction'=>'Xem hướng dẫn'
+    'instruction'=>'Xem hướng dẫn',
+    'onlinebooking' => 'Đặt khám'
  ];
 ?>

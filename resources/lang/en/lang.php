@@ -9,6 +9,7 @@
     'english'=>'English',
     'vietnam'=>'Vietnamese',
     'connecting_home_medical_with_online_doctors'=>'Connecting home medical with online doctors',
-    'instruction'=>'Instruction'
+    'instruction'=>'Instruction',
+    'onlinebooking' => 'Online Booking'
  ];
 ?>

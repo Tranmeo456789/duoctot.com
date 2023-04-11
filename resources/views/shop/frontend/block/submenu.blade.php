@@ -35,7 +35,7 @@ $listCatAll=(new CatProductModel())->listItems(null, ['task'  => 'list-items-fro
                 <div class="col-9 px-0 content-submenu-right">
                     <div class="sub-menu2 ">
                         <div class="cat_detail list_cat_level3_products">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -45,5 +45,8 @@ $listCatAll=(new CatProductModel())->listItems(null, ['task'  => 'list-items-fro
     @endforeach
     <li class="">
         <a href="">Nhà thuốc</a>
+    </li>
+    <li class="https://tdoctor.vn/booking-online">
+        <a href="">@lang('lang.onlinebooking')</a>
     </li>
 </ul>
