@@ -5,9 +5,11 @@
     'cart'=>'Giỏ hàng',
     'login'=>'Đăng nhập',
     'register'=>'Đăng ký',
-    'language'=>'Ngôn ngữ',
+    'language'=>'Tiếng Việt',
     'english'=>'Tiếng Anh',
     'vietnam'=>'Tiếng Việt',
+    'chinese'=>'Tiếng Trung Quốc',
+    'korean'=>'Tiếng Hàn Quốc',
     'connecting_home_medical_with_online_doctors'=>'Kết nối khám chữa bệnh tại nhà với các bác sĩ online',
     'instruction'=>'Xem hướng dẫn',
     'onlinebooking' => 'Đặt khám'

@@ -5,9 +5,11 @@
     'cart'=>'Cart',
     'login'=>'Log in',
     'register'=>'Register',
-    'language'=>'Language',
+    'language'=>'English',
     'english'=>'English',
     'vietnam'=>'Vietnamese',
+    'chinese'=>'Chinese',
+    'korean'=>'Korean',
     'connecting_home_medical_with_online_doctors'=>'Connecting home medical with online doctors',
     'instruction'=>'Instruction',
     'onlinebooking' => 'Online Booking'

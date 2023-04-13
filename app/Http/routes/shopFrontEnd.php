@@ -36,7 +36,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('/xoa-san-pham-gio-hang/{user_sell}-{id}','CartController@delete')->name('fe.cart.delete');
     
     Route::get('lang/{locale}',function($locale){
-        if(! in_array($locale,['en','vi'])){
+        if(! in_array($locale,['en','vi','zh','ko'])){
             abort(404);
         }
         session()->put('locale',$locale);

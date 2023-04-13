@@ -80,6 +80,8 @@
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="{{url('lang/vi')}}">@lang('lang.vietnam')</a>
                                 <a class="dropdown-item" href="{{url('lang/en')}}">@lang('lang.english')</a>
+                                <a class="dropdown-item" href="{{url('lang/zh')}}">@lang('lang.chinese')</a>
+                                <a class="dropdown-item" href="{{url('lang/ko')}}">@lang('lang.korean')</a>
                             </div>
                         </div>
                     </div>
