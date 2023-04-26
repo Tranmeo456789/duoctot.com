@@ -78,10 +78,10 @@
                         <div class="dropdown">
                             <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('lang.language')</button>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="{{url('lang/vi')}}">@lang('lang.vietnam')</a>
-                                <a class="dropdown-item" href="{{url('lang/en')}}">@lang('lang.english')</a>
-                                <a class="dropdown-item" href="{{url('lang/zh')}}">@lang('lang.chinese')</a>
-                                <a class="dropdown-item" href="{{url('lang/ko')}}">@lang('lang.korean')</a>
+                                <a class="dropdown-item" href="{{url('lang/vi')}}"><span><img src="{{asset('images/shop/fg_vi.png')}}"></span><span class="pl-2">@lang('lang.vietnam')</span></a>
+                                <a class="dropdown-item" href="{{url('lang/en')}}"><span><img src="{{asset('images/shop/fg_en.png')}}"></span><span class="pl-2">@lang('lang.english')</span></a>
+                                <a class="dropdown-item" href="{{url('lang/zh')}}"><span><img src="{{asset('images/shop/fg_zh.png')}}"></span><span class="pl-2">@lang('lang.chinese')</span></a>
+                                <a class="dropdown-item" href="{{url('lang/ko')}}"><span><img src="{{asset('images/shop/fg_ko.png')}}"></span><span class="pl-2">@lang('lang.korean')</span></a>
                             </div>
                         </div>
                     </div>

@@ -281,9 +281,11 @@
 #head-body #main-menu>li:first-child>a {
     padding-left: 0px;
 }
-
-.flag img {
+.flag img{
     width: 31px;
+}
+.flag>div>img {
+    
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -294,6 +296,9 @@
     font-size: 16px;
 }
 
+.flag .dropdown-menu.show a{
+    padding: 5px 8px;
+}
 #dropdownMenuButton.btn:focus {
     box-shadow: none;
 }
