@@ -31,9 +31,9 @@ Route::post('/dang-ky', 'UserController@register')->name('user.register');
 Route::post('/dang-nhap', 'UserController@login')->name('user.login');
 Route::get('/dang-xuat', 'UserController@logout')->name('user.logout');
 Route::get('/kiem-tra-email', 'UserController@isunique')->name('user.isunique');
-Route::group(['prefix' => 'laravel-filemanager','middleware' => ['check.login']], function () {
-    \UniSharp\LaravelFilemanager\Lfm::routes();
-});
+// Route::group(['prefix' => 'laravel-filemanager','middleware' => ['check.login']], function () {
+//     \UniSharp\LaravelFilemanager\Lfm::routes();
+// });
 
 Route::get('district/get-list', 'Shop\BackEnd\DistrictController@getListByParentID')->name('district.getListByParentID');
 Route::get('ward/get-list', 'Shop\BackEnd\WardController@getListByParentID')->name('ward.getListByParentID');
