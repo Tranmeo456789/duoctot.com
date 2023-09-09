@@ -25,9 +25,11 @@
     <div id="buy-medicine" class="mt-3">
         @include("$moduleName.pages.$controllerName.child_index.buy_medicine")
     </div>
+    {{--
     <div id="featured-category" class="mt-5">
         @include("$moduleName.pages.$controllerName.child_index.featured_category")
     </div>
+    --}}
 </div>
 <div id="productsl" class="mt-5 py-4 product_hcovid">
     <div class="wp-inner">
