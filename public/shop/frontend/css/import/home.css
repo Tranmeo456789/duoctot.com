@@ -16,7 +16,7 @@
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.05);
     border-radius: 50px;
     position: absolute;
-    top: -120px;
+    top: -40px;
     z-index: 501;
 }
 
@@ -372,7 +372,7 @@
     color: #718198;
 }
 #selling-product .slect-customer .slect-item-customer:hover{
-    background: #718198;  
+    background: #718198;
 }
 #selling-product .slect-customer .slect-item-customer:hover a{
     color: #fff;
@@ -795,7 +795,7 @@
 }
 #category-product-wp .list-item .sub-menu>li:hover>a {
     background: #F1F8FF;
-    
+
 }
 .sub-menu1{
     position: relative;
@@ -810,7 +810,7 @@
     font-size: 12px;
 }
 #category-product-wp .list-item li .sub-menu{
-    display: none; 
+    display: none;
     position: absolute;
     left: 0;
     top: 112%;
