@@ -7,7 +7,7 @@
     <style type="text/css">
 
         .search-form {
-            background: url(https:/tdoctor.vn/public/v2/img/hero-area.jpeg) no-repeat;
+            background: url(https://tdoctor.vn/public/v2/img/hero-area.jpeg) no-repeat;
             background-size: cover;
             color: #fff;
             overflow: hidden;
@@ -411,7 +411,7 @@
                                                             <figure>
                                                                 <i class="far fa-heart"></i>
                                                                 <a href="{{$linkDetail}}">
-                                                                    <img class="img-fluid" src="https:/tdoctor.vn/public/images/{{$folderUpload}}/{{$val->profile_image}}" alt="">
+                                                                    <img class="img-fluid" src="https://tdoctor.vn/public/images/{{$folderUpload}}/{{$val->profile_image}}" alt="">
                                                                 </a>
                                                             </figure>
                                                             <div class="feature-content">
