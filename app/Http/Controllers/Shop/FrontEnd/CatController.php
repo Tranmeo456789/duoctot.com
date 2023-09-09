@@ -24,7 +24,7 @@ class CatController extends ShopFrontEndController
     }
     public function catLevel2($slug, $slug1)
     {
-        $itemCatCurent = (new CatProductModel())->getItem(['slug'=>$slug1],['task'=>'get-item-slug']); 
+        $itemCatCurent = (new CatProductModel())->getItem(['slug'=>$slug1],['task'=>'get-item-slug']);
         $products=(new ProductModel())->listItems(['cat_product_id'=>$itemCatCurent['id']],['task'=>'frontend-list-items']);
         $itemCatParent=(new CatProductModel)->getItem(['parent_id'=>$itemCatCurent['parent_id']],['task'=>'get-item-parent']);
         return view($this->pathViewController . 'cat_level2', compact('itemCatCurent','products','itemCatParent'));
