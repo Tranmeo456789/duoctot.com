@@ -55,7 +55,7 @@ class ProductModel extends BackEndModel
                 return  $query;
             }else{
                 return  $query->where('user_id',$user->user_id);
-            }      
+            }
         }
         return $query;
     }
@@ -129,7 +129,7 @@ class ProductModel extends BackEndModel
             }else{
                 $result =  $query->get();
             }
-            
+
         }
         if ($options['task'] == "frontend-list-items-featurer") {
             $type = $params['type'];
@@ -150,7 +150,26 @@ class ProductModel extends BackEndModel
             $result =  $query->orderBy('id', 'desc')
                              ->paginate($params['limit']);
         }
-        
+        if ($options['task'] == "frontend-list-items-by-type") {
+            $type = $params['type'];
+            $query = $this::select('id','name','type','code','cat_product_id','producer_id',
+                                    'tick','type_price','price','price_vat','coefficient',
+                                    'type_vat','packing','unit_id','sell_area','amout_max',
+                                    'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
+                                    'dosage_forms','country_id','specification','benefit',
+                                    'preserve','note','image','albumImage','albumImageHash','user_id','featurer','long','wide','high',
+                                    'mass')
+                                 //   ->whereRaw("JSON_CONTAINS(`featurer`, '\"{$params['type']}\"')");
+                                    ->whereRaw("FIND_IN_SET('\"{$params['type']}\"',REPLACE(REPLACE(`featurer`, '[',''),']',''))")->where('status_product','da_duyet');
+            if (isset($params['cat_product_id']) && ($params['cat_product_id'] != 0)){
+                $query->whereIn('cat_product_id', CatProductModel::getChild($params['cat_product_id']));
+            }
+
+            $query->OfCollaboratorCode();
+            $result =  $query->orderBy('id', 'desc')
+                             ->paginate($params['limit']);
+        }
+
         if($options['task'] == "admin-list-items-in-selectbox") {
             $query = $this->select('id', 'name')
                         ->where('id','>',1)
@@ -253,7 +272,7 @@ class ProductModel extends BackEndModel
                             ->select(DB::raw('status_product , COUNT(id) as count') )
                             ->where('id','>',1)
                             ->OfUser();
-            
+
             $result = $query->get()->toArray();
         }
         if ($options['task'] == "count-number-product-in-cat") {

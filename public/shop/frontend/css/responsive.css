@@ -176,7 +176,9 @@
     #selling-product.viewnproduct li {
         min-height: 245px;
     }
-
+    .list-product.viewnproduct li {
+        min-height: 245px;
+    }
     .info-tdoctor .list-info-tdoctor li {
         margin-right: 120px;
     }
@@ -281,7 +283,20 @@
     #selling-product li {
         width: 32.666%;
     }
+    .list-product li {
+        width: 32.666%;
+    }
+    .list-product li:nth-child(5n) {
+        margin-right: 1%;
+    }
+    .list-product li:nth-child(3n) {
+        margin-right: 0px;
+    }
 
+    .list-product h1 p {
+        font-size: 22px;
+        padding-top: 5px;
+    }
     #selling-product li:nth-child(5n) {
         margin-right: 1%;
     }
@@ -348,11 +363,15 @@
     .ipsp {
         display: none;
     }
-
+    .list-product .slect-customer {
+        margin-left: 20px;
+    }
     #selling-product .slect-customer {
         margin-left: 20px;
     }
-
+    .list-product .slect-customer {
+        margin-left: 20px;
+    }
     #selling-product .icon-product-round2 img {
         width: 30px;
     }
@@ -1033,12 +1052,12 @@
         margin: 0px;
         font-size: 20px;
     }
-    
+
     .info-product-cart .manipulation {
         padding-right: 5px;
         font-size: 12px;
     }
-    
+
     .local_drugstore{
         font-size: 12px;
     }

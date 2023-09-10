@@ -23,9 +23,10 @@ class HomeController extends ShopFrontEndController
         $product_selling = (new ProductModel())->listItems(null, ['task' => 'frontend-list-items']);
         $product_covid=(new ProductModel())->listItems(['type'=>'hau_covid','limit'=>10], ['task' => 'frontend-list-items-featurer']);
         $product=(new ProductModel())->listItems(['type'=>'tre_em','limit'=>10], ['task' => 'frontend-list-items-featurer']);
+        $itemsProduct['new'] = (new ProductModel())->listItems(['type'=>'new','limit'=>10], ['task' => 'frontend-list-items-by-type']);
         return view(
             $this->pathViewController . 'index',
-            compact('product_selling','product_covid','product')
+            compact('product_selling','product_covid','product','itemsProduct')
         );
     }
     public function ajaxHoverCatLevel1(Request $request)
@@ -44,7 +45,7 @@ class HomeController extends ShopFrontEndController
         unset($params['parent_id']);
         $params['cat_product_id']=$itemLevel2First['id'];
         $params['limit']=4;
-        $listProductCatLevel2=(new ProductModel())->listItems($params,['task'=>'frontend-list-items']);
+        $listProductCatLevel2=(new ProductModel())->listItems($params,['task'=>'frontend-list-items-featurer']);
         return view("$this->moduleName.block.child_submenu.ls_cat_level3_and_product",compact('listItemLevel3','listProductCatLevel2','slugCatLevel1','slugCatLevel2'));
     }
     public function ajaxHoverCatLevel2(Request $request)
@@ -61,17 +62,19 @@ class HomeController extends ShopFrontEndController
         unset($params['parent_id']);
         $params['cat_product_id']=$idCatLevel2;
         $params['limit']=4;
-        $listProductCatLevel2=(new ProductModel())->listItems($params,['task'=>'frontend-list-items']);
+        $listProductCatLevel2=(new ProductModel())->listItems($params,['task'=>'frontend-list-items-featurer']);
+
+
         return view("$this->moduleName.block.child_submenu.ls_cat_level3_and_product",compact('listItemLevel3','listProductCatLevel2','slugCatLevel1','slugCatLevel2'));
     }
-    
+
     public function ajax_filter(Request $request){
         $data = $request->all();
         $ls_product='';
         $object_product = $request->object_product;
         $params['type']=$object_product;$params['limit']=10;
         $product=(new ProductModel())->listItems($params, ['task' => 'frontend-list-items-featurer']);
-        $result = array(  
+        $result = array(
             'test'=>$object_product
         );
         return view("$this->pathViewController.partial.product_object",compact('product'));
