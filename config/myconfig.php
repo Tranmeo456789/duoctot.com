@@ -138,11 +138,12 @@
                 '2' => 'Giá theo doanh thu'
             ],
             'type_featurer' => [
+                'new' => 'Sản phẩm mới',
                 'noi_bat' => 'Sản phẩm nổi bật',
                 'hau_covid' => 'Sản phẩm hậu covid',
                 'tre_em' => 'Trẻ em',
                 'nguoi_cao_tuoi' => 'Người cao tuổi',
-                'phu_nu_cho_con_bu' => 'Phụ nữ cho con bú'
+                'phu_nu_cho_con_bu' => 'Phụ nữ cho con bú',
             ],
 
             'char_level' => "|---",
@@ -156,7 +157,7 @@
                     'cho_kiem_duyet' => ['name' => 'Chờ kiểm duyệt', 'class' => 'item-tab'],
                     'tu_choi' => ['name' => 'Từ chối', 'class' => 'item-tab'],
                 ],
-                'status_product'      => [                 
+                'status_product'      => [
                     'cho_kiem_duyet' => ['name' => 'Chờ kiểm duyệt', 'class' => 'item-tab'],
                     'da_duyet' => ['name' => 'Đã duyệt', 'class' => 'item-tab'],
                     'tu_choi' => ['name' => 'Từ chối', 'class' => 'item-tab'],

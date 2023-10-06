@@ -25,11 +25,22 @@
     <div id="buy-medicine" class="mt-3">
         @include("$moduleName.pages.$controllerName.child_index.buy_medicine")
     </div>
+    {{--
     <div id="featured-category" class="mt-5">
         @include("$moduleName.pages.$controllerName.child_index.featured_category")
     </div>
+    --}}
 </div>
-<div id="productsl" class="mt-5 py-4 product_hcovid">
+<div class="product-backround  mt-5 py-4">
+    <div class="wp-inner">
+        <div id="new-product" class="list-product">
+            @include("$moduleName.templates.box_title_product",['title' => 'Sản phẩm mới','featured' => true])
+            @include("$moduleName.templates.list_product",['items' => $itemsProduct['new']])
+        </div>
+    </div>
+</div>
+
+<div class="mt-5 product_hcovid">
     <div class="wp-inner">
         @include("$moduleName.pages.$controllerName.child_index.product_covid")
     </div>
@@ -42,6 +53,8 @@
         @include("$moduleName.pages.$controllerName.child_index.product_in_object")
     </div>
 </div>
+
+
 <div class="wp-inner">
     @include("$moduleName.pages.$controllerName.child_index.news")
 </div>

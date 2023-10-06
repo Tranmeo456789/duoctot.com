@@ -34,7 +34,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('/xoa-lich-su-tim-kiem-tu-khoa','SearchController@deleteHistory')->name('fe.deleteHistory');
 
     Route::get('/xoa-san-pham-gio-hang/{user_sell}-{id}','CartController@delete')->name('fe.cart.delete');
-    
+
     Route::get('lang/{locale}',function($locale){
         if(! in_array($locale,['en','vi','zh','ko'])){
             abort(404);
@@ -43,8 +43,11 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
         return redirect()->back();
     });
 
+    Route::get('booking-online', 'BookingController@index')->name('fe.booking_online');
+
     Route::get('/{slug}','CatController@catLevel1')->name('fe.cat');
     Route::get('/{slug1}/{slug2}','CatController@catLevel2')->name('fe.cat2');
     Route::get('/{slug1}/{slug2}/{slug3}','CatController@catLevel3')->name('fe.cat3');
+
 
 });

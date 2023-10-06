@@ -6,6 +6,11 @@ $listCatLevel1=(new CatProductModel())->listItems(['parent_id' => 1],['task'=>'f
 $listCatAll=(new CatProductModel())->listItems(null, ['task'  => 'list-items-front-end']);
 @endphp
 <ul id="main-menu" class="d-flex list-item">
+    <li class="catc1" >
+        <a href="{{route('home')}}" class="cat1name" style="padding: 15px;font-size:20px">
+            <i class="fas fa-home"></i>
+        </a>
+    </li>
     @foreach ($listCatLevel1 as $itemLevel1)
     <li class="catc1" data-id="{{$itemLevel1['id']}}">
         <a href="{{route('fe.cat',$itemLevel1['slug'])}}" data-id="{{$itemLevel1['id']}}" data-href="{{route('ajaxHoverCatLevel1')}}" class="cat1name">
@@ -47,6 +52,6 @@ $listCatAll=(new CatProductModel())->listItems(null, ['task'  => 'list-items-fro
         <a href="">Nhà thuốc</a>
     </li>
     <li>
-        <a href="https://tdoctor.vn/booking-online">@lang('lang.onlinebooking')</a>
+        <a href="{{route('fe.booking_online')}}">@lang('lang.onlinebooking')</a>
     </li>
 </ul>

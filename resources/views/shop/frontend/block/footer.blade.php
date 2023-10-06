@@ -53,7 +53,7 @@
                             <img src="{{asset('images/shop/dc1.png')}}" alt="">
                         </div>
                     </div>
-                    <p>Trụ sở chính: P.1108, tòa nhà Gold Tower, 275 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
+                    <p>Trụ sở chính: V7B07 Shophouse Terra An Hưng, Đường Nguyễn Thanh Bình, Hà Đông, Hà Nội</p>
                 </div>
                 <div class="d-flex mb-2">
                     <div>
@@ -85,7 +85,7 @@
                             <img src="{{asset('images/shop/dc4.png')}}" alt="">
                         </div>
                     </div>
-                    <p>Hotline: +84n393 157 234</p>
+                    <p>Hotline: +84 393 157 234</p>
                 </div>
                 <div class="d-flex mb-2">
                     <div>
