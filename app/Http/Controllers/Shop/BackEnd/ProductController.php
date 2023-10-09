@@ -38,13 +38,13 @@ class ProductController extends BackEndController
         } else {
             $session->put('currentController', $this->controllerName);
         }
-        $session->put('params.filter.typeProduct', $request->has('filter_typeProduct') ? $request->get('filter_typeProduct') : ($session->has('params.filter.typeProduct') ? $session->get('params.filter.typeProduct') : 'dang_ban'));
+        $session->put('params.filter.status_product', $request->has('filter_status_product') ? $request->get('filter_status_product') : ($session->has('params.filter.status_product') ? $session->get('params.filter.status_product') : 'all'));
 
         $session->put('params.pagination.totalItemsPerPage', $this->totalItemsPerPage);
         $this->params     = $session->get('params');
 
         $items            = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
-
+        $itemStatusProductCount = $this->model->countItems($this->params, ['task' => 'admin-count-items-group-by-status-product']);
         if ($items->currentPage() > $items->lastPage()) {
             $lastPage = $items->lastPage();
             Paginator::currentPageResolver(function () use ($lastPage) {
@@ -55,7 +55,8 @@ class ProductController extends BackEndController
         $pathView = $request->ajax() ? 'ajax' : 'index';
         return view($this->pathViewController .  $pathView, [
             'params'           => $this->params,
-            'items'            => $items
+            'items'            => $items,
+            'itemStatusProductCount' => $itemStatusProductCount
          ]);     
     }
     public function index_admin(Request $request){

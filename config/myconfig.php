@@ -158,6 +158,7 @@
                     'tu_choi' => ['name' => 'Từ chối', 'class' => 'item-tab'],
                 ],
                 'status_product'      => [
+                    'all'           => ['name' => 'Tất cả', 'class' => 'item-tab'],
                     'cho_kiem_duyet' => ['name' => 'Chờ kiểm duyệt', 'class' => 'item-tab'],
                     'da_duyet' => ['name' => 'Đã duyệt', 'class' => 'item-tab'],
                     'tu_choi' => ['name' => 'Từ chối', 'class' => 'item-tab'],
