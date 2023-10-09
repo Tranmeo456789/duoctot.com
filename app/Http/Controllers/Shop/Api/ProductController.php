@@ -68,5 +68,11 @@ class ProductController extends ApiController
 
         return $this->setResponse($this->res);
     }
+    public function getListFeaturerFrontEnd(Request $request){
+        $params['type'] = 'noi_bat';
+        $params['limit']        = $this->limit;
+        $this->res['data']  = $this->model->listItems($params,['task'=>'frontend-list-items-by-type']);
+        return $this->setResponse($this->res);
+    }
 
 }

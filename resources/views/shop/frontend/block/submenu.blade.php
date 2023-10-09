@@ -6,8 +6,8 @@ $listCatLevel1=(new CatProductModel())->listItems(['parent_id' => 1],['task'=>'f
 $listCatAll=(new CatProductModel())->listItems(null, ['task'  => 'list-items-front-end']);
 @endphp
 <ul id="main-menu" class="d-flex list-item">
-    <li class="catc1" >
-        <a href="{{route('home')}}" class="cat1name" style="padding: 15px;font-size:20px">
+    <li>
+        <a href="{{route('home')}}" style="padding: 15px;font-size:20px">
             <i class="fas fa-home"></i>
         </a>
     </li>

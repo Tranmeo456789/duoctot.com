@@ -12,4 +12,5 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
 
 Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' => []], function () {
     Route::get('/get-list-ward/{parentID}','WardController@getList')->name('ward.getList');
+    Route::get('/get-list-product-featurer-frontend', 'ProductController@getListFeaturerFrontEnd')->name('product.featurer.frontend');
 });

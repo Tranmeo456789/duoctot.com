@@ -152,7 +152,7 @@ class ProductModel extends BackEndModel
         }
         if ($options['task'] == "frontend-list-items-by-type") {
             $type = $params['type'];
-            $query = $this::select('id','name','type','code','cat_product_id','producer_id',
+            $query = $this::with('unitProduct')->select('id','name','type','code','cat_product_id','producer_id',
                                     'tick','type_price','price','price_vat','coefficient',
                                     'type_vat','packing','unit_id','sell_area','amout_max',
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
