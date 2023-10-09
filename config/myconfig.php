@@ -141,9 +141,12 @@
                 'new' => 'Sản phẩm mới',
                 'noi_bat' => 'Sản phẩm nổi bật',
                 'hau_covid' => 'Sản phẩm hậu covid',
+                'goi_y'=>'Sản phẩm gợi ý',
                 'tre_em' => 'Trẻ em',
                 'nguoi_cao_tuoi' => 'Người cao tuổi',
                 'phu_nu_cho_con_bu' => 'Phụ nữ cho con bú',
+                'hien_thi_ben_trai'=> 'Hiển thị bên trái',
+                'hien_thi_ben_phai' => 'Hiển thị bên phải'
             ],
 
             'char_level' => "|---",
