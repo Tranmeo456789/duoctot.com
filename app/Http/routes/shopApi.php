@@ -12,5 +12,12 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
 
 Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' => []], function () {
     Route::get('/get-list-ward/{parentID}','WardController@getList')->name('ward.getList');
-    Route::get('/get-list-product-featurer-frontend', 'ProductController@getListFeaturerFrontEnd')->name('product.featurer.frontend');
+
+    $prefix         = 'product';
+    $controllerName = 'product';
+    Route::group(['prefix' => $prefix], function () use($controllerName) {
+        $controller = ucfirst($controllerName)  . 'Controller@';
+         Route::get('getListFeaturerFrontEnd', ['uses' => $controller . 'getListFeaturerFrontEnd']);
+     });
+
 });

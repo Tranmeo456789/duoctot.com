@@ -24,6 +24,9 @@
             'getListProvince' => 'api/v0.3/province/get-list',
             'checkLoginStatus' => 'api/v0.3/checkLoginStatus',
         ],
+        'appKey' => [
+            'tdoctor' => 'fQc3d7yxpxNDG12ffuKstTNx7ncU1ng3bWswOIZ2HRkBGgYmjnNa6hvK0t2MPbIkwPGEZHta'
+        ],
         'template' => [
             'star' => "<span class='text-red ml-2'>*</span>",
             'form_element' => [
