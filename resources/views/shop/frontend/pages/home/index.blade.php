@@ -22,7 +22,8 @@
             </div>
         </div>
     </div>
-    <div id="buy-medicine" class="mt-3">
+
+    <div id="buy-medicine" class="mt-3 pt-4">
         @include("$moduleName.pages.$controllerName.child_index.buy_medicine")
     </div>
     {{--
@@ -39,16 +40,17 @@
         </div>
     </div>
 </div>
-
+<div class="wp-inner mt-5">
+    <div id="selling-product">
+        @include("$moduleName.templates.selling_product")
+    </div>
+</div>
 <div class="mt-5 product_hcovid">
     <div class="wp-inner">
         @include("$moduleName.pages.$controllerName.child_index.product_covid")
     </div>
 </div>
 <div class="wp-inner mt-5">
-    <div id="selling-product">
-        @include("$moduleName.templates.selling_product")
-    </div>
     <div id="selling-product" class="mt-5">
         @include("$moduleName.pages.$controllerName.child_index.product_in_object")
     </div>

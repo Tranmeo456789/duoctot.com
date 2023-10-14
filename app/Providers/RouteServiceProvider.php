@@ -22,13 +22,18 @@ class RouteServiceProvider extends ServiceProvider
      * @param  \Illuminate\Routing\Router  $router
      * @return void
      */
-    public function boot(Router $router)
+    // public function boot(Router $router)
+    // {
+    //     //
+
+    //     parent::boot($router);
+    // }
+    public function boot()
     {
         //
 
-        parent::boot($router);
+        parent::boot();
     }
-
     /**
      * Define the routes for the application.
      *

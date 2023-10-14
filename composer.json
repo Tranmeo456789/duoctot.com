@@ -8,7 +8,7 @@
         "php": ">=5.5.9",
         "doctrine/dbal": "^2.0",
         "guzzlehttp/guzzle": "~6.0",
-        "laravel/framework": "5.2.*",
+        "laravel/framework": "5.4.*",
         "laravelcollective/html": "^5.2.0",
         "unisharp/laravel-filemanager": "~1.8",
         "kalnoy/nestedset": "^4.3",
@@ -17,9 +17,9 @@
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~4.0",
-        "symfony/css-selector": "2.8.*|3.0.*",
-        "symfony/dom-crawler": "2.8.*|3.0.*"
+        "phpunit/phpunit": "~5.7",
+        "symfony/css-selector": "3.1.*",
+        "symfony/dom-crawler": "3.1.*"
     },
     "autoload": {
         "files": [

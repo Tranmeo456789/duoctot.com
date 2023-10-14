@@ -72,7 +72,7 @@ class UsersModel extends BackEndModel
             $params['password']  = Hash::make($params['password']);
             $params['user_type_id'] = 0;
             $params['is_admin'] = 2;
-           $params['user_id'] = $this->insertGetId($this->prepareParams($params));
+            $params['user_id'] = $this->insertGetId($this->prepareParams($params));
 
             if (is_numeric($params['user_id'])){
                 $paramsCode = [
@@ -103,7 +103,7 @@ class UsersModel extends BackEndModel
                 $user = self::where('user_id', $params['user_id'])->first();
                 self::where('user_id', $params['user_id'])->update($this->prepareParams($params));
                 $paramsUserValue =[];
-                \App\Model\Shop\UserValuesModel::where('user_id', $params['user_id'])->delete();
+                \App\Model\UserValuesModel::where('user_id', $params['user_id'])->delete();
                 foreach ($details as $key => $value){
                     $paramsUserValue =[
                         'user_id' =>$params['user_id'],

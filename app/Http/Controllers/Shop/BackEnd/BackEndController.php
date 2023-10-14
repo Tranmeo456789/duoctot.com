@@ -66,7 +66,7 @@ class BackEndController extends Controller
         $params["id"]             = $request->id;
         $this->model->deleteItem($params, ['task' => 'delete-item']);
         $notify = "Xóa $this->pageTitle thành công!";
-        $request->session()->put('app_notify', $notify);
+        $request->session()->put('notify', $notify);
         return response()->json([
             'fail'         => false,
             'redirect_url' => route($this->controllerName),
