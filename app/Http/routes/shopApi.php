@@ -13,7 +13,4 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
 Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' => []], function () {
     Route::get('/get-list-ward/{parentID}','WardController@getList')->name('ward.getList');
     Route::get('/get-list-product-featurer-frontend', 'ProductController@getListFeaturerFrontEnd')->name('product.featurer.frontend');
-    Route::get('/get-list-product-suggest-frontend', 'ProductController@getListSuggestFrontEnd')->name('product.suggets.frontend');
-    Route::get('/get-list-product-sidebar-right-frontend', 'ProductController@getListProductSidebarRightFrontEnd')->name('product.sidebar.right.frontend');
-    Route::get('/get-list-product-sidebar-left-frontend', 'ProductController@getListProductSidebarLeftFrontEnd')->name('product.sidebar.right.frontend');
 });

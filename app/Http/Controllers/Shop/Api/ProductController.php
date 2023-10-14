@@ -69,28 +69,11 @@ class ProductController extends ApiController
         return $this->setResponse($this->res);
     }
     public function getListFeaturerFrontEnd(Request $request){
-        $params['type'] = 'noi_bat';
-        $params['limit']        = $this->limit;
+        $params['type'] = $request->type ?? 'noi_bat';
+        $params['limit']        = $request->limit ?? 'noi_bat';
         $this->res['data']  = $this->model->listItems($params,['task'=>'frontend-list-items-by-type']);
         return $this->setResponse($this->res);
     }
-    public function getListSuggestFrontEnd(Request $request){
-        $params['type'] = 'goi_y';
-        $params['limit']        = $this->limit;
-        $this->res['data']  = $this->model->listItems($params,['task'=>'frontend-list-items-by-type']);
-        return $this->setResponse($this->res);
-    }
-    public function getListProductSidebarRightFrontEnd(Request $request){
-        $params['type'] = 'hien_thi_ben_phai';
-        $params['limit']        = $this->limit;
-        $this->res['data']  = $this->model->listItems($params,['task'=>'frontend-list-items-by-type']);
-        return $this->setResponse($this->res);
-    }
-    public function getListProductSidebarLeftFrontEnd(Request $request){
-        $params['type'] = 'hien_thi_ben_trai';
-        $params['limit']        = $this->limit;
-        $this->res['data']  = $this->model->listItems($params,['task'=>'frontend-list-items-by-type']);
-        return $this->setResponse($this->res);
-    }
+
 
 }
