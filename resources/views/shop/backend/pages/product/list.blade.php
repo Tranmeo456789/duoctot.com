@@ -22,7 +22,8 @@
             @php
                 $temp++;
                 $image = Template::showImagePreviewFileManager($val['image'],$val['slug']??$val['name']);
-
+                $statusProductValue = array_combine(array_keys(config("myconfig.template.column.status_product")),array_column(config("myconfig.template.column.status_product"),'name'));
+                unset($statusProductValue['all']);
             @endphp
             <tr>
                 <td style="width: 3%">{{$temp}}</td>
@@ -40,7 +41,7 @@
                 <td style="width: 5%">{{$val->unitProduct->name}}</td>
                 <td style="width: 12%" class="text-center">0</td>
                 <td style="width: 7%" class="text-right">{{$val->quantity_in_stock}}</td>
-                <td style="width: 8%"><span class="badge badge-success">Chờ kiểm duyệt</span></td>
+                <td style="width: 8%"><span class="badge {{$val->status_product=='da_duyet'?'badge-success':'badge-warning'}}">{!! $statusProductValue[$val['status_product']]!!}</span></td>
                 <td style="width: 8%">
                     <a href="{{route("$controllerName.edit",$val->id)}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit"></i></a>
                     <a data-href="{{route("$controllerName.delete",$val->id)}}" class="btn btn-sm btn-danger btn-delete text-white" data-id="{{$val->id}}" data-toggle="tooltip" data-placement="top" title="Xóa" data-token="{{csrf_token()}}">

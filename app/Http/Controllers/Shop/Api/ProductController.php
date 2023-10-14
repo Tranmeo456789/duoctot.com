@@ -74,5 +74,23 @@ class ProductController extends ApiController
         $this->res['data']  = $this->model->listItems($params,['task'=>'frontend-list-items-by-type']);
         return $this->setResponse($this->res);
     }
+    public function getListSuggestFrontEnd(Request $request){
+        $params['type'] = 'goi_y';
+        $params['limit']        = $this->limit;
+        $this->res['data']  = $this->model->listItems($params,['task'=>'frontend-list-items-by-type']);
+        return $this->setResponse($this->res);
+    }
+    public function getListProductSidebarRightFrontEnd(Request $request){
+        $params['type'] = 'hien_thi_ben_phai';
+        $params['limit']        = $this->limit;
+        $this->res['data']  = $this->model->listItems($params,['task'=>'frontend-list-items-by-type']);
+        return $this->setResponse($this->res);
+    }
+    public function getListProductSidebarLeftFrontEnd(Request $request){
+        $params['type'] = 'hien_thi_ben_trai';
+        $params['limit']        = $this->limit;
+        $this->res['data']  = $this->model->listItems($params,['task'=>'frontend-list-items-by-type']);
+        return $this->setResponse($this->res);
+    }
 
 }
