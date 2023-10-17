@@ -100,8 +100,8 @@ class OrderModel extends BackEndModel
             $result =  $query;
         }
         if ($options['task'] == "user-list-items-by-status"){
-            $query = $this::with('userSell')
-                                ->select('id','code_order','total_product','info_product','total','created_at','buyer','receive','status_order','user_id')
+            $query = $this::with('userBuy','userSell')
+                                ->select('id','code_order','total_product','info_product','total','created_at','buyer','receive','status_order','user_id','user_sell')
                                 ->where('created_by',$params['user']->user_id);
             if ((isset($params['status_order'])) && ($params['status_order'] != 'all')) {
                 $query = $query->where('status_order',$params['filter']['status_order']);
@@ -334,6 +334,6 @@ class OrderModel extends BackEndModel
         return $this->belongsTo('App\Model\Shop\UsersModel','user_id','user_id');
     }
     public function userSell(){
-        return $this->belongsTo('App\Model\Shop\UsersModel','user_id','user_id');
+        return $this->belongsTo('App\Model\Shop\UsersModel','user_sell','user_id');
     }
 }
