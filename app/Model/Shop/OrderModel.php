@@ -48,7 +48,7 @@ class OrderModel extends BackEndModel
             }else{
                 return  $query->where('user_sell',$user->user_id);
             }
-            
+
         }
         return $query;
     }
@@ -58,20 +58,20 @@ class OrderModel extends BackEndModel
         $result = null;
         if($options['task'] == "user-list-items-frontend"){
             $query = $this::select('id','code_order','total','total_product','created_at','status_order','user_id')
-                                ->where('user_id',$params['user_id']);                           
+                                ->where('user_id',$params['user_id']);
             switch ($params['status'])
             {
                 case 'chua_hoan_tat' :
-                    $query = $query->whereIn('status_order',['dangXuLy','daXacNhan','dangGiaoHang','daGiaoHang']); 
+                    $query = $query->whereIn('status_order',['choThanhToan','dangXuLy','daXacNhan','dangGiaoHang','daGiaoHang']);
                     break;
                 case 'hoan_tat' :
-                    $query = $query->whereIn('status_order',['hoanTat']); 
+                    $query = $query->whereIn('status_order',['hoanTat']);
                     break;
                 case 'da_huy' :
-                    $query = $query->whereIn('status_order',['daHuy']); 
+                    $query = $query->whereIn('status_order',['daHuy']);
                     break;
                 case 'tra_hang' :
-                    $query = $query->whereIn('status_order',['traHang']); 
+                    $query = $query->whereIn('status_order',['traHang']);
                     break;
                 default:
                 $query = $query;
@@ -96,7 +96,24 @@ class OrderModel extends BackEndModel
             }else{
                 $query=$query->orderBy('id', 'desc')->get();
             }
-            
+
+            $result =  $query;
+        }
+        if ($options['task'] == "user-list-items-by-status"){
+            $query = $this::with('userSell')
+                                ->select('id','code_order','total_product','info_product','total','created_at','buyer','receive','status_order','user_id')
+                                ->where('created_by',$params['user']->user_id);
+            if ((isset($params['status_order'])) && ($params['status_order'] != 'all')) {
+                $query = $query->where('status_order',$params['filter']['status_order']);
+            }
+
+            if(isset($params['pagination'])){
+                $query=$query->orderBy('id', 'desc')
+                              ->paginate($params['pagination']['totalItemsPerPage']);
+            }else{
+                $query=$query->orderBy('id', 'desc')->get();
+            }
+
             $result =  $query;
         }
         if($options['task'] == "user-list-items-in-day"){
@@ -151,7 +168,7 @@ class OrderModel extends BackEndModel
                             ->where('id','>',1);
             if(isset($params['user_sell'])){
                 $query->where('user_sell',$params['user_sell']);
-            } 
+            }
             if(isset($params['filter_in_day'])){
                 $query->whereBetween('created_at', ["{$params['filter_in_day']['day_start']}", "{$params['filter_in_day']['day_end']}"]);
             }
@@ -183,7 +200,7 @@ class OrderModel extends BackEndModel
             if(isset($params['status_order'])){
                 if($params['status_order']!='all'){
                     $query->where('status_order',$params['status_order']);
-                }             
+                }
             }
             if(isset($params['filter_in_day'])){
                 $query->whereBetween('created_at', ["{$params['filter_in_day']['day_start']}", "{$params['filter_in_day']['day_end']}"]);
@@ -316,5 +333,7 @@ class OrderModel extends BackEndModel
     public function userBuy(){
         return $this->belongsTo('App\Model\Shop\UsersModel','user_id','user_id');
     }
-    
+    public function userSell(){
+        return $this->belongsTo('App\Model\Shop\UsersModel','user_id','user_id');
+    }
 }

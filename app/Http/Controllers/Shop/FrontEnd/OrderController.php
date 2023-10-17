@@ -63,7 +63,7 @@ class OrderController extends ShopFrontEndController
             $address=$order_detail->receive['address'].', '.$ward.', '.$district.', '.$province;
         }
         return view("$this->moduleName.pages.order.child_index.detail_order",compact('order_detail','address'));
-        //  $result = array(  
+        //  $result = array(
         //      'test'=>$info_buyer
         //   );
         //   return response()->json($result, 200);
@@ -103,7 +103,7 @@ class OrderController extends ShopFrontEndController
                 'redirect_url' => route("home"),
                 'message'      => $notify,
             ]);
-        }    
+        }
     }
     public function success($code)
     {
@@ -113,8 +113,8 @@ class OrderController extends ShopFrontEndController
         $customer=json_decode($order->buyer, true);
         $address='';
         if($order->delivery_method ==1){
-            $warehouse_id=$order['pharmacy']['warehouse_id'];
-            $address=(new WarehouseModel())->getItem(['id'=>$warehouse_id],['task' => 'get-item-of-id'])->address;
+            $warehouse_id=$order['pharmacy']['warehouse_id']??'';
+            $address=(new WarehouseModel())->getItem(['id'=>$warehouse_id],['task' => 'get-item-of-id'])->address??'';
         }else{
             $ward_detail=(new WardModel())->getItem(['id'=>$order->receive['ward_id']],['task' => 'get-item-full']);
             $ward=$ward_detail['name'];$district=$ward_detail['district']['name'];$province=$ward_detail['district']['province']['name'];
