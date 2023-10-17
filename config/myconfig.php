@@ -171,6 +171,7 @@
                 ],
                 'status_order' => [
                     'all'          => ['name' => 'Tất cả', 'class' => 'item-tab'],
+                    'choThanhToan' => ['name' => 'Chờ thanh toán', 'class' => 'item-tab'],
                     'dangXuLy'     => ['name' => 'Đang xử lý', 'class' => 'item-tab'],
                     'dangGiaoHang' => ['name' => 'Đang giao hàng', 'class' => 'item-tab'],
                     'daXacNhan'    => ['name' => 'Đã xác nhận', 'class' => 'item-tab'],

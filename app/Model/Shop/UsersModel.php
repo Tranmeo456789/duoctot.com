@@ -160,6 +160,11 @@ class UsersModel extends BackEndModel
         return $this->hasMany(\App\Model\Shop\UserValuesModel::class,'user_id','user_id')
                     ->select('user_id','user_field','value');
     }
+    public function detailValues()
+    {
+        return $this->hasMany(\App\Model\Shop\UserValuesModel::class,'user_id','user_id')
+                    ->select('user_id','user_field','value');
+    }
     public function listItems($params = null, $options = null)
     {
         $result = null;

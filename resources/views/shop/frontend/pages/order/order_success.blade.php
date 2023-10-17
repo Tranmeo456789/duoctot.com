@@ -1,3 +1,8 @@
+@php
+    use App\Helpers\Template as Template;
+    use App\Helpers\MyFunction;
+    use App\Model\Shop\UnitModel;
+@endphp
 @extends('shop.layouts.frontend')
 
 @section('content')
@@ -11,6 +16,13 @@
                 <h2 class="title-dhtc">Đặt hàng thành công</h2>
                 <p>Quý khách có thể theo dõi tình trạng đơn hàng bằng cách</p>
                 <p><span class="font-weight-bold">"Tra cứu đơn hàng"</span> ngay bên dưới</p>
+            </div>
+            <div class="text-center box-dhtc">
+                <p>Vui lòng thanh toán số tiền: <b>{{ MyFunction::formatNumber($order['total']) . ' đ'}}</b> vào tài khoản ngân hàng</p>
+                <p>Ngân hàng TMCP Á Châu</p>
+                <p>Số tài khoản: 68686388</p>
+                <p>Chủ tài khoản: Công ty cổ phần giải pháp TDoctor</p>
+                <p>Liên hệ hotline/Zalo 0393167234 để xác nhận thanh toán và hỗ trợ</p>
             </div>
             <div class="title-info-order">
                 <h1 class=" pd-order">Thông tin giao hàng</h1>
@@ -62,11 +74,7 @@
                     </tbody>
                 </table>
             </div>
-            @php
-                use App\Helpers\Template as Template;
-                use App\Helpers\MyFunction;
-                use App\Model\Shop\UnitModel;
-            @endphp
+
             <div class="item-info">
                 <div class="set-screen-375">
                 <table class="table pd-order mb-0" id="tbList">
@@ -110,7 +118,7 @@
                     </tbody>
                 </table>
                 </div>
-                
+
             </div>
             <div class="text-center mt-2">
                 <a href="{{route('home')}}" class="exit-home-order">VỀ TRANG CHỦ</a>

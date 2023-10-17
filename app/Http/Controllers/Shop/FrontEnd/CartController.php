@@ -23,7 +23,7 @@ class CartController extends ShopFrontEndController
         $this->pathViewController = "$this->moduleName.pages.$this->controllerName.";
         $this->pageTitle          = 'Giỏ hàng';
         parent::__construct();
-       
+
     }
     public function view(Request $request)
     {
@@ -33,7 +33,7 @@ class CartController extends ShopFrontEndController
         $details =[];
         if ($session->has('user')){
             $user = (new UsersModel())->getItem(['user_id'=>$session->get('user.user_id')],['task' => 'get-item']);
-            $details = $user->details->pluck('value','user_field')->toArray()??[];
+            $details = $user->detailValues->pluck('value','user_field')->toArray()??[];
         }
         $itemsProvince = (new ProvinceModel())->listItems(null,['task'=>'admin-list-items-in-selectbox']);
         $params['province_id'] = (isset($details['province_id']) && ($details['province_id']!=0))?$details['province_id']:((isset($user->province_id) && ($user->province_id != 0)) ? $user->province_id:0);
@@ -60,10 +60,10 @@ class CartController extends ShopFrontEndController
     }
     public function cartFull(Request $request)
     {
-        
+
         return view($this->pathViewController . 'cart_full');
     }
-   
+
 
     public function addproduct(Request $request)
     {
@@ -120,8 +120,8 @@ class CartController extends ShopFrontEndController
         $request->session()->put('cart', $cart);
         setcookie("cart", json_encode($cart), time() + config('myconfig.time_cookie'), "/", $_SERVER['SERVER_NAME']);
         return response()->json($cart[$user_sell], 200);
-        //    $result = array(  
-        //       'test'=>$cart[$user_sell] 
+        //    $result = array(
+        //       'test'=>$cart[$user_sell]
         //    );
         //    return response()->json($result, 200);
     }
