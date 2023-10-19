@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Shop\BackEnd;
 
 use App\Model\Shop\TrademarkModel as MainModel;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\Shop\BackEnd\BackEndController;
 use App\Http\Requests\TrademarkRequest as MainRequest;
 class TrademarkController extends BackEndController
