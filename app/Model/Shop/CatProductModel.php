@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Model\Shop;
+
 use App\Http\Requests\Request;
 use Illuminate\Database\Eloquent\Model;
 use App\Model\Shop\BackEndModel;
@@ -10,6 +11,7 @@ use App\Model\Shop\ProductModel;
 use App\Model\Shop\CollaboratorsUserModel;
 use App\Model\Shop\CollaboratorsClinicDoctor;
 use DB;
+
 class CatProductModel extends BackEndModel
 {
     use NodeTrait;
@@ -18,21 +20,20 @@ class CatProductModel extends BackEndModel
 
     public function scopeOfCollaboratorCode($query)
     {
-        if (\Session::has('user')){
+        if (\Session::has('user')) {
             $user = \Session::get('user');
 
-            $refer_id = $user->refer_id ;
-            $collaborator = CollaboratorsUserModel::where('code',$refer_id)->first();
-
-            if ($collaborator)  {
+            $refer_id = $user->refer_id;
+            $collaborator = CollaboratorsUserModel::where('code', $refer_id)->first();
+            if ($collaborator) {
                 $collaborator_code = $collaborator->code;
 
                 $arrUserID = CollaboratorsClinicDoctor::select("user_id")
-                                ->where("collaborators_clinic_doctor.collaborator_code",$collaborator_code)
-                                ->first();
+                    ->where("collaborators_clinic_doctor.collaborator_code", $collaborator_code)
+                    ->first();
 
                 if (!empty($arrUserID)) {
-                    $query->whereIn('user_id',$arrUserID['user_id']);
+                    $query->whereIn('user_id', $arrUserID['user_id']);
                 }
             }
         }
@@ -58,8 +59,8 @@ class CatProductModel extends BackEndModel
             $query = self::withDepth()
                 ->having('depth', '>', 0)
                 ->defaultOrder();
-            if(isset($params['depth'])){
-                $query->where('depth',$params['depth']);
+            if (isset($params['depth'])) {
+                $query->where('depth', $params['depth']);
             }
             $query = $query->get()
                 ->toFlatTree();
@@ -67,13 +68,18 @@ class CatProductModel extends BackEndModel
             $result = $query;
         }
         if ($options['task'] == "list-items-api-by-depth") {
-            $query = self::withDepth()
+            $query = self::with('parent')->withDepth()
                 ->having('depth', '>', 0)
                 ->defaultOrder();
             $query = $query->get()
                 ->toFlatTree();
-
-            $result = $query->toArray();
+            if (isset($params['depth'])) {
+                $query = $query->where('depth', $params['depth']);
+            }
+            if (isset($params['limit'])) {
+                $query = $query->take($params['limit']);
+            }
+            $result = $query;
         }
         if ($options['task'] == "admin-list-items-in-selectbox-quan-ly") {
             $query = self::select('id', 'name')
@@ -100,22 +106,22 @@ class CatProductModel extends BackEndModel
                 $result[$value['id']] = str_repeat(config('myconfig.template.char_level'), $value['depth'] - 1) . $value['name'];
             }
         }
-    
-        if ($options['task'] == "frontend-list-items-level-2"){
+
+        if ($options['task'] == "frontend-list-items-level-2") {
             $user = \Session::get('user');
 
-            $refer_id = $user->refer_id ;
-            $collaborator = CollaboratorsUserModel::where('code',$refer_id)->first();
+            $refer_id = $user->refer_id;
+            $collaborator = CollaboratorsUserModel::where('code', $refer_id)->first();
             $whereProduct = "";
-            if ($collaborator)  {
+            if ($collaborator) {
                 $collaborator_code = $collaborator->code;
 
                 $arrUserID = CollaboratorsClinicDoctor::select("user_id")
-                                ->where("collaborators_clinic_doctor.collaborator_code",$collaborator_code)
-                                ->first();
+                    ->where("collaborators_clinic_doctor.collaborator_code", $collaborator_code)
+                    ->first();
 
                 if (!empty($arrUserID['user_id'])) {
-                    $arrUserID = "(". implode(',',$arrUserID['user_id']).")";
+                    $arrUserID = "(" . implode(',', $arrUserID['user_id']) . ")";
                     $whereProduct = "AND `user_id` IN $arrUserID";
                 }
             }
@@ -131,19 +137,19 @@ class CatProductModel extends BackEndModel
                                     $whereProduct
                                 ) as `number_product`
                            "))
-                         ->where('cat_product.status','=','active')
-                         ->having('depth','=',2)
-                         ->orderBy('cat_product._lft');
+                ->where('cat_product.status', '=', 'active')
+                ->having('depth', '=', 2)
+                ->orderBy('cat_product._lft');
             $result = $query->get()
-                            ->toArray();
+                ->toArray();
         }
-        if ($options['task'] == "frontend-list-items-by-parent-id"){
-            $query = self::select('id','name','image','slug','parent_id')
-                         ->where('status','=','active')
-                         ->where('parent_id',$params['parent_id'])
-                         ->orderBy('_lft');
+        if ($options['task'] == "frontend-list-items-by-parent-id") {
+            $query = self::select('id', 'name', 'image', 'slug', 'parent_id')
+                ->where('status', '=', 'active')
+                ->where('parent_id', $params['parent_id'])
+                ->orderBy('_lft');
             $result = $query->get()
-                            ->toArray();
+                ->toArray();
         }
         return $result;
     }
@@ -168,13 +174,13 @@ class CatProductModel extends BackEndModel
         }
         if ($options['task'] == 'get-item-parent') {
             $result = self::select('id', 'name', 'parent_id', 'image', 'slug')->where('id', $params['parent_id'])->first();
-            if(isset($params['up_level'])){
-                $catParent=$result;
-                for ($i = 1; $i < $params['up_level']; $i++){
-                     $catParent = self::getParent($catParent['parent_id']);
+            if (isset($params['up_level'])) {
+                $catParent = $result;
+                for ($i = 1; $i < $params['up_level']; $i++) {
+                    $catParent = self::getParent($catParent['parent_id']);
                 }
-                $result=$catParent; 
-            }                   
+                $result = $catParent;
+            }
         }
         if ($options['task'] == 'get-item-slug') {
             $result = self::select('id', 'name', 'parent_id', 'image', 'slug')
@@ -226,19 +232,23 @@ class CatProductModel extends BackEndModel
         if ($params['type'] == 'down') $node->down();
         if ($params['type'] == 'up') $node->up();
     }
-    public static function getChild($id='')
+    public static function getChild($id = '')
     {
         $item = self::find($id);
-        $query = self::select('id','name')
-                    ->where('_lft','>=',$item->_lft)
-                    ->where('_lft','<=',$item->_rgt);
+        $query = self::select('id', 'name')
+            ->where('_lft', '>=', $item->_lft)
+            ->where('_lft', '<=', $item->_rgt);
 
         return $result = $query->pluck('id')->toArray();
     }
-    public static function getParent($parent_id='')
+    public static function getParent($parent_id = '')
     {
         $item = self::where('id', $parent_id)->first();
         return $item;
+    }
+    public function parent()
+    {
+        return $this->belongsTo(self::class, 'parent_id','id');
     }
     // public function child()
     // {
@@ -259,6 +269,6 @@ class CatProductModel extends BackEndModel
     // }
     public function productsOfChild()
     {
-        return $this->hasMany('App\Model\Shop\ProductModel','cat_product_parent_id');
+        return $this->hasMany('App\Model\Shop\ProductModel', 'cat_product_parent_id');
     }
 }

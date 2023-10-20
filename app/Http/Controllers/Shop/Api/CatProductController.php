@@ -50,13 +50,8 @@ class CatProductController extends ApiController
     }
     public function getListByDepthFrontEnd(Request $request){
         $params['limit']        = $this->limit;
-        $desiredDepth = $request->depth;
-        $data  = $this->model->listItems($params,['task'=>'list-items-api-by-depth']);
-        $filteredData = array_filter($data, function ($item) use ($desiredDepth) {
-            return isset($item['depth']) && $item['depth'] == $desiredDepth;
-        });
-        return $filteredData;
-        $this->res['data']=$filteredData;
+        $params['depth'] = $request->depth;
+        $this->res['data']  = $this->model->listItems($params,['task'=>'list-items-api-by-depth']);
         return $this->setResponse($this->res);
     }
 }
