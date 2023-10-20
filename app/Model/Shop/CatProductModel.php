@@ -66,6 +66,15 @@ class CatProductModel extends BackEndModel
 
             $result = $query;
         }
+        if ($options['task'] == "list-items-api-by-depth") {
+            $query = self::withDepth()
+                ->having('depth', '>', 0)
+                ->defaultOrder();
+            $query = $query->get()
+                ->toFlatTree();
+
+            $result = $query->toArray();
+        }
         if ($options['task'] == "admin-list-items-in-selectbox-quan-ly") {
             $query = self::select('id', 'name')
                 ->withDepth()->defaultOrder();

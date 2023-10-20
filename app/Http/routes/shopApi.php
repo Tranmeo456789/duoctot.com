@@ -13,6 +13,7 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
 
 Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' => []], function () {
     Route::get('/get-list-ward/{parentID}','WardController@getList')->name('ward.getList');
+    Route::get('/cat/getListCatProductFrontEnd','CatProductController@getListByDepthFrontEnd');
 
     $prefix         = 'product';
     $controllerName = 'product';
