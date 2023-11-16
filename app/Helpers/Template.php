@@ -74,7 +74,7 @@ class Template {
             ]);
 
             $xhtml =  "<ul class='nav nav-tabs bar_tabs'>";
-            foreach ($tmplStatus as $keyStatus => $itemStatus) { 
+            foreach ($tmplStatus as $keyStatus => $itemStatus) {
                 $count = in_array($keyStatus,array_column($itemsStatusCount,$column))?$itemsStatusCount[array_search($keyStatus,array_column($itemsStatusCount,$column))]['count']:0;
                 $currentTemplateStatus = $tmplStatus[$keyStatus]; // $value['status'] inactive block active
                 $link = route('admin.'.$controllerName.'.list') . "?filter_" . $column ."=" .  $keyStatus;

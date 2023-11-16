@@ -194,7 +194,6 @@ img[src=''] {
 .text-right .form-control {
     text-align: right !important;
 }
-
 span.highlight {
     background: yellow;
     font-weight: bold;
@@ -296,7 +295,7 @@ span.highlight {
         width: 800px;
     }
     .card{
-        border-radius: 0px;  
+        border-radius: 0px;
     }
     .card-primary.card-outline{
         border-top: 1px solid #007bff;
