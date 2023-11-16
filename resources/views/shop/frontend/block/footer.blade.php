@@ -43,6 +43,12 @@
                         </div>
                         <p>Instagram</p>
                     </div>
+                    <div class="d-flex">
+                        <div class="icon-social">
+                            <a href=""><img src="{{asset('images/shop/bocongthuong.png')}}" alt=""></a>
+                        </div>
+                        <p>Instagram</p>
+                    </div>
                 </div>
             </div>
             <div class="col-md-6 social2">
