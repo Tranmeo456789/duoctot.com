@@ -1,4 +1,4 @@
-{{--
+
 <h1 class="text-center">Mua thuốc dễ dàng tại TDoctor</h1>
 <ul class="d-flex list-unstyled">
     <li>
@@ -27,7 +27,7 @@
     <div class="text-center btn-buynn mb-3"><a href="{{route('fe.prescrip.index')}}">MUA THUỐC NGAY</a></div>
     <span>Hoặc mua qua hostline 0393167234</span>
 </div>
---}}
+
 <div class="mt-5 rimg-center">
     <img src="{{asset('images/shop/baner.png')}}" alt="">
 </div>
