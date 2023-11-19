@@ -12,7 +12,7 @@
             </thead>
             <tbody>
                 @php
-                    $details = $item->details->pluck('value','user_field')->toArray()??[];
+                    $details = $item->details ? $item->details->pluck('value', 'user_field')->toArray() : [];
                 @endphp
                 <tr class="">
                     <td style="width: 20%">{{$item->fullname}}</td>

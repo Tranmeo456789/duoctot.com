@@ -30,8 +30,8 @@
                         $price = MyFunction::formatNumber($val['price']) . ' đ';
                         $total_money = MyFunction::formatNumber($val['total_money']) . ' đ';
                         $pos = array_search($val['product_id'],$arrProduct);
-                        $code = $itemsProduct[$pos]['code'];
-                        $unit = $itemsProduct[$pos]->unitProduct->name;
+                        $code = $pos == false ? '' : $itemsProduct[$pos]['code'];
+                        $unit = $pos == false ? '' : $itemsProduct[$pos]->unitProduct->name;
                     @endphp
 
                     <tr>
