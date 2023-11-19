@@ -24,7 +24,9 @@ class ProductController extends ShopFrontEndController
     public function detail(Request $request){
         $params['id'] = intval($request->id);
         $item= $this->model->getItem($params,['task' => 'frontend-get-item']);
+
         $productViewed  = (isset($_COOKIE["productViewed"]))?json_decode($_COOKIE["productViewed"],true):[];
+
         $productCurrent = [];
         if (isset($productViewed[$params['id']])){
             $productCurrent[$params['id']] = $productViewed[$params['id']];
@@ -37,9 +39,11 @@ class ProductController extends ShopFrontEndController
                 'image'      => $item->image,
                 'unit'       => $item->unitProduct->name
             ];
+
         }
 
         $productViewed = $productCurrent + $productViewed;
+
         if (count($productViewed) > 8){
             array_pop($productViewed);
         }
@@ -55,7 +59,7 @@ class ProductController extends ShopFrontEndController
         $params['user_sell']=$request->user_sell;
         $items=$this->model->listItems($params,['task' => 'list-items-search']);
         return view("$this->moduleName.pages.prescrip.child_index.ls_product_search",compact('items','keyword'));
-        //   $result = array(  
+        //   $result = array(
         //      'test'=>$items
         //   );
         //   return response()->json($result, 200);
