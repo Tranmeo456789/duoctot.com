@@ -14,9 +14,17 @@
                                 <li data-thumb="{{asset($item['image'])}}" class="text-center">
                                     <img src="{{asset($item['image'])}}" />
                                 </li>
-                                <li data-thumb="{{asset($item['image'])}}" class="text-center">
-                                    <img src="{{asset($item['image'])}}" />
-                                </li>
+                                @if(!empty($albumImageCurrent))
+                                    @foreach($albumImageCurrent as $val)
+                                        <li data-thumb="{{asset('public/fileUpload/product/'.$val)}}" class="text-center">
+                                            <img src="{{asset('public/fileUpload/product/'.$val)}}" />
+                                        </li>
+                                    @endforeach
+                                @else
+                                    <li data-thumb="{{asset($item['image'])}}" class="text-center">
+                                        <img src="{{asset($item['image'])}}" />
+                                    </li>
+                                @endif
                             </ul>
                         </div>
                     </div>
