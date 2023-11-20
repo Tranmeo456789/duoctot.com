@@ -1077,6 +1077,10 @@
     .info-product-cart .total_money{
         font-size: 16px;
     }
+    #buy-medicine h1 {
+        margin-bottom: 30px;
+        padding-top: 30px;
+    }
 }
 
 @media screen and (max-width: 500px) {

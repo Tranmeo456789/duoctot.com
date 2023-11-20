@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <div id="buy-medicine" class="mt-3 pt-4">
+    <div id="buy-medicine" class="mt-0 pt-0 mt-md-3 pt-md-3">
         @include("$moduleName.pages.$controllerName.child_index.buy_medicine")
     </div>
     {{--
