@@ -1116,3 +1116,13 @@ input[type="radio"] {
 #box-search-fixed {
     display: none;
 }
+.file-preview-table .filename {
+    display: none;
+}
+.file-preview-table .filesize {
+    display: none;
+}
+.file-preview-table .file-preview-placeholder {
+    width: 200px;
+    height: 53px;
+}

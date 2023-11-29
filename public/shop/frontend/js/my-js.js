@@ -50,6 +50,18 @@ $.ajaxSetup({
     }
 });
 $(document).ready(function () {
+    if ($("input[name='albumImage[]']").length) {
+        myUploadImage = $("input[name='albumImage[]']").uploadPreviewer({
+            buttonText: "Thêm ảnh",
+        });
+    }
+    if (($(".file-preview-table").length > 0) &&
+        ($(".file-preview-table").find('td').length == 0)) {
+        $(".file-preview-table").css({
+            "margin-top": "0px",
+            "margin-bottom": "0px"
+        });
+    }
     //  Cat hover
     $('.cat1name').hover(
         function() {
@@ -883,6 +895,7 @@ $(document).on('click', ".wp-input-search input", function (event) {
     const position = $("#form-search").offset().top;
     $("HTML, BODY").animate({ scrollTop: position }, 500);
 });
+
 $(document).on('click', ".ipsp", function (event) {
     $('#box-search-fixed').css("display", "block");
 });

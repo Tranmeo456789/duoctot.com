@@ -64,6 +64,9 @@ class PrescripController extends ShopFrontEndController
                $params['user_id']=$user->user_id;
                 
             }  
+            if ($request->has('name_store')) {
+                $params['user_sell'] = $request->input('name_store');
+            } 
             $this->model->saveItem($params,['task'=>'frontend-save-item']);
             $last_record = PrescripModel::latest('id')->first()->toArray();
             return redirect()->route('fe.prescrip.prescripCustomer', ['id' => $last_record['id']]);

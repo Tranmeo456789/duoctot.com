@@ -66,7 +66,7 @@
     $elementLocals = [
         [
             'label'   => '',
-            'element' => Form::select('province_id',$itemsProvince, $user->province_id??null, array_merge($formSelect2GetChildIgnoreAttr,['id' =>'province_id','style' =>'width:100%','data-href'=>$linkGetListDistrict,'data-target' => '#district_id'])),
+            'element' => Form::select('province_id',[null=>"-- Chọn {$label['province_id']} --"] + $itemsProvince, null, array_merge($formSelect2GetChildIgnoreAttr,['id' =>'province_id','style' =>'width:100%','data-href'=>$linkGetListDistrict,'data-target' => '#district_id'])),
             'type' =>'select',
             'widthElement' => 'col-lg-6 col-md-12 mb1024-5'
         ],[
@@ -76,7 +76,7 @@
             'widthElement' => 'col-lg-6 col-md-12 mb1024-5'
         ],[
             'label'   => '',
-            'element' => Form::select('ward_id',[null=>"-- Chọn {$label['ward_id']} --"],  $details['ward_id']??null, array_merge($formSelect2GetChildIgnoreAttr,['id' =>'ward_id','style' =>'width:100%'])),
+            'element' => Form::select('ward_id',[null=>"-- Chọn {$label['ward_id']} --"],  $details['ward_id']??null, array_merge($formSelect2Attr,['id' =>'ward_id','style' =>'width:100%'])),
             'type' =>'select',
             'widthElement' => 'col-12 my-1'
         ],[
@@ -93,6 +93,7 @@
     'url'            => route('fe.prescrip.save'),
     'accept-charset' => 'UTF-8',
     'class'          => 'form-main-prescrip',
+    'enctype'        => 'multipart/form-data',
     'id'             => ''])  }}
     <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-yes-prescrip">

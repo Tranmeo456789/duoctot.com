@@ -22,7 +22,7 @@ class PrescripModel extends BackEndModel
     public function __construct() {
         $this->table               = 'prescrips';
         $this->controllerName      = 'prescrip';
-        $this->folderUpload        = '' ;
+        $this->folderUpload        = 'prescrip' ;
         $this->crudNotAccepted     = ['_token','task','number_product'];
     }
     public function scopeOfUser($query)
@@ -42,7 +42,7 @@ class PrescripModel extends BackEndModel
     {
         $result = null;     
         if ($options['task'] == "user-list-items") {
-            $query = $this::select('id','info_product','is_prescrip','user_id','user_sell','buyer','province_id','district_id','ward_id','address','image','created_at')
+            $query = $this::select('id','info_product','is_prescrip','user_id','user_sell','buyer','province_id','district_id','ward_id','address','image','albumImage','albumImageHash','created_at')
                                 ->where('id','>',1)
                                 ->OfUser();
             
@@ -63,12 +63,12 @@ class PrescripModel extends BackEndModel
     {
         $result = null;
         if ($options['task'] == 'get-item-frontend') {
-            $result = self::select('id','info_product','user_id','user_sell','buyer','province_id','district_id','ward_id','address')
+            $result = self::select('id','info_product','user_id','user_sell','buyer','province_id','district_id','ward_id','address','albumImage','albumImageHash')
                             ->where('id', $params['id'])
                             ->first();
         }
         if ($options['task'] == 'get-item-backend') {
-            $result = self::select('id','info_product','user_id','user_sell','buyer','province_id','district_id','ward_id','address','created_at')
+            $result = self::select('id','info_product','user_id','user_sell','buyer','province_id','district_id','ward_id','address','albumImage','albumImageHash','created_at')
                             ->where('id', $params['id'])
                             ->first();
         }
@@ -84,7 +84,11 @@ class PrescripModel extends BackEndModel
                     $params['info_product'] = json_encode($params['info_product']);
                 }
                 $params['buyer'] = json_encode($params['buyer']); 
-                             
+                if (isset($params['albumImage'])) {
+                    $resultFileUpload       = $this->uploadFile($params['albumImage']);
+                    $params['albumImage']   = $resultFileUpload['fileAttach'];
+                    $params['albumImageHash']     = $resultFileUpload['fileHash'];
+                }     
                 self::insert($this->prepareParams($params));
         }
     }
