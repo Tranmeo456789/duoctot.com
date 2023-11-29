@@ -24,6 +24,7 @@
     </li>
 </ul>
 @php
+    use App\Model\Shop\ConfigModel as Config;
     $hotline = Config::where('name', 'hotline_duoc')->first()->content ?? '';
 @endphp
 <div class="text-center child_buy">

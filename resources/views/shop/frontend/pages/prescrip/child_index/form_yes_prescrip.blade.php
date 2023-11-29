@@ -2,14 +2,14 @@
     use App\Helpers\Form as FormTemplate;
     use App\Helpers\Template as Template;
     use App\Helpers\MyFunction;
-    $controllerName='prescrip';
+    
     $elements = [
         [
             'label'   => '',
             'element' => Form::file('albumImage[]', array_merge($formInputAttr,['multiple'=>'multiple','accept'=>'image/*'])),
             'fileAttach'   => (!empty($item['id'])) ? Template::showImageAttachPreview('prescrip', $item['albumImage'],$item['albumImageHash'], $item['id'],['btn' => 'delete']) : null ,
             'type'    => "fileAttachPreview",
-            'widthInput' => 'col-11',
+            'widthInput' => 'col-12',
         ]
     ];
 @endphp

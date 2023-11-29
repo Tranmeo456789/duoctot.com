@@ -1124,5 +1124,8 @@ input[type="radio"] {
 }
 .file-preview-table .file-preview-placeholder {
     width: 200px;
-    height: 53px;
+    height: 100px;
+}
+.file-preview-shadow{
+    font-size: 13px;
 }

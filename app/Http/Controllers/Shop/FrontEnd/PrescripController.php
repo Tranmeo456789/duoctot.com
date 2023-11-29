@@ -37,7 +37,6 @@ class PrescripController extends ShopFrontEndController
         $details =[];
         if ($session->has('user')){
             $user = (new UsersModel())->getItem(['user_id'=>$session->get('user.user_id')],['task' => 'get-item']);
-            $details = $user->details->pluck('value','user_field')->toArray()??[];
         }
         $itemsProvince = (new ProvinceModel())->listItems(null,['task'=>'admin-list-items-in-selectbox']);
         $params['province_id'] = (isset($details['province_id']) && ($details['province_id']!=0))?$details['province_id']:((isset($user->province_id) && ($user->province_id != 0)) ? $user->province_id:0);
