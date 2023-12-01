@@ -1,11 +1,7 @@
-<h1 class="d-flex mb-2 mb-lg-5">
-    <div class="d-flex align-items-center">
-        <div class="icon-product-round"><img src="{{asset('images/shop/selling1.png')}}" alt=""></div>
-    </div>
-    <p>Sản phẩm bán chạy nhất</p>
-</h1>
+@if(isset($listProductAddView))
+<div id="selling-product">
 <ul class="clearfix list-unstyled">
-    @foreach($product_selling as $item)
+    @foreach($listProductAddView as $item)
     <li class="position-relative">
         <a href="{{route('fe.product.detail',$item['id'])}}" class="d-block">   
             <div class="seth-img"><img src="{{asset($item['image'])}}"></div>
@@ -18,3 +14,5 @@
     </li>
     @endforeach
 </ul>
+</div>
+@endif

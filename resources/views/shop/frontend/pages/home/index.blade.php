@@ -32,7 +32,7 @@
     </div>
     --}}
 </div>
-<div class="product-backround  mt-5 py-4">
+<div class="product-backround  mt-3 mt-lg-5 py-4">
     <div class="wp-inner">
         <div id="new-product" class="list-product">
             @include("$moduleName.templates.box_title_product",['title' => 'Sản phẩm mới','featured' => true])
@@ -40,18 +40,24 @@
         </div>
     </div>
 </div>
-<div class="wp-inner mt-5">
+<div class="wp-inner mt-3 mt-lg-5">
     <div id="selling-product">
         @include("$moduleName.templates.selling_product")
     </div>
+    <div id="ls-product-view-add">
+        @include("$moduleName.pages.home.child_index.ls_product_view_add")
+    </div>
+    <div class="text-center mt-3">
+        <span class="view-add-product" data-offset="20" data-href="{{route('fe.product.loadMoreProducts')}}">Xem thêm(20 sp)</span>
+    </div>
 </div>
-<div class="mt-5 product_hcovid">
+<div class="mt-3 mt-lg-5 product_hcovid">
     <div class="wp-inner">
         @include("$moduleName.pages.$controllerName.child_index.product_covid")
     </div>
 </div>
 <div class="wp-inner mt-5">
-    <div id="selling-product" class="mt-5">
+    <div id="selling-product">
         @include("$moduleName.pages.$controllerName.child_index.product_in_object")
     </div>
 </div>
@@ -60,13 +66,13 @@
 <div class="wp-inner">
     @include("$moduleName.pages.$controllerName.child_index.news")
 </div>
-<div class="service-tdoctor mt-5">
+<div class="service-tdoctor mt-3 mt-lg-5">
     @include("$moduleName.templates.info_service")
 </div>
 <div class="local">
     @include("$moduleName.templates.local_drugstore")
 </div>
-<div class="wp-inner mt-5">
+<div class="wp-inner mt-3 mt-lg-5">
     <div class="feedback-customer">
         @include("$moduleName.templates.feedback_customer")
     </div>

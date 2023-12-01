@@ -5,8 +5,8 @@ $object_product=[
     ['name'=>'Phụ nữ cho con bú','slug'=>'phu_nu_cho_con_bu'],
 ]
 @endphp
-<h1 class="d-flex justify-content-between mb-5 flex-wrap ">
-    <div class="title_cathd mb-sm-2">
+<h1 class="d-flex justify-content-between mb-2 mb-lg-5 flex-wrap ">
+    <div class="title_cathd mb-2">
         <div class="d-flex align-items-center">
             <div class="d-flex"><img src="{{asset('images/shop/tp3.png')}}" alt=""></div>
             <h1>Sản phẩm theo đối tượng</h1>

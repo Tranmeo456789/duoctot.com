@@ -748,6 +748,28 @@ $(document).on('click', ".view-detail-order", function (event) {
         },
     }); 
 });
+$(document).on('click', ".view-add-product", function (event) {
+    var offset = $(this).data("offset");
+    offset += 20;
+    $(this).data("offset", offset);
+    var url = $(this).attr("data-href");
+    var _token = $('input[name="_token"]').val();
+    $.ajax({
+        url: url,
+        cache: false,
+        method: "GET",
+        dataType: 'html',
+        data: {
+            offset: offset,
+            _token: _token,
+        },
+        success: function(data) {
+            $('#ls-product-view-add').append(data);
+        },
+    }); 
+});
+
+
 $(document).on('click', ".btn-closenk", function (event) {
     $('.wp-detail-order').css("display", "none");
     $('.black-screen').css("display", "none");

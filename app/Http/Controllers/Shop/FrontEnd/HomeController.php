@@ -20,7 +20,7 @@ class HomeController extends ShopFrontEndController
     }
     public function index(Request $request)
     {
-        $product_selling = (new ProductModel())->listItems(null, ['task' => 'frontend-list-items']);
+        $product_selling = (new ProductModel())->listItems(null, ['task' => 'frontend-list-items'])->take(20);
         $product_covid=(new ProductModel())->listItems(['type'=>'hau_covid','limit'=>10], ['task' => 'frontend-list-items-by-type']);
         $product=(new ProductModel())->listItems(['type'=>'tre_em','limit'=>10], ['task' => 'frontend-list-items']);
         $itemsProduct['new'] = (new ProductModel())->listItems(['type'=>'new','limit'=>10], ['task' => 'frontend-list-items-by-type']);

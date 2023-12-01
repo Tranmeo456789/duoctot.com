@@ -1,3 +1,4 @@
+@if(count($product_covid)>0)
 <div id="feature-product-wp" class="product_sellhome">
     <div class="mb-3 headf d-flex">
         <div class="icon-product-round">
@@ -15,3 +16,4 @@
         </ul>
     </div>
 </div>
+@endif

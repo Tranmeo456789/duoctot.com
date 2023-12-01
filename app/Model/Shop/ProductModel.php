@@ -136,6 +136,12 @@ class ProductModel extends BackEndModel
             if (isset($params['cat_product_id']) && ($params['cat_product_id'] != 0)){
                 $query->whereIn('cat_product_id', CatProductModel::getChild($params['cat_product_id']));
             }
+            if(isset($params['offset'])){
+                $query->skip($params['offset']);
+            }
+            if(isset($params['take'])){
+                $query->take($params['take']);
+            }
             $query->OfCollaboratorCode()->orderBy('id', 'desc');
             if(isset($params['limit'])){
                 $result=$query->paginate($params['limit']);
