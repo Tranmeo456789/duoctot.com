@@ -66,7 +66,6 @@ class ProductRequest extends AjaxFormRequest
         $rules =  [
             'name'           => $condName,
             'type'           => $condType,
-            'image'          => $condImage,
             'code'           => $condCode,
             'cat_product_id' => $condCatPrduct,
             'producer_id'    => $condProducer,
@@ -78,11 +77,7 @@ class ProductRequest extends AjaxFormRequest
             'inventory_min'  => $condInventory,
             'price_vat'      => $condPriceVat,
             'general_info'   => $condGeneralInfo,
-            'benefit'        => $condBenefit,
-            'longs'          => $condLongs,
-            'wides'          => $condWides,
-            'highs'          => $condHighs,
-            'mass'           => $condMass,
+            'benefit'        => $condBenefit
         ];
         return array_merge($rules, $rulesAlbumImage);
     }

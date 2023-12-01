@@ -67,9 +67,9 @@ class ProductModel extends BackEndModel
             $query = $this::with('unitProduct')
                             ->select('id','name','type','code','cat_product_id','producer_id',
                                     'tick','type_price','price','price_vat','coefficient',
-                                    'type_vat','packing','unit_id','sell_area','amout_max',
+                                    'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
-                                    'dosage_forms','country_id','specification','benefit',
+                                    'dosage_forms','country_id','specification','benefit','elements',
                                     'preserve','note','image','featurer','long','user_id','status_product','wide','high',
                                     'mass','quantity_in_stock','created_at', 'updated_at')->where('id','>',1)
                                     ->ofUser();
@@ -114,9 +114,9 @@ class ProductModel extends BackEndModel
         if ($options['task'] == "frontend-list-items") {
             $query = $this::select('id','name','type','code','cat_product_id','producer_id',
                                     'tick','type_price','price','price_vat','coefficient',
-                                    'type_vat','packing','unit_id','sell_area','amout_max',
+                                    'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
-                                    'dosage_forms','country_id','specification','benefit',
+                                    'dosage_forms','country_id','specification','benefit','elements',
                                     'preserve','note','image','albumImage','albumImageHash','user_id','featurer','long','wide','high',
                                     'mass')
                                 ->where('id','>',1)->where('status_product','da_duyet');
@@ -135,9 +135,9 @@ class ProductModel extends BackEndModel
             $type = $params['type'];
             $query = $this::select('id','name','type','code','cat_product_id','producer_id',
                                     'tick','type_price','price','price_vat','coefficient',
-                                    'type_vat','packing','unit_id','sell_area','amout_max',
+                                    'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
-                                    'dosage_forms','country_id','specification','benefit',
+                                    'dosage_forms','country_id','specification','benefit','elements',
                                     'preserve','note','image','albumImage','albumImageHash','user_id','featurer','long','wide','high',
                                     'mass')
                                  //   ->whereRaw("JSON_CONTAINS(`featurer`, '\"{$params['type']}\"')");
@@ -154,9 +154,9 @@ class ProductModel extends BackEndModel
             $type = $params['type'];
             $query = $this::with('unitProduct')->select('id','name','type','code','cat_product_id','producer_id',
                                     'tick','type_price','price','price_vat','coefficient',
-                                    'type_vat','packing','unit_id','sell_area','amout_max',
+                                    'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
-                                    'dosage_forms','country_id','specification','benefit',
+                                    'dosage_forms','country_id','specification','benefit','elements',
                                     'preserve','note','image','albumImage','albumImageHash','user_id','featurer','long','wide','high',
                                     'mass')
                                  //   ->whereRaw("JSON_CONTAINS(`featurer`, '\"{$params['type']}\"')");
@@ -198,9 +198,9 @@ class ProductModel extends BackEndModel
         $user = Session::get('user');
         $query = $this::select('id','name','type','code','cat_product_id','producer_id',
         'tick','type_price','price','price_vat','coefficient',
-        'type_vat','packing','unit_id','sell_area','amout_max',
+        'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
         'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
-        'dosage_forms','country_id','specification','benefit',
+        'dosage_forms','country_id','specification','benefit','elements',
         'preserve','note','image','featurer','long','user_id','wide','high',
         'mass', 'created_at', 'updated_at');
         $result =  $query->orderBy('id', 'desc')->where('user_id',$user->user_id)->get();
@@ -211,9 +211,9 @@ class ProductModel extends BackEndModel
         $user = Session::get('user');
         $query = $this::select('id','name','type','code','cat_product_id','producer_id',
         'tick','type_price','price','price_vat','coefficient',
-        'type_vat','packing','unit_id','sell_area','amout_max',
+        'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
         'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
-        'dosage_forms','country_id','specification','benefit',
+        'dosage_forms','country_id','specification','benefit','elements',
         'preserve','note','image','featurer','long','user_id','wide','high',
         'mass', 'created_at', 'updated_at');
         $result =  $query->orderBy('id', 'desc')->get();
@@ -225,9 +225,9 @@ class ProductModel extends BackEndModel
         if ($options['task'] == 'get-item') {
             $result = self::select('id','name','type','code','cat_product_id','producer_id',
                                     'tick','type_price','price','price_vat','coefficient',
-                                    'type_vat','packing','unit_id','sell_area','amout_max',
+                                    'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
-                                    'dosage_forms','country_id','specification','benefit',
+                                    'dosage_forms','country_id','specification','benefit','elements',
                                     'preserve','note','image','albumImage','albumImageHash','user_id','featurer','long','wide','high',
                                     'mass')
                             ->where('id', $params['id'])
@@ -245,9 +245,9 @@ class ProductModel extends BackEndModel
             $result = self::with('unitProduct')
                             ->select('id','name','type','code','cat_product_id','producer_id',
                                     'tick','type_price','price','price_vat','coefficient',
-                                    'type_vat','packing','unit_id','sell_area','amout_max',
+                                    'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
-                                    'dosage_forms','country_id','specification','benefit',
+                                    'dosage_forms','country_id','specification','benefit','elements',
                                     'preserve','note','image','albumImage','albumImageHash','user_id','featurer','long','wide','high',
                                     'mass')
                             ->where('id', $params['id'])
@@ -326,7 +326,7 @@ class ProductModel extends BackEndModel
                 $params['albumImageHash']     = $resultFileUpload['fileHash'];
             }
             $params['status_product'] = 'cho_kiem_duyet';
-            $params['sell_area'] = ($params['sell_area'] != '')? json_encode($params['sell_area'],JSON_NUMERIC_CHECK ): NULL;
+            $params['sell_area'] = (isset($params['sell_area']) && $params['sell_area'] !== '') ? json_encode($params['sell_area'], JSON_NUMERIC_CHECK) : 0;
             $catProduct = CatProductModel::find($params['cat_product_id']);
             if ($catProduct){
                 $params['cat_product_parent_id'] = $catProduct->parent_id;
@@ -341,7 +341,7 @@ class ProductModel extends BackEndModel
             $this->updateFileUpload($item,$params,'albumImage');
             $params['tick'] = isset($params['tick'])?json_encode($params['tick'],JSON_NUMERIC_CHECK ): NULL;
             $params['featurer'] = isset($params['featurer'])?json_encode($params['featurer']): NULL;
-            $params['sell_area'] = ($params['sell_area'] != '')? json_encode($params['sell_area'],JSON_NUMERIC_CHECK ): NULL;
+            $params['sell_area'] = (isset($params['sell_area']) && $params['sell_area'] !== '') ? json_encode($params['sell_area'], JSON_NUMERIC_CHECK) : 0;
             $catProduct = CatProductModel::find($params['cat_product_id']);
             if ($catProduct){
                 $params['cat_product_parent_id'] = $catProduct->parent_id;
