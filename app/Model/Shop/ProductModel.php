@@ -22,6 +22,8 @@ class ProductModel extends BackEndModel
         $this->table               = 'products';
         $this->controllerName      = 'product';
         $this->folderUpload        = 'product';
+        $filedSearch               = array_key_exists($this->controllerName, config('myconfig.config.search')) ? $this->controllerName : 'default';
+        $this->fieldSearchAccepted = array_diff(config('myconfig.config.search.' . $filedSearch),['all']);
         $this->crudNotAccepted     = ['_token', 'btn_save','file-del','files'];
     }
     public function scopeOfCollaboratorCode($query)
@@ -78,6 +80,17 @@ class ProductModel extends BackEndModel
             }
             if ((isset($params['filter']['status_product'])) && ($params['filter']['status_product'] != 'all')) {
                 $query = $query->where('status_product',$params['filter']['status_product']);
+            }
+            if (isset($params['search']['value']) && ($params['search']['value'] !== ""))  {
+                if($params['search']['field'] == "all") {
+                    $query->where(function($query) use ($params){
+                        foreach($this->fieldSearchAccepted as $column){
+                            $query->orWhereRaw("LOWER($column)" . ' LIKE BINARY ' .  "LOWER('%{$params['search']['value']}%')" );
+                        }
+                    });
+                } else if(in_array($params['search']['field'], $this->fieldSearchAccepted)) {
+                        $query->whereRaw("LOWER({$params['search']['field']})" . " LIKE BINARY " .  "LOWER('%{$params['search']['value']}%')" );
+                }
             }
             $query->orderBy('created_at', 'desc');
             if (isset($params['pagination']['totalItemsPerPage'])){

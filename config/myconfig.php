@@ -194,7 +194,8 @@
         'config' => [
             'search' => [
                 'default'  => ['name'],
-                'user' => ['email','fullname']
+                'user' => ['email','fullname'],
+                'product'=>['name'],
             ]
         ]
     ];
