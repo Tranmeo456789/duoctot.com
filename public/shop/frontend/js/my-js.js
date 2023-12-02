@@ -920,6 +920,7 @@ $(document).on('click', ".wp-input-search input", function (event) {
 
 $(document).on('click', ".ipsp", function (event) {
     $('#box-search-fixed').css("display", "block");
+    $('#box-search-fixed .input-search-info').focus();
 });
 $(document).on('click', ".icon-back-search", function (event) {
     $('#box-search-fixed').css("display", "none");

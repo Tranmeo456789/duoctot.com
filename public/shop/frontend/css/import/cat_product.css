@@ -326,6 +326,7 @@
     font-size: 18px;
     line-height: 20px;
     color: #1E1E1E;
+    min-height: 40px;
 }
 
 #body-nbox h3 {
