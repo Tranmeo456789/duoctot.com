@@ -91,6 +91,7 @@
                 'price' => 'Giá bán thuốc (chưa VAT)',
                 'price_vat' => 'Giá bán thuốc (có VAT)',
                 'type_vat' => 'Loại VAT',
+                'percent_discount'=>'Giảm giá(%)',
                 'expiration_date' => 'Hạn sử dụng',
                 'unit_id' => 'Đơn vị',
                 'amout_max' => 'Số lượng đặt hàng lớn nhất',

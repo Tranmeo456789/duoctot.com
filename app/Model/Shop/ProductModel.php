@@ -68,7 +68,7 @@ class ProductModel extends BackEndModel
         if ($options['task'] == "user-list-items") {
             $query = $this::with('unitProduct')
                             ->select('id','name','type','code','cat_product_id','producer_id',
-                                    'tick','type_price','price','price_vat','coefficient',
+                                    'tick','type_price','price','price_vat','percent_discount','coefficient',
                                     'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
@@ -126,7 +126,7 @@ class ProductModel extends BackEndModel
         }
         if ($options['task'] == "frontend-list-items") {
             $query = $this::select('id','name','type','code','cat_product_id','producer_id',
-                                    'tick','type_price','price','price_vat','coefficient',
+                                    'tick','type_price','price','price_vat','percent_discount','coefficient',
                                     'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
@@ -153,7 +153,7 @@ class ProductModel extends BackEndModel
         if ($options['task'] == "frontend-list-items-featurer") {
             $type = $params['type'];
             $query = $this::select('id','name','type','code','cat_product_id','producer_id',
-                                    'tick','type_price','price','price_vat','coefficient',
+                                    'tick','type_price','price','price_vat','percent_discount','coefficient',
                                     'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
@@ -172,7 +172,7 @@ class ProductModel extends BackEndModel
         if ($options['task'] == "frontend-list-items-by-type") {
             $type = $params['type'];
             $query = $this::with('unitProduct')->select('id','name','type','code','cat_product_id','producer_id',
-                                    'tick','type_price','price','price_vat','coefficient',
+                                    'tick','type_price','price','price_vat','percent_discount','coefficient',
                                     'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
@@ -216,7 +216,7 @@ class ProductModel extends BackEndModel
         $result = null;
         $user = Session::get('user');
         $query = $this::select('id','name','type','code','cat_product_id','producer_id',
-        'tick','type_price','price','price_vat','coefficient',
+        'tick','type_price','price','price_vat','percent_discount','coefficient',
         'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
         'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
         'dosage_forms','country_id','specification','benefit','elements',
@@ -229,7 +229,7 @@ class ProductModel extends BackEndModel
         $result = null;
         $user = Session::get('user');
         $query = $this::select('id','name','type','code','cat_product_id','producer_id',
-        'tick','type_price','price','price_vat','coefficient',
+        'tick','type_price','price','price_vat','percent_discount','coefficient',
         'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
         'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
         'dosage_forms','country_id','specification','benefit','elements',
@@ -243,7 +243,7 @@ class ProductModel extends BackEndModel
         $result = null;
         if ($options['task'] == 'get-item') {
             $result = self::select('id','name','type','code','cat_product_id','producer_id',
-                                    'tick','type_price','price','price_vat','coefficient',
+                                    'tick','type_price','price','price_vat','percent_discount','coefficient',
                                     'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
@@ -263,7 +263,7 @@ class ProductModel extends BackEndModel
         if ($options['task'] == 'frontend-get-item') {
             $result = self::with('unitProduct')
                             ->select('id','name','type','code','cat_product_id','producer_id',
-                                    'tick','type_price','price','price_vat','coefficient',
+                                    'tick','type_price','price','price_vat','percent_discount','coefficient',
                                     'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
