@@ -11,8 +11,8 @@
             @include("$moduleName.pages.$controllerName.child_view.cart_null")
         @endif
 
-        <div class="new-view">
-             @include("$moduleName.templates.new_view")
+        <div>
+             @include("$moduleName.templates.list_product_new_view")
         </div>
     </div>
 </div>

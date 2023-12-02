@@ -22,47 +22,40 @@
             </div>
         </div>
     </div>
-
     <div id="buy-medicine" class="mt-0 pt-0 mt-md-3 pt-md-3">
         @include("$moduleName.pages.$controllerName.child_index.buy_medicine")
     </div>
-    {{--
-    <div id="featured-category" class="mt-5">
-        @include("$moduleName.pages.$controllerName.child_index.featured_category")
-    </div>
-    --}}
 </div>
 <div class="product-backround  mt-3 mt-lg-5 py-4">
     <div class="wp-inner">
-        <div id="new-product" class="list-product">
-            @include("$moduleName.templates.box_title_product",['title' => 'Sản phẩm mới','featured' => true])
-            @include("$moduleName.templates.list_product",['items' => $itemsProduct['new']])
-        </div>
+        @include("$moduleName.templates.box_title_product",['title' => 'Sản phẩm mới','featured' => true])
+        @include("$moduleName.templates.list_product",['items'=>$itemsProduct['new']])
     </div>
 </div>
 <div class="wp-inner mt-3 mt-lg-5">
     <div id="selling-product">
-        @include("$moduleName.templates.selling_product")
+        @include("$moduleName.pages.$controllerName.child_index.best_selling_product")
     </div>
     <div id="ls-product-view-add">
-        @include("$moduleName.pages.home.child_index.ls_product_view_add")
+        @include("$moduleName.pages.$controllerName.child_index.ls_product_view_add")
     </div>
     <div class="text-center mt-3">
         <span class="view-add-product" data-offset="20" data-href="{{route('fe.product.loadMoreProducts')}}">Xem thêm(20 sp)</span>
     </div>
 </div>
-<div class="mt-3 mt-lg-5 product_hcovid">
+@if(count($product_covid)>0)
+<div class="product-backround  mt-3 mt-lg-5 py-4">
     <div class="wp-inner">
-        @include("$moduleName.pages.$controllerName.child_index.product_covid")
+        @include("$moduleName.templates.box_title_product",['title' => 'Sản phẩm hậu covid','featured' => true])
+        @include("$moduleName.templates.list_product",['items'=>$product_covid])
     </div>
 </div>
+@endif
 <div class="wp-inner mt-5">
-    <div id="selling-product">
-        @include("$moduleName.pages.$controllerName.child_index.product_in_object")
+    <div id="product-by-object">
+        @include("$moduleName.pages.$controllerName.child_index.product_by_object")
     </div>
 </div>
-
-
 <div class="wp-inner">
     @include("$moduleName.pages.$controllerName.child_index.news")
 </div>

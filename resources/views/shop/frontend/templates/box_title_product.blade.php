@@ -6,7 +6,7 @@
         $classBackground =  'icon-product-featured';
     }
 @endphp
-<div class="d-flex mb-3">
+<div class="d-flex mb-3 wp-title">
     <div class="d-flex align-items-center">
         <div class="{{$classBackground}}">
             <img src="{{asset('images/shop/' .  $img )}}" alt="">

@@ -1,10 +1,5 @@
 <div class="title-product-out d-flex justify-content-between mb-3 flex-wrap">
-    <div class="title_cathd">
-        <div class="d-flex align-items-center">
-            <div class="d-flex"><img src="{{asset('images/shop/banc1.png')}}" alt=""></div>
-            <h1>Sản phẩm nổi bật</h1>
-        </div>
-    </div>
+    @include("$moduleName.templates.box_title_product",['title' => 'Sản phẩm nổi bật','featured' => true])
     <div>
         <div class="fitter-wp d-flex">
             <div class="selectpp align-self-center">

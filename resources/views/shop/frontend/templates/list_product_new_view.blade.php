@@ -9,16 +9,13 @@
     }
 @endphp
 @if(count($productViewed) > 0)
-    <div id="selling-product" class="viewnproduct">
-        <h1 class="d-flex mb-3">
-            <div class="align-self-center"><div class="icon-product-round"><img src="{{asset('images/shop/eye1.png')}}" alt="" srcset=""></div></div>
-            <p>Vừa mới xem</p>
-        </h1>
-        <ul class="clearfix">
+    <div class="viewnproduct">
+        @include("$moduleName.templates.box_title_product",['title' => 'Vừa mới xem','featured' => false])
+        <ul class="clearfix list-unstyled ls_product">
             @foreach($productViewed as $key=>$val)
             <li class="position-relative">
                 <a href="{{route('fe.product.detail',$val['product_id'])}}">
-                    <div class="d-flex justify-content-center h-60"><img src="{{asset($val['image'])}}" alt=""></div>
+                    <div class="d-flex justify-content-center wp-img-thumb-product"><img src="{{asset($val['image'])}}" alt=""></div>
                     <div class="mt-3 px-2">
                         <p class="truncate2">{{$val['name']}}</p>
                         <span class="text-info">{{ MyFunction::formatNumber($val['price'])}}đ / {{$val['unit']}}</span>

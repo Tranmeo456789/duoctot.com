@@ -6,12 +6,7 @@ $object_product=[
 ]
 @endphp
 <h1 class="d-flex justify-content-between mb-2 mb-lg-5 flex-wrap ">
-    <div class="title_cathd mb-2">
-        <div class="d-flex align-items-center">
-            <div class="d-flex"><img src="{{asset('images/shop/tp3.png')}}" alt=""></div>
-            <h1>Sản phẩm theo đối tượng</h1>
-        </div>
-    </div>
+    @include("$moduleName.templates.box_title_product",['title'=>'Sản phẩm theo đối tượng'])
     <div>
         <div class="d-flex justify-content-between flex-wrap  slect-customer">
             <span>Lọc theo</span>
@@ -25,6 +20,4 @@ $object_product=[
         </div>
     </div>
 </h1>
-<ul class="clearfix list-unstyled list-product-object">
-    @include("$moduleName.pages.$controllerName.partial.product_object")
-</ul>
+@include("$moduleName.templates.list_product",['items'=>$product_selling])

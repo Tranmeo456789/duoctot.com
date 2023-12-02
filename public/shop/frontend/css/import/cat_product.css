@@ -480,15 +480,9 @@
     border: none;
 }
 
-.new-view {
-    background: #F1F8FF;
-    padding: 15px 10px;
-}
-
-#selling-product.viewnproduct li {
+.viewnproduct li {
     float: left;
     width: 24.25%;
-    height: 378px;
     margin-right: 1%;
     margin-bottom: 1%;
     padding: 25px 3px;
@@ -497,7 +491,7 @@
     border-radius: 10px;
 }
 
-#selling-product.viewnproduct li:nth-child(4n) {
+.viewnproduct li:nth-child(4n) {
     margin-right: 0px;
 }
 
@@ -670,10 +664,6 @@ input:checked+.slider:before {
 #productsl {
     background: linear-gradient(270deg, #072C94 0%, #375FBE 100%);
     border-radius: 15px;
-}
-
-#productsl.product_hcovid {
-    border-radius: 0px
 }
 
 #feature-product-wp .headf h1 {

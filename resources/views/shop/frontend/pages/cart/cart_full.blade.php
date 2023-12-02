@@ -6,8 +6,8 @@
         </div>
         @include ("$moduleName.pages.cart.child_cart_full.list_product")
         <div class="wp-inner">
-            <div class="new-view">
-                @include("$moduleName.templates.new_view")
+            <div>
+                @include("$moduleName.templates.list_product_new_view")
             </div>
         </div>        
 </div>

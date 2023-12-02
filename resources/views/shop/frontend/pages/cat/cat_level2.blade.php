@@ -25,8 +25,8 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="new-view mt-3">
-                    @include("$moduleName.templates.new_view")
+                    <div class="mt-3">
+                    @include("$moduleName.templates.list_product_new_view")
                     </div>
                 </div>
             </div>     
