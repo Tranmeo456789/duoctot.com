@@ -51,7 +51,7 @@
     </div>
 </div>
 @endif
-<div class="wp-inner mt-3 mt-lg-5">
+<div class="wp-inner mt-5">
     <div id="product-by-object">
         @include("$moduleName.pages.$controllerName.child_index.product_by_object")
     </div>

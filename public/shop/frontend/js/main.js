@@ -167,10 +167,10 @@ $(document).ready(function() {
 
     });
     
-    $(window).resize(function(event) {
-        $('#head-body-respon').removeClass("slider");
-        $('#fixscreen-respon').css("display", "none");
-    });
+    // $(window).resize(function(event) {
+    //     $('#head-body-respon').removeClass("slider");
+    //     $('#fixscreen-respon').css("display", "none");
+    // });
 
     //xo danh muc cap 1
     $('.vissubmenu').click(function() {
