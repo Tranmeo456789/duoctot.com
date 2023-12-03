@@ -352,15 +352,7 @@
     .ipsp {
         display: none;
     }
-    .list-product .slect-customer {
-        margin-left: 20px;
-    }
-    .slect-customer {
-        margin-left: 20px;
-    }
-    .list-product .slect-customer {
-        margin-left: 20px;
-    }
+    
     .icon-product-round2 img {
         width: 30px;
     }
@@ -604,16 +596,8 @@
         margin-right: 8px;
     }
 
-    .slect-customer span {
-        display: none;
-    }
-
     .medical-faculty {
         display: none;
-    }
-
-    .slect-customer {
-        padding: 1px 1px;
     }
 
     #buy-medicine h1 {
@@ -666,10 +650,6 @@
     }
     .info-app {
         display: none;
-    }
-
-    .slect-customer {
-        margin-left: 0px;
     }
 
     .icon-product-round2 img {
@@ -818,6 +798,13 @@
 @media screen and (max-width: 600px) {
     #site {
         overflow-x: hidden;
+    }
+    .wp-slect-customer{
+        width: 100%;
+        overflow-x: scroll;
+    }
+    .wp-slect-customer .slect-customer{
+        width: 600px;
     }
     .wp-detail-order .tab-header{
         padding: 10px;
@@ -1164,20 +1151,6 @@
     #qadoctor .setq {
         display: none;
     }
-
-    .slect-customer {
-        font-size: 12px;
-        padding-top: 10px;
-    }
-
-    .slect-customer .slect-item-customer:first-child {
-        margin-left: 0px;
-    }
-
-    .slect-customer .slect-item-customer {
-        margin-right: 10px;
-        padding: 4px 6px;
-    }
 }
 
 @media screen and (max-width: 450px) {
@@ -1193,10 +1166,6 @@
         font-size: 18px;
         padding-top: 5px;
         margin-left: 10px;
-    }
-
-    .slect-customer {
-        padding: 4px 0px;
     }
 
     .medical-faculty .lage-font {

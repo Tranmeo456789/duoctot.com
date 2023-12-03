@@ -10,7 +10,7 @@
 @endphp
 @if(count($productViewed) > 0)
     <div class="viewnproduct">
-        @include("$moduleName.templates.box_title_product",['title' => 'Vừa mới xem','featured' => false])
+        @include("$moduleName.templates.box_title_product",['title' => 'Vừa mới xem','img'=>'mat.png'])
         <ul class="clearfix list-unstyled ls_product">
             @foreach($productViewed as $key=>$val)
             <li class="position-relative">

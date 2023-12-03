@@ -28,7 +28,7 @@
 </div>
 <div class="product-backround  mt-3 mt-lg-5 py-4">
     <div class="wp-inner">
-        @include("$moduleName.templates.box_title_product",['title' => 'Sản phẩm mới','featured' => true])
+        @include("$moduleName.templates.box_title_product",['title' => 'Sản phẩm mới','classBackground'=>'bg-danger'])
         @include("$moduleName.templates.list_product",['items'=>$itemsProduct['new']])
     </div>
 </div>
@@ -46,12 +46,12 @@
 @if(count($product_covid)>0)
 <div class="product-backround  mt-3 mt-lg-5 py-4">
     <div class="wp-inner">
-        @include("$moduleName.templates.box_title_product",['title' => 'Sản phẩm hậu covid','featured' => true])
+        @include("$moduleName.templates.box_title_product",['title' => 'Sản phẩm hậu covid','classBackground'=>'bg-danger'])
         @include("$moduleName.templates.list_product",['items'=>$product_covid])
     </div>
 </div>
 @endif
-<div class="wp-inner mt-5">
+<div class="wp-inner mt-3 mt-lg-5">
     <div id="product-by-object">
         @include("$moduleName.pages.$controllerName.child_index.product_by_object")
     </div>

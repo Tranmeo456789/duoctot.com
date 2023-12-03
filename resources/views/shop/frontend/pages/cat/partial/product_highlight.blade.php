@@ -1,9 +1,8 @@
 <div class="title-product-out d-flex justify-content-between mb-3 flex-wrap">
-    @include("$moduleName.templates.box_title_product",['title' => 'Sản phẩm nổi bật','featured' => true])
+    @include("$moduleName.templates.box_title_product",['title' => 'Sản phẩm nổi bật'])
     <div>
         <div class="fitter-wp d-flex">
             <div class="selectpp align-self-center">
-                <p>Lọc theo</p>
                 <ul class="d-flex">
                     <li><a href="" class="active-btn">Bán chạy</a></li>
                     <li><a href="">Mới nhất</a></li>
