@@ -1,33 +1,26 @@
-<div class="title-product-out d-flex justify-content-between mb-3 flex-wrap">
+@php
+$objectProducts=[
+    ['name'=>'Hàng mới','slug'=>'hang_moi'],
+    ['name'=>'Bán chạy','slug'=>'ban_chay'],
+    ['name'=>'Giá cao','slug'=>'gia_cao'],
+    ['name'=>'Giá thấp','slug'=>'gia_thap']
+]
+@endphp
+<div class="title-product-out d-flex justify-content-between flex-wrap">
     @include("$moduleName.templates.box_title_product",['title' => 'Sản phẩm nổi bật'])
     <div>
         <div class="fitter-wp d-flex">
-            <div class="selectpp align-self-center">
-                <ul class="d-flex">
-                    <li><a href="" class="active-btn">Bán chạy</a></li>
-                    <li><a href="">Mới nhất</a></li>
-                    <li><a href="">Giá thấp</a></li>
-                    <li><a href="">Giá cao</a></li>
-                </ul>
-            </div>
             <div class="seclect_ol d-flex">
                 <a class="ol1 activebtn"><img src="{{asset('images/shop/v4.png')}}" alt=""></a>
                 <a class="ol2"><img src="{{asset('images/shop/3ngang.png')}}" alt=""></a>
             </div>
         </div>
     </div>
+</div>
+<div class="mb-2">
+    @include("$moduleName.templates.select_filter_product",['items'=>$objectProducts])
+</div> 
 
-</div>
-<div class="fitler-respon mb-2">
-    <div class="dropdown">
-        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hàng mới</button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Bán chạy</a>
-            <a class="dropdown-item" href="#">Giá thấp</a>
-            <a class="dropdown-item" href="#">Giá cao</a>
-        </div>
-    </div>
-</div>
 <div class="body-nb">
     <ul>
         @foreach($products as $item)

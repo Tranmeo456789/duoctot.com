@@ -909,6 +909,7 @@ $(document).on('keyup', ".input-search-info", function (event) {
     }else{
         $('.btn-search-home').removeAttr("disabled");
     }      
+    $('.ipsp > input').val(keyword);
 });
 $(document).on('click', ".wp-input-search input", function (event) {
     $('.lc-mask-search').css("opacity", 1);
