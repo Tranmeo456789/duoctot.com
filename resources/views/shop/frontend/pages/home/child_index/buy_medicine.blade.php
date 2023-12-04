@@ -1,4 +1,6 @@
-
+@php
+    use App\Model\Shop\ConfigModel;
+@endphp
 <h1 class="text-center">Mua thuốc dễ dàng tại TDoctor</h1>
 <ul class="d-flex list-unstyled">
     <li>
@@ -24,7 +26,7 @@
     </li>
 </ul>
 @php
-    $hotline = Config::where('name', 'hotline_duoc')->first()->content ?? '';
+    $hotline = ConfigModel::where('name', 'hotline_duoc')->first()->content ?? '';
 @endphp
 <div class="text-center child_buy">
     <div class="text-center btn-buynn mb-3"><a href="{{route('fe.prescrip.index')}}">MUA THUỐC NGAY</a></div>
