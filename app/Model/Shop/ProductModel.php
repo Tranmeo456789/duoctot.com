@@ -148,7 +148,16 @@ class ProductModel extends BackEndModel
             }else{
                 $result =  $query->get();
             }
-
+        }
+        if ($options['task'] == "frontend-list-items-simple") {
+            $query = $this::select('id','name')
+                                ->where('id','>',1)->where('status_product','da_duyet');
+            $query->OfCollaboratorCode()->orderBy('id', 'desc');
+            if(isset($params['limit'])){
+                $result=$query->paginate($params['limit']);
+            }else{
+                $result =  $query->get();
+            }
         }
         if ($options['task'] == "frontend-list-items-featurer") {
             $type = $params['type'];

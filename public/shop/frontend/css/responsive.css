@@ -13,6 +13,13 @@
 }
 
 @media screen and (max-width: 1200px) {
+    .wp-list-alphabet{
+        width: 100%;
+        overflow: auto;
+    }
+    .wp-list-alphabet .list-alphabet{
+        width: 1200px;
+    }
     .body_catdetail>div .delplcol:nth-child(2n) {
         padding-left: 0px !important;
     }
@@ -362,7 +369,9 @@
     .btnnk-respon {
         margin-top: 20px;
     }
-
+    .search-product .wp-search-menu {
+        width: 100%;
+    }
     .newsh .news-content-left {
         padding-top: 6px;
         padding-left: 0px;
@@ -615,7 +624,7 @@
     }
 
     .wp-iconmn #btnmenu-resp img {
-        width: 30px
+        width: 24px
     }
 
     .wp-iconmn .logotop img {
@@ -721,6 +730,9 @@
 }
 
 @media screen and (max-width: 768px) {
+    .item-product-simple {
+        min-height: auto;
+    }
     #box-search-fixed{
         position: fixed;
         top: 0;
@@ -981,7 +993,7 @@
 
     .wp-iconmn #btnmenu-resp,
     .wp-iconmn .logotop {
-        margin-right: 9vw;
+        padding-right: 10px;
     }
 
     .info-tdoctor {

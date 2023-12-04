@@ -4,10 +4,7 @@ use App\Model\Shop\CatProductModel;
 $listCatAll=(new CatProductModel())->listItems(null, ['task'  => 'list-items-front-end']);
 @endphp
 <div class="">
-    <div class="title_catdetail mb-2 d-flex">
-        <div class="icon-cat-product"><img src="{{asset('images/shop/vuongwin.png')}}" alt=""></div>
-        <span>{{$itemCatCurent['name']}}</span>
-    </div>
+    <div>@include("$moduleName.templates.box_title_product",['title' => $itemCatCurent['name'],'img'=>'vuongwin.png'])</div>
     <ul class="body_catdetail1">
         <div class="row">
             @foreach($listCatAll as $child)

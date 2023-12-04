@@ -60,6 +60,13 @@ class ProductController extends ShopFrontEndController
         $items=$this->model->listItems($params,['task' => 'list-items-search']);
         return view("$this->moduleName.pages.prescrip.child_index.ls_product_search",compact('items','keyword'));
     }
+    public function searchListProductShort(Request $request){
+        $data = $request->all();
+        $params['keyword']=$request->keyword;$params['limit']=6;
+        $keyword=$params['keyword'];
+        $items=$this->model->listItems($params,['task' => 'list-items-search']);
+        return view("$this->moduleName.templates.list_product_short",compact('items','keyword'));
+    }
     public function loadMoreProducts(Request $request){
         $data = $request->all();
         $offset=$request->offset;

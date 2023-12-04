@@ -17,7 +17,9 @@
                 <a href="{{route('fe.product.detail',$val['product_id'])}}">
                     <div class="d-flex justify-content-center wp-img-thumb-product"><img src="{{asset($val['image'])}}" alt=""></div>
                     <div class="mt-3 px-2">
-                        <p class="truncate2">{{$val['name']}}</p>
+                        <div class="wp-name-product">
+                            <p class="truncate3">{{$val['name']}}</p>
+                        </div>
                         <span class="text-info">{{ MyFunction::formatNumber($val['price'])}}đ / {{$val['unit']}}</span>
                     </div>
                 </a>

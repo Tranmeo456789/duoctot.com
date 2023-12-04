@@ -949,3 +949,37 @@ $(document).on('click', ".delete-history-keyword", function (event) {
         },
     }); 
 });
+$(".wp-search-menu .input-search-small>input").focus(function() {
+    $(".black-screen").css("display", "block");
+    $(".wp-list-product-short").css("display", "block");
+    $(".wp-search-menu form").css("z-index", 504);
+    if ($(window).width() < 768) {
+        const position = $(".wp-search-menu").offset().top;
+        $("HTML, BODY").animate({ scrollTop: position }, 100);
+    }
+});
+$(document).on('click', ".black-screen", function (event) {
+    $(".black-screen").css("display", "none");
+    $(".wp-list-product-short").css("display", "none");
+    $(".wp-search-menu form").css("z-index", 502);
+});
+$(document).on('keyup', ".wp-input-search-simple>input", function (event) {
+    var keyword = $(this).val();
+    if(keyword!='' || keyword[0]!=' '){
+        var url = $(this).attr("data-href");
+        var _token = $('input[name="_token"]').val();
+        $.ajax({
+            url: url,
+            cache: false,
+            method: "GET",
+            dataType: 'html',
+            data: {
+                keyword: keyword,
+                _token: _token
+             },
+            success: function(data) {
+                $('.wp-list-product-short').html(data);
+            },
+            });     
+        }
+});
