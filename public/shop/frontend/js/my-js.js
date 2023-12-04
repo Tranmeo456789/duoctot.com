@@ -50,6 +50,18 @@ $.ajaxSetup({
     }
 });
 $(document).ready(function () {
+    if ($("input[name='albumImage[]']").length) {
+        myUploadImage = $("input[name='albumImage[]']").uploadPreviewer({
+            buttonText: "Thêm ảnh",
+        });
+    }
+    if (($(".file-preview-table").length > 0) &&
+        ($(".file-preview-table").find('td').length == 0)) {
+        $(".file-preview-table").css({
+            "margin-top": "0px",
+            "margin-bottom": "0px"
+        });
+    }
     //  Cat hover
     $('.cat1name').hover(
         function() {
@@ -736,6 +748,28 @@ $(document).on('click', ".view-detail-order", function (event) {
         },
     }); 
 });
+$(document).on('click', ".view-add-product", function (event) {
+    var offset = $(this).data("offset");
+    offset += 20;
+    $(this).data("offset", offset);
+    var url = $(this).attr("data-href");
+    var _token = $('input[name="_token"]').val();
+    $.ajax({
+        url: url,
+        cache: false,
+        method: "GET",
+        dataType: 'html',
+        data: {
+            offset: offset,
+            _token: _token,
+        },
+        success: function(data) {
+            $('#ls-product-view-add').append(data);
+        },
+    }); 
+});
+
+
 $(document).on('click', ".btn-closenk", function (event) {
     $('.wp-detail-order').css("display", "none");
     $('.black-screen').css("display", "none");
@@ -875,6 +909,7 @@ $(document).on('keyup', ".input-search-info", function (event) {
     }else{
         $('.btn-search-home').removeAttr("disabled");
     }      
+    $('.ipsp > input').val(keyword);
 });
 $(document).on('click', ".wp-input-search input", function (event) {
     $('.lc-mask-search').css("opacity", 1);
@@ -883,8 +918,10 @@ $(document).on('click', ".wp-input-search input", function (event) {
     const position = $("#form-search").offset().top;
     $("HTML, BODY").animate({ scrollTop: position }, 500);
 });
+
 $(document).on('click', ".ipsp", function (event) {
     $('#box-search-fixed').css("display", "block");
+    $('#box-search-fixed .input-search-info').focus();
 });
 $(document).on('click', ".icon-back-search", function (event) {
     $('#box-search-fixed').css("display", "none");

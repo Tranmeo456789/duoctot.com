@@ -1,5 +1,5 @@
 <img src="{{asset('images/shop/baner.png')}}" alt="">
-<div class="newsh mt-5">
+<div class="newsh mt-3 mt-lg-5">
     <div class="title-news d-flex">
         <img src="{{asset('images/shop/news1.png')}}" alt="">
         <h1>Tin tức và góc sức khỏe</h1>

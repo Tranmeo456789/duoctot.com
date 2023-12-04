@@ -106,9 +106,15 @@
                 'label'   => HTML::decode(Form::label('price_vat',$label['price_vat'] .  $star, $formLabelAttr)),
                 'element' => Form::text('price_vat', $item['price_vat']??null, array_merge($formInputAttr,['placeholder'=>$label['price_vat']])),
                 'widthElement' => 'col-3'
-            ],[
-                'label'   => HTML::decode(Form::label('packing',$label['packing'], $formLabelAttr)),
-                'element' => Form::text('packing', $item['packing']??null, array_merge($formInputAttr,['placeholder'=>$label['packing']])),
+            ],
+            [
+                'label'   => HTML::decode(Form::label('percent_discount',$label['percent_discount'], $formLabelAttr)),
+                'element' => Form::text('percent_discount', $item['percent_discount']??null, array_merge($formInputAttr,['placeholder'=>$label['percent_discount']])),
+                'widthElement' => 'col-3'
+            ],
+            [
+                'label'   => HTML::decode(Form::label('expiration_date',$label['expiration_date'], $formLabelAttr)),
+                'element' => Form::text('expiration_date', $item['expiration_date']??null, array_merge($formInputAttr,['placeholder'=>$label['expiration_date']])),
                 'widthElement' => 'col-3'
             ],[
                 'label'   => HTML::decode(Form::label('unit_id', $label['unit_id'] .  $star , $formLabelAttr)),
@@ -124,11 +130,11 @@
                 'widthElement' => 'col-3'
             ],[
                 'label'   => HTML::decode(Form::label('type_price', $label['type_price'] .  $star , $formLabelAttr)),
-                'element' => Form::select('type_price',[null=>"Chọn {$label['type_price']}"]+ $itemsTypePrice, $item['type_price']??null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
-                'widthElement' => 'col-6'
+                'element' => Form::select('type_price',$itemsTypePrice, $item['type_price']??null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
+                'widthElement' => 'col-3'
             ],[
                 'label'   => HTML::decode(Form::label('sell_area', $label['sell_area'] .  $star , $formLabelAttr)),
-                'element' => Form::select('sell_area',$itemsProvince, $item['sell_area']??null, array_merge($formSelect2Attr,['data-placeholder'=>"Chọn {$label['sell_area']}",'style' =>'width:100%','multiple' => 'multiple'])),
+                'element' => Form::select('sell_area',$itemsProvince, $item['sell_area']??null, array_merge($formSelect2Attr,['data-placeholder'=>"Mặc định(Cả nước)",'style' =>'width:100%','multiple' => 'multiple'])),
                 'widthElement' => 'col-6'
             ],[
                 'label' => HTML::decode(Form::label('', 'Chọn đặc tính sản phẩm' , $formLabelAttr)),
@@ -169,7 +175,12 @@
             ],[
                 'label'   => Form::label('benefit', $label['benefit'], $formLabelAttr),
                 'element' => Form::textarea('benefit', $item['benefit']?? null, array_merge($formInputAttr,['placeholder'=>$label['benefit'],"rows"=>"5"]))
-            ],[
+            ],
+            [
+                'label'   => Form::label('elements', $label['elements'], $formLabelAttr),
+                'element' => Form::textarea('elements', $item['elements']?? null, array_merge($formInputAttr,['placeholder'=>$label['elements'],"rows"=>"5"]))
+            ],
+            [
                 'label'   => Form::label('prescribe', $label['prescribe'], $formLabelAttr),
                 'element' => Form::textarea('prescribe', $item['prescribe']?? null, array_merge($formInputAttr,['placeholder'=>$label['prescribe'],"rows"=>"5"]))
             ],[

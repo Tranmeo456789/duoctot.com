@@ -48,6 +48,9 @@
             <div class="col-12">
                 @include("$moduleName.pages.$controllerName.child_detail.list_product",['item' => $item['info_product']])
             </div>
+            <div class="col-12">
+                @include("$moduleName.pages.$controllerName.child_detail.list_img",['item' => $item['info_product']])
+            </div>
         </div>
     </div>
 </section>

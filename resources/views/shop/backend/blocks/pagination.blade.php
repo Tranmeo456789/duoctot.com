@@ -6,7 +6,7 @@
                 @if ( $paginator->currentPage() == 1)
                     <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
                 @else
-                    <li><a class="page-link" href="{{ $paginator->previousPageUrl() }}" rel="prev">&laquo;</a></li>
+                    <li><a class="page-link" href="{{ $paginator->appends(request()->query())->previousPageUrl() }}" rel="prev">&laquo;</a></li>
                 @endif
                 @php
                     $start = $paginator->currentPage() - 2; // show 3 pagination links before current
@@ -28,7 +28,7 @@
                     @if ($page == $paginator->currentPage())
                             <li class="page-item active"><span class="page-link">{{ $page }}</span></li>
                     @else
-                        <li class="page-item"><a class="page-link" href="{{ $paginator->url($page) }}">{{ $page }}</a></li>
+                        <li class="page-item"><a class="page-link" href="{{ $paginator->appends(request()->query())->url($page) }}">{{ $page }}</a></li>
                     @endif
                 @endfor
                 @if($end < $paginator->lastPage())
@@ -43,7 +43,7 @@
 
                 {{-- Next Page Link --}}
                 @if ($paginator->hasMorePages())
-                    <li class="page-item"><a class="page-link" href="{{ $paginator->nextPageUrl() }}" rel="next">&raquo;</a></li>
+                    <li class="page-item"><a class="page-link" href="{{ $paginator->appends(request()->query())->nextPageUrl() }}" rel="next">&raquo;</a></li>
                 @else
                     <li class="page-item disabled"><span>&raquo;</span></li>
                 @endif

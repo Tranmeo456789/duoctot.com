@@ -1,16 +1,18 @@
 @php
-    $img = 'selling1.png';
-    $classBackground =  'icon-product-round';
-    if (isset($featured) && $featured){
-        $img = 'lua1.png';
-        $classBackground =  'icon-product-featured';
+    $imgDefault = 'selling1.png';
+    $class =  'icon-product-round';
+    if (isset($img)){
+        $imgDefault=$img;
+    }
+    if(isset($classBackground)){
+        $class =  'icon-product-round '.$classBackground;
     }
 @endphp
-<div class="d-flex mb-3">
+<div class="d-flex mb-2 mb-lg-3 wp-title">
     <div class="d-flex align-items-center">
-        <div class="{{$classBackground}}">
-            <img src="{{asset('images/shop/' .  $img )}}" alt="">
+        <div class="{{$class}}">
+            <img src="{{asset('images/shop/' .  $imgDefault )}}" alt="">
         </div>
     </div>
-    <h4 class="mb-0">{{$title}}</h4>
+    <h4 class="mb-0 ml-2">{{$title}}</h4>
 </div>

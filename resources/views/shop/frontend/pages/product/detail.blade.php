@@ -110,8 +110,8 @@
 <div class="wp-inner mt-2">
     <div class="row">
         <div class="col-md-12">
-            <div class="new-view">
-            @include("$moduleName.templates.new_view")
+            <div>
+            @include("$moduleName.templates.list_product_new_view")
             </div>
         </div>
     </div>

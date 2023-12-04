@@ -37,7 +37,6 @@ class PrescripController extends ShopFrontEndController
         $details =[];
         if ($session->has('user')){
             $user = (new UsersModel())->getItem(['user_id'=>$session->get('user.user_id')],['task' => 'get-item']);
-            $details = $user->details->pluck('value','user_field')->toArray()??[];
         }
         $itemsProvince = (new ProvinceModel())->listItems(null,['task'=>'admin-list-items-in-selectbox']);
         $params['province_id'] = (isset($details['province_id']) && ($details['province_id']!=0))?$details['province_id']:((isset($user->province_id) && ($user->province_id != 0)) ? $user->province_id:0);
@@ -64,6 +63,9 @@ class PrescripController extends ShopFrontEndController
                $params['user_id']=$user->user_id;
                 
             }  
+            if ($request->has('name_store')) {
+                $params['user_sell'] = $request->input('name_store');
+            } 
             $this->model->saveItem($params,['task'=>'frontend-save-item']);
             $last_record = PrescripModel::latest('id')->first()->toArray();
             return redirect()->route('fe.prescrip.prescripCustomer', ['id' => $last_record['id']]);

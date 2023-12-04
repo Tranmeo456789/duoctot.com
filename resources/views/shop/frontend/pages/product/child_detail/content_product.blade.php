@@ -29,31 +29,6 @@
     </div>
     <div class="content-detail-product">
         {!!$item->general_info!!}
-        <h2 id="element-product">Thành phần</h2>
-        <table>
-            <thead>
-                <th class="pl-2 py-2">Thành phần</th>
-                <th class="text-right pr-2 py-2">Hàm lượng</th>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="pl-2 py-2">Nhung hươu</td>
-                    <td class="text-right pr-2 py-2">2,4mg</td>
-                </tr>
-                <tr>
-                    <td class="pl-2 py-2">Cao ban long</td>
-                    <td class="text-right pr-2 py-2">2,4mg</td>
-                </tr>
-                <tr>
-                    <td class="pl-2 py-2">Đỗ chi</td>
-                    <td class="text-right pr-2 py-2">2,4mg</td>
-                </tr>
-                <tr>
-                    <td class="pl-2 py-2">Hà thủ ô đỏ</td>
-                    <td class="text-right pr-2 py-2">2,4mg</td>
-                </tr>
-            </tbody>
-        </table>
         <h2 id="func-product" class="mt-2">Công dụng</h2>
         <p>{{$item->benefit}}</p>
         <h2 id="alternate-product" class="mt-2">Cách dùng</h2>

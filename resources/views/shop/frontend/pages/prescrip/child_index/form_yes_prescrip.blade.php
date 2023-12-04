@@ -1,3 +1,19 @@
+@php
+    use App\Helpers\Form as FormTemplate;
+    use App\Helpers\Template as Template;
+    use App\Helpers\MyFunction;
+    
+    $elements = [
+        [
+            'label'   => '',
+            'element' => Form::file('albumImage[]', array_merge($formInputAttr,['multiple'=>'multiple','accept'=>'image/*'])),
+            'fileAttach'   => (!empty($item['id'])) ? Template::showImageAttachPreview('prescrip', $item['albumImage'],$item['albumImageHash'], $item['id'],['btn' => 'delete']) : null ,
+            'type'    => "fileAttachPreview",
+            'widthInput' => 'col-12',
+        ]
+    ];
+@endphp
+
 <div class="tcy">
     <p>Để dược sĩ có đầy đủ thông tin tư vấn & xác nhận đơn hàng của quý khách.</p>
     <strong>Vui lòng nhập theo tên thuốc hoặc gửi ảnh chụp đơn thuốc:</strong>
@@ -23,8 +39,7 @@
             </div>
             <div class="tcy-upload-content text-center f-w-600">
                 <p>Gửi ảnh chụp đơn thuốc</p>
-                <input type="file" name="image" id="file" class="inputfile" />
-                <label for="file" class="btn btn-primary btn-sm border-r-1000">Thêm ảnh</label>
+                {!! FormTemplate::show($elements,$formInputWidth)  !!}
             </div>
         </div>
     </div>

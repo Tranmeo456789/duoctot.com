@@ -20,11 +20,11 @@
 </div>
 <div class="cbr py-2">
     <div class="wp-inner">
-        <div id="selling-product" class="search-result">
-            @include("$moduleName.pages.$controllerName.child_view.list_product_search")
+        <div class="search-result">
+            @include("$moduleName.templates.list_product",['items'=>$itemSearch])
         </div>
-        <div class="new-view">
-            @include("$moduleName.templates.new_view")
+        <div class="mt-2">
+            @include("$moduleName.templates.list_product_new_view")
         </div>  
     </div>
 </div>

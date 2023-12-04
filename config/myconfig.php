@@ -91,13 +91,15 @@
                 'price' => 'Giá bán thuốc (chưa VAT)',
                 'price_vat' => 'Giá bán thuốc (có VAT)',
                 'type_vat' => 'Loại VAT',
-                'packing' => 'Quy cách đóng gói',
+                'percent_discount'=>'Giảm giá(%)',
+                'expiration_date' => 'Hạn sử dụng',
                 'unit_id' => 'Đơn vị',
                 'amout_max' => 'Số lượng đặt hàng lớn nhất',
                 'inventory_min' => 'Số lượng tồn tối thiếu',
                 'type_price' => 'Loại giá bán hàng',
                 'general_info' =>'Thông tin chung',
                 'benefit' => 'Công dụng',
+                'elements'=>'Thành phần chính của thuốc',
                 'prescribe' => 'Chỉ định',
                 'dosage' => 'Cách dùng, liều lượng',
                 'note' => 'Lưu ý',
@@ -193,7 +195,8 @@
         'config' => [
             'search' => [
                 'default'  => ['name'],
-                'user' => ['email','fullname']
+                'user' => ['email','fullname'],
+                'product'=>['name'],
             ]
         ]
     ];

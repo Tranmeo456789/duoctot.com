@@ -1,20 +1,5 @@
-//slider
 $(document).ready(function() {
 
-    var feature_productcovid = $('#feature-product-wp.product_sellhome .list-item');
-    feature_productcovid.owlCarousel({
-        autoPlay: true,
-        navigation: true,
-        navigationText: false,
-        paginationNumbers: false,
-        pagination: false,
-        stopOnHover: true,
-        items: 6, //10 items above 1000px browser width
-        itemsDesktop: [1000, 4], //5 items between 1000px and 901px
-        itemsDesktopSmall: [800, 3], // betweem 900px and 601px
-        itemsTablet: [600, 2], //2 items between 600 and 0
-        itemsMobile: [375, 1] // itemsMobile disabled - inherit from itemsTablet option
-    });
     var feature_productcovid = $('#product-relate #feature-product-wp .list-item');
     feature_productcovid.owlCarousel({
         autoPlay: true,
@@ -146,24 +131,6 @@ $(document).ready(function() {
             $('.password input').attr('type', 'password');
         }
     });
-    //hien tra cuu order
-    // $('#search-order .btn-closenk').click(function() {
-    //     $('#search-order').css("display", "none");
-    //     $('.black-screen').css("display", "none");
-    //     $('.titlek').removeClass("fixed-hbd");
-    // });
-    // $('.search-history-order').click(function() {
-    //     $('#search-order').css("display", "block");
-    //     $('.black-screen').css("display", "block");
-    //     $('#container').addClass("fixed-hbd");
-    // });
-    // $('.container-menures').click(function () {
-    //     $('#search-order').css("display", "block");
-    //      $('.black-screen').css("display", "block");
-    //      $('#container').addClass("fixed-hbd");
-    // });
-
-    // validate form
     $('#check-rules').click(function() {
         if ($(this).prop("checked") == true) {
             $('#dang-ky #btn-register').prop("disabled", false);
@@ -199,15 +166,11 @@ $(document).ready(function() {
         $('#head-body-respon').addClass("slider");
 
     });
-    // $('.closem').click(function () {
-    //      //$('#fixscreen-respon').css("display", "none");
-    //     // $('#container').removeClass("fixed-hbd");
+    
+    // $(window).resize(function(event) {
     //     $('#head-body-respon').removeClass("slider");
+    //     $('#fixscreen-respon').css("display", "none");
     // });
-    $(window).resize(function(event) {
-        $('#head-body-respon').removeClass("slider");
-        $('#fixscreen-respon').css("display", "none");
-    });
 
     //xo danh muc cap 1
     $('.vissubmenu').click(function() {
@@ -379,41 +342,7 @@ jQuery.validator.addMethod("checknamecompany",
         return flag;
     }
 );
-// jQuery.validator.addMethod("checktaxcode",
-//     function() {
-//         var flag = true;
-//         var taxcode = $('#taxcode').val().trim();
-//         local_re = $('input[type="radio"][name="identity"]:checked').val();
-//         if (document.getElementById('reqexport').checked && local_re == 'Công ty') {
-//             if (taxcode.length > 0) {
-//                 flag = true;
-//             } else {
-//                 flag = false;
-//             }
-//         } else {
-//             flag = true;
-//         }
-//         return flag;
-//     }
-// );
-// jQuery.validator.addMethod("checkaddresscompany",
-//     function() {
-//         var flag = true;
-//         var addresscompany = $('#addresscompany').val().trim();
-//         local_re = $('input[type="radio"][name="identity"]:checked').val();
-//         if (document.getElementById('reqexport').checked && local_re == 'Công ty') {
-//             if (addresscompany.length > 0) {
-//                 flag = true;
-//             } else {
-//                 flag = false;
-//             }
-//         } else {
-//             flag = true;
-//         }
 
-//         return flag;
-//     }
-// );
 jQuery.validator.addMethod("checkname1",
     function() {
         var flag = true;

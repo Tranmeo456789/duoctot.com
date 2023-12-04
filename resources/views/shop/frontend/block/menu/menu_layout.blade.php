@@ -91,7 +91,7 @@
     </div>
     <div id="head-body-respon">
         <div class="tlogo-menu position-relative">
-            <div class="rimg-startm"><img src="{{asset('images/shop/logo_topbar2.png')}}" alt=""></div>
+            <div class="rimg-startm"><a href=""><img src="{{asset('images/shop/logo_topbar2.png')}}" alt=""></a></div>
             <div class="rimg-center closem" id="closem"><img src="{{asset('images/shop/closem.png')}}" alt=""></div>
         </div>
         @if((Session::has('user') && Session::get('user')['user_type_id'] != 9) || Session::get('user')==null)

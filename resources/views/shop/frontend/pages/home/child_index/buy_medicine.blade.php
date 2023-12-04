@@ -32,7 +32,6 @@
     <div class="text-center btn-buynn mb-3"><a href="{{route('fe.prescrip.index')}}">MUA THUỐC NGAY</a></div>
     <span>Hoặc mua qua hotline {{$hotline ?? '0393167234' }}</span>
 </div>
-
-<div class="mt-5 rimg-center">
+<div class="mt-3 mt-lg-5 rimg-center">
     <img src="{{asset('images/shop/baner.png')}}" alt="">
 </div>

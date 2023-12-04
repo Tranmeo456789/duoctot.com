@@ -173,12 +173,6 @@
         display: none;
     }
 
-    #selling-product.viewnproduct li {
-        min-height: 245px;
-    }
-    .list-product.viewnproduct li {
-        min-height: 245px;
-    }
     .info-tdoctor .list-info-tdoctor li {
         margin-right: 120px;
     }
@@ -280,7 +274,7 @@
         width: 31.93%;
     }
 
-    #selling-product li {
+    .ls_product li {
         width: 32.666%;
     }
     .list-product li {
@@ -297,17 +291,12 @@
         font-size: 22px;
         padding-top: 5px;
     }
-    #selling-product li:nth-child(5n) {
+    .ls_product li:nth-child(5n) {
         margin-right: 1%;
     }
 
-    #selling-product li:nth-child(3n) {
+    .ls_product li:nth-child(3n) {
         margin-right: 0px;
-    }
-
-    #selling-product h1 p {
-        font-size: 22px;
-        padding-top: 5px;
     }
 
     .service-tdoctor ul {
@@ -363,16 +352,8 @@
     .ipsp {
         display: none;
     }
-    .list-product .slect-customer {
-        margin-left: 20px;
-    }
-    #selling-product .slect-customer {
-        margin-left: 20px;
-    }
-    .list-product .slect-customer {
-        margin-left: 20px;
-    }
-    #selling-product .icon-product-round2 img {
+    
+    .icon-product-round2 img {
         width: 30px;
     }
 }
@@ -416,10 +397,6 @@
 
     .service-tdoctor li {
         flex-direction: column;
-    }
-
-    #selling-product h1 p {
-        font-size: 18px;
     }
 
     .service-tdoctor img {
@@ -583,24 +560,20 @@
     }
 
     .cat-product-out #body-nbox li,
-    #selling-product.viewnproduct li {
+    .viewnproduct li {
         width: 32.66%;
         margin-right: 1%;
         margin-bottom: 1%;
     }
 
     .cat-product-out #body-nbox li:nth-child(3n),
-    #selling-product.viewnproduct li:nth-child(3n) {
+    .viewnproduct li:nth-child(3n) {
         margin-right: 0;
     }
 
     .cat-product-out #body-nbox li:nth-child(4n),
-    #selling-product.viewnproduct li:nth-child(4n) {
+    .viewnproduct li:nth-child(4n) {
         margin-right: 1%;
-    }
-
-    .fitler-respon {
-        display: block;
     }
 
     .selectpp {
@@ -619,16 +592,8 @@
         margin-right: 8px;
     }
 
-    #selling-product .slect-customer span {
-        display: none;
-    }
-
     .medical-faculty {
         display: none;
-    }
-
-    #selling-product .slect-customer {
-        padding: 1px 1px;
     }
 
     #buy-medicine h1 {
@@ -683,11 +648,7 @@
         display: none;
     }
 
-    #selling-product .slect-customer {
-        margin-left: 0px;
-    }
-
-    #selling-product .icon-product-round2 img {
+    .icon-product-round2 img {
         width: 30px;
     }
 
@@ -703,15 +664,15 @@
         width: 48.5%;
     }
 
-    #selling-product li {
+    .ls_product li {
         width: 49.5%;
     }
 
-    #selling-product li:nth-child(3n) {
+    .ls_product li:nth-child(3n) {
         margin-right: 1%;
     }
 
-    #selling-product li:nth-child(2n) {
+    .ls_product li:nth-child(2n) {
         margin-right: 0px;
     }
 
@@ -834,6 +795,13 @@
     #site {
         overflow-x: hidden;
     }
+    .wp-slect-customer{
+        width: 100%;
+        overflow-x: scroll;
+    }
+    .wp-slect-customer .slect-customer{
+        width: 600px;
+    }
     .wp-detail-order .tab-header{
         padding: 10px;
     }
@@ -873,7 +841,7 @@
     .cart-null a {
         display: inline-block;
         margin-top: 20px;
-        padding: 8px 20px;
+        padding: 12px 20px;
         font-size: 16px;
         line-height: 10px;
     }
@@ -891,24 +859,20 @@
         font-size: 18px;
     }
 
-    .new-view {
-        padding: 5px 0px;
-    }
-
     .cat-product-out #body-nbox li,
-    #selling-product.viewnproduct li {
+    .viewnproduct li {
         width: 49.5%;
         margin-right: 1%;
         margin-bottom: 1%;
     }
 
     .cat-product-out #body-nbox li:nth-child(3n),
-    #selling-product.viewnproduct li:nth-child(3n) {
+    .viewnproduct li:nth-child(3n) {
         margin-right: 1%;
     }
 
     .cat-product-out #body-nbox li:nth-child(2n),
-    #selling-product.viewnproduct li:nth-child(2n) {
+    .viewnproduct li:nth-child(2n) {
         margin-right: 0;
     }
 
@@ -918,10 +882,6 @@
     }
     .set-screen-600 .nav-pills{
         width: 600px;
-    }
-
-    #selling-product.viewnproduct li {
-        height: 351px;
     }
 
     .content-commit-tdoctorrespon {
@@ -1156,23 +1116,16 @@
         height: 26px;
     }
 
-    #selling-product li {
-        height: 300px;
-    }
-
     .btn-form-submit {
-        padding: 0px 10px;
-        height: 30px;
+        height: 32px;
     }
 
     .form-info-buy {
         font-size: 16px;
     }
 
-    #selling-product li {
-
+    .ls_product li {
         padding: 10px 3px;
-
     }
 
     .hrflag {
@@ -1194,20 +1147,6 @@
     #qadoctor .setq {
         display: none;
     }
-
-    #selling-product .slect-customer {
-        font-size: 12px;
-        padding-top: 10px;
-    }
-
-    #selling-product .slect-customer .slect-item-customer:first-child {
-        margin-left: 0px;
-    }
-
-    #selling-product .slect-customer .slect-item-customer {
-        margin-right: 10px;
-        padding: 3px 5px;
-    }
 }
 
 @media screen and (max-width: 450px) {
@@ -1223,10 +1162,6 @@
         font-size: 18px;
         padding-top: 5px;
         margin-left: 10px;
-    }
-
-    #selling-product .slect-customer {
-        padding: 4px 0px;
     }
 
     .medical-faculty .lage-font {
@@ -1285,9 +1220,6 @@
 }
 
 @media screen and (max-width: 375px) {
-    #selling-product li {
-        height: 260px;
-    }
     .set-screen-375{
         width: 100%;
         overflow-x: scroll;
@@ -1301,7 +1233,7 @@
 }
 
 @media screen and (max-width: 300px) {
-    #selling-product li {
+    .ls_product li {
         width: 98%;
     }
 

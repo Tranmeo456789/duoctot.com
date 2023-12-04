@@ -52,9 +52,10 @@ class PrescripController extends BackEndController
         $ward_detail=(new WardModel())->getItem(['id'=>$item['ward_id']],['task' => 'get-item-full']);
         $ward=$ward_detail['name'];$district=$ward_detail['district']['name'];$province=$ward_detail['district']['province']['name'];
         $address=$item['address'].', '.$ward.', '.$district.', '.$province;
+        $albumImageCurrent=!empty($item['albumImageHash']) ? explode('|', $item['albumImageHash']) : [];
         $pageTitle ='Chi tiết đơn thuốc';
         return view($this->pathViewController .  'detail',
-                 compact('item','pageTitle','address'));
+                 compact('item','pageTitle','address','albumImageCurrent'));
     }
  
    

@@ -59,9 +59,11 @@ class ProductController extends ShopFrontEndController
         $params['user_sell']=$request->user_sell;
         $items=$this->model->listItems($params,['task' => 'list-items-search']);
         return view("$this->moduleName.pages.prescrip.child_index.ls_product_search",compact('items','keyword'));
-        //   $result = array(
-        //      'test'=>$items
-        //   );
-        //   return response()->json($result, 200);
+    }
+    public function loadMoreProducts(Request $request){
+        $data = $request->all();
+        $offset=$request->offset;
+        $listProductAddView = $this->model->listItems(['offset'=>$offset,'take'=>20], ['task' => 'frontend-list-items']);
+        return view("$this->moduleName.pages.home.child_index.ls_product_view_add",compact('listProductAddView','offset'));
     }
 }
