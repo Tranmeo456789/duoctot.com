@@ -431,6 +431,8 @@ li .wp-discount
     padding-left: 12px;
     padding-right: 12px;
     position: relative;
+    white-space: nowrap;
+    will-change: transform;
 }
 .icon-sticky{
     width: 0px;
@@ -461,7 +463,7 @@ li .wp-discount
     height: 1em;
     vertical-align: baseline;
 }
-.slect-customer .slect-item-customer>span{
+.slect-customer .slect-item-customer>p{
     color: #718198;
     font-size: 14px;
     line-height: 24px;

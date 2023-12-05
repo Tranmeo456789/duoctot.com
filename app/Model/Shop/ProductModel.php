@@ -206,7 +206,7 @@ class ProductModel extends BackEndModel
             $result = $query->pluck('name', 'id')->toArray();
         }
         if($options['task'] == "list-items-search") {
-            $query = $this::with('unitProduct')->select('id', 'name','image','price','unit_id');
+            $query = $this::with('unitProduct')->select('id','name','image','price','percent_discount','unit_id');
             if(isset($params['keyword'])){
                 $query->where('name','LIKE', "%{$params['keyword']}%");
             }

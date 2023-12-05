@@ -936,12 +936,21 @@ input[type="radio"] {
     font-size: 20px;
     padding: 15px 0px;
 }
-
+.slect-customer {
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
 .wp-search-menu {
     position: relative;
     padding-top: 20px;
     margin-left: 150px;
     width: 35%;
+}
+.note-video-clip{
+    width:100%;
+}
+.form-control.number-product{
+    padding: 0;
 }
 .price-old{
   color: #657384;

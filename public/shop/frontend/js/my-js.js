@@ -796,9 +796,26 @@ $(document).on('click', '.plus', function () {
     $(this).parents('.input-group').find('.number-product').change();
 });
 $(document).on('click', '.minus', function () {
-    qty = parseInt($(this).parents('.input-group').find('.number-product').val()) - 1;
-    $(this).parents('.input-group').find('.number-product').val(qty);
-    $(this).parents('.input-group').find('.number-product').change();
+    var numberProduct = parseInt($(this).parents('.input-group').find('.number-product').val());
+    if(numberProduct <= 1) {
+        qty=1;
+    }else{
+        qty = parseInt($(this).parents('.input-group').find('.number-product').val()) - 1;
+        $(this).parents('.input-group').find('.number-product').val(qty);
+        $(this).parents('.input-group').find('.number-product').change();
+    }
+});
+$(document).on('input', '.number-product', function () {
+    var inputValue = $(this).val();
+    if (isNaN(inputValue)) {
+        $(this).val(1);
+    } else {
+        if (inputValue < 1) {
+            $(this).val(1);
+        } else if (inputValue > 999) {
+            $(this).val(999);
+        }
+    }
 });
 $(document).on('click', '.delele-item-in-cart', function () {
 
@@ -964,8 +981,10 @@ $(document).on('click', ".black-screen", function (event) {
 $(document).on('keyup', ".wp-search .wp-input-search-simple>input", function (event) {
     var keyword = $(this).val();
     if(keyword=='' || keyword[0]==' '){
+        $('.btn-search').attr("disabled","disabled");
         $('.list-product-short').html("<div class='px-4 py-2'><p class='mb-3'>Bạn có thể tìm kiếm theo tên thuốc</p><img loading='lazy' decoding='async' alt='Tdoctor' src='../../images/shop/skeleton-product.png'></div>");
     }else{
+        $('.btn-search').removeAttr("disabled");
         var url = $(this).attr("data-href");
         var _token = $('input[name="_token"]').val();
         $.ajax({

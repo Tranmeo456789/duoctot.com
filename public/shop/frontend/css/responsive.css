@@ -783,13 +783,6 @@
     #site {
         overflow-x: hidden;
     }
-    .wp-slect-customer{
-        width: 100%;
-        overflow-x: scroll;
-    }
-    .wp-slect-customer .slect-customer{
-        width: 600px;
-    }
     .wp-detail-order .tab-header{
         padding: 10px;
     }
