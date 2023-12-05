@@ -943,7 +943,14 @@ input[type="radio"] {
     margin-left: 150px;
     width: 35%;
 }
-
+.price-old{
+  color: #657384;
+  text-decoration-line: line-through;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: .02em;
+}
 .wp-search-menu form {
     position: relative;
     z-index: 502;
