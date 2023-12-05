@@ -15,7 +15,7 @@
     @else
         <div class="px-4 py-2">
             <p class="mb-3">Bạn có thể tìm kiếm theo tên thuốc</p>
-            <img loading="lazy" decoding="async" alt="Tdoctor" src="https://nhathuoclongchau.com.vn/estore-images/static/others/skeleton-product.png">
+            <img loading="lazy" decoding="async" alt="Tdoctor" src="{{asset('images/shop/skeleton-product.png')}}">
         </div>
     @endisset
 </div>

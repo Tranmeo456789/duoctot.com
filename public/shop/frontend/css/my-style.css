@@ -948,7 +948,52 @@ input[type="radio"] {
     position: relative;
     z-index: 502;
 }
-
+.element-input-search{
+    position: relative;
+    z-index: 502;
+    display: flex;
+    align-items: center;
+}
+.element-input-search .wp-input-search-simple{
+    width: 100%;
+    padding: 0 10px;
+}
+.element-input-search{
+    background: white;
+    border-radius: 100px;
+}
+.element-input-search input{
+    background: white;
+    min-height: 40px;
+    border-radius: 100px;
+}
+.element-input-search .btn-search{
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    background-color: #c1d0f6;;
+    border-color: #c1d0f6;
+    color: #1250dc;
+    font-weight: 500;
+    height: 28px;
+    width: 28px;
+    margin-right: 0.25rem;
+    margin-left: 0.25rem;
+    border-radius: 50px !important;
+}
+.element-input-search .btn-search>span{
+    border: 0 solid #e5e7eb;
+    color: #1250dc;
+}
+.element-input-search .btn-search>span svg{
+    width: 16px;
+    height: 16px;
+}
+.wp-search .element-input-search{
+    background: #edf0f3;
+}
 .form-search-inner form {
     position: relative;
     z-index: 502;
@@ -1177,6 +1222,7 @@ input[type="radio"] {
     background: #edf0f3;
     border-radius: 100px;
 }
+
 .wp-search .wp-input-search-simple input{
     background: #edf0f3;
     min-height: 40px;
@@ -1188,6 +1234,7 @@ input[type="radio"] {
     padding: 4px 7px;
     height: auto;
 }
+
 .wp-search .wp-search-menu .wp-btn-search .btn-search-home>img {
     width: 20px;
 }

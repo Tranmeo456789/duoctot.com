@@ -29,8 +29,8 @@ class CatController extends ShopFrontEndController
         $itemCatParent=(new CatProductModel)->getItem(['parent_id'=>$itemCatCurent['parent_id']],['task'=>'get-item-parent']);
         if($slug=='thuoc' && $slug1=='tra-cuu-thuoc'){
             $productAlls = (new ProductModel())->listItems(['limit'=>20], ['task' => 'frontend-list-items-simple']);
-            //return $productAlls;
-            return view($this->pathViewController . 'view_search_product', compact('productAlls','itemCatParent','itemCatCurent'));
+            $viewNoSearchHeader=true;
+            return view($this->pathViewController . 'view_search_product', compact('productAlls','itemCatParent','itemCatCurent','viewNoSearchHeader'));
         }
         return view($this->pathViewController . 'cat_level2', compact('itemCatCurent','products','itemCatParent'));
     }

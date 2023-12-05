@@ -17,6 +17,9 @@
         width: 100%;
         overflow: auto;
     }
+    .presp {
+        padding-bottom: 0.5rem;
+    }
     .wp-list-alphabet .list-alphabet{
         width: 1200px;
     }
@@ -356,9 +359,6 @@
         min-height: 280px;
     }
 
-    .ipsp {
-        display: none;
-    }
     
     .icon-product-round2 img {
         width: 30px;
@@ -370,6 +370,9 @@
         margin-top: 20px;
     }
     .search-product .wp-search-menu {
+        width: 100%;
+    }
+    .element-input-search{
         width: 100%;
     }
     .newsh .news-content-left {
@@ -689,33 +692,6 @@
         display: none;
     }
 
-    .ipsp {
-        display: block;
-        position: relative;
-    }
-
-    .ipsp input {
-        width: 100%;
-        height: 40px;
-        text-indent: 45px;
-        font-size: 20px;
-        background: #FFFFFF;
-        border: 1px solid #98FAFB;
-        border-radius: 40px;
-    }
-
-    .ipsp img {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        left: 12px;
-        width: 28px;
-    }
-
-    .presp {
-        padding-bottom: 20px;
-    }
-
     #service-doctor .list_servicetdoctor li {
         padding: 30px 15px;
         width: 30%;
@@ -819,6 +795,9 @@
     }
     .wp-detail-order .wp-content .top-tab-order h4{
         font-size: 16px;
+    }
+    .element-input-search input{
+        min-height: 35px;
     }
     .font-size-600-14{
         font-size: 14px!important;
@@ -1006,16 +985,6 @@
         color: black;
     }
 
-    .ipsp input {
-        width: 100%;
-        height: 37px;
-        font-size: 18px;
-
-    }
-
-    .ipsp img {
-        width: 26px;
-    }
 
     .owl-pagination {
         display: none;
@@ -1204,18 +1173,6 @@
 
     #buy-medicine ul li img {
         width: 40px;
-    }
-
-    .ipsp input {
-        width: 100%;
-        height: 30px;
-        font-size: 16px;
-        text-indent: 35px;
-    }
-
-    .ipsp img {
-        width: 20px;
-        left: 9px;
     }
 
     #service-doctor .list_servicetdoctor li {

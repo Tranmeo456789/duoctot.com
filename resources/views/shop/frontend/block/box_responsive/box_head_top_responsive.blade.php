@@ -40,8 +40,9 @@
             </ul>
         </div>
     </div>
-    <div class="ipsp">
-        <input type="text" placeholder="Nhập tìm thuốc, TPCN, bệnh lý ...">
-        <div class="rimg-center"></div><img src="{{asset('images/shop/icsp.png')}}" alt="">
-    </div>
+    @if(!isset($viewNoSearchHeader))
+        <div class="search-header-mobi">
+            @include("$moduleName.block.input_search")
+        </div>
+    @endif
 </div>

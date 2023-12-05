@@ -909,7 +909,7 @@ $(document).on('keyup', ".input-search-info", function (event) {
     }else{
         $('.btn-search-home').removeAttr("disabled");
     }      
-    $('.ipsp > input').val(keyword);
+    $('.search-header-mobi .wp-input-search-simple>input').val(keyword);
 });
 $(document).on('click', ".wp-input-search input", function (event) {
     $('.lc-mask-search').css("opacity", 1);
@@ -919,7 +919,7 @@ $(document).on('click', ".wp-input-search input", function (event) {
     $("HTML, BODY").animate({ scrollTop: position }, 500);
 });
 
-$(document).on('click', ".ipsp", function (event) {
+$(document).on('click', ".search-header-mobi .wp-input-search-simple", function (event) {
     $('#box-search-fixed').css("display", "block");
     $('#box-search-fixed .input-search-info').focus();
 });
@@ -949,23 +949,23 @@ $(document).on('click', ".delete-history-keyword", function (event) {
         },
     }); 
 });
-$(".wp-search-menu .input-search-small>input").focus(function() {
+$(document).on('click', ".wp-search .wp-input-search-simple>input", function (event) {
     $(".black-screen").css("display", "block");
     $(".wp-list-product-short").css("display", "block");
     $(".wp-search-menu form").css("z-index", 504);
-    if ($(window).width() < 768) {
-        const position = $(".wp-search-menu").offset().top;
-        $("HTML, BODY").animate({ scrollTop: position }, 100);
-    }
+    const position = $("#wp-search").offset().top;
+    $("HTML, BODY").animate({ scrollTop: position },0);
 });
 $(document).on('click', ".black-screen", function (event) {
     $(".black-screen").css("display", "none");
     $(".wp-list-product-short").css("display", "none");
     $(".wp-search-menu form").css("z-index", 502);
 });
-$(document).on('keyup', ".wp-input-search-simple>input", function (event) {
+$(document).on('keyup', ".wp-search .wp-input-search-simple>input", function (event) {
     var keyword = $(this).val();
-    if(keyword!='' || keyword[0]!=' '){
+    if(keyword=='' || keyword[0]==' '){
+        $('.list-product-short').html("<div class='px-4 py-2'><p class='mb-3'>Bạn có thể tìm kiếm theo tên thuốc</p><img loading='lazy' decoding='async' alt='Tdoctor' src='../../images/shop/skeleton-product.png'></div>");
+    }else{
         var url = $(this).attr("data-href");
         var _token = $('input[name="_token"]').val();
         $.ajax({
@@ -980,6 +980,6 @@ $(document).on('keyup', ".wp-input-search-simple>input", function (event) {
             success: function(data) {
                 $('.wp-list-product-short').html(data);
             },
-            });     
-        }
+        });    
+    }
 });
