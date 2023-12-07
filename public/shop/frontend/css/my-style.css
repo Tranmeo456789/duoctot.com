@@ -959,6 +959,7 @@ input[type="radio"] {
   font-size: 12px;
   line-height: 16px;
   letter-spacing: .02em;
+  min-height: 16px;
 }
 .wp-search-menu form {
     position: relative;

@@ -27,7 +27,7 @@ class UnitModel extends BackEndModel
             if (isset($params['arrID'])){
                 $query->whereIn('id', $params['arrID']);
             }
-            $result = $query->orderBy('name', 'asc')
+            $result = $query->orderBy('id', 'asc')
                             ->pluck('name', 'id')->toArray();
         }
         return $result;

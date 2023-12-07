@@ -14,9 +14,11 @@
                     <p class="truncate3">{{$val['name']}}</p>
                 </div>
                 <span class="text-info">{{ number_format( $val['price'], 0, "" ,"." )}}đ / {{$val->unitProduct->name}}</span></span>
-                @if(!empty($val['percent_discount']))
-                    <div class="price-old">{{ number_format( $priceOld, 0, "" ,"." )}}đ</div>
-                @endif
+                <div class="price-old">
+                    @if(!empty($val['percent_discount']))
+                        {{ number_format( $priceOld, 0, "" ,"." )}}đ
+                    @endif
+                </div>
             </div>
         </a>
         <div class="unit-top">{{$val->unitProduct->name}}</div>
