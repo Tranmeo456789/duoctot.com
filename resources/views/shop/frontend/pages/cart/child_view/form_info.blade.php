@@ -127,16 +127,16 @@
     ];
     $elementChoosePharmacy = [
         [
-            'label' => Form::label('', 'Nhận tại nhà thuốc',$formLabelAttr),
-            'element' => Form::radio('delivery_method', '1',true),
+            'label' => Form::label('delivery_method1', 'Nhận tại nhà thuốc', $formLabelAttr),
+            'element' => Form::radio('delivery_method', '1', true, ['id' => 'delivery_method1']),
             'type' =>'inline-text-right',
-            'widthElement' => 'col-12 col-md-5',
+            'widthElement' => 'col-6 col-md-5',
             'styleFormGroup' => 'mb-1',
         ],[
-            'label' => Form::label('', 'Giao hàng tận nơi',$formLabelAttr),
-            'element' => Form::radio('delivery_method', '2',false),
+            'label' => Form::label('delivery_method2', 'Giao hàng tận nơi',$formLabelAttr),
+            'element' => Form::radio('delivery_method', '2',false, ['id' => 'delivery_method2']),
             'type' =>'inline-text-right',
-            'widthElement' => 'col-12 col-md-5',
+            'widthElement' => 'col-6 col-md-5',
             'styleFormGroup' => 'mb-1',
         ]
     ];

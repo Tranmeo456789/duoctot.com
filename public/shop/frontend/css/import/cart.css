@@ -313,6 +313,7 @@
     display: inline-block;
     margin-bottom: 10px;
     cursor: pointer;
+    user-select: none;
 }
 
 #dcshop-error {

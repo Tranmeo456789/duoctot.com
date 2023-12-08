@@ -1,7 +1,7 @@
 @foreach($items as $val)
     @php
         if(!empty($val['percent_discount'])){
-            $priceOld=$val['price']*(1-$val['percent_discount']/100);
+            $priceOld=$val['price']*(1+$val['percent_discount']/100);
         }
     @endphp
     <li class="position-relative">
