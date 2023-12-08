@@ -170,9 +170,20 @@ class Template {
             <div class='input-group'>
                 <span class='input-group-btn'>
                     <a id='$btn' data-input='$name' data-preview='$thumb' class='btn btn-primary'>
-                        <i class='fa fa-picture-o'></i> Chọn ảnh
+                        <i class='fa fa-picture-o'></i> Chọn ảnh từ file
                     </a>
                 </span>
+                <input id='$name' class='form-control' name='$name' type='hidden' value='$filePath'>
+            </div>
+            <img id='$thumb' style='margin-top:15px;max-height:100px;' src='$src'>
+        ";
+        return $xhtml;
+    }
+    public static function showImageAndInputSingle($name,$filePath='',$params=[]){
+        $thumb = $name . '-thumb';
+        $src = ($filePath)?asset($filePath):'';
+        $xhtml = "
+            <div class='input-group'>
                 <input id='$name' class='form-control' name='$name' type='hidden' value='$filePath'>
             </div>
             <img id='$thumb' style='margin-top:15px;max-height:100px;' src='$src'>

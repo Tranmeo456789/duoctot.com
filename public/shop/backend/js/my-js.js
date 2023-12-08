@@ -484,3 +484,41 @@ $(document).on('keypress', "input[name='search_value']", function(event) {
         $("button#btn-search").click();
     }
 });
+function showModal() {
+    $('#imageModal').modal('show');
+    $('body').addClass('modal-open-overlay');
+}
+function hideModal() {
+    $('#imageModal').modal('hide');
+    $('body').removeClass('modal-open-overlay');
+}
+$('.label-select-image').click(function() {
+    showModal();
+});
+$('#imageModal .close').click(function() {
+    hideModal();
+});
+$('#imageModal').click(function(event) {
+    if ($(event.target).hasClass('modal')) {
+        hideModal();
+    }
+});
+$(document).on('input', "#imageUrlThumb", function(event) {
+    $('.btn-insert-url-thumb').prop('disabled', $(this).val().trim() === '');
+});
+$(document).on('mouseup', "#btn-image", function(event) {
+    hideModal();
+});
+$(document).on('click', '.btn-insert-url-thumb', function(event) {
+    var imageUrl = $('#imageUrlThumb').val().trim();
+    if (imageUrl !== '') {
+        $('#image').val(imageUrl);
+        $('#image-thumb').attr('src', imageUrl);
+        $('#image-thumb').show();
+        $('.help-block').hide();
+        $('#imageModal').modal('hide');
+    } else {
+        $('#image-thumb').hide();
+        $('.help-block').text('Vui lòng nhập đường dẫn hình ảnh.').show();
+    }
+});

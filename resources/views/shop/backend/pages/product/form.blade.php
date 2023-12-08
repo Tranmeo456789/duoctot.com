@@ -156,12 +156,13 @@
     $elements = array_merge($elements,
         [
             [
-                'label' => '',
-                'element' =>'',
-                'widthElement' => 'col-12',
-            ],[
-                'label'   => Form::label('image','Ảnh đại diện', ['class' => 'col-1 col-form-label']),
-                'element' => Template::createFileManager('image', $item['image']?? null),
+                'label'   => Form::label('','Ảnh đại diện', ['class' => 'col-1 col-form-label']),
+                'element' => Form::label('','Chọn ảnh', ['class' => 'btn btn-primary label-select-image']),
+                'widthInput' => '',
+            ],
+            [
+                'label'   => '',
+                'element' => Template::showImageAndInputSingle('image', $item['image']?? null),
                 'widthInput' => 'col-11',
             ],[
                 'label'   => Form::label('albumImage', 'Album ảnh', ['class' => 'col-1 col-form-label']),
@@ -226,6 +227,7 @@
                 </div>
             </div>
         </div>
+        @include ("$moduleName.pages.product.child_form.modal_img")
     </div>
 </section>
 @endsection
