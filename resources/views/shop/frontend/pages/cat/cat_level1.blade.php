@@ -18,7 +18,7 @@
                             @include("$moduleName.pages.$controllerName.child_cat_level1.list_cat_child_responsive")
                         </div>
                     </div>
-                    <div id="productsl" class="mt-5 p-4">
+                    <div>
                         @include("$moduleName.pages.$controllerName.partial.product_selling")
                     </div>
                     <div class="cat-product-out mt-5">

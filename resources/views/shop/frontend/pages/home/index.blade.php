@@ -26,10 +26,14 @@
         @include("$moduleName.pages.$controllerName.child_index.buy_medicine")
     </div>
 </div>
-<div class="product-backround  mt-3 mt-lg-5 py-4">
-    <div class="wp-inner">
-        @include("$moduleName.templates.box_title_product",['title' => 'Sản phẩm mới','classBackground'=>'bg-danger'])
-        @include("$moduleName.templates.list_product",['items'=>$itemsProduct['new']])
+<div id="feature-product-wp">
+    <div class="product-backround  mt-3 mt-lg-5 py-4">
+        <div class="wp-inner">
+            @include("$moduleName.templates.box_title_product",['title' => 'Sản phẩm mới','classBackground'=>'bg-danger'])
+            <ul class="list-item">
+                @include("$moduleName.partial.product",['items'=>$itemsProduct['new']])
+            </ul>
+        </div>
     </div>
 </div>
 <div class="wp-inner mt-3 mt-lg-5">

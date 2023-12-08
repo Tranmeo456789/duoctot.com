@@ -15,7 +15,7 @@
                     <div id="cat_detail" class="">
                         @include("$moduleName.pages.$controllerName.child_cat_level2.list_cat_child")
                     </div>
-                    <div id="productsl" class="mt-5 p-4">
+                    <div>
                         @include("$moduleName.pages.$controllerName.partial.product_selling")
                     </div>
                     <div class="cat-product-out mt-5">

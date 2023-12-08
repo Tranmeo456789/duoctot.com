@@ -682,11 +682,23 @@ input:checked+.slider:before {
 
 #feature-product-wp .list-item li {
     border-radius: 10px;
-    min-height: 280px;
     background: #fff;
     margin-right: 5px;
+    padding: 10px 3px;
 }
-
+#feature-product-wp .list-item li .wp-img-thumb-product {
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#feature-product-wp .list-item.owl-carousel .owl-wrapper-outer{
+    max-height: max-content;
+}
+#feature-product-wp .list-item .wp-name-product {
+    height: 58px;
+    line-height: 18px;
+}
 #feature-product-wp .list-item li p {
     color: #000;
 }
