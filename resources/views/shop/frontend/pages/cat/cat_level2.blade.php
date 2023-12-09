@@ -9,17 +9,17 @@
                     </div>
                 </div>
                 <div class="col-xl-3 trademark">
-                    @include("$moduleName.pages.$controllerName.partial.listbox_select")
+                    @include("$moduleName.pages.$controllerName.templates.listbox_select")
                 </div>
                 <div class="col-12 col-xl-9">
                     <div id="cat_detail" class="">
                         @include("$moduleName.pages.$controllerName.child_cat_level2.list_cat_child")
                     </div>
                     <div>
-                        @include("$moduleName.pages.$controllerName.partial.product_selling")
+                        @include("$moduleName.pages.$controllerName.templates.product_selling")
                     </div>
                     <div class="cat-product-out mt-5">
-                        @include("$moduleName.pages.$controllerName.partial.product_highlight")
+                        @include("$moduleName.pages.$controllerName.templates.product_highlight")
                     </div>
                 </div>
             </div>

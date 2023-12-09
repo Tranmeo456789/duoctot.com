@@ -751,11 +751,13 @@ $(document).on('click', ".view-btn-add-product", function (event) {
     var offset = parseInt($(this).data("offset"));
     offset += 20;
     $(this).data("offset", offset);
+    console.log("Offset updated:", offset);
     var url = $(this).attr("data-href");
     var _token = $('input[name="_token"]').val();
+    var type = $(this).attr("data-type");
+    var idCat = $(this).attr("data-idcat");
     var currentElement = $(this); 
     var currentCount = parseInt($(this).find(".visibility-number-product").text().trim());
-    $(this).find(".visibility-number-product").text(currentCount - 20);
     if (currentCount - 20 < 1) {
         $(".view-btn-add-product").hide();
     }
@@ -766,10 +768,15 @@ $(document).on('click', ".view-btn-add-product", function (event) {
         dataType: 'html',
         data: {
             offset: offset,
+            type: type,
+            idCat: idCat,
             _token: _token,
         },
         success: function(data) {
-            var listProductContainer = currentElement.closest('.parent-btn-view-add').find('ul.ls_product');
+            $(".visibility-number-product").text(function(index, text) {
+                return Math.max(parseInt(text) - 20, 0);
+            });
+            var listProductContainer = currentElement.closest('.parent-btn-view-add').find('ul.ls_product-view-add');
             listProductContainer.append(data);
         },
     }); 

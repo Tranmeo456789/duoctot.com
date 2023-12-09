@@ -69,8 +69,20 @@ class ProductController extends ShopFrontEndController
     }
     public function loadMoreProducts(Request $request){
         $data = $request->all();
-        $offset=$request->offset;
-        $listProductAddView = $this->model->listItems(['offset'=>$offset,'take'=>20], ['task' => 'frontend-list-items']);
-        return view("$this->moduleName.partial.product",['items'=>$listProductAddView]);
-    }
+        $offset = $request->offset;
+        $listParams = ['offset' => $offset, 'take' => 20];
+        if ($type = $data['type'] ?? null) {
+            $listParams['cat_product_id'] = $data['idCat'] ?? null;
+        }
+        $listProductAddView = $this->model->listItems($listParams, ['task' => 'frontend-list-items']);
+        $viewName = $this->moduleName;
+        if ($type == 'product_cat_horizontal') {
+            $viewName .= '.pages.cat.partial.product_horizontal';
+        } elseif ($type == 'product_cat') {
+            $viewName .= '.pages.cat.partial.product';
+        } else {
+            $viewName .= '.partial.product';
+        }
+        return view($viewName, ['items' => $listProductAddView]);
+        }
 }

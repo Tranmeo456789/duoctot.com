@@ -9,7 +9,7 @@
                     </div>
                 </div>
                 <div class="col-xl-3 trademark">
-                    @include("$moduleName.pages.$controllerName.partial.listbox_select")
+                    @include("$moduleName.pages.$controllerName.templates.listbox_select")
                 </div>
                 <div class="col-xl-9 col-12">
                     <div class="product-of-cat">
@@ -19,10 +19,10 @@
                         </div>
                     </div>
                     <div>
-                        @include("$moduleName.pages.$controllerName.partial.product_selling")
+                        @include("$moduleName.pages.$controllerName.templates.product_selling")
                     </div>
                     <div class="cat-product-out mt-5">
-                        @include("$moduleName.pages.$controllerName.partial.product_highlight")
+                        @include("$moduleName.pages.$controllerName.templates.product_highlight")
                     </div>
                 </div>
             </div>

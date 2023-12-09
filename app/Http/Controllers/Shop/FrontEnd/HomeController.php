@@ -26,7 +26,7 @@ class HomeController extends ShopFrontEndController
         $product=(new ProductModel())->listItems(['type'=>'tre_em','limit'=>10], ['task' => 'frontend-list-items']);
         $itemsProduct['new'] = (new ProductModel())->listItems(['type'=>'new','limit'=>10], ['task' => 'frontend-list-items-by-type']);
         $couterSumProduct=(new ProductModel())->countItems(null, ['task' => 'count-items-all-product-frontend']);
-        $couterSumProduct=$couterSumProduct[0]['count'];
+        $couterSumProduct=$couterSumProduct[0]['count']-20;
         return view(
             $this->pathViewController . 'index',
             compact('product_selling','product_covid','product','itemsProduct','couterSumProduct')

@@ -36,7 +36,7 @@
                         </div>
                         <div class="info-product ml-1">
                             <p class="text-primary font-weight-bold mb-1">{!! $name !!}</p>
-                            <p mb-1>Mã: {{$val->code}}</p>
+                            <p mb-1>Giá: {{ number_format( $val->price, 0, "" ,"." )}}đ</p>
                         </div>
                     </div>
                 </td>
