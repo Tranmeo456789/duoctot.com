@@ -37,14 +37,9 @@
     </div>
 </div>
 <div class="wp-inner mt-3 mt-lg-5">
-    <div id="selling-product">
+    <div id="selling-product" class="parent-btn-view-add">
         @include("$moduleName.pages.$controllerName.child_index.best_selling_product")
-    </div>
-    <div id="ls-product-view-add">
-        @include("$moduleName.pages.$controllerName.child_index.ls_product_view_add")
-    </div>
-    <div class="text-center mt-3">
-        <span class="view-add-product" data-offset="20" data-href="{{route('fe.product.loadMoreProducts')}}">Xem thêm(20 sp)</span>
+        @include("$moduleName.block.btn_view_add",['countProduct'=>$couterSumProduct])
     </div>
 </div>
 @if(count($product_covid)>0)

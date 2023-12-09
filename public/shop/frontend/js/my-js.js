@@ -743,17 +743,22 @@ $(document).on('click', ".view-detail-order", function (event) {
             _token: _token,
         },
         success: function(data) {
-            //console.log(data['test']['fullname']);
             $('.wp-detail-order').html(data);
         },
     }); 
 });
-$(document).on('click', ".view-add-product", function (event) {
-    var offset = $(this).data("offset");
+$(document).on('click', ".view-btn-add-product", function (event) {
+    var offset = parseInt($(this).data("offset"));
     offset += 20;
     $(this).data("offset", offset);
     var url = $(this).attr("data-href");
     var _token = $('input[name="_token"]').val();
+    var currentElement = $(this); 
+    var currentCount = parseInt($(this).find(".visibility-number-product").text().trim());
+    $(this).find(".visibility-number-product").text(currentCount - 20);
+    if (currentCount - 20 < 1) {
+        $(".view-btn-add-product").hide();
+    }
     $.ajax({
         url: url,
         cache: false,
@@ -764,7 +769,8 @@ $(document).on('click', ".view-add-product", function (event) {
             _token: _token,
         },
         success: function(data) {
-            $('#ls-product-view-add').append(data);
+            var listProductContainer = currentElement.closest('.parent-btn-view-add').find('ul.ls_product');
+            listProductContainer.append(data);
         },
     }); 
 });

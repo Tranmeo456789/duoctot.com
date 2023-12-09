@@ -71,6 +71,6 @@ class ProductController extends ShopFrontEndController
         $data = $request->all();
         $offset=$request->offset;
         $listProductAddView = $this->model->listItems(['offset'=>$offset,'take'=>20], ['task' => 'frontend-list-items']);
-        return view("$this->moduleName.pages.home.child_index.ls_product_view_add",compact('listProductAddView','offset'));
+        return view("$this->moduleName.partial.product",['items'=>$listProductAddView]);
     }
 }

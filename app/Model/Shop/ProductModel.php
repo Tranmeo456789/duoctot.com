@@ -303,6 +303,14 @@ class ProductModel extends BackEndModel
 
             $result = $query->get()->toArray();
         }
+         if($options['task'] == 'count-items-all-product-frontend') {
+            $query = $this::groupBy('status_product')
+                    ->select(DB::raw('status_product, COUNT(id) as count'))
+                    ->where('id', '>', 1)
+                    ->where('status_product', 'da_duyet');
+
+            $result = $query->get()->toArray();
+        }
         if ($options['task'] == "count-number-product-in-cat") {
             $query = $this::select('id','name')
                             ->where('status_product','da_duyet')

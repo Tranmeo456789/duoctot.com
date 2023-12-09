@@ -20,13 +20,16 @@ class HomeController extends ShopFrontEndController
     }
     public function index(Request $request)
     {
-        $product_selling = (new ProductModel())->listItems(null, ['task' => 'frontend-list-items'])->take(20);
+        $numTake=20;
+        $product_selling = (new ProductModel())->listItems(null, ['task' => 'frontend-list-items'])->take($numTake);
         $product_covid=(new ProductModel())->listItems(['type'=>'hau_covid','limit'=>10], ['task' => 'frontend-list-items-by-type']);
         $product=(new ProductModel())->listItems(['type'=>'tre_em','limit'=>10], ['task' => 'frontend-list-items']);
         $itemsProduct['new'] = (new ProductModel())->listItems(['type'=>'new','limit'=>10], ['task' => 'frontend-list-items-by-type']);
+        $couterSumProduct=(new ProductModel())->countItems(null, ['task' => 'count-items-all-product-frontend']);
+        $couterSumProduct=$couterSumProduct[0]['count'];
         return view(
             $this->pathViewController . 'index',
-            compact('product_selling','product_covid','product','itemsProduct')
+            compact('product_selling','product_covid','product','itemsProduct','couterSumProduct')
         );
     }
     public function ajaxHoverCatLevel1(Request $request)
