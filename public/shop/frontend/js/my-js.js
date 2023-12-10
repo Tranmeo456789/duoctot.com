@@ -749,9 +749,6 @@ $(document).on('click', ".view-detail-order", function (event) {
 });
 $(document).on('click', ".view-btn-add-product", function (event) {
     var offset = parseInt($(this).data("offset"));
-    offset += 20;
-    $(this).data("offset", offset);
-    console.log("Offset updated:", offset);
     var url = $(this).attr("data-href");
     var _token = $('input[name="_token"]').val();
     var type = $(this).attr("data-type");
@@ -776,6 +773,8 @@ $(document).on('click', ".view-btn-add-product", function (event) {
             $(".visibility-number-product").text(function(index, text) {
                 return Math.max(parseInt(text) - 20, 0);
             });
+            offset += 20;
+            currentElement.attr("data-offset", offset);
             var listProductContainer = currentElement.closest('.parent-btn-view-add').find('ul.ls_product-view-add');
             listProductContainer.append(data);
         },

@@ -15,10 +15,12 @@
     $inputFileDel     = isset($item['id'])?Form::hidden('file-del'):'';
     $formSelect2Attr  = config('myconfig.template.form_element.select2');
     $itemsTypeProduct = config('myconfig.template.type_product');
+    $randomNumber = str_pad(mt_rand(1, 999999), 6, '0', STR_PAD_LEFT);
+    $codeProduct = 'SP' . $randomNumber;
     $elements = [
         [
             'label'   => HTML::decode(Form::label('code', 'Mã thuốc' .  $star, $formLabelAttr)),
-            'element' => Form::text('code', $item['code']??null, array_merge($formInputAttr,['placeholder'=>'Mã thuốc'])),
+            'element' => Form::text('code', $item['code']??$codeProduct, array_merge($formInputAttr,['placeholder'=>'Mã thuốc'])),
             'widthElement' => 'col-3'
         ],[
             'label'   => HTML::decode(Form::label('name', 'Tên thuốc' .  $star, $formLabelAttr)),

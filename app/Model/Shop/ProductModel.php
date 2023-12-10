@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Model\Shop\BackEndModel;
 use App\Model\Shop\WarehouseModel;
 use App\Model\Shop\CatProductModel;
-use App\Model\Shop\Size;
+use App\Helpers\HttpClient;
 use Illuminate\Support\Str;
 use DB;
 class ProductModel extends BackEndModel
@@ -388,6 +388,34 @@ class ProductModel extends BackEndModel
             self::where('id', $params['id'])->update(['status_product' => $params['status_product']]);
         }
     }
+    public function uploadToImgBB($imageUrl)
+    {
+        $apiKey = '859e29f6b43b74159e2097b463992b32';
+        $imgBBUrl = 'https://api.imgbb.com/1/upload';
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $imgBBUrl . '?expiration=600&key=' . $apiKey);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        $fileContents = file_get_contents($imageUrl);
+        $postData = array('image' => base64_encode($fileContents));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+        $response = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        if ($err) {
+            echo 'cURL Error: ' . $err;
+            return null;
+        } else {
+            $responseData = json_decode($response, true);
+            if (isset($responseData['data']['url'])) {
+                return $responseData['data']['url'];
+            } else {
+                echo 'Error from imgBB: ' . print_r($responseData, true);
+                return null;
+            }
+        }
+    }
+
     public function deleteItem($params = null, $options = null)
     {
         if($options['task'] == 'delete-item') {
