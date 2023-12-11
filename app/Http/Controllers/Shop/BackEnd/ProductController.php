@@ -122,10 +122,10 @@ class ProductController extends BackEndController
                 $task   = "edit-item";
                 $notify = "Cập nhật $this->pageTitle thành công!";
             }
-            $urlImgBB=$this->model->uploadToImgBB($params['image']);
-            if ($urlImgBB) {
-                $params['image'] = $urlImgBB;
-            }
+            // $urlImgBB=$this->model->uploadToImgBB($params['image']);
+            // if ($urlImgBB) {
+            //     $params['image'] = $urlImgBB;
+            // }
             $this->model->saveItem($params, ['task' => $task]);
             $request->session()->put('app_notify', $notify);
             if(Session::get('user')['is_admin'] == 1 || Session::get('user')['is_admin'] == 2){
