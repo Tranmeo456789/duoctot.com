@@ -19,7 +19,6 @@
     $formInputWidth['widthInput']  =  'col-12';
     $inputHiddenID    = Form::hidden('user_id', $item['user_id']??null);
     $inputHiddenTask    = Form::hidden('task', 'update-item');
-    $details = $item->details->pluck('value','user_field')->toArray()??[];
 
     $linkGetListDistrict = route('district.getListByParentID',['parentID' => 'value_new']);
     $linkGetListWard = route('ward.getListByParentID',['parentID' => 'value_new']);
@@ -58,7 +57,7 @@
             'widthElement' => 'col-12'
         ],[
             'label'   => HTML::decode(Form::label('sell_area', $label['sell_area'] , $formLabelAttr)),
-            'element' => Form::select('details[sell_area]',$itemsProvince, $details['sell_area']??null, array_merge($formSelect2Attr,['style' =>'width:100%','multiple' => 'multiple'])),
+            'element' => Form::select('details[sell_area]',[0 =>"-- Cả nước --"] + $itemsProvince, $details['sell_area']??0, array_merge($formSelect2Attr,['style' =>'width:100%','multiple' => 'multiple'])),
             'widthElement' => 'col-12'
         ],[
             'label'   => HTML::decode(Form::label('tax_code', $label['tax_code'], $formLabelAttr)),

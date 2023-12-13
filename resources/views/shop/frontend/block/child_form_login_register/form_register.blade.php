@@ -46,9 +46,10 @@
     ];
     $arrTypeUser = config('myconfig.template.type_user');
     foreach($arrTypeUser as $key_user => $type_user){
+        $isChecked = ($key_user == 1) ? true : false;
         $elements[] = [
             'label'   => Form::label('name', $type_user, $formLabelAttr),
-            'element' => Form::radio('user_type_id', $key_user,false ,array_merge($formInputAttr)),
+            'element' => Form::radio('user_type_id', $key_user,$isChecked,false ,array_merge($formInputAttr)),
             'type' =>'inline-text-right',
             'widthElement' => 'col-6 p-0',
             'styleFormGroup' => 'mb-2 h-35',

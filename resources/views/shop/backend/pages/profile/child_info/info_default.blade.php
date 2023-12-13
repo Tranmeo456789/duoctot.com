@@ -19,7 +19,6 @@
     $formInputWidth['widthInput']  =  'col-12';
     $inputHiddenID    = Form::hidden('user_id', $item['user_id']??null);
     $inputHiddenTask    = Form::hidden('task', 'update-item');
-    $details = $item->details->pluck('value','user_field')->toArray()??[];
 
     $linkGetListDistrict = route('district.getListByParentID',['parentID' => 'value_new']);
     $linkGetListWard = route('ward.getListByParentID',['parentID' => 'value_new']);

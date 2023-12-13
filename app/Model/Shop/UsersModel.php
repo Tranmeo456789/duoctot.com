@@ -51,7 +51,6 @@ class UsersModel extends BackEndModel
                 $params['user_type_id'] = 1;
             }
            $params['user_id'] = $this->insertGetId($this->prepareParams($params));
-
             if (is_numeric($params['user_id'])){
                 $paramsCode = [
                     'type' => 'user_type_id',
@@ -64,7 +63,7 @@ class UsersModel extends BackEndModel
                     'value' =>$member_id
                 ];
                 \App\Model\Shop\UserValuesModel::insert($this->prepareParams($paramsUserValue));
-                return self::getItem(['user_id'=>$params['user_id']],['task' => 'get-item']);
+                //return self::getItem(['user_id'=>$params['user_id']],['task' => 'get-item']);
             }
             return false;
         }
@@ -103,7 +102,7 @@ class UsersModel extends BackEndModel
                 $user = self::where('user_id', $params['user_id'])->first();
                 self::where('user_id', $params['user_id'])->update($this->prepareParams($params));
                 $paramsUserValue =[];
-                \App\Model\UserValuesModel::where('user_id', $params['user_id'])->delete();
+                \App\Model\Shop\UserValuesModel::where('user_id', $params['user_id'])->delete();
                 foreach ($details as $key => $value){
                     $paramsUserValue =[
                         'user_id' =>$params['user_id'],

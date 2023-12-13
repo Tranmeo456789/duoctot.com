@@ -155,6 +155,7 @@ ul {
 .form-group.h-35 {
     height: 35px !important;
     line-height: 35px !important;
+    align-items: center;
 }
 
 .form-input-group .form-group input[type='radio'] {

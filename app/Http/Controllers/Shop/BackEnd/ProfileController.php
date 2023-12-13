@@ -25,24 +25,30 @@ class ProfileController extends BackEndController
         $item = [];
         if ($session->has('user')) {
             $item = $this->model->getItem(['user_id'=>$session->get('user.user_id')],['task' => 'get-item']);
+            if ($item && $item->detailValues) {
+                $details = $item->detailValues->pluck('value', 'user_field')->toArray() ?? [];
+            } else {
+                $details = [];
+            }
+        }else {
+            $details = [];
         }
-        $details = $item->details->pluck('value','user_field')->toArray()??[];
         $itemsProvince = (new ProvinceModel())->listItems(null,['task'=>'admin-list-items-in-selectbox']);
-        $params['province_id'] = (isset($details['province_id']) && ($details['province_id']!=0))?$details['province_id']:((isset($item->province_id) && ($item->province_id != 0)) ? $item->province_id:0);
+        $params['province_id'] = (isset($details['province_id']) && ($details['province_id']!=0))?$details['province_id']:((isset($item['province_id']) && ($item['province_id'] != 0)) ? $item['province_id']:0);
         $itemsDistrict = [];
         if ($params['province_id']  != 0){
             $itemsDistrict = (new DistrictModel())->listItems(['parentID' => $params['province_id']],
                                                                 ['task'=>'admin-list-items-in-selectbox']);
         }
 
-        $params['district_id'] = (isset($details['district_id']) && ($details['district_id'] != 0))?$details['district_id']:((isset($item->district_id) && ($item->district_id != 0)) ? $item->district_id:0);
+        $params['district_id'] = (isset($details['district_id']) && ($details['district_id'] != 0))?$details['district_id']:((isset($item['district_id']) && ($item['district_id'] != 0)) ? $item['district_id']:0);
         $itemsWard = [];
         if ($params['district_id']  != 0){
             $itemsWard = (new WardModel())->listItems(['parentID' => $params['district_id']],
                                                                 ['task'=>'admin-list-items-in-selectbox']);
         }
         return view($this->pathViewController .  'info',
-                    compact('item', 'itemsProvince' ,'itemsDistrict','itemsWard')
+                    compact('item','details', 'itemsProvince' ,'itemsDistrict','itemsWard')
                 );
     }
     public function save(MainRequest $request)
@@ -66,7 +72,7 @@ class ProfileController extends BackEndController
                 $notify = "Thay đổi mật khẩu thành công!";
                 $redirect_url = route($this->controllerName .'.password');
             }
-            if ($this->model->saveItem($params, ['task' => $task])){
+            if ($this->model->saveItem($params, ['task' => 'update-item'])){
                 $request->session()->put('app_notify', $notify);
                 $userModel = new MainModel();
                 $current_user = $this->model->getItem(['user_id'=>$params['user_id']], ['task' => 'get-item']);
