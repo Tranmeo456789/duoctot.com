@@ -29,6 +29,8 @@
     </div>
     <div class="content-detail-product">
         {!!$item->general_info!!}
+        <h2 id="element-product" class="mt-2">Thành phần</h2>
+        <p>{{$item->elements}}</p>
         <h2 id="func-product" class="mt-2">Công dụng</h2>
         <p>{{$item->benefit}}</p>
         <h2 id="alternate-product" class="mt-2">Cách dùng</h2>

@@ -7,7 +7,7 @@
             <h3 class="truncate1">{{ number_format( $item['price'], 0, "" ,"." )}}đ / {{$item->unitProduct->name}}</h3>
             <p class="noteheth truncate1">{{$item->catProduct->name}}</p>
             <p class="truncate1">Dạng bào chế: {{$item['dosage_forms'] ?: '...'}}</p>
-            <p class="truncate1">Thành phần: {{$item['elements'] ?: '...'}}</p>
+            <p class="truncate2">Thành phần: {{$item['elements'] ?: '...'}}</p>
         </div>
     </a>
 </li>

@@ -316,6 +316,9 @@
 
     color: #1E1E1E;
 }
+#body-nbox .elements-product{
+    min-height: 48px;
+}
 
 .name-body-nbox {
     font-weight: 400;
@@ -433,7 +436,6 @@
 
 .cat-product-out .body-nb a {
     color: #000;
-    max-height: 180px;
 }
 
 .cat-product-out .body-nb p {
