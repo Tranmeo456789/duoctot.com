@@ -19,7 +19,10 @@ class DashboardController extends BackEndController
         parent::__construct();
     }
     public function index(Request $request){
-        $params['day']=date("Y-m-d");$sum_money_day=0;$sum_quantity=0; $sum_money=0;     
+        $params['day']=date("Y-m-d");
+        $sum_money_day=0;
+        $sum_quantity=0;
+        $sum_money=0;     
         $order_day=(new OrderModel)->listItems($params, ['task' => 'user-list-items-in-day']);
         if(!empty($order_day)){
             $sum_money_day = $order_day->sum('total');

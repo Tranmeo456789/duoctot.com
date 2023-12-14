@@ -11,9 +11,8 @@
     $formDateMaskAttr = config('myconfig.template.form_element.input_datemask');
     $star             = config('myconfig.template.star');
     $inputHiddenID    = Form::hidden('id', $item['id']??null);
-    $date             = isset($item['date'])?MyFunction::formatDateFrontend($item['date']):'';
+    $date = isset($item['date']) ? MyFunction::formatDateFrontend($item['date']) : (new DateTime())->format('d/m/Y');
     $warehouse        = (count($itemsWareHouse) > 1)?[null=>"-- Chọn {$label['warehouse_id']} --"] +  $itemsWareHouse:$itemsWareHouse;
-    $date  = isset($item['date'])?MyFunction::formatDateFrontend($item['date']):'';
     $linkGetProduct = route('product.getItem',['id' => 'value_new']);
     $formInputWidth['widthInput']  =  'col-12';
     $elements = [

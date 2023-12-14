@@ -324,10 +324,7 @@ class ProductModel extends BackEndModel
         if ($options['task'] == "sum-quantity-product-in-warehouse-of-user-id") {
             $query = $this::with('productWarehouse')
                             ->select('id','price','quantity_in_stock','user_id','created_at')
-                            ->where('id','>',1);
-            if(isset($params['user_id'])){
-                $query->where('user_id', $params['user_id']);
-            }
+                            ->where('id','>',1)->OfUser();
             if(isset($params['filter_in_day'])){
                 $query->whereBetween('created_at', ["{$params['filter_in_day']['day_start']}", "{$params['filter_in_day']['day_end']}"]);
             }
@@ -336,14 +333,11 @@ class ProductModel extends BackEndModel
         if ($options['task'] == "sum-money-product-in-warehouse-of-user-id") {
             $query = $this::with('productWarehouse')
                             ->select('id','price','quantity_in_stock','user_id','created_at')
-                            ->where('id','>',1);
-            if(isset($params['user_id'])){
-                $query->where('user_id', $params['user_id']);
-            }
+                            ->where('id','>',1)->OfUser();
             if(isset($params['filter_in_day'])){
                 $query->whereBetween('created_at', ["{$params['filter_in_day']['day_start']}", "{$params['filter_in_day']['day_end']}"]);
             }
-            $result =  $query->get()->sum('price');
+            $result = $query->select(DB::raw('SUM(price * quantity_in_stock) as total'))->get()->first()->total;
         }
         return $result;
     }
