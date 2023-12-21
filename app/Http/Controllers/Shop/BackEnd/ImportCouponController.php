@@ -40,9 +40,7 @@ class ImportCouponController extends BackEndController
         if (!$request->ajax()) return view("errors." .  'notfound', []);
         if (isset($request->validator) && $request->validator->fails()) {
             return response()->json([
-                'status' => 200,
-                'data' => null,
-                'success' => false,
+                'fail' => true,
                 'errors' => $request->validator->errors()
             ]);
         }

@@ -14,6 +14,9 @@
                     <div class="card-body p-0">
                         @include("$moduleName.pages.$controllerName.list_info")
                     </div>
+                    <div class="card-footer my-card-pagination clearfix">
+                        @include("$moduleName.blocks.pagination",['paginator'=>$itemsProduct])
+                    </div>
                 </div>
             </div>
         </div>

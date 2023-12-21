@@ -63,7 +63,7 @@
                 <li class="d-flex">
                     <img src="{{asset('images/shop/news6.png')}}" alt="">
                     <div class="nctright">
-                        <a class="title-new-left">FPL Long Châu thu cũ đổi mới mmieenx phí 10.000 máy đo đường huyết</a>
+                        <a class="title-new-left">Thu mới đổi cũ miễn phí 10.000 máy đo đường huyết</a>
                         <div class="text-mute d-flex">
                             <img src="{{asset('images/shop/oclock.png')}}" alt="">
                             <div class="ml-2">1 tuần trước</div>
