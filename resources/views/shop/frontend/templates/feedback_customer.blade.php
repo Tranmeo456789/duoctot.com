@@ -1,11 +1,23 @@
+@php
+    $feedbacks=[
+        ['thumb'=>'phanhoi1.png','fullname'=>'Duy Nguyễn Nhất','content'=>'Rất tuyệt vời, đặc biệt trong mùa dịch đi lại khó khăn. Chúc doctor ngày càng phát triển và mở rộng phạm vi ra nhiều tỉnh hơn, nhất là vùng Đồng bằng sông Cửu Long'],
+        ['thumb'=>'phanhoi2.png','fullname'=>'Quốc Bình Vũ','content'=>'Rất tuyệt vời, đặc biệt trong mùa dịch đi lại khó khăn. Chúc doctor ngày càng phát triển và mở rộng phạm vi ra nhiều tỉnh hơn, nhất là vùng Đồng bằng sông Cửu Long'],
+        ['thumb'=>'phanhoi3.png','fullname'=>'Nguyễn Ngọc Minh','content'=>'Rất tuyệt vời, đặc biệt trong mùa dịch đi lại khó khăn. Chúc doctor ngày càng phát triển và mở rộng phạm vi ra nhiều tỉnh hơn, nhất là vùng Đồng bằng sông Cửu Long']
+        ];
+        $imgCustomer=['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg'];
+@endphp
 <div class="row mx-0">
     <div class="col-xl-6 col-lg-12">
         <h1 class="mb-4">Phản hồi từ bệnh nhân</h1>
         <ul>
+            @foreach($feedbacks as $val)
+                @php
+                $thumb = asset('images/shop/') . '/' . $val['thumb'];
+                @endphp
             <li class="d-flex mb-3">
-                <div class="rimg-start"><img src="{{asset('images/shop/phanhoi1.png')}}" alt=""></div>
+                <div class="rimg-start"><img src="{{$thumb}}" alt=""></div>
                 <div class="ml-3">
-                    <h2>Duy Nguyễn Nhất</h2>
+                    <h2>{{$val['fullname']}}</h2>
                     <span>
                         <img src="{{asset('images/shop/star.png')}}" alt="">
                         <img src="{{asset('images/shop/star.png')}}" alt="">
@@ -13,42 +25,19 @@
                         <img src="{{asset('images/shop/star.png')}}" alt="">
                         <img src="{{asset('images/shop/star.png')}}" alt="">
                     </span>
-                    <p>Rất tuyệt vời, đặc biệt trong mùa dịch đi lại khó khăn. Chúc doctor ngày càng phát triển và mở rộng phạm vi ra nhiều tỉnh hơn, nhất là vùng Đồng bằng sông Cửu Long</p>
+                    <p>{{$val['content']}}</p>
                 </div>
             </li>
-            <li class="d-flex mb-3">
-                <div class="rimg-start"><img src="{{asset('images/shop/phanhoi2.png')}}" alt=""></div>
-                <div class="ml-3">
-                    <h2>Quốc Bình Vũ</h2>
-                    <span>
-                        <img src="{{asset('images/shop/star.png')}}" alt="">
-                        <img src="{{asset('images/shop/star.png')}}" alt="">
-                        <img src="{{asset('images/shop/star.png')}}" alt="">
-                        <img src="{{asset('images/shop/star.png')}}" alt="">
-                        <img src="{{asset('images/shop/star.png')}}" alt="">
-                    </span>
-                    <p>Rất tuyệt vời, đặc biệt trong mùa dịch đi lại khó khăn. Chúc doctor ngày càng phát triển và mở rộng phạm vi ra nhiều tỉnh hơn, nhất là vùng Đồng bằng sông Cửu Long</p>
-                </div>
-            </li>
-            <li class="d-flex">
-               <div class="rimg-start"><img src="{{asset('images/shop/phanhoi3.png')}}" alt=""></div> 
-                <div class="ml-3">
-                    <h2>Nguyễn Ngọc Minh</h2>
-                    <span>
-                        <img src="{{asset('images/shop/star.png')}}" alt="">
-                        <img src="{{asset('images/shop/star.png')}}" alt="">
-                        <img src="{{asset('images/shop/star.png')}}" alt="">
-                        <img src="{{asset('images/shop/star.png')}}" alt="">
-                        <img src="{{asset('images/shop/star.png')}}" alt="">
-                    </span>
-                    <p>Rất tuyệt vời, đặc biệt trong mùa dịch đi lại khó khăn. Chúc doctor ngày càng phát triển và mở rộng phạm vi ra nhiều tỉnh hơn, nhất là vùng Đồng bằng sông Cửu Long</p>
-                </div>
-            </li>
+            @endforeach
         </ul>
     </div>
-    <div class="col-xl-3 img-customer">
-        <div class="mb-2"><img src="{{asset('images/shop/phanhoi4.png')}}" alt=""></div>
-        <div><img src="{{asset('images/shop/phanhoi5.png')}}" alt=""></div>
+    <div class="col-xl-3 img-customer" id="img-customer">
+        @foreach($imgCustomer as $val)
+            @php
+            $img = asset('images/shop/') . '/' .$val;
+            @endphp
+            <div><img src="{{$img}}" alt=""></div>
+        @endforeach
     </div>
     <div class="col-xl-3 col-lg-12 dlapp pb-0">
         <div class="dlapp1">
@@ -59,6 +48,6 @@
                 <div class="mb-4 mt-3"><a href="https://play.google.com/store/apps/details?id=com.app.khambenh.bacsiviet"><img src="{{asset('images/shop/app2.png')}}" alt=""></a></div>
             </div>        
         </div>     
-        <div><img src="{{asset('images/shop/app3.png')}}" alt=""></div>
+        <div><img src="{{asset('images/shop/app4.png')}}" alt=""></div>
     </div>
 </div>

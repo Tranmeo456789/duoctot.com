@@ -810,10 +810,6 @@
     .wp-status-order .ls-status-order li:not(:last-child)::before{
         content: none;
     }
-    .nctright {
-        padding-left: 0px;
-    }
-
     .cart-null h1 {
         font-size: 16px;
     }

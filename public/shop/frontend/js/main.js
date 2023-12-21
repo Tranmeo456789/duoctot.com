@@ -20,14 +20,27 @@ $(document).ready(function() {
         navigationText: false,
         paginationNumbers: false,
         pagination: true,
-        items: 1, //10 items above 1000px browser width
-        itemsDesktop: [1000, 1], //5 items between 1000px and 901px
-        itemsDesktopSmall: [900, 1], // betweem 900px and 601px
-        itemsTablet: [600, 1], //2 items between 600 and 0
-        itemsMobile: true // itemsMobile disabled - inherit from itemsTablet option
+        items: 1, 
+        itemsDesktop: [1000, 1],
+        itemsDesktopSmall: [900, 1],
+        itemsTablet: [600, 1],
+        itemsMobile: true
+    });
+    var imgSlider = $('#img-customer');
+    imgSlider.owlCarousel({
+        autoPlay: 4500,
+        navigation: true,
+        navigationText: false,
+        paginationNumbers: false,
+        pagination: false,
+        stopOnHover: true,
+        items: 1,
+        itemsDesktop: [1000, 1],
+        itemsDesktopSmall: [900, 1],
+        itemsTablet: [600, 1],
+        itemsMobile: true 
     });
     $('.js-select2').select2();
-    //box  or list product
     $('.ol1').click(function() {
         $('#body-nbox').css("display", "block");
         $('.body-nb').css("display", "none");

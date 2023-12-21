@@ -619,17 +619,6 @@ li .wp-discount
     margin-left: 20px;
 }
 
-.newsh p {
-    font-family: 'Helvetica Neue';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 24px;
-    text-align: justify;
-    color: #000000;
-    margin-bottom: 10px;
-}
-
 .newsh .news-content-right {
     background: #F5FAFE;
     border-radius: 10px;
@@ -657,8 +646,8 @@ li .wp-discount
     font-family: 'Helvetica Neue';
     font-style: normal;
     font-weight: 700;
-    font-size: 18px;
-    line-height: 22px;
+    font-size: .875rem;
+    line-height: 1.25rem;
     text-align: justify;
     color: #000000;
 }
@@ -786,8 +775,8 @@ li .wp-discount
 .newsh .news-content-left{
     padding-left: 10px;
 }
-.nctright{
-    padding-left: 10px;
+.nctright {
+    flex: 1 1 0%;
 }
 .local p {
     font-family: 'Inter';
