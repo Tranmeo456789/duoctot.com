@@ -5,7 +5,7 @@
         }
     @endphp
     <li class="position-relative">
-        <a href="{{route('fe.product.detail',$val['id'])}}" class="d-block">
+        <a href="{{route('fe.product.detail',$val['slug'])}}" class="d-block">
             <div class="wp-img-thumb-product mb-2">
                 <img src="{{asset($val['image'])}}">
             </div>

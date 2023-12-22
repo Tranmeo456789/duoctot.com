@@ -5,7 +5,7 @@
             @if (!empty($items) && count($items) > 0)
                 <ul class="list-name-product pb-3">
                     @foreach ($items as $val)
-                        <li class="py-2 px-3"><a href="{{route('fe.product.detail',$val['id'])}}">{{ $val->name }}</a></li>
+                        <li class="py-2 px-3"><a href="{{route('fe.product.detail',$val['slug'])}}">{{ $val->name }}</a></li>
                     @endforeach
                 </ul>
             @else

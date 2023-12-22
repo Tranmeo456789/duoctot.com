@@ -22,35 +22,35 @@ class ProductController extends ShopFrontEndController
         parent::__construct();
     }
     public function detail(Request $request){
-        $params['id'] = intval($request->id);
-        $item= $this->model->getItem($params,['task' => 'frontend-get-item']);
+        $slug = $request->slug;
+        $item= $this->model->getItem(['slug'=>$slug],['task' => 'frontend-get-item']);
         $albumImageCurrent=!empty($item['albumImageHash']) ? explode('|', $item['albumImageHash']) : [];
         $productViewed  = (isset($_COOKIE["productViewed"]))?json_decode($_COOKIE["productViewed"],true):[];
-
         $productCurrent = [];
-        if (isset($productViewed[$params['id']])){
-            $productCurrent[$params['id']] = $productViewed[$params['id']];
-            unset($productViewed[$params['id']]);
+        if (isset($productViewed[$item['id']])){
+            $productCurrent[$item['id']] = $productViewed[$item['id']];
+            unset($productViewed[$item['id']]);
         }else{
-            $productCurrent[$params['id']] = [
+            $productCurrent[$item['id']] = [
                 'product_id' => $item->id,
                 'name'       => $item->name,
                 'price'      => $item->price,
                 'image'      => $item->image,
-                'unit'       => $item->unitProduct->name
+                'unit'       => $item->unitProduct->name,
+                'slug'=>$item->slug
             ];
 
         }
 
         $productViewed = $productCurrent + $productViewed;
-
+        $params['id']=$item['id'];
         if (count($productViewed) > 8){
             array_pop($productViewed);
         }
         setcookie("productViewed", json_encode($productViewed),time() + config('myconfig.time_cookie'), "/");
         $_COOKIE["productViewed"] = json_encode($productViewed);
 
-        return view($this->pathViewController . 'detail',compact('item','params','albumImageCurrent'));
+        return view($this->pathViewController . 'detail',compact('params','item','albumImageCurrent'));
     }
     public function searchProductAjax(Request $request){
         $data = $request->all();

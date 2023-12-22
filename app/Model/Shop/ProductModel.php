@@ -72,7 +72,7 @@ class ProductModel extends BackEndModel
                                     'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
-                                    'preserve','note','image','featurer','long','user_id','status_product','wide','high',
+                                    'preserve','note','image','featurer','long','user_id','status_product','slug','wide','high',
                                     'mass','quantity_in_stock','created_at', 'updated_at')->where('id','>',1)
                                     ->ofUser();
             if (isset($params['group_id'])){
@@ -103,7 +103,7 @@ class ProductModel extends BackEndModel
 
         if ($options['task'] == "user-list-items-in-warehouse") {
             $query = $this::with('productWarehouse')
-                            ->select('id','name','code','image','quantity_in_stock')
+                            ->select('id','name','code','image','quantity_in_stock','slug')
                             ->where('id','>',1)
                             ->ofUser();
             $result =  $query->orderBy('id', 'desc')
@@ -111,7 +111,7 @@ class ProductModel extends BackEndModel
         }
         if ($options['task'] == "user-list-items-in-warehouse-no-pagination") {
             $query = $this::with('productWarehouse')
-                            ->select('id','name','code','price','image','quantity_in_stock','user_id')
+                            ->select('id','name','code','price','image','quantity_in_stock','user_id','slug')
                             ->where('id','>',1)
                             ->ofUser();
             $result =  $query->orderBy('id', 'desc')
@@ -130,7 +130,7 @@ class ProductModel extends BackEndModel
                                     'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
-                                    'preserve','note','image','albumImage','albumImageHash','user_id','featurer','long','wide','high',
+                                    'preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','long','wide','high',
                                     'mass')
                                 ->where('id','>',1)->where('status_product','da_duyet');
             if (isset($params['cat_product_id']) && ($params['cat_product_id'] != 0)){
@@ -150,7 +150,7 @@ class ProductModel extends BackEndModel
             }
         }
         if ($options['task'] == "frontend-list-items-simple") {
-            $query = $this::select('id','name')
+            $query = $this::select('id','name','slug')
                                 ->where('id','>',1)->where('status_product','da_duyet');
             $query->OfCollaboratorCode()->orderBy('id', 'desc');
             if(isset($params['limit'])){
@@ -166,7 +166,7 @@ class ProductModel extends BackEndModel
                                     'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
-                                    'preserve','note','image','albumImage','albumImageHash','user_id','featurer','long','wide','high',
+                                    'preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','long','wide','high',
                                     'mass')
                                  //   ->whereRaw("JSON_CONTAINS(`featurer`, '\"{$params['type']}\"')");
                                     ->whereRaw("FIND_IN_SET('\"{$params['type']}\"',REPLACE(REPLACE(`featurer`, '[',''),']',''))")->where('status_product','da_duyet');
@@ -185,7 +185,7 @@ class ProductModel extends BackEndModel
                                     'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
-                                    'preserve','note','image','albumImage','albumImageHash','user_id','featurer','long','wide','high',
+                                    'preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','long','wide','high',
                                     'mass')
                                  //   ->whereRaw("JSON_CONTAINS(`featurer`, '\"{$params['type']}\"')");
                                     ->whereRaw("FIND_IN_SET('\"{$params['type']}\"',REPLACE(REPLACE(`featurer`, '[',''),']',''))")->where('status_product','da_duyet');
@@ -206,7 +206,7 @@ class ProductModel extends BackEndModel
             $result = $query->pluck('name', 'id')->toArray();
         }
         if($options['task'] == "list-items-search") {
-            $query = $this::with('unitProduct')->select('id','name','image','price','percent_discount','unit_id');
+            $query = $this::with('unitProduct')->select('id','name','image','price','percent_discount','unit_id','slug');
             if(isset($params['keyword'])){
                 $query->where('name','LIKE', "%{$params['keyword']}%");
             }
@@ -229,7 +229,7 @@ class ProductModel extends BackEndModel
         'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
         'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
         'dosage_forms','country_id','specification','benefit','elements',
-        'preserve','note','image','featurer','long','user_id','wide','high',
+        'preserve','note','image','featurer','slug','long','user_id','wide','high',
         'mass', 'created_at', 'updated_at');
         $result =  $query->orderBy('id', 'desc')->where('user_id',$user->user_id)->get();
         return $result;
@@ -242,7 +242,7 @@ class ProductModel extends BackEndModel
         'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
         'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
         'dosage_forms','country_id','specification','benefit','elements',
-        'preserve','note','image','featurer','long','user_id','wide','high',
+        'preserve','note','image','featurer','slug','long','user_id','wide','high',
         'mass', 'created_at', 'updated_at');
         $result =  $query->orderBy('id', 'desc')->get();
         return $result;
@@ -256,30 +256,35 @@ class ProductModel extends BackEndModel
                                     'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
-                                    'preserve','note','image','albumImage','albumImageHash','user_id','featurer','long','wide','high',
+                                    'preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','long','wide','high',
                                     'mass')
                             ->where('id', $params['id'])
                             ->OfCollaboratorCode()
                             ->first();
         }
         if ($options['task'] == 'get-item-simple') {
-            $result = self::with('unitProduct')->select('id','name','unit_id','price')
+            $result = self::with('unitProduct')->select('id','name','unit_id','price','slug')
                             ->where('id', $params['id'])
                             ->OfUser()
                             ->first();
         }
 
         if ($options['task'] == 'frontend-get-item') {
-            $result = self::with('unitProduct')
+            $query = self::with('unitProduct')
                             ->select('id','name','type','code','cat_product_id','producer_id',
                                     'tick','type_price','price','price_vat','percent_discount','coefficient',
                                     'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
-                                    'preserve','note','image','albumImage','albumImageHash','user_id','featurer','long','wide','high',
-                                    'mass')
-                            ->where('id', $params['id'])
-                            ->first();
+                                    'preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','long','wide','high',
+                                    'mass');
+            if(isset($params['id'])){
+                $query->where('id', $params['id']);
+            }
+            if(isset($params['slug'])){
+                $query->where('slug', $params['slug']);
+            }            
+            $result = $query->first();
         }
         return $result;
     }

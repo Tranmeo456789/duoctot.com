@@ -13,7 +13,7 @@
     @foreach($items as $val)
     <div class="col-12 col-md-6 col-lg-3">
         <div class="item-product-simple">
-            <a href="{{route('fe.product.detail',$val['id'])}}" title="">
+            <a href="{{route('fe.product.detail',$val['slug'])}}" title="">
                 <p class="truncate2">{{$val['name']}}</p>
             </a>
         </div>

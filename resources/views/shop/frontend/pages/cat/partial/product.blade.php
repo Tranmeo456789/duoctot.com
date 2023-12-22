@@ -1,6 +1,6 @@
 @foreach($items as $item)
 <li class="text-center">
-    <a href="{{route('fe.product.detail',$item['id'])}}">
+    <a href="{{route('fe.product.detail',$item['slug'])}}">
         <div class="rdimg"><img src="{{asset($item['image'])}}" alt=""></div>
         <div class="">
             <p class="name-body-nbox truncate2">{{$item['name']}}</p>

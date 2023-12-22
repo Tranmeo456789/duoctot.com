@@ -14,7 +14,7 @@
         <ul class="clearfix list-unstyled ls_product">
             @foreach($productViewed as $key=>$val)
             <li class="position-relative">
-                <a href="{{route('fe.product.detail',$val['product_id'])}}">
+                <a href="{{route('fe.product.detail',$val['slug']??'')}}">
                     <div class="d-flex justify-content-center wp-img-thumb-product"><img src="{{asset($val['image'])}}" alt=""></div>
                     <div class="mt-3 px-2">
                         <div class="wp-name-product">

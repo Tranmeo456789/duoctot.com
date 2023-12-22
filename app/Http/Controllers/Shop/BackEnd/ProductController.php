@@ -16,6 +16,8 @@ use App\Http\Requests\ProductRequest as MainRequest;
 use App\Model\Shop\UnitModel;
 use App\Model\Shop\ProvinceModel;
 use App\Helpers\MyFunction;
+use Illuminate\Support\Str;
+
 use DB;
 use Session;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
@@ -126,6 +128,7 @@ class ProductController extends BackEndController
             // if ($urlImgBB) {
             //     $params['image'] = $urlImgBB;
             // }
+            $params['slug']= Str::slug($params['name']);
             $this->model->saveItem($params, ['task' => $task]);
             $request->session()->put('app_notify', $notify);
             if(Session::get('user')['is_admin'] == 1 || Session::get('user')['is_admin'] == 2){

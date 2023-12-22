@@ -7,7 +7,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('/ajaxHoverCatLevel2','HomeController@ajaxHoverCatLevel2')->name('ajaxHoverCatLevel2');
     Route::get('/ajaxHoverCatLevel1','HomeController@ajaxHoverCatLevel1')->name('ajaxHoverCatLevel1');
     Route::get('/ajaxlocal-store','HomeController@ajaxlocal')->name('fe.ajaxlocal');
-    Route::get('/chi-tiet-san-pham/{id}','ProductController@detail')->name('fe.product.detail');
+    Route::get('/chi-tiet-san-pham/{slug}.html','ProductController@detail')->name('fe.product.detail');
     Route::get('/tim-kiem-san-pham-theo-ten','ProductController@searchProductAjax')->name('fe.product.searchProductAjax');
     Route::get('/tim-kiem-san-pham-danh-sach-ngan','ProductController@searchListProductShort')->name('fe.product.searchListProductShort');
     Route::get('/load-more-products','ProductController@loadMoreProducts')->name('fe.product.loadMoreProducts');
