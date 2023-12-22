@@ -44,7 +44,7 @@
             'widthElement' => 'col-4'
         ],[
             'label'   => HTML::decode(Form::label('', $label['warehouse_id'], $formLabelAttr)),
-            'element' => Form::select('warehouse_id',[null=>"-- Chọn {$label['warehouse_id']} --"] + $itemsWarehouse, null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
+            'element' => Form::select('warehouse_id',$itemsWarehouse, null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
             'widthElement' => 'col-4'
         ],[
             'label'   => HTML::decode(Form::label('', 'Thời gian đặt hàng', $formLabelAttr)),

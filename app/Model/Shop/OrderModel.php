@@ -123,7 +123,22 @@ class OrderModel extends BackEndModel
             ->OfUser();
             $result =  $query->orderBy('id', 'desc')->get();
         }
+        if ($options['task'] == "list-items-in-phone") {
+            $query = $this::select('id','code_order','total','created_at','status_order','user_id','delivery_method','receive',
+            'info_product','buyer','pharmacy','total_product')
+                                ->where('id','>',1);
+            if(isset($params['search'])){
+                $query=$this::where('buyer','LIKE', "%{$params['search']}%");
+            } 
+            if(isset($params['pagination'])){
+                $query=$query->orderBy('id', 'desc')
+                              ->paginate($params['pagination']['totalItemsPerPage']);
+            }else{
+                $query=$query->orderBy('id', 'desc')->get();
+            }
 
+            $result =  $query;
+        }
         return $result;
     }
     public function getItem($params = null, $options = null)
@@ -136,15 +151,15 @@ class OrderModel extends BackEndModel
                             ->first();
         }
         if ($options['task'] == 'get-item-frontend-code') {
-            $result = self::select('id','code_order','total','created_at','status_order','user_id','delivery_method','receive',
-                            'info_product','buyer','pharmacy','total_product')
+            $result = self::select('id','code_order','total','created_at','status_order','user_id',
+            'info_product','buyer','pharmacy','total_product','delivery_method','receive')
                             ->where('code_order', $params['code_order'])
                             ->first();
         }
         if ($options['task'] == 'get-item') {
             $result = self::with('userBuy')
                             ->select('id','code_order','total','created_at','status_order','user_id',
-                            'info_product','pharmacy','total_product')
+                            'info_product','buyer','pharmacy','total_product','delivery_method','receive')
                             ->where('id', $params['id'])
                             ->OfUser()
                             ->first();

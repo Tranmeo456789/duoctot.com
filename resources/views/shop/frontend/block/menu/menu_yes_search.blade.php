@@ -26,7 +26,7 @@
     </div>
     
     <div id="" class="fl-right" style="margin-right:50px; padding-top:5px">
-        <a href="{{route('fe.order.list')}}" id="payment-link" class="search-history-order">
+        <a href="{{route('fe.order.formSearch')}}" id="payment-link" class="search-history-order">
             <div class="clearfix">
                 <div class="fl-left mr-2 pt-2">
                     <img style="width:26px" src="{{asset('images/shop/history.png')}}" alt="">

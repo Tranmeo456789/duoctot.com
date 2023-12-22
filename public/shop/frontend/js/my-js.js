@@ -349,6 +349,38 @@ $(document).ready(function () {
             $(element).closest(".wp-input").removeClass('has-error');
         }
     });
+    $(".form-search-phone-order").validate({
+        ignore: ".ignore",
+        rules: {
+            phone: {
+                required: true,
+                checkPhone: true,
+            }
+        },
+        messages: {
+            phone: {
+                required: "Nhập số điện thoại",
+                checkPhone: "Số điện thoại không đúng định dạng"
+            }
+        },
+        errorPlacement: function (error, element) {
+            // Add the `invalid-feedback` class to the error element
+            error.addClass("invalid-feedback");
+            element.closest(".input-group").addClass('has-error');
+            if (element.prop("type") === "checkbox") {
+                error.insertAfter(element.next("label"));
+            } else {
+                error.insertAfter(element.closest(".input-group"));
+            }
+        },
+        highlight: function (element, errorClass, validClass) {
+            $(element).addClass("is-invalid").removeClass("is-valid");
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).addClass("is-valid").removeClass("is-invalid");
+            $(element).closest(".input-group").removeClass('has-error');
+        }
+    });
     $("#content-slider").lightSlider({
         loop: true,
         keyPress: true

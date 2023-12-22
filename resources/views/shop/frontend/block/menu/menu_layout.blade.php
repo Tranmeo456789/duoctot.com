@@ -96,7 +96,7 @@
         </div>
         @if((Session::has('user') && Session::get('user')['user_type_id'] != 9) || Session::get('user')==null)
             <div class="body-responhoder">
-                <a href="{{route('fe.order.list')}}">
+                <a href="{{route('fe.order.formSearch')}}">
                     <div class="container-menures d-flex">
                         <div class="rimg-center"><img src="{{asset('images/shop/news1.png')}}" alt=""></div>
                         <h2>Tra cứu lịch sử đơn hàng</h2>

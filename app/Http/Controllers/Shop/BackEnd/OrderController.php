@@ -72,9 +72,19 @@ class OrderController extends BackEndController
         $pageTitle ='Chi tiết đơn hàng';
         $itemsWarehouse = (new WarehouseModel())->listItems(['user_id'=>$item['user_sell']],['task' => 'admin-list-items-in-selectbox']);
         $params['group_id'] = array_keys($item['info_product']);
+        $address='';
+        if($item->delivery_method ==1){
+            $warehouse_id=$item['pharmacy']['warehouse_id'];
+            $address=(new WarehouseModel())->getItem(['id'=>$warehouse_id],['task' => 'get-item-of-id'])->address;
+        }else{
+            $ward_detail=(new WardModel())->getItem(['id'=>$item->receive['ward_id']],['task' => 'get-item-full']);
+            $ward=$ward_detail['name'];$district=$ward_detail['district']['name'];$province=$ward_detail['district']['province']['name'];
+            $address=$item->receive['address'].', '.$ward.', '.$district.', '.$province;
+        }
         $itemsProduct = (new ProductModel())->listItems($params,['task' => 'user-list-items']);
+        $infoBuyer=json_decode($item['buyer'], true);
         return view($this->pathViewController .  'detail',
-                 compact('item','itemsWarehouse','itemsProduct','pageTitle'));
+                 compact('item','itemsWarehouse','itemsProduct','address','infoBuyer','pageTitle'));
     }
     public function save(Request $request)
     {

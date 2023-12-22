@@ -5,7 +5,7 @@
             <a href="https://tdoctor.vn" title="" id="payment-link" class="fl-left"><img style="width:213px" src="{{asset('images/shop/logo_topbar2.png')}}" alt=""></a>
             @if((Session::has('user') && Session::get('user')['user_type_id'] != 9) || Session::get('user')==null)
             <div id="" class="fl-left" style="margin-left:300px; padding-top:5px">
-                <a href="{{route('fe.order.list')}}" id="payment-link" class="search-history-order">
+                <a href="{{route('fe.order.formSearch')}}" id="payment-link" class="search-history-order">
                     <div class="clearfix">
                         <div class="fl-left mr-2 pt-2">
                             <img style="width:26px" src="{{asset('images/shop/history.png')}}" alt="">

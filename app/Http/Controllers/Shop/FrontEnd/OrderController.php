@@ -27,6 +27,18 @@ class OrderController extends ShopFrontEndController
         $this->model = new MainModel();
         parent::__construct();
     }
+    public function formSearch(){
+        return view($this->moduleName.'.pages.order.form_search');
+
+    }
+    public function searchInPhone(Request $request){
+        if ($request->method() == 'POST') {
+            $params = $request->all();
+            $phone = trim((string)$params['phone']);
+            $order=(new OrderModel)->listItems(['search'=>$phone],['task'=>'list-items-in-phone']);
+            return view($this->moduleName.'.pages.order.index',compact('order'));
+        }  
+    }
     public function list(){
         $params['status']='tat_ca';
         $params['user_id']='';

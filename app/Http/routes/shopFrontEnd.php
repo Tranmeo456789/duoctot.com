@@ -20,7 +20,8 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('/don-hang-cua-toi','OrderController@list')->name('fe.order.list');
     Route::get('/chi-tiet-don-hang-cua-toi','OrderController@detail')->name('fe.order.detail');
     Route::get('/loc-don-hang-cua-toi','OrderController@ajaxFliter')->name('fe.order.ajaxFliter');
-    Route::get('/thu-test','OrderController@test');
+    Route::get('/tra-cuu-don-hang','OrderController@formSearch')->name('fe.order.formSearch');
+    Route::post('/tra-cuu-don-hang-theo-so-dien-thoai','OrderController@searchInPhone')->name('fe.order.searchInPhone');
 
     Route::get('/don-thuoc','PrescripController@index')->name('fe.prescrip.index');
     Route::post('/luu-don-thuoc-khach-hang','PrescripController@save')->name('fe.prescrip.save');

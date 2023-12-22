@@ -1371,3 +1371,56 @@ input[type="radio"] {
     line-height: 20px;
     font-weight: 500;
 }
+.wp-search-phone-order .d1 {
+    padding: 60px 70px;
+    border-radius: 12px;
+    box-shadow: 0 0 16px rgba(0,0,0,.11);
+    background-color: #fff;
+    text-align: center;
+    align-items: center;
+    font-family: ROBOTO LIGHT;
+    width: 600px;
+    background: #f7f2f2;
+}
+.wp-search-phone-order>.d1>span {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.5;
+    display: block;
+    margin-bottom: 25px;
+    color: blue;
+}
+.wp-search-phone-order>div>form input {
+    border: 1px solid #e0e0e0;
+    border-radius: 100px!important;
+    height: 48px;
+    padding: 0 50px;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+.wp-search-phone-order form .input-icon {
+    position: absolute;
+    top: 50%;
+    left: 25px;
+    z-index: 5;
+    transform: translate(0,-50%);
+    height: 21px;
+}
+.wp-search-phone-order form .btn {
+    cursor: pointer;
+    margin: auto;
+    font-family: ROBOTO LIGHT;
+    background-color: orangered;
+    box-shadow: unset;
+    border-radius: 100px;
+    width: 302px;
+    height: 50px;
+    border: none;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 17px;
+    max-width: 100%;
+}
+.wp-search-phone-order .form-group.has-border .input-group {
+    border: none;
+}

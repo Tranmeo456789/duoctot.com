@@ -104,6 +104,29 @@ class Form
                     $element['element']
                 );
                 break;
+            case 'input-group-addon-image-before-rounded':
+                $xhtml = sprintf(
+                    "
+                    <div class='%s'>
+                        <div class='form-group row $styleFormGroup'>
+                            %s
+                            <div class='%s'>
+                                <div class='input-group align-self-center'>
+                                    <div class='input-icon'>
+                                        <img src='%s'>
+                                    </div>
+                                    %s
+                                </div>
+                            </div>
+                        </div>
+                    </div>",
+                    $widthElement,
+                    $element['label'],
+                    $widthInput,
+                    $element['image'],
+                    $element['element']
+                );
+                break;
             case 'input-password':
                 $xhtml = sprintf(
                     "

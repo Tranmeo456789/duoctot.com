@@ -11,14 +11,11 @@
                 </tr>
             </thead>
             <tbody>
-                @php
-                    $details = $item->details ? $item->details->pluck('value', 'user_field')->toArray() : [];
-                @endphp
                 <tr class="">
-                    <td style="width: 20%">{{$item->fullname}}</td>
-                    <td style="width: 20%">{{$item->phone}}</td>
-                    <td style="width: 20%">{{$item->email}}</td>
-                    <td style="width: 40%">{{$details['address'] ?? null}}</td>
+                    <td style="width: 20%">{{$infoBuyer['fullname']??''}}</td>
+                    <td style="width: 20%">{{$infoBuyer['phone']??''}}</td>
+                    <td style="width: 20%">{{$infoBuyer['email']??''}}</td>
+                    <td style="width: 40%">{{$address}}</td>
                 </tr>
             </tbody>
         </table>
