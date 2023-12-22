@@ -206,26 +206,6 @@ $(document).ready(function () {
                 required: true,
                 checkPhone: true,
             },
-            "buyer[email]": {
-                checkEmail: true,
-            },
-            
-            "invoice[name]": {
-                required: true,
-            },
-            "invoice[phone]": {
-                required: true,
-                checkPhone: true,
-            },
-            "invoice[tax_code]": {
-                required: true,
-            },
-            "invoice[address]": {
-                required: true
-            },
-            warehouse_id: {
-                required: true
-            },
             "receive[fullname]": {
                 required: true
             },
@@ -625,17 +605,15 @@ $(document).on('change', "input[name='delivery_method']", function (event) {
     if ($value == 1) {
         $(".rowPharmacy").removeClass('d-none');
         $(".rowHome").addClass('d-none');
-        $("input[name='receive[fullname]']").addClass('ignore');
-        $("input[name='receive[phone]']").addClass('ignore');
         $("input[name='receive[address]']").addClass('ignore');
+        $("select[name='receive[province_id]']").addClass('ignore');
         $("select[name='receive[ward_id]']").addClass('ignore');
         $("select[name='receive[district_id]']").addClass('ignore');
     } else {
         $(".rowPharmacy").addClass('d-none');
         $(".rowHome").removeClass('d-none');
-        $("input[name='receive[fullname]']").removeClass('ignore');
-        $("input[name='receive[phone]']").removeClass('ignore');
         $("input[name='receive[address]']").removeClass('ignore');
+        $("select[name='receive[province_id]']").removeClass('ignore');
         $("select[name='receive[ward_id]']").removeClass('ignore');
         $("select[name='receive[district_id]']").removeClass('ignore');
     }

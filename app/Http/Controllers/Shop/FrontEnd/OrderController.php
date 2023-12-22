@@ -109,9 +109,8 @@ class OrderController extends ShopFrontEndController
     {
         $order=$this->model->getItem(['code_order'=>$code], ['task' => 'get-item-frontend-code']);
         $info_product=$order['info_product'];
-        $params['id']=$order->customer_id;
-        $customer=json_decode($order->buyer, true);
         $address='';
+        $buyer=json_decode($order['buyer'], true);
         if($order->delivery_method ==1){
             $warehouse_id=$order['pharmacy']['warehouse_id']??'';
             $address=(new WarehouseModel())->getItem(['id'=>$warehouse_id],['task' => 'get-item-of-id'])->address??'';
@@ -120,6 +119,6 @@ class OrderController extends ShopFrontEndController
             $ward=$ward_detail['name'];$district=$ward_detail['district']['name'];$province=$ward_detail['district']['province']['name'];
             $address=$order->receive['address'].', '.$ward.', '.$district.', '.$province;
         }
-        return view($this->pathViewController . 'order_success',compact('customer','order','info_product','address'));
+        return view($this->pathViewController . 'order_success',compact('buyer','order','info_product','address'));
     }
 }

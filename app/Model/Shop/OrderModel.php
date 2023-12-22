@@ -216,7 +216,7 @@ class OrderModel extends BackEndModel
             try {
                 $this->setCreatedHistory($params);
                 $params['buyer'] = json_encode($params['buyer']);
-                $params['invoice'] = isset($params['export_tax'])?json_encode($params['invoice']) :null;
+                //$params['invoice'] = isset($params['export_tax'])?json_encode($params['invoice']) :null;
                 if ($params['delivery_method'] == 1){ //Nhận hàng tại nhà thuốc
                     $params['pharmacy'] = json_encode($params['pharmacy']);
                     $params['receive'] = null;
@@ -237,15 +237,15 @@ class OrderModel extends BackEndModel
                 self::insert($this->prepareParams($params));
 
                 //Cập nhật khách hàng
-                $customer = CustomerShopModel::where('user_id',$params['user_id'])
-                                            ->where('user_sell',$params['user_sell'])
-                                            ->first();
-                if (empty($customer)){
-                    CustomerShopModel::insert([
-                        'user_id' => $params['user_id'],
-                        'user_sell' => $params['user_sell']
-                    ]);
-                }
+                // $customer = CustomerShopModel::where('user_id',$params['user_id'])
+                //                             ->where('user_sell',$params['user_sell'])
+                //                             ->first();
+                // if (empty($customer)){
+                //     CustomerShopModel::insert([
+                //         'user_id' => $params['user_id'],
+                //         'user_sell' => $params['user_sell']
+                //     ]);
+                // }
 
                 DB::commit();
                 return true;

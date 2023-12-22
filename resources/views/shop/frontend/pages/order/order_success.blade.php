@@ -31,16 +31,16 @@
                 <table class="table pd-order mb-0" id="tbList">
                     <tbody>
                         <tr class="bb_order">
-                            <td style="width: 30%">Số đơn hàng</td>
+                            <td style="width: 30%">Số đơn hàng <span class="text-info">{{$order['code_order']}}</span></td>
                             <td style="width: 70%" class='name'><a href=""><span class="search-ttdh">Tra cứu đơn hàng</span></a></td>
                         </tr>
                         <tr class="bb_order">
                             <td style="width: 30%">Họ và tên người đặt</td>
-                            <td style="width: 70%" class='name'>{{$customer['fullname']}}</td>
+                            <td style="width: 70%" class='name'>{{$buyer['fullname']}}</td>
                         </tr>
                         <tr class="bb_order pb-1">
                             <td style="width: 30%">Số điện thoại người đặt</td>
-                            <td style="width: 70%" class='name'>{{$customer['phone']}}</td>
+                            <td style="width: 70%" class='name'>{{$buyer['phone']}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -53,11 +53,11 @@
                     <tbody>
                         <tr class="bb_order">
                             <td style="width: 30%">Họ và tên người nhận</td>
-                            <td style="width: 70%" class='name'>{{$customer['fullname']}}</td>
+                            <td style="width: 70%" class='name'>{{$buyer['fullname']}}</td>
                         </tr>
                         <tr class="bb_order">
                             <td style="width: 30%">Số điện thoại người nhận</td>
-                            <td style="width: 70%" class='name'>{{$customer['phone']}}</td>
+                            <td style="width: 70%" class='name'>{{$buyer['phone']}}</td>
                         </tr>
                         <tr class="bb_order">
                             <td style="width: 30%">Nhận hàng tại</td>
