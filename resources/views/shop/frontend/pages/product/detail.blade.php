@@ -79,6 +79,7 @@
                         <span name="btn_selectbuy" class="btn-select-buy btn btn-primary text-light mb-xs-2" data-href="{{route('fe.cart.addproduct')}}">Chọn mua</span>
                         <a class="btn-search-house" href="">Tìm nhà thuốc</a>
                         <input type="hidden" id="product_id" value="{{$item['id']}}">
+                        <input type="hidden" id="code_ref" value="{{$codeRef??''}}">
                         <input type="hidden" id="user_sell" value="{{$item->userProduct->user_id}}">
                     </div>
                 </div>

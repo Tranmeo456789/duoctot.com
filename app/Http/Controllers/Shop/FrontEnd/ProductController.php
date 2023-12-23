@@ -23,6 +23,7 @@ class ProductController extends ShopFrontEndController
     }
     public function detail(Request $request){
         $slug = $request->slug;
+        $codeRef=$request->codeRef ?? '';
         $item= $this->model->getItem(['slug'=>$slug],['task' => 'frontend-get-item']);
         $albumImageCurrent=!empty($item['albumImageHash']) ? explode('|', $item['albumImageHash']) : [];
         $productViewed  = (isset($_COOKIE["productViewed"]))?json_decode($_COOKIE["productViewed"],true):[];
@@ -50,7 +51,7 @@ class ProductController extends ShopFrontEndController
         setcookie("productViewed", json_encode($productViewed),time() + config('myconfig.time_cookie'), "/");
         $_COOKIE["productViewed"] = json_encode($productViewed);
 
-        return view($this->pathViewController . 'detail',compact('params','item','albumImageCurrent'));
+        return view($this->pathViewController . 'detail',compact('params','item','albumImageCurrent','codeRef'));
     }
     public function searchProductAjax(Request $request){
         $data = $request->all();

@@ -33,13 +33,14 @@
                 $index++;
                 $ngayDatHang = MyFunction::formatDateFrontend($val['created_at']);
                 $linkStatusOrder = route('order.changeStatusOrder',['id'=>$val['id'],'value' => 'value_new']);
+                $buyer=json_decode($val['buyer'],true)??'';
                 //Form::select('status_order',$statusOrderValue, $val['status_order']??null, array_merge($formInputChangeValueAttr,['style' =>'width:100%','data-href'=>$linkStatusOrder]))
             @endphp
             <tr>
                 <td style="width: 3%">{{$index}}</td>
                 <td style="width: 15%">{{$val['code_order']}} </td>
                 <td style="width: 12%;text-align:right">{{MyFunction::formatNumber($val['total'])}} đ</td>
-                <td style="width: 15%" class="text-justify">{{$val->userBuy->fullname??''}}</td>
+                <td style="width: 15%" class="text-justify">{{$buyer['fullname']??''}}</td>
                 <td style="width: 10%" class="text-right">{{$ngayDatHang}}</td>
                 <td style="width:15%">
                     {!! $statusOrderValue[$val['status_order']]!!}

@@ -13,7 +13,7 @@
                     <th class="text-center">Giá</th>
                     <th class="text-center">Đơn vị tính</th>
                     <th class="text-center">Số lượng đặt</th>
-                    <th class="text-center">Số lượng giao</th>
+                    <th class="text-center">Mã đại lý</th>
                     <th class="text-center">Thành tiền</th>
                 </tr>
             </thead>
@@ -50,7 +50,7 @@
                         <td style="width: 7%" class="text-right">{{$price}}</td>
                         <td style="width: 7%" class="text-center">{{$unit}}</td>
                         <td style="width: 5%" class="text-right">{{$val['quantity']}}</span></td>
-                        <td style="width: 5%" class="text-right">{{$val['quantity']}}</span></td>
+                        <td style="width: 5%" class="text-right">{{$val['codeRef']??''}}</span></td>
                         <td style="width: 8%" class="text-right"> {{$total_money}} </td>
 
                         </td>

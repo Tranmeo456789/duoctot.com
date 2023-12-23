@@ -467,6 +467,7 @@ $(document).on('click', '.btn-select-buy', function (event) {
     $('.hrcart .number_cartmenu').text(total_product);
     var product_id = $('#product_id').val();
     var user_sell = $('#user_sell').val();
+    var codeRef = $('#code_ref').val();
     url = $(this).data('href');
     $.ajax({
         url: url,
@@ -477,6 +478,7 @@ $(document).on('click', '.btn-select-buy', function (event) {
             product_id: product_id,
             quantity: quantity,
             user_sell: user_sell,
+            codeRef: codeRef,
             _token: _token,
         },
         success: function (data) {

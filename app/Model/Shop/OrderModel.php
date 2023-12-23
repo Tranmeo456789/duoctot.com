@@ -57,7 +57,7 @@ class OrderModel extends BackEndModel
     {
         $result = null;
         if($options['task'] == "user-list-items-frontend"){
-            $query = $this::select('id','code_order','total','total_product','created_at','status_order','user_id')
+            $query = $this::select('id','code_order','total','total_product','created_at','status_order','user_id','buyer')
                                 ->where('user_id',$params['user_id']);
             switch ($params['status'])
             {
@@ -81,7 +81,7 @@ class OrderModel extends BackEndModel
         }
         if ($options['task'] == "user-list-items") {
             $query = $this::with('userBuy')
-                                ->select('id','code_order','total','created_at','status_order','user_id')
+                                ->select('id','code_order','total','created_at','status_order','user_id','buyer')
                                 ->where('id','>',1)
                                 ->OfUser();
             if ((isset($params['filter']['status_order'])) && ($params['filter']['status_order'] != 'all')) {

@@ -70,6 +70,7 @@ class CartController extends ShopFrontEndController
         $id = intval($request->product_id);
         $quantity = intval($request->quantity);
         $user_sell = intval($request->user_sell);
+        $codeRef = $request->codeRef;
         $product = ProductModel::find($id);
         $image = $product->image;
         $cart = $request->session()->has('cart')?$request->session()->get('cart'):[];
@@ -93,6 +94,7 @@ class CartController extends ShopFrontEndController
                 'quantity' => $quantity,
                 'image' => $image,
                 'unit_id' => $product->unit_id,
+                'codeRef'=>$codeRef,
             ];
             $cart[$user_sell]['total'] += $product->price * $quantity;
         }
