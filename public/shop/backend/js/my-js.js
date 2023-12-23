@@ -522,3 +522,11 @@ $(document).on('click', '.btn-insert-url-thumb', function(event) {
         $('.help-block').text('Vui lòng nhập đường dẫn hình ảnh.').show();
     }
 });
+$(document).on('click', '.btn-copy', function(event) {
+    var affiliateLink = $(this).siblings("input").val();
+    var tempTextArea = $("<textarea>");
+    $("body").append(tempTextArea);
+    tempTextArea.val(affiliateLink).select();
+    document.execCommand("copy");
+    tempTextArea.remove();
+});

@@ -203,6 +203,9 @@ span.highlight {
 .datemask{
     cursor: pointer;
 }
+.btn-copy{
+    margin-left: -10px;
+}
 @media screen and (max-width: 1400px) {
     .business-results li {
         width: 50%;

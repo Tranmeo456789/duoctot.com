@@ -232,6 +232,12 @@
                     <p>Quản lý Editor</p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{route('affiliate')}}" class="nav-link">
+                    <i class="fas fa-users"></i>
+                    <p>Affiliate</p>
+                </a>
+            </li>
             @endif
             <!-- <li class="nav-item">
                 <a href="#" class="nav-link">
