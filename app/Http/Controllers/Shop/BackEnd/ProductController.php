@@ -40,6 +40,9 @@ class ProductController extends BackEndController
         } else {
             $session->put('currentController', $this->controllerName);
         }
+        if ($request->has('deleteValueSearch') && $request->get('deleteValueSearch') == 1) {
+            $session->forget('params.search.value');
+        }
         $session->put('params.filter.status_product', $request->has('filter_status_product') ? $request->get('filter_status_product') : ($session->has('params.filter.status_product') ? $session->get('params.filter.status_product') : 'all'));
         $session->put('params.search.field', $request->has('search_field') ? $request->get('search_field') : ($session->has('params.search.field') ? $session->get('params.search.field') : ''));
         $session->put('params.search.value', $request->has('search_value') ? $request->get('search_value') : ($session->has('params.search.value') ? $session->get('params.search.value') : ''));

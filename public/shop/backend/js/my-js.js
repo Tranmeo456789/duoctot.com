@@ -423,6 +423,7 @@ $(document).on('click', "button#btn-clear-search", function(event) {
             link += param + "=" + searchParams.get(param) + "&"
         }
     });
+    link += "deleteValueSearch=1&";
     if (link == '') {
         url = pathname
     } else {

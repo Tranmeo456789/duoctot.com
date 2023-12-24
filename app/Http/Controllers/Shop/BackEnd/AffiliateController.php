@@ -29,9 +29,13 @@ class AffiliateController extends BackEndController
         } else {
             $session->put('currentController', $this->controllerName);
         }
+        if ($request->has('deleteValueSearch') && $request->get('deleteValueSearch') == 1) {
+            $session->forget('params.search.value');
+        }
+        $session->put('params.search.field', $request->has('search_field') ? $request->get('search_field') : ($session->has('params.search.field') ? $session->get('params.search.field') : ''));
+        $session->put('params.search.value', $request->has('search_value') ? $request->get('search_value') : ($session->has('params.search.value') ? $session->get('params.search.value') : ''));
         $session->put('params.pagination.totalItemsPerPage', $this->totalItemsPerPage);
         $this->params     = $session->get('params');
-
         $items            = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
         if ($items->currentPage() > $items->lastPage()) {
             $lastPage = $items->lastPage();

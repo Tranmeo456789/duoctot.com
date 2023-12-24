@@ -1,3 +1,6 @@
+@php
+    use App\Helpers\Hightlight;
+@endphp
 <table class="table table-bordered table-striped table-hover table-head-fixed text-wrap" id="tbList">
     <thead>
         <tr class="row-heading">
@@ -15,10 +18,11 @@
             @foreach ($items as $val)
             @php
                 $index++;
+                $codeRef = Hightlight::show($val->code_ref, $params['search'], 'code_ref');
             @endphp
             <tr>
                 <th scope="row" style="width: 10%">{{$index}}</th>
-                <td style="width: 30%" class='name'>{{$val['code_ref']}}</td>
+                <td style="width: 30%" class='name'><p>{!! $codeRef !!}</p></td>
                 <td style="width: 45%" class='text-justify'>
                     <div>Họ tên: {{$val['info_ref']['name']??null}}</div>
                     <div>Số ĐT: {{$val['info_ref']['phone']??null}}</div>

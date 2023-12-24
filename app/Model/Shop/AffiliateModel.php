@@ -18,6 +18,8 @@ class AffiliateModel extends BackEndModel
         $this->table               = 'affiliate';
         $this->controllerName      = 'affiliate';
         $this->folderUpload        = '' ;
+        $filedSearch               = array_key_exists($this->controllerName, config('myconfig.config.search')) ? $this->controllerName : 'default';
+        $this->fieldSearchAccepted = array_diff(config('myconfig.config.search.' . $filedSearch),['all']);
         $this->crudNotAccepted     = ['_token','btn_save'];
     }
     public function scopeOfUser($query)
@@ -40,13 +42,25 @@ class AffiliateModel extends BackEndModel
         $result = null;
         if($options['task'] == "user-list-items") {
             $query = $this::select('id', 'code_ref', 'info_ref','info_product','user_id',
-                                    'created_at', 'updated_at')
-                                    ->where('id','>',1);
-            $result =  $query->ofUser()
-                            ->ofActive()
-                            ->orderBy('id', 'desc')
-                            ->paginate($params['pagination']['totalItemsPerPage']);
-
+                                    'created_at', 'updated_at') ->where('id','>',1)
+                            ->ofUser()->ofActive();
+            if (isset($params['search']['value']) && ($params['search']['value'] !== ""))  {
+                if($params['search']['field'] == "all") {
+                    $query->where(function($query) use ($params){
+                        foreach($this->fieldSearchAccepted as $column){
+                            $query->orWhereRaw("LOWER($column)" . ' LIKE BINARY ' .  "LOWER('%{$params['search']['value']}%')" );
+                        }
+                    });
+                } else if(in_array($params['search']['field'], $this->fieldSearchAccepted)) {
+                        $query->whereRaw("LOWER({$params['search']['field']})" . " LIKE BINARY " .  "LOWER('%{$params['search']['value']}%')" );
+                }
+            }
+            $query->orderBy('created_at', 'desc');
+            if (isset($params['pagination']['totalItemsPerPage'])){
+                $result =  $query->paginate($params['pagination']['totalItemsPerPage']);
+            }else{
+                $result = $query->get();
+            }
         }
         return $result;
     }
