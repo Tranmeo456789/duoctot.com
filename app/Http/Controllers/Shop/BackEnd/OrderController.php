@@ -60,7 +60,7 @@ class OrderController extends BackEndController
         $this->params     = $session->get('params');
         $pageTitle='Quản lý đơn hàng';$this->params['user_type_id']=3;
         $items=(new UsersModel)->listItems($this->params, ['task'  => 'admin-list-items-of-shop']);
-         return view($this->pathViewController .  'index_admin', [
+         return view($this->pathViewController .  'admin.index', [
             'items'            => $items,
             'pageTitle'=>$pageTitle
         ]);
@@ -133,5 +133,32 @@ class OrderController extends BackEndController
         //     'redirect_url' => route($this->controllerName),
         //     'message'      => $notify
         // ]);
+    }
+    public function listOrderAdmin(Request $request){
+        $session = $request->session();
+        if ($session->has('currentController') &&  ($session->get('currentController') != $this->controllerName)) {
+            $session->forget('params');
+        } else {
+            $session->put('currentController', $this->controllerName);
+        }
+        $session->put('params.filter.status_order', $request->has('filter_status_order') ? $request->get('filter_status_order') : ($session->has('params.filter.status_order') ? $session->get('params.filter.status_order') : 'dangXuLy'));
+        $session->put('params.pagination.totalItemsPerPage', $this->totalItemsPerPage);
+        $this->params     = $session->get('params');
+
+        $items            = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
+
+        if ($items->currentPage() > $items->lastPage()) {
+            $lastPage = $items->lastPage();
+            Paginator::currentPageResolver(function () use ($lastPage) {
+                return $lastPage;
+            });
+            $items              = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
+        }
+        $itemStatusOrderCount = $this->model->countItems($this->params, ['task' => 'admin-count-items-group-by-status-order']);
+        return view($this->pathViewController .  'admin.list_order', [
+            'params'           => $this->params,
+            'items'            => $items,
+            'itemStatusOrderCount' => $itemStatusOrderCount
+        ]);
     }
 }

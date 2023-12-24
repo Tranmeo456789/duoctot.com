@@ -48,7 +48,6 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
         Route::get('/chi-tiet-hoa-don', 'OrderController@detail_invoice')->name('invoice.detail');
 
         Route::get('/danh-sach-don-hang', 'OrderController@index')->name('order');
-        Route::get('/chi-tiet-don-hang/{id}', 'OrderController@detail')->name('order.detail');
         Route::get('/cap-nhat-trang-thai-don-hang-{value}/{id}', 'OrderController@changeStatusOrder')->name('order.changeStatusOrder');
         Route::get('/cap-nhat-trang-thai-don-hang-{value}/{id}', 'OrderController@changeStatusOrder')->name('order.changeStatusOrder');
         Route::post('/luu-don-hang', 'OrderController@save')->name('order.save');
@@ -88,7 +87,9 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
     Route::group(['middleware' => ['permission.editProduct']], function () {
         Route::get('/sua-san-pham/{id}', 'ProductController@form')->name('product.edit');
         Route::post('/luu-san-pham', 'ProductController@save')->name('product.save');
+        Route::get('/chi-tiet-don-hang/{id}', 'OrderController@detail')->name('order.detail');
     });
+
     Route::group(['middleware' => ['permission.editorOrAdmin']], function () {
         Route::get('/danh-sach-danh-muc-thuoc', 'CatProductController@index')->name('catProduct');
         Route::get('/them-danh-muc-thuoc', 'CatProductController@form')->name('catProduct.add');
@@ -110,7 +111,10 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
         Route::get('/xoa-editor/{id}', 'EditorController@delete')->name('editor.delete');
 
         Route::get('/quan-ly-thuoc-admin', 'ProductController@index_admin')->name('admin.product');
+        
         Route::get('/quan-ly-don-hang-admin', 'OrderController@index_admin')->name('admin.order');
+        Route::get('/danh-sach-don-hang-admin', 'OrderController@listOrderAdmin')->name('admin.order.list');
+
         Route::get('/quan-ly-kho-hang-admin', 'WarehouseController@index_admin')->name('admin.warehouse');
         Route::get('/quan-ly-khách-hàng-admin', 'CustomerController@index_admin')->name('admin.customer');
         Route::get('/quan-ly-doanh-thu-admin', 'RevenueController@index_admin')->name('admin.revenue');
