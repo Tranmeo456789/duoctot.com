@@ -57,6 +57,7 @@ class Kernel extends HttpKernel
         'permission.dashboard' => \App\Http\Middleware\PermissionDashboard::class,
         'permission.editorOrAdmin' => \App\Http\Middleware\PermissionEditorOrAdmin::class,
         'permission.editProduct' => \App\Http\Middleware\PermissionEditProduct::class,
+        'permission.affiliate' => \App\Http\Middleware\PermissionAffiliate ::class,
         'jwt.auth' => JWTCustom::class,
     ];
 }

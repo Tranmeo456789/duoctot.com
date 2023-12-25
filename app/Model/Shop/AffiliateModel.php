@@ -20,7 +20,7 @@ class AffiliateModel extends BackEndModel
         $this->folderUpload        = '' ;
         $filedSearch               = array_key_exists($this->controllerName, config('myconfig.config.search')) ? $this->controllerName : 'default';
         $this->fieldSearchAccepted = array_diff(config('myconfig.config.search.' . $filedSearch),['all']);
-        $this->crudNotAccepted     = ['_token','btn_save'];
+        $this->crudNotAccepted     = ['_token','btn_save','password','info_ref','fullname','phone'];
     }
     public function scopeOfUser($query)
     {
@@ -67,14 +67,19 @@ class AffiliateModel extends BackEndModel
     public function getItem($params = null, $options = null) {
         $result = null;
         if($options['task'] == 'get-item') {
-            $result = self::select('id', 'code_ref', 'info_ref','info_product','user_id',
+            $query = self::select('id', 'code_ref', 'info_ref','info_product','user_id',
             'created_at', 'updated_at')
                             ->where('id','>',0)
                             ->ofUser()
-                            ->ofActive()
-                            ->where('id', $params['id'])->first();
+                            ->ofActive();
+            if (isset($params['id'])){
+                $query->where('id', $params['id']);
+            }
+            if (isset($params['user_id'])){
+                $query->where('user_id', $params['user_id']);
+            }
         }
-        return $result;
+        return $result= $query->first();
     }
     public function saveItem($params = null, $options = null) {
         if($options['task'] == 'add-item') {
@@ -98,9 +103,7 @@ class AffiliateModel extends BackEndModel
                     $list_products = $arrProduct;
                     $params['info_product'] = json_encode($arrProduct);
                 }
-                $params['info_ref']=json_encode($params['info_ref']);
-                $params['user_id'] = '';
-                
+                //$params['info_ref']=json_encode($params['info_ref']);
                 self::insert($this->prepareParams($params));
                 DB::commit();
                 return true;
@@ -129,9 +132,6 @@ class AffiliateModel extends BackEndModel
                     $list_products = $arrProduct;
                     $params['info_product'] = json_encode($arrProduct);
                 }
-                $params['info_ref']=json_encode($params['info_ref']);
-                $params['user_id'] = '';
-
                 self::where('id', $params['id'])->update($this->prepareParams($params));
                 DB::commit();
                 return true;
@@ -154,6 +154,9 @@ class AffiliateModel extends BackEndModel
                                                             'list_products'=>$item->list_products],
                                                         ['task' => 'output-warehouse']);
         }
+    }
+    public function userRef(){
+        return $this->belongsTo('App\Model\Shop\UsersModel','user_id','user_id');
     }
     
 }

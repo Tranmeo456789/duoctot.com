@@ -48,11 +48,7 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
         Route::get('/chi-tiet-hoa-don', 'OrderController@detail_invoice')->name('invoice.detail');
 
         Route::get('/danh-sach-don-hang', 'OrderController@index')->name('order');
-        Route::get('/cap-nhat-trang-thai-don-hang-{value}/{id}', 'OrderController@changeStatusOrder')->name('order.changeStatusOrder');
-        Route::get('/cap-nhat-trang-thai-don-hang-{value}/{id}', 'OrderController@changeStatusOrder')->name('order.changeStatusOrder');
-        Route::post('/luu-don-hang', 'OrderController@save')->name('order.save');
-
-
+        
         Route::get('/phieu-gui-hang', 'ConsignmentController@index')->name('consignment.list');
         Route::get('/tao-phieu-gui-hang', 'ConsignmentController@add')->name('consignment.add');
         Route::get('/chi-tiet-phieu-gui-hang', 'ConsignmentController@detail')->name('consignment.detail');
@@ -84,10 +80,15 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
     Route::group(['middleware' => ['permission.dashboard']], function () {
         Route::get('/', 'DashboardController@index')->name('dashboard');
     });
+    Route::group(['middleware' => ['permission.affiliate']], function () {
+        Route::get('/thong-ke-hoa-hong-theo-san-pham-dai-ly', 'AffiliateController@refAffiliate')->name('affiliate.refAffiliate');
+    });
     Route::group(['middleware' => ['permission.editProduct']], function () {
         Route::get('/sua-san-pham/{id}', 'ProductController@form')->name('product.edit');
         Route::post('/luu-san-pham', 'ProductController@save')->name('product.save');
         Route::get('/chi-tiet-don-hang/{id}', 'OrderController@detail')->name('order.detail');
+        Route::get('/cap-nhat-trang-thai-don-hang-{value}/{id}', 'OrderController@changeStatusOrder')->name('order.changeStatusOrder');
+        Route::post('/luu-don-hang', 'OrderController@save')->name('order.save');
     });
 
     Route::group(['middleware' => ['permission.editorOrAdmin']], function () {

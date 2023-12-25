@@ -19,13 +19,14 @@
             @php
                 $index++;
                 $codeRef = Hightlight::show($val->code_ref, $params['search'], 'code_ref');
+                $userRef=$val->userRef;
             @endphp
             <tr>
                 <th scope="row" style="width: 10%">{{$index}}</th>
                 <td style="width: 30%" class='name'><p>{!! $codeRef !!}</p></td>
                 <td style="width: 45%" class='text-justify'>
-                    <div>Họ tên: {{$val['info_ref']['name']??null}}</div>
-                    <div>Số ĐT: {{$val['info_ref']['phone']??null}}</div>
+                    <div>Họ tên: {{$userRef['fullname']??null}}</div>
+                    <div>Số ĐT: {{$userRef['phone']??null}}</div>
                 </td>
                 <td style="width: 25%">
                     <a href="{{route("$controllerName.detail",$val->id)}}" class="btn btn-info btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="xem chi tiết"><i class="fa fa-eye"></i></a>

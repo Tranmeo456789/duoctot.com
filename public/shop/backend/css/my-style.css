@@ -206,6 +206,9 @@ span.highlight {
 .btn-copy{
     margin-left: -10px;
 }
+.wp-link-affiliate .value-link{
+    display: none;
+}
 @media screen and (max-width: 1400px) {
     .business-results li {
         width: 50%;

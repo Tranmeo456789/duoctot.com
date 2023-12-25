@@ -9,6 +9,8 @@ use App\Model\Shop\UsersModel as MainModel;
 use App\Model\Shop\ProvinceModel;
 use App\Model\Shop\DistrictModel;
 use App\Model\Shop\WardModel;
+use App\Model\Shop\AffiliateModel;
+
 class ProfileController extends BackEndController
 {
     public function __construct()
@@ -47,8 +49,14 @@ class ProfileController extends BackEndController
             $itemsWard = (new WardModel())->listItems(['parentID' => $params['district_id']],
                                                                 ['task'=>'admin-list-items-in-selectbox']);
         }
+        $userInfo = $request->session()->get('user');
+        $userAff = (new AffiliateModel)->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
+        if(isset($userAff) && !empty($userAff)){
+            $codeRef = $userAff['code_ref'];
+        }
+        $codeRef = isset($userAff['code_ref']) ? $userAff['code_ref'] : null;
         return view($this->pathViewController .  'info',
-                    compact('item','details', 'itemsProvince' ,'itemsDistrict','itemsWard')
+                    compact('item','details', 'itemsProvince' ,'itemsDistrict','itemsWard','codeRef')
                 );
     }
     public function save(MainRequest $request)

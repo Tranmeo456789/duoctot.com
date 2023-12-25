@@ -22,10 +22,13 @@
 
     $linkGetListDistrict = route('district.getListByParentID',['parentID' => 'value_new']);
     $linkGetListWard = route('ward.getListByParentID',['parentID' => 'value_new']);
+
+    $codeRef=
+
     $elements = [
         [
             'label'   => HTML::decode(Form::label('member_id', $label['member_id'] .  $star, $formLabelAttr)),
-            'element' => Form::text('details[member_id]', $details['member_id']??null, array_merge($formInputAttr,['placeholder'=>$label['member_id'],'readonly' => 'readonly'])),
+            'element' => Form::text('details[member_id]', $codeRef ?? $details['member_id']??null, array_merge($formInputAttr,['placeholder'=>$label['member_id'],'readonly' => 'readonly'])),
             'widthElement' => 'col-12 col-md-4'
         ],[
             'label'   => HTML::decode(Form::label('fullname', 'Họ tên' .  $star, $formLabelAttr)),

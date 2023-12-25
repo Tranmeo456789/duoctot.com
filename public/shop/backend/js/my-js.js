@@ -531,3 +531,20 @@ $(document).on('click', '.btn-copy', function(event) {
     document.execCommand("copy");
     tempTextArea.remove();
 });
+$(document).on('click', '.show-link', function(event) {
+    var valueLink = $(this).siblings(".value-link");
+    valueLink.toggle();
+    var icon = $(this).find("i");
+    icon.toggleClass("fas fa-eye-slash");
+    var buttonText = valueLink.is(":visible") ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
+    $(this).html(buttonText);
+});
+$(document).on('click', '.wp-link-affiliate .btn-copy-link', function(event) {
+    var copyText = $(this).siblings('.value-link');
+    var tempInput = $("<input>");
+    $("body").append(tempInput);
+    tempInput.val(copyText.text()).select();
+    document.execCommand("copy");
+    tempInput.remove();
+});
+

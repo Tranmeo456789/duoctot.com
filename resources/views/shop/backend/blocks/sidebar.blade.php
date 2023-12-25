@@ -7,7 +7,7 @@
     <!-- Sidebar Menu -->
     <nav>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            @if (((Session::has('user') && Session::get('user')['user_type_id'] > 3)) || ((Session::has('user') && Session::get('user')['is_admin'] == 1)) )
+            @if (((Session::has('user') && Session::get('user')['user_type_id'] > 3 && Session::get('user')['user_type_id'] < 10)) || ((Session::has('user') && Session::get('user')['is_admin'] == 1)) )
             <li class="nav-item">
                 <a href="{{ route('dashboard') }}" class="nav-link">
                     <i class="far fa-list-alt nav-icon"></i>
@@ -38,6 +38,14 @@
                     </li>
                 </ul>
             </li>
+            @if (Session::has('user') && Session::get('user')['user_type_id'] == 10 ) 
+            <li class="nav-item">
+                <a href="{{ route('affiliate.refAffiliate') }}" class="nav-link">
+                    <i class="far fa-list-alt nav-icon"></i>
+                    <p>Thống kê bán SP</p>
+                </a>
+            </li>
+            @endif
             @if ((Session::has('user') && Session::get('user')['is_admin'] == 1) || (Session::has('user') && Session::get('user')['is_admin'] == 2) )         
             <li class="nav-item">
                 <a href="{{ route('catProduct') }}" class="nav-link">
@@ -46,7 +54,7 @@
                 </a>
             </li>
             @endif
-            @if ((Session::has('user') && Session::get('user')['user_type_id'] > 3)) 
+            @if ((Session::has('user') && Session::get('user')['user_type_id'] > 3 && Session::get('user')['user_type_id'] < 10)) 
             <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-dumpster-fire"></i>

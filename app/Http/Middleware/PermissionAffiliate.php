@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class PermissionDashboard
+class PermissionAffiliate
 {
     /**
      * Handle an incoming request.
@@ -17,7 +17,7 @@ class PermissionDashboard
     {
         if($request->session()->has('user'))  {
             $userInfo = $request->session()->get('user');
-            if (($userInfo['user_type_id'] > 3 && $userInfo['user_type_id'] < 10 ) || $userInfo['is_admin'] == 1){
+            if ($userInfo['user_type_id'] == 10){
                 return $next($request);
             }  
             return redirect()->route('profile.info');
@@ -26,5 +26,3 @@ class PermissionDashboard
         return redirect()->route('home');
     }
 }
-
-// news/login

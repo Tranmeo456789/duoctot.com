@@ -65,7 +65,7 @@ class UsersModel extends BackEndModel
                 \App\Model\Shop\UserValuesModel::insert($this->prepareParams($paramsUserValue));
                 //return self::getItem(['user_id'=>$params['user_id']],['task' => 'get-item']);
             }
-            return false;
+            return $params['user_id'];
         }
         if($options['task'] == 'add-item-editor') {
             $params['password']  = Hash::make($params['password']);
@@ -152,6 +152,23 @@ class UsersModel extends BackEndModel
                 throw $th;
             }
 
+        }
+        if($options['task'] == 'update-item-simple'){
+            DB::beginTransaction();
+            try {
+                if(isset($params['password']) && !empty($params['password'])){
+                    $params['password'] = Hash::make($params['password']);
+                } else {
+                    unset($params['password']);
+                }
+                self::where('user_id', $params['user_id'])->update($this->prepareParams($params));
+                DB::commit();
+                return true;
+            } catch (\Throwable $th) {
+                DB::rollback();
+                return false;
+                throw $th;
+            }
         }
     }
     public function details()

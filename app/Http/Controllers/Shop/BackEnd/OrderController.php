@@ -100,13 +100,13 @@ class OrderController extends BackEndController
             $params['status_order'] = $request->status_order;
             $params['warehouse_id'] = intval($request->warehouse_id);
             $task   = "update-item";
-            $notify = "Cập nhật $this->pageTitle thành công!";
+            $notify = "Cập nhật trạng thái đơn hàng thành công!";
             $this->model->saveItem($params, ['task' => $task]);
             $request->session()->put('app_notify', $notify);
             return response()->json([
                 'fail' => false,
-                'redirect_url' => route($this->controllerName),
-                'message'      => $notify,
+                'redirect_url' => back()->getTargetUrl(),
+                'message' => $notify,
             ]);
         }
     }
