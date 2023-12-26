@@ -29,16 +29,16 @@ use App\Helpers\MyFunction;
                         $sumMoney=0;
                         @endphp
                         <tbody>
-                            @foreach ($infoProduct as $key=>$val)
+                            @foreach ($infoProduct as $val)
                             @php
                             $index++;
-                            $product = ProductModel::select('slug','name','price')->find($val['product_id']);
+                            $product = ProductModel::select('slug','name','price','discount_ref')->find($val);
                             $linkAffiliate=route('fe.product.detail', ['slug' => $product['slug'], 'codeRef' => $codeRef]);
                             $quantity=0;
                             $totalMoney=0;
-                            if (isset($productComplete[$key])){
-                            $quantity = $productComplete[$key]['quantity'];
-                            $totalMoney = $productComplete[$key]['total_money']*$val['discount']/100;
+                            if (isset($productComplete[$val])){
+                            $quantity = $productComplete[$val]['quantity'];
+                            $totalMoney = $productComplete[$val]['total_money']*$product ['discount_ref']/100;
                             $sumQuantity+=$quantity;
                             $sumMoney+=$totalMoney;
                             }
@@ -49,7 +49,7 @@ use App\Helpers\MyFunction;
                                 <td style="width: 65%" class='name'>
                                     <div><span class="text-success">{{$product['name']}}</span></div>
                                     <div>Giá: <span class="text-danger">{{MyFunction::formatNumber($product['price'])}} đ</span></div>
-                                    <div>Chiết khấu: <span class="text-danger">{{$val['discount']}}%</span></div>
+                                    <div>Chiết khấu: <span class="text-danger">{{$product['discount_ref']}}%</span></div>
                                     <div class="wp-link-affiliate">Link affiliate:
                                         <span class="btn btn-sm btn-primary show-link"><i class="fas fa-eye"></i></span>
                                         <a href="{{$linkAffiliate}}" class="text-primary value-link" target="_blank">{{$linkAffiliate}}</a>

@@ -91,19 +91,19 @@ class AffiliateModel extends BackEndModel
                     'value' => date('Ymd')
                 ];
                 $params['code_ref'] = 'MDL' . date('Ymd') . sprintf("%05d",self::getMaxCode($paramsCode));
-                $list_products = $params['info_product'];
-                if (count($list_products['product_id']) > 0){
-                    $arrProduct = [];
-                    foreach($list_products['product_id'] as $key=>$val){
-                        $arrProduct[$list_products['product_id'][$key]] = [
-                            'product_id' => $list_products['product_id'][$key],
-                            'discount' => $list_products['discount'][$key],
-                        ];
-                    }
-                    $list_products = $arrProduct;
-                    $params['info_product'] = json_encode($arrProduct);
-                }
-                //$params['info_ref']=json_encode($params['info_ref']);
+                // $list_products = $params['info_product'];
+                // if (count($list_products['product_id']) > 0){
+                //     $arrProduct = [];
+                //     foreach($list_products['product_id'] as $key=>$val){
+                //         $arrProduct[$list_products['product_id'][$key]] = [
+                //             'product_id' => $list_products['product_id'][$key],
+                //             'discount' => $list_products['discount'][$key],
+                //         ];
+                //     }
+                //     $list_products = $arrProduct;
+                //     $params['info_product'] = json_encode($arrProduct);
+                // }
+                $params['info_product'] = json_encode($params['info_product']);
                 self::insert($this->prepareParams($params));
                 DB::commit();
                 return true;
@@ -120,18 +120,8 @@ class AffiliateModel extends BackEndModel
                 $this->setModifiedHistory($params);
                 $item = self::find($params['id']);
 
-                $list_products = $params['info_product'];
-                if (count($list_products['product_id']) > 0){
-                    $arrProduct = [];
-                    foreach($list_products['product_id'] as $key=>$val){
-                        $arrProduct[$list_products['product_id'][$key]] = [
-                            'product_id' => $list_products['product_id'][$key],
-                            'discount' => $list_products['discount'][$key],
-                        ];
-                    }
-                    $list_products = $arrProduct;
-                    $params['info_product'] = json_encode($arrProduct);
-                }
+                $params['info_product'] = json_encode($params['info_product']);
+
                 self::where('id', $params['id'])->update($this->prepareParams($params));
                 DB::commit();
                 return true;

@@ -39,77 +39,11 @@
             'widthElement' => 'col-6 p-0'
         ],
         [
-            'label'   => HTML::decode(Form::label('', 'Danh sách sản phẩm chiết khấu %'  .  $star, $formLabelAttr)),
+            'label'   => HTML::decode(Form::label('', 'Danh sách sản phẩm cho đại lý'  .  $star, $formLabelAttr)),
             'element' => '',
             'widthElement' => 'col-12'
-        ],[
-            'label'   => HTML::decode(Form::label('', 'Tên thuốc', $formLabelAttr)),
-            'element' => '',
-            'widthElement' => 'col-5 p-0 text-center'
-        ],[
-            'label'   => HTML::decode(Form::label('', 'Chiết khấu(%)', $formLabelAttr)),
-            'element' => '',
-            'widthElement' => 'col-2 p-0 text-center'
-        ],[
-            'label'   => HTML::decode(Form::label('', 'Link affiliate thuốc', $formLabelAttr)),
-            'element' => '',
-            'widthElement' => 'col-4 p-0 text-center'
-        ],[
-            'label'   => HTML::decode(Form::label('', '', $formLabelAttr)),
-            'element' => '',
-            'widthElement' => 'col-1 p-0 text-center'
         ]
     ];
-
-    $elementsDetails = [];
-    if (isset($item['info_product']) && (count($item['info_product']) > 0)) {
-        foreach($item['info_product'] as $keyProduct => $product) {
-            $getSlugProduct = ProductModel::select('slug')->find($product['product_id']);
-            $linkAffiliate=route('fe.product.detail', ['slug' => $getSlugProduct['slug'], 'codeRef' => $item['code_ref']]);
-            $elementsDetails[] = [
-                [
-                    'label'   => '',
-                    'element' => Form::select('info_product[product_id][]',['null' => '-- Chọn thuốc -- '] + $itemsProduct,$product['product_id'], array_merge($formSelect2Attr,['style' =>'width:100%','data-href' => $linkGetProduct])),
-                    'widthElement' => 'col-5'
-                 ],[
-                    'label'   => '',
-                    'element' => Form::text('info_product[discount][]', $product['discount'], array_merge($formNumberAttr,['placeholder'=>'chiết khấu(%)'])),
-                    'widthElement' => 'col-2 text-right'
-                ],[
-                    'label'   => '',
-                    'element' => Form::text('info_product[link_affiliate][]', $linkAffiliate, array_merge($formInputAttr,['placeholder'=>'link affiliate','readonly'=>true])),
-                    'widthElement' => 'col-4',
-                    'type' => 'input-has-copy'
-                ],[
-                    'label'   => '',
-                    'element' => Form::button("<i class='fa fa-plus'></i>",['class'=>'btn btn-sm btn-primary btn-add-row']) . " " . Form::button("<i class='fa fa-times'></i>",['class'=>'btn btn-sm btn-danger btn-delete-row']),
-                    'widthElement' => 'col-1 text-right'
-                ]
-            ];
-        }
-    }else{
-        $elementsDetails[] = [
-            [
-                'label'   => '',
-                'element' => Form::select('info_product[product_id][]',['null' => '-- Chọn thuốc -- '] + $itemsProduct,null, array_merge($formSelect2Attr,['style' =>'width:100%','data-href' => $linkGetProduct])),
-                'widthElement' => 'col-5'
-            ],[
-                'label'   => '',
-                'element' => Form::text('info_product[discount][]', 0, array_merge($formNumberAttr,['placeholder'=>'chiết khấu(%)'])),
-                'widthElement' => 'col-2 text-right'
-            ],[
-                'label'   => '',
-                'element' => Form::text('info_product[link_affiliate][]', '', array_merge($formInputAttr,['placeholder'=>'link affiliate','readonly'=>true])),
-                'widthElement' => 'col-4',
-                'type' => 'input-has-copy'
-            ],[
-                'label'   => '',
-                'element' => Form::button("<i class='fa fa-plus'></i>",['class'=>'btn btn-sm btn-primary btn-add-row']) . " " . Form::button("<i class='fa fa-times'></i>",['class'=>'btn btn-sm btn-danger btn-delete-row']),
-                'widthElement' => 'col-1 text-right'
-            ]
-        ];
-    }
-
     
     $elementsBtn  = [
             [
@@ -139,11 +73,9 @@
                             <div class="row">
                                 {!! FormTemplate::show($elements,$formInputWidth)  !!}
                             </div>
-                            @foreach($elementsDetails as $element)
-                                <div class="row row-detail">
-                                    {!! FormTemplate::show($element,$formInputWidth)  !!}
-                                </div>
-                            @endforeach
+                            <div>
+                                @include("$moduleName.pages.$controllerName.child_form.table_products")
+                            </div>
                             <div class="row">
                                 {!! FormTemplate::show($elementsBtn,$formInputWidth)  !!}
                             </div>
