@@ -23,8 +23,6 @@
     $linkGetListDistrict = route('district.getListByParentID',['parentID' => 'value_new']);
     $linkGetListWard = route('ward.getListByParentID',['parentID' => 'value_new']);
 
-    $codeRef=
-
     $elements = [
         [
             'label'   => HTML::decode(Form::label('member_id', $label['member_id'] .  $star, $formLabelAttr)),

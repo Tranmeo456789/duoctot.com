@@ -118,7 +118,28 @@ class AffiliateController extends BackEndController
     {
         $item = $this->model->getItem(['id' => $id], ['task' => 'get-item']);
         $infoProduct = $item['info_product'];
-        return view($this->pathViewController .  'detail', compact('item', 'infoProduct'));
+        $codeRef = $item['code_ref'];
+        $orders = OrderModel::select('info_product')->where('status_order','hoanTat')->get();
+        $productComplete = [];
+        if(isset($orders) && !empty($orders)){
+            foreach ($orders as $order) {
+                $productOrder = $order->info_product;
+                foreach ($productOrder as $productId => $product) {
+                    if (isset($product['codeRef']) && $product['codeRef'] === $codeRef) {
+                        if (!isset($productComplete[$productId])) {
+                            $productComplete[$productId] = [
+                                'product_id' => $productId,
+                                'quantity' => 0,
+                                'total_money' => 0,
+                            ];
+                        }
+                        $productComplete[$productId]['quantity'] += $product['quantity'];
+                        $productComplete[$productId]['total_money'] += $product['total_money'];
+                    }
+                }
+            }
+        }
+        return view($this->pathViewController .  'detail', compact('item', 'infoProduct','productComplete'));
     }
     public function refAffiliate(Request $request)
     {
