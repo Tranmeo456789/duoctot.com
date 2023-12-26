@@ -74,7 +74,7 @@ class ProductController extends BackEndController
         }
         $session->put('params.pagination.totalItemsPerPage', $this->totalItemsPerPage);
         $this->params     = $session->get('params');
-        $pageTitle='Quản lý thuốc';$this->params['user_type_id']=3;
+        $pageTitle='Quản lý thuốc';
         $items=(new UsersModel)->listItems($this->params, ['task'  => 'admin-list-items-of-shop']);
          return view($this->pathViewController .  'index_admin', [
             //'params'           => $this->params,

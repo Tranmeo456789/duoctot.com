@@ -943,14 +943,19 @@ $(document).on('change', "#name-store", function (event) {
     $('.ls-product-select').html(' ');
     $('.ls-product-select').css("display", "none");
 });
-$(document).on('keyup', ".input-search-info", function (event) {
-    var keyword = $(this).val();
-    if(keyword=='' || keyword[0]==' '){
-        $('.btn-search-home').attr("disabled","disabled");
-    }else{
+$(document).on('keyup focus input', ".wp-input-search input", function (event) {
+    var keyword = $(this).val().trim();
+    if (keyword.length > 0 && keyword[0] === ' ') {
+        keyword = keyword.substring(1);
+    }
+    if (keyword.length > 0) {
         $('.btn-search-home').removeAttr("disabled");
-    }      
-    $('.search-header-mobi .wp-input-search-simple>input').val(keyword);
+        $('.wp-input-search-simple>input').val(keyword);
+    } else {
+        $('.btn-search-home').attr("disabled", "disabled");
+        $('.wp-input-search-simple>input').val('');
+    }
+    $(this).val(keyword);
 });
 $(document).on('click', ".wp-input-search input", function (event) {
     $('.lc-mask-search').css("opacity", 1);

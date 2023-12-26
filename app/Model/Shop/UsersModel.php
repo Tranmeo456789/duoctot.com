@@ -208,9 +208,8 @@ class UsersModel extends BackEndModel
             if(isset($params['filter_in_day'])){
                 $query->whereBetween('created_at', ["{$params['filter_in_day']['day_start']}", "{$params['filter_in_day']['day_end']}"]);
             }
-            if(isset($params['user_type_id'])){
-                $query->where('user_type_id','>',$params['user_type_id']);
-            }
+                $query->where('user_type_id', '>', 3)
+                ->where('user_type_id', '<', 10);
             if (isset($params['search']['value']) && ($params['search']['value'] !== ""))  {
                 if($params['search']['field'] == "all") {
                     $query->where(function($query) use ($params){
