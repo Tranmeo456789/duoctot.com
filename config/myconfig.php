@@ -109,7 +109,8 @@
                 'quantity' => 'Số lượng',
                 'price_import' => 'Giá nhập',
                 'code_order' => 'Mã đơn hàng',
-                'status_order' => 'Trạng thái đơn hàng'
+                'status_order' => 'Trạng thái đơn hàng',
+                'discount_ref'=>'Chiết khấu cho đại lý(%)'
             ],
             'type_user' => [
                 '1' => 'Thành viên',

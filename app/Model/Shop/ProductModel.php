@@ -73,7 +73,7 @@ class ProductModel extends BackEndModel
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
                                     'preserve','note','image','featurer','long','user_id','status_product','slug','wide','high',
-                                    'mass','quantity_in_stock','created_at', 'updated_at')->where('id','>',1)
+                                    'mass','quantity_in_stock','discount_ref','created_at', 'updated_at')->where('id','>',1)
                                     ->ofUser();
             if (isset($params['group_id'])){
                 $query->whereIn('id',$params['group_id']);
@@ -131,7 +131,7 @@ class ProductModel extends BackEndModel
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
                                     'preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','long','wide','high',
-                                    'mass')
+                                    'mass','discount_ref')
                                 ->where('id','>',1)->where('status_product','da_duyet');
             if (isset($params['cat_product_id']) && ($params['cat_product_id'] != 0)){
                 $query->whereIn('cat_product_id', CatProductModel::getChild($params['cat_product_id']));
@@ -167,7 +167,7 @@ class ProductModel extends BackEndModel
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
                                     'preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','long','wide','high',
-                                    'mass')
+                                    'mass','discount_ref')
                                  //   ->whereRaw("JSON_CONTAINS(`featurer`, '\"{$params['type']}\"')");
                                     ->whereRaw("FIND_IN_SET('\"{$params['type']}\"',REPLACE(REPLACE(`featurer`, '[',''),']',''))")->where('status_product','da_duyet');
             if (isset($params['cat_product_id']) && ($params['cat_product_id'] != 0)){
@@ -186,7 +186,7 @@ class ProductModel extends BackEndModel
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
                                     'preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','long','wide','high',
-                                    'mass')
+                                    'mass','discount_ref')
                                  //   ->whereRaw("JSON_CONTAINS(`featurer`, '\"{$params['type']}\"')");
                                     ->whereRaw("FIND_IN_SET('\"{$params['type']}\"',REPLACE(REPLACE(`featurer`, '[',''),']',''))")->where('status_product','da_duyet');
             if (isset($params['cat_product_id']) && ($params['cat_product_id'] != 0)){
@@ -230,7 +230,7 @@ class ProductModel extends BackEndModel
         'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
         'dosage_forms','country_id','specification','benefit','elements',
         'preserve','note','image','featurer','slug','long','user_id','wide','high',
-        'mass', 'created_at', 'updated_at');
+        'mass','discount_ref', 'created_at', 'updated_at');
         $result =  $query->orderBy('id', 'desc')->where('user_id',$user->user_id)->get();
         return $result;
     }
@@ -243,7 +243,7 @@ class ProductModel extends BackEndModel
         'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
         'dosage_forms','country_id','specification','benefit','elements',
         'preserve','note','image','featurer','slug','long','user_id','wide','high',
-        'mass', 'created_at', 'updated_at');
+        'mass','discount_ref', 'created_at', 'updated_at');
         $result =  $query->orderBy('id', 'desc')->get();
         return $result;
     }
@@ -257,7 +257,7 @@ class ProductModel extends BackEndModel
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
                                     'preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','long','wide','high',
-                                    'mass')
+                                    'mass','discount_ref')
                             ->where('id', $params['id'])
                             ->OfCollaboratorCode()
                             ->first();
@@ -277,7 +277,7 @@ class ProductModel extends BackEndModel
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
                                     'preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','long','wide','high',
-                                    'mass');
+                                    'mass','discount_ref');
             if(isset($params['id'])){
                 $query->where('id', $params['id']);
             }

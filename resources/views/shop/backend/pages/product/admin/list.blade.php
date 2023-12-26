@@ -1,6 +1,7 @@
 @php
     use App\Helpers\Template;
     use App\Helpers\MyFunction;
+    use App\Helpers\Hightlight;
 @endphp
 <div class="set-withscreen">
     <table class="table table-bordered table-striped table-hover table-head-fixed text-wrap" id="tbList">
@@ -25,6 +26,7 @@
                     $image = Template::showImagePreviewFileManager($val['image'],$val['slug']??$val['name']);
                     $statusProductValue = array_combine(array_keys(config("myconfig.template.column.status_product")),array_column(config("myconfig.template.column.status_product"),'name'));
                     unset($statusProductValue['all']);
+                    $name = Hightlight::show($val->name, $params['search'], 'name');
                 @endphp
                 <tr>
                     <td style="width: 3%">{{$temp}}</td>
@@ -34,7 +36,7 @@
                                 {!! $image !!}
                             </div>
                             <div class="info-product ml-1">
-                                <p class="text-primary font-weight-bold mb-1">{{$val->name}}</p>
+                                <p class="text-primary font-weight-bold mb-1">{!! $name !!}</p>
                                 <p mb-1><span>Đơn vị: {{$val->unitProduct->name}}</span></p>
                             </div>
                         </div>

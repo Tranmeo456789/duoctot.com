@@ -137,8 +137,14 @@
             ],[
                 'label'   => HTML::decode(Form::label('sell_area', $label['sell_area'], $formLabelAttr)),
                 'element' => Form::select('sell_area',$itemsProvince, $item['sell_area']??null, array_merge($formSelect2Attr,['data-placeholder'=>"Mặc định(Cả nước)",'style' =>'width:100%','multiple' => 'multiple'])),
-                'widthElement' => 'col-6'
-            ],[
+                'widthElement' => 'col-3'
+            ],
+            [
+                'label'   => HTML::decode(Form::label('discount_ref',$label['discount_ref'], $formLabelAttr)),
+                'element' => Form::text('discount_ref', $item['discount_ref']??10, array_merge($formInputAttr,['placeholder'=>$label['discount_ref']])),
+                'widthElement' => 'col-3'
+            ],
+            [
                 'label' => HTML::decode(Form::label('', 'Chọn đặc tính sản phẩm' , $formLabelAttr)),
                 'element' =>'',
                 'widthElement' => 'col-12',
