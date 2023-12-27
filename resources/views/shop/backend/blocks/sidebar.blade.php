@@ -45,6 +45,12 @@
                     <p>Thống kê bán SP</p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('affiliate.infoBank') }}" class="nav-link">
+                    <i class="fas fa-money-check-alt nav-icon"></i>
+                    <p>TK ngân hàng</p>
+                </a>
+            </li>
             @endif
             @if ((Session::has('user') && Session::get('user')['is_admin'] == 1) || (Session::has('user') && Session::get('user')['is_admin'] == 2) )         
             <li class="nav-item">

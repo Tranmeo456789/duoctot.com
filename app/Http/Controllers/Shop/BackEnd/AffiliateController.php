@@ -169,4 +169,29 @@ class AffiliateController extends BackEndController
         }
         return view($this->pathViewController .  'references.index', compact('item', 'infoProduct','productComplete'));
     }
+    public function infoBank(Request $request){
+        $userInfo = $request->session()->get('user');
+        $item = $this->model->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
+        $infoBank = $item['info_bank'];
+        //return $item;
+        return view($this->pathViewController .  'references.info_bank',['item'=>$infoBank]);
+    }
+    public function saveInfoBank(Request $request){
+        $userInfo = $request->session()->get('user');
+        $item = $this->model->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
+        $infoBank = [
+            'fullname' => $request->input('info_bank.fullname'),
+            'stk_bank' => $request->input('info_bank.stk_bank'),
+            'name_bank' => $request->input('info_bank.name_bank'),
+        ];
+        
+        $notify = "Cập nhật thành công!";
+        $this->model->saveItem(['id'=> $item['id'],'info_bank'=>$infoBank], ['task' => 'edit-item']);
+        $request->session()->put('app_notify', $notify);
+        return response()->json([
+            'fail' => false,
+            'redirect_url' => route('affiliate.infoBank'),
+            'message'      => $notify,
+        ]);
+    }
 }

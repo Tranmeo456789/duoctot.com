@@ -12,7 +12,8 @@ class AffiliateModel extends BackEndModel
 {
     protected $casts = [
         'info_product'   => 'array',
-        'info_ref'=>'array'
+        'info_ref'=>'array',
+        'info_bank' => 'array'
     ];
     public function __construct() {
         $this->table               = 'affiliate';
@@ -41,7 +42,7 @@ class AffiliateModel extends BackEndModel
     public function listItems($params = null, $options = null) {
         $result = null;
         if($options['task'] == "user-list-items") {
-            $query = $this::select('id', 'code_ref', 'info_ref','info_product','user_id',
+            $query = $this::select('id', 'code_ref', 'info_ref','info_product','info_bank','user_id',
                                     'created_at', 'updated_at') ->where('id','>',1)
                             ->ofUser()->ofActive();
             if (isset($params['search']['value']) && ($params['search']['value'] !== ""))  {
@@ -67,7 +68,7 @@ class AffiliateModel extends BackEndModel
     public function getItem($params = null, $options = null) {
         $result = null;
         if($options['task'] == 'get-item') {
-            $query = self::select('id', 'code_ref', 'info_ref','info_product','user_id',
+            $query = self::select('id', 'code_ref', 'info_ref','info_product','info_bank','user_id',
             'created_at', 'updated_at')
                             ->where('id','>',0)
                             ->ofUser()
@@ -119,9 +120,12 @@ class AffiliateModel extends BackEndModel
             try {
                 $this->setModifiedHistory($params);
                 $item = self::find($params['id']);
-
-                $params['info_product'] = json_encode($params['info_product']);
-
+                if(isset($params['info_product'])){
+                    $params['info_product'] = json_encode($params['info_product']);
+                }
+                if(isset($params['info_bank'])){
+                    $params['info_bank'] = json_encode($params['info_bank']);
+                }
                 self::where('id', $params['id'])->update($this->prepareParams($params));
                 DB::commit();
                 return true;
@@ -140,9 +144,6 @@ class AffiliateModel extends BackEndModel
             $item->deleted_at   = date('Y-m-d H:i:s');
             $item->deleted_by = \Session::get('user')['user_id'];
             $item->save();
-            (new ProductWarehouseModel())->saveItem(['warehouse_id'=>$item->warehouse_id,
-                                                            'list_products'=>$item->list_products],
-                                                        ['task' => 'output-warehouse']);
         }
     }
     public function userRef(){
