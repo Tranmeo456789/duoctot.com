@@ -20,6 +20,9 @@ class PermissionDashboard
             if (($userInfo['user_type_id'] > 3 && $userInfo['user_type_id'] < 10 ) || $userInfo['is_admin'] == 1){
                 return $next($request);
             }  
+            if ( $userInfo['user_type_id'] == 10 ){
+                return redirect()->route('affiliate.dashboardRef');
+            }
             return redirect()->route('profile.info');
         }
 

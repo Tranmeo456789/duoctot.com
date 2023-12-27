@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Model\Shop\CatProductModel;
+use App\Model\Shop\AffiliateProductModel;
 use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
 
 use App\Model\Shop\ProductModel as MainModel;
@@ -25,6 +26,12 @@ class ProductController extends ShopFrontEndController
         $slug = $request->slug;
         $codeRef=$request->codeRef ?? '';
         $item= $this->model->getItem(['slug'=>$slug],['task' => 'frontend-get-item']);
+        $affiliateProduct = AffiliateProductModel::where('code_ref', $codeRef)
+            ->where('product_id', $item['id'])
+            ->first();
+        if ($affiliateProduct) {
+            $affiliateProduct->increment('sum_click');
+        }
         $albumImageCurrent=!empty($item['albumImageHash']) ? explode('|', $item['albumImageHash']) : [];
         $productViewed  = (isset($_COOKIE["productViewed"]))?json_decode($_COOKIE["productViewed"],true):[];
         $productCurrent = [];

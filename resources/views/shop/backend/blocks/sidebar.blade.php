@@ -15,6 +15,14 @@
                 </a>
             </li>
             @endif
+            @if (Session::has('user') && Session::get('user')['user_type_id'] == 10 ) 
+            <li class="nav-item">
+                <a href="{{ route('affiliate.dashboardRef') }}" class="nav-link">
+                    <i class="fas fa-columns nav-icon"></i>
+                    <p>Tổng quan</p>
+                </a>
+            </li>
+            @endif
             <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-chalkboard-teacher"></i>

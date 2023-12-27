@@ -134,57 +134,21 @@ class AffiliateController extends BackEndController
     public function detail($id)
     {
         $item = $this->model->getItem(['id' => $id], ['task' => 'get-item']);
-        $infoProduct = $item['info_product'];
         $codeRef = $item['code_ref'];
-        $orders = OrderModel::select('info_product')->where('status_order','hoanTat')->get();
-        $productComplete = [];
-        if(isset($orders) && !empty($orders)){
-            foreach ($orders as $order) {
-                $productOrder = $order->info_product;
-                foreach ($productOrder as $productId => $product) {
-                    if (isset($product['codeRef']) && $product['codeRef'] === $codeRef) {
-                        if (!isset($productComplete[$productId])) {
-                            $productComplete[$productId] = [
-                                'product_id' => $productId,
-                                'quantity' => 0,
-                                'total_money' => 0,
-                            ];
-                        }
-                        $productComplete[$productId]['quantity'] += $product['quantity'];
-                        $productComplete[$productId]['total_money'] += $product['total_money'];
-                    }
-                }
-            }
-        }
-        return view($this->pathViewController .  'detail', compact('item', 'infoProduct','productComplete'));
+        $infoProduct=$item->listIdProduct;
+        $sumMoney=$item->sumMoneyRefAffiliate($codeRef);
+        $sumQuantity=$item->sumQuantityRefAffiliate($codeRef);
+        return view($this->pathViewController .  'detail', compact('item', 'infoProduct','sumMoney','sumQuantity'));
     }
     public function refAffiliate(Request $request)
     {
         $userInfo = $request->session()->get('user');
         $item = $this->model->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
-        $infoProduct = $item['info_product'];
         $codeRef = $item['code_ref'];
-        $orders = OrderModel::select('info_product')->where('status_order','hoanTat')->get();
-        $productComplete = [];
-        if(isset($orders) && !empty($orders)){
-            foreach ($orders as $order) {
-                $productOrder = $order->info_product;
-                foreach ($productOrder as $productId => $product) {
-                    if (isset($product['codeRef']) && $product['codeRef'] === $codeRef) {
-                        if (!isset($productComplete[$productId])) {
-                            $productComplete[$productId] = [
-                                'product_id' => $productId,
-                                'quantity' => 0,
-                                'total_money' => 0,
-                            ];
-                        }
-                        $productComplete[$productId]['quantity'] += $product['quantity'];
-                        $productComplete[$productId]['total_money'] += $product['total_money'];
-                    }
-                }
-            }
-        }
-        return view($this->pathViewController .  'references.index', compact('item', 'infoProduct','productComplete'));
+        $infoProduct=$item->listIdProduct;
+        $sumMoney=$item->sumMoneyRefAffiliate($codeRef);
+        $sumQuantity=$item->sumQuantityRefAffiliate($codeRef);
+        return view($this->pathViewController .  'references.index', compact('item', 'infoProduct','sumMoney','sumQuantity'));
     }
     public function infoBank(Request $request){
         $userInfo = $request->session()->get('user');
@@ -209,5 +173,15 @@ class AffiliateController extends BackEndController
             'redirect_url' => route('affiliate.infoBank'),
             'message'      => $notify,
         ]);
+    }
+    public function dashboardRef(Request $request){
+        $userInfo = $request->session()->get('user');
+        $item = $this->model->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
+        $codeRef = $item['code_ref'];
+        $sumMoney=$item->sumMoneyRefAffiliate($codeRef);
+        $sumQuantity=$item->sumQuantityRefAffiliate($codeRef);
+        $sumLinkCount = AffiliateProductModel::where('code_ref', $codeRef)->sum('sum_click');
+
+        return view($this->pathViewController .  'references.dashboard', compact('sumMoney','sumQuantity','sumLinkCount'));
     }
 }

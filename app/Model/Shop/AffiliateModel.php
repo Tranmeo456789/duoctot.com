@@ -5,6 +5,7 @@ namespace App\Model\Shop;
 use Illuminate\Database\Eloquent\Model;
 use App\Model\Shop\BackEndModel;
 use App\Model\Shop\WarehouseModel;
+use App\Model\Shop\OrderModel;
 use App\Model\Shop\ProductWarehouseModel;
 use DB;
 use App\Helpers\MyFunction;
@@ -146,8 +147,67 @@ class AffiliateModel extends BackEndModel
             $item->save();
         }
     }
+    public function sumMoneyRefAffiliate($codeRef){
+        $orders = OrderModel::select('info_product')->where('status_order','hoanTat')->get();
+        $totalMoney = 0;
+        foreach ($orders as $order) {
+            $infoProductArray = $order->info_product;
+            foreach($infoProductArray as $val){
+                if ($val['codeRef'] == $codeRef) {
+                    $discount=ProductModel::find($val['product_id'])->discount_ref;
+                    $totalMoney+=($val['total_money']*$discount)/100;
+                }
+            }
+            
+        }
+        return $totalMoney;
+    }
+    public function sumMoneyAProductRefAffiliate($codeRef,$idProduct){
+        $orders = OrderModel::select('info_product')->where('status_order','hoanTat')->get();
+        $totalMoney = 0;
+        foreach ($orders as $order) {
+            $infoProductArray = $order->info_product;
+            foreach($infoProductArray as $val){
+                if ($val['codeRef'] == $codeRef && $val['product_id']==$idProduct) {
+                    $discount=ProductModel::find($val['product_id'])->discount_ref;
+                    $totalMoney+=($val['total_money']*$discount)/100;
+                }
+            }
+        }
+        return $totalMoney;
+    }
+    public function sumQuantityRefAffiliate($codeRef){
+        $orders = OrderModel::select('info_product')->where('status_order','hoanTat')->get();
+        $sumQuantity = 0;
+        foreach ($orders as $order) {
+            $infoProductArray = $order->info_product;
+            foreach($infoProductArray as $val){
+                if ($val['codeRef'] == $codeRef) {
+                    $sumQuantity+=$val['quantity'];
+                }
+            }
+            
+        }
+        return $sumQuantity;
+    }
+    public function sumQuantityAProductRefAffiliate($codeRef,$idProduct){
+        $orders = OrderModel::select('info_product')->where('status_order','hoanTat')->get();
+        $sumQuantity = 0;
+        foreach ($orders as $order) {
+            $infoProductArray = $order->info_product;
+            foreach($infoProductArray as $val){
+                if ($val['codeRef'] == $codeRef && $val['product_id']==$idProduct) {
+                    $sumQuantity+=$val['quantity'];
+                }
+            }
+            
+        }
+        return $sumQuantity;
+    }
     public function userRef(){
         return $this->belongsTo('App\Model\Shop\UsersModel','user_id','user_id');
     }
-    
+    public function listIdProduct(){
+        return $this->hasMany('App\Model\Shop\AffiliateProductModel','code_ref','code_ref');
+    }
 }

@@ -50,5 +50,18 @@ class AffiliateProductModel extends BackEndModel
 
         }
     }
-    
+    public function getItem($params = null, $options = null) {
+        $result = null;
+        if($options['task'] == 'get-item') {
+            $query = self::select('id', 'code_ref', 'product_id','sum_click')
+                            ->where('id','>',0);
+            if (isset($params['product_id'])){
+                $query->where('product_id', $params['product_id']);
+            }
+            if(isset($params['code_ref'])){
+                $query->where('code_ref', $params['code_ref']);
+            }
+        }
+        return $result= $query->first();
+    }
 }

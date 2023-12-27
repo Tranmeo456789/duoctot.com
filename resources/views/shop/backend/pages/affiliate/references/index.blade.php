@@ -1,5 +1,7 @@
 @php
 use App\Model\Shop\ProductModel;
+use App\Model\Shop\AffiliateProductModel;
+
 use App\Helpers\MyFunction;
 
 @endphp
@@ -11,6 +13,21 @@ use App\Helpers\MyFunction;
 <section class="content">
     <div class="container-fluid">
         <div class="row">
+            <div class="col-12">
+                <div class="card card-outline card-primary">
+                    <table class="mb-0 table table-bordered table-striped table-hover table-head-fixed text-wrap" id="tbList">
+                        <tbody>
+                            <tr>
+                                <td colspan="2" style="width: 70%" class='text-center'>
+                                    <span class="font-weight-bold">Tổng</span>
+                                </td>
+                                <td scope="row" style="width: 10%" class="text-center">{{$sumQuantity}}</td>
+                                <td scope="row" style="width: 20%" class="text-center">{{MyFunction::formatNumber($sumMoney)}} đ</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
             <div class="col-12">
                 <div class="card card-outline card-primary">
                     <table class="table table-bordered table-striped table-hover table-head-fixed text-wrap" id="tbList">
@@ -31,20 +48,13 @@ use App\Helpers\MyFunction;
                         @endphp
                         <tbody>
                             @foreach ($infoProduct as $val)
-                            @php
-                            $index++;
-                            $product = ProductModel::select('slug','name','price','discount_ref')->find($val);
-                            $linkAffiliate=route('fe.product.detail', ['slug' => $product['slug'], 'codeRef' => $codeRef]);
-                            $quantity=0;
-                            $totalMoney=0;
-                            if (isset($productComplete[$val])){
-                            $quantity = $productComplete[$val]['quantity'];
-                            $totalMoney = $productComplete[$val]['total_money']*$product ['discount_ref']/100;
-                            $sumQuantity+=$quantity;
-                            $sumMoney+=$totalMoney;
-                            }
-
-                            @endphp
+                                @php
+                                $index++;
+                                $product = ProductModel::select('slug','name','price','discount_ref')->find($val['product_id']);
+                                $linkAffiliate=route('fe.product.detail', ['slug' => $product['slug'], 'codeRef' => $codeRef]);
+                                $quantity = (new \App\Model\Shop\AffiliateModel)->sumQuantityAProductRefAffiliate($codeRef, $val['product_id']);
+                                $totalMoney = (new \App\Model\Shop\AffiliateModel)->sumMoneyAProductRefAffiliate($codeRef, $val['product_id']);
+                                @endphp
                             <tr>
                                 <td scope="row" style="width: 5%">{{$index}}</td>
                                 <td style="width: 55%" class='name'>
@@ -59,7 +69,7 @@ use App\Helpers\MyFunction;
                                         </span>
                                     </div>
                                 </td>
-                                <td scope="row" style="width: 10%" class="text-center">1</td>
+                                <td scope="row" style="width: 10%" class="text-center">{{$val['sum_click']}}</td>
                                 <td scope="row" style="width: 10%" class="text-center">{{$quantity}}</td>
                                 <td scope="row" style="width: 20%" class="text-center">{{MyFunction::formatNumber($totalMoney)}} đ</td>
                             </tr>
@@ -68,21 +78,7 @@ use App\Helpers\MyFunction;
                     </table>
                 </div>
             </div>
-            <div class="col-12">
-                <div class="card card-outline card-primary">
-                    <table class="mb-0 table table-bordered table-striped table-hover table-head-fixed text-wrap" id="tbList">
-                        <tbody>
-                            <tr>
-                                <td colspan="2" style="width: 70%" class='text-center'>
-                                    <span class="font-weight-bold">Tổng</span>
-                                </td>
-                                <td scope="row" style="width: 10%" class="text-center">{{$sumQuantity}}</td>
-                                <td scope="row" style="width: 20%" class="text-center">{{MyFunction::formatNumber($sumMoney)}} đ</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            
         </div>
     </div>
 </section>
