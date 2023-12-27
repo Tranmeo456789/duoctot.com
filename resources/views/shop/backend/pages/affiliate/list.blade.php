@@ -1,5 +1,6 @@
 @php
     use App\Helpers\Hightlight;
+    use App\Helpers\MyFunction;
 @endphp
 <table class="table table-bordered table-striped table-hover table-head-fixed text-wrap" id="tbList">
     <thead>
@@ -7,6 +8,7 @@
             <th>STT</th>
             <th>Mã đại lý</th>
             <th>Thông tin đại lý</th>
+            <th>Tổng thu nhập</th>
             <th>Tác vụ</th>
         </tr>
     </thead>
@@ -23,11 +25,12 @@
             @endphp
             <tr>
                 <th scope="row" style="width: 10%">{{$index}}</th>
-                <td style="width: 30%" class='name'><p>{!! $codeRef !!}</p></td>
-                <td style="width: 45%" class='text-justify'>
+                <td style="width: 25%" class='name'><p>{!! $codeRef !!}</p></td>
+                <td style="width: 35%" class='text-justify'>
                     <div>Họ tên: {{$userRef['fullname']??null}}</div>
                     <div>Số ĐT: {{$userRef['phone']??null}}</div>
                 </td>
+                <td style="width: 15%" class='text-center'><p>{{MyFunction::formatNumber($val['sum_money'])}} đ</p></td>
                 <td style="width: 25%">
                     <a href="{{route("$controllerName.detail",$val->id)}}" class="btn btn-info btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="xem chi tiết"><i class="fa fa-eye"></i></a>
                     <a href="{{route("$controllerName.edit",$val->id)}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit"></i></a>

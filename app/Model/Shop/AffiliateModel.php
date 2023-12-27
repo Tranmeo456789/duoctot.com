@@ -42,7 +42,7 @@ class AffiliateModel extends BackEndModel
     public function listItems($params = null, $options = null) {
         $result = null;
         if($options['task'] == "user-list-items") {
-            $query = $this::select('id', 'code_ref', 'info_ref','info_product','info_bank','user_id',
+            $query = $this::select('id', 'code_ref', 'info_ref','info_product','info_bank','sum_money','user_id',
                                     'created_at', 'updated_at') ->where('id','>',1)
                             ->ofUser()->ofActive();
             if (isset($params['search']['value']) && ($params['search']['value'] !== ""))  {
@@ -68,7 +68,7 @@ class AffiliateModel extends BackEndModel
     public function getItem($params = null, $options = null) {
         $result = null;
         if($options['task'] == 'get-item') {
-            $query = self::select('id', 'code_ref', 'info_ref','info_product','info_bank','user_id',
+            $query = self::select('id', 'code_ref', 'info_ref','info_product','info_bank','sum_money','user_id',
             'created_at', 'updated_at')
                             ->where('id','>',0)
                             ->ofUser()
@@ -107,7 +107,7 @@ class AffiliateModel extends BackEndModel
                 $params['info_product'] = json_encode($params['info_product']);
                 self::insert($this->prepareParams($params));
                 DB::commit();
-                return true;
+                return $params['code_ref'];
             } catch (\Throwable $th) {
                 DB::rollback();
                 throw $th;

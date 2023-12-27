@@ -955,7 +955,6 @@ $(document).on('keyup focus input', ".wp-input-search input", function (event) {
         $('.btn-search-home').attr("disabled", "disabled");
         $('.wp-input-search-simple>input').val('');
     }
-    $(this).val(keyword);
 });
 $(document).on('click', ".wp-input-search input", function (event) {
     $('.lc-mask-search').css("opacity", 1);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Shop\BackEnd;
 use App\Model\Shop\AffiliateModel as MainModel;
 use App\Model\Shop\ProductModel;
 use App\Model\Shop\UsersModel;
+use App\Model\Shop\AffiliateProductModel;
 use App\Model\Shop\OrderModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Shop\BackEnd\BackEndController;
@@ -84,34 +85,50 @@ class AffiliateController extends BackEndController
             $paramsUser['user_type_id'] = 10;
             $paramsUser['domain_register'] = config("myconfig.url.prod");
             $userModel = new UsersModel();
+            $paramsAffiliateProduct=[];
             if ($params['id'] != null) {
                 $task   = "edit-item";
                 $notify = "Cập nhật $this->pageTitle thành công!";
                 $item = $this->model->getItem(['id' => $params['id']], ['task' => 'get-item']);
                 $paramsUser['user_id'] = $item['user_id'];
                 $userModel->saveItem($paramsUser, ['task' => 'update-item-simple']);
+                $codeRef=$item['code_ref'];
+                $this->model->saveItem($params, ['task' => $task]);
+
+                $productIdsToCheck=$params['info_product'];
+                $existingProductIds = AffiliateProductModel::where('code_ref',$codeRef)->pluck('product_id')->toArray();
+                $newProductIds = array_diff($productIdsToCheck, $existingProductIds);
+                $oldProductIds= array_diff($existingProductIds, $productIdsToCheck);
+                $commonProductIds = array_intersect($productIdsToCheck, $existingProductIds);
+                if (!empty($newProductIds)) {
+                    foreach ($newProductIds as $productId) {
+                        (new AffiliateProductModel)->saveItem(['code_ref'=>$codeRef,'product_id'=>$productId], ['task' => 'add-item']);
+                    }
+                }
+                if (!empty($oldProductIds)) {
+                    AffiliateProductModel::whereIn('product_id', $oldProductIds)->where('code_ref', $codeRef)->update(['active' => 0]);
+                }
+                if (!empty($commonProductIds)) {
+                    AffiliateProductModel::whereIn('product_id', $commonProductIds)->where('code_ref', $codeRef)->update(['active' => 1]);
+                }
             } else {
                 $params['user_id'] = $userModel->saveItem($paramsUser, ['task' => 'register']);
+                $codeRef=$this->model->saveItem($params, ['task' => $task]); 
+                foreach ($params['info_product'] as $value) {
+                    $paramsAffiliateProduct['code_ref']=$codeRef;
+                    $paramsAffiliateProduct['product_id']=$value;
+                    (new AffiliateProductModel)->saveItem($paramsAffiliateProduct, ['task' => 'add-item']);
+                }
             }
-            if ($this->model->saveItem($params, ['task' => $task])) {
-                $request->session()->put('app_notify', $notify);
-                return response()->json([
-                    'status' => 200,
-                    'success' => true,
-                    'data' =>  null,
-                    'errors' => null,
-                    'message' => $notify,
-                    'redirect_url' => route($this->controllerName)
-                ], 200);
-            } else {
-                return response()->json([
-                    'status' => 200,
-                    'success' => false,
-                    'data' => null,
-                    'errors' => null,
-                    'message' => 'Có lỗi xảy ra, vui lòng thử lại'
-                ], 200);
-            }
+            $request->session()->put('app_notify', $notify);
+            return response()->json([
+                'status' => 200,
+                'success' => true,
+                'data' =>  null,
+                'errors' => null,
+                'message' => $notify,
+                'redirect_url' => route($this->controllerName)
+            ], 200);
         }
     }
     public function detail($id)
@@ -173,7 +190,6 @@ class AffiliateController extends BackEndController
         $userInfo = $request->session()->get('user');
         $item = $this->model->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
         $infoBank = $item['info_bank'];
-        //return $item;
         return view($this->pathViewController .  'references.info_bank',['item'=>$infoBank]);
     }
     public function saveInfoBank(Request $request){

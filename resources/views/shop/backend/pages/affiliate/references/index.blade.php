@@ -18,6 +18,7 @@ use App\Helpers\MyFunction;
                             <tr class="row-heading">
                                 <th>STT</th>
                                 <th>Thông tin sản phẩm</th>
+                                <th>SLTT(link)</th>
                                 <th>SL bán</th>
                                 <th>Thu nhập</th>
                             </tr>
@@ -46,7 +47,7 @@ use App\Helpers\MyFunction;
                             @endphp
                             <tr>
                                 <td scope="row" style="width: 5%">{{$index}}</td>
-                                <td style="width: 65%" class='name'>
+                                <td style="width: 55%" class='name'>
                                     <div><span class="text-success">{{$product['name']}}</span></div>
                                     <div>Giá: <span class="text-danger">{{MyFunction::formatNumber($product['price'])}} đ</span></div>
                                     <div>Chiết khấu: <span class="text-danger">{{$product['discount_ref']}}%</span></div>
@@ -58,6 +59,7 @@ use App\Helpers\MyFunction;
                                         </span>
                                     </div>
                                 </td>
+                                <td scope="row" style="width: 10%" class="text-center">1</td>
                                 <td scope="row" style="width: 10%" class="text-center">{{$quantity}}</td>
                                 <td scope="row" style="width: 20%" class="text-center">{{MyFunction::formatNumber($totalMoney)}} đ</td>
                             </tr>
