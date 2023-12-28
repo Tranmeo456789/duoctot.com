@@ -20,8 +20,8 @@ $(document).ready(function() {
         navigationText: false,
         paginationNumbers: false,
         pagination: true,
-        items: 1, 
-        itemsDesktop: [1000, 1],
+        items: 2, 
+        itemsDesktop: [1000, 2],
         itemsDesktopSmall: [900, 1],
         itemsTablet: [600, 1],
         itemsMobile: true

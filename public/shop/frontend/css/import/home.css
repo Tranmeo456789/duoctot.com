@@ -5,19 +5,12 @@
     position: relative;
     overflow: hidden;
 }
-#hisd{
-    position: relative;
-    margin-bottom: 150px;
-}
 #form-search {
     width: 87%;
     padding-bottom: 30px;
     background: #FFFFFF;
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.05);
     border-radius: 50px;
-    position: absolute;
-    top: -40px;
-    z-index: 501;
 }
 
 #form-search .form-search-inner {
@@ -139,7 +132,6 @@
     text-align: center;
     color: #1E1E1E;
     margin-bottom: 40px;
-    padding-top: 50px;
 }
 
 #buy-medicine h2 {

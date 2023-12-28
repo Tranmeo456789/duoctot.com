@@ -1,16 +1,22 @@
 @extends('shop.layouts.frontend')
 
 @section('content')
-<div class="section" id="slider-wp">
-    <div class="section-detail">
-        <div class="item">
-            <img src="{{asset('images/shop/banner1.png')}}" alt="" class="img-fluid" style="width:100%">
-        </div>
-        <div class="item">
-            <img src="{{asset('images/shop/banner2.png')}}" alt="" class="img-fluid" style="width:100%">
-        </div>
-        <div class="item">
-            <img src="{{asset('images/shop/banner3.png')}}" alt="" class="img-fluid" style="width:100%">
+<div class="container-slider">
+    <div class="row">
+        <div class="col-12">
+            <div class="section" id="slider-wp">
+                <div class="section-detail">
+                    <div class="item">
+                        <img src="{{asset('images/shop/banner1.png')}}" alt="" class="img-fluid" style="width:100%">
+                    </div>
+                    <div class="item">
+                        <img src="{{asset('images/shop/banner2.png')}}" alt="" class="img-fluid" style="width:100%">
+                    </div>
+                    <div class="item">
+                        <img src="{{asset('images/shop/banner3.png')}}" alt="" class="img-fluid" style="width:100%">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
