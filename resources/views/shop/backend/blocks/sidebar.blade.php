@@ -245,10 +245,24 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{route('affiliate')}}" class="nav-link">
-                    <i class="fas fa-users"></i>
-                    <p>Affiliate</p>
+                <a href="{{route('admin.order')}}" class="nav-link">
+                    <i class="nav-icon fas fa-gifts"></i>
+                    <p>Affiliate<i class="right fas fa-angle-left"></i></p>
                 </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('affiliate')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Quản lý chung</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('couponPayment')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>DS phiếu thanh toán</p>
+                        </a>
+                    </li>
+                </ul>
             </li>
             @endif
             <li class="nav-item">

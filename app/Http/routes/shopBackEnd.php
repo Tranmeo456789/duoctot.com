@@ -131,6 +131,13 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
         Route::post('/luu-affiliate', 'AffiliateController@save')->name('affiliate.save');
         Route::get('/xoa-affiliate/{id}', 'AffiliateController@delete')->name('affiliate.delete');
 
+        Route::get('/danh-sach-phieu-thanh-toan', 'CouponPaymentController@index')->name('couponPayment');
+        Route::get('/them-phieu-thanh-toan', 'CouponPaymentController@form')->name('couponPayment.add');
+        Route::get('/sua-phieu-thanh-toan/{id}', 'CouponPaymentController@form')->name('couponPayment.edit');
+        Route::get('/chi-tiet-phieu-thanh-toan/{id}', 'CouponPaymentController@detail')->name('couponPayment.detail');
+        Route::post('/luu-phieu-thanh-toan', 'CouponPaymentController@save')->name('couponPayment.save');
+        Route::get('/xoa-phieu-thanh-toan/{id}', 'CouponPaymentController@delete')->name('couponPayment.delete');
+
         // Route::get('/them-nguoi-dung', 'UserController@form')->name('user.add');
         // Route::get('/sua-nguoi-dung/{id}', 'UserController@form')->name('user.edit');
         // Route::post('/luu-nguoi-dung', 'UserController@save')->name('user.save');

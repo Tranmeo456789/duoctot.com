@@ -138,7 +138,9 @@ class AffiliateController extends BackEndController
         $infoProduct=$item->listIdProduct;
         $sumMoney=$item->sumMoneyRefAffiliate($codeRef);
         $sumQuantity=$item->sumQuantityRefAffiliate($codeRef);
-        return view($this->pathViewController .  'detail', compact('item', 'infoProduct','sumMoney','sumQuantity'));
+        $sumLinkCount = AffiliateProductModel::where('code_ref', $codeRef)->sum('sum_click');
+
+        return view($this->pathViewController .  'detail', compact('item', 'infoProduct','sumMoney','sumQuantity','sumLinkCount'));
     }
     public function refAffiliate(Request $request)
     {
@@ -148,7 +150,9 @@ class AffiliateController extends BackEndController
         $infoProduct=$item->listIdProduct;
         $sumMoney=$item->sumMoneyRefAffiliate($codeRef);
         $sumQuantity=$item->sumQuantityRefAffiliate($codeRef);
-        return view($this->pathViewController .  'references.index', compact('item', 'infoProduct','sumMoney','sumQuantity'));
+        $sumLinkCount = AffiliateProductModel::where('code_ref', $codeRef)->sum('sum_click');
+
+        return view($this->pathViewController .  'references.index', compact('item', 'infoProduct','sumMoney','sumQuantity','sumLinkCount'));
     }
     public function infoBank(Request $request){
         $userInfo = $request->session()->get('user');

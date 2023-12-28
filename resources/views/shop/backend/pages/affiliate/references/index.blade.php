@@ -18,9 +18,10 @@ use App\Helpers\MyFunction;
                     <table class="mb-0 table table-bordered table-striped table-hover table-head-fixed text-wrap" id="tbList">
                         <tbody>
                             <tr>
-                                <td colspan="2" style="width: 70%" class='text-center'>
+                                <td colspan="2" style="width: 60%" class='text-center'>
                                     <span class="font-weight-bold">Tổng</span>
                                 </td>
+                                <td scope="row" style="width: 10%" class="text-center">{{$sumLinkCount}}</td>
                                 <td scope="row" style="width: 10%" class="text-center">{{$sumQuantity}}</td>
                                 <td scope="row" style="width: 20%" class="text-center">{{MyFunction::formatNumber($sumMoney)}} đ</td>
                             </tr>

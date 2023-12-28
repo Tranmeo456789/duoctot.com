@@ -77,6 +77,9 @@ class AffiliateModel extends BackEndModel
             if (isset($params['id'])){
                 $query->where('id', $params['id']);
             }
+            if (isset($params['code_ref'])){
+                $query->where('code_ref', $params['code_ref']);
+            }
             if (isset($params['user_id'])){
                 $query->where('user_id', $params['user_id']);
             }
