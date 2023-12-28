@@ -1,3 +1,6 @@
+@php
+use App\Helpers\MyFunction;
+@endphp
 <!-- Navbar -->
 <nav class="main-header navbar navbar-expand-md navbar-white">
     <!-- Left navbar links -->

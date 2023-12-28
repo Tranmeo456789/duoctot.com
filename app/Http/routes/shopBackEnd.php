@@ -17,7 +17,7 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
     Route::get('/thong-tin-nguoi-dung', 'ProfileController@info')->name('profile.info');
     Route::post('/luu-thong-tin-nguoi-dung', 'ProfileController@save')->name('profile.save');
     Route::get('/thay-doi-mat-khau', 'ProfileController@change_password')->name('profile.password');
-    Route::post('/thay-doi-mat-khau', 'ProfileController@change_password')->name('profile.password');
+    Route::post('/luu-thay-doi-mat-khau', 'ProfileController@saveChangePassword')->name('profile.saveChangePassword');
     Route::get('/thiet-lap-cai-dat-khac', 'ProfileController@setting')->name('profile.setting');
     Route::group(['middleware' => ['permission.shop']], function () {
 

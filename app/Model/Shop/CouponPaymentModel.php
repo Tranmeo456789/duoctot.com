@@ -106,6 +106,16 @@ class CouponPaymentModel extends BackEndModel
             $item->save();
         }
     }
+    public function sumMoney($params = null, $options = null) {
+        $query = self::query();
+        if ($options['task'] == 'tinh-tong-tien-affiliate') {
+            if (isset($params['code_ref'])) {
+                $result = $query->where('code_ref', $params['code_ref']);
+            }
+        }
+        $result = $query->sum('money');
+        return $result;
+    }
     public function userRef(){
         return $this->belongsTo('App\Model\Shop\UsersModel','user_id','user_id');
     }

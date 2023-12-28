@@ -6,6 +6,9 @@
 use App\Helpers\MyFunction;
 @endphp
 <section class="content">
+    <div class="text-right mb-3">
+        <span class="font-weight-bold">(Số dư: <span class="text-danger">{{MyFunction::formatNumber($sumMoney-$sumPayment)}} đ</span> )</span>
+    </div>
     <div class="card card-outline card-primary mb800-0">
         @include("$moduleName.blocks.x_title", ['title' => 'Tổng quan tài khoản'])
         <div class="card-body p-0">
@@ -27,7 +30,7 @@ use App\Helpers\MyFunction;
                             <div class="icon"><i class="far fa-newspaper"></i></i></div>
                             <div>
                                 <h6>Đã nhận</h6>
-                                <h5>0 đ</h5>
+                                <h5>{{$sumPayment??""}} đ</h5>
                             </div>
                         </a>
                     </div>

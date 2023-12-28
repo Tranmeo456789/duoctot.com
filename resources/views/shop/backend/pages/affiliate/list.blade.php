@@ -1,6 +1,9 @@
 @php
     use App\Helpers\Hightlight;
     use App\Helpers\MyFunction;
+    use App\Model\Shop\CouponPaymentModel;
+    use App\Model\Shop\AffiliateModel;
+
 @endphp
 <table class="table table-bordered table-striped table-hover table-head-fixed text-wrap" id="tbList">
     <thead>
@@ -22,6 +25,10 @@
                 $index++;
                 $codeRef = Hightlight::show($val->code_ref, $params['search'], 'code_ref');
                 $userRef=$val->userRef;
+                $sumPayment=(new CouponPaymentModel)->sumMoney(['code_ref'=>$codeRef],['task'=>'tinh-tong-tien-affiliate']);
+                $sumMoney=(new AffiliateModel)->sumMoneyRefAffiliate($codeRef);
+
+                $restMoney=$sumMoney-$sumPayment;
             @endphp
             <tr>
                 <th scope="row" style="width: 10%">{{$index}}</th>
@@ -30,7 +37,7 @@
                     <div>Họ tên: {{$userRef['fullname']??null}}</div>
                     <div>Số ĐT: {{$userRef['phone']??null}}</div>
                 </td>
-                <td style="width: 15%" class='text-center'><p>{{MyFunction::formatNumber(0)}} đ</p></td>
+                <td style="width: 15%" class='text-center'><p>{{MyFunction::formatNumber($restMoney??0)}} đ</p></td>
                 <td style="width: 25%">
                     <a href="{{route("$controllerName.detail",$val->id)}}" class="btn btn-info btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="xem chi tiết"><i class="fa fa-eye"></i></a>
                     <a href="{{route("$controllerName.edit",$val->id)}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit"></i></a>

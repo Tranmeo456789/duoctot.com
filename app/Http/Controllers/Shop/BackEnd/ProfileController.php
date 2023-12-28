@@ -110,6 +110,52 @@ class ProfileController extends BackEndController
     {
         return view($this->pathViewController .  'password');
     }
+    public function saveChangePassword(Request $request){
+        if (!$request->ajax()) return view("errors." .  'notfound', []);
+        if (isset($request->validator) && $request->validator->fails()) {
+            return response()->json([
+                'status' => 200,
+                'data' => null,
+                'success' => false,
+                'errors' => $request->validator->errors()
+            ]);
+        }
+        if ($request->method() == 'POST') {
+            $params = $request->all();
+
+            $task   = $params['task'];
+            $notify = "Cập nhật $this->pageTitle thành công!";
+            $redirect_url = route($this->controllerName .'.info');
+            if ($task == 'change-password') {
+                $notify = "Thay đổi mật khẩu thành công!";
+                $redirect_url = route($this->controllerName .'.password');
+            }
+            if ($this->model->saveItem($params, ['task' => 'change-password'])){
+                $request->session()->put('app_notify', $notify);
+                $userModel = new MainModel();
+                $current_user = $this->model->getItem(['user_id'=>$params['user_id']], ['task' => 'get-item']);
+                $request->session()->put('user', $current_user);
+                return response()->json([
+                    'status' => 200,
+                    'success' => true,
+                    'data' =>  null,
+                    'errors' => null,
+                    'message' => $notify,
+                    'redirect_url' => $redirect_url
+                ], 200);
+            }else{
+                return response()->json([
+                    'status' => 200,
+                    'success' => false,
+                    'data' =>  null,
+                    'errors' => null,
+                    'message' => 'Có lỗi xảy ra trong quá trình cập nhật thông tin',
+                    'redirect_url' => ''
+                ], 200);
+            }
+
+        }
+    }
     public function setting()
     {
         return view('shop.backend.profile.setting');

@@ -6,7 +6,7 @@ use App\Model\Shop\AffiliateModel as MainModel;
 use App\Model\Shop\ProductModel;
 use App\Model\Shop\UsersModel;
 use App\Model\Shop\AffiliateProductModel;
-use App\Model\Shop\OrderModel;
+use App\Model\Shop\CouponPaymentModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Shop\BackEnd\BackEndController;
 use App\Http\Requests\AffiliateRequest as MainRequest;
@@ -45,7 +45,7 @@ class AffiliateController extends BackEndController
             });
             $items              = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
         }
-
+        
         return view($this->pathViewController .  'index', [
             'params'           => $this->params,
             'items'            => $items
@@ -185,7 +185,7 @@ class AffiliateController extends BackEndController
         $sumMoney=$item->sumMoneyRefAffiliate($codeRef);
         $sumQuantity=$item->sumQuantityRefAffiliate($codeRef);
         $sumLinkCount = AffiliateProductModel::where('code_ref', $codeRef)->sum('sum_click');
-
-        return view($this->pathViewController .  'references.dashboard', compact('sumMoney','sumQuantity','sumLinkCount'));
+        $sumPayment=(new CouponPaymentModel)->sumMoney(['code_ref'=>$codeRef],['task'=>'tinh-tong-tien-affiliate']);
+        return view($this->pathViewController .  'references.dashboard', compact('sumMoney','sumPayment','sumQuantity','sumLinkCount'));
     }
 }
