@@ -151,6 +151,7 @@
                 'tre_em' => 'Trẻ em',
                 'nguoi_cao_tuoi' => 'Người cao tuổi',
                 'phu_nu_cho_con_bu' => 'Phụ nữ cho con bú',
+                'phu_nu' => 'Phụ nữ',
                 'hien_thi_ben_trai'=> 'Hiển thị bên trái',
                 'hien_thi_ben_phai' => 'Hiển thị bên phải'
             ],

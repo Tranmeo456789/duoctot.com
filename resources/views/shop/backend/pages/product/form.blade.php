@@ -111,12 +111,12 @@
             ],
             [
                 'label'   => HTML::decode(Form::label('percent_discount',$label['percent_discount'], $formLabelAttr)),
-                'element' => Form::text('percent_discount', $item['percent_discount']??null, array_merge($formInputAttr,['placeholder'=>$label['percent_discount']])),
+                'element' => Form::text('percent_discount', $item['percent_discount']??10, array_merge($formInputAttr,['placeholder'=>$label['percent_discount']])),
                 'widthElement' => 'col-3'
             ],
             [
                 'label'   => HTML::decode(Form::label('expiration_date',$label['expiration_date'], $formLabelAttr)),
-                'element' => Form::text('expiration_date', $item['expiration_date']??null, array_merge($formInputAttr,['placeholder'=>$label['expiration_date']])),
+                'element' => Form::text('expiration_date', $item['expiration_date']??'Xem trên bao bì sản phẩm', array_merge($formInputAttr,['placeholder'=>$label['expiration_date']])),
                 'widthElement' => 'col-3'
             ],[
                 'label'   => HTML::decode(Form::label('unit_id', $label['unit_id'] .  $star , $formLabelAttr)),
@@ -124,11 +124,11 @@
                 'widthElement' => 'col-3'
             ],[
                 'label'   => HTML::decode(Form::label('amout_max',$label['amout_max'], $formLabelAttr)),
-                'element' => Form::text('amout_max', $item['amout_max']??null, array_merge($formInputAttr,['placeholder'=>$label['amout_max']])),
+                'element' => Form::text('amout_max', $item['amout_max']??10, array_merge($formInputAttr,['placeholder'=>$label['amout_max']])),
                 'widthElement' => 'col-3'
             ],[
                 'label'   => HTML::decode(Form::label('inventory_min',$label['inventory_min'], $formLabelAttr)),
-                'element' => Form::text('inventory_min', $item['inventory_min']??null, array_merge($formInputAttr,['placeholder'=>$label['inventory_min']])),
+                'element' => Form::text('inventory_min', $item['inventory_min']??10, array_merge($formInputAttr,['placeholder'=>$label['inventory_min']])),
                 'widthElement' => 'col-3'
             ],[
                 'label'   => HTML::decode(Form::label('type_price', $label['type_price'] .  $star , $formLabelAttr)),
