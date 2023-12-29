@@ -9,4 +9,4 @@ $objectProducts=[
     @include("$moduleName.templates.box_title_product",['title'=>'Sản phẩm theo đối tượng','img'=>'objects.png'])
     @include("$moduleName.templates.select_filter_product",['items'=>$objectProducts])
 </h1>
-@include("$moduleName.templates.list_product",['items'=>$product_selling])
+@include("$moduleName.templates.list_product",['items'=>$productInObject])

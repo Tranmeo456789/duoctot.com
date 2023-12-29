@@ -715,7 +715,7 @@ $(document).on('click', ".slect-item-customer", function (event) {
             _token: _token
         },
         success: function (data) {
-            $('.list-product-object').html(data);
+            $('#product-by-object .ls_product').html(data);
         },
     });
 });
@@ -760,7 +760,7 @@ $(document).on('click', ".view-detail-order", function (event) {
     }); 
 });
 $(document).on('click', ".view-btn-add-product", function (event) {
-    var offset = parseInt($(this).data("offset"));
+    var offset = parseInt($(this).attr("data-offset"));
     var url = $(this).attr("data-href");
     var _token = $('input[name="_token"]').val();
     var type = $(this).attr("data-type");

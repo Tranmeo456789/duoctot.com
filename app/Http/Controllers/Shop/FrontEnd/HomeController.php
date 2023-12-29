@@ -23,13 +23,13 @@ class HomeController extends ShopFrontEndController
         $numTake=20;
         $product_selling = (new ProductModel())->listItems(null, ['task' => 'frontend-list-items'])->take($numTake);
         $product_covid=(new ProductModel())->listItems(['type'=>'hau_covid','limit'=>10], ['task' => 'frontend-list-items-by-type']);
-        $product=(new ProductModel())->listItems(['type'=>'tre_em','limit'=>10], ['task' => 'frontend-list-items']);
+        $productInObject=(new ProductModel())->listItems(['type'=>'tre_em','limit'=>10], ['task' => 'frontend-list-items-by-type']);
         $itemsProduct['new'] = (new ProductModel())->listItems(['type'=>'new','limit'=>10], ['task' => 'frontend-list-items-by-type']);
         $couterSumProduct=(new ProductModel())->countItems(null, ['task' => 'count-items-all-product-frontend']);
         $couterSumProduct=$couterSumProduct[0]['count']-20;
         return view(
             $this->pathViewController . 'index',
-            compact('product_selling','product_covid','product','itemsProduct','couterSumProduct')
+            compact('product_selling','product_covid','productInObject','itemsProduct','couterSumProduct')
         );
     }
     public function ajaxHoverCatLevel1(Request $request)
@@ -73,14 +73,8 @@ class HomeController extends ShopFrontEndController
 
     public function ajax_filter(Request $request){
         $data = $request->all();
-        $ls_product='';
         $object_product = $request->object_product;
-        $params['type']=$object_product;$params['limit']=10;
-        $product=(new ProductModel())->listItems($params, ['task' => 'frontend-list-items']);
-        $result = array(
-            'test'=>$object_product
-        );
-        return view("$this->pathViewController.partial.product_object",compact('product'));
-        return response()->json($result, 200);
+        $productInObject=(new ProductModel())->listItems(['type'=>$object_product,'limit'=>10], ['task' => 'frontend-list-items-by-type']);
+        return view("$this->moduleName.partial.product",['items'=>$productInObject]);
     }
 }
