@@ -71,7 +71,7 @@
             @if ((Session::has('user') && Session::get('user')['user_type_id'] > 3 && Session::get('user')['user_type_id'] < 10)) 
             <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-dumpster-fire"></i>
+                    <i class="nav-icon fab fa-product-hunt"></i>
                     <p>
                         Quản lý thuốc
                         <i class="right fas fa-angle-left"></i>
@@ -100,13 +100,13 @@
             </li>
             <li class="nav-item">
                 <a href="{{route('producer')}}" class="nav-link">
-                    <i class="nav-icon fas fa-box-tissue"></i>
+                    <i class="nav-icon fas fa-record-vinyl"></i>
                     <p>Quản lý Nhà sản xuất</p>
                 </a>
             </li>
             <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-gifts"></i>
+                    <i class="nav-icon fab fa-first-order"></i>
                     <p>
                         Quản lý đơn hàng
                         <i class="right fas fa-angle-left"></i>
@@ -135,7 +135,7 @@
             </li>
             <li class="nav-item has-treeview">
                 <a href="" class="nav-link">
-                    <i class="nav-icon fas fa-store"></i>
+                    <i class="nav-icon fas fa-weight"></i>
                     <p>
                         Kho hàng
                         <i class="right fas fa-angle-left"></i>
@@ -164,7 +164,7 @@
             </li>
             <li class="nav-item">
                 <a href="{{route('customer')}}" class="nav-link">
-                    <i class="nav-icon fas fa-person-booth"></i>
+                    <i class="nav-icon fas fa-user-friends"></i>
                     <p>Quản lý khách hàng</p>
                 </a>
             </li>
@@ -172,7 +172,7 @@
             @if ((Session::has('user') && Session::get('user')['is_admin'] == 1) || (Session::has('user') && Session::get('user')['is_admin'] == 2))
             <li class="nav-item">
                 <a href="{{route('admin.product.list')}}" class="nav-link">
-                    <i class="nav-icon fas fa-dumpster-fire"></i>
+                    <i class="nav-icon fab fa-product-hunt"></i>
                     <p>Quản lý Thuốc <i class="right fas fa-angle-left"></i></p>
                 </a>
                 <ul class="nav nav-treeview">
@@ -196,7 +196,7 @@
             @if ((Session::has('user') && Session::get('user')['is_admin'] == 1))
             <li class="nav-item">
                 <a href="{{route('admin.order')}}" class="nav-link">
-                    <i class="nav-icon fas fa-gifts"></i>
+                    <i class="nav-icon fab fa-first-order"></i>
                     <p>Quản lý đơn hàng<i class="right fas fa-angle-left"></i></p>
                 </a>
                 <ul class="nav nav-treeview">
@@ -216,13 +216,13 @@
             </li>
             <li class="nav-item">
                 <a href="{{route('admin.revenue')}}" class="nav-link">
-                    <i class="fas fa-search-dollar"></i>
+                    <i class="nav-icon fas fa-search-dollar"></i>
                     <p>Quản lý doanh thu</p>
                 </a>
             </li>
             <div class="nav-item">
                 <a href="{{route('admin.warehouse')}}" class="nav-link">
-                    <i class="nav-icon fas fa-store"></i>
+                    <i class="nav-icon fas fa-weight"></i>
                     <p>Kho hàng</p>
                 </a>
             </div>
@@ -234,7 +234,7 @@
             </li>
             <li class="nav-item">
                 <a href="{{route('admin.customer')}}" class="nav-link">
-                <i class="nav-icon fas fa-person-booth"></i>
+                <i class="nav-icon fas fa-user-friends"></i>
                     <p>Quản lý khách hàng</p>
                 </a>
             </li>
@@ -246,7 +246,7 @@
             </li>
             <li class="nav-item">
                 <a href="{{route('admin.order')}}" class="nav-link">
-                    <i class="nav-icon fas fa-gifts"></i>
+                    <i class="nav-icon fas fa-external-link-square-alt"></i>
                     <p>Affiliate<i class="right fas fa-angle-left"></i></p>
                 </a>
                 <ul class="nav nav-treeview">
@@ -267,7 +267,7 @@
             @endif
             <li class="nav-item">
                 <a href="{{route('user.logout')}}" class="nav-link">
-                    <i class="fas fa-sign-out-alt"></i>
+                    <i class="nav-icon fas fa-sign-out-alt"></i>
                     <p>Đăng xuất</p>
                 </a>
             </li>

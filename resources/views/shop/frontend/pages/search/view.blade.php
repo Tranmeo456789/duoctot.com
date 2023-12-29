@@ -34,7 +34,7 @@
 <div class="local">
     @include("$moduleName.templates.local_drugstore")
 </div>
-<div class="wp-inner mt-5">
+<div class="wp-inner mt-3 mt-lg-4">
     <div class="feedback-customer">
         @include("$moduleName.templates.feedback_customer")
     </div>

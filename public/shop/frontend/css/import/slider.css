@@ -49,21 +49,26 @@
 /* Styling Pagination*/
 .owl-theme .owl-controls .owl-page span{
     display: block;
-    width: 12px;
-    height: 12px;
+    width: 8px;
+    height: 8px;
     margin: 5px 7px;
     filter: Alpha(Opacity=50);/*IE7 fix*/
     opacity: 0.5;
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
     border-radius: 20px;
-    background: #6eeca3;
+    background: #c1c8d1;
+}
+#slider-wp{
+    border-radius: 0.75rem;
+    overflow: hidden;
 }
 #slider  .owl-page span{background: rgb(177, 21, 21);}
 .owl-pagination { position: absolute;
     right: 50%;
     transform: translateX(50%);
-    bottom: 12px;}
+    bottom: 0;
+}
 #slider .owl-pagination{bottom: 10px; }
 
 .owl-theme .owl-controls .owl-page.active span,

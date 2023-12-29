@@ -31,13 +31,13 @@ $status=[
             @include("$moduleName.pages.order.partial.product_order_frontend")
         </div>
     </div>
-    <div class="service-tdoctor mt-5">
+    <div class="service-tdoctor mt-3 mt-lg-4">
         @include("$moduleName.templates.info_service")
     </div>
     <div class="local">
         @include("$moduleName.templates.local_drugstore")
     </div>
-    <div class="wp-inner mt-5">
+    <div class="wp-inner mt-3 mt-lg-4">
         <div class="feedback-customer">
             @include("$moduleName.templates.feedback_customer")
         </div>

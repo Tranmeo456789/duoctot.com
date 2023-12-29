@@ -30,7 +30,7 @@ use App\Helpers\MyFunction;
                             <div class="icon"><i class="far fa-newspaper"></i></i></div>
                             <div>
                                 <h6>Đã nhận</h6>
-                                <h5>{{$sumPayment??""}} đ</h5>
+                                <h5>{{MyFunction::formatNumber($sumPayment??0) . ' đ'}}</h5>
                             </div>
                         </a>
                     </div>

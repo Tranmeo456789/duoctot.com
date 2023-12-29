@@ -1,9 +1,9 @@
 @extends('shop.layouts.frontend')
 
 @section('content')
-<div class="container-slider">
+<div class="container-slider mt-0 mt-lg-2 pl-0 pl-lg-2">
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 col-lg-8">
             <div class="section" id="slider-wp">
                 <div class="section-detail">
                     <div class="item">
@@ -16,6 +16,11 @@
                         <img src="{{asset('images/shop/banner3.png')}}" alt="" class="img-fluid" style="width:100%">
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="d-none d-lg-block col-lg-3">
+            <div>
+                <img src="{{asset('images/shop/banner-right-home.jpg')}}" alt="" class="img-fluid" style="width:100%">
             </div>
         </div>
     </div>
@@ -42,21 +47,21 @@
         </div>
     </div>
 </div>
-<div class="wp-inner mt-3 mt-lg-5">
+<div class="wp-inner mt-3 mt-lg-4">
     <div id="selling-product" class="parent-btn-view-add">
         @include("$moduleName.pages.$controllerName.child_index.best_selling_product")
         @include("$moduleName.block.btn_view_add",['countProduct'=>$couterSumProduct])
     </div>
 </div>
 @if(count($product_covid)>0)
-<div class="product-backround  mt-3 mt-lg-5 py-4">
+<div class="product-backround  mt-3 mt-lg-4 py-4">
     <div class="wp-inner">
         @include("$moduleName.templates.box_title_product",['title' => 'Sản phẩm hậu covid','classBackground'=>'bg-danger'])
         @include("$moduleName.templates.list_product",['items'=>$product_covid])
     </div>
 </div>
 @endif
-<div class="wp-inner mt-5">
+<div class="wp-inner mt-3 mt-lg-4">
     <div id="product-by-object">
         @include("$moduleName.pages.$controllerName.child_index.product_by_object")
     </div>
@@ -64,13 +69,13 @@
 <div class="wp-inner">
     @include("$moduleName.pages.$controllerName.child_index.news")
 </div>
-<div class="service-tdoctor mt-3 mt-lg-5">
+<div class="service-tdoctor mt-3 mt-lg-4">
     @include("$moduleName.templates.info_service")
 </div>
 <div class="local">
     @include("$moduleName.templates.local_drugstore")
 </div>
-<div class="wp-inner mt-3 mt-lg-5">
+<div class="wp-inner mt-3 mt-lg-4">
     <div class="feedback-customer">
         @include("$moduleName.templates.feedback_customer")
     </div>

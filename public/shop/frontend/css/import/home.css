@@ -21,8 +21,8 @@
     color: #1E1E1E;
     font-family: 'Helvetica Neue';
     font-weight: 700;
-    font-size: 32px;
-    line-height: 39px;
+    font-size: 26px;
+    line-height: 20px;
     padding: 15px 0px;
 }
 
@@ -168,7 +168,7 @@
 }
 
 #buy-medicine ul li img {
-    width: 120px;
+    width: 100px;
 }
 
 #buy-medicine .btn-buynn {
