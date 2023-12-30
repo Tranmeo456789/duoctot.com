@@ -74,6 +74,12 @@ class ProductController extends ApiController
         $this->res['data']  = $this->model->listItems($params,['task'=>'frontend-list-items-by-type']);
         return $this->setResponse($this->res);
     }
+    public function getListProductByProductID(Request $request){
+        $params['id'] = json_decode($request->id);
+
+        $this->res['data']  = $this->model->listItems($params,['task'=>'frontend-list-items-by-id']);
+        return $this->setResponse($this->res);
+    }
 
 
 }

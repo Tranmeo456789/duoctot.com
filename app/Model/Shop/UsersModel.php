@@ -7,11 +7,15 @@ use DB;
 use Hash;
 use App\Helpers\Format;
 
+use Illuminate\Support\Str;
 class UsersModel extends BackEndModel
 {
     protected $connection = 'mysql_share_data';
     protected $hidden = [
         'password'
+    ];
+    protected $casts = [
+        'details'   => 'array',
     ];
     public function __construct() {
         $this->controllerName      = 'user';
@@ -19,7 +23,7 @@ class UsersModel extends BackEndModel
         $this->folderUpload        = '' ;
         $filedSearch               = array_key_exists($this->controllerName, config('myconfig.config.search')) ? $this->controllerName : 'default';
         $this->fieldSearchAccepted = array_diff(config('myconfig.config.search.' . $filedSearch),['all']);
-        $this->crudNotAccepted     = ['_token','isnumber','password_confirmation','password_old','submit','btn-register','details','task','id'];
+        $this->crudNotAccepted     = ['_token','isnumber','password_confirmation','password_old','submit','btn-register','task','id'];
     }
     public function getItem($params = null, $options = null) {
         $result = null;
@@ -92,14 +96,20 @@ class UsersModel extends BackEndModel
         if($options['task'] == 'update-item'){
             $details = $params['details'];
             $params['province_id'] =$details['province_id'];
+
             DB::beginTransaction();
             try {
                 $details = $params['details'];
+                $details['slug']= Str::slug($params['fullname']);
+                $details['image'] = $params['image'];
+                unset($params['image']);
+
                 if (isset($details['sell_area'])){
                     $details['sell_area'] = ($details['sell_area'] != '')? json_encode($details['sell_area'],JSON_NUMERIC_CHECK ): NULL;;
                 }
                 $params['province_id'] = $details['province_id'];
                 $user = self::where('user_id', $params['user_id'])->first();
+                $params['details'] = json_encode($details,JSON_NUMERIC_CHECK );
                 self::where('user_id', $params['user_id'])->update($this->prepareParams($params));
                 $paramsUserValue =[];
                 \App\Model\Shop\UserValuesModel::where('user_id', $params['user_id'])->delete();

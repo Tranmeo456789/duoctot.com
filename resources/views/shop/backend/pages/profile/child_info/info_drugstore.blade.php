@@ -1,6 +1,8 @@
 @php
     use App\Helpers\Form as FormTemplate;
     use App\Helpers\MyFunction;
+    use App\Helpers\Template as Template;
+
     $label            = config('myconfig.template.label');
     $formLabelAttr    = array_merge_recursive(
                             config('myconfig.template.form_element.label'),
@@ -68,6 +70,17 @@
             'element' => Form::text('details[person_represent]', $details['person_represent']??null, array_merge($formInputAttr,['placeholder'=>$label['person_represent']])),
             'widthElement' => 'col-12 col-md-6'
         ],[
+            'label'   => Form::label('','Ảnh đại diện', ['class' => 'col-1 col-form-label']),
+            'element' => Form::label('','Chọn ảnh', ['class' => 'btn btn-primary label-select-image']),
+            'widthInput' => '',
+        ],[
+            'label'   => '',
+            'element' => Template::showImageAndInputSingle('image', $item['image']?? ($item['details']['image']??null)),
+            'widthInput' => 'col-11',
+        ],[
+                'label'   => Form::label('map', 'Bản đồ', $formLabelAttr),
+                'element' => Form::textarea('details[map]', $item['details']['map']?? '', array_merge($formInputAttr,['placeholder'=>'Bản đồ',"rows"=>"5"]))
+        ],[
             'element' => $inputHiddenID . $inputHiddenTask .Form::submit('Cập nhật', ['class'=>'btn btn-primary']),
             'type'    => "btn-submit-center"
         ]
@@ -81,7 +94,7 @@
     'url'            => route("$controllerName.save"),
     'accept-charset' => 'UTF-8',
     'class'          => 'form-horizontal form-label-left',
-    'id'             => 'main-form' ])  }}
+    'id'             => 'main-form1' ])  }}
     <div class="row">
         {!! FormTemplate::show($elements,$formInputWidth)  !!}
     </div>

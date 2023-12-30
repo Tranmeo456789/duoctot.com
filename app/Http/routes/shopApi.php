@@ -20,6 +20,8 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
     Route::group(['prefix' => $prefix], function () use($controllerName) {
         $controller = ucfirst($controllerName)  . 'Controller@';
          Route::get('getListFeaturerFrontEnd', ['uses' => $controller . 'getListFeaturerFrontEnd']);
+         Route::get('getListProductByProductID', ['uses' => $controller . 'getListProductByProductID']);
+
      });
 
 });

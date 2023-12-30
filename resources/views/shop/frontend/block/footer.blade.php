@@ -15,7 +15,7 @@
                 <div class="social">
                     <div class="d-flex">
                         <div class="icon-social">
-                            <a href=""><img src="{{asset('images/shop/ict1.png')}}" alt=""></a>
+                            <a href="https://www.facebook.com/tdoctorvietnam"><img src="{{asset('images/shop/ict1.png')}}" alt=""></a>
                         </div>
                         <p>Facebook</p>
                     </div>

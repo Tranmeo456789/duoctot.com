@@ -10,7 +10,6 @@ use App\Model\Shop\ProvinceModel;
 use App\Model\Shop\DistrictModel;
 use App\Model\Shop\WardModel;
 use App\Model\Shop\AffiliateModel;
-
 class ProfileController extends BackEndController
 {
     public function __construct()
@@ -27,6 +26,7 @@ class ProfileController extends BackEndController
         $item = [];
         if ($session->has('user')) {
             $item = $this->model->getItem(['user_id'=>$session->get('user.user_id')],['task' => 'get-item']);
+
             if ($item && $item->detailValues) {
                 $details = $item->detailValues->pluck('value', 'user_field')->toArray() ?? [];
             } else {
@@ -61,7 +61,7 @@ class ProfileController extends BackEndController
     }
     public function save(MainRequest $request)
     {
-        if (!$request->ajax()) return view("errors." .  'notfound', []);
+     //   if (!$request->ajax()) return view("errors." .  'notfound', []);
         if (isset($request->validator) && $request->validator->fails()) {
             return response()->json([
                 'status' => 200,

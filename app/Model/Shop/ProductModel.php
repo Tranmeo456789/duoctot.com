@@ -197,7 +197,23 @@ class ProductModel extends BackEndModel
             $result =  $query->orderBy('id', 'desc')
                              ->paginate($params['limit']);
         }
+        if ($options['task'] == "frontend-list-items-by-id") {
+            logger($params);
+            $query = $this::with('unitProduct')->select('id','name','type','code','cat_product_id','producer_id',
+                                    'tick','type_price','price','price_vat','percent_discount','coefficient',
+                                    'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
+                                    'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
+                                    'dosage_forms','country_id','specification','benefit','elements',
+                                    'preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','long','wide','high',
+                                    'mass','discount_ref')
+                                    ->whereIn("id",$params['id'])
+                                    ->where('status_product','da_duyet');
 
+
+          //  $query->OfCollaboratorCode();
+          $result =  $query->orderBy('id', 'desc')
+                            ->paginate(10);
+        }
         if($options['task'] == "admin-list-items-in-selectbox") {
             $query = $this->select('id', 'name')
                         ->where('id','>',1)
@@ -283,7 +299,7 @@ class ProductModel extends BackEndModel
             }
             if(isset($params['slug'])){
                 $query->where('slug', $params['slug']);
-            }            
+            }
             $result = $query->first();
         }
         return $result;

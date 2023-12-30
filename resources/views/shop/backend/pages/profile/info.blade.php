@@ -14,6 +14,7 @@
                 @endif
             </div>
         </div>
+        @include ("$moduleName.pages.product.child_form.modal_img")
     </div>
 </section>
 @endsection
