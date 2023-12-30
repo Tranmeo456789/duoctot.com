@@ -12,7 +12,10 @@
     $formSelect2Attr  = config('myconfig.template.form_element.select2');
     $statusOrderValue = array_combine(array_keys(config("myconfig.template.column.status_order")),array_column(config("myconfig.template.column.status_order"),'name'));
     unset($statusOrderValue['all']);
+    $statusControlOrderValue = array_combine(array_keys(config("myconfig.template.column.status_control")),array_column(config("myconfig.template.column.status_control"),'name'));
+
     $ngayDatHang = MyFunction::formatDateFrontend($item['created_at']);
+    $payment = $item['payment']==2 ? 'Thanh toán ngay(ck)' : 'Thanh toán tại nhà';
     $elements = [
         [
             'label'   => HTML::decode(Form::label('code_order', $label['code_order'], $formLabelAttr)),
@@ -36,11 +39,11 @@
             'widthElement' => 'col-4'
         ],[
             'label'   => HTML::decode(Form::label('', 'Hình thức thanh toán', $formLabelAttr)),
-            'element' => Form::text('', '', array_merge($formInputAttr,['readonly' =>true])),
+            'element' => Form::text('', $payment, array_merge($formInputAttr,['readonly' =>true])),
             'widthElement' => 'col-4'
         ],[
-            'label'   => HTML::decode(Form::label('', 'Hình thức giao hàng', $formLabelAttr)),
-            'element' => Form::text('', 'Giao hàng tiêu chuẩn', array_merge($formInputAttr,['readonly' =>true])),
+            'label'   => HTML::decode(Form::label('', $label['status_control'], $formLabelAttr)),
+            'element' => Form::select('status_control',$statusControlOrderValue, $item['status_control']??null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
             'widthElement' => 'col-4'
         ],[
             'label'   => HTML::decode(Form::label('', $label['warehouse_id'], $formLabelAttr)),

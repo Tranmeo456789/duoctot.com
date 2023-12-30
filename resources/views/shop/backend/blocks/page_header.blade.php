@@ -9,8 +9,7 @@
                     @if (isset($pageIndex) && ($pageIndex))
                         <a href='{{route("$controllerName.add")}}' class="btn btn-primary loat-right">Thêm mới</a>
                     @else
-                        <a href='{{url()->previous()}}' class="btn btn-primary float-right">Quay về</a>
-                    @endif
+                    <a href='{{url()->previous()}}' class="btn btn-primary float-right">Quay về</a>                    @endif
                 @endif
             </div>
         </div> <!-- /.row -->

@@ -167,6 +167,19 @@
             'type' =>'input-border-radius-blue',
             'widthElement' => 'col-lg-10 col-md-12 mb1024-5',
             'styleFormGroup' => 'has-border'
+        ],[
+            'label' => Form::label('payment1', 'Thanh toán khi nhận hàng',$formLabelAttr),
+            'element' => Form::radio('payment', '1',true, ['id' => 'payment1']),
+            'type' =>'inline-text-right',
+            'widthElement' => 'col-6 col-md-5',
+            'styleFormGroup' => 'mb-1',
+        ],
+        [
+            'label' => Form::label('payment2', 'Thanh toán ngay(ck)', $formLabelAttr),
+            'element' => Form::radio('payment', '2', false, ['id' => 'payment2']),
+            'type' =>'inline-text-right',
+            'widthElement' => 'col-6 col-md-5',
+            'styleFormGroup' => 'mb-1',
         ]
     ];   
 @endphp
@@ -180,13 +193,13 @@
         <div class="col-12 col-xl-9 mb-2 pd-xl-0">
             <div class="col-left-cart">
                 @include("$moduleName.pages.$controllerName.child_view.list_cart")
-                <div class="pay-cart">
+                <!-- <div class="pay-cart">
                     <div class="titanh">
                         <h3>Áp dụng ưu đãi</h3>
                         <img src="{{asset('images/shop/ad1.png')}}" alt="">
                     </div>
                     @include("$moduleName.block.payment_vnpay")
-                </div>
+                </div> -->
                 <div class="info-customer-cart mt-2">
                     <div class="container-fluid">
                         <div class="row py-0">
@@ -206,6 +219,15 @@
                         </div>
                         <div class="row rowHome py-0">
                             {!!FormTemplate::show($elementHome,$formInputWidth)   !!}
+                            <div class="info-payment-ck col-12 d-none">
+                                <div class="box-dhtc">
+                                    <p>Vui lòng thanh toán số tiền: <b><span class="total_thanh_toan">{{MyFunction::formatNumber($item['total'])}}</span> đ</b> vào tài khoản ngân hàng</p>
+                                    <p>Ngân hàng TMCP Á Châu</p>
+                                    <p>Số tài khoản: 68686388</p>
+                                    <p>Chủ tài khoản: Công ty cổ phần giải pháp TDoctor</p>
+                                    <p>Liên hệ hotline/Zalo 0349444164 để xác nhận thanh toán và hỗ trợ</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     

@@ -1,5 +1,5 @@
 @php
-    use App\Helpers\MyFunction;
+use App\Helpers\MyFunction;
 
 @endphp
 <div class="title-order d-flex justify-content-center">
@@ -26,13 +26,13 @@
         </tr>
     </tbody>
 </table>
-<div class="discount-code">
+<!-- <div class="discount-code">
     <h4 class="text-info d-flex justify-content-center py-2">
         <div class="d-flex justify-content-center align-items-center"><img src="{{asset('images/shop/ode2.png')}}" alt=""></div>
-        <a href="" class="">Sử dụng mã giảm giá</a>
+        <a class="">Sử dụng mã giảm giá</a>
     </h4>
-    <!-- <small class="text-danger d-flex justify-content-center">
-                                    <img src="{{asset('images/shop/gd1.png')}}" alt="">
-                                    <span>Vui lòng nhập đầy đủ tên và số điện thoại mua hàng để áp dụng mã giảm giá</span>
-                                </small> -->
-</div>
+    <small class="text-danger d-flex justify-content-center">
+        <img src="{{asset('images/shop/gd1.png')}}" alt="">
+        <span>Vui lòng nhập đầy đủ tên và số điện thoại mua hàng để áp dụng mã giảm giá</span>
+    </small>
+</div> -->

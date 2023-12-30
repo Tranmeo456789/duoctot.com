@@ -625,6 +625,7 @@ $(document).on('change', "input.number-product", function (event) {
                  if (($("input[name=user_sell]").length > 0) && ($("input[name=user_sell]").val() == data.user_sell)) {
                      $(".col-right-cart").find(".total").html(data.total.toLocaleString("vi-VN"));
                      $(".col-right-cart").find(".total_thanh_toan").html(data.total.toLocaleString("vi-VN"));
+                     $(".info-payment-ck").find(".total_thanh_toan").html(data.total.toLocaleString("vi-VN"));
                  }
             },
             error: function (xhr, textStatus, errorThrown) {
@@ -650,6 +651,15 @@ $(document).on('change', "input[name='delivery_method']", function (event) {
         $("select[name='receive[province_id]']").removeClass('ignore');
         $("select[name='receive[ward_id]']").removeClass('ignore');
         $("select[name='receive[district_id]']").removeClass('ignore');
+    }
+});
+$(document).on('change', "input[name='payment']", function (event) {
+    event.preventDefault();
+    $value = $(this).val();
+    if ($value == 1) {
+        $(".info-payment-ck").addClass('d-none');
+    } else {
+        $(".info-payment-ck").removeClass('d-none');
     }
 });
 $(document).on('change', "#export_tax", function (event) {

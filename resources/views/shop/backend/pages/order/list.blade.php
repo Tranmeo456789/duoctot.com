@@ -9,7 +9,8 @@
     $formInputChangeValueAttr = MyFunction::array_fill_muti_values($formInputChangeValueAttr);
     $statusOrderValue = array_combine(array_keys(config("myconfig.template.column.status_order")),array_column(config("myconfig.template.column.status_order"),'name'));
     unset($statusOrderValue['all']);
-@endphp
+    $statusControlOrderValue = array_combine(array_keys(config("myconfig.template.column.status_control")),array_column(config("myconfig.template.column.status_control"),'name'));
+ @endphp
     <table class="table table-bordered table-striped table-hover table-head-fixed text-wrap" id="tbList">
         <thead>
             <tr class="row-heading">
@@ -46,7 +47,7 @@
                     {!! $statusOrderValue[$val['status_order']]!!}
                 </td>
                 <td style="width:15%" class="text-danger">
-                   <span>Chưa thanh toán</span>
+                   <span>{!! $statusControlOrderValue[$val['status_control']]!!}</span>
                 </td>
                 <td class='text-center'>
                     <a href="{{route('order.detail',$val['id'])}}" class="btn btn-info btn-sm rounded-0 text-white " type="button" data-toggle="tooltip" data-placement="top" title="Xem chi tiết đơn hàng"><i class="fas fa-eye rounded-circle"></i></a>

@@ -11,18 +11,18 @@
             @include("$moduleName.pages.$controllerName.child_view.cart_null")
         @endif
 
-        <div>
+        <div class="mt-3 mt-lg-4">
              @include("$moduleName.templates.list_product_new_view")
         </div>
     </div>
 </div>
-<div class="service-tdoctor mt-5">
+<div class="service-tdoctor mt-3 mt-lg-4">
     @include("$moduleName.templates.info_service")
 </div>
 <div class="local">
     @include("$moduleName.templates.local_drugstore")
 </div>
-<div class="wp-inner mt-5">
+<div class="wp-inner mt-3 mt-lg-4">
     <div class="feedback-customer">
         @include("$moduleName.templates.feedback_customer")
     </div>

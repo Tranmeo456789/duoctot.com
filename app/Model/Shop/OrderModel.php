@@ -57,7 +57,7 @@ class OrderModel extends BackEndModel
     {
         $result = null;
         if($options['task'] == "user-list-items-frontend"){
-            $query = $this::select('id','code_order','total','total_product','created_at','status_order','user_id','buyer')
+            $query = $this::select('id','code_order','total','total_product','created_at','status_order','user_id','buyer','payment','status_control')
                                 ->where('user_id',$params['user_id']);
             switch ($params['status'])
             {
@@ -81,7 +81,7 @@ class OrderModel extends BackEndModel
         }
         if ($options['task'] == "user-list-items") {
             $query = $this::with('userBuy')
-                                ->select('id','code_order','total','created_at','status_order','user_id','buyer')
+                                ->select('id','code_order','total','created_at','status_order','user_id','buyer','payment','status_control')
                                 ->where('id','>',1)
                                 ->OfUser();
             if ((isset($params['filter']['status_order'])) && ($params['filter']['status_order'] != 'all')) {
@@ -101,7 +101,7 @@ class OrderModel extends BackEndModel
         }
         if ($options['task'] == "user-list-items-by-status"){
             $query = $this::with('userBuy','userSell')
-                                ->select('id','code_order','total_product','info_product','total','created_at','buyer','receive','status_order','user_id','user_sell')
+                                ->select('id','code_order','total_product','info_product','total','created_at','buyer','receive','status_order','payment','status_control','user_id','user_sell')
                                 ->where('created_by',$params['user']->user_id);
             if ((isset($params['status_order'])) && ($params['status_order'] != 'all')) {
                 $query = $query->where('status_order',$params['filter']['status_order']);
@@ -118,13 +118,13 @@ class OrderModel extends BackEndModel
         }
         if($options['task'] == "user-list-items-in-day"){
             $query = $this::with('userBuy')
-            ->select('id','code_order','total','created_at','status_order','user_id')
+            ->select('id','code_order','total','created_at','status_order','user_id','payment','status_control')
             ->where('id','>',1)->where('created_at','LIKE', "%{$params['day']}%")
             ->OfUser();
             $result =  $query->orderBy('id', 'desc')->get();
         }
         if ($options['task'] == "list-items-in-phone") {
-            $query = $this::select('id','code_order','total','created_at','status_order','user_id','delivery_method','receive',
+            $query = $this::select('id','code_order','total','created_at','status_order','payment','status_control','user_id','delivery_method','receive',
             'info_product','buyer','pharmacy','total_product')
                                 ->where('id','>',1);
             if(isset($params['search'])){
@@ -145,20 +145,20 @@ class OrderModel extends BackEndModel
     {
         $result = null;
         if ($options['task'] == 'get-item-frontend') {
-            $result = self::select('id','code_order','total','created_at','status_order','user_id',
+            $result = self::select('id','code_order','total','created_at','status_order','payment','status_control','user_id',
                             'info_product','buyer','pharmacy','total_product','delivery_method','receive')
                             ->where('id', $params['id'])
                             ->first();
         }
         if ($options['task'] == 'get-item-frontend-code') {
-            $result = self::select('id','code_order','total','created_at','status_order','user_id',
+            $result = self::select('id','code_order','total','created_at','status_order','payment','status_control','user_id',
             'info_product','buyer','pharmacy','total_product','delivery_method','receive')
                             ->where('code_order', $params['code_order'])
                             ->first();
         }
         if ($options['task'] == 'get-item') {
             $result = self::with('userBuy')
-                            ->select('id','code_order','total','created_at','status_order','user_id',
+                            ->select('id','code_order','total','created_at','status_order','payment','status_control','user_id',
                             'info_product','buyer','pharmacy','total_product','delivery_method','receive')
                             ->where('id', $params['id'])
                             ->OfUser()

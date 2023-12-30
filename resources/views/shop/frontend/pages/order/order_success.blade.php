@@ -17,13 +17,16 @@
                 <p>Quý khách có thể theo dõi tình trạng đơn hàng bằng cách</p>
                 <p><span class="font-weight-bold">"Tra cứu đơn hàng"</span> ngay bên dưới</p>
             </div>
+            @if($order['payment']==2)
             <div class="text-center box-dhtc">
-                <p>Vui lòng thanh toán số tiền: <b>{{ MyFunction::formatNumber($order['total']) . ' đ'}}</b> vào tài khoản ngân hàng</p>
+                <p>Vui lòng thanh toán số tiền(nếu chưa): <b>{{ MyFunction::formatNumber($order['total']) . ' đ'}}</b> vào tài khoản ngân hàng</p>
                 <p>Ngân hàng TMCP Á Châu</p>
                 <p>Số tài khoản: 68686388</p>
                 <p>Chủ tài khoản: Công ty cổ phần giải pháp TDoctor</p>
-                <p>Liên hệ hotline/Zalo 0393167234 để xác nhận thanh toán và hỗ trợ</p>
+                <p>Nếu đã quý khách thanh toán</p>
+                <p>Liên hệ hotline/Zalo 0349444164 để xác nhận thanh toán và hỗ trợ</p>
             </div>
+            @endif
             <div class="title-info-order">
                 <h1 class=" pd-order">Thông tin giao hàng</h1>
             </div>
@@ -65,7 +68,7 @@
                         </tr>
                         <tr class="bb_order">
                             <td style="width: 30%">Phương thức thanh toán</td>
-                            <td style="width: 70%" class='name'>Chưa thanh toán</td>
+                            <td style="width: 70%" class='name'>{{$order['payment']==2 ? 'Thanh toán ngay(ck)' : 'Thanh toán tại nhà'}}</td>
                         </tr>
                         <tr class="bb_order">
                             <td style="width: 30%">Thời gian dự kiến</td>

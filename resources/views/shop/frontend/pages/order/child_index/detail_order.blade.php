@@ -9,6 +9,9 @@ $status_order=[
     ['temp'=>2,'name'=>'Đã xác nhận','slug'=>'daXacNhan'],
     ['temp'=>1,'name'=>'Đang xử lý','slug'=>'dangXuLy'],
 ];
+
+$statusControlOrderValue = array_combine(array_keys(config("myconfig.template.column.status_control")),array_column(config("myconfig.template.column.status_control"),'name'));
+
 @endphp
 <div class="header d-flex justify-content-between">
     <div class="tshorder">Chi tiết đơn hàng</div>
@@ -88,7 +91,11 @@ foreach($status_order as $value){
                 </tr>
                 <tr class="bb_order pb-1">
                     <td style="width: 30%">Phương thức thanh toán</td>
-                    <td style="width: 70%" class='name'>Chưa thanh toán</td>
+                    <td style="width: 70%" class='name'>{{$order_detail['payment']==2 ? 'Thanh toán ngay(ck)' : 'Thanh toán tại nhà'}}</td>
+                </tr>
+                <tr class="bb_order pb-1">
+                    <td style="width: 30%">Trạng thái đối soát</td>
+                    <td style="width: 70%" class='name'>{!! $statusControlOrderValue[$order_detail['status_control']]!!}</td>
                 </tr>
                 <tr class="bb_order pb-1">
                     <td style="width: 30%">Thời gian dự kiến</td>

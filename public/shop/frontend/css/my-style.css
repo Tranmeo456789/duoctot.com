@@ -1431,3 +1431,8 @@ input[type="radio"] {
 .wp-search-phone-order .form-group.has-border .input-group {
     border: none;
 }
+.info-payment-ck .box-dhtc {
+    padding-top: 0; 
+     padding-bottom:0;
+     border-bottom: none;
+}

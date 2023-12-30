@@ -98,6 +98,7 @@ class OrderController extends BackEndController
         if ($request->method() == 'POST') {
             $params['id'] = intval($request->id);
             $params['status_order'] = $request->status_order;
+            $params['status_control'] = $request->status_control;
             $params['warehouse_id'] = intval($request->warehouse_id);
             $task   = "update-item";
             $notify = "Cập nhật trạng thái đơn hàng thành công!";
@@ -105,7 +106,7 @@ class OrderController extends BackEndController
             $request->session()->put('app_notify', $notify);
             return response()->json([
                 'fail' => false,
-                'redirect_url' => back()->getTargetUrl(),
+                'redirect_url' => redirect()->back()->getTargetUrl(),
                 'message' => $notify,
             ]);
         }

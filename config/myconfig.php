@@ -99,7 +99,7 @@
                 'type_price' => 'Loại giá bán hàng',
                 'general_info' =>'Thông tin chung',
                 'benefit' => 'Công dụng',
-                'elements'=>'Thành phần chính của thuốc',
+                'elements'=>'Thành phần của thuốc',
                 'prescribe' => 'Chỉ định',
                 'dosage' => 'Cách dùng, liều lượng',
                 'note' => 'Lưu ý',
@@ -110,6 +110,7 @@
                 'price_import' => 'Giá nhập',
                 'code_order' => 'Mã đơn hàng',
                 'status_order' => 'Trạng thái đơn hàng',
+                'status_control'=>'Trạng thái đối soát',
                 'discount_ref'=>'Chiết khấu cho đại lý(%)'
             ],
             'type_user' => [
@@ -181,6 +182,10 @@
                     'daGiaoHang'   => ['name' => 'Đã giao hàng', 'class' => 'item-tab'],
                     'hoanTat'      => ['name' => 'Hoàn tất', 'class' => 'item-tab'],
                     'daHuy'        => ['name' => 'Đã hủy', 'class' => 'item-tab']
+                ],
+                'status_control' => [
+                    'chuaThanhToan'     => ['name' => 'Chưa thanh toán', 'class' => 'item-tab'],
+                    'daThanhToan'        => ['name' => 'Đã thanh toán', 'class' => 'item-tab']
                 ],
             ],
             'search'       => [
