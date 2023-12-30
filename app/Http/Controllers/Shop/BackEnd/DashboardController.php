@@ -27,8 +27,10 @@ class DashboardController extends BackEndController
         if(!empty($order_day)){
             $sum_money_day = $order_day->sum('total');
         }     
-        $sum_quantity=(new ProductModel())->sumNumberItems($params, ['task' => 'sum-quantity-product-in-warehouse-of-user-id']);
-        $sum_money=(new ProductModel())->sumNumberItems($params, ['task' => 'sum-money-product-in-warehouse-of-user-id']);
+        //$sum_quantity=(new ProductModel())->sumNumberItems($params, ['task' => 'sum-quantity-product-in-warehouse-of-user-id']);
+        //$sum_money=(new ProductModel())->sumNumberItems($params, ['task' => 'sum-money-product-in-warehouse-of-user-id']);
+        $sum_quantity=100;
+        $sum_money=100000000;
         $itemOrder=(new OrderModel())->listItems(null, ['task' => 'user-list-items']);
          if(!empty($itemOrder)){
              $total_revenue=$itemOrder->sum('total');

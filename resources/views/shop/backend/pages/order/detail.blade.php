@@ -16,6 +16,7 @@
 
     $ngayDatHang = MyFunction::formatDateFrontend($item['created_at']);
     $payment = $item['payment']==2 ? 'Thanh toán ngay(ck)' : 'Thanh toán tại nhà';
+    $isAdmin = (Session::has('user') && Session::get('user')['is_admin'] == 1);
     $elements = [
         [
             'label'   => HTML::decode(Form::label('code_order', $label['code_order'], $formLabelAttr)),
@@ -54,17 +55,18 @@
             'element' => Form::text('', $ngayDatHang, array_merge($formInputAttr,['readonly' =>true])),
             'widthElement' => 'col-4'
         ],[
-            'element' => $inputHiddenID  .Form::submit('Cập nhật', ['class'=>'btn btn-primary']),
+            'element' => $inputHiddenID  .Form::submit('Cập nhật', ['class'=>'btn btn-primary', 'disabled' => $isAdmin]),
             'type'    => "btn-submit-center"
         ]
     ];
-
 
 @endphp
 @extends('shop.layouts.backend')
 @section('title',$pageTitle)
 @section('content')
+@if(!$isAdmin)
 @include ("$moduleName.blocks.page_header", ['pageIndex' => false])
+@endif
 <section class="content">
     <div class="container-fluid">
         <div class="row">

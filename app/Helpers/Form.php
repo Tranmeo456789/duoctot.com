@@ -196,7 +196,7 @@ class Form
             case 'inline-text-right':
                 $xhtml .= sprintf(
                     "<div class='%s'>
-                                <div class='form-group text-justify $styleFormGroup d-inline-flex'>
+                                <div class='form-group $styleFormGroup d-inline-flex'>
                                     %s
                                     %s
                                 </div>

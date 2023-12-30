@@ -168,7 +168,7 @@
             'widthElement' => 'col-lg-10 col-md-12 mb1024-5',
             'styleFormGroup' => 'has-border'
         ],[
-            'label' => Form::label('payment1', 'Thanh toán khi nhận hàng',$formLabelAttr),
+            'label' => Form::label('payment1', 'Thanh toán tại nhà',$formLabelAttr),
             'element' => Form::radio('payment', '1',true, ['id' => 'payment1']),
             'type' =>'inline-text-right',
             'widthElement' => 'col-6 col-md-5',
