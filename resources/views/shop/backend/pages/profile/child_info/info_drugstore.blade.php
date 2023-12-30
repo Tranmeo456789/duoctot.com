@@ -94,7 +94,7 @@
     'url'            => route("$controllerName.save"),
     'accept-charset' => 'UTF-8',
     'class'          => 'form-horizontal form-label-left',
-    'id'             => 'main-form1' ])  }}
+    'id'             => 'main-form' ])  }}
     <div class="row">
         {!! FormTemplate::show($elements,$formInputWidth)  !!}
     </div>

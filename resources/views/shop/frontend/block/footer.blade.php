@@ -66,7 +66,7 @@
                             <img src="{{asset('images/shop/dc1.png')}}" alt="">
                         </div>
                     </div>
-                    <p>Chi nhánh: Phòng 6.28, tòa nhà Everich Infinity, 290 An Dương Vương, phường 4, quận 5, Hồ Chí Minh</p>
+                    <p>Chi nhánh: 15 Võ Văn Kiêt, Quận 8, thành phố Hồ Chí Minh</p>
                 </div>
                 <div class="d-flex mb-2">
                     <div>
@@ -90,7 +90,7 @@
                             <img src="{{asset('images/shop/dc4.png')}}" alt="">
                         </div>
                     </div>
-                    <p>Hotline: +84 393 157 234</p>
+                    <p>Hotline: 0393 167 234</p>
                 </div>
                 <div class="d-flex mb-2">
                     <div>
