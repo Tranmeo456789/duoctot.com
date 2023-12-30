@@ -92,7 +92,7 @@
                 @include("$moduleName.pages.$controllerName.child_detail.info_customer",['item' => $item->userBuy])
             </div>
             <div class="col-12">
-                @include("$moduleName.pages.$controllerName.child_detail.list_product",['item' => $item['info_product']])
+                @include("$moduleName.pages.$controllerName.child_detail.list_product",['infoProduct' => $item['info_product']])
             </div>
         </div>
     </div>

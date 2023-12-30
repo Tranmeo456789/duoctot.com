@@ -10,9 +10,7 @@
                 <tr >
                     <th class="text-center">STT</th>
                     <th class="text-center">Tên sản phẩm</th>
-                    <th class="text-center">Giá</th>
-                    <th class="text-center">Đơn vị tính</th>
-                    <th class="text-center">Số lượng đặt</th>
+                    <th class="text-center">SL</th>
                     <th class="text-center">Mã đại lý</th>
                     <th class="text-center">Thành tiền</th>
                 </tr>
@@ -23,17 +21,17 @@
 
                     $arrProduct = array_column($itemsProduct->toArray(),'id');
                 @endphp
-                @foreach($item as $val)
+                @foreach($infoProduct as $val)
                     @php
                         $index++;
                         $image = Template::showImagePreviewFileManager($val['image'],$val['slug']??$val['name']);
                         $price = MyFunction::formatNumber($val['price']) . ' đ';
                         $total_money = MyFunction::formatNumber($val['total_money']) . ' đ';
-                        $pos = array_search($val['product_id'],$arrProduct);
-                        $code = $pos == false ? '' : $itemsProduct[$pos]['code'];
-                        $unit = $pos == false ? '' : $itemsProduct[$pos]->unitProduct->name;
+                        $productId = (int)$val['product_id'];
+                        $pos = array_search($productId, array_map('intval', $arrProduct));
+                        $code = $pos !== false ? $itemsProduct[$pos]['code'] : '';
+                        $unit = $pos !== false ? $itemsProduct[$pos]->unitProduct->name : '';
                     @endphp
-
                     <tr>
                         <td style="width: 3%">{{$index}}</td>
                         <td style="width: 35%" class="img-in-table">
@@ -42,18 +40,14 @@
                                     {!! $image !!}
                                 </div>
                                 <div class="info-product ml-1">
-                                    <p class="text-primary font-weight-bold mb-1">{{$val['name']}}</p>
-                                    <p mb-1>Mã: {{$code}}</p>
+                                    <p class="text-primary font-weight-bold">{{$val['name']}}</p>
+                                    <p>Giá: {{$price}}/ <small>{{$unit}}</small></p>
                                 </div>
                             </div>
                         </td>
-                        <td style="width: 7%" class="text-right">{{$price}}</td>
-                        <td style="width: 7%" class="text-center">{{$unit}}</td>
-                        <td style="width: 5%" class="text-right">{{$val['quantity']}}</span></td>
-                        <td style="width: 5%" class="text-right">{{$val['codeRef']??''}}</span></td>
-                        <td style="width: 8%" class="text-right"> {{$total_money}} </td>
-
-                        </td>
+                        <td style="width: 5%" class="text-center">{{$val['quantity']}}</span></td>
+                        <td style="width: 19%" class="text-center">{{$val['codeRef']??''}}</span></td>
+                        <td style="width: 8%" class="text-center"> {{$total_money}} </td>
                     </tr>
                 @endforeach
             </tbody>
