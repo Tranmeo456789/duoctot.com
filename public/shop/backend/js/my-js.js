@@ -547,4 +547,16 @@ $(document).on('click', '.wp-link-affiliate .btn-copy-link', function(event) {
     document.execCommand("copy");
     tempInput.remove();
 });
+$(document).on('click', '#checkAll', function(event) {
+    var checkAllStatus = $(this).prop('checked');
+    $('input[name="info_product[]"]').prop('checked', checkAllStatus);
+});
+
+$(document).on('click', 'input[name="info_product[]"]', function(event) {
+    if ($('input[name="info_product[]"]:checked').length === $('input[name="info_product[]"]').length) {
+        $('#checkAll').prop('checked', true);
+    } else {
+        $('#checkAll').prop('checked', false);
+    }
+});
 

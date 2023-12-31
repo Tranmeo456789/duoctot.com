@@ -43,7 +43,7 @@ class AffiliateModel extends BackEndModel
     public function listItems($params = null, $options = null) {
         $result = null;
         if($options['task'] == "user-list-items") {
-            $query = $this::select('id', 'code_ref', 'info_ref','info_product','info_bank','sum_money','user_id',
+            $query = $this::select('id', 'code_ref', 'info_ref','info_product','info_bank','sum_money','link_comon','sum_click','user_id',
                                     'created_at', 'updated_at') ->where('id','>',1)
                             ->ofUser()->ofActive();
             if (isset($params['search']['value']) && ($params['search']['value'] !== ""))  {
@@ -69,7 +69,7 @@ class AffiliateModel extends BackEndModel
     public function getItem($params = null, $options = null) {
         $result = null;
         if($options['task'] == 'get-item') {
-            $query = self::select('id', 'code_ref', 'info_ref','info_product','info_bank','sum_money','user_id',
+            $query = self::select('id', 'code_ref', 'info_ref','info_product','info_bank','sum_money','link_comon','sum_click','user_id',
             'created_at', 'updated_at')
                             ->where('id','>',0)
                             ->ofUser()

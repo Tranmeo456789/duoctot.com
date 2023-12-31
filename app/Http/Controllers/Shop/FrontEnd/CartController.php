@@ -39,20 +39,17 @@ class CartController extends ShopFrontEndController
         $params['province_id'] = (isset($details['province_id']) && ($details['province_id']!=0))?$details['province_id']:((isset($user->province_id) && ($user->province_id != 0)) ? $user->province_id:0);
         $itemsDistrict = [];
         if ($params['province_id']  != 0){
-            $itemsDistrict = (new DistrictModel())->listItems(['parentID' => $params['province_id']],
-                                                                ['task'=>'admin-list-items-in-selectbox']);
+            $itemsDistrict = (new DistrictModel())->listItems(['parentID' => $params['province_id']],['task'=>'admin-list-items-in-selectbox']);
         }
         $params['district_id'] = (isset($details['district_id']) && ($details['district_id'] != 0))?$details['district_id']:((isset($user->district_id) && ($user->district_id != 0)) ? $user->district_id:0);
         $itemsWard = [];
         if ($params['district_id']  != 0){
-            $itemsWard = (new WardModel())->listItems(['parentID' => $params['district_id']],
-                                                                ['task'=>'admin-list-items-in-selectbox']);
+            $itemsWard = (new WardModel())->listItems(['parentID' => $params['district_id']],['task'=>'admin-list-items-in-selectbox']);
         }
         if (!$session->has("cart." . $params['user_sell']) && isset($_COOKIE['cart'])){
             $cart = json_decode($_COOKIE['cart'], true);
             $session->put("cart", $cart);
         }
-
         $item = $session->has("cart." . $params['user_sell'])?$session->get("cart." . $params['user_sell']):[];
         $itemsStore = (new WarehouseModel())->listItems(['user_id'=>$params['user_sell']],['task' => 'frontend-list-items']);
         return view($this->pathViewController . 'view',
@@ -70,7 +67,7 @@ class CartController extends ShopFrontEndController
         $id = intval($request->product_id);
         $quantity = intval($request->quantity);
         $user_sell = intval($request->user_sell);
-        $codeRef = $request->codeRef;
+        $codeRef = $request->codeRef ?? '';
         $product = ProductModel::find($id);
         $image = $product->image;
         $cart = $request->session()->has('cart')?$request->session()->get('cart'):[];

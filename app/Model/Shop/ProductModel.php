@@ -98,7 +98,33 @@ class ProductModel extends BackEndModel
             }else{
                 $result = $query->get();
             }
-
+        }
+        if ($options['task'] == "user-list-items-simple-affiliate") {
+            $query = $this::with('unitProduct')
+                            ->select('id','slug','name','price','image','discount_ref','created_at', 'updated_at')->where('id','>',1);
+            if (isset($params['group_id'])){
+                $query->whereIn('id',$params['group_id']);
+            }
+            if ((isset($params['filter']['status_product'])) && ($params['filter']['status_product'] != 'all')) {
+                $query = $query->where('status_product',$params['filter']['status_product']);
+            }
+            if (isset($params['search']['value']) && ($params['search']['value'] !== ""))  {
+                if($params['search']['field'] == "all") {
+                    $query->where(function($query) use ($params){
+                        foreach($this->fieldSearchAccepted as $column){
+                            $query->orWhereRaw("LOWER($column)" . ' LIKE BINARY ' .  "LOWER('%{$params['search']['value']}%')" );
+                        }
+                    });
+                } else if(in_array($params['search']['field'], $this->fieldSearchAccepted)) {
+                        $query->whereRaw("LOWER({$params['search']['field']})" . " LIKE BINARY " .  "LOWER('%{$params['search']['value']}%')" );
+                }
+            }
+            $query->orderBy('created_at', 'desc');
+            if (isset($params['pagination']['totalItemsPerPage'])){
+                $result =  $query->paginate($params['pagination']['totalItemsPerPage']);
+            }else{
+                $result = $query->get();
+            }
         }
 
         if ($options['task'] == "user-list-items-in-warehouse") {

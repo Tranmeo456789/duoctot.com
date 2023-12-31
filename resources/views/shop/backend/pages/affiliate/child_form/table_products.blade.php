@@ -7,7 +7,13 @@ use App\Helpers\Hightlight;
         <tr class="row-heading">
             <th>STT</th>
             <th>Thuốc</th>
-            <th>Thao tác</th>
+            <th>
+                Thao tác
+                <div>
+                    Check all 
+                </div>
+                <div><input id="checkAll" type="checkbox" {{count($item['info_product']) == count($itemsProduct) ? 'checked' : ''}}></div>
+            </th>
         </tr>
     </thead>
     @php
@@ -21,14 +27,14 @@ use App\Helpers\Hightlight;
         @endphp
         <tr>
             <td style="width: 10%">{{$temp}}</td>
-            <td style="width: 80%" class="img-in-table">
+            <td style="width: 70%" class="img-in-table">
                 <div class="info-product ml-1 d-flex">
                     <p class="text-primary font-weight-bold mb-1">{{$val}}</p>
                 </div>
             </td>
-            <td style="width: 10%" class="text-center">
+            <td style="width: 20%" class="text-center">
                 <div>
-                    <input class="form-check-input" name="info_product[]" value="{{ $key }}" type="checkbox" {{ in_array($key, $item['info_product'] ?? [] ) ? 'checked' : '' }}>
+                    <input class="" name="info_product[]" value="{{ $key }}" type="checkbox" {{ in_array($key, $item['info_product'] ?? [] ) ? 'checked' : '' }}>
                 </div>
             </td>
         </tr>

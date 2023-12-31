@@ -24,7 +24,10 @@ class ProductController extends ShopFrontEndController
     }
     public function detail(Request $request){
         $slug = $request->slug;
-        $codeRef=$request->codeRef ?? '';
+        $codeRef = $request->codeRef ?? ($request->session()->get('codeRef') ?? '');
+        if (empty($request->codeRef) && session('codeRef')) {
+            return redirect()->route('fe.product.detail', ['slug' => $slug, 'codeRef' => $codeRef]);
+        }
         $item= $this->model->getItem(['slug'=>$slug],['task' => 'frontend-get-item']);
         $affiliateProduct = AffiliateProductModel::where('code_ref', $codeRef)
             ->where('product_id', $item['id'])

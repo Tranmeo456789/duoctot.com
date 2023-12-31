@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Config;
 use App\Model\Shop\ProductModel;
 use App\Model\Shop\UsersModel;
 use App\Model\Shop\CatProductModel;
+use App\Model\Shop\AffiliateModel;
 use App\Helpers\HttpClient;
 class HomeController extends ShopFrontEndController
 {
@@ -27,6 +28,15 @@ class HomeController extends ShopFrontEndController
         $itemsProduct['new'] = (new ProductModel())->listItems(['type'=>'new','limit'=>10], ['task' => 'frontend-list-items-by-type']);
         $couterSumProduct=(new ProductModel())->countItems(null, ['task' => 'count-items-all-product-frontend']);
         $couterSumProduct=$couterSumProduct[0]['count']-20;
+        if ($request->has('codeRef')) {
+            $request->session()->put('codeRef', $request->query('codeRef'));
+            $codeRef = $request->codeRef ?? ($request->session()->get('codeRef') ?? '');
+            $affiliate = AffiliateModel::where('code_ref', $codeRef)->first();
+            if ($affiliate) {
+                $affiliate->increment('sum_click');
+             }
+        }
+        
         return view(
             $this->pathViewController . 'index',
             compact('product_selling','product_covid','productInObject','itemsProduct','couterSumProduct')
