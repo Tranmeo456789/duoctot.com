@@ -73,6 +73,7 @@ $xhtmlAreaSeach = Template::showAreaSearch('product', $params['search']);
                         $sumMoney=0;
                         @endphp
                         <tbody>
+                        @if($infoProduct->count()>0)
                             @foreach ($infoProduct as $val)
                                 @php
                                 $index++;
@@ -101,6 +102,9 @@ $xhtmlAreaSeach = Template::showAreaSearch('product', $params['search']);
                                 <td scope="row" style="width: 20%" class="text-center">{{MyFunction::formatNumber($totalMoney)}} đ</td>
                             </tr>
                             @endforeach
+                        @else
+                            @include("$moduleName.blocks.list_empty", ['colspan' => 5])
+                        @endif
                         </tbody>
                     </table>
                 </div>

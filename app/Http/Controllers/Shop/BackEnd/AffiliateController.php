@@ -46,7 +46,6 @@ class AffiliateController extends BackEndController
             });
             $items              = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
         }
-        
         return view($this->pathViewController .  'index', [
             'params'           => $this->params,
             'items'            => $items
@@ -135,6 +134,11 @@ class AffiliateController extends BackEndController
     public function detail(Request $request, $id)
     {
         $session = $request->session();
+        if ($session->has('currentController') &&  ($session->get('currentController') != $this->controllerName)) {
+            $session->forget('params');
+        } else {
+            $session->put('currentController', $this->controllerName);
+        }
         $item = $this->model->getItem(['id' => $id], ['task' => 'get-item']);
         $codeRef = $item['code_ref'];
         $sumMoney=$item->sumMoneyRefAffiliate($codeRef);
@@ -147,6 +151,7 @@ class AffiliateController extends BackEndController
         $session->put('params.search.field', $request->has('search_field') ? $request->get('search_field') : ($session->has('params.search.field') ? $session->get('params.search.field') : ''));
         $session->put('params.search.value', $request->has('search_value') ? $request->get('search_value') : ($session->has('params.search.value') ? $session->get('params.search.value') : ''));
         $session->put('params.group_id', $params['group_id']);
+        $session->put('params.pagination.totalItemsPerPage', $this->totalItemsPerPage);
         
         $this->params     = $session->get('params');
         $infoProduct=(new ProductModel)->listItems($this->params,['task'=>'user-list-items-simple-affiliate']);
@@ -155,7 +160,7 @@ class AffiliateController extends BackEndController
             Paginator::currentPageResolver(function () use ($lastPage) {
                 return $lastPage;
             });
-            $infoProduct             = $this->model->listItems($this->params, ['task'  => 'user-list-items-simple-affiliate']);
+            $infoProduct             = (new ProductModel)->listItems($this->params, ['task'  => 'user-list-items-simple-affiliate']);
         }
         return view($this->pathViewController .  'detail',
         [
@@ -173,6 +178,11 @@ class AffiliateController extends BackEndController
         $item = $this->model->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
         $codeRef = $item['code_ref'];
         $session = $request->session();
+        if ($session->has('currentController') &&  ($session->get('currentController') != $this->controllerName)) {
+            $session->forget('params');
+        } else {
+            $session->put('currentController', $this->controllerName);
+        }
         $sumMoney=$item->sumMoneyRefAffiliate($codeRef);
         $sumQuantity=$item->sumQuantityRefAffiliate($codeRef);
         $sumLinkCount = AffiliateProductModel::where('code_ref', $codeRef)->sum('sum_click')+$item['sum_click'];
@@ -183,6 +193,7 @@ class AffiliateController extends BackEndController
         $session->put('params.search.field', $request->has('search_field') ? $request->get('search_field') : ($session->has('params.search.field') ? $session->get('params.search.field') : ''));
         $session->put('params.search.value', $request->has('search_value') ? $request->get('search_value') : ($session->has('params.search.value') ? $session->get('params.search.value') : ''));
         $session->put('params.group_id', $params['group_id']);
+        $session->put('params.pagination.totalItemsPerPage', $this->totalItemsPerPage);
         
         $this->params     = $session->get('params');
         $infoProduct=(new ProductModel)->listItems($this->params,['task'=>'user-list-items-simple-affiliate']);
@@ -191,7 +202,7 @@ class AffiliateController extends BackEndController
             Paginator::currentPageResolver(function () use ($lastPage) {
                 return $lastPage;
             });
-            $infoProduct             = $this->model->listItems($this->params, ['task'  => 'user-list-items-simple-affiliate']);
+            $infoProduct             = (new ProductModel)->listItems($this->params, ['task'  => 'user-list-items-simple-affiliate']);
         }
         return view($this->pathViewController .  'references.index',
         [
