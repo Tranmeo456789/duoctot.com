@@ -47,7 +47,7 @@
                     {!! $statusOrderValue[$val['status_order']]!!}
                 </td>
                 <td style="width:15%" class="text-danger">
-                   <span>{!! $statusControlOrderValue[$val['status_control']]!!}</span>
+                   <span>{!! $statusControlOrderValue[$val['status_control']] ?? 'Chưa thanh toán' !!}</span>
                 </td>
                 <td class='text-center'>
                     <a href="{{route('order.detail',$val['id'])}}" class="btn btn-info btn-sm rounded-0 text-white " type="button" data-toggle="tooltip" data-placement="top" title="Xem chi tiết đơn hàng"><i class="fas fa-eye rounded-circle"></i></a>

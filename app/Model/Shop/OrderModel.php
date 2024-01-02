@@ -145,20 +145,20 @@ class OrderModel extends BackEndModel
     {
         $result = null;
         if ($options['task'] == 'get-item-frontend') {
-            $result = self::select('id','code_order','total','created_at','status_order','payment','status_control','user_id',
+            $result = self::select('id','code_order','total','created_at','status_order','payment','status_control','user_id','user_sell',
                             'info_product','buyer','pharmacy','total_product','delivery_method','receive')
                             ->where('id', $params['id'])
                             ->first();
         }
         if ($options['task'] == 'get-item-frontend-code') {
-            $result = self::select('id','code_order','total','created_at','status_order','payment','status_control','user_id',
+            $result = self::select('id','code_order','total','created_at','status_order','payment','status_control','user_id','user_sell',
             'info_product','buyer','pharmacy','total_product','delivery_method','receive')
                             ->where('code_order', $params['code_order'])
                             ->first();
         }
         if ($options['task'] == 'get-item') {
             $result = self::with('userBuy')
-                            ->select('id','code_order','total','created_at','status_order','payment','status_control','user_id',
+                            ->select('id','code_order','total','created_at','status_order','payment','status_control','user_id','user_sell',
                             'info_product','buyer','pharmacy','total_product','delivery_method','receive')
                             ->where('id', $params['id'])
                             ->OfUser()

@@ -28,7 +28,7 @@ class OrderController extends BackEndController
         } else {
             $session->put('currentController', $this->controllerName);
         }
-        $session->put('params.filter.status_order', $request->has('filter_status_order') ? $request->get('filter_status_order') : ($session->has('params.filter.status_order') ? $session->get('params.filter.status_order') : 'dangXuLy'));
+        $session->put('params.filter.status_order', $request->has('filter_status_order') ? $request->get('filter_status_order') : ($session->has('params.filter.status_order') ? $session->get('params.filter.status_order') : 'all'));
 
         $session->put('params.pagination.totalItemsPerPage', $this->totalItemsPerPage);
         $this->params     = $session->get('params');
@@ -106,7 +106,7 @@ class OrderController extends BackEndController
             $request->session()->put('app_notify', $notify);
             return response()->json([
                 'fail' => false,
-                'redirect_url' => redirect()->back()->getTargetUrl(),
+                'redirect_url' => route($this->controllerName),
                 'message' => $notify,
             ]);
         }

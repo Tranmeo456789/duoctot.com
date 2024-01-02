@@ -119,15 +119,9 @@
             'type' =>'inline-text-right',
             'widthElement' => 'col-6 col-md-5',
             'styleFormGroup' => 'mb-1',
-        ],
-        [
-            'label' => Form::label('delivery_method1', 'Nhận tại nhà thuốc', $formLabelAttr),
-            'element' => Form::radio('delivery_method', '1', false, ['id' => 'delivery_method1']),
-            'type' =>'inline-text-right',
-            'widthElement' => 'col-6 col-md-5',
-            'styleFormGroup' => 'mb-1',
         ]
     ];
+   
 
     $elementPharmacy = [
         [
@@ -250,3 +244,19 @@
         </div>
     </div>
 {{ Form::close() }}
+ <!-- $elementChoosePharmacyOld = [
+        [
+            'label' => Form::label('delivery_method2', 'Giao hàng tận nơi',$formLabelAttr),
+            'element' => Form::radio('delivery_method', '2',true, ['id' => 'delivery_method2']),
+            'type' =>'inline-text-right',
+            'widthElement' => 'col-6 col-md-5',
+            'styleFormGroup' => 'mb-1',
+        ],
+        [
+            'label' => Form::label('delivery_method1', 'Nhận tại nhà thuốc', $formLabelAttr),
+            'element' => Form::radio('delivery_method', '1', false, ['id' => 'delivery_method1']),
+            'type' =>'inline-text-right',
+            'widthElement' => 'col-6 col-md-5',
+            'styleFormGroup' => 'mb-1',
+        ]
+    ]; -->

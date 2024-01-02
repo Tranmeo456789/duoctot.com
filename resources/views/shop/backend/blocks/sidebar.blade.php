@@ -195,13 +195,13 @@
             @endif
             @if ((Session::has('user') && Session::get('user')['is_admin'] == 1))
             <li class="nav-item">
-                <a href="{{route('admin.order')}}" class="nav-link">
+                <a href="{{route('order')}}" class="nav-link">
                     <i class="nav-icon fab fa-first-order"></i>
                     <p>Quản lý đơn hàng<i class="right fas fa-angle-left"></i></p>
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('admin.order.list')}}" class="nav-link">
+                        <a href="{{route('order')}}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Danh sách đơn hàng</p>
                         </a>

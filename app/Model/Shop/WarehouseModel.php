@@ -50,9 +50,11 @@ class WarehouseModel extends BackEndModel
         if($options['task'] == "admin-list-items-in-selectbox") {
             $query = $this->select('id', 'name')
                         ->where('id','>',1)
-                        ->OfUser()
-                        ->orderBy('name', 'asc');
-            $result = $query->pluck('name', 'id')->toArray();
+                        ->OfUser();
+            if(isset($params['user_id'])){
+                $query=$query->where('user_id',$params['user_id']);
+            }
+            $result = $query->orderBy('name', 'asc')->pluck('name', 'id')->toArray();
         }
         if ($options['task'] == 'frontend-list-items'){
             $query = $this::with(['province','district'])
