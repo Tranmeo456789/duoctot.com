@@ -266,6 +266,16 @@ class UsersModel extends BackEndModel
                 $result = $query->get();
             }
         }
+        if($options['task'] == "admin-list-by-type-id-in-selectbox") {
+            $query = $this::select('user_id','fullname');
+            if(isset($params['user_type_id'])){
+                $query->whereIn('user_type_id', $params['user_type_id']);
+            }
+            $result =  $query->selectRaw("CONCAT(fullname, ' - ', IFNULL(phone, ''), ' - ', IFNULL(email, '')) as name, user_id")
+            ->orderBy('fullname', 'asc')
+            ->pluck('name', 'user_id')
+            ->toArray();;
+        }
         return $result;
     }
     public function deleteItem($params = null, $options = null)

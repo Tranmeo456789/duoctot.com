@@ -15,7 +15,7 @@
                 </a>
             </li>
             @endif
-            @if (Session::has('user') && Session::get('user')['user_type_id'] == 10 ) 
+            @if (Session::has('user') && Session::get('user')['is_affiliate'] == 1 ) 
             <li class="nav-item">
                 <a href="{{ route('affiliate.dashboardRef') }}" class="nav-link">
                     <i class="fas fa-columns nav-icon"></i>
@@ -46,7 +46,7 @@
                     </li>
                 </ul>
             </li>
-            @if (Session::has('user') && Session::get('user')['user_type_id'] == 10 ) 
+            @if (Session::has('user') && Session::get('user')['is_affiliate'] == 1 ) 
             <li class="nav-item">
                 <a href="{{ route('affiliate.refAffiliate') }}" class="nav-link">
                     <i class="far fa-list-alt nav-icon"></i>

@@ -12,7 +12,7 @@ use App\Helpers\Hightlight;
                 <div>
                     Check all 
                 </div>
-                <div><input id="checkAll" type="checkbox" {{count($item['info_product']) == count($itemsProduct) ? 'checked' : ''}}></div>
+                <div><input id="checkAll" type="checkbox" {{ isset($infoProduct) && count($infoProduct) == count($itemsProduct) ? 'checked' : '' }} ></div>
             </th>
         </tr>
     </thead>
@@ -34,7 +34,7 @@ use App\Helpers\Hightlight;
             </td>
             <td style="width: 20%" class="text-center">
                 <div>
-                    <input class="" name="info_product[]" value="{{ $key }}" type="checkbox" {{ in_array($key, $item['info_product'] ?? [] ) ? 'checked' : '' }}>
+                    <input class="" name="info_product[]" value="{{ $key }}" type="checkbox" {{ in_array($key, $infoProduct ?? [] ) ? 'checked' : '' }}>
                 </div>
             </td>
         </tr>

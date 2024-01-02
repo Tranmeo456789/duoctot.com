@@ -18,32 +18,33 @@
     $userRef=$item->userRef??'';
     $fullname=$userRef['fullname']??'';
     $phone= $userRef['phone']??'';
-    $elements = [
-        [
-            'label'   => HTML::decode(Form::label('code_ref', 'Mã đại lý' .  $star, $formLabelAttr)),
-            'element' => Form::text('code_ref', $item['code_ref']??null, array_merge($formInputAttr,['placeholder'=>'Mã đại lý','readonly'=>true])),
-            'widthElement' => 'col-6'
-        ],[
-            'label'   => HTML::decode(Form::label('name_ref', 'Tên đại lý' .  $star, $formLabelAttr)),
-            'element' => Form::text('fullname', $fullname??null, array_merge($formInputAttr,['placeholder'=>'Tên đại lý'])),
-            'widthElement' => 'col-6'
-        ],[
-            'label'   => HTML::decode(Form::label('phone_ref', 'Số điện thoại đại lý' .  $star, $formLabelAttr)),
-            'element' => Form::text('phone', $phone??null, array_merge($formInputAttr,['placeholder'=>'Số điện thoại đại lý'])),
-            'widthElement' => 'col-6'
-        ],
-        [
-            'label'   => HTML::decode(Form::label('password', 'Mật khẩu' .  $star, $formLabelAttr)),
-            'element' => Form::password('password', array_merge($formInputAttr,['placeholder' => isset($item) ? 'Nếu dùng mật khẩu cũ không nhập' : 'Nhập Mật khẩu','style'=>'border-right:0px'])),
-            'type' => 'input-password',
-            'widthElement' => 'col-6 p-0'
-        ],
-        [
-            'label'   => HTML::decode(Form::label('', 'Danh sách sản phẩm cho đại lý'  .  $star, $formLabelAttr)),
-            'element' => '',
-            'widthElement' => 'col-12'
-        ]
-    ];
+    if(isset($item['id'])){
+        $elements = [
+                    [
+                        'label'   => HTML::decode(Form::label('', 'Danh sách sản phẩm cho đại lý'  .  $star, $formLabelAttr)),
+                        'element' => '',
+                        'widthElement' => 'col-12'
+                    ]
+                ];
+    }else{
+        $elements = [
+            [
+                'label'   => HTML::decode(Form::label('code_ref', 'Mã đại lý' .  $star, $formLabelAttr)),
+                'element' => Form::text('code_ref', $item['code_ref']??null, array_merge($formInputAttr,['placeholder'=>'Mã đại lý','readonly'=>true])),
+                'widthElement' => 'col-6'
+            ],
+            [
+                'label'   => HTML::decode(Form::label('user_id', 'Chọn User làm affiliate' .  $star , $formLabelAttr)),
+                'element' => Form::select('user_id',$itemsUser, null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
+                'widthElement' => 'col-6'
+            ],
+            [
+                'label'   => HTML::decode(Form::label('', 'Danh sách sản phẩm cho đại lý'  .  $star, $formLabelAttr)),
+                'element' => '',
+                'widthElement' => 'col-12'
+            ]
+        ];
+    }
     
     $elementsBtn  = [
             [

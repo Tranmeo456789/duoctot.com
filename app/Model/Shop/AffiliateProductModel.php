@@ -33,12 +33,7 @@ class AffiliateProductModel extends BackEndModel
             try {
                 $this->setModifiedHistory($params);
                 $item = self::find($params['id']);
-                if(isset($params['info_product'])){
-                    $params['info_product'] = json_encode($params['info_product']);
-                }
-                if(isset($params['info_bank'])){
-                    $params['info_bank'] = json_encode($params['info_bank']);
-                }
+               
                 self::where('id', $params['id'])->update($this->prepareParams($params));
                 DB::commit();
                 return true;

@@ -54,14 +54,19 @@ class AffiliateController extends BackEndController
     public function form(Request $request)
     {
         $item = null;
+        $infoProduct=[];
         if ($request->id !== null) {
             $params["id"] = $request->id;
             $item = $this->model->getItem($params, ['task' => 'get-item']);
+            $infoProduct= collect($item->listIdProduct)->pluck('product_id')->toArray();
         }
         $itemsProduct = (new ProductModel())->listItems(['status_product'=>'da_duyet'], ['task' => 'admin-list-items-in-selectbox']);
+        
+        $typeUserId=[1,4];
+        $itemsUser=(new UsersModel())->listItems(['user_type_id'=>$typeUserId],['task'=>'admin-list-by-type-id-in-selectbox']);
         return view(
             $this->pathViewController .  'form',
-            compact('item', 'itemsProduct')
+            compact('item', 'itemsProduct','itemsUser','infoProduct')
         );
     }
     public function save(MainRequest $request)
@@ -78,20 +83,11 @@ class AffiliateController extends BackEndController
 
             $task   = "add-item";
             $notify = "Thêm mới $this->pageTitle thành công!";
-            $paramsUser = [];
-            $paramsUser['fullname'] = $params['fullname'];
-            $paramsUser['phone'] = $params['phone'];
-            $paramsUser['password'] = $params['password'];
-            $paramsUser['user_type_id'] = 10;
-            $paramsUser['domain_register'] = config("myconfig.url.prod");
-            $userModel = new UsersModel();
             $paramsAffiliateProduct=[];
             if ($params['id'] != null) {
                 $task   = "edit-item";
                 $notify = "Cập nhật $this->pageTitle thành công!";
                 $item = $this->model->getItem(['id' => $params['id']], ['task' => 'get-item']);
-                $paramsUser['user_id'] = $item['user_id'];
-                $userModel->saveItem($paramsUser, ['task' => 'update-item-simple']);
                 $codeRef=$item['code_ref'];
                 $this->model->saveItem($params, ['task' => $task]);
 
@@ -111,8 +107,9 @@ class AffiliateController extends BackEndController
                 if (!empty($commonProductIds)) {
                     AffiliateProductModel::whereIn('product_id', $commonProductIds)->where('code_ref', $codeRef)->update(['active' => 1]);
                 }
+                (new UsersModel())->saveItem(['user_id'=>$item['user_id'],'is_affiliate'=> 1], ['task' => 'update-item-simple']);
             } else {
-                $params['user_id'] = $userModel->saveItem($paramsUser, ['task' => 'register']);
+                (new UsersModel())->saveItem(['user_id'=>$params['user_id'],'is_affiliate'=> 1], ['task' => 'update-item-simple']);
                 $codeRef=$this->model->saveItem($params, ['task' => $task]); 
                 foreach ($params['info_product'] as $value) {
                     $paramsAffiliateProduct['code_ref']=$codeRef;

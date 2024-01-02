@@ -12,7 +12,6 @@ $xhtmlAreaSeach = Template::showAreaSearch('product', $params['search']);
 
 @section('title','Chi tiết sản phẩm đại lý')
 @section('content')
-@include ("$moduleName.blocks.page_header", ['pageIndex' => false])
 <section class="content">
     <div class="card card-outline card-primary mb800-0">
         <div class="card-body my-card-filter">

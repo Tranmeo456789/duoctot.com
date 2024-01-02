@@ -12,8 +12,6 @@ use App\Helpers\MyFunction;
 class AffiliateModel extends BackEndModel
 {
     protected $casts = [
-        'info_product'   => 'array',
-        'info_ref'=>'array',
         'info_bank' => 'array'
     ];
     public function __construct() {
@@ -22,7 +20,7 @@ class AffiliateModel extends BackEndModel
         $this->folderUpload        = '' ;
         $filedSearch               = array_key_exists($this->controllerName, config('myconfig.config.search')) ? $this->controllerName : 'default';
         $this->fieldSearchAccepted = array_diff(config('myconfig.config.search.' . $filedSearch),['all']);
-        $this->crudNotAccepted     = ['_token','btn_save','password','info_ref','fullname','phone'];
+        $this->crudNotAccepted     = ['_token','btn_save','password','fullname','phone','info_product'];
     }
     public function scopeOfUser($query)
     {
@@ -43,7 +41,7 @@ class AffiliateModel extends BackEndModel
     public function listItems($params = null, $options = null) {
         $result = null;
         if($options['task'] == "user-list-items") {
-            $query = $this::select('id', 'code_ref', 'info_ref','info_product','info_bank','sum_money','link_comon','sum_click','user_id',
+            $query = $this::select('id', 'code_ref','info_bank','link_comon','sum_click','user_id',
                                     'created_at', 'updated_at') ->where('id','>',1)
                             ->ofUser()->ofActive();
             if (isset($params['search']['value']) && ($params['search']['value'] !== ""))  {
@@ -69,7 +67,7 @@ class AffiliateModel extends BackEndModel
     public function getItem($params = null, $options = null) {
         $result = null;
         if($options['task'] == 'get-item') {
-            $query = self::select('id', 'code_ref', 'info_ref','info_product','info_bank','sum_money','link_comon','sum_click','user_id',
+            $query = self::select('id', 'code_ref','info_bank','link_comon','sum_click','user_id',
             'created_at', 'updated_at')
                             ->where('id','>',0)
                             ->ofUser()
@@ -96,19 +94,6 @@ class AffiliateModel extends BackEndModel
                     'value' => date('Ymd')
                 ];
                 $params['code_ref'] = 'MDL' . date('Ymd') . sprintf("%05d",self::getMaxCode($paramsCode));
-                // $list_products = $params['info_product'];
-                // if (count($list_products['product_id']) > 0){
-                //     $arrProduct = [];
-                //     foreach($list_products['product_id'] as $key=>$val){
-                //         $arrProduct[$list_products['product_id'][$key]] = [
-                //             'product_id' => $list_products['product_id'][$key],
-                //             'discount' => $list_products['discount'][$key],
-                //         ];
-                //     }
-                //     $list_products = $arrProduct;
-                //     $params['info_product'] = json_encode($arrProduct);
-                // }
-                $params['info_product'] = json_encode($params['info_product']);
                 self::insert($this->prepareParams($params));
                 DB::commit();
                 return $params['code_ref'];
@@ -124,9 +109,6 @@ class AffiliateModel extends BackEndModel
             try {
                 $this->setModifiedHistory($params);
                 $item = self::find($params['id']);
-                if(isset($params['info_product'])){
-                    $params['info_product'] = json_encode($params['info_product']);
-                }
                 if(isset($params['info_bank'])){
                     $params['info_bank'] = json_encode($params['info_bank']);
                 }
