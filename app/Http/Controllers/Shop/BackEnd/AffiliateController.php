@@ -58,7 +58,7 @@ class AffiliateController extends BackEndController
             $params["id"] = $request->id;
             $item = $this->model->getItem($params, ['task' => 'get-item']);
         }
-        $itemsProduct = (new ProductModel())->listItems(null, ['task' => 'admin-list-items-in-selectbox']);
+        $itemsProduct = (new ProductModel())->listItems(['status_product'=>'da_duyet'], ['task' => 'admin-list-items-in-selectbox']);
         return view(
             $this->pathViewController .  'form',
             compact('item', 'itemsProduct')

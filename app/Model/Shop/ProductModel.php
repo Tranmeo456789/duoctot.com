@@ -243,9 +243,11 @@ class ProductModel extends BackEndModel
         if($options['task'] == "admin-list-items-in-selectbox") {
             $query = $this->select('id', 'name')
                         ->where('id','>',1)
-                        ->OfUser()
-                        ->orderBy('name', 'asc');
-            $result = $query->pluck('name', 'id')->toArray();
+                        ->OfUser();
+            if(isset($params['status_product'])){
+                $query=$query->where('status_product',$params['status_product']);
+            }
+            $result = $query->orderBy('name', 'asc')->pluck('name', 'id')->toArray();
         }
         if($options['task'] == "list-items-search") {
             $query = $this::with('unitProduct')->select('id','name','image','price','percent_discount','unit_id','slug');
