@@ -267,14 +267,17 @@ class UsersModel extends BackEndModel
             }
         }
         if($options['task'] == "admin-list-by-type-id-in-selectbox") {
-            $query = $this::select('user_id','fullname');
-            if(isset($params['user_type_id'])){
-                $query->whereIn('user_type_id', $params['user_type_id']);
-            }
-            $result =  $query->selectRaw("CONCAT(fullname, ' - ', IFNULL(phone, ''), ' - ', IFNULL(email, '')) as name, user_id")
+            $result = $this->where(function ($query) {
+                $query->where('user_type_id', 4)
+                      ->orWhere(function ($query) {
+                          $query->where('user_type_id', 1)
+                                ->where('created_at', '>', '2023-10-01');
+                      });
+            })
+            ->selectRaw("CONCAT(fullname, ' - ', IFNULL(phone, ''), ' - ', IFNULL(email, '')) as name, user_id")
             ->orderBy('fullname', 'asc')
             ->pluck('name', 'user_id')
-            ->toArray();;
+            ->toArray();
         }
         return $result;
     }
