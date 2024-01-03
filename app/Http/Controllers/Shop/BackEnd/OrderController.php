@@ -8,6 +8,7 @@ use App\Model\Shop\WardModel;
 use App\Model\Shop\UsersModel;
 use App\Http\Requests;
 use App\Http\Controllers\Shop\BackEnd\BackEndController;
+use App\Model\Shop\AffiliateModel;
 use App\Model\Shop\OrderModel as MainModel;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 class OrderController extends BackEndController
@@ -32,15 +33,27 @@ class OrderController extends BackEndController
 
         $session->put('params.pagination.totalItemsPerPage', $this->totalItemsPerPage);
         $this->params     = $session->get('params');
-
-        $items            = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
-
+        if($session->get('user.is_affiliate') == 1){
+            $userAffiliate = (new AffiliateModel)->getItem(['user_id' => $session->get('user.user_id')], ['task' => 'get-item']);
+            $this->params['code_ref'] = $userAffiliate['code_ref'];
+            $this->params['user_type_id'] = $session->get('user.user_type_id');
+            $items = $this->model->listItems($this->params, ['task'  => 'user-list-items-affiliate']);
+        }else{
+            $items            = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
+        }
         if ($items->currentPage() > $items->lastPage()) {
             $lastPage = $items->lastPage();
             Paginator::currentPageResolver(function () use ($lastPage) {
                 return $lastPage;
             });
-            $items              = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
+            if($session->get('user.is_affiliate') == 1){
+                $userAffiliate = (new AffiliateModel)->getItem(['user_id' => $session->get('user.user_id')], ['task' => 'get-item']);
+                $this->params['code_ref'] = $userAffiliate['code_ref'];
+                $this->params['user_type_id'] = $session->get('user.user_type_id');
+                $items = $this->model->listItems($this->params, ['task'  => 'user-list-items-affiliate']);
+            }else{
+                $items = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
+            }
         }
         $itemStatusOrderCount = $this->model->countItems($this->params, ['task' => 'admin-count-items-group-by-status-order']);
         return view($this->pathViewController .  'index', [

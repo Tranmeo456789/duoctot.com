@@ -4,6 +4,8 @@
 @section('content')
 @php
 use App\Model\Shop\OrderModel;
+use App\Model\Shop\AffiliateModel;
+
 use App\Helpers\MyFunction;
 @endphp
 <section class="content">
@@ -63,7 +65,7 @@ use App\Helpers\MyFunction;
         @include("$moduleName.blocks.x_title", ['title' => 'ĐƠN HÀNG'])
         <div class="card-body p-0">
             @php
-            $status_oreder=[
+            $status_order=[
             ['name'=>'Đang xử lý','slug'=>'dangXuLy','icon'=>'fa-business-time'],
             ['name'=>'Đã xác nhận','slug'=>'daXacNhan','icon'=>'fa-business-time'],
             ['name'=>'Đang giao hàng','slug'=>'dangGiaoHang','icon'=>'fa-business-time'],
@@ -73,10 +75,10 @@ use App\Helpers\MyFunction;
             ]
             @endphp
             <ul class="order-wait mb-0">
-                @foreach($status_oreder as $item)
+            @foreach($status_order as $item)
                 @php
-                $params['status_order']=$item['slug'];
-                $itemStatus = (new OrderModel)->countItems($params, ['task' => 'admin-count-items-status-order']);
+                    $itemStatus = collect($itemStatusOrderCount)->where('status_order', $item['slug'])->first();
+                    $count = $itemStatus['count'] ?? 0;
                 @endphp
                 <li class="">
                     <a href="" style="color:black">
@@ -85,17 +87,18 @@ use App\Helpers\MyFunction;
                         </div>
                         <div>
                             <p>{{$item['name']}}</p>
-                            <h6>{{$itemStatus[0]['count']??0}}</h6>
+                            <h6>{{$count}}</h6>
                         </div>
                     </a>
                 </li>
-                @endforeach
+            @endforeach
             </ul>
         </div>
     </div>
     <div class="data-revenue">
         @include("$moduleName.pages.$controllerName.child_index.revenue_sell")
     </div>
+    @if ((Session::has('user') && Session::get('user')['is_admin'] == 1))
     <div class="card card-outline card-primary mb800-0">
         @include("$moduleName.blocks.x_title", ['title' => 'THÔNG TIN KHO'])
         <div class="card-body">
@@ -115,5 +118,6 @@ use App\Helpers\MyFunction;
             </ul>
         </div>
     </div>
+    @endif
 </section>
 @endsection

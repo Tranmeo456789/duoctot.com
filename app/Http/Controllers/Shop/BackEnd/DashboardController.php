@@ -8,6 +8,7 @@ use App\Model\Shop\OrderModel;
 use App\Model\Shop\ProductModel;
 use App\Helpers\MyFunction;
 use App\Http\Controllers\Shop\BackEnd\BackEndController;
+use App\Model\Shop\AffiliateModel;
 use DB;
 class DashboardController extends BackEndController
 {
@@ -23,19 +24,36 @@ class DashboardController extends BackEndController
         $sum_money_day=0;
         $sum_quantity=0;
         $sum_money=0;     
-        $order_day=(new OrderModel)->listItems($params, ['task' => 'user-list-items-in-day']);
+        $session = $request->session();
+        if($session->get('user.is_affiliate') == 1){
+            $userAffiliate = (new AffiliateModel)->getItem(['user_id' => $session->get('user.user_id')], ['task' => 'get-item']);
+            $params['code_ref'] = $userAffiliate['code_ref'];
+            $params['user_type_id'] = $session->get('user.user_type_id');
+            $order_day=(new OrderModel)->listItems($params, ['task' => 'user-list-items-in-day']);
+        }else{
+            $order_day=(new OrderModel)->listItems($params, ['task' => 'user-list-items-in-day']);
+        }
         if(!empty($order_day)){
             $sum_money_day = $order_day->sum('total');
         }     
+        $itemStatusOrderCount = (new OrderModel)->countItems($params, ['task' => 'admin-count-items-group-by-status-order']);
         //$sum_quantity=(new ProductModel())->sumNumberItems($params, ['task' => 'sum-quantity-product-in-warehouse-of-user-id']);
         //$sum_money=(new ProductModel())->sumNumberItems($params, ['task' => 'sum-money-product-in-warehouse-of-user-id']);
         $sum_quantity=100;
         $sum_money=100000000;
-        $itemOrder=(new OrderModel())->listItems(null, ['task' => 'user-list-items']);
+        $session = $request->session();
+        if($session->get('user.is_affiliate') == 1){
+            $userAffiliate = (new AffiliateModel)->getItem(['user_id' => $session->get('user.user_id')], ['task' => 'get-item']);
+            $this->params['code_ref'] = $userAffiliate['code_ref'];
+            $this->params['user_type_id'] = $session->get('user.user_type_id');
+            $itemOrder = (new OrderModel())->listItems($this->params, ['task'  => 'user-list-items-affiliate']);
+        }else{
+            $itemOrder=(new OrderModel())->listItems(null, ['task' => 'user-list-items']);
+        }
          if(!empty($itemOrder)){
              $total_revenue=$itemOrder->sum('total');
          }
-        return view($this->pathViewController .  'index',compact('order_day','sum_money_day','sum_quantity','sum_money','total_revenue'));
+        return view($this->pathViewController .  'index',compact('order_day','sum_money_day','sum_quantity','sum_money','total_revenue','itemStatusOrderCount'));
     }
     public function filterInDay(Request $request){
         $data = $request->all();

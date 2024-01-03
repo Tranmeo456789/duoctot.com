@@ -49,8 +49,7 @@ class WarehouseModel extends BackEndModel
         }
         if($options['task'] == "admin-list-items-in-selectbox") {
             $query = $this->select('id', 'name')
-                        ->where('id','>',1)
-                        ->OfUser();
+                        ->where('id','>',1);
             if(isset($params['user_id'])){
                 $query=$query->where('user_id',$params['user_id']);
             }

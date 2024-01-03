@@ -66,6 +66,14 @@
                             <img src="{{asset('images/shop/dc1.png')}}" alt="">
                         </div>
                     </div>
+                    <p>Văn phòng đại diện: G3, Vinhomes Green Bay, P. Mễ Trì, Q. Nam Từ Liêm, Hà Nội</p>
+                </div>
+                <div class="d-flex mb-2">
+                    <div>
+                        <div class="icon-social">
+                            <img src="{{asset('images/shop/dc1.png')}}" alt="">
+                        </div>
+                    </div>
                     <p>Chi nhánh: 15 Võ Văn Kiêt, Quận 8, thành phố Hồ Chí Minh</p>
                 </div>
                 <div class="d-flex mb-2">
@@ -90,7 +98,7 @@
                             <img src="{{asset('images/shop/dc4.png')}}" alt="">
                         </div>
                     </div>
-                    <p>Hotline: 0393 167 234</p>
+                    <p>Hotline: +84 393 167 234</p>
                 </div>
                 <div class="d-flex mb-2">
                     <div>

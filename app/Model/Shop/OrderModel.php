@@ -99,6 +99,34 @@ class OrderModel extends BackEndModel
 
             $result =  $query;
         }
+        if ($options['task'] == "user-list-items-affiliate") {
+            $query = $this::with('userBuy')
+                                ->select('id','code_order','total','created_at','status_order','user_id','buyer','payment','status_control')
+                                ->where('id','>',1);
+            if ((isset($params['code_ref']))) {
+                $codeRef=$params['code_ref'];
+                if($params['user_type_id'] > 4){
+                    $query = $query->OfUser()
+                    ->orWhere('info_product', 'LIKE', "%$codeRef%");
+                }else{
+                    $query = $query->where('info_product', 'LIKE', "%$codeRef%");
+                }
+            }             
+            if ((isset($params['filter']['status_order'])) && ($params['filter']['status_order'] != 'all')) {
+                $query = $query->where('status_order',$params['filter']['status_order']);
+            }
+            if(isset($params['filter_in_day'])){
+                $query->whereBetween('created_at', ["{$params['filter_in_day']['day_start']}", "{$params['filter_in_day']['day_end']}"]);
+            }
+            if(isset($params['pagination'])){
+                $query=$query->orderBy('id', 'desc')
+                              ->paginate($params['pagination']['totalItemsPerPage']);
+            }else{
+                $query=$query->orderBy('id', 'desc')->get();
+            }
+
+            $result =  $query;
+        }
         if ($options['task'] == "user-list-items-by-status"){
             $query = $this::with('userBuy','userSell')
                                 ->select('id','code_order','total_product','info_product','total','created_at','buyer','receive','status_order','payment','status_control','user_id','user_sell')
@@ -119,8 +147,18 @@ class OrderModel extends BackEndModel
         if($options['task'] == "user-list-items-in-day"){
             $query = $this::with('userBuy')
             ->select('id','code_order','total','created_at','status_order','user_id','payment','status_control')
-            ->where('id','>',1)->where('created_at','LIKE', "%{$params['day']}%")
-            ->OfUser();
+            ->where('id','>',1)->where('created_at','LIKE', "%{$params['day']}%");
+            if ((isset($params['code_ref']))) {
+                $codeRef=$params['code_ref'];
+                if($params['user_type_id'] > 4){
+                    $query = $query->OfUser()
+                    ->whereDate('created_at', $params['day']);
+                }else{
+                    $query = $query->where('info_product', 'LIKE', "%$codeRef%");
+                }
+            }else{
+                $query = $query->OfUser();
+            }  
             $result =  $query->orderBy('id', 'desc')->get();
         }
         if ($options['task'] == "list-items-in-phone") {
@@ -161,7 +199,6 @@ class OrderModel extends BackEndModel
                             ->select('id','code_order','total','created_at','status_order','payment','status_control','user_id','user_sell',
                             'info_product','buyer','pharmacy','total_product','delivery_method','receive')
                             ->where('id', $params['id'])
-                            ->OfUser()
                             ->first();
 
         }
@@ -196,16 +233,36 @@ class OrderModel extends BackEndModel
         if($options['task'] == 'admin-count-items-group-by-status-order') {
             $query = $this::groupBy('status_order')
                             ->select(DB::raw('status_order , COUNT(id) as count') )
-                            ->where('id','>',1)
-                            ->OfUser();
+                            ->where('id','>',1);
+            if ((isset($params['code_ref']))) {
+                $codeRef=$params['code_ref'];
+                if($params['user_type_id'] > 4){
+                    $query = $query->OfUser()
+                    ->orWhere('info_product', 'LIKE', "%$codeRef%");
+                }else{
+                    $query = $query->where('info_product', 'LIKE', "%$codeRef%");
+                }
+            }else{
+                $query=$query->OfUser();
+            }
             $query = $this->search($query, $params);
             $result = $query->get()->toArray();
         }
         if($options['task'] == 'admin-count-items-status-order') {
             $query = $this::groupBy('status_order')
                             ->select(DB::raw('status_order , COUNT(id) as count') )
-                            ->where('id','>',1)->where('status_order',$params['status_order'])
-                            ->OfUser();
+                            ->where('id','>',1)->where('status_order',$params['status_order']);
+            if ((isset($params['code_ref']))) {
+                $codeRef=$params['code_ref'];
+                if($params['user_type_id'] > 4){
+                    $query = $query->OfUser()
+                    ->orWhere('info_product', 'LIKE', "%$codeRef%");
+                }else{
+                    $query = $query->where('info_product', 'LIKE', "%$codeRef%");
+                }
+            }else{
+                $query=$query->OfUser();
+            }
             $result = $query->get()->toArray();
         }
         if($options['task'] == 'admin-count-items-of-user-sell') {

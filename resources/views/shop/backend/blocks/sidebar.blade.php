@@ -75,112 +75,115 @@
                 </a>
             </li>
             @endif
+            @if (Session::has('user') && (Session::get('user')['user_type_id'] > 3 && Session::get('user')['user_type_id'] <= 10 || Session::get('user')['is_affiliate'] == 1))
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fab fa-first-order"></i>
+                        <p>
+                            Quản lý đơn hàng
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('order')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh sách đơn hàng</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('prescrip')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Thuốc theo toa</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endif
+
             @if ((Session::has('user') && Session::get('user')['user_type_id'] > 3 && Session::get('user')['user_type_id'] <= 10)) 
-            <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
-                    <i class="nav-icon fab fa-product-hunt"></i>
-                    <p>
-                        Quản lý thuốc
-                        <i class="right fas fa-angle-left"></i>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fab fa-product-hunt"></i>
+                        <p>
+                            Quản lý thuốc
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('product')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh sách thuốc</p>
+                            </a>
+                        </li>
+                        @if(Session::get('user')['user_id']==864108238)
+                        <li class="nav-item">
+                            <a href="{{route('unit')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Đơn vị tính</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('trademark')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Thương hiệu thuốc</p>
+                            </a>
+                        </li>
+                        @endif
+                    </ul>
+                </li>
+                @if(Session::get('user')['user_id']==864108238)
                     <li class="nav-item">
-                        <a href="{{route('product')}}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Danh sách thuốc</p>
+                        <a href="{{route('producer')}}" class="nav-link">
+                            <i class="nav-icon fas fa-record-vinyl"></i>
+                            <p>Quản lý Nhà sản xuất</p>
                         </a>
                     </li>
-                    @if(Session::get('user')['user_id']==864108238)
+                @endif
+                <li class="nav-item d-none">
+                    <a href="{{route('consignment.list')}}" class="nav-link">
+                        <i class="nav-icon fas fa-file-alt"></i>
+                        <p>Phiếu gửi hàng</p>
+                    </a>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="" class="nav-link">
+                        <i class="nav-icon fas fa-weight"></i>
+                        <p>
+                            Kho hàng
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('warehouse.info')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Quản lý kho hàng</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('warehouse')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh sách kho hàng</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('importCoupon')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Phiếu nhập kho</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                @if(Session::get('user')['user_id']==864108238)
                     <li class="nav-item">
-                        <a href="{{route('unit')}}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Đơn vị tính</p>
+                        <a href="{{route('customer')}}" class="nav-link">
+                            <i class="nav-icon fas fa-user-friends"></i>
+                            <p>Quản lý khách hàng</p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{route('trademark')}}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Thương hiệu thuốc</p>
-                        </a>
-                    </li>
-                    @endif
-                </ul>
-            </li>
-            @if(Session::get('user')['user_id']==864108238)
-            <li class="nav-item">
-                <a href="{{route('producer')}}" class="nav-link">
-                    <i class="nav-icon fas fa-record-vinyl"></i>
-                    <p>Quản lý Nhà sản xuất</p>
-                </a>
-            </li>
-            @endif
-            <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
-                    <i class="nav-icon fab fa-first-order"></i>
-                    <p>
-                        Quản lý đơn hàng
-                        <i class="right fas fa-angle-left"></i>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="{{route('order')}}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Danh sách đơn hàng</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('prescrip')}}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Thuốc theo toa</p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item d-none">
-                <a href="{{route('consignment.list')}}" class="nav-link">
-                    <i class="nav-icon fas fa-file-alt"></i>
-                    <p>Phiếu gửi hàng</p>
-                </a>
-            </li>
-            <li class="nav-item has-treeview">
-                <a href="" class="nav-link">
-                    <i class="nav-icon fas fa-weight"></i>
-                    <p>
-                        Kho hàng
-                        <i class="right fas fa-angle-left"></i>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="{{route('warehouse.info')}}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Quản lý kho hàng</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('warehouse')}}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Danh sách kho hàng</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('importCoupon')}}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Phiếu nhập kho</p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            @if(Session::get('user')['user_id']==864108238)
-            <li class="nav-item">
-                <a href="{{route('customer')}}" class="nav-link">
-                    <i class="nav-icon fas fa-user-friends"></i>
-                    <p>Quản lý khách hàng</p>
-                </a>
-            </li>
-            @endif
+                @endif
             @endif
             @if ((Session::has('user') && Session::get('user')['is_admin'] == 1) || (Session::has('user') && Session::get('user')['is_admin'] == 2))
             <li class="nav-item">
