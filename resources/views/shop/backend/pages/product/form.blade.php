@@ -177,7 +177,7 @@
                 'element' => Form::file('albumImage[]', array_merge($formInputAttr,['multiple'=>'multiple','accept'=>'image/*'])),
                 'fileAttach'   => (!empty($item['id'])) ? Template::showImageAttachPreview($controllerName, $item['albumImage'],$item['albumImageHash'], $item['id'],['btn' => 'delete']) : null ,
                 'type'    => "fileAttachPreview",
-                'widthInput' => 'col-11',
+                'widthInput' => 'col-11' . (Session::get('user')['user_id'] == 864108238 ? '' : ' d-none'),
             ],[
                 'label'   => HTML::decode(Form::label('general_info', $label['general_info'] .  $star, $formLabelAttr)),
                 'element' => Form::textarea('general_info', $item['general_info']?? null, array_merge($formEditorAttr,['placeholder'=>$label['general_info'],'id'=>'general_info']))

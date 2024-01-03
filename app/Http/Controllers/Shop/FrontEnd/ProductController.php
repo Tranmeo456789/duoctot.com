@@ -11,6 +11,7 @@ use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
 
 use App\Model\Shop\ProductModel as MainModel;
 use App\Model\Shop\TrademarkModel ;
+use App\Model\Shop\UsersModel;
 use Illuminate\Support\Facades\Cookie;
 class ProductController extends ShopFrontEndController
 {
@@ -29,6 +30,7 @@ class ProductController extends ShopFrontEndController
             return redirect()->route('fe.product.detail', ['slug' => $slug, 'codeRef' => $codeRef]);
         }
         $item= $this->model->getItem(['slug'=>$slug],['task' => 'frontend-get-item']);
+        $userInfo = (new UsersModel)->getItem(['user_id' => $item['user_id']],['task'=>'get-item']);
         $affiliateProduct = AffiliateProductModel::where('code_ref', $codeRef)
             ->where('product_id', $item['id'])
             ->first();
@@ -61,7 +63,7 @@ class ProductController extends ShopFrontEndController
         setcookie("productViewed", json_encode($productViewed),time() + config('myconfig.time_cookie'), "/");
         $_COOKIE["productViewed"] = json_encode($productViewed);
 
-        return view($this->pathViewController . 'detail',compact('params','item','albumImageCurrent','codeRef'));
+        return view($this->pathViewController . 'detail',compact('params','item','albumImageCurrent','codeRef','userInfo'));
     }
     public function searchProductAjax(Request $request){
         $data = $request->all();
@@ -95,5 +97,15 @@ class ProductController extends ShopFrontEndController
             $viewName .= '.partial.product';
         }
         return view($viewName, ['items' => $listProductAddView]);
-        }
+    }
+    public function drugstore(Request $request){
+        $productDrugstore = $this->model->listItems(['user_id'=>$request->id], ['task' => 'frontend-list-items']);
+        $userInfo=(new UsersModel)->getItem(['user_id' => $request->id],['task'=>'get-item']);
+        return view($this->pathViewController . 'drugstore',
+            [
+                'userInfo' => $userInfo,
+                'productDrugstore'=>$productDrugstore
+            ]
+    );
+    }
 }

@@ -84,6 +84,7 @@
                             <p>Danh sách thuốc</p>
                         </a>
                     </li>
+                    @if(Session::get('user')['user_id']==864108238)
                     <li class="nav-item">
                         <a href="{{route('unit')}}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
@@ -96,14 +97,17 @@
                             <p>Thương hiệu thuốc</p>
                         </a>
                     </li>
+                    @endif
                 </ul>
             </li>
+            @if(Session::get('user')['user_id']==864108238)
             <li class="nav-item">
                 <a href="{{route('producer')}}" class="nav-link">
                     <i class="nav-icon fas fa-record-vinyl"></i>
                     <p>Quản lý Nhà sản xuất</p>
                 </a>
             </li>
+            @endif
             <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fab fa-first-order"></i>
@@ -162,12 +166,14 @@
                     </li>
                 </ul>
             </li>
+            @if(Session::get('user')['user_id']==864108238)
             <li class="nav-item">
                 <a href="{{route('customer')}}" class="nav-link">
                     <i class="nav-icon fas fa-user-friends"></i>
                     <p>Quản lý khách hàng</p>
                 </a>
             </li>
+            @endif
             @endif
             @if ((Session::has('user') && Session::get('user')['is_admin'] == 1) || (Session::has('user') && Session::get('user')['is_admin'] == 2))
             <li class="nav-item">
@@ -245,7 +251,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{route('admin.order')}}" class="nav-link">
+                <a href="" class="nav-link">
                     <i class="nav-icon fas fa-external-link-square-alt"></i>
                     <p>Affiliate<i class="right fas fa-angle-left"></i></p>
                 </a>

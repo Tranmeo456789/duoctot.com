@@ -3,6 +3,7 @@
     use App\Helpers\MyFunction;
     use App\Model\Shop\CouponPaymentModel;
     use App\Model\Shop\AffiliateModel;
+    use App\Model\Shop\AffiliateProductModel;
 
 @endphp
 <table class="table table-bordered table-striped table-hover table-head-fixed text-wrap" id="tbList">
@@ -27,7 +28,7 @@
                 $userRef=$val->userRef;
                 $sumPayment=(new CouponPaymentModel)->sumMoney(['code_ref'=>$codeRef],['task'=>'tinh-tong-tien-affiliate']);
                 $sumMoney=(new AffiliateModel)->sumMoneyRefAffiliate($codeRef);
-
+                $sumLinkCount = AffiliateProductModel::where('code_ref', $codeRef)->sum('sum_click')+$val['sum_click'];
                 $restMoney=$sumMoney-$sumPayment;
             @endphp
             <tr>
@@ -35,7 +36,9 @@
                 <td style="width: 25%" class='name'><p>{!! $codeRef !!}</p></td>
                 <td style="width: 35%" class='text-justify'>
                     <div>Họ tên: {{$userRef['fullname']??null}}</div>
-                    <div>Số ĐT: {{$userRef['phone']??null}}</div>
+                    <div>Số ĐT: {{$userRef['phone']}}</div>
+                    <div>Email: {{$userRef['email']}}</div>
+                    <div>Số lượng traffic: {{$sumLinkCount}}</div>
                 </td>
                 <td style="width: 15%" class='text-center'><p>{{MyFunction::formatNumber($restMoney??0)}} đ</p></td>
                 <td style="width: 25%">

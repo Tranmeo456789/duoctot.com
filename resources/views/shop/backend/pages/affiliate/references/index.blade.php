@@ -4,6 +4,7 @@ use App\Model\Shop\AffiliateProductModel;
 use App\Helpers\MyFunction;
 use App\Helpers\Hightlight;
 use App\Helpers\Template;
+use Illuminate\Support\Str;
 
 $xhtmlAreaSeach = Template::showAreaSearch('product', $params['search']);
 
@@ -38,7 +39,18 @@ $xhtmlAreaSeach = Template::showAreaSearch('product', $params['search']);
                                 <td colspan="2" style="width: 60%" class="text-center">
                                  <div class="wp-link-affiliate">
                                     <div class="text-center">Link chung</div>
-                                    <a href="{{ url('/') . '?codeRef=' . $item['code_ref'] }}" class="text-primary value-link d-inline-block" target="_blank">{{ url('/') . '?codeRef=' . $item['code_ref'] }}</a>
+                                    @if(isset($userInfo))
+                                        @php
+                                            $slugName = Str::slug($userInfo['fullname']);                                        $codeRef = $item['code_ref'];
+                                            $routeParams = ['slug' => $slugName,'id'=> $userInfo['user_id'], 'codeRef' => $codeRef];
+                                        @endphp
+
+                                        @if($userInfo['user_type_id'] == 4)
+                                            <a href="{{ route('fe.product.drugstore', $routeParams) }}" class="text-primary value-link d-inline-block" target="_blank">{{ route('fe.product.drugstore', $routeParams) }}</a>
+                                        @else
+                                            <a href="{{ url('/') . '?codeRef=' . $item['code_ref'] }}" class="text-primary value-link d-inline-block" target="_blank">{{ url('/') . '?codeRef=' . $item['code_ref'] }}</a>
+                                        @endif
+                                    @endif
                                     <span class="btn btn-sm btn-danger d-inline-block ml-2 btn-copy-link">
                                         <i class="far fa-copy"></i>
                                     </span>

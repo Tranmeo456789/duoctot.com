@@ -1,3 +1,7 @@
+@php
+use Illuminate\Support\Str;
+
+@endphp
 @extends('shop.layouts.frontend')
 @section('content')
 <div class="wp-inner mt-2">
@@ -50,7 +54,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="desc_product">
+                <div class="desc_product mb-3">
                     <div class="price_product mb-2"><span class="font-weight-bold">{{ number_format( $item['price'], 0, "" ,"." )}}đ /</span> {{$item->unitProduct->name}}</div>
                     <p><span class="font-weight-bold bcn">Danh mục: </span><span class="text-info">{{$item->catProduct->name}}</span></p>
                     <p><span class="font-weight-bold">Dạng bào chế: </span>{{$item['dosage_forms']}}</p>
@@ -59,8 +63,11 @@
                     <p><span class="font-weight-bold">Nước sản xuất: </span>{{$item->countryProduct->name}}</p>
                     <p><span class="font-weight-bold">Công dụng: </span>{{$item['benefit']}}</p>
                 </div>
+                    @php
+                        $slugName = Str::slug($userInfo['fullname']);                                     
+                    @endphp
+                <div class="mb-3"><a href="{{ route('fe.product.drugstore', ['slug' => $slugName,'id'=> $userInfo['user_id']]) }}" class="btn btn-sm btn-outline-secondary">Xem shop</a></div>
                 @if((Session::has('user') && Session::get('user')['user_type_id'] != 9) || Session::get('user')==null)
-                @include("$moduleName.block.payment_vnpay")
                 <div>
                     {!! csrf_field() !!}
                     <div class="form-group mb-3 d-flex" >

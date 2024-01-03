@@ -12,6 +12,7 @@ use App\Http\Controllers\Shop\BackEnd\BackEndController;
 use App\Http\Requests\AffiliateRequest as MainRequest;
 use App\Model\Shop\AffiliateModel;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
+use Illuminate\Support\Str;
 
 class AffiliateController extends BackEndController
 {
@@ -138,6 +139,8 @@ class AffiliateController extends BackEndController
         }
         $item = $this->model->getItem(['id' => $id], ['task' => 'get-item']);
         $codeRef = $item['code_ref'];
+        $userId=$item['user_id'];
+        $userInfo=(new UsersModel)->getItem(['user_id' => $userId],['task'=>'get-item']);
         $sumMoney=$item->sumMoneyRefAffiliate($codeRef);
         $sumQuantity=$item->sumQuantityRefAffiliate($codeRef);
         $sumLinkCount = AffiliateProductModel::where('code_ref', $codeRef)->sum('sum_click')+$item['sum_click'];
@@ -166,12 +169,14 @@ class AffiliateController extends BackEndController
             'infoProduct' => $infoProduct,
             'sumMoney'=> $sumMoney,
             'sumQuantity' => $sumQuantity,
-            'sumLinkCount' => $sumLinkCount
+            'sumLinkCount' => $sumLinkCount,
+            'userInfo'=> $userInfo
         ]);
     }
     public function refAffiliate(Request $request)
     {
         $userInfo = $request->session()->get('user');
+        $userInfo=(new UsersModel)->getItem(['user_id' => $userInfo['user_id']],['task'=>'get-item']);
         $item = $this->model->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
         $codeRef = $item['code_ref'];
         $session = $request->session();
@@ -208,7 +213,8 @@ class AffiliateController extends BackEndController
             'infoProduct' => $infoProduct,
             'sumMoney'=> $sumMoney,
             'sumQuantity' => $sumQuantity,
-            'sumLinkCount' => $sumLinkCount
+            'sumLinkCount' => $sumLinkCount,
+            'userInfo'=> $userInfo
         ]);
     }
     public function infoBank(Request $request){
