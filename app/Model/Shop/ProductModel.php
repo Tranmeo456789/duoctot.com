@@ -162,6 +162,9 @@ class ProductModel extends BackEndModel
             if (isset($params['cat_product_id']) && ($params['cat_product_id'] != 0)){
                 $query->whereIn('cat_product_id', CatProductModel::getChild($params['cat_product_id']));
             }
+            if (isset($params['group_id'])){
+                $query->whereIn('id',$params['group_id']);
+            }
             if(isset($params['user_id'])){
                 $query->where('user_id',$params['user_id']);
             }

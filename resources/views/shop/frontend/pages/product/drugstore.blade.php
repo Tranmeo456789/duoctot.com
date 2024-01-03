@@ -7,16 +7,16 @@
     <div class="mb-4">
         <div class="row">
             <div class="cod-12 col-md-4">
-                <img src="https://tdoctor.net/laravel-filemanager/fileUpload/nhathuoc/659416b90a18b.jpg" alt="">
+                <img src="https://bcp.cdnchinhphu.vn/Uploaded/nguyenthikimlien/2018_05_02/b503ae41ddf217eb13c3e4757362181a_thuoc3.jpg" alt="">
             </div>
             <div class="cod-12 col-md-8">
                 <h5 class="text-primary">{{$userInfo['fullname']??''}}</h5>
-                <p>Số lượng sản phẩm: {{count($productDrugstore)}}</p>
+                <p>Số lượng sản phẩm: {{count($productDrugstore)+count($productAffiliate)}}</p>
             </div>
         </div>
     </div>
     <div id="selling-product" class="parent-btn-view-add">
-        @include("$moduleName.pages.$controllerName.child_drugstore.list_product",['productDrugstore'=>$productDrugstore->take(10)])
+        @include("$moduleName.pages.$controllerName.child_drugstore.list_product",['productDrugstore'=>$productDrugstore,'productAffiliate'=>$productAffiliate])
     </div>
 </div>
 

@@ -8,9 +8,9 @@ use App\Http\Controllers\Controller;
 use App\Model\Shop\CatProductModel;
 use App\Model\Shop\AffiliateProductModel;
 use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
-
+use App\Model\Shop\AffiliateModel;
 use App\Model\Shop\ProductModel as MainModel;
-use App\Model\Shop\TrademarkModel ;
+use App\Model\Shop\TrademarkModel;
 use App\Model\Shop\UsersModel;
 use Illuminate\Support\Facades\Cookie;
 class ProductController extends ShopFrontEndController
@@ -101,10 +101,15 @@ class ProductController extends ShopFrontEndController
     public function drugstore(Request $request){
         $productDrugstore = $this->model->listItems(['user_id'=>$request->id], ['task' => 'frontend-list-items']);
         $userInfo=(new UsersModel)->getItem(['user_id' => $request->id],['task'=>'get-item']);
+        $item = (new AffiliateModel)->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
+        $codeRef = $item['code_ref'];
+        $params['group_id'] = collect($item->listIdProduct)->pluck('product_id')->toArray();
+        $productAffiliate = $this->model->listItems(['group_id'=>$params['group_id']], ['task' => 'frontend-list-items']);
         return view($this->pathViewController . 'drugstore',
             [
                 'userInfo' => $userInfo,
-                'productDrugstore'=>$productDrugstore
+                'productDrugstore'=>$productDrugstore,
+                'productAffiliate'=>$productAffiliate
             ]
     );
     }
