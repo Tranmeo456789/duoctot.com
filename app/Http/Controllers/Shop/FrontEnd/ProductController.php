@@ -101,10 +101,21 @@ class ProductController extends ShopFrontEndController
     public function drugstore(Request $request){
         $productDrugstore = $this->model->listItems(['user_id'=>$request->id], ['task' => 'frontend-list-items']);
         $userInfo=(new UsersModel)->getItem(['user_id' => $request->id],['task'=>'get-item']);
+        if ($request->has('codeRef')) {
+            $request->session()->put('codeRef', $request->query('codeRef'));
+            $codeRef = $request->codeRef ?? ($request->session()->get('codeRef') ?? '');
+            $affiliate = AffiliateModel::where('code_ref', $codeRef)->first();
+            if ($affiliate) {
+                $affiliate->increment('sum_click');
+             }
+        }
+
         $item = (new AffiliateModel)->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
-        $codeRef = $item['code_ref'];
-        $params['group_id'] = collect($item->listIdProduct)->pluck('product_id')->toArray();
-        $productAffiliate = $this->model->listItems(['group_id'=>$params['group_id']], ['task' => 'frontend-list-items']);
+        $productAffiliate=[];
+        if ($item) {
+            $params['group_id'] = collect($item->listIdProduct)->pluck('product_id')->toArray();
+            $productAffiliate = $this->model->listItems(['group_id' => $params['group_id']], ['task' => 'frontend-list-items']);
+        } 
         return view($this->pathViewController . 'drugstore',
             [
                 'userInfo' => $userInfo,

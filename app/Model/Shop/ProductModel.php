@@ -151,13 +151,7 @@ class ProductModel extends BackEndModel
                                     ->toArray();
         }
         if ($options['task'] == "frontend-list-items") {
-            $query = $this::select('id','name','type','code','cat_product_id','producer_id',
-                                    'tick','type_price','price','price_vat','percent_discount','coefficient',
-                                    'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
-                                    'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
-                                    'dosage_forms','country_id','specification','benefit','elements',
-                                    'preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','long','wide','high',
-                                    'mass','discount_ref')
+            $query = $this::select('id','name','type','code','cat_product_id','price','price_vat','percent_discount','unit_id','image','user_id','featurer','slug','discount_ref')
                                 ->where('id','>',1)->where('status_product','da_duyet');
             if (isset($params['cat_product_id']) && ($params['cat_product_id'] != 0)){
                 $query->whereIn('cat_product_id', CatProductModel::getChild($params['cat_product_id']));

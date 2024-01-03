@@ -45,7 +45,7 @@ $xhtmlAreaSeach = Template::showAreaSearch('product', $params['search']);
                                             $routeParams = ['slug' => $slugName,'id'=> $userInfo['user_id'], 'codeRef' => $codeRef];
                                         @endphp
 
-                                        @if($userInfo['user_type_id'] == 4)
+                                        @if($userInfo['user_type_id'] == 4 || $userInfo['user_type_id'] == 10)
                                             <a href="{{ route('fe.product.drugstore', $routeParams) }}" class="text-primary value-link d-inline-block" target="_blank">{{ route('fe.product.drugstore', $routeParams) }}</a>
                                         @else
                                             <a href="{{ url('/') . '?codeRef=' . $item['code_ref'] }}" class="text-primary value-link d-inline-block" target="_blank">{{ url('/') . '?codeRef=' . $item['code_ref'] }}</a>

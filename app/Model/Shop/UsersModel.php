@@ -266,10 +266,12 @@ class UsersModel extends BackEndModel
                 $result = $query->get();
             }
         }
-        if($options['task'] == "admin-list-by-type-id-in-selectbox") {
-            $result = $this->where(function ($query) {
-                $query->where('user_type_id', 4)
-                      ->orWhere(function ($query) {
+        if ($options['task'] == "admin-list-by-type-id-in-selectbox") {
+            $result = $this->where(function ($query) use ($params) {
+                if (isset($params['user_type_id'])) {
+                    $query->whereIn('user_type_id', $params['user_type_id']);
+                }
+                $query->orWhere(function ($query) {
                           $query->where('user_type_id', 1)
                                 ->where('created_at', '>', '2023-10-01');
                       });

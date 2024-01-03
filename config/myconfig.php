@@ -115,14 +115,16 @@
             ],
             'type_user' => [
                 '1' => 'Thành viên',
-                '2' => 'Bác sĩ',
-                '3' => 'Phòng khám',
-                '4' => 'Nhà thuốc',
-                '5' => 'Bệnh viện',
-                '6' => 'Trung tâm y tế',
-                '7' => 'Nha khoa',
-                '8' => 'Thẩm mỹ viện',
-                '9' => 'Công ty dược phẩm'
+                '4'=>'Nhà thuốc',
+                '9' => 'Công ty dược phẩm',
+                '10'=> 'Shop bán hàng'
+                // '2' => 'Bác sĩ',
+                // '3' => 'Phòng khám',
+                // '4' => 'Nhà thuốc',
+                // '5' => 'Bệnh viện',
+                // '6' => 'Trung tâm y tế',
+                // '7' => 'Nha khoa',
+                // '8' => 'Thẩm mỹ viện',
             ],
             'type_gender' => [
                 '1' => 'Anh',

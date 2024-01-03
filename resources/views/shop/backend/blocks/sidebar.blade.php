@@ -7,22 +7,15 @@
     <!-- Sidebar Menu -->
     <nav>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            @if (((Session::has('user') && Session::get('user')['user_type_id'] > 3 && Session::get('user')['user_type_id'] < 10)) || ((Session::has('user') && Session::get('user')['is_admin'] == 1)) )
+            @if (((Session::has('user') && Session::get('user')['user_type_id'] > 3)) || ((Session::has('user') && Session::get('user')['is_admin'] == 1)) )
             <li class="nav-item">
                 <a href="{{ route('dashboard') }}" class="nav-link">
                     <i class="far fa-list-alt nav-icon"></i>
-                    <p>Thống kê bán hàng</p>
+                    <p>Thống kê bán hàng Shop</p>
                 </a>
             </li>
             @endif
-            @if (Session::has('user') && Session::get('user')['is_affiliate'] == 1 ) 
-            <li class="nav-item">
-                <a href="{{ route('affiliate.dashboardRef') }}" class="nav-link">
-                    <i class="fas fa-columns nav-icon"></i>
-                    <p>Tổng quan</p>
-                </a>
-            </li>
-            @endif
+           
             <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-chalkboard-teacher"></i>
@@ -47,18 +40,32 @@
                 </ul>
             </li>
             @if (Session::has('user') && Session::get('user')['is_affiliate'] == 1 ) 
-            <li class="nav-item">
-                <a href="{{ route('affiliate.refAffiliate') }}" class="nav-link">
-                    <i class="far fa-list-alt nav-icon"></i>
-                    <p>Thống kê bán SP</p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('affiliate.infoBank') }}" class="nav-link">
-                    <i class="fas fa-money-check-alt nav-icon"></i>
-                    <p>TK ngân hàng</p>
-                </a>
-            </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="nav-icon fas fa-external-link-square-alt"></i>
+                        <p>Affiliate<i class="right fas fa-angle-left"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('affiliate.dashboardRef') }}" class="nav-link">
+                                <i class="fas fa-columns nav-icon"></i>
+                                <p>Tổng quan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('affiliate.refAffiliate') }}" class="nav-link">
+                                <i class="far fa-list-alt nav-icon"></i>
+                                <p>Thống kê bán SP</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('affiliate.infoBank') }}" class="nav-link">
+                                <i class="fas fa-money-check-alt nav-icon"></i>
+                                <p>TK ngân hàng</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             @endif
             @if ((Session::has('user') && Session::get('user')['is_admin'] == 1) || (Session::has('user') && Session::get('user')['is_admin'] == 2) )         
             <li class="nav-item">
@@ -68,7 +75,7 @@
                 </a>
             </li>
             @endif
-            @if ((Session::has('user') && Session::get('user')['user_type_id'] > 3 && Session::get('user')['user_type_id'] < 10)) 
+            @if ((Session::has('user') && Session::get('user')['user_type_id'] > 3 && Session::get('user')['user_type_id'] <= 10)) 
             <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fab fa-product-hunt"></i>
