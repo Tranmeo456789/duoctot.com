@@ -1,6 +1,8 @@
 @php
     use App\Helpers\Form as FormTemplate;
     use App\Helpers\MyFunction;
+    use App\Helpers\Template as Template;
+
     $label            = config('myconfig.template.label');
     $formLabelAttr    = array_merge_recursive(
                             config('myconfig.template.form_element.label'),
@@ -22,7 +24,6 @@
 
     $linkGetListDistrict = route('district.getListByParentID',['parentID' => 'value_new']);
     $linkGetListWard = route('ward.getListByParentID',['parentID' => 'value_new']);
-
     $elements = [
         [
             'label'   => HTML::decode(Form::label('member_id', $label['member_id'] .  $star, $formLabelAttr)),
@@ -61,7 +62,15 @@
             'element' => Form::text('details[tax_code]', $details['tax_code']??null, array_merge($formInputAttr,['placeholder'=>$label['tax_code']])),
             'widthElement' => 'col-12 col-md-6'
         ],[
-            'element' => $inputHiddenID  . $inputHiddenTask .Form::submit('Cập nhật', ['class'=>'btn btn-primary']),
+            'label'   => Form::label('','Ảnh đại diện', ['class' => 'col-1 col-form-label']),
+            'element' => Form::label('','Chọn ảnh', ['class' => 'btn btn-primary label-select-image']),
+            'widthInput' => '',
+        ],[
+            'label'   => '',
+            'element' => Template::showImageAndInputSingle('image', $item['image']?? ($item['details']['image']??null)),
+            'widthInput' => 'col-11',
+        ],[
+            'element' => $inputHiddenID . $inputHiddenTask .Form::submit('Cập nhật', ['class'=>'btn btn-primary']),
             'type'    => "btn-submit-center"
         ]
     ];

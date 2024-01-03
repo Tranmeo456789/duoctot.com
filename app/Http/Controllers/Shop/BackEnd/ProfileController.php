@@ -99,7 +99,7 @@ class ProfileController extends BackEndController
                     'success' => false,
                     'data' =>  null,
                     'errors' => null,
-                    'message' => 'Có lỗi xảy ra trong quá trình cập nhật thông tin',
+                    'message' => 'lỗi xảy ra trong quá trình cập nhật thông tin',
                     'redirect_url' => ''
                 ], 200);
             }

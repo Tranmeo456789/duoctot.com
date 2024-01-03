@@ -117,7 +117,7 @@
                 '1' => 'Thành viên',
                 '4'=>'Nhà thuốc',
                 '9' => 'Công ty dược phẩm',
-                '10'=> 'Shop bán hàng'
+                '10'=> 'Shop dược phẩm'
                 // '2' => 'Bác sĩ',
                 // '3' => 'Phòng khám',
                 // '4' => 'Nhà thuốc',
