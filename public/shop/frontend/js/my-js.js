@@ -1040,3 +1040,11 @@ $(document).on('keyup', ".wp-search .wp-input-search-simple>input", function (ev
         });    
     }
 });
+$(document).on('click', '.wp-link-affiliate .btn-copy-link', function(event) {
+    var copyText = $(this).siblings('.value-link');
+    var tempInput = $("<input>");
+    $("body").append(tempInput);
+    tempInput.val(copyText.text()).select();
+    document.execCommand("copy");
+    tempInput.remove();
+});

@@ -66,7 +66,21 @@ use Illuminate\Support\Str;
                     @php
                         $slugName = Str::slug($userInfo['fullname']);                                     
                     @endphp
-                <div class="mb-3"><a href="{{ route('fe.product.drugstore', ['slug' => $slugName,'id'=> $userInfo['user_id']]) }}" class="btn btn-sm btn-outline-secondary">Xem shop</a></div>
+                <div class="mb-3 d-flex justify-content-between">
+                    <a href="{{ route('fe.product.drugstore', ['slug' => $slugName,'id'=> $userInfo['user_id']]) }}" class="btn btn-sm btn-outline-secondary">Xem shop</a>
+                    <div class="wp-link-affiliate">
+                        @if(Session::has('user'))
+                            @if(Session::get('user')['is_affiliate'] == 1)
+                                 <div class="value-link d-none">{{route('fe.product.detail',['slug'=> $item['slug'], 'codeRef'=>$codeRefLogin])}}</div>
+                            @else
+                                <div class="value-link d-none">{{route('fe.product.detail',$item['slug'])}}</div>
+                            @endif
+                        @else
+                            <div class="value-link d-none">{{route('fe.product.detail',$item['slug'])}}</div>
+                        @endif
+                        <span class="text-primary share-link btn-copy-link">Share <i class="fas fa-share"></i></span>
+                    </div>
+                </div>
                 @if((Session::has('user') && Session::get('user')['user_type_id'] != 9) || Session::get('user')==null)
                 <div>
                     {!! csrf_field() !!}

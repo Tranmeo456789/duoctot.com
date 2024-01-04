@@ -41,19 +41,34 @@ $xhtmlAreaSeach = Template::showAreaSearch('product', $params['search']);
                                     <div class="text-center">Link chung</div>
                                     @if(isset($userInfo))
                                         @php
-                                            $slugName = Str::slug($userInfo['fullname']);                                        $codeRef = $item['code_ref'];
+                                            $slugName = Str::slug($userInfo['fullname']);                                        
+                                            $codeRef = $item['code_ref'];
                                             $routeParams = ['slug' => $slugName,'id'=> $userInfo['user_id'], 'codeRef' => $codeRef];
                                         @endphp
 
                                         @if($userInfo['user_type_id'] == 4 || $userInfo['user_type_id'] == 10)
-                                            <a href="{{ route('fe.product.drugstore', $routeParams) }}" class="text-primary value-link d-inline-block" target="_blank">{{ route('fe.product.drugstore', $routeParams) }}</a>
+                                            <div class="wp-link-affiliate">
+                                                <a href="{{ route('fe.product.drugstore', $routeParams) }}" class="text-primary value-link d-inline-block" target="_blank">{{ route('fe.product.drugstore', $routeParams) }}</a>
+                                                <span class="btn btn-sm btn-danger d-inline-block ml-2 btn-copy-link">
+                                                    <i class="far fa-copy"></i>
+                                                </span>
+                                            </div>
+                                            <div class="wp-link-affiliate">
+                                                <p class="mb-0">hoặc</p>
+                                                <a href="{{ url('/') . '?codeRef=' . $item['code_ref'] }}" class="text-primary value-link d-inline-block" target="_blank">{{ url('/') . '?codeRef=' . $item['code_ref'] }}</a>
+                                                <span class="btn btn-sm btn-danger d-inline-block ml-2 btn-copy-link">
+                                                    <i class="far fa-copy"></i>
+                                                </span>
+                                            </div>
                                         @else
+                                        <div class="wp-link-affiliate">
                                             <a href="{{ url('/') . '?codeRef=' . $item['code_ref'] }}" class="text-primary value-link d-inline-block" target="_blank">{{ url('/') . '?codeRef=' . $item['code_ref'] }}</a>
+                                            <span class="btn btn-sm btn-danger d-inline-block ml-2 btn-copy-link">
+                                                <i class="far fa-copy"></i>
+                                            </span>
+                                        </div>
                                         @endif
                                     @endif
-                                    <span class="btn btn-sm btn-danger d-inline-block ml-2 btn-copy-link">
-                                        <i class="far fa-copy"></i>
-                                    </span>
                                  </div>
                                 </td>
                                 <td scope="row" style="width: 10%" class="text-center">{{$item['sum_click']}}</td>

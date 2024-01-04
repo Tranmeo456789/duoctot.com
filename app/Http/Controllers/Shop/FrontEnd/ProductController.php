@@ -62,8 +62,21 @@ class ProductController extends ShopFrontEndController
         }
         setcookie("productViewed", json_encode($productViewed),time() + config('myconfig.time_cookie'), "/");
         $_COOKIE["productViewed"] = json_encode($productViewed);
-
-        return view($this->pathViewController . 'detail',compact('params','item','albumImageCurrent','codeRef','userInfo'));
+        $session = $request->session();
+        if ($session->has('user')) {
+            $userInfo = $request->session()->get('user');
+            $userInfo = (new UsersModel)->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
+            $itemAffiliate = (new AffiliateModel)->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
+            if ($itemAffiliate && isset($itemAffiliate['code_ref'])) {
+                $codeRefLogin = $itemAffiliate['code_ref'];
+            } else {
+                $codeRefLogin = '';
+            }
+        } else {
+            $codeRefLogin = '';
+        }
+        
+        return view($this->pathViewController . 'detail',compact('params','item','albumImageCurrent','codeRef','userInfo','codeRefLogin'));
     }
     public function searchProductAjax(Request $request){
         $data = $request->all();
