@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Shop\Api\ApiController;
+use App\Model\Shop\AffiliateProductModel;
 use App\Model\Shop\ProductModel as MainModel;
 use \Firebase\JWTCustom\JWTCustom as JWTCustom;
 
@@ -80,6 +81,24 @@ class ProductController extends ApiController
         $this->res['data']  = $this->model->listItems($params,['task'=>'frontend-list-items-by-id']);
         return $this->setResponse($this->res);
     }
+    public function getListProductShowFrontEnd(Request $request){
+        $params['limit'] = intval($request->limit)??8;
+        $params['user_id'] = intval($request->user_id);
+
+        $productAffifiate = AffiliateProductModel::where('user_id',$params['user_id'])->pluck('product_id')->toArray();
+        $productShop = MainModel::where('user_id',$params['user_id'])->pluck('id')->toArray();
+        $arrProductID= array_unique(array_merge($productAffifiate,$productShop));
+        if (count($arrProductID) > 0){
+            $this->res['data']  = $this->model->listItems(['id' => $arrProductID,'limit' => $params['limit']],['task'=>'frontend-list-items-by-id']);
+        }
+        else{
+            $this->res['data']  = $this->model->listItems(['type' => 'new','limit' => $params['limit']],['task'=>'frontend-list-items-by-type']);
+        }
+
+
+        return $this->setResponse($this->res);
+    }
+
 
 
 }
