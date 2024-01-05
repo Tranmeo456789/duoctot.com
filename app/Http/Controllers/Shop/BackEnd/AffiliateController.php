@@ -99,14 +99,14 @@ class AffiliateController extends BackEndController
                 $commonProductIds = array_intersect($productIdsToCheck, $existingProductIds);
                 if (!empty($newProductIds)) {
                     foreach ($newProductIds as $productId) {
-                        (new AffiliateProductModel)->saveItem(['code_ref'=>$codeRef,'product_id'=>$productId], ['task' => 'add-item']);
+                        (new AffiliateProductModel)->saveItem(['code_ref'=>$codeRef,'product_id'=>$productId,'user_id'=>$item['user_id']], ['task' => 'add-item']);
                     }
                 }
                 if (!empty($oldProductIds)) {
-                    AffiliateProductModel::whereIn('product_id', $oldProductIds)->where('code_ref', $codeRef)->update(['active' => 0]);
+                    AffiliateProductModel::whereIn('product_id', $oldProductIds)->where('code_ref', $codeRef)->update(['active' => 0,'user_id' => $item['user_id']]);
                 }
                 if (!empty($commonProductIds)) {
-                    AffiliateProductModel::whereIn('product_id', $commonProductIds)->where('code_ref', $codeRef)->update(['active' => 1]);
+                    AffiliateProductModel::whereIn('product_id', $commonProductIds)->where('code_ref', $codeRef)->update(['active' => 1,'user_id' => $item['user_id']]);
                 }
                 (new UsersModel())->saveItem(['user_id'=>$item['user_id'],'is_affiliate'=> 1], ['task' => 'update-item-simple']);
             } else {
@@ -115,6 +115,7 @@ class AffiliateController extends BackEndController
                 foreach ($params['info_product'] as $value) {
                     $paramsAffiliateProduct['code_ref']=$codeRef;
                     $paramsAffiliateProduct['product_id']=$value;
+                    $paramsAffiliateProduct['user_id']=$params['user_id'];
                     (new AffiliateProductModel)->saveItem($paramsAffiliateProduct, ['task' => 'add-item']);
                 }
             }

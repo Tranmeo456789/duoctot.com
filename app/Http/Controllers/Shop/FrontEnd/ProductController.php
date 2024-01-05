@@ -64,9 +64,9 @@ class ProductController extends ShopFrontEndController
         $_COOKIE["productViewed"] = json_encode($productViewed);
         $session = $request->session();
         if ($session->has('user')) {
-            $userInfo = $request->session()->get('user');
-            $userInfo = (new UsersModel)->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
-            $itemAffiliate = (new AffiliateModel)->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
+            $userInfoCurrent = $request->session()->get('user');
+            $userInfoCurrent = (new UsersModel)->getItem(['user_id' => $userInfoCurrent['user_id']], ['task' => 'get-item']);
+            $itemAffiliate = (new AffiliateModel)->getItem(['user_id' => $userInfoCurrent['user_id']], ['task' => 'get-item']);
             if ($itemAffiliate && isset($itemAffiliate['code_ref'])) {
                 $codeRefLogin = $itemAffiliate['code_ref'];
             } else {
