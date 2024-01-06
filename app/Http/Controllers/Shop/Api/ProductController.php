@@ -98,7 +98,14 @@ class ProductController extends ApiController
 
         return $this->setResponse($this->res);
     }
+    public function getListProductAffiliate(Request $request){
+        $params['user_id'] = intval($request->user_id);
 
+        $productAffifiate = AffiliateProductModel::where('user_id',$params['user_id'])->pluck('product_id')->toArray();
+        $this->res['data'] = $productAffifiate;
+
+        return $this->setResponse($this->res);
+    }
 
 
 }
