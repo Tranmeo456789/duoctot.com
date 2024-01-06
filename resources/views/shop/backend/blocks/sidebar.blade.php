@@ -1,6 +1,6 @@
 <!-- sidebar: style can be found in sidebar.less -->
 <!-- Brand Logo -->
-<a href="{{ route('dashboard') }}" class="brand-link">
+<a href="{{route('home')}}" class="brand-link">
     <img src="{{asset('shop/images/logo.png')}}" alt="Tdoctor" class="brand-image img-fluid">
 </a>
 <div class="sidebar">

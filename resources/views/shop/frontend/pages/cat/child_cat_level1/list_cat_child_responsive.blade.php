@@ -24,7 +24,7 @@ $listCatAll=(new CatProductModel())->listItems(null, ['task'  => 'list-items-fro
                     <ul>
                         @foreach($listCatAll as $itemLevel3)
                         @if($itemLevel2['id'] == $itemLevel3['parent_id'])
-                            <li><a href="">{{$itemLevel3['name']}}</a></li>
+                            <li><a href="{{route('fe.cat3',[$itemCatCurent['slug'],$itemLevel2['slug'],$itemLevel3['slug']])}}">{{$itemLevel3['name']}}</a></li>
                         @endif
                         @endforeach
                     </ul>

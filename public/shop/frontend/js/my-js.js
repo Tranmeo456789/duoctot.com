@@ -1047,4 +1047,11 @@ $(document).on('click', '.wp-link-affiliate .btn-copy-link', function(event) {
     tempInput.val(copyText.text()).select();
     document.execCommand("copy");
     tempInput.remove();
+    $(this).tooltip({
+        title: "Đã copy!",
+        trigger: "manual"
+    }).tooltip('show');
+    setTimeout(function() {
+        $('.wp-link-affiliate .btn-copy-link').tooltip('hide');
+    }, 2000);
 });
