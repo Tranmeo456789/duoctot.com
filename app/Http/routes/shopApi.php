@@ -21,7 +21,14 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
         $controller = ucfirst($controllerName)  . 'Controller@';
          Route::get('getListFeaturerFrontEnd', ['uses' => $controller . 'getListFeaturerFrontEnd']);
          Route::get('getListProductByProductID', ['uses' => $controller . 'getListProductByProductID']);
-
+         Route::get('getListProductShowFrontEnd', ['uses' => $controller . 'getListProductShowFrontEnd']);
      });
+
+     $prefix         = 'affiliate';
+     $controllerName = 'affiliate';
+     Route::group(['prefix' => $prefix], function () use($controllerName) {
+         $controller = ucfirst($controllerName)  . 'Controller@';
+          Route::get('getItem', ['uses' => $controller . 'getItem']);
+    });
 
 });

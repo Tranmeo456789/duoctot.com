@@ -9,7 +9,8 @@ use App\Model\Shop\ProductModel;
 use App\Model\Shop\UsersModel;
 use App\Model\Shop\CatProductModel;
 use App\Model\Shop\AffiliateModel;
-use App\Helpers\HttpClient;
+use App\Model\Shop\ArticleModel;
+
 class HomeController extends ShopFrontEndController
 {
     public function __construct()
@@ -36,10 +37,11 @@ class HomeController extends ShopFrontEndController
                 $affiliate->increment('sum_click');
              }
         }
-        
+        $itemsArticle = (new ArticleModel())->listItems(null, ['task' => 'frontend-list-items']);
+
         return view(
             $this->pathViewController . 'index',
-            compact('product_selling','product_covid','productInObject','itemsProduct','couterSumProduct')
+            compact('product_selling','product_covid','productInObject','itemsProduct','couterSumProduct','itemsArticle')
         );
     }
     public function ajaxHoverCatLevel1(Request $request)

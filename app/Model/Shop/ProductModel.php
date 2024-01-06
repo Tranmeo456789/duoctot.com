@@ -263,6 +263,7 @@ class ProductModel extends BackEndModel
             }
             $result = $query->get();
         }
+
         return $result;
     }
     public function listItemsNoPaginate(){
@@ -330,6 +331,9 @@ class ProductModel extends BackEndModel
             }
             $result = $query->first();
         }
+
+
+
         return $result;
     }
     public function countItems($params = null, $options  = null) {
