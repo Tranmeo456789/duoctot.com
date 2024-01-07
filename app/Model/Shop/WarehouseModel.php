@@ -52,6 +52,8 @@ class WarehouseModel extends BackEndModel
                         ->where('id','>',1);
             if(isset($params['user_id'])){
                 $query=$query->where('user_id',$params['user_id']);
+            }else{
+                $query=$query->OfUser();
             }
             $result = $query->orderBy('name', 'asc')->pluck('name', 'id')->toArray();
         }

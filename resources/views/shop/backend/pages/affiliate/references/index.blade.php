@@ -82,6 +82,7 @@ $xhtmlAreaSeach = Template::showAreaSearch('product', $params['search']);
             </div>
             <div class="col-12">
                 <div class="card card-outline card-primary">
+                    <div class="mb-2"><small class="pl-2">*Ghi chú: hoa hồng sản phẩm được tính % theo tiền lãi của sản phẩm trên link của bạn khi đơn hàng hoàn tất</small></div>
                     <table class="table table-bordered table-striped table-hover table-head-fixed text-wrap" id="tbList">
                         <thead>
                             <tr class="row-heading">
@@ -108,13 +109,14 @@ $xhtmlAreaSeach = Template::showAreaSearch('product', $params['search']);
                                 $totalMoney = (new \App\Model\Shop\AffiliateModel)->sumMoneyAProductRefAffiliate($codeRef, $val['id']);
                                 $name = Hightlight::show($val['name'], $params['search'], 'name');
                                 $sumClick = (new \App\Model\Shop\AffiliateProductModel)->getItem(['product_id'=>$val['id'],'code_ref'=>$codeRef],['task'=>'get-item'])->sum_click;
+                                $moneyDiscountRef=($val['discount_ref']*$val['discount_tdoctor']/10000)*$val['price']??0;
                                 @endphp
                             <tr>
                                 <td scope="row" style="width: 5%">{{$index}}</td>
                                 <td style="width: 55%" class='name'>
                                     <div><span class="text-success">{!! $name !!}</span></div>
                                     <div>Giá: <span class="text-danger">{{MyFunction::formatNumber($val['price'])}} đ</span></div>
-                                    <div>Chiết khấu: <span class="text-danger">{{$val['discount_ref']}}%</span></div>
+                                    <div>Hoa hồng(~): <span class="text-danger">{{MyFunction::formatNumber($moneyDiscountRef)}} vnđ ({{$val['discount_ref']}}%)</span></div>
                                     <div class="wp-link-affiliate">Link affiliate:
                                         <span class="btn btn-sm btn-primary show-link"><i class="fas fa-eye"></i></span>
                                         <a href="{{$linkAffiliate}}" class="text-primary value-link" target="_blank">{{$linkAffiliate}}</a>
