@@ -46,6 +46,14 @@
             </ul>
         </div>
     </div>
+    <div class="product-backround  mt-3 mt-lg-5 py-4">
+        <div class="wp-inner">
+            @include("$moduleName.templates.box_title_product",['title' => 'Sản phẩm nổi bật','classBackground'=>'bg-danger'])
+            <ul class="list-item">
+                @include("$moduleName.partial.product",['items'=>$itemsProduct['best']])
+            </ul>
+        </div>
+    </div>
 </div>
 <div class="wp-inner mt-3 mt-lg-4">
     <div id="selling-product" class="parent-btn-view-add">

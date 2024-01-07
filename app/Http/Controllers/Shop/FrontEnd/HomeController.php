@@ -27,6 +27,7 @@ class HomeController extends ShopFrontEndController
         $product_covid=(new ProductModel())->listItems(['type'=>'hau_covid','limit'=>10], ['task' => 'frontend-list-items-by-type']);
         $productInObject=(new ProductModel())->listItems(['type'=>'tre_em','limit'=>10], ['task' => 'frontend-list-items-by-type']);
         $itemsProduct['new'] = (new ProductModel())->listItems(['type'=>'new','limit'=>10], ['task' => 'frontend-list-items-by-type']);
+        $itemsProduct['best'] = (new ProductModel())->listItems(['type'=>'noi_bat','limit'=>10], ['task' => 'frontend-list-items-by-type']);
         $couterSumProduct=(new ProductModel())->countItems(null, ['task' => 'count-items-all-product-frontend']);
         $couterSumProduct=$couterSumProduct[0]['count']-20;
         if ($request->has('codeRef')) {
