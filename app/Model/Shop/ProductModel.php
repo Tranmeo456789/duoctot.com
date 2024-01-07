@@ -73,7 +73,7 @@ class ProductModel extends BackEndModel
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
                                     'preserve','note','image','featurer','long','user_id','status_product','slug','wide','high',
-                                    'mass','quantity_in_stock','discount_ref','created_at', 'updated_at')->where('id','>',1)
+                                    'mass','quantity_in_stock','discount_ref','discount_tdoctor','created_at', 'updated_at')->where('id','>',1)
                                     ->ofUser();
             if (isset($params['group_id'])){
                 $query->whereIn('id',$params['group_id']);
@@ -101,7 +101,7 @@ class ProductModel extends BackEndModel
         }
         if ($options['task'] == "user-list-items-simple-affiliate") {
             $query = $this::with('unitProduct')
-                            ->select('id','slug','name','price','image','discount_ref','created_at', 'updated_at')->where('id','>',1);
+                            ->select('id','slug','name','price','image','discount_ref','discount_tdoctor','created_at', 'updated_at')->where('id','>',1);
             if (isset($params['group_id'])){
                 $query->whereIn('id',$params['group_id']);
             }
@@ -302,7 +302,7 @@ class ProductModel extends BackEndModel
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
                                     'preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','long','wide','high',
-                                    'mass','discount_ref')
+                                    'mass','discount_ref','discount_tdoctor')
                             ->where('id', $params['id'])
                             ->OfCollaboratorCode()
                             ->first();

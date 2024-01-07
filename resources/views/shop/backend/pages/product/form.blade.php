@@ -134,15 +134,21 @@
                 'label'   => HTML::decode(Form::label('type_price', $label['type_price'] .  $star , $formLabelAttr)),
                 'element' => Form::select('type_price',$itemsTypePrice, $item['type_price']??null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
                 'widthElement' => 'col-3'
-            ],[
-                'label'   => HTML::decode(Form::label('sell_area', $label['sell_area'], $formLabelAttr)),
-                'element' => Form::select('sell_area',$itemsProvince, $item['sell_area']??null, array_merge($formSelect2Attr,['data-placeholder'=>"Mặc định(Cả nước)",'style' =>'width:100%','multiple' => 'multiple'])),
+            ],
+            [
+                'label'   => HTML::decode(Form::label('discount_tdoctor',$label['discount_tdoctor'], $formLabelAttr)),
+                'element' => Form::text('discount_tdoctor', $item['discount_tdoctor']??30, array_merge($formInputAttr,['placeholder'=>$label['discount_tdoctor']])),
                 'widthElement' => 'col-3'
             ],
             [
                 'label'   => HTML::decode(Form::label('discount_ref',$label['discount_ref'], $formLabelAttr)),
-                'element' => Form::text('discount_ref', $item['discount_ref']??10, array_merge($formInputAttr,['placeholder'=>$label['discount_ref']])),
+                'element' => Form::text('discount_ref', $item['discount_ref']??15, array_merge($formInputAttr,['placeholder'=>$label['discount_ref']])),
                 'widthElement' => 'col-3'
+            ],
+            [
+                'label'   => HTML::decode(Form::label('sell_area', $label['sell_area'], $formLabelAttr)),
+                'element' => Form::select('sell_area',$itemsProvince, $item['sell_area']??null, array_merge($formSelect2Attr,['data-placeholder'=>"Mặc định(Cả nước)",'style' =>'width:100%','multiple' => 'multiple'])),
+                'widthElement' => 'col-6'
             ],
             [
                 'label' => HTML::decode(Form::label('', 'Chọn đặc tính sản phẩm' , $formLabelAttr)),

@@ -1,3 +1,6 @@
+<div class="mt-3">
+    <span class="">Nếu mua số lượng lớn thì vui lòng liên hệ hotline 0349444164</span>
+</div>
 <div class="pnote-view d-flex">
     <div>
         <div class="roud25y-img"><img src="{{asset('images/shop/star2.png')}}" alt=""></div>

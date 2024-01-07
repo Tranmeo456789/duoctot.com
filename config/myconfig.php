@@ -111,7 +111,8 @@
                 'code_order' => 'Mã đơn hàng',
                 'status_order' => 'Trạng thái đơn hàng',
                 'status_control'=>'Trạng thái đối soát',
-                'discount_ref'=>'Chiết khấu cho đại lý(%)'
+                'discount_ref'=>'Chiết khấu cho đại lý(%)',
+                'discount_tdoctor'=>'Chiết khấu NCC cho Tdoctor(%)'
             ],
             'type_user' => [
                 '1' => 'Thành viên',

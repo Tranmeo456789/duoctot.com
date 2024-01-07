@@ -139,7 +139,8 @@ class AffiliateModel extends BackEndModel
             $infoProductArray = $order->info_product;
             foreach($infoProductArray as $val){
                 if ($val['codeRef'] == $codeRef) {
-                    $discount=ProductModel::find($val['product_id'])->discount_ref;
+                    $productCurrent=ProductModel::find($val['product_id']);
+                    $discount=($productCurrent['discount_ref']*$productCurrent['discount_tdoctor'])/100;
                     $totalMoney+=($val['total_money']*$discount)/100;
                 }
             }
@@ -154,7 +155,8 @@ class AffiliateModel extends BackEndModel
             $infoProductArray = $order->info_product;
             foreach($infoProductArray as $val){
                 if ($val['codeRef'] == $codeRef && $val['product_id']==$idProduct) {
-                    $discount=ProductModel::find($val['product_id'])->discount_ref;
+                    $productCurrent=ProductModel::find($val['product_id']);
+                    $discount=($productCurrent['discount_ref']*$productCurrent['discount_tdoctor'])/100;
                     $totalMoney+=($val['total_money']*$discount)/100;
                 }
             }
