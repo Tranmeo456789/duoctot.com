@@ -31,6 +31,9 @@
             'star' => "<span class='text-red ml-2'>*</span>",
             'form_element' => [
                 'label' => ['class'=>'col-form-label'],
+                'label_3' => [
+                    'class' => 'col-md-3 col-sm-3 col-form-label'
+                ],
                 'input' => [
                     'class' => 'form-control'
                 ],
@@ -60,6 +63,9 @@
                 ],
                 'get_data' =>[
                     'class' => 'get_data'
+                ],
+                'image_preview' => [
+                    'class' => 'form-control img-preview'
                 ],
             ],
             'label' => [

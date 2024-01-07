@@ -36,6 +36,9 @@
     <div id="buy-medicine" class="mt-0 pt-0 mt-md-3 pt-md-3">
         @include("$moduleName.pages.$controllerName.child_index.buy_medicine")
     </div>
+    <div id="doi-tac" class="mt-0 pt-0 mt-md-3 pt-md-3">
+        @include("$moduleName.pages.$controllerName.child_index.banner_shop")
+    </div>
 </div>
 <div id="feature-product-wp">
     <div class="product-backround  mt-3 mt-lg-5 py-4">
