@@ -168,6 +168,27 @@ class OrderModel extends BackEndModel
             if(isset($params['search'])){
                 $query=$this::where('buyer','LIKE', "%{$params['search']}%");
             } 
+            if(isset($params['status'])){
+                switch ($params['status'])
+                {
+                    case 'chua_hoan_tat' :
+                        $query = $query->whereIn('status_order',['choThanhToan','dangXuLy','daXacNhan','dangGiaoHang','daGiaoHang']);
+                        break;
+                    case 'hoan_tat' :
+                        $query = $query->whereIn('status_order',['hoanTat']);
+                        break;
+                    case 'da_huy' :
+                        $query = $query->whereIn('status_order',['daHuy']);
+                        break;
+                    case 'tra_hang' :
+                        $query = $query->whereIn('status_order',['traHang']);
+                        break;
+                    default:
+                    $query = $query;
+                        break;
+                }
+            } 
+            
             if(isset($params['pagination'])){
                 $query=$query->orderBy('id', 'desc')
                               ->paginate($params['pagination']['totalItemsPerPage']);

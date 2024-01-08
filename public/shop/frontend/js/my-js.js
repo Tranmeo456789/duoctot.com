@@ -732,6 +732,7 @@ $(document).on('click', ".slect-item-customer", function (event) {
 $(document).on('click', ".select-status-order", function (event) {
     var status = $(this).attr("data-status");
     var url = $(this).attr("data-href");
+    var phone = $(this).attr("data-phone");
     var _token = $('input[name="_token"]').val();
     $.ajax({
         url: url,
@@ -740,6 +741,7 @@ $(document).on('click', ".select-status-order", function (event) {
         dataType: 'html',
         data: {
             status: status,
+            phone: phone,
             _token: _token
         },
         success: function(data) {

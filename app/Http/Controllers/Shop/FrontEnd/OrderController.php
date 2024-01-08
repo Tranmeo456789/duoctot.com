@@ -36,7 +36,7 @@ class OrderController extends ShopFrontEndController
             $params = $request->all();
             $phone = trim((string)$params['phone']);
             $order=(new OrderModel)->listItems(['search'=>$phone],['task'=>'list-items-in-phone']);
-            return view($this->moduleName.'.pages.order.index',compact('order'));
+            return view($this->moduleName.'.pages.order.index',compact('order','phone'));
         }  
     }
     public function list(){
@@ -51,14 +51,9 @@ class OrderController extends ShopFrontEndController
     }
     public function ajaxFliter(Request $request){
         $data = $request->all();
-        $params['user_id']='';
-        if(Session::has('user')){
-            $user_login=Session::get('user');
-            $params['user_id']=$user_login->user_id;
-        }
-        $params['status']=$request->status;
-        $order=$this->model->listItems($params, ['task' => 'user-list-items-frontend']);
-        return view("$this->moduleName.pages.order.partial.product_order_frontend",compact('order'));
+        $phone = trim((string)$request->phone);
+        $order=(new OrderModel)->listItems(['search' => $phone,'status' => $request->status], ['task' => 'list-items-in-phone']);
+        return view("$this->moduleName.pages.order.partial.product_order_frontend",compact('order','phone'));
     }
     public function detail(Request $request){
         $data = $request->all();
