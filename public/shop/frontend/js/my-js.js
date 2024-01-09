@@ -1057,3 +1057,8 @@ $(document).on('click', '.wp-link-affiliate .btn-copy-link', function(event) {
         $('.wp-link-affiliate .btn-copy-link').tooltip('hide');
     }, 2000);
 });
+$(document).on('keyup', 'input[name="buyer[phone]"]', function(event) {
+    var inputValue = $(this).val();
+    var spanElement = $('.phone-customer');
+    spanElement.text(inputValue);
+});

@@ -23,7 +23,8 @@
                 <p>Ngân hàng TMCP Á Châu</p>
                 <p>Số tài khoản: 68686388</p>
                 <p>Chủ tài khoản: Công ty cổ phần giải pháp TDoctor</p>
-                <p>Nếu đã quý khách thanh toán</p>
+                <p>Nội dung ck: {{$buyer['phone']}}</p>
+                <p>Nếu quý khách đã thanh toán</p>
                 <p>Liên hệ hotline/Zalo 0349444164 để xác nhận thanh toán và hỗ trợ</p>
             </div>
             @endif
