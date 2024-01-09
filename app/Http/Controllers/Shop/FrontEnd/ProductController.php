@@ -12,6 +12,7 @@ use App\Model\Shop\AffiliateModel;
 use App\Model\Shop\ProductModel as MainModel;
 use App\Model\Shop\TrademarkModel;
 use App\Model\Shop\UsersModel;
+use App\Model\Shop\WardModel;
 use Illuminate\Support\Facades\Cookie;
 class ProductController extends ShopFrontEndController
 {
@@ -129,11 +130,24 @@ class ProductController extends ShopFrontEndController
             $params['group_id'] = collect($item->listIdProduct)->pluck('product_id')->toArray();
             $productAffiliate = $this->model->listItems(['group_id' => $params['group_id']], ['task' => 'frontend-list-items']);
         } 
+        $address='';
+        $map='';
+        if(isset($userInfo['details'])){
+            $ward_detail=(new WardModel())->getItem(['id'=> $userInfo['details']['ward_id']],['task' => 'get-item-full']);
+            $ward=$ward_detail['name'];
+            $district=$ward_detail['district']['name'];
+            $province=$ward_detail['district']['province']['name'];
+            $address=$userInfo['details']['address'].', '.$ward.', '.$district.', '.$province;
+            $map=isset($userInfo['details']['map']) ? $userInfo['details']['map'] : '';
+        }
+        
         return view($this->pathViewController . 'drugstore',
             [
                 'userInfo' => $userInfo,
                 'productDrugstore'=>$productDrugstore,
-                'productAffiliate'=>$productAffiliate
+                'productAffiliate'=>$productAffiliate,
+                'address'=>$address,
+                'map'=>$map
             ]
     );
     }
