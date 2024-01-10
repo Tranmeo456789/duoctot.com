@@ -232,7 +232,7 @@ class ProductModel extends BackEndModel
             $result = $query->orderBy('name', 'asc')->pluck('name', 'id')->toArray();
         }
         if($options['task'] == "list-items-search") {
-            $query = $this::with('unitProduct')->select('id','name','image','price','percent_discount','unit_id','slug');
+            $query = $this::with('unitProduct')->select('id','name','image','price','percent_discount','unit_id','slug')->where('status_product','da_duyet');
             if(isset($params['keyword'])){
                 $query->where('name','LIKE', "%{$params['keyword']}%");
             }

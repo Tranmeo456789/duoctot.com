@@ -72,7 +72,7 @@ class CustomerController extends BackEndController
         $session->put('params.pagination.totalItemsPerPage', $this->totalItemsPerPage);
         $this->params     = $session->get('params');
         $pageTitle='Quản lý khách hàng';$this->params['user_type_id']=3;
-        $items=(new UsersModel)->listItems($this->params, ['task'  => 'admin-list-items-of-shop']);
+        $items=(new UsersModel)->listItems($this->params, ['task'  => 'list-item-user-type-id-up3-of-shop']);
         $params['user_sell']=864108238;
         $customer=$this->model->listItems($params, ['task'  => 'list-items-in-user-sell']);
         //return(count($customer));

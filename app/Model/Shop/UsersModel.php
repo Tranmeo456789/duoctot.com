@@ -214,12 +214,13 @@ class UsersModel extends BackEndModel
         }
         if($options['task'] == "admin-list-items-of-shop") {
             $query = $this::select('user_id','email','fullname','phone','user_type_id','gender','is_admin','created_at')
-                         ->where('domain_register',"shop.tdoctor.vn");
+            ->where(function ($query) {
+                $query->where('domain_register', 'shop.tdoctor.vn')
+                      ->orWhere('domain_register', 'tdoctor.net');
+            });
             if(isset($params['filter_in_day'])){
                 $query->whereBetween('created_at', ["{$params['filter_in_day']['day_start']}", "{$params['filter_in_day']['day_end']}"]);
             }
-                $query->where('user_type_id', '>', 3)
-                ->where('user_type_id', '<', 10);
             if (isset($params['search']['value']) && ($params['search']['value'] !== ""))  {
                 if($params['search']['field'] == "all") {
                     $query->where(function($query) use ($params){
@@ -240,8 +241,16 @@ class UsersModel extends BackEndModel
         }
         if($options['task'] == "list-item-user-type-id-up3-of-shop") {
             $query = $this::select('user_id','email','fullname','phone','user_type_id','gender')
-            ->where('domain_register',"shop.tdoctor.vn")->where('user_type_id','>',3);
-            $result = $query->get();
+            ->where(function ($query) {
+                $query->where('domain_register', 'shop.tdoctor.vn')
+                      ->orWhere('domain_register', 'tdoctor.net');
+            })->where('user_type_id','>',3);
+            $query->orderBy('created_at', 'desc');
+            if (isset($params['pagination']['totalItemsPerPage'])){
+                $result =  $query->paginate($params['pagination']['totalItemsPerPage']);
+            }else{
+                $result = $query->get();
+            }
         }
         if($options['task'] == "admin-list-editor-of-shop") {
             $query = $this::select('user_id','email','fullname','phone','user_type_id','gender','is_admin','created_at');
