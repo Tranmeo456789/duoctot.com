@@ -156,6 +156,9 @@ class ProductModel extends BackEndModel
             if (isset($params['cat_product_id']) && ($params['cat_product_id'] != 0)){
                 $query->whereIn('cat_product_id', CatProductModel::getChild($params['cat_product_id']));
             }
+            if (isset($params['type'])){
+                $query->whereRaw("FIND_IN_SET('\"{$params['type']}\"',REPLACE(REPLACE(`featurer`, '[',''),']',''))");
+            }
             if (isset($params['group_id'])){
                 $query->whereIn('id',$params['group_id']);
             }
@@ -187,13 +190,7 @@ class ProductModel extends BackEndModel
         }
         if ($options['task'] == "frontend-list-items-featurer") {
             $type = $params['type'];
-            $query = $this::select('id','name','type','code','cat_product_id','producer_id',
-                                    'tick','type_price','price','price_vat','percent_discount','coefficient',
-                                    'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
-                                    'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
-                                    'dosage_forms','country_id','specification','benefit','elements',
-                                    'preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','long','wide','high',
-                                    'mass','discount_ref')
+            $query = $this::select('id','name','type','code','cat_product_id','price','price_vat','percent_discount','unit_id','image','user_id','featurer','slug','discount_ref')
                                  //   ->whereRaw("JSON_CONTAINS(`featurer`, '\"{$params['type']}\"')");
                                     ->whereRaw("FIND_IN_SET('\"{$params['type']}\"',REPLACE(REPLACE(`featurer`, '[',''),']',''))")->where('status_product','da_duyet');
             if (isset($params['cat_product_id']) && ($params['cat_product_id'] != 0)){
@@ -206,36 +203,21 @@ class ProductModel extends BackEndModel
         }
         if ($options['task'] == "frontend-list-items-by-type") {
             $type = $params['type'];
-            $query = $this::with('unitProduct')->select('id','name','type','code','cat_product_id','producer_id',
-                                    'tick','type_price','price','price_vat','percent_discount','coefficient',
-                                    'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
-                                    'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
-                                    'dosage_forms','country_id','specification','benefit','elements',
-                                    'preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','long','wide','high',
-                                    'mass','discount_ref')
+            $query = $this::with('unitProduct')->select('id','name','type','code','cat_product_id','price','price_vat','percent_discount','unit_id','image','user_id','featurer','slug','discount_ref')
                                  //   ->whereRaw("JSON_CONTAINS(`featurer`, '\"{$params['type']}\"')");
                                     ->whereRaw("FIND_IN_SET('\"{$params['type']}\"',REPLACE(REPLACE(`featurer`, '[',''),']',''))")->where('status_product','da_duyet');
             if (isset($params['cat_product_id']) && ($params['cat_product_id'] != 0)){
                 $query->whereIn('cat_product_id', CatProductModel::getChild($params['cat_product_id']));
             }
-
             $query->OfCollaboratorCode();
             $result =  $query->orderBy('id', 'desc')
                              ->paginate($params['limit']);
         }
         if ($options['task'] == "frontend-list-items-by-id") {
             logger($params);
-            $query = $this::with('unitProduct')->select('id','name','type','code','cat_product_id','producer_id',
-                                    'tick','type_price','price','price_vat','percent_discount','coefficient',
-                                    'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
-                                    'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
-                                    'dosage_forms','country_id','specification','benefit','elements',
-                                    'preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','long','wide','high',
-                                    'mass','discount_ref')
+            $query = $this::with('unitProduct')->select('id','name','type','code','cat_product_id','price','price_vat','percent_discount','unit_id','image','user_id','featurer','slug','discount_ref')
                                     ->whereIn("id",$params['id'])
                                     ->where('status_product','da_duyet');
-
-
           //  $query->OfCollaboratorCode();
           $result =  $query->orderBy('id', 'desc')
                             ->paginate(10);
@@ -269,26 +251,14 @@ class ProductModel extends BackEndModel
     public function listItemsNoPaginate(){
         $result = null;
         $user = Session::get('user');
-        $query = $this::select('id','name','type','code','cat_product_id','producer_id',
-        'tick','type_price','price','price_vat','percent_discount','coefficient',
-        'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
-        'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
-        'dosage_forms','country_id','specification','benefit','elements',
-        'preserve','note','image','featurer','slug','long','user_id','wide','high',
-        'mass','discount_ref', 'created_at', 'updated_at');
+        $query = $this::select('id','name','type','code','cat_product_id','price','price_vat','percent_discount','unit_id','image','user_id','featurer','slug','discount_ref');
         $result =  $query->orderBy('id', 'desc')->where('user_id',$user->user_id)->get();
         return $result;
     }
     public function listItemsAllNoPaginate(){
         $result = null;
         $user = Session::get('user');
-        $query = $this::select('id','name','type','code','cat_product_id','producer_id',
-        'tick','type_price','price','price_vat','percent_discount','coefficient',
-        'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
-        'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
-        'dosage_forms','country_id','specification','benefit','elements',
-        'preserve','note','image','featurer','slug','long','user_id','wide','high',
-        'mass','discount_ref', 'created_at', 'updated_at');
+        $query = $this::select('id','name','type','code','cat_product_id','price','price_vat','percent_discount','unit_id','image','user_id','featurer','slug','discount_ref');
         $result =  $query->orderBy('id', 'desc')->get();
         return $result;
     }
@@ -356,12 +326,14 @@ class ProductModel extends BackEndModel
 
             $result = $query->get()->toArray();
         }
-         if($options['task'] == 'count-items-all-product-frontend') {
+         if($options['task'] == 'count-items-product-frontend') {
             $query = $this::groupBy('status_product')
                     ->select(DB::raw('status_product, COUNT(id) as count'))
                     ->where('id', '>', 1)
                     ->where('status_product', 'da_duyet');
-
+            if (isset($params['type'])){
+                $query->whereRaw("FIND_IN_SET('\"{$params['type']}\"',REPLACE(REPLACE(`featurer`, '[',''),']',''))");
+            }
             $result = $query->get()->toArray();
         }
         if ($options['task'] == "count-number-product-in-cat") {

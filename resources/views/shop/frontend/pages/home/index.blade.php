@@ -73,7 +73,7 @@
 </div>
 @endif
 <div class="wp-inner mt-3 mt-lg-4">
-    <div id="product-by-object">
+    <div id="product-by-object" class="parent-btn-view-add">
         @include("$moduleName.pages.$controllerName.child_index.product_by_object")
     </div>
 </div>

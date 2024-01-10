@@ -15,7 +15,7 @@
                     <h6 class="text-danger text-center font-weight-bold">{{$userInfo['fullname']??''}}</h6>
                     <p>*Số lượng sản phẩm: {{count($productDrugstore)+count($productAffiliate)}}</p>
                     <p>*Địa chỉ: {{$address??''}}</p>
-                    <p>*Số điện thoại: {{$userInfo['phone'] ??''}}</p>
+                    <p>*Số điện thoại: 0349444164</p>
                 </div>
             </div>
             <div class="cod-12 col-md-6">

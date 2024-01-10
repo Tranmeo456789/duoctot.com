@@ -24,11 +24,13 @@ class HomeController extends ShopFrontEndController
     {
         $numTake=20;
         $product_selling = (new ProductModel())->listItems(null, ['task' => 'frontend-list-items'])->take($numTake);
-        $product_covid=(new ProductModel())->listItems(['type'=>'hau_covid','limit'=>10], ['task' => 'frontend-list-items-by-type']);
-        $productInObject=(new ProductModel())->listItems(['type'=>'tre_em','limit'=>10], ['task' => 'frontend-list-items-by-type']);
-        $itemsProduct['new'] = (new ProductModel())->listItems(['type'=>'new','limit'=>10], ['task' => 'frontend-list-items-by-type']);
-        $itemsProduct['best'] = (new ProductModel())->listItems(['type'=>'noi_bat','limit'=>10], ['task' => 'frontend-list-items-by-type']);
-        $couterSumProduct=(new ProductModel())->countItems(null, ['task' => 'count-items-all-product-frontend']);
+        $product_covid=(new ProductModel())->listItems(['type'=>'hau_covid'], ['task' => 'frontend-list-items'])->take(10);
+        $productInObject=(new ProductModel())->listItems(['type'=>'tre_em'], ['task' => 'frontend-list-items'])->take(10);
+        $countproductInObject=(new ProductModel())->countItems(['type'=>'tre_em'], ['task' => 'count-items-product-frontend']);
+        $countproductInObject=$countproductInObject[0]['count']-10;
+        $itemsProduct['new'] = (new ProductModel())->listItems(['type'=>'new'], ['task' => 'frontend-list-items'])->take(10);
+        $itemsProduct['best'] = (new ProductModel())->listItems(['type'=>'noi_bat'], ['task' => 'frontend-list-items'])->take(10);
+        $couterSumProduct=(new ProductModel())->countItems(null, ['task' => 'count-items-product-frontend']);
         $couterSumProduct=$couterSumProduct[0]['count']-20;
         if ($request->has('codeRef')) {
             $request->session()->put('codeRef', $request->query('codeRef'));
@@ -39,10 +41,9 @@ class HomeController extends ShopFrontEndController
              }
         }
         $itemsArticle = (new ArticleModel())->listItems(null, ['task' => 'frontend-list-items']);
-
         return view(
             $this->pathViewController . 'index',
-            compact('product_selling','product_covid','productInObject','itemsProduct','couterSumProduct','itemsArticle')
+            compact('product_selling','product_covid','productInObject','itemsProduct','couterSumProduct','countproductInObject','itemsArticle')
         );
     }
     public function ajaxHoverCatLevel1(Request $request)
@@ -86,8 +87,15 @@ class HomeController extends ShopFrontEndController
 
     public function ajax_filter(Request $request){
         $data = $request->all();
-        $object_product = $request->object_product;
-        $productInObject=(new ProductModel())->listItems(['type'=>$object_product,'limit'=>10], ['task' => 'frontend-list-items-by-type']);
-        return view("$this->moduleName.partial.product",['items'=>$productInObject]);
+        $typeObject = $request->object_product;
+        $countproductInObject=(new ProductModel())->countItems(['type'=>$typeObject], ['task' => 'count-items-product-frontend']);
+        $countproductInObject=$countproductInObject[0]['count']-10;
+        $productInObject=(new ProductModel())->listItems(['type'=>$typeObject], ['task' => 'frontend-list-items'])->take(10);
+        return view("$this->pathViewController.child_index.product_by_object",
+                [
+                    'productInObject'=>$productInObject,
+                    'countproductInObject'=>$countproductInObject,
+                    'typeObject'=>$typeObject
+                ]);
     }
 }

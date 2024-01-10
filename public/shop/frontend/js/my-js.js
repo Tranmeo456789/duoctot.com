@@ -713,6 +713,9 @@ $(document).on('click', ".slect-item-customer", function (event) {
     $('.slect-item-customer').removeClass("active-slect");
     $(this).addClass("active-slect");
     var object_product = $(this).attr("data-object");
+    var productByObject = $(this).closest("#product-by-object");
+    productByObject.find(".view-btn-add-product").attr("data-object", object_product);
+    productByObject.find(".view-btn-add-product").attr("data-offset", 10);
     var url = $(this).attr("data-href");
     var _token = $('input[name="_token"]').val();
     $.ajax({
@@ -725,7 +728,7 @@ $(document).on('click', ".slect-item-customer", function (event) {
             _token: _token
         },
         success: function (data) {
-            $('#product-by-object .ls_product').html(data);
+            $('#product-by-object').html(data);
         },
     });
 });
@@ -776,6 +779,7 @@ $(document).on('click', ".view-btn-add-product", function (event) {
     var url = $(this).attr("data-href");
     var _token = $('input[name="_token"]').val();
     var type = $(this).attr("data-type");
+    var object = $(this).attr("data-object");
     var idCat = $(this).attr("data-idcat");
     var currentElement = $(this); 
     var currentCount = parseInt($(this).find(".visibility-number-product").text().trim());
@@ -790,11 +794,12 @@ $(document).on('click', ".view-btn-add-product", function (event) {
         data: {
             offset: offset,
             type: type,
+            object: object,
             idCat: idCat,
             _token: _token,
         },
         success: function(data) {
-            $(".visibility-number-product").text(function(index, text) {
+            currentElement.find(".visibility-number-product").text(function(index, text) {
                 return Math.max(parseInt(text) - 20, 0);
             });
             offset += 20;

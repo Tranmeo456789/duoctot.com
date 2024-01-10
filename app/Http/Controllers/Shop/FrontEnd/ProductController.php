@@ -101,6 +101,9 @@ class ProductController extends ShopFrontEndController
         if ($type = $data['type'] ?? null) {
             $listParams['cat_product_id'] = $data['idCat'] ?? null;
         }
+        if ($object = $data['object'] ?? null) {
+            $listParams['type'] = $data['object'] ?? null;
+        }
         $listProductAddView = $this->model->listItems($listParams, ['task' => 'frontend-list-items']);
         $viewName = $this->moduleName;
         if ($type == 'product_cat_horizontal') {
