@@ -1,4 +1,6 @@
-
+@php
+    $dataHref = route('fe.product.searchListProductShort');
+@endphp
 <div class="position-relative">
 <div class="d-flex header-box-search">
     <span class="icon-back-search"><i class="fas fa-arrow-left"></i></span>
@@ -7,7 +9,7 @@
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             <div class="d-flex">
                 <div class="wp-input-search input-search-small">
-                    <input type="text" name="keyword" class="input-search-info" value="{{$keyword??''}}" placeholder="Nhập tìm thuốc, TPCN, bệnh lý..." autocomplete="off">
+                    <input type="text" name="keyword" class="input-search-info" data-href="{{$dataHref}}" value="{{$keyword??''}}" placeholder="Nhập tìm thuốc, TPCN, bệnh lý..." autocomplete="off">
                 </div>
                 <div class="wp-btn-search">
                     <button type="submit" class="btn-search-respon btn-search-home btn" name="btn_search" value="1" disabled="disabled">
@@ -16,6 +18,11 @@
                 </div>
             </div>
         </form>
+    </div>
+</div>
+<div class="position-relative result-product-res">
+    <div class="wp-list-product-short">
+        @include("$moduleName.templates.list_product_short")
     </div>
 </div>
 <div class="data-history">

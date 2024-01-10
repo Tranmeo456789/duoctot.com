@@ -1315,9 +1315,12 @@ input[type="radio"] {
     overflow-x: hidden;
     z-index: 504;
     touch-action: none;
-    display: none;
     border-radius: 1rem;
     box-shadow:0 0 #0000,0 0 #0000,0 0 #0000,0 0 #0000,0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px -1px rgba(0,0,0,.1);
+}
+.result-product-res .wp-list-product-short{
+    position: static;
+    border-radius: 0;
 }
 .list-name-product li{
     cursor: pointer;

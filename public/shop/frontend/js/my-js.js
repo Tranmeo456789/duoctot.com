@@ -965,6 +965,26 @@ $(document).on('keyup focus input', ".wp-input-search input", function (event) {
     if (keyword.length > 0 && keyword[0] === ' ') {
         keyword = keyword.substring(1);
     }
+    if(keyword=='' || keyword[0]==' '){
+        $('.list-product-short').html("<div class='px-4 py-2'><p class='mb-3'>Bạn có thể tìm kiếm theo tên thuốc</p><img loading='lazy' decoding='async' alt='Tdoctor' src='../../images/shop/skeleton-product.png'></div>");
+    }else{
+        $('.btn-search').removeAttr("disabled");
+        var url = $(this).attr("data-href");
+        var _token = $('input[name="_token"]').val();
+        $.ajax({
+            url: url,
+            cache: false,
+            method: "GET",
+            dataType: 'html',
+            data: {
+                keyword: keyword,
+                _token: _token
+             },
+            success: function(data) {
+                $('.wp-list-product-short').html(data);
+            },
+        });    
+    }
     if (keyword.length > 0) {
         $('.btn-search-home').removeAttr("disabled");
         $('.wp-input-search-simple>input').val(keyword);
@@ -973,6 +993,7 @@ $(document).on('keyup focus input', ".wp-input-search input", function (event) {
         $('.wp-input-search-simple>input').val('');
     }
 });
+
 $(document).on('click', ".wp-input-search input", function (event) {
     $('.lc-mask-search').css("opacity", 1);
     $('.lc-mask-search').css("visibility", "visible"); 
@@ -983,7 +1004,15 @@ $(document).on('click', ".wp-input-search input", function (event) {
 
 $(document).on('click', ".search-header-mobi .wp-input-search-simple", function (event) {
     $('#box-search-fixed').css("display", "block");
-    $('#box-search-fixed .input-search-info').focus();
+    var input = $('#box-search-fixed .input-search-info')[0];
+    input.focus();
+    if (typeof input.setSelectionRange === 'function') {
+        input.setSelectionRange(input.value.length, input.value.length);
+    } else if (typeof input.createTextRange === 'function') {
+        var range = input.createTextRange();
+        range.collapse(false);
+        range.select();
+    }
 });
 $(document).on('click', ".icon-back-search", function (event) {
     $('#box-search-fixed').css("display", "none");
