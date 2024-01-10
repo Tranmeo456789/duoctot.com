@@ -1097,7 +1097,6 @@ input[type="radio"] {
     z-index: 501;
     padding-top: 18px;
     margin-top: -18px;
-    max-width: calc(100% - 76px);
     display: none;
 }
 
@@ -1105,7 +1104,7 @@ input[type="radio"] {
     position: static;
     box-shadow: none;
     border-radius: 0px;
-    padding-top: 18px;
+    padding-top: 0;
     margin-top: 0px;
     max-width: calc(100%);
     display: block;
@@ -1314,13 +1313,15 @@ input[type="radio"] {
     width: 100%;
     overflow-x: hidden;
     z-index: 504;
+    display: none;
     touch-action: none;
     border-radius: 1rem;
     box-shadow:0 0 #0000,0 0 #0000,0 0 #0000,0 0 #0000,0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px -1px rgba(0,0,0,.1);
 }
-.result-product-res .wp-list-product-short{
+.ls-history .wp-list-product-short{
     position: static;
     border-radius: 0;
+    display: block;
 }
 .list-name-product li{
     cursor: pointer;
@@ -1442,4 +1443,8 @@ input[type="radio"] {
 .share-link{
     font-size: 18px;
     cursor: pointer;
+}
+#map-drugstore iframe{
+    width: 100%!important;
+    height: 300px!important;
 }

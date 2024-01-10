@@ -20,11 +20,6 @@
         </form>
     </div>
 </div>
-<div class="position-relative result-product-res">
-    <div class="wp-list-product-short">
-        @include("$moduleName.templates.list_product_short")
-    </div>
-</div>
 <div class="data-history">
     @include("shop.frontend.block.menu.child_menu_yes_search.list_history_keyword")
 </div>

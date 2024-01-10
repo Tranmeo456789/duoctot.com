@@ -2,6 +2,8 @@
 use App\Model\Shop\SearchModel;
 $params['limit']=6;
 $listKeywordHight=(new SearchModel)->listItems($params, ['task'=>'list-keyword-search-most']);
+$dataHref = route('fe.product.searchListProductShort');
+
 @endphp
 <div class="form-search-inner">
     <h1>Tra Cứu Thuốc, TPCN, Bệnh lý...</h1>
@@ -10,7 +12,7 @@ $listKeywordHight=(new SearchModel)->listItems($params, ['task'=>'list-keyword-s
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             <div class="position-relative">
                 <div class="wp-input-search">
-                    <input type="text" name="keyword" class="input-search-info" value="" placeholder="Nhập từ khóa..." autocomplete="off">
+                    <input type="text" name="keyword" class="input-search-info" data-href="{{$dataHref}}" value="" placeholder="Nhập từ khóa..." autocomplete="off">
                 </div>
                 <button type="submit" class="btn-search-home" name="btn_search" value="1" disabled="disabled">
                     <img src="{{asset('images/shop/icon-search.png')}}" alt="">

@@ -18,7 +18,7 @@
                     <p>*Số điện thoại: 0349444164</p>
                 </div>
             </div>
-            <div class="cod-12 col-md-6">
+            <div id="map-drugstore" class="cod-12 col-md-6">
                 @if(empty($map))
                 <img style="width: 100%; height: 300px" src="https://images.fpt.shop/unsafe/filters:quality(5)/fptshop.com.vn/uploads/images/tin-tuc/154470/Originals/Google%20Map%20l%C3%A0%20g%C3%AC%20h%C3%ACnh%201.jpg" alt="">
                 @else

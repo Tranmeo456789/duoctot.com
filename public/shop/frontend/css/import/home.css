@@ -56,9 +56,6 @@
     padding: 3px 8px;
     cursor: pointer;
 }
-#form-search .form-search-inner li a{
-    color: #1B1D2C;
-}
 #form-search .form-search-inner li:hover{
     background: #e1e6eb;
 }
@@ -358,7 +355,7 @@
     border-radius: 12px;
     z-index: 10;
 }
-.ls_product li .unit-top {
+li .unit-top {
     position: absolute;
     top: 8px;
     right: 8px;
