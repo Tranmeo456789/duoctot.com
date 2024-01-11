@@ -23,7 +23,6 @@
                         <span class="text-info">{{ MyFunction::formatNumber($val['price'])}}đ / {{$val['unit']}}</span>
                     </div>
                 </a>
-                <div class="unit-top">{{$val['unit']}}</div>
                 <div class="text-center slbuy"><a href="">Chọn mua</a></div>
             </li>
             @endforeach

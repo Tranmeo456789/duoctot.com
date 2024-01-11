@@ -21,7 +21,11 @@
                 </div>
             </div>
         </a>
-        <div class="unit-top">{{$val->unitProduct->name}}</div>
+        <div class="d-inline-block pl-2">
+            <div class="unit-top">
+                <p class="truncate1 pt-0">{{ empty($val['specification']) ? $val->unitProduct->name : $val['specification'] }}</p>
+            </div>
+        </div>
         @if(!empty($val['percent_discount']))
             <div class="wp-discount">-{{$val['percent_discount']}}%</div>
         @endif

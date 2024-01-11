@@ -966,7 +966,7 @@ $(document).on('keyup focus input', ".wp-input-search input", function (event) {
         keyword = keyword.substring(1);
     }
     if(keyword=='' || keyword[0]==' '){
-        $('.list-product-short').html("<div class='px-4 py-2'><p class='mb-3'>Bạn có thể tìm kiếm theo tên thuốc</p><img loading='lazy' decoding='async' alt='Tdoctor' src='../../images/shop/skeleton-product.png'></div>");
+        $('.list-product-short').html("<div class='px-4 py-2'><p>Bạn có thể tìm kiếm theo tên thuốc</p></div>");
     }else{
         $('.btn-search').removeAttr("disabled");
         var url = $(this).attr("data-href");
