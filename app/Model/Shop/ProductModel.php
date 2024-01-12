@@ -233,8 +233,12 @@ class ProductModel extends BackEndModel
         }
         if($options['task'] == "list-items-search") {
             $query = $this::with('unitProduct')->select('id','name','image','price','percent_discount','unit_id','specification','slug')->where('status_product','da_duyet');
-            if(isset($params['keyword'])){
-                $query->where('name','LIKE', "%{$params['keyword']}%");
+            if (isset($params['keyword'])) {
+                $query->where(function ($query) use ($params) {
+                    $keyword = $params['keyword'];
+                    $query->orWhere('name', 'LIKE', "%{$keyword}%", 'utf8mb4_vietnamese_ci');
+                    $query->orWhere('benefit', 'LIKE', "%{$keyword}%", 'utf8mb4_vietnamese_ci');
+                });
             }
             if(isset($params['user_sell'])){
                 $query->where('user_id',$params['user_sell']);

@@ -89,7 +89,7 @@ class ProductController extends ShopFrontEndController
     }
     public function searchListProductShort(Request $request){
         $data = $request->all();
-        $params['keyword']=$request->keyword;$params['limit']=6;
+        $params['keyword']=$request->keyword;
         $keyword=$params['keyword'];
         $items=$this->model->listItems($params,['task' => 'list-items-search']);
         return view("$this->moduleName.templates.list_product_short",compact('items','keyword'));
