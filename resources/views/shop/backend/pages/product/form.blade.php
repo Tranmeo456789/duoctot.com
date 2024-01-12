@@ -218,7 +218,22 @@
 @extends('shop.layouts.backend')
 @section('title',$pageTitle)
 @section('content')
-@include ("$moduleName.blocks.page_header", ['pageIndex' => false])
+@if ((Session::has('user') && Session::get('user')['is_admin'] == 1))
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>{{ $pageTitle }}</h1>
+                </div>
+                <div class="col-md-6 d-flex justify-content-end">
+                    <a href='{{route("admin.product.list")}}' class="btn btn-primary float-right">Quay về</a>                   
+                </div>
+            </div>
+        </div>
+    </div>
+@else
+  @include ("$moduleName.blocks.page_header", ['pageIndex' => false])
+@endif
 <section class="content">
     <div class="container-fluid">
         <div class="row">

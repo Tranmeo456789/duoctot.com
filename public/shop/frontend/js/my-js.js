@@ -452,14 +452,13 @@ function visible_cart_respon() {
     $('.dropdown_cart').css("visibility", "visible");
     $('.black-res-screen').css("display", "block");
     $('.fix1screen').css("display", "block");
-    $('.fix1screen').css("height", '100vh');
-    $('#site').addClass('fix-1vh');
 }
 $(document).on('click', '.btn-select-buy', function (event) {
-    $('body,html').stop().animate({
-        scrollTop: 0
-    }, 800);
-
+    if ($(window).width() > 1200) {
+        $('body,html').stop().animate({
+            scrollTop: 0
+        }, 800);
+    }
     var _token = $('input[name="_token"]').val();
     var quantity = $('input[name="qty_product"]').val();
     var total_product = $('.hrcart .number_cartmenu').text();
@@ -499,7 +498,6 @@ $(document).on('click', ".close-cart", function (event) {
     $('.dropdown_cart').css("visibility", "hidden");
     $('.black-res-screen').css("display", "none");
     $('.fix1screen').css("display", "none");
-    $('#site').removeClass("fix-1vh");
 });
 $(document).on('change', "select.get_child", function (event) {
     event.preventDefault();
@@ -1108,4 +1106,9 @@ bannerQuangCao.owlCarousel({
     itemsDesktopSmall: [900, 1],
     itemsTablet: [600, 1],
     itemsMobile: true
+});
+$(document).on('click', '.mdlh .md', function(event) {
+    $('.md').removeClass('active');
+    $(this).addClass('active');
+    $('.content-detail-product').toggleClass('fs-big');
 });

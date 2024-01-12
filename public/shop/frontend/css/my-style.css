@@ -150,6 +150,10 @@ ul {
 .content-detail-product {
     font-size: 18px;
     font-family: sans-serif;
+    transition: font-size 0.5s ease;
+}
+.content-detail-product.fs-big {
+    font-size: 20px;
 }
 #img-customer .owl-controls .owl-buttons div{
     position: absolute;

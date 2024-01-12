@@ -21,10 +21,10 @@
         <h1 id="desc-product">Mô tả sản phẩm</h1>
         <div class="d-flex justify-content-center flex-wrap">
             <span class="ktc">Kích thước chữ</span>
-            <span class="mdlh">
-                <a class="md" href="">Mặc định</a>
-                <a class="lh" href="">Lớn hơn</a>
-            </span>
+            <ul class="mdlh">
+                <li class="md active">Mặc định</li>
+                <li class="md">Lớn hơn</li>
+            </ul>
         </div>
     </div>
     <div class="content-detail-product">
