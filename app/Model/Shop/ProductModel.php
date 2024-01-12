@@ -234,11 +234,27 @@ class ProductModel extends BackEndModel
         if($options['task'] == "list-items-search") {
             $query = $this::with('unitProduct')->select('id','name','image','price','percent_discount','unit_id','specification','slug')->where('status_product','da_duyet');
             if (isset($params['keyword'])) {
-                $query->where(function ($query) use ($params) {
-                    $keyword = $params['keyword'];
-                    $query->orWhere('name', 'LIKE', "%{$keyword}%", 'utf8mb4_vietnamese_ci');
-                    $query->orWhere('benefit', 'LIKE', "%{$keyword}%", 'utf8mb4_vietnamese_ci');
+                $keyword = $params['keyword'];
+                $keywords = explode(' ', $keyword);
+                
+                $results = $query->where(function ($query) use ($keywords) {
+                    foreach ($keywords as $word) {
+                        $query->where(function ($query) use ($word) {
+                            $query->orWhere('name', 'LIKE', "%{$word}%", 'utf8mb4_vietnamese_ci')
+                                ->orWhere('benefit', 'LIKE', "%{$word}%", 'utf8mb4_vietnamese_ci');
+                        });
+                    }
+                })->get();
+                $results = $results->map(function ($result) use ($keywords) {
+                    $score = collect($keywords)->sum(function ($word) use ($result) {
+                        return mb_stripos($result->name, $word, 0, 'UTF-8') !== false ? mb_strlen($word, 'UTF-8') : 0;
+                    });
+            
+                    return ['score' => $score, 'result' => $result];
                 });
+            
+                // Sắp xếp kết quả theo điểm số giảm dần
+                $results = $results->sortByDesc('score')->pluck('result');
             }
             if(isset($params['user_sell'])){
                 $query->where('user_id',$params['user_sell']);
@@ -247,7 +263,7 @@ class ProductModel extends BackEndModel
             if(isset($params['limit'])){
                 $query->limit($params['limit']);
             }
-            $result = $query->get();
+            $result = $results;
         }
 
         return $result;

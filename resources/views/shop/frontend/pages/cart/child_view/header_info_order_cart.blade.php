@@ -18,11 +18,11 @@ use App\Helpers\MyFunction;
         </tr>
         <tr>
             <td class="pl-2 py-2">Phí giao dự kiến</td>
-            <td class="text-right pr-2 py-2">0 đ</td>
+            <td class="text-right pr-2 py-2"><input type="hidden" name="money_ship" value="20000"> 20.000 đ</td>
         </tr>
         <tr>
             <td class="pl-2 py-2 font-weight-bold">Cần thanh toán</td>
-            <td class="text-right text-info pr-2 py-2"><span class="total_thanh_toan">{{MyFunction::formatNumber($item['total'])}}</span> đ</td>
+            <td class="text-right text-info pr-2 py-2"><span class="total_thanh_toan">{{MyFunction::formatNumber($item['total']+20000)}}</span> đ</td>
         </tr>
     </tbody>
 </table>

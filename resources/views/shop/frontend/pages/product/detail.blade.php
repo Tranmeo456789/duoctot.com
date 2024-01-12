@@ -35,6 +35,9 @@ use Illuminate\Support\Str;
                 </div>
             </div>
             <div class="col-md-7">
+                @if ((Session::has('user') && Session::get('user')['is_admin'] == 1))
+                    <a href="{{route('product.edit',$item->id)}}" class="btn btn-sm btn-secondary">chỉnh sửa</a>
+                @endif
                 <div class="title_product">
                     <p class="trademark_product">Thương hiệu: <span class="text-info">{{$item->trademarkProduct->name}}</span></p>
                     <h1>{{$item['name']}}</h1>

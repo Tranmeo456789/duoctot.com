@@ -149,12 +149,13 @@ foreach($status_order as $value){
         <div class="money-order-detail">
             <ul>
                 <li><div class="font-md-14 text-right">Tổng tiền: {{MyFunction::formatNumber($order_detail['total'])}} đ</div></li>
-                <li><div class="font-md-14 text-right font-weight-bold">Cần thanh toán: {{MyFunction::formatNumber($order_detail['total'])}} đ</div></li>
+                <li><div class="font-md-14 text-right">Phí giao hàng: {{MyFunction::formatNumber($order_detail['money_ship'])}} đ</div></li>
+                <li><div class="font-md-14 text-right font-weight-bold">Cần thanh toán: {{MyFunction::formatNumber($order_detail['total']+$order_detail['money_ship'])}} đ</div></li>
             </ul>
         </div>
         @if($order_detail['status_control'] == 'chuaThanhToan')
             <div class="text-center box-dhtc">
-                <p>Vui lòng thanh toán số tiền(nếu chưa): <b>{{ MyFunction::formatNumber($order_detail['total']) . ' đ'}}</b> vào tài khoản ngân hàng</p>
+                <p>Vui lòng thanh toán số tiền(nếu chưa): <b>{{ MyFunction::formatNumber($order_detail['total']+$order_detail['money_ship']) . ' đ'}}</b> vào tài khoản ngân hàng</p>
                 <p>Ngân hàng TMCP Á Châu</p>
                 <p>Số tài khoản: 68686388</p>
                 <p>Chủ tài khoản: Công ty cổ phần giải pháp TDoctor</p>

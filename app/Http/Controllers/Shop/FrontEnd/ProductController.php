@@ -10,6 +10,7 @@ use App\Model\Shop\AffiliateProductModel;
 use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
 use App\Model\Shop\AffiliateModel;
 use App\Model\Shop\ProductModel as MainModel;
+use App\Model\Shop\ProvinceModel;
 use App\Model\Shop\TrademarkModel;
 use App\Model\Shop\UsersModel;
 use App\Model\Shop\WardModel;
@@ -135,12 +136,21 @@ class ProductController extends ShopFrontEndController
         } 
         $address='';
         $map='';
+        $ward='';
         if(isset($userInfo['details'])){
             $ward_detail=(new WardModel())->getItem(['id'=> $userInfo['details']['ward_id']],['task' => 'get-item-full']);
-            $ward=$ward_detail['name'];
-            $district=$ward_detail['district']['name'];
-            $province=$ward_detail['district']['province']['name'];
-            $address=$userInfo['details']['address'].', '.$ward.', '.$district.', '.$province;
+            if($ward_detail){
+                $ward=$ward_detail['name']??'';
+                $district=$ward_detail['district']['name']??'';
+                $province=$ward_detail['district']['province']['name']??'';
+            }else{
+                $province_detail=(new ProvinceModel)->getItem(['id'=> $userInfo['details']['province_id']],['task' => 'get-item-full']);
+                $province=$province_detail['name']??'';
+                $district_detail=(new ProvinceModel)->getItem(['id'=> $userInfo['details']['district_id']],['task' => 'get-item-full']);
+                $district=$district_detail['name']??'';
+            }
+            
+            $address=$userInfo['details']['address'].' '.$ward.' '.$district.' '.$province;
             $map=isset($userInfo['details']['map']) ? $userInfo['details']['map'] : '';
         }
         

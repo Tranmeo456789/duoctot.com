@@ -582,11 +582,13 @@ $(document).on('change', "select.get_data", function (event) {
 });
 $(document).on('change', "input.number-product", function (event) {
     $value = $(this).val();
+    var moneyShip= $('input[name="money_ship"]').val();
+    var moneyShip = parseInt(moneyShip, 10);
     url = $(this).data('href');
     if (url) {
         url = url.replace('value_new', $value);
         $current = $(this);
-
+        
         $.post({
             url: url,
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -622,8 +624,8 @@ $(document).on('change', "input.number-product", function (event) {
                 //tổng thanh toán
                  if (($("input[name=user_sell]").length > 0) && ($("input[name=user_sell]").val() == data.user_sell)) {
                      $(".col-right-cart").find(".total").html(data.total.toLocaleString("vi-VN"));
-                     $(".col-right-cart").find(".total_thanh_toan").html(data.total.toLocaleString("vi-VN"));
-                     $(".info-payment-ck").find(".total_thanh_toan").html(data.total.toLocaleString("vi-VN"));
+                     $(".col-right-cart").find(".total_thanh_toan").html((data.total+moneyShip).toLocaleString("vi-VN"));
+                     $(".info-payment-ck").find(".total_thanh_toan").html((data.total+moneyShip).toLocaleString("vi-VN"));
                  }
             },
             error: function (xhr, textStatus, errorThrown) {
