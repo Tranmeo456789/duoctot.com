@@ -132,10 +132,8 @@ $(document).ready(function() {
     $('#check-rules').click(function() {
         if ($(this).prop("checked") == true) {
             $('#dang-ky #btn-register').prop("disabled", false);
-            $('#dang-ky #btn-register').css("background", "#05AFE3");
         } else if ($(this).prop("checked") == false) {
             $('#dang-ky #btn-register').prop("disabled", true);
-            $('#dang-ky #btn-register').css("background", "#96d4e7");
         }
 
     });

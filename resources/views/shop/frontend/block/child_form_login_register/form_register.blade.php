@@ -75,7 +75,7 @@
             <p class="dkfn text-center btn-login mb-2">Nếu đã có tài khoản, vui lòng <a class="dkfnc ">Đăng nhập</a></p>
             <div class="col-12 text-center" id="dang-ky">
                 {{$inputHiddenTask}}
-                <input type="submit" name="btn-register" value="Tạo tài khoản" id="btn-register" disabled>
+                <input type="submit" name="btn-register" class="btn btn-info" value="Tạo tài khoản" id="btn-register" disabled>
             </div>
         </div>
     </div>
