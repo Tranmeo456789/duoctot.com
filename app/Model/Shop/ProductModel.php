@@ -240,8 +240,8 @@ class ProductModel extends BackEndModel
                 $results = $query->where(function ($query) use ($keywords) {
                     foreach ($keywords as $word) {
                         $query->where(function ($query) use ($word) {
-                            $query->orWhere('name', 'LIKE', "%{$word}%", 'utf8mb4_vietnamese_ci')
-                                ->orWhere('benefit', 'LIKE', "%{$word}%", 'utf8mb4_vietnamese_ci');
+                            $query->orWhere('name', 'LIKE', "%{$word}%")
+                                ->orWhere('benefit', 'LIKE', "%{$word}%");
                         });
                     }
                 })->get();
