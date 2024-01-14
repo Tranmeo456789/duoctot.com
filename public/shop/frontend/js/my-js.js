@@ -960,16 +960,43 @@ $(document).on('change', "#name-store", function (event) {
     $('.ls-product-select').html(' ');
     $('.ls-product-select').css("display", "none");
 });
-$(document).on('keyup focus input', ".wp-input-search input", function (event) {
-    var keyword = $(this).val().trim();
+var typingTimer;
+var doneTypingInterval = 1000;
+
+$(document).on('input', ".wp-input-search input", function (event) {
+    var keywordInput = $(this);
+    var keyword = keywordInput.val().trim();
+
     if (keyword.length > 0 && keyword[0] === ' ') {
         keyword = keyword.substring(1);
     }
-    if(keyword=='' || keyword[0]==' '){
-        $('.list-product-short').html("<div class='px-4 py-2'><p>Bạn có thể tìm kiếm theo tên hoặc công dụng thuốc</p></div>");
-    }else{
-        $('.btn-search').removeAttr("disabled");
-        var url = $(this).attr("data-href");
+    if (keyword == '') {
+        if (typingTimer) {
+            clearTimeout(typingTimer);
+        }
+        $('.fa-spinner').hide();
+        var searchListProduct = keywordInput.closest('.wp-search-list-product');
+        searchListProduct.find('.list-product-short').html("<div class='px-4 py-2'><p>Bạn có thể tìm kiếm theo tên hoặc công dụng thuốc</p></div>");
+        searchListProduct.find('.clear-keyword').hide();
+        return;
+    }
+
+    if (typingTimer) {
+        clearTimeout(typingTimer);
+    }
+    $('.fa-spinner').show();
+    
+    var searchListProduct = keywordInput.closest('.wp-search-list-product');
+    searchListProduct.find('.clear-keyword').hide();
+    if (keyword.length > 0) {
+        $('.btn-search-home').removeAttr("disabled");
+        $('.wp-input-search-simple>input').val(keyword);
+    } else {
+        $('.btn-search-home').attr("disabled", "disabled");
+        $('.wp-input-search-simple>input').val('');
+    }
+    typingTimer = setTimeout(function () {
+        var url = keywordInput.attr("data-href");
         var _token = $('input[name="_token"]').val();
         $.ajax({
             url: url,
@@ -979,20 +1006,27 @@ $(document).on('keyup focus input', ".wp-input-search input", function (event) {
             data: {
                 keyword: keyword,
                 _token: _token
-             },
-            success: function(data) {
-                $('.wp-list-product-short').html(data);
             },
-        });    
-    }
-    if (keyword.length > 0) {
-        $('.btn-search-home').removeAttr("disabled");
-        $('.wp-input-search-simple>input').val(keyword);
-    } else {
-        $('.btn-search-home').attr("disabled", "disabled");
-        $('.wp-input-search-simple>input').val('');
-    }
+            success: function (data) {
+                searchListProduct.find('.wp-list-product-short').html(data);
+                $('.fa-spinner').hide();
+                searchListProduct.find('.clear-keyword').show();
+            },
+            error: function () {
+                $('.fa-spinner').hide();
+                searchListProduct.find('.clear-keyword').show();
+            }
+        });
+    }, doneTypingInterval);
 });
+
+$(document).on('click', '.clear-keyword', function () {
+    var searchListProduct = $(this).closest('.wp-search-list-product');
+    searchListProduct.find(".wp-input-search input").val('').focus();
+    $(this).hide();
+});
+
+
 
 $(document).on('click', ".wp-input-search input", function (event) {
     $('.lc-mask-search').css("opacity", 1);

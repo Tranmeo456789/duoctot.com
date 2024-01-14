@@ -1456,3 +1456,20 @@ input[type="radio"] {
     width: 100%!important;
     height: 300px!important;
 }
+.btn-load-delete{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 95px;
+}
+.btn-load-delete .clear-keyword{
+    cursor: pointer;
+    background:#333;
+    color: white;
+    font-size: 8px;
+    padding: 4px;
+    border-radius: 50%;
+}
+.size-mobile .btn-load-delete{
+    right: 84px;
+}
