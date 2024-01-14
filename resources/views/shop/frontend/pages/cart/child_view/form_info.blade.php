@@ -217,7 +217,7 @@
                                 <div class="row">
                                     <div class="col-12 col-md-9">
                                         <div class="box-dhtc">
-                                            <p>Vui lòng thanh toán số tiền: <b><span class="total_thanh_toan">{{MyFunction::formatNumber($item['total'])}}</span> đ</b> vào tài khoản ngân hàng</p>
+                                            <p>Vui lòng thanh toán số tiền: <b><span class="total_thanh_toan">{{MyFunction::formatNumber($item['total']+20000)}}</span> đ</b> vào tài khoản ngân hàng</p>
                                             <p>Ngân hàng TMCP Á Châu</p>
                                             <p>Số tài khoản: <span class="font-weight-bold">68686388</span></p>
                                             <p>Chủ tài khoản: Công ty cổ phần giải pháp TDoctor</p>

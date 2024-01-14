@@ -235,8 +235,8 @@ class ProductModel extends BackEndModel
             $query = $this::with('unitProduct')->select('id','name','image','price','percent_discount','unit_id','specification','slug')->where('status_product','da_duyet');
             if (isset($params['keyword'])) {
                 $keyword = $params['keyword'];
-                $keywords = explode(' ', $keyword);
-                
+                $keywords = array_filter(explode(' ', trim($keyword)));
+                $keywords = array_values($keywords);
                 $results = $query->where(function ($query) use ($keywords) {
                     foreach ($keywords as $word) {
                         $query->where(function ($query) use ($word) {

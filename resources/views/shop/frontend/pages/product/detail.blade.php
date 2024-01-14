@@ -39,7 +39,9 @@ use Illuminate\Support\Str;
                     <a href="{{route('product.edit',$item->id)}}" class="btn btn-sm btn-secondary">chỉnh sửa</a>
                 @endif
                 <div class="title_product">
-                    <p class="trademark_product">Thương hiệu: <span class="text-info">{{$item->trademarkProduct->name}}</span></p>
+                    @if(isset($item->trademarkProduct) && !empty($item->trademarkProduct->name))
+                        <p class="trademark_product">Thương hiệu: <span class="text-info">{{ $item->trademarkProduct->name }}</span></p>
+                    @endif
                     <h1>{{$item['name']}}</h1>
                     <div class="comment d-flex justify-content-between flex-wrap">
                         <span class="text-muted">({{$item->code??''}})</span>

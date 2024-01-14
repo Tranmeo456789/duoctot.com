@@ -40,7 +40,7 @@
             'widthElement' => 'col-6'
         ],[
             'label'   => HTML::decode(Form::label('trademark_id', $label['trademark_id'] .  $star , $formLabelAttr)),
-            'element' => Form::select('trademark_id',$itemsTrademark, $item['trademark_id']??null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
+            'element' => Form::select('trademark_id',[null=>"-- Chọn thương hiệu --"]+$itemsTrademark, $item['trademark_id']??null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
             'widthElement' => 'col-6'
         ],[
             'label'   => HTML::decode(Form::label('dosage_forms',$label['dosage_forms'] .  $star, $formLabelAttr)),
@@ -111,7 +111,7 @@
             ],
             [
                 'label'   => HTML::decode(Form::label('percent_discount',$label['percent_discount'], $formLabelAttr)),
-                'element' => Form::text('percent_discount', $item['percent_discount']??10, array_merge($formInputAttr,['placeholder'=>$label['percent_discount']])),
+                'element' => Form::text('percent_discount', $item['percent_discount']??2, array_merge($formInputAttr,['placeholder'=>$label['percent_discount']])),
                 'widthElement' => 'col-3'
             ],
             [
