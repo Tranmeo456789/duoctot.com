@@ -31,7 +31,7 @@ class SearchController extends ShopFrontEndController
     public function saveHome(Request $request)
     {
         // save history keyword search
-        if(!empty($request->input('btn_search')) && !empty($request->input('keyword'))){
+        if(!empty($request->input('btn_search')) && !empty($request->input('keyword')) && trim($request->input('keyword')) !== ''){
             $params = $request->all();
             $itemExist = $this->model->getItem($params, ['task'=>'get-item']);
             $keywordHistory  = (isset($_COOKIE["keywordHistory"]))?json_decode($_COOKIE["keywordHistory"],true):[];
@@ -59,6 +59,8 @@ class SearchController extends ShopFrontEndController
             $this->model->saveItem($params, ['task'=>'add-item-home']);
         } 
             return redirect()->route('fe.search.viewHome',['keyword' => $params['keyword']]);
+        }else{
+            return redirect()->back();
         }
         
     }
