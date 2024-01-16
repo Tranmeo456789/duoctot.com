@@ -21,6 +21,7 @@
         </div>
         <div id="fixscreen-respon"></div>
         <div class="black-screen"></div>
+        @include('shop.frontend.block.spinner_screen')
     </div>
 </body>
 @include('shop.frontend.block.script')

@@ -116,6 +116,15 @@ $(document).ready(function () {
     );
 //end Cat
     $(".select2").select2();
+    function startRotateEffect() {
+        $(".rotate-effect").css("visibility", "visible").addClass("animate__animated animate__rotateIn");
+        $(".overlay").show();
+    }
+    
+    function stopRotateEffect() {
+        $(".rotate-effect").removeClass("animate__animated animate__rotateIn").css("visibility", "hidden");
+        $(".overlay").hide();
+    }
     $(".user-register").validate({
         rules: {
             fullname: "required",
@@ -157,19 +166,18 @@ $(document).ready(function () {
             $(element).closest(".input-group").removeClass('has-error');
         },
         submitHandler: function (form) {
+            startRotateEffect();
             $.ajax({
                 url: form.action,
                 method: form.method,
                 data: $(form).serialize(),
                 success: function (response) {
                     if (response.success) {
-                        if (response.rotate_effect) {
-                            $(".rotate-effect").css("visibility", "visible").addClass("animate__animated animate__rotateIn");
-                            $(".overlay").show();
-                        }
+                        $(".loading-text").text("Đang đăng ký...");
                         alert('Đăng ký thành công!');
                         window.location.href = response.redirect_url;
                     } else {
+                        stopRotateEffect();
                         alert('Kiểm tra lại thông tin đã tồn tại, vui lòng thử lại');
                     }
                 }
@@ -214,26 +222,26 @@ $(document).ready(function () {
             $(element).closest(".input-group").removeClass('has-error');
         },
         submitHandler: function (form) {
+            startRotateEffect();  
             $.ajax({
                 url: form.action,
                 method: form.method,
                 data: $(form).serialize(),
-                success: function (response) {
+                success: function (response) {        
                     if (response.success) {
-                        if (response.rotate_effect) {
-                            $(".rotate-effect").css("visibility", "visible").addClass("animate__animated animate__rotateIn");
-                            $(".overlay").show();
-                        }
+                         $(".loading-text").text("Đang đăng nhập...");
                         window.location.href = response.redirect_url;
                     } else {
                         if (response.errors && response.errors.authentication) {
+                            stopRotateEffect();
                             alert(response.errors.authentication);
                         } else {
+                            // Xử lý lỗi khác nếu cần
                         }
                     }
                 },
                 error: function (error) {
-                    // Xử lý lỗi AJAX nếu cần
+                    stopRotateEffect(); 
                 }
             });
         }
@@ -316,7 +324,6 @@ $(document).ready(function () {
             }
         },
         errorPlacement: function (error, element) {
-            // Add the `invalid-feedback` class to the error element
             error.addClass("invalid-feedback");
             element.closest(".wp-input").addClass('has-error');                  
             error.insertAfter(element.closest(".wp-input"));          
@@ -327,6 +334,26 @@ $(document).ready(function () {
         unhighlight: function (element, errorClass, validClass) {
             $(element).addClass("is-valid").removeClass("is-invalid");
             $(element).closest(".wp-input").removeClass('has-error');
+        },
+        submitHandler: function (form) {
+            $(".loading-text").text("Đang đặt hàng...");
+            startRotateEffect();
+            $.ajax({
+                url: form.action,
+                method: form.method,
+                data: $(form).serialize(),
+                success: function (response) {
+                    if (response.fail === false) {
+                        window.location.href = response.redirect_url;
+                    } else {
+                        stopRotateEffect();
+                        alert('Kiểm tra lại thông tin, vui lòng thử lại');
+                    }
+                },
+                error: function (error) {
+                    stopRotateEffect(); // Xử lý lỗi AJAX nếu cần
+                }
+            });
         }
     });
     $(".form-main-prescrip").validate({

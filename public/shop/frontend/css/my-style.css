@@ -4,14 +4,20 @@
 }
 
 .rotate-effect {
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 902;
-    height: 40%;
-    width: 20%;
     visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.rotate-effect #svg-spinner{
+    height: 100px;
+    width: 100px;
 }
 .overlay {
     position: fixed;

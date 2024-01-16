@@ -242,7 +242,7 @@
                 <div class="cmoder">
                     {{$inputUserSellHidden}}
                     {{$inputUserIDHidden}}
-                    <button type="submit"  value="1" class="complete_order">HOÀN TẤT ĐẶT HÀNG</button>
+                    <button type="submit"  value="1" class="complete_order btn btn-info">HOÀN TẤT ĐẶT HÀNG</button>
                     <!-- <span class="order-noislogin">HOÀN TẤT ĐẶT HÀNG</span> -->
                     <p>Bằng cách đặt hàng, bạn đồng ý với
                         <span class="underline"> Điều khoản sử dụng </span>của TDoctor
