@@ -1533,3 +1533,10 @@ input[type="radio"] {
 .size-mobile .btn-load-delete{
     right: 84px;
 }
+.contact-buy{
+    font-size: 18px;
+}
+.contact-buy .phone{
+    font-size: 20px;
+    font-weight: bold;
+}

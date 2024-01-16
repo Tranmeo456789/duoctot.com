@@ -1,5 +1,5 @@
 <div class="mt-3">
-    <span class="">Nếu mua số lượng lớn thì vui lòng liên hệ hotline 0349444164</span>
+    <span class="contact-buy">Nếu mua số lượng lớn thì vui lòng liên hệ hotline <span class="phone">0349.444.164</span></span>
 </div>
 <div class="pnote-view d-flex">
     <div>

@@ -1019,6 +1019,12 @@
 }
 
 @media screen and (max-width: 500px) {
+    .contact-buy{
+        font-size: 16px;
+    }
+    .contact-buy .phone{
+        font-size: 16px;
+    }
     .header-prescrip {
         font-size: 12px;
         line-height: 14px;
