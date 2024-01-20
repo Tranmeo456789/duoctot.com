@@ -142,7 +142,7 @@
             ],
             [
                 'label'   => HTML::decode(Form::label('discount_ref',$label['discount_ref'], $formLabelAttr)),
-                'element' => Form::text('discount_ref', $item['discount_ref']??15, array_merge($formInputAttr,['placeholder'=>$label['discount_ref']])),
+                'element' => Form::text('discount_ref', $item['discount_ref']??33, array_merge($formInputAttr,['placeholder'=>$label['discount_ref']])),
                 'widthElement' => 'col-3'
             ],
             [
