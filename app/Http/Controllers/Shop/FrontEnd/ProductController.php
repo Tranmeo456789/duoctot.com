@@ -153,15 +153,16 @@ class ProductController extends ShopFrontEndController
             $address=$userInfo['details']['address'].' '.$ward.' '.$district.' '.$province;
             $map=isset($userInfo['details']['map']) ? $userInfo['details']['map'] : '';
         }
-        
+        $title = isset($userInfo['fullname']) && $userInfo['fullname'] !== '' ? $userInfo['fullname'] . ', Shop dược phẩm trực tuyến | Tdoctor' : 'Sàn thương mại điện tử trong y dược';
         return view($this->pathViewController . 'drugstore',
             [
                 'userInfo' => $userInfo,
                 'productDrugstore'=>$productDrugstore,
                 'productAffiliate'=>$productAffiliate,
                 'address'=>$address,
-                'map'=>$map
-            ]
+                'map'=>$map,
+                'title'=> $title        
+               ]
     );
     }
 }
