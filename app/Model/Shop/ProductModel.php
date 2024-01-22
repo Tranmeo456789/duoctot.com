@@ -232,47 +232,38 @@ class ProductModel extends BackEndModel
             $result = $query->orderBy('name', 'asc')->pluck('name', 'id')->toArray();
         }
         if ($options['task'] == "list-items-search") {
-            $query = $this::with('unitProduct')->select('id', 'name', 'image', 'price', 'percent_discount', 'unit_id', 'specification', 'slug')->where('status_product', 'da_duyet');
-        
+            $query = $this::with(['unitProduct', 'trademarkProduct'])->select('id', 'name', 'image', 'price', 'percent_discount', 'unit_id','trademark_id', 'specification', 'slug')->where('status_product', 'da_duyet');
             if (isset($params['keyword'])) {
                 $keyword = $params['keyword'];
                 $keyword = strip_tags($keyword);
-                $keyword = preg_replace('/[^\p{L}\p{N}\s]/u', '', $keyword);
-        
+                $keyword = preg_replace('/[^\p{L}\p{N}\s]/u', '', $keyword);       
                 $keywords = array_filter(explode(' ', trim($keyword)));
-                $keywords = array_values($keywords);
-        
+                $keywords = array_values($keywords);      
                 $results = $query->where(function ($query) use ($keywords) {
                     foreach ($keywords as $word) {
                         $query->where(function ($query) use ($word) {
                             $query->orWhere('name', 'LIKE', "%{$word}%")
-                                ->orWhere('benefit', 'LIKE', "%{$word}%");
+                                ->orWhere('benefit', 'LIKE', "%{$word}%")
+                                ->orWhere('keyword_search', 'LIKE', "%{$word}%");
                         });
                     }
                 })->get();
-        
                 $results = $results->map(function ($result) use ($keywords) {
                     $score = collect($keywords)->sum(function ($word) use ($result) {
                         return mb_stripos($result->name, $word, 0, 'UTF-8') !== false ? mb_strlen($word, 'UTF-8') : 0;
                     });
-        
                     return ['score' => $score, 'result' => $result];
                 });
-        
                 // Sắp xếp kết quả theo điểm số giảm dần
                 $results = $results->sortByDesc('score')->pluck('result');
             }
-        
             if (isset($params['user_sell'])) {
                 $query->where('user_id', $params['user_sell']);
             }
-        
             $query->orderBy('id', 'asc');
-        
             if (isset($params['limit'])) {
                 $query->limit($params['limit']);
             }
-        
             $result = $results;
         }
         

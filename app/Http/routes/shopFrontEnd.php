@@ -37,6 +37,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::post('/luu-noi-dung-tim-kiem-trang-chu','SearchController@saveHome')->name('fe.search.saveHome');
     Route::get('/tim-kiem/{keyword}','SearchController@viewHome')->name('fe.search.viewHome');
     Route::get('/xoa-lich-su-tim-kiem-tu-khoa','SearchController@deleteHistory')->name('fe.deleteHistory');
+    Route::get('/update-keyword-search-product','SearchController@updateFieldSearchKeyword');
 
     Route::get('/xoa-san-pham-gio-hang/{user_sell}-{id}','CartController@delete')->name('fe.cart.delete');
 
