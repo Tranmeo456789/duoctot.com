@@ -126,7 +126,7 @@ use Illuminate\Support\Str;
 <div class="mt-3 py-3 colorb-wp">
     <div class="wp-inner">
         <div id="product-relate">
-            @include("$moduleName.pages.$controllerName.child_detail.product_relate")
+            @include("$moduleName.pages.$controllerName.child_detail.product_relate",['items'=>$listProductRelate])
         </div>
         <div class="comment-product">
             @include("$moduleName.pages.$controllerName.child_detail.comment_product")

@@ -3,24 +3,18 @@
                 Câu hỏi thường gặp
             </h1>
             <ul class="list-question">
-                <li>
+                <li class="catparentc">
                     <h3 class="">Thực phẩm chức năng hỗ trợ sức khỏe tình dục nam giới có tác dụng gì?<img src="{{asset('images/shop/hoi.png')}}" alt="">
-                        <i class="fas fa-angle-up"></i>
+                        <div class="vissubmenu"><i class="fas fa-angle-down"></i></div>
                     </h3>
-                    <p>* Giúp kích hoạt cơ chế sản sinh Hormone sinh dục nam nội sinh một cách tự nhiên.</p>
-                    <p>* Bổ thận tráng dương, tăng cường sinh lý, phục hồi khả năng sinh lý nam giới.</p>
-                    <p>* Hỗ trợ điều trị rối loạn cương dương, xuất tinh sớm, di tinh, mộng tinh… làm chậm quá trình mãn dục nam.</p>
-                    <p>* Giúp tăng cường lưu thông máu, tăng cường ham muốn, khắc phục tình trạng rối loạn cương dương ở nam giới.</p>
-                </li>
-                <li>
-                    <h3 class="">Thực phẩm chức năng hỗ trợ sức khỏe tình dục nam giới có tác dụng gì?<img src="{{asset('images/shop/hoi.png')}}" alt="">
-                        <i class="fas fa-angle-down"></i>
-                    </h3>
-                </li>
-                <li>
-                    <h3 class="">Thực phẩm chức năng hỗ trợ sức khỏe tình dục nam giới có tác dụng gì?<img src="{{asset('images/shop/hoi.png')}}" alt="">
-                        <i class="fas fa-angle-down"></i>
-                    </h3>
+                    <div class="submenua1">
+                        <ul>
+                            <p>* Giúp kích hoạt cơ chế sản sinh Hormone sinh dục nam nội sinh một cách tự nhiên.</p>
+                            <p>* Bổ thận tráng dương, tăng cường sinh lý, phục hồi khả năng sinh lý nam giới.</p>
+                            <p>* Hỗ trợ điều trị rối loạn cương dương, xuất tinh sớm, di tinh, mộng tinh… làm chậm quá trình mãn dục nam.</p>
+                            <p>* Giúp tăng cường lưu thông máu, tăng cường ham muốn, khắc phục tình trạng rối loạn cương dương ở nam giới.</p>
+                        </ul>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -77,7 +71,7 @@
             </ul>
             <p class="text-center"><a href="" class="add-comment">Xem thêm bình luận <i class="fas fa-angle-down"></i></a></p>
         </div>
-        <div class="question-often mt-3">
+        <!-- <div class="question-often mt-3">
             <h1>Đánh Giá & Nhận Xét <span class="coutn-dn">3</span></h1>
             <div class="average-rating">
                 <div class="d-flex justify-content-between flex-wrap">
@@ -185,4 +179,4 @@
                 </li>
             </ul>
             <p class="text-center"><a href="" class="add-comment">Xem thêm bình luận <i class="fas fa-angle-down"></i></a></p>
-        </div>
+        </div> -->

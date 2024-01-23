@@ -77,8 +77,8 @@ class ProductController extends ShopFrontEndController
         } else {
             $codeRefLogin = '';
         }
-        
-        return view($this->pathViewController . 'detail',compact('params','item','albumImageCurrent','codeRef','userInfo','codeRefLogin'));
+        $listProductRelate = $this->model->listItems(['cat_product_id'=>$item['cat_product_id'],'limit'=>4],['task' => 'frontend-list-items'])??[];
+        return view($this->pathViewController . 'detail',compact('params','item','albumImageCurrent','codeRef','userInfo','codeRefLogin','listProductRelate'));
     }
     public function searchProductAjax(Request $request){
         $data = $request->all();
