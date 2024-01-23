@@ -427,6 +427,7 @@
     padding: 15px;
     position: relative;
     background: #F1F8FF;
+    text-align: right;
 }
 
 .question-often .content-quest textarea {
@@ -465,7 +466,7 @@
 }
 
 .list-comment li {
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 .list-comment .commenta .cdntl {

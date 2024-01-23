@@ -11,6 +11,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('/tim-kiem-san-pham-theo-ten','ProductController@searchProductAjax')->name('fe.product.searchProductAjax');
     Route::get('/tim-kiem-san-pham-danh-sach-ngan','ProductController@searchListProductShort')->name('fe.product.searchListProductShort');
     Route::get('/load-more-products','ProductController@loadMoreProducts')->name('fe.product.loadMoreProducts');
+    Route::get('/them-comment-product','ProductController@addCommentProduct')->name('fe.product.addCommentProduct');
 
     Route::get('/ajax-filter-product-object','HomeController@ajax_filter')->name('fe.home.ajaxfilter');
 

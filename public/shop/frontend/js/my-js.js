@@ -1217,3 +1217,33 @@ $(document).on('click', '.mdlh .md', function(event) {
     $(this).addClass('active');
     $('.content-detail-product').toggleClass('fs-big');
 });
+$(document).on('click', '.no-login', function(event) {
+    alert('Vui lòng đăng nhập để gửi bình luận!');
+});
+$(document).on('click', '.submit-comment', function(event) {
+    var content = $(this).closest('.content-quest').find('textarea[name="content"]').val();
+    var trimmedContent = content.trim();
+    if (trimmedContent.length === 0) {
+        alert('Vui lòng nhập nội dung bình luận!');
+        return;
+    }
+    var url = $(this).attr("data-url");
+    var productId = $(this).attr("data-product");
+    var userId = $(this).attr("data-user");
+    var _token = $('input[name="_token"]').val();
+    $.ajax({
+        url: url,
+        cache: false,
+        method: "GET",
+        dataType: 'html',
+        data: {
+            _token: _token,
+            userId: userId,
+            productId: productId,
+            content: content
+        },
+        success: function(data) {
+            $('.content-comment-product').html(data);
+        },
+    });
+});

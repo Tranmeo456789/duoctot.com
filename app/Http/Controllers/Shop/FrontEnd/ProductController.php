@@ -9,6 +9,7 @@ use App\Model\Shop\CatProductModel;
 use App\Model\Shop\AffiliateProductModel;
 use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
 use App\Model\Shop\AffiliateModel;
+use App\Model\Shop\CommentModel;
 use App\Model\Shop\ProductModel as MainModel;
 use App\Model\Shop\ProvinceModel;
 use App\Model\Shop\TrademarkModel;
@@ -78,7 +79,8 @@ class ProductController extends ShopFrontEndController
             $codeRefLogin = '';
         }
         $listProductRelate = $this->model->listItems(['cat_product_id'=>$item['cat_product_id'],'limit'=>4],['task' => 'frontend-list-items'])??[];
-        return view($this->pathViewController . 'detail',compact('params','item','albumImageCurrent','codeRef','userInfo','codeRefLogin','listProductRelate'));
+        $commentProduct=(new CommentModel)->listItems(['product_id'=>$item['id']],['task' => 'list-items-frontend']);
+        return view($this->pathViewController . 'detail',compact('params','item','albumImageCurrent','codeRef','userInfo','codeRefLogin','listProductRelate','commentProduct'));
     }
     public function searchProductAjax(Request $request){
         $data = $request->all();
@@ -164,5 +166,19 @@ class ProductController extends ShopFrontEndController
                 'title'=> $title        
                ]
     );
+    }
+    public function addCommentProduct(Request $request){
+        $data = $request->all();
+        $params['user_id']=$request->userId;
+        $params['product_id']=$request->productId;
+        $params['content']=$request->content;
+        $params['level']=1;
+        $params['parent_id']=0;
+        (new CommentModel)->saveItem($params,['task' => 'add-item']);
+        $commentProduct=(new CommentModel)->listItems(['product_id'=>$params['product_id']],['task' => 'list-items-frontend']);
+        return view("$this->moduleName.pages.product.child_detail.content_comment",[
+            'commentProduct'=>$commentProduct,
+            'productId'=>$params['product_id']
+        ]);
     }
 }
