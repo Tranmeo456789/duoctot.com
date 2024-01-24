@@ -151,6 +151,11 @@
                 'widthElement' => 'col-6'
             ],
             [
+                'label'   => HTML::decode(Form::label('contact','SĐT liên hệ', $formLabelAttr)),
+                'element' => Form::text('contact', $item['contact']??'', array_merge($formInputAttr,['placeholder'=>'SĐT liên hệ'])),
+                'widthElement' => 'col-6'
+            ],
+            [
                 'label' => HTML::decode(Form::label('', 'Chọn đặc tính sản phẩm' , $formLabelAttr)),
                 'element' =>'',
                 'widthElement' => 'col-12',

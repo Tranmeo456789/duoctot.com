@@ -294,7 +294,7 @@ class ProductModel extends BackEndModel
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
                                     'preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','long','wide','high',
-                                    'mass','discount_ref','discount_tdoctor')
+                                    'mass','discount_ref','discount_tdoctor','contact')
                             ->where('id', $params['id'])
                             ->OfCollaboratorCode()
                             ->first();
@@ -314,7 +314,7 @@ class ProductModel extends BackEndModel
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
                                     'preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','long','wide','high',
-                                    'mass','discount_ref');
+                                    'mass','discount_ref','contact');
             if(isset($params['id'])){
                 $query->where('id', $params['id']);
             }

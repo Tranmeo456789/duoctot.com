@@ -1,5 +1,8 @@
+@php
+    $contact=$item['contact']??'0349.444.164';
+@endphp
 <div class="mt-3">
-    <span class="contact-buy">Nếu mua số lượng lớn thì vui lòng liên hệ hotline <span class="phone">0349.444.164</span></span>
+    <span class="contact-buy">Nếu mua số lượng lớn thì vui lòng liên hệ hotline <span class="phone">{{$contact}}</span></span>
 </div>
 <div class="pnote-view d-flex">
     <div>
@@ -74,4 +77,4 @@
         </ul>
     </div>
 </div>
-<div class="mess_free bg-orange"><a href="">Nhận tư vấn miễn phí</a><img src="{{asset('images/shop/mess.png')}}" alt=""></div>
+<div class="mess_free bg-orange" data-contact="{{$contact}}"><span class="text-light">Nhận tư vấn miễn phí</span><img src="{{asset('images/shop/mess.png')}}" alt=""></div>

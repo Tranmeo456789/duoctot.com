@@ -1247,3 +1247,7 @@ $(document).on('click', '.submit-comment', function(event) {
         },
     });
 });
+$(document).on('click', '.mess_free', function(event) {
+    var contact = $(this).attr("data-contact");
+    alert('Vui lòng liên hệ sđt: '+ contact);
+});
