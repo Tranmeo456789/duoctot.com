@@ -74,13 +74,19 @@ class SearchController extends ShopFrontEndController
         try {
             DB::beginTransaction();
     
-            $products = ProductModel::with('trademarkProduct')->select('id', 'name', 'benefit', 'trademark_id')->where('status_product', 'da_duyet')->get();
+            $products = ProductModel::with('trademarkProduct')->select('id', 'name', 'benefit', 'trademark_id','user_id','cat_product_id')->where('status_product', 'da_duyet')->get();
     
             foreach ($products as $product) {
                 $trademarkName = $product->trademarkProduct ? $product->trademarkProduct->name : '';
+                $userSell = $product->userProduct ? $product->userProduct->fullname : '';
+                $catProduct = $product->catProduct ? $product->catProduct->name : '';
                 $keywordSearch = implode(' ', [
                     $trademarkName,
                     Str::ascii($trademarkName),
+                    $userSell,
+                    Str::ascii($userSell),
+                    $catProduct,
+                    Str::ascii($catProduct),
                     Str::ascii($product->name),
                     Str::ascii($product->benefit),
                 ]);
