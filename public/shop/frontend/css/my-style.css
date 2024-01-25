@@ -1546,3 +1546,9 @@ input[type="radio"] {
     font-size: 20px;
     font-weight: bold;
 }
+.icon-contact{
+    width: 30px;
+    background: blue;
+    margin: 5px;
+    border-radius: 3px;
+}

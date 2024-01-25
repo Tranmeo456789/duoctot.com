@@ -220,6 +220,7 @@
     display: inline-block;
     margin-bottom: 54px;
     cursor: pointer;
+    user-select: none;
 }
 
 .mess_free a {

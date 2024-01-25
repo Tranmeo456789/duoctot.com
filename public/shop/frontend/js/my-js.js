@@ -1247,7 +1247,25 @@ $(document).on('click', '.submit-comment', function(event) {
         },
     });
 });
-$(document).on('click', '.mess_free', function(event) {
-    var contact = $(this).attr("data-contact");
-    alert('Vui lòng liên hệ sđt: '+ contact);
+var tooltipTimeout;
+
+$('.mess_free').tooltip({
+    trigger: 'manual',  
+    delay: { show: 500, hide: 0 }
+});
+
+$('.mess_free').on({
+    'mouseenter': function () {
+        clearTimeout(tooltipTimeout);
+        $(this).tooltip('show');
+    },
+    'mouseleave': function () {
+        tooltipTimeout = setTimeout(function () {
+            $('.mess_free').tooltip('hide');
+        }, 10000);
+    },
+    'click': function () {
+        clearTimeout(tooltipTimeout);
+        $('.mess_free').tooltip('show');
+    }
 });
