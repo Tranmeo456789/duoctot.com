@@ -11,6 +11,7 @@
 }
 .tooltip.show {
     opacity: 1;
+    z-index: 10;
 }
 </style>
 @php

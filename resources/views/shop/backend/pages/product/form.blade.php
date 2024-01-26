@@ -152,7 +152,7 @@
             ],
             [
                 'label'   => HTML::decode(Form::label('contact','SĐT liên hệ', $formLabelAttr)),
-                'element' => Form::text('contact', $item['contact']??'', array_merge($formInputAttr,['placeholder'=>'SĐT liên hệ'])),
+                'element' => Form::text('contact', $item['contact']??'0349444164', array_merge($formInputAttr,['placeholder'=>'SĐT liên hệ'])),
                 'widthElement' => 'col-6'
             ],
             [
