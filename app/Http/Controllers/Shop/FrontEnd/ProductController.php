@@ -119,6 +119,7 @@ class ProductController extends ShopFrontEndController
         return view($viewName, ['items' => $listProductAddView]);
     }
     public function drugstore(Request $request){
+        $productDrugstore=[];
         $productDrugstore = $this->model->listItems(['user_id'=>$request->id], ['task' => 'frontend-list-items']);
         $userInfo=(new UsersModel)->getItem(['user_id' => $request->id],['task'=>'get-item']);
         if ($request->has('codeRef')) {
@@ -129,12 +130,10 @@ class ProductController extends ShopFrontEndController
                 $affiliate->increment('sum_click');
              }
         }
-
         $item = (new AffiliateModel)->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
-        $productAffiliate=[];
         if ($item) {
             $params['group_id'] = collect($item->listIdProduct)->pluck('product_id')->toArray();
-            $productAffiliate = $this->model->listItems(['group_id' => $params['group_id']], ['task' => 'frontend-list-items']);
+            $productDrugstore = $this->model->listItems(['group_id' => $params['group_id'],'user_id' => $request->id], ['task' => 'frontend-list-item-shop'])??[];
         } 
         $address='';
         $map='';
@@ -160,7 +159,6 @@ class ProductController extends ShopFrontEndController
             [
                 'userInfo' => $userInfo,
                 'productDrugstore'=>$productDrugstore,
-                'productAffiliate'=>$productAffiliate,
                 'address'=>$address,
                 'map'=>$map,
                 'title'=> $title        

@@ -178,6 +178,24 @@ class ProductModel extends BackEndModel
                 $result =  $query->get();
             }
         }
+        if ($options['task'] == "frontend-list-item-shop") {
+            $query = $this::select('id', 'name', 'type', 'code', 'cat_product_id', 'price', 'price_vat', 'percent_discount', 'unit_id', 'specification', 'image', 'user_id', 'featurer', 'slug', 'discount_ref', 'dosage_forms', 'elements')
+            ->where('id', '>', 1)
+            ->where('status_product', 'da_duyet');
+            if (isset($params['group_id'])) {
+                $query->whereIn('id', $params['group_id']);
+            }
+            if (isset($params['user_id'])) {
+                $query->orWhere('user_id', $params['user_id']);
+            }
+            if (isset($params['offset'])) {
+                $query->skip($params['offset']);
+            }
+            if (isset($params['take'])) {
+                $query->take($params['take']);
+            }
+            $result = $query->get();        
+        }
         if ($options['task'] == "frontend-list-items-simple") {
             $query = $this::select('id','name','slug')
                                 ->where('id','>',1)->where('status_product','da_duyet');

@@ -36,10 +36,10 @@
                 <td style="width: 25%" class='name'><p>{!! $codeRef !!}</p></td>
                 <td style="width: 35%" class='text-justify'>
                     <div>Họ tên: {{$userRef['fullname']??null}}</div>
-                    <div>Số ĐT: {{$userRef['phone']}}</div>
-                    <div>Email: {{$userRef['email']}}</div>
-                    <div>Thuộc đối tượng: {{$arrTypeUser[$userRef->user_type_id]}}</div>
-                    <div>Số lượng traffic: {{$sumLinkCount}}</div>
+                    <div>Số ĐT: {{$userRef['phone']??''}}</div>
+                    <div>Email: {{$userRef['email']??''}}</div>
+                    <div>Thuộc đối tượng: {{$arrTypeUser[$userRef->user_type_id??1]}}</div>
+                    <div>Số lượng traffic: {{$sumLinkCount??''}}</div>
                 </td>
                 <td style="width: 15%" class='text-center'><p>{{MyFunction::formatNumber($restMoney??0)}} đ</p></td>
                 <td style="width: 25%">

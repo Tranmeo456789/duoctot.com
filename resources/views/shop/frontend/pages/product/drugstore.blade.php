@@ -1,6 +1,9 @@
 @php
     $imageSrc = isset($userInfo['details']['image']) ? $userInfo['details']['image'] : 'https://bcp.cdnchinhphu.vn/Uploaded/nguyenthikimlien/2018_05_02/b503ae41ddf217eb13c3e4757362181a_thuoc3.jpg';
+    $phoneContact=$userInfo['phone'] ?? '0349444164';
+    $phoneShop=implode('.', str_split($phoneContact, 4));
 @endphp
+
 @extends('shop.layouts.frontend')
 
 @section('content')
@@ -11,11 +14,11 @@
         <div class="row">
             <div class="cod-12 col-md-6">
                 <div class="text-center"><img class="border border-secondary rounded" src="{{ $imageSrc }}" style="width: 300px;" alt=""></div>
-                <div class="mt-3">
+                <div class="mt-3 wp-info-shop">
                     <h6 class="text-danger text-center font-weight-bold">{{$userInfo['fullname']??''}}</h6>
-                    <p>*Số lượng sản phẩm: {{count($productDrugstore)+count($productAffiliate)}}</p>
-                    <p>*Địa chỉ: {{$address??''}}</p>
-                    <p>*Số điện thoại: 0349444164</p>
+                    <p>*Số lượng sản phẩm: <span class="font-weight-bold">{{count($productDrugstore)}}</span></p>
+                    <p>*Địa chỉ: <span class="font-weight-bold">{{$address??''}}</span></p>
+                    <p>*Số điện thoại: <span class="font-weight-bold">{{$phoneShop}}</span></p>
                 </div>
             </div>
             <div id="map-drugstore" class="cod-12 col-md-6">
@@ -28,7 +31,7 @@
         </div>
     </div>
     <div id="selling-product" class="parent-btn-view-add">
-        @include("$moduleName.pages.$controllerName.child_drugstore.list_product",['productDrugstore'=>$productDrugstore,'productAffiliate'=>$productAffiliate])
+        @include("$moduleName.pages.$controllerName.child_drugstore.list_product",['productDrugstore'=>$productDrugstore])
     </div>
 </div>
 
