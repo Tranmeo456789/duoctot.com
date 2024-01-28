@@ -1552,3 +1552,14 @@ input[type="radio"] {
     margin: 5px;
     border-radius: 3px;
 }
+.repply-comment{
+    color: blue;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 4px;
+}
+.repply-comment:hover{
+    border-radius: 10px;
+    background: gainsboro;
+}

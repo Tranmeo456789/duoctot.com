@@ -1221,6 +1221,8 @@ $(document).on('click', '.no-login', function(event) {
     alert('Vui lòng đăng nhập để gửi bình luận!');
 });
 $(document).on('click', '.submit-comment', function(event) {
+    $('#replyModal').modal('hide');
+    $('.modal-backdrop').remove();
     var content = $(this).closest('.content-quest').find('textarea[name="content"]').val();
     var trimmedContent = content.trim();
     if (trimmedContent.length === 0) {
@@ -1230,6 +1232,7 @@ $(document).on('click', '.submit-comment', function(event) {
     var url = $(this).attr("data-url");
     var productId = $(this).attr("data-product");
     var userId = $(this).attr("data-user");
+    var parentid = $(this).attr("data-parentid");
     var _token = $('input[name="_token"]').val();
     $.ajax({
         url: url,
@@ -1240,7 +1243,8 @@ $(document).on('click', '.submit-comment', function(event) {
             _token: _token,
             userId: userId,
             productId: productId,
-            content: content
+            content: content,
+            parentid: parentid,
         },
         success: function(data) {
             $('.content-comment-product').html(data);
@@ -1268,4 +1272,14 @@ $('.mess_free').on({
         clearTimeout(tooltipTimeout);
         $('.mess_free').tooltip('show');
     }
+});
+$(document).on('click', '.repply-comment', function(event){
+    var commenterName = $(this).data('commenter-name');
+    var commentId = $(this).data('comment-id');
+    $('#replyModal').modal('show').on('shown.bs.modal', function () {
+        $('#replyModalLabel').text('Trả lời cho ' + commenterName);
+        $('#replyModal .submit-comment').attr("data-parentid", commentId);
+        var input = $('#replyModal textarea[name="content"]')[0];
+        input.focus();
+    });
 });
