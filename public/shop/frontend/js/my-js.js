@@ -62,6 +62,9 @@ $(document).ready(function () {
             "margin-bottom": "0px"
         });
     }
+    $('.carousel')({
+        interval: 2000
+      });
     //  Cat hover
     $('.cat1name').hover(
         function() {
@@ -82,10 +85,10 @@ $(document).ready(function () {
                     $('.sub-menu1>li').removeClass('active-menucat2');
                     $('.sub-menu1>li:first-child').addClass('active-menucat2');
                 },
-            }); 
+            });
         },
         function(){
-            
+
         }
     );
     $('.sub-menu1>li').hover(
@@ -106,12 +109,12 @@ $(document).ready(function () {
                 },
                 success: function(data) {
                     $('.list_cat_level3_products').html(data);
-                
+
                 },
-            }); 
+            });
         },
         function(){
-            
+
         }
     );
 //end Cat
@@ -276,8 +279,8 @@ $(document).ready(function () {
         errorPlacement: function (error, element) {
             // Add the `invalid-feedback` class to the error element
             error.addClass("invalid-feedback");
-            element.closest(".wp-input").addClass('has-error');                  
-            error.insertAfter(element.closest(".wp-input"));          
+            element.closest(".wp-input").addClass('has-error');
+            error.insertAfter(element.closest(".wp-input"));
         },
         highlight: function (element, errorClass, validClass) {
             $(element).addClass("is-invalid").removeClass("is-valid");
@@ -311,13 +314,13 @@ $(document).ready(function () {
             },
             address:{
                 required: true,
-            },    
+            },
         },
         messages: {
             "buyer[fullname]": "Thông tin bắt buộc",
             "buyer[phone]": {
-                required: "Thông tin bắt buộc", 
-                checkPhone: "Số điện thoại không đúng định dạng",             
+                required: "Thông tin bắt buộc",
+                checkPhone: "Số điện thoại không đúng định dạng",
             },
             number_product:{
                 isProductSelect: "Vui lòng chọn thêm thuốc"
@@ -333,13 +336,13 @@ $(document).ready(function () {
             },
             address:{
                 required: "Thông tin bắt buộc",
-            },                             
+            },
         },
         errorPlacement: function (error, element) {
             // Add the `invalid-feedback` class to the error element
             error.addClass("invalid-feedback");
-            element.closest(".wp-input").addClass('has-error');                  
-            error.insertAfter(element.closest(".wp-input"));          
+            element.closest(".wp-input").addClass('has-error');
+            error.insertAfter(element.closest(".wp-input"));
         },
         highlight: function (element, errorClass, validClass) {
             $(element).addClass("is-invalid").removeClass("is-valid");
@@ -746,7 +749,7 @@ $(document).on('click', ".select-status-order", function (event) {
             //console.log(data);
             $('.table-order-frontend').html(data);
         },
-    }); 
+    });
 });
 $(document).on('click', ".view-detail-order", function (event) {
     $('.wp-detail-order').css("display", "block");
@@ -767,7 +770,7 @@ $(document).on('click', ".view-detail-order", function (event) {
         success: function(data) {
             $('.wp-detail-order').html(data);
         },
-    }); 
+    });
 });
 $(document).on('click', ".view-btn-add-product", function (event) {
     var offset = parseInt($(this).attr("data-offset"));
@@ -775,7 +778,7 @@ $(document).on('click', ".view-btn-add-product", function (event) {
     var _token = $('input[name="_token"]').val();
     var type = $(this).attr("data-type");
     var idCat = $(this).attr("data-idcat");
-    var currentElement = $(this); 
+    var currentElement = $(this);
     var currentCount = parseInt($(this).find(".visibility-number-product").text().trim());
     if (currentCount - 20 < 1) {
         $(".view-btn-add-product").hide();
@@ -800,7 +803,7 @@ $(document).on('click', ".view-btn-add-product", function (event) {
             var listProductContainer = currentElement.closest('.parent-btn-view-add').find('ul.ls_product-view-add');
             listProductContainer.append(data);
         },
-    }); 
+    });
 });
 
 
@@ -808,7 +811,7 @@ $(document).on('click', ".btn-closenk", function (event) {
     $('.wp-detail-order').css("display", "none");
     $('.black-screen').css("display", "none");
     $('.titlek').removeClass("fixed-hbd");
-   
+
 });
 $(document).on('click', "#btn-searchorder", function (event) {
     if($('.ls-product-select li').length > 0){
@@ -887,19 +890,19 @@ $(document).on('keyup', ".search-product-keyup", function (event) {
             success: function(data) {
                 $('.ls-product-search').html(data);
             },
-            }); 
-    }      
+            });
+    }
 });
 $(document).on('click', ".btn-add-item", function (event) {
     $('.ls-product-select').css("display", "block");
     var id = $(this).attr("data-id");
     rowCurrent = $(this).closest('.item-search');
     rowCurrent.remove();
-    temp=$('.ls-product-select li').length+1;     
+    temp=$('.ls-product-select li').length+1;
     nameProduct=rowCurrent.find('.name-product').text();
     $('.title-list-select').text("Tên thuốc đã nhập: ");
     itemSelect="<li class='item-select'><div class='d-flex'><div class='wp-10 text-center number_select'>"+temp+"</div><div class='wp-70 text-left'>"+nameProduct+"</div><div class='wp-20  text-center'><div class='btn'><input type='hidden'  name='info_product["+id+"]' value='"+nameProduct+"'><span class='btn-remove'>Xóa</span></div></div></div></li>";
-    $('.ls-product-select').append(itemSelect); 
+    $('.ls-product-select').append(itemSelect);
 });
 $('.addy-product').click(function() {
     const position = $("#form-search-product").offset().top;
@@ -918,8 +921,8 @@ $(document).on('click', ".ls-product-select .btn-remove", function (event) {
     rowCurrent.remove();
     indexCurent=rowCurrent.find('.number_select').text();
     listItemSelect=document.querySelectorAll('.ls-product-select li.item-select');
-    for(let i=0; i< listItemSelect.length; i++) { 
-        listItemSelect[i].querySelector('.number_select').innerText=i+1;    
+    for(let i=0; i< listItemSelect.length; i++) {
+        listItemSelect[i].querySelector('.number_select').innerText=i+1;
     }
 });
 $(document).on('click', ".ls-product-select-prescrip .btn-remove", function (event) {
@@ -932,9 +935,9 @@ $(document).on('click', ".ls-product-select-prescrip .btn-remove", function (eve
     rowCurrent.remove();
     indexCurent=rowCurrent.find('.number_select').text();
     listItemSelect=document.querySelectorAll('.ls-product-select-prescrip li.item-select');
-    
-    for(let i=0; i< listItemSelect.length; i++) { 
-        listItemSelect[i].querySelector('.number_select').innerText=i+1;    
+
+    for(let i=0; i< listItemSelect.length; i++) {
+        listItemSelect[i].querySelector('.number_select').innerText=i+1;
     }
 });
 $(document).on('click', "#pills-no-prescrip", function (event) {
@@ -968,7 +971,7 @@ $(document).on('keyup focus input', ".wp-input-search input", function (event) {
 });
 $(document).on('click', ".wp-input-search input", function (event) {
     $('.lc-mask-search').css("opacity", 1);
-    $('.lc-mask-search').css("visibility", "visible"); 
+    $('.lc-mask-search').css("visibility", "visible");
     $('.ls-history').css("display", "block");
     const position = $("#form-search").offset().top;
     $("HTML, BODY").animate({ scrollTop: position }, 500);
@@ -985,7 +988,7 @@ $(document).on('click', ".icon-back-search", function (event) {
 });
 $(document).on('click', ".lc-mask-search", function (event) {
     $('.lc-mask-search').css("opacity", 0);
-    $('.lc-mask-search').css("visibility", "hidden"); 
+    $('.lc-mask-search').css("visibility", "hidden");
     $('.ls-history').css("display", "none");
 });
 $(document).on('click', ".delete-history-keyword", function (event) {
@@ -1002,7 +1005,7 @@ $(document).on('click', ".delete-history-keyword", function (event) {
         success: function(data) {
             $('.data-history').html(data);
         },
-    }); 
+    });
 });
 $(document).on('click', ".wp-search .wp-input-search-simple>input", function (event) {
     $(".black-screen").css("display", "block");
@@ -1037,7 +1040,7 @@ $(document).on('keyup', ".wp-search .wp-input-search-simple>input", function (ev
             success: function(data) {
                 $('.wp-list-product-short').html(data);
             },
-        });    
+        });
     }
 });
 $(document).on('click', '.wp-link-affiliate .btn-copy-link', function(event) {

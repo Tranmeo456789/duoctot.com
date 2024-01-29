@@ -7,6 +7,7 @@ use DB;
 use Hash;
 use App\Helpers\Format;
 
+use Illuminate\Support\Str;
 class Users extends BackEndModel
 {
     protected $connection = 'mysql_share_data';
@@ -16,7 +17,7 @@ class Users extends BackEndModel
     public function __construct() {
         $this->table               = 'user';
         $this->folderUpload        = '' ;
-        $this->crudNotAccepted     = ['_token','isnumber','password_confirmation','password_old','submit','btn-register','details','task'];
+        $this->crudNotAccepted     = ['_token','isnumber','password_confirmation','password_old','submit','btn-register','task'];
     }
     public function getItem($params = null, $options = null) {
         $result = null;
@@ -47,7 +48,8 @@ class Users extends BackEndModel
             if (!isset($params['user_type_id']) || $params['user_type_id'] == ''){
                 $params['user_type_id'] = 1;
             }
-           $params['user_id'] = $this->insertGetId($this->prepareParams($params));
+            $params['details'] = json_encode($details,JSON_NUMERIC_CHECK );
+            $params['user_id'] = $this->insertGetId($this->prepareParams($params));
 
             if (is_numeric($params['user_id'])){
                 $paramsCode = [
@@ -58,7 +60,14 @@ class Users extends BackEndModel
                 $paramsUserValue =[
                     'user_id' =>$params['user_id'],
                     'user_field' =>'member_id',
-                    'value' =>$member_id
+                    'value' =>$member_id,
+                ];
+
+                \App\Model\Shop\UserValuesModel::insert($this->prepareParams($paramsUserValue));
+                $paramsUserValue =[
+                    'user_id' =>$params['user_id'],
+                    'user_field' =>'slug',
+                    'value' => Str::slug($params['fullname']),
                 ];
                 \App\Model\Shop\UserValuesModel::insert($this->prepareParams($paramsUserValue));
                 return self::getItem(['user_id'=>$params['user_id']],['task' => 'get-item']);
@@ -71,11 +80,13 @@ class Users extends BackEndModel
             DB::beginTransaction();
             try {
                 $details = $params['details'];
+                $details['slug']= Str::slug($params['fullname']);
                 if (isset($details['sell_area'])){
                     $details['sell_area'] = ($details['sell_area'] != '')? json_encode($details['sell_area'],JSON_NUMERIC_CHECK ): NULL;;
                 }
                 $params['province_id'] = $details['province_id'];
                 $user = self::where('user_id', $params['user_id'])->first();
+                $params['details'] = json_encode($details,JSON_NUMERIC_CHECK);
                 self::where('user_id', $params['user_id'])->update($this->prepareParams($params));
                 $paramsUserValue =[];
                 \App\Model\Shop\UserValuesModel::where('user_id', $params['user_id'])->delete();

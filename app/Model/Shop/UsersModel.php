@@ -54,7 +54,8 @@ class UsersModel extends BackEndModel
             if (!isset($params['user_type_id']) || $params['user_type_id'] == ''){
                 $params['user_type_id'] = 1;
             }
-           $params['user_id'] = $this->insertGetId($this->prepareParams($params));
+            $params['details'] = json_encode($details,JSON_NUMERIC_CHECK );
+            $params['user_id'] = $this->insertGetId($this->prepareParams($params));
             if (is_numeric($params['user_id'])){
                 $paramsCode = [
                     'type' => 'user_type_id',
@@ -67,6 +68,13 @@ class UsersModel extends BackEndModel
                     'value' =>$member_id
                 ];
                 \App\Model\Shop\UserValuesModel::insert($this->prepareParams($paramsUserValue));
+
+                $paramsUserValue =[
+                    'user_id' =>$params['user_id'],
+                    'user_field' =>'slug',
+                    'value' => Str::slug($params['fullname']),
+                ];
+                \App\Model\Shop\UserValuesModel::insert($this->prepareParams($paramsUserValue));
                 //return self::getItem(['user_id'=>$params['user_id']],['task' => 'get-item']);
             }
             return $params['user_id'];
@@ -75,6 +83,9 @@ class UsersModel extends BackEndModel
             $params['password']  = Hash::make($params['password']);
             $params['user_type_id'] = 0;
             $params['is_admin'] = 2;
+            $details = $params['details'];
+            $details['slug']= Str::slug($params['fullname']);
+            $params['details'] = json_encode($details,JSON_NUMERIC_CHECK );
             $params['user_id'] = $this->insertGetId($this->prepareParams($params));
 
             if (is_numeric($params['user_id'])){
