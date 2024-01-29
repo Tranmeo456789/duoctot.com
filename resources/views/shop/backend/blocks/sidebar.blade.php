@@ -117,7 +117,6 @@
                                 <p>Danh sách thuốc</p>
                             </a>
                         </li>
-                        @if(Session::get('user')['user_id']==864108238)
                         <li class="nav-item">
                             <a href="{{route('unit')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -130,17 +129,14 @@
                                 <p>Thương hiệu thuốc</p>
                             </a>
                         </li>
-                        @endif
                     </ul>
                 </li>
-                @if(Session::get('user')['user_id']==864108238)
-                    <li class="nav-item">
-                        <a href="{{route('producer')}}" class="nav-link">
-                            <i class="nav-icon fas fa-record-vinyl"></i>
-                            <p>Quản lý Nhà sản xuất</p>
-                        </a>
-                    </li>
-                @endif
+                <li class="nav-item">
+                    <a href="{{route('producer')}}" class="nav-link">
+                        <i class="nav-icon fas fa-record-vinyl"></i>
+                        <p>Quản lý Nhà sản xuất</p>
+                    </a>
+                </li>
                 <li class="nav-item d-none">
                     <a href="{{route('consignment.list')}}" class="nav-link">
                         <i class="nav-icon fas fa-file-alt"></i>

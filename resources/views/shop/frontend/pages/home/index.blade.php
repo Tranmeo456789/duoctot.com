@@ -41,7 +41,7 @@
     </div>
 </div>
 <div id="feature-product-wp">
-    <div class="product-backround  mt-3 mt-lg-5 py-4">
+    <div class="product-backround  mt-3 mt-lg-4 py-4">
         <div class="wp-inner">
             @include("$moduleName.templates.box_title_product",['title' => 'Sản phẩm mới','classBackground'=>'bg-danger'])
             <ul class="list-item">
@@ -49,7 +49,7 @@
             </ul>
         </div>
     </div>
-    <div class="product-backround  mt-3 mt-lg-5 py-4">
+    <div class="mt-3 mt-lg-4">
         <div class="wp-inner">
             @include("$moduleName.templates.box_title_product",['title' => 'Sản phẩm nổi bật','classBackground'=>'bg-danger'])
             <ul class="list-item">
@@ -73,7 +73,7 @@
 </div>
 @endif
 <div class="wp-inner mt-3 mt-lg-4">
-    <div id="product-by-object">
+    <div id="product-by-object" class="parent-btn-view-add">
         @include("$moduleName.pages.$controllerName.child_index.product_by_object")
     </div>
 </div>

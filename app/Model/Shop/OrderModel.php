@@ -168,6 +168,27 @@ class OrderModel extends BackEndModel
             if(isset($params['search'])){
                 $query=$this::where('buyer','LIKE', "%{$params['search']}%");
             } 
+            if(isset($params['status'])){
+                switch ($params['status'])
+                {
+                    case 'chua_hoan_tat' :
+                        $query = $query->whereIn('status_order',['choThanhToan','dangXuLy','daXacNhan','dangGiaoHang','daGiaoHang']);
+                        break;
+                    case 'hoan_tat' :
+                        $query = $query->whereIn('status_order',['hoanTat']);
+                        break;
+                    case 'da_huy' :
+                        $query = $query->whereIn('status_order',['daHuy']);
+                        break;
+                    case 'tra_hang' :
+                        $query = $query->whereIn('status_order',['traHang']);
+                        break;
+                    default:
+                    $query = $query;
+                        break;
+                }
+            } 
+            
             if(isset($params['pagination'])){
                 $query=$query->orderBy('id', 'desc')
                               ->paginate($params['pagination']['totalItemsPerPage']);
@@ -183,20 +204,20 @@ class OrderModel extends BackEndModel
     {
         $result = null;
         if ($options['task'] == 'get-item-frontend') {
-            $result = self::select('id','code_order','total','created_at','status_order','payment','status_control','user_id','user_sell',
+            $result = self::select('id','code_order','total','money_ship','created_at','status_order','payment','status_control','user_id','user_sell',
                             'info_product','buyer','pharmacy','total_product','delivery_method','receive')
                             ->where('id', $params['id'])
                             ->first();
         }
         if ($options['task'] == 'get-item-frontend-code') {
-            $result = self::select('id','code_order','total','created_at','status_order','payment','status_control','user_id','user_sell',
+            $result = self::select('id','code_order','total','money_ship','created_at','status_order','payment','status_control','user_id','user_sell',
             'info_product','buyer','pharmacy','total_product','delivery_method','receive')
                             ->where('code_order', $params['code_order'])
                             ->first();
         }
         if ($options['task'] == 'get-item') {
             $result = self::with('userBuy')
-                            ->select('id','code_order','total','created_at','status_order','payment','status_control','user_id','user_sell',
+                            ->select('id','code_order','total','money_ship','created_at','status_order','payment','status_control','user_id','user_sell',
                             'info_product','buyer','pharmacy','total_product','delivery_method','receive')
                             ->where('id', $params['id'])
                             ->first();

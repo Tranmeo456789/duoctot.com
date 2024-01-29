@@ -39,7 +39,7 @@
             </div>
             <div id="user_login" class="text-center col-12">
                 {{$inputHiddenTask }}
-                <button type="submit" name="btn-login" value="1" id="btn-logint">Đăng nhập</button>
+                <button type="submit" name="btn-login" value="1" id="btn-logint" class="btn btn-info">Đăng nhập</button>
             </div>
             <p class="dkfn text-center btn-register">Để nhận ưu đãi hấp dẫn, <a class="dkfnc">Đăng ký thành viên</a></p>
         </div>

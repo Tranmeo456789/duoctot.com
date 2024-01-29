@@ -219,6 +219,8 @@
     border-radius: 25px;
     display: inline-block;
     margin-bottom: 54px;
+    cursor: pointer;
+    user-select: none;
 }
 
 .mess_free a {
@@ -314,22 +316,16 @@
 .title-content-detail-product .md {
     font-size: 14px;
     line-height: 17px;
-    background: #4D6394;
-    border-radius: 15px;
-    color: #FFFFFF;
-    padding: 6px 15px;
-    display: inline-block;
-    margin-right: 6px;
-}
-
-.title-content-detail-product .lh {
-    font-size: 14px;
-    line-height: 17px;
     background: #FFFFFF;
     border-radius: 15px;
     color: #4D6394;
     padding: 6px 15px;
     display: inline-block;
+    cursor: pointer;
+}
+.title-content-detail-product .md.active {
+    background: #4D6394;
+    color: #FFFFFF;
 }
 
 .title-content-detail-product .mdlh {
@@ -433,9 +429,10 @@
     padding: 15px;
     position: relative;
     background: #F1F8FF;
+    text-align: right;
 }
 
-.question-often .content-quest textarea {
+.content-quest textarea {
     text-indent: 15px;
     width: 100%;
     min-height: 90px;
@@ -471,7 +468,7 @@
 }
 
 .list-comment li {
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 .list-comment .commenta .cdntl {

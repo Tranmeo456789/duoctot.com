@@ -5,7 +5,7 @@
         <button class="btn-closenk rimg-center"><img src="{{asset('images/shop/dn4.png')}}" alt=""></button>
     </div>
     <div class="d-flex justify-content-center">
-        <div class="wp-content">
+        <div class="wp-content position-relative">
             @include("$moduleName.block.child_form_login_register.form_login")
             @include("$moduleName.block.child_form_login_register.form_register")
             <form action="" class="wp-content-forgetpw">

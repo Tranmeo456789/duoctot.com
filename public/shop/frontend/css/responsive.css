@@ -77,6 +77,8 @@
         width: 100vw;
         min-width: 150px;
         border-radius: 8px 8px 0px 0px;
+        max-height: 100%;
+        overflow-y: scroll;
        position: static;
     }
     .wp-cart-res .number_cartmenu{
@@ -530,12 +532,12 @@
     }
 
     #dang-ky #btn-register {
-        padding: 6px 30px;
+        padding: 10px 30px;
         font-size: 18px;
     }
 
     .form-login #btn-logint {
-        padding: 6px 30px;
+        padding: 10px 30px;
         font-size: 18px;
     }
 
@@ -1017,6 +1019,12 @@
 }
 
 @media screen and (max-width: 500px) {
+    .contact-buy{
+        font-size: 16px;
+    }
+    .contact-buy .phone{
+        font-size: 16px;
+    }
     .header-prescrip {
         font-size: 12px;
         line-height: 14px;

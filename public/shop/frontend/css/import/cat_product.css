@@ -687,6 +687,7 @@ input:checked+.slider:before {
     background: #fff;
     margin-right: 5px;
     padding: 10px 3px;
+    border: 1px solid gray;
 }
 #feature-product-wp .list-item li .wp-img-thumb-product {
     height: 180px;
@@ -702,7 +703,7 @@ input:checked+.slider:before {
     line-height: 18px;
 }
 #feature-product-wp .list-item li p {
-    color: #000;
+    color: #4a4f63;
 }
 
 .body-nb a,

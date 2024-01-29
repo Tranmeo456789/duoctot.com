@@ -270,7 +270,6 @@
 
 #head-body #main-menu>li>a {
     color: #313544d4;
-    text-transform: uppercase;
     padding: 15px 17px 15px 0px;
     display: block;
     position: relative;
@@ -595,15 +594,12 @@
     font-size: 20px;
     line-height: 24px;
     text-align: center;
-    color: #FFFFFF;
-    background: #05AFE3;
     border-radius: 25px;
     border: none;
     padding: 13px 48px;
 }
 
 #dang-ky #btn-register {
-    background: #96d4e7;
     font-family: 'Helvetica Neue';
     font-style: normal;
     font-weight: 700;

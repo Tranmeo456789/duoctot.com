@@ -4,7 +4,7 @@
     use App\Model\Shop\CouponPaymentModel;
     use App\Model\Shop\AffiliateModel;
     use App\Model\Shop\AffiliateProductModel;
-
+    $arrTypeUser = config('myconfig.template.type_user');
 @endphp
 <table class="table table-bordered table-striped table-hover table-head-fixed text-wrap" id="tbList">
     <thead>
@@ -36,9 +36,10 @@
                 <td style="width: 25%" class='name'><p>{!! $codeRef !!}</p></td>
                 <td style="width: 35%" class='text-justify'>
                     <div>Họ tên: {{$userRef['fullname']??null}}</div>
-                    <div>Số ĐT: {{$userRef['phone']}}</div>
-                    <div>Email: {{$userRef['email']}}</div>
-                    <div>Số lượng traffic: {{$sumLinkCount}}</div>
+                    <div>Số ĐT: {{$userRef['phone']??''}}</div>
+                    <div>Email: {{$userRef['email']??''}}</div>
+                    <div>Thuộc đối tượng: {{$arrTypeUser[$userRef->user_type_id??1]}}</div>
+                    <div>Số lượng traffic: {{$sumLinkCount??''}}</div>
                 </td>
                 <td style="width: 15%" class='text-center'><p>{{MyFunction::formatNumber($restMoney??0)}} đ</p></td>
                 <td style="width: 25%">

@@ -13,11 +13,11 @@ $status_order=[
 $statusControlOrderValue = array_combine(array_keys(config("myconfig.template.column.status_control")),array_column(config("myconfig.template.column.status_control"),'name'));
 
 @endphp
+@if(isset($order_detail))
 <div class="header d-flex justify-content-between">
     <div class="tshorder">Chi tiết đơn hàng</div>
     <button class="btn-closenk rimg-center"><img src="{{asset('images/shop/dn4.png')}}" alt=""></button>
 </div>
-@if(isset($order_detail))
 @php
 $info_buyer=json_decode($order_detail['buyer'], true);
 $ngayDatHang = MyFunction::formatDateFrontend($order_detail['created_at']);
@@ -149,9 +149,21 @@ foreach($status_order as $value){
         <div class="money-order-detail">
             <ul>
                 <li><div class="font-md-14 text-right">Tổng tiền: {{MyFunction::formatNumber($order_detail['total'])}} đ</div></li>
-                <li><div class="font-md-14 text-right font-weight-bold">Cần thanh toán: {{MyFunction::formatNumber($order_detail['total'])}} đ</div></li>
+                <li><div class="font-md-14 text-right">Phí giao hàng: {{MyFunction::formatNumber($order_detail['money_ship'])}} đ</div></li>
+                <li><div class="font-md-14 text-right font-weight-bold">Cần thanh toán: {{MyFunction::formatNumber($order_detail['total']+$order_detail['money_ship'])}} đ</div></li>
             </ul>
         </div>
+        @if($order_detail['status_control'] == 'chuaThanhToan')
+            <div class="text-center box-dhtc">
+                <p>Vui lòng thanh toán số tiền(nếu chưa): <b>{{ MyFunction::formatNumber($order_detail['total']+$order_detail['money_ship']) . ' đ'}}</b> vào tài khoản ngân hàng</p>
+                <p>Ngân hàng TMCP Á Châu</p>
+                <p>Số tài khoản: 68686388</p>
+                <p>Chủ tài khoản: Công ty cổ phần giải pháp TDoctor</p>
+                <p>Nội dung ck: {{$info_buyer['phone']}}</p>
+                <p>Nếu quý khách đã thanh toán</p>
+                <p>Liên hệ hotline/Zalo 0349444164 để xác nhận thanh toán và hỗ trợ</p>
+            </div>
+        @endif
     </div>
 </div>
 @endif

@@ -48,16 +48,17 @@ class UserController extends Controller
                     'data' =>  $current_user,
                     'errors' => null,
                     'message' => 'Đăng kí thành công',
-                    'redirect_url' => route('home')
+                    'redirect_url' => route('home'),
+                    'rotate_effect' => true,
                 ], 200);
             }else{
                 return response()->json([
                     'status' => 200,
                     'success' => false,
-                    'data' => null,
+                    'data' =>  null,
                     'errors' => null,
                     'message' => 'Có lỗi xảy ra, vui lòng thử lại'
-                ],200);
+                ], 200);
             }
         }
         return redirect()->route('errors/notfound');
@@ -87,18 +88,19 @@ class UserController extends Controller
                 return response()->json([
                     'status' => 200,
                     'success' => true,
-                    'data' =>  $current_user,
+                    'data' => $current_user,
                     'errors' => null,
                     'message' => 'Đăng nhập thành công',
-                    'redirect_url' => route('home')
+                    'redirect_url' => route('home'),
+                    'rotate_effect' => true,
                 ], 200);
             }
             return response()->json([
                 'status' => 200,
                 'success' => false,
                 'data' =>  null,
-                'errors' => null,
-                'message' => 'Số điện thoại/Email hoặc Mật khẩu không đúng'
+                'errors' => ['authentication' => 'Số điện thoại/Email hoặc Mật khẩu không đúng'],
+                'message' => 'Authentication failed'
             ], 200);
         }
 

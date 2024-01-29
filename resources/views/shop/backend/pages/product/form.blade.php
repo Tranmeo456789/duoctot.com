@@ -40,7 +40,7 @@
             'widthElement' => 'col-6'
         ],[
             'label'   => HTML::decode(Form::label('trademark_id', $label['trademark_id'] .  $star , $formLabelAttr)),
-            'element' => Form::select('trademark_id',$itemsTrademark, $item['trademark_id']??null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
+            'element' => Form::select('trademark_id',[null=>"-- Chọn thương hiệu --"]+$itemsTrademark, $item['trademark_id']??null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
             'widthElement' => 'col-6'
         ],[
             'label'   => HTML::decode(Form::label('dosage_forms',$label['dosage_forms'] .  $star, $formLabelAttr)),
@@ -111,7 +111,7 @@
             ],
             [
                 'label'   => HTML::decode(Form::label('percent_discount',$label['percent_discount'], $formLabelAttr)),
-                'element' => Form::text('percent_discount', $item['percent_discount']??10, array_merge($formInputAttr,['placeholder'=>$label['percent_discount']])),
+                'element' => Form::text('percent_discount', $item['percent_discount']??2, array_merge($formInputAttr,['placeholder'=>$label['percent_discount']])),
                 'widthElement' => 'col-3'
             ],
             [
@@ -134,15 +134,26 @@
                 'label'   => HTML::decode(Form::label('type_price', $label['type_price'] .  $star , $formLabelAttr)),
                 'element' => Form::select('type_price',$itemsTypePrice, $item['type_price']??null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
                 'widthElement' => 'col-3'
-            ],[
-                'label'   => HTML::decode(Form::label('sell_area', $label['sell_area'], $formLabelAttr)),
-                'element' => Form::select('sell_area',$itemsProvince, $item['sell_area']??null, array_merge($formSelect2Attr,['data-placeholder'=>"Mặc định(Cả nước)",'style' =>'width:100%','multiple' => 'multiple'])),
+            ],
+            [
+                'label'   => HTML::decode(Form::label('discount_tdoctor',$label['discount_tdoctor'], $formLabelAttr)),
+                'element' => Form::text('discount_tdoctor', $item['discount_tdoctor']??30, array_merge($formInputAttr,['placeholder'=>$label['discount_tdoctor']])),
                 'widthElement' => 'col-3'
             ],
             [
                 'label'   => HTML::decode(Form::label('discount_ref',$label['discount_ref'], $formLabelAttr)),
-                'element' => Form::text('discount_ref', $item['discount_ref']??10, array_merge($formInputAttr,['placeholder'=>$label['discount_ref']])),
+                'element' => Form::text('discount_ref', $item['discount_ref']??33, array_merge($formInputAttr,['placeholder'=>$label['discount_ref']])),
                 'widthElement' => 'col-3'
+            ],
+            [
+                'label'   => HTML::decode(Form::label('sell_area', $label['sell_area'], $formLabelAttr)),
+                'element' => Form::select('sell_area',$itemsProvince, $item['sell_area']??null, array_merge($formSelect2Attr,['data-placeholder'=>"Mặc định(Cả nước)",'style' =>'width:100%','multiple' => 'multiple'])),
+                'widthElement' => 'col-6'
+            ],
+            [
+                'label'   => HTML::decode(Form::label('contact','SĐT liên hệ', $formLabelAttr)),
+                'element' => Form::text('contact', $item['contact']??'0349444164', array_merge($formInputAttr,['placeholder'=>'SĐT liên hệ'])),
+                'widthElement' => 'col-6'
             ],
             [
                 'label' => HTML::decode(Form::label('', 'Chọn đặc tính sản phẩm' , $formLabelAttr)),
@@ -212,7 +223,22 @@
 @extends('shop.layouts.backend')
 @section('title',$pageTitle)
 @section('content')
-@include ("$moduleName.blocks.page_header", ['pageIndex' => false])
+@if ((Session::has('user') && Session::get('user')['is_admin'] == 1))
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>{{ $pageTitle }}</h1>
+                </div>
+                <div class="col-md-6 d-flex justify-content-end">
+                    <a href='{{route("admin.product.list")}}' class="btn btn-primary float-right">Quay về</a>                   
+                </div>
+            </div>
+        </div>
+    </div>
+@else
+  @include ("$moduleName.blocks.page_header", ['pageIndex' => false])
+@endif
 <section class="content">
     <div class="container-fluid">
         <div class="row">

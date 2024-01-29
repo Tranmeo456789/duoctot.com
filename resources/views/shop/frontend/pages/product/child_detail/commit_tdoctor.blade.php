@@ -1,3 +1,25 @@
+<style>
+    .tooltip-inner {
+    background-color: #b9ddc7;
+    color: #000000;
+    border: 1px solid #dddddd; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+}
+.bs-tooltip-top .arrow::before{
+    border-top-color: #e7d9d9;
+}
+.tooltip.show {
+    opacity: 1;
+    z-index: 10;
+}
+</style>
+@php
+    $contact=$item['contact']??'0349444164';
+@endphp
+<div class="mt-3">
+    <span class="contact-buy">Nếu mua số lượng lớn thì vui lòng liên hệ hotline <span class="phone">{{ implode('.', str_split($contact, 4)) }}</span></span>
+</div>
 <div class="pnote-view d-flex">
     <div>
         <div class="roud25y-img"><img src="{{asset('images/shop/star2.png')}}" alt=""></div>
@@ -67,8 +89,11 @@
                     </div>
                 </div>
             </li>
-
         </ul>
     </div>
 </div>
-<div class="mess_free bg-orange"><a href="">Nhận tư vấn miễn phí</a><img src="{{asset('images/shop/mess.png')}}" alt=""></div>
+<div class="mess_free bg-orange" data-toggle="tooltip" data-html="true" title="@include($moduleName.'.pages.'.$controllerName.'.child_detail.tooltip_contact',['phoneContact'=>$contact])">
+    <span class="text-light">Nhận tư vấn miễn phí</span>
+    <img src="{{asset('images/shop/mess.png')}}" alt="">
+</div>
+

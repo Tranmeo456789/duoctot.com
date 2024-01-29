@@ -69,7 +69,7 @@ class ProductRequest extends AjaxFormRequest
             'code'           => $condCode,
             'cat_product_id' => $condCatPrduct,
             'producer_id'    => $condProducer,
-            'trademark_id'   => $condTrademark,
+            //'trademark_id'   => $condTrademark,
             'country_id'     => $condCountry,
             'price'          => $condPrice,
             'type_price'          => $condTypePrice,

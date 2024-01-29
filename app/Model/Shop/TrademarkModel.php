@@ -16,7 +16,7 @@ class TrademarkModel extends BackEndModel
     public function listItems($params = null, $options = null) {
         $result = null;
         if($options['task'] == "user-list-items") {
-            $query = $this::select('id', 'name', 'created_at', 'updated_at');
+            $query = $this::select('id', 'name','created_by', 'created_at', 'updated_at');
             $result =  $query->orderBy('id', 'desc')
                             ->paginate($params['pagination']['totalItemsPerPage']);
 

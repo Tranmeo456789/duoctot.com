@@ -88,7 +88,7 @@ class OrderController extends BackEndController
         $address='';
         if($item->delivery_method ==1){
             $warehouse_id=$item['pharmacy']['warehouse_id'];
-            $address=(new WarehouseModel())->getItem(['id'=>$warehouse_id],['task' => 'get-item-of-id'])->address;
+            $address=(new WarehouseModel())->getItem(['id'=>$warehouse_id],['task' => 'get-item-of-id'])->address??'';
         }else{
             $ward_detail=(new WardModel())->getItem(['id'=>$item->receive['ward_id']],['task' => 'get-item-full']);
             $ward=$ward_detail['name'];$district=$ward_detail['district']['name'];$province=$ward_detail['district']['province']['name'];

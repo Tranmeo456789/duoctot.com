@@ -214,12 +214,20 @@
                         <div class="row rowHome py-0">
                             {!!FormTemplate::show($elementHome,$formInputWidth)   !!}
                             <div class="info-payment-ck col-12 d-none">
-                                <div class="box-dhtc">
-                                    <p>Vui lòng thanh toán số tiền: <b><span class="total_thanh_toan">{{MyFunction::formatNumber($item['total'])}}</span> đ</b> vào tài khoản ngân hàng</p>
-                                    <p>Ngân hàng TMCP Á Châu</p>
-                                    <p>Số tài khoản: 68686388</p>
-                                    <p>Chủ tài khoản: Công ty cổ phần giải pháp TDoctor</p>
-                                    <p>Liên hệ hotline/Zalo 0349444164 để xác nhận thanh toán và hỗ trợ</p>
+                                <div class="row">
+                                    <div class="col-12 col-md-9">
+                                        <div class="box-dhtc">
+                                            <p>Vui lòng thanh toán số tiền: <b><span class="total_thanh_toan">{{MyFunction::formatNumber($item['total']+20000)}}</span> đ</b> vào tài khoản ngân hàng</p>
+                                            <p>Ngân hàng TMCP Á Châu</p>
+                                            <p>Số tài khoản: <span class="font-weight-bold">68686388</span></p>
+                                            <p>Chủ tài khoản: Công ty cổ phần giải pháp TDoctor</p>
+                                            <p>Nội dung ck: <span class="phone-customer font-weight-bold">{{$user->phone??null}}</span></p>
+                                            <p>Liên hệ hotline/Zalo 0349444164 để xác nhận thanh toán và hỗ trợ</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-3 text-center">
+                                        <img src="{{asset('public/images/shop/qracbnh.jpg')}}" style="width: 100px;" alt="">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -234,7 +242,7 @@
                 <div class="cmoder">
                     {{$inputUserSellHidden}}
                     {{$inputUserIDHidden}}
-                    <button type="submit"  value="1" class="complete_order">HOÀN TẤT ĐẶT HÀNG</button>
+                    <button type="submit"  value="1" class="complete_order btn btn-info">HOÀN TẤT ĐẶT HÀNG</button>
                     <!-- <span class="order-noislogin">HOÀN TẤT ĐẶT HÀNG</span> -->
                     <p>Bằng cách đặt hàng, bạn đồng ý với
                         <span class="underline"> Điều khoản sử dụng </span>của TDoctor

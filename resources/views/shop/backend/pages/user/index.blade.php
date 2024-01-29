@@ -1,10 +1,8 @@
 @php
 use App\Helpers\Template;
-// $xhtmlButtonFilter = Template::showButtonFilter($controllerName, $itemsStatusCount, $params['filter']['status'], $params['search']);
-$xhtmlButtonFilter = '';
 $xhtmlAreaSeach = Template::showAreaSearch($controllerName, $params['search']);
 @endphp
-@endphp
+
 @extends('shop.layouts.backend')
 
 @section('title',$pageTitle)
@@ -16,7 +14,6 @@ $xhtmlAreaSeach = Template::showAreaSearch($controllerName, $params['search']);
         <div class="card card-outline card-primary mb800-0">
             <div class="card-body my-card-filter">
                 <div class="row">
-                    <!-- <div class="col-7 col-button-filter">{!! $xhtmlButtonFilter !!}</div> -->
                     <div class="col-12 col-md-7">{!! $xhtmlAreaSeach !!}</div>
                 </div>
             </div>

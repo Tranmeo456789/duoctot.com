@@ -35,8 +35,13 @@ use Illuminate\Support\Str;
                 </div>
             </div>
             <div class="col-md-7">
+                @if ((Session::has('user') && Session::get('user')['is_admin'] == 1))
+                    <a href="{{route('product.edit',$item->id)}}" class="btn btn-sm btn-secondary">chỉnh sửa</a>
+                @endif
                 <div class="title_product">
-                    <p class="trademark_product">Thương hiệu: <span class="text-info">{{$item->trademarkProduct->name}}</span></p>
+                    @if(isset($item->trademarkProduct) && !empty($item->trademarkProduct->name))
+                        <p class="trademark_product">Thương hiệu: <span class="text-info">{{ $item->trademarkProduct->name }}</span></p>
+                    @endif
                     <h1>{{$item['name']}}</h1>
                     <div class="comment d-flex justify-content-between flex-wrap">
                         <span class="text-muted">({{$item->code??''}})</span>
@@ -121,7 +126,7 @@ use Illuminate\Support\Str;
 <div class="mt-3 py-3 colorb-wp">
     <div class="wp-inner">
         <div id="product-relate">
-            @include("$moduleName.pages.$controllerName.child_detail.product_relate")
+            @include("$moduleName.pages.$controllerName.child_detail.product_relate",['items'=>$listProductRelate])
         </div>
         <div class="comment-product">
             @include("$moduleName.pages.$controllerName.child_detail.comment_product")

@@ -9,9 +9,12 @@ use App\Model\Shop\CatProductModel;
 use App\Model\Shop\AffiliateProductModel;
 use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
 use App\Model\Shop\AffiliateModel;
+use App\Model\Shop\CommentModel;
 use App\Model\Shop\ProductModel as MainModel;
+use App\Model\Shop\ProvinceModel;
 use App\Model\Shop\TrademarkModel;
 use App\Model\Shop\UsersModel;
+use App\Model\Shop\WardModel;
 use Illuminate\Support\Facades\Cookie;
 class ProductController extends ShopFrontEndController
 {
@@ -75,8 +78,9 @@ class ProductController extends ShopFrontEndController
         } else {
             $codeRefLogin = '';
         }
-        
-        return view($this->pathViewController . 'detail',compact('params','item','albumImageCurrent','codeRef','userInfo','codeRefLogin'));
+        $listProductRelate = $this->model->listItems(['cat_product_id'=>$item['cat_product_id'],'limit'=>4],['task' => 'frontend-list-items'])??[];
+        $commentProduct = CommentModel::getAllCommentsWithTreeStructure($item['id']);
+        return view($this->pathViewController . 'detail',compact('params','item','albumImageCurrent','codeRef','userInfo','codeRefLogin','listProductRelate','commentProduct'));
     }
     public function searchProductAjax(Request $request){
         $data = $request->all();
@@ -88,7 +92,7 @@ class ProductController extends ShopFrontEndController
     }
     public function searchListProductShort(Request $request){
         $data = $request->all();
-        $params['keyword']=$request->keyword;$params['limit']=6;
+        $params['keyword']=$request->keyword;
         $keyword=$params['keyword'];
         $items=$this->model->listItems($params,['task' => 'list-items-search']);
         return view("$this->moduleName.templates.list_product_short",compact('items','keyword'));
@@ -99,6 +103,9 @@ class ProductController extends ShopFrontEndController
         $listParams = ['offset' => $offset, 'take' => 20];
         if ($type = $data['type'] ?? null) {
             $listParams['cat_product_id'] = $data['idCat'] ?? null;
+        }
+        if ($object = $data['object'] ?? null) {
+            $listParams['type'] = $data['object'] ?? null;
         }
         $listProductAddView = $this->model->listItems($listParams, ['task' => 'frontend-list-items']);
         $viewName = $this->moduleName;
@@ -112,6 +119,7 @@ class ProductController extends ShopFrontEndController
         return view($viewName, ['items' => $listProductAddView]);
     }
     public function drugstore(Request $request){
+        $productDrugstore=[];
         $productDrugstore = $this->model->listItems(['user_id'=>$request->id], ['task' => 'frontend-list-items']);
         $userInfo=(new UsersModel)->getItem(['user_id' => $request->id],['task'=>'get-item']);
         if ($request->has('codeRef')) {
@@ -122,19 +130,52 @@ class ProductController extends ShopFrontEndController
                 $affiliate->increment('sum_click');
              }
         }
-
         $item = (new AffiliateModel)->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
-        $productAffiliate=[];
         if ($item) {
             $params['group_id'] = collect($item->listIdProduct)->pluck('product_id')->toArray();
-            $productAffiliate = $this->model->listItems(['group_id' => $params['group_id']], ['task' => 'frontend-list-items']);
+            $productDrugstore = $this->model->listItems(['group_id' => $params['group_id'],'user_id' => $request->id], ['task' => 'frontend-list-item-shop'])??[];
         } 
+        $address='';
+        $map='';
+        $ward='';
+        if(isset($userInfo['details'])){
+            $ward_detail=(new WardModel())->getItem(['id'=> $userInfo['details']['ward_id']],['task' => 'get-item-full']);
+            if($ward_detail){
+                $ward=$ward_detail['name']??'';
+                $district=$ward_detail['district']['name']??'';
+                $province=$ward_detail['district']['province']['name']??'';
+            }else{
+                $province_detail=(new ProvinceModel)->getItem(['id'=> $userInfo['details']['province_id']],['task' => 'get-item-full']);
+                $province=$province_detail['name']??'';
+                $district_detail=(new ProvinceModel)->getItem(['id'=> $userInfo['details']['district_id']],['task' => 'get-item-full']);
+                $district=$district_detail['name']??'';
+            }
+            
+            $address=$userInfo['details']['address'].' '.$ward.' '.$district.' '.$province;
+            $map=isset($userInfo['details']['map']) ? $userInfo['details']['map'] : '';
+        }
+        $title = isset($userInfo['fullname']) && $userInfo['fullname'] !== '' ? $userInfo['fullname'] . ', Shop dược phẩm trực tuyến | Tdoctor' : 'Sàn thương mại điện tử trong y dược';
         return view($this->pathViewController . 'drugstore',
             [
                 'userInfo' => $userInfo,
                 'productDrugstore'=>$productDrugstore,
-                'productAffiliate'=>$productAffiliate
-            ]
+                'address'=>$address,
+                'map'=>$map,
+                'title'=> $title        
+               ]
     );
+    }
+    public function addCommentProduct(Request $request){
+        $data = $request->all();
+        $params['user_id']=$request->userId;
+        $params['product_id']=$request->productId;
+        $params['content']=$request->content;
+        $params['parent_id']=$request->parentid;
+        (new CommentModel)->saveItem($params,['task' => 'add-item']);
+        $commentProduct = CommentModel::getAllCommentsWithTreeStructure($params['product_id']);
+        return view("$this->moduleName.pages.product.child_detail.content_comment",[
+            'commentProduct'=>$commentProduct,
+            'productId'=>$params['product_id']
+        ]);
     }
 }

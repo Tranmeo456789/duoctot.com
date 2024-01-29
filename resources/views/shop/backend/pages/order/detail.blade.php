@@ -34,8 +34,8 @@
             'element' => Form::text('total_product', $item['total_product']??null, array_merge($formInputAttr,['readonly' =>true])),
             'widthElement' => 'col-4'
         ],[
-            'label'   => HTML::decode(Form::label('', 'Số lượng mặt hàng', $formLabelAttr)),
-            'element' => Form::text('', count($item['info_product']??[]), array_merge($formInputAttr,['readonly' =>true])),
+            'label'   => HTML::decode(Form::label('', 'Phí giao hàng', $formLabelAttr)),
+            'element' => Form::text('',MyFunction::formatNumber($item['money_ship']??0) . ' đ', array_merge($formInputAttr,['readonly' =>true])),
             'widthElement' => 'col-4'
         ],[
             'label'   => HTML::decode(Form::label('', 'Hình thức thanh toán', $formLabelAttr)),

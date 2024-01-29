@@ -19,11 +19,12 @@
             </div>
             @if($order['payment']==2)
             <div class="text-center box-dhtc">
-                <p>Vui lòng thanh toán số tiền(nếu chưa): <b>{{ MyFunction::formatNumber($order['total']) . ' đ'}}</b> vào tài khoản ngân hàng</p>
+                <p>Vui lòng thanh toán số tiền(nếu chưa): <b>{{ MyFunction::formatNumber($order['total']+$order['money_ship']) . ' đ'}}</b> vào tài khoản ngân hàng</p>
                 <p>Ngân hàng TMCP Á Châu</p>
                 <p>Số tài khoản: 68686388</p>
                 <p>Chủ tài khoản: Công ty cổ phần giải pháp TDoctor</p>
-                <p>Nếu đã quý khách thanh toán</p>
+                <p>Nội dung ck: {{$buyer['phone']}}</p>
+                <p>Nếu quý khách đã thanh toán</p>
                 <p>Liên hệ hotline/Zalo 0349444164 để xác nhận thanh toán và hỗ trợ</p>
             </div>
             @endif
@@ -115,8 +116,12 @@
                             <td colspan="2" style="width: 16%" class='text-left'>{{MyFunction::formatNumber($order['total'])}} đ</td>
                         </tr>
                         <tr class="bb_order">
+                            <td colspan="2" style="width: 16%" class="text-right">Phí giao hàng</td>
+                            <td colspan="2" style="width: 16%" class='text-left'>{{MyFunction::formatNumber($order['money_ship'])}} đ</td>
+                        </tr>
+                        <tr class="bb_order">
                             <td colspan="2" style="width: 16%" class="text-right font-weight-bold">Cần thanh toán</td>
-                            <td colspan="2" style="width: 16%" class='text-left font-weight-bold'>{{MyFunction::formatNumber($order['total'])}} đ</td>
+                            <td colspan="2" style="width: 16%" class='text-left font-weight-bold'>{{MyFunction::formatNumber($order['total']+$order['money_ship'])}} đ</td>
                         </tr>
                     </tbody>
                 </table>

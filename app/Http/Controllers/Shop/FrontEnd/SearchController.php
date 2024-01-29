@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
 use App\Model\Shop\ProductModel;
 use App\Model\Shop\SearchModel as MainModel;
+use Illuminate\Support\Str;
 
 class SearchController extends ShopFrontEndController
 {
@@ -31,7 +32,7 @@ class SearchController extends ShopFrontEndController
     public function saveHome(Request $request)
     {
         // save history keyword search
-        if(!empty($request->input('btn_search')) && !empty($request->input('keyword'))){
+        if(!empty($request->input('btn_search')) && !empty($request->input('keyword')) && trim($request->input('keyword')) !== ''){
             $params = $request->all();
             $itemExist = $this->model->getItem($params, ['task'=>'get-item']);
             $keywordHistory  = (isset($_COOKIE["keywordHistory"]))?json_decode($_COOKIE["keywordHistory"],true):[];
@@ -59,6 +60,8 @@ class SearchController extends ShopFrontEndController
             $this->model->saveItem($params, ['task'=>'add-item-home']);
         } 
             return redirect()->route('fe.search.viewHome',['keyword' => $params['keyword']]);
+        }else{
+            return redirect()->back();
         }
         
     }
@@ -66,5 +69,38 @@ class SearchController extends ShopFrontEndController
         $data = $request->all();
         setcookie( "keywordHistory", "", time()- 60, "/","", 0);
         return view("$this->moduleName.block.menu.child_menu_yes_search.list_history_keyword");
+    }
+    public function updateFieldSearchKeyword() {
+        try {
+            DB::beginTransaction();
+    
+            $products = ProductModel::with('trademarkProduct')->select('id', 'name', 'benefit', 'trademark_id','user_id','cat_product_id')->where('status_product', 'da_duyet')->get();
+    
+            foreach ($products as $product) {
+                $trademarkName = $product->trademarkProduct ? $product->trademarkProduct->name : '';
+                $userSell = $product->userProduct ? $product->userProduct->fullname : '';
+                $catProduct = $product->catProduct ? $product->catProduct->name : '';
+                $keywordSearch = implode(' ', [
+                    $trademarkName,
+                    Str::ascii($trademarkName),
+                    $userSell,
+                    Str::ascii($userSell),
+                    $catProduct,
+                    Str::ascii($catProduct),
+                    Str::ascii($product->name),
+                    Str::ascii($product->benefit),
+                ]);
+    
+                ProductModel::where('id', $product['id'])->update(['keyword_search' => $keywordSearch]);
+            }
+    
+            DB::commit();
+    
+            return response()->json(['success' => true, 'message' => 'Cập nhật thành công']);
+        } catch (\Exception $e) {
+            DB::rollBack();
+    
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
     }
 }

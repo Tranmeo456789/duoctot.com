@@ -8,6 +8,9 @@ if(isset($_COOKIE["keywordHistory"])){
 }
 @endphp
 <div class="ls-history">
+    <div class="wp-list-product-short">
+        @include("$moduleName.templates.list_product_short")
+    </div>
     @if(count($listKeywordHistory) >0)
     <div class="ls-historySuggest">
         <div class="title-history">

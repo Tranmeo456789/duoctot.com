@@ -1,7 +1,10 @@
+@php
+    $title = $title ?? 'Sàn thương mại điện tử trong y dược';
+@endphp
 <!DOCTYPE html>
 <html>
-
 <head>
+    <title>{{$title}}</title>
     @include('shop.frontend.block.head')
 </head>
 
@@ -21,6 +24,7 @@
         </div>
         <div id="fixscreen-respon"></div>
         <div class="black-screen"></div>
+        @include('shop.frontend.block.spinner_screen')
     </div>
 </body>
 @include('shop.frontend.block.script')
