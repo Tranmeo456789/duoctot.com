@@ -14,15 +14,25 @@
 <div class="wp-inner presp">
     <div class="wp-iconmn">
         <div class="d-flex justify-content-between">
-            <div id="btnmenu-resp" class="rimg-center"><img src="{{asset('images/shop/nb3.png')}}" alt=""></div>
+            <!-- <div id="btnmenu-resp" class="rimg-center">
+                <img src="{{asset('images/shop/nb3.png')}}" alt="">
+            </div> -->
+            <div id="btnmenu-resp" class="rimg-center">
+                <i class="fas fa-bars icon-top"></i>
+            </div>
             <div class="logotop"><a href="{{route('home')}}">
-                    <div class="rimg-center"><img src="{{asset('images/shop/logo_topbar2.png')}}" alt=""></div>
+                    <div class="rimg-center"><img src="{{asset('images/shop/logo_topbar3.png')}}" alt=""></div>
                 </a></div>
             <ul class="d-flex align-items-center">
                 <li class="hrcart">
-                    <a href="{{route('fe.product.cartFull')}}">
+                    <!-- <a href="{{route('fe.product.cartFull')}}">
                         <div class="rimg-center">
                             <img src="{{asset('images/shop/cart.png')}}">
+                        </div>
+                    </a> -->
+                    <a href="{{route('fe.product.cartFull')}}">
+                        <div class="rimg-center">
+                            <i class="fas fa-shopping-cart icon-top"></i>
                         </div>
                     </a>
                     @if($number_product > 0)

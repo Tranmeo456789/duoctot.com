@@ -16,7 +16,7 @@
                 <div class="d-flex justify-content-center">
                     <div><span class="circle-ripple"></span></div>
                     <a href="" class="tt-respon">Hướng dẫn</a>
-                    <p class="p-head-topon">Kết nối khám chữa bệnh tại nhà</p>
+                    <p class="p-head-topon">Kết nối mua thuốc tại nhà <span class="font-weight-bold">0349.444.164</span></p>
                 </div>
             </div>
         </div>
@@ -91,7 +91,7 @@
     </div>
     <div id="head-body-respon">
         <div class="tlogo-menu position-relative">
-            <div class="rimg-startm"><a href=""><img src="{{asset('images/shop/logo_topbar2.png')}}" alt=""></a></div>
+            <div class="rimg-startm"><a href=""><img src="{{asset('images/shop/logo_topbar3.png')}}" alt=""></a></div>
             <div class="rimg-center closem" id="closem"><img src="{{asset('images/shop/closem.png')}}" alt=""></div>
         </div>
         @if((Session::has('user') && Session::get('user')['user_type_id'] != 9) || Session::get('user')==null)

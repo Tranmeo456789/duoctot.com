@@ -2,7 +2,7 @@
 
 @section('header_top')
 <div class="wp-inner clearfix">
-    <a href="{{route('home')}}" title="" id="payment-link" class="fl-left"><img style="width:213px" src="{{asset('images/shop/logo_topbar2.png')}}" alt=""></a>
+    <a href="{{route('home')}}" title="" id="payment-link" class="fl-left"><img style="width:213px" src="{{asset('images/shop/logo_topbar3.png')}}" alt=""></a>
     <div class="fl-left wp-search-menu">
         @include('shop.frontend.block.menu.child_menu_yes_search.form_search')
     </div>

@@ -10,8 +10,8 @@
     'vietnam'=>'Tiếng Việt',
     'chinese'=>'Tiếng Trung',
     'korean'=>'Tiếng Hàn',
-    'connecting_home_medical_with_online_doctors'=>'Kết nối khám chữa bệnh tại nhà với các bác sĩ online',
-    'instruction'=>'Xem hướng dẫn',
+    'connecting_home_medical_with_online_doctors'=>'Kết nối mua thuốc tại nhà hotline',
+    'instruction'=>'0349.444.164',
     'onlinebooking' => 'Đặt khám'
  ];
 ?>
