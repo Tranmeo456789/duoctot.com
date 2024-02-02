@@ -44,7 +44,7 @@
             @if(Session::has('user'))
             <div class="float-right" style="margin-left:10px;padding-top:20px;">
                 <div class="dropdown">
-                    <button class="btn dropdown-toggle text-light" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
                         {{Session::get('user')['fullname']}}
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
