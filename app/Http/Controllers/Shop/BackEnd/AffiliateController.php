@@ -81,7 +81,6 @@ class AffiliateController extends BackEndController
         }
         if ($request->method() == 'POST') {
             $params = $request->all();
-
             $task   = "add-item";
             $notify = "Thêm mới $this->pageTitle thành công!";
             $paramsAffiliateProduct=[];
@@ -110,14 +109,27 @@ class AffiliateController extends BackEndController
                 }
                 (new UsersModel())->saveItem(['user_id'=>$item['user_id'],'is_affiliate'=> 1], ['task' => 'update-item-simple']);
             } else {
-                (new UsersModel())->saveItem(['user_id'=>$params['user_id'],'is_affiliate'=> 1], ['task' => 'update-item-simple']);
-                $codeRef=$this->model->saveItem($params, ['task' => $task]); 
-                foreach ($params['info_product'] as $value) {
-                    $paramsAffiliateProduct['code_ref']=$codeRef;
-                    $paramsAffiliateProduct['product_id']=$value;
-                    $paramsAffiliateProduct['user_id']=$params['user_id'];
-                    (new AffiliateProductModel)->saveItem($paramsAffiliateProduct, ['task' => 'add-item']);
+                $existingAffiliate = $this->model->getItem(['user_id' => $params['user_id']], ['task' => 'get-item']);
+                if ($existingAffiliate) {
+                    return response()->json([
+                        'status' => 200,
+                        'success' => true,
+                        'data' =>  null,
+                        'errors' => null,
+                        'message' => 'affilate đã tồn tại',
+                        'redirect_url' => route($this->controllerName)
+                    ], 200);
+                } else {
+                    (new UsersModel())->saveItem(['user_id'=>$params['user_id'],'is_affiliate'=> 1], ['task' => 'update-item-simple']);
+                    $codeRef=$this->model->saveItem($params, ['task' => $task]); 
+                    foreach ($params['info_product'] as $value) {
+                        $paramsAffiliateProduct['code_ref']=$codeRef;
+                        $paramsAffiliateProduct['product_id']=$value;
+                        $paramsAffiliateProduct['user_id']=$params['user_id'];
+                        (new AffiliateProductModel)->saveItem($paramsAffiliateProduct, ['task' => 'add-item']);
+                    }
                 }
+                
             }
             $request->session()->put('app_notify', $notify);
             return response()->json([
