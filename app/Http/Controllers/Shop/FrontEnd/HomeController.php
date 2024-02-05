@@ -84,7 +84,6 @@ class HomeController extends ShopFrontEndController
 
         return view("$this->moduleName.block.child_submenu.ls_cat_level3_and_product",compact('listItemLevel3','listProductCatLevel2','slugCatLevel1','slugCatLevel2'));
     }
-
     public function ajax_filter(Request $request){
         $data = $request->all();
         $typeObject = $request->object_product;
@@ -97,5 +96,11 @@ class HomeController extends ShopFrontEndController
                     'countproductInObject'=>$countproductInObject,
                     'typeObject'=>$typeObject
                 ]);
+    }
+    public function writeContentAi(){
+        $title = 'Hướng dẫn viết content bằng AI | Tdoctor';
+        return view("$this->pathViewController.write_content",[
+            'title'=>$title
+        ]);
     }
 }

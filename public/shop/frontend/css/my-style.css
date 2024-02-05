@@ -1113,7 +1113,12 @@ input[type="radio"] {
     position: relative;
     z-index: 502;
 }
-
+.write-content-ai{
+    font-size: 18px;
+}
+.write-content-ai p{
+    margin-bottom: 5px;
+} 
 .input-search-small {
     border-radius: 100px 0 0 100px;
     padding: 0 8px 0 16px;
