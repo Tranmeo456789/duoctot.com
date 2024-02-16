@@ -175,7 +175,8 @@ $(document).ready(function () {
                     if (response.success) {
                         $(".loading-text").text("Đang đăng ký...");
                         alert('Đăng ký thành công!');
-                        window.location.href = response.redirect_url;
+                       // window.location.href = response.redirect_url;
+                        location.reload();
                     } else {
                         stopRotateEffect();
                         alert('Kiểm tra lại thông tin đã tồn tại, vui lòng thử lại');
@@ -230,7 +231,8 @@ $(document).ready(function () {
                 success: function (response) {        
                     if (response.success) {
                          $(".loading-text").text("Đang đăng nhập...");
-                        window.location.href = response.redirect_url;
+                        //window.location.href = response.redirect_url;
+                        location.reload();
                     } else {
                         if (response.errors && response.errors.authentication) {
                             stopRotateEffect();
@@ -1223,11 +1225,16 @@ $(document).on('click', '.no-login', function(event) {
 $(document).on('click', '.submit-comment', function(event) {
     $('#replyModal').modal('hide');
     $('.modal-backdrop').remove();
+    $('#ratingModal').modal('hide');
     var content = $(this).closest('.content-quest').find('textarea[name="content"]').val();
+    var rating = $(this).attr("data-rating") ?? null;
     var trimmedContent = content.trim();
-    if (trimmedContent.length === 0) {
-        alert('Vui lòng nhập nội dung bình luận!');
-        return;
+    if (!rating) {
+        var trimmedContent = content.trim();
+        if (trimmedContent.length === 0) {
+            alert('Vui lòng nhập nội dung bình luận!');
+            return;
+        }
     }
     var url = $(this).attr("data-url");
     var productId = $(this).attr("data-product");
@@ -1245,9 +1252,14 @@ $(document).on('click', '.submit-comment', function(event) {
             productId: productId,
             content: content,
             parentid: parentid,
+            rating: rating
         },
         success: function(data) {
-            $('.content-comment-product').html(data);
+            if (rating && rating !== null) {
+                $('.content-rating-product').html(data);
+            } else {
+                $('.content-comment-product').html(data);
+            }
         },
     });
 });
@@ -1283,3 +1295,30 @@ $(document).on('click', '.repply-comment', function(event){
         input.focus();
     });
 });
+$(document).on('click', '#starRating .star-big', function(event){
+    var rating = $(this).data('rating');
+    $(this).closest('.rating').find('.star').each(function(index) {
+        if (index < rating) {
+            $(this).addClass('active');
+        } else {
+            $(this).removeClass('active');
+        }
+    });
+    var modalBody = $(this).closest('.modal-body');
+    modalBody.find('.submit-comment').attr("data-rating", rating);
+});
+
+$(document).on('mouseover', '#starRating .star-big', function(event){
+    var rating = $(this).data('rating');
+    $(this).closest('.rating').find('.star').each(function(index) {
+        if (index < rating) {
+            $(this).addClass('active');
+        } else {
+            $(this).removeClass('active');
+        }
+    });
+    var modalBody = $(this).closest('.modal-body');
+    modalBody.find('.submit-comment').attr("data-rating", rating);
+});
+
+

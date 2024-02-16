@@ -21,112 +21,35 @@
 <div class="content-comment-product">
     @include("$moduleName.pages.$controllerName.child_detail.content_comment")
 </div>
-<!-- <div class="question-often mt-3">
-            <h1>Đánh Giá & Nhận Xét <span class="coutn-dn">3</span></h1>
-            <div class="average-rating">
-                <div class="d-flex justify-content-between flex-wrap">
-                    <div class="average-rating-left text-center">
-                        <p>Đánh giá trung bình</p>
-                        <span class="sst">5/5</span>
-                        <p>
-                            <img src="{{asset('images/shop/Starred.png')}}" alt="">
-                            <img src="{{asset('images/shop/Starred.png')}}" alt="">
-                            <img src="{{asset('images/shop/Starred.png')}}" alt="">
-                            <img src="{{asset('images/shop/Starred.png')}}" alt="">
-                            <img src="{{asset('images/shop/Starred.png')}}" alt="">
-                        </p>
-                        <span class="text-muted">3 đánh giá</span>
-                    </div>
-                    <div class="average-rating-center align-self-center">
-                        <ul>
-                            <li>
-                                <span class="td">
-                                    <span class="tn"></span>
-                                    <span class="str">5 <img src="{{asset('images/shop/Starred.png')}}" alt=""></span>
-                                    <span class="ss">2</span>
-                                </span>
-                            </li>
-                            <li>
-                                <span class="td">
-                                    <span class="tn"></span>
-                                    <span class="str">4 <img src="{{asset('images/shop/Starred.png')}}" alt=""></span>
-                                    <span class="ss">2</span>
-                                </span>
-                            </li>
-                            <li>
-                                <span class="td">
-                                    <span class="tn"></span>
-                                    <span class="str">3 <img src="{{asset('images/shop/Starred.png')}}" alt=""></span>
-                                    <span class="ss">2</span>
-                                </span>
-                            </li>
-                            <li>
-                                <span class="td">
-                                    <span class="tn"></span>
-                                    <span class="str">2 <img src="{{asset('images/shop/Starred.png')}}" alt=""></span>
-                                    <span class="ss">2</span>
-                                </span>
-                            </li>
-                            <li>
-                                <span class="td">
-                                    <span class="tn"></span>
-                                    <span class="str">1 <img src="{{asset('images/shop/Starred.png')}}" alt=""></span>
-                                    <span class="ss">2</span>
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="average-rating-right text-center d-flex align-self-center">
-                        <div class="">
-                            <p>Bạn đã dùng sản phẩm này</p>
-                            <p class="text-center mt-3"><a href="">Gửi đánh giá</a></p>
-                        </div>
-
-                    </div>
+<div class="question-often content-rating-product mt-3">
+    @include("$moduleName.pages.$controllerName.child_detail.content_rating")
+</div>
+<div class="modal fade" id="ratingModal" tabindex="-1" role="dialog" aria-labelledby="ratingModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ratingModalLabel">Đánh giá sản phẩm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex mb-2">
+                    <div> <img src="{{asset($item['image'])}}" style="max-width: 100px; max-height:100px;" /></div>
+                    <div class="font-weight-bold">{{$item['name']}}</div>
+                </div>
+                <div class="rating text-center mb-2" id="starRating">
+                    <span class="star star-big active" data-rating="1">★</span>
+                    <span class="star star-big active" data-rating="2">★</span>
+                    <span class="star star-big active" data-rating="3">★</span>
+                    <span class="star star-big active" data-rating="4">★</span>
+                    <span class="star star-big active" data-rating="5">★</span>
+                </div>
+                <div class="content-quest">
+                    <textarea name="content" placeholder="Nhập nội dung (Vui lòng gõ tiếng Việt có dấu)..."></textarea>
+                    <span class="btn btn-primary submit-comment rounded-pill btn-block" data-user="{{Session::has('user') ? Session::get('user')['user_id'] : ''}}" data-url="{{route('fe.product.addCommentProduct')}}" data-product="{{$item['id']??$productId}}" data-parentid="0" data-rating="5">Gửi</span>
                 </div>
             </div>
-            <ul class="list-comment position-relative">
-                <div class="btnselecthc">
-                    <div class="dropdown">
-                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mới nhất</button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Cũ nhất</a>
-                            <a class="dropdown-item" href="#">Hữu ích nhất</a>
-                        </div>
-                    </div>
-                </div>
-                <li>
-                    <div class="commentq position-relative">
-                        <span class="name">Trần Tùng </span><span class="text-muted">2 ngày trước</span>
-                        <p>Mình mới dùng được một lọ theo chỉ dẫn uống ngày hai lần mỗi lần hai viên lúc đóinhưng được hai ba hôm mỗi lần uống thỉnh thoảng lại nổi mẩn ngứa ở hai eo lưng và sau gần sát nách</p>
-                        <div class="roud-img"><img src="{{asset('images/shop/TT.png')}}" alt=""></div>
-                    </div>
-                    <p><a href="">Trả lời</a><span>*</span><a href="">Thích</a></p>
-                    <div class="tplv">
-                        <div class="commenta">
-                            <span class="name">QuỳnhDT32</span><span class="cdntl">Quản trị viên</span><span class="text-muted">2 ngày trước</span>
-                            <p>Chào Bạn Trịnh công bảo,Dạ sản phẩm hiện có hàng tại một số chi nhánh thuộc khu vực Thành Phố Huế gần khu vực thị xã Hương Trà ạ.Bạn vui lòng liên hệ tổng đài miễn phí 18006928 để được hỗ trợ tư vấn và đặt hàng.Thân mến!</p>
-                            <p><a href="">Trả lời</a><span>*</span><a href="">Thích</a></p>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="commentq position-relative">
-                        <span class="name">Võ Hùng </span><span class="text-muted">2 ngày trước</span>
-                        <p>mình sử dụng hết thuốc sâm nhung bổ thận TW3 rồi qua sử dụng viên uống sâm nhung bổ thận NV này được ko ạ
-                            mình sử dụng hết thuốc sâm nhung bổ thận TW3 rồi qua sử dụng viên uống sâm nhung bổ thận NV này được ko ạ
-                        </p>
-                        <div class="roud-img"><img src="{{asset('images/shop/VH.png')}}" alt=""></div>
-                    </div>
-                    <p><a href="">Trả lời</a><span>*</span><a href="">Thích</a></p>
-                    <div class="tplv">
-                        <div class="commenta">
-                            <span class="name">QuỳnhDT32</span><span class="cdntl">Quản trị viên</span><span class="text-muted">2 ngày trước</span>
-                            <p>Chào Bạn Trịnh công bảo,Dạ sản phẩm hiện có hàng tại một số chi nhánh thuộc khu vực Thành Phố Huế gần khu vực thị xã Hương Trà ạ.Bạn vui lòng liên hệ tổng đài miễn phí 18006928 để được hỗ trợ tư vấn và đặt hàng.Thân mến!</p>
-                            <p><a href="">Trả lời</a><span>*</span><a href="">Thích</a></p>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-            <p class="text-center"><a href="" class="add-comment">Xem thêm bình luận <i class="fas fa-angle-down"></i></a></p>
-        </div> -->
+        </div>
+    </div>
+</div>

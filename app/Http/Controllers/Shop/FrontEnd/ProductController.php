@@ -79,8 +79,9 @@ class ProductController extends ShopFrontEndController
             $codeRefLogin = '';
         }
         $listProductRelate = $this->model->listItems(['cat_product_id'=>$item['cat_product_id'],'limit'=>4],['task' => 'frontend-list-items'])??[];
-        $commentProduct = CommentModel::getAllCommentsWithTreeStructure($item['id']);
-        return view($this->pathViewController . 'detail',compact('params','item','albumImageCurrent','codeRef','userInfo','codeRefLogin','listProductRelate','commentProduct'));
+        $commentProduct = (new CommentModel)->listItems(['product_id' => $item['id']], ['task' => 'list-items-frontend']);
+        $ratingProduct = (new CommentModel)->listItems(['product_id' => $item['id'],'rating'=>1], ['task' => 'list-items-frontend']);
+        return view($this->pathViewController . 'detail',compact('params','item','albumImageCurrent','codeRef','userInfo','codeRefLogin','listProductRelate','commentProduct','ratingProduct'));
     }
     public function searchProductAjax(Request $request){
         $data = $request->all();
@@ -171,11 +172,22 @@ class ProductController extends ShopFrontEndController
         $params['product_id']=$request->productId;
         $params['content']=$request->content;
         $params['parent_id']=$request->parentid;
+        $params['rating']=$request->rating??null;
         (new CommentModel)->saveItem($params,['task' => 'add-item']);
-        $commentProduct = CommentModel::getAllCommentsWithTreeStructure($params['product_id']);
-        return view("$this->moduleName.pages.product.child_detail.content_comment",[
-            'commentProduct'=>$commentProduct,
-            'productId'=>$params['product_id']
-        ]);
+        if($request->rating != null){
+            $ratingProduct = (new CommentModel)->listItems(['product_id' => $params['product_id'],'rating'=>1], ['task' => 'list-items-frontend']);
+            $item['id']=$params['product_id'];
+            return view("$this->moduleName.pages.product.child_detail.content_rating",[
+                'ratingProduct'=>$ratingProduct,
+                'item'=>$item
+            ]);
+        }else{
+            $commentProduct = (new CommentModel)->listItems(['product_id' => $params['product_id']], ['task' => 'list-items-frontend']);
+            return view("$this->moduleName.pages.product.child_detail.content_comment",[
+                'commentProduct'=>$commentProduct,
+                'productId'=>$params['product_id']
+            ]);
+        }
+        
     }
 }

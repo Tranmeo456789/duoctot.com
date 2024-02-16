@@ -1575,3 +1575,14 @@ input[type="radio"] {
 .icon-top{
     font-size: 24px;
 }
+.star-big{
+    font-size: 50px;
+    cursor: pointer;
+}
+.star-medium{
+    font-size: 24px;
+    color: #fa8c16;
+}
+.star.active {
+    color: #fa8c16;
+}

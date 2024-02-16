@@ -21,11 +21,20 @@ class CommentModel extends BackEndModel
                             ->paginate($params['pagination']['totalItemsPerPage']);
         }
         if($options['task'] == "list-items-frontend") {
-            $query = $this::select('id','user_id','product_id','parent_id','content','created_by', 'created_at', 'updated_at');
+            $query = $this::select('id','user_id','product_id','parent_id','content','rating','created_by', 'created_at', 'updated_at');
             if (isset($params['product_id'])) {
                 $query->where('product_id', $params['product_id']);
             }
+            if (isset($params['rating'])) {
+                $query->where('rating','>',0);
+            }else {
+                $query->where(function($q) {
+                    $q->whereNull('rating')
+                      ->orWhere('rating', '');
+                });
+            }
             $result =  $query->orderBy('id', 'desc')->get();
+            $result = self::buildTree($result);
         }
         return $result;
     }
@@ -55,6 +64,47 @@ class CommentModel extends BackEndModel
            self::where('id', $params['id'])->delete();
         }
     }
+    public function averageRating($params = null, $options = null) {
+        $result = null;
+        if($options['task'] == "rating-star-average") {
+            $query = $this::select('id','user_id','product_id','parent_id','content','rating','created_by', 'created_at', 'updated_at');
+            if (isset($params['product_id'])) {
+                $query->where('product_id', $params['product_id']);
+            }
+            $comments = $query->whereIn('rating', [1, 2, 3, 4, 5])->get();
+            $totalRatings = $comments->count();
+            $totalRatingSum = $comments->sum('rating');
+            $averageRating = $totalRatings > 0 ? $totalRatingSum / $totalRatings : 0;
+            $averageRating = round($averageRating, 1);
+            $result=$averageRating;
+        }
+        return $result;
+    }
+    public function ratingPercentages($params = null, $options = null) {
+        $result = null;
+        if ($options['task'] == "rating-percentage-star") {
+            $query = $this::select('id', 'user_id', 'product_id', 'parent_id', 'content', 'rating', 'created_by', 'created_at', 'updated_at');
+            if (isset($params['product_id'])) {
+                $query = $query->where('product_id', $params['product_id']);
+            }
+            $ratingsCount = $query->whereIn('rating', [1, 2, 3, 4, 5])
+                                 ->groupBy('rating')
+                                 ->selectRaw('rating, COUNT(*) as count')
+                                 ->pluck('count', 'rating')
+                                 ->toArray();
+        
+            $totalRatings = array_sum($ratingsCount);
+            $percentages = [];
+            for ($i = 1; $i <= 5; $i++) {
+                $count = isset($ratingsCount[$i]) ? $ratingsCount[$i] : 0;
+                $percentage = $totalRatings > 0 ? round(($count / $totalRatings) * 100) : 0;
+                $percentages[$i] = is_int($percentage) ? intval($percentage) : $percentage;
+            }
+            $result = $percentages;
+        }
+        
+        return $result;
+    }
     public function userComment(){
         return $this->belongsTo('App\Model\Shop\UsersModel','user_id','user_id');
     }
@@ -73,7 +123,6 @@ class CommentModel extends BackEndModel
             ->orderBy('created_at', 'desc')
             ->get();
         $commentsTree = self::buildTree($comments);
-
         return $commentsTree;
     }
 
@@ -91,4 +140,5 @@ class CommentModel extends BackEndModel
 
         return $tree;
     }
+
 }
