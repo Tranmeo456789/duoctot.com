@@ -1,6 +1,6 @@
 @php
     $imageSrc = isset($userInfo['details']['image']) ? $userInfo['details']['image'] : 'https://bcp.cdnchinhphu.vn/Uploaded/nguyenthikimlien/2018_05_02/b503ae41ddf217eb13c3e4757362181a_thuoc3.jpg';
-    $phoneContact=$userInfo['phone'] ?? '0349444164';
+    $phoneContact = ($userInfo['user_type_id'] == 9) ? '0349444164' : ($userInfo['phone'] ?? '0349444164');
     $phoneShop=implode('.', str_split($phoneContact, 4));
 @endphp
 
