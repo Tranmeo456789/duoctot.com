@@ -21,9 +21,12 @@ class CommentModel extends BackEndModel
                             ->paginate($params['pagination']['totalItemsPerPage']);
         }
         if($options['task'] == "list-items-frontend") {
-            $query = $this::select('id','user_id','product_id','parent_id','content','rating','created_by', 'created_at', 'updated_at');
+            $query = $this::select('id','user_id','product_id','shop_id','parent_id','content','rating','created_by', 'created_at', 'updated_at');
             if (isset($params['product_id'])) {
                 $query->where('product_id', $params['product_id']);
+            }
+            if (isset($params['shop_id'])) {
+                $query->where('shop_id', $params['shop_id']);
             }
             if (isset($params['rating'])) {
                 $query->where('rating','>',0);

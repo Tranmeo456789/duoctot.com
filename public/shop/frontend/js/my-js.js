@@ -1238,6 +1238,7 @@ $(document).on('click', '.submit-comment', function(event) {
     }
     var url = $(this).attr("data-url");
     var productId = $(this).attr("data-product");
+    var shopId = $(this).attr("data-shop");
     var userId = $(this).attr("data-user");
     var parentid = $(this).attr("data-parentid");
     var _token = $('input[name="_token"]').val();
@@ -1250,6 +1251,7 @@ $(document).on('click', '.submit-comment', function(event) {
             _token: _token,
             userId: userId,
             productId: productId,
+            shopId: shopId,
             content: content,
             parentid: parentid,
             rating: rating

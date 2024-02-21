@@ -8,7 +8,7 @@ use App\Helpers\MyFunction;
   <div class="content-quest">
     <textarea name="content" placeholder="Nhập nội dung câu hỏi"></textarea>
     @if(Session::has('user'))
-    <span class="btn btn-primary submit-comment" data-user="{{Session::get('user')['user_id']}}" data-url="{{route('fe.product.addCommentProduct')}}" data-product="{{$item['id']??$productId}}" data-parentid="0">Gửi bình luận</span>
+    <span class="btn btn-primary submit-comment" data-user="{{Session::get('user')['user_id']}}" data-url="{{route('fe.product.addCommentProduct')}}" data-shop="{{$userInfo['user_id']??$shopId}}" data-parentid="0">Gửi bình luận</span>
     @else
     <span class="btn btn-primary no-login">Gửi bình luận</span>
     @endif
@@ -23,9 +23,9 @@ use App\Helpers\MyFunction;
         </div>
       </div>
     </div>
-    @if(count($commentProduct)>0)
-    @foreach($commentProduct as $val)
-    @include("$moduleName.partial.comment",['commentProduct'=>$val])
+    @if(count($commentShop)>0)
+    @foreach($commentShop as $val)
+    @include("$moduleName.partial.comment",['$commentShop'=>$val])
     @endforeach
     @endif
     <li>
@@ -73,7 +73,7 @@ use App\Helpers\MyFunction;
         <div class="content-quest">
           <textarea name="content" placeholder="Nhập nội dung câu hỏi"></textarea>
           @if(Session::has('user'))
-          <span class="btn btn-primary submit-comment" data-user="{{Session::get('user')['user_id']}}" data-url="{{route('fe.product.addCommentProduct')}}" data-product="{{$item['id']??$productId}}" data-parentid="">Gửi bình luận</span>
+          <span class="btn btn-primary submit-comment" data-user="{{Session::get('user')['user_id']}}" data-url="{{route('fe.product.addCommentProduct')}}" data-shop="{{$userInfo['user_id']??$shopId}}" data-parentid="">Gửi bình luận</span>
           @else
           <span class="btn btn-primary no-login">Gửi bình luận</span>
           @endif

@@ -33,6 +33,9 @@
     <div id="selling-product" class="parent-btn-view-add">
         @include("$moduleName.pages.$controllerName.child_drugstore.list_product",['productDrugstore'=>$productDrugstore])
     </div>
+    <div class="comment-product">
+        @include("$moduleName.pages.$controllerName.child_drugstore.comment_drugstore")
+    </div>
 </div>
 
 <div class="service-tdoctor mt-3 mt-lg-4">

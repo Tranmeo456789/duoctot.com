@@ -156,37 +156,61 @@ class ProductController extends ShopFrontEndController
             $map=isset($userInfo['details']['map']) ? $userInfo['details']['map'] : '';
         }
         $title = isset($userInfo['fullname']) && $userInfo['fullname'] !== '' ? $userInfo['fullname'] . ', Shop dược phẩm trực tuyến | Tdoctor' : 'Sàn thương mại điện tử trong y dược';
+        $commentShop = (new CommentModel)->listItems(['shop_id' => $userInfo['user_id']], ['task' => 'list-items-frontend']);
+        $ratingShop = (new CommentModel)->listItems(['shop_id' => $userInfo['user_id'],'rating'=>1], ['task' => 'list-items-frontend']);
         return view($this->pathViewController . 'drugstore',
             [
                 'userInfo' => $userInfo,
                 'productDrugstore'=>$productDrugstore,
                 'address'=>$address,
                 'map'=>$map,
-                'title'=> $title        
-               ]
-    );
+                'title'=> $title,
+                'commentShop' => $commentShop,
+                'ratingShop' => $ratingShop       
+            ]
+        );
     }
     public function addCommentProduct(Request $request){
         $data = $request->all();
         $params['user_id']=$request->userId;
         $params['product_id']=$request->productId;
+        $params['shop_id']=$request->shopId;
         $params['content']=$request->content;
         $params['parent_id']=$request->parentid;
         $params['rating']=$request->rating??null;
         (new CommentModel)->saveItem($params,['task' => 'add-item']);
         if($request->rating != null){
-            $ratingProduct = (new CommentModel)->listItems(['product_id' => $params['product_id'],'rating'=>1], ['task' => 'list-items-frontend']);
-            $item['id']=$params['product_id'];
-            return view("$this->moduleName.pages.product.child_detail.content_rating",[
-                'ratingProduct'=>$ratingProduct,
-                'item'=>$item
-            ]);
+            if($request->shopId){
+                $ratingShop = (new CommentModel)->listItems(['shop_id' => $params['shop_id'],'rating'=>1], ['task' => 'list-items-frontend']);
+                $userInfo['id']=$params['shop_id'];
+                return view("$this->moduleName.pages.product.child_drugstore.content_rating",[
+                    'ratingShop'=>$ratingShop,
+                    'userInfo'=>$userInfo
+                ]);
+            }else{
+                $ratingProduct = (new CommentModel)->listItems(['product_id' => $params['product_id'],'rating'=>1], ['task' => 'list-items-frontend']);
+                $item['id']=$params['product_id'];
+                return view("$this->moduleName.pages.product.child_detail.content_rating",[
+                    'ratingProduct'=>$ratingProduct,
+                    'item'=>$item
+                ]);
+            }
         }else{
-            $commentProduct = (new CommentModel)->listItems(['product_id' => $params['product_id']], ['task' => 'list-items-frontend']);
-            return view("$this->moduleName.pages.product.child_detail.content_comment",[
-                'commentProduct'=>$commentProduct,
-                'productId'=>$params['product_id']
-            ]);
+            if($request->shopId){
+                $commentShop = (new CommentModel)->listItems(['shop_id' => $params['shop_id']], ['task' => 'list-items-frontend']);
+                $userInfo['id']=$params['shop_id'];
+                return view("$this->moduleName.pages.product.child_drugstore.content_comment",[
+                    'commentShop'=>$commentShop,
+                    'shopId'=>$params['shop_id']
+                ]);
+            }else{
+                $commentProduct = (new CommentModel)->listItems(['product_id' => $params['product_id']], ['task' => 'list-items-frontend']);
+                return view("$this->moduleName.pages.product.child_detail.content_comment",[
+                    'commentProduct'=>$commentProduct,
+                    'productId'=>$params['product_id']
+                ]);
+            }
+            
         }
         
     }
