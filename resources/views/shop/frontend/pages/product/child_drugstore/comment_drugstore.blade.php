@@ -1,23 +1,3 @@
-<div class="question-often mt-3">
-    <h1>
-        Câu hỏi thường gặp
-    </h1>
-    <ul class="list-question">
-        <li class="catparentc">
-            <h3 class="">Thực phẩm chức năng hỗ trợ sức khỏe tình dục nam giới có tác dụng gì?<img src="{{asset('images/shop/hoi.png')}}" alt="">
-                <div class="vissubmenu"><i class="fas fa-angle-down"></i></div>
-            </h3>
-            <div class="submenua1">
-                <ul>
-                    <p>* Giúp kích hoạt cơ chế sản sinh Hormone sinh dục nam nội sinh một cách tự nhiên.</p>
-                    <p>* Bổ thận tráng dương, tăng cường sinh lý, phục hồi khả năng sinh lý nam giới.</p>
-                    <p>* Hỗ trợ điều trị rối loạn cương dương, xuất tinh sớm, di tinh, mộng tinh… làm chậm quá trình mãn dục nam.</p>
-                    <p>* Giúp tăng cường lưu thông máu, tăng cường ham muốn, khắc phục tình trạng rối loạn cương dương ở nam giới.</p>
-                </ul>
-            </div>
-        </li>
-    </ul>
-</div>
 <div class="content-comment-product">
     @include("$moduleName.pages.$controllerName.child_drugstore.content_comment")
 </div>
@@ -46,7 +26,7 @@
                 </div>
                 <div class="content-quest">
                     <textarea name="content" placeholder="Nhập nội dung (Vui lòng gõ tiếng Việt có dấu)..."></textarea>
-                    <span class="btn btn-primary submit-comment rounded-pill btn-block" data-user="{{Session::has('user') ? Session::get('user')['user_id'] : ''}}" data-url="{{route('fe.product.addCommentProduct')}}" data-product="{{$userInfo['user_id']??$productId}}" data-parentid="0" data-rating="5">Gửi</span>
+                    <span class="btn btn-primary submit-comment rounded-pill btn-block" data-user="{{Session::has('user') ? Session::get('user')['user_id'] : ''}}" data-url="{{route('fe.product.addCommentProduct')}}" data-shop="{{$userInfo['user_id']??$shopId}}" data-parentid="0" data-rating="5">Gửi</span>
                 </div>
             </div>
         </div>

@@ -182,7 +182,7 @@ class ProductController extends ShopFrontEndController
         if($request->rating != null){
             if($request->shopId){
                 $ratingShop = (new CommentModel)->listItems(['shop_id' => $params['shop_id'],'rating'=>1], ['task' => 'list-items-frontend']);
-                $userInfo['id']=$params['shop_id'];
+                $userInfo['user_id']=$params['shop_id'];
                 return view("$this->moduleName.pages.product.child_drugstore.content_rating",[
                     'ratingShop'=>$ratingShop,
                     'userInfo'=>$userInfo

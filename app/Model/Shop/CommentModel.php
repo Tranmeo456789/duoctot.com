@@ -74,6 +74,9 @@ class CommentModel extends BackEndModel
             if (isset($params['product_id'])) {
                 $query->where('product_id', $params['product_id']);
             }
+            if (isset($params['shop_id'])) {
+                $query->where('shop_id', $params['shop_id']);
+            }
             $comments = $query->whereIn('rating', [1, 2, 3, 4, 5])->get();
             $totalRatings = $comments->count();
             $totalRatingSum = $comments->sum('rating');
@@ -89,6 +92,9 @@ class CommentModel extends BackEndModel
             $query = $this::select('id', 'user_id', 'product_id', 'parent_id', 'content', 'rating', 'created_by', 'created_at', 'updated_at');
             if (isset($params['product_id'])) {
                 $query = $query->where('product_id', $params['product_id']);
+            }
+            if (isset($params['shop_id'])) {
+                $query->where('shop_id', $params['shop_id']);
             }
             $ratingsCount = $query->whereIn('rating', [1, 2, 3, 4, 5])
                                  ->groupBy('rating')
