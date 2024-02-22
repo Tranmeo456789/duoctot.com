@@ -195,6 +195,6 @@ class AffiliateModel extends BackEndModel
         return $this->belongsTo('App\Model\Shop\UsersModel','user_id','user_id');
     }
     public function listIdProduct(){
-        return $this->hasMany('App\Model\Shop\AffiliateProductModel','code_ref','code_ref');
+        return $this->hasMany('App\Model\Shop\AffiliateProductModel','code_ref','code_ref')->where('active', 1);
     }
 }
