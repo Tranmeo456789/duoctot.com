@@ -72,7 +72,7 @@ use Illuminate\Support\Str;
                         $slugName = Str::slug($userInfo['fullname']);                                     
                     @endphp
                 <div class="mb-3 d-flex justify-content-between">
-                    <a href="{{ route('fe.product.drugstore', ['slug' => $slugName,'id'=> $userInfo['user_id']]) }}" class="btn btn-sm btn-outline-secondary">Xem shop</a>
+                    <a href="{{ route('fe.product.drugstore', ['slug' => $slugName,'shopId'=> $userInfo['user_id']]) }}" class="btn btn-sm btn-outline-secondary">Xem shop</a>
                     <div class="wp-link-affiliate">
                         @if(Session::has('user'))
                             @if(Session::get('user')['is_affiliate'] == 1)

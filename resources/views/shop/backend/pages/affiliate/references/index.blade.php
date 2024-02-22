@@ -43,7 +43,7 @@ $xhtmlAreaSeach = Template::showAreaSearch('product', $params['search']);
                                         @php
                                             $slugName = Str::slug($userInfo['fullname']);                                        
                                             $codeRef = $item['code_ref'];
-                                            $routeParams = ['slug' => $slugName,'id'=> $userInfo['user_id'], 'codeRef' => $codeRef];
+                                            $routeParams = ['slug' => $slugName,'shopId'=> $userInfo['user_id'], 'codeRef' => $codeRef];
                                         @endphp
 
                                         @if($userInfo['user_type_id'] == 4 || $userInfo['user_type_id'] == 10)

@@ -58,7 +58,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('danh-muc=thuoc/{slug1}/{slug2}','CatController@catLevel2')->name('fe.cat2');
     Route::get('danh-muc-thuoc/{slug1}/{slug2}/{slug3}','CatController@catLevel3')->name('fe.cat3');
     
-    Route::get('shop/{id}/{slug}','ProductController@drugstore')->name('fe.product.drugstore');
+    Route::get('{slug}.html','ProductController@drugstore')->name('fe.product.drugstore');
 
 
 });

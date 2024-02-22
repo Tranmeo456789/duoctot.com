@@ -120,9 +120,10 @@ class ProductController extends ShopFrontEndController
         return view($viewName, ['items' => $listProductAddView]);
     }
     public function drugstore(Request $request){
+        $shopId=$request->shopId;
         $productDrugstore=[];
-        $productDrugstore = $this->model->listItems(['user_id'=>$request->id], ['task' => 'frontend-list-items']);
-        $userInfo=(new UsersModel)->getItem(['user_id' => $request->id],['task'=>'get-item']);
+        $productDrugstore = $this->model->listItems(['user_id'=>$shopId], ['task' => 'frontend-list-items']);
+        $userInfo=(new UsersModel)->getItem(['user_id' => $shopId],['task'=>'get-item']);
         if ($request->has('codeRef')) {
             $request->session()->put('codeRef', $request->query('codeRef'));
             $codeRef = $request->codeRef ?? ($request->session()->get('codeRef') ?? '');
@@ -134,7 +135,7 @@ class ProductController extends ShopFrontEndController
         $item = (new AffiliateModel)->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
         if ($item) {
             $params['group_id'] = collect($item->listIdProduct)->pluck('product_id')->toArray();
-            $productDrugstore = $this->model->listItems(['group_id' => $params['group_id'],'user_id' => $request->id], ['task' => 'frontend-list-item-shop'])??[];
+            $productDrugstore = $this->model->listItems(['group_id' => $params['group_id'],'user_id' => $shopId], ['task' => 'frontend-list-item-shop'])??[];
         } 
         $address='';
         $map='';
