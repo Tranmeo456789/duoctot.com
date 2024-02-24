@@ -33,7 +33,8 @@
     <div class="content text-center">
         <div class="row">
             {!! FormTemplate::show($elements,$formInputWidth)  !!}
-            <div class="qpassword col-12"><a>Quên mật khẩu</a></div>
+            <!-- <div class="qpassword col-12"><a>Quên mật khẩu</a></div> -->
+            <div class="col-12">Quên mật khẩu liên hệ 0349.444.164 !</div>
             <div class="remember-login d-flex">
                 <input type="checkbox"><label for="">Giữ tôi đăng nhập</label>
             </div>
