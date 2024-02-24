@@ -25,13 +25,14 @@
                         $temp++;
                         $email = Hightlight::show($val->email, $params['search'], 'email');
                         $fullname = Hightlight::show($val->fullname, $params['search'], 'fullname');
+                        $phone = Hightlight::show($val->phone, $params['search'], 'phone');
                     @endphp
                     <tr>
                         <th scope="row" style="width: 5%">{{$temp}}</th>
                         <td style="width: 15%">{{$val->user_id}}</td>
                         <td style="width: 20%">{!! $fullname !!}</td>
                         <td style="width: 15%">{!! $email !!}</td>
-                        <td style="width: 15%">{{$val->phone}}</td>
+                        <td style="width: 15%">{!! $phone !!}</td>
                         <td style="width: 20%">{{$arrTypeUser[$val->user_type_id]}}</td>
                         <td style="width: 10%">
                             <a href="{{route("$controllerName.edit",$val->user_id)}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit"></i></a>

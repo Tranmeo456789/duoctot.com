@@ -200,6 +200,7 @@
             'search'       => [
                 'all'      => ['name'=>'Tìm kiếm Tất cả'],
                 'name'     => ['name'=>'Tìm kiếm theo Tên'],
+                'phone'=> ['name'=>'Tìm kiếm theo số điện thoại'],
                 'fullname' => ['name'=>'Tìm kiếm theo Họ tên'],
                 'email' => ['name'=>'Tìm kiếm theo Email'],
                 'code_ref' => ['name'=>'Tìm kiếm theo mã đại lý'],
@@ -211,7 +212,7 @@
         'config' => [
             'search' => [
                 'default'  => ['name'],
-                'user' => ['email','fullname'],
+                'user' => ['email','fullname','phone'],
                 'product'=>['name'],
                 'affiliate'=>['code_ref'],
             ]
