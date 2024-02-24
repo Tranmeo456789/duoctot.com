@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Shop\BackEnd;
 
 use App\Model\Shop\UsersModel as MainModel;
+use App\Http\Requests\UserRequest as MainRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Shop\BackEnd\BackEndController;
 use App\Model\Shop\ProvinceModel;
 use App\Model\Shop\DistrictModel;
 use App\Model\Shop\WardModel;
+use App\Model\Shop\AffiliateModel;
 use App\Helpers\MyFunction;
 use DB;
+use Hash;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 class UserController extends BackEndController
 {
@@ -53,14 +56,79 @@ class UserController extends BackEndController
         $details=[];
         if ($request->id !== null) {
             $params["user_id"] = $request->id;
-            $item = $this->model->getItem($params, ['task' => 'get-item']);
-            $details = $item->details->pluck('value','user_field')->toArray()??[];
+            $item = $this->model->getItem(['user_id'=>$request->id],['task' => 'get-item']);
+            if ($item && $item->detailValues) {
+                $details = $item->detailValues->pluck('value', 'user_field')->toArray() ?? [];
+            } else {
+                $details = [];
+            }
         }
         $itemsProvince = (new ProvinceModel())->listItems(null,['task'=>'admin-list-items-in-selectbox']);
-        return view($this->pathViewController . 'form', compact(
-            'item','itemsProvince','details'
+        $params['province_id'] = (isset($details['province_id']) && ($details['province_id']!=0))?$details['province_id']:((isset($item['province_id']) && ($item['province_id'] != 0)) ? $item['province_id']:0);
+        $itemsDistrict = [];
+        if ($params['province_id']  != 0){
+            $itemsDistrict = (new DistrictModel())->listItems(['parentID' => $params['province_id']],
+                                                                ['task'=>'admin-list-items-in-selectbox']);
+        }
 
-        ));
+        $params['district_id'] = (isset($details['district_id']) && ($details['district_id'] != 0))?$details['district_id']:((isset($item['district_id']) && ($item['district_id'] != 0)) ? $item['district_id']:0);
+        $itemsWard = [];
+        if ($params['district_id']  != 0){
+            $itemsWard = (new WardModel())->listItems(['parentID' => $params['district_id']],
+                                                                ['task'=>'admin-list-items-in-selectbox']);
+        }
+        $userInfo = $request->session()->get('user');
+        $userAff = (new AffiliateModel)->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
+        if(isset($userAff) && !empty($userAff)){
+            $codeRef = $userAff['code_ref'];
+        }
+        $codeRef = isset($userAff['code_ref']) ? $userAff['code_ref'] : null;
+        return view($this->pathViewController .  'form',
+                    compact('item','details', 'itemsProvince' ,'itemsDistrict','itemsWard','codeRef')
+                );
+    }
+    public function save(MainRequest $request)
+    {
+        if (isset($request->validator) && $request->validator->fails()) {
+            return response()->json([
+                'status' => 200,
+                'data' => null,
+                'success' => false,
+                'errors' => $request->validator->errors()
+            ]);
+        }
+        if ($request->method() == 'POST') {
+            $params = $request->all();
+            if(isset($params['password']) && ($params['password'] !== '' && $params['password'] !== null)){
+                $params['password'] = Hash::make($params['password']);
+            } else {
+                unset($params['password']);
+            }
+            $task   = $params['task'];
+            $notify = "Cập nhật $this->pageTitle thành công!";
+            $redirect_url = route($this->controllerName);
+            if ($this->model->saveItem($params, ['task' => 'update-item'])){
+                $request->session()->put('app_notify', $notify);
+                return response()->json([
+                    'status' => 200,
+                    'success' => true,
+                    'data' =>  null,
+                    'errors' => null,
+                    'message' => $notify,
+                    'redirect_url' => $redirect_url
+                ], 200);
+            }else{
+                return response()->json([
+                    'status' => 200,
+                    'success' => false,
+                    'data' =>  null,
+                    'errors' => null,
+                    'message' => 'lỗi xảy ra trong quá trình cập nhật thông tin',
+                    'redirect_url' => ''
+                ], 200);
+            }
+
+        }
     }
     public function filterInDay(Request $request){
         $data = $request->all();

@@ -34,10 +34,7 @@
                         <td style="width: 15%">{{$val->phone}}</td>
                         <td style="width: 20%">{{$arrTypeUser[$val->user_type_id]}}</td>
                         <td style="width: 10%">
-                            {{-- <a href="{{route("$controllerName.edit",$val->user_id)}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit"></i></a>
-                            <a data-href="{{route("$controllerName.delete",$val->id)}}" class="btn btn-sm btn-danger btn-delete text-white" data-id="{{$val->id}}" data-toggle="tooltip" data-placement="top" title="Xóa" data-token="{{csrf_token()}}">
-                                <i class="fa fa-trash"></i>
-                            </a> --}}
+                            <a href="{{route("$controllerName.edit",$val->user_id)}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit"></i></a>
                         </td>
                 </tr>
                 @endforeach

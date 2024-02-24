@@ -107,6 +107,8 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
     });
     Route::group(['middleware' => ['permission.admin']], function () {
         Route::get('/danh-sach-nguoi-dung', 'UserController@index')->name('user');
+        Route::get('/sua-nguoi-dung/{id}', 'UserController@form')->name('user.edit');
+        Route::post('/luu-nguoi-dung', 'UserController@save')->name('user.save');
         
         Route::get('/quan-ly-editor', 'EditorController@index')->name('editor');
         Route::get('/them-editor', 'EditorController@form')->name('editor.add');
