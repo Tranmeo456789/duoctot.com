@@ -26,6 +26,9 @@
                 $index++;
                 $codeRef = Hightlight::show($val->code_ref, $params['search'], 'code_ref');
                 $userRef=$val->userRef;
+                $fullname = Hightlight::show($userRef['fullname'], $params['search'], 'fullname');
+                $phone = Hightlight::show($userRef['phone'], $params['search'], 'phone');
+                $email = Hightlight::show($userRef['email'], $params['search'], 'email');
                 $sumPayment=(new CouponPaymentModel)->sumMoney(['code_ref'=>$codeRef],['task'=>'tinh-tong-tien-affiliate']);
                 $sumMoney=(new AffiliateModel)->sumMoneyRefAffiliate($codeRef);
                 $sumLinkCount = AffiliateProductModel::where('code_ref', $codeRef)->sum('sum_click')+$val['sum_click'];
@@ -35,9 +38,9 @@
                 <th scope="row" style="width: 10%">{{$index}}</th>
                 <td style="width: 25%" class='name'><p>{!! $codeRef !!}</p></td>
                 <td style="width: 35%" class='text-justify'>
-                    <div>Họ tên: {{$userRef['fullname']??null}}</div>
-                    <div>Số ĐT: {{$userRef['phone']??''}}</div>
-                    <div>Email: {{$userRef['email']??''}}</div>
+                    <div>Họ tên: {!! $fullname !!}</div>
+                    <div>Số ĐT: {!! $phone !!}</div>
+                    <div>Email: {!! $email !!}</div>
                     <div>Thuộc đối tượng: {{$arrTypeUser[$userRef->user_type_id??1]}}</div>
                     <div>Số lượng traffic: {{$sumLinkCount??''}}</div>
                 </td>

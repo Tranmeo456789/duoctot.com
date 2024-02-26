@@ -9,6 +9,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Cookie;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
+use App\Model\Shop\AffiliateModel;
 use App\Model\Shop\ProductModel;
 use App\Model\Shop\SearchModel as MainModel;
 use Illuminate\Support\Str;
@@ -70,37 +71,56 @@ class SearchController extends ShopFrontEndController
         setcookie( "keywordHistory", "", time()- 60, "/","", 0);
         return view("$this->moduleName.block.menu.child_menu_yes_search.list_history_keyword");
     }
-    public function updateFieldSearchKeyword() {
-        try {
-            DB::beginTransaction();
-    
-            $products = ProductModel::with('trademarkProduct')->select('id', 'name', 'benefit', 'trademark_id','user_id','cat_product_id')->where('status_product', 'da_duyet')->get();
-    
-            foreach ($products as $product) {
-                $trademarkName = $product->trademarkProduct ? $product->trademarkProduct->name : '';
-                $userSell = $product->userProduct ? $product->userProduct->fullname : '';
-                $catProduct = $product->catProduct ? $product->catProduct->name : '';
-                $keywordSearch = implode(' ', [
-                    $trademarkName,
-                    Str::ascii($trademarkName),
-                    $userSell,
-                    Str::ascii($userSell),
-                    $catProduct,
-                    Str::ascii($catProduct),
-                    Str::ascii($product->name),
-                    Str::ascii($product->benefit),
-                ]);
-    
-                ProductModel::where('id', $product['id'])->update(['keyword_search' => $keywordSearch]);
+    public function updateFieldSearchKeyword(Request $request) {
+        if($request->product){
+            try {
+                DB::beginTransaction();
+                $products = ProductModel::with('trademarkProduct')->select('id', 'name', 'benefit', 'trademark_id','user_id','cat_product_id')->where('status_product', 'da_duyet')->get();
+                foreach ($products as $product) {
+                    $trademarkName = $product->trademarkProduct ? $product->trademarkProduct->name : '';
+                    $userSell = $product->userProduct ? $product->userProduct->fullname : '';
+                    $catProduct = $product->catProduct ? $product->catProduct->name : '';
+                    $keywordSearch = implode(' ', [
+                        $trademarkName,
+                        Str::ascii($trademarkName),
+                        $userSell,
+                        Str::ascii($userSell),
+                        $catProduct,
+                        Str::ascii($catProduct),
+                        Str::ascii($product->name),
+                        Str::ascii($product->benefit),
+                    ]);
+        
+                    ProductModel::where('id', $product['id'])->update(['keyword_search' => $keywordSearch]);
+                }
+                DB::commit();
+                return response()->json(['success' => true, 'message' => 'Cập nhật keyword product thành công']);
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return response()->json(['success' => false, 'message' => $e->getMessage()]);
             }
-    
-            DB::commit();
-    
-            return response()->json(['success' => true, 'message' => 'Cập nhật thành công']);
-        } catch (\Exception $e) {
-            DB::rollBack();
-    
-            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }else{
+            try {
+                DB::beginTransaction();
+                $affiliates = AffiliateModel::with('userRef')->select('id', 'code_ref', 'user_id', 'info_user')->get();
+                foreach ($affiliates as $affiliate) {
+                    $fullname = $affiliate->userRef ? $affiliate->userRef->fullname : '';
+                    $phone = $affiliate->userRef ? $affiliate->userRef->phone : '';
+                    $email = $affiliate->userRef ? $affiliate->userRef->email : '';
+                    $infoUser = implode(' ', [
+                        $fullname,
+                        $phone,
+                        $email
+                    ]);
+                    AffiliateModel::where('id', $affiliate['id'])->update(['info_user' => $infoUser]);
+                }
+                DB::commit();
+                return response()->json(['success' => true, 'message' => 'Cập nhật info user affiliate thành công']);
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return response()->json(['success' => false, 'message' => $e->getMessage()]);
+            }
         }
+        
     }
 }

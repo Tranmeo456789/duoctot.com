@@ -204,6 +204,7 @@
                 'fullname' => ['name'=>'Tìm kiếm theo Họ tên'],
                 'email' => ['name'=>'Tìm kiếm theo Email'],
                 'code_ref' => ['name'=>'Tìm kiếm theo mã đại lý'],
+                'info_user' => ['name'=>'Tìm kiếm theo thông tin user'],
             ],
         ],
         'folderUpload' => [
@@ -214,7 +215,7 @@
                 'default'  => ['name'],
                 'user' => ['email','fullname','phone'],
                 'product'=>['name'],
-                'affiliate'=>['code_ref'],
+                'affiliate'=>['code_ref','info_user'],
             ]
         ]
     ];
