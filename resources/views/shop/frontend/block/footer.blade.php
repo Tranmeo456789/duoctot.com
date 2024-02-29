@@ -64,7 +64,7 @@
                             <img src="{{asset('images/shop/dc1.png')}}" alt="">
                         </div>
                     </div>
-                    <p>Văn phòng đại diện: Tầng 3, Tòa 35 Hùng Vương, Phường Điện Biên, Quận Ba Đình, Hà Nội</p>
+                    <p>Văn phòng đại diện: Tầng 3, Tòa 35 Hùng Vương, P. Điện Biên, Q. Ba Đình, Hà Nội</p>
                 </div>
                 <div class="d-flex mb-2">
                     <div>
