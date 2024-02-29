@@ -53,6 +53,8 @@ class DashboardController extends BackEndController
          if(!empty($itemOrder)){
              $total_revenue=$itemOrder->sum('total');
          }
+         $session->forget('params.search');
+         $session->forget('params.filter');
         return view($this->pathViewController .  'index',compact('order_day','sum_money_day','sum_quantity','sum_money','total_revenue','itemStatusOrderCount'));
     }
     public function filterInDay(Request $request){

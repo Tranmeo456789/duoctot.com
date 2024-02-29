@@ -1,10 +1,14 @@
 @php
     $title = $title ?? 'Sàn thương mại điện tử trong y dược';
+    $imageItem = $item['image'] ?? 'images/shop/logo_topbar3.png';
 @endphp
 <!DOCTYPE html>
 <html>
 <head>
     <title>{{$title}}</title>
+    <meta property="og:title" content="{{ $item['name'] ?? 'Tdoctor' }}">
+    <meta property="og:image" content="{{ asset($imageItem) }}">
+    
     @include('shop.frontend.block.head')
 </head>
 

@@ -12,3 +12,11 @@
 <script src="{{ asset('/shop/frontend/js/owl.carousel.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/shop/frontend/js/jquery.uploadPreviewer.js')}}?t=@php echo time() @endphp" type="text/javascript"></script>
 <script src="{{ asset('/shop/frontend/js/my-js.js')}}?t=@php echo time() @endphp" type="text/javascript"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PZKFD196QW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PZKFD196QW');
+</script>
