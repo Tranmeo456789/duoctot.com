@@ -1,7 +1,7 @@
 <?php
  return[
     'look_up'=>'Tra cứu',
-    'order_history'=>'Lịch sử đơn hàng',
+    'order_history'=>'Tra cứu đơn hàng',
     'cart'=>'Giỏ hàng',
     'login'=>'Đăng nhập',
     'register'=>'Đăng ký',

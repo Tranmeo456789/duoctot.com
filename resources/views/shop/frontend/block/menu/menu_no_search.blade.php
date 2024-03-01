@@ -4,17 +4,16 @@
         <div class="wp-inner clearfix">
             <a href="{{route('home')}}" title="" id="payment-link" class="fl-left"><img style="width:213px" src="{{asset('images/shop/logo_topbar3.png')}}" alt=""></a>
             @if((Session::has('user') && Session::get('user')['user_type_id'] != 9) || Session::get('user')==null)
-            <div id="" class="fl-left" style="margin-left:300px; padding-top:5px">
+            <div id="" class="fl-left" style="margin-left:300px; padding-top:15px">
                 <a href="{{route('fe.order.formSearch')}}" id="payment-link" class="search-history-order">
                     <div class="clearfix">
                         <!-- <div class="fl-left mr-2 pt-2">
                             <img style="width:26px" src="{{asset('images/shop/history.png')}}" alt="">
                         </div> -->
-                        <div class="fl-left mr-2 pt-2">
+                        <div class="mr-2 fl-left">
                             <i class="fas fa-file-alt icon-top"></i>
                         </div>
-                        <div class="fl-left">
-                            <p>@lang('lang.look_up')</p>
+                        <div class="pt-1 fl-left">
                             <p>@lang('lang.order_history')</p>
                         </div>
                     </div>

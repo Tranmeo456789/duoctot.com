@@ -17,7 +17,7 @@
                     <div class="fl-left mr-2">
                         <i class="fas fa-shopping-cart icon-top"></i>
                     </div>
-                    <div class="fl-left pt-2">
+                    <div class="fl-left pt-1">
                         <p>Giỏ hàng</p>
                     </div>
                 </div>
@@ -28,18 +28,17 @@
         </div>
     </div>
     
-    <div id="" class="fl-right" style="margin-right:50px; padding-top:5px">
+    <div id="" class="fl-right" style="margin-right:50px; padding-top:15px">
         <a href="{{route('fe.order.formSearch')}}" id="payment-link" class="search-history-order">
             <div class="clearfix">
                 <!-- <div class="fl-left mr-2 pt-2">
                     <img style="width:26px" src="{{asset('images/shop/history.png')}}" alt="">
                 </div> -->
-                <div class="fl-left mr-2 pt-2">
+                <div class="fl-left mr-2">
                     <i class="fas fa-file-alt icon-top"></i>
                 </div>
-                <div class="fl-left">
-                    <p>Tra cứu</p>
-                    <p>Lịch sử đơn hàng</p>
+                <div class="fl-left pt-1">
+                    <p>Tra cứu đơn hàng</p>
                 </div>
             </div>
         </a>

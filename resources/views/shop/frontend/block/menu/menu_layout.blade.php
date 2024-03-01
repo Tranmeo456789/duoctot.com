@@ -1,5 +1,5 @@
 <div id="header-wp" class="position-relative">
-    <div class="head_topon">
+    <!-- <div class="head_topon">
         <div class="wp-inner">
             <div class="d-flex justify-content-center">
                 <div class="d-flex justify-content-center">
@@ -9,14 +9,14 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="head_topon_reponsive">
         <div class="wp-inner">
             <div class="d-flex justify-content-center">
                 <div class="d-flex justify-content-center">
                     <div><span class="circle-ripple"></span></div>
                     <!-- <a href="" class="tt-respon">Hướng dẫn</a> -->
-                    <p class="p-head-topon">Kết nối mua thuốc tại nhà <span class="font-weight-bold">0349.444.164</span></p>
+                    <p class="p-head-topon">Kết nối mua thuốc online <span class="font-weight-bold">0349.444.164</span></p>
                 </div>
             </div>
         </div>
