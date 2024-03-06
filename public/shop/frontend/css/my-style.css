@@ -1551,6 +1551,7 @@ input[type="radio"] {
 .contact-buy .phone{
     font-size: 20px;
     font-weight: bold;
+    color: rgb(248, 12, 12);
 }
 .icon-contact{
     width: 30px;
