@@ -67,7 +67,7 @@
         <div class="row">
             {!! FormTemplate::show($elements,$formInputWidth)  !!}
 
-            <p class="dkgp py-2">Để tài khoản được kích hoạt, quý khách hàng vui lòng cung cấp cho TDoctor đầy đủ các giấy phép theo quy định của pháp luật.</p>
+            <!-- <p class="dkgp py-2">Để tài khoản được kích hoạt, quý khách hàng vui lòng cung cấp cho TDoctor đầy đủ các giấy phép theo quy định của pháp luật.</p> -->
 
             <div class="remember-login d-flex">
                 <input id="check-rules" type="checkbox"><label for="">Tôi đã đọc và đồng ý với <a href="" class="text-info">Điều khoản sử dụng*</a></label>

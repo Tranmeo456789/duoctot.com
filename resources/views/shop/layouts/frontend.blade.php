@@ -1,6 +1,7 @@
 @php
     $title = $title ?? 'Sàn thương mại điện tử trong y dược';
     $imageItem = $item['image'] ?? 'images/shop/logo_topbar3.png';
+    $benefit = $item['benefit'] ?? 'Sản phẩm được nhiều khách hàng tin dùng'
 @endphp
 <!DOCTYPE html>
 <html>
@@ -8,7 +9,8 @@
     <title>{{$title}}</title>
     <meta property="og:title" content="{{ $item['name'] ?? 'Tdoctor' }}">
     <meta property="og:image" content="{{ asset($imageItem) }}">
-    
+    <meta property="og:description" content="{{$benefit}}">
+
     @include('shop.frontend.block.head')
 </head>
 
