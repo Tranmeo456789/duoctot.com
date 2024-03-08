@@ -44,6 +44,7 @@ class CatProductController extends BackEndController
     {
         $item = null;
         $params =[];
+        $params['down_depth']=3;
         if ($request->id !== null) {
             $params["id"] = $request->id;
             $item = $this->model->getItem($params, ['task' => 'get-item']);

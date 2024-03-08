@@ -84,6 +84,9 @@ class CatProductModel extends BackEndModel
         if ($options['task'] == "admin-list-items-in-selectbox-quan-ly") {
             $query = self::select('id', 'name')
                 ->withDepth()->defaultOrder();
+            if (isset($params['down_depth'])) {
+                $query = $query->having('depth', '<', $params['down_depth']);
+            }
             if (isset($params['id'])) {
                 $currNode = self::find($params['id']);
                 $query = self::select('id', 'name')
@@ -101,6 +104,9 @@ class CatProductModel extends BackEndModel
             $query = self::select('id', 'name')
                 ->withDepth()->defaultOrder()
                 ->where('id', '<>', 1);
+            if (isset($params['up_depth'])) {
+                $query = $query->having('depth', '>', $params['up_depth']);
+            }
             $nodes = $query->get()->toFlatTree();
             foreach ($nodes as $value) {
                 $result[$value['id']] = str_repeat(config('myconfig.template.char_level'), $value['depth'] - 1) . $value['name'];

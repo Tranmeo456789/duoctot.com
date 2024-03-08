@@ -163,7 +163,7 @@ class ProductController extends BackEndController
             $params["id"] = $request->id;
             $item = $this->model->getItem($params, ['task' => 'get-item']);
         }
-        $itemsCatProduct = (new CatProductModel())->listItems(null, ['task' => 'admin-list-items-in-selectbox']);
+        $itemsCatProduct = (new CatProductModel())->listItems(['up_depth'=>1], ['task' => 'admin-list-items-in-selectbox']);
         $itemsProducer = (new ProducerModel())->listItems(null, ['task' => 'admin-list-items-in-selectbox']);
         $itemsTrademark = (new TrademarkModel())->listItems(null, ['task' => 'admin-list-items-in-selectbox']);
         $itemsCountry = (new CountryModel())->listItems(null, ['task' => 'admin-list-items-in-selectbox']);
