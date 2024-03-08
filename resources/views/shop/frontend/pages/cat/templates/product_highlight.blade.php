@@ -1,9 +1,7 @@
 @php
 $objectProducts=[
-    ['name'=>'Hàng mới','slug'=>'hang_moi'],
-    ['name'=>'Bán chạy','slug'=>'ban_chay'],
-    ['name'=>'Giá cao','slug'=>'gia_cao'],
-    ['name'=>'Giá thấp','slug'=>'gia_thap']
+    ['name'=>'Giá thấp','slug'=>'gia_thap'],
+    ['name'=>'Giá cao','slug'=>'gia_cao']
 ]
 @endphp
 <div class="title-product-out d-flex justify-content-between flex-wrap">

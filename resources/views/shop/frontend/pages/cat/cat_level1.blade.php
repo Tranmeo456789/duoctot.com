@@ -3,15 +3,10 @@
 @section('content')
     <div class="wp-inner mt-2">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 mb-3">
                     <div class="" id="breadcrumb-wp">
                         @include("$moduleName.pages.$controllerName.child_cat_level1.breadcrumb")
                     </div>
-                </div>
-                <div class="col-xl-3 trademark">
-                    @include("$moduleName.pages.$controllerName.templates.listbox_select")
-                </div>
-                <div class="col-xl-9 col-12">
                     <div class="product-of-cat">
                         @include("$moduleName.pages.$controllerName.child_cat_level1.list_cat_child")
                         <div class="bodycat-productrespon">
@@ -21,7 +16,12 @@
                     <div>
                         @include("$moduleName.pages.$controllerName.templates.product_selling")
                     </div>
-                    <div class="cat-product-out mt-5">
+                </div>
+                <div class="col-xl-3 trademark">
+                    @include("$moduleName.pages.$controllerName.templates.listbox_select")
+                </div>
+                <div class="col-xl-9 col-12">
+                    <div class="cat-product-out">
                         @include("$moduleName.pages.$controllerName.templates.product_highlight")
                     </div>
                 </div>

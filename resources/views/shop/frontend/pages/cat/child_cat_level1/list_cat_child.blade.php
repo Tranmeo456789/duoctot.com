@@ -13,11 +13,11 @@ $listCatAll=(new CatProductModel())->listItems(null, ['task'  => 'list-items-fro
         @php
             $countProduct=(new ProductModel())->countItems(['cat_product_id'=> $itemLevel2['id']],['task' => 'count-number-product-in-cat']);
         @endphp
-        <li class="">
-            <div class="d-flex">
+        <li>
+            <div class="d-flex full-height">
                 <div class="item-cat-left text-center">
                     <a href="{{route('fe.cat2',[$itemCatCurent['slug'],$itemLevel2['slug']])}}">
-                        <div><img src="{{asset($itemLevel2['image'])}}" alt="" style="width:70%"></div>
+                        <div><img src="{{asset($itemLevel2['image'])}}" alt="" style="width:50%"></div>
                         <h3>{{$itemLevel2['name']}}</h3>
                         <span>{{$countProduct}} sản phẩm</span>
                     </a>

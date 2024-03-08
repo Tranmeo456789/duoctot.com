@@ -3,22 +3,22 @@
 @section('content')
     <div class="wp-inner mt-2">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 mb-3">
                     <div class="" id="breadcrumb-wp">
                         @include("$moduleName.pages.$controllerName.child_cat_level2.breadcrumb")
                     </div>
-                </div>
-                <div class="col-xl-3 trademark">
-                    @include("$moduleName.pages.$controllerName.templates.listbox_select")
-                </div>
-                <div class="col-12 col-xl-9">
                     <div id="cat_detail" class="">
                         @include("$moduleName.pages.$controllerName.child_cat_level2.list_cat_child")
                     </div>
                     <div>
                         @include("$moduleName.pages.$controllerName.templates.product_selling")
                     </div>
-                    <div class="cat-product-out mt-5">
+                </div>
+                <div class="col-xl-3 trademark">
+                    @include("$moduleName.pages.$controllerName.templates.listbox_select")
+                </div>
+                <div class="col-12 col-xl-9">
+                    <div class="cat-product-out">
                         @include("$moduleName.pages.$controllerName.templates.product_highlight")
                     </div>
                 </div>

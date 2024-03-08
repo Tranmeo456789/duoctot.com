@@ -1,107 +1,78 @@
+@php
+    use App\Model\Shop\TrademarkModel;
+    use App\Model\Shop\CountryModel;
+
+    $listTrademark = (new TrademarkModel)->listItems(null, ['task'=>'admin-list-items-in-selectbox']);
+    $listCountry = (new CountryModel)->listItems(null, ['task'=>'admin-list-items-in-selectbox']);
+@endphp
 <ul class="list-box-select">
     <li>
         <h1 class="mb-2">Thương hiệu</h1>
-        <form action="">
-            <div class="form-group mb-1">
-                <div class="position-relative">
+        <div class="form-group mb-1 set_height_250">
+            <!-- <div class="position-relative">
                     <input class="" type="text" name="" id="" autocomplete="off">
                     <div class="sfpro"><img src="{{asset('images/shop/icon-searchf.png')}}" alt=""></div>
-                </div>
-                <ul class="mt-2">
-                    <li>
-                        <div class="d-flex"><input type="checkbox" name="" id="">
-                            <div><label for="">Tất cả</label></div>
-                    </li>
-                    <li>
-                        <div class="d-flex"><input type="checkbox" name="" id=""><label for="">Lab Well</label></div>
-                    </li>
-                    <li>
-                        <div class="d-flex"><input type="checkbox" name="" id=""><label for="">KNGPHAR</label></div>
-                    </li>
-                    <li>
-                        <div class="d-flex"><input type="checkbox" name="" id=""><label for="">UBA Pharma</label></div>
-                    </li>
-                    <li>
-                        <div class="d-flex"><input type="checkbox" name="" id=""><label for="">Tuệ Tĩnh</label></div>
-                    </li>
-                    <li>
-                        <div class="d-flex"><input type="checkbox" name="" id=""><label for="">HDPARMA</label></div>
-                    </li>
-                    <li>
-                        <div class="d-flex"><input type="checkbox" name="" id=""><label for="">Vesta</label></div>
-                    </li>
-                    <li>
-                        <div class="d-flex"><input type="checkbox" name="" id=""><label for="">Goodhealth</label></div>
-                    </li>
-                    <li>
-                        <div class="d-flex"><input type="checkbox" name="" id=""><label for="">Doppelherz</label></div>
-                    </li>
-                    <li>
-                        <div class="d-flex"><input type="checkbox" name="" id=""><label for="">Tất thành</label></div>
-                    </li>
-                    <li>
-                        <div class="d-flex"><input type="checkbox" name="" id=""><label for="">Phanrvina</label></div>
-                    </li>
-                    <li>
-                        <div class="d-flex"><input type="checkbox" name="" id=""><label for="">Ecogreen</label></div>
-                    </li>
-                    <li>
-                        <div class="d-flex"><input type="checkbox" name="" id=""><label for="">FOBIC</label></div>
-                    </li>
-                    <li>
-                        <div class="d-flex"><input type="checkbox" name="" id=""><label for="">DHG PHARMA</label></div>
-                    </li>
-                </ul>
-            </div>
-        </form>
-        <div class="show_list_select"><a href="">Thu gọn</a></div>
+                </div> -->
+            <ul class="mt-2">
+                <li>
+                    <div class="d-flex"><input type="checkbox" checked='check'>
+                        <div><label for="">Tất cả</label></div>
+                </li>
+                @foreach($listTrademark as $key=>$val)
+                <li>
+                    <div class="d-flex">
+                        <input type="checkbox" name="list_trademark[]" value="{{$key}}">
+                        <label for="">{{$val}}</label>
+                    </div>
+                </li>
+                @endforeach
+            </ul>
+        </div>
+        <!-- <div class="show_list_select"><a href="">Thu gọn</a></div> -->
     </li>
     <li>
         <h1 class="mb-2">Xuất xứ</h1>
+        <div class="form-group mb-1 set_height_250">
+            <ul class="mt-2">
+                <li>
+                    <div class="d-flex">
+                        <input type="checkbox" name="" checked='check'>
+                        <label for="">Tất cả</label>
+                    </div>
+                </li>
+                @foreach($listCountry as $key=>$val)
+                <li>
+                    <div class="d-flex">
+                        <input type="checkbox" name="list_country[]" value="{{$key}}">
+                        <label for="">{{$val}}</label>
+                    </div>
+                </li>
+                @endforeach
+            </ul>
+        </div>
+    </li>
+    <li>
+        <h1 class="mb-2">Giá bán</h1>
         <form action="">
             <div class="form-group mb-1">
-                <div class="position-relative">
-                    <input class="" type="text" name="" id="" autocomplete="off">
-                    <div class="sfpro"><img src="{{asset('images/shop/icon-searchf.png')}}" alt=""></div>
-                </div>
-                <ul class="mt-2">
+                <ul class="mt-2 list-slect-price-product">
                     <li>
-                        <div class="d-flex"><input type="checkbox" name="" id="">
-                            <div><label for="">Tất cả</label></div>
+                        <div class="slect-price-product"><a href="">Dưới 100.000đ</a></div>
                     </li>
                     <li>
-                        <div class="d-flex"><input type="checkbox" name="" id=""><label for="">Hoa Kỳ</label></div>
+                        <div class="slect-price-product"><a href="">100.000đ đến 300.00đ</a></div>
                     </li>
                     <li>
-                        <div class="d-flex"><input type="checkbox" name="" id=""><label for="">Việt Nam</label></div>
+                        <div class="slect-price-product"><a href="">300.000đ đến 500.00đ</a></div>
                     </li>
                     <li>
-                        <div class="d-flex"><input type="checkbox" name="" id=""><label for="">Úc</label></div>
-                    </li>
-                    <li>
-                        <div class="d-flex"><input type="checkbox" name="" id=""><label for="">Thụy Điển</label></div>
-                    </li>
-                    <li>
-                        <div class="d-flex"><input type="checkbox" name="" id=""><label for="">Nhật Bản</label></div>
-                    </li>
-                    <li>
-                        <div class="d-flex"><input type="checkbox" name="" id=""><label for="">Đức</label></div>
-                    </li>
-                    <li>
-                        <div class="d-flex"><input type="checkbox" name="" id=""><label for="">Slovenia</label></div>
-                    </li>
-                    <li>
-                        <div class="d-flex"><input type="checkbox" name="" id=""><label for="">Tây Ban Nha</label></div>
-                    </li>
-                    <li>
-                        <div class="d-flex"><input type="checkbox" name="" id=""><label for="">Pháp</label></div>
+                        <div class="slect-price-product"><a href="">Trên 500.000đ</a></div>
                     </li>
                 </ul>
             </div>
         </form>
-        <div class="show_list_select"><a href="">Thu gọn</a></div>
     </li>
-    <li>
+    <!-- <li>
         <h1 class="mb-2">Hỗ trợ điều trị</h1>
         <form action="">
             <div class="form-group mb-1">
@@ -290,26 +261,6 @@
             </div>
         </form>
         <div class="show_list_select"><a href="">Thu gọn</a></div>
-    </li>
-    <li>
-        <h1 class="mb-2">Giá bán</h1>
-        <form action="">
-            <div class="form-group mb-1">
-                <ul class="mt-2 list-slect-price-product">
-                    <li>
-                        <div class="slect-price-product"><a href="">Dưới 100.000đ</a></div>
-                    </li>
-                    <li>
-                        <div class="slect-price-product"><a href="">100.000đ đến 300.00đ</a></div>
-                    </li>
-                    <li>
-                        <div class="slect-price-product"><a href="">300.000đ đến 500.00đ</a></div>
-                    </li>
-                    <li>
-                        <div class="slect-price-product"><a href="">Trên 500.000đ</a></div>
-                    </li>
-                </ul>
-            </div>
-        </form>
-    </li>
+    </li> -->
+
 </ul>

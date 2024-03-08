@@ -3,7 +3,7 @@
 @section('content')
 <div class="wp-inner mt-2">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 mb-3">
             <div class="" id="breadcrumb-wp">
                 @include("$moduleName.pages.$controllerName.child_cat_level3.breadcrumb")
             </div>

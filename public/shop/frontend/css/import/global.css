@@ -47,6 +47,13 @@ body{
 .pd-left-40{
     padding-left: 40px!important;
 }
+.full-height {
+    height: 100%;
+  }
+  .set_height_250{
+    height: 250px;
+    overflow-y: scroll;
+  }
 .fix1screen{
     height: 100vh;width: 100%;
     position: fixed;z-index: 1000;top: 0px;
