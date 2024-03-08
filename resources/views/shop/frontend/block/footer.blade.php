@@ -9,6 +9,7 @@
                 <p><a href="https://tdoctor.vn/chinhsach-baomat-thongtin-khachhang">Chính sách bảo mật thông tin</a></p>
                 <p><a href="https://tdoctor.vn/dang-ky-bac-si">Đăng ký bác sỹ</a></p>
                 <p><a href="https://tdoctor.vn/dang-ky-phong-kham">Đăng ký phòng khám</a></p>
+                <p><a href="{{route('fe.home.pageChinhSachDoiTra')}}">Chính sách đổi trả</a></p>
             </div>
             <div class="col-xl-3 col-lg-12">
                 <h1 class="mb-2">Liên hệ</h1>

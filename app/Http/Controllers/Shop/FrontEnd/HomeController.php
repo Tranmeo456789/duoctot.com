@@ -103,4 +103,10 @@ class HomeController extends ShopFrontEndController
             'title'=>$title
         ]);
     }
+    public function pageChinhSachDoiTra(){
+        $title = 'Chính sách đổi trả | Tdoctor';
+        return view("$this->pathViewController.chinhsach_doitra",[
+            'title'=>$title
+        ]);
+    }
 }

@@ -1587,3 +1587,6 @@ input[type="radio"] {
 .star.active {
     color: #fa8c16;
 }
+.content-policy{
+    font-size: 18px;
+}
