@@ -780,28 +780,92 @@ $(document).on('change', "input[name='invoice[object]']", function (event) {
     }
 
 });
-$(document).on('click', ".slect-item-customer", function (event) {
-    $('.slect-item-customer').removeClass("active-slect");
-    $(this).addClass("active-slect");
-    var object_product = $(this).attr("data-object");
-    var productByObject = $(this).closest("#product-by-object");
-    productByObject.find(".view-btn-add-product").attr("data-object", object_product);
-    productByObject.find(".view-btn-add-product").attr("data-offset", 10);
+$(document).on('click', ".view-btn-add-product", function (event) {
+    var offset = parseInt($(this).attr("data-offset"));
     var url = $(this).attr("data-href");
     var _token = $('input[name="_token"]').val();
+    var type = $(this).attr("data-type");
+    var object = $(this).attr("data-object");
+    var orderBy = $(this).attr("data-orderby");
+    var idCat = $(this).attr("data-idcat");
+    var currentElement = $(this); 
+    var currentCount = parseInt($(this).find(".visibility-number-product").text().trim());
+    if (currentCount - 20 < 1) {
+        $(".view-btn-add-product").hide();
+    }
     $.ajax({
         url: url,
         cache: false,
         method: "GET",
         dataType: 'html',
         data: {
-            object_product: object_product,
-            _token: _token
+            offset: offset,
+            type: type,
+            object: object,
+            orderBy: orderBy,
+            idCat: idCat,
+            _token: _token,
         },
-        success: function (data) {
-            $('#product-by-object').html(data);
+        success: function(data) {
+            currentElement.find(".visibility-number-product").text(function(index, text) {
+                return Math.max(parseInt(text) - 20, 0);
+            });
+            offset += 20;
+            currentElement.attr("data-offset", offset);
+            var listProductContainer = currentElement.closest('.parent-btn-view-add').find('ul.ls_product-view-add');
+            listProductContainer.append(data);
         },
-    });
+    }); 
+});
+$(document).on('click', ".slect-item-customer", function (event) {
+    $('.slect-item-customer').removeClass("active-slect");
+    $(this).addClass("active-slect");
+    var orderby_product = $(this).attr("data-orderby") || null;
+    var object_product = $(this).attr("data-object") || null;
+    var type = $(this).attr("data-type") || null;
+    var idCat = $(this).attr("data-idcat") || null;
+    if(orderby_product != null){
+        var productByObject = $(this).closest("#wp-product-cat");
+        productByObject.find(".view-btn-add-product").attr("data-orderby", orderby_product);
+        productByObject.find(".view-btn-add-product").attr("data-offset", 20);
+        var url = $(this).attr("data-href");
+        var _token = $('input[name="_token"]').val();
+        $.ajax({
+            url: url,
+            cache: false,
+            method: "GET",
+            dataType: 'html',
+            data: {
+                orderby_product: orderby_product,
+                type: type,
+                idCat: idCat,
+                _token: _token
+            },
+            success: function (data) {
+                $('#body-nbox').html(data);
+            },
+        });
+    }else{
+        var productByObject = $(this).closest("#product-by-object");
+        productByObject.find(".view-btn-add-product").attr("data-object", object_product);
+        productByObject.find(".view-btn-add-product").attr("data-offset", 10);
+        var url = $(this).attr("data-href");
+        var _token = $('input[name="_token"]').val();
+        $.ajax({
+            url: url,
+            cache: false,
+            method: "GET",
+            dataType: 'html',
+            data: {
+                object_product: object_product,
+                _token: _token
+            },
+            success: function (data) {
+                $('#product-by-object').html(data);
+            },
+        });
+    }
+    
 });
 $(document).on('click', ".select-status-order", function (event) {
     var status = $(this).attr("data-status");
@@ -819,7 +883,6 @@ $(document).on('click', ".select-status-order", function (event) {
             _token: _token
         },
         success: function(data) {
-            //console.log(data);
             $('.table-order-frontend').html(data);
         },
     }); 
@@ -845,43 +908,6 @@ $(document).on('click', ".view-detail-order", function (event) {
         },
     }); 
 });
-$(document).on('click', ".view-btn-add-product", function (event) {
-    var offset = parseInt($(this).attr("data-offset"));
-    var url = $(this).attr("data-href");
-    var _token = $('input[name="_token"]').val();
-    var type = $(this).attr("data-type");
-    var object = $(this).attr("data-object");
-    var idCat = $(this).attr("data-idcat");
-    var currentElement = $(this); 
-    var currentCount = parseInt($(this).find(".visibility-number-product").text().trim());
-    if (currentCount - 20 < 1) {
-        $(".view-btn-add-product").hide();
-    }
-    $.ajax({
-        url: url,
-        cache: false,
-        method: "GET",
-        dataType: 'html',
-        data: {
-            offset: offset,
-            type: type,
-            object: object,
-            idCat: idCat,
-            _token: _token,
-        },
-        success: function(data) {
-            currentElement.find(".visibility-number-product").text(function(index, text) {
-                return Math.max(parseInt(text) - 20, 0);
-            });
-            offset += 20;
-            currentElement.attr("data-offset", offset);
-            var listProductContainer = currentElement.closest('.parent-btn-view-add').find('ul.ls_product-view-add');
-            listProductContainer.append(data);
-        },
-    }); 
-});
-
-
 $(document).on('click', ".btn-closenk", function (event) {
     $('.wp-detail-order').css("display", "none");
     $('.black-screen').css("display", "none");

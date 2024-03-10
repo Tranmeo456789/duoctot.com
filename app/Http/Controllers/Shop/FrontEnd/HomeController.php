@@ -86,16 +86,33 @@ class HomeController extends ShopFrontEndController
     }
     public function ajax_filter(Request $request){
         $data = $request->all();
-        $typeObject = $request->object_product;
-        $countproductInObject=(new ProductModel())->countItems(['type'=>$typeObject], ['task' => 'count-items-product-frontend']);
-        $countproductInObject=$countproductInObject[0]['count']-10;
-        $productInObject=(new ProductModel())->listItems(['type'=>$typeObject], ['task' => 'frontend-list-items'])->take(10);
-        return view("$this->pathViewController.child_index.product_by_object",
-                [
-                    'productInObject'=>$productInObject,
-                    'countproductInObject'=>$countproductInObject,
-                    'typeObject'=>$typeObject
-                ]);
+        if(isset($data['orderby_product'])){
+            $listParams['order_by']=$data['orderby_product'] ?? null;
+            if ($type = $data['type'] ?? null) {
+                $listParams['cat_product_id'] = $data['idCat'] ?? null;
+            }
+            $listProductOrderBy=(new ProductModel())->listItems($listParams, ['task' => 'frontend-list-items'])->take(20);
+            $couterSumProduct=(new ProductModel())->countItems(['cat_product_id'=>$data['idCat']],['task'=>'count-number-product-in-cat']);
+            $couterSumProduct=$couterSumProduct-20;
+            return view("$this->moduleName.pages.cat.templates.list_product",
+                    [
+                        'items'=>$listProductOrderBy,
+                        'countProduct'=>$couterSumProduct,
+                        'idCat'=>$data['idCat'],
+                        'typeOrderBy'=>$data['orderby_product']
+                    ]);
+        }else{
+            $typeObject = $request->object_product;
+            $countproductInObject=(new ProductModel())->countItems(['type'=>$typeObject], ['task' => 'count-items-product-frontend']);
+            $countproductInObject=$countproductInObject[0]['count']-10;
+            $productInObject=(new ProductModel())->listItems(['type'=>$typeObject], ['task' => 'frontend-list-items'])->take(10);
+            return view("$this->pathViewController.child_index.product_by_object",
+                    [
+                        'productInObject'=>$productInObject,
+                        'countproductInObject'=>$countproductInObject,
+                        'typeObject'=>$typeObject
+                    ]);
+        }
     }
     public function writeContentAi(){
         $title = 'Hướng dẫn viết content bằng AI | Tdoctor';

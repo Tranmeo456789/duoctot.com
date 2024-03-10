@@ -13,9 +13,9 @@
                             @include("$moduleName.pages.$controllerName.child_cat_level1.list_cat_child_responsive")
                         </div>
                     </div>
-                    <div>
+                    <!-- <div>
                         @include("$moduleName.pages.$controllerName.templates.product_selling")
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-xl-3 trademark">
                     @include("$moduleName.pages.$controllerName.templates.listbox_select")

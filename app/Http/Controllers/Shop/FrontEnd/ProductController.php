@@ -108,11 +108,12 @@ class ProductController extends ShopFrontEndController
         if ($object = $data['object'] ?? null) {
             $listParams['type'] = $data['object'] ?? null;
         }
+        if ($orderBy = $data['orderBy'] ?? null) {
+            $listParams['order_by'] = $data['orderBy'] ?? null;
+        }
         $listProductAddView = $this->model->listItems($listParams, ['task' => 'frontend-list-items']);
         $viewName = $this->moduleName;
-        if ($type == 'product_cat_horizontal') {
-            $viewName .= '.pages.cat.partial.product_horizontal';
-        } elseif ($type == 'product_cat') {
+        if ($type == 'product_cat') {
             $viewName .= '.pages.cat.partial.product';
         } else {
             $viewName .= '.partial.product';

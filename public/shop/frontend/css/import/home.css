@@ -454,6 +454,9 @@ li .wp-discount
     top: -22px;
     position: absolute;
 }
+.cat-product-out .icon-sticky span{
+    top: -25px;
+}
 .icon-sticky span svg{
     width: 1em;
     height: 1em;

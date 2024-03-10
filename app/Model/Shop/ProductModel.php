@@ -171,7 +171,18 @@ class ProductModel extends BackEndModel
             if(isset($params['take'])){
                 $query->take($params['take']);
             }
-            $query->OfCollaboratorCode()->orderBy('id', 'desc');
+            $query= $query->OfCollaboratorCode();
+            if(isset($params['order_by'])){
+                if($params['order_by']==='gia_thap'){
+                    $query->orderBy('price', 'asc');
+                }elseif($params['order_by']==='gia_cao'){
+                    $query->orderBy('price', 'desc');
+                }else{
+                    $query->orderBy('id', 'desc');
+                }
+            }else{
+                $query->orderBy('id', 'desc');
+            }
             if(isset($params['limit'])){
                 $result=$query->paginate($params['limit']);
             }else{

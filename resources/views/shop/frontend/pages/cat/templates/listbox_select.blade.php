@@ -51,7 +51,7 @@
             </ul>
         </div>
     </li>
-    <li>
+    <!-- <li>
         <h1 class="mb-2">Giá bán</h1>
         <form action="">
             <div class="form-group mb-1">
@@ -71,7 +71,7 @@
                 </ul>
             </div>
         </form>
-    </li>
+    </li> -->
     <!-- <li>
         <h1 class="mb-2">Hỗ trợ điều trị</h1>
         <form action="">

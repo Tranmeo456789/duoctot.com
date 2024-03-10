@@ -10,9 +10,9 @@
                     <div id="cat_detail" class="">
                         @include("$moduleName.pages.$controllerName.child_cat_level2.list_cat_child")
                     </div>
-                    <div>
+                    <!-- <div>
                         @include("$moduleName.pages.$controllerName.templates.product_selling")
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-xl-3 trademark">
                     @include("$moduleName.pages.$controllerName.templates.listbox_select")
