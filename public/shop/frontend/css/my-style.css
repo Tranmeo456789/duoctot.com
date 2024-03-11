@@ -1590,3 +1590,13 @@ input[type="radio"] {
 .content-policy{
     font-size: 18px;
 }
+.icon-filter {
+    font-size: 20px;
+    color: #ff002f;
+    align-self: center;
+    cursor: pointer;
+    padding: 4px;
+}
+.icon-filter-advance{
+    display: none;
+}

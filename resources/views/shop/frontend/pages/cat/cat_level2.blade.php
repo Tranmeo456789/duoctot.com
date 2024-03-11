@@ -47,6 +47,6 @@
             @include("$moduleName.templates.feedback_customer")
         </div>
     </div>
-
+    @include("$moduleName.pages.$controllerName.templates.modal_filter")
 @endsection
 

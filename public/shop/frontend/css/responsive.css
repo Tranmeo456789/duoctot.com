@@ -122,7 +122,15 @@
     .list-box-select {
         display: none;
     }
-
+    .modal-filter-mobile .list-box-select {
+        display: block;
+    }
+    #modalFilter{
+        padding-right: 0px!important;
+    }
+    .icon-filter-advance{
+        display: block;
+    }
     .trademark {
         display: none;
     }

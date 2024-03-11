@@ -876,6 +876,7 @@ $(document).on('click', ".btnFilterProductInCat", function (event) {
     countryCheckboxes.each(function() {
         listCountryId.push($(this).val());
     });
+    $('#modalFilter').modal('hide');
     $.ajax({
         url: url,
         cache: false,

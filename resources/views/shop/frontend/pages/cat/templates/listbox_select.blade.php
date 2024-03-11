@@ -1,6 +1,6 @@
 <ul class="list-box-select">
     <li>
-        <h1 class="mb-2">Thương hiệu</h1>
+        <h3 class="mb-2">Thương hiệu</h3>
         <div class="form-group mb-1 set_height_250">
             <!-- <div class="position-relative">
                     <input class="" type="text" name="" id="" autocomplete="off">
@@ -26,7 +26,7 @@
         </div>
     </li>
     <li>
-        <h1 class="mb-2">Xuất xứ</h1>
+        <h3 class="mb-2">Xuất xứ</h3>
         <div class="form-group mb-1 set_height_250">
             <ul class="mt-2 list-check-items">
                 <li>
