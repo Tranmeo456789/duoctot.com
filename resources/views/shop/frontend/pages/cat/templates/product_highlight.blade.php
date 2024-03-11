@@ -1,9 +1,10 @@
 @php
 $objectProducts=[
-['name'=>'Hàng mới','slug'=>'hang_moi'],
-['name'=>'Giá thấp','slug'=>'gia_thap'],
-['name'=>'Giá cao','slug'=>'gia_cao']
-]
+        ['name'=>'Hàng mới','slug'=>'hang_moi'],
+        ['name'=>'Giá thấp','slug'=>'gia_thap'],
+        ['name'=>'Giá cao','slug'=>'gia_cao']
+    ];
+    $urlAjax=route('fe.cat.filterProduct');
 @endphp
 <div id="wp-product-cat">
     <div class="title-product-out d-flex justify-content-between flex-wrap">
@@ -18,7 +19,7 @@ $objectProducts=[
     </div> -->
     </div>
     <div class="mb-2">
-        @include("$moduleName.templates.select_filter_product",['items'=>$objectProducts,'typeOrderBy'=>'hang_moi'])
+        @include("$moduleName.templates.select_filter_product",['items'=>$objectProducts,'typeOrderBy'=>'hang_moi','urlAjax'=>$urlAjax])
     </div>
     <div id="body-nbox" class="parent-btn-view-add">
         @include("$moduleName.pages.$controllerName.templates.list_product",['items'=>$products,'countProduct'=>$couterSumProduct,'idCat'=>$itemCatCurent['id']])

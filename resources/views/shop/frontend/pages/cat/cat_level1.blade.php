@@ -17,12 +17,16 @@
                         @include("$moduleName.pages.$controllerName.templates.product_selling")
                     </div> -->
                 </div>
-                <div class="col-xl-3 trademark">
-                    @include("$moduleName.pages.$controllerName.templates.listbox_select")
-                </div>
-                <div class="col-xl-9 col-12">
-                    <div class="cat-product-out">
-                        @include("$moduleName.pages.$controllerName.templates.product_highlight")
+                <div class="col-12">
+                    <div class="box-filter-advanced row">
+                        <div class="col-xl-3 trademark">
+                            @include("$moduleName.pages.$controllerName.templates.listbox_select")
+                        </div>
+                        <div class="col-xl-9 col-12">
+                            <div class="cat-product-out">
+                                @include("$moduleName.pages.$controllerName.templates.product_highlight")
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

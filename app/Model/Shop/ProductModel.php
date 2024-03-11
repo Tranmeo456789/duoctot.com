@@ -151,7 +151,7 @@ class ProductModel extends BackEndModel
                                     ->toArray();
         }
         if ($options['task'] == "frontend-list-items") {
-            $query = $this::select('id','name','type','code','cat_product_id','price','price_vat','percent_discount','unit_id','specification','image','user_id','featurer','slug','discount_ref','dosage_forms','elements')
+            $query = $this::select('id','name','type','code','cat_product_id','price','price_vat','percent_discount','unit_id','trademark_id','country_id','specification','image','user_id','featurer','slug','discount_ref','dosage_forms','elements')
                                 ->where('id','>',1)->where('status_product','da_duyet');
             if (isset($params['cat_product_id']) && ($params['cat_product_id'] != 0)){
                 $query->whereIn('cat_product_id', CatProductModel::getChild($params['cat_product_id']));
@@ -170,6 +170,12 @@ class ProductModel extends BackEndModel
             }
             if(isset($params['take'])){
                 $query->take($params['take']);
+            }
+            if (isset($params['group_trademark'])){
+                $query->whereIn('trademark_id',$params['group_trademark']);
+            }
+            if (isset($params['group_country'])){
+                $query->whereIn('country_id',$params['group_country']);
             }
             $query= $query->OfCollaboratorCode();
             if(isset($params['order_by'])){
@@ -388,9 +394,14 @@ class ProductModel extends BackEndModel
             $result = $query->get()->toArray();
         }
         if ($options['task'] == "count-number-product-in-cat") {
-            $query = $this::select('id','name')
-                            ->where('status_product','da_duyet')
-                            ->whereIn('cat_product_id', CatProductModel::getChild($params['cat_product_id']))->get();
+            $query = $this::select('id','name')->where('status_product','da_duyet');
+            if (isset($params['group_trademark'])){
+                $query->whereIn('trademark_id',$params['group_trademark']);
+            }
+            if (isset($params['group_country'])){
+                $query = $query->whereIn('country_id',$params['group_country']);
+            }
+            $query = $query->whereIn('cat_product_id', CatProductModel::getChild($params['cat_product_id']))->get();
 
             $result =  count($query);
         }

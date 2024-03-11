@@ -793,6 +793,16 @@ $(document).on('click', ".view-btn-add-product", function (event) {
     if (currentCount - 20 < 1) {
         $(".view-btn-add-product").hide();
     }
+    var trademarkCheckboxes = $(this).closest(".box-filter-advanced").find('input[name="list_trademark[]"]:checked');
+    var listTrademarkId = [];
+    trademarkCheckboxes.each(function() {
+        listTrademarkId.push($(this).val());
+    });
+    var countryCheckboxes = $(this).closest(".box-filter-advanced").find('input[name="list_country[]"]:checked');
+    var listCountryId = [];
+    countryCheckboxes.each(function() {
+        listCountryId.push($(this).val());
+    });
     $.ajax({
         url: url,
         cache: false,
@@ -804,6 +814,8 @@ $(document).on('click', ".view-btn-add-product", function (event) {
             object: object,
             orderBy: orderBy,
             idCat: idCat,
+            listTrademarkId:listTrademarkId,
+            listCountryId: listCountryId,
             _token: _token,
         },
         success: function(data) {
@@ -817,55 +829,70 @@ $(document).on('click', ".view-btn-add-product", function (event) {
         },
     }); 
 });
-$(document).on('click', ".slect-item-customer", function (event) {
+$(document).on('click', ".btnFilterProductInHome", function (event) {
     $('.slect-item-customer').removeClass("active-slect");
     $(this).addClass("active-slect");
-    var orderby_product = $(this).attr("data-orderby") || null;
     var object_product = $(this).attr("data-object") || null;
     var type = $(this).attr("data-type") || null;
+    var productByObject = $(this).closest("#product-by-object");
+    productByObject.find(".view-btn-add-product").attr("data-object", object_product);
+    productByObject.find(".view-btn-add-product").attr("data-offset", 10);
+    var url = $(this).attr("data-href");
+    var _token = $('input[name="_token"]').val();
+    $.ajax({
+        url: url,
+        cache: false,
+        method: "GET",
+        dataType: 'html',
+        data: {
+            object_product: object_product,
+            _token: _token
+        },
+        success: function (data) {
+            $('#product-by-object').html(data);
+        },
+    });
+});
+$(document).on('click', ".btnFilterProductInCat", function (event) {
+    $('.slect-item-customer').removeClass("active-slect");
+    $(this).addClass("active-slect");
+    var productCat = $(this).closest("#wp-product-cat");
+    productCat.find(".view-btn-add-product").attr("data-orderby", orderby_product);
+    productCat.find(".view-btn-add-product").attr("data-offset", 20);
+    var productByObject = $(this).closest("#wp-product-cat");
+    $(".btnFilterProductInCat").attr("data-orderby", orderby_product);
+    var orderby_product = $(this).attr("data-orderby") || null;
+    var type = $(this).attr("data-type") || null;
     var idCat = $(this).attr("data-idcat") || null;
-    if(orderby_product != null){
-        var productByObject = $(this).closest("#wp-product-cat");
-        productByObject.find(".view-btn-add-product").attr("data-orderby", orderby_product);
-        productByObject.find(".view-btn-add-product").attr("data-offset", 20);
-        var url = $(this).attr("data-href");
-        var _token = $('input[name="_token"]').val();
-        $.ajax({
-            url: url,
-            cache: false,
-            method: "GET",
-            dataType: 'html',
-            data: {
-                orderby_product: orderby_product,
-                type: type,
-                idCat: idCat,
-                _token: _token
-            },
-            success: function (data) {
-                $('#body-nbox').html(data);
-            },
-        });
-    }else{
-        var productByObject = $(this).closest("#product-by-object");
-        productByObject.find(".view-btn-add-product").attr("data-object", object_product);
-        productByObject.find(".view-btn-add-product").attr("data-offset", 10);
-        var url = $(this).attr("data-href");
-        var _token = $('input[name="_token"]').val();
-        $.ajax({
-            url: url,
-            cache: false,
-            method: "GET",
-            dataType: 'html',
-            data: {
-                object_product: object_product,
-                _token: _token
-            },
-            success: function (data) {
-                $('#product-by-object').html(data);
-            },
-        });
-    }
-    
+    var url = $(this).attr("data-href");
+    var _token = $('input[name="_token"]').val();
+    var trademarkCheckboxes = $(this).closest(".box-filter-advanced").find('input[name="list_trademark[]"]:checked');
+    var listTrademarkId = [];
+    trademarkCheckboxes.each(function() {
+        listTrademarkId.push($(this).val());
+    });
+    var countryCheckboxes = $(this).closest(".box-filter-advanced").find('input[name="list_country[]"]:checked');
+    var listCountryId = [];
+    countryCheckboxes.each(function() {
+        listCountryId.push($(this).val());
+    });
+    $.ajax({
+        url: url,
+        cache: false,
+        method: "GET",
+        dataType: 'html',
+        data: {
+            orderby_product: orderby_product,
+            type: type,
+            idCat: idCat,
+            listTrademarkId: listTrademarkId,
+            listCountryId: listCountryId,
+            _token: _token
+        },
+        success: function (data) {
+            $('#body-nbox').html(data);
+        },
+    });
 });
 $(document).on('click', ".select-status-order", function (event) {
     var status = $(this).attr("data-status");
@@ -1348,5 +1375,25 @@ $(document).on('mouseover', '#starRating .star-big', function(event){
     var modalBody = $(this).closest('.modal-body');
     modalBody.find('.submit-comment').attr("data-rating", rating);
 });
-
+$('.list-check-items').each(function() {
+    var $checkAll = $(this).find('.check-all');
+    var $subCheckboxes = $(this).find('.sub-checkbox');
+    $checkAll.change(function() {
+        $subCheckboxes.prop('checked', false);
+    });
+    $subCheckboxes.change(function() {
+        if (!$(this).prop('checked')) {
+            $checkAll.prop('checked', false);
+        } else {
+            var allChecked = true;
+            $subCheckboxes.each(function() {
+                if (!$(this).prop('checked')) {
+                    allChecked = false;
+                    return false;
+                }
+            });
+            $checkAll.prop('checked', allChecked);
+        }
+    });
+});
 

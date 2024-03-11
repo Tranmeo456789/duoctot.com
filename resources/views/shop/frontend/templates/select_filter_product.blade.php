@@ -1,6 +1,7 @@
 @php
 $typeObject=$typeObject??'tre_em';
 $idCat=$itemCatCurent['id'] ?? null;
+$urlAjax=$urlAjax??route('fe.home.ajaxfilter');
 @endphp
 
 @if(isset($typeOrderBy))
@@ -9,7 +10,7 @@ $idCat=$itemCatCurent['id'] ?? null;
             <div class="d-flex gap-2">
                 @foreach($items as $k=>$item)
                 <div>
-                    <span class="slect-item-customer {{$typeOrderBy == $item['slug'] ? 'active-slect' : ''}}" data-orderby="{{$item['slug']}}" data-href="{{route('fe.home.ajaxfilter')}}" data-offset="20" data-type="product_cat" data-idcat="{{$idCat}}">
+                    <span class="slect-item-customer btnFilterProductInCat {{$typeOrderBy == $item['slug'] ? 'active-slect' : ''}}" data-orderby="{{$item['slug']}}" data-href="{{$urlAjax}}" data-offset="20" data-type="product_cat" data-idcat="{{$idCat}}">
                         <p>{{$item['name']}}</p>
                         <div class="icon-sticky">
                             <span>
@@ -30,7 +31,7 @@ $idCat=$itemCatCurent['id'] ?? null;
             <div class="d-flex gap-2">
                 @foreach($items as $k=>$item)
                 <div>
-                    <span class="slect-item-customer {{$typeObject == $item['slug'] ? 'active-slect' : ''}}" data-object="{{$item['slug']}}" data-href="{{route('fe.home.ajaxfilter')}}" data-offset="10">
+                    <span class="slect-item-customer btnFilterProductInHome {{$typeObject == $item['slug'] ? 'active-slect' : ''}}" data-object="{{$item['slug']}}" data-href="{{route('fe.home.ajaxfilter')}}" data-offset="10">
                         <p>{{$item['name']}}</p>
                         <div class="icon-sticky">
                             <span>

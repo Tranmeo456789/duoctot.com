@@ -20,9 +20,11 @@ class CountryModel extends BackEndModel
 
         if($options['task'] == "admin-list-items-in-selectbox") {
             $query = $this->select('id', 'name')
-                        ->orderBy('name', 'asc')
                         ->where('status', '=', 'active' );
-            $result = $query->pluck('name', 'id')->toArray();
+            if (isset($params['group_id'])){
+                $query->whereIn('id',$params['group_id']);
+            }
+            $result = $query->orderBy('name', 'asc')->pluck('name', 'id')->toArray();
         }
 
         return $result;

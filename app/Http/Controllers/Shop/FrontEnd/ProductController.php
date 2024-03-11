@@ -111,6 +111,12 @@ class ProductController extends ShopFrontEndController
         if ($orderBy = $data['orderBy'] ?? null) {
             $listParams['order_by'] = $data['orderBy'] ?? null;
         }
+        if ($data['listTrademarkId'] ?? null) {
+            $listParams['group_trademark']=$data['listTrademarkId'];
+        }
+        if ($data['listCountryId'] ?? null) {
+            $listParams['group_country']=$data['listCountryId'];
+        }
         $listProductAddView = $this->model->listItems($listParams, ['task' => 'frontend-list-items']);
         $viewName = $this->moduleName;
         if ($type == 'product_cat') {
