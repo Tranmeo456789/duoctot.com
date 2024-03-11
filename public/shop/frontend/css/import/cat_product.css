@@ -313,8 +313,11 @@
 }
 
 #body-nbox a {
-
     color: #1E1E1E;
+}
+
+#body-nbox.product-horizontal ul li>a {
+   display: flex;
 }
 #body-nbox .elements-product{
     min-height: 48px;
@@ -733,7 +736,10 @@ input:checked+.slider:before {
     margin-right: 1%;
     width: 24.25%;
 }
-
+.cat-product-out #body-nbox.product-horizontal li {
+    margin-right: 0;
+    width: 100%;
+}
 .cat-product-out #body-nbox li:nth-child(4n) {
     margin-right: 0;
 }

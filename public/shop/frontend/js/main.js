@@ -42,19 +42,15 @@ $(document).ready(function() {
     });
     $('.js-select2').select2();
     $('.ol1').click(function() {
-        $('#body-nbox').css("display", "block");
-        $('.body-nb').css("display", "none");
         $(this).addClass("activebtn");
         $('.ol2').removeClass("activebtn");
+        $('#body-nbox').removeClass("product-horizontal");
     });
     $('.ol2').click(function() {
-        $('#body-nbox').css("display", "none");
-        $('.body-nb').css("display", "block");
         $(this).addClass("activebtn");
+        $('#body-nbox').addClass("product-horizontal");
         $('.ol1').removeClass("activebtn");
     });
-
-    //dong form
     $('.btn-closenk').click(function() {
         $('.form-login').css("display", "none");
         $('.form-search-product').css("display", "none");
@@ -62,8 +58,6 @@ $(document).ready(function() {
         $('#container').removeClass("fixed-hbd");
         $('#fixscreen-respon').css("display", "none");
     });
-
-    //hien form dang ky,dang nhap,quen mat khau
     $('.btn-login').click(function() {
         $('.form-login').css("display", "block");
         $('.black-screen').css("display", "block");
