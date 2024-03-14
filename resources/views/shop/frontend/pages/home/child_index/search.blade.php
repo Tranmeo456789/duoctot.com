@@ -11,14 +11,14 @@ $dataHref = route('fe.product.searchListProductShort');
         <form action="{{route('fe.search.saveHome')}}" method="POST">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             <div class="position-relative">
-                <div class="wp-input-search">
+                <div class="wp-input-search fc-search-js form-search-show-list form-search-scroll form-search-show-list">
                     <input type="text" name="keyword" class="input-search-info" data-href="{{$dataHref}}" value="" placeholder="Nhập từ khóa..." autocomplete="off">
                 </div>
                 <div class="btn-load-delete">
                     <i class="fas fa-spinner fa-spin" style="display: none;"></i>
                     <span class="clear-keyword" style="display: none;">X</span>
                 </div>
-                <button type="submit" class="btn-search-home" name="btn_search" value="1" disabled="disabled">
+                <button type="submit" class="btn-search-home" name="btn_search" value="1">
                     <img src="{{asset('images/shop/icon-search.png')}}" alt="">
                 </button>
             </div>

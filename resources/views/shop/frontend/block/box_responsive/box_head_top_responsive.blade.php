@@ -52,7 +52,10 @@
     </div>
     @if(!isset($viewNoSearchHeader))
         <div class="search-header-mobi">
-            @include("$moduleName.block.input_search")
+            <form action="{{route('fe.search.saveHome')}}" method="POST">
+                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                @include("$moduleName.block.input_search")
+            </form>
         </div>
     @endif
 </div>

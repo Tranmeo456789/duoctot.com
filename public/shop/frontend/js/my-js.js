@@ -1086,65 +1086,57 @@ $(document).on('change', "#name-store", function (event) {
     $('.ls-product-select').css("display", "none");
 });
 var typingTimer;
-var doneTypingInterval = 1000;
-
-$(document).on('input', ".wp-input-search input", function (event) {
+var ajaxRequest;
+$(document).on('input', ".fc-search-js input", function(event) {
+    var doneTypingInterval = 1000;
     var keywordInput = $(this);
     var keyword = keywordInput.val().trim();
-
     if (keyword.length > 0 && keyword[0] === ' ') {
         keyword = keyword.substring(1);
     }
     if (keyword == '') {
-        if (typingTimer) {
-            clearTimeout(typingTimer);
-        }
+        clearTimeout(typingTimer);
         $('.fa-spinner').hide();
         var searchListProduct = keywordInput.closest('.wp-search-list-product');
         searchListProduct.find('.list-product-short').html("<div class='px-4 py-2'><p>Bạn có thể tìm kiếm theo tên hoặc công dụng thuốc</p></div>");
         searchListProduct.find('.clear-keyword').hide();
+        $('.wp-input-search-simple>input').val('');
         return;
     }
-
-    if (typingTimer) {
-        clearTimeout(typingTimer);
+    if (keyword.length > 0) {
+        $('.wp-input-search-simple>input').val(keyword);
     }
+    clearTimeout(typingTimer);
+    clearTimeout(ajaxRequest);
     $('.fa-spinner').show();
-    
     var searchListProduct = keywordInput.closest('.wp-search-list-product');
     searchListProduct.find('.clear-keyword').hide();
-    if (keyword.length > 0) {
-        $('.btn-search-home').removeAttr("disabled");
-        $('.wp-input-search-simple>input').val(keyword);
-    } else {
-        $('.btn-search-home').attr("disabled", "disabled");
-        $('.wp-input-search-simple>input').val('');
-    }
-    typingTimer = setTimeout(function () {
+    typingTimer = setTimeout(function() {
         var url = keywordInput.attr("data-href");
         var _token = $('input[name="_token"]').val();
-        $.ajax({
-            url: url,
-            cache: false,
-            method: "GET",
-            dataType: 'html',
-            data: {
-                keyword: keyword,
-                _token: _token
-            },
-            success: function (data) {
-                searchListProduct.find('.wp-list-product-short').html(data);
-                $('.fa-spinner').hide();
-                searchListProduct.find('.clear-keyword').show();
-            },
-            error: function () {
-                $('.fa-spinner').hide();
-                searchListProduct.find('.clear-keyword').show();
-            }
-        });
-    }, doneTypingInterval);
+        ajaxRequest = setTimeout(function() {
+            $.ajax({
+                url: url,
+                cache: false,
+                method: "GET",
+                dataType: 'html',
+                data: {
+                    keyword: keyword,
+                    _token: _token
+                },
+                success: function(data) {
+                    searchListProduct.find('.wp-list-product-short').html(data);
+                    $('.fa-spinner').hide();
+                    searchListProduct.find('.clear-keyword').show();
+                },
+                error: function() {
+                    $('.fa-spinner').hide();
+                    searchListProduct.find('.clear-keyword').show();
+                }
+            });
+        }, doneTypingInterval);
+    }, 250);
 });
-
 $(document).on('click', '.clear-keyword', function () {
     var searchListProduct = $(this).closest('.wp-search-list-product');
     searchListProduct.find(".wp-input-search input").val('').focus();
@@ -1153,14 +1145,16 @@ $(document).on('click', '.clear-keyword', function () {
 
 
 
-$(document).on('click', ".wp-input-search input", function (event) {
-    $('.lc-mask-search').css("opacity", 1);
-    $('.lc-mask-search').css("visibility", "visible"); 
-    $('.ls-history').css("display", "block");
+$(document).on('click', ".form-search-scroll", function (event) {
     const position = $("#form-search").offset().top;
     $("HTML, BODY").animate({ scrollTop: position }, 500);
 });
 
+$(document).on('click', ".form-search-show-list", function (event) {
+    $('.lc-mask-search').css("opacity", 1);
+    $('.lc-mask-search').css("visibility", "visible"); 
+    $('.ls-history').css("display", "block");
+});
 $(document).on('click', ".search-header-mobi .wp-input-search-simple", function (event) {
     $('#box-search-fixed').css("display", "block");
     var input = $('#box-search-fixed .input-search-info')[0];
