@@ -26,9 +26,9 @@
                 $index++;
                 $codeRef = Hightlight::show($val->code_ref, $params['search'], 'code_ref');
                 $userRef=$val->userRef;
-                $fullname = Hightlight::show($userRef['fullname'], $params['search'], 'fullname');
-                $phone = Hightlight::show($userRef['phone'], $params['search'], 'phone');
-                $email = Hightlight::show($userRef['email'], $params['search'], 'email');
+                $fullname = isset($userRef['fullname']) ? Hightlight::show($userRef['fullname'], $params['search'], 'fullname') : '';
+                $phone = isset($userRef['phone']) ? Hightlight::show($userRef['phone'], $params['search'], 'phone') : '';
+                $email = isset($userRef['email']) ? Hightlight::show($userRef['email'], $params['search'], 'email') : '';
                 $sumPayment=(new CouponPaymentModel)->sumMoney(['code_ref'=>$codeRef],['task'=>'tinh-tong-tien-affiliate']);
                 $sumMoney=(new AffiliateModel)->sumMoneyRefAffiliate($codeRef);
                 $sumLinkCount = AffiliateProductModel::where('code_ref', $codeRef)->sum('sum_click')+$val['sum_click'];

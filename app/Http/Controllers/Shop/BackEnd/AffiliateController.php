@@ -151,7 +151,10 @@ class AffiliateController extends BackEndController
         } else {
             $session->put('currentController', $this->controllerName);
         }
-        $item = $this->model->getItem(['id' => $id], ['task' => 'get-item']);
+        $item = $this->model->getItem(
+            is_numeric($id) ? ['id' => $id] : ['code_ref' => $id], 
+            ['task' => 'get-item']
+        );
         $codeRef = $item['code_ref'];
         $userId=$item['user_id'];
         $userInfo=(new UsersModel)->getItem(['user_id' => $userId],['task'=>'get-item']);

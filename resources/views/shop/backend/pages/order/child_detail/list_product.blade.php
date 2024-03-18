@@ -31,6 +31,7 @@
                         $pos = array_search($productId, array_map('intval', $arrProduct));
                         $code = $pos !== false ? $itemsProduct[$pos]['code'] : '';
                         $unit = $pos !== false ? $itemsProduct[$pos]->unitProduct->name : '';
+                        $codeRef=$val['codeRef']??'';
                     @endphp
                     <tr>
                         <td style="width: 3%">{{$index}}</td>
@@ -45,8 +46,8 @@
                                 </div>
                             </div>
                         </td>
-                        <td style="width: 5%" class="text-center">{{$val['quantity']}}</span></td>
-                        <td style="width: 19%" class="text-center">{{$val['codeRef']??''}}</span></td>
+                        <td style="width: 5%" class="text-center">{{$val['quantity']}}</td>
+                        <td style="width: 19%" class="text-center"><a href="{{route('affiliate.detail',$codeRef)}}" target="_blank">{{$codeRef}}</a></td>
                         <td style="width: 8%" class="text-center"> {{$total_money}} </td>
                     </tr>
                 @endforeach

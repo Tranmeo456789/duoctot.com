@@ -16,6 +16,14 @@ $xhtmlAreaSeach = Template::showAreaSearch('product', $params['search']);
 <section class="content">
     <div class="card card-outline card-primary mb800-0">
         <div class="card-body my-card-filter">
+            <p><span class="font-weight-bold">Họ tên: </span>{{$userInfo['fullname']??''}}</p>
+            <p><span class="font-weight-bold">Số điện thoại: </span>{{$userInfo['phone']??''}}</p>
+            <p><span class="font-weight-bold">Email: </span>{{$userInfo['email']??''}}</p>
+            <p><span class="font-weight-bold">Địa chỉ: </span>{{$userInfo['details']['address']??''}}</p>
+        </div>
+    </div>
+    <div class="card card-outline card-primary mb800-0">
+        <div class="card-body my-card-filter">
             <div class="row">
                 <div class="col-12 col-md-7">{!! $xhtmlAreaSeach !!}</div>
             </div>
