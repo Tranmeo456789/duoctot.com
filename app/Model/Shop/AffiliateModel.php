@@ -138,7 +138,7 @@ class AffiliateModel extends BackEndModel
         foreach ($orders as $order) {
             $infoProductArray = $order->info_product;
             foreach($infoProductArray as $val){
-                if ($val['codeRef'] == $codeRef) {
+                if (isset($val['codeRef']) && $val['codeRef'] == $codeRef) {
                     $productCurrent=ProductModel::find($val['product_id']);
                     $discount=($productCurrent['discount_ref']*$productCurrent['discount_tdoctor'])/100;
                     $totalMoney+=($val['total_money']*$discount)/100;
@@ -154,7 +154,7 @@ class AffiliateModel extends BackEndModel
         foreach ($orders as $order) {
             $infoProductArray = $order->info_product;
             foreach($infoProductArray as $val){
-                if ($val['codeRef'] == $codeRef && $val['product_id']==$idProduct) {
+                if (isset($val['codeRef']) && $val['codeRef'] == $codeRef && $val['product_id']==$idProduct) {
                     $productCurrent=ProductModel::find($val['product_id']);
                     $discount=($productCurrent['discount_ref']*$productCurrent['discount_tdoctor'])/100;
                     $totalMoney+=($val['total_money']*$discount)/100;
@@ -169,7 +169,7 @@ class AffiliateModel extends BackEndModel
         foreach ($orders as $order) {
             $infoProductArray = $order->info_product;
             foreach($infoProductArray as $val){
-                if ($val['codeRef'] == $codeRef) {
+                if (isset($val['codeRef']) && $val['codeRef'] == $codeRef) {
                     $sumQuantity+=$val['quantity'];
                 }
             }
@@ -183,7 +183,7 @@ class AffiliateModel extends BackEndModel
         foreach ($orders as $order) {
             $infoProductArray = $order->info_product;
             foreach($infoProductArray as $val){
-                if ($val['codeRef'] == $codeRef && $val['product_id']==$idProduct) {
+                if (isset($val['codeRef']) && $val['codeRef'] == $codeRef && $val['product_id']==$idProduct) {
                     $sumQuantity+=$val['quantity'];
                 }
             }
