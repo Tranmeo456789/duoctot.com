@@ -11,6 +11,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
 use App\Model\Shop\AffiliateModel;
 use App\Model\Shop\ProductModel;
+use App\Model\Shop\OrderModel;
+use App\Model\Shop\OrderProductModel;
 use App\Model\Shop\SearchModel as MainModel;
 use Illuminate\Support\Str;
 
@@ -121,6 +123,26 @@ class SearchController extends ShopFrontEndController
                 return response()->json(['success' => false, 'message' => $e->getMessage()]);
             }
         }
-        
+
+        // add infomation for table order_product
+        // $listOrders = OrderModel::all();
+        // try {
+        //     foreach ($listOrders as $order) {
+        //         foreach ($order['info_product'] as $product) {
+        //             $paramsOrderProduct['order_id'] = $order['id']??'';
+        //             $paramsOrderProduct['product_id'] = $product['product_id']??'';
+        //             $paramsOrderProduct['code_order'] = $order['code_order']??'';
+        //             $paramsOrderProduct['status_order'] = $order['status_order']??'dangXuLy';
+        //             $paramsOrderProduct['quantity'] = $product['quantity']??0;
+        //             $paramsOrderProduct['price'] = $product['price']?? 0;
+        //             $paramsOrderProduct['unit'] = $product['unit_id']??'';
+        //             $paramsOrderProduct['code_ref'] = $product['codeRef']??'';
+        //             (new OrderProductModel)->saveItem($paramsOrderProduct, ['task' => 'add-item']);
+        //         }
+        //     }
+        //     return "Thêm dữ liệu vào order_product ok!";
+        // } catch (\Exception $e) {
+        //     return "Đã xảy ra lỗi khi thêm dữ liệu vào cơ sở dữ liệu: " . $e->getMessage();
+        // }
     }
 }

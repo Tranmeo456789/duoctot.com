@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Shop\FrontEnd;
 use Illuminate\Http\Request;
 use App\Model\Shop\CustomerModel;
 use App\Model\Shop\OrderModel;
+use App\Model\Shop\OrderProductModel;
 use App\Model\Shop\CatProductModel;
 use App\Model\Shop\ProductModel;
 use App\Http\Requests;
@@ -93,11 +94,23 @@ class OrderController extends ShopFrontEndController
             if ($this->model->saveItem($params, ['task' => $task])){
                 $request->session()->put('app_notify', $notify);
                 $cart = $request->session()->get('cart');
+                $code_order=$this->model->getItem(null, ['task' => 'get-item-last'])['code_order'];
+                $idOrder=$this->model->getItem(null, ['task' => 'get-item-last'])['id'];
+                $listProductUserSell=$cart[$params['user_sell']]['product'];
+                foreach ($listProductUserSell as $value) {
+                    $paramsOrderProduct['order_id']=$idOrder;
+                    $paramsOrderProduct['product_id']=$value['product_id'];
+                    $paramsOrderProduct['code_order']=$code_order;
+                    $paramsOrderProduct['status_order']='dangXuLy';
+                    $paramsOrderProduct['quantity']=$value['quantity'];
+                    $paramsOrderProduct['price']=$value['price'];
+                    $paramsOrderProduct['unit']=$value['unit_id'];
+                    $paramsOrderProduct['code_ref']=$value['codeRef'];
+                    (new OrderProductModel)->saveItem($paramsOrderProduct, ['task' => 'add-item']);
+                }
                 unset($cart[$params['user_sell']]);
                 $request->session()->put('cart', $cart);
                 setcookie("cart", json_encode($cart),time() + config('myconfig.time_cookie'), "/", $_SERVER['SERVER_NAME']);
-                $code_order=$this->model->getItem(null, ['task' => 'get-item-last'])['code_order'];
-                //return redirect()->route('fe.order.success', ['code' => $code_order]);
                 return response()->json([
                     'fail' => false,
                     'redirect_url' =>route("fe.order.success",['code' => $code_order]),

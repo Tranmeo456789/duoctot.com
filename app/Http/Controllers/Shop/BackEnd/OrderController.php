@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Shop\BackEnd;
 use Illuminate\Http\Request;
 use App\Model\Shop\WarehouseModel;
 use App\Model\Shop\ProductModel;
+use App\Model\Shop\OrderProductModel;
 use App\Model\Shop\WardModel;
 use App\Model\Shop\UsersModel;
 use App\Http\Requests;
@@ -116,6 +117,7 @@ class OrderController extends BackEndController
             $task   = "update-item";
             $notify = "Cập nhật trạng thái đơn hàng thành công!";
             $this->model->saveItem($params, ['task' => $task]);
+            (new OrderProductModel)->saveItem(['order_id' => $params['id'],'status_order' => $params['status_order']], ['task' => 'edit-item']);
             $request->session()->put('app_notify', $notify);
             return response()->json([
                 'fail' => false,
