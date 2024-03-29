@@ -142,7 +142,7 @@
     $elementHome = [
         [
             'label'   => '',
-            'element' => Form::select('receive[province_id]',[null=>"-- Chọn {$label['province_id']} --"] + $itemsProvince, $user->province_id??null, array_merge($formSelect2GetChildAttr,['id' =>'province_id','style' =>'width:100%','data-href'=>$linkGetListDistrict,'data-target' => '#receive-district-id'])),
+            'element' => Form::select('receive[province_id]',[null=>"-- Chọn {$label['province_id']} --"] + $itemsProvince, $details['province_id']??($user->province_id??null), array_merge($formSelect2GetChildAttr,['id' =>'province_id','style' =>'width:100%','data-href'=>$linkGetListDistrict,'data-target' => '#receive-district-id'])),
             'type' =>'select',
             'widthElement' => 'col-lg-5 col-md-12 mb1024-5'
         ],[
