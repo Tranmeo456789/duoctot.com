@@ -266,13 +266,13 @@ $(document).ready(function () {
                 checkPhone: true
             },
             "receive[province_id]": {
-                required: true
+               // required: true
             },
             "receive[district_id]": {
-                required: true
+                //required: true
             },
             "receive[ward_id]": {
-                required: true
+               // required: true
             },
             "receive[address]": {
                 required: true

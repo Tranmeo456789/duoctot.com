@@ -92,8 +92,10 @@ class OrderController extends BackEndController
             $address=(new WarehouseModel())->getItem(['id'=>$warehouse_id],['task' => 'get-item-of-id'])->address??'';
         }else{
             $ward_detail=(new WardModel())->getItem(['id'=>$item->receive['ward_id']],['task' => 'get-item-full']);
-            $ward=$ward_detail['name'];$district=$ward_detail['district']['name'];$province=$ward_detail['district']['province']['name'];
-            $address=$item->receive['address'].', '.$ward.', '.$district.', '.$province;
+            $ward=$ward_detail['name']??'';
+            $district=$ward_detail['district']['name']??'';
+            $province=$ward_detail['district']['province']['name']??'';
+            $address=$item->receive['address'].' '.$ward.' '.$district.' '.$province;
         }
         $itemsProduct = (new ProductModel())->listItems($params,['task' => 'user-list-items']);
         $infoBuyer=json_decode($item['buyer'], true);

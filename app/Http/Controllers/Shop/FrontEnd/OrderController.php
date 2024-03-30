@@ -67,14 +67,12 @@ class OrderController extends ShopFrontEndController
             $address=(new WarehouseModel())->getItem(['id'=>$warehouse_id],['task' => 'get-item-of-id'])->address;
         }else{
             $ward_detail=(new WardModel())->getItem(['id'=>$order_detail->receive['ward_id']],['task' => 'get-item-full']);
-            $ward=$ward_detail['name'];$district=$ward_detail['district']['name'];$province=$ward_detail['district']['province']['name'];
-            $address=$order_detail->receive['address'].', '.$ward.', '.$district.', '.$province;
+            $ward=$ward_detail['name']??'';
+            $district=$ward_detail['district']['name']??'';
+            $province=$ward_detail['district']['province']['name']??'';
+            $address=$order_detail->receive['address'].' '.$ward.' '.$district.' '.$province;
         }
         return view("$this->moduleName.pages.order.child_index.detail_order",compact('order_detail','address'));
-        //  $result = array(
-        //      'test'=>$info_buyer
-        //   );
-        //   return response()->json($result, 200);
     }
     public function completed(Request $request)
     {
@@ -136,8 +134,10 @@ class OrderController extends ShopFrontEndController
             $address=(new WarehouseModel())->getItem(['id'=>$warehouse_id],['task' => 'get-item-of-id'])->address??'';
         }else{
             $ward_detail=(new WardModel())->getItem(['id'=>$order->receive['ward_id']],['task' => 'get-item-full']);
-            $ward=$ward_detail['name'];$district=$ward_detail['district']['name'];$province=$ward_detail['district']['province']['name'];
-            $address=$order->receive['address'].', '.$ward.', '.$district.', '.$province;
+            $ward=$ward_detail['name']??'';
+            $district=$ward_detail['district']['name']??'';
+            $province=$ward_detail['district']['province']['name']??'';
+            $address=$order->receive['address'].' '.$ward.' '.$district.' '.$province;
         }
         return view($this->pathViewController . 'order_success',compact('buyer','order','info_product','address'));
     }
