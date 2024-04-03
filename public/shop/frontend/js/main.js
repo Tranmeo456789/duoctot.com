@@ -67,7 +67,7 @@ $(document).ready(function() {
         $('.titlek').removeClass("active-formkn");
         $('.titlen').addClass("active-formkn");
         $('#container').addClass("fixed-hbd");
-        // $('body,html').stop().animate({ scrollTop: 0 }, 0);
+        $('body,html').stop().animate({ scrollTop: 0 }, 0);
     });
 
     $('.btn-login-res').click(function() {

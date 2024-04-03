@@ -27,7 +27,9 @@
                         <div class="bimgm"><div class="h-100"><a href="{{route('fe.product.detail', $product->slug)}}" class="h-100 d-flex align-items-center "><img src="{{asset($product->image)}}" alt=""></a></div></div>
                         <div class="">
                             <a href="{{route('fe.product.detail', $product->slug)}}" class="truncate2">{{$product->name}}</a>
+                            @if(Session::has('user'))
                             <h3 class="my-2">{{number_format($product['price'], 0, "", ".")}}đ /{{$product->unitProduct->name}}</h3>
+                            @endif
                         </div>
                     </li>
                 </div>

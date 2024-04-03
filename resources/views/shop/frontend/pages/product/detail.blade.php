@@ -60,7 +60,14 @@ use Illuminate\Support\Str;
                     </div>
                 </div>
                 <div class="desc_product mb-3">
+                    @if(Session::has('user'))
                     <div class="price_product mb-2"><span class="font-weight-bold">{{ number_format( $item['price'], 0, "" ,"." )}}đ /</span> {{$item->unitProduct->name}}</div>
+                    @else
+                    <div class="mb-2">
+                        <button class="btn btn-login text-white rounded-pill font-weight-bold view-price"><i class="fas fa-eye"></i> <span>Xem giá</span></button>
+                        <small>Vui lòng đăng nhập để xem giá!</small>
+                    </div>
+                    @endif
                     <p><span class="font-weight-bold bcn">Danh mục: </span><span class="text-info">{{$item->catProduct->name}}</span></p>
                     <p><span class="font-weight-bold">Dạng bào chế: </span>{{$item['dosage_forms']}}</p>
                     <p><span class="font-weight-bold">Quy cách: </span>{{$item['specification']}}</p>
@@ -86,7 +93,7 @@ use Illuminate\Support\Str;
                         <span class="text-primary share-link btn-copy-link">Share <i class="fas fa-share"></i></span>
                     </div>
                 </div>
-                @if((Session::has('user') && Session::get('user')['user_type_id'] != 9) || Session::get('user')==null)
+                @if(Session::has('user'))
                 <div>
                     {!! csrf_field() !!}
                     <div class="form-group mb-3 d-flex" >

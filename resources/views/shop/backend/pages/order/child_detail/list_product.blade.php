@@ -1,6 +1,7 @@
 @php
     use App\Helpers\Template as Template;
     use App\Helpers\MyFunction;
+    use Illuminate\Support\Str;
 @endphp
 <div class="card card-info">
     @include("$moduleName.blocks.x_title", ['title' => 'Sản phẩm đã đặt'])
@@ -32,6 +33,7 @@
                         $code = $pos !== false ? $itemsProduct[$pos]['code'] : '';
                         $unit = $pos !== false ? $itemsProduct[$pos]->unitProduct->name : '';
                         $codeRef=$val['codeRef']??'';
+                        $slug=Str::slug($val['name'])??'';
                     @endphp
                     <tr>
                         <td style="width: 3%">{{$index}}</td>
@@ -41,7 +43,7 @@
                                     {!! $image !!}
                                 </div>
                                 <div class="info-product ml-1">
-                                    <p class="text-primary font-weight-bold">{{$val['name']}}</p>
+                                    <p class="text-primary font-weight-bold"><a href="{{route('fe.product.detail',$slug)}}" target="_blank" rel="noopener noreferrer">{{$val['name']}}</a></p>
                                     <p>Giá: {{$price}}/ <small>{{$unit}}</small></p>
                                 </div>
                             </div>

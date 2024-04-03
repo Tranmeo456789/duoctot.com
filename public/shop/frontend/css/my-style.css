@@ -1573,6 +1573,9 @@ input[type="radio"] {
 .wp-info-shop{
     font-size: 16px;
 }
+.view-price{
+    background: #e88438;
+}
 .icon-top{
     font-size: 24px;
 }

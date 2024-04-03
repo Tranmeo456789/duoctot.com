@@ -6,7 +6,7 @@
     <div class="fl-left wp-search-menu">
         @include('shop.frontend.block.menu.child_menu_yes_search.form_search')
     </div>
-    @if((Session::has('user') && Session::get('user')['user_type_id'] != 9) || Session::get('user')==null)
+    @if(Session::has('user'))
     <div id="cart-load" class="fl-right" style="padding-top:15px;">
         <div class="icon-cart-menu">
             <a href="{{route('fe.product.cartFull')}}" title="" id="payment-link" class="">
@@ -27,7 +27,7 @@
             </div>
         </div>
     </div>
-    
+    @endif
     <div id="" class="fl-right" style="margin-right:50px; padding-top:15px">
         <a href="{{route('fe.order.formSearch')}}" id="payment-link" class="search-history-order">
             <div class="clearfix">
@@ -43,6 +43,5 @@
             </div>
         </a>
     </div>
-@endif
 </div>
 @endsection
