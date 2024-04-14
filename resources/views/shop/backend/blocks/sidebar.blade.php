@@ -74,6 +74,12 @@
                     <p>Danh mục thuốc</p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('post') }}" class="nav-link">
+                    <i class="nav-icon fas fa-wallet"></i>
+                    <p>Tin tức</p>
+                </a>
+            </li>
             @endif
             @if (Session::has('user') && (Session::get('user')['user_type_id'] > 3 && Session::get('user')['user_type_id'] <= 10 || Session::get('user')['is_affiliate'] == 1))
                 <li class="nav-item has-treeview">
