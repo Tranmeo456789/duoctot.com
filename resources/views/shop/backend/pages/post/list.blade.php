@@ -22,7 +22,8 @@
             @php
                 $temp++;
                 $image = Template::showImagePreviewFileManager($val['image'],$val['slug']??$val['title']);
-                $title = Hightlight::show($val->title, $params['search'], 'title');
+                $title = Hightlight::show($val->title, $params['search'], 'key_search');
+                $nameCatPost = Hightlight::show($val->catPost->name, $params['search'], 'key_search');
                 $timePost = MyFunction::formatDateFrontend($val['created_at']);
             @endphp
             <tr>
@@ -37,7 +38,7 @@
                         </div>
                     </div>
                 </td>
-                <td style="width: 15%">{{$val->catPost->name}}</td>
+                <td style="width: 15%">{!! $nameCatPost !!}</td>
                 <td style="width: 10%">{{$timePost}}</td>
                 <td style="width: 15%">
                     <a href="{{route("$controllerName.edit",$val->id)}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit"></i></a>

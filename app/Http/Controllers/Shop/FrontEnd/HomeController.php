@@ -10,6 +10,7 @@ use App\Model\Shop\UsersModel;
 use App\Model\Shop\CatProductModel;
 use App\Model\Shop\AffiliateModel;
 use App\Model\Shop\ArticleModel;
+use App\Model\Shop\PostModel;
 
 class HomeController extends ShopFrontEndController
 {
@@ -40,7 +41,8 @@ class HomeController extends ShopFrontEndController
                 $affiliate->increment('sum_click');
              }
         }
-        $itemsArticle = (new ArticleModel())->listItems(null, ['task' => 'frontend-list-items']);
+        //$itemsArticle = (new ArticleModel())->listItems(null, ['task' => 'frontend-list-items']);
+        $itemsArticle = (new PostModel)->listItems(['take'=>5], ['task' => 'frontend-list-items']);
         return view(
             $this->pathViewController . 'index',
             compact('product_selling','product_covid','productInObject','itemsProduct','couterSumProduct','countproductInObject','itemsArticle')

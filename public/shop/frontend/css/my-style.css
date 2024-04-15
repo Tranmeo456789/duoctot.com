@@ -199,6 +199,7 @@ ul {
     width: 100%;
     object-fit: fill;
     max-height: 380px;
+    border-radius: 10px;
 }
 .newsh .wp-thumb-item{
     flex: 0 1 auto;

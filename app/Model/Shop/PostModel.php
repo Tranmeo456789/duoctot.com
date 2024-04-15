@@ -88,13 +88,9 @@ class PostModel extends BackEndModel
             }
         }
         if ($options['task'] == "frontend-list-items") {
-            $query = $this::select('id','title','content','slug','image','cat_post_id','created_at', 'updated_at')
-                                ->where('id','>',1);
+            $query = $this::with('catPost')->select('id','title','content','slug','image','cat_post_id','created_at', 'updated_at');
             if (isset($params['group_id'])){
                 $query->whereIn('id',$params['group_id']);
-            }
-            if(isset($params['user_id'])){
-                $query->where('user_id',$params['user_id']);
             }
             if(isset($params['offset'])){
                 $query->skip($params['offset']);
@@ -152,7 +148,6 @@ class PostModel extends BackEndModel
         if ($options['task'] == 'edit-item') {
             $this->setModifiedHistory($params);
             $item = self::getItem($params,['task'=>'get-item']);
-            $this->updateFileUpload($item,$params);
             self::where('id', $params['id'])->update($this->prepareParams($params));
         }
     }

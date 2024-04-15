@@ -14,6 +14,12 @@ class MyFunction {
         if ($dateTime == '0000-00-00') return null;
         return date_format(date_create($dateTime), Config::get('myconfig.format.short_time'));
     }
+    public static function formatDateLongTime($dateTime)
+    {
+        if ($dateTime == '') return null;
+        if ($dateTime == '0000-00-00') return null;
+        return date_format(date_create($dateTime), Config::get('myconfig.format.long_time'));
+    }
     public static function formatDateMySQL($dateTime)
     {
         return date_format(date_create_from_format(Config::get('myconfig.format.short_time'),$dateTime), Config::get('myconfig.format.my_sql_date'));

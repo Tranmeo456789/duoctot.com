@@ -24,5 +24,15 @@ class CatalogModel extends BackEndModel
         }
         return $result;
     }
+    public function getItem($params = null, $options = null)
+    {
+        $result = null;
+        if ($options['task'] == 'get-item') {
+            $result = self::select('id','name')
+                            ->where('id', $params['id'])
+                            ->first();
+        }
+        return $result;
+    }
 }
 

@@ -5,6 +5,7 @@
                 <h1 class="mb-3">TDOCTOR</h1>
                 <p><a href="https://tdoctor.vn/vechungtoi">Về chúng tôi</a></p>
                 <p><a href="https://tdoctor.vn/lienhe">Liên hệ</a></p>
+                <p><a href="{{route('fe.post')}}">Tin tức</a></p>
                 <p><a href="https://tdoctor.vn/quytrinh-giaiquyet-tranhchap">Quy trình giải quyết tranh chấp</a></p>
                 <p><a href="https://tdoctor.vn/chinhsach-baomat-thongtin-khachhang">Chính sách bảo mật thông tin</a></p>
                 <p><a href="https://tdoctor.vn/dang-ky-bac-si">Đăng ký bác sỹ</a></p>

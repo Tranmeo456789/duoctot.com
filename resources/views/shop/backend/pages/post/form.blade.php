@@ -26,8 +26,12 @@
         ],[
             'label'   => Form::label('','Ảnh đại diện', ['class' => 'col-12 col-form-label']),
             'element' => Form::label('','Chọn ảnh', ['class' => 'btn btn-primary label-select-image']),
+            'widthInput' => '',
+        ],
+        [
+            'label'   => '',
+            'element' => Template::showImageAndInputSingle('image', $item['image']?? null),
             'widthInput' => 'col-12',
-            'widthElement' => 'col-12'
         ],[
             'label'   => HTML::decode(Form::label('content', 'Nội dung bài viết' .  $star, $formLabelAttr)),
             'element' => Form::textarea('content', $item['content']?? null, array_merge($formEditorAttr,['placeholder'=>'Nội dung bài viết','id'=>'content']))

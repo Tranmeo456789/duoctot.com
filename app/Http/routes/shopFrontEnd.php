@@ -15,9 +15,11 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('/tim-kiem-san-pham-danh-sach-ngan','ProductController@searchListProductShort')->name('fe.product.searchListProductShort');
     Route::get('/load-more-products','ProductController@loadMoreProducts')->name('fe.product.loadMoreProducts');
     Route::get('/them-comment-product','ProductController@addCommentProduct')->name('fe.product.addCommentProduct');
-
+    
     Route::get('/ajax-filter-product-object','HomeController@ajax_filter')->name('fe.home.ajaxfilter');
-
+    
+    Route::get('/tin-tuc','PostController@index')->name('fe.post');
+    Route::get('/tin-tuc/{slug}.html','PostController@detail')->name('fe.post.detail');
 
     Route::post('/hoan-tat-dat-hang','OrderController@completed')->name('fe.order.completed');
     Route::get('/dat-hang/thanh-cong/{code}','OrderController@success')->name('fe.order.success');

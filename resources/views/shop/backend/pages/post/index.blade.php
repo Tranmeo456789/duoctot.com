@@ -1,7 +1,7 @@
 @php
     use App\Helpers\Template;
     $xhtmlButtonFilter = '';
-    $xhtmlAreaSeach = Template::showAreaSearch('product', $params['search']);
+    $xhtmlAreaSeach = Template::showAreaSearch('post', $params['search']);
 @endphp
 @extends('shop.layouts.backend')
 

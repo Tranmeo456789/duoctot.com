@@ -74,6 +74,13 @@ class PostController extends BackEndController
                 $notify = "Cập nhật $this->pageTitle thành công!";
             }
             $params['slug']= Str::slug($params['title']);
+            $idCat=$params['cat_post_id'];
+            $catPost=(new CatalogModel)->getItem(['id'=>$idCat],['task'=>'get-item']);
+            $nameCatPost = $catPost['name']??'';
+            $params['key_search'] = implode(' ', [
+                $params['title'],
+                $nameCatPost
+            ]);
             $this->model->saveItem($params, ['task' => $task]);
             $request->session()->put('app_notify', $notify);
             return response()->json([
