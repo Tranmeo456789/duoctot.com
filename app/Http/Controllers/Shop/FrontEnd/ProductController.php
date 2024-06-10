@@ -129,7 +129,8 @@ class ProductController extends ShopFrontEndController
     public function drugstore(Request $request){
         $shopId=$request->shopId;
         $productDrugstore=[];
-        $productDrugstore = $this->model->listItems(['user_id'=>$shopId], ['task' => 'frontend-list-items']);
+        $listIdProductAdd=[1894, 1895];
+        $productDrugstore = $this->model->listItems(['group_id'=>$listIdProductAdd, 'user_id'=>$shopId], ['task' => 'frontend-list-item-shop']);
         $userInfo=(new UsersModel)->getItem(['user_id' => $shopId],['task'=>'get-item']);
         if ($request->has('codeRef')) {
             $request->session()->put('codeRef', $request->query('codeRef'));
@@ -141,7 +142,7 @@ class ProductController extends ShopFrontEndController
         }
         $item = (new AffiliateModel)->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
         if ($item) {
-            $params['group_id'] = collect($item->listIdProduct)->pluck('product_id')->toArray();
+            $params['group_id'] = array_merge(collect($item->listIdProduct)->pluck('product_id')->toArray(), $listIdProductAdd);
             $productDrugstore = $this->model->listItems(['group_id' => $params['group_id'],'user_id' => $shopId], ['task' => 'frontend-list-item-shop'])??[];
         } 
         $address='';

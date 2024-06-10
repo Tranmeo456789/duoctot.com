@@ -211,7 +211,7 @@ class ProductModel extends BackEndModel
             if (isset($params['take'])) {
                 $query->take($params['take']);
             }
-            $result = $query->get();
+            $result = $query->orderBy('id', 'desc')->get();
         }
         if ($options['task'] == "frontend-list-items-simple") {
             $query = $this::select('id','name','slug')
