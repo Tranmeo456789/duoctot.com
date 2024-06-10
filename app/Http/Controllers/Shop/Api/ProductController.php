@@ -82,20 +82,26 @@ class ProductController extends ApiController
         return $this->setResponse($this->res);
     }
     public function getListProductShowFrontEnd(Request $request){
-        $params['limit'] = intval($request->limit)??8;
+        $params['limit'] = intval($request->limit)??6;
         $params['user_id'] = intval($request->user_id);
 
-        $productAffifiate = AffiliateProductModel::where('user_id',$params['user_id'])->pluck('product_id')->toArray();
-        $productShop = MainModel::where('user_id',$params['user_id'])->pluck('id')->toArray();
+        $productAffifiate = AffiliateProductModel::where('user_id',$params['user_id'])
+                                                ->whereNotIn('product_id',[1894,1895])
+                                                ->pluck('product_id')->toArray();
+        $productShop = MainModel::where('user_id',$params['user_id'])
+                                        ->whereNotIn('id',[1894,1895])
+                                        ->pluck('id')->toArray();
         $arrProductID= array_unique(array_merge($productAffifiate,$productShop));
         if (count($arrProductID) > 0){
-            $this->res['data']  = $this->model->listItems(['id' => $arrProductID,'limit' => $params['limit']],['task'=>'frontend-list-items-by-id']);
+            $data  = $this->model->listItems(['id' => $arrProductID,'limit' => $params['limit']],['task'=>'frontend-list-items-by-id']);
         }
         else{
-            $this->res['data']  = $this->model->listItems(['type' => 'new','limit' => $params['limit']],['task'=>'frontend-list-items-by-type']);
+            $data = $this->model->listItems(['type' => 'new','limit' => $params['limit']],['task'=>'frontend-list-items-by-type']);
         }
 
+        $dataPermanent = $this->model->listItems(['groupID'=>[1894,1895]],['task'=>'frontend-list-items-by-groupID']);
 
+        $this->res['data'] = array_merge($dataPermanent->toArray(),$data->toArray()['data']);
         return $this->setResponse($this->res);
     }
 

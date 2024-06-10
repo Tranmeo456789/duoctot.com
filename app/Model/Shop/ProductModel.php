@@ -211,7 +211,7 @@ class ProductModel extends BackEndModel
             if (isset($params['take'])) {
                 $query->take($params['take']);
             }
-            $result = $query->get();        
+            $result = $query->get();
         }
         if ($options['task'] == "frontend-list-items-simple") {
             $query = $this::select('id','name','slug')
@@ -248,8 +248,16 @@ class ProductModel extends BackEndModel
             $result =  $query->orderBy('id', 'desc')
                              ->paginate($params['limit']);
         }
+        if ($options['task'] == "frontend-list-items-by-groupID") {
+
+            $query = $this::with('unitProduct')->select('id','name','type','code','cat_product_id','price','price_vat','percent_discount','unit_id','specification','image','user_id','featurer','slug','discount_ref')
+                                 ->whereIn('id', $params['groupID']);
+            $query->OfCollaboratorCode();
+            $result =  $query->orderBy('id', 'desc')
+                             ->get();
+        }
+
         if ($options['task'] == "frontend-list-items-by-id") {
-            logger($params);
             $query = $this::with('unitProduct')->select('id','name','type','code','cat_product_id','price','price_vat','percent_discount','unit_id','specification','image','user_id','featurer','slug','discount_ref')
                                     ->whereIn("id",$params['id'])
                                     ->where('status_product','da_duyet');
@@ -271,9 +279,9 @@ class ProductModel extends BackEndModel
             if (isset($params['keyword'])) {
                 $keyword = $params['keyword'];
                 $keyword = strip_tags($keyword);
-                $keyword = preg_replace('/[^\p{L}\p{N}\s]/u', '', $keyword);       
+                $keyword = preg_replace('/[^\p{L}\p{N}\s]/u', '', $keyword);
                 $keywords = array_filter(explode(' ', trim($keyword)));
-                $keywords = array_values($keywords);      
+                $keywords = array_values($keywords);
                 $results = $query->where(function ($query) use ($keywords) {
                     foreach ($keywords as $word) {
                         $query->where(function ($query) use ($word) {
@@ -301,7 +309,7 @@ class ProductModel extends BackEndModel
             }
             $result = $results;
         }
-        
+
 
         return $result;
     }
