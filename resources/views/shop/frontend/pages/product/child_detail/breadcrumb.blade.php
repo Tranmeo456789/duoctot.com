@@ -12,20 +12,20 @@
 <div class="">
     <ul class="list-item clearfix">
         <li>
-            <a href="" title="">Trang chủ</a>
+            <a href="{{route('home')}}">Trang chủ</a>
         </li>
         @if ($itemCatParentLevel2)
         <li>
-            <a href="" title="">{{$itemCatParentLevel2['name']}}</a>
+            <a href="{{route('fe.cat',$itemCatParentLevel2['slug'])}}">{{$itemCatParentLevel2['name']}}</a>
         </li>
         @endif
         @if ($itemCatParentLevel1['parent_id'] != '')
         <li>
-            <a href="" title="">{{$itemCatParentLevel1['name']}}</a>
+            <a href="{{route('fe.cat2',[$itemCatParentLevel2['slug'],$itemCatParentLevel1['slug']])}}">{{$itemCatParentLevel1['name']}}</a>
         </li>
         @endif
         <li>
-            <a href="" title="">{{$itemCatCurent['name']}}</a>
+            <a href="{{route('fe.cat3',[$itemCatParentLevel2['slug'],$itemCatParentLevel1['slug'],$itemCatCurent['slug']])}}">{{$itemCatCurent['name']}}</a>
         </li>
     </ul>
 </div>

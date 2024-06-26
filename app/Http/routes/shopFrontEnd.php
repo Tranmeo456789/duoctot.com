@@ -60,7 +60,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('booking-online', 'BookingController@index')->name('fe.booking_online');
 
     Route::get('danh-muc-thuoc/{slug}','CatController@catLevel1')->name('fe.cat');
-    Route::get('danh-muc=thuoc/{slug1}/{slug2}','CatController@catLevel2')->name('fe.cat2');
+    Route::get('danh-muc-thuoc/{slug1}/{slug2}','CatController@catLevel2')->name('fe.cat2');
     Route::get('danh-muc-thuoc/{slug1}/{slug2}/{slug3}','CatController@catLevel3')->name('fe.cat3');
     Route::get('loc-san-pham-trong-danh-muc','CatController@filterProduct')->name('fe.cat.filterProduct');
     

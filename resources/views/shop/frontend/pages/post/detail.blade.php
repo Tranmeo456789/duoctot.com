@@ -10,13 +10,13 @@ $timePost = MyFunction::formatDateLongTime($item['created_at']);
     <div id="breadcrumb-wp">
         <ul class="list-item clearfix">
             <li>
-                <a href="">Trang chủ</a>
+                <a href="{{route('home')}}">Trang chủ</a>
             </li>
             <li>
-                <a href="">Tin tức</a>
+                <a href="{{route('fe.post')}}">Tin tức</a>
             </li>
             <li>
-                <a href="">{{$item->catPost->name}}</a>
+                <p>{{$item->catPost->name}}</p>
             </li>
         </ul>
     </div>

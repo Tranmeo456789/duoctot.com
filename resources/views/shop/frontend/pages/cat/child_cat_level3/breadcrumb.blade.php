@@ -4,13 +4,13 @@
             <a href="{{route('home')}}" title="">Trang chủ</a>
         </li>
         <li>
-            <a href="" title="">{{$itemCatParentLevel2['name']}}</a>
+            <a href="{{route('fe.cat',$itemCatParentLevel2['slug'])}}">{{$itemCatParentLevel2['name']}}</a>
         </li>
         <li>
-            <a href="" title="">{{$itemCatParentLevel1['name']}}</a>
+            <a href="{{route('fe.cat2',[$itemCatParentLevel2['slug'],$itemCatParentLevel1['slug']])}}">{{$itemCatParentLevel1['name']}}</a>
         </li>
         <li>
-            <a href="" title="">{{$itemCatCurent['name']}}</a>
+            <span>{{$itemCatCurent['name']}}</span>
         </li>
     </ul>
 </div>

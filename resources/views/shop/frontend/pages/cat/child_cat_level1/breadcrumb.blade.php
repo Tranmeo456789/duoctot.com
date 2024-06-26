@@ -4,7 +4,7 @@
             <a href="{{route('home')}}" title="">Trang chủ</a>
         </li>
         <li>
-            <a href="" title="">{{$itemCatCurent['name']}}</a>
+            <span>{{$itemCatCurent['name']}}</span>
         </li>
     </ul>
 </div>

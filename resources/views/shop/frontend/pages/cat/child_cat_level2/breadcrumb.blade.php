@@ -2,13 +2,13 @@
 <div class="">
     <ul class="list-item clearfix">
         <li>
-            <a href="{{route('home')}}" title="">Trang chủ</a>
+            <a href="{{route('home')}}">Trang chủ</a>
         </li>
         <li>
-            <a href="" title="">{{$itemCatParent['name']}}</a>
+            <a href="{{route('fe.cat',$itemCatParent['slug'])}}">{{$itemCatParent['name']}}</a>
         </li>
         <li>
-            <a href="" title="">{{$itemCatCurent['name']}}</a>
+            <span>{{$itemCatCurent['name']}}</span>
         </li>
     </ul>
 </div>

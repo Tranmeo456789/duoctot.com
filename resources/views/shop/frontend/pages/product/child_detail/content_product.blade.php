@@ -1,9 +1,9 @@
 <div class="col-12 col-lg-3 px-0">
     <div class="cat-content">
         <div class="main-content-product">
-            <h1>Nội dung chính
-                <div class="roud-img"><img src="{{asset('images/shop/3ngang.png')}}" alt=""></div>
-            </h1>
+            <h4>Nội dung chính
+                <div class="roud-img"><img src="{{asset('images/shop/3ngang.png')}}" alt="tdoctor"></div>
+            </h4>
         </div>
         <ul class="list-content-product">
             <li><a href="#desc-product">Mô tả sản phẩm</a></li>
@@ -18,7 +18,7 @@
 </div>
 <div class="col-12 col-lg-9">
     <div class="title-content-detail-product d-flex justify-content-between flex-wrap">
-        <h1 id="desc-product">Mô tả sản phẩm</h1>
+        <h4 id="desc-product">Mô tả sản phẩm</h4>
         <div class="d-flex justify-content-center flex-wrap">
             <span class="ktc">Kích thước chữ</span>
             <ul class="mdlh">

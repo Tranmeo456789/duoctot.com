@@ -54,7 +54,7 @@ use Illuminate\Support\Str;
                                 <img src="{{asset('images/shop/star.png')}}" alt="">
                             </span>
                             <span class="text-muted">
-                                3 Đánh giá | 138 Bình luận
+                                3 Đánh giá
                             </span>
                         </div>
                     </div>
