@@ -324,9 +324,7 @@
     display: block;
 }
 
-#main-menu li.catc1:hover>.content-submenu {
-    display: block;
-}
+
 
 #main-menu .catc1 .arrow {
     position: absolute;
