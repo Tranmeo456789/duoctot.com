@@ -16,8 +16,10 @@
 #form-search .form-search-inner {
     width: 80%;
 }
-
-#form-search .form-search-inner h1 {
+h1.title-name{
+    font-size: 1.5rem;
+}
+#form-search .form-search-inner h6 {
     color: #1E1E1E;
     font-family: 'Helvetica Neue';
     font-weight: 700;

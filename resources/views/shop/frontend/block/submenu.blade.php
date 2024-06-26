@@ -27,7 +27,7 @@ $listCatAll=(new CatProductModel())->listItems(null, ['task'  => 'list-items-fro
                             <div class="himg-menu">
                                 <div class="d-flex">
                                     <div class="d-flex align-items-center pl-2">
-                                        <div class="rdimg rimg-centerw"><img src="{{asset($itemLevel2['image'])}}" alt=""></div>
+                                        <div class="rdimg rimg-centerw"><img src="{{asset($itemLevel2['image'])}}" alt="tdoctor"></div>
                                     </div>
                                     <a href="{{route('fe.cat2',[$itemLevel1['slug'],$itemLevel2['slug']])}}" title="" class="titlec2">{{$itemLevel2['name']}}</a>
                                 </div>

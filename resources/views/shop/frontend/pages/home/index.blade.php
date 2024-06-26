@@ -7,20 +7,20 @@
             <div class="section" id="slider-wp">
                 <div class="section-detail">
                     <div class="item">
-                        <img loading="lazy" src="{{asset('images/shop/banner1.jpg')}}" alt="" class="img-fluid" style="width:100%">
+                        <img loading="lazy" src="{{asset('images/shop/banner1.jpg')}}" alt="tdoctor" class="img-fluid">
                     </div>
                     <div class="item">
-                        <img loading="lazy" src="{{asset('images/shop/banner2.jpg')}}" alt="" class="img-fluid" style="width:100%">
+                        <img loading="lazy" src="{{asset('images/shop/banner2.jpg')}}" alt="tdoctor" class="img-fluid">
                     </div>
                     <div class="item">
-                        <img loading="lazy" src="{{asset('images/shop/banner3.jpg')}}" alt="" class="img-fluid" style="width:100%">
+                        <img loading="lazy" src="{{asset('images/shop/banner3.jpg')}}" alt="tdoctor" class="img-fluid">
                     </div>
                 </div>
             </div>
         </div>
         <div class="d-none d-lg-block col-lg-3">
             <div>
-                <img src="{{asset('images/shop/banner-right-home.jpg')}}" alt="" class="img-fluid" style="width:100%">
+                <img src="{{asset('images/shop/banner-right-home.jpg')}}" alt="tdotor" class="img-fluid" style="width:100%">
             </div>
         </div>
     </div>

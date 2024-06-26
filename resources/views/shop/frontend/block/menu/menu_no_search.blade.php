@@ -2,7 +2,7 @@
 
 @section('header_top')
         <div class="wp-inner clearfix">
-            <a href="{{route('home')}}" title="" id="payment-link" class="fl-left"><img style="width:213px" src="{{asset('images/shop/logo_topbar3.png')}}" alt=""></a>
+            <a href="{{route('home')}}" title="" id="payment-link" class="fl-left"><img style="width:213px" src="{{asset('images/shop/logo_topbar3.png')}}" alt="tdoctor"></a>
             <div id="" class="fl-left" style="margin-left:300px; padding-top:15px">
                 <a href="{{route('fe.order.formSearch')}}" id="payment-link" class="search-history-order">
                     <div class="clearfix">

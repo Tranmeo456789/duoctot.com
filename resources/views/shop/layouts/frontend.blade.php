@@ -1,16 +1,18 @@
 @php
-    $title = $title ?? 'Sàn thương mại điện tử trong y dược';
+    $title = $item['name'] ?? $item['title'] ?? 'Sàn thương mại điện tử trong y dược Tdoctor';
     $imageItem = $item['image'] ?? 'images/shop/logo_topbar3.png';
-    $benefit = $item['benefit'] ?? 'Sản phẩm được nhiều khách hàng tin dùng'
+    $benefit = $item['benefit'] ?? $item['desc'] ?? 'Sàn thương mại điện tử trong y dược Tdoctor chuyên cung cấp các TPCN, thuốc và thiết bị y tế'
 @endphp
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{$title}}</title>
-    <meta property="og:title" content="{{ $item['name'] ?? 'Tdoctor' }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="{{ $title }}">
     <meta property="og:image" content="{{ asset($imageItem) }}">
     <meta property="og:description" content="{{$benefit}}">
-
+    <title>{{$title}}</title>
+    <link rel="icon" href="{{ asset('images/shop/favicon.jpg') }}" type="image/jpeg">
     @include('shop.frontend.block.head')
 </head>
 

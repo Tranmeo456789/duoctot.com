@@ -24,7 +24,7 @@
                 @foreach($listProductCatLevel2 as $product)
                 <div class="col-3 pl-3">
                     <li>
-                        <div class="bimgm"><div class="h-100"><a href="{{route('fe.product.detail', $product->slug)}}" class="h-100 d-flex align-items-center "><img src="{{asset($product->image)}}" alt=""></a></div></div>
+                        <div class="bimgm"><div class="h-100"><a href="{{route('fe.product.detail', $product->slug)}}" class="h-100 d-flex align-items-center "><img src="{{asset($product->image)}}" alt="{{$product->name}}"></a></div></div>
                         <div class="">
                             <a href="{{route('fe.product.detail', $product->slug)}}" class="truncate2">{{$product->name}}</a>
                             @if(Session::has('user'))

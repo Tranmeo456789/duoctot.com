@@ -7,21 +7,20 @@ $timePost = MyFunction::formatDateLongTime($item['created_at']);
 @extends('shop.layouts.frontend')
 @section('content')
 <div class="wp-inner mt-2">
-    <div class="" id="breadcrumb-wp">
+    <div id="breadcrumb-wp">
         <ul class="list-item clearfix">
             <li>
-                <a href="" title="">Trang chủ</a>
+                <a href="">Trang chủ</a>
             </li>
             <li>
-                <a href="" title="">Tin tức</a>
+                <a href="">Tin tức</a>
             </li>
             <li>
-                <a href="" title="">{{$item->catPost->name}}</a>
+                <a href="">{{$item->catPost->name}}</a>
             </li>
         </ul>
     </div>
-    <h5 class="text-primary">{{$item->catPost->name}}</h5>
-    <h3>{{$item['title']}}</h3>
+    <h1 class="title-name">{{$item['title']}}</h1>
     <p>{{$timePost}}</p>
     <div class="content-post">
         {!! $item['content'] !!}

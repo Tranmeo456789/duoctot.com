@@ -1,12 +1,17 @@
 @php
-    $title = $title ?? 'Sàn thương mại điện tử trong y dược';
+$title = $title ?? 'Sàn thương mại điện tử trong y dược';
 @endphp
 <!DOCTYPE html>
 <html>
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{$title}}</title>
+    <link rel="icon" href="{{ asset('images/shop/favicon.jpg') }}" type="image/jpeg">
     @include('shop.frontend.block.head')
 </head>
+
 <body>
     <div id="site">
         <div id="container">
@@ -27,4 +32,5 @@
     </div>
 </body>
 @include('shop.frontend.block.script')
+
 </html>

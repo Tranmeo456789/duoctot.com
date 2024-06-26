@@ -30,7 +30,8 @@ class SearchController extends ShopFrontEndController
     {
         $params['keyword']=$keyword;
         $itemSearch=(new ProductModel)->listItems($params,['task'=>'list-items-search']);
-        return view($this->pathViewController . 'view',['keyword'=>$keyword,'itemSearch'=>$itemSearch]);
+        $title= 'Kết quả tìm kiếm';
+        return view($this->pathViewController . 'view',['keyword'=>$keyword,'itemSearch'=>$itemSearch,'title'=>$title]);
     }
     public function saveHome(Request $request)
     {
