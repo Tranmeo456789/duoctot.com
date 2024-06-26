@@ -32,7 +32,12 @@
             'label'   => '',
             'element' => Template::showImageAndInputSingle('image', $item['image']?? null),
             'widthInput' => 'col-12',
-        ],[
+        ],
+        [
+            'label'   =>  HTML::decode(Form::label('description', $label['description'] .  $star, $formLabelAttr)),
+            'element' => Form::textarea('description', $item['description']?? null, array_merge($formInputAttr,['placeholder'=>$label['description'],"rows"=>"5"]))
+        ]
+        ,[
             'label'   => HTML::decode(Form::label('content', 'Nội dung bài viết' .  $star, $formLabelAttr)),
             'element' => Form::textarea('content', $item['content']?? null, array_merge($formEditorAttr,['placeholder'=>'Nội dung bài viết','id'=>'content']))
         ],[

@@ -1,7 +1,7 @@
 @php
     $title = $item['name'] ?? $item['title'] ?? 'Sàn thương mại điện tử trong y dược Tdoctor';
     $imageItem = $item['image'] ?? 'images/shop/logo_topbar3.png';
-    $benefit = $item['benefit'] ?? $item['desc'] ?? 'Sàn thương mại điện tử trong y dược Tdoctor chuyên cung cấp các TPCN, thuốc và thiết bị y tế'
+    $benefit = $item['benefit'] ?? $item['description'] ?? 'Sàn thương mại điện tử trong y dược Tdoctor chuyên cung cấp các TPCN, thuốc và thiết bị y tế'
 @endphp
 <!DOCTYPE html>
 <html>
