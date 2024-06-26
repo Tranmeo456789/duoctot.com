@@ -33,6 +33,9 @@ class ProductController extends ShopFrontEndController
             return redirect()->route('fe.product.detail', ['slug' => $slug, 'codeRef' => $codeRef]);
         }
         $item= $this->model->getItem(['slug'=>$slug],['task' => 'frontend-get-item']);
+        if (!$item) {
+            return redirect()->route('home');
+        }
         $userInfo = (new UsersModel)->getItem(['user_id' => $item['user_id']],['task'=>'get-item']);
         $affiliateProduct = AffiliateProductModel::where('code_ref', $codeRef)
             ->where('product_id', $item['id'])
@@ -132,6 +135,9 @@ class ProductController extends ShopFrontEndController
         $listIdProductAdd=[1894, 1895];
         $productDrugstore = $this->model->listItems(['group_id'=>$listIdProductAdd, 'user_id'=>$shopId], ['task' => 'frontend-list-item-shop']);
         $userInfo=(new UsersModel)->getItem(['user_id' => $shopId],['task'=>'get-item']);
+        if ($userInfo) {
+            return redirect()->route('home');
+        }
         if ($request->has('codeRef')) {
             $request->session()->put('codeRef', $request->query('codeRef'));
             $codeRef = $request->codeRef ?? ($request->session()->get('codeRef') ?? '');

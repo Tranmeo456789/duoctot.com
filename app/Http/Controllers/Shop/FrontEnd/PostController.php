@@ -30,6 +30,9 @@ class PostController extends ShopFrontEndController
     public function detail(Request $request){
         $slug = $request->slug;
         $item= $this->model->getItem(['slug'=>$slug],['task' => 'frontend-get-item']);
+        if (!$item) {
+            return redirect()->route('home');
+        }
         return view($this->pathViewController . 'detail',compact('item'));
     }
 }
