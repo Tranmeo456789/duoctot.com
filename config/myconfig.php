@@ -119,7 +119,8 @@
                 'status_control'=>'Trạng thái đối soát',
                 'discount_ref'=>'Chiết khấu cho đại lý(%)',
                 'discount_tdoctor'=>'Chiết khấu NCC cho Tdoctor(%)',
-                'description'=>'Mô tả ngắn'
+                'description'=>'Mô tả ngắn',
+                'meta_keywords'=>'Meta Keyword'
             ],
             'type_user' => [
                 '1' => 'Thành viên',

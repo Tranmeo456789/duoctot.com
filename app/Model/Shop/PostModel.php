@@ -62,7 +62,7 @@ class PostModel extends BackEndModel
         $result = null;
         $user = Session::get('user');
         if ($options['task'] == "user-list-items") {
-            $query = $this::with('catPost')->select('id','title','description','content','slug','image','cat_post_id','created_at', 'updated_at')->ofUser();
+            $query = $this::with('catPost')->select('id','title','meta_keywords','description','content','slug','image','cat_post_id','created_at', 'updated_at')->ofUser();
             if (isset($params['group_id'])){
                 $query->whereIn('id',$params['group_id']);
             }
@@ -88,7 +88,7 @@ class PostModel extends BackEndModel
             }
         }
         if ($options['task'] == "frontend-list-items") {
-            $query = $this::with('catPost')->select('id','title','description','content','slug','image','cat_post_id','created_at', 'updated_at');
+            $query = $this::with('catPost')->select('id','title','meta_keywords','description','content','slug','image','cat_post_id','created_at', 'updated_at');
             if (isset($params['group_id'])){
                 $query->whereIn('id',$params['group_id']);
             }
@@ -122,13 +122,13 @@ class PostModel extends BackEndModel
     {
         $result = null;
         if ($options['task'] == 'get-item') {
-            $result = self::select('id','title','description','content','slug','image','cat_post_id','created_at', 'updated_at')
+            $result = self::select('id','title','meta_keywords','description','content','slug','image','cat_post_id','created_at', 'updated_at')
                             ->where('id', $params['id'])
                             ->OfCollaboratorCode()
                             ->first();
         }
         if ($options['task'] == 'frontend-get-item') {
-            $query = self::select('id','title','description','content','slug','image','cat_post_id','created_at', 'updated_at');
+            $query = self::select('id','title','meta_keywords','description','content','slug','image','cat_post_id','created_at', 'updated_at');
             if(isset($params['id'])){
                 $query->where('id', $params['id']);
             }

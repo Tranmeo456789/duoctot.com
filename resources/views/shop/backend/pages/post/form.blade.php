@@ -19,7 +19,12 @@
             'label'   => HTML::decode(Form::label('title', 'Tiêu đề bài viết' .  $star, $formLabelAttr)),
             'element' => Form::text('title', $item['title']??null, array_merge($formInputAttr,['placeholder'=>'Tiêu đề bài viết'])),
             'widthElement' => 'col-12'
-        ],[
+        ],
+        [
+            'label'   =>  HTML::decode(Form::label('meta_keywords', $label['meta_keywords'] .  $star, $formLabelAttr)),
+            'element' => Form::textarea('meta_keywords', $item['meta_keywords']?? null, array_merge($formInputAttr,['placeholder'=>$label['meta_keywords'],"rows"=>"5"]))
+        ],
+        [
             'label'   => HTML::decode(Form::label('cat_post_id', 'Danh mục' .  $star , $formLabelAttr)),
             'element' => Form::select('cat_post_id',$itemsCatPost, $item['cat_post_id']??null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
             'widthElement' => 'col-12'
