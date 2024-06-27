@@ -64,7 +64,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('danh-muc-thuoc/{slug1}/{slug2}/{slug3}','CatController@catLevel3')->name('fe.cat3');
     Route::get('loc-san-pham-trong-danh-muc','CatController@filterProduct')->name('fe.cat.filterProduct');
     
+    Route::get('/sitemap.xml', 'SiteMapController@sitemapPage');
     Route::get('{slug}.html','ProductController@drugstore')->name('fe.product.drugstore');
-
 
 });
