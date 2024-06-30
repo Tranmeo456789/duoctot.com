@@ -418,7 +418,7 @@
         padding-left: 0px;
     }
 
-    .service-tdoctor .title-service h1 {
+    .service-tdoctor .title-service .first-title {
         text-align: center;
         margin-top: 8px;
     }
@@ -826,7 +826,7 @@
     .wp-status-order .ls-status-order li:not(:last-child)::before{
         content: none;
     }
-    .cart-null h1 {
+    .cart-null .title-null {
         font-size: 16px;
     }
 
@@ -851,7 +851,7 @@
         width: 84% !important;
     }
 
-    .wp-left-cart .title-cart h1 {
+    .wp-left-cart .title-cart .number-product {
         font-size: 18px;
     }
 
@@ -926,7 +926,7 @@
         width: 46%;
     }
 
-    .service-tdoctor .title-service h1 {
+    .service-tdoctor .title-service .first-title {
         font-size: 16px;
     }
 
@@ -994,7 +994,7 @@
     .owl-pagination {
         display: none;
     }
-    .col-left-cart .title-cart h1{
+    .col-left-cart .title-cart .number-product{
         margin: 0px;
         font-size: 20px;
     }
@@ -1085,7 +1085,7 @@
         margin-right: 5px;
     }
 
-    .wp-left-cart .title-cart h1 {
+    .wp-left-cart .title-cart .number-product {
         font-size: 15px;
     }
 
@@ -1145,7 +1145,7 @@
 }
 
 @media screen and (max-width: 450px) {
-    .service-tdoctor .title-service h1 {
+    .service-tdoctor .title-service .first-title {
         font-size: 10px;
     }
 

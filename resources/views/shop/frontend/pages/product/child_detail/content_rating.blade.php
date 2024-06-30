@@ -3,9 +3,9 @@ use App\Model\Shop\CommentModel;
 $averageRating=(new CommentModel)->averageRating(['product_id'=>$item['id']],['task' => 'rating-star-average'])??'';
 $ratingPercentages=(new CommentModel)->ratingPercentages(['product_id'=>$item['id']],['task' => 'rating-percentage-star'])??[];
 @endphp
-<h1>Đánh Giá & Nhận Xét
+<div class="title-rating">Đánh Giá & Nhận Xét
     <!-- <span class="coutn-dn">3</span> -->
-</h1>
+</div>
 <div class="average-rating">
     <div class="d-flex justify-content-between flex-wrap">
         <div class="average-rating-left text-center">

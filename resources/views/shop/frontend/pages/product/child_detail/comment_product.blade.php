@@ -1,7 +1,7 @@
 <div class="question-often mt-3">
-    <h1>
+    <div class="title-rating">
         Câu hỏi thường gặp
-    </h1>
+    </div>
     <ul class="list-question">
         <li class="catparentc">
             <h3 class="">Thực phẩm chức năng hỗ trợ sức khỏe tình dục nam giới có tác dụng gì?<img src="{{asset('images/shop/hoi.png')}}" alt="">

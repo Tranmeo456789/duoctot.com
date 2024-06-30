@@ -14,5 +14,5 @@
             <img src="{{asset('images/shop/' .  $imgDefault )}}" alt="">
         </div>
     </div>
-    <h4 class="mb-0 ml-2">{{$title}}</h4>
+    <div class="mb-0 ml-2 title-name">{{$title}}</div>
 </div>

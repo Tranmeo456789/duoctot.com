@@ -2,9 +2,7 @@
 use App\Helpers\MyFunction;
 @endphp
 <div class="question-often mt-3">
-  <h1>
-    Bình luận
-  </h1>
+  <div class="title-rating">Bình luận</div>
   <div class="content-quest">
     <textarea name="content" placeholder="Nhập nội dung câu hỏi"></textarea>
     @if(Session::has('user'))

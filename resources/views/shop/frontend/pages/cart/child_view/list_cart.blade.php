@@ -5,7 +5,7 @@ use App\Helpers\MyFunction;
 <div class="info-product-cart">
     <div class="title-cart">
         <div class="text-center">
-            <h1>Có <span class='total_product'>{{$item['total_product']}}</span> sản phẩm trong giỏ hàng</h1>
+            <div class="number-product">Có <span class='total_product'>{{$item['total_product']}}</span> sản phẩm trong giỏ hàng</div>
         </div>
     </div>
     @foreach($item['product'] as $val )

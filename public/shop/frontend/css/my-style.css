@@ -710,7 +710,7 @@ label.error {
     padding-bottom: 20px;
 }
 
-.col-left-cart .title-cart h1 {
+.col-left-cart .title-cart .number-product {
     font-family: 'Helvetica Neue';
     font-style: normal;
     font-weight: 700;

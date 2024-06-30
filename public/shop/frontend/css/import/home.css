@@ -287,7 +287,7 @@ h1.title-name{
     width: 27px;
     height: 27px;
 }
-.wp-title h4 {
+.wp-title .title-name {
     font-size: 18px;
     line-height: 24px;
     font-weight: 600;
@@ -758,7 +758,7 @@ li .wp-discount
     color: #072C94;
     margin-left: 15px;
 }
-.service-tdoctor .title-service h1{
+.service-tdoctor .title-service .first-title{
     margin: 0;
     padding: 0;
     border: 0;
