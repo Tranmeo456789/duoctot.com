@@ -27,7 +27,7 @@ use App\Helpers\MyFunction;
                         </a>
                         <div class="nctright pl-2">
                             <div class="news-known d-flex mb-1">
-                                <a class="text-primary">{{$val->catPost->name??''}}</a>
+                                <p class="text-primary">{{$val->catPost->name??''}}</p>
                             </div>
                             <a class="title-new-left mb-1" href="{{route('fe.post.detail',$val['slug'])}}">
                                 <p class="truncate2 pb-0">{{$val['title']}}</p>

@@ -30,7 +30,7 @@
                         </a>
                         <div class="nctright pl-2">
                             <div class="news-known d-flex mb-1">
-                                <a href="">{{$val->catPost->name??''}}</a>
+                                <a>{{$val->catPost->name??''}}</a>
                             </div>
                             <a class="title-new-left mb-1" href="{{route('fe.post.detail',$val['slug'])}}" >
                                 <p class="truncate2 pb-0">{{$val['title']}}</p>
