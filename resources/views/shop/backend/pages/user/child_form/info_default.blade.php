@@ -36,12 +36,19 @@
         ],[
             'label'   => HTML::decode(Form::label('phone', $label['phone'], $formLabelAttr)),
             'element' => Form::text('phone', $item['phone']??null, array_merge($formInputAttr,['placeholder'=>$label['phone']])),
-            'widthElement' => 'col-12 col-md-6'
+            'widthElement' => 'col-12 col-md-4'
         ],[
             'label'   => HTML::decode(Form::label('email', $label['email'], $formLabelAttr)),
             'element' => Form::text('email', $item['email']??null, array_merge($formInputAttr,['placeholder'=>$label['email']])),
-            'widthElement' => 'col-12 col-md-6'
-        ],[
+            'widthElement' => 'col-12 col-md-4'
+        ]
+        ,[
+            'label'   => HTML::decode(Form::label('password', 'Mật khẩu mới' .  $star, $formLabelAttr)),
+            'element' => Form::password('password', array_merge($formInputAttr,['placeholder'=>'Nếu dùng mật khẩu cũ không nhập!','style'=>'border-right:0px'])),
+            'type' => 'input-password',
+            'widthElement' => 'col-12 col-md-4'
+        ],
+        [
             'label'   => HTML::decode(Form::label('details[province_id]', $label['province_id'] , $formLabelAttr)),
             'element' => Form::select('details[province_id]',$itemsProvince, $details['province_id']??($item['province_id']??null), array_merge($formSelect2GetChildAttr,['id' =>'details[province_id]','style' =>'width:100%','data-href'=>$linkGetListDistrict,'data-target' => '#district_id'])),
             'widthElement' => 'col-12 col-md-4'
