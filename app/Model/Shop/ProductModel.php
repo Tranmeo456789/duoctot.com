@@ -357,7 +357,7 @@ class ProductModel extends BackEndModel
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
                                     'preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','long','wide','high',
-                                    'mass','discount_ref','contact');
+                                    'mass','discount_ref','contact')->where('status_product','da_duyet');
             if(isset($params['id'])){
                 $query->where('id', $params['id']);
             }

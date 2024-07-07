@@ -23,6 +23,7 @@ class Form
         $widthElement = isset($element['widthElement']) ? $element['widthElement'] : "col-12";
         $xhtml = null;
         $styleFormGroup = isset($element['styleFormGroup']) ? $element['styleFormGroup'] : '';
+        $prefix = isset($element['prefix']) ? $element['prefix'] : "https://tdoctor.net/";
         switch ($type) {
             case 'input':
                 $xhtml .= sprintf(
@@ -238,6 +239,28 @@ class Form
                     $element['element']
                 );
                 break;
+            case 'url-page':
+                $xhtml = sprintf(
+                    "
+                    <div class='%s'>
+                        <div class='form-group row $styleFormGroup'>
+                            %s
+                            <div class='%s'>
+                                <div class='input-group align-self-center'>
+                                    <div class='input-icon align-self-center mr-1'>%s</div>
+                                    %s
+                                    <span class='align-self-center'>.html</span>
+                                    <span class='help-block'></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>",
+                    $widthElement,
+                    $element['label'],
+                    $widthInput,
+                    $prefix,
+                    $element['element']
+                );
         }
         return $xhtml;
     }

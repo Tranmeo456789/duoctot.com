@@ -27,12 +27,15 @@ class PostRequest extends AjaxFormRequest
     {
         $id = $this->id;
         $condTitle  = "bail|required|between:1,255|unique:$this->table,title";
+        $condSlug  = "bail|between:1,255|unique:$this->table,slug";
         $condContent  =  "bail|required";
         if (!empty($id)) { // edit
             $condTitle  .= ",$id";
+            $condSlug  .= ",$id";
         }
         $rules =  [
             'title'           => $condTitle,
+            'slug'           => $condSlug,
             'content'           => $condContent,
         ];
         return array_merge($rules);

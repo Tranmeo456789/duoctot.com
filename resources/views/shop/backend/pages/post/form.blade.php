@@ -20,6 +20,13 @@
             'element' => Form::text('title', $item['title']??null, array_merge($formInputAttr,['placeholder'=>'Tiêu đề bài viết'])),
             'widthElement' => 'col-12'
         ],
+         [
+            'label'   => HTML::decode(Form::label('slug', $label['slug'], $formLabelAttr)),
+            'prefix' => url('/').'/tin-tuc/',
+            'element' => Form::text('slug', $item['slug']??null, array_merge($formInputAttr,['placeholder'=>$label['slug']])),
+            'type'    => "url-page",
+            'widthInput' => 'col-12',
+        ],
         [
             'label'   =>  HTML::decode(Form::label('meta_keywords', $label['meta_keywords'] .  $star, $formLabelAttr)),
             'element' => Form::textarea('meta_keywords', $item['meta_keywords']?? null, array_merge($formInputAttr,['placeholder'=>$label['meta_keywords'],"rows"=>"5"]))

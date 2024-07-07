@@ -26,7 +26,15 @@
             'label'   => HTML::decode(Form::label('name', 'Tên thuốc' .  $star, $formLabelAttr)),
             'element' => Form::text('name', $item['name']??null, array_merge($formInputAttr,['placeholder'=>'Tên thuốc'])),
             'widthElement' => 'col-9'
-        ],[
+        ],
+        [
+            'label'   => HTML::decode(Form::label('slug', $label['slug'], $formLabelAttr)),
+            'prefix' => url('/').'/chi-tiet-san-pham/',
+            'element' => Form::text('slug', $item['slug']??null, array_merge($formInputAttr,['placeholder'=>$label['slug']])),
+            'type'    => "url-page",
+            'widthInput' => 'col-12',
+        ],
+        [
             'label'   => HTML::decode(Form::label('type', 'Loại thuốc' .  $star , $formLabelAttr)),
             'element' => Form::select('type',$itemsTypeProduct, $item['type']??null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
             'widthElement' => 'col-6'

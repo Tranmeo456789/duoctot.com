@@ -136,7 +136,7 @@ class ProductController extends BackEndController
             // if ($urlImgBB) {
             //     $params['image'] = $urlImgBB;
             // }
-            $params['slug']= Str::slug($params['name']);
+            $params['slug'] = !empty($params['slug']) ? $params['slug'] : Str::slug($params['name']);
             $this->model->saveItem($params, ['task' => $task]);
             $request->session()->put('app_notify', $notify);
             if(Session::get('user')['is_admin'] == 1 || Session::get('user')['is_admin'] == 2){

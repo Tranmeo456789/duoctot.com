@@ -120,7 +120,8 @@
                 'discount_ref'=>'Chiết khấu cho đại lý(%)',
                 'discount_tdoctor'=>'Chiết khấu NCC cho Tdoctor(%)',
                 'description'=>'Mô tả ngắn',
-                'meta_keywords'=>'Meta Keyword'
+                'meta_keywords'=>'Meta Keyword',
+                'slug'=>'Url trang'
             ],
             'type_user' => [
                 '1' => 'Thành viên',

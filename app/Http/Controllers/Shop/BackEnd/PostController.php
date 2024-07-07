@@ -73,7 +73,7 @@ class PostController extends BackEndController
                 $task   = "edit-item";
                 $notify = "Cập nhật $this->pageTitle thành công!";
             }
-            $params['slug']= Str::slug($params['title']);
+            $params['slug'] = !empty($params['slug']) ? $params['slug'] : Str::slug($params['title']);
             $idCat=$params['cat_post_id'];
             $catPost=(new CatalogModel)->getItem(['id'=>$idCat],['task'=>'get-item']);
             $nameCatPost = $catPost['name']??'';

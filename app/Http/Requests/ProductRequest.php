@@ -32,6 +32,7 @@ class ProductRequest extends AjaxFormRequest
     {
         $id = $this->id;
         $condName  = "bail|required|between:1,255|unique:$this->table,name";
+        $condSlug  = "bail|between:1,255|unique:$this->table,slug";
         $condType  = "bail|required|in:" . implode(',',array_keys(config('myconfig.template.type_product')));
         $condCode  =  "bail|required";
         $condImage  =  "bail|required";
@@ -53,6 +54,7 @@ class ProductRequest extends AjaxFormRequest
         $condMass  =  "bail|numeric";
         if (!empty($id)) { // edit
             $condName  .= ",$id";
+            $condSlug  .= ",$id";
         }
         $rulesAlbumImage = array();
         $condAlbumImage = "image";
@@ -65,6 +67,7 @@ class ProductRequest extends AjaxFormRequest
 
         $rules =  [
             'name'           => $condName,
+            'slug'           => $condSlug,
             'type'           => $condType,
             'code'           => $condCode,
             'cat_product_id' => $condCatPrduct,
