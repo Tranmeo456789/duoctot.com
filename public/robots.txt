@@ -1,5 +1,6 @@
-User-agent: * 
-Disallow: 
-
+User-agent: *
+Disallow: /backend
+https://tdoctor.net/shop/frontend/
+https://tdoctor.net/shop/template
+User-agent: Swiftbot
 Sitemap: https://tdoctor.net/sitemap.xml
-Sitemap: https://shop.tdoctor.vn/sitemap.xml

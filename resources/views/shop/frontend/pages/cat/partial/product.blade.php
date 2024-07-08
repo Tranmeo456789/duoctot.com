@@ -15,7 +15,7 @@
             </div>
             <p class="truncate1 text-left fs-12">Dạng bào chế: {{$item['dosage_forms'] ?: '...'}}</p>
             <div class="elements-product text-left">
-                <p class="truncate2 fs-12">Thành phần: {{$item['elements'] ?: '...'}}</p>
+                <p class="truncate1 fs-12">Thành phần: ...</p>
             </div>
         </div>
     </a>

@@ -18,7 +18,7 @@
 </div>
 <div class="col-12 col-lg-9">
     <div class="title-content-detail-product d-flex justify-content-between flex-wrap">
-        <h4 id="desc-product">Mô tả sản phẩm</h4>
+        <h2 id="desc-product">Mô tả sản phẩm</h2>
         <div class="d-flex justify-content-center flex-wrap">
             <span class="ktc">Kích thước chữ</span>
             <ul class="mdlh">
@@ -30,18 +30,16 @@
     <div class="content-detail-product">
         {!!$item->general_info!!}
         <h2 id="element-product" class="mt-2">Thành phần</h2>
-        <p>{{$item->elements}}</p>
+        <p>{!!$item->elements!!}</p>
         <h2 id="func-product" class="mt-2">Công dụng</h2>
-        <p>{{$item->benefit}}</p>
+        <p>{!!$item->benefit!!}</p>
         <h2 id="alternate-product" class="mt-2">Cách dùng</h2>
-        <p>{{$item->dosage}}</p>
-        <h2 id="ide-effects">Tác dụng phụ</h2>
-        <p>Chưa có tác dụng không mong muốn</p>
+        <p>{!!$item->dosage!!}</p>
         <div id="note-product" class="note-product mt-2">
             <h2>Lưu ý</h2>
-            <p>{{$item->note}}</p>
+            <p>{!!$item->note!!}</p>
         </div>
         <h2 id="preserve-product">Bảo quản</h2>
-        <p>{{$item->preserve}}</p>
+        <p>{!!$item->preserve!!}</p>
     </div>
 </div>

@@ -73,7 +73,7 @@ use Illuminate\Support\Str;
                     <p><span class="font-weight-bold">Quy cách: </span>{{$item['specification']}}</p>
                     <p><span class="font-weight-bold">Xuất xứ thương hiệu: </span>{{$item->countryProduct->name}}</p>
                     <p><span class="font-weight-bold">Nước sản xuất: </span>{{$item->countryProduct->name}}</p>
-                    <p><span class="font-weight-bold">Công dụng: </span>{{$item['benefit']}}</p>
+                    <p><span class="font-weight-bold">Công dụng: </span>{!!$item->benefit!!}</p>
                 </div>
                     @php
                         $slugName = Str::slug($userInfo['fullname']);                                     

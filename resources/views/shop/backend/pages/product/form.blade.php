@@ -202,24 +202,24 @@
                 'element' => Form::textarea('general_info', $item['general_info']?? null, array_merge($formEditorAttr,['placeholder'=>$label['general_info'],'id'=>'general_info']))
             ],[
                 'label'   =>  HTML::decode(Form::label('benefit', $label['benefit'] .  $star, $formLabelAttr)),
-                'element' => Form::textarea('benefit', $item['benefit']?? null, array_merge($formInputAttr,['placeholder'=>$label['benefit'],"rows"=>"5"]))
+                'element' => Form::textarea('benefit', $item['benefit']?? null, array_merge($formEditorAttr,['placeholder'=>$label['benefit'],"rows"=>"5"]))
             ],
             [
                 'label'   => Form::label('elements', $label['elements'], $formLabelAttr),
-                'element' => Form::textarea('elements', $item['elements']?? null, array_merge($formInputAttr,['placeholder'=>$label['elements'],"rows"=>"5"]))
+                'element' => Form::textarea('elements', $item['elements']?? null, array_merge($formEditorAttr,['placeholder'=>$label['elements'],"rows"=>"5"]))
             ],
             [
                 'label'   => Form::label('prescribe', $label['prescribe'], $formLabelAttr),
-                'element' => Form::textarea('prescribe', $item['prescribe']?? null, array_merge($formInputAttr,['placeholder'=>$label['prescribe'],"rows"=>"5"]))
+                'element' => Form::textarea('prescribe', $item['prescribe']?? null, array_merge($formEditorAttr,['placeholder'=>$label['prescribe'],"rows"=>"5"]))
             ],[
                 'label'   => Form::label('dosage', $label['dosage'], $formLabelAttr),
-                'element' => Form::textarea('dosage', $item['dosage']?? null, array_merge($formInputAttr,['placeholder'=>$label['dosage'],"rows"=>"5"]))
+                'element' => Form::textarea('dosage', $item['dosage']?? null, array_merge($formEditorAttr,['placeholder'=>$label['dosage'],"rows"=>"5"]))
             ],[
                 'label'   => Form::label('note', $label['note'], $formLabelAttr),
-                'element' => Form::textarea('note', $item['note']?? 'Đọc kĩ hướng dẫn sử dụng trước khi dùng.', array_merge($formInputAttr,['placeholder'=>$label['note'],"rows"=>"5"]))
+                'element' => Form::textarea('note', $item['note']?? 'Đọc kĩ hướng dẫn sử dụng trước khi dùng.', array_merge($formEditorAttr,['placeholder'=>$label['note'],"rows"=>"5"]))
             ],[
                 'label'   => Form::label('preserve', $label['preserve'], $formLabelAttr),
-                'element' => Form::textarea('preserve', $item['preserve']?? 'Bảo quản nơi khô mát, tránh ánh sáng trực tiếp và nhiệt độ cao.', array_merge($formInputAttr,['placeholder'=>$label['preserve'],"rows"=>"5"]))
+                'element' => Form::textarea('preserve', $item['preserve']?? 'Bảo quản nơi khô mát, tránh ánh sáng trực tiếp và nhiệt độ cao.', array_merge($formEditorAttr,['placeholder'=>$label['preserve'],"rows"=>"5"]))
             ],[
                 'element' => $inputHiddenID . $inputFileDel .Form::submit('Lưu', ['class'=>'btn btn-primary']),
                 'type'    => "btn-submit-center"
