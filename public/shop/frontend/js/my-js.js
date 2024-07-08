@@ -1,3 +1,788 @@
+(function($) {
+    defaults = {
+        formDataKey: "files",
+        buttonText: "Add Files",
+        buttonClass: "file-preview-button",
+        shadowClass: "file-preview-shadow",
+        tableCss: "file-preview-table",
+        tableRowClass: "file-preview-row",
+        placeholderClass: "file-preview-placeholder",
+        loadingCss: "file-preview-loading",
+        tableTemplate: function() {
+            return "<table class='table table-striped file-preview-table' id='file-preview-table'>" +
+                "<tbody></tbody>" +
+                "</table>";
+        },
+        rowTemplate: function(options) {
+            return "<tr class='" + config.tableRowClass + "'>" +
+                "<td>" + "<img src='" + options.src + "' class='" + options.placeholderCssClass + "' />" + "</td>" +
+                "<td class='filename'>" + options.name + "</td>" +
+                "<td class='filesize'>" + options.size + "</td>" +
+                "<td class='remove-file'><button class='btn btn-danger'>&times;</button></td>" +
+                "</tr>";
+        },
+        loadingTemplate: function() {
+            return "<div id='file-preview-loading-container'>" +
+                "<div id='" + config.loadingCss + "' class='loader-inner ball-clip-rotate-pulse no-show'>" +
+                "<div></div>" +
+                "<div></div>" +
+                "</div>" +
+                "</div>";
+        }
+    }
+
+    if (typeof Humanize == 'undefined' || typeof Humanize.filesize != 'function') {
+        $.getScript("https://cdnjs.cloudflare.com/ajax/libs/humanize-plus/1.5.0/humanize.min.js")
+    }
+
+    var getFileSize = function(filesize) {
+        return Humanize.fileSize(filesize);
+    };
+    var getFileTypeCssClass = function(filetype) {
+        var fileTypeCssClass;
+        fileTypeCssClass = (function() {
+            switch (true) {
+                case /video/.test(filetype):
+                    return 'video';
+                case /audio/.test(filetype):
+                    return 'audio';
+                case /pdf/.test(filetype):
+                    return 'pdf';
+                case /csv|excel/.test(filetype):
+                    return 'spreadsheet';
+                case /powerpoint/.test(filetype):
+                    return 'powerpoint';
+                case /msword|text/.test(filetype):
+                    return 'document';
+                case /zip/.test(filetype):
+                    return 'zip';
+                case /rar/.test(filetype):
+                    return 'rar';
+                default:
+                    return 'default-filetype';
+            }
+        })();
+        return defaults.placeholderClass + " " + fileTypeCssClass;
+    };
+
+    $.fn.uploadPreviewer = function(options, callback) {
+        var that = this;
+
+        if (!options) {
+            options = {};
+        }
+        config = $.extend({}, defaults, options);
+        var buttonText,
+            previewRowTemplate,
+            previewTable,
+            previewTableBody,
+            previewTableIdentifier,
+            currentFileList = [];
+
+        if (window.File && window.FileReader && window.FileList && window.Blob) {
+
+            this.wrap("<span class='btn btn-primary " + config.shadowClass + "'></span>");
+            buttonText = this.parent("." + config.shadowClass);
+            buttonText.prepend("<span><i class='fa fa-arrow-alt-circle-up'></i>" + config.buttonText + "</span>");
+            buttonText.wrap("<span class='" + config.buttonClass + "'></span>");
+
+            previewTableIdentifier = options.preview_table;
+            if (!previewTableIdentifier) {
+                $("span." + config.buttonClass).after(config.tableTemplate());
+                previewTableIdentifier = "table." + config.tableCss;
+            }
+
+            previewTable = $(previewTableIdentifier);
+            previewTable.addClass(config.tableCss);
+            previewTableBody = previewTable.find("tbody");
+
+            previewRowTemplate = options.preview_row_template || config.rowTemplate;
+
+            previewTable.after(config.loadingTemplate());
+
+            previewTable.on("click", ".remove-file", function() {
+                var parentRow = $(this).parent("tr");
+                var filename = parentRow.find(".filename").text();
+                for (var i = 0; i < currentFileList.length; i++) {
+                    if (currentFileList[i].name == filename) {
+                        currentFileList.splice(i, 1);
+                        break;
+                    }
+                }
+                parentRow.remove();
+                $.event.trigger({ type: 'file-preview:changed', files: currentFileList });
+            });
+
+            this.on('change', function(e) {
+                var loadingSpinner = $("#" + config.loadingCss);
+                loadingSpinner.show();
+
+                var reader;
+                var filesCount = e.currentTarget.files.length;
+                $.each(e.currentTarget.files, function(index, file) {
+                    currentFileList.push(file);
+
+                    reader = new FileReader();
+                    reader.onload = function(fileReaderEvent) {
+                        var filesize, filetype, imagePreviewRow, placeholderCssClass, source;
+                        if (previewTableBody) {
+                            filetype = file.type;
+                            if (/image/.test(filetype)) {
+                                source = fileReaderEvent.target.result;
+                                placeholderCssClass = config.placeholderClass + " image";
+                            } else {
+                                source = "";
+                                placeholderCssClass = getFileTypeCssClass(filetype);
+                            }
+                            filesize = getFileSize(file.size);
+                            imagePreviewRow = previewRowTemplate({
+                                src: source,
+                                name: file.name,
+                                placeholderCssClass: placeholderCssClass,
+                                size: filesize
+                            });
+
+                            previewTableBody.append(imagePreviewRow);
+
+                            if (index == filesCount - 1) {
+                                loadingSpinner.hide();
+                            }
+                        }
+                        if (callback) {
+                            callback(fileReaderEvent);
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                });
+
+                $.event.trigger({ type: 'file-preview:changed', files: currentFileList });
+            });
+
+            this.fileList = function() {
+                return currentFileList;
+            }
+
+            this.clearFileList = function() {
+                $('.remove-file').click();
+            }
+
+            this.url = function(url) {
+                if (url != undefined) {
+                    config.url = url;
+                } else {
+                    return config.url;
+                }
+            }
+
+            this._onComplete = function(eventData) {
+                eventData['type'] = 'file-preview:submit:complete'
+                $.event.trigger(eventData);
+            }
+
+            this.submit = function(successCallback, errorCallback) {
+                if (config.url == undefined) throw ('Please set the URL to which I shall post the files');
+
+                if (currentFileList.length > 0) {
+                    var filesFormData = new FormData();
+                    currentFileList.forEach(function(file) {
+                        filesFormData.append(options.formDataKey + "[]", file);
+                    });
+
+                    $.ajax({
+                        type: "POST",
+                        url: config.url,
+                        data: filesFormData,
+                        contentType: false,
+                        processData: false,
+                        xhr: function() {
+                            var xhr = new window.XMLHttpRequest();
+                            xhr.upload.addEventListener("progress", function(evt) {
+                                if (evt.lengthComputable &&
+                                    options != null &&
+                                    options.uploadProgress != null &&
+                                    typeof options.uploadProgress == "function") {
+                                    options.uploadProgress(evt.loaded / evt.total);
+                                }
+                            }, false);
+                            return xhr;
+                        },
+                        success: function(data, status, jqXHR) {
+                            if (typeof successCallback == "function") {
+                                successCallback(data, status, jqXHR);
+                            }
+                            that._onComplete({ data: data, status: status, jqXHR: jqXHR });
+                        },
+                        error: function(jqXHR, status, error) {
+                            if (typeof errorCallback == "function") {
+                                errorCallback(jqXHR, status, error);
+                            }
+                            that._onComplete({ error: error, status: status, jqXHR: jqXHR });
+                        }
+                    });
+                } else {
+                    console.log("There are no selected files, please select at least one file before submitting.");
+                    that._onComplete({ status: 'no-files' });
+                }
+            }
+
+            return this;
+
+        } else {
+            throw "The File APIs are not fully supported in this browser.";
+        }
+    };
+})(jQuery);
+$(document).ready(function() {
+    var feature_product = $('#feature-product-wp .list-item');
+    feature_product.owlCarousel({
+        autoPlay: true,
+        navigation: true,
+        navigationText: false,
+        paginationNumbers: false,
+        pagination: false,
+        stopOnHover: true,
+        items: 5, 
+        itemsDesktop: [1000, 4], 
+        itemsDesktopSmall: [800, 3], 
+        itemsTablet: [600, 2], 
+        itemsMobile: [375, 2] 
+    });
+    var slider = $('#slider-wp .section-detail');
+    slider.owlCarousel({
+        autoPlay: 4500,
+        navigation: false,
+        navigationText: false,
+        paginationNumbers: false,
+        pagination: true,
+        items: 1, 
+        itemsDesktop: [1000, 1],
+        itemsDesktopSmall: [900, 1],
+        itemsTablet: [600, 1],
+        itemsMobile: true
+    });
+    var imgSlider = $('#img-customer');
+    imgSlider.owlCarousel({
+        autoPlay: 4500,
+        navigation: true,
+        navigationText: false,
+        paginationNumbers: false,
+        pagination: false,
+        stopOnHover: true,
+        items: 1,
+        itemsDesktop: [1000, 1],
+        itemsDesktopSmall: [900, 1],
+        itemsTablet: [600, 1],
+        itemsMobile: true 
+    });
+    $('.js-select2').select2();
+    $('.ol1').click(function() {
+        $(this).addClass("activebtn");
+        $('.ol2').removeClass("activebtn");
+        $('#body-nbox').removeClass("product-horizontal");
+    });
+    $('.ol2').click(function() {
+        $(this).addClass("activebtn");
+        $('#body-nbox').addClass("product-horizontal");
+        $('.ol1').removeClass("activebtn");
+    });
+    $('.btn-closenk').click(function() {
+        $('.form-login').css("display", "none");
+        $('.form-search-product').css("display", "none");
+        $('.black-screen').css("display", "none");
+        $('#container').removeClass("fixed-hbd");
+        $('#fixscreen-respon').css("display", "none");
+    });
+    $('.btn-login').click(function() {
+        $('.form-login').css("display", "block");
+        $('.black-screen').css("display", "block");
+        $('.wp-content-login').css("display", "block");
+        $('.wp-content-register').css("display", "none");
+        $('.wp-content-forgetpw').css("display", "none");
+        $('.titlek').removeClass("active-formkn");
+        $('.titlen').addClass("active-formkn");
+        $('#container').addClass("fixed-hbd");
+        $('body,html').stop().animate({ scrollTop: 0 }, 0);
+    });
+
+    $('.btn-login-res').click(function() {
+        $('#head-body-respon').removeClass("slider");
+        $('.form-login').css("display", "block");
+        $('.titlek').removeClass("active-formkn");
+        $('.titlen').addClass("active-formkn");
+        $('#container').addClass("fixed-hbd");
+        $('.wp-content-login').css("display", "block");
+        $('.wp-content-register').css("display", "none");
+        $('.wp-content-forgetpw').css("display", "none");
+        $('.titlek').removeClass("active-formkn");
+        $('.black-screen').css("display", "block");
+        $('#container').addClass("fixed-hbd");
+        $('#fixscreen-respon').css("display", "none");
+    });
+    $('.btn-register').click(function() {
+        $('.form-login').css("display", "block");
+        $('.black-screen').css("display", "block");
+        $('.wp-content-login').css("display", "none");
+        $('.wp-content-register').css("display", "block");
+        $('.wp-content-forgetpw').css("display", "none");
+        $('.titlen').removeClass("active-formkn");
+        $('.titlek').addClass("active-formkn");
+        $('#container').addClass("fixed-hbd");
+    });
+    $('.btn-register-res').click(function() {
+        $('#head-body-respon').removeClass("slider");
+        $('.form-login').css("display", "block");
+        $('.wp-content-login').css("display", "none");
+        $('.wp-content-register').css("display", "block");
+        $('.wp-content-forgetpw').css("display", "none");
+        $('.titlen').removeClass("active-formkn");
+        $('.titlek').addClass("active-formkn");
+        $('.black-screen').css("display", "block");
+        $('#container').addClass("fixed-hbd");
+        $('#fixscreen-respon').css("display", "none");
+    });
+    $('.qpassword').click(function() {
+        $('.form-login').css("display", "block");
+        $('.black-screen').css("display", "block");
+        $('.wp-content-forgetpw').css("display", "block");
+        $('.wp-content-login').css("display", "none");
+        $('.wp-content-register').css("display", "none");
+        $('#container').addClass("fixed-hbd");
+    });
+
+    $('.password .imgm').click(function() {
+        $(this).toggleClass('open');
+        if ($(this).hasClass('open')) {
+            $('.password input').attr('type', 'text');
+        } else {
+            $('.password input').attr('type', 'password');
+        }
+    });
+    $('#check-rules').click(function() {
+        if ($(this).prop("checked") == true) {
+            $('#dang-ky #btn-register').prop("disabled", false);
+        } else if ($(this).prop("checked") == false) {
+            $('#dang-ky #btn-register').prop("disabled", true);
+        }
+
+    });
+
+
+    // tang giam so luong san pham
+    $('.plus1, .minus1').on('click', function(e) {
+        const isNegative = $(e.target).closest('.minus1').is('.minus1');
+        const input = $(e.target).closest('.input-number').find('input');
+        if (input.is('input')) {
+            input[0][isNegative ? 'stepDown' : 'stepUp']()
+        }
+    })
+
+    $('.order-noislogin').on('click', function() {
+        alert('Vui lòng đăng nhập để mua hàng !')
+    });
+    //xoay arrow 180deg
+    $('.iconmnrhv').click(function() {
+        $(this).parents('.parentsmenu').children('.submenu1res').toggleClass('display-vis');
+        $(this).toggleClass('arrow-rotate');
+    });
+    $('#btnmenu-resp').click(function() {
+        $('#fixscreen-respon').css("display", "block");
+        $('#head-body-respon').addClass("slider");
+
+    });
+    
+    $('.vissubmenu').click(function() {
+        $(this).parents('.catparentc').children('.submenua1').toggleClass('display-vis');
+        $(this).toggleClass('arrow-rotate');
+    });
+
+    const head_body_respon = document.getElementById('head-body-respon');
+    const fixscreen_respon = document.getElementById('fixscreen-respon');
+    const closem = document.getElementById('closem');
+    closem.addEventListener('click', () => {
+        $('#head-body-respon').removeClass("slider");
+        $('#fixscreen-respon').css("display", "none");
+    });
+    fixscreen_respon.addEventListener('click', (e) => {
+        if (!head_body_respon.contains(e.target)) {
+            closem.click();
+            $('.form-login').css("display", "none");
+        }
+    });
+
+    $('.catc1').hover(
+        function() {
+            var $this = $(this);
+            $this.data('timeout', setTimeout(function() {
+                $('.black-content').css("display", "block");
+                $('.lc-mask-search').css({
+                    "opacity": 0,
+                    "visibility": "hidden"
+                });
+                $('.ls-history').css("display", "none");
+                $this.find('.content-submenu').css("display", "block");
+            }, 100));
+        },
+        function() {
+            var $this = $(this);
+            clearTimeout($this.data('timeout'));
+            $('.black-content').css("display", "none");
+            $this.find('.content-submenu').css("display", "none");
+        }
+    );
+    $('.icon_cart').hover(
+        function() {
+            $('#dropdown').addClass('opacity1_cartmini');
+        },
+        function() {
+            $('#dropdown').removeClass('opacity1_cartmini');
+        },
+    );
+    $('#reqexport').on('click', function() {
+        if ($(this).prop("checked") == true) {
+            $('.hidden_noreqes').css("display", "block");
+        } else if ($(this).prop("checked") == false) {
+            $('.hidden_noreqes').css("display", "none");
+        }
+        var dcshop = $('input[type="radio"][name="dcshop"]:checked').val();
+    });
+    $('.identity').on('click', function() {
+        identity = $('input[type="radio"][name="identity"]:checked').val();
+        if (identity == 'Công ty') {
+            $('.company').css("display", "block");
+            $('.person').css("display", "none");
+
+        } else {
+            $('.company').css("display", "none");
+            $('.person').css("display", "block");
+
+        }
+    });
+    $('.local-re').on('click', function() {
+        local_re = $('input[type="radio"][name="local-re"]:checked').val();
+        if (local_re == 'Giao hàng tận nơi') {
+            $('.de-home').css("display", "block");
+            $('.de-store').css("display", "none");
+        } else {
+            $('.de-home').css("display", "none");
+            $('.de-store').css("display", "block");
+        }
+    });
+});
+jQuery.validator.addMethod("checkPhone",
+    function() {
+        var flag = false;
+        var phone = $('.phonecart1').val().trim();
+        phone = phone.replace('(+84)', '0');
+        phone = phone.replace('+84', '0');
+        phone = phone.replace('0084', '0');
+        phone = phone.replace(/ /g, '');
+
+        if (phone != '') {
+            var firstNumber = phone.substring(0, 2);
+            if ((firstNumber == '09' || firstNumber == '08' || firstNumber == '03' || firstNumber == '07') && phone.length == 10) {
+                if (phone.match(/^\d{10}/)) {
+                    flag = true;
+                }
+            } else if (firstNumber == '01' && phone.length == 11) {
+                if (phone.match(/^\d{11}/)) {
+                    flag = true;
+                }
+            }
+        }
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checkPhone1",
+    function() {
+        var flag = false;
+        var phone = $('.phonecart2').val().trim();
+        phone = phone.replace('(+84)', '0');
+        phone = phone.replace('+84', '0');
+        phone = phone.replace('0084', '0');
+        phone = phone.replace(/ /g, '');
+
+        if (phone != '') {
+            var firstNumber = phone.substring(0, 2);
+            if ((firstNumber == '09' || firstNumber == '08' || firstNumber == '03' || firstNumber == '07') && phone.length == 10) {
+                if (phone.match(/^\d{10}/)) {
+                    flag = true;
+                }
+            } else if (firstNumber == '01' && phone.length == 11) {
+                if (phone.match(/^\d{11}/)) {
+                    flag = true;
+                }
+            }
+        }
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checkPhone2",
+    function() {
+        var flag = false;
+        var phone = $('.phonecart3').val().trim();
+        phone = phone.replace('(+84)', '0');
+        phone = phone.replace('+84', '0');
+        phone = phone.replace('0084', '0');
+        phone = phone.replace(/ /g, '');
+
+        if (phone != '') {
+            var firstNumber = phone.substring(0, 2);
+            if ((firstNumber == '09' || firstNumber == '08' || firstNumber == '03' || firstNumber == '07') && phone.length == 10) {
+                if (phone.match(/^\d{10}/)) {
+                    flag = true;
+                }
+            } else if (firstNumber == '01' && phone.length == 11) {
+                if (phone.match(/^\d{11}/)) {
+                    flag = true;
+                }
+            }
+        }
+        return flag;
+    }
+);
+
+jQuery.validator.addMethod("checknamecompany",
+    function() {
+        var flag = true;
+        var namecompany = $('#namecompany').val().trim();
+        local_re = $('input[type="radio"][name="identity"]:checked').val();
+        if (document.getElementById('reqexport').checked && local_re == 'Công ty') {
+            if (namecompany.length > 0) {
+                flag = true;
+            } else {
+                flag = false;
+            }
+        } else {
+            flag = true;
+        }
+
+        return flag;
+    }
+);
+
+jQuery.validator.addMethod("checkname1",
+    function() {
+        var flag = true;
+        var name1 = $('#name1').val().trim();
+        local_re = $('input[type="radio"][name="identity"]:checked').val();
+        if (document.getElementById('reqexport').checked && local_re == 'Cá nhân') {
+            if (name1.length > 0) {
+                flag = true;
+            } else {
+                flag = false;
+            }
+        } else {
+            flag = true;
+        }
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checkphone1",
+    function() {
+        var flag = true;
+        var phone1 = $('#phone1').val().trim();
+        local_re = $('input[type="radio"][name="identity"]:checked').val();
+        if (document.getElementById('reqexport').checked && local_re == 'Cá nhân') {
+            if (phone1.length > 0) {
+                flag = true;
+            } else {
+                flag = false;
+            }
+        } else {
+            flag = true;
+        }
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checkaddress1",
+    function() {
+        var flag = true;
+        var address1 = $('#address1').val().trim();
+        local_re = $('input[type="radio"][name="identity"]:checked').val();
+        if (document.getElementById('reqexport').checked && local_re == 'Cá nhân') {
+            if (address1.length > 0) {
+                flag = true;
+            } else {
+                flag = false;
+            }
+        } else {
+            flag = true;
+        }
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checkname2",
+    function() {
+        var flag = true;
+        var name2 = $('#name2').val().trim();
+        local_re = $('input[type="radio"][name="local-re"]:checked').val();
+        if (local_re == 'Giao hàng tận nơi') {
+            if (name2.length > 0) {
+                flag = true;
+            } else {
+                flag = false;
+            }
+        } else {
+            flag = true;
+        }
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checkphone2",
+    function() {
+        var flag = true;
+        var phone2 = $('#phone2').val().trim();
+        local_re = $('input[type="radio"][name="local-re"]:checked').val();
+        if (local_re == 'Giao hàng tận nơi') {
+            if (phone2.length > 0) {
+                flag = true;
+            } else {
+                flag = false;
+            }
+        } else {
+            flag = true;
+        }
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checkcity2",
+    function() {
+        var flag = true;
+        var city2 = $('#city').find(":selected").val();
+        local_re = $('input[type="radio"][name="local-re"]:checked').val();
+        if (local_re == 'Giao hàng tận nơi') {
+            if (city2.length > 0) {
+                flag = true;
+            } else {
+                flag = false;
+            }
+        } else {
+            flag = true;
+        }
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checkdistrict2",
+    function() {
+        var flag = true;
+        var district2 = $('#district2').find(":selected").val();
+        local_re = $('input[type="radio"][name="local-re"]:checked').val();
+        if (local_re == 'Giao hàng tận nơi') {
+            if (district2.length > 0) {
+                flag = true;
+            } else {
+                flag = false;
+            }
+        } else {
+            flag = true;
+        }
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checkwards2",
+    function() {
+        var flag = true;
+        var wards2 = $('#wards2').find(":selected").val();
+        local_re = $('input[type="radio"][name="local-re"]:checked').val();
+        if (local_re == 'Giao hàng tận nơi') {
+            if (wards2.length > 0) {
+                flag = true;
+            } else {
+                flag = false;
+            }
+        } else {
+            flag = true;
+        }
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checkaddressdetail2",
+    function() {
+        var flag = true;
+        var addressdetail2 = $('#addressdetail2').val().trim();
+        local_re = $('input[type="radio"][name="local-re"]:checked').val();
+        if (local_re == 'Giao hàng tận nơi') {
+            if (addressdetail2.length > 0) {
+                flag = true;
+            } else {
+                flag = false;
+            }
+        } else {
+            flag = true;
+        }
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checkcity3",
+    function() {
+        var flag = true;
+        var city3 = $('#city3').val().trim();
+        local_re = $('input[type="radio"][name="local-re"]:checked').val();
+        if (local_re == 'Nhận tại nhà thuốc') {
+            if (city3.length > 0) {
+                flag = true;
+            } else {
+                flag = false;
+            }
+        } else {
+            flag = true;
+        }
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checkdistrict3",
+    function() {
+        var flag = true;
+        var district3 = $('#district3').val().trim();
+        local_re = $('input[type="radio"][name="local-re"]:checked').val();
+        if (local_re == 'Nhận tại nhà thuốc') {
+            if (district3.length > 0) {
+                flag = true;
+            } else {
+                flag = false;
+            }
+        } else {
+            flag = true;
+        }
+        return flag;
+    }
+);
+jQuery.validator.addMethod("checkdcshop",
+    function() {
+        var flag = true;
+        var dcshop = '';
+        var dcshop = $('input[type="radio"][name="dcshop"]:checked').val();
+        local_re = $('input[type="radio"][name="local-re"]:checked').val();
+        if (local_re == 'Nhận tại nhà thuốc') {
+            if (dcshop != undefined) {
+                flag = true;
+            } else {
+                flag = false;
+            }
+        } else {
+            flag = true;
+        }
+        return flag;
+    }
+);
+
+jQuery.validator.addMethod("checknumbershop",
+    function() {
+        var flag = true;
+        var count_store = $('.count-store').val().trim();
+        local_re = $('input[type="radio"][name="local-re"]:checked').val();
+        if (local_re == 'Nhận tại nhà thuốc') {
+            if (count_store > 0) {
+                flag = true;
+            } else {
+                flag = false;
+            }
+        } else {
+            flag = true;
+        }
+        return flag;
+    }
+);
 function isEmail(value) {
     var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     return regex.test(value);

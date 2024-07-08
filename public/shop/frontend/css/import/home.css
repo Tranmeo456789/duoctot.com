@@ -857,59 +857,6 @@ li .wp-discount
     width: 75%;
     margin-left: 2%;
 }
-/* #category-product-wp .list-item {
-    background: #fff;
-}
-
-#category-product-wp .list-item li a {
-    display: block;
-    padding: 10px 18px;
-}
-#category-product-wp .list-item > li:first-child > a{padding-left: 3px;}
-#category-product-wp .list-item li:last-child a {
-    border-bottom: none;
-}
-#category-product-wp .list-item>li:hover{
-    border-bottom: 5px solid #E9212D;
-    z-index: 1;
-}
-#category-product-wp .list-item .sub-menu>li:hover>a {
-    background: #F1F8FF;
-
-}
-.sub-menu1{
-    position: relative;
-}
-#category-product-wp .list-item>li{ position: relative;}
-#category-product-wp .list-item li .arrow{
-    position: absolute;
-    top: 50%;
-    right: 1%;
-    transform: translateY(-50%);
-    color: #666;
-    font-size: 12px;
-}
-#category-product-wp .list-item li .sub-menu{
-    display: none;
-    position: absolute;
-    left: 0;
-    top: 112%;
-    width: 300px;
-    z-index: -1;
-    border: 1px solid #ececec;
-    background: #fff;
-    border-radius: 0px 0px 0px 20px;
-    height: 500px;
-}
-#category-product-wp .list-item li li .sub-menu{
-    left: 100%;
-    top: 0px;
-    width: 800px;
-    z-index: -1;
-    background: #F1F8FF;
-    border-radius: 0px 0px 20px 0px;
-}
-#category-product-wp .list-item li:hover > .sub-menu{ display: block;} */
 
 #list-product-wp .section-detail .list-item li {
     float: left;

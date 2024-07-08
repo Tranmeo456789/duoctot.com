@@ -7,11 +7,11 @@ $(document).ready(function() {
         paginationNumbers: false,
         pagination: false,
         stopOnHover: true,
-        items: 5, //10 items above 1000px browser width
-        itemsDesktop: [1000, 4], //5 items between 1000px and 901px
-        itemsDesktopSmall: [800, 3], // betweem 900px and 601px
-        itemsTablet: [600, 2], //2 items between 600 and 0
-        itemsMobile: [375, 2] // itemsMobile disabled - inherit from itemsTablet option
+        items: 5, 
+        itemsDesktop: [1000, 4], 
+        itemsDesktopSmall: [800, 3], 
+        itemsTablet: [600, 2], 
+        itemsMobile: [375, 2] 
     });
     var slider = $('#slider-wp .section-detail');
     slider.owlCarousel({
@@ -151,18 +151,11 @@ $(document).ready(function() {
         $(this).toggleClass('arrow-rotate');
     });
     $('#btnmenu-resp').click(function() {
-        //$('#container').addClass("fixed-hbd");
         $('#fixscreen-respon').css("display", "block");
         $('#head-body-respon').addClass("slider");
 
     });
     
-    // $(window).resize(function(event) {
-    //     $('#head-body-respon').removeClass("slider");
-    //     $('#fixscreen-respon').css("display", "none");
-    // });
-
-    //xo danh muc cap 1
     $('.vissubmenu').click(function() {
         $(this).parents('.catparentc').children('.submenua1').toggleClass('display-vis');
         $(this).toggleClass('arrow-rotate');
@@ -181,16 +174,7 @@ $(document).ready(function() {
             $('.form-login').css("display", "none");
         }
     });
-    // $('.content-submenu').hover(
-    //     function () {
-    //         $('.black-content').css("display", "block");
-    //         //$('.content-submenu').css("display", "block");
-    //     },
-    //     function () {
-    //         $('.black-content').css("display", "none");
-    //         //$('.content-submenu').css("display", "none");
-    //     }
-    // );
+
     $('.catc1').hover(
         function() {
             var $this = $(this);

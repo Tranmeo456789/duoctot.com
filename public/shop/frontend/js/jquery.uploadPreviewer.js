@@ -31,7 +31,6 @@
         }
     }
 
-    //NOTE: Depends on Humanize-plus (humanize.js)
     if (typeof Humanize == 'undefined' || typeof Humanize.filesize != 'function') {
         $.getScript("https://cdnjs.cloudflare.com/ajax/libs/humanize-plus/1.5.0/humanize.min.js")
     }
@@ -39,13 +38,6 @@
     var getFileSize = function(filesize) {
         return Humanize.fileSize(filesize);
     };
-
-    // NOTE: Ensure a required filetype is matching a MIME type
-    // (partial match is fine) and not matching against file extensions.
-    //
-    // Quick ref:  http://www.sitepoint.com/web-foundations/mime-types-complete-list/
-    //
-    // NOTE: For extended support of mime types, we should use https://github.com/broofa/node-mime
     var getFileTypeCssClass = function(filetype) {
         var fileTypeCssClass;
         fileTypeCssClass = (function() {

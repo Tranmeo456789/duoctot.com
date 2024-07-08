@@ -279,11 +279,6 @@
     height: 280px;
 }
 
-.title_cathd {
-    /* padding-left: 40px;
-    position: relative; */
-}
-
 .title_cathd h1 {
     font-family: 'Inter';
     font-style: normal;
@@ -496,7 +491,6 @@
     margin-right: 0px;
 }
 
-/* The switch - the box around the slider */
 .switch {
     position: relative;
     display: inline-block;
@@ -504,14 +498,12 @@
     height: 20px;
 }
 
-/* Hide default HTML checkbox */
 .switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
 
-/* The slider */
 .slider {
     position: absolute;
     cursor: pointer;
@@ -550,7 +542,6 @@ input:checked+.slider:before {
     transform: translateX(26px);
 }
 
-/* Rounded sliders */
 .slider.round {
     border-radius: 34px;
 }
@@ -558,12 +549,6 @@ input:checked+.slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
-
-/* .title_catdetail img {
-    width: 30px;
-    position: absolute;
-    left: -32px;
-} */
 
 .title_catdetail span {
     font-family: 'Helvetica Neue';
@@ -579,26 +564,6 @@ input:checked+.slider:before {
     padding: 10px 20px;
 }
 
-/* #cat_detail .body_catdetail li {
-
-    float: left;
-    margin-right: 20px;
-    margin-bottom: 20px;
-
-} */
-
-/* #cat_detail .body_catdetail li .item_cat4{
-    position: relative;
-    padding: 10px 20px 10px 60px;
-    border-radius: 30px;
-    border: 1px solid #B0C1DB;
-  } */
-/* #cat_detail .body_catdetail li img{
-    position: absolute;
-    top: 1px;
-    left: 10px;
-    z-index: 100;
-  } */
 #feature-product-wp .list-item a {
     display: block;
 }
@@ -679,9 +644,6 @@ input:checked+.slider:before {
 }
 
 #feature-product-wp .headf img {
-    /* position: absolute;
-    top: 0px;
-    left: 0px; */
     width: 30px;
 }
 
