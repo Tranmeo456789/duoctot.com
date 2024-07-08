@@ -1,7 +1,7 @@
 @php
     $title = $item['name'] ?? $item['title'] ?? 'Sàn thương mại điện tử trong y dược Tdoctor';
     $imageItem = $item['image'] ?? 'images/shop/logo_topbar3.png';
-    $benefit = $item['benefit'] ?? $item['description'] ?? 'Sàn thương mại điện tử trong y dược Tdoctor chuyên cung cấp các TPCN, thuốc và thiết bị y tế';
+    $benefit = $item['benefit'] ?? $item['description'] ?? 'Tdoctor là một giải pháp cho các nhà thuốc, các doanh nghiệp, công ty dược phẩm tăng doanh thu một cách nhanh chóng.';
     $metaKeywords = $item['meta_keywords']?? 'Nhà thuốc trực tuyến, mua thuốc online, tư vấn dược phẩm, giao thuốc tận nhà, thuốc giảm đau, vitamin bổ sung';
 @endphp
 <!DOCTYPE html>
@@ -9,6 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{$benefit}}">
     <meta property="og:title" content="{{ $title }}">
     <meta property="og:image" content="{{ asset($imageItem) }}">
     <meta property="og:description" content="{{$benefit}}">

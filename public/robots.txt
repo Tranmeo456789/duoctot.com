@@ -1,2 +1,5 @@
-User-agent: *
-Disallow:
+User-agent: * 
+Disallow: 
+
+Sitemap: https://tdoctor.net/sitemap.xml
+Sitemap: https://shop.tdoctor.vn/sitemap.xml

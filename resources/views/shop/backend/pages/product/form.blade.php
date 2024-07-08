@@ -30,7 +30,7 @@
         [
             'label'   => HTML::decode(Form::label('slug', $label['slug'], $formLabelAttr)),
             'prefix' => url('/').'/chi-tiet-san-pham/',
-            'element' => Form::text('slug', $item['slug']??null, array_merge($formInputAttr,['placeholder'=>$label['slug']])),
+            'element' => Form::text('slug', $item['slug']??null, array_merge($formInputAttr,['placeholder'=>'Nếu để trống tự động lấy theo slug tên thuốc'])),
             'type'    => "url-page",
             'widthInput' => 'col-12',
         ],

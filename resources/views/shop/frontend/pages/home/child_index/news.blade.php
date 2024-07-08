@@ -4,7 +4,7 @@
     $firstAricle = $itemsArticle[0];
     unset($itemsArticle[0]);
 @endphp
-<div><img src="{{asset('images/shop/baner.png')}}" alt="tdoctor"></div>
+<div><img loading="lazy" src="{{asset('images/shop/banner4.jpg')}}" alt="tdoctor" style="width: 100%;"></div>
 <div class="newsh mt-3 mt-lg-5">
     @include("$moduleName.templates.box_title_product",['title' => 'Tin tức và góc sức khỏe','classBackground'=>'bg-info','img'=>'news1.png'])
     <div class="row px-2">
