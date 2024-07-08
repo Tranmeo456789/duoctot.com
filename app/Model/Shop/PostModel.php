@@ -5,8 +5,6 @@ use Session;
 use App\Http\Requests\Request;
 use Illuminate\Database\Eloquent\Model;
 use App\Model\Shop\BackEndModel;
-use App\Model\Shop\WarehouseModel;
-use App\Model\Shop\CatProductModel;
 use App\Helpers\HttpClient;
 use Illuminate\Support\Str;
 use DB;
@@ -91,6 +89,9 @@ class PostModel extends BackEndModel
             $query = $this::with('catPost')->select('id','title','meta_keywords','description','content','slug','image','cat_post_id','created_at', 'updated_at');
             if (isset($params['group_id'])){
                 $query->whereIn('id',$params['group_id']);
+            }
+            if (isset($params['cat_post_id'])){
+                $query->where('cat_post_id',$params['cat_post_id']);
             }
             if(isset($params['offset'])){
                 $query->skip($params['offset']);

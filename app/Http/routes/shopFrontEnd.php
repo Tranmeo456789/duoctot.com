@@ -19,6 +19,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('/ajax-filter-product-object','HomeController@ajax_filter')->name('fe.home.ajaxfilter');
     
     Route::get('/tin-tuc','PostController@index')->name('fe.post');
+    Route::get('/danh-muc-tin-tuc/{slug}','PostController@listPostOfCat')->name('fe.post.listPostOfCat');
     Route::get('/tin-tuc/{slug}.html','PostController@detail')->name('fe.post.detail');
 
     Route::post('/hoan-tat-dat-hang','OrderController@completed')->name('fe.order.completed');

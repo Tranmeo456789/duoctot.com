@@ -12,7 +12,10 @@ use App\Helpers\MyFunction;
                 <a href="{{route('home')}}">Trang chủ</a>
             </li>
             <li>
-                <span>Tin tức</span>
+                <a href="{{route('fe.post')}}">Tin tức</a>
+            </li>
+            <li>
+                <span>{{$itemCat['name']}}</span>
             </li>
         </ul>
     </div>

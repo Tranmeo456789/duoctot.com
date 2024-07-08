@@ -16,7 +16,7 @@ $timePost = MyFunction::formatDateLongTime($item['created_at']);
                 <a href="{{route('fe.post')}}">Tin tức</a>
             </li>
             <li>
-                <p>{{$item->catPost->name}}</p>
+                <a href="{{route('fe.post.listPostOfCat',$item->catPost->name_url)}}">{{$item->catPost->name}}</a>
             </li>
         </ul>
     </div>
@@ -26,7 +26,37 @@ $timePost = MyFunction::formatDateLongTime($item['created_at']);
         {!! $item['content'] !!}
     </div>
 </div>
-<div class="wp-inner mt-2">
+<div class="wp-inner mt-3">
+    @include("$moduleName.templates.box_title_product",['title' => 'Tin liên quan','img'=>'mat.png'])
+    <div class="mb-2">
+        <div class="row">
+            @foreach($listItemRelate as $val)
+            <div class="col-xl-6 col-lg-12 newsh py-2">
+                <div class="news-content-left">
+                    <ul class="list-unstyled">
+                        <li class="d-flex">
+                            <a href="{{route('fe.post.detail',$val['slug'])}}" class="wp-thumb-item d-block">
+                                <img src="{{asset($val['image'])}}" alt="">
+                            </a>
+                            <div class="nctright pl-2">
+                                <div class="news-known d-flex mb-1">
+                                    <p class="text-primary">{{$val->catPost->name??''}}</p>
+                                </div>
+                                <a class="title-new-left mb-1" href="{{route('fe.post.detail',$val['slug'])}}">
+                                    <p class="truncate2 pb-0">{{$val['title']}}</p>
+                                </a>
+                                <div class="icon-oclock d-flex align-items-center">
+                                    <img src="{{asset('images/shop/oclock.png')}}" alt="">
+                                    <div class="ml-2">{{MyFunction::formatDateFrontend($val['created_at'])}}</div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div>

@@ -3,6 +3,7 @@
 namespace App\Model\Shop;
 
 use App\Model\Shop\BackEndModel;
+use App\Model\Shop\PostModel;
 use DB;
 
 class CatalogModel extends BackEndModel
@@ -28,9 +29,14 @@ class CatalogModel extends BackEndModel
     {
         $result = null;
         if ($options['task'] == 'get-item') {
-            $result = self::select('id','name')
-                            ->where('id', $params['id'])
-                            ->first();
+            $query = self::select('id','name','name_url');
+            if (isset($params['id'])){
+                $query=$query->where('id', $params['id']);
+            }
+            if (isset($params['name_url'])){
+                $query=$query->where('name_url', $params['name_url']);
+            }
+            $result=  $query->first();
         }
         return $result;
     }
