@@ -2060,7 +2060,7 @@ $(document).on('click', '.submit-comment', function(event) {
     $('.modal-backdrop').remove();
     $('#ratingModal').modal('hide');
     var content = $(this).closest('.content-quest').find('textarea[name="content"]').val();
-    var rating = $(this).attr("data-rating") ?? null;
+    var rating = $(this).attr("data-rating") !== undefined ? $(this).attr("data-rating") : null;
     var trimmedContent = content.trim();
     if (!rating) {
         var trimmedContent = content.trim();
