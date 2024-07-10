@@ -121,6 +121,7 @@
                 'discount_tdoctor'=>'Chiết khấu NCC cho Tdoctor(%)',
                 'description'=>'Mô tả ngắn',
                 'meta_keywords'=>'Meta Keyword',
+                'meta_description'=>'Meta Description',
                 'slug'=>'Url trang'
             ],
             'type_user' => [

@@ -198,6 +198,12 @@
                 'type'    => "fileAttachPreview",
                 'widthInput' => 'col-11' . (Session::get('user')['user_id'] == 864108238 ? '' : ' d-none'),
             ],[
+                'label'   =>  HTML::decode(Form::label('meta_keywords', $label['meta_keywords'] .  $star, $formLabelAttr)),
+                'element' => Form::textarea('meta_keywords', $item['meta_keywords']?? null, array_merge($formInputAttr,['placeholder'=>$label['meta_keywords'],"rows"=>"5"]))
+            ],[
+                'label'   =>  HTML::decode(Form::label('meta_description', $label['meta_description'] .  $star, $formLabelAttr)),
+                'element' => Form::textarea('meta_description', $item['meta_description']?? null, array_merge($formInputAttr,['placeholder'=>$label['meta_description'],"rows"=>"5"]))
+            ],[
                 'label'   => HTML::decode(Form::label('general_info', $label['general_info'] .  $star, $formLabelAttr)),
                 'element' => Form::textarea('general_info', $item['general_info']?? null, array_merge($formEditorAttr,['placeholder'=>$label['general_info'],'id'=>'general_info']))
             ],[
