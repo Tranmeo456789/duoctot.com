@@ -51,6 +51,9 @@ $listCatAll=(new CatProductModel())->listItems(null, ['task'  => 'list-items-fro
     <li class="">
         <a href="https://tdoctor.vn/danh-sach-nha-thuoc" target="_blank">Nhà thuốc</a>
     </li>
+    <li class="">
+        <a href="https://tdoctor.vn/danh-sach-shop" target="_blank">Shop</a>
+    </li>
     <li>
         <a href="{{route('fe.booking_online')}}">@lang('lang.onlinebooking')</a>
     </li>

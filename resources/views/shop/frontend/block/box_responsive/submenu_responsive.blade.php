@@ -36,6 +36,13 @@
             </div>
         </div>
     </li>
+    <li>
+        <div class="container-menures position-relative parentsmenu">
+            <div class=" pr-4">
+                <a href="https://tdoctor.vn/danh-sach-shop" target="_blank">Shop</a>
+            </div>
+        </div>
+    </li>
     <li class="">
         <div class="container-menures position-relative parentsmenu">
             <a href="https://tdoctor.vn/booking-online">@lang('lang.onlinebooking')</a>
