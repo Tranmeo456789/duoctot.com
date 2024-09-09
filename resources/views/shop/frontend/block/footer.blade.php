@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-xl-3 col-lg-12">
                 <h6 class="mb-3">TDOCTOR</h6>
-                <p><a href="https://tdoctor.vn/vechungtoi">Về chúng tôi</a></p>
+                <p><a href="{{route('fe.home.pageAboutUs')}}">Về chúng tôi</a></p>
                 <p><a href="https://tdoctor.vn/lienhe">Liên hệ</a></p>
                 <p><a href="{{route('fe.post')}}">Tin tức</a></p>
                 <p><a href="https://tdoctor.vn/quytrinh-giaiquyet-tranhchap">Quy trình giải quyết tranh chấp</a></p>

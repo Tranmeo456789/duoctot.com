@@ -128,4 +128,10 @@ class HomeController extends ShopFrontEndController
             'title'=>$title
         ]);
     }
+    public function pageAboutUs(){
+        $title = 'Về chúng tôi | Tdoctor';
+        return view("$this->pathViewController.about_us",[
+            'title'=>$title
+        ]);
+    }
 }
