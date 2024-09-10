@@ -63,22 +63,7 @@
             <br />
             <br />
             <div class="media" id="leader">
-                <h2>4. BÁC SĨ NGUYỄN VĂN HÒA</h2>
-                <img style="width: 150px;margin-right: 70px;" src="{{ asset('public/shop/frontend/images/aboutUs/BS-HOA-022-1.jpg') }}" alt="Nguyễn Văn Hòa" />
-                <p>
-                    <b class="cl-b">Chức danh:</b> <b>GIÁM ĐỐC CHUYÊN MÔN</b>
-                    <br><br>
-                    <b class="cl-b">Chuyên môn:</b> <b>
-                        Tốt nghiệp bác sĩ chuyên khoa răng hàm mặt tại đại học Harvard, chuyên khoa sâu về phẫu thuật nhỏ răng và dán răng veneer
-                    </b>
-                    <br><br>
-                <p><b class="cl-b">Kinh nghiệm:</b><b>Chăm sóc nụ cười thành công cho hơn hàng trăm nghìn khách hàng, trong đó có rất nhiều người nổi tiếng như nhạc sĩ Huy Tuấn, ca sĩ Đức Phúc, Masterchef Tuấn Hải, diễn viên Hoa Thúy, DJ Trang Moon, MC Minh Hà,...</b></p>
-                </p>
-            </div>
-            <br />
-            <br />
-            <div class="media" id="leader">
-                <h2>5. LEE SANG MOK</h2>
+                <h2>4. LEE SANG MOK</h2>
                 <img style="width: 150px;margin-right: 70px;" src="{{ asset('public/shop/frontend/images/aboutUs/LeeSangMok.jpg') }}" alt="Lee Sang Mok" />
                 <p>
                     <b class="cl-b">Chức danh:</b> <b>PHÓ GIÁM ĐỐC</b>
@@ -94,7 +79,7 @@
             <br />
             <br />
             <div class="media" id="leader">
-                <h2>6. KHUẤT NGUYÊN NGỌC</h2>
+                <h2>5. KHUẤT NGUYÊN NGỌC</h2>
                 <img src="{{asset('public/shop/frontend/images/aboutUs/KhuatNguyenNgoc.jpg')}}" alt="Sunil Shroff">
                 <p>
                     <b class="cl-b">Chức danh:</b> <b>TRƯỞNG NHÓM KINH DOANH </b>
@@ -108,7 +93,7 @@
                 </p>
             </div>
             <div class="media" id="leader">
-                <h2>7. MR TAL RUSHINEK </h2>
+                <h2>6. MR TAL RUSHINEK </h2>
                 <img src="{{asset('public/shop/frontend/images/aboutUs/mrTalRushinek.jpg')}}" alt="Sunil Shroff">
                 <p>
                     <b class="cl-b">Chức danh:</b> <b>GIÁM ĐỐC SẢN PHẨM </b>
@@ -122,7 +107,7 @@
                 </p>
             </div>
             <div class="media" id="leader">
-                <h2>8. MÃ THÀNH DANH</h2>
+                <h2>7. MÃ THÀNH DANH</h2>
                 <img style="height:200px" src="{{asset('public/shop/frontend/images/aboutUs/MaThanhDanh.jpg')}}" alt="Sunil Shroff">
                 <p>
                     <b class="cl-b">Chức danh:</b> <b>GIÁM ĐỐC CHIẾN LƯỢC </b>
@@ -135,22 +120,7 @@
                 </p>
             </div>
             <div class="media" id="leader">
-                <h2>9. NGUYỄN VĂN TÙNG</h2>
-                <img src="{{asset('public/shop/frontend/images/aboutUs/NguyenVanTung.jpg')}}" alt="Sunil Shroff">
-                <p>
-                    <b class="cl-b">Chức danh:</b> <b>GIÁM ĐỐC TRUYỀN THÔNG </b>
-                    <br><br>
-                    <b class="cl-b">Chuyên môn:</b> <b>
-                        Quản lý kinh doanh, Nghiệp vụ báo chí
-                    </b>
-                    <br><br>
-                    <b class="cl-b">Trường đào tạo:</b> <b>Đại Học Công nghiệp Hà Ncdội</b>
-                    <br><br>
-                    <b class="cl-b">Kinh nghiệm: </b><span style="text-align: justify;font-size: 18px;">15 năm kinh nghiệm trong lĩnh vực tài chính</span>
-                </p>
-            </div>
-            <div class="media" id="leader">
-                <h2>10. NGUYỄN THẾ SƠN</h2>
+                <h2>8. NGUYỄN THẾ SƠN</h2>
                 <img src="{{asset('public/shop/frontend/images/aboutUs/NguyenTheSon.png')}}" alt="Sunil Shroff">
                 <p>
                     <b class="cl-b">Chức danh:</b> <b>GIÁM ĐỐC MẢNG DƯỢC VÀ THỰC PHẨM CHỨC NĂNG </b>
@@ -165,7 +135,7 @@
                 </p>
             </div>
             <div class="media" id="leader">
-                <h2>11. NGUYỄN XUÂN HOÀNG</h2>
+                <h2>9. NGUYỄN XUÂN HOÀNG</h2>
                 <img src="{{asset('public/shop/frontend/images/aboutUs/NguyenXuanHoang.jpg')}}" alt="">
                 <p>
                     <b class="cl-b">Chức danh:</b> <b>TRƯỞNG PHÒNG KINH DOANH </b>
@@ -180,22 +150,7 @@
                 </p>
             </div>
             <div class="media" id="leader">
-                <h2>12. NGUYỄN THỊ THÙY LINH</h2>
-                <img src="{{asset('public/shop/frontend/images/aboutUs/NguyenThiThuyLinh.jpg')}}" alt="">
-                <p>
-                    <b class="cl-b">Chức danh:</b> <b>TRƯỞNG PHÒNG KINH DOANH TDENTIST</b>
-                    <br><br>
-                    <b class="cl-b">Chuyên môn:</b> <b>
-                        Công nghệ thông tin
-                    </b>
-                    <br><br>
-                    <b class="cl-b">Trường đào tạo:</b> <b>Kỹ sư công nghệ thông tin của ĐH Hải Phòng</b>
-                    <br><br>
-                    <b class="cl-b">Kinh nghiệm: </b><span style="text-align: justify;font-size: 18px;"> <b class="cl-b">Kinh nghiệm: </b><span style="text-align: justify;font-size: 18px;">nhiều năm quản lý và điều hành các hãng lớn như FPT telecom chi nhánh Hải Dương, bảo hiểm Manulife, ngân hàng VPbank khu vực Ba Đình, Chứng khoán VPS </span></span>
-                </p>
-            </div>
-            <div class="media" id="leader">
-                <h2>13. LƯU THU QUANG</h2>
+                <h2>10. LƯU THU QUANG</h2>
                 <img src="{{asset('public/shop/frontend/images/aboutUs/luuthuquang.jpg')}}" alt="Sunil Shroff">
                 <p>
                     <b class="cl-b">Chức danh:</b> <b>CỐ VẤN CHIẾN LƯỢC </b>
@@ -210,22 +165,7 @@
             <br />
             <br />
             <div class="media" id="leader">
-                <h2>14. NGUYỄN THÀNH ĐẠT</h2>
-                <img src="{{asset('public/shop/frontend/images/aboutUs/nguyenthanhdat01.jpg')}}" alt="Sunil Shroff">
-                <p>
-                    <b class="cl-b">Chức danh:</b> <b>CỐ VẤN CHIẾN LƯỢC </b>
-                    <br><br>
-                    <b class="cl-b">Chuyên môn:</b> <b>
-                        BÁC SĨ CHUYÊN KHOA 1 RĂNG HÀM MẶT
-                    </b>
-                    <br><br>
-                    <b class="cl-b">Trường đào tạo:</b> <b> ĐẠI HỌC Y DƯỢC CẦN THƠ</b>
-                </p>
-            </div>
-            <br />
-            <br />
-            <div class="media" id="leader">
-                <h2>15. LƯƠNG MỘNG ÁI NHI</h2>
+                <h2>11. LƯƠNG MỘNG ÁI NHI</h2>
                 <img src="{{asset('public/shop/frontend/images/aboutUs/luongmongainhi.jpg')}}" alt="Sunil Shroff">
                 <p>
                     <b class="cl-b">Chức danh:</b> <b>CỐ VẤN CHIẾN LƯỢC </b>
@@ -247,7 +187,7 @@
             </div>
             <p>Bây giờ người bệnh có thể tương tác với bác sĩ trực tiếp mọi lúc mọi nơi</p>
             <br>
-            <h4 class="h4-abu">2. Văn hóa tại <a class="link-p" href="https://tdoctor.vn/">www.tdoctor.vn</a></h4>
+            <h4 class="h4-abu">2. Văn hóa tại <a class="link-p" href="https://tdoctor.net/">www.tdoctor.net</a></h4>
             <p class="p-abu">Chúng tôi là mô hình công bằng với hệ thống tổ chức phẳng, chúng tôi tôn trọng chuyên môn của các bác sĩ giỏi, nhiều kinh nghiệm và tâm huyết với nghề. Chúng tôi luôn tôn trọng người dùng là bệnh nhân. Với chúng tôi bệnh nhân chính là đối tượng được phục vụ, là trung tâm của hệ thống</p>
             <div class="div-abu" style="text-align:center">
                 <img style="width: 60%;" src="{{asset('public/shop/frontend/images/aboutUs/2.jpg')}}">

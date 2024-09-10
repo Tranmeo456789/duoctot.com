@@ -39,7 +39,7 @@
     <li>
         <div class="container-menures position-relative parentsmenu">
             <div class=" pr-4">
-                <a href="https://tdoctor.vn/danh-sach-shop" target="_blank">Shop</a>
+                <a href="{{route('fe.product.listShop')}}">Shop</a>
             </div>
         </div>
     </li>

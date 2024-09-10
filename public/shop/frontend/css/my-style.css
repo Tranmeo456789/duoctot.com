@@ -6210,6 +6210,104 @@ input[type="radio"] {
     color: #2fa4e7;
     font-weight: bold;
 }
+#detail-drugstore img {
+    transform: scale(1.0);
+  }
+  .btn-primary  {
+    margin: 5px 0;
+  }
+  
+  .wp-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .wp-img img {
+    transition: transform 0.3s ease;
+    vertical-align: middle;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+  }
+  .w-40 {
+    width: 40px;
+  }
+  .page-item .page-link {
+    font-size: 1.15rem;
+    width: 40px;
+    height: 40px;
+  }
+  .page-link:hover {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  /* start danh sach nha thuoc moi */
+  .banner-tdoctor{
+      background-image: linear-gradient(0deg, #ccf3ff 0%, #83e2ff 100%);
+      border: 1px solid #06afe3;
+    }
+    .banner-tdoctor img{
+      transform: scale(1,1);
+    }
+    .banner-tdoctor .wp-img>img{
+      max-width: 70px;
+    }
+    .banner-tdoctor span.title-first{
+      font-size: 11px;
+      line-height: 20px;
+      color: #000000;
+      font-family: "Arial";
+      text-align: right;
+      position: absolute;
+        right: 10px;
+        bottom: -10px;
+    }
+    .banner-tdoctor span.title{
+    font-size: 18px;
+    line-height: 22px;
+    color: #000000;
+    font-family: "Arial";
+    }
+    .form-normally .select2-container--default .select2-selection--single{
+      height: 42px;
+      display: flex;
+      align-items: center;
+    }
+    .form-normally .select2-container--default .select2-selection--single .select2-selection__arrow {
+      height: 32px;
+    }
+    .form-normally .form-input-group .form-group .input-group {
+      height: 42px;
+    }
+    #list-drugstore .custom-thead {
+      background-color: #ffcccc;
+    }
+  
+    #list-drugstore .table-bordered .custom-thead th {
+      border-bottom: 1px solid #eae1e1;
+    }
+    .buy-ads .title{
+      min-height: 53px;
+      margin-bottom: 0;
+      padding-top: 5px;
+      font-size: 15px;
+    }
+    .height-40{
+      height: 40px;
+    }
+    .flex-column-space{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+    .check-input-readonly[readonly] {
+        pointer-events: none;
+      }
+      .table-list-drugstore .wp-img>img{
+          width: 150px;
+          height: 120px;
+      }
 /*RESPONSIVE*/
 @media screen and (max-width: 1400px) {
     #head-body #main-menu>li>a {

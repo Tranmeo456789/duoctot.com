@@ -16,6 +16,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('/tim-kiem-san-pham-danh-sach-ngan','ProductController@searchListProductShort')->name('fe.product.searchListProductShort');
     Route::get('/load-more-products','ProductController@loadMoreProducts')->name('fe.product.loadMoreProducts');
     Route::get('/them-comment-product','ProductController@addCommentProduct')->name('fe.product.addCommentProduct');
+   // Route::post('/loc-drugstore-trong-danh-sach','ProductController@filterDrugstore')->name('fe.product.filterDrugstore');
     
     Route::get('/ajax-filter-product-object','HomeController@ajax_filter')->name('fe.home.ajaxfilter');
     
@@ -67,6 +68,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('loc-san-pham-trong-danh-muc','CatController@filterProduct')->name('fe.cat.filterProduct');
     
     Route::get('/sitemap.xml', 'SiteMapController@sitemapPage');
+    Route::get('danh-sach-shop','ProductController@listShop')->name('fe.product.listShop');
     Route::get('{slug}.html','ProductController@drugstore')->name('fe.product.drugstore');
 
 });
