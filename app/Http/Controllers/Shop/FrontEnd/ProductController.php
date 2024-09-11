@@ -132,10 +132,15 @@ class ProductController extends ShopFrontEndController
     }
     public function drugstore(Request $request){
         $shopId=$request->shopId;
+        $userInfo=(new UsersModel)->getItem(['user_id' => $shopId],['task'=>'get-item']);
         $productDrugstore=[];
         $listIdProductAdd=[1894, 1895, 1899];
+        if (isset($userInfo['user_type_id']) && $userInfo['user_type_id'] == 9) {
+            $listIdProductAdd = [];
+        } else {
+            $listIdProductAdd = [1894, 1895, 1899];
+        }
         $productDrugstore = $this->model->listItems(['group_id'=>$listIdProductAdd, 'user_id'=>$shopId], ['task' => 'frontend-list-item-shop']);
-        $userInfo=(new UsersModel)->getItem(['user_id' => $shopId],['task'=>'get-item']);
         if (!$userInfo) {
             return redirect()->route('home');
         }

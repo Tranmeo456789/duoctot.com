@@ -58,7 +58,7 @@
                             <img src="{{asset('images/shop/dc1.png')}}" alt="tdoctor">
                         </div>
                     </div>
-                    <p>Trụ sở chính: V7B07 Shophouse Terra An Hưng, Đường Nguyễn Thanh Bình, Hà Đông, Hà Nội</p>
+                    <p>Số 209, Đường 30/4, Phường Xuân Khánh, Quận Ninh Kiều, Thành phố Cần Thơ</p>
                 </div>
                 <div class="d-flex mb-2">
                     <div>
