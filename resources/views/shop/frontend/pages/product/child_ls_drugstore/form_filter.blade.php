@@ -38,7 +38,7 @@
 @endphp
 {{ Form::open([
     'method'         => 'GET',
-    'url'            => route('fe.product.listShop'),
+    'url'            => route('fe.product.listDrugstore'),
     'accept-charset' => 'UTF-8',
     'class'          => 'form-in-modal',
     'id'             => '' ])  }}

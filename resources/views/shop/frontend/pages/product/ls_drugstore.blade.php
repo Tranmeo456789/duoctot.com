@@ -8,15 +8,15 @@
                 <a href="{{route('home')}}" title="">Trang chủ</a>
             </li>
             <li>
-                <span>Danh sách Shop</span>
+                <span>Danh sách Nhà thuốc</span>
             </li>
         </ul>
     </div>
     <div class="mb-3">
-        @include("$moduleName.pages.$controllerName.child_ls_shop.form_filter")
+        @include("$moduleName.pages.$controllerName.child_ls_drugstore.form_filter")
     </div>
     <div class="mb-3">
-        @include("$moduleName.pages.$controllerName.child_ls_shop.table_list_shop",['items'=>$items])
+        @include("$moduleName.pages.$controllerName.child_ls_drugstore.table_list_drugstore",['items'=>$items])
     </div>
 </div>
 <div class="service-tdoctor mt-3 mt-lg-4">

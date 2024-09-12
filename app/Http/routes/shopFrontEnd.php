@@ -69,6 +69,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     
     Route::get('/sitemap.xml', 'SiteMapController@sitemapPage');
     Route::get('danh-sach-shop','ProductController@listShop')->name('fe.product.listShop');
+    Route::get('danh-sach-nha-thuoc','ProductController@listDrugstore')->name('fe.product.listDrugstore');
     Route::get('{slug}.html','ProductController@drugstore')->name('fe.product.drugstore');
 
 });

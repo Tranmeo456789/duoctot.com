@@ -32,7 +32,7 @@
     <li>
         <div class="container-menures position-relative parentsmenu">
             <div class=" pr-4">
-                <a href="https://tdoctor.vn/danh-sach-nha-thuoc" target="_blank">Nhà thuốc</a>
+                <a href="{{route('fe.product.listDrugstore')}}" >Nhà thuốc</a>
             </div>
         </div>
     </li>
