@@ -79,7 +79,21 @@
             <br />
             <br />
             <div class="media" id="leader">
-                <h2>5. KHUẤT NGUYÊN NGỌC</h2>
+                <h2>5. BÁC SĨ TRƯƠNG THANH SƠN</h2>
+                <img src="{{asset('public/shop/frontend/images/aboutUs/bs-thanhson.jpg')}}" alt="Sunil Shroff">
+                <p>
+                    <b class="cl-b">Chức danh:</b> <b>Bác sĩ chuyên khoa 2 ngoại tiêu hóa gan mật </b>
+                    <br><br>
+                    <b class="cl-b">Chuyên môn:</b> <b>
+                        Founder Trung Sơn pharma
+                    </b>
+                    <br><br>
+                    <br><br>
+                    <b class="cl-b">Kinh nghiệm: </b> <b> 25 năm Bệnh viện đa khoa TW Cần Thơ</b>
+                </p>
+            </div>
+            <div class="media" id="leader">
+                <h2>6. KHUẤT NGUYÊN NGỌC</h2>
                 <img src="{{asset('public/shop/frontend/images/aboutUs/KhuatNguyenNgoc.jpg')}}" alt="Sunil Shroff">
                 <p>
                     <b class="cl-b">Chức danh:</b> <b>TRƯỞNG NHÓM KINH DOANH </b>
@@ -93,7 +107,7 @@
                 </p>
             </div>
             <div class="media" id="leader">
-                <h2>6. MR TAL RUSHINEK </h2>
+                <h2>7. MR TAL RUSHINEK </h2>
                 <img src="{{asset('public/shop/frontend/images/aboutUs/mrTalRushinek.jpg')}}" alt="Sunil Shroff">
                 <p>
                     <b class="cl-b">Chức danh:</b> <b>GIÁM ĐỐC SẢN PHẨM </b>
@@ -107,7 +121,7 @@
                 </p>
             </div>
             <div class="media" id="leader">
-                <h2>7. MÃ THÀNH DANH</h2>
+                <h2>8. MÃ THÀNH DANH</h2>
                 <img style="height:200px" src="{{asset('public/shop/frontend/images/aboutUs/MaThanhDanh.jpg')}}" alt="Sunil Shroff">
                 <p>
                     <b class="cl-b">Chức danh:</b> <b>GIÁM ĐỐC CHIẾN LƯỢC </b>
@@ -120,7 +134,7 @@
                 </p>
             </div>
             <div class="media" id="leader">
-                <h2>8. NGUYỄN THẾ SƠN</h2>
+                <h2>9. NGUYỄN THẾ SƠN</h2>
                 <img src="{{asset('public/shop/frontend/images/aboutUs/NguyenTheSon.png')}}" alt="Sunil Shroff">
                 <p>
                     <b class="cl-b">Chức danh:</b> <b>GIÁM ĐỐC MẢNG DƯỢC VÀ THỰC PHẨM CHỨC NĂNG </b>
@@ -135,7 +149,7 @@
                 </p>
             </div>
             <div class="media" id="leader">
-                <h2>9. NGUYỄN XUÂN HOÀNG</h2>
+                <h2>10. NGUYỄN XUÂN HOÀNG</h2>
                 <img src="{{asset('public/shop/frontend/images/aboutUs/NguyenXuanHoang.jpg')}}" alt="">
                 <p>
                     <b class="cl-b">Chức danh:</b> <b>TRƯỞNG PHÒNG KINH DOANH </b>
@@ -150,7 +164,7 @@
                 </p>
             </div>
             <div class="media" id="leader">
-                <h2>10. LƯU THU QUANG</h2>
+                <h2>11. LƯU THU QUANG</h2>
                 <img src="{{asset('public/shop/frontend/images/aboutUs/luuthuquang.jpg')}}" alt="Sunil Shroff">
                 <p>
                     <b class="cl-b">Chức danh:</b> <b>CỐ VẤN CHIẾN LƯỢC </b>
@@ -165,7 +179,7 @@
             <br />
             <br />
             <div class="media" id="leader">
-                <h2>11. LƯƠNG MỘNG ÁI NHI</h2>
+                <h2>12. LƯƠNG MỘNG ÁI NHI</h2>
                 <img src="{{asset('public/shop/frontend/images/aboutUs/luongmongainhi.jpg')}}" alt="Sunil Shroff">
                 <p>
                     <b class="cl-b">Chức danh:</b> <b>CỐ VẤN CHIẾN LƯỢC </b>
