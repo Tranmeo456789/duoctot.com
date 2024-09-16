@@ -35,20 +35,20 @@
             @php
             $img = asset('images/shop/') . '/' .$val;
             @endphp
-            <div><img src="{{$img}}" alt="tdoctor"></div>
+            <div class="text-center"><img src="{{$img}}" alt="tdoctor"></div>
         @endforeach
     </div>
     <div class="col-xl-3 col-lg-12 dlapp pb-0">
         <div class="dlapp1">
             <!-- <p>Mua thuốc trực tuyến, giao hàng tận nơi dễ dàng & nhanh chóng</p> -->
-            <div class="dlapp2 mb-4">
+            <div class="mb-4">
                 <h6>App Tdoctor dành cho bệnh nhân</h6>
-                <div class="my-2 mr-xl-0 mr-lg-2 app-store"><a href="https://apps.apple.com/us/app/tdoctor/id1443310734"><img src="{{asset('images/shop/app1.png')}}" alt=""></a></div>
+                <div class="my-2"><a href="https://apps.apple.com/us/app/tdoctor/id1443310734"><img src="{{asset('images/shop/app1.png')}}" alt=""></a></div>
                 <div><a href="https://play.google.com/store/apps/details?id=com.app.khambenh.bacsiviet"><img src="{{asset('images/shop/app2.png')}}" alt=""></a></div>
             </div>     
-            <div class="dlapp2">
+            <div class="pb-4">
                 <h6>App Tdoctor dành cho Bác sĩ</h6>
-                <div class="my-2 mr-xl-0 mr-lg-2 app-store"><a href="https://apps.apple.com/vn/app/tdoctor-for-doctor/id1555758280"><img src="{{asset('images/shop/app1.png')}}" alt=""></a></div>
+                <div class="my-2"><a href="https://apps.apple.com/vn/app/tdoctor-for-doctor/id1555758280"><img src="{{asset('images/shop/app1.png')}}" alt=""></a></div>
                 <div><a href="https://play.google.com/store/apps/details?id=com.app.khambenh.doctor"><img src="{{asset('images/shop/app2.png')}}" alt=""></a></div>
             </div>    
         </div>     

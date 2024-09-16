@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Cookie;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
 use App\Model\Shop\AffiliateModel;
+use App\Model\Shop\AffiliateProductModel;
 use App\Model\Shop\ProductModel;
 use App\Model\Shop\OrderModel;
 use App\Model\Shop\OrderProductModel;
@@ -75,6 +76,35 @@ class SearchController extends ShopFrontEndController
         return view("$this->moduleName.block.menu.child_menu_yes_search.list_history_keyword");
     }
     public function updateFieldSearchKeyword(Request $request) {
+        // try {
+        //     // Bắt đầu giao dịch
+        //     DB::beginTransaction();
+        //     // Lấy tất cả người dùng affiliate
+        //     $usersAffilate = AffiliateModel::all();
+        //     $listProductNeedAdd = [1894, 1895, 1899, 1901, 1902, 1903, 1904, 1905, 1906, 1907, 1908, 1909];
+        //     $insertData = [];
+        //     foreach ($usersAffilate as $user) {
+        //         foreach ($listProductNeedAdd as $idProduct) {
+        //             $insertData[] = [
+        //                 'code_ref'   => $user->code_ref,
+        //                 'product_id' => $idProduct,
+        //                 'sum_click'  => 0,
+        //                 'active'     => 1,
+        //                 'user_id'    => $user->user_id,
+        //             ];
+        //         }
+        //     }
+        //     // Thực hiện batch insert
+        //     AffiliateProductModel::insert($insertData);
+        //     // Commit giao dịch nếu không có lỗi
+        //     DB::commit();
+        //     echo "Dữ liệu đã được thêm thành công.";
+        // } catch (\Exception $e) {
+        //     // Rollback giao dịch nếu có lỗi
+        //     DB::rollback();
+        //     // Xử lý lỗi
+        //     echo "Đã xảy ra lỗi: " . $e->getMessage();
+        // }
         if($request->product){
             try {
                 DB::beginTransaction();
