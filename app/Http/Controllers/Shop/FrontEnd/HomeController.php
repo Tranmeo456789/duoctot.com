@@ -134,4 +134,22 @@ class HomeController extends ShopFrontEndController
             'title'=>$title
         ]);
     }
+    public function pageContact(){
+        $title = 'Liên hệ | Tdoctor';
+        return view("$this->pathViewController.contact",[
+            'title'=>$title
+        ]);
+    }
+    public function pageQuytrinhGiaiquyetTranhchap(){
+        $title = 'Quy trình giải quyết tranh chấp | Tdoctor';
+        return view("$this->pathViewController.quytrinh_giaiquyet_tranhchap",[
+            'title'=>$title
+        ]);
+    }
+    public function pageChinhsachBaomatThongtin(){
+        $title = 'Chính sách bảo mật thông tin | Tdoctor';
+        return view("$this->pathViewController.chinhsach_baomat_thongtin",[
+            'title'=>$title
+        ]);
+    }
 }

@@ -4,12 +4,10 @@
             <div class="col-xl-3 col-lg-12">
                 <h6 class="mb-3">TDOCTOR</h6>
                 <p><a href="{{route('fe.home.pageAboutUs')}}">Về chúng tôi</a></p>
-                <p><a href="https://tdoctor.vn/lienhe">Liên hệ</a></p>
+                <p><a href="{{route('fe.home.pageContact')}}">Liên hệ</a></p>
                 <p><a href="{{route('fe.post')}}">Tin tức</a></p>
-                <p><a href="https://tdoctor.vn/quytrinh-giaiquyet-tranhchap">Quy trình giải quyết tranh chấp</a></p>
-                <p><a href="https://tdoctor.vn/chinhsach-baomat-thongtin-khachhang">Chính sách bảo mật thông tin</a></p>
-                <p><a href="https://tdoctor.vn/dang-ky-bac-si">Đăng ký bác sỹ</a></p>
-                <p><a href="https://tdoctor.vn/dang-ky-phong-kham">Đăng ký phòng khám</a></p>
+                <p><a href="{{route('fe.home.pageQuytrinhGiaiquyetTranhchap')}}">Quy trình giải quyết tranh chấp</a></p>
+                <p><a href="{{route('fe.home.pageChinhsachBaomatThongtin')}}">Chính sách bảo mật thông tin</a></p>
                 <p><a href="{{route('fe.home.pageChinhSachDoiTra')}}">Chính sách đổi trả</a></p>
             </div>
             <div class="col-xl-3 col-lg-12">

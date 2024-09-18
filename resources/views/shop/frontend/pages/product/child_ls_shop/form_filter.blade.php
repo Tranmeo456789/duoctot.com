@@ -45,7 +45,7 @@
     <div>
         <div class="row">
             {!! FormTemplate::show($elements,$formInputWidth)  !!}
-            <div class="col-lg-2 col-12">
+            <div class="col-lg-2 col-12 text-center">
                 <button class="btn btn-primary my-0">Lọc kết quả</button>
             </div>
         </div>
