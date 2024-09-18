@@ -56,7 +56,7 @@
                             <img src="{{asset('images/shop/dc1.png')}}" alt="tdoctor">
                         </div>
                     </div>
-                    <p>Số 209, Đường 30/4, Phường Xuân Khánh, Quận Ninh Kiều, Thành phố Cần Thơ</p>
+                    <p>Trụ sở: Số 03, Đường Huỳnh Khương Ninh, Phường Đa Kao, Quận 1, Thành phố Hồ Chí Minh, Việt Nam</p>
                 </div>
                 <div class="d-flex mb-2">
                     <div>
@@ -72,7 +72,7 @@
                             <img src="{{asset('images/shop/dc1.png')}}" alt="tdoctor">
                         </div>
                     </div>
-                    <p>Số 03, Đường Huỳnh Khương Ninh, Phường Đa Kao, Quận 1, Thành phố Hồ Chí Minh, Việt Nam</p>
+                    <p>Chi nhánh Cần Thơ: Số 209, Đường 30/4, Phường Xuân Khánh, Quận Ninh Kiều, Thành phố Cần Thơ</p>
                 </div>
                 <div class="d-flex mb-2">
                     <div>
@@ -96,7 +96,7 @@
                             <img src="{{asset('images/shop/dc4.png')}}" alt="tdoctor">
                         </div>
                     </div>
-                    <p>Hotline: +84 393 167 234</p>
+                    <p>Hotline: 0393 167 234</p>
                 </div>
                 <div class="d-flex mb-2">
                     <div>

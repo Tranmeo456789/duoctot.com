@@ -110,7 +110,7 @@ use Illuminate\Support\Str;
                     </div>
                     <div class="btn-buy-search d-flex justify-content-between flex-wrap">
                         <span name="btn_selectbuy" class="btn-select-buy btn btn-primary text-light mb-xs-2" data-href="{{route('fe.cart.addproduct')}}">Chọn mua</span>
-                        <a class="btn-search-house" href="{{route('fe.product.listDrugstore')}}">Tìm nhà thuốc</a>
+                        <a class="btn-search-house align-self-center" href="{{route('fe.product.listDrugstore')}}">Tìm nhà thuốc</a>
                         <input type="hidden" id="product_id" value="{{$item['id']}}">
                         <input type="hidden" id="code_ref" value="{{$codeRef??''}}">
                         <input type="hidden" id="user_sell" value="{{$item->userProduct->user_id}}">

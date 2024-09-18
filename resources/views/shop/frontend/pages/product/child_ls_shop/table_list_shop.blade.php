@@ -28,7 +28,7 @@
                     }
                 }
                 $slug = $val['details']['slug']??($drugstore['drugstore_url']??'');
-                $linkShop='https://tdoctor.net/'.$slug.'.html?shopId='.$val['user_id'];
+                $linkShop = route('home') . '/' . $slug . '.html?shopId=' . $val['user_id'];
             @endphp
             <tr>
                 <td>
