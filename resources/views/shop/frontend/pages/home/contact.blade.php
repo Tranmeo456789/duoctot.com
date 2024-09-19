@@ -33,7 +33,7 @@
                 </div>
                 <div class="col-12 col-md-4">
                     <h6 class="text-center"><strong>Mã QR CODE</strong></h6>
-                    <div class="text-center"><img src="{{asset('public/shop/frontend/images/shop/qrcode_techcombank.jpg')}}"></div>
+                    <div class="text-center"><img style="width: 200px;" src="{{ asset('public/shop/frontend/images/shop/qrcode_techcombank.jpg') }}?v={{ time() }}"></div>
                 </div>
             </div>
 

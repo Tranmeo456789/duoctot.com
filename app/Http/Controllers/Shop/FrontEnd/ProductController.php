@@ -12,6 +12,7 @@ use App\Model\Shop\AffiliateModel;
 use App\Model\Shop\CommentModel;
 use App\Model\Shop\ProductModel as MainModel;
 use App\Model\Shop\ProvinceModel;
+use App\Model\Shop\DistrictModel;
 use App\Model\Shop\TrademarkModel;
 use App\Model\Shop\UsersModel;
 use App\Model\Shop\UserValuesModel;
@@ -249,11 +250,11 @@ class ProductController extends ShopFrontEndController
             if ($prv != null) {
                 $query = $query->where('province_id', $prv->id);
             }
-            $itemsDistrict= (new WardModel())->listItems(['parent_id' =>  $prv->id],['task'=>'admin-list-items-in-selectbox']);
+            $itemsDistrict= (new DistrictModel())->listItems(['parentID' =>  $prv->id],['task'=>'admin-list-items-in-selectbox']);
 
         }
         if ($request->input('district_id') != null) {
-            $itemDistrict = WardModel::where('id', intval($request->input('district_id')))->first();
+            $itemDistrict = DistrictModel::where('id', intval($request->input('district_id')))->first();
 
             if ($itemDistrict != null) {
                 $arrUserID = UserValuesModel::select('user_id')
@@ -294,11 +295,11 @@ class ProductController extends ShopFrontEndController
             if ($prv != null) {
                 $query = $query->where('province_id', $prv->id);
             }
-            $itemsDistrict= (new WardModel())->listItems(['parent_id' =>  $prv->id],['task'=>'admin-list-items-in-selectbox']);
+            $itemsDistrict= (new DistrictModel())->listItems(['parentID' =>  $prv->id],['task'=>'admin-list-items-in-selectbox']);
 
         }
         if ($request->input('district_id') != null) {
-            $itemDistrict = WardModel::where('id', intval($request->input('district_id')))->first();
+            $itemDistrict = DistrictModel::where('id', intval($request->input('district_id')))->first();
 
             if ($itemDistrict != null) {
                 $arrUserID = UserValuesModel::select('user_id')
