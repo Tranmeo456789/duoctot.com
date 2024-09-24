@@ -1,7 +1,7 @@
 @php
     use App\Model\Shop\QuangCaoModel;
 
-    $itemsQuangCao = QuangCaoModel::where('status', 'active')->inRandomOrder()->take(2)->get();
+    $itemsQuangCao = QuangCaoModel::where('status', 'active')->get();
     $xhtmlDesktop = '';
     $xhtmlMobile = '';
     $indicatorsDesktop = '';

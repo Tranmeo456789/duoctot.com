@@ -4,15 +4,73 @@
 <div class="container-slider mt-0 mt-lg-2 pl-0 pl-lg-2">
     <div class="row">
         <div class="col-12 col-lg-8">
-            <div class="section" id="slider-wp">
-                <div class="section-detail">
-                    <div class="item">
-                        <img loading="lazy" src="{{asset('images/shop/banner02.jpg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
-                    </div>
-                    <div class="item">
-                        <img loading="lazy" src="{{asset('images/shop/banner03.jpg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
-                    </div>
-                </div>
+            <div class="d-none d-md-block">
+                <ul class="banner_doitac list-unstyled cS-hidden">
+                    <li class="text-center">
+                        <img src="{{asset('images/shop/banner2.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
+                    </li>
+                    <li class="text-center">
+                        <img src="{{asset('images/shop/banner3.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
+                    </li>
+                    <li class="text-center">
+                        <img src="{{asset('images/shop/banner4.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
+                    </li>
+                    <li class="text-center">
+                        <img src="{{asset('images/shop/banner5.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
+                    </li>
+                    <li class="text-center">
+                        <img src="{{asset('images/shop/banner6.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
+                    </li>
+                    <li class="text-center">
+                        <img src="{{asset('images/shop/banner7.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
+                    </li>
+                    <li class="text-center">
+                        <img src="{{asset('images/shop/banner8.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
+                    </li>
+                    <li class="text-center">
+                        <img src="{{asset('images/shop/banner9.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
+                    </li>
+                    <li class="text-center">
+                        <img src="{{asset('images/shop/banner10.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
+                    </li>
+                    <li class="text-center">
+                        <img src="{{asset('images/shop/banner1.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
+                    </li>
+                </ul>
+            </div>
+            <div class="d-block d-md-none">
+                <ul class="banner_doitac list-unstyled cS-hidden">
+                    <li class="text-center">
+                        <img src="{{asset('images/shop/banner2_mobi.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
+                    </li>
+                    <li class="text-center">
+                        <img src="{{asset('images/shop/banner3_mobi.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
+                    </li>
+                    <li class="text-center">
+                        <img src="{{asset('images/shop/banner4_mobi.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
+                    </li>
+                    <li class="text-center">
+                        <img src="{{asset('images/shop/banner5_mobi.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
+                    </li>
+                    <li class="text-center">
+                        <img src="{{asset('images/shop/banner6_mobi.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
+                    </li>
+                    <li class="text-center">
+                        <img src="{{asset('images/shop/banner7_mobi.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
+                    </li>
+                    <li class="text-center">
+                        <img src="{{asset('images/shop/banner8_mobi.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
+                    </li>
+                    <li class="text-center">
+                        <img src="{{asset('images/shop/banner9_mobi.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
+                    </li>
+                    <li class="text-center">
+                        <img src="{{asset('images/shop/banner10_mobi.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
+                    </li>
+                    <li class="text-center">
+                        <img src="{{asset('images/shop/banner1_mobi.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="d-none d-lg-block col-lg-3">
@@ -33,9 +91,9 @@
     <div id="buy-medicine" class="mt-0 pt-0 mt-md-3 pt-md-3">
         @include("$moduleName.pages.$controllerName.child_index.buy_medicine")
     </div>
-    <div id="doi-tac" class="mt-0 pt-0 mt-md-3 pt-md-3">
+    <!-- <div id="doi-tac" class="mt-0 pt-0 mt-md-3 pt-md-3">
         @include("$moduleName.pages.$controllerName.child_index.banner_shop")
-    </div>
+    </div> -->
 </div>
 <div id="feature-product-wp">
     <div class="product-backround  mt-3 mt-lg-4 py-4">

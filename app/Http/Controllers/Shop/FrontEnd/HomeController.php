@@ -11,6 +11,7 @@ use App\Model\Shop\CatProductModel;
 use App\Model\Shop\AffiliateModel;
 use App\Model\Shop\ArticleModel;
 use App\Model\Shop\PostModel;
+use App\Model\Shop\QuangCaoModel;
 
 class HomeController extends ShopFrontEndController
 {
@@ -41,6 +42,8 @@ class HomeController extends ShopFrontEndController
                 $affiliate->increment('sum_click');
              }
         }
+        $itemsQuangCao = QuangCaoModel::where('status', 'active')->get();
+        //return $itemsQuangCao;
         //$itemsArticle = (new ArticleModel())->listItems(null, ['task' => 'frontend-list-items']);
         $itemsArticle = (new PostModel)->listItems(['take'=>5], ['task' => 'frontend-list-items']);
         return view(

@@ -233,47 +233,6 @@
     };
 })(jQuery);
 $(document).ready(function() {
-    var feature_product = $('#feature-product-wp .list-item');
-    feature_product.owlCarousel({
-        autoPlay: true,
-        navigation: true,
-        navigationText: false,
-        paginationNumbers: false,
-        pagination: false,
-        stopOnHover: true,
-        items: 5, 
-        itemsDesktop: [1000, 4], 
-        itemsDesktopSmall: [800, 3], 
-        itemsTablet: [600, 2], 
-        itemsMobile: [375, 2] 
-    });
-    var slider = $('#slider-wp .section-detail');
-    slider.owlCarousel({
-        autoPlay: 4500,
-        navigation: false,
-        navigationText: false,
-        paginationNumbers: false,
-        pagination: true,
-        items: 1, 
-        itemsDesktop: [1000, 1],
-        itemsDesktopSmall: [900, 1],
-        itemsTablet: [600, 1],
-        itemsMobile: true
-    });
-    var imgSlider = $('#img-customer');
-    imgSlider.owlCarousel({
-        autoPlay: 4500,
-        navigation: true,
-        navigationText: false,
-        paginationNumbers: false,
-        pagination: false,
-        stopOnHover: true,
-        items: 1,
-        itemsDesktop: [1000, 1],
-        itemsDesktopSmall: [900, 1],
-        itemsTablet: [600, 1],
-        itemsMobile: true 
-    });
     $('.js-select2').select2();
     $('.ol1').click(function() {
         $(this).addClass("activebtn");
@@ -1244,7 +1203,7 @@ $(document).ready(function () {
     $('#image-gallery').lightSlider({
         gallery: true,
         item: 1,
-        thumbItem: 9,
+        thumbItem: 4,
         slideMargin: 0,
         speed: 500,
         auto: true,
@@ -1253,6 +1212,58 @@ $(document).ready(function () {
             $('#image-gallery').removeClass('cS-hidden');
         }
     });
+    $('#image-gallery').on('click', function() {
+        slider.pause();
+    });
+    $('.banner_doitac').lightSlider({
+        item: 1,
+        slideMargin: 0,
+        speed: 500,
+        auto: true,
+        loop: true,
+        pager: false,
+        onSliderLoad: function() {
+            $('.banner_doitac').removeClass('cS-hidden');
+        }
+    });
+    $('#feature-product-wp .list-item').lightSlider({
+        item: 5, // Giá trị tối đa cho màn hình lớn
+        slideMargin: 5,
+        speed: 500,
+        auto: true,
+        loop: true,
+        pager: false,
+        responsive: [
+            {
+                breakpoint: 1000,
+                settings: {
+                    item: 5,
+                }
+            },
+            {
+                breakpoint: 800,
+                settings: {
+                    item: 4,
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    item: 2,
+                }
+            },
+            {
+                breakpoint: 375,
+                settings: {
+                    item: 2,
+                }
+            }
+        ],
+        onSliderLoad: function() {
+            $('.banner_doitac').removeClass('cS-hidden');
+        }
+    });
+    
 });
 $(document).on('submit', "#main-form", function (event) {
     event.preventDefault();
