@@ -6111,7 +6111,7 @@ input[type="radio"] {
     font-size: 18px;
 }
 .contact-buy .phone{
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
     color: rgb(248, 12, 12);
 }
@@ -7343,7 +7343,7 @@ input[type="radio"] {
         font-size: 16px;
     }
     .contact-buy .phone{
-        font-size: 16px;
+        font-size: 26px;
     }
     .header-prescrip {
         font-size: 12px;

@@ -18,7 +18,7 @@
     $contact=$item['contact']??'0349444164';
 @endphp
 <div class="mt-3">
-    <span class="contact-buy">Nếu mua số lượng lớn thì vui lòng liên hệ hotline <span class="phone">{{ implode('.', str_split($contact, 4)) }}</span></span>
+    <span class="contact-buy">Liên hệ Hotline <span class="phone">{{ implode('.', str_split($contact, 4)) }}</span></span>
 </div>
 <div class="pnote-view d-flex">
     <div>

@@ -36,7 +36,7 @@
                     <tbody>
                         <tr class="bb_order">
                             <td style="width: 30%">Số đơn hàng <span class="text-info">{{$order['code_order']}}</span></td>
-                            <td style="width: 70%" class='name'><a href=""><span class="search-ttdh">Tra cứu đơn hàng</span></a></td>
+                            <td style="width: 70%" class='name'><a href="{{route('fe.order.formSearch')}}"><span class="search-ttdh">Tra cứu đơn hàng</span></a></td>
                         </tr>
                         <tr class="bb_order">
                             <td style="width: 30%">Họ và tên người đặt</td>
