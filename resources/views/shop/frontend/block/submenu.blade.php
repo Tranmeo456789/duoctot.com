@@ -49,10 +49,10 @@ $listCatAll=(new CatProductModel())->listItems(null, ['task'  => 'list-items-fro
     </li>
     @endforeach
     <li class="">
-        <a href="{{route('fe.product.listDrugstore')}}">Nhà thuốc</a>
+        <a href="{{route('fe.product.listDrugstore')}}">@lang('lang.pharmacy')</a>
     </li>
     <li class="">
-        <a href="{{route('fe.product.listShop')}}">Shop</a>
+        <a href="{{route('fe.product.listShop')}}">@lang('lang.shop')</a>
     </li>
     <li>
         <a href="{{route('fe.booking_online')}}">@lang('lang.onlinebooking')</a>

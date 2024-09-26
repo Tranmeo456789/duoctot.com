@@ -47,8 +47,8 @@
                         {{Session::get('user')['fullname']}}
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="{{route('dashboard')}}">Tài khoản</a>
-                        <a class="dropdown-item" href="{{route('user.logout')}}">Thoát</a>
+                        <a class="dropdown-item" href="{{route('dashboard')}}">@lang('lang.account')</a>
+                        <a class="dropdown-item" href="{{route('user.logout')}}">@lang('lang.log_out')</a>
                     </div>
                 </div>
             </div>

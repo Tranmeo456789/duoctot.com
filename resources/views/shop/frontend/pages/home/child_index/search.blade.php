@@ -6,13 +6,13 @@ $dataHref = route('fe.product.searchListProductShort');
 
 @endphp
 <div class="form-search-inner">
-    <h6>Tra Cứu Thuốc, TPCN, Bệnh lý...</h6>
+    <h6>@lang('lang.search_for_drugs')...</h6>
     <div class="position-relative wp-search-list-product">
         <form action="{{route('fe.search.saveHome')}}" method="POST">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             <div class="position-relative">
                 <div class="wp-input-search fc-search-js form-search-show-list form-search-scroll form-search-show-list">
-                    <input type="text" name="keyword" class="input-search-info" data-href="{{$dataHref}}" value="" placeholder="Nhập từ khóa..." autocomplete="off">
+                    <input type="text" name="keyword" class="input-search-info" data-href="{{$dataHref}}" value="" placeholder="@lang('lang.search_for_drugs')..." autocomplete="off">
                 </div>
                 <div class="btn-load-delete">
                     <i class="fas fa-spinner fa-spin" style="display: none;"></i>
@@ -29,7 +29,7 @@ $dataHref = route('fe.product.searchListProductShort');
     </div>
 
 
-    <h5 class="mt-3 mb-2">Tra cứu hàng đầu</h5>
+    <h5 class="mt-3 mb-2">@lang('lang.top_search')</h5>
     @if(isset($listKeywordHight))
     <ul class="d-flex justify-content-between list-hight-home">
         @foreach($listKeywordHight as $val)

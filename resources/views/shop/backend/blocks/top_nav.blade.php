@@ -25,8 +25,8 @@ use App\Helpers\MyFunction;
                     <span class="d-none d-md-inline">{{$fullName}}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="#">Tài khoản</a>
-                    <a class="dropdown-item" href="{{route('user.logout')}}">Thoát</a>
+                    <a class="dropdown-item" href="#">@lang('lang.account')</a>
+                    <a class="dropdown-item" href="{{route('user.logout')}}">@lang('lang.log_out')</a>
                 </ul>
             </li>
         @endif

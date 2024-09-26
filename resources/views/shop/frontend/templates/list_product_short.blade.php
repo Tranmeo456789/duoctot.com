@@ -15,7 +15,7 @@
         </div>
     @else
         <div class="px-4 py-2">
-            <p>Bạn có thể tìm kiếm theo tên hoặc công dụng thuốc</p>
+            <p>@lang('lang.you_can_search_by_name_or_drug_function')</p>
             <!-- <img loading="lazy" decoding="async" alt="Tdoctor" src="{{asset('images/shop/skeleton-product.png')}}"> -->
         </div>
     @endisset

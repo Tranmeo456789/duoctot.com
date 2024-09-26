@@ -27,61 +27,63 @@ class SearchController extends ShopFrontEndController
         $this->model = new MainModel();
         parent::__construct();
     }
-    public function viewHome(Request $request,$keyword)
+    public function viewHome(Request $request, $keyword)
     {
-        $params['keyword']=$keyword;
-        $itemSearch=(new ProductModel)->listItems($params,['task'=>'list-items-search']);
-        $title= 'Kết quả tìm kiếm';
-        return view($this->pathViewController . 'view',['keyword'=>$keyword,'itemSearch'=>$itemSearch,'title'=>$title]);
+        $params['keyword'] = $keyword;
+        $itemSearch = (new ProductModel)->listItems($params, ['task' => 'list-items-search']);
+        $title = 'Kết quả tìm kiếm';
+        return view($this->pathViewController . 'view', ['keyword' => $keyword, 'itemSearch' => $itemSearch, 'title' => $title]);
     }
     public function saveHome(Request $request)
     {
         // save history keyword search
-        if(!empty($request->input('btn_search')) && !empty($request->input('keyword')) && trim($request->input('keyword')) !== ''){
+        if (!empty($request->input('btn_search')) && !empty($request->input('keyword')) && trim($request->input('keyword')) !== '') {
             $params = $request->all();
-            $itemExist = $this->model->getItem($params, ['task'=>'get-item']);
-            $keywordHistory  = (isset($_COOKIE["keywordHistory"]))?json_decode($_COOKIE["keywordHistory"],true):[];
+            $itemExist = $this->model->getItem($params, ['task' => 'get-item']);
+            $keywordHistory  = (isset($_COOKIE["keywordHistory"])) ? json_decode($_COOKIE["keywordHistory"], true) : [];
             $keywordCurrent = [];
-        if (isset($keywordCurrent[$params['keyword']])){
-            $keywordCurrent[$params['keyword']] = $keywordHistory[$params['keyword']];
-            unset($keywordHistory[$params['keyword']]);
-        }else{
-            $keywordCurrent[$params['keyword']] = [
-                'keyword' => $params['keyword'],
-            ];
-        }
-        $keywordHistory = $keywordCurrent + $keywordHistory;
-        if (count($keywordHistory) > 5){
-            array_pop($keywordHistory);
-        }
-        setcookie("keywordHistory", json_encode($keywordHistory),time() + config('myconfig.time_cookie'), "/");
-        $_COOKIE["keywordHistory"] = json_encode($keywordHistory);
-        //save keyword search most
-        if(isset($itemExist)){
-            $params['id']=$itemExist['id'];
-            $params['number_search'] = $itemExist['number_search'];
-            $this->model->saveItem($params, ['task'=>'update-number-search-item']);
-        }else{
-            $this->model->saveItem($params, ['task'=>'add-item-home']);
-        } 
-            return redirect()->route('fe.search.viewHome',['keyword' => $params['keyword']]);
-        }else{
+            if (isset($keywordCurrent[$params['keyword']])) {
+                $keywordCurrent[$params['keyword']] = $keywordHistory[$params['keyword']];
+                unset($keywordHistory[$params['keyword']]);
+            } else {
+                $keywordCurrent[$params['keyword']] = [
+                    'keyword' => $params['keyword'],
+                ];
+            }
+            $keywordHistory = $keywordCurrent + $keywordHistory;
+            if (count($keywordHistory) > 5) {
+                array_pop($keywordHistory);
+            }
+            setcookie("keywordHistory", json_encode($keywordHistory), time() + config('myconfig.time_cookie'), "/");
+            $_COOKIE["keywordHistory"] = json_encode($keywordHistory);
+            //save keyword search most
+            if (isset($itemExist)) {
+                $params['id'] = $itemExist['id'];
+                $params['number_search'] = $itemExist['number_search'];
+                $this->model->saveItem($params, ['task' => 'update-number-search-item']);
+            } else {
+                $this->model->saveItem($params, ['task' => 'add-item-home']);
+            }
+            return redirect()->route('fe.search.viewHome', ['keyword' => $params['keyword']]);
+        } else {
             return redirect()->back();
         }
-        
     }
-    public function deleteHistory(Request $request){
+    public function deleteHistory(Request $request)
+    {
         $data = $request->all();
-        setcookie( "keywordHistory", "", time()- 60, "/","", 0);
+        setcookie("keywordHistory", "", time() - 60, "/", "", 0);
         return view("$this->moduleName.block.menu.child_menu_yes_search.list_history_keyword");
     }
-    public function updateFieldSearchKeyword(Request $request) {
+    public function updateFieldSearchKeyword(Request $request)
+    {
+        //add products AffiliateProductModel
         // try {
         //     // Bắt đầu giao dịch
         //     DB::beginTransaction();
         //     // Lấy tất cả người dùng affiliate
         //     $usersAffilate = AffiliateModel::all();
-        //     $listProductNeedAdd = [1894, 1895, 1899, 1901, 1902, 1903, 1904, 1905, 1906, 1907, 1908, 1909];
+        //     $listProductNeedAdd = [1909, 1910];
         //     $insertData = [];
         //     foreach ($usersAffilate as $user) {
         //         foreach ($listProductNeedAdd as $idProduct) {
@@ -105,6 +107,22 @@ class SearchController extends ShopFrontEndController
         //     // Xử lý lỗi
         //     echo "Đã xảy ra lỗi: " . $e->getMessage();
         // }
+
+        //remove products AffiliateProductModel
+        // $listProductNeedRemove = [1894, 1895, 1899, 1910];
+        // try {
+        //     $deletedRows = AffiliateProductModel::whereIn('product_id', $listProductNeedRemove)->delete();
+
+        //     if ($deletedRows > 0) {
+        //         echo "Đã xóa $deletedRows bản ghi thành công.";
+        //     } else {
+        //         echo "Không có bản ghi nào được xóa.";
+        //     }
+        // } catch (\Exception $e) {
+        //     echo "Có lỗi xảy ra: " . $e->getMessage();
+        // }
+
+        // add keywords product search
         if($request->product){
             try {
                 DB::beginTransaction();
@@ -123,7 +141,7 @@ class SearchController extends ShopFrontEndController
                         Str::ascii($product->name),
                         Str::ascii($product->benefit),
                     ]);
-        
+
                     ProductModel::where('id', $product['id'])->update(['keyword_search' => $keywordSearch]);
                 }
                 DB::commit();

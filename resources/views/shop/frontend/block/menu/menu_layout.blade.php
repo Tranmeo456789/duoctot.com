@@ -16,7 +16,7 @@
                 <div class="d-flex justify-content-center">
                     <div><span class="circle-ripple"></span></div>
                     <!-- <a href="" class="tt-respon">Hướng dẫn</a> -->
-                    <p class="p-head-topon">Kết nối mua thuốc online <span class="font-weight-bold">0349.444.164</span></p>
+                    <p class="p-head-topon">@lang('lang.connecting_home_medical_with_online_doctors') <span class="font-weight-bold">0349.444.164</span></p>
                 </div>
             </div>
         </div>
@@ -99,7 +99,7 @@
                 <a href="{{route('fe.order.formSearch')}}">
                     <div class="container-menures d-flex">
                         <div class="rimg-center"><img src="{{asset('images/shop/news1.png')}}" alt=""></div>
-                        <h2>Tra cứu lịch sử đơn hàng</h2>
+                        <h2>@lang('lang.order_history')</h2>
                     </div>
                 </a>
             </div>
@@ -108,14 +108,14 @@
             @include('shop.frontend.block.box_responsive.submenu_responsive')
         </div>
 
-        <div class="btn-advice container-menures">
+        <!-- <div class="btn-advice container-menures">
             <a href="" class="btn-refree">
                 <div class="d-flex">
                     <div class="rimg-center mr-1"><img src="{{asset('images/shop/mess.png')}}" alt=""></div>
                     <span>Nhận tư vấn miễn phí</span>
                 </div>
             </a>
-        </div>
+        </div> -->
 
     </div>
 

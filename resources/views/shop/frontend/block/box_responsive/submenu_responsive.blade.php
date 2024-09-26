@@ -32,14 +32,14 @@
     <li>
         <div class="container-menures position-relative parentsmenu">
             <div class=" pr-4">
-                <a href="{{route('fe.product.listDrugstore')}}" >Nhà thuốc</a>
+                <a href="{{route('fe.product.listDrugstore')}}" >@lang('lang.pharmacy')</a>
             </div>
         </div>
     </li>
     <li>
         <div class="container-menures position-relative parentsmenu">
             <div class=" pr-4">
-                <a href="{{route('fe.product.listShop')}}">Shop</a>
+                <a href="{{route('fe.product.listShop')}}">@lang('lang.shop')</a>
             </div>
         </div>
     </li>
@@ -52,14 +52,14 @@
     <li>
         <div class="container-menures position-relative parentsmenu">
             <div class=" pr-4">
-                <a href="{{route('dashboard')}}">Tài khoản</a>
+                <a href="{{route('dashboard')}}">@lang('lang.account')</a>
             </div>
         </div>
     </li>
     <li>
         <div class="container-menures position-relative parentsmenu">
             <div class=" pr-4">
-                <a href="{{route('user.logout')}}">Đăng xuất</a>
+                <a href="{{route('user.logout')}}">@lang('lang.log_out')</a>
             </div>
         </div>
     </li>
@@ -67,14 +67,14 @@
     <li>
         <div class="container-menures position-relative parentsmenu">
             <div class=" pr-4">
-                <a class="btn-register-res">Đăng ký</a>
+                <a class="btn-register-res">@lang('lang.register')</a>
             </div>
         </div>
     </li>
     <li>
         <div class="container-menures position-relative parentsmenu">
             <div class=" pr-4">
-                <a class="btn-login-res">Đăng nhập</a>
+                <a class="btn-login-res">@lang('lang.login')</a>
             </div>
         </div>
     </li>

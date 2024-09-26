@@ -135,7 +135,7 @@ class ProductController extends ShopFrontEndController
         $shopId=$request->shopId;
         $userInfo=(new UsersModel)->getItem(['user_id' => $shopId],['task'=>'get-item']);
         $productDrugstore=[];
-        $listIdProductAdd=[1894, 1895, 1899, 1901, 1902, 1903, 1904, 1905, 1906, 1907, 1908, 1909];
+        $listIdProductAdd=[1901, 1902, 1903, 1904, 1905, 1906, 1907, 1908, 1909, 1910];
         if (isset($userInfo['user_type_id']) && $userInfo['user_type_id'] == 9) {
             $listIdProductAdd = [];
         } 
@@ -153,7 +153,8 @@ class ProductController extends ShopFrontEndController
         }
         $item = (new AffiliateModel)->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
         if ($item) {
-            $params['group_id'] = array_merge(collect($item->listIdProduct)->pluck('product_id')->toArray(), $listIdProductAdd);
+            // $params['group_id'] = array_merge(collect($item->listIdProduct)->pluck('product_id')->toArray(), $listIdProductAdd);
+            $params['group_id'] = collect($item->listIdProduct)->pluck('product_id')->toArray();
             $productDrugstore = $this->model->listItems(['group_id' => $params['group_id'],'user_id' => $shopId], ['task' => 'frontend-list-item-shop'])??[];
         } 
         $address='';

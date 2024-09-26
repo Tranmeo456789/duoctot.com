@@ -272,7 +272,7 @@ class ProductModel extends BackEndModel
             if(isset($params['status_product'])){
                 $query=$query->where('status_product',$params['status_product']);
             }
-            $result = $query->orderBy('name', 'asc')->pluck('name', 'id')->toArray();
+            $result = $query->orderBy('id', 'desc')->pluck('name', 'id')->toArray();
         }
         if ($options['task'] == "list-items-search") {
             $query = $this::with(['unitProduct', 'trademarkProduct'])->select('id', 'name', 'image', 'price', 'percent_discount', 'unit_id','trademark_id', 'specification', 'slug')->where('status_product', 'da_duyet');

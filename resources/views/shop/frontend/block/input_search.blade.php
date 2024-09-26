@@ -1,6 +1,6 @@
 <div class="element-input-search">
     <div class="wp-input-search-simple">
-        <input type="text" name="keyword" value="{{$keyword??''}}" data-href="{{$dataHref ?? ''}}" placeholder="Tìm tên thuốc, bệnh lý, thực phẩm chức năng..." autocomplete="off">
+        <input type="text" name="keyword" value="{{$keyword??''}}" data-href="{{$dataHref ?? ''}}" placeholder="@lang('lang.search_for_drugs')..." autocomplete="off">
     </div>
     <button type="submit" class="btn-search btn" name="btn_search" value="1">
         <span>
