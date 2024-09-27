@@ -18,7 +18,6 @@
                     </div>
                 </a>
             </div>
-            @if(Session::has('user'))
             <div id="cart-load" class="fl-left" style="margin-left:30px;padding-top:15px;">
                 <div class="icon-cart-menu">
                     <a href="{{route('fe.product.cartFull')}}" title="" id="payment-link" class="">
@@ -39,7 +38,6 @@
                     </div>
                 </div>
             </div>
-            @endif
             @if(Session::has('user'))
             <div class="float-right" style="margin-left:10px;padding-top:20px;">
                 <div class="dropdown">

@@ -24,7 +24,6 @@
                     <div class="rimg-center"><img src="{{asset('images/shop/logo_topbar3.png')}}" alt="tdoctor"></div>
                 </a></div>
             <ul class="d-flex align-items-center">
-                @if(Session::has('user'))
                 <li class="hrcart">
                     <!-- <a href="{{route('fe.product.cartFull')}}">
                         <div class="rimg-center">
@@ -40,7 +39,6 @@
                     <span class="number_cartmenu">{{$number_product}}</span>
                     @endif
                 </li>
-                @endif
                 <li class="hruse"><a href="">
                         <div class="rimg-center"><img src="{{asset('images/shop/mr1.png')}}" alt=""></div>
                     </a></li>

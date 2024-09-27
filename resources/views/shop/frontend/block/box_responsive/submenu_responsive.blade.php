@@ -1,8 +1,11 @@
 @php
-    use App\Helpers\MyFunction;
-    use App\Model\Shop\CatProductModel;
-    $listCatLevel1=(new CatProductModel())->listItems(['parent_id' => 1],['task'=>'frontend-list-items-by-parent-id']);
-    $listCatAll=(new CatProductModel())->listItems(null, ['task'  => 'list-items-front-end']);
+use App\Helpers\MyFunction;
+use App\Model\Shop\CatProductModel;
+$listCatLevel1=(new CatProductModel())->listItems(['parent_id' => 1],['task'=>'frontend-list-items-by-parent-id']);
+$listCatAll=(new CatProductModel())->listItems(null, ['task' => 'list-items-front-end']);
+$iconZalo=asset('images/shop/zalo-2.png');
+$iconCall=asset('images/shop/icon-call.png');
+$phoneContact=$phoneContact??'0349444164';
 @endphp
 <h3>
     <div class="container-menures"><a href="{{route('home')}}">Trang chủ</a></div>
@@ -32,7 +35,7 @@
     <li>
         <div class="container-menures position-relative parentsmenu">
             <div class=" pr-4">
-                <a href="{{route('fe.product.listDrugstore')}}" >@lang('lang.pharmacy')</a>
+                <a href="{{route('fe.product.listDrugstore')}}">@lang('lang.pharmacy')</a>
             </div>
         </div>
     </li>
@@ -79,4 +82,21 @@
         </div>
     </li>
     @endif
+    <li class="mt-3 pb-3">
+        <p class='mb-2'>Nhận tư vấn miễn phí</p>
+        <div>
+            <a href='https://zalo.me/{{$phoneContact}}' target='_blank'>
+                <div class='d-flex align-items-center'>
+                    <div class='icon-contact'><img alt='Zalo' src='{{$iconZalo}}'></div>
+                    <span>Liên hệ Zalo</span>
+                </div>
+            </a>
+            <a href='tel:{{$phoneContact}}'>
+                <div class='d-flex align-items-center'>
+                    <div class='icon-contact'><img alt='Zalo' src='{{$iconCall}}'></div>
+                    <span>Gọi điện</span>
+                </div>
+            </a>
+        </div>
+    </li>
 </ul>

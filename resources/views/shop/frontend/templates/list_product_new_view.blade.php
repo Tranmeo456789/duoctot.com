@@ -20,9 +20,7 @@
                         <div class="wp-name-product">
                             <p class="truncate3">{{$val['name']}}</p>
                         </div>
-                        @if(Session::has('user'))
                         <span class="text-info">{{ MyFunction::formatNumber($val['price'])}}đ / {{$val['unit']}}</span>
-                        @endif
                     </div>
                 </a>
                 <div class="text-center slbuy"><a href="">Chọn mua</a></div>

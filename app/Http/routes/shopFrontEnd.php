@@ -38,12 +38,12 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('/don-thuoc','PrescripController@index')->name('fe.prescrip.index');
     Route::post('/luu-don-thuoc-khach-hang','PrescripController@save')->name('fe.prescrip.save');
     Route::get('/don-thuoc-khach-hang/{id}','PrescripController@prescripCustomer')->name('fe.prescrip.prescripCustomer');
-
+    Route::get('/gio-hang/{user_sell}','CartController@view')->name('fe.product.viewcart');
+    Route::get('/gio-hang-full','CartController@cartFull')->name('fe.product.cartFull');
+    Route::post('/them-san-pham-gio-hang','CartController@addproduct')->name('fe.cart.addproduct');
+    Route::post('/thay-doi-so-luong-san-pham/{user_sell}-{id}-{quantity}','CartController@changeQuatity')->name('fe.cart.change_quatity');
     Route::group(['middleware' => ['check.login']], function () {
-        Route::get('/gio-hang/{user_sell}','CartController@view')->name('fe.product.viewcart');
-        Route::get('/gio-hang-full','CartController@cartFull')->name('fe.product.cartFull');
-        Route::post('/them-san-pham-gio-hang','CartController@addproduct')->name('fe.cart.addproduct');
-        Route::post('/thay-doi-so-luong-san-pham/{user_sell}-{id}-{quantity}','CartController@changeQuatity')->name('fe.cart.change_quatity');
+        
     });
 
     Route::get('/danh-sach-kho-hang','WarehouseController@getList')->name('fe.warehouse.getList');

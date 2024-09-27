@@ -1,16 +1,18 @@
 @php
-    use App\Helpers\MyFunction;
+use App\Helpers\MyFunction;
 
-    $firstAricle = $itemsArticle[0];
-    unset($itemsArticle[0]);
+$firstAricle = $itemsArticle[0];
+unset($itemsArticle[0]);
 @endphp
 <div><img loading="lazy" src="{{asset('images/shop/banner4.jpg')}}" alt="tdoctor" style="width: 100%;"></div>
 <div class="newsh mt-3 mt-lg-5">
     @include("$moduleName.templates.box_title_product",['title' => 'Tin tức và góc sức khỏe','classBackground'=>'bg-info','img'=>'news1.png'])
     <div class="row px-2">
         <div class="col-xl-6 col-lg-12 news-content-right px-0 mb-xl-0 mb-lg-3">
-            <a href="{{route('fe.post.detail',$firstAricle['slug'])}}" class="wp-thumb-first d-block" >
-                <img src="{{asset($firstAricle['image'])}}" alt="{{$firstAricle['title']}}">
+            <a href="{{route('fe.post.detail',$firstAricle['slug'])}}" class="wp-thumb-first d-block">
+                <div class="text-center">
+                    <img src="{{asset($firstAricle['image'])}}" alt="{{$firstAricle['title']}}">
+                </div>
                 <p class="truncate2 pb-0 px-2">{{$firstAricle['title']}}</p>
             </a>
             <div class="px-2 py-1">
@@ -32,7 +34,7 @@
                             <div class="news-known d-flex mb-1">
                                 <a href="{{route('fe.post.listPostOfCat',$val->catPost->name_url)}}">{{$val->catPost->name??''}}</a>
                             </div>
-                            <a class="title-new-left mb-1" href="{{route('fe.post.detail',$val['slug'])}}" >
+                            <a class="title-new-left mb-1" href="{{route('fe.post.detail',$val['slug'])}}">
                                 <p class="truncate2 pb-0">{{$val['title']}}</p>
                             </a>
                             <div class="icon-oclock d-flex align-items-center">
