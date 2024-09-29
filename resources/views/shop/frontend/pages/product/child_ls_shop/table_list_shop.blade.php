@@ -1,6 +1,8 @@
 @php
     use App\Model\Shop\ConfigModel;
-
+    use App\Model\Shop\ProvinceModel;
+    use App\Model\Shop\DistrictModel;
+    use App\Model\Shop\WardModel;
     $hotline = ConfigModel::where('name', 'hotline_duoc')->first()->content ?? '';
 
 @endphp
@@ -16,20 +18,36 @@
         </thead>
         <tbody>
             @foreach($items as $val)
-            @php
-                $drugstore = isset($val->drugstore)?$val->drugstore:null;
-                $imgThumb = '';
+                @php
+                    $drugstore = isset($val->drugstore)?$val->drugstore:null;
+                    $imgThumb = '';
 
-                if (isset($val['details']['image']) && $val['details']['image'] != ''){
-                    $imgThumb = 'https://tdoctor.net' .$val['details']['image'] ;
-                } else{
-                    if (isset($drugstore['profile_image'])){
-                        $imgThumb = 'https://tdoctor.vn/public/images/health_facilities/'. $drugstore['profile_image'];
+                    if (isset($val['details']['image']) && $val['details']['image'] != ''){
+                        $imgThumb = 'https://tdoctor.net' .$val['details']['image'] ;
+                    } else{
+                        if (isset($drugstore['profile_image'])){
+                            $imgThumb = 'https://tdoctor.vn/public/images/health_facilities/'. $drugstore['profile_image'];
+                        }
                     }
-                }
-                $slug = $val['details']['slug']??($drugstore['drugstore_url']??'');
-                $linkShop = route('home') . '/' . $slug . '.html?shopId=' . $val['user_id'];
-            @endphp
+                    $slug = $val['details']['slug']??($drugstore['drugstore_url']??'');
+                    $linkShop = route('home') . '/' . $slug . '.html?shopId=' . $val['user_id'];
+                    $address='';
+                    $ward='';
+                    if(isset($val['details'])){
+                        $ward_detail=(new WardModel())->getItem(['id'=> $val['details']['ward_id']],['task' => 'get-item-full']);
+                        if($ward_detail){
+                            $ward=' '.$ward_detail['name']??'';
+                            $district=', '.$ward_detail['district']['name']??'';
+                            $province=', '.$ward_detail['district']['province']['name']??'';
+                        }else{
+                            $province_detail=(new ProvinceModel)->getItem(['id'=> $val['details']['province_id']],['task' => 'get-item-full']);
+                            $province=$province_detail['name']??'';
+                            $district_detail=(new ProvinceModel)->getItem(['id'=> $val['details']['district_id']],['task' => 'get-item-full']);
+                            $district=$district_detail['name']??'';
+                        }
+                        $address=$val['details']['address'].$ward.$district.$province;
+                    }
+                @endphp
             <tr>
                 <td>
                     <div class="wp-img">
@@ -46,7 +64,7 @@
                         <ul class="list-unstyled address__list">
                             <li class="mb-2">
                                 <img src="{{asset('public/images/shop/dc1.png')}}" alt="Head Office Tdoctor.vn">
-                                <span>Địa chỉ : {{$val['details']['address']??($drugstore['drugstore_address']??'')}}</span>
+                                <span>Địa chỉ : {{$address}}</span>
                             </li>
                             <li class="mb-2">
                                 <img src="{{asset('public/images/shop/dc3.png')}}" alt="Hotline Tdoctor.vn">

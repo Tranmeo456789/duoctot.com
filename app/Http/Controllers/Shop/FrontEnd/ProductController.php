@@ -153,8 +153,8 @@ class ProductController extends ShopFrontEndController
         }
         $item = (new AffiliateModel)->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
         if ($item) {
-            // $params['group_id'] = array_merge(collect($item->listIdProduct)->pluck('product_id')->toArray(), $listIdProductAdd);
-            $params['group_id'] = collect($item->listIdProduct)->pluck('product_id')->toArray();
+            $listIdProductAdd = [];
+            $params['group_id'] = array_merge(collect($item->listIdProduct)->pluck('product_id')->toArray(), $listIdProductAdd);
             $productDrugstore = $this->model->listItems(['group_id' => $params['group_id'],'user_id' => $shopId], ['task' => 'frontend-list-item-shop'])??[];
         } 
         $address='';
@@ -163,9 +163,9 @@ class ProductController extends ShopFrontEndController
         if(isset($userInfo['details'])){
             $ward_detail=(new WardModel())->getItem(['id'=> $userInfo['details']['ward_id']],['task' => 'get-item-full']);
             if($ward_detail){
-                $ward=$ward_detail['name']??'';
-                $district=$ward_detail['district']['name']??'';
-                $province=$ward_detail['district']['province']['name']??'';
+                $ward=' '.$ward_detail['name']??'';
+                $district=', '.$ward_detail['district']['name']??'';
+                $province=', '.$ward_detail['district']['province']['name']??'';
             }else{
                 $province_detail=(new ProvinceModel)->getItem(['id'=> $userInfo['details']['province_id']],['task' => 'get-item-full']);
                 $province=$province_detail['name']??'';
@@ -173,7 +173,7 @@ class ProductController extends ShopFrontEndController
                 $district=$district_detail['name']??'';
             }
             
-            $address=$userInfo['details']['address'].' '.$ward.' '.$district.' '.$province;
+            $address=$userInfo['details']['address'].$ward.$district.$province;
             $map=isset($userInfo['details']['map']) ? $userInfo['details']['map'] : '';
         }
         $title = isset($userInfo['fullname']) && $userInfo['fullname'] !== '' ? $userInfo['fullname'] . ', Shop dược phẩm trực tuyến | Tdoctor' : 'Sàn thương mại điện tử trong y dược';

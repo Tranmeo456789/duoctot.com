@@ -16,7 +16,7 @@
                 <div class="d-flex justify-content-center">
                     <div><span class="circle-ripple"></span></div>
                     <!-- <a href="" class="tt-respon">Hướng dẫn</a> -->
-                    <p class="p-head-topon">@lang('lang.connecting_home_medical_with_online_doctors') <span class="font-weight-bold">0349.444.164</span></p>
+                    <p class="p-head-topon">@lang('lang.connecting_home_medical_with_online_doctors') <span class="font-weight-bold text-danger" style="font-size: 20px;"><a href="tel:0349444164" class="text-danger">0349.444.164</a></span></p>
                 </div>
             </div>
         </div>
