@@ -14,6 +14,10 @@ use App\Model\Shop\AffiliateProductModel;
 use App\Model\Shop\ProductModel;
 use App\Model\Shop\OrderModel;
 use App\Model\Shop\OrderProductModel;
+use App\Model\Shop\MyTableModel;
+use App\Users;
+use App\Model\Shop\UsersModel;
+use App\Model\Shop\UserValuesModel;
 use App\Model\Shop\SearchModel as MainModel;
 use Illuminate\Support\Str;
 
@@ -123,55 +127,55 @@ class SearchController extends ShopFrontEndController
         // }
 
         // add keywords product search
-        if($request->product){
-            try {
-                DB::beginTransaction();
-                $products = ProductModel::with('trademarkProduct')->select('id', 'name', 'benefit', 'trademark_id','user_id','cat_product_id')->where('status_product', 'da_duyet')->get();
-                foreach ($products as $product) {
-                    $trademarkName = $product->trademarkProduct ? $product->trademarkProduct->name : '';
-                    $userSell = $product->userProduct ? $product->userProduct->fullname : '';
-                    $catProduct = $product->catProduct ? $product->catProduct->name : '';
-                    $keywordSearch = implode(' ', [
-                        $trademarkName,
-                        Str::ascii($trademarkName),
-                        $userSell,
-                        Str::ascii($userSell),
-                        $catProduct,
-                        Str::ascii($catProduct),
-                        Str::ascii($product->name),
-                        Str::ascii($product->benefit),
-                    ]);
+        // if($request->product){
+        //     try {
+        //         DB::beginTransaction();
+        //         $products = ProductModel::with('trademarkProduct')->select('id', 'name', 'benefit', 'trademark_id','user_id','cat_product_id')->where('status_product', 'da_duyet')->get();
+        //         foreach ($products as $product) {
+        //             $trademarkName = $product->trademarkProduct ? $product->trademarkProduct->name : '';
+        //             $userSell = $product->userProduct ? $product->userProduct->fullname : '';
+        //             $catProduct = $product->catProduct ? $product->catProduct->name : '';
+        //             $keywordSearch = implode(' ', [
+        //                 $trademarkName,
+        //                 Str::ascii($trademarkName),
+        //                 $userSell,
+        //                 Str::ascii($userSell),
+        //                 $catProduct,
+        //                 Str::ascii($catProduct),
+        //                 Str::ascii($product->name),
+        //                 Str::ascii($product->benefit),
+        //             ]);
 
-                    ProductModel::where('id', $product['id'])->update(['keyword_search' => $keywordSearch]);
-                }
-                DB::commit();
-                return response()->json(['success' => true, 'message' => 'Cập nhật keyword product thành công']);
-            } catch (\Exception $e) {
-                DB::rollBack();
-                return response()->json(['success' => false, 'message' => $e->getMessage()]);
-            }
-        }else{
-            try {
-                DB::beginTransaction();
-                $affiliates = AffiliateModel::with('userRef')->select('id', 'code_ref', 'user_id', 'info_user')->get();
-                foreach ($affiliates as $affiliate) {
-                    $fullname = $affiliate->userRef ? $affiliate->userRef->fullname : '';
-                    $phone = $affiliate->userRef ? $affiliate->userRef->phone : '';
-                    $email = $affiliate->userRef ? $affiliate->userRef->email : '';
-                    $infoUser = implode(' ', [
-                        $fullname,
-                        $phone,
-                        $email
-                    ]);
-                    AffiliateModel::where('id', $affiliate['id'])->update(['info_user' => $infoUser]);
-                }
-                DB::commit();
-                return response()->json(['success' => true, 'message' => 'Cập nhật info user affiliate thành công']);
-            } catch (\Exception $e) {
-                DB::rollBack();
-                return response()->json(['success' => false, 'message' => $e->getMessage()]);
-            }
-        }
+        //             ProductModel::where('id', $product['id'])->update(['keyword_search' => $keywordSearch]);
+        //         }
+        //         DB::commit();
+        //         return response()->json(['success' => true, 'message' => 'Cập nhật keyword product thành công']);
+        //     } catch (\Exception $e) {
+        //         DB::rollBack();
+        //         return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        //     }
+        // }else{
+        //     try {
+        //         DB::beginTransaction();
+        //         $affiliates = AffiliateModel::with('userRef')->select('id', 'code_ref', 'user_id', 'info_user')->get();
+        //         foreach ($affiliates as $affiliate) {
+        //             $fullname = $affiliate->userRef ? $affiliate->userRef->fullname : '';
+        //             $phone = $affiliate->userRef ? $affiliate->userRef->phone : '';
+        //             $email = $affiliate->userRef ? $affiliate->userRef->email : '';
+        //             $infoUser = implode(' ', [
+        //                 $fullname,
+        //                 $phone,
+        //                 $email
+        //             ]);
+        //             AffiliateModel::where('id', $affiliate['id'])->update(['info_user' => $infoUser]);
+        //         }
+        //         DB::commit();
+        //         return response()->json(['success' => true, 'message' => 'Cập nhật info user affiliate thành công']);
+        //     } catch (\Exception $e) {
+        //         DB::rollBack();
+        //         return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        //     }
+        // }
 
         // add infomation for table order_product
         // $listOrders = OrderModel::all();
@@ -193,5 +197,84 @@ class SearchController extends ShopFrontEndController
         // } catch (\Exception $e) {
         //     return "Đã xảy ra lỗi khi thêm dữ liệu vào cơ sở dữ liệu: " . $e->getMessage();
         // }
+
+        //validate data nha thuoc len database mytable ở local
+        // $userNeedAdd = MyTableModel::all();
+        // foreach ($userNeedAdd as $record) {
+        //     if (isset($record->D) && $record->D !== null) {
+        //         if (strpos($record->D, '0') !== 0) {
+        //             $record->D = '0' . $record->D;
+        //         }
+        //     }
+        //     $record->E = 1; //tinh
+        //     $record->save();
+        // }
+        // return $userNeedAdd;
+        //add lên bảng user
+        $userNeedAdd = MyTableModel::orderBy('A')->take(1000)->get();
+        //$userNeedAdd = MyTableModel::orderBy('A')->skip(3000)->take(1000)->get();
+        $count = 1;
+        //$userIdTest=UsersModel::where('user_id',1124110068)->get();
+        //return $userIdTest;
+        try {
+            $successCount = 0;
+            $failureCount = 0;
+            $maxRecords = 1000; // Giới hạn số bản ghi tối đa cần thêm
+            foreach ($userNeedAdd as $val) {
+                if ($successCount >= $maxRecords) {
+                    break; 
+                }
+                $params = [
+                    'domain_register' => 'shop.tdoctor.vn',
+                    'fullname' => $val['C'],
+                    'phone' => $val['D'],
+                    'password' => 1234567,
+                    'province_id' => $val['E'],
+                    'user_type_id' => 4,
+                    'gender' => 3,
+                    'paid' => 1,
+                    'details' => [
+                        'member_id' => $val['A'],
+                        'province_id' => $val['E'],
+                        'district_id' => '',
+                        'ward_id' => '',
+                        'address' => $val['B'],
+                        'sell_area' => 0,
+                        'tax_code' => '',
+                        'person_represent' => '',
+                        'map' => "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59587.946381010894!2d105.7957636011908!3d21.022814759960095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab9bd9861ca1%3A0xe7887f7b72ca17a9!2zSMOgIE7hu5lpLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1727767180491!5m2!1svi!2s\" width=\"100%\" height=\"340px\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>",
+                        'slug' => Str::slug($val['C']),
+                        'image' => "/laravel-filemanager/fileUpload/nhathuoc/nhathuocmau" . $count . ".jpg",
+                    ]
+                ];
+                $count++;
+                if ($count > 10) {
+                    $count = 1;
+                }
+                $currentIdUser = (new UsersModel())->saveItem($params, ['task' => 'register']);
+        
+                if ($currentIdUser) {
+                    $currentIdDelete = UserValuesModel::where('user_id', $currentIdUser)->delete();
+        
+                    foreach ($params['details'] as $key => $value) {
+                        $paramsUserValue = [
+                            'user_id' => $currentIdUser,
+                            'user_field' => $key,
+                            'value' => $value
+                        ];
+                        UserValuesModel::insert((new UsersModel())->prepareParams($paramsUserValue));
+                    }
+                    echo "Thêm người dùng thành công: " . $val['A'] . "<br>";
+                    $successCount++;
+                } else {
+                    echo "Thêm người dùng thất bại: " . $val['A'] . "<br>";
+                    $failureCount++;
+                }
+            }
+            return "Thêm dữ liệu thành công! Số bản ghi thành công: $successCount, Số bản ghi thất bại: $failureCount.";
+        } catch (\Exception $e) {
+            return "Đã xảy ra lỗi khi thêm dữ liệu vào cơ sở dữ liệu: " . $e->getMessage();
+        }        
+        return 1;
     }
 }

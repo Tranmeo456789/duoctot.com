@@ -36,14 +36,14 @@
                     if(isset($val['details'])){
                         $ward_detail=(new WardModel())->getItem(['id'=> $val['details']['ward_id']],['task' => 'get-item-full']);
                         if($ward_detail){
-                            $ward=' '.$ward_detail['name']??'';
-                            $district=', '.$ward_detail['district']['name']??'';
-                            $province=', '.$ward_detail['district']['province']['name']??'';
+                            $ward = isset($ward_detail['name']) ? ' ' . $ward_detail['name'] : '';
+                            $district = isset($ward_detail['district']['name']) ? ', ' . $ward_detail['district']['name'] : '';
+                            $province = isset($ward_detail['district']['province']['name']) ? ', ' . $ward_detail['district']['province']['name'] : '';
                         }else{
                             $province_detail=(new ProvinceModel)->getItem(['id'=> $val['details']['province_id']],['task' => 'get-item-full']);
-                            $province=$province_detail['name']??'';
+                            $province = isset($province_detail['name']) ? ', ' . $province_detail['name'] : '';
                             $district_detail=(new ProvinceModel)->getItem(['id'=> $val['details']['district_id']],['task' => 'get-item-full']);
-                            $district=$district_detail['name']??'';
+                            $district = isset($district_detail['name']) ? $district_detail['name'] : '';
                         }
                         $address=$val['details']['address'].$ward.$district.$province;
                     }

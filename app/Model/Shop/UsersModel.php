@@ -50,6 +50,7 @@ class UsersModel extends BackEndModel
     public function saveItem($params = null, $options = null) {
 
         if($options['task'] == 'register') {
+            $details = $params['details'];
             $params['password']  = Hash::make($params['password']);
             if (!isset($params['user_type_id']) || $params['user_type_id'] == ''){
                 $params['user_type_id'] = 1;
