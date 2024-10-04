@@ -203,7 +203,10 @@ class ProductModel extends BackEndModel
                 $query->whereIn('id', $params['group_id']);
             }
             if (isset($params['user_id'])) {
-                $query->orWhere('user_id', $params['user_id']);
+                $query->orWhere([
+                    ['user_id', $params['user_id']],
+                    ['status_product', 'da_duyet']
+                ]);
             }
             if (isset($params['offset'])) {
                 $query->skip($params['offset']);

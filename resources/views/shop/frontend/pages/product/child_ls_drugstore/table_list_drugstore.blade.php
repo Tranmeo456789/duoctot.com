@@ -72,7 +72,7 @@
                             </li>
                             <li>
                                 <img src="{{asset('public/images/shop/dc4.png')}}" alt="MST của Tdoctor.vn">
-                                <span>Số điện thoại: {{$hotline}}</span>
+                                <span>Số điện thoại: {{($val['phone'] != '') ?$val['phone']:$hotline}}</span>
                             </li>
                         </ul>
                     </div>

@@ -14,6 +14,7 @@
     <meta property="og:image" content="{{ asset($imageItem) }}?v=1">
     <meta property="og:description" content="{{$description}}">
     <meta name="keywords" content="{{ $metaKeywords }}">
+    <meta name="google-site-verification" content="SF3DQyzJn3obwShXlf3gfh6NC1HX20ronORFCHD5y8g" />
     <title>{{$title}}</title>
     <link rel="icon" href="{{ asset('images/shop/favicon.jpg') }}" type="image/jpeg">
     @include('shop.frontend.block.head')
