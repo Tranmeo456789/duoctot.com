@@ -64,8 +64,8 @@ class AffiliateController extends BackEndController
         }
         $itemsProduct = (new ProductModel())->listItems(['status_product'=>'da_duyet'], ['task' => 'admin-list-items-in-selectbox']);
         
-        $typeUserId=[4,10];
-        $itemsUser=(new UsersModel())->listItems(['user_type_id'=>$typeUserId],['task'=>'admin-list-by-type-id-in-selectbox']);
+        // /$typeUserId=[4,10];
+        $itemsUser=(new UsersModel())->listItems(null,['task'=>'admin-list-by-type-id-in-selectbox-affiliate']);
         return view(
             $this->pathViewController .  'form',
             compact('item', 'itemsProduct','itemsUser','infoProduct')

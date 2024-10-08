@@ -23,6 +23,8 @@ class OrderModel extends BackEndModel
         $this->table               = 'orders';
         $this->controllerName      = 'order';
         $this->folderUpload        = '' ;
+        $filedSearch               = array_key_exists($this->controllerName, config('myconfig.config.search')) ? $this->controllerName : 'default';
+        $this->fieldSearchAccepted = array_diff(config('myconfig.config.search.' . $filedSearch),['all']);
         $this->crudNotAccepted     = ['_token','btn_save','quantity','currentValue','warehouse_id'];
     }
     public function search($query,$params){
@@ -89,6 +91,17 @@ class OrderModel extends BackEndModel
             }
             if(isset($params['filter_in_day'])){
                 $query->whereBetween('created_at', ["{$params['filter_in_day']['day_start']}", "{$params['filter_in_day']['day_end']}"]);
+            }
+            if (isset($params['search']['value']) && ($params['search']['value'] !== ""))  {
+                if($params['search']['field'] == "all") {
+                    $query->where(function($query) use ($params){
+                        foreach($this->fieldSearchAccepted as $column){
+                            $query->orWhereRaw("LOWER($column)" . ' LIKE BINARY ' .  "LOWER('%{$params['search']['value']}%')" );
+                        }
+                    });
+                } else if(in_array($params['search']['field'], $this->fieldSearchAccepted)) {
+                        $query->whereRaw("LOWER({$params['search']['field']})" . " LIKE BINARY " .  "LOWER('%{$params['search']['value']}%')" );
+                }
             }
             if(isset($params['pagination'])){
                 $query=$query->orderBy('id', 'desc')

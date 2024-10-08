@@ -1,7 +1,7 @@
 @php
     use App\Helpers\Template;
     use App\Helpers\MyFunction;
-
+    use App\Helpers\Hightlight;
     $formInputChangeValueAttr    = array_merge_recursive(
                                     config('myconfig.template.form_element.input'),
                                     ['class' => 'sources select_change_attr']
@@ -35,13 +35,15 @@
                 $ngayDatHang = MyFunction::formatDateFrontend($val['created_at']);
                 $linkStatusOrder = route('order.changeStatusOrder',['id'=>$val['id'],'value' => 'value_new']);
                 $buyer=json_decode($val['buyer'],true)??'';
+                $fullname = isset($buyer['fullname']) ? Hightlight::show($buyer['fullname'], $params['search'], 'fullname') : '';
+                $phone = isset($buyer['phone']) ? Hightlight::show($buyer['phone'], $params['search'], 'buyer') : '';
                 //Form::select('status_order',$statusOrderValue, $val['status_order']??null, array_merge($formInputChangeValueAttr,['style' =>'width:100%','data-href'=>$linkStatusOrder]))
             @endphp
             <tr>
                 <td style="width: 3%">{{$index}}</td>
                 <td style="width: 15%">{{$val['code_order']}} </td>
                 <td style="width: 12%;text-align:right">{{MyFunction::formatNumber($val['total'])}} đ</td>
-                <td style="width: 15%" class="text-justify">{{$buyer['fullname']??''}}</td>
+                <td style="width: 15%" class="text-justify"><p class="mb-0">{!! $fullname !!}</p>{!! $phone !!}</td>
                 <td style="width: 10%" class="text-right">{{$ngayDatHang}}</td>
                 <td style="width:15%">
                     {!! $statusOrderValue[$val['status_order']]!!}

@@ -209,7 +209,9 @@
                 'email' => ['name'=>'Tìm kiếm theo Email'],
                 'code_ref' => ['name'=>'Tìm kiếm theo mã đại lý'],
                 'info_user' => ['name'=>'Tìm kiếm theo thông tin user'],
-                'key_search'=> ['name'=>'Tìm kiếm']
+                'key_search'=> ['name'=>'Tìm kiếm'],
+                'buyer'=> ['name'=>'Tìm kiếm'],
+
             ],
         ],
         'folderUpload' => [
@@ -221,7 +223,8 @@
                 'user' => ['email','fullname','phone'],
                 'product'=>['name'],
                 'affiliate'=>['code_ref','info_user'],
-                'post'=>['key_search']
+                'post'=>['key_search'],
+                'order'=>['buyer'],
             ]
         ]
     ];

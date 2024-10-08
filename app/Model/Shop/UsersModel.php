@@ -289,6 +289,7 @@ class UsersModel extends BackEndModel
         }
         if ($options['task'] == "admin-list-by-type-id-in-selectbox") {
             $result = $this->where(function ($query) use ($params) {
+                $query->where('type_account', '=', null);
                 if (isset($params['user_type_id'])) {
                     $query->whereIn('user_type_id', $params['user_type_id']);
                 }
@@ -301,6 +302,14 @@ class UsersModel extends BackEndModel
             ->orderBy('fullname', 'asc')
             ->pluck('name', 'user_id')
             ->toArray();
+        }
+        if ($options['task'] == "admin-list-by-type-id-in-selectbox-affiliate") {
+            $result = self::whereNull('type_account')
+                ->where('created_at', '>', '2023-12-12')
+                ->selectRaw("CONCAT(fullname, ' - ', IFNULL(phone, ''), ' - ', IFNULL(email, '')) as name, user_id")
+                ->orderBy('user_id', 'desc')
+                ->pluck('name', 'user_id')
+                ->toArray();
         }
         return $result;
     }
