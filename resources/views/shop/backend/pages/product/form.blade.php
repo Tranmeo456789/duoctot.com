@@ -97,10 +97,19 @@
     $elements = array_merge($elements,
         [
             [
-                'label' => '',
-                'element' =>'',
-                'widthElement' => 'col-12',
+                'label' => Form::label('show_price', 'Hiện giá',$formLabelAttr),
+                'element' => Form::radio('show_price', 1,(!isset($item['show_price']) || $item['show_price'] == 1) ? true : false),
+                'type' =>'inline-text-right',
+                'widthElement' => 'col-3',
+                'styleFormGroup' => 'mb-1',
             ],[
+                'label' => Form::label('show_price', ' Ẩn giá',$formLabelAttr),
+                'element' => Form::radio('show_price', 2,(isset($item['show_price']) && $item['show_price'] == 2) ? true : false),
+                'type' =>'inline-text-right',
+                'widthElement' => 'col-3',
+                'styleFormGroup' => 'mb-1',
+            ],
+            [
                 'label'   => HTML::decode(Form::label('coefficient',$label['coefficient'], $formLabelAttr)),
                 'element' => Form::text('coefficient', $item['coefficient']??null, array_merge($formInputAttr,['placeholder'=>$label['coefficient']])),
                 'widthElement' => 'col-3'

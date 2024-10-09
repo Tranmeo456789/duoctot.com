@@ -14,7 +14,7 @@
                         <div class="wp-name-product">
                             <p class="truncate3">{{$val['name']}}</p>
                         </div>
-                        <span class="text-info">{{ MyFunction::formatNumber($val['price'])}}đ / {{$val->unitProduct->name??''}}</span>
+                        <span class="text-info">...</span>
                     </div>
                 </a>
                 <div class="text-center slbuy"><a href="">Chọn mua</a></div>

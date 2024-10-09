@@ -20,9 +20,9 @@ $status=[
     <div class="wp-inner">
         <div class="set-screen-600">
             <ul class="nav nav-pills mb-3 header-tab" id="pills-tab" role="tablist">
-                @foreach($status as $item)
-                <li class="nav-item wp-20 select-status-order" role="presentation" data-status="{{$item['slug']}}" data-href="{{route('fe.order.ajaxFliter')}}" data-phone="{{$phone??''}}">
-                    <button class="nav-link {{$item['slug']=='tat_ca'?'active':''}} wp-100" data-toggle="pill" type="button" role="tab">{{$item['name']}}</button>
+                @foreach($status as $val)
+                <li class="nav-item wp-20 select-status-order" role="presentation" data-status="{{$val['slug']}}" data-href="{{route('fe.order.ajaxFliter')}}" data-phone="{{$phone??''}}">
+                    <button class="nav-link {{$val['slug']=='tat_ca'?'active':''}} wp-100" data-toggle="pill" type="button" role="tab">{{$val['name']}}</button>
                 </li>
                 @endforeach
             </ul>

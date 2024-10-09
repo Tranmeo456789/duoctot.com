@@ -13,12 +13,17 @@
                 <div class="d-flex align-items-center wp-name-product">
                     <p class="truncate3">{{$val['name']}}</p>
                 </div>
-                <span class="text-info">{{ number_format( $val['price'], 0, "" ,"." )}}đ / {{$val->unitProduct->name}}</span></span>
+                @if($val['show_price'] == 1)
+                <span class="text-info">{{ number_format( $val['price'], 0, "" ,"." )}}đ / {{$val->unitProduct->name}}</span>
                 <div class="price-old">
                     @if(!empty($val['percent_discount']))
                         {{ number_format( $priceOld, 0, "" ,"." )}}đ
                     @endif
                 </div>
+                @else
+                <span class="text-info">...</span>
+                <div class="price-old">...</div>
+                @endif
             </div>
         </a>
         <div class="d-inline-block pl-2">
