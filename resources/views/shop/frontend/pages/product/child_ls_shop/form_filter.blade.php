@@ -17,7 +17,7 @@
     $elements = [
         [
             'label'   => '',
-            'element' => Form::text('fullname', null, array_merge($formInputAttr,['placeholder'=>'Tìm kiếm...'])),
+            'element' => Form::text('fullname', null, array_merge($formInputAttr,['placeholder'=>'Tìm kiếm tên hoặc số điện thoại...'])),
             'image' => asset('public/images/shop/icon_search.jpg'),
             'widthElement' => 'col-lg-4 col-12',
             'styleFormGroup' => '',

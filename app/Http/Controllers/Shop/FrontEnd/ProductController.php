@@ -267,7 +267,13 @@ class ProductController extends ShopFrontEndController
         }
         if ($request->input('fullname') != null) {
             $fullname = htmlspecialchars($request->input('fullname'), ENT_QUOTES, 'UTF-8');
-            $query = $query->where('fullname','like',"%$fullname%");
+            $query = $query->where(function($q) use ($fullname) {
+                $q->where([
+                    ['fullname', 'like', "%$fullname%"],
+                ])->orWhere([
+                    ['phone', 'like', "%$fullname%"],
+                ]);
+            });
         }
         $items = $query->paginate(10);
         $title = 'Danh sách Shop dược | Tdoctor';
@@ -312,7 +318,13 @@ class ProductController extends ShopFrontEndController
         }
         if ($request->input('fullname') != null) {
             $fullname = htmlspecialchars($request->input('fullname'), ENT_QUOTES, 'UTF-8');
-            $query = $query->where('fullname','like',"%$fullname%");
+            $query = $query->where(function($q) use ($fullname) {
+                $q->where([
+                    ['fullname', 'like', "%$fullname%"],
+                ])->orWhere([
+                    ['phone', 'like', "%$fullname%"],
+                ]);
+            });
         }
         $items = $query->paginate(10);
         $title = 'Danh sách Nhà thuốc | Tdoctor';

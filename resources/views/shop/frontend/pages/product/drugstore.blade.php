@@ -1,5 +1,11 @@
 @php
-    $imageSrc = isset($userInfo['details']['image']) ? $userInfo['details']['image'] : 'https://bcp.cdnchinhphu.vn/Uploaded/nguyenthikimlien/2018_05_02/b503ae41ddf217eb13c3e4757362181a_thuoc3.jpg';
+    $imageSrc = isset($userInfo['details']['image']) ? $userInfo['details']['image'] : route('home') . '/laravel-filemanager/fileUpload/nhathuoc/nhathuocmau10.jpg';
+    if (isset($userInfo['details']['image']) && $userInfo['details']['image'] != ''){
+        $imageSrc  = route('home') . $userInfo['details']['image'];
+    } else{
+        $imageSrc  = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/nhathuocmau10.jpg';
+    }
+    $imageMap = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/mapduphong.jpeg';
     $phoneContact = $userInfo['phone'] != '' ? $userInfo['phone'] : '0349444164';
     $phoneShop=implode('.', str_split($phoneContact, 4));
 @endphp
@@ -23,7 +29,7 @@
             </div>
             <div id="map-drugstore" class="cod-12 col-md-6">
                 @if(empty($map))
-                <img style="width: 100%; height: 300px" src="https://images.fpt.shop/unsafe/filters:quality(5)/fptshop.com.vn/uploads/images/tin-tuc/154470/Originals/Google%20Map%20l%C3%A0%20g%C3%AC%20h%C3%ACnh%201.jpg" alt="">
+                <img style="width: 100%; height: 300px" src="{{$imageMap}}" alt="{{$userInfo['fullname']??''}}">
                 @else
                 {!! $map !!}
                 @endif
