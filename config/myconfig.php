@@ -89,6 +89,7 @@
                 'dosage_forms' => 'Dạng bào chế',
                 'specification' => 'Quy cách',
                 'country_id' => 'Nước sản xuất',
+                'brand_origin_id' => 'Xuất xứ thương hiệu',
                 'long' => 'Chiều dài (mm)',
                 'wide' => 'Chiều rộng (mm)',
                 'high' => 'Chiều cao (mm)',

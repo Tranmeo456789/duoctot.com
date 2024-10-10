@@ -73,15 +73,15 @@ use Illuminate\Support\Str;
                     <p><span class="font-weight-bold bcn">Danh mục: </span><span class="text-info">{{$item->catProduct->name}}</span></p>
                     <p><span class="font-weight-bold">Dạng bào chế: </span>{{$item['dosage_forms']}}</p>
                     <p><span class="font-weight-bold">Quy cách: </span>{{$item['specification']}}</p>
-                    <p><span class="font-weight-bold">Xuất xứ thương hiệu: </span>{{$item->countryProduct->name}}</p>
-                    <p><span class="font-weight-bold">Nước sản xuất: </span>{{$item->countryProduct->name}}</p>
+                    <p><span class="font-weight-bold">Xuất xứ thương hiệu: </span>{{ $item->brandOriginIdProduct->name ?? '...' }}</p>
+                    <p><span class="font-weight-bold">Nước sản xuất: </span>{{$item->countryProduct->name ?? '...'}}</p>
                     <p><span class="font-weight-bold">Công dụng: </span>{!!$item->benefit!!}</p>
                 </div>
                     @php
                         $slugName = Str::slug($userInfo['fullname']);                                     
                     @endphp
                 <div class="mb-3 d-flex justify-content-between">
-                    <a href="{{ route('fe.product.drugstore', ['slug' => $slugName,'shopId'=> $userInfo['user_id']]) }}" class="btn btn-sm btn-outline-secondary">Xem shop</a>
+                    <a href="{{ route('fe.product.drugstore', ['slug' => $slugName,'shopId'=> $userInfo['user_id']]) }}" class="btn btn-sm btn-outline-secondary py-1 px-2 btn-buy-search">Xem shop</a>
                     <div class="wp-link-affiliate">
                         @if(Session::has('user'))
                             @if(Session::get('user')['is_affiliate'] == 1)

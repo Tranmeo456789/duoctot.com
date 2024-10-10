@@ -337,7 +337,7 @@ class ProductModel extends BackEndModel
             $result = self::select('id','name','type','code','cat_product_id','producer_id',
                                     'tick','type_price','price','price_vat','percent_discount','coefficient',
                                     'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
-                                    'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
+                                    'inventory','inventory_min','general_info','prescribe','dosage','trademark_id','brand_origin_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
                                     'preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','long','wide','high',
                                     'mass','discount_ref','discount_tdoctor','contact','meta_keywords','meta_description','show_price')
@@ -356,7 +356,7 @@ class ProductModel extends BackEndModel
                             ->select('id','name','type','code','cat_product_id','producer_id',
                                     'tick','type_price','price','price_vat','percent_discount','coefficient',
                                     'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
-                                    'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
+                                    'inventory','inventory_min','general_info','prescribe','dosage','trademark_id','brand_origin_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
                                     'preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','long','wide','high',
                                     'mass','discount_ref','contact','meta_keywords','meta_description','show_price')->where('status_product','da_duyet');
@@ -521,6 +521,9 @@ class ProductModel extends BackEndModel
     }
     public function countryProduct(){
         return $this->belongsTo('App\Model\Shop\CountryModel','country_id','id');
+    }
+    public function brandOriginIdProduct(){
+        return $this->belongsTo('App\Model\Shop\CountryModel','brand_origin_id','id');
     }
     public function userProduct(){
         return $this->belongsTo('App\Model\Shop\UsersModel','user_id','user_id');

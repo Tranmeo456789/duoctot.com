@@ -53,15 +53,19 @@
         ],[
             'label'   => HTML::decode(Form::label('dosage_forms',$label['dosage_forms'] .  $star, $formLabelAttr)),
             'element' => Form::text('dosage_forms', $item['dosage_forms']??null, array_merge($formInputAttr,['placeholder'=>$label['dosage_forms']])),
-            'widthElement' => 'col-4'
+            'widthElement' => 'col-3'
         ],[
             'label'   => HTML::decode(Form::label('country_id', $label['country_id'] .  $star , $formLabelAttr)),
             'element' => Form::select('country_id',$itemsCountry, $item['country_id']??null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
-            'widthElement' => 'col-4'
+            'widthElement' => 'col-3'
+        ],[
+            'label'   => HTML::decode(Form::label('brand_origin_id', $label['brand_origin_id'] .  $star , $formLabelAttr)),
+            'element' => Form::select('brand_origin_id',$itemsCountry, $item['brand_origin_id']??null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
+            'widthElement' => 'col-3'
         ],[
             'label'   => HTML::decode(Form::label('specification',$label['specification'] .  $star, $formLabelAttr)),
             'element' => Form::text('specification', $item['specification']??null, array_merge($formInputAttr,['placeholder'=>$label['specification']])),
-            'widthElement' => 'col-4'
+            'widthElement' => 'col-3'
         ],[
             'label'   => HTML::decode(Form::label('long',$label['long'], $formLabelAttr)),
             'element' => Form::text('long', $item['long']??null, array_merge($formInputAttr,['placeholder'=>$label['long']])),
