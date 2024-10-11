@@ -74,12 +74,29 @@
                     <p>Danh mục thuốc</p>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="{{ route('post') }}" class="nav-link">
-                    <i class="nav-icon fas fa-wallet"></i>
-                    <p>Tin tức</p>
-                </a>
-            </li>
+            <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-wallet"></i>
+                        <p>
+                            Tin tức
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('catalog')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh mục bài viết</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('post')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh sách bài viết</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             @endif
             @if (Session::has('user') && (Session::get('user')['user_type_id'] > 3 && Session::get('user')['user_type_id'] <= 10 || Session::get('user')['is_affiliate'] == 1))
                 <li class="nav-item has-treeview">

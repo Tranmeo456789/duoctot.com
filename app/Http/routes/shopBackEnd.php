@@ -108,6 +108,12 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
         Route::post('/luu-tin-tuc', 'PostController@save')->name('post.save');
         Route::get('/xoa-tin-tuc/{id}', 'PostController@delete')->name('post.delete');
 
+        Route::get('/danh-sach-danh-muc-tin-tuc', 'CatalogController@index')->name('catalog');
+        Route::get('/them-danh-muc-tin-tuc', 'CatalogController@form')->name('catalog.add');
+        Route::get('/sua-danh-muc-tin-tuc/{id}', 'CatalogController@form')->name('catalog.edit');
+        Route::post('/luu-danh-muc-tin-tuc', 'CatalogController@save')->name('catalog.save');
+        Route::get('/xoa-danh-muc-tin-tuc/{id}', 'CatalogController@delete')->name('catalog.delete');
+
         Route::get('/danh-sach-thuoc-admin', 'ProductController@listProductAdmin')->name('admin.product.list');
         Route::get('/thay-doi-trang-thai-thuoc-admin/{id}/{status}', 'ProductController@changeProductInAdmin')->name('admin.product.change.status');
     });

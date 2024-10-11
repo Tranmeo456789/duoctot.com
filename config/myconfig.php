@@ -226,6 +226,7 @@
                 'affiliate'=>['code_ref','info_user'],
                 'post'=>['key_search'],
                 'order'=>['buyer'],
+                'catalog'=>['name'],
             ]
         ]
     ];
