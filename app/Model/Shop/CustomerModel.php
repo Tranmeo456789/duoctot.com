@@ -1,12 +1,9 @@
 <?php
 
 namespace App\Model\Shop;
-
 use Illuminate\Database\Eloquent\Model;
 use App\Model\Shop\BackEndModel;
-use App\Model\Shop\Tinhthanhpho;
-use App\Model\Shop\Quanhuyen;
-use App\Model\Shop\Xaphuongthitran;
+use App\Model\Shop\WardModel;
 use DB;
 class CustomerModel extends BackEndModel
 {

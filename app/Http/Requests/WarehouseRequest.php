@@ -27,9 +27,12 @@ class WarehouseRequest extends AjaxFormRequest
     {
         $id = $this->id;
         $condName  = "bail|required|between:1,255";
-        $condProvince = "bail|required|exists:mysql_share_data.province,id";
-        $condDistrict  = "bail|required|exists:mysql_share_data.district,id";
-        $condWards  = "bail|required|exists:mysql_share_data.ward,id";
+        // $condProvince = "bail|required|exists:mysql_share_data.province,id";
+        // $condDistrict  = "bail|required|exists:mysql_share_data.district,id";
+        // $condWards  = "bail|required|exists:mysql_share_data.ward,id";
+        $condProvince = "bail|required|exists:province,id";
+        $condDistrict  = "bail|required|exists:district,id";
+        $condWards  = "bail|required|exists:ward,id";
         if(!empty($id)){ // edit
             $condName  .= ",$id";
         }

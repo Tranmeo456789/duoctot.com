@@ -7,7 +7,7 @@ use DB;
 
 class WardModel extends BackEndModel
 {
-    protected $connection = 'mysql_share_data';
+    //protected $connection = 'mysql_share_data';
     public function __construct() {
         $this->table               = 'ward';
     }

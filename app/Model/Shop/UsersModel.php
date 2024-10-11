@@ -10,7 +10,7 @@ use App\Helpers\Format;
 use Illuminate\Support\Str;
 class UsersModel extends BackEndModel
 {
-    protected $connection = 'mysql_share_data';
+    //protected $connection = 'mysql_share_data';
     protected $hidden = [
         'password'
     ];

@@ -195,14 +195,6 @@
                         </li>
                     </ul>
                 </li>
-                @if(Session::get('user')['user_id']==864108238)
-                    <li class="nav-item">
-                        <a href="{{route('customer')}}" class="nav-link">
-                            <i class="nav-icon fas fa-user-friends"></i>
-                            <p>Quản lý khách hàng</p>
-                        </a>
-                    </li>
-                @endif
             @endif
             @if ((Session::has('user') && Session::get('user')['is_admin'] == 1) || (Session::has('user') && Session::get('user')['is_admin'] == 2))
             <li class="nav-item">

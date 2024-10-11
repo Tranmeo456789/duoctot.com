@@ -6,7 +6,7 @@ use App\Http\Requests\AjaxFormRequest;
 
 class UserRequest extends AjaxFormRequest
 {
-   // private $table            = 'user';
+    private $table            = 'user';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -32,12 +32,15 @@ class UserRequest extends AjaxFormRequest
                 $condName  = "bail|required|between:1,255";
                 $condEmail = '';
                 if (str_contains($this->email,'@')){
-                    $condEmail  = "bail|required|email|unique:mysql_share_data.user,email";
+                    //$condEmail  = "bail|required|email|unique:mysql_share_data.user,email";
+                    $condEmail  = "bail|required|email|unique:user,email";
                 }else{
-                    $condEmail = "bail|required|numeric|phone|unique:mysql_share_data.user,phone";
+                    //$condEmail = "bail|required|numeric|phone|unique:mysql_share_data.user,phone";
+                    $condEmail = "bail|required|numeric|phone|unique:user,phone";
                 }
                 $condPassword  = "bail|required|between:6,255";
-                $condProvince = "bail|required|exists:mysql_share_data.province,id";
+                //$condProvince = "bail|required|exists:mysql_share_data.province,id";
+                $condProvince = "bail|required|exists:province,id";
                 return  [
                     'fullname'    => $condName,
                     'email'       => $condEmail,

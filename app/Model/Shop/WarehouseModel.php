@@ -4,11 +4,8 @@ namespace App\Model\Shop;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Model\Shop\BackEndModel;
-use App\Model\Shop\Tinhthanhpho;
-use App\Model\Shop\Quanhuyen;
 use Session;
 use DB;
-use App\Model\Shop\Xaphuongthitran;
 use App\Model\Shop\ProductModel;
 class WarehouseModel extends BackEndModel
 {
