@@ -218,15 +218,15 @@
                                     <div class="col-12 col-md-9">
                                         <div class="box-dhtc">
                                             <p>Vui lòng thanh toán số tiền: <b><span class="total_thanh_toan">{{MyFunction::formatNumber($item['total']+20000)}}</span> đ</b> vào tài khoản ngân hàng</p>
-                                            <p>Ngân hàng TMCP Á Châu</p>
-                                            <p>Số tài khoản: <span class="font-weight-bold">68686388</span></p>
-                                            <p>Chủ tài khoản: Công ty cổ phần giải pháp TDoctor</p>
+                                            <p>Ngân hàng Kỹ thương (Techcombank)</p>
+                                            <p>Số tài khoản: <span class="font-weight-bold">19040023026018</span></p>
+                                            <p>Chủ tài khoản: CONG TY CO PHAN TDOCTOR PHARMA</p>
                                             <p>Nội dung ck: <span class="phone-customer font-weight-bold">{{$user->phone??null}}</span></p>
                                             <p>Liên hệ hotline/Zalo 0349444164 để xác nhận thanh toán và hỗ trợ</p>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-3 text-center">
-                                        <img src="{{asset('public/images/shop/qracbnh.jpg')}}" style="width: 100px;" alt="">
+                                        <img src="{{asset('public/shop/frontend/images/shop/qrcode_techcombank.jpg')}}" style="width: 150px;" alt="">
                                     </div>
                                 </div>
                             </div>

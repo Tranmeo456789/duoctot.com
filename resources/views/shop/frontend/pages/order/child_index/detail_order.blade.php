@@ -156,9 +156,9 @@ foreach($status_order as $value){
         @if($order_detail['status_control'] == 'chuaThanhToan')
             <div class="text-center box-dhtc">
                 <p>Vui lòng thanh toán số tiền(nếu chưa): <b>{{ MyFunction::formatNumber($order_detail['total']+$order_detail['money_ship']) . ' đ'}}</b> vào tài khoản ngân hàng</p>
-                <p>Ngân hàng TMCP Á Châu</p>
-                <p>Số tài khoản: 68686388</p>
-                <p>Chủ tài khoản: Công ty cổ phần giải pháp TDoctor</p>
+                <p>Ngân hàng Kỹ thương (Techcombank)</p>
+                <p>Số tài khoản: 19040023026018</p>
+                <p>Chủ tài khoản: CONG TY CO PHAN TDOCTOR PHARMA</p>
                 <p>Nội dung ck: {{$info_buyer['phone']}}</p>
                 <p>Nếu quý khách đã thanh toán</p>
                 <p>Liên hệ hotline/Zalo 0349444164 để xác nhận thanh toán và hỗ trợ</p>
