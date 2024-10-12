@@ -7,7 +7,6 @@ use DB;
 
 class DoctorModel extends BackEndModel
 {
-    protected $connection = 'mysql_share_data';
     public function __construct() {
         $this->table               = 'doctor';
     }

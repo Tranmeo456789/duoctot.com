@@ -7,7 +7,6 @@ use DB;
 
 class ClinicModel extends BackEndModel
 {
-    protected $connection = 'mysql_share_data';
     protected $primaryKey = "clinic_id";
     public function __construct() {
         $this->table               = 'clinic';

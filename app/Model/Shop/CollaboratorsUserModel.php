@@ -9,7 +9,6 @@ use App\Helpers\Format;
 
 class CollaboratorsUserModel extends BackEndModel
 {
-    protected $connection = 'mysql_share_data';
     protected $primaryKey = "user_id";
     public function __construct() {
         $this->table               = 'collaborators_user';

@@ -9,7 +9,6 @@ use App\Helpers\Format;
 
 class UserValuesModel extends BackEndModel
 {
-    //protected $connection = 'mysql_share_data';
     public function __construct() {
         $this->table               = 'user_values';
         $this->folderUpload        = '' ;

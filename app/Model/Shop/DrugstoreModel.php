@@ -7,7 +7,6 @@ use DB;
 
 class DrugstoreModel extends BackEndModel
 {
-    protected $connection = 'mysql_share_data';
     protected $primaryKey = "drugstore_id";
     public function __construct() {
         $this->table               = 'drugstore';

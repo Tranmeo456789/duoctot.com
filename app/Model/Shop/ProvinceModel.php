@@ -7,7 +7,6 @@ use DB;
 
 class ProvinceModel extends BackEndModel
 {
-    //protected $connection = 'mysql_share_data';
     public function __construct() {
         $this->table               = 'province';
         $this->folderUpload        = '' ;

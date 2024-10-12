@@ -84,7 +84,10 @@ class UsersModel extends BackEndModel
             $params['password']  = Hash::make($params['password']);
             $params['user_type_id'] = 0;
             $params['is_admin'] = 2;
-            $details = $params['details'];
+            $details=[];
+            if (isset($params['details'])){
+                $details = $params['details'];
+            }
             $details['slug']= Str::slug($params['fullname']);
             $params['details'] = json_encode($details,JSON_NUMERIC_CHECK );
             $params['user_id'] = $this->insertGetId($this->prepareParams($params));
@@ -101,9 +104,7 @@ class UsersModel extends BackEndModel
                     'value' =>$member_id
                 ];
                 \App\Model\Shop\UserValuesModel::insert($this->prepareParams($paramsUserValue));
-                //return self::getItem(['user_id'=>$params['user_id']],['task' => 'get-item']);
             }
-            //return false;
         }
         if($options['task'] == 'update-item'){
             $details = $params['details'];
