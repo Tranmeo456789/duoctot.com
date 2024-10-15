@@ -1230,7 +1230,7 @@ $(document).ready(function () {
         item: 5, // Giá trị tối đa cho màn hình lớn
         slideMargin: 5,
         speed: 500,
-        auto: true,
+        auto: false,
         loop: true,
         pager: false,
         responsive: [
@@ -1258,10 +1258,7 @@ $(document).ready(function () {
                     item: 2,
                 }
             }
-        ],
-        onSliderLoad: function() {
-            $('.banner_doitac').removeClass('cS-hidden');
-        }
+        ]
     });
     
 });

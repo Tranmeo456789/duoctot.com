@@ -65,7 +65,10 @@ body{
     color: #ffffff;
     background-color: #0894D9;
 }
-
+.note-editor li{
+    margin-left: 25px;
+    padding-bottom: 6px;
+}
 .my-sidebar .nav-treeview {
     background-color: #aee9e9;
 }

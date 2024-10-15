@@ -31,13 +31,13 @@ $imgCustomer=['1.jpg', '2.jpg'];
         </ul>
     </div>
     <div class="col-xl-3 col-lg-12">
-        <ul class="banner_doitac list-unstyled cS-hidden text-center">
+        <ul class="list-unstyled text-center">
             <li class="text-center">
                 <img src="{{asset('images/shop/1.jpg')}}" alt="tdoctor" class="img-fluid">
             </li>
-            <li class="text-center">
+            <!-- <li class="text-center">
                 <img src="{{asset('images/shop/2.jpg')}}" alt="tdoctor" class="img-fluid">
-            </li>
+            </li> -->
         </ul>
     </div>
 

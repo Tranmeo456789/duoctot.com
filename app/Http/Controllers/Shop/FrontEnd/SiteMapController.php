@@ -10,37 +10,21 @@ use Carbon\Carbon;
 
 class SiteMapController extends ShopFrontEndController
 {
-    public function sitemapPage()
-    {
-
-        $time = Carbon::now()->toDateString();
-
-        $publicPath = public_path();
-        // Tạo nội dung cho sitemapindex
-        $sitemapIndexContent = '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL;
-        $sitemapIndexContent .= '<sitemapindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd">' . PHP_EOL;
-        // Thêm các liên kết tới các tệp sitemap con
-        $sitemapIndexContent .= $this->generateSitemapEntry('https://tdoctor.net/sitemap_thuc-pham-chuc-nang.xml', Carbon::now()->toDateString());
-        $sitemapIndexContent .= $this->generateSitemapEntry('https://tdoctor.net/sitemap_thuoc.xml', Carbon::now()->toDateString());
-        $sitemapIndexContent .= $this->generateSitemapEntry('https://tdoctor.net/sitemap_cham-soc-ca-nhan.xml', Carbon::now()->toDateString());
-        $sitemapIndexContent .= $this->generateSitemapEntry('https://tdoctor.net/sitemap_thiet-bi_y-te.xml', Carbon::now()->toDateString());
-        $sitemapIndexContent .= $this->generateSitemapEntry('https://tdoctor.net/me-va-be.xml', Carbon::now()->toDateString());
-        $sitemapIndexContent .= $this->generateSitemapEntry('https://tdoctor.net/sitemap_tin-tuc.xml', Carbon::now()->toDateString());
-        // Thêm các tệp sitemap khác tương tự ở đây
-        $sitemapIndexContent .= '</sitemapindex>';
-        // Ghi đè nội dung mới lên tệp sitemap.xml
-        File::put($publicPath . '/sitemap.xml', $sitemapIndexContent);
-        // Trả về nội dung của sitemapindex
-        return Response::make($sitemapIndexContent, 200, [
-            'Content-Type' => 'text/xml'
-        ]);
-    }
-
-    protected function generateSitemapEntry($loc, $lastmod)
-    {
-        return "\t<sitemap>" . PHP_EOL .
-            "\t\t<loc>" . $loc . "</loc>" . PHP_EOL .
-            "\t\t<lastmod>" . $lastmod . "</lastmod>" . PHP_EOL .
-            "\t</sitemap>" . PHP_EOL;
+    public function sitemapPage(){
+        $urls = [
+            ['loc' => 'https://tdoctor.net/sitemap_thuc-pham-chuc-nang.xml', 'lastmod' => Carbon::now()->toDateString()],
+            ['loc' => 'https://tdoctor.net/sitemap_cham-soc-ca-nhan.xml', 'lastmod' => Carbon::now()->toDateString()],
+            ['loc' => 'https://tdoctor.net/sitemap_thuoc.xml', 'lastmod' => Carbon::now()->toDateString()],
+            ['loc' => 'https://tdoctor.net/sitemap_thiet-bi-y-te.xml', 'lastmod' => Carbon::now()->toDateString()],
+            ['loc' => 'https://tdoctor.net/sitemap_me-va-be.xml', 'lastmod' => Carbon::now()->toDateString()],
+            ['loc' => 'https://tdoctor.net/sitemap_tin-tuc.xml', 'lastmod' => Carbon::now()->toDateString()],
+            ['loc' => 'https://tdoctor.net/sitemap_baiviet1.xml', 'lastmod' => Carbon::now()->toDateString()],
+            ['loc' => 'https://tdoctor.net/sitemap_baiviet2.xml', 'lastmod' => Carbon::now()->toDateString()],
+            ['loc' => 'https://tdoctor.net/sitemap_baiviet3.xml', 'lastmod' => Carbon::now()->toDateString()],
+            ['loc' => 'https://tdoctor.net/sitemap_baiviet4.xml', 'lastmod' => Carbon::now()->toDateString()],
+            ['loc' => 'https://tdoctor.net/sitemap_baiviet5.xml', 'lastmod' => Carbon::now()->toDateString()],
+        ];
+        return response()->view('shop.frontend.pages.home/sitemap', ['urls' => $urls])
+                         ->header('Content-Type', 'application/xml');
     }
 }

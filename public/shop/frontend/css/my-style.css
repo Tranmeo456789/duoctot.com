@@ -2594,7 +2594,7 @@ body{
     position: fixed;z-index: 1000;top: 0px;
     display: none;
 }
-
+.content-post p{margin-bottom: 5px;}
 .btn-form-submit{
     padding: 0 25px;
     height: 45px;
