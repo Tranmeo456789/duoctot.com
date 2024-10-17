@@ -1206,7 +1206,7 @@ $(document).ready(function () {
         thumbItem: 4,
         slideMargin: 0,
         speed: 500,
-        auto: true,
+        auto: false,
         loop: true,
         onSliderLoad: function() {
             $('#image-gallery').removeClass('cS-hidden');

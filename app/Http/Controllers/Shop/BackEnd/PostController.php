@@ -10,7 +10,7 @@ use App\Model\Shop\UsersModel;
 use App\Http\Requests\PostRequest as MainRequest;
 use App\Helpers\MyFunction;
 use Illuminate\Support\Str;
-
+use Illuminate\Support\Facades\Storage;
 use DB;
 use Session;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
@@ -107,5 +107,21 @@ class PostController extends BackEndController
         $params["id"] = intval($request->id);
         $item = $this->model->getItem($params, ['task' => 'get-item-simple']);
         return json_encode($item->toArray());
+    }
+    public function upload(Request $request)
+    {
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $destinationPath = public_path('fileUpload/post'); // Hoặc đường dẫn cụ thể đến thư mục bạn muốn lưu
+
+            // Di chuyển file vào thư mục mong muốn
+            $file->move($destinationPath, $fileName);
+    
+            // Tạo URL cho file đã lưu
+            $url = asset('/laravel-filemanager/fileUpload/post/' . $fileName); 
+            return response()->json(['url' => $url]);
+        }
+        return response()->json(['error' => 'File không hợp lệ.'], 400);
     }
 }

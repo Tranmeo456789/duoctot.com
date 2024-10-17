@@ -337,6 +337,29 @@ $(document).ready(function() {
 
     // Initialize summernote with LFM button in the popover button group
     // Please note that you can add this button to any other button group you'd like
+    function sendFile(file) {
+        var formData = new FormData();
+        formData.append('file', file);
+    
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: '/backend/upload-image', // Endpoint để tải ảnh lên server
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                const fullUrl = response.url;
+                console.log('URL ảnh:', fullUrl);
+                $('.editor').summernote('insertImage', fullUrl);
+            },
+            error: function(xhr, status, error) {
+                console.error('Lỗi khi tải ảnh lên:', error);
+            }
+        });
+    }
     $('.editor').summernote({
         tabsize: 2,
         height: 100,
@@ -351,6 +374,9 @@ $(document).ready(function() {
                 setTimeout(function() {
                     document.execCommand('insertText', false, bufferText);
                 }, 10);
+            },
+            onImageUpload: function(files) {
+                sendFile(files[0]); // Gọi hàm sendFile khi người dùng tải ảnh lên
             }
         }
     })
