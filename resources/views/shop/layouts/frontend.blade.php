@@ -18,6 +18,7 @@
     <title>{{$title}}</title>
     <link rel="icon" href="{{ asset('images/shop/favicon.jpg') }}" type="image/jpeg">
     @include('shop.frontend.block.head')
+    @include('shop.frontend.block.script')
 </head>
 
 <body>
@@ -39,6 +40,5 @@
         @include('shop.frontend.block.spinner_screen')
     </div>
 </body>
-@include('shop.frontend.block.script')
 
 </html>

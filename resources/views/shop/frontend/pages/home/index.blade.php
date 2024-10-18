@@ -81,6 +81,7 @@
     </div>
 </div>
 <div class="wp-inner">
+    <h1 class="d-none">Sàn thương mại điện tử trong y dược Tdoctor</h1>
     <div id="hisd" class="position-relative">
         <div class="d-flex justify-content-center">
             <div id="form-search" class="d-flex justify-content-center">
@@ -96,14 +97,14 @@
     </div> -->
 </div>
 <div id="feature-product-wp">
-    <div class="product-backround  mt-3 mt-lg-4 py-4">
+    <!-- <div class="product-backround  mt-3 mt-lg-4 py-4">
         <div class="wp-inner">
             @include("$moduleName.templates.box_title_product",['title' => 'Sản phẩm mới','classBackground'=>'bg-danger'])
             <ul class="list-item">
                 @include("$moduleName.partial.product",['items'=>$itemsProduct['new']])
             </ul>
         </div>
-    </div>
+    </div> -->
     <div class="mt-3 mt-lg-4">
         <div class="wp-inner">
             @include("$moduleName.templates.box_title_product",['title' => 'Sản phẩm nổi bật','classBackground'=>'bg-danger'])
