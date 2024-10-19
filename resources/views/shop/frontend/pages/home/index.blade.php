@@ -89,10 +89,10 @@
             </div>
         </div>
     </div>
-    <div id="buy-medicine" class="mt-0 pt-0 mt-md-3 pt-md-3">
+    <div id="buy-medicine" class="mt-2 pt-2">
         @include("$moduleName.pages.$controllerName.child_index.buy_medicine")
     </div>
-    <!-- <div id="doi-tac" class="mt-0 pt-0 mt-md-3 pt-md-3">
+    <!-- <div id="doi-tac" class="mt-2 pt-2">
         @include("$moduleName.pages.$controllerName.child_index.banner_shop")
     </div> -->
 </div>
