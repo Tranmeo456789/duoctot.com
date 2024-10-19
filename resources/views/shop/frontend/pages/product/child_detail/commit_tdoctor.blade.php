@@ -92,8 +92,10 @@
         </ul>
     </div>
 </div>
-<div class="mess_free bg-orange" data-toggle="tooltip" data-html="true" title="@include($moduleName.'.pages.'.$controllerName.'.child_detail.tooltip_contact',['phoneContact'=>$contact])">
-    <span class="text-light">Nhận tư vấn miễn phí</span>
-    <img src="{{asset('images/shop/mess.png')}}" alt="">
+<div class="mess_free bg-orange">
+    <a href='https://zalo.me/0349444164' target='_blank'>
+        <span class="text-light">Nhận tư vấn miễn phí</span>
+        <img src="{{asset('images/shop/mess.png')}}" alt="">
+    </a>  
 </div>
 

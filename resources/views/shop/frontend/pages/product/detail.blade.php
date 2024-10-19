@@ -99,7 +99,7 @@ use Illuminate\Support\Str;
                     {!! csrf_field() !!}
                     <div class="form-group mb-3 d-flex" >
                         <label class="col-form-label" style="font-size:16px;">Chọn số lượng</label>
-                        <div class="input-group" style="width:125px;margin-left:10px">
+                        <div class="input-group" style="width:125px;margin-left:10px;flex-wrap: nowrap">
                             <div class="input-group-prepend">
                               <span class="input-group-text minus"><i class="fa fa-minus"></i></span>
                             </div>
