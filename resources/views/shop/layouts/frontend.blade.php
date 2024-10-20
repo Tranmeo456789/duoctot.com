@@ -37,6 +37,6 @@
         <div class="black-screen"></div>
         @include('shop.frontend.block.spinner_screen')
     </div>
+    @include('shop.frontend.block.script')
 </body>
-@include('shop.frontend.block.script')
 </html>
