@@ -2042,19 +2042,6 @@ $(document).on('keyup', 'input[name="buyer[phone]"]', function(event) {
     var spanElement = $('.phone-customer');
     spanElement.text(inputValue);
 });
-var bannerQuangCao= $('#banner_doitac .banner_doitac');
-bannerQuangCao.owlCarousel({
-    autoPlay: 4500,
-    navigation: false,
-    navigationText: false,
-    paginationNumbers: false,
-    pagination: true,
-    items: 1, 
-    itemsDesktop: [1000, 1],
-    itemsDesktopSmall: [900, 1],
-    itemsTablet: [600, 1],
-    itemsMobile: true
-});
 $(document).on('click', '.mdlh .md', function(event) {
     $('.md').removeClass('active');
     $(this).addClass('active');
