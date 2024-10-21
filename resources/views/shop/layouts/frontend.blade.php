@@ -38,5 +38,6 @@
         @include('shop.frontend.block.spinner_screen')
     </div>
     @include('shop.frontend.block.script')
+    @yield('scrip_add')
 </body>
 </html>

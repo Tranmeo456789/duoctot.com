@@ -13,7 +13,9 @@
     transition: all 0.5s ease-in-out;
     display: none;
 }
-
+p, label, ul {
+    margin-bottom: 0;
+}
 .tlogo-menu .rimg-startm img {
     width: 125px;
 }
@@ -7305,3 +7307,4 @@ input[type="radio"] {
     }
 }
 .content-post ul{margin: auto;padding: revert;margin-bottom: 1rem;} .content-post ul li{list-style: initial; padding: 5px;} 
+

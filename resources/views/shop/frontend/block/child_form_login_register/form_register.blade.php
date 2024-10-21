@@ -3,7 +3,7 @@
     $label            = config('myconfig.template.label');
     $formLabelAttr    = config('myconfig.template.form_element.label');
     $formInputAttr    = config('myconfig.template.form_element.input');
-    $formSelect2Attr  = config('myconfig.template.form_element.select2');
+    
     $formInputWidth['widthInput']  =  'col-12 p-0';
     $inputHiddenTask    = Form::hidden('task', 'register');
     $elements = [
@@ -30,7 +30,7 @@
             'styleFormGroup' => 'has-border',
         ],[
             'label'   => '',
-            'element' => Form::select('province_id',$itemsProvince, null, array_merge($formSelect2Attr,['style' =>'width:90%'])),
+            'element' => Form::select('province_id',$itemsProvince, null, array_merge($formInputAttr,['style' =>'width:90%'])),
             'type' => 'input-group-addon-image-before',
             'image' => asset('images/shop/ic_address.png'),
             'widthElement' => 'col-12 p-0',
