@@ -16,7 +16,7 @@
             'styleFormGroup' => 'has-border',
         ],[
             'label'   => '',
-            'element' => Form::text('email', null, array_merge($formInputAttr,['placeholder'=>'Nhập Số điện thoại / Email *','id'=>'email'])),
+            'element' => Form::text('email', null, array_merge($formInputAttr,['placeholder'=>'Nhập Số điện thoại / Email *','id'=>'email-dk'])),
             'type' => 'input-group-addon-image-before',
             'image' => asset('images/shop/ic_phone.png'),
             'widthElement' => 'col-12 p-0',
@@ -62,7 +62,7 @@
     'url'            => route('user.register'),
     'accept-charset' => 'UTF-8',
     'class'          => 'wp-content-register form-input-group form-in-modal user-register',
-    'id'             => 'main-form' ])  }}
+    'id'             => 'main-form1' ])  }}
     <div class="content text-center">
         <div class="row">
             {!! FormTemplate::show($elements,$formInputWidth)  !!}

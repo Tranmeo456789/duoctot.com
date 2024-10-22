@@ -4105,7 +4105,7 @@ input[type=number]::-webkit-outer-spin-button {
     display: block;
     top: 50%;
     height: 32px;
-    background-image: url('http://localhost/shop.tdoctor.vn/public/images/shop/controls.png');
+    background-image: url('https://tdoctor.net/public/images/shop/controls.png');
     cursor: pointer;
     position: absolute;
     z-index: 99;
@@ -7307,4 +7307,4 @@ input[type="radio"] {
     }
 }
 .content-post ul{margin: auto;padding: revert;margin-bottom: 1rem;} .content-post ul li{list-style: initial; padding: 5px;} 
-
+.progress{display: -ms-flexbox;display: flex;height: 1rem;overflow: hidden;line-height: 0;font-size: .75rem;background-color: #e9ecef;border-radius: .25rem;}

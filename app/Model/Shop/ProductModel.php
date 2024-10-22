@@ -61,6 +61,15 @@ class ProductModel extends BackEndModel
         }
         return $query;
     }
+    public function scopeUserLogin($query)
+    {
+        if (\Session::has('user')){
+            return $query;
+        }else{
+            return $query->where('id', '>', 1900)->where('id', '<', 1911);
+        }
+        return $query;
+    }
     public function listItems($params = null, $options = null)
     {
         $result = null;

@@ -56,7 +56,7 @@
                             <img src="{{asset('images/shop/dc1.png')}}" alt="tdoctor">
                         </div>
                     </div>
-                    <p>Trụ sở: Số 03, Đường Huỳnh Khương Ninh, Phường Đa Kao, Quận 1, Thành phố Hồ Chí Minh, Việt Nam</p>
+                    <p>Trụ sở CÔNG TY CỔ PHẦN TDOCTOR PHARMA: Số 03, Đường Huỳnh Khương Ninh, Phường Đa Kao, Quận 1, Thành phố Hồ Chí Minh, Việt Nam</p>
                 </div>
                 <div class="d-flex mb-2">
                     <div>
