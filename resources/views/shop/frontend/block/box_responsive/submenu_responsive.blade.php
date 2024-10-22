@@ -32,6 +32,7 @@ $phoneContact=$phoneContact??'0349444164';
     </li>
     @endif
     @endforeach
+    @if(Session::has('user'))
     <li>
         <div class="container-menures position-relative parentsmenu">
             <div class=" pr-4">
@@ -46,6 +47,7 @@ $phoneContact=$phoneContact??'0349444164';
             </div>
         </div>
     </li>
+    @endif
     <li class="">
         <div class="container-menures position-relative parentsmenu">
             <a href="https://tdoctor.vn/booking-online">@lang('lang.onlinebooking')</a>

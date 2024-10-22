@@ -48,12 +48,14 @@ $listCatAll=(new CatProductModel())->listItems(null, ['task'  => 'list-items-fro
         </div>
     </li>
     @endforeach
+    @if(Session::has('user'))
     <li class="">
         <a href="{{route('fe.product.listDrugstore')}}">@lang('lang.pharmacy')</a>
     </li>
     <li class="">
         <a href="{{route('fe.product.listShop')}}">@lang('lang.shop')</a>
     </li>
+    @endif
     <li>
         <a href="{{route('fe.booking_online')}}">@lang('lang.onlinebooking')</a>
     </li>

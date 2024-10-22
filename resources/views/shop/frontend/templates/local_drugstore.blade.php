@@ -1,3 +1,4 @@
+@if(Session::has('user'))
 <div class="wp-inner d-flex justify-content-between flex-wrap">
     <div class="d-flex">
         <img src="{{asset('images/shop/local.png')}}" alt="tdoctor">
@@ -7,3 +8,4 @@
         <a href="{{route('fe.product.listDrugstore')}}" target="_blank">Xem danh sách nhà thuốc</a>
     </div>
 </div>
+@endif
