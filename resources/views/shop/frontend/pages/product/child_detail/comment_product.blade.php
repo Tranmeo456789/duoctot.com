@@ -24,12 +24,12 @@
 <div class="question-often content-rating-product mt-3">
     @include("$moduleName.pages.$controllerName.child_detail.content_rating")
 </div>
-<div class="modal fade" id="ratingModal" tabindex="-1" role="dialog" aria-labelledby="ratingModalLabel" aria-hidden="true">
+<div class="modal" id="ratingModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="ratingModalLabel">Đánh giá sản phẩm</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>

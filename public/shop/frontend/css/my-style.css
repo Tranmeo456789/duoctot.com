@@ -2585,7 +2585,7 @@ body{
     height: 100%;
   }
   .set_height_250{
-    height: 250px;
+    max-height: 250px;
     overflow-y: scroll;
   }
 .fix1screen{

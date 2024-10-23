@@ -20,7 +20,7 @@
                       <span class="input-group-text money">{{ MyFunction::formatNumber($item['price']*$item['quantity'])}} đ</span>
                       <span class="input-group-text px-0">
                         <span>|&nbsp;</span>
-                        <span class="delele-item-in-cart" data-href="{{route('fe.cart.delete',['user_sell'=>$user_sell,'id'=>$item['product_id']])}}">Xóa</span>
+                        <a href="{{route('fe.cart.delete',['user_sell'=>$user_sell,'id'=>$item['product_id']])}}">Xóa</a>
                       </span>
                     </div>
                 </div>

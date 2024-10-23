@@ -1214,7 +1214,7 @@ $(document).ready(function () {
     $('.banner_doitac').lightSlider({
         item: 1,
         slideMargin: 0,
-        speed: 500,
+        speed: 1000,
         auto: true,
         loop: true,
         pager: false,
@@ -1225,8 +1225,8 @@ $(document).ready(function () {
     $('#feature-product-wp .list-item').lightSlider({
         item: 5, // Giá trị tối đa cho màn hình lớn
         slideMargin: 5,
-        speed: 500,
-        auto: false,
+        speed: 1000,
+        auto: true,
         loop: true,
         pager: false,
         responsive: [
@@ -1665,7 +1665,6 @@ $(document).on('click', ".btnFilterProductInCat", function (event) {
     countryCheckboxes.each(function() {
         listCountryId.push($(this).val());
     });
-    $('#modalFilter').modal('hide');
     $.ajax({
         url: url,
         cache: false,
@@ -2018,21 +2017,6 @@ $(document).on('keyup', ".wp-search .wp-input-search-simple>input", function (ev
         });    
     }
 });
-$(document).on('click', '.wp-link-affiliate .btn-copy-link', function(event) {
-    var copyText = $(this).siblings('.value-link');
-    var tempInput = $("<input>");
-    $("body").append(tempInput);
-    tempInput.val(copyText.text()).select();
-    document.execCommand("copy");
-    tempInput.remove();
-    $(this).tooltip({
-        title: "Đã copy!",
-        trigger: "manual"
-    }).tooltip('show');
-    setTimeout(function() {
-        $('.wp-link-affiliate .btn-copy-link').tooltip('hide');
-    }, 2000);
-});
 $(document).on('keyup', 'input[name="buyer[phone]"]', function(event) {
     var inputValue = $(this).val();
     var spanElement = $('.phone-customer');
@@ -2047,9 +2031,6 @@ $(document).on('click', '.no-login', function(event) {
     alert('Vui lòng đăng nhập để gửi bình luận!');
 });
 $(document).on('click', '.submit-comment', function(event) {
-    $('#replyModal').modal('hide');
-    $('.modal-backdrop').remove();
-    $('#ratingModal').modal('hide');
     var content = $(this).closest('.content-quest').find('textarea[name="content"]').val();
     var rating = $(this).attr("data-rating") !== undefined ? $(this).attr("data-rating") : null;
     var trimmedContent = content.trim();
@@ -2089,37 +2070,15 @@ $(document).on('click', '.submit-comment', function(event) {
         },
     });
 });
-var tooltipTimeout;
-
-$('.mess_free').tooltip({
-    trigger: 'manual',  
-    delay: { show: 500, hide: 0 }
-});
-
-$('.mess_free').on({
-    'mouseenter': function () {
-        clearTimeout(tooltipTimeout);
-        $(this).tooltip('show');
-    },
-    'mouseleave': function () {
-        tooltipTimeout = setTimeout(function () {
-            $('.mess_free').tooltip('hide');
-        }, 10000);
-    },
-    'click': function () {
-        clearTimeout(tooltipTimeout);
-        $('.mess_free').tooltip('show');
-    }
-});
 $(document).on('click', '.repply-comment', function(event){
     var commenterName = $(this).data('commenter-name');
     var commentId = $(this).data('comment-id');
-    $('#replyModal').modal('show').on('shown.bs.modal', function () {
-        $('#replyModalLabel').text('Trả lời cho ' + commenterName);
-        $('#replyModal .submit-comment').attr("data-parentid", commentId);
-        var input = $('#replyModal textarea[name="content"]')[0];
-        input.focus();
-    });
+    var rating = $(this).data('rating');
+    $("#replyModal").fadeIn(200);
+    $('#replyModalLabel').text('Trả lời cho ' + commenterName);
+    $('#replyModal .submit-comment').attr("data-parentid", commentId);
+    $('#replyModal .submit-comment').attr("data-rating", rating);
+    $('#replyModal textarea[name="content"]').val('').focus();
 });
 $(document).on('click', '#starRating .star-big', function(event){
     var rating = $(this).data('rating');
@@ -2167,4 +2126,33 @@ $('.list-check-items').each(function() {
         }
     });
 });
-
+!function(t){var e=function(e){this.$element=t(e),this.$toggle=this.$element.find(".dropdown-toggle"),this.$menu=this.$element.find(".dropdown-menu"),this.init()};e.prototype.init=function(){var e=this;this.$toggle.on("click",function(t){t.preventDefault();let n=window.getSelection();n.rangeCount,e.toggle()}),t(document).on("click",function(n){t(n.target).closest(e.$element).length||e.hide()})},e.prototype.toggle=function(){this.$menu.toggleClass("show"),this.$toggle.attr("aria-expanded",this.$menu.hasClass("show"))},e.prototype.hide=function(){this.$menu.hasClass("show")&&(this.$menu.removeClass("show"),this.$toggle.attr("aria-expanded","false"))},t.fn.dropdown=function(){return this.each(function(){new e(this)})},t(document).ready(function(){t(".dropdown").dropdown()})}(jQuery);
+$(document).on("click", ".wp-link-affiliate .btn-copy-link", function(e) {
+    var t = $(this).siblings(".value-link"),
+        n = $("<input>");
+    $("body").append(n);
+    n.val(t.text()).select();
+    document.execCommand("copy");
+    n.remove();
+    $("#copy-notification").fadeIn(200).delay(2000).fadeOut(200);
+});
+$(document).ready(function() {
+    $('.icon-filter').on('click', function() {
+        $('#modalFilter').fadeIn(200);
+    });
+    $('.show-form-rating').on('click', function() {
+        $('#ratingModal').fadeIn(200);
+    });
+    $('.close').on('click', function() {
+        $('#modalFilter').fadeOut(200);
+        $('#replyModal').fadeOut(200);
+        $('#ratingModal').fadeOut(200);
+    });
+    $('.submit-comment').on('click', function() {
+        $('#replyModal').fadeOut(200);
+        $('#ratingModal').fadeOut(200);
+    });
+    $('.btnFilterProductInCat').on('click', function() {
+        $('#modalFilter').fadeOut(200);
+    });
+});

@@ -29,7 +29,7 @@ class CommentModel extends BackEndModel
                 $query->where('shop_id', $params['shop_id']);
             }
             if (isset($params['rating'])) {
-                $query->where('rating','>',0);
+                $query->whereNotNull('rating')->where('rating', '!=', '');
             }else {
                 $query->where(function($q) {
                     $q->whereNull('rating')

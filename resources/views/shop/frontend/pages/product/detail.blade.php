@@ -82,7 +82,8 @@ use Illuminate\Support\Str;
                     @endphp
                 <div class="mb-3 d-flex justify-content-between">
                     <a href="{{ route('fe.product.drugstore', ['slug' => $slugName,'shopId'=> $userInfo['user_id']]) }}" class="btn btn-sm btn-outline-secondary py-1 px-2 btn-buy-search">Xem shop</a>
-                    <div class="wp-link-affiliate">
+                    <div class="wp-link-affiliate position-relative">
+                        <div id="copy-notification" style="display:none;position:absolute;background-color:#28a745;color:white;padding:3px;border-radius:5px;z-index:1000;font-size:14px;">Đã copy!</div>
                         @if(Session::has('user'))
                             @if(Session::get('user')['is_affiliate'] == 1)
                                  <div class="value-link d-none">{{route('fe.product.detail',['slug'=> $item['slug'], 'codeRef'=>$codeRefLogin])}}</div>

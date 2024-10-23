@@ -11,7 +11,7 @@ $urlAjax=route('fe.cat.filterProduct');
         @include("$moduleName.templates.box_title_product",['title' => 'Danh sách sản phẩm'])
         <div>
             <div class="fitter-wp d-flex">
-                <div class="icon-filter icon-filter-advance mr-2" data-toggle="modal" data-target="#modalFilter"><i class="fas fa-filter"></i></div>
+                <div class="icon-filter icon-filter-advance mr-2" id="openModal"><i class="fas fa-filter"></i></div>
                 <div class="seclect_ol d-flex">
                     <a class="ol1 activebtn"><img src="{{asset('images/shop/v4.png')}}" alt=""></a>
                     <a class="ol2"><img src="{{asset('images/shop/3ngang.png')}}" alt=""></a>

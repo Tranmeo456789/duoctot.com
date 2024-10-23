@@ -35,7 +35,7 @@ $ratingPercentages=(new CommentModel)->ratingPercentages(['product_id'=>$item['i
             <div class="">
                 <p>Bạn đã dùng sản phẩm này</p>
                 @if(Session::has('user'))
-                <span class="btn btn-primary show-form-rating" data-toggle="modal" data-target="#ratingModal">Gửi đánh giá</span>
+                <span class="btn btn-primary show-form-rating">Gửi đánh giá</span>
                 @else
                 <span class="btn btn-primary no-login">Gửi đánh giá</span>
                 @endif
@@ -44,7 +44,7 @@ $ratingPercentages=(new CommentModel)->ratingPercentages(['product_id'=>$item['i
     </div>
 </div>
 <ul class="list-comment position-relative">
-    <div class="btnselecthc">
+    <!-- <div class="btnselecthc">
         <div class="dropdown">
             <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mới nhất</button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -52,10 +52,10 @@ $ratingPercentages=(new CommentModel)->ratingPercentages(['product_id'=>$item['i
                 <a class="dropdown-item" href="#">Hữu ích nhất</a>
             </div>
         </div>
-    </div>
+    </div> -->
     @if(count($ratingProduct)>0)
     @foreach($ratingProduct as $val)
-    @include("$moduleName.partial.comment",['$ratingProduct'=>$val])
+    @include("$moduleName.partial.comment_rating",['$ratingProduct'=>$val])
     @endforeach
     @endif
 </ul>

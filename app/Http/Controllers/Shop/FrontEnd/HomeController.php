@@ -106,7 +106,7 @@ class HomeController extends ShopFrontEndController
         }else{
             $typeObject = $request->object_product;
             $countproductInObject=(new ProductModel())->countItems(['type'=>$typeObject], ['task' => 'count-items-product-frontend']);
-            $countproductInObject=$countproductInObject[0]['count']-10;
+            $countproductInObject = isset($countproductInObject[0]['count']) ? $countproductInObject[0]['count'] - 10 : 0;
             $productInObject=(new ProductModel())->listItems(['type'=>$typeObject], ['task' => 'frontend-list-items'])->take(10);
             return view("$this->pathViewController.child_index.product_by_object",
                     [

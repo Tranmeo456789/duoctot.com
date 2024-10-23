@@ -35,7 +35,7 @@ $ratingPercentages=(new CommentModel)->ratingPercentages(['shop_id'=>$userInfo['
             <div class="">
                 <p>Bạn đã dùng sản phẩm này</p>
                 @if(Session::has('user'))
-                <span class="btn btn-primary show-form-rating" data-toggle="modal" data-target="#ratingModal">Gửi đánh giá</span>
+                <span class="btn btn-primary show-form-rating">Gửi đánh giá</span>
                 @else
                 <span class="btn btn-primary no-login">Gửi đánh giá</span>
                 @endif
@@ -55,7 +55,7 @@ $ratingPercentages=(new CommentModel)->ratingPercentages(['shop_id'=>$userInfo['
     </div>
     @if(count($ratingShop)>0)
     @foreach($ratingShop as $val)
-    @include("$moduleName.partial.comment",['$ratingShop'=>$val])
+    @include("$moduleName.partial.comment_rating",['$ratingShop'=>$val])
     @endforeach
     @endif
 </ul>
