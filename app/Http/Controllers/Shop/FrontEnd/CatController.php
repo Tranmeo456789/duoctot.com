@@ -21,6 +21,9 @@ class CatController extends ShopFrontEndController
     public function catLevel1($slug)
     {
         $itemCatCurent = (new CatProductModel())->getItem(['slug'=>$slug],['task'=>'get-item-slug']);
+        if (empty($itemCatCurent)) {
+            return redirect()->route('home');
+        }
         $products=(new ProductModel())->listItems(['cat_product_id'=>$itemCatCurent['id'],'take'=>20],['task'=>'frontend-list-items']);
         $couterSumProduct=(new ProductModel())->countItems(['cat_product_id'=>$itemCatCurent['id']],['task'=>'count-number-product-in-cat']);
         $couterSumProduct=$couterSumProduct-20;

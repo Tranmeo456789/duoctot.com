@@ -199,82 +199,82 @@ class SearchController extends ShopFrontEndController
         // }
 
         //validate data nha thuoc len database mytable ở local
-        // $userNeedAdd = MyTableModel::all();
-        // foreach ($userNeedAdd as $record) {
-        //     if (isset($record->D) && $record->D !== null) {
-        //         if (strpos($record->D, '0') !== 0) {
-        //             $record->D = '0' . $record->D;
-        //         }
-        //     }
-        //     $record->E = 1; //tinh
-        //     $record->save();
-        // }
-        // return $userNeedAdd;
+            // $userNeedAdd = MyTableModel::all();
+            // foreach ($userNeedAdd as $record) {
+            //     if (isset($record->D) && $record->D !== null) {
+            //         if (strpos($record->D, '0') !== 0) {
+            //             $record->D = '0' . $record->D;
+            //         }
+            //     }
+            //     $record->E = 79; //tinh
+            //     $record->save();
+            // }
+            // return $userNeedAdd;
         //add lên bảng user
-        $userNeedAdd = MyTableModel::orderBy('A')->take(1000)->get();
-        //$userNeedAdd = MyTableModel::orderBy('A')->skip(3000)->take(1000)->get();
-        $count = 1;
-        //$userIdTest=UsersModel::where('user_id',1124110068)->get();
-        //return $userIdTest;
-        try {
-            $successCount = 0;
-            $failureCount = 0;
-            $maxRecords = 1000; // Giới hạn số bản ghi tối đa cần thêm
-            foreach ($userNeedAdd as $val) {
-                if ($successCount >= $maxRecords) {
-                    break; 
-                }
-                $params = [
-                    'domain_register' => 'shop.tdoctor.vn',
-                    'fullname' => $val['C'],
-                    'phone' => $val['D'],
-                    'password' => 1234567,
-                    'province_id' => $val['E'],
-                    'user_type_id' => 4,
-                    'gender' => 3,
-                    'paid' => 1,
-                    'details' => [
-                        'member_id' => $val['A'],
-                        'province_id' => $val['E'],
-                        'district_id' => '',
-                        'ward_id' => '',
-                        'address' => $val['B'],
-                        'sell_area' => 0,
-                        'tax_code' => '',
-                        'person_represent' => '',
-                        'map' => "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59587.946381010894!2d105.7957636011908!3d21.022814759960095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab9bd9861ca1%3A0xe7887f7b72ca17a9!2zSMOgIE7hu5lpLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1727767180491!5m2!1svi!2s\" width=\"100%\" height=\"340px\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>",
-                        'slug' => Str::slug($val['C']),
-                        'image' => "/laravel-filemanager/fileUpload/nhathuoc/nhathuocmau" . $count . ".jpg",
-                    ]
-                ];
-                $count++;
-                if ($count > 10) {
-                    $count = 1;
-                }
-                $currentIdUser = (new UsersModel())->saveItem($params, ['task' => 'register']);
-        
-                if ($currentIdUser) {
-                    $currentIdDelete = UserValuesModel::where('user_id', $currentIdUser)->delete();
-        
-                    foreach ($params['details'] as $key => $value) {
-                        $paramsUserValue = [
-                            'user_id' => $currentIdUser,
-                            'user_field' => $key,
-                            'value' => $value
-                        ];
-                        UserValuesModel::insert((new UsersModel())->prepareParams($paramsUserValue));
+            //$userNeedAdd = MyTableModel::orderBy('A')->skip(3000)->take(1000)->get();
+            $userNeedAdd = MyTableModel::orderBy('A')->take(479)->get();
+            $count = 1;
+            try {
+                $successCount = 0;
+                $failureCount = 0;
+                $maxRecords = 479; // Giới hạn số bản ghi tối đa cần thêm
+                foreach ($userNeedAdd as $val) {
+                    if ($successCount >= $maxRecords) {
+                        break; 
                     }
-                    echo "Thêm người dùng thành công: " . $val['A'] . "<br>";
-                    $successCount++;
-                } else {
-                    echo "Thêm người dùng thất bại: " . $val['A'] . "<br>";
-                    $failureCount++;
+                    $params = [
+                        'domain_register' => 'shop.tdoctor.vn',
+                        'fullname' => $val['C'],
+                        'phone' => $val['D'],
+                        'password' => 1234567,
+                        'province_id' => $val['E'],
+                        'district_id' => 783,
+                        'user_type_id' => 4,
+                        'gender' => 3,
+                        'paid' => 1,
+                        'type_account'=>'code_import',
+                        'details' => [
+                            'member_id' => $val['A'],
+                            'province_id' => $val['E'],
+                            'district_id' => 783,
+                            'ward_id' => '',
+                            'address' => $val['B'],
+                            'sell_area' => 0,
+                            'tax_code' => '',
+                            'person_represent' => '',
+                            'map' => "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d250625.17483345352!2d106.34226217030678!3d11.037249425292385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310b2d148b9dcd1f%3A0xf325fa2562fcf1b1!2zQ-G7pyBDaGksIEjhu5MgQ2jDrSBNaW5oLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1729045618230!5m2!1svi!2s\" width=\"100%\" height=\"340px\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>",
+                            'slug' => Str::slug($val['C']),
+                            'image' => "/laravel-filemanager/fileUpload/nhathuoc/nhathuocmau" . $count . ".jpg",
+                        ]
+                    ];
+                    $count++;
+                    if ($count > 10) {
+                        $count = 1;
+                    }
+                    $currentIdUser = (new UsersModel())->saveItem($params, ['task' => 'register']);
+            
+                    if ($currentIdUser) {
+                        //$currentIdDelete = UserValuesModel::where('user_id', $currentIdUser)->delete();
+            
+                        foreach ($params['details'] as $key => $value) {
+                            $paramsUserValue = [
+                                'user_id' => $currentIdUser,
+                                'user_field' => $key,
+                                'value' => $value
+                            ];
+                            UserValuesModel::insert((new UsersModel())->prepareParams($paramsUserValue));
+                        }
+                        echo "Thêm người dùng thành công: " . $val['A'] . "<br>";
+                        $successCount++;
+                    } else {
+                        echo "Thêm người dùng thất bại: " . $val['A'] . "<br>";
+                        $failureCount++;
+                    }
                 }
-            }
-            return "Thêm dữ liệu thành công! Số bản ghi thành công: $successCount, Số bản ghi thất bại: $failureCount.";
-        } catch (\Exception $e) {
-            return "Đã xảy ra lỗi khi thêm dữ liệu vào cơ sở dữ liệu: " . $e->getMessage();
-        }        
-        return 1;
+                return "Thêm dữ liệu thành công! Số bản ghi thành công: $successCount, Số bản ghi thất bại: $failureCount.";
+            } catch (\Exception $e) {
+                return "Đã xảy ra lỗi khi thêm dữ liệu vào cơ sở dữ liệu: " . $e->getMessage();
+            }        
+            return 1;
     }
 }

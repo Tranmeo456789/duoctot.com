@@ -17,7 +17,16 @@ class ProductController extends ApiController
         $this->limit = isset($request->limit) ? $request->limit : 50;
         $this->model = new MainModel();
     }
-
+    public function getListProductHome(Request $request){
+        $this->res['data'] = null;
+        $this->res['data']  = $this->model->listItems(null,['task'=>'frontend-list-items-api']);
+        return $this->setResponse($this->res);
+    }
+    public function getListProductFeaturer(Request $request){
+        $this->res['data'] = null;
+        $this->res['data'] = $this->model->listItems(['type'=>'noi_bat'], ['task' => 'frontend-list-items-api'])->take(10);
+        return $this->setResponse($this->res);
+    }
     public function index(Request $request)
     {
         $this->res['data'] = null;

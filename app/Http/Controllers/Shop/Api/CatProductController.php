@@ -31,21 +31,28 @@ class CatProductController extends ApiController
         }
         return $this->setResponse($this->res);
     }
-
+    public function getListCatProductLevel1(Request $request)
+    {
+        $this->res['data'] = null;
+        $this->res['data'] = $this->model->listItems(['parent_id' => 1],['task'=>'frontend-list-items-by-parent-id']);
+        return $this->setResponse($this->res);
+    }
     public function getListByParent(Request $request)
     {
         $this->res['data'] = null;
-        $params['parent_id'] = $request->parent_id;
-        $token = $request->header('Tdoctor-Token');
-        $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
-        if ($data_token['message'] == 'OK') {
-            $params['user'] =  json_decode(json_encode($data_token['payload']));
-           // $this->res['data'] =  $params['user'];
-            $request->session()->put('user', $params['user']);
-            $params['limit']        = $this->limit;
+        $params['parent_id'] = $request->parentID;
+        // $token = $request->header('Tdoctor-Token');
+        // $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
+        // if ($data_token['message'] == 'OK') {
+        //     $params['user'] =  json_decode(json_encode($data_token['payload']));
+        //    // $this->res['data'] =  $params['user'];
+        //     $request->session()->put('user', $params['user']);
+        //     $params['limit']        = $this->limit;
 
-            $this->res['data']  = $this->model->listItems($params,['task'=>'frontend-list-items-by-parent-id']);
-        }
+        //     $this->res['data']  = $this->model->listItems($params,['task'=>'frontend-list-items-by-parent-id']);
+        // }
+        $this->res['data']  = $this->model->listItems(['parent_id' => $request->parentID],['task'=>'frontend-list-items-by-parent-id']);
+        return $this->res['data'];
         return $this->setResponse($this->res);
     }
     public function getListByDepthFrontEnd(Request $request){

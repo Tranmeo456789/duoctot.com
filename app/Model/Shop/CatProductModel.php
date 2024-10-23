@@ -175,7 +175,7 @@ class CatProductModel extends BackEndModel
     {
         $result = null;
         if ($options['task'] == 'get-item') {
-            $result = self::select('id', 'name', 'parent_id', 'image', 'slug')
+            $result = self::select('id', 'name', 'parent_id', 'image', 'slug','status')
                 ->where('id', $params['id'])->first();
         }
         if ($options['task'] == 'get-item-parent') {
@@ -189,7 +189,7 @@ class CatProductModel extends BackEndModel
             }
         }
         if ($options['task'] == 'get-item-slug') {
-            $result = self::select('id', 'name', 'parent_id', 'image', 'slug')
+            $result = self::select('id', 'name', 'parent_id', 'image', 'slug')->where('status', '=', 'active')
                 ->where('slug', $params['slug'])->first();
         }
         return $result;

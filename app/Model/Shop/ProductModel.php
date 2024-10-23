@@ -204,6 +204,51 @@ class ProductModel extends BackEndModel
                 $result =  $query->get();
             }
         }
+        if ($options['task'] == "frontend-list-items-api") {
+            $query = $this::with('unitProduct')->select('id','name','price','percent_discount','unit_id','image','slug','show_price')
+                                ->where('id','>',1)->where('status_product','da_duyet')->userLogin();
+            if (isset($params['cat_product_id']) && ($params['cat_product_id'] != 0)){
+                $query->whereIn('cat_product_id', CatProductModel::getChild($params['cat_product_id']));
+            }
+            if (isset($params['type'])){
+                $query->whereRaw("FIND_IN_SET('\"{$params['type']}\"',REPLACE(REPLACE(`featurer`, '[',''),']',''))");
+            }
+            if (isset($params['group_id'])){
+                $query->whereIn('id',$params['group_id']);
+            }
+            if(isset($params['user_id'])){
+                $query->where('user_id',$params['user_id']);
+            }
+            if(isset($params['offset'])){
+                $query->skip($params['offset']);
+            }
+            if(isset($params['take'])){
+                $query->take($params['take']);
+            }
+            if (isset($params['group_trademark'])){
+                $query->whereIn('trademark_id',$params['group_trademark']);
+            }
+            if (isset($params['group_country'])){
+                $query->whereIn('country_id',$params['group_country']);
+            }
+            $query= $query->OfCollaboratorCode();
+            if(isset($params['order_by'])){
+                if($params['order_by']==='gia_thap'){
+                    $query->orderBy('price', 'asc');
+                }elseif($params['order_by']==='gia_cao'){
+                    $query->orderBy('price', 'desc');
+                }else{
+                    $query->orderBy('id', 'desc');
+                }
+            }else{
+                $query->orderBy('id', 'desc');
+            }
+            if(isset($params['limit'])){
+                $result=$query->paginate($params['limit']);
+            }else{
+                $result =  $query->get();
+            }
+        }
         if ($options['task'] == "frontend-list-item-shop") {
             $query = $this::select('id', 'name', 'type', 'code', 'cat_product_id', 'price', 'price_vat', 'percent_discount', 'unit_id', 'specification', 'image', 'user_id', 'featurer', 'slug', 'discount_ref', 'dosage_forms', 'elements','show_price')
             ->where('id', '>', 1)

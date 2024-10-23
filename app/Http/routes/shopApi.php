@@ -22,6 +22,16 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
          Route::get('getListFeaturerFrontEnd', ['uses' => $controller . 'getListFeaturerFrontEnd']);
          Route::get('getListProductByProductID', ['uses' => $controller . 'getListProductByProductID']);
          Route::get('getListProductShowFrontEnd', ['uses' => $controller . 'getListProductShowFrontEnd']);
+         Route::get('getListProductHome', ['uses' => $controller . 'getListProductHome']);
+         Route::get('getListProductFeaturer', ['uses' => $controller . 'getListProductFeaturer']);
+     });
+
+    $prefix         = 'catProduct';
+    $controllerName = 'catProduct';
+    Route::group(['prefix' => $prefix], function () use($controllerName) {
+        $controller = ucfirst($controllerName)  . 'Controller@';
+         Route::get('getListCatProductLevel1', ['uses' => $controller . 'getListCatProductLevel1']);
+         Route::get('getListByParent', ['uses' => $controller . 'getListByParent']);
      });
 
      $prefix         = 'affiliate';

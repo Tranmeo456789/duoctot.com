@@ -19,6 +19,18 @@
             'element' => Form::select('parent_id',$itemsParent, $item['parent_id']??null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
             'widthElement' => 'col-12'
         ],[
+                'label' => Form::label('status', 'Hiển thị',$formLabelAttr),
+                'element' => Form::radio('status', 'active',(!isset($item['status']) || $item['status'] == 'active') ? true : false),
+                'type' =>'inline-text-right',
+                'widthElement' => 'col-6',
+                'styleFormGroup' => 'mb-1',
+        ],[
+                'label' => Form::label('status', ' Ẩn',$formLabelAttr),
+                'element' => Form::radio('status', 'disable',(isset($item['status']) && $item['status'] == 'disable') ? true : false),
+                'type' =>'inline-text-right',
+                'widthElement' => 'col-6',
+                'styleFormGroup' => 'mb-1',
+        ],[
             'label'   => Form::label('image','Hình ảnh', ['class' => 'col-xs-3 col-form-label']),
             'element' => Template::createFileManager('image', $item['image']?? null),
             'widthInput' => 'col-9'
