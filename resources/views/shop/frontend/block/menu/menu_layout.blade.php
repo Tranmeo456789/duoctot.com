@@ -60,6 +60,7 @@
     <div id="head-top-respon">
         @include("$moduleName.block.box_responsive.box_head_top_responsive")
     </div>
+    @if(Session::has('user'))
     <div id="head-body">
         <div class="wp-inner" id="category-product-wp">
             <div class="d-flex justify-content-between">
@@ -89,6 +90,7 @@
             </div>
         </div>
     </div>
+    @endif
     <div id="head-body-respon">
         <div class="tlogo-menu position-relative">
             <div class="rimg-startm"><a href=""><img src="{{asset('images/shop/logo_topbar3.png')}}" alt="tdoctor"></a></div>
