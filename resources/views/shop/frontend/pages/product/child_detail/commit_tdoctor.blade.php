@@ -76,7 +76,7 @@
                     <div class="roud1-img1 mr-1"><i class="fas fa-thumbs-up"></i></div>
                     <div class=" align-items-start">
                         <h3>Miễn phí 100%</h3>
-                        <p>đổi thuốc</p>
+                        <p>đổi hàng</p>
                     </div>
                 </div>
             </li>

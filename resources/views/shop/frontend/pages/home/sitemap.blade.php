@@ -6,267 +6,267 @@
         <priority>1.00</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/sinh-ly-noi-tiet-to</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/sinh-ly-noi-tiet-to</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/suc-khoe-tim-mach</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/suc-khoe-tim-mach</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/ho-tro-tieu-hoa</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/ho-tro-tieu-hoa</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/than-kinh-nao</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/than-kinh-nao</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/cai-thien-tang-cuong-chuc-nang</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/cai-thien-tang-cuong-chuc-nang</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/thao-duoc-thuc-pham-tu-nhien</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/thao-duoc-thuc-pham-tu-nhien</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/tham-my-ho-tro-lam-dep</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/tham-my-ho-tro-lam-dep</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/dinh-duong-vitamin-khoang-chat</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/dinh-duong-vitamin-khoang-chat</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/ung-thu</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/ung-thu</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/xuong-khop</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/xuong-khop</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/tai-mui-hong</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/tai-mui-hong</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/phu-khoa</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/phu-khoa</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/than-tiet-nieu</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/than-tiet-nieu</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/mat-nhan-khoa</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/mat-nhan-khoa</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/he-ho-hap</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/he-ho-hap</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/da-lieu</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/da-lieu</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/cham-soc-ca-nhan</loc>
+        <loc>https://tdoctor.net/danh-muc/cham-soc-ca-nhan</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/cham-soc-ca-nhan/ho-tro-tinh-duc</loc>
+        <loc>https://tdoctor.net/danh-muc/cham-soc-ca-nhan/ho-tro-tinh-duc</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/cham-soc-ca-nhan/cham-soc-rang-mieng</loc>
+        <loc>https://tdoctor.net/danh-muc/cham-soc-ca-nhan/cham-soc-rang-mieng</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/cham-soc-ca-nhan/ve-sinh-ca-nhan</loc>
+        <loc>https://tdoctor.net/danh-muc/cham-soc-ca-nhan/ve-sinh-ca-nhan</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/cham-soc-ca-nhan/do-dung-gia-dinh</loc>
+        <loc>https://tdoctor.net/danh-muc/cham-soc-ca-nhan/do-dung-gia-dinh</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/cham-soc-ca-nhan/tinh-dau-cac-loai</loc>
+        <loc>https://tdoctor.net/danh-muc/cham-soc-ca-nhan/tinh-dau-cac-loai</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/cham-soc-ca-nhan/thuc-pham-do-uong</loc>
+        <loc>https://tdoctor.net/danh-muc/cham-soc-ca-nhan/thuc-pham-do-uong</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/cham-soc-ca-nhan/hang-tong-hop</loc>
+        <loc>https://tdoctor.net/danh-muc/cham-soc-ca-nhan/hang-tong-hop</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/cham-soc-ca-nhan/cham-soc-tay-chan</loc>
+        <loc>https://tdoctor.net/danh-muc/cham-soc-ca-nhan/cham-soc-tay-chan</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/cham-soc-ca-nhan/cham-soc-da</loc>
+        <loc>https://tdoctor.net/danh-muc/cham-soc-ca-nhan/cham-soc-da</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/cham-soc-ca-nhan/cham-soc-toc-da-dau</loc>
+        <loc>https://tdoctor.net/danh-muc/cham-soc-ca-nhan/cham-soc-toc-da-dau</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/cham-soc-ca-nhan/duoc-my-pham-trang-diem</loc>
+        <loc>https://tdoctor.net/danh-muc/cham-soc-ca-nhan/duoc-my-pham-trang-diem</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuoc</loc>
+        <loc>https://tdoctor.net/danh-muc/thuoc</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuoc/thuoc-tieu-hoa-gan-mat</loc>
+        <loc>https://tdoctor.net/danh-muc/thuoc/thuoc-tieu-hoa-gan-mat</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuoc/thuoc-tim-mach-tao-mau</loc>
+        <loc>https://tdoctor.net/danh-muc/thuoc/thuoc-tim-mach-tao-mau</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuoc/thuoc-di-ung-he-mien-dich</loc>
+        <loc>https://tdoctor.net/danh-muc/thuoc/thuoc-di-ung-he-mien-dich</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuoc/thuoc-ve-mat</loc>
+        <loc>https://tdoctor.net/danh-muc/thuoc/thuoc-ve-mat</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuoc/thuoc-khang-sinh</loc>
+        <loc>https://tdoctor.net/danh-muc/thuoc/thuoc-khang-sinh</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuoc/thuoc-ve-than-kinh</loc>
+        <loc>https://tdoctor.net/danh-muc/thuoc/thuoc-ve-than-kinh</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuoc/thuoc-thay-the-y-hoc-co-truyen-ho-tro-khac</loc>
+        <loc>https://tdoctor.net/danh-muc/thuoc/thuoc-thay-the-y-hoc-co-truyen-ho-tro-khac</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuoc/thuoc-ung-thu</loc>
+        <loc>https://tdoctor.net/danh-muc/thuoc/thuoc-ung-thu</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuoc/thuoc-tai-mui-hong</loc>
+        <loc>https://tdoctor.net/danh-muc/thuoc/thuoc-tai-mui-hong</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuoc/thuoc-sinh-ly</loc>
+        <loc>https://tdoctor.net/danh-muc/thuoc/thuoc-sinh-ly</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuoc/thuoc-ho-hap</loc>
+        <loc>https://tdoctor.net/danh-muc/thuoc/thuoc-ho-hap</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuoc/thuoc-giam-dau-ha-sot</loc>
+        <loc>https://tdoctor.net/danh-muc/thuoc/thuoc-giam-dau-ha-sot</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuoc/thuoc-ve-da</loc>
+        <loc>https://tdoctor.net/danh-muc/thuoc/thuoc-ve-da</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuoc/thuoc-ve-xuong-khop</loc>
+        <loc>https://tdoctor.net/danh-muc/thuoc/thuoc-ve-xuong-khop</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuoc/thuoc-phu-khoa</loc>
+        <loc>https://tdoctor.net/danh-muc/thuoc/thuoc-phu-khoa</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuoc/thuoc-tieu-duong</loc>
+        <loc>https://tdoctor.net/danh-muc/thuoc/thuoc-tieu-duong</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thiet-bi-y-te</loc>
+        <loc>https://tdoctor.net/danh-muc/thiet-bi-y-te</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thiet-bi-y-te/dung-cu-y-te</loc>
+        <loc>https://tdoctor.net/danh-muc/thiet-bi-y-te/dung-cu-y-te</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thiet-bi-y-te/dung-cu-theo-doi</loc>
+        <loc>https://tdoctor.net/danh-muc/thiet-bi-y-te/dung-cu-theo-doi</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thiet-bi-y-te/nha-khoa</loc>
+        <loc>https://tdoctor.net/danh-muc/thiet-bi-y-te/nha-khoa</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/me-va-be</loc>
+        <loc>https://tdoctor.net/danh-muc/me-va-be</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/me-va-be/san-pham-cho-me</loc>
+        <loc>https://tdoctor.net/danh-muc/me-va-be/san-pham-cho-me</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/me-va-be/san-pham-cho-be</loc>
+        <loc>https://tdoctor.net/danh-muc/me-va-be/san-pham-cho-be</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.80</priority>
     </url>
@@ -556,252 +556,252 @@
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/sinh-ly-noi-tiet-to/sinh-ly-nam</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/sinh-ly-noi-tiet-to/sinh-ly-nam</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/sinh-ly-noi-tiet-to/sinh-ly-nu</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/sinh-ly-noi-tiet-to/sinh-ly-nu</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/sinh-ly-noi-tiet-to/suc-khoe-tinh-duc</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/sinh-ly-noi-tiet-to/suc-khoe-tinh-duc</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/suc-khoe-tim-mach/huyet-ap</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/suc-khoe-tim-mach/huyet-ap</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/suc-khoe-tim-mach/cholesterol</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/suc-khoe-tim-mach/cholesterol</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/suc-khoe-tim-mach/suy-gian-tim-mach</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/suc-khoe-tim-mach/suy-gian-tim-mach</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/ho-tro-tieu-hoa/da-day-ta-trang</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/ho-tro-tieu-hoa/da-day-ta-trang</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/ho-tro-tieu-hoa/nhuan-trang</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/ho-tro-tieu-hoa/nhuan-trang</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/ho-tro-tieu-hoa/kho-tieu</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/ho-tro-tieu-hoa/kho-tieu</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/ho-tro-tieu-hoa/tao-bon</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/ho-tro-tieu-hoa/tao-bon</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/ho-tro-tieu-hoa/dai-trang</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/ho-tro-tieu-hoa/dai-trang</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/ho-tro-tieu-hoa/vi-sinh-probiotic</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/ho-tro-tieu-hoa/vi-sinh-probiotic</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/ho-tro-tieu-hoa/tieu-duong</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/ho-tro-tieu-hoa/tieu-duong</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/ho-tro-tieu-hoa/gan-mat</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/ho-tro-tieu-hoa/gan-mat</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/ho-tro-tieu-hoa/tri</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/ho-tro-tieu-hoa/tri</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/than-kinh-nao/bo-nao-cai-thien-tri-nho</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/than-kinh-nao/bo-nao-cai-thien-tri-nho</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/than-kinh-nao/kiem-soat-cang-thang</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/than-kinh-nao/kiem-soat-cang-thang</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/than-kinh-nao/ho-tro-giac-ngu</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/than-kinh-nao/ho-tro-giac-ngu</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/cai-thien-tang-cuong-chuc-nang/tang-suc-de-khang</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/cai-thien-tang-cuong-chuc-nang/tang-suc-de-khang</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/cai-thien-tang-cuong-chuc-nang/ho-tro-trao-doi-chat</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/cai-thien-tang-cuong-chuc-nang/ho-tro-trao-doi-chat</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/cai-thien-tang-cuong-chuc-nang/thuc-pham-bo-sung-cac-san-pham-ho-tro-suc-khoe</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/cai-thien-tang-cuong-chuc-nang/thuc-pham-bo-sung-cac-san-pham-ho-tro-suc-khoe</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/thao-duoc-thuc-pham-tu-nhien/nghe-curcumin</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/thao-duoc-thuc-pham-tu-nhien/nghe-curcumin</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/thao-duoc-thuc-pham-tu-nhien/nhan-sam</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/thao-duoc-thuc-pham-tu-nhien/nhan-sam</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/thao-duoc-thuc-pham-tu-nhien/dong-trung-ha-thao</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/thao-duoc-thuc-pham-tu-nhien/dong-trung-ha-thao</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/thao-duoc-thuc-pham-tu-nhien/trinh-nu-hoang-cung</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/thao-duoc-thuc-pham-tu-nhien/trinh-nu-hoang-cung</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/thao-duoc-thuc-pham-tu-nhien/mat-ong</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/thao-duoc-thuc-pham-tu-nhien/mat-ong</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/thao-duoc-thuc-pham-tu-nhien/toi</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/thao-duoc-thuc-pham-tu-nhien/toi</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/thao-duoc-thuc-pham-tu-nhien/ha-thu-o</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/thao-duoc-thuc-pham-tu-nhien/ha-thu-o</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/thao-duoc-thuc-pham-tu-nhien/sua-ong-chua</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/thao-duoc-thuc-pham-tu-nhien/sua-ong-chua</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/tham-my-ho-tro-lam-dep/toc</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/tham-my-ho-tro-lam-dep/toc</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/tham-my-ho-tro-lam-dep/ho-tro-giam-can</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/tham-my-ho-tro-lam-dep/ho-tro-giam-can</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/tham-my-ho-tro-lam-dep/thuc-pham-giam-can</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/tham-my-ho-tro-lam-dep/thuc-pham-giam-can</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/dinh-duong-vitamin-khoang-chat/vitaminc</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/dinh-duong-vitamin-khoang-chat/vitaminc</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/dinh-duong-vitamin-khoang-chat/vitamina</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/dinh-duong-vitamin-khoang-chat/vitamina</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/dinh-duong-vitamin-khoang-chat/vitamine</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/dinh-duong-vitamin-khoang-chat/vitamine</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/dinh-duong-vitamin-khoang-chat/canxi</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/dinh-duong-vitamin-khoang-chat/canxi</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/dinh-duong-vitamin-khoang-chat/sat</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/dinh-duong-vitamin-khoang-chat/sat</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/dinh-duong-vitamin-khoang-chat/kem</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/dinh-duong-vitamin-khoang-chat/kem</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/dinh-duong-vitamin-khoang-chat/dha</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/dinh-duong-vitamin-khoang-chat/dha</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/dinh-duong-vitamin-khoang-chat/vitamin-tong-hop</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/dinh-duong-vitamin-khoang-chat/vitamin-tong-hop</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/dinh-duong-vitamin-khoang-chat/sua</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/dinh-duong-vitamin-khoang-chat/sua</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/dinh-duong-vitamin-khoang-chat/thuc-pham-an-kieng</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/dinh-duong-vitamin-khoang-chat/thuc-pham-an-kieng</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/ung-thu/ung-thu-da-day</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/ung-thu/ung-thu-da-day</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/xuong-khop/co-xuong-khop</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/xuong-khop/co-xuong-khop</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/xuong-khop/gout</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/xuong-khop/gout</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/tai-mui-hong/ho-hap-xoang</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/tai-mui-hong/ho-hap-xoang</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/tai-mui-hong/mui</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/tai-mui-hong/mui</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/than-tiet-nieu/than-tien-liet-tuyen</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/than-tiet-nieu/than-tien-liet-tuyen</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/mat-nhan-khoa/bao-ve-mat</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/mat-nhan-khoa/bao-ve-mat</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>https://tdoctor.net/danh-muc-thuoc/thuc-pham-chuc-nang/he-ho-hap/bo-phoi</loc>
+        <loc>https://tdoctor.net/danh-muc/thuc-pham-chuc-nang/he-ho-hap/bo-phoi</loc>
         <lastmod>2024-10-18T08:05:19+00:00</lastmod>
         <priority>0.64</priority>
     </url>

@@ -178,7 +178,7 @@
             <p>3.1. Không:</p>
             <p>-ChatGPT vẫn cần được đào tạo, nạp dữ liệu ban đầu để có những câu trả lời chính xác.</p>
             <p>-ChatGPT cần được hỏi với các yêu cầu chính xác về thuật ngữ, chuyên môn, kiểu content phải biết về pillot, angle, công thức content, tiêu đề thu hút…</p>
-            <p>-ChatGPT đặc biệt là bản free vẫn đang thích trổ tài nghệ sĩ, "bay bổng", "hay vẽ vời" khi gặp các vấn đề không biết, các kiến thức về chuyên môn sâu (bệnh học/ thuốc/ ... có thể là 1 lĩnh vực như thế)</p>
+            <p>-ChatGPT đặc biệt là bản free vẫn đang thích trổ tài nghệ sĩ, "bay bổng", "hay vẽ vời" khi gặp các vấn đề không biết, các kiến thức về chuyên môn sâu (bệnh học/ ... có thể là 1 lĩnh vực như thế)</p>
             <p>-ChatGPT không hiểu được hết ý của sếp, vì nhiều sếp thật sự cũng không biết mình muốn truyền tải gì, viết gì, chỉ đơn giản là viết hay lên, thu hút lên.</p>
             <p>3.2. Có:</p>
             <p>-ChatGPT sẽ thay thế các anh em vẫn đang làm việc thiếu sức sống, làm cho có, hay đơn giản là copy - paste nhưng đôi khi lại quên edit.</p>

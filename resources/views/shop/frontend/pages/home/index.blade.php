@@ -75,13 +75,13 @@
         </div>
         <div class="d-none d-lg-block col-lg-3">
             <div>
-                <img src="{{asset('images/shop/banner-right-home.jpg')}}" alt="tdotor" class="img-fluid" style="width:100%">
+                <img src="{{asset('images/shop/banner-right-home1.jpg')}}" alt="tdotor" class="img-fluid" style="width:100%">
             </div>
         </div>
     </div>
 </div>
 <div class="wp-inner">
-    <h1 class="d-none">Sàn thương mại điện tử trong y dược Tdoctor</h1>
+    <h1 class="d-none">Tdoctor</h1>
     <div id="hisd" class="position-relative">
         <div class="d-flex justify-content-center">
             <div id="form-search" class="d-flex justify-content-center">
@@ -89,9 +89,9 @@
             </div>
         </div>
     </div>
-    <div id="buy-medicine" class="mt-2 pt-2">
+    <!-- <div id="buy-medicine" class="mt-2 pt-2">
         @include("$moduleName.pages.$controllerName.child_index.buy_medicine")
-    </div>
+    </div> -->
     <!-- <div id="doi-tac" class="mt-2 pt-2">
         @include("$moduleName.pages.$controllerName.child_index.banner_shop")
     </div> -->

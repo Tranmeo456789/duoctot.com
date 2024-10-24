@@ -3,7 +3,7 @@
         <li class="d-flex">
             <div class="rimg-center"><img src="{{asset('images/shop/dichvu1.png')}}" alt="tdoctor"></div>
             <div class="title-service">
-                <p class="first-title">THUỐC CHÍNH HÃNG</p>
+                <p class="first-title">SP CHÍNH HÃNG</p>
                 <p>Đa dạng và chuyên sâu</p>
             </div>
         </li>

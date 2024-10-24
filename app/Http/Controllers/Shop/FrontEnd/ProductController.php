@@ -176,7 +176,7 @@ class ProductController extends ShopFrontEndController
             $address=$userInfo['details']['address'].$ward.$district.$province;
             $map=isset($userInfo['details']['map']) ? $userInfo['details']['map'] : '';
         }
-        $title = isset($userInfo['fullname']) && $userInfo['fullname'] !== '' ? $userInfo['fullname'] . ', Shop dược phẩm trực tuyến | Tdoctor' : 'Sàn thương mại điện tử trong y dược';
+        $title = isset($userInfo['fullname']) && $userInfo['fullname'] !== '' ? $userInfo['fullname'] . ', Tdoctor' : 'Tdoctor';
         $commentShop = (new CommentModel)->listItems(['shop_id' => $userInfo['user_id']], ['task' => 'list-items-frontend']);
         $ratingShop = (new CommentModel)->listItems(['shop_id' => $userInfo['user_id'],'rating'=>1], ['task' => 'list-items-frontend']);
         return view($this->pathViewController . 'drugstore',

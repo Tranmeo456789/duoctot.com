@@ -4,7 +4,7 @@
 
     $listCatAll=(new CatProductModel())->listItems(null, ['task'  => 'list-items-front-end']);
 @endphp
-<h1 class="text-center mb-5">Danh mục thuốc nổi bật</h1>
+<h1 class="text-center mb-5">Danh mục SP nổi bật</h1>
 <ul class="clearfix list-unstyled">
     @foreach ($listCatAll as $itemLevel2)
     @if($itemLevel2['depth'] == 2)

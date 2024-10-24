@@ -9,7 +9,7 @@
         @include("$moduleName.pages.$controllerName.child_view_search_product.form_search")
     </div>
     <div class="mb-3">
-        @include("$moduleName.templates.box_title_product",['title' => 'Thuốc thông dụng','classBackground'=>'bg-danger'])
+        @include("$moduleName.templates.box_title_product",['title' => 'SP thông dụng','classBackground'=>'bg-danger'])
     </div>
     <div class="mb-3">
         @include("$moduleName.pages.$controllerName.child_view_search_product.list_product",['items'=>$productAlls])

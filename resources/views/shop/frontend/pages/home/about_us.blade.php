@@ -14,7 +14,7 @@
             </ul>
         </div>
         <div class="top-new">
-            <p style="font-size: 16px;">Chúng tôi là những bác sĩ nhiều kinh nghiệm, chúng tôi phục vụ người bệnh mọi lúc mọi nơi. <a style="font-size: 16px; color: #2b96cc;" href="https://tdoctor.net/">tdoctor.net</a> là công ty công nghệ với mong muốn sẽ xây dựng được một hệ thống chăm sóc sức khỏe toàn diện thông qua ứng dụng trên điện thoại và web. Ứng dụng tdoctor trên smartphone / tablet phiên bản Android và IOS cung cấp dịch vụ chăm sóc sức khỏe chủ động đầu tiên tại Việt Nam. Dựa trên nền tảng công nghệ thông tin, ứng dụng tdoctor giúp kết nối người dùng và Bác Sĩ dễ dàng ở mọi lúc, mọi nơi. Người dùng có thể sử dụng ứng dụng để được tư vấn sức khỏe, tra cứu thuốc & phòng khám, cùng các dịch vụ sức khỏe khác.</p>
+            <p style="font-size: 16px;">Chúng tôi là những bác sĩ nhiều kinh nghiệm, chúng tôi phục vụ người bệnh mọi lúc mọi nơi. <a style="font-size: 16px; color: #2b96cc;" href="https://tdoctor.net/">tdoctor.net</a> là công ty công nghệ với mong muốn sẽ xây dựng được một hệ thống chăm sóc sức khỏe toàn diện thông qua ứng dụng trên điện thoại và web. Ứng dụng tdoctor trên smartphone / tablet phiên bản Android và IOS cung cấp dịch vụ chăm sóc sức khỏe chủ động đầu tiên tại Việt Nam. Dựa trên nền tảng công nghệ thông tin, ứng dụng tdoctor giúp kết nối người dùng và Bác Sĩ dễ dàng ở mọi lúc, mọi nơi. Người dùng có thể sử dụng ứng dụng để được tư vấn sức khỏe, tra cứu SP & phòng khám, cùng các dịch vụ sức khỏe khác.</p>
             <br />
             <h2>ĐỘI NGŨ SÁNG LẬP VÀ NGƯỜI LÃNH ĐẠO</h2>
             <br />
@@ -145,7 +145,7 @@
                     <br><br>
                     <b class="cl-b">Trường đào tạo:</b> <b>Đại học Y dược Thành phố Hồ Chí Minh</b>
                     <br><br>
-                    <b class="cl-b">Kinh nghiệm: </b><span style="text-align: justify;font-size: 18px;"><br />Từng làm Thủ kho, dược sỹ lâm sàng - thông tin thuốc, phụ trách mua sắm vật tư y tế, trang thiết bị y tế, Trưởng phòng IT, Trưởng khoa dược. <br />Đã tham gia công tác tại 4 bệnh viện công lập trực thuộc Sở y tế TP. HCM<br />Đã qua vị trí trưởng khoa dược, quản lý điều hành khoa dược tại Bệnh viện đa khoa Sài Gòn, Bệnh viện An Bình</span>
+                    <b class="cl-b">Kinh nghiệm: </b><span style="text-align: justify;font-size: 18px;"><br />Từng làm Thủ kho, dược sỹ lâm sàng - thông tin SP, phụ trách mua sắm vật tư y tế, trang thiết bị y tế, Trưởng phòng IT, Trưởng khoa dược. <br />Đã tham gia công tác tại 4 bệnh viện công lập trực thuộc Sở y tế TP. HCM<br />Đã qua vị trí trưởng khoa dược, quản lý điều hành khoa dược tại Bệnh viện đa khoa Sài Gòn, Bệnh viện An Bình</span>
                 </p>
             </div>
             <div class="media" id="leader">

@@ -6,7 +6,7 @@
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
         <div class="d-flex">
             <div class="wp-input-search fc-search-js form-search-show-list input input-search-small">
-                <input type="text" name="keyword" class="input-search-info" data-href="{{$dataHref}}" value="{{$keyword??''}}" placeholder="Nhập tìm thuốc, TPCN, bệnh lý..." autocomplete="off">
+                <input type="text" name="keyword" class="input-search-info" data-href="{{$dataHref}}" value="{{$keyword??''}}" placeholder="Nhập tìm theo tên hoặc công dụng..." autocomplete="off">
             </div>
             <div class="btn-load-delete">
                 <i class="fas fa-spinner fa-spin" style="display: none;"></i>
