@@ -8,11 +8,13 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('/ajaxHoverCatLevel1','HomeController@ajaxHoverCatLevel1')->name('ajaxHoverCatLevel1');
     Route::get('/ajaxlocal-store','HomeController@ajaxlocal')->name('fe.ajaxlocal');
     Route::get('tai-lieu/dao-tao-viet-content-voi-ai.html','HomeController@writeContentAi')->name('fe.home.writeContentAi');
-    Route::get('chinh-sach-doi-tra.html','HomeController@pageChinhSachDoiTra')->name('fe.home.pageChinhSachDoiTra');
+    Route::get('chinh-sach-kiem-hang-doi-tra.html','HomeController@pageChinhSachDoiTra')->name('fe.home.pageChinhSachDoiTra');
     Route::get('ve-chung-toi.html','HomeController@pageAboutUs')->name('fe.home.pageAboutUs');
     Route::get('lien-he.html','HomeController@pageContact')->name('fe.home.pageContact');
     Route::get('quy-trinh-tranh-chap-giai-quyet.html','HomeController@pageQuytrinhGiaiquyetTranhchap')->name('fe.home.pageQuytrinhGiaiquyetTranhchap');
-    Route::get('chinh-sach-bao-mat-thong-tin.html','HomeController@pageChinhsachBaomatThongtin')->name('fe.home.pageChinhsachBaomatThongtin');
+    Route::get('chinh-sach-bao-mat.html','HomeController@pageChinhsachBaomatThongtin')->name('fe.home.pageChinhsachBaomatThongtin');
+    Route::get('chinh-sach-giao-nhan.html','HomeController@pageChinhsachGiaoNhan')->name('fe.home.pageChinhsachGiaoNhan');
+    Route::get('chinh-sach-thanh-toan.html','HomeController@pageChinhsachThanhToan')->name('fe.home.pageChinhsachThanhToan');
 
     Route::get('/chi-tiet-san-pham/{slug}.html','ProductController@detail')->name('fe.product.detail');
     Route::get('/tim-kiem-san-pham-theo-ten','ProductController@searchProductAjax')->name('fe.product.searchProductAjax');

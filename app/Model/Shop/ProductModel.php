@@ -601,6 +601,9 @@ class ProductModel extends BackEndModel
     public function countryProduct(){
         return $this->belongsTo('App\Model\Shop\CountryModel','country_id','id');
     }
+    public function producerProduct(){
+        return $this->belongsTo('App\Model\Shop\ProducerModel','producer_id','id');
+    }
     public function brandOriginIdProduct(){
         return $this->belongsTo('App\Model\Shop\CountryModel','brand_origin_id','id');
     }

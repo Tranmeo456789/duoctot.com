@@ -63,7 +63,7 @@ use Illuminate\Support\Str;
                 </div>
                 <div class="desc_product mb-3">
                     @if($item['show_price'] == 1)
-                        <div class="price_product mb-2"><span class="font-weight-bold">{{ number_format( $item['price'], 0, "" ,"." )}}đ /</span> {{$item->unitProduct->name}}</div>
+                        <div class="price_product mb-2 text-primary"><span class="font-weight-bold">{{ number_format( $item['price'], 0, "" ,"." )}}đ /</span> {{$item->unitProduct->name}}</div>
                     @else
                         <div class="mb-2">
                             <a href='https://zalo.me/0349444164' target='_blank'>
@@ -72,12 +72,14 @@ use Illuminate\Support\Str;
                             <span class="contact-buy">Liên hệ Hotline <span class="phone">0349.444.164</span></span>
                         </div>
                     @endif
-                    <p><span class="font-weight-bold bcn">Danh mục: </span><span class="text-info">{{$item->catProduct->name}}</span></p>
-                    <p><span class="font-weight-bold">Dạng bào chế: </span>{{$item['dosage_forms']}}</p>
-                    <p><span class="font-weight-bold">Quy cách: </span>{{$item['specification']}}</p>
+                    <p><span class="font-weight-bold bcn">Danh mục: </span><span class="text-info">{{$item->catProduct->name??'...'}}</span></p>
+                    <p><span class="font-weight-bold">Dạng bào chế: </span>{{$item['dosage_forms']??'...'}}</p>
+                    <p><span class="font-weight-bold">Quy cách: </span>{{$item['specification']??'...'}}</p>
                     <p><span class="font-weight-bold">Xuất xứ thương hiệu: </span>{{ $item->brandOriginIdProduct->name ?? '...' }}</p>
+                    <p><span class="font-weight-bold">Nhà sản xuất: </span>{{$item->producerProduct->name ?? '...'}}</p>
                     <p><span class="font-weight-bold">Nước sản xuất: </span>{{$item->countryProduct->name ?? '...'}}</p>
                     <p><span class="font-weight-bold">Công dụng: </span>{!!$item->benefit!!}</p>
+                    <p><span class="font-weight-bold">Hạn sử dụng: </span>{{$item['expiration_date']??'...'}}</p>
                 </div>
                     @php
                         $slugName = Str::slug($userInfo['fullname']);                                     

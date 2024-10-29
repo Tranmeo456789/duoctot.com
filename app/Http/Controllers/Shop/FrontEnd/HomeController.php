@@ -152,4 +152,16 @@ class HomeController extends ShopFrontEndController
             'title'=>$title
         ]);
     }
+    public function pageChinhsachGiaoNhan(){
+        $title = 'Chính sách giao nhận | Tdoctor';
+        return view("$this->pathViewController.chinhsach_giaonhan",[
+            'title'=>$title
+        ]);
+    }
+    public function pageChinhsachThanhToan(){
+        $title = 'Chính sách thanh toán | Tdoctor';
+        return view("$this->pathViewController.chinhsach_thanhtoan",[
+            'title'=>$title
+        ]);
+    }
 }
