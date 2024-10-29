@@ -114,24 +114,7 @@ class CatProductModel extends BackEndModel
         }
 
         if ($options['task'] == "frontend-list-items-level-2") {
-            $user = \Session::get('user');
-
-            $refer_id = $user->refer_id;
-            $collaborator = CollaboratorsUserModel::where('code', $refer_id)->first();
             $whereProduct = "";
-            if ($collaborator) {
-                $collaborator_code = $collaborator->code;
-
-                $arrUserID = CollaboratorsClinicDoctor::select("user_id")
-                    ->where("collaborators_clinic_doctor.collaborator_code", $collaborator_code)
-                    ->first();
-
-                if (!empty($arrUserID['user_id'])) {
-                    $arrUserID = "(" . implode(',', $arrUserID['user_id']) . ")";
-                    $whereProduct = "AND `user_id` IN $arrUserID";
-                }
-            }
-
             $query = self::select(DB::raw("cat_product.id,cat_product.name,cat_product.image,cat_product.slug,
                                 (  select count(1) - 1
                                     from `cat_product` as `_d`

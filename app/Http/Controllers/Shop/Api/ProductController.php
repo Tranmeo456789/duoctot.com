@@ -49,16 +49,15 @@ class ProductController extends ApiController
     {
         $this->res['data'] = null;
         $params['parent_id'] = $request->parent_id;
-        $token = $request->header('Tdoctor-Token');
-        $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
-        if ($data_token['message'] == 'OK') {
-            $params['user'] =  json_decode(json_encode($data_token['payload']));
-            $params['id'] = intval($request->id);
-
-            $request->session()->put('user', $params['user']);
-            $this->res['data']  = $this->model->getItem($params,['task'=>'frontend-get-item']);
-        }
-
+        $params['id'] = intval($request->id);
+        // $token = $request->header('Tdoctor-Token');
+        // $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
+        // if ($data_token['message'] == 'OK') {
+        //     $params['user'] =  json_decode(json_encode($data_token['payload']));
+        //     $request->session()->put('user', $params['user']);
+        //     $this->res['data']  = $this->model->getItem($params,['task'=>'frontend-get-item-api']);
+        // }
+        $this->res['data']  = $this->model->getItem($params,['task'=>'frontend-get-item-api']);
         return $this->setResponse($this->res);
     }
     public function getListFeaturer(Request $request)

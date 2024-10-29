@@ -20,16 +20,19 @@ class CatProductController extends ApiController
     public function index(Request $request)
     {
         $this->res['data'] = null;
-        $token = $request->header('Tdoctor-Token');
-        $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
-        if ($data_token['message'] == 'OK') {
-            $params['user'] =  json_decode(json_encode($data_token['payload']));
-           // $this->res['data'] =  $params['user'];
-            $request->session()->put('user', $params['user']);
-            $params['limit']        = $this->limit;
+        // $token = $request->header('Tdoctor-Token');
+        // $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
+        // if ($data_token['message'] == 'OK') {
+        //     $params['user'] =  json_decode(json_encode($data_token['payload']));
+        //    // $this->res['data'] =  $params['user'];
+        //     $request->session()->put('user', $params['user']);
+        //     $params['limit']        = $this->limit;
 
-            $this->res['data']  = $this->model->listItems($params,['task'=>'frontend-list-items-level-2']);
-        }
+        //     $this->res['data']  = $this->model->listItems($params,['task'=>'frontend-list-items-level-2']);
+        // }
+        $params['limit']=$this->limit;
+        $this->res['data']  = $this->model->listItems($params,['task'=>'frontend-list-items-level-2']);
+        $this->res['count']  = count($this->res['data']);
         return $this->setResponse($this->res);
     }
     public function getListCatProductLevel1(Request $request)

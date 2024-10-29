@@ -20,6 +20,11 @@ class ProvinceModel extends BackEndModel
                         ->orderBy('name', 'asc');
             $result = $query->pluck('name', 'id')->toArray();
         }
+        if($options['task'] == "list-items-in-selectbox-api") {
+            $query = $this->select('id', 'name')
+                        ->orderBy('name', 'asc');
+            $result = $query->pluck('name', 'id')->toArray();
+        }
 
         return $result;
     }

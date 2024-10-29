@@ -421,6 +421,32 @@ class ProductModel extends BackEndModel
             }
             $result = $query->first();
         }
+        if ($options['task'] == 'frontend-get-item-api') {
+            $query = self::with(['unitProduct', 'catProduct'])
+                            ->select('id','name','type','code','cat_product_id','producer_id',
+                                    'tick','type_price','price','price_vat','percent_discount','coefficient',
+                                    'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
+                                    'inventory','inventory_min','general_info','prescribe','dosage','trademark_id','brand_origin_id',
+                                    'dosage_forms','country_id','specification','benefit','elements',
+                                    'preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','long','wide','high',
+                                    'mass','discount_ref','contact','show_price');
+            if(isset($params['id'])){
+                $query->where('id', $params['id']);
+            }
+            if(isset($params['slug'])){
+                $query->where('slug', $params['slug']);
+            }
+            $result = $query->first();
+            if ($result) {
+                $result->general_info = strip_tags($result->general_info);
+                $result->prescribe = strip_tags($result->prescribe);
+                $result->dosage = strip_tags($result->dosage);
+                $result->benefit = strip_tags($result->benefit);
+                $result->elements = strip_tags($result->elements);
+                $result->preserve = strip_tags($result->preserve);
+                $result->note = strip_tags($result->note);
+            }
+        }
         return $result;
     }
     public function countItems($params = null, $options  = null) {

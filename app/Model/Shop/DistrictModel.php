@@ -21,6 +21,14 @@ class DistrictModel extends BackEndModel
             }
             $result = $query->pluck('name', 'id')->toArray();
         }
+        if($options['task'] == "list-items-in-selectbox-api") {
+            $query = $this->select('id', 'name')
+                        ->orderBy('name', 'asc');
+            if (isset($params['parentID'])){
+                $query->where('province_id', $params['parentID']);
+            }
+            $result = $query->pluck('name', 'id')->toArray();
+        }
 
         return $result;
     }
