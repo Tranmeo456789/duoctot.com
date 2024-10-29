@@ -32,6 +32,7 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
         $controller = ucfirst($controllerName)  . 'Controller@';
          Route::get('getListCatProductLevel1', ['uses' => $controller . 'getListCatProductLevel1']);
          Route::get('getListByParent', ['uses' => $controller . 'getListByParent']);
+         Route::get('getListProductByCatId', ['uses' => $controller . 'getListProductByCatId']);
      });
 
      $prefix         = 'affiliate';

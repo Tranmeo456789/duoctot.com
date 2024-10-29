@@ -11,11 +11,14 @@ use App\Model\Shop\ProvinceModel;
 use App\Model\Shop\DistrictModel;
 use App\Model\Shop\DoctorModel;
 use App\Model\Shop\DrugstoreModel;
+use Illuminate\Support\Facades\Session;
 class BookingController extends ShopFrontEndController
 {
     public function index(Request $request)
     {
-
+        if (!Session::has('user') || (Session::has('user') && Session::get('user')['user_id'] == 1124149617)) {
+            return redirect()->route('home');
+        }
         $session = $request->session();
         $params['limit'] = 20;
         $params['cate'] = $request->has('cate')?$request->get('cate'):($session->has('params.cate')?$session->get('params.cate'):'doctor');

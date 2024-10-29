@@ -60,7 +60,7 @@
     <div id="head-top-respon">
         @include("$moduleName.block.box_responsive.box_head_top_responsive")
     </div>
-    @if(Session::has('user'))
+    @if(Session::has('user') && isset(Session::get('user')['user_id']) && Session::get('user')['user_id'] != 1124149617)
     <div id="head-body">
         <div class="wp-inner" id="category-product-wp">
             <div class="d-flex justify-content-between">

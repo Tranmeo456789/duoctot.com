@@ -25,7 +25,7 @@ class CatController extends ShopFrontEndController
         if (empty($itemCatCurent)) {
             return redirect()->route('home');
         }
-        if(!Session::has('user')){
+        if (!Session::has('user') || (Session::has('user') && Session::get('user')['user_id'] == 1124149617)) {
             return redirect()->route('home');
         }
         $products=(new ProductModel())->listItems(['cat_product_id'=>$itemCatCurent['id'],'take'=>20],['task'=>'frontend-list-items']);
@@ -39,7 +39,7 @@ class CatController extends ShopFrontEndController
     }
     public function catLevel2($slug, $slug1)
     {
-        if(!Session::has('user')){
+        if (!Session::has('user') || (Session::has('user') && Session::get('user')['user_id'] == 1124149617)) {
             return redirect()->route('home');
         }
         $itemCatCurent = (new CatProductModel())->getItem(['slug'=>$slug1],['task'=>'get-item-slug']);
@@ -60,7 +60,7 @@ class CatController extends ShopFrontEndController
     }
     public function catLevel3($slug, $slug1, $slug2)
     {
-        if(!Session::has('user')){
+        if (!Session::has('user') || (Session::has('user') && Session::get('user')['user_id'] == 1124149617)) {
             return redirect()->route('home');
         }
         $itemCatCurent = (new CatProductModel())->getItem(['slug'=>$slug2],['task'=>'get-item-slug']);

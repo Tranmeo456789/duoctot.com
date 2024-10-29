@@ -63,7 +63,8 @@ class ProductModel extends BackEndModel
     }
     public function scopeUserLogin($query)
     {
-        if (\Session::has('user')){
+        $user = \Session::get('user');
+        if (\Session::has('user') && $user['user_id']!=1124149617){
             return $query;
         }else{
             return $query->where('id', '>', 1900)->where('id', '<', 1911);
@@ -206,7 +207,7 @@ class ProductModel extends BackEndModel
         }
         if ($options['task'] == "frontend-list-items-api") {
             $query = $this::with('unitProduct')->select('id','name','price','percent_discount','unit_id','image','slug','show_price')
-                                ->where('id','>',1)->where('status_product','da_duyet')->userLogin();
+                                ->where('id','>',1)->where('status_product','da_duyet');
             if (isset($params['cat_product_id']) && ($params['cat_product_id'] != 0)){
                 $query->whereIn('cat_product_id', CatProductModel::getChild($params['cat_product_id']));
             }
@@ -404,7 +405,7 @@ class ProductModel extends BackEndModel
                             ->first();
         }
         if ($options['task'] == 'frontend-get-item') {
-            $query = self::with('unitProduct')
+            $query = self::with(['unitProduct', 'catProduct'])
                             ->select('id','name','type','code','cat_product_id','producer_id',
                                     'tick','type_price','price','price_vat','percent_discount','coefficient',
                                     'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',

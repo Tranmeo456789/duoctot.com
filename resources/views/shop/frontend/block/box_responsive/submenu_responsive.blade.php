@@ -11,7 +11,7 @@ $phoneContact=$phoneContact??'0349444164';
     <div class="container-menures"><a href="{{route('home')}}">Trang chủ</a></div>
 </h3>
 <ul>
-    @if(Session::has('user'))
+    @if(Session::has('user') && isset(Session::get('user')['user_id']) && Session::get('user')['user_id'] != 1124149617)
         @foreach ($listCatLevel1 as $itemLevel1)
             @if($itemLevel1['parent_id']==1)
             <li>

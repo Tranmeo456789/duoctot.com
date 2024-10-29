@@ -17,6 +17,7 @@ use App\Model\Shop\TrademarkModel;
 use App\Model\Shop\UsersModel;
 use App\Model\Shop\UserValuesModel;
 use App\Model\Shop\WardModel;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cookie;
 class ProductController extends ShopFrontEndController
 {
@@ -236,11 +237,12 @@ class ProductController extends ShopFrontEndController
         
     }
     public function listShop(Request $request){
+        if (!Session::has('user') || (Session::has('user') && Session::get('user')['user_id'] == 1124149617)) {
+            return redirect()->route('home');
+        }
         $itemsProvince = (new ProvinceModel())->listItems(null,['task'=>'admin-list-items-in-selectbox']);
         $itemsDistrict=[];
-        $query = UsersModel::whereIn('user_type_id', [10])
-
-                    ->orderBy('user_id', 'DESC');
+        $query = UsersModel::whereIn('user_type_id', [10])->orderBy('user_id', 'DESC');
         if (isset($_COOKIE['province']) && $_COOKIE['province'] != "") {
             $query = $query->where('province_id', $this->getProvinceID($_COOKIE['province']));
 
@@ -252,7 +254,6 @@ class ProductController extends ShopFrontEndController
                 $query = $query->where('province_id', $prv->id);
             }
             $itemsDistrict= (new DistrictModel())->listItems(['parentID' =>  $prv->id],['task'=>'admin-list-items-in-selectbox']);
-
         }
         if ($request->input('district_id') != null) {
             $itemDistrict = DistrictModel::where('id', intval($request->input('district_id')))->first();
@@ -287,11 +288,12 @@ class ProductController extends ShopFrontEndController
         );
     }
     public function listDrugstore(Request $request){
+        if (!Session::has('user') || (Session::has('user') && Session::get('user')['user_id'] == 1124149617)) {
+            return redirect()->route('home');
+        }
         $itemsProvince = (new ProvinceModel())->listItems(null,['task'=>'admin-list-items-in-selectbox']);
         $itemsDistrict=[];
-        $query = UsersModel::whereIn('user_type_id', [4])
-
-                    ->orderBy('user_id', 'DESC');
+        $query = UsersModel::whereIn('user_type_id', [4])->orderBy('user_id', 'DESC');
         if (isset($_COOKIE['province']) && $_COOKIE['province'] != "") {
             $query = $query->where('province_id', $this->getProvinceID($_COOKIE['province']));
 
@@ -307,7 +309,6 @@ class ProductController extends ShopFrontEndController
         }
         if ($request->input('district_id') != null) {
             $itemDistrict = DistrictModel::where('id', intval($request->input('district_id')))->first();
-
             if ($itemDistrict != null) {
                 $arrUserID = UserValuesModel::select('user_id')
                                             ->where('value',$itemDistrict->id)

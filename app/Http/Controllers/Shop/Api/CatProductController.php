@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Shop\Api\ApiController;
 use App\Model\Shop\CatProductModel as MainModel;
+use App\Model\Shop\ProductModel;
 use \Firebase\JWTCustom\JWTCustom as JWTCustom;
 
 class CatProductController extends ApiController
@@ -52,13 +53,20 @@ class CatProductController extends ApiController
         //     $this->res['data']  = $this->model->listItems($params,['task'=>'frontend-list-items-by-parent-id']);
         // }
         $this->res['data']  = $this->model->listItems(['parent_id' => $request->parentID],['task'=>'frontend-list-items-by-parent-id']);
-        return $this->res['data'];
         return $this->setResponse($this->res);
     }
     public function getListByDepthFrontEnd(Request $request){
         $params['limit']        = $this->limit;
         $params['depth'] = $request->depth;
         $this->res['data']  = $this->model->listItems($params,['task'=>'list-items-api-by-depth']);
+        return $this->setResponse($this->res);
+    }
+    public function getListProductByCatId(Request $request){
+        //$params['limit']        = $this->limit;
+        $this->res['data'] = null;
+        $params['cat_product_id'] = $request->catProductId;
+        $this->res['data']=(new ProductModel())->listItems($params,['task'=>'frontend-list-items-api']);
+        $this->res['count'] = count($this->res['data']);
         return $this->setResponse($this->res);
     }
 }
