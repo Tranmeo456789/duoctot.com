@@ -244,10 +244,12 @@ class ProductModel extends BackEndModel
             }else{
                 $query->orderBy('id', 'desc');
             }
-            if(isset($params['limit'])){
-                $result=$query->paginate($params['limit']);
-            }else{
-                $result =  $query->get();
+            $currentPage = isset($params['page']) ? (int)$params['page'] : 1;
+            $perPage = isset($params['perPage']) ? (int)$params['perPage'] : 20;
+            if (isset($params['page'])) {
+                $result = $query->paginate($perPage, ['*'], 'page', $currentPage);
+            } else {
+                $result = $query->get();
             }
         }
         if ($options['task'] == "frontend-list-item-shop") {

@@ -75,9 +75,9 @@ use Illuminate\Support\Str;
                     <p><span class="font-weight-bold bcn">Danh mục: </span><span class="text-info">{{$item->catProduct->name??'...'}}</span></p>
                     <p><span class="font-weight-bold">Dạng bào chế: </span>{{$item['dosage_forms']??'...'}}</p>
                     <p><span class="font-weight-bold">Quy cách: </span>{{$item['specification']??'...'}}</p>
-                    <p><span class="font-weight-bold">Xuất xứ thương hiệu: </span>{{ $item->brandOriginIdProduct->name ?? '...' }}</p>
+                    <!-- <p><span class="font-weight-bold">Xuất xứ thương hiệu: </span>{{ $item->brandOriginIdProduct->name ?? '...' }}</p> -->
                     <p><span class="font-weight-bold">Nhà sản xuất: </span>{{$item->producerProduct->name ?? '...'}}</p>
-                    <p><span class="font-weight-bold">Nước sản xuất: </span>{{$item->countryProduct->name ?? '...'}}</p>
+                    <!-- <p><span class="font-weight-bold">Nước sản xuất: </span>{{$item->countryProduct->name ?? '...'}}</p> -->
                     <p><span class="font-weight-bold">Công dụng: </span>{!!$item->benefit!!}</p>
                     <p><span class="font-weight-bold">Hạn sử dụng: </span>{{$item['expiration_date']??'...'}}</p>
                 </div>

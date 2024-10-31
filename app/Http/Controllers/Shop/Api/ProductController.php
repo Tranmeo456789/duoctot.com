@@ -18,8 +18,11 @@ class ProductController extends ApiController
         $this->model = new MainModel();
     }
     public function getListProductHome(Request $request){
+        $params=[];
+        $params['page']=$request->page ?? 1;
+        $params['perPage']=$request->perPage ?? 20;
         $this->res['data'] = null;
-        $this->res['data']  = $this->model->listItems(null,['task'=>'frontend-list-items-api']);
+        $this->res['data']  = $this->model->listItems($params,['task'=>'frontend-list-items-api']);
         return $this->setResponse($this->res);
     }
     public function getListProductFeaturer(Request $request){

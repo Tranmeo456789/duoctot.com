@@ -34,6 +34,7 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
         Route::get('getListCatProductLevel1', ['uses' => $controller . 'getListCatProductLevel1']);
         Route::get('getListByParent', ['uses' => $controller . 'getListByParent']);
         Route::get('getListProductByCatId', ['uses' => $controller . 'getListProductByCatId']);
+        Route::get('getListCatProductLevel1AndChild', ['uses' => $controller . 'getListCatProductLevel1AndChild']);
     });
 
     $prefix         = 'affiliate';

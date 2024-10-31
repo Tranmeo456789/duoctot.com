@@ -65,11 +65,22 @@ class CatProductController extends ApiController
         return $this->setResponse($this->res);
     }
     public function getListProductByCatId(Request $request){
-        //$params['limit']        = $this->limit;
+        $params=[];
+        $params['page'] = intval($request->page ?? 1);
+        $params['perPage']=$request->perPage ?? 20;
+        $params['cat_product_id'] = $request->catProductId ?? 1;
         $this->res['data'] = null;
-        $params['cat_product_id'] = $request->catProductId;
         $this->res['data']=(new ProductModel())->listItems($params,['task'=>'frontend-list-items-api']);
         $this->res['count'] = count($this->res['data']);
+        return $this->setResponse($this->res);
+    }
+    public function getListCatProductLevel1AndChild(Request $request)
+    {
+        $this->res['data'] = null;
+        $this->res['data'] = $this->model->listItems(['parent_id' => 1],['task'=>'frontend-list-items-by-parent-id']);
+        foreach ($this->res['data'] as $key => $value) {
+            $this->res['data'][$key]['child'] = $this->model->listItems(['parent_id' => $value['id']],['task'=>'frontend-list-items-by-parent-id']);
+        }
         return $this->setResponse($this->res);
     }
 }
