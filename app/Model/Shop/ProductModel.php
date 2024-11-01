@@ -232,6 +232,29 @@ class ProductModel extends BackEndModel
             if (isset($params['group_country'])){
                 $query->whereIn('country_id',$params['group_country']);
             }
+            if (isset($params['keyword'])) {
+                $keyword = $params['keyword'];
+                $keyword = strip_tags($keyword);
+                $keyword = preg_replace('/[^\p{L}\p{N}\s]/u', '', $keyword);
+                $keywords = array_filter(explode(' ', trim($keyword)));
+                $keywords = array_values($keywords);
+                $results = $query->where(function ($query) use ($keywords) {
+                    foreach ($keywords as $word) {
+                        $query->where(function ($query) use ($word) {
+                            $query->orWhere('name', 'LIKE', "%{$word}%")
+                                ->orWhere('benefit', 'LIKE', "%{$word}%")
+                                ->orWhere('keyword_search', 'LIKE', "%{$word}%");
+                        });
+                    }
+                })->get();
+                $results = $results->map(function ($result) use ($keywords) {
+                    $score = collect($keywords)->sum(function ($word) use ($result) {
+                        return mb_stripos($result->name, $word, 0, 'UTF-8') !== false ? mb_strlen($word, 'UTF-8') : 0;
+                    });
+                    return ['score' => $score, 'result' => $result];
+                });
+                $results = $results->sortByDesc('score')->pluck('result');
+            }
             $query= $query->OfCollaboratorCode();
             if(isset($params['order_by'])){
                 if($params['order_by']==='gia_thap'){

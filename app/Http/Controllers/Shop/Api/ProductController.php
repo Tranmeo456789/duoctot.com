@@ -21,6 +21,7 @@ class ProductController extends ApiController
         $params=[];
         $params['page']=$request->page ?? 1;
         $params['perPage']=$request->perPage ?? 20;
+        $params['keyword']=$request->keywordSearch ?? '';
         $this->res['data'] = null;
         $this->res['data']  = $this->model->listItems($params,['task'=>'frontend-list-items-api']);
         return $this->setResponse($this->res);
