@@ -83,4 +83,12 @@ class CatProductController extends ApiController
         }
         return $this->setResponse($this->res);
     }
+    public function getListCatFeature(Request $request){
+        $params['group_id']=[3, 9, 10, 11, 13, 16, 143, 47, 63, 192];
+        $this->res['data']  = $this->model->listItems($params,['task'=>'list-items-front-end-api']);
+        foreach($this->res['data'] as $key => $value){
+            $this->res['data'][$key]['countProduct'] = (new ProductModel())->countItems(['cat_product_id'=>$value['id']],['task'=>'count-number-product-in-cat']);
+        }
+        return $this->setResponse($this->res);
+    }
 }

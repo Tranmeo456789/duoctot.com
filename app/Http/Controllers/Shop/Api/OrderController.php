@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Shop\Api\ApiController;
 use App\Model\Shop\OrderModel as MainModel;
+use App\Model\Shop\OrderProductModel;
 use \Firebase\JWTCustom\JWTCustom as JWTCustom;
 
 class OrderController extends ApiController
@@ -67,6 +68,55 @@ class OrderController extends ApiController
                     'message' => 'Đặt hàng thành công'
                 ], 200);
             }
+        }
+        return response()->json([
+            'status' => 200,
+            'success' => false,
+            'data' => null,
+            'message' => 'Có lỗi trong quá trình đặt hàng'
+        ], 200);
+    }
+    public function orderCompleted(Request $request){
+        $params['user_sell'] = $request->idUserSell;
+        $params['delivery_method'] = $request->deliveryMethod ?? 2;
+        $params['payment'] = $request->paymentMethod ?? 1;
+        $params['money_ship'] = '20000';
+        $params['status_order'] = 'dangXuLy';
+        $params['status_control'] = 'chuaThanhToan';
+        $params['buyer']['gender']=$request->gender ?? 1;
+        $params['buyer']['fullname']=$request->fullName ?? 'Unknown';
+        $params['buyer']['phone']=$request->phone ?? 'Unknown';
+        $params['receive']['province_id'] = $request->provinceId ?? null;
+        $params['receive']['district_id'] = $request->districtId ?? null;
+        $params['receive']['ward_id'] = $request->wardId ?? null;
+        $params['receive']['address'] = $request->addressDetail ?? 'Unknown';
+        $params['info_product'] = $request->arrListIdProduct ?? [];
+        $params['total']=0;
+        $params['total_product']=0;
+        foreach($params['info_product']  as $val){
+            $params['total'] += $val['total_money'];
+            $params['total_product'] += $val['quantity'];
+        }
+        $codeOrder = $this->model->saveItem($params, ['task' => 'api-save-item']);
+        if ($codeOrder){
+            $orderCurrent=$this->model->getItem(['code_order'=>$codeOrder], ['task' => 'get-item-frontend-code']);
+            foreach ($params['info_product'] as $value) {
+                $paramsOrderProduct['order_id']=$orderCurrent['id'];
+                $paramsOrderProduct['product_id']=$value['product_id'];
+                $paramsOrderProduct['code_order']=$codeOrder;
+                $paramsOrderProduct['status_order']='dangXuLy';
+                $paramsOrderProduct['quantity']=$value['quantity'];
+                $paramsOrderProduct['price']=$value['price'];
+                $paramsOrderProduct['unit']=$value['unit_id'];
+                $paramsOrderProduct['code_ref']=$value['codeRef'];
+                (new OrderProductModel)->saveItem($paramsOrderProduct, ['task' => 'add-item']);
+            }
+            return response()->json([
+                'status' => 200,
+                'success' => true,
+                'data' => $orderCurrent,
+                'message' => 'Đặt hàng thành công'
+            ], 200);
         }
         return response()->json([
             'status' => 200,

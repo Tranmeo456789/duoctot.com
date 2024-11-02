@@ -17,11 +17,20 @@ class ProductController extends ApiController
         $this->limit = isset($request->limit) ? $request->limit : 50;
         $this->model = new MainModel();
     }
-    public function getListProductHome(Request $request){
+    public function getListProduct(Request $request){
         $params=[];
         $params['page']=$request->page ?? 1;
         $params['perPage']=$request->perPage ?? 20;
         $params['keyword']=$request->keywordSearch ?? '';
+        $this->res['data'] = null;
+        $this->res['data']  = $this->model->listItems($params,['task'=>'frontend-list-items-api']);
+        return $this->setResponse($this->res);
+    }
+    public function getListProductInObject(Request $request){
+        $params=[];
+        $params['page']=$request->page ?? 1;
+        $params['perPage']=$request->perPage ?? 20;
+        $params['type']=$request->typeProduct ?? 'tre_em';
         $this->res['data'] = null;
         $this->res['data']  = $this->model->listItems($params,['task'=>'frontend-list-items-api']);
         return $this->setResponse($this->res);

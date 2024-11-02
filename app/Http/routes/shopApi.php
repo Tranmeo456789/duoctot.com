@@ -23,8 +23,9 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
         Route::get('getListFeaturerFrontEnd', ['uses' => $controller . 'getListFeaturerFrontEnd']);
         Route::get('getListProductByProductID', ['uses' => $controller . 'getListProductByProductID']);
         Route::get('getListProductShowFrontEnd', ['uses' => $controller . 'getListProductShowFrontEnd']);
-        Route::get('getListProductHome', ['uses' => $controller . 'getListProductHome']);
+        Route::get('getListProduct', ['uses' => $controller . 'getListProduct']);
         Route::get('getListProductFeaturer', ['uses' => $controller . 'getListProductFeaturer']);
+        Route::get('getListProductInObject', ['uses' => $controller . 'getListProductInObject']);
      });
 
     $prefix         = 'catProduct';
@@ -35,6 +36,7 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
         Route::get('getListByParent', ['uses' => $controller . 'getListByParent']);
         Route::get('getListProductByCatId', ['uses' => $controller . 'getListProductByCatId']);
         Route::get('getListCatProductLevel1AndChild', ['uses' => $controller . 'getListCatProductLevel1AndChild']);
+        Route::get('getListCatFeature', ['uses' => $controller . 'getListCatFeature']);
     });
 
     $prefix         = 'affiliate';
@@ -50,6 +52,12 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
         $controller = ucfirst($controllerName)  . 'Controller@';
         Route::get('getListShop', ['uses' => $controller . 'getListShop']);
         Route::get('getListDrugstore', ['uses' => $controller . 'getListDrugstore']);
+    });
+    $prefix         = 'order';
+    $controllerName = 'order';
+    Route::group(['prefix' => $prefix], function () use($controllerName) {
+        $controller = ucfirst($controllerName)  . 'Controller@';
+        Route::post('orderCompleted', ['uses' => $controller . 'orderCompleted']);
     });
     $prefix         = 'province';
     $controllerName = 'province';

@@ -505,7 +505,7 @@ class ProductModel extends BackEndModel
             $result = $query->get()->toArray();
         }
         if ($options['task'] == "count-number-product-in-cat") {
-            $query = $this::select('id','name')->where('status_product','da_duyet')->userLogin();
+            $query = $this::select('id','name')->where('status_product','da_duyet');
             if (isset($params['group_trademark'])){
                 $query->whereIn('trademark_id',$params['group_trademark']);
             }

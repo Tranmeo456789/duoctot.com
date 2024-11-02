@@ -67,6 +67,15 @@ class CatProductModel extends BackEndModel
 
             $result = $query;
         }
+        if ($options['task'] == "list-items-front-end-api") {
+            $query = self::select('id', 'name', 'image', 'slug', 'parent_id')
+                ->where('status', '=', 'active')
+                ->orderBy('_lft');
+                if (isset($params['group_id'])){
+                    $query->whereIn('id',$params['group_id']);
+                }
+            $result = $query->get();
+        }
         if ($options['task'] == "list-items-api-by-depth") {
             $query = self::with('parent')->withDepth()
                 ->having('depth', '>', 0)
@@ -129,6 +138,9 @@ class CatProductModel extends BackEndModel
                 ->where('cat_product.status', '=', 'active')
                 ->having('depth', '=', 2)
                 ->orderBy('cat_product._lft');
+                if (isset($params['take'])) {
+                    $query = $query->take($params['take']);
+                }
             $result = $query->get()
                 ->toArray();
         }
