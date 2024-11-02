@@ -36,8 +36,11 @@ class ProductController extends ApiController
         return $this->setResponse($this->res);
     }
     public function getListProductFeaturer(Request $request){
+        $params=[];
+        $params['order_by'] = $request->order_by ?? 'san_pham_moi';
+        $params['type']='noi_bat';
         $this->res['data'] = null;
-        $this->res['data'] = $this->model->listItems(['type'=>'noi_bat'], ['task' => 'frontend-list-items-api'])->take(10);
+        $this->res['data'] = $this->model->listItems($params,['task' => 'frontend-list-items-api'])->take(10);
         return $this->setResponse($this->res);
     }
     public function index(Request $request)

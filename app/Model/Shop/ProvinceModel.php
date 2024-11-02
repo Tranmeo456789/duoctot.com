@@ -21,9 +21,8 @@ class ProvinceModel extends BackEndModel
             $result = $query->pluck('name', 'id')->toArray();
         }
         if($options['task'] == "list-items-in-selectbox-api") {
-            $query = $this->select('id', 'name')
-                        ->orderBy('name', 'asc');
-            $result = $query->pluck('name', 'id')->toArray();
+            $query = $this->with('districts')->select('id', 'name')->orderBy('name', 'asc');
+            $result = $query->get();
         }
 
         return $result;
@@ -37,6 +36,12 @@ class ProvinceModel extends BackEndModel
     }
     public function district(){
         return $this->hasMany('App\Model\Shop\DistrictModel', 'province_id', 'id');
+    }
+    public function districts()
+    {
+        return $this->hasMany('App\Model\Shop\DistrictModel', 'province_id', 'id')
+                    ->select('id', 'name', 'province_id') 
+                    ->with(['ward:id,name,district_id']); 
     }
 }
 
