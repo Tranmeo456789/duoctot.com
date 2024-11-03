@@ -19,7 +19,14 @@ class UserController extends ApiController
         $this->limit = isset($request->limit) ? $request->limit : 50;
         $this->model = new MainModel();
     }
-
+    public function detailUser(Request $request)
+    {
+        $params=[];
+        $this->res['data'] = null;
+        $params['user_id'] = $request->userID;
+        $this->res['data']= $this->model->getItem($params,['task'=>'get-item']);
+        return $this->setResponse($this->res);
+    }
     public function getListShop(Request $request)
     {
         $this->res['data'] = null;

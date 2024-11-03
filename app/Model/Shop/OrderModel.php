@@ -10,6 +10,9 @@ use App\Model\Shop\CollaboratorsUserModel;
 use App\Model\Shop\CollaboratorsClinicDoctor;
 use App\Model\Shop\CustomerShopModel;
 use App\Model\Shop\ProductWarehouseModel;
+use App\Model\Shop\ProvinceModel;
+use App\Model\Shop\DistrictModel;
+use App\Model\Shop\WardModel;
 use DB;
 use Session;
 class OrderModel extends BackEndModel
@@ -147,14 +150,12 @@ class OrderModel extends BackEndModel
             if ((isset($params['status_order'])) && ($params['status_order'] != 'all')) {
                 $query = $query->where('status_order',$params['filter']['status_order']);
             }
-
             if(isset($params['pagination'])){
                 $query=$query->orderBy('id', 'desc')
                               ->paginate($params['pagination']['totalItemsPerPage']);
             }else{
                 $query=$query->orderBy('id', 'desc')->get();
             }
-
             $result =  $query;
         }
         if($options['task'] == "user-list-items-in-day"){
@@ -200,8 +201,7 @@ class OrderModel extends BackEndModel
                     $query = $query;
                         break;
                 }
-            } 
-            
+            }          
             if(isset($params['pagination'])){
                 $query=$query->orderBy('id', 'desc')
                               ->paginate($params['pagination']['totalItemsPerPage']);
@@ -209,6 +209,38 @@ class OrderModel extends BackEndModel
                 $query=$query->orderBy('id', 'desc')->get();
             }
 
+            $result =  $query;
+        }
+        if ($options['task'] == "list-items-api") {
+            $query = $this::select('id','code_order','total','created_at','status_order','total_product');
+            if(isset($params['search'])){
+                $query=$this::where('buyer','LIKE', "%{$params['search']}%");
+            } 
+            if(isset($params['status_order'])){
+                switch ($params['status_order'])
+                {
+                    case 'chua_hoan_tat' :
+                        $query = $query->whereIn('status_order',['choThanhToan','dangXuLy','daXacNhan','dangGiaoHang','daGiaoHang']);
+                        break;
+                    case 'hoan_tat' :
+                        $query = $query->whereIn('status_order',['hoanTat']);
+                        break;
+                    case 'da_huy' :
+                        $query = $query->whereIn('status_order',['daHuy']);
+                        break;
+                    case 'tra_hang' :
+                        $query = $query->whereIn('status_order',['traHang']);
+                        break;
+                    default:
+                    $query = $query;
+                        break;
+                }
+            }          
+            if (isset($params['page']) && isset($params['perPage'])) {
+                $query = $query->orderBy('id', 'desc')->paginate($params['perPage'],['id','code_order','total','created_at','status_order','total_product'], 'page', $params['page']);
+            }else{
+                $query=$query->orderBy('id', 'desc')->get();
+            }
             $result =  $query;
         }
         return $result;
@@ -224,7 +256,7 @@ class OrderModel extends BackEndModel
         }
         if ($options['task'] == 'get-item-frontend-code') {
             $result = self::select('id','code_order','total','money_ship','created_at','status_order','payment','status_control','user_id','user_sell',
-            'info_product','buyer','pharmacy','total_product','delivery_method','receive')
+            'info_product','buyer','pharmacy','total_product','delivery_method','receive','address_detail')
                             ->where('code_order', $params['code_order'])
                             ->first();
         }
@@ -327,6 +359,20 @@ class OrderModel extends BackEndModel
                     $params['pharmacy'] = json_encode($params['pharmacy']);
                     $params['receive'] = null;
                 }else{
+                    $province = ProvinceModel::find($params['receive']['province_id']);
+                    $district = DistrictModel::find($params['receive']['district_id']);
+                    $ward = WardModel::find($params['receive']['ward_id']);
+                    $address = $params['receive']['address'];
+                    if ($ward) {
+                        $address .= ', ' . $ward->name; 
+                    }
+                    if ($district) {
+                        $address .= ', ' . $district->name;
+                    }
+                    if ($province) {
+                        $address .= ', ' . $province->name;
+                    }
+                    $params['address_detail'] = $address;
                     $params['pharmacy'] = null;
                     $params['receive'] = json_encode($params['receive']);
                 }

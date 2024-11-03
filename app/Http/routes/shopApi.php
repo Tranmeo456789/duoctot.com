@@ -52,12 +52,15 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
         $controller = ucfirst($controllerName)  . 'Controller@';
         Route::get('getListShop', ['uses' => $controller . 'getListShop']);
         Route::get('getListDrugstore', ['uses' => $controller . 'getListDrugstore']);
+        Route::get('detailUser', ['uses' => $controller . 'detailUser']);
     });
     $prefix         = 'order';
     $controllerName = 'order';
     Route::group(['prefix' => $prefix], function () use($controllerName) {
         $controller = ucfirst($controllerName)  . 'Controller@';
         Route::post('orderCompleted', ['uses' => $controller . 'orderCompleted']);
+        Route::post('getListOrder', ['uses' => $controller . 'getListOrder']);
+        Route::get('detailOrder', ['uses' => $controller . 'detailOrder']);
     });
     $prefix         = 'province';
     $controllerName = 'province';

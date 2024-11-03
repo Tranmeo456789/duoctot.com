@@ -44,6 +44,12 @@ $status=[
     </div>
 </div>
 @endsection
+
+@section('scriptadd')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.min.js"></script>
+@endsection
+
 <div class="wp-detail-order">
     @include("$moduleName.pages.order.child_index.detail_order")
 </div>
+

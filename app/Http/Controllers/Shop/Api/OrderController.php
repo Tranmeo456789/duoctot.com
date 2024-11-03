@@ -4,8 +4,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Shop\Api\ApiController;
+use App\Model\Shop\DistrictModel;
 use App\Model\Shop\OrderModel as MainModel;
 use App\Model\Shop\OrderProductModel;
+use App\Model\Shop\ProvinceModel;
+use App\Model\Shop\WardModel;
 use \Firebase\JWTCustom\JWTCustom as JWTCustom;
 
 class OrderController extends ApiController
@@ -49,6 +52,24 @@ class OrderController extends ApiController
             $this->res['data']  = $this->model->listItems($params,['task'=>'user-list-items-by-status']);
         }
 
+        return $this->setResponse($this->res);
+    }
+    public function getListOrder(Request $request)
+    {
+        $this->res['data'] = null;
+        $params['status_order'] = $request->status_order ??'all';
+        $params['search'] = $request->phone??'unknown';
+        $params['page']        = $this->page??1;
+        $params['perPage']        = $this->perPage??20;
+        $this->res['data']  = $this->model->listItems($params,['task'=>'list-items-api']);
+        return $this->setResponse($this->res);
+    }
+    public function detailOrder(Request $request)
+    {
+        $this->res['data'] = null;
+        $params['code_order'] = $request->codeOrder??'unknown';
+        $this->res['data']  = $this->model->getItem($params,['task'=>'get-item-frontend-code']);
+        $this->res['data']['buyer']=json_decode($this->res['data']['buyer'], true);
         return $this->setResponse($this->res);
     }
     public function completed(Request $request)
@@ -97,6 +118,20 @@ class OrderController extends ApiController
             $params['total'] += $val['total_money'];
             $params['total_product'] += $val['quantity'];
         }
+        $province = ProvinceModel::find($params['receive']['province_id']);
+        $district = DistrictModel::find($params['receive']['district_id']);
+        $ward = WardModel::find($params['receive']['ward_id']);
+        $address = $params['receive']['address'];
+        if ($ward) {
+            $address .= ', ' . $ward->name; 
+        }
+        if ($district) {
+            $address .= ', ' . $district->name;
+        }
+        if ($province) {
+            $address .= ', ' . $province->name;
+        }
+        $params['address_detail'] = $address;
         $codeOrder = $this->model->saveItem($params, ['task' => 'api-save-item']);
         if ($codeOrder){
             $orderCurrent=$this->model->getItem(['code_order'=>$codeOrder], ['task' => 'get-item-frontend-code']);
