@@ -118,7 +118,7 @@ return [
 
     'redis' => [
 
-        'cluster' => false,
+        'client' => 'predis',
 
         'default' => [
             'host' => env('REDIS_HOST', 'localhost'),

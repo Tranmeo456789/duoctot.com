@@ -111,6 +111,8 @@ class OrderController extends ApiController
                 $paramsOrderProduct['code_ref']=$value['codeRef'];
                 (new OrderProductModel)->saveItem($paramsOrderProduct, ['task' => 'add-item']);
             }
+            $orderCurrent['info_product']=array_values($orderCurrent['info_product']);
+            $orderCurrent['buyer']=json_decode($orderCurrent['buyer'], true);
             return response()->json([
                 'status' => 200,
                 'success' => true,
