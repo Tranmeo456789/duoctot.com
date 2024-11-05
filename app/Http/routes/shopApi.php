@@ -80,4 +80,10 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
         $controller = ucfirst($controllerName)  . 'Controller@';
         Route::get('getList/{parentID}', ['uses' => $controller . 'getList']);
     });
+    $prefix         = 'message';
+    $controllerName = 'message';
+    Route::group(['prefix' => $prefix], function () use($controllerName) {
+        $controller = ucfirst($controllerName)  . 'Controller@';
+        Route::post('sendMessage', ['uses' => $controller . 'sendMessage']);
+    });
 });
