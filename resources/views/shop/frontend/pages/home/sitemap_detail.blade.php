@@ -10,19 +10,18 @@
 <body>
 <div class="container mt-4">
     <div class="container">
-        <h6 class="mb-4">This XML Sitemap Index file contains {{ count($sitemaps) }} sitemaps.</h6>
-        <table class="table table-striped">
+        <h6 class="mb-3">This XML Sitemap contains {{ count($links) }} URLs.</h6>
+        <a href="/sitemap.xml">← Sitemap Index</a>
+        <table class="table table-striped mt-2">
             <thead class="">
             <tr style="background-color: #4275f4; color: white">
-                <th>Sitemap</th>
-                <th>Last Modified</th>
+                <th>URL</th>
             </tr>
             </thead>
             <tbody>
-            @foreach ($sitemaps as $sitemap)
-                <tr style="color: #05809e; font-size: 14px; cursor: pointer;" onclick="window.location='{{ $sitemap['url'] }}';">
-                    <td><a style="color: #05809e !important;" href="{{ $sitemap['url'] }}" target="_blank">{{ $sitemap['url'] }}</a></td>
-                    <td>{{ \Carbon\Carbon::parse($sitemap['last_modified'])->format('Y-m-d H:i') }}</td>
+            @foreach ($links as $sitemap)
+                <tr style="color: #05809e; font-size: 14px; cursor: pointer;" onclick="window.location='{{ $sitemap }}';">
+                    <td><a href="{{ $sitemap }}" target="_blank">{{ $sitemap }}</a></td>
                 </tr>
             @endforeach
             </tbody>

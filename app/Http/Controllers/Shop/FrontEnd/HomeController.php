@@ -164,4 +164,33 @@ class HomeController extends ShopFrontEndController
             'title'=>$title
         ]);
     }
+    public function getSitemap($filePath)
+    {
+        if (!file_exists($filePath)) {
+            abort(404, 'File not found');
+        }
+        $links = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        return view('shop.frontend.pages.home.sitemap_detail', compact('links'));
+    }
+    public function sitemapPost(){
+        $filePath = public_path('xml/post.txt');
+        return $this->getSitemap($filePath);
+    }
+    public function sitemapPage(){
+        $filePath = public_path('xml/page.txt');
+        return $this->getSitemap($filePath);
+    }
+    public function siteCategory(){
+        $filePath = public_path('xml/category.txt');
+        return $this->getSitemap($filePath);
+    }
+    public function siteCatProduct(){
+        $filePath = public_path('xml/cat_product.txt');
+        return $this->getSitemap($filePath);
+    }
+    public function siteProduct(){
+        $filePath = public_path('xml/product.txt');
+        return $this->getSitemap($filePath);
+    }
+    
 }

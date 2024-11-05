@@ -72,12 +72,22 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('danh-muc/{slug1}/{slug2}/{slug3}','CatController@catLevel3')->name('fe.cat3');
     Route::get('loc-san-pham-trong-danh-muc','CatController@filterProduct')->name('fe.cat.filterProduct');
     
-    Route::get('/sitemap.xml', 'SiteMapController@sitemapPage');
     Route::get('danh-sach-shop','ProductController@listShop')->name('fe.product.listShop');
     Route::get('danh-sach-nha-thuoc','ProductController@listDrugstore')->name('fe.product.listDrugstore');
 
     Route::get('chat-test','MessagesController@chatTest')->name('fe.messages.chatTest');
     Route::post('send-messages','MessagesController@sendMessages')->name('fe.messages.sendMessages');
+
+    Route::get('sitemap.xml', function () {
+        $sitemaps = config('myconfig.urlSitemap');;
+        return view('shop.frontend.pages.home.sitemap', compact('sitemaps'));
+    });
+
+    Route::get('post-sitemap.xml','HomeController@sitemapPost');
+    Route::get('page-sitemap.xml','HomeController@sitemapPage');
+    Route::get('cat_product-sitemap.xml','HomeController@siteCatProduct');
+    Route::get('category-sitemap.xml','HomeController@siteCategory');
+    Route::get('product-sitemap.xml','HomeController@siteProduct');
 
     Route::get('{slug}.html','ProductController@drugstore')->name('fe.product.drugstore');
 

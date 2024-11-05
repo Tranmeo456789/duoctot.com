@@ -3,7 +3,7 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
-include 'FirebaseJWT/JWTCustom.php';
+include_once base_path('FirebaseJWT/JWTCustom.php');
 use \Firebase\JWTCustom\JWTCustom as JWTCustom;
 class Kernel extends HttpKernel
 {
