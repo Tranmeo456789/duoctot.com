@@ -59,12 +59,18 @@ class MessageController extends ApiController
             }
             $this->res['data']  = $this->model->listItems(['room_id'=>$paramsMessage['room_id']],['task'=>'frontend-list-items-api']);
             $this->res['message']  = 'Gửi tin nhăn thành công!';
+            $deviceToken = (new UserTokenModel)->where('user_id',90007044)->first();
+            if ($deviceToken && $deviceToken->token) {
+                $this->sendNotification($deviceToken->token, $params['content']);
+            } else {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Không tìm thấy token cho user_id 90007044.'
+                ], 404);
+            }
         }
         return $this->setResponse($this->res);     
-        //     if ($receiver && $receiver->token) {
-        //         // Gửi thông báo FCM tới thiết bị của người nhận
-        //         $this->sendNotification($receiver->token, $content);
-        //     }
+        
     }
 
     private function sendNotification($fcmToken, $message)
