@@ -6,11 +6,14 @@ use App\Http\Requests;
 use App\Http\Controllers\Shop\Api\ApiController;
 use App\Model\Shop\DistrictModel;
 use App\Model\Shop\MessagesModel as MainModel;
+use App\Model\Shop\MessagesModel;
 use App\Model\Shop\UsersModel;
-use App\Model\Shop\UserValuesModel;
+use App\Model\Shop\UserTokenModel;
+use App\Model\Shop\RoomModel;
+use App\Model\Shop\RoomUserModel;
 use \Firebase\JWTCustom\JWTCustom as JWTCustom;
 
-class UserController extends ApiController
+class MessageController extends ApiController
 {
     protected $limit;
     public function __construct(Request $request)
@@ -18,66 +21,88 @@ class UserController extends ApiController
         $this->limit = isset($request->limit) ? $request->limit : 50;
         $this->model = new MainModel();
     }
-    /**
-     * Gửi tin nhắn từ người dùng thứ 1 đến người dùng thứ 2 và gửi thông báo
-     */
     public function sendMessage(Request $request)
     {
-        // Kiểm tra dữ liệu đầu vào
-        $request->validate([
-            'sender_id' => 'required|exists:users,id',
-            'receiver_id' => 'required|exists:users,id',
-            'message' => 'required|string',
-        ]);
+        $this->res['data'] = null;
+        $params['content'] = $request->content ?? '';
+        $params['type_room'] = $request->typeRoom ?? 'group_bac_si';
+        $params['page']=$request->page ?? 1;
+        $params['perPage']=$request->perPage ?? 20;
+        $token = $request->header('Tdoctor-Token');
+        $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
+        if ($data_token['message'] == 'OK') {
+            $params['user'] =  (array)$data_token['payload'];
+            $request->session()->put('user', $params['user']);
+            $infoUserSend=(array)$data_token['payload'];
+            if(!$request->roomId){
+                $existRoom=(new RoomModel)->where('created_by',$infoUserSend['user_id'])
+                ->where('type_room',$params['type_room'])->first();
+                if(!$existRoom){
+                    $paramsRoom['name'] = 'room_'.$infoUserSend['user_id'].'_'.$params['type_room'];
+                    $paramsRoom['type_room'] = $params['type_room'];
+                    $paramsRoom['created_by'] = $infoUserSend['user_id'];
+                    $roomCurrent=(new RoomModel)->saveItem($paramsRoom,['task'=>'add-item']);
+                }else{
+                    $roomCurrent=$existRoom;
+                }
+                $paramsMessage=[];
+                $paramsMessage['room_id'] = $roomCurrent->id;
+                $paramsMessage['content'] = $params['content'];
+                $paramsMessage['user_id'] = $infoUserSend['user_id'];
+                $this->model->saveItem($paramsMessage, ['task' => 'add-item']);
+            }else{
+                $paramsMessage['room_id'] = $request->roomId ?? 0;
+                $paramsMessage['content'] = $params['content'];
+                $paramsMessage['user_id'] = $infoUserSend['user_id'];
+                $this->model->saveItem($paramsMessage, ['task' => 'add-item']);
 
-        // Lưu tin nhắn vào cơ sở dữ liệu
-        $message = $this->model->create([
-            'sender_id' => $request->sender_id,
-            'receiver_id' => $request->receiver_id,
-            'message' => $request->message,
-            'status' => 'sent',
-        ]);
-
-        // Lấy FCM Token của người nhận
-        $receiver = UsersModel::findOrFail($request->receiver_id);
-        $receiverFcmToken = $receiver->fcm_token;
-
-        // Nếu có FCM token của người nhận, gửi thông báo
-        if ($receiverFcmToken) {
-            $this->sendNotification($receiverFcmToken, $request->message);
+            }
+            $this->res['data']  = $this->model->listItems(['room_id'=>$paramsMessage['room_id']],['task'=>'frontend-list-items-api']);
+            $this->res['message']  = 'Gửi tin nhăn thành công!';
         }
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Tin nhắn đã được gửi và thông báo đã được gửi đến người nhận.',
-            'data' => $message
-        ]);
+        return $this->setResponse($this->res);     
+        //     if ($receiver && $receiver->token) {
+        //         // Gửi thông báo FCM tới thiết bị của người nhận
+        //         $this->sendNotification($receiver->token, $content);
+        //     }
     }
 
-    /**
-     * Gửi thông báo tới người dùng thông qua FCM
-     */
     private function sendNotification($fcmToken, $message)
     {
-        // Đường dẫn tới tệp credentials Firebase
-        $credentialsPath = config('firebase.firebase_project_1_credentials');
-
+        $credentialsPath = config('firebase.firebase_medixLink_credentials');
+        
         // Khởi tạo Firebase
-        $firebase = (new Factory)->withServiceAccount($credentialsPath)->createMessaging();
-
+        $firebase = (new \Kreait\Firebase\Factory)->withServiceAccount($credentialsPath)->createMessaging();
+    
         // Tạo thông báo
         $notification = \Kreait\Firebase\Messaging\Notification::create('Bạn có tin nhắn mới', $message);
-
-        // Tạo message gửi FCM
+    
+        // Tạo thông báo FCM
         $fcmMessage = \Kreait\Firebase\Messaging\CloudMessage::withTarget('token', $fcmToken)
             ->withNotification($notification);
-
+    
         // Gửi thông báo
         try {
             $firebase->send($fcmMessage);
         } catch (\Exception $e) {
-            // Xử lý lỗi gửi thông báo
             \Log::error('Failed to send notification: ' . $e->getMessage());
         }
+    }
+    public function getListMessage(Request $request)
+    {
+        $token = $request->header('Tdoctor-Token');
+        $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
+        if ($data_token['message'] == 'OK') {
+            $params['user'] =  (array)$data_token['payload'];
+            $request->session()->put('user', $params['user']);
+            $infoUserGetList=(array)$data_token['payload'];
+            if($infoUserGetList['user_type_id']==1){
+                $listRoom=(new RoomModel)->listItems(['created_by'=>$infoUserGetList['user_id']], ['task' => 'frontend-list-items-api']);
+            }else if($infoUserGetList['user_type_id']==4){
+                $listRoom=(new RoomModel)->listItems(['type_room'=>'group_bac_si'], ['task' => 'frontend-list-items-api']);
+            }
+        }
+        $this->res['data']=$listRoom;
+        return $this->setResponse($this->res);
     }
 }

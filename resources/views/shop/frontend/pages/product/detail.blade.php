@@ -77,6 +77,9 @@ use Illuminate\Support\Str;
                     <p><span class="font-weight-bold">Quy cách: </span>{{$item['specification']??'...'}}</p>
                     <!-- <p><span class="font-weight-bold">Xuất xứ thương hiệu: </span>{{ $item->brandOriginIdProduct->name ?? '...' }}</p> -->
                     <p><span class="font-weight-bold">Nhà sản xuất: </span>{{$item->producerProduct->name ?? '...'}}</p>
+                    @if($item['id'] > 1900 && $item['id'] < 1911)
+                    <p><span class="font-weight-bold">Thuốc cần kê toa: </span>Không</p>
+                    @endif
                     <!-- <p><span class="font-weight-bold">Nước sản xuất: </span>{{$item->countryProduct->name ?? '...'}}</p> -->
                     <p><span class="font-weight-bold">Công dụng: </span>{!!$item->benefit!!}</p>
                     <p><span class="font-weight-bold">Hạn sử dụng: </span>{{$item['expiration_date']??'...'}}</p>

@@ -85,5 +85,6 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
     Route::group(['prefix' => $prefix], function () use($controllerName) {
         $controller = ucfirst($controllerName)  . 'Controller@';
         Route::post('sendMessage', ['uses' => $controller . 'sendMessage']);
+        Route::get('getListMessage', ['uses' => $controller . 'getListMessage']);
     });
 });

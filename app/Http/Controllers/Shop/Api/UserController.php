@@ -9,6 +9,7 @@ use App\Model\Shop\UsersModel as MainModel;
 use App\Model\Shop\ProductModel;
 use App\Model\Shop\ProvinceModel;
 use App\Model\Shop\UserValuesModel;
+use App\Model\Shop\UserTokenModel;
 use \Firebase\JWTCustom\JWTCustom as JWTCustom;
 
 class UserController extends ApiController
@@ -18,6 +19,12 @@ class UserController extends ApiController
     {
         $this->limit = isset($request->limit) ? $request->limit : 50;
         $this->model = new MainModel();
+    }
+    public function register(Request $request){
+
+    }
+    public function login(Request $request){
+        
     }
     public function detailUser(Request $request)
     {
