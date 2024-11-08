@@ -21,7 +21,19 @@ class PostController extends ShopFrontEndController
     }
     public function index(Request $request){
         $items = $this->model->listItems( null , ['task' => 'frontend-list-items']);
-        return view($this->pathViewController . 'index',compact('items'));
+        $itemNews = $this->model->listItems( ['take'=>5] , ['task' => 'frontend-list-items']);
+        $catItems=(new CatalogModel)->listItems(null, ['task' => 'frontend-list-items']);
+        foreach($catItems as $key=>$val){
+            $catItems[$key]['post'] = $val->posts()->take(4)->get();
+            if(count($catItems[$key]['post']) < 1){
+                unset($catItems[$key]);
+            }
+        }
+        return view($this->pathViewController . 'index',[
+            'items' => $items,
+            'itemNews' => $itemNews,
+            'catItems' => $catItems
+        ]);
     }
     public function detail(Request $request){
         $slug = $request->slug;

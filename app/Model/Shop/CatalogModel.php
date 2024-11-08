@@ -84,25 +84,16 @@ class CatalogModel extends BackEndModel
             }
         }
         if ($options['task'] == "frontend-list-items") {
-            $query = $this::select('id','name','name_url','meta_desc','meta_key','parent_id','created_at','updated_at','created_by', 'updated_by');
-            if (isset($params['group_id'])){
-                $query->whereIn('id',$params['group_id']);
+            $query = $this::select('id', 'name', 'name_url');
+            if (isset($params['group_id'])) {
+                $query->whereIn('id', $params['group_id']);
             }
-            if(isset($params['offset'])){
-                $query->skip($params['offset']);
-            }
-            if(isset($params['take'])){
+            if (isset($params['take'])) {
                 $query->take($params['take']);
             }
-            $query= $query->OfCollaboratorCode();
             $query->orderBy('id', 'desc');
-            if(isset($params['limit'])){
-                $result=$query->paginate($params['limit']);
-            }else{
-                $result =  $query->get();
-            }
+            $result = $query->get();
         }
-        
         if($options['task'] == "admin-list-items-in-selectbox") {
             $query = $this->select('id', 'name')->OfUser();
             $result = $query->orderBy('name', 'asc')->pluck('name', 'id')->toArray();
@@ -147,5 +138,9 @@ class CatalogModel extends BackEndModel
         if($options['task'] == 'delete-item') {
            self::where('id', $params['id'])->delete();
         }
+    }
+    public function posts()
+    {
+        return $this->hasMany('App\Model\Shop\PostModel', 'cat_post_id', 'id')->select('id','title','slug','image','cat_post_id');
     }
 }

@@ -84,6 +84,13 @@ $phoneContact=$phoneContact??'0349444164';
         </div>
     </li>
     @endif
+    <li>
+        <div class="container-menures position-relative parentsmenu">
+            <div class="pr-4">
+                <a href="{{route('fe.post')}}">Tin tức</a>
+            </div>
+        </div>
+    </li>
     <li class="mt-3 pb-3">
         <p class='mb-2'>Nhận tư vấn miễn phí</p>
         <div>

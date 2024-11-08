@@ -20,29 +20,12 @@ use App\Helpers\MyFunction;
         </ul>
     </div>
     <div class="row">
-        @foreach($items as $val)
-        <div class="col-xl-6 col-lg-12 newsh py-1">
-            <div class="news-content-left">
-                <ul class="list-unstyled">
-                    <li class="d-flex">
-                        <a href="{{route('fe.post.detail',$val['slug'])}}" class="wp-thumb-item d-block">
-                            <img src="{{asset($val['image'])}}" alt="">
-                        </a>
-                        <div class="nctright pl-2">
-                            <div class="news-known d-flex mb-1">
-                                <p class="text-primary">{{$val->catPost->name??''}}</p>
-                            </div>
-                            <a class="title-new-left mb-1" href="{{route('fe.post.detail',$val['slug'])}}">
-                                <p class="truncate2 pb-0">{{$val['title']}}</p>
-                            </a>
-                            <div class="icon-oclock d-flex align-items-center">
-                                <img src="{{asset('images/shop/oclock.png')}}" alt="">
-                                <div class="ml-2">{{MyFunction::formatDateFrontend($val['created_at'])}}</div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+        @foreach($items as $post)
+        <div class="col-xl-3 col-6 pb-2">
+            <a href="{{route('fe.post.detail',$post['slug'])}}" class="d-block">
+                <div class="wp-thumb-item"><img src="{{asset($post['image'])}}" alt="{{$post['title']}}" class="rounded"></div>
+                <p class="truncate2 pb-0 text-dark font-weight-bold">{{$post['title']}}</p>
+            </a>
         </div>
         @endforeach
     </div>

@@ -2839,6 +2839,7 @@ a:hover{
     text-overflow: ellipsis;
     word-break: break-word;
     display: -webkit-box;
+    line-height: 18px;
 }
 .truncate1 {
     -webkit-box-orient: vertical;
@@ -7306,5 +7307,5 @@ input[type="radio"] {
         display: none;
     }
 }
-.content-post ul{margin: auto;padding: revert;margin-bottom: 1rem;} .content-post ul li{list-style: initial; padding: 5px;} 
-.progress{display: -ms-flexbox;display: flex;height: 1rem;overflow: hidden;line-height: 0;font-size: .75rem;background-color: #e9ecef;border-radius: .25rem;}
+.content-post ul{margin: auto;padding-left: 20px;margin-bottom: 1rem;} .content-post ul li{list-style: initial; padding: 5px;} 
+.progress{display: -ms-flexbox;display: flex;height: 1rem;overflow: hidden;line-height: 0;font-size: .75rem;background-color: #e9ecef;border-radius: .25rem;}.fa-eye-slash:before{content:"\f070"}
