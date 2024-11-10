@@ -33,6 +33,9 @@ class BackEndModel extends Model
       }
       
     }
+    public function setCreatedHistoryNoCreateAt(&$params){
+      $params['created_at']    = date('Y-m-d H:i:s');
+    }
     public function setModifiedHistory(&$params){
       $params['updated_at']    = date('Y-m-d H:i:s');
       if(Session::has('user')){

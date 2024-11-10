@@ -83,9 +83,12 @@ class RoomModel extends BackEndModel
             }
         }
         if ($options['task'] == "frontend-list-items-api") {
-            $query = $this::with('listMessages.userSend')->select('id','name','type_room','created_by');
+            $query = $this::select('id','name','type_room','created_by');
             if (isset($params['created_by'])){
                 $query->where('created_by',$params['created_by']);
+            }
+            if (isset($params['type_room'])){
+                $query->where('type_room',$params['type_room']);
             }
             if (isset($params['page'])) {
                 $currentPage = isset($params['page']) ? (int)$params['page'] : 1;
@@ -129,6 +132,6 @@ class RoomModel extends BackEndModel
     }
     public function listMessages() {
         return $this->hasMany('App\Model\Shop\MessagesModel', 'room_id', 'id')
-                    ->select('id', 'content', 'user_id','room_id');
+                    ->select('id', 'content', 'user_id','room_id','created_at');
     }
 }

@@ -453,7 +453,7 @@ class ProductModel extends BackEndModel
                                     'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id','brand_origin_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
-                                    'preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','long','wide','high',
+                                    'preserve','note','image','albumImage','albumImageHash','user_id','slug','long','wide','high',
                                     'mass','discount_ref','contact','show_price','prescription_drug');
             if(isset($params['id'])){
                 $query->where('id', $params['id']);

@@ -102,7 +102,7 @@ class MessagesModel extends BackEndModel
             }
         }
         if ($options['task'] == "frontend-list-items-api") {
-            $query = $this::with('userSend')->select('id','content','user_id','room_id');
+            $query = $this::with('userSend')->select('id','content','user_id','room_id','created_at');
             if (isset($params['room_id'])) {
                 $result = $query->where('room_id',$params['room_id']);
             }
@@ -163,6 +163,6 @@ class MessagesModel extends BackEndModel
     }
     public function userSend() {
         return $this->belongsTo('App\Model\Shop\UsersModel', 'user_id', 'user_id')
-                    ->select('user_id', 'fullname');
+                    ->select('user_id', 'fullname','user_type_id');
     }
 }

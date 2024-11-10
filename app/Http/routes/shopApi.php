@@ -53,6 +53,7 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
         Route::get('getListShop', ['uses' => $controller . 'getListShop']);
         Route::get('getListDrugstore', ['uses' => $controller . 'getListDrugstore']);
         Route::get('detailUser', ['uses' => $controller . 'detailUser']);
+        Route::post('sendDeviceToken', ['uses' => $controller . 'sendDeviceToken']);
     });
     $prefix         = 'order';
     $controllerName = 'order';

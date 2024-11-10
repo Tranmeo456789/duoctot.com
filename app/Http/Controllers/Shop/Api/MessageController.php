@@ -25,7 +25,7 @@ class MessageController extends ApiController
     {
         $this->res['data'] = null;
         $params['content'] = $request->content ?? '';
-        $params['type_room'] = $request->typeRoom ?? 'group_bac_si';
+        $params['type_room'] = $request->receiver ?? 'group_bac_si';
         $params['page']=$request->page ?? 1;
         $params['perPage']=$request->perPage ?? 20;
         $token = $request->header('Tdoctor-Token');
@@ -55,13 +55,36 @@ class MessageController extends ApiController
                 $paramsMessage['content'] = $params['content'];
                 $paramsMessage['user_id'] = $infoUserSend['user_id'];
                 $this->model->saveItem($paramsMessage, ['task' => 'add-item']);
-
             }
-            $this->res['data']  = $this->model->listItems(['room_id'=>$paramsMessage['room_id']],['task'=>'frontend-list-items-api']);
+            // if($params['user']['user_type_id']==1){
+            //     if(!$request->typeRoomGet){
+            //         $listRoom=(new RoomModel)->listItems(['created_by'=>$params['user']['user_id']], ['task' => 'frontend-list-items-api']);
+            //     }else{
+            //         $listRoom=(new RoomModel)->listItems(['type_room'=>$request->typeRoomGet,'created_by'=>$params['user']['user_id']], ['task' => 'frontend-list-items-api']);
+            //     }
+            // }else{
+
+            //     $listRoom=(new RoomModel)->listItems(['type_room'=>'group_bac_si'], ['task' => 'frontend-list-items-api']);
+            // }
+            // foreach ($listRoom as $key => $value) {
+            //     foreach($value->listMessages as $k=>$message) {
+            //         $role=0;
+            //         if($value['created_by']==$message['user_id']) {
+            //             $role=1;
+            //         }
+            //         $fullname= $message->userSend['fullname'] ?? '';
+            //         $listRoom[$key]['list_messages']=$value->listMessages;
+            //         $listRoom[$key]['list_messages'][$k]['role']=$role;
+            //         unset($listRoom[$key]['list_messages'][$k]['user_send']);
+            //     }
+            // }
+            //$this->res['data']=$listRoom;
             $this->res['message']  = 'Gửi tin nhăn thành công!';
             $deviceToken = (new UserTokenModel)->where('user_id',90007044)->first();
+            $deviceToken1 = (new UserTokenModel)->where('user_id',994110172)->first();
             if ($deviceToken && $deviceToken->token) {
                 $this->sendNotification($deviceToken->token, $params['content']);
+                $this->sendNotification($deviceToken1->token, $params['content']);
             } else {
                 return response()->json([
                     'status' => 'error',
@@ -70,7 +93,6 @@ class MessageController extends ApiController
             }
         }
         return $this->setResponse($this->res);     
-        
     }
 
     private function sendNotification($fcmToken, $message)
@@ -97,15 +119,32 @@ class MessageController extends ApiController
     public function getListMessage(Request $request)
     {
         $token = $request->header('Tdoctor-Token');
+        $typeRoom= $request->typeRoom??'group_bac_si';
         $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
         if ($data_token['message'] == 'OK') {
             $params['user'] =  (array)$data_token['payload'];
             $request->session()->put('user', $params['user']);
             $infoUserGetList=(array)$data_token['payload'];
             if($infoUserGetList['user_type_id']==1){
-                $listRoom=(new RoomModel)->listItems(['created_by'=>$infoUserGetList['user_id']], ['task' => 'frontend-list-items-api']);
+                if($request->typeRoom){
+                    $listRoom=(new RoomModel)->listItems(['type_room'=>$typeRoom,'created_by'=>$infoUserGetList['user_id']], ['task' => 'frontend-list-items-api']);
+                }else{
+                    $listRoom=(new RoomModel)->listItems(['created_by'=>$infoUserGetList['user_id']], ['task' => 'frontend-list-items-api']);
+                }
             }else if($infoUserGetList['user_type_id']==4){
                 $listRoom=(new RoomModel)->listItems(['type_room'=>'group_bac_si'], ['task' => 'frontend-list-items-api']);
+            }
+        }
+        foreach ($listRoom as $key => $value) {
+            foreach($value->listMessages as $k=>$message) {
+                $role=0;
+                if($value['created_by']==$message['user_id']) {
+                    $role=1;
+                }
+                $fullname= $message->userSend['fullname'] ?? '';
+                $listRoom[$key]['list_messages']=$value->listMessages;
+                $listRoom[$key]['list_messages'][$k]['role']=$role;
+                unset($listRoom[$key]['list_messages'][$k]['user_send']);
             }
         }
         $this->res['data']=$listRoom;

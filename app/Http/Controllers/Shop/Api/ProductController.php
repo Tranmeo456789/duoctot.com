@@ -73,7 +73,9 @@ class ProductController extends ApiController
         //     $request->session()->put('user', $params['user']);
         //     $this->res['data']  = $this->model->getItem($params,['task'=>'frontend-get-item-api']);
         // }
-        $this->res['data']  = $this->model->getItem($params,['task'=>'frontend-get-item-api']);
+        $itemCurrent=$this->model->getItem($params,['task'=>'frontend-get-item-api']);
+        $itemCurrent['url'] = route('fe.product.detail', ['slug' => $itemCurrent['slug']]) ?? '';
+        $this->res['data']  = $itemCurrent;
         return $this->setResponse($this->res);
     }
     public function getListFeaturer(Request $request)

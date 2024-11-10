@@ -26,6 +26,31 @@ class UserController extends ApiController
     public function login(Request $request){
         
     }
+    public function sendDeviceToken(Request $request){
+        $this->res['data'] = null;
+        $token = $request->header('Tdoctor-Token');
+
+        $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
+        if ($data_token['message'] == 'OK') {
+            $params['user'] =  json_decode(json_encode($data_token['payload']));
+            if ($request->device_token && !empty($request->device_token)) {
+                $tokenDevice = $request->device_token;
+                $exists = UserTokenModel::where('token', $tokenDevice) ->where('user_id', $params['user']->user_id)->exists();
+                if (!$exists) {
+                    UserTokenModel::where('user_id', $params['user']->user_id)->delete();
+                    UserTokenModel::where('token', $tokenDevice)->delete();
+                    $paramsToken['user_id']=$params['user']->user_id;
+                    $paramsToken['token']=$tokenDevice;
+                    (new UserTokenModel)->saveItem($paramsToken,['task'=>'add-item']);
+                }
+            }
+            $request->session()->put('user', $params['user']);
+            $this->res['data']  = [];
+            $this->res['message']  = ['đã lưu divice token thành công'];
+        }
+
+        return $this->setResponse($this->res);
+    }
     public function detailUser(Request $request)
     {
         $params=[];

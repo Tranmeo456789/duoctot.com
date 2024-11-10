@@ -17,7 +17,7 @@ class UserTokenModel extends BackEndModel
     public function saveItem($params = null, $options = null)
     {
         if ($options['task'] == 'add-item') {
-            self::setCreatedHistory($params);
+            self::setCreatedHistoryNoCreateAt($params);
             $tokenId = self::insertGetId ($this->prepareParams($params));
         }
         if ($options['task'] == 'edit-item') {
