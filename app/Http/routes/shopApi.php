@@ -52,6 +52,7 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
         $controller = ucfirst($controllerName)  . 'Controller@';
         Route::get('getListShop', ['uses' => $controller . 'getListShop']);
         Route::get('getListDrugstore', ['uses' => $controller . 'getListDrugstore']);
+        Route::get('detailShop', ['uses' => $controller . 'detailShop']);
         Route::get('detailUser', ['uses' => $controller . 'detailUser']);
         Route::post('sendDeviceToken', ['uses' => $controller . 'sendDeviceToken']);
     });
@@ -87,5 +88,7 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
         $controller = ucfirst($controllerName)  . 'Controller@';
         Route::post('sendMessage', ['uses' => $controller . 'sendMessage']);
         Route::get('getListMessage', ['uses' => $controller . 'getListMessage']);
+        Route::post('receiveNoticeToDeciveToKen', ['uses' => $controller . 'receiveNoticeToDeciveToKen']);
+        Route::post('receiveNoticeToDeviceToKen2', ['uses' => $controller . 'receiveNoticeToDeviceToKen2']);
     });
 });

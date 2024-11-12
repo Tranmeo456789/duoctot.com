@@ -255,7 +255,6 @@ class ProductModel extends BackEndModel
                 });
                 $results = $results->sortByDesc('score')->pluck('result');
             }
-            $query= $query->OfCollaboratorCode();
             if(isset($params['order_by'])){
                 if($params['order_by']==='gia_thap'){
                     $query->orderBy('price', 'asc');
@@ -267,9 +266,9 @@ class ProductModel extends BackEndModel
             }else{
                 $query->orderBy('id', 'desc');
             }
-            $currentPage = isset($params['page']) ? (int)$params['page'] : 1;
-            $perPage = isset($params['perPage']) ? (int)$params['perPage'] : 20;
             if (isset($params['page'])) {
+                $currentPage = isset($params['page']) ? (int)$params['page'] : 1;
+                $perPage = isset($params['perPage']) ? (int)$params['perPage'] : 20;
                 $result = $query->paginate($perPage, ['*'], 'page', $currentPage);
             } else {
                 $result = $query->get();
@@ -295,6 +294,33 @@ class ProductModel extends BackEndModel
                 $query->take($params['take']);
             }
             $result = $query->orderBy('id', 'desc')->get();
+        }
+        if ($options['task'] == "frontend-list-item-shop-api") {
+            $query = $this::select('id', 'name', 'code', 'cat_product_id', 'price', 'unit_id', 'image', 'user_id','show_price')
+            ->where('id', '>', 1)
+            ->where('status_product', 'da_duyet');
+            if (isset($params['group_id'])) {
+                $query->whereIn('id', $params['group_id']);
+            }
+            if (isset($params['user_id'])) {
+                $query->orWhere([
+                    ['user_id', $params['user_id']],
+                    ['status_product', 'da_duyet']
+                ]);
+            }
+            if (isset($params['offset'])) {
+                $query->skip($params['offset']);
+            }
+            if (isset($params['take'])) {
+                $query->take($params['take']);
+            }
+            if (isset($params['page'])) {
+                $currentPage = isset($params['page']) ? (int)$params['page'] : 1;
+                $perPage = isset($params['perPage']) ? (int)$params['perPage'] : 20;
+                $result = $query->paginate($perPage, ['*'], 'page', $currentPage);
+            } else {
+                $result = $query->orderBy('id', 'desc')->get();
+            }
         }
         if ($options['task'] == "frontend-list-items-simple") {
             $query = $this::select('id','name','slug')

@@ -31,8 +31,10 @@ class UsersModel extends BackEndModel
         if($options['task'] == 'get-item') {
             $result = self::where('user_id', $params['user_id'])->first();
         }
-        if($options['task'] == 'get-item-api') {
-            $result = self::with('details.detailValues')->where('user_id', $params['user_id'])->first();
+        if ($options['task'] == 'get-item-api') {
+            $result = self::select('user_id', 'email', 'fullname', 'phone', 'user_type_id','details')
+                          ->where('user_id', $params['user_id'])
+                          ->first();
         }
         if($options['task'] == 'user-login') {
             if (isset($params['email'])){

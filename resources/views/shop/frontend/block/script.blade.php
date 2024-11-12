@@ -1,6 +1,25 @@
 <!-- <script src="{{ asset('/shop/frontend/js/jquery-3.1.1.min.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/shop/frontend/js/lightslider.min.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/shop/frontend/js/jquery.validate.min.js')}}" type="text/javascript"></script> -->
+<script>
+    let hiddenTime = 0;
+    let reloadTimeout; 
+    document.addEventListener("visibilitychange", function() {
+        if (document.hidden) {
+            hiddenTime = Date.now(); 
+            clearTimeout(reloadTimeout); 
+        } else {
+            const elapsedTime = Date.now() - hiddenTime; 
+            if (elapsedTime >= 300000) {
+                location.reload();
+            } else {
+                reloadTimeout = setTimeout(() => {
+                    location.reload(); 
+                }, 300000 - elapsedTime); 
+            }
+        }
+    });
+</script>
 <script src="{{ asset('/shop/frontend/js/combined_library.min.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/shop/frontend/js/my-js.min.js')}}?t=@php echo time() @endphp" type="text/javascript"></script>
 <script src="https://www.googletagmanager.com/gtag/js?id=G-PZKFD196QW" defer></script>
