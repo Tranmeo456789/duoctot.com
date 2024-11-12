@@ -90,5 +90,6 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
         Route::get('getListMessage', ['uses' => $controller . 'getListMessage']);
         Route::post('receiveNoticeToDeciveToKen', ['uses' => $controller . 'receiveNoticeToDeciveToKen']);
         Route::post('receiveNoticeToDeviceToKen2', ['uses' => $controller . 'receiveNoticeToDeviceToKen2']);
+        Route::post('sendNotification3', ['uses' => $controller . 'sendNotification3']);
     });
 });

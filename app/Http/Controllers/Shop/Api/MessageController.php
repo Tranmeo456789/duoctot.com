@@ -13,12 +13,17 @@ use App\Model\Shop\RoomModel;
 use App\Model\Shop\RoomUserModel;
 use \Firebase\JWTCustom\JWTCustom as JWTCustom;
 use GuzzleHttp\Client;
+use App\Services\FirebaseService;
 use Carbon\Carbon;
 use Kreait\Firebase\Messaging\CloudMessage;
 use Kreait\Firebase\Messaging\Notification;
+use Google_Client;
+use Google\Client as GoogleClient;
+use Exception;
 class MessageController extends ApiController
 {
     protected $limit;
+    protected $firebaseService;
     public function __construct(Request $request)
     {
         $this->limit = isset($request->limit) ? $request->limit : 50;
@@ -69,8 +74,6 @@ class MessageController extends ApiController
             return response()->json(['error' => 'Failed to send notification: ' . $e->getMessage()], 500); // Trả về lỗi nếu không thể gửi thông báo
         }
     }
-    
-
     public function sendNotification2($fcmToken, $message)
     {
         $client = new Client();
@@ -168,6 +171,7 @@ class MessageController extends ApiController
             ]);
         }
     }
+
     function sendPushMessageFirebase($user_id, $title, $url, $body, $icon, $type, $is_show_result = true, $agora_app_id = '', $agora_token = '', $channel_name = '', $agora_client_name = ''){
 
         if (strpos($user_id, ',') !== false) {
@@ -348,4 +352,112 @@ class MessageController extends ApiController
         $this->res['data']=$listRoom;
         return $this->setResponse($this->res);
     }
+    public function sendNotification3(Request $request)
+    {
+        // Lấy thông tin từ request
+        $deviceToken = $request->device_token;
+        $title = $request->title;
+        $body = $request->body;
+
+        // Kiểm tra nếu thiếu bất kỳ thông tin cần thiết nào
+        if (empty($deviceToken) || empty($title) || empty($body)) {
+            return response()->json(['error' => 'Missing parameters'], 400);
+        }
+
+        // Dữ liệu thông báo
+        $messageData = [
+            'title' => $title,
+            'body' => $body,
+            'data' => [
+                'key1' => 'value1', // Dữ liệu tùy chọn thêm cho ứng dụng
+                'key2' => 'value2',
+            ]
+        ];
+
+        // Khởi tạo Google Client
+        try {
+            $client = new Google_Client();
+
+            // Đảm bảo rằng tệp firebase_credentials.json tồn tại
+            $filePath = public_path('firebase/firebase.json');
+            if (!file_exists($filePath)) {
+                \Log::error("Tệp firebase_credentials.json không tồn tại tại: " . $filePath);
+                return response()->json(['error' => 'Firebase credentials file not found.'], 500);
+            }
+
+            // Cấu hình Google Client với firebase_credentials.json
+            $client->setAuthConfig($filePath);
+            $client->addScope('https://www.googleapis.com/auth/firebase.messaging');
+
+            // Kiểm tra và lấy Access Token
+            $accessToken = $client->fetchAccessTokenWithAssertion();
+            if (isset($accessToken['error'])) {
+                \Log::error("Lỗi khi lấy Access Token từ Google: " . json_encode($accessToken['error']));
+                return response()->json(['error' => 'Unable to get access token'], 500);
+            }
+
+            // Gửi thông báo đến deviceToken qua Firebase
+            $url = 'https://fcm.googleapis.com/v1/projects/medix-link/messages:send'; // Thay YOUR_PROJECT_ID với ID dự án Firebase của bạn
+            $postData = [
+                'message' => [
+                    'token' => $deviceToken,
+                    'notification' => [
+                        'title' => $messageData['title'],
+                        'body' => $messageData['body']
+                    ],
+                    'data' => $messageData['data'] ?? []
+                ]
+            ];
+
+            // Gửi yêu cầu POST đến FCM
+            $response = $this->sendCurlRequest($url, $accessToken['access_token'], $postData);
+
+            // Kiểm tra lỗi từ phản hồi của Firebase
+            if (isset($response['error'])) {
+                \Log::error("Lỗi gửi thông báo từ Firebase: " . json_encode($response['error']));
+                return response()->json(['error' => 'Error sending notification: ' . json_encode($response['error'])], 500);
+            }
+
+            // Thành công
+            return response()->json([
+                'status' => true,
+                'message' => 'Notification sent successfully',
+                'data' => $response
+            ]);
+        } catch (Exception $e) {
+            // Ghi lại thông tin lỗi
+            \Log::error("Lỗi trong quá trình cấu hình Firebase: " . $e->getMessage());
+            return response()->json(['error' => 'Failed to send notification: ' . $e->getMessage()], 500);
+        }
+    }
+
+    /**
+     * Gửi yêu cầu cURL
+     *
+     * @param string $url
+     * @param string $accessToken
+     * @param array $postData
+     * @return mixed
+     */
+    private function sendCurlRequest($url, $accessToken, $postData)
+    {
+        $ch = curl_init();
+
+        curl_setopt_array($ch, [
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_HTTPHEADER => [
+                'Authorization: Bearer ' . $accessToken,
+                'Content-Type: application/json'
+            ],
+            CURLOPT_POSTFIELDS => json_encode($postData)
+        ]);
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        return json_decode($response, true);
+    }
 }
+

@@ -13,7 +13,6 @@ use App\Model\Shop\UserValuesModel;
 use App\Model\Shop\UserTokenModel;
 use App\Model\Shop\WardModel;
 use \Firebase\JWTCustom\JWTCustom as JWTCustom;
-
 class UserController extends ApiController
 {
     protected $limit;
@@ -108,7 +107,6 @@ class UserController extends ApiController
                 $this->res['message'] = 'Chưa lưu được device token';
             }
         }
-        $this->res['data']['device_token'] = 'chua co';
         return $this->setResponse($this->res);
     }
     

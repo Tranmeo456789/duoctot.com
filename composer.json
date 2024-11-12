@@ -8,6 +8,7 @@
         "php": ">=5.5.9",
         "barryvdh/laravel-debugbar": "^2.4",
         "doctrine/dbal": "^2.0",
+        "google/apiclient": "^2.14",
         "guzzlehttp/guzzle": "~6.0",
         "kalnoy/nestedset": "^4.3",
         "kreait/firebase-php": "^4.0",
