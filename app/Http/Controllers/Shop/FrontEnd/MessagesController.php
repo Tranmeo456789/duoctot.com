@@ -33,4 +33,7 @@ class MessagesController extends ShopFrontEndController
         );
         return redirect()->back();
     }
+    public function noticeDeviceToken(Request $request){
+        return view($this->pathViewController . 'notice_device_token');
+    }
 }

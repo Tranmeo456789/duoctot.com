@@ -77,6 +77,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
 
     Route::get('chat-test','MessagesController@chatTest')->name('fe.messages.chatTest');
     Route::post('send-messages','MessagesController@sendMessages')->name('fe.messages.sendMessages');
+    Route::get('notice-device-token','MessagesController@noticeDeviceToken')->name('fe.messages.noticeDeviceToken');
 
     Route::get('sitemap.xml', function () {
         $sitemaps = config('myconfig.urlSitemap');;
