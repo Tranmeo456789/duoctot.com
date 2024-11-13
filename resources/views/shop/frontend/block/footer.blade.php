@@ -46,9 +46,11 @@
                         <p><a href="https://www.instagram.com/tdoctorcom/">Instagram</a></p>
                     </div>
                 </div>
-                <!-- <div class="d-flex">
-                    <img style="width: 200px; margin-left: -15px;" src="{{asset('images/shop/bocongthuong.png')}}" alt="tdoctor">
-                </div> -->
+                <div class="d-flex">
+                    <a href="http://online.gov.vn/Home/WebDetails/125559" target="_blank">
+                        <img style="width: 200px; margin-left: -15px;" src="{{asset('images/shop/bocongthuong.png')}}" alt="tdoctor">
+                    </a>
+                </div>
             </div>
             <div class="col-md-6 social2">
                 <div class="mb-2">

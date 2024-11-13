@@ -25,9 +25,6 @@ class CatController extends ShopFrontEndController
         if (empty($itemCatCurent)) {
             return redirect()->route('home');
         }
-        if (!Session::has('user') || (Session::has('user') && Session::get('user')['user_id'] == 1124149617)) {
-            return redirect()->route('home');
-        }
         $products=(new ProductModel())->listItems(['cat_product_id'=>$itemCatCurent['id'],'take'=>20],['task'=>'frontend-list-items']);
         $couterSumProduct=(new ProductModel())->countItems(['cat_product_id'=>$itemCatCurent['id']],['task'=>'count-number-product-in-cat']);
         $couterSumProduct=$couterSumProduct-20;
@@ -39,9 +36,6 @@ class CatController extends ShopFrontEndController
     }
     public function catLevel2($slug, $slug1)
     {
-        if (!Session::has('user') || (Session::has('user') && Session::get('user')['user_id'] == 1124149617)) {
-            return redirect()->route('home');
-        }
         $itemCatCurent = (new CatProductModel())->getItem(['slug'=>$slug1],['task'=>'get-item-slug']);
         $products=(new ProductModel())->listItems(['cat_product_id'=>$itemCatCurent['id'],'take'=>20],['task'=>'frontend-list-items']);
         $itemCatParent=(new CatProductModel)->getItem(['parent_id'=>$itemCatCurent['parent_id']],['task'=>'get-item-parent']);
@@ -60,9 +54,6 @@ class CatController extends ShopFrontEndController
     }
     public function catLevel3($slug, $slug1, $slug2)
     {
-        if (!Session::has('user') || (Session::has('user') && Session::get('user')['user_id'] == 1124149617)) {
-            return redirect()->route('home');
-        }
         $itemCatCurent = (new CatProductModel())->getItem(['slug'=>$slug2],['task'=>'get-item-slug']);
         $params['parent_id']=$itemCatCurent['parent_id'];
         $itemCatParentLevel1=(new CatProductModel)->getItem($params,['task'=>'get-item-parent']);

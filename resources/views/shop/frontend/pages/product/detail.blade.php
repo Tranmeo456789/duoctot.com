@@ -61,6 +61,9 @@ use Illuminate\Support\Str;
                         </div>
                     </div>
                 </div>
+                @php
+                    $item['show_price'] = 1;
+                @endphp
                 <div class="desc_product mb-3">
                     @if($item['show_price'] == 1)
                         <div class="price_product mb-2 text-primary"><span class="font-weight-bold">{{ number_format( $item['price'], 0, "" ,"." )}}đ /</span> {{$item->unitProduct->name}}</div>

@@ -60,7 +60,6 @@
     <div id="head-top-respon">
         @include("$moduleName.block.box_responsive.box_head_top_responsive")
     </div>
-    @if(Session::has('user') && isset(Session::get('user')['user_id']) && Session::get('user')['user_id'] != 1124149617)
     <div id="head-body">
         <div class="wp-inner" id="category-product-wp">
             <div class="d-flex justify-content-between">
@@ -90,26 +89,22 @@
             </div>
         </div>
     </div>
-    @endif
     <div id="head-body-respon">
         <div class="tlogo-menu position-relative">
             <div class="rimg-startm"><a href=""><img src="{{asset('images/shop/logo_topbar3.png')}}" alt="tdoctor"></a></div>
             <div class="rimg-center closem" id="closem"><img src="{{asset('images/shop/closem.png')}}" alt=""></div>
         </div>
-        @if((Session::has('user') && Session::get('user')['user_type_id'] != 9) || Session::get('user')==null)
-            <div class="body-responhoder">
-                <a href="{{route('fe.order.formSearch')}}">
-                    <div class="container-menures d-flex">
-                        <div class="rimg-center"><img src="{{asset('images/shop/news1.png')}}" alt=""></div>
-                        <h2>@lang('lang.order_history')</h2>
-                    </div>
-                </a>
-            </div>
-        @endif
+        <div class="body-responhoder">
+            <a href="{{route('fe.order.formSearch')}}">
+                <div class="container-menures d-flex">
+                    <div class="rimg-center"><img src="{{asset('images/shop/news1.png')}}" alt=""></div>
+                    <h2>@lang('lang.order_history')</h2>
+                </div>
+            </a>
+        </div>
         <div class="list-menures">
             @include('shop.frontend.block.box_responsive.submenu_responsive')
         </div>
-
         <!-- <div class="btn-advice container-menures">
             <a href="" class="btn-refree">
                 <div class="d-flex">
@@ -120,7 +115,5 @@
         </div> -->
 
     </div>
-
     <div class="black-content"></div>
-
 </div>
