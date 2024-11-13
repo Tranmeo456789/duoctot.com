@@ -187,7 +187,6 @@ class ProductModel extends BackEndModel
             if (isset($params['group_country'])){
                 $query->whereIn('country_id',$params['group_country']);
             }
-            $query= $query->OfCollaboratorCode();
             if(isset($params['order_by'])){
                 if($params['order_by']==='gia_thap'){
                     $query->orderBy('price', 'asc');
@@ -324,8 +323,7 @@ class ProductModel extends BackEndModel
         }
         if ($options['task'] == "frontend-list-items-simple") {
             $query = $this::select('id','name','slug')
-                                ->where('id','>',1)->where('status_product','da_duyet');
-            $query->OfCollaboratorCode()->orderBy('id', 'desc');
+                                ->where('id','>',1)->where('status_product','da_duyet')->orderBy('id', 'desc');
             if(isset($params['limit'])){
                 $result=$query->paginate($params['limit']);
             }else{
@@ -340,8 +338,6 @@ class ProductModel extends BackEndModel
             if (isset($params['cat_product_id']) && ($params['cat_product_id'] != 0)){
                 $query->whereIn('cat_product_id', CatProductModel::getChild($params['cat_product_id']));
             }
-
-            $query->OfCollaboratorCode();
             $result =  $query->orderBy('id', 'desc')
                              ->paginate($params['limit']);
         }
@@ -353,7 +349,6 @@ class ProductModel extends BackEndModel
             if (isset($params['cat_product_id']) && ($params['cat_product_id'] != 0)){
                 $query->whereIn('cat_product_id', CatProductModel::getChild($params['cat_product_id']));
             }
-            $query->OfCollaboratorCode();
             $result =  $query->orderBy('id', 'desc')
                              ->paginate($params['limit']);
         }
@@ -361,7 +356,6 @@ class ProductModel extends BackEndModel
 
             $query = $this::with('unitProduct')->select('id','name','type','code','cat_product_id','price','price_vat','percent_discount','unit_id','specification','image','user_id','featurer','slug','discount_ref','show_price')
                                  ->whereIn('id', $params['groupID']);
-            $query->OfCollaboratorCode();
             $result =  $query->orderBy('id', 'desc')
                              ->get();
         }
@@ -370,7 +364,6 @@ class ProductModel extends BackEndModel
             $query = $this::with('unitProduct')->select('id','name','type','code','cat_product_id','price','price_vat','percent_discount','unit_id','specification','image','user_id','featurer','slug','discount_ref','show_price')
                                     ->whereIn("id",$params['id'])
                                     ->where('status_product','da_duyet');
-          //  $query->OfCollaboratorCode();
           $result =  $query->orderBy('id', 'desc')
                             ->paginate(10);
         }
@@ -446,7 +439,6 @@ class ProductModel extends BackEndModel
                                     'preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','long','wide','high',
                                     'mass','discount_ref','discount_tdoctor','contact','meta_keywords','meta_description','show_price','prescription_drug')
                             ->where('id', $params['id'])
-                            ->OfCollaboratorCode()
                             ->first();
         }
         if ($options['task'] == 'get-item-simple') {

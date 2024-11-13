@@ -237,9 +237,6 @@ class ProductController extends ShopFrontEndController
         
     }
     public function listShop(Request $request){
-        if (!Session::has('user') || (Session::has('user') && Session::get('user')['user_id'] == 1124149617)) {
-            return redirect()->route('home');
-        }
         $itemsProvince = (new ProvinceModel())->listItems(null,['task'=>'admin-list-items-in-selectbox']);
         $itemsDistrict=[];
         $query = UsersModel::whereIn('user_type_id', [10])->orderBy('user_id', 'DESC');
@@ -288,9 +285,6 @@ class ProductController extends ShopFrontEndController
         );
     }
     public function listDrugstore(Request $request){
-        if (!Session::has('user') || (Session::has('user') && Session::get('user')['user_id'] == 1124149617)) {
-            return redirect()->route('home');
-        }
         $itemsProvince = (new ProvinceModel())->listItems(null,['task'=>'admin-list-items-in-selectbox']);
         $itemsDistrict=[];
         $query = UsersModel::whereIn('user_type_id', [4])->orderBy('user_id', 'DESC');

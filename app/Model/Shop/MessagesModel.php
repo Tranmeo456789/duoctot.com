@@ -20,29 +20,6 @@ class MessagesModel extends BackEndModel
         $this->fieldSearchAccepted = array_diff(config('myconfig.config.search.' . $filedSearch),['all']);
         $this->crudNotAccepted     = ['_token', 'btn_save','file-del','files'];
     }
-    public function scopeOfCollaboratorCode($query)
-    {
-        if (\Session::has('user')){
-            $user = \Session::get('user');
-
-            $refer_id = $user->refer_id ;
-            $collaborator = CollaboratorsUserModel::where('code',$refer_id)->first();
-
-            if ($collaborator)  {
-                $collaborator_code = $collaborator->code;
-
-                $arrUserID = CollaboratorsClinicDoctor::select("user_id")
-                                ->where("collaborators_clinic_doctor.collaborator_code",$collaborator_code)
-                                ->first();
-
-                if (!empty($arrUserID)) {
-                    $query->whereIn('user_id',$arrUserID->user_id);
-                }
-            }
-        }
-
-        return $query;
-    }
     public function scopeOfUser($query)
     {
         if (\Session::has('user')){
@@ -93,7 +70,6 @@ class MessagesModel extends BackEndModel
             if(isset($params['take'])){
                 $query->take($params['take']);
             }
-            $query= $query->OfCollaboratorCode();
             $query->orderBy('id', 'desc');
             if(isset($params['limit'])){
                 $result=$query->paginate($params['limit']);
@@ -126,7 +102,6 @@ class MessagesModel extends BackEndModel
         if ($options['task'] == 'get-item') {
             $result = self::select('id','name','name_url','meta_desc','meta_key','parent_id','created_at','updated_at','created_by', 'updated_by')
                             ->where('id', $params['id'])
-                            ->OfCollaboratorCode()
                             ->first();
         }
         if ($options['task'] == 'frontend-get-item') {

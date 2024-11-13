@@ -20,29 +20,6 @@ class PostModel extends BackEndModel
         $this->fieldSearchAccepted = array_diff(config('myconfig.config.search.' . $filedSearch),['all']);
         $this->crudNotAccepted     = ['_token', 'btn_save','file-del','files'];
     }
-    public function scopeOfCollaboratorCode($query)
-    {
-        if (\Session::has('user')){
-            $user = \Session::get('user');
-
-            $refer_id = $user->refer_id ;
-            $collaborator = CollaboratorsUserModel::where('code',$refer_id)->first();
-
-            if ($collaborator)  {
-                $collaborator_code = $collaborator->code;
-
-                $arrUserID = CollaboratorsClinicDoctor::select("user_id")
-                                ->where("collaborators_clinic_doctor.collaborator_code",$collaborator_code)
-                                ->first();
-
-                if (!empty($arrUserID)) {
-                    $query->whereIn('user_id',$arrUserID->user_id);
-                }
-            }
-        }
-
-        return $query;
-    }
     public function scopeOfUser($query)
     {
         if (\Session::has('user')){
@@ -86,7 +63,7 @@ class PostModel extends BackEndModel
             }
         }
         if ($options['task'] == "frontend-list-items") {
-            $query = $this::with('catPost')->select('id','title','meta_keywords','description','content','slug','image','cat_post_id','created_at', 'updated_at');
+            $query = $this::with('catPost')->select('id','title','slug','image','cat_post_id','created_at', 'updated_at');
             if (isset($params['group_id'])){
                 $query->whereIn('id',$params['group_id']);
             }
@@ -99,7 +76,6 @@ class PostModel extends BackEndModel
             if(isset($params['take'])){
                 $query->take($params['take']);
             }
-            $query= $query->OfCollaboratorCode();
             $query->orderBy('id', 'desc');
             if(isset($params['limit'])){
                 $result=$query->paginate($params['limit']);
@@ -107,7 +83,29 @@ class PostModel extends BackEndModel
                 $result =  $query->get();
             }
         }
-        
+        if ($options['task'] == "frontend-list-items-api") {
+            $query = $this::with('catPost')->select('id','title','image','cat_post_id','created_at', 'updated_at');
+            if (isset($params['group_id'])){
+                $query->whereIn('id',$params['group_id']);
+            }
+            if (isset($params['cat_post_id'])){
+                $query->where('cat_post_id',$params['cat_post_id']);
+            }
+            if(isset($params['offset'])){
+                $query->skip($params['offset']);
+            }
+            if(isset($params['take'])){
+                $query->take($params['take']);
+            }
+            $query->orderBy('id', 'desc');
+            if (isset($params['page'])) {
+                $currentPage = isset($params['page']) ? (int)$params['page'] : 1;
+                $perPage = isset($params['perPage']) ? (int)$params['perPage'] : 20;
+                $result = $query->paginate($perPage, ['*'], 'page', $currentPage);
+            } else {
+                $result = $query->get();
+            }
+        }
         if($options['task'] == "admin-list-items-in-selectbox") {
             $query = $this->select('id', 'name')
                         ->where('id','>',1)
@@ -125,7 +123,6 @@ class PostModel extends BackEndModel
         if ($options['task'] == 'get-item') {
             $result = self::select('id','title','meta_keywords','description','content','slug','image','cat_post_id','created_at', 'updated_at')
                             ->where('id', $params['id'])
-                            ->OfCollaboratorCode()
                             ->first();
         }
         if ($options['task'] == 'frontend-get-item') {
@@ -158,7 +155,9 @@ class PostModel extends BackEndModel
            self::where('id', $params['id'])->delete();
         }
     }
-    public function catPost(){
-        return $this->belongsTo('App\Model\Shop\CatalogModel','cat_post_id','id');
+    public function catPost()
+    {
+        return $this->belongsTo('App\Model\Shop\CatalogModel', 'cat_post_id', 'id')
+                    ->select('id', 'name', 'name_url');
     }
 }
