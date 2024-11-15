@@ -23,16 +23,12 @@ class RoomUserModel extends BackEndModel
     public function saveItem($params = null, $options = null)
     {
         if ($options['task'] == 'add-item') {
-            $this->setCreatedHistory($params);
-            $messageId = self::insertGetId ($this->prepareParams($params));
-            $message = self::find($messageId);
+           self::insertGetId ($this->prepareParams($params));
         }
         if ($options['task'] == 'edit-item') {
-            $this->setModifiedHistory($params);
-            $message = self::getItem($params,['task'=>'get-item']);
+            self::getItem($params,['task'=>'get-item']);
             self::where('id', $params['id'])->update($this->prepareParams($params));
         }
-        return $message;
     }
     public function deleteItem($params = null, $options = null)
     {

@@ -16,7 +16,7 @@ class ApiController extends Controller
     protected $res = [
         'status' => 200,
         'data' => [],
-        'error' => [],
+        //'error' => [],
         'success' => true,
         'message' => ''
     ];

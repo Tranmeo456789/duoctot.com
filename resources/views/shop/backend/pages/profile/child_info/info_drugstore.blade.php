@@ -24,12 +24,18 @@
 
     $linkGetListDistrict = route('district.getListByParentID',['parentID' => 'value_new']);
     $linkGetListWard = route('ward.getListByParentID',['parentID' => 'value_new']);
+    $elementsAdd=[];
+    if(!empty($codeRef)){
+        $elementsAdd=[
+            [
+                'label'   => HTML::decode(Form::label('affiliate', 'Mã Affiliate', $formLabelAttr)),
+                'element' => Form::text('code_ref', $codeRef??null, array_merge($formInputAttr,['placeholder'=>'Mã Affiliate','readonly' => 'readonly'])),
+                'widthElement' => 'col-12 col-md-4'
+            ]
+        ];
+    }
     $elements = [
         [
-            'label'   => HTML::decode(Form::label('member_id', $label['member_id'] .  $star, $formLabelAttr)),
-            'element' => Form::text('details[member_id]', $details['member_id']??null, array_merge($formInputAttr,['placeholder'=>$label['member_id'],'readonly' => 'readonly'])),
-            'widthElement' => 'col-12 col-md-4'
-        ],[
             'label'   => HTML::decode(Form::label('fullname', 'Họ tên' .  $star, $formLabelAttr)),
             'element' => Form::text('fullname', $item['fullname']??null, array_merge($formInputAttr,['placeholder'=>'Họ tên'])),
             'widthElement' => 'col-12 col-md-8'
@@ -85,7 +91,7 @@
             'type'    => "btn-submit-center"
         ]
     ];
-
+    $elements = array_merge($elementsAdd, $elements);
     $title = 'Cập nhật thông tin';
 @endphp
 

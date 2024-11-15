@@ -16,7 +16,7 @@ class Users extends BackEndModel
     public function __construct() {
         $this->table               = 'user';
         $this->folderUpload        = '' ;
-        $this->crudNotAccepted     = ['_token','isnumber','password_confirmation','password_old','submit','btn-register','task'];
+        $this->crudNotAccepted     = ['_token','isnumber','password_confirmation','password_old','submit','btn-register','task','code_ref'];
     }
     public function getItem($params = null, $options = null) {
         $result = null;

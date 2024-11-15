@@ -265,15 +265,14 @@ class MessageController extends ApiController
     {
         $this->res['data'] = null;
         $params['content'] = $request->content ?? '';
-        $params['type_room'] = $request->receiver ?? 'group_bac_si';
-        $params['page']=$request->page ?? 1;
-        $params['perPage']=$request->perPage ?? 20;
+        $params['type_room'] = $request->typeRoom ?? 'group_bac_si';
         $token = $request->header('Tdoctor-Token');
         $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
         if ($data_token['message'] == 'OK') {
             $params['user'] =  (array)$data_token['payload'];
             $request->session()->put('user', $params['user']);
             $infoUserSend=(array)$data_token['payload'];
+            $roomIdCurrent=0;
             if(!$request->roomId){
                 $existRoom=(new RoomModel)->where('created_by',$infoUserSend['user_id'])
                 ->where('type_room',$params['type_room'])->first();
@@ -282,39 +281,39 @@ class MessageController extends ApiController
                     $paramsRoom['type_room'] = $params['type_room'];
                     $paramsRoom['created_by'] = $infoUserSend['user_id'];
                     $roomCurrent=(new RoomModel)->saveItem($paramsRoom,['task'=>'add-item']);
+                    (new RoomUserModel)->saveItem(['room_id'=>$roomCurrent['id'],'user_id'=>$infoUserSend['user_id']],['task'=>'add-item']);
+                    if($params['type_room']=='group_bac_si'){
+                        (new RoomUserModel)->saveItem(['room_id'=>$roomCurrent['id'],'user_id'=>90007044],['task'=>'add-item']);
+                    }else if($params['type_room']=='group_duoc_si'){
+                        (new RoomUserModel)->saveItem(['room_id'=>$roomCurrent['id'],'user_id'=>1014110310],['task'=>'add-item']);
+                    }
                 }else{
                     $roomCurrent=$existRoom;
                 }
                 $paramsMessage=[];
                 $paramsMessage['room_id'] = $roomCurrent->id;
+                $roomIdCurrent=$roomCurrent->id;
                 $paramsMessage['content'] = $params['content'];
                 $paramsMessage['user_id'] = $infoUserSend['user_id'];
                 $this->model->saveItem($paramsMessage, ['task' => 'add-item']);
             }else{
                 $paramsMessage['room_id'] = $request->roomId ?? 0;
+                $roomIdCurrent=$request->roomId ?? 0;
                 $paramsMessage['content'] = $params['content'];
                 $paramsMessage['user_id'] = $infoUserSend['user_id'];
-                $this->model->saveItem($paramsMessage, ['task' => 'add-item']);
+                $this->model->saveItem($paramsMessage, ['task' => 'add-item']);                
             }
-            $this->res['message']  = 'Gửi tin nhăn thành công!';
-            $users = [
-                90007044 => null,  // Token của người dùng 1 sẽ được lấy từ CSDL
-                994110172 => null, // Token của người dùng 2 sẽ được lấy từ CSDL
-            ];
-            foreach ($users as $userId => $token) {
-                $deviceToken = (new UserTokenModel)->where('user_id', $userId)->first();
-                if ($deviceToken && $deviceToken->token) {
-                    $users[$userId] = $deviceToken->token;
-                }
-            }
-            $fixtoken = 'fefd-951T3CVs2Ep3JxDsc:APA91bEpfTMK_HYqgHKH_7uazSZsrt2_JuQEmc1M4VMY3n_xLfbTH-4JsO5WcbapuhRch2pRya6hhHKSNFQl_qr9yK6sdCgBb-nWkujMTreP56an48MHma4';
-            $users['fixed'] = $fixtoken;
-            foreach ($users as $userId => $token) {
-                if ($token) {
-                    $message = ($userId === 'fixed') ? 'tot' : 'da nhan';
-                    $this->sendNotification($token, $message);
-                }
-            }
+            //get user in room current
+            $listUserInRoom = RoomUserModel::where('room_id', $roomIdCurrent)->pluck('user_id');
+            // foreach ($listUserInRoom as $value) {
+            //     if($value!=$infoUserSend['user_id']){
+            //         $this->sendPushMessageFirebase($value['user_id'], $infoUserSend['fullname'].' đã gửi tin nhắn', '', $params['content'], 'https://tdoctor.vn/images/logo.png', 'chat');
+            //     }
+            // }
+
+            //response
+            $this->res['data'] = [];
+            $this->res['message']  = 'Gửi tin nhắn thành công!';
         }
         return $this->setResponse($this->res);     
     }
@@ -335,6 +334,8 @@ class MessageController extends ApiController
                 }
             }else if($infoUserGetList['user_type_id']==4){
                 $listRoom=(new RoomModel)->listItems(['type_room'=>'group_bac_si'], ['task' => 'frontend-list-items-api']);
+            }else if($infoUserGetList['user_type_id']==5){
+                $listRoom=(new RoomModel)->listItems(['type_room'=>'group_duoc_si'], ['task' => 'frontend-list-items-api']);
             }
         }
         foreach ($listRoom as $key => $value) {

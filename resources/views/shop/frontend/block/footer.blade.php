@@ -65,7 +65,23 @@
                             <img src="{{asset('images/shop/dc1.png')}}" alt="tdoctor">
                         </div>
                     </div>
-                    <p>Địa chỉ: Số 03, Đường Huỳnh Khương Ninh, Phường Đa Kao, Quận 1, Thành phố Hồ Chí Minh, Việt Nam.</p>
+                    <p>Trụ sở: Số 03, Đường Huỳnh Khương Ninh, Phường Đa Kao, Quận 1, Thành phố Hồ Chí Minh, Việt Nam</p>
+                </div>
+                <div class="d-flex mb-3">
+                    <div>
+                        <div class="icon-social">
+                            <img src="{{asset('images/shop/dc1.png')}}" alt="tdoctor">
+                        </div>
+                    </div>
+                    <p>Văn phòng đại diện: Tầng 3, Tòa 35 Hùng Vương, P. Điện Biên, Q. Ba Đình, Hà Nội</p>
+                </div>
+                <div class="d-flex mb-3">
+                    <div>
+                        <div class="icon-social">
+                            <img src="{{asset('images/shop/dc1.png')}}" alt="tdoctor">
+                        </div>
+                    </div>
+                    <p>Chi nhánh Cần Thơ: Số 209, Đường 30/4, Phường Xuân Khánh, Quận Ninh Kiều, Thành phố Cần Thơ</p>
                 </div>
                 <div class="d-flex mb-3">
                     <div>
@@ -82,8 +98,7 @@
                         </div>
                     </div>
                     <p>Email: tdoctorvn@gmail.com</p>
-                </div>
-                
+                </div>            
             </div>
         </div>
     </div>
