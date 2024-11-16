@@ -82,6 +82,20 @@ class AffiliateModel extends BackEndModel
                 $query->where('user_id', $params['user_id']);
             }
         }
+        if($options['task'] == 'get-item-api') {
+            $query = self::select('id', 'code_ref','info_bank','link_comon','sum_click','user_id',
+            'created_at', 'updated_at')
+                            ->where('id','>',0);
+            if (isset($params['id'])){
+                $query->where('id', $params['id']);
+            }
+            if (isset($params['code_ref'])){
+                $query->where('code_ref', $params['code_ref']);
+            }
+            if (isset($params['user_id'])){
+                $query->where('user_id', $params['user_id']);
+            }
+        }
         return $result= $query->first();
     }
     public function saveItem($params = null, $options = null) {

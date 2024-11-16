@@ -32,7 +32,7 @@ class UsersModel extends BackEndModel
             $result = self::where('user_id', $params['user_id'])->first();
         }
         if ($options['task'] == 'get-item-api') {
-            $result = self::select('user_id', 'email', 'fullname', 'phone', 'user_type_id','details')
+            $result = self::select('user_id', 'email', 'fullname', 'phone', 'user_type_id','details','ref_register')
                           ->where('user_id', $params['user_id'])
                           ->first();
         }
@@ -139,6 +139,18 @@ class UsersModel extends BackEndModel
                     ];
                     \App\Model\Shop\UserValuesModel::insert($this->prepareParams($paramsUserValue));
                 }
+                DB::commit();
+                return true;
+            } catch (\Throwable $th) {
+                DB::rollback();
+                return false;
+                throw $th;
+            }
+        }
+        if($options['task'] == 'update-item-api'){
+            DB::beginTransaction();
+            try {
+                self::where('user_id', $params['user_id'])->update($this->prepareParams($params));
                 DB::commit();
                 return true;
             } catch (\Throwable $th) {

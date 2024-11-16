@@ -65,10 +65,6 @@
             'element' => Form::text('details[address]', $details['address']??null, array_merge($formInputAttr,['placeholder'=>$label['address']])),
             'widthElement' => 'col-12'
         ],[
-            'label'   => HTML::decode(Form::label('tax_code', $label['tax_code'], $formLabelAttr)),
-            'element' => Form::text('details[tax_code]', $details['tax_code']??null, array_merge($formInputAttr,['placeholder'=>$label['tax_code']])),
-            'widthElement' => 'col-12 col-md-6'
-        ],[
             'label'   => Form::label('','Ảnh đại diện', ['class' => 'col-1 col-form-label']),
             'element' => Form::label('','Chọn ảnh', ['class' => 'btn btn-primary label-select-image']),
             'widthInput' => '',

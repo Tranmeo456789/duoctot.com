@@ -14,6 +14,7 @@ use App\Model\Shop\RoomUserModel;
 use \Firebase\JWTCustom\JWTCustom as JWTCustom;
 use GuzzleHttp\Client;
 use App\Services\FirebaseService;
+use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 use Kreait\Firebase\Messaging\CloudMessage;
 use Kreait\Firebase\Messaging\Notification;
@@ -319,9 +320,10 @@ class MessageController extends ApiController
     }
     public function getListMessage(Request $request)
     {
-        $token = $request->header('Tdoctor-Token');
+        $token = $request->header('Tdoctor-Token')??'hhhhh';
         $typeRoom= $request->typeRoom??'group_bac_si';
         $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
+        $listRoom=[];
         if ($data_token['message'] == 'OK') {
             $params['user'] =  (array)$data_token['payload'];
             $request->session()->put('user', $params['user']);
@@ -332,23 +334,67 @@ class MessageController extends ApiController
                 }else{
                     $listRoom=(new RoomModel)->listItems(['created_by'=>$infoUserGetList['user_id']], ['task' => 'frontend-list-items-api']);
                 }
-            }else if($infoUserGetList['user_type_id']==4){
+            }else if($infoUserGetList['user_type_id']==2){
                 $listRoom=(new RoomModel)->listItems(['type_room'=>'group_bac_si'], ['task' => 'frontend-list-items-api']);
             }else if($infoUserGetList['user_type_id']==5){
                 $listRoom=(new RoomModel)->listItems(['type_room'=>'group_duoc_si'], ['task' => 'frontend-list-items-api']);
             }
         }
         foreach ($listRoom as $key => $value) {
-            foreach($value->listMessages as $k=>$message) {
-                $role=0;
-                if($value['created_by']==$message['user_id']) {
-                    $role=1;
-                }
-                $fullname= $message->userSend['fullname'] ?? '';
-                $listRoom[$key]['list_messages']=$value->listMessages;
-                $listRoom[$key]['list_messages'][$k]['role']=$role;
-                unset($listRoom[$key]['list_messages'][$k]['user_send']);
+            $item=$value->listMessageLast()->first();
+            $role=0;
+            if($value['created_by']==$item['user_id']) {
+                $role=1;
             }
+            $item['role']=$role;
+            $listRoom[$key]['list_messages']=$item;
+        }
+        $this->res['data']=$listRoom;
+        return $this->setResponse($this->res);
+    }
+    public function getListMessageInRoomId(Request $request)
+    {
+        $params=[];
+        $params['room_id']= $request->roomId??0;
+        $params['page']= $request->page??1;
+        $params['perPage']= $request->perPage??10;
+        $roomCurrent=(new RoomModel)->getItem(['id'=>$params['room_id']], ['task' => 'get-item']);
+        $listMessage=(new MessagesModel)->listItems($params, ['task' => 'frontend-list-items-api']);
+        $listMessage = $listMessage->reverse()->values();
+        $roomCurrent['created_by']=0;
+        $message['user_id']=0;
+        foreach($listMessage as $k=>$message) {
+            $role=0;
+            if($roomCurrent['created_by']==$message['user_id']) {
+                $role=1;
+            }
+            $listMessage[$k]['role']=$role;
+        }
+        $this->res['data']=$listMessage;
+        return $this->setResponse($this->res);
+    }
+    public function getListMessageDoctor(Request $request)
+    {
+        $token = $request->header('Tdoctor-Token')??'hhhhh';
+        $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
+        $listRoom=[];
+        if ($data_token['message'] == 'OK') {
+            $params['user'] =  (array)$data_token['payload'];
+            $infoUserGetList=(array)$data_token['payload'];
+            if($infoUserGetList['user_type_id']==2){
+                $listRoom=(new RoomModel)->listItems(['type_room'=>'group_bac_si'], ['task' => 'frontend-list-items-api']);
+            }else if($infoUserGetList['user_type_id']==5){
+                $listRoom=(new RoomModel)->listItems(['type_room'=>'group_duoc_si'], ['task' => 'frontend-list-items-api']);
+            }
+        }
+        foreach ($listRoom as $key => $value) {
+            $item=$value->listMessageLast()->first();
+            $role=0;
+            if($value['created_by']==$item['user_id']) {
+                $role=1;
+            }
+            $item['role']=$role;
+            $listRoom[$key]['list_messages']=$item;
         }
         $this->res['data']=$listRoom;
         return $this->setResponse($this->res);

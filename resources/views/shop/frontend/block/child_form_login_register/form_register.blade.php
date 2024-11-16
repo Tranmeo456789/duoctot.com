@@ -37,7 +37,7 @@
             'styleFormGroup' => 'has-border',
         ],[
             'label'   => '',
-            'element' => Form::text('refer_id', null, array_merge($formInputAttr,['placeholder'=>'Nhập Mã code (không bắt buộc)'])),
+            'element' => Form::text('ref_register', null, array_merge($formInputAttr,['placeholder'=>'Nhập Mã code (không bắt buộc)'])),
             'type' => 'input-group-addon-image-before',
             'image' => asset('images/shop/ic_code.png'),
             'widthElement' => 'col-12 p-0',

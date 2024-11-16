@@ -10,12 +10,12 @@
             clearTimeout(reloadTimeout); 
         } else {
             const elapsedTime = Date.now() - hiddenTime; 
-            if (elapsedTime >= 300000) {
+            if (elapsedTime >= 1200000) {
                 location.reload();
             } else {
                 reloadTimeout = setTimeout(() => {
                     location.reload(); 
-                }, 300000 - elapsedTime); 
+                }, 1200000 - elapsedTime); 
             }
         }
     });

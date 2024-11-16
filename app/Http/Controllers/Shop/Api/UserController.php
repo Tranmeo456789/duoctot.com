@@ -83,22 +83,32 @@ class UserController extends ApiController
     public function sendDeviceToken(Request $request){
         $this->res['data']['device_token'] = 'chua co';
         $token = $request->header('Tdoctor-Token');
+        $tokenDevice = trim($request->device_token);
         $tokenDatabase = '';
         $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
         if ($data_token['message'] == 'OK') {
-            $params['user'] =  json_decode(json_encode($data_token['payload']));
-            $tokenDevice = trim($request->device_token);
-            $exists = UserTokenModel::where('user_id', $params['user']->user_id)->first();
+            $params['user'] =  (array)$data_token['payload'];
+            $exists = UserTokenModel::where('user_id', $params['user']['user_id'])
+            ->where('token', $tokenDevice)
+            ->first();
+            $existingToken = UserTokenModel::where('token', $tokenDevice)->first();
+            $existingUser = UserTokenModel::where('user_id', $params['user']['user_id'])->first();
             if (!$exists) {
-                $paramsToken['user_id']=$params['user']->user_id;
+                $paramsToken['user_id']=$params['user']['user_id'];
                 $paramsToken['token']=$tokenDevice;
-                (new UserTokenModel)->saveItem($paramsToken,['task'=>'add-item']);
-            }else{
-                UserTokenModel::where('user_id', $params['user']->user_id)->update(
-                    ['token' => $tokenDevice]
-                );
+                if($existingUser){
+                    UserTokenModel::where('user_id', $params['user']['user_id'])->update(
+                        ['token' => $tokenDevice]
+                    );
+                }else if($existingToken){
+                    UserTokenModel::where('token', $tokenDevice)->update(
+                        ['user_id' => $params['user']['user_id']]
+                    );
+                }else{
+                    (new UserTokenModel)->saveItem($paramsToken,['task'=>'add-item']);
+                }
             }
-            $userToken = UserTokenModel::where('user_id', $params['user']->user_id)->first();
+            $userToken = UserTokenModel::where('user_id', $params['user']['user_id'])->first();
             if ($userToken) {
                 $this->res['data']['device_token'] = $userToken->token;
                 $this->res['message'] = 'Đã lưu device token thành công';
@@ -116,6 +126,42 @@ class UserController extends ApiController
         $this->res['data'] = null;
         $params['user_id'] = $request->userID;
         $this->res['data']= $this->model->getItem($params,['task'=>'get-item']);
+        return $this->setResponse($this->res);
+    }
+    public function updateInfoUser(Request $request)
+    {
+        $params=[];
+        $this->res['data'] = null;
+        $params['fullname'] = $request->fullname??'';
+        $params['phone'] = $request->phone??'';
+        $params['email'] = $request->email??'';
+        $params['ref_register'] = $request->ref_register??'';
+        $token = $request->header('Tdoctor-Token');
+        $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
+        if ($data_token['message'] == 'OK') {
+            $userCurrent =  (array)$data_token['payload'];
+            $params['user_id'] = $userCurrent['user_id'];
+            $this->model->saveItem($params,['task'=>'update-item-api']);
+            $this->res['data']= null;
+        }
+        return $this->setResponse($this->res);
+    }
+    public function getInfoUser(Request $request)
+    {
+        $params=[];
+        $this->res['data'] = [];
+        $token = $request->header('Tdoctor-Token');
+        $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
+        if ($data_token['message'] == 'OK') {
+            $userCurrent =  (array)$data_token['payload'];
+            $this->res['data']= $this->model->getItem(['user_id'=>$userCurrent['user_id']],['task'=>'get-item-api']);
+            $userAff = (new AffiliateModel)->getItem(['user_id' => $userCurrent['user_id']], ['task' => 'get-item-api']);
+            if(isset($userAff) && !empty($userAff)){
+                $codeRef = $userAff['code_ref'];
+            }
+            $codeRef = isset($userAff['code_ref']) ? $userAff['code_ref'] : null;
+            $this->res['data']['codeRef'] = $codeRef;
+        }
         return $this->setResponse($this->res);
     }
     public function getListShop(Request $request)
