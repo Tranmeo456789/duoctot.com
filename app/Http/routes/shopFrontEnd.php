@@ -15,6 +15,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('chinh-sach-bao-mat.html','HomeController@pageChinhsachBaomatThongtin')->name('fe.home.pageChinhsachBaomatThongtin');
     Route::get('chinh-sach-giao-nhan.html','HomeController@pageChinhsachGiaoNhan')->name('fe.home.pageChinhsachGiaoNhan');
     Route::get('chinh-sach-thanh-toan.html','HomeController@pageChinhsachThanhToan')->name('fe.home.pageChinhsachThanhToan');
+    Route::get('web-view','HomeController@pageHomeWebView')->name('fe.home.pageHomeWebView');
 
     Route::get('/chi-tiet-san-pham/{slug}.html','ProductController@detail')->name('fe.product.detail');
     Route::get('/tim-kiem-san-pham-theo-ten','ProductController@searchProductAjax')->name('fe.product.searchProductAjax');

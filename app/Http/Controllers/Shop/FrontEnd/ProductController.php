@@ -31,8 +31,23 @@ class ProductController extends ShopFrontEndController
     }
     public function detail(Request $request){
         $slug = $request->slug;
-        $codeRef = $request->codeRef ?? ($request->session()->get('codeRef') ?? '');
-        if (empty($request->codeRef) && session('codeRef')) {
+        $codeRefRegister='';
+        $session = $request->session();
+        if ($session->has('user')) {
+            $userInfoCurrent = $request->session()->get('user');
+            $userInfoCurrent = (new UsersModel)->getItem(['user_id' => $userInfoCurrent['user_id']], ['task' => 'get-item']);
+            $itemAffiliate = (new AffiliateModel)->getItem(['user_id' => $userInfoCurrent['user_id']], ['task' => 'get-item']);
+            if ($itemAffiliate && isset($itemAffiliate['code_ref'])) {
+                $codeRefLogin = $itemAffiliate['code_ref'];
+            } else {
+                $codeRefLogin = '';
+            }
+            $codeRefRegister=$userInfoCurrent['ref_register']??'';
+        } else {
+            $codeRefLogin = '';
+        }
+        $codeRef = $request->codeRef ?? ($request->session()->get('codeRef') ?? $codeRefRegister);
+        if ((empty($request->codeRef) && session('codeRef')) || (empty($request->codeRef) && $codeRefRegister!='')) {
             return redirect()->route('fe.product.detail', ['slug' => $slug, 'codeRef' => $codeRef]);
         }
         $item= $this->model->getItem(['slug'=>$slug],['task' => 'frontend-get-item']);
@@ -71,19 +86,6 @@ class ProductController extends ShopFrontEndController
         }
         setcookie("productViewed", json_encode($productViewed),time() + config('myconfig.time_cookie'), "/");
         $_COOKIE["productViewed"] = json_encode($productViewed);
-        $session = $request->session();
-        if ($session->has('user')) {
-            $userInfoCurrent = $request->session()->get('user');
-            $userInfoCurrent = (new UsersModel)->getItem(['user_id' => $userInfoCurrent['user_id']], ['task' => 'get-item']);
-            $itemAffiliate = (new AffiliateModel)->getItem(['user_id' => $userInfoCurrent['user_id']], ['task' => 'get-item']);
-            if ($itemAffiliate && isset($itemAffiliate['code_ref'])) {
-                $codeRefLogin = $itemAffiliate['code_ref'];
-            } else {
-                $codeRefLogin = '';
-            }
-        } else {
-            $codeRefLogin = '';
-        }
         $listProductRelate = $this->model->listItems(['cat_product_id'=>$item['cat_product_id'],'limit'=>4],['task' => 'frontend-list-items'])??[];
         $commentProduct = (new CommentModel)->listItems(['product_id' => $item['id']], ['task' => 'list-items-frontend']);
         $ratingProduct = (new CommentModel)->listItems(['product_id' => $item['id'],'rating'=>1], ['task' => 'list-items-frontend']);

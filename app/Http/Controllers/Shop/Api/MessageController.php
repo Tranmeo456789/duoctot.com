@@ -326,7 +326,6 @@ class MessageController extends ApiController
         $listRoom=[];
         if ($data_token['message'] == 'OK') {
             $params['user'] =  (array)$data_token['payload'];
-            $request->session()->put('user', $params['user']);
             $infoUserGetList=(array)$data_token['payload'];
             if($infoUserGetList['user_type_id']==1){
                 if($request->typeRoom){

@@ -190,5 +190,30 @@ class HomeController extends ShopFrontEndController
         $filePath = public_path('xml/product.txt');
         return $this->getSitemap($filePath);
     }
-    
+    public function pageHomeWebView(Request $request){
+        $numTake=20;
+        $product_selling = (new ProductModel())->listItems(null, ['task' => 'frontend-list-items'])->take($numTake);
+        $product_covid=(new ProductModel())->listItems(['type'=>'hau_covid'], ['task' => 'frontend-list-items'])->take(10);
+        $productInObject=(new ProductModel())->listItems(['type'=>'tre_em'], ['task' => 'frontend-list-items'])->take(10);
+        $countproductInObject=(new ProductModel())->countItems(['type'=>'tre_em'], ['task' => 'count-items-product-frontend']);
+        $countproductInObject=$countproductInObject[0]['count']-10;
+        $itemsProduct['new'] = (new ProductModel())->listItems(['type'=>'new'], ['task' => 'frontend-list-items'])->take(10);
+        $itemsProduct['best'] = (new ProductModel())->listItems(['type'=>'noi_bat'], ['task' => 'frontend-list-items'])->take(10);
+        $couterSumProduct=(new ProductModel())->countItems(null, ['task' => 'count-items-product-frontend']);
+        $couterSumProduct=$couterSumProduct[0]['count']-20;
+        if ($request->has('codeRef')) {
+            $request->session()->put('codeRef', $request->query('codeRef'));
+            $codeRef = $request->codeRef ?? ($request->session()->get('codeRef') ?? '');
+            $affiliate = AffiliateModel::where('code_ref', $codeRef)->first();
+            if ($affiliate) {
+                $affiliate->increment('sum_click');
+             }
+        }
+        $itemsQuangCao = QuangCaoModel::where('status', 'active')->get();
+        $itemsArticle = (new PostModel)->listItems(['take'=>5], ['task' => 'frontend-list-items']);
+        return view(
+            $this->pathViewController . 'home_webview',
+            compact('product_selling','product_covid','productInObject','itemsProduct','couterSumProduct','countproductInObject','itemsArticle')
+        );
+    }
 }

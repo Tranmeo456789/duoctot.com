@@ -8,6 +8,7 @@ use App\Model\Shop\DistrictModel;
 use App\Model\Shop\OrderModel as MainModel;
 use App\Model\Shop\OrderProductModel;
 use App\Model\Shop\ProvinceModel;
+use App\Model\Shop\UsersModel;
 use App\Model\Shop\WardModel;
 use \Firebase\JWTCustom\JWTCustom as JWTCustom;
 
@@ -114,9 +115,17 @@ class OrderController extends ApiController
         $params['info_product'] = $request->arrListIdProduct ?? [];
         $params['total']=0;
         $params['total_product']=0;
-        foreach($params['info_product']  as $val){
+        $token = $request->header('Tdoctor-Token');
+        $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
+        if ($data_token['message'] == 'OK') {
+            $userCurrent =  (array)$data_token['payload'];
+            $userLogin= (new UsersModel)->getItem(['user_id'=>$userCurrent['user_id']],['task'=>'get-item-api']);
+            $codeRef = $userLogin['ref_register']??'';
+        }
+        foreach($params['info_product']  as $k=>$val){
             $params['total'] += $val['total_money'];
             $params['total_product'] += $val['quantity'];
+            $params['info_product'][$k]['codeRef']=$codeRef??'';
         }
         $province = ProvinceModel::find($params['receive']['province_id']);
         $district = DistrictModel::find($params['receive']['district_id']);
