@@ -57,18 +57,21 @@ class AffiliateController extends BackEndController
     {
         $item = null;
         $infoProduct=[];
+        $userInfo=[];
         if ($request->id !== null) {
             $params["id"] = $request->id;
             $item = $this->model->getItem($params, ['task' => 'get-item']);
             $infoProduct= collect($item->listIdProduct)->pluck('product_id')->toArray();
+            $userInfo=(new UsersModel())->getItem(['user_id'=>$item['user_id']],['task'=>'get-item']);
+        }
+        if ($request->userId !== null) {
+            $userInfo=(new UsersModel())->getItem(['user_id'=>$request->userId],['task'=>'get-item']);
         }
         $itemsProduct = (new ProductModel())->listItems(['status_product'=>'da_duyet'], ['task' => 'admin-list-items-in-selectbox']);
-        
-        // /$typeUserId=[4,10];
-        $itemsUser=(new UsersModel())->listItems(null,['task'=>'admin-list-by-type-id-in-selectbox-affiliate']);
+        //$itemsUser=(new UsersModel())->listItems(null,['task'=>'admin-list-by-type-id-in-selectbox-affiliate']);
         return view(
             $this->pathViewController .  'form',
-            compact('item', 'itemsProduct','itemsUser','infoProduct')
+            compact('item', 'itemsProduct','infoProduct','userInfo')
         );
     }
     public function save(MainRequest $request)

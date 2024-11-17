@@ -10,10 +10,8 @@
         <thead>
             <tr class="row-heading">
                 <th>#</th>
-                <th>ID</th>
                 <th>Họ tên</th>
-                <th>Email</th></th>
-                <th>Số điện thoại</th>
+                <th>Email, Số điện thoại</th>
                 <th>Thuộc đối tượng</th>
                 <th>Thao tác</th>
             </tr>
@@ -30,13 +28,17 @@
                     @endphp
                     <tr>
                         <th scope="row" style="width: 5%">{{$temp}}</th>
-                        <td style="width: 15%">{{$val->user_id}}</td>
-                        <td style="width: 20%">{!! $fullname !!}</td>
-                        <td style="width: 15%">{!! $email !!}</td>
-                        <td style="width: 15%">{!! $phone !!}</td>
+                        <td style="width: 25%">{!! $fullname !!}</td>
+                        <td style="width: 30%">
+                            <div>{!! $email !!}</div>
+                            <div>{!! $phone !!}</div>
+                        </td>
                         <td style="width: 20%">{{$userType}}</td>
-                        <td style="width: 10%">
-                            <a href="{{route("$controllerName.edit",$val->user_id)}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit"></i></a>
+                        <td style="width: 25%">
+                            <a href="{{route("$controllerName.edit",$val->user_id)}}" class="btn btn-success btn-sm rounded-0 text-white p-2 mr-2" type="button" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit"></i></a>
+                            @if($val['is_affiliate'] != 1)
+                            <a href="{{route("affiliate.add",$val->user_id)}}" class="btn btn-primary btn-sm rounded-0 text-white p-2" type="button" data-toggle="tooltip" data-placement="top" title="Thêm affiliate">Thêm affiliate</a>
+                            @endif
                         </td>
                 </tr>
                 @endforeach

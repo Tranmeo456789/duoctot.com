@@ -6,7 +6,7 @@
 
 @section('title',$pageTitle)
 @section('content')
-@include ("$moduleName.blocks.page_header", ['pageIndex' => true])
+
 <section class="content">
     @include("$moduleName.blocks.notify")
     <div class="card card-outline card-primary mb800-0">

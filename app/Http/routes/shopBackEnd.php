@@ -140,7 +140,7 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
         Route::get('/loc-user-theo-thoi-gian', 'UserController@filterInDay')->name('user.filterInDay');
 
         Route::get('/danh-sach-affiliate', 'AffiliateController@index')->name('affiliate');
-        Route::get('/them-affiliate', 'AffiliateController@form')->name('affiliate.add');
+        Route::get('/them-affiliate/{userId}', 'AffiliateController@form')->name('affiliate.add');
         Route::get('/sua-affiliate/{id}', 'AffiliateController@form')->name('affiliate.edit');
         Route::get('/chi-tiet-affiliate/{id}', 'AffiliateController@detail')->name('affiliate.detail');
         Route::post('/luu-affiliate', 'AffiliateController@save')->name('affiliate.save');

@@ -18,33 +18,14 @@
     $userRef=$item->userRef??'';
     $fullname=$userRef['fullname']??'';
     $phone= $userRef['phone']??'';
-    if(isset($item['id'])){
-        $elements = [
-                    [
-                        'label'   => HTML::decode(Form::label('', 'Danh sách sản phẩm cho đại lý'  .  $star, $formLabelAttr)),
-                        'element' => '',
-                        'widthElement' => 'col-12'
-                    ]
-                ];
-    }else{
-        $elements = [
-            [
-                'label'   => HTML::decode(Form::label('code_ref', 'Mã đại lý' .  $star, $formLabelAttr)),
-                'element' => Form::text('code_ref', $item['code_ref']??null, array_merge($formInputAttr,['placeholder'=>'Mã đại lý','readonly'=>true])),
-                'widthElement' => 'col-12 col-md-6'
-            ],
-            [
-                'label'   => HTML::decode(Form::label('user_id', 'Chọn User làm affiliate' .  $star , $formLabelAttr)),
-                'element' => Form::select('user_id',$itemsUser, null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
-                'widthElement' => 'col-12 col-md-6'
-            ],
-            [
-                'label'   => HTML::decode(Form::label('', 'Danh sách sản phẩm cho đại lý'  .  $star, $formLabelAttr)),
-                'element' => '',
-                'widthElement' => 'col-12'
-            ]
-        ];
-    }
+    $userAffiliate=$userInfo['fullname'].'-'.$userInfo['phone'].'-'.$userInfo['email']??'';
+    $elements = [
+        [
+            'label'   => HTML::decode(Form::label('code_ref', 'Mã đại lý' .  $star, $formLabelAttr)),
+            'element' => Form::text('code_ref', $item['code_ref']??null, array_merge($formInputAttr,['placeholder'=>'Mã đại lý','readonly'=>true])),
+            'widthElement' => 'col-12 col-md-6'
+        ]
+    ];
     
     $elementsBtn  = [
             [
@@ -74,6 +55,10 @@
                             <div class="row">
                                 {!! FormTemplate::show($elements,$formInputWidth)  !!}
                             </div>
+                            <div class="font-weight-bold my-2">Thông tin user Affiliate:</div>
+                            <input type="hidden" name="user_id" value="{{$userInfo['user_id']??null}}">
+                            <div>{{$userAffiliate}}</div>
+                            <div class="font-weight-bold my-2">Danh sách sản phẩm cho đại lý:</div>
                             <div>
                                 @include("$moduleName.pages.$controllerName.child_form.table_products")
                             </div>
