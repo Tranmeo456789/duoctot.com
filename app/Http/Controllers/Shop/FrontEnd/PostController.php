@@ -35,6 +35,22 @@ class PostController extends ShopFrontEndController
             'catItems' => $catItems
         ]);
     }
+    public function indexWebView(Request $request){
+        $items = $this->model->listItems( null , ['task' => 'frontend-list-items']);
+        $itemNews = $this->model->listItems( ['take'=>5] , ['task' => 'frontend-list-items']);
+        $catItems=(new CatalogModel)->listItems(null, ['task' => 'frontend-list-items']);
+        foreach($catItems as $key=>$val){
+            $catItems[$key]['post'] = $val->posts()->take(4)->get();
+            if(count($catItems[$key]['post']) < 1){
+                unset($catItems[$key]);
+            }
+        }
+        return view($this->pathViewController . 'index_webview',[
+            'items' => $items,
+            'itemNews' => $itemNews,
+            'catItems' => $catItems
+        ]);
+    }
     public function detail(Request $request){
         $slug = $request->slug;
         $item= $this->model->getItem(['slug'=>$slug],['task' => 'frontend-get-item']);

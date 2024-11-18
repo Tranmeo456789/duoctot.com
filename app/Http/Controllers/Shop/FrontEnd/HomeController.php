@@ -132,6 +132,12 @@ class HomeController extends ShopFrontEndController
             'title'=>$title
         ]);
     }
+    public function pageAboutUsWebView(){
+        $title = 'Về chúng tôi | Tdoctor';
+        return view("$this->pathViewController.about_us_web_view",[
+            'title'=>$title
+        ]);
+    }
     public function pageContact(){
         $title = 'Liên hệ | Tdoctor';
         return view("$this->pathViewController.contact",[
@@ -215,5 +221,11 @@ class HomeController extends ShopFrontEndController
             $this->pathViewController . 'home_webview',
             compact('product_selling','product_covid','productInObject','itemsProduct','couterSumProduct','countproductInObject','itemsArticle')
         );
+    }
+    public function pageDieukhoanSudung(){
+        $title = 'Điều khoản sử dụng | Tdoctor';
+        return view("$this->pathViewController.dieukhoan_sudung",[
+            'title'=>$title
+        ]);
     }
 }

@@ -22,7 +22,6 @@
 <body>
     <div id="site">
         <div id="container">
-            @include('shop.frontend.block.menu.menu_no_search')
             <div id="main-content-wp" class="home-page clearfix">
                 @yield('content')
             </div>

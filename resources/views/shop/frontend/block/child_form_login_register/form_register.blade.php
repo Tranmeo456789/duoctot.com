@@ -70,7 +70,7 @@
             <!-- <p class="dkgp py-2">Để tài khoản được kích hoạt, quý khách hàng vui lòng cung cấp cho TDoctor đầy đủ các giấy phép theo quy định của pháp luật.</p> -->
 
             <div class="remember-login d-flex">
-                <input id="check-rules" type="checkbox"><label for="">Tôi đã đọc và đồng ý với <a href="" class="text-info">Điều khoản sử dụng*</a></label>
+                <input id="check-rules" type="checkbox"><label for="">Tôi đã đọc và đồng ý với <a href="{{route('fe.home.pageDieukhoanSudung')}}" class="text-info">Điều khoản sử dụng*</a></label>
             </div>
             <p class="dkfn text-center btn-login mb-2">Nếu đã có tài khoản, vui lòng <a class="dkfnc ">Đăng nhập</a></p>
             <div class="col-12 text-center" id="dang-ky">

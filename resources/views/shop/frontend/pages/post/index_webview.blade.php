@@ -3,7 +3,7 @@ use Illuminate\Support\Str;
 use App\Helpers\MyFunction;
 
 @endphp
-@extends('shop.layouts.frontend')
+@extends('shop.layouts.frontend_webview')
 @section('content')
 <div class="wp-inner mt-2">
     <div class="" id="breadcrumb-wp">
@@ -70,24 +70,4 @@ use App\Helpers\MyFunction;
         @endforeach
     </div>
     @endforeach
-    <div class="wp-inner mt-2">
-        <div class="row">
-            <div class="col-md-12">
-                <div>
-                    @include("$moduleName.templates.list_product_new_view")
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="service-tdoctor mt-5">
-        @include("$moduleName.templates.info_service")
-    </div>
-    <div class="local">
-        @include("$moduleName.templates.local_drugstore")
-    </div>
-    <div class="mt-3 mt-lg-4">
-        <div class="feedback-customer">
-            @include("$moduleName.templates.feedback_customer")
-        </div>
-    </div>
     @endsection

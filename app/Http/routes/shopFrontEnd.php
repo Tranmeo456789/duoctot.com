@@ -10,11 +10,13 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('tai-lieu/dao-tao-viet-content-voi-ai.html','HomeController@writeContentAi')->name('fe.home.writeContentAi');
     Route::get('chinh-sach-kiem-hang-doi-tra.html','HomeController@pageChinhSachDoiTra')->name('fe.home.pageChinhSachDoiTra');
     Route::get('ve-chung-toi.html','HomeController@pageAboutUs')->name('fe.home.pageAboutUs');
+    Route::get('ve-chung-toi-web-view.html','HomeController@pageAboutUsWebView')->name('fe.home.pageAboutUsWebView');
     Route::get('lien-he.html','HomeController@pageContact')->name('fe.home.pageContact');
     Route::get('quy-trinh-tranh-chap-giai-quyet.html','HomeController@pageQuytrinhGiaiquyetTranhchap')->name('fe.home.pageQuytrinhGiaiquyetTranhchap');
     Route::get('chinh-sach-bao-mat.html','HomeController@pageChinhsachBaomatThongtin')->name('fe.home.pageChinhsachBaomatThongtin');
     Route::get('chinh-sach-giao-nhan.html','HomeController@pageChinhsachGiaoNhan')->name('fe.home.pageChinhsachGiaoNhan');
     Route::get('chinh-sach-thanh-toan.html','HomeController@pageChinhsachThanhToan')->name('fe.home.pageChinhsachThanhToan');
+    Route::get('dieu-khoan-su-dung.html','HomeController@pageDieukhoanSudung')->name('fe.home.pageDieukhoanSudung');
     Route::get('web-view','HomeController@pageHomeWebView')->name('fe.home.pageHomeWebView');
 
     Route::get('/chi-tiet-san-pham/{slug}.html','ProductController@detail')->name('fe.product.detail');
@@ -27,6 +29,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('/ajax-filter-product-object','HomeController@ajax_filter')->name('fe.home.ajaxfilter');
     
     Route::get('/tin-tuc','PostController@index')->name('fe.post');
+    Route::get('/tin-tuc-web-view','PostController@indexWebView')->name('fe.post.indexWebView');
     Route::get('/danh-muc-tin-tuc/{slug}','PostController@listPostOfCat')->name('fe.post.listPostOfCat');
     Route::get('/tin-tuc/{slug}.html','PostController@detail')->name('fe.post.detail');
 
