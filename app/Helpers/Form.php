@@ -87,6 +87,21 @@ class Form
                 $element['element']
             );
             break;
+            case 'input-border-radius-blue-has-label':
+                $xhtml .= sprintf(
+                    "<div class='%s'>
+                        %s
+                        <div class='form-group $styleFormGroup'>                           
+                            <div class='wp-input'>
+                                %s                                  
+                            </div>
+                        </div>
+                    </div>",
+                    $widthElement, 
+                    $element['label'],                    
+                    $element['element']
+                );
+            break;
             case 'inline':
                 $xhtml .= sprintf(
                     "<div class='%s'>

@@ -88,10 +88,16 @@ class OrderController extends ShopFrontEndController
 
             $task   = "frontend-save-item";
             $notify = "Đặt hàng thành công!";
-
+            $cart = $request->session()->get('cart');
+            $params['info_product']=$cart[$params['user_sell']]['product'];
+            if($params['ref_register'] != ''){
+                foreach ($params['info_product'] as $key=>$value) {
+                    $params['info_product'][$key]['codeRef']=$params['ref_register'];
+                }
+                $listProductUserSell=$params['info_product'];
+            }
             if ($this->model->saveItem($params, ['task' => $task])){
                 $request->session()->put('app_notify', $notify);
-                $cart = $request->session()->get('cart');
                 $code_order=$this->model->getItem(null, ['task' => 'get-item-last'])['code_order'];
                 $idOrder=$this->model->getItem(null, ['task' => 'get-item-last'])['id'];
                 $listProductUserSell=$cart[$params['user_sell']]['product'];

@@ -79,7 +79,7 @@
             'element' => Form::text('details[person_represent]', $details['person_represent']??null, array_merge($formInputAttr,['placeholder'=>$label['person_represent']])),
             'widthElement' => 'col-12 col-md-6'
         ],[
-            'label'   => Form::label('','Ảnh đại diện', ['class' => 'col-1 col-form-label']),
+            'label'   => Form::label('','Ảnh đại diện', ['class' => 'col-12 col-form-label']),
             'element' => Form::label('','Chọn ảnh', ['class' => 'btn btn-primary label-select-image']),
             'widthInput' => '',
         ],[

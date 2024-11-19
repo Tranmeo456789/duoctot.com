@@ -377,7 +377,7 @@ class OrderModel extends BackEndModel
                     $params['receive'] = json_encode($params['receive']);
                 }
                 $cart = \Session::get('cart');
-                $params['info_product'] = $cart[$params['user_sell']]['product'];
+                //$params['info_product'] = $cart[$params['user_sell']]['product'];
                 $params['info_product'] = json_encode($params['info_product']);
                 $params['total'] = $cart[$params['user_sell']]['total'];
                 $params['total_product'] = $cart[$params['user_sell']]['total_product'];

@@ -120,8 +120,9 @@ class OrderController extends ApiController
         if ($data_token['message'] == 'OK') {
             $userCurrent =  (array)$data_token['payload'];
             $userLogin= (new UsersModel)->getItem(['user_id'=>$userCurrent['user_id']],['task'=>'get-item-api']);
-            $codeRef = $userLogin['ref_register']??'';
+            $codeRefLogin = $userLogin['ref_register']??'';
         }
+        $codeRef=$params['ref_register']??($codeRefLogin ?? '');
         foreach($params['info_product']  as $k=>$val){
             $params['total'] += $val['total_money'];
             $params['total_product'] += $val['quantity'];

@@ -33,6 +33,14 @@
                 'widthElement' => 'col-12 col-md-4'
             ]
         ];
+    }else{
+        $elementsAdd=[
+            [
+                'label'   => HTML::decode(Form::label('ref_register', 'Nhập mã đại lý' .  $star, $formLabelAttr)),
+                'element' => Form::text('ref_register', $item['ref_register']??null, array_merge($formInputAttr,['placeholder'=>'Nhập mã đại lý'])),
+                'widthElement' => 'col-12 col-md-4'
+            ]
+        ];
     }
     $elements = [
         [
@@ -64,7 +72,7 @@
             'element' => Form::text('details[address]', $details['address']??null, array_merge($formInputAttr,['placeholder'=>$label['address']])),
             'widthElement' => 'col-12'
         ],[
-            'label'   => Form::label('','Ảnh đại diện', ['class' => 'col-1 col-form-label']),
+            'label'   => Form::label('','Ảnh đại diện', ['class' => 'col-12 col-form-label']),
             'element' => Form::label('','Chọn ảnh', ['class' => 'btn btn-primary label-select-image']),
             'widthInput' => '',
         ],[

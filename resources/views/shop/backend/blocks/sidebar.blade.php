@@ -11,7 +11,7 @@
             <li class="nav-item">
                 <a href="{{ route('dashboard') }}" class="nav-link">
                     <i class="far fa-list-alt nav-icon"></i>
-                    <p>Thống kê bán hàng Shop</p>
+                    <p>Thống kê</p>
                 </a>
             </li>
             @endif

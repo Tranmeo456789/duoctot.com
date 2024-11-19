@@ -41,7 +41,7 @@
             @endphp
             <tr>
                 <td style="width: 3%">{{$index}}</td>
-                <td style="width: 15%">{{$val['code_order']}} </td>
+                <td style="width: 15%"><a href="{{route('order.detail',$val['id'])}}">{{$val['code_order']}}</a></td>
                 <td style="width: 12%;text-align:right">{{MyFunction::formatNumber($val['total'])}} đ</td>
                 <td style="width: 15%" class="text-justify"><p class="mb-0">{!! $fullname !!}</p>{!! $phone !!}</td>
                 <td style="width: 10%" class="text-right">{{$ngayDatHang}}</td>

@@ -23,8 +23,10 @@
                 <div class="card card-outline card-primary">
                     @include("$moduleName.blocks.x_title", ['title' => 'Danh sách'])
                     <div class="card-body p-0">
-                        {!! Template::showTabFilter($controllerName, $itemStatusOrderCount, $params['filter']['status_order'], $params,'status_order'); !!}
-                        @include("$moduleName.pages.$controllerName.list")
+                        <div class="set-withscreen">
+                            {!! Template::showTabFilter($controllerName, $itemStatusOrderCount, $params['filter']['status_order'], $params,'status_order'); !!}
+                            @include("$moduleName.pages.$controllerName.list")
+                        </div>
                     </div>
                     <div class="card-footer my-card-pagination clearfix">
                         @include("$moduleName.blocks.pagination",['paginator'=>$items])

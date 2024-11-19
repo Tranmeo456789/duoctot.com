@@ -162,6 +162,12 @@
             'widthElement' => 'col-lg-10 col-md-12 mb1024-5',
             'styleFormGroup' => 'has-border'
         ],[
+            'label'   => HTML::decode(Form::label('ref_register', 'Nhập mã đại lý', $formLabelAttr)),
+            'element' => Form::text('ref_register', $user['ref_register']??null, array_merge($formInputAttr,['placeholder'=>'Nhập mã đại lý'])),
+            'type' =>'input-border-radius-blue-has-label',
+            'widthElement' => 'col-12 mb1024-5',
+            'styleFormGroup' => 'has-border'
+        ],[
             'label' => Form::label('payment1', 'Thanh toán tại nhà',$formLabelAttr),
             'element' => Form::radio('payment', '1',true, ['id' => 'payment1']),
             'type' =>'inline-text-right',
