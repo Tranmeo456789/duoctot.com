@@ -1,28 +1,205 @@
 <?php
 namespace App\Http\Controllers\Shop\Api;
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Shop\Api\ApiController;
 use App\Model\Shop\AffiliateModel;
+use App\Model\Shop\ClinicModel;
+use App\Model\Shop\CollaboratorsUserModel;
 use App\Model\Shop\DistrictModel;
+use App\Model\Shop\DoctorModel;
 use App\Model\Shop\UsersModel as MainModel;
+use App\Model\Shop\UsersModel;
 use App\Model\Shop\ProductModel;
 use App\Model\Shop\ProvinceModel;
 use App\Model\Shop\UserValuesModel;
 use App\Model\Shop\UserTokenModel;
 use App\Model\Shop\WardModel;
+use App\Model\Shop\DoctorSpecialityModel;
+use App\Model\Shop\DoctorServiceModel;
+use Illuminate\Support\Facades\Hash;
 use \Firebase\JWTCustom\JWTCustom as JWTCustom;
 class UserController extends ApiController
 {
     protected $limit;
+    protected $jwt_key = 'anHAzy7CeVuL8ybwt4epOUH5NQXYocpBXQwWGalzU6xRSkD0lAUOsRChzC8fTS6ETSH2J3KpgQbnlPvdMVe7oNcuPQzTkPHfUx88';
     public function __construct(Request $request)
     {
         $this->limit = isset($request->limit) ? $request->limit : 50;
         $this->model = new MainModel();
     }
-    public function register(Request $request){
+    public function register(Request $rq){
+        $email = null;//$rq->mobile_phone;
+        $email_info = $rq->mobile_phone;
+        $phone = $rq->mobile_phone;
+        $name = $rq->fullName;
+        $password = $rq->password;
+        $present = "";
+        $type = $rq->user_type_id ?? 1;
+        $gender = "";
+        $type_account=$rq->check_terms ?? '';
+        $domain_register=$rq->domain_register ?? '';
+        $ref_register=$rq->ref_register ?? '';
+        if($rq->has('present')){
+            $present = $rq->ngt;
+        }
+        if($rq->has('gender')){
+            $gender = $rq->gender;
+        }
+        if ( $phone != null && $name != null && $password != null) {
+            if($email != null){
+                $user = UsersModel::where('email', '=', $email)->orWhere(function ($query) use ($phone) {
+                    $query->where('phone', $phone)->where('phone', '!=', '0');
+                })->first();
+            }else{
+                $user = UsersModel::orWhere(function ($query) use ($phone) {
+                            $query->where('email', $phone)->where('email', '!=', null);
+                        })
+                        ->orWhere(function ($query) use ($phone) {
+                            $query->where('phone', $phone)->where('phone', '!=', 0);
+                        })
+                        ->orWhere(function ($query) use ($phone) {
+                            $query->where('phone', ('0'.$phone))->where('phone', '!=', 0);
+                        })
+                        ->first();
+            }
+            if ($user == null) {
+                $user = new UsersModel;
+                if($email == null){
+                    $user->email = $phone;
+                }else{
+                    $user->email = $email;
+                }
+                $user->email_info = $email_info;
+                $user->fullname = $name;
+                $user->phone = $phone;
+                $user->gender = $gender;
+                $user->address = 'Việt Nam';
+                $user->password = Hash::make($password);
+                if (isset($rq->refer_id) && $rq->refer_id != ''){
+                    $referId = $rq->refer_id;
+                    $user->refer_id = $referId;
+                }
+                if($email != null && (preg_match('/^[^0-9][_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/', $email) == 0  || strlen($email) < 6) ) {
+                    return response()->json(array('success' => false, 'detail' => 'Vui lòng nhập đúng email'), 200);
+                }
+                $user->user_type_id = $type;
+                $user->paid = 1;
+                $user->type_account = $type_account;
+                $user->domain_register = $domain_register;
+                $user->ref_register = $ref_register;
+                if ($user->save()) {
+                    if($email != null){
+                        $user = UsersModel::where('email', '=', $email)->orWhere(function ($query) use ($phone) {
+                            $query->where('phone', $phone)->where('phone', '!=', '0');
+                        })->first();
+                    }else{
+                        $user = UsersModel::orWhere(function ($query) use ($phone) {
+                                    $query->where('email', $phone)->where('email', '!=', null);
+                                })
+                                ->orWhere(function ($query) use ($phone) {
+                                    $query->where('phone', $phone)->where('phone', '!=', 0);
+                                })
+                                ->orWhere(function ($query) use ($phone) {
+                                    $query->where('phone', ('0'.$phone))->where('phone', '!=', 0);
+                                })
+                                ->first();
+                    }
+                    // Tạo dữ liệu partient tài khoản
+                    $patientNew = $user->createPatient();
+                    $patientNew->save();
+                    if ($present != null && $present != "") {
+                        $user->present = $present;
+                        $user->save();
+                        $collaboratorsUser = CollaboratorsUserModel::where('code', $present)->first();
+                        if ($collaboratorsUser != null) {
+                            $patientNew->balance += $collaboratorsUser->promotion;
+                            $patientNew->save();
+                        }
+                    }
+                    if ($user->user_type_id == 1) {
+                        $patientNew = $user->createPatient();
+                        $patientNew->save();
+                        if ($present != null && $present != "") {
+                            $user->present = $present;
+                            $user->save();
+                            $collaboratorsUser = CollaboratorsUserModel::where('code', $present)->first();
+                            if ($collaboratorsUser != null) {
+                                $patientNew->balance += $collaboratorsUser->promotion;
+                                $patientNew->save();
+                            }
+                        }
+                    } else if ($user->user_type_id == 2) {
+                        $doctor = new DoctorModel;
+                        $doctor->doctor_name = 'BS ' . $user->fullname;
+                        $doctor->doctor_url = $this->to_slug('BS ' . $user->fullname);
+                        $doctor->user_id = $user->user_id;
+                        $doctor->experience = '<ul><li>20 năm bệnh viện Chợ rẫy</li></ul>';
+                        $doctor->training = '<ul><li>Đại học y dược HCM</li></ul>';
+                        $doctor->doctor_address = 'Hồ Chí Minh';
+                        $doctor->profile_image = '246170446bacsi.jpg';
+                        $doctor->doctor_timework = '7h đến 19h';
+                        $doctor->doctor_clinic = 'bv Đại Học Y Dược';
+                        if ($doctor->save()) {
+                            $docsp = new DoctorSpecialityModel;
+                            $docsp->doctor_id = $doctor->doctor_id;
+                            $docsp->speciality_id = 1;
+                            $docsp->save();
+                            $docser = new DoctorServiceModel;
+                            $docser->doctor_id = $doctor->doctor_id;
+                            $docser->service_id = 1;
+                            $docser->save();
+                        }
+                    } else if ($user->user_type_id == 3) {
+                        $image = $user->avatar;
+                        $address = $user->address;
+                        $clinic = new ClinicModel();
+                        $clinic->user_id = $user->user_id;
+                        $clinic->clinic_name = $user->fullname;
+                        if ($image == null) {
+                            $image = "";
+                        }
+                        $clinic->profile_image = $image;
+                        if ($address == null) {
+                            $address = "Việt Nam";
+                        }
+                        $clinic->clinic_address = $address;
+                        $clinic->save();
+                    } else if ($user->user_type_id == 4) {
+                        $patientNew = $user->createPatient();
+                        $patientNew->save();
+                        if ($present != null && $present != "") {
+                            $user->present = $present;
+                            $user->save();
+                            $collaboratorsUser = CollaboratorsUserModel::where('code', $present)->first();
+                            if ($collaboratorsUser != null) {
+                                $patientNew->balance += $collaboratorsUser->promotion;
+                                $patientNew->save();
+                            }
+                        }
+                    }
+                    $current_user= $this->model->getItem(['user_id'=>$user->user_id],['task'=>'get-item-api']);
+                    $data = JWTCustom::encode($current_user, $this->jwt_key);
+                    return response()->json([
+                        'status' => 200,
+                        'success' => true,
+                        'data' => array(
+                            'token' => $data,
+                            'current_user' => $current_user
+                        ),
+                        'message' => 'Đăng kí thành công'
+                    ], 200);
+                }
 
+            } else {
+                return response()->json(array('status' => 400, 'success' => false, 'data' => null, 'message' => 'Email/Phone này đã có người sử dụng, vui lòng kiểm tra lại.'), 400);
+            }
+        } else {
+            return response()->json(array('status' => 400, 'success' => false, 'data' => null, 'message' => 'Số điện thoại và mật khẩu không được để trống'), 400);
+        }
+        return response()->json(array('status' => 400, 'success' => false, 'data' => null, 'message' => 'Có lỗi xảy ra, vui lòng thử lại'), 400);
     }
     public function login(Request $request){
         
@@ -119,7 +296,6 @@ class UserController extends ApiController
         }
         return $this->setResponse($this->res);
     }
-    
     public function detailUser(Request $request)
     {
         $params=[];

@@ -57,6 +57,7 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
         Route::get('getInfoUser', ['uses' => $controller . 'getInfoUser']);
         Route::post('sendDeviceToken', ['uses' => $controller . 'sendDeviceToken']);
         Route::post('updateInfoUser', ['uses' => $controller . 'updateInfoUser']);
+        Route::post('register', ['uses' => $controller . 'register']);
     });
     $prefix         = 'order';
     $controllerName = 'order';

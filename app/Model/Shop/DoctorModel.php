@@ -4,21 +4,17 @@ namespace App\Model\Shop;
 
 use App\Model\Shop\BackEndModel;
 use DB;
+use App\Model\Shop\CollaboratorsClinicDoctor;
 
 class DoctorModel extends BackEndModel
 {
     public function __construct() {
         $this->table               = 'doctor';
     }
-
     public function listItems($params = null, $options = null){
         $result = [];
-
         if ($options['task'] == 'list-items-for-search'){
             $query = self::select('doctor.doctor_id as id','doctor.doctor_name as name','doctor.profile_image','doctor.doctor_address as address','doctor.price','doctor.created_at');
-
-
-
             if (isset($params['province']) && $params['province'] != ''){
                 $query->where('province_id', $params['province']);
             }
@@ -33,12 +29,12 @@ class DoctorModel extends BackEndModel
             if (isset($params['user'])){
                 $user = json_decode(json_encode($params['user']));
                 $refer_id = $params['user']->refer_id ;
-                $collaborator = CollaboratorsUser::where('code',$refer_id)->first();
+                $collaborator = CollaboratorsUserModel::where('code',$refer_id)->first();
 
                 if ($collaborator)  { //Nếu refer_id là của bác sĩ
                     $collaborator_code = $collaborator->code;
 
-                    $arrDoctocID = \App\CollaboratorsClinicDoctor::select("doctor_id")
+                    $arrDoctocID = CollaboratorsClinicDoctor::select("doctor_id")
                                                     ->where("collaborators_clinic_doctor.collaborator_code",$collaborator_code)
                                                     ->first();
                     if (!empty($arrDoctocID)) {
@@ -52,7 +48,6 @@ class DoctorModel extends BackEndModel
                     }
                 }
             }
-
             $result = $query->where('status',1)
                             ->orderBy("$this->table.doctor_id", 'desc')
                             ->paginate($params['limit']);

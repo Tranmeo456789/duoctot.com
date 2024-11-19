@@ -6,7 +6,7 @@ use App\Model\Shop\BackEndModel;
 use DB;
 use Hash;
 use App\Helpers\Format;
-
+use App\Model\Shop\PatientModel;
 use Illuminate\Support\Str;
 class UsersModel extends BackEndModel
 {
@@ -360,5 +360,12 @@ class UsersModel extends BackEndModel
         if ($options['task'] == 'delete-item') {
             self::where('user_id', $params['user_id'])->delete();
         }
+    }
+    public function createPatient(){
+        $patient = new PatientModel;
+        $patient->user_id = $this->user_id;
+        $patient->profile_image = $this->avatar;;
+        $patient->email = $this->email;
+        return $patient;
     }
 }
