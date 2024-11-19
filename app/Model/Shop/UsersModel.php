@@ -270,6 +270,29 @@ class UsersModel extends BackEndModel
                 $result = $query->get();
             }
         }
+        if($options['task'] == "list-items-import-code-ref") {
+            $query = $this::select('user_id','email','fullname','phone','user_type_id','gender','is_admin','created_at','is_affiliate','ref_register');
+            if (isset($params['ref_register'])){
+                $query =  $query->where('ref_register',$params['ref_register']);
+            }
+            if (isset($params['search']['value']) && ($params['search']['value'] !== ""))  {
+                if($params['search']['field'] == "all") {
+                    $query->where(function($query) use ($params){
+                        foreach($this->fieldSearchAccepted as $column){
+                            $query->orWhereRaw("LOWER($column)" . ' LIKE BINARY ' .  "LOWER('%{$params['search']['value']}%')" );
+                        }
+                    });
+                } else if(in_array($params['search']['field'], $this->fieldSearchAccepted)) {
+                        $query->whereRaw("LOWER({$params['search']['field']})" . " LIKE BINARY " .  "LOWER('%{$params['search']['value']}%')" );
+                }
+            }
+            $query->orderBy('created_at', 'desc');
+            if (isset($params['pagination']['totalItemsPerPage'])){
+                $result =  $query->paginate($params['pagination']['totalItemsPerPage']);
+            }else{
+                $result = $query->get();
+            }
+        }
         if($options['task'] == "list-item-user-type-id-up3-of-shop") {
             $query = $this::select('user_id','email','fullname','phone','user_type_id','gender','is_affiliate')
             ->where(function ($query) {

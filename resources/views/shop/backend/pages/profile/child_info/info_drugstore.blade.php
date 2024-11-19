@@ -29,9 +29,12 @@
         $elementsAdd=[
             [
                 'label'   => HTML::decode(Form::label('affiliate', 'Mã Affiliate', $formLabelAttr)),
-                'element' => Form::text('code_ref', $codeRef??null, array_merge($formInputAttr,['placeholder'=>'Mã Affiliate','readonly' => 'readonly'])),
-                'widthElement' => 'col-12 col-md-4'
-            ]
+                'element' => '<div class="input-group">
+                                ' . Form::text('code_ref', $codeRef ?? null, array_merge($formInputAttr, ['placeholder' => 'Mã Affiliate', 'readonly' => 'readonly', 'id' => 'code_ref'])) . '
+                                <button type="button" class="btn btn-outline-secondary btn-sm" id="copyBtn" title="Copied!">Copy</button>
+                            </div>',
+                'widthElement' => 'col-12 col-md-4',
+            ],
         ];
     }
     $elements = [

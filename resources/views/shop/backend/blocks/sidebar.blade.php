@@ -59,6 +59,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('affiliate.userImportCodeAffiliate') }}" class="nav-link">
+                                <i class="far fa-list-alt nav-icon"></i>
+                                <p>User nhập mã affiliate</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('affiliate.infoBank') }}" class="nav-link">
                                 <i class="fas fa-money-check-alt nav-icon"></i>
                                 <p>TK ngân hàng</p>

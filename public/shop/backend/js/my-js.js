@@ -592,4 +592,18 @@ $(document).on('click', 'input[name="info_product[]"]', function(event) {
         $('#checkAll').prop('checked', false);
     }
 });
-
+document.getElementById('copyBtn').addEventListener('click', function() {
+    var copyText = document.getElementById('code_ref');
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    document.execCommand('copy');
+    var tooltip = new bootstrap.Tooltip(document.getElementById('copyBtn'), {
+        title: 'Copied!',
+        placement: 'top', 
+        trigger: 'manual' 
+    });
+    tooltip.show();
+    setTimeout(function() {
+        tooltip.hide();
+    }, 2000);
+});

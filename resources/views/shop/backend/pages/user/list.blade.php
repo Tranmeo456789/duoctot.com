@@ -31,7 +31,7 @@
                         <td style="width: 25%">{!! $fullname !!}</td>
                         <td style="width: 30%">
                             <div>{!! $email !!}</div>
-                            <div>{!! $phone !!}</div>
+                            <div class="font-weight-bold">{!! $phone !!}</div>
                         </td>
                         <td style="width: 20%">{{$userType}}</td>
                         <td style="width: 25%">

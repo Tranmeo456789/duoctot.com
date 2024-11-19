@@ -82,6 +82,7 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
         Route::get('/thong-ke-hoa-hong-theo-san-pham-dai-ly', 'AffiliateController@refAffiliate')->name('affiliate.refAffiliate');
         Route::get('/trang-tong-quan-tai-khoan-affiliate', 'AffiliateController@dashboardRef')->name('affiliate.dashboardRef');
         Route::get('/thong-tin-tai-khoan-ngan-hang-affiliate', 'AffiliateController@infoBank')->name('affiliate.infoBank');
+        Route::get('/nguoi-dung-da-nhap-ma-affiliate', 'AffiliateController@userImportCodeAffiliate')->name('affiliate.userImportCodeAffiliate');
         Route::post('/luu-thong-tin-tai-khoan-ngan-hang-affiliate', 'AffiliateController@saveInfoBank')->name('affiliate.saveInfoBank');
     });
     Route::group(['middleware' => ['permission.editProduct']], function () {

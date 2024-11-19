@@ -273,4 +273,32 @@ class AffiliateController extends BackEndController
         $sumPayment=(new CouponPaymentModel)->sumMoney(['code_ref'=>$codeRef],['task'=>'tinh-tong-tien-affiliate']);
         return view($this->pathViewController .  'references.dashboard', compact('sumMoney','sumPayment','sumQuantity','sumLinkCount'));
     }
+    public function userImportCodeAffiliate(Request $request){
+        $session = $request->session();
+        $userInfo = $request->session()->get('user');
+        $item = $this->model->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
+        if ($session->has('currentController') &&  ($session->get('currentController') == $this->controllerName)) {
+            $session->forget('params');
+        } else {
+            $session->put('currentController', $this->controllerName);
+        }
+        $session->put('params.filter.status', $request->has('filter_status') ? $request->get('filter_status') : ($session->has('params.filter.status') ? $session->get('params.filter.status') : 'all'));
+        $session->put('params.search.field', $request->has('search_field') ? $request->get('search_field') : ($session->has('params.search.field') ? $session->get('params.search.field') : ''));
+        $session->put('params.search.value', $request->has('search_value') ? $request->get('search_value') : ($session->has('params.search.value') ? $session->get('params.search.value') : ''));
+        $session->put('params.pagination.totalItemsPerPage', $this->totalItemsPerPage);
+        $this->params =  $session->get('params');
+        $this->params['ref_register']=$item['code_ref'];
+        $items              = (new UsersModel)->listItems($this->params, ['task'  => 'list-items-import-code-ref']);
+        if ($items->currentPage() > $items->lastPage()) {
+            $lastPage = $items->lastPage();
+            Paginator::currentPageResolver(function () use ($lastPage) {
+                return $lastPage;
+            });
+            $items  = (new UsersModel)->listItems($this->params, ['task'  => 'list-items-import-code-ref']);
+        }
+        return view($this->pathViewController .  'references.users_import_codeRef', [
+            'params'           => $this->params,
+            'items'            => $items,
+        ]);
+    }
 }
