@@ -33,7 +33,7 @@ $imgCustomer=['1.jpg', '2.jpg'];
     <div class="col-xl-3 col-lg-12">
         <ul class="list-unstyled text-center">
             <li class="text-center">
-                <img src="{{asset('images/shop/1.jpg')}}" alt="tdoctor" class="img-fluid">
+                <img class="lazy" data-src="{{asset('images/shop/1.jpg')}}" alt="tdoctor" class="img-fluid">
             </li>
             <!-- <li class="text-center">
                 <img src="{{asset('images/shop/2.jpg')}}" alt="tdoctor" class="img-fluid">
@@ -43,18 +43,16 @@ $imgCustomer=['1.jpg', '2.jpg'];
 
     <div class="col-xl-3 col-lg-12 dlapp pb-0">
         <div class="dlapp1">
-            <!-- <p>Mua thuốc trực tuyến, giao hàng tận nơi dễ dàng & nhanh chóng</p> -->
             <div class="mb-4">
                 <h6>App Tdoctor dành cho bệnh nhân</h6>
-                <div class="my-2"><a href="https://apps.apple.com/us/app/tdoctor/id1443310734"><img src="{{asset('images/shop/app1.png')}}" alt=""></a></div>
-                <div><a href="https://play.google.com/store/apps/details?id=com.app.khambenh.bacsiviet"><img src="{{asset('images/shop/app2.png')}}" alt=""></a></div>
+                <div class="my-2"><a href="https://apps.apple.com/us/app/tdoctor/id1443310734"><img class="lazy" data-src="{{asset('images/shop/app1.png')}}" alt="Tdoctor"></a></div>
+                <div><a href="https://play.google.com/store/apps/details?id=com.app.khambenh.bacsiviet"><img class="lazy" data-src="{{asset('images/shop/app2.png')}}" alt="Tdoctor"></a></div>
             </div>
             <div class="pb-4">
                 <h6>App Tdoctor dành cho Bác sĩ</h6>
-                <div class="my-2"><a href="https://apps.apple.com/vn/app/tdoctor-for-doctor/id1555758280"><img src="{{asset('images/shop/app1.png')}}" alt=""></a></div>
-                <div><a href="https://play.google.com/store/apps/details?id=com.app.khambenh.doctor"><img src="{{asset('images/shop/app2.png')}}" alt=""></a></div>
+                <div class="my-2"><a href="https://apps.apple.com/vn/app/tdoctor-for-doctor/id1555758280"><img class="lazy" data-src="{{asset('images/shop/app1.png')}}" alt="Tdoctor"></a></div>
+                <div><a href="https://play.google.com/store/apps/details?id=com.app.khambenh.doctor"><img class="lazy" data-src="{{asset('images/shop/app2.png')}}" alt="Tdoctor"></a></div>
             </div>
         </div>
-        <!-- <div><img src="{{asset('images/shop/app4.png')}}" alt="tdoctor"></div> -->
     </div>
 </div>

@@ -20,39 +20,39 @@
         [
             'label'   => HTML::decode(Form::label('code_order', $label['code_order'], $formLabelAttr)),
             'element' => Form::text('code_order', $item['code_order']??null, array_merge($formInputAttr,['placeholder'=>$label['code_order'],'readonly' =>true])),
-            'widthElement' => 'col-4'
+            'widthElement' => 'col-12 col-lg-4'
         ],[
             'label'   => HTML::decode(Form::label('', $label['status_order'], $formLabelAttr)),
             'element' => Form::select('status_order',$statusOrderValue, $item['status_order']??null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
-            'widthElement' => 'col-4'
+            'widthElement' => 'col-12 col-lg-4'
         ],[
             'label'   => HTML::decode(Form::label('total', 'Tổng tiền đơn hàng' , $formLabelAttr)),
             'element' => Form::text('total', MyFunction::formatNumber($item['total']??0) . ' đ', array_merge($formInputAttr,['readonly' =>true,'style'=>'text-align:right'])),
-            'widthElement' => 'col-4'
+            'widthElement' => 'col-12 col-lg-4'
         ],[
             'label'   => HTML::decode(Form::label('total_product', 'Số lượng sản phẩm', $formLabelAttr)),
             'element' => Form::text('total_product', $item['total_product']??null, array_merge($formInputAttr,['readonly' =>true])),
-            'widthElement' => 'col-4'
+            'widthElement' => 'col-12 col-lg-4'
         ],[
             'label'   => HTML::decode(Form::label('', 'Phí giao hàng', $formLabelAttr)),
             'element' => Form::text('',MyFunction::formatNumber($item['money_ship']??0) . ' đ', array_merge($formInputAttr,['readonly' =>true])),
-            'widthElement' => 'col-4'
+            'widthElement' => 'col-12 col-lg-4'
         ],[
             'label'   => HTML::decode(Form::label('', 'Hình thức thanh toán', $formLabelAttr)),
             'element' => Form::text('', $payment, array_merge($formInputAttr,['readonly' =>true])),
-            'widthElement' => 'col-4'
+            'widthElement' => 'col-12 col-lg-4'
         ],[
             'label'   => HTML::decode(Form::label('', $label['status_control'], $formLabelAttr)),
             'element' => Form::select('status_control',$statusControlOrderValue, $item['status_control']??null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
-            'widthElement' => 'col-4'
+            'widthElement' => 'col-12 col-lg-4'
         ],[
             'label'   => HTML::decode(Form::label('', $label['warehouse_id'], $formLabelAttr)),
             'element' => Form::select('warehouse_id',$itemsWarehouse, null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
-            'widthElement' => 'col-4'
+            'widthElement' => 'col-12 col-lg-4'
         ],[
             'label'   => HTML::decode(Form::label('', 'Thời gian đặt hàng', $formLabelAttr)),
             'element' => Form::text('', $ngayDatHang, array_merge($formInputAttr,['readonly' =>true])),
-            'widthElement' => 'col-4'
+            'widthElement' => 'col-12 col-lg-4'
         ]
     ];
     $elementSubmits=[];

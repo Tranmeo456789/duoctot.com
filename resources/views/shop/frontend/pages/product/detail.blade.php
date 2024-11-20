@@ -20,7 +20,10 @@ use Illuminate\Support\Str;
                                 <li data-thumb="{{asset($item['image'])}}" class="text-center">
                                     <img src="{{asset($item['image'])}}" />
                                 </li>
-                                @if(!empty($albumImageCurrent))
+                                <li data-thumb="{{asset($item['image'])}}" class="text-center">
+                                    <img src="{{asset($item['image'])}}" />
+                                </li>
+                                <!-- @if(!empty($albumImageCurrent))
                                     @foreach($albumImageCurrent as $val)
                                         <li data-thumb="{{asset('public/fileUpload/product/'.$val)}}" class="text-center">
                                             <img src="{{asset('public/fileUpload/product/'.$val)}}" />
@@ -30,7 +33,7 @@ use Illuminate\Support\Str;
                                     <li data-thumb="{{asset($item['image'])}}" class="text-center">
                                         <img src="{{asset($item['image'])}}" />
                                     </li>
-                                @endif
+                                @endif -->
                             </ul>
                         </div>
                     </div>
@@ -149,7 +152,6 @@ use Illuminate\Support\Str;
         <div class="comment-product">
             @include("$moduleName.pages.$controllerName.child_detail.comment_product")
         </div>
-        
     </div>
 </div>
 <div class="wp-inner mt-2">

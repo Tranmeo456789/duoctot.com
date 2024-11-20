@@ -1,7 +1,7 @@
 @foreach($items as $item)
 <li>
     <a href="{{route('fe.product.detail',$item['slug'])}}" class="d-flex">
-        <div class="rimg-center1"><img src="{{asset($item['image'])}}" alt=""></div>
+        <div class="rimg-center1"><img loading="lazy" src="{{asset($item['image'])}}" alt=""></div>
         <div class="rightcnb">
             <p class="truncate2 nb-name-product">{{$item['name']}}</p>
             <h3 class="truncate1">{{ number_format( $item['price'], 0, "" ,"." )}}đ / {{$item->unitProduct->name}}</h3>

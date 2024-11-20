@@ -1,4 +1,4 @@
-@foreach($items as $val)
+@foreach($items as $key=>$val)
     @php
         if(!empty($val['percent_discount'])){
             $priceOld=$val['price']*(1+$val['percent_discount']/100);
@@ -7,7 +7,11 @@
     <li class="position-relative">
         <a href="{{route('fe.product.detail',$val['slug'])}}" class="d-block">
             <div class="wp-img-thumb-product mb-2">
+                @if($key==0 || $key==1 || $key==2 || $key==3)
+                <img src="{{asset($val['image'])}}" alt="{{$val['name']}}">
+                @else
                 <img class="lazy" data-src="{{asset($val['image'])}}" alt="{{$val['name']}}">
+                @endif
             </div>
             <div class="pl-1">
                 <div class="d-flex align-items-center wp-name-product">

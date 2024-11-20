@@ -11,7 +11,7 @@ unset($itemsArticle[0]);
         <div class="col-xl-6 col-lg-12 news-content-right px-0 mb-xl-0 mb-lg-3">
             <a href="{{route('fe.post.detail',$firstAricle['slug'])}}" class="wp-thumb-first d-block">
                 <div class="text-center">
-                    <img src="{{asset($firstAricle['image'])}}" alt="{{$firstAricle['title']}}" style="max-height: 400px;">
+                    <img class="lazy" data-src="{{asset($firstAricle['image'])}}" alt="{{$firstAricle['title']}}" style="max-height: 400px;">
                 </div>
                 <p class="truncate2 pb-0 px-2">{{$firstAricle['title']}}</p>
             </a>

@@ -63,7 +63,7 @@ use App\Helpers\MyFunction;
         @foreach($catItem['post'] as $post)
         <div class="col-xl-3 col-6 pb-2">
             <a href="{{route('fe.post.detail',$post['slug'])}}" class="d-block">
-                <div class="wp-thumb-item"><img src="{{asset($post['image'])}}" alt="{{$post['title']}}" class="rounded"></div>
+                <div class="wp-thumb-item"><img class="lazy" data-src="{{asset($post['image'])}}" alt="{{$post['title']}}" class="rounded"></div>
                 <p class="truncate2 pb-0 text-dark font-weight-bold">{{$post['title']}}</p>
             </a>
         </div>

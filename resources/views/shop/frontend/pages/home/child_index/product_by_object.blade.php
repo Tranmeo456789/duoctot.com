@@ -10,5 +10,5 @@ $objectProducts=[
     @include("$moduleName.templates.box_title_product",['title'=>'Sản phẩm theo đối tượng','img'=>'objects.png'])
     @include("$moduleName.templates.select_filter_product",['items'=>$objectProducts])
 </div>
-@include("$moduleName.templates.list_product",['items'=>$productInObject])
+@include("$moduleName.templates.list_product_object",['items'=>$productInObject])
 @include("$moduleName.block.btn_view_add", ['countProduct' => $countproductInObject, 'typeObject' => $typeObject ?? 'tre_em', 'dataOffset' => 10])

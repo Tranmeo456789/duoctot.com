@@ -19,7 +19,7 @@
             @foreach($productViewed as $key=>$val)
             <li class="position-relative">
                 <a href="{{route('fe.product.detail',$val['slug']??'')}}">
-                    <div class="d-flex justify-content-center wp-img-thumb-product"><img src="{{asset($val['image'])}}" alt=""></div>
+                    <div class="d-flex justify-content-center wp-img-thumb-product"><img class="lazy" data-src="{{asset($val['image'])}}" alt=""></div>
                     <div class="mt-3 px-2">
                         <div class="wp-name-product">
                             <p class="truncate3">{{$val['name']}}</p>

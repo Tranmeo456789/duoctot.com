@@ -23,7 +23,7 @@ class HomeController extends ShopFrontEndController
     }
     public function index(Request $request)
     {
-        $numTake=20;
+        $numTake=10;
         $product_selling = (new ProductModel())->listItems(null, ['task' => 'frontend-list-items'])->take($numTake);
         $product_covid=(new ProductModel())->listItems(['type'=>'hau_covid'], ['task' => 'frontend-list-items'])->take(10);
         $productInObject=(new ProductModel())->listItems(['type'=>'tre_em'], ['task' => 'frontend-list-items'])->take(10);
@@ -32,16 +32,16 @@ class HomeController extends ShopFrontEndController
         $itemsProduct['new'] = (new ProductModel())->listItems(['type'=>'new'], ['task' => 'frontend-list-items'])->take(10);
         $itemsProduct['best'] = (new ProductModel())->listItems(['type'=>'noi_bat'], ['task' => 'frontend-list-items'])->take(10);
         $couterSumProduct=(new ProductModel())->countItems(null, ['task' => 'count-items-product-frontend']);
-        $couterSumProduct=$couterSumProduct[0]['count']-20;
-        if ($request->has('codeRef')) {
-            $request->session()->put('codeRef', $request->query('codeRef'));
-            $codeRef = $request->codeRef ?? ($request->session()->get('codeRef') ?? '');
-            $affiliate = AffiliateModel::where('code_ref', $codeRef)->first();
-            if ($affiliate) {
-                $affiliate->increment('sum_click');
-             }
-        }
-        $itemsQuangCao = QuangCaoModel::where('status', 'active')->get();
+        $couterSumProduct=$couterSumProduct[0]['count']-$numTake;
+        // if ($request->has('codeRef')) {
+        //     $request->session()->put('codeRef', $request->query('codeRef'));
+        //     $codeRef = $request->codeRef ?? ($request->session()->get('codeRef') ?? '');
+        //     $affiliate = AffiliateModel::where('code_ref', $codeRef)->first();
+        //     if ($affiliate) {
+        //         $affiliate->increment('sum_click');
+        //      }
+        // }
+        //$itemsQuangCao = QuangCaoModel::where('status', 'active')->get();
         $itemsArticle = (new PostModel)->listItems(['take'=>5], ['task' => 'frontend-list-items']);
         return view(
             $this->pathViewController . 'index',
@@ -215,7 +215,7 @@ class HomeController extends ShopFrontEndController
                 $affiliate->increment('sum_click');
              }
         }
-        $itemsQuangCao = QuangCaoModel::where('status', 'active')->get();
+        //$itemsQuangCao = QuangCaoModel::where('status', 'active')->get();
         $itemsArticle = (new PostModel)->listItems(['take'=>5], ['task' => 'frontend-list-items']);
         return view(
             $this->pathViewController . 'home_webview',

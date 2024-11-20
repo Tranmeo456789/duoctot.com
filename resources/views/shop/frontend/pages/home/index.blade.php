@@ -15,12 +15,12 @@
                     <li class="text-center">
                         <img src="{{asset('images/shop/banner4.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
                     </li>
-                    <li class="text-center">
+                    <!-- <li class="text-center">
                         <img src="{{asset('images/shop/banner5.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
                     </li>
                     <li class="text-center">
                         <img src="{{asset('images/shop/banner6.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
-                    </li>
+                    </li> -->
                     <!-- <li class="text-center">
                         <img src="{{asset('images/shop/banner7.jpeg')}}" alt="tdoctor" class="img-fluid" loading="lazy" style="width: 100%;">
                     </li>
@@ -49,12 +49,12 @@
                     <li class="text-center">
                         <img src="{{asset('images/shop/banner4_mobi.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
                     </li>
-                    <li class="text-center">
+                    <!-- <li class="text-center">
                         <img src="{{asset('images/shop/banner5_mobi.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
                     </li>
                     <li class="text-center">
                         <img src="{{asset('images/shop/banner6_mobi.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
-                    </li>
+                    </li> -->
                     <!-- <li class="text-center">
                         <img src="{{asset('images/shop/banner7_mobi.jpeg')}}" alt="tdoctor" class="img-fluid" loading="lazy" style="width: 100%;">
                     </li>
@@ -108,9 +108,10 @@
     <div class="mt-3 mt-lg-4">
         <div class="wp-inner">
             @include("$moduleName.templates.box_title_product",['title' => 'Sản phẩm nổi bật','classBackground'=>'bg-danger'])
-            <ul class="list-item">
+            <!-- <ul class="list-item">
                 @include("$moduleName.partial.product",['items'=>$itemsProduct['best']])
-            </ul>
+            </ul> -->
+            @include("$moduleName.templates.list_product_best",['items'=>$itemsProduct['best']])
         </div>
     </div>
 </div>
@@ -120,14 +121,14 @@
         @include("$moduleName.block.btn_view_add",['countProduct'=>$couterSumProduct])
     </div>
 </div>
-@if(count($product_covid)>0)
+<!-- @if(count($product_covid)>0)
 <div class="product-backround  mt-3 mt-lg-4 py-4">
     <div class="wp-inner">
         @include("$moduleName.templates.box_title_product",['title' => 'Sản phẩm hậu covid','classBackground'=>'bg-danger'])
         @include("$moduleName.templates.list_product",['items'=>$product_covid])
     </div>
 </div>
-@endif
+@endif -->
 <div class="wp-inner mt-3 mt-lg-4">
     <div id="product-by-object" class="parent-btn-view-add">
         @include("$moduleName.pages.$controllerName.child_index.product_by_object")
