@@ -4,7 +4,7 @@ use App\Helpers\MyFunction;
 $firstAricle = $itemsArticle[0];
 unset($itemsArticle[0]);
 @endphp
-<div class="text-center"><img loading="lazy" src="{{asset('images/shop/banner12.jpeg')}}" alt="tdoctor" style="max-width: 600px;width:100%"></div>
+<div class="text-center"><img class="lazy" data-src="{{asset('images/shop/banner12.jpeg')}}" alt="tdoctor" style="max-width: 600px;width:100%"></div>
 <div class="newsh mt-3 mt-lg-5">
     @include("$moduleName.templates.box_title_product",['title' => 'Tin tức và góc sức khỏe','classBackground'=>'bg-info','img'=>'news1.png'])
     <div class="row px-2">
@@ -28,7 +28,7 @@ unset($itemsArticle[0]);
                     @foreach($itemsArticle as $val)
                     <li class="d-flex">
                         <a href="{{route('fe.post.detail',$val['slug'])}}" class="wp-thumb-item d-block">
-                            <img src="{{asset($val['image'])}}" alt="{{$val['title']}}">
+                            <img class="lazy" data-src="{{asset($val['image'])}}" alt="{{$val['title']}}">
                         </a>
                         <div class="nctright pl-2">
                             <div class="news-known d-flex mb-1">

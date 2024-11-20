@@ -41,35 +41,11 @@
             <div class="d-block d-md-none">
                 <ul class="banner_doitac list-unstyled cS-hidden">
                     <li class="text-center">
-                        <img src="{{asset('images/shop/banner2_mobi.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
-                    </li>
-                    <!-- <li class="text-center">
-                        <img src="{{asset('images/shop/banner3_mobi.jpeg')}}" alt="tdoctor" class="img-fluid" loading="lazy" style="width: 100%;">
-                    </li> -->
-                    <li class="text-center">
-                        <img src="{{asset('images/shop/banner4_mobi.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
-                    </li>
-                    <!-- <li class="text-center">
-                        <img src="{{asset('images/shop/banner5_mobi.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
+                        <img src="{{asset('images/shop/banner14_mobi.webp')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
                     </li>
                     <li class="text-center">
-                        <img src="{{asset('images/shop/banner6_mobi.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
-                    </li> -->
-                    <!-- <li class="text-center">
-                        <img src="{{asset('images/shop/banner7_mobi.jpeg')}}" alt="tdoctor" class="img-fluid" loading="lazy" style="width: 100%;">
+                        <img src="{{asset('images/shop/banner14_mobi.webp')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
                     </li>
-                    <li class="text-center">
-                        <img src="{{asset('images/shop/banner8_mobi.jpeg')}}" alt="tdoctor" class="img-fluid" loading="lazy" style="width: 100%;">
-                    </li>
-                    <li class="text-center">
-                        <img src="{{asset('images/shop/banner9_mobi.jpeg')}}" alt="tdoctor" class="img-fluid" loading="lazy" style="width: 100%;">
-                    </li>
-                    <li class="text-center">
-                        <img src="{{asset('images/shop/banner10_mobi.jpeg')}}" alt="tdoctor" class="img-fluid" loading="lazy" style="width: 100%;">
-                    </li>
-                    <li class="text-center">
-                        <img src="{{asset('images/shop/banner1_mobi.jpeg')}}" alt="tdoctor" class="img-fluid" loading="lazy" style="width: 100%;">
-                    </li> -->
                 </ul>
             </div>
         </div>
@@ -111,7 +87,7 @@
             <!-- <ul class="list-item">
                 @include("$moduleName.partial.product",['items'=>$itemsProduct['best']])
             </ul> -->
-            @include("$moduleName.templates.list_product_best",['items'=>$itemsProduct['best']])
+            @include("$moduleName.templates.list_product",['items'=>$itemsProduct['best']])
         </div>
     </div>
 </div>

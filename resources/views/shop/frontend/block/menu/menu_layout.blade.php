@@ -11,15 +11,14 @@
         </div>
     </div> -->
     <div class="head_topon_reponsive">
-        <div class="wp-inner">
+        <!-- <div class="wp-inner">
             <div class="d-flex justify-content-center">
                 <div class="d-flex justify-content-center">
                     <div><span class="circle-ripple"></span></div>
-                    <!-- <a href="" class="tt-respon">Hướng dẫn</a> -->
                     <p class="p-head-topon">@lang('lang.connecting_home_medical_with_online_doctors') <span class="font-weight-bold text-danger" style="font-size: 20px;"><a href="tel:0349444164" class="text-danger">0349.444.164</a></span></p>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="fix1screen">
             <div class="wp-cart-res">
                 @include("$moduleName.templates.menu_cart")

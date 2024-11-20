@@ -394,6 +394,13 @@ class MessageController extends ApiController
             }
             $item['role']=$role;
             $listRoom[$key]['list_messages']=$item;
+            $userCreatedRoom=UsersModel::where('user_id',$value['created_by'])->first();
+            $listRoom[$key]['list_messages']['user_send'] = [
+                'user_id' => $userCreatedRoom->user_id ?? '',
+                'fullname' => $userCreatedRoom->fullname ?? '',
+                'email' => $userCreatedRoom->email ?? '',
+                'phone' => $userCreatedRoom->phone ?? ''
+            ];
         }
         $this->res['data']=$listRoom;
         return $this->setResponse($this->res);

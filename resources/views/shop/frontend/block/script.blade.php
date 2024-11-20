@@ -2,26 +2,6 @@
 <script src="{{ asset('/shop/frontend/js/lightslider.min.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/shop/frontend/js/jquery.validate.min.js')}}" type="text/javascript"></script> -->
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const lazyImages = document.querySelectorAll('.lazy');
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const lazyImage = entry.target;
-                lazyImage.src = lazyImage.getAttribute('data-src');
-                lazyImage.classList.remove('lazy');
-                observer.unobserve(lazyImage);
-            }
-        });
-    }, {
-        rootMargin: '0px 0px 200px 0px',
-    });
-    lazyImages.forEach(image => {
-        imageObserver.observe(image);
-    });
-});
-</script>
-<script>
     let hiddenTime = 0;
     let reloadTimeout; 
     document.addEventListener("visibilitychange", function() {

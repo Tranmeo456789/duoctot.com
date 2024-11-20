@@ -114,6 +114,10 @@ class RoomModel extends BackEndModel
     public function listMessageLast() {
         return $this->hasMany('App\Model\Shop\MessagesModel', 'room_id', 'id')
                 ->select('id', 'content', 'user_id', 'room_id', 'created_at')
-                ->latest('created_at')->with('userSend');// Lấy tin nhắn mới nhất
+                ->latest('created_at');
+    }
+    public function userCreateRoom() {
+        return $this->belongsTo('App\Model\Shop\UsersModel', 'created_by', 'user_id')
+                    ->select('user_id', 'fullname', 'email', 'phone');
     }
 }
