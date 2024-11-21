@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Shop\Api\ApiController;
 use App\Model\Shop\AffiliateProductModel;
+use App\Model\Shop\UsersModel;
 use App\Model\Shop\ProductModel as MainModel;
 use \Firebase\JWTCustom\JWTCustom as JWTCustom;
 
@@ -74,7 +75,9 @@ class ProductController extends ApiController
         //     $this->res['data']  = $this->model->getItem($params,['task'=>'frontend-get-item-api']);
         // }
         $itemCurrent=$this->model->getItem($params,['task'=>'frontend-get-item-api']);
+        $sellerProduct=UsersModel::where('user_id',$itemCurrent['user_id'])->first();
         $itemCurrent['url'] = route('fe.product.detail', ['slug' => $itemCurrent['slug']]) ?? '';
+        $itemCurrent['fullname_sell'] = $sellerProduct['fullname']??'';
         $this->res['data']  = $itemCurrent;
         return $this->setResponse($this->res);
     }

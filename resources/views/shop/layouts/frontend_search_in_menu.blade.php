@@ -1,5 +1,5 @@
 @php
-$title = $title ?? 'Tdoctor';
+$title = $title ?? 'Sàn thương mại điện tử trong y số 1 Việt Nam';
 @endphp
 <!DOCTYPE html>
 <html>

@@ -54,10 +54,12 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
         Route::get('getListDrugstore', ['uses' => $controller . 'getListDrugstore']);
         Route::get('detailShop', ['uses' => $controller . 'detailShop']);
         Route::get('detailUser', ['uses' => $controller . 'detailUser']);
+        Route::get('getInfoConfig', ['uses' => $controller . 'getInfoConfig']);
         Route::get('getInfoUser', ['uses' => $controller . 'getInfoUser']);
         Route::post('sendDeviceToken', ['uses' => $controller . 'sendDeviceToken']);
         Route::post('updateInfoUser', ['uses' => $controller . 'updateInfoUser']);
         Route::post('register', ['uses' => $controller . 'register']);
+        Route::post('login', ['uses' => $controller . 'login']);
     });
     $prefix         = 'order';
     $controllerName = 'order';

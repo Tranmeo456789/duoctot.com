@@ -19,6 +19,7 @@ use App\Model\Shop\UserTokenModel;
 use App\Model\Shop\WardModel;
 use App\Model\Shop\DoctorSpecialityModel;
 use App\Model\Shop\DoctorServiceModel;
+use App\Model\Shop\ConfigModel;
 use Illuminate\Support\Facades\Hash;
 use \Firebase\JWTCustom\JWTCustom as JWTCustom;
 class UserController extends ApiController
@@ -202,7 +203,36 @@ class UserController extends ApiController
         return response()->json(array('status' => 400, 'success' => false, 'data' => null, 'message' => 'Có lỗi xảy ra, vui lòng thử lại'), 400);
     }
     public function login(Request $request){
-        
+        $username = $request->username;
+        $password = $request->password;
+        $type = (isset($request->type))?intval($request->type):1;
+        $current_user = UsersModel::where('email', '=', $username)->orWhere(function ($query) use ($username) {
+            $query->where('phone', $username)
+                  ->where('phone', '!=', '0');
+        })->first();
+        if ($current_user != null) {
+            if (Hash::check($password, $current_user->password)) {
+                if($current_user != null){
+                    //$request->session()->put('user', $current_user);
+                    //setcookie("Tdoctor-token",JWTCustom::encode($current_user, $this->jwt_key),time() + 365*60*60*24,"/", $_SERVER['SERVER_NAME']);
+                    $data = JWTCustom::encode($current_user, $this->jwt_key);
+                    return response()->json([
+                        'status' => 200,
+                        'success' => true,
+                        'data' => array(
+                            'token' => $data,
+                            'current_user' => $current_user
+                        ),
+                        'detail' => 'success'
+                    ], 200);
+                }
+            }
+        }
+        return response()->json([
+            'success' => false,
+            'data' => NULL,
+            'detail' => 'Tài khoản hoặc mật khẩu chưa đúng, vui lòng thử lại!'
+        ]);
     }
     public function detailShop(Request $request){
         $params=[];
@@ -416,6 +446,13 @@ class UserController extends ApiController
         $currentPage = intval($request->page ?? 1);
         $queryResults = $query->paginate($perPage, ['*'], 'page', $currentPage);
         $this->res['data'] = $queryResults;
+        return $this->setResponse($this->res);
+    }
+    public function getInfoConfig(Request $request)
+    {
+        $this->res['data'] = null;
+        $config = ConfigModel::where('id', 11)->first();
+        $this->res['data'] = $config;
         return $this->setResponse($this->res);
     }
 }
