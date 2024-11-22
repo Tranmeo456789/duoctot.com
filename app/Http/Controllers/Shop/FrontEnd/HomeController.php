@@ -144,6 +144,12 @@ class HomeController extends ShopFrontEndController
             'title'=>$title
         ]);
     }
+    public function pageContactWebView(){
+        $title = 'Liên hệ | Tdoctor';
+        return view("$this->pathViewController.contact_webview",[
+            'title'=>$title
+        ]);
+    }
     public function pageQuytrinhGiaiquyetTranhchap(){
         $title = 'Quy trình giải quyết tranh chấp | Tdoctor';
         return view("$this->pathViewController.quytrinh_giaiquyet_tranhchap",[

@@ -3,17 +3,6 @@
 @section('content')
 <div class="wp-inner mt-3 mt-lg-4">
     <div class="abu-cnt">
-        <div class="" id="breadcrumb-wp">
-            <ul class="list-item clearfix">
-                <li>
-                    <a href="{{route('home')}}" title="">Trang chủ</a>
-                </li>
-                <li>
-                    <span>Điều khoản sử dụng</span>
-                </li>
-            </ul>
-        </div>
-        <hr>
         <div class="info-secu">
             <h2 style="text-align: center;">ĐIỀU KHOẢN SỬ DỤNG</h2>
             <h5> <strong>Mục đích và phạm vi thu thập</strong></h5>

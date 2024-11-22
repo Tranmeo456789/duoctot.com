@@ -60,11 +60,25 @@ class PostController extends ShopFrontEndController
         $listItemRelate = $this->model->where('id', '!=', $item['id'])->where('cat_post_id', $item['cat_post_id'])->take(4)->get();
 
         return view($this->pathViewController . 'detail',
-        [
-            'item' => $item,
-            'listItemRelate' => $listItemRelate,            
-        ]
-    );
+            [
+                'item' => $item,
+                'listItemRelate' => $listItemRelate,            
+            ]
+        );
+    }
+    public function detail_webview(Request $request){
+        $slug = $request->slug;
+        $item= $this->model->getItem(['slug'=>$slug],['task' => 'frontend-get-item']);
+        if (!$item) {
+            return view('shop.frontend.pages.error.page_404'); ;
+        }
+        $listItemRelate = $this->model->where('id', '!=', $item['id'])->where('cat_post_id', $item['cat_post_id'])->take(4)->get();
+        return view($this->pathViewController . 'detail_webview',
+            [
+                'item' => $item,
+                'listItemRelate' => $listItemRelate,            
+            ]
+        );
     }
     public function listPostOfCat(Request $request){
         $slug = $request->slug;

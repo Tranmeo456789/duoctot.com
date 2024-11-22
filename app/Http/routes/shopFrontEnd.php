@@ -11,7 +11,8 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('chinh-sach-kiem-hang-doi-tra.html','HomeController@pageChinhSachDoiTra')->name('fe.home.pageChinhSachDoiTra');
     Route::get('ve-chung-toi.html','HomeController@pageAboutUs')->name('fe.home.pageAboutUs');
     Route::get('ve-chung-toi-web-view.html','HomeController@pageAboutUsWebView')->name('fe.home.pageAboutUsWebView');
-    Route::get('lien-he.html','HomeController@pageContact')->name('fe.home.pageContact');
+    Route::get('lien-he.html','HomeController@pageContactWebView')->name('fe.home.pageContactWebView');
+    Route::get('lien-he-chung-toi.html','HomeController@pageContact')->name('fe.home.pageContact');
     Route::get('quy-trinh-tranh-chap-giai-quyet.html','HomeController@pageQuytrinhGiaiquyetTranhchap')->name('fe.home.pageQuytrinhGiaiquyetTranhchap');
     Route::get('chinh-sach-bao-mat.html','HomeController@pageChinhsachBaomatThongtin')->name('fe.home.pageChinhsachBaomatThongtin');
     Route::get('chinh-sach-giao-nhan.html','HomeController@pageChinhsachGiaoNhan')->name('fe.home.pageChinhsachGiaoNhan');
@@ -32,6 +33,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('/tin-tuc-web-view','PostController@indexWebView')->name('fe.post.indexWebView');
     Route::get('/danh-muc-tin-tuc/{slug}','PostController@listPostOfCat')->name('fe.post.listPostOfCat');
     Route::get('/tin-tuc/{slug}.html','PostController@detail')->name('fe.post.detail');
+    Route::get('/tin-tuc/webview/{slug}.html','PostController@detail_webview')->name('fe.post.detail.webview');
 
     Route::post('/hoan-tat-dat-hang','OrderController@completed')->name('fe.order.completed');
     Route::get('/dat-hang/thanh-cong/{code}','OrderController@success')->name('fe.order.success');
