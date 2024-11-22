@@ -7,7 +7,7 @@
     <!-- Sidebar Menu -->
     <nav>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            @if (((Session::has('user') && Session::get('user')['user_type_id'] > 3)) || ((Session::has('user') && Session::get('user')['is_admin'] == 1)) )
+            @if (((Session::has('user') && Session::get('user')['user_type_id'] > 1)) || ((Session::has('user') && Session::get('user')['is_admin'] == 1)) )
             <li class="nav-item">
                 <a href="{{ route('dashboard') }}" class="nav-link">
                     <i class="far fa-list-alt nav-icon"></i>
@@ -104,7 +104,7 @@
                     </ul>
                 </li>
             @endif
-            @if (Session::has('user') && (Session::get('user')['user_type_id'] > 3 && Session::get('user')['user_type_id'] <= 10 || Session::get('user')['is_affiliate'] == 1))
+            @if (Session::has('user') && (Session::get('user')['user_type_id'] > 1 && Session::get('user')['user_type_id'] <= 10 || Session::get('user')['is_affiliate'] == 1))
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fab fa-first-order"></i>
@@ -130,7 +130,7 @@
                 </li>
             @endif
 
-            @if ((Session::has('user') && Session::get('user')['user_type_id'] > 3 && Session::get('user')['user_type_id'] <= 10)) 
+            @if ((Session::has('user') && Session::get('user')['user_type_id'] > 1 && Session::get('user')['user_type_id'] <= 10)) 
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fab fa-product-hunt"></i>

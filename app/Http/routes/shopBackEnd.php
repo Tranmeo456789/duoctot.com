@@ -13,6 +13,9 @@
 
 //shop tdoctor
 $prefixShopBackEnd = '/backend';
+Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd'], function () { 
+    Route::get('/', 'DashboardController@index')->name('dashboard');
+});
 Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'middleware' => ['check.login']], function () { 
     Route::get('/thong-tin-nguoi-dung', 'ProfileController@info')->name('profile.info');
     Route::post('/luu-thong-tin-nguoi-dung', 'ProfileController@save')->name('profile.save');
@@ -76,7 +79,6 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
     });
 
     Route::group(['middleware' => ['permission.dashboard']], function () {
-        Route::get('/', 'DashboardController@index')->name('dashboard');
     });
     Route::group(['middleware' => ['permission.affiliate']], function () {
         Route::get('/thong-ke-hoa-hong-theo-san-pham-dai-ly', 'AffiliateController@refAffiliate')->name('affiliate.refAffiliate');

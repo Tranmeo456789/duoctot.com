@@ -17,7 +17,7 @@ class PermissionDashboard
     {
         if($request->session()->has('user'))  {
             $userInfo = $request->session()->get('user');
-            if (($userInfo['user_type_id'] > 3 && $userInfo['user_type_id'] <= 10 ) || $userInfo['is_admin'] == 1){
+            if (($userInfo['user_type_id'] > 1 && $userInfo['user_type_id'] <= 10 ) || $userInfo['is_admin'] == 1){
                 return $next($request);
             }  
             if ( $userInfo['user_type_id'] == 10 ){

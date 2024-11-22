@@ -21,6 +21,7 @@ use App\Model\Shop\DoctorSpecialityModel;
 use App\Model\Shop\DoctorServiceModel;
 use App\Model\Shop\ConfigModel;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use \Firebase\JWTCustom\JWTCustom as JWTCustom;
 class UserController extends ApiController
 {
@@ -205,28 +206,31 @@ class UserController extends ApiController
     public function login(Request $request){
         $username = $request->username;
         $password = $request->password;
-        $type = (isset($request->type))?intval($request->type):1;
+        // $type = (isset($request->type))?intval($request->type):1;
         $current_user = UsersModel::where('email', '=', $username)->orWhere(function ($query) use ($username) {
             $query->where('phone', $username)
-                  ->where('phone', '!=', '0');
+            ->where('phone', '!=', '0');
         })->first();
         if ($current_user != null) {
             if (Hash::check($password, $current_user->password)) {
                 if($current_user != null){
                     //$request->session()->put('user', $current_user);
                     //setcookie("Tdoctor-token",JWTCustom::encode($current_user, $this->jwt_key),time() + 365*60*60*24,"/", $_SERVER['SERVER_NAME']);
-                    $data = JWTCustom::encode($current_user, $this->jwt_key);
+                    $dataToken = JWTCustom::encode($current_user, $this->jwt_key);
+                    $currentUser=$this->model->getItem(['user_id'=>$current_user['user_id']],['task'=>'get-item-api']);
+                    Log::info('đúng mk');
                     return response()->json([
                         'status' => 200,
                         'success' => true,
                         'data' => array(
-                            'token' => $data,
-                            'current_user' => $current_user
+                            'token' => $dataToken,
+                            'current_user' => $currentUser
                         ),
                         'detail' => 'success'
                     ], 200);
                 }
             }
+            Log::info('không check được mk');
         }
         return response()->json([
             'success' => false,
@@ -357,6 +361,7 @@ class UserController extends ApiController
         $params=[];
         $this->res['data'] = [];
         $token = $request->header('Tdoctor-Token');
+        Log::info('token',['token' => $token]);
         $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
         if ($data_token['message'] == 'OK') {
             $userCurrent =  (array)$data_token['payload'];
@@ -367,6 +372,7 @@ class UserController extends ApiController
             }
             $codeRef = isset($userAff['code_ref']) ? $userAff['code_ref'] : null;
             $this->res['data']['codeRef'] = $codeRef;
+            Log::info('infoget',['infoget' => $this->res['data']]);
         }
         return $this->setResponse($this->res);
     }

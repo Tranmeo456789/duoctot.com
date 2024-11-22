@@ -17,7 +17,7 @@ class PermissionEditProduct
     {
         if($request->session()->has('user'))  {
             $userInfo = $request->session()->get('user');
-            if ($userInfo['user_type_id'] > 3 || $userInfo['is_admin'] == 1 || $userInfo['is_admin'] == 2){
+            if ($userInfo['user_type_id'] > 1 || $userInfo['is_admin'] == 1 || $userInfo['is_admin'] == 2){
                 return $next($request);
             }  
             return redirect()->route('profile.info');

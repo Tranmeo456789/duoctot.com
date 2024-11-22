@@ -32,7 +32,7 @@ class UsersModel extends BackEndModel
             $result = self::where('user_id', $params['user_id'])->first();
         }
         if ($options['task'] == 'get-item-api') {
-            $result = self::select('user_id', 'email', 'fullname', 'phone', 'user_type_id','details','ref_register')
+            $result = self::select('user_id', 'email', 'fullname', 'phone', 'user_type_id','ref_register')
                           ->where('user_id', $params['user_id'])
                           ->first();
         }

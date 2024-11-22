@@ -9,9 +9,12 @@ use App\Model\Shop\ProductModel;
 use App\Helpers\MyFunction;
 use App\Http\Controllers\Shop\BackEnd\BackEndController;
 use App\Model\Shop\AffiliateModel;
+use App\Model\Shop\UsersModel;
+use \Firebase\JWTCustom\JWTCustom as JWTCustom;
 use DB;
 class DashboardController extends BackEndController
 {
+    protected $jwt_key = 'anHAzy7CeVuL8ybwt4epOUH5NQXYocpBXQwWGalzU6xRSkD0lAUOsRChzC8fTS6ETSH2J3KpgQbnlPvdMVe7oNcuPQzTkPHfUx88';
     public function __construct()
     {
         $this->controllerName     = 'dashboard';
@@ -25,6 +28,25 @@ class DashboardController extends BackEndController
         $sum_quantity=0;
         $sum_money=0;     
         $session = $request->session();
+        if($request->token){
+            $token = $request->token;
+            $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
+            $listRoom=[];
+            if ($data_token['message'] == 'OK') {
+                $userInfoId = ((array)$data_token['payload'])['user_id'];
+                $userInfo=UsersModel::where('user_id',$userInfoId)->first();
+                //return($userInfo);
+                $request->session()->put('user',$userInfo);
+                if ( $userInfo['user_type_id']== 10 ){
+                    return redirect()->route('affiliate.dashboardRef');
+                }else if($userInfo['user_type_id'] == 1){
+                    return redirect()->route('profile.info');
+                }
+            }else{
+                return view('shop.frontend.pages.error.page_404'); 
+            }
+        }
+        
         if($session->get('user.is_affiliate') == 1){
             $userAffiliate = (new AffiliateModel)->getItem(['user_id' => $session->get('user.user_id')], ['task' => 'get-item']);
             $params['code_ref'] = $userAffiliate['code_ref'];
