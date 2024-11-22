@@ -48,7 +48,6 @@ class Users extends BackEndModel
                 $params['user_type_id'] = 1;
             }
            $params['user_id'] = $this->insertGetId($this->prepareParams($params));
-
             if (is_numeric($params['user_id'])){
                 $paramsCode = [
                     'type' => 'user_type_id',

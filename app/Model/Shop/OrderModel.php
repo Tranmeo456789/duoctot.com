@@ -51,7 +51,8 @@ class OrderModel extends BackEndModel
             if($user['is_admin']==1){
                 return  $query;
             }else{
-                return  $query->where('user_sell',$user->user_id);
+                $codeRef=$user->codeRef;
+                return  $query->where('user_sell',$user->user_id)->orWhere('info_product', 'LIKE', "%$codeRef%");
             }
 
         }
@@ -87,8 +88,7 @@ class OrderModel extends BackEndModel
         if ($options['task'] == "user-list-items") {
             $query = $this::with('userBuy')
                                 ->select('id','code_order','total','created_at','status_order','user_id','buyer','payment','status_control')
-                                ->where('id','>',1)
-                                ->OfUser();
+                                ->where('id','>',1)->OfUser();
             if ((isset($params['filter']['status_order'])) && ($params['filter']['status_order'] != 'all')) {
                 $query = $query->where('status_order',$params['filter']['status_order']);
             }

@@ -556,6 +556,14 @@ $(document).on('click', '.btn-copy', function(event) {
     tempTextArea.val(affiliateLink).select();
     document.execCommand("copy");
     tempTextArea.remove();
+    var $message = $('<span class="copy-message">Copied!</span>');
+    $(this).after($message);  
+    $message.fadeIn(300);  
+    setTimeout(function() {
+        $message.fadeOut(300, function() {
+            $message.remove();  
+        });
+    }, 2000);
 });
 $(document).on('click', '.show-link', function(event) {
     var valueLink = $(this).siblings(".value-link");

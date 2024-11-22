@@ -36,8 +36,8 @@
                         <td style="width: 20%">{{$userType}}</td>
                         <td style="width: 25%">
                             <a href="{{route("$controllerName.edit",$val->user_id)}}" class="btn btn-success btn-sm rounded-0 text-white p-2 mr-2" type="button" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit"></i></a>
-                            @if($val['is_affiliate'] != 1)
-                            <a href="{{route("affiliate.add",$val->user_id)}}" class="btn btn-primary btn-sm rounded-0 text-white p-2" type="button" data-toggle="tooltip" data-placement="top" title="Thêm affiliate">Thêm affiliate</a>
+                            @if($val['is_affiliate'] != 1 && $val['user_type_id'] > 1 )
+                                <a href="{{route("affiliate.add",$val->user_id)}}" class="btn btn-primary btn-sm rounded-0 text-white p-2" type="button" data-toggle="tooltip" data-placement="top" title="Thêm thuốc hiển thị trong Shop">Thêm thuốc</a>
                             @endif
                         </td>
                 </tr>

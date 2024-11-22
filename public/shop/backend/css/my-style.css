@@ -212,6 +212,17 @@ span.highlight {
 .wp-link-affiliate .value-link{
     display: none;
 }
+.copy-message {
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;  /* Ban đầu ẩn */
+}
 @media screen and (max-width: 1400px) {
     .business-results li {
         width: 50%;

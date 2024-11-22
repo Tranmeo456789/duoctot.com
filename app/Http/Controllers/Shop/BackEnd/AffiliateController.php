@@ -125,6 +125,8 @@ class AffiliateController extends BackEndController
                     ], 200);
                 } else {
                     (new UsersModel())->saveItem(['user_id'=>$params['user_id'],'is_affiliate'=> 1], ['task' => 'update-item-simple']);
+                    $userAffiliate=UsersModel::where('user_id',$params['user_id'])->first();
+                    $params['code_ref'] = $userAffiliate['codeRef'];                  
                     $codeRef=$this->model->saveItem($params, ['task' => $task]); 
                     foreach ($params['info_product'] as $value) {
                         $paramsAffiliateProduct['code_ref']=$codeRef;
@@ -133,7 +135,6 @@ class AffiliateController extends BackEndController
                         (new AffiliateProductModel)->saveItem($paramsAffiliateProduct, ['task' => 'add-item']);
                     }
                 }
-                
             }
             $request->session()->put('app_notify', $notify);
             return response()->json([
@@ -276,7 +277,7 @@ class AffiliateController extends BackEndController
     public function userImportCodeAffiliate(Request $request){
         $session = $request->session();
         $userInfo = $request->session()->get('user');
-        $item = $this->model->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
+        //$item = $this->model->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
         if ($session->has('currentController') &&  ($session->get('currentController') == $this->controllerName)) {
             $session->forget('params');
         } else {
@@ -287,7 +288,7 @@ class AffiliateController extends BackEndController
         $session->put('params.search.value', $request->has('search_value') ? $request->get('search_value') : ($session->has('params.search.value') ? $session->get('params.search.value') : ''));
         $session->put('params.pagination.totalItemsPerPage', $this->totalItemsPerPage);
         $this->params =  $session->get('params');
-        $this->params['ref_register']=$item['code_ref'];
+        $this->params['ref_register']=$userInfo['codeRef'];
         $items              = (new UsersModel)->listItems($this->params, ['task'  => 'list-items-import-code-ref']);
         if ($items->currentPage() > $items->lastPage()) {
             $lastPage = $items->lastPage();

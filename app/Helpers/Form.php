@@ -50,7 +50,7 @@ class Form
                                 <div class='%s wp-copy d-flex'>
                                     %s
                                     <span class='help-block'></span>
-                                    <span class='btn-copy btn btn-secondary'><small>Copy</small></span>
+                                    <span class='btn-copy btn btn-secondary' data-bs-toggle='tooltip' data-bs-placement='top' title='Copied!'><small>Copy</small></span>
                                 </div>
                             </div>
                         </div>",

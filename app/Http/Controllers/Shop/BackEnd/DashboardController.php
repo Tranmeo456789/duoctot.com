@@ -35,7 +35,7 @@ class DashboardController extends BackEndController
             if ($data_token['message'] == 'OK') {
                 $userInfoId = ((array)$data_token['payload'])['user_id'];
                 $userInfo=UsersModel::where('user_id',$userInfoId)->first();
-                //return($userInfo);
+                $request->session()->put('web_view', 1);
                 $request->session()->put('user',$userInfo);
                 if ( $userInfo['user_type_id']== 10 ){
                     return redirect()->route('affiliate.dashboardRef');

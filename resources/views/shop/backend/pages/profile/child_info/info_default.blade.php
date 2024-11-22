@@ -24,29 +24,22 @@
 
     $linkGetListDistrict = route('district.getListByParentID',['parentID' => 'value_new']);
     $linkGetListWard = route('ward.getListByParentID',['parentID' => 'value_new']);
-    $elementsAdd=[];
-    if(!empty($codeRef)){
-        $elementsAdd=[
-            [
-                'label'   => HTML::decode(Form::label('affiliate', 'Mã Affiliate', $formLabelAttr)),
-                'element' => Form::text('code_ref', $codeRef??null, array_merge($formInputAttr,['placeholder'=>'Mã Affiliate','readonly' => 'readonly'])),
-                'widthElement' => 'col-12 col-md-4'
-            ]
-        ];
-    }else{
-        $elementsAdd=[
-            [
-                'label'   => HTML::decode(Form::label('ref_register', 'Nhập mã đại lý' .  $star, $formLabelAttr)),
-                'element' => Form::text('ref_register', $item['ref_register']??null, array_merge($formInputAttr,['placeholder'=>'Nhập mã đại lý'])),
-                'widthElement' => 'col-12 col-md-4'
-            ]
-        ];
-    }
     $elements = [
+        [
+            'label'   => HTML::decode(Form::label('codeRef', 'Mã của tôi', $formLabelAttr)),
+            'element' => Form::text('codeRef', $item['codeRef']??null, array_merge($formInputAttr,['placeholder'=>'Mã của tôi','readonly' => 'readonly'])),
+            'widthElement' => 'col-12 col-md-6',
+            'type' => 'input-has-copy'
+        ],
+        [
+            'label'   => HTML::decode(Form::label('ref_register', 'Mã giới thiệu' .  $star, $formLabelAttr)),
+            'element' => Form::text('ref_register', $item['ref_register']??null, array_merge($formInputAttr,['placeholder'=>'Mã giới thiệu'])),
+            'widthElement' => 'col-12 col-md-6'
+        ],
         [
             'label'   => HTML::decode(Form::label('fullname', 'Họ tên' .  $star, $formLabelAttr)),
             'element' => Form::text('fullname', $item['fullname']??null, array_merge($formInputAttr,['placeholder'=>'Họ tên'])),
-            'widthElement' => 'col-12 col-md-8'
+            'widthElement' => 'col-12'
         ],[
             'label'   => HTML::decode(Form::label('phone', $label['phone'], $formLabelAttr)),
             'element' => Form::text('phone', $item['phone']??null, array_merge($formInputAttr,['placeholder'=>$label['phone']])),
@@ -84,7 +77,6 @@
             'type'    => "btn-submit-center"
         ]
     ];
-    $elements = array_merge($elementsAdd, $elements);
     $title = 'Cập nhật thông tin';
 @endphp
 

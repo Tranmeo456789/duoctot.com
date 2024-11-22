@@ -1,8 +1,10 @@
 <!-- sidebar: style can be found in sidebar.less -->
 <!-- Brand Logo -->
+@if(!Session::has('web_view')) 
 <a href="{{route('home')}}" class="brand-link">
     <img src="{{asset('shop/images/logo.png')}}" alt="Tdoctor" class="brand-image img-fluid">
 </a>
+@endif
 <div class="sidebar">
     <!-- Sidebar Menu -->
     <nav>
@@ -37,6 +39,12 @@
                             <p>Đổi mật khẩu</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('affiliate.userImportCodeAffiliate') }}" class="nav-link">
+                            <i class="far fa-list-alt nav-icon"></i>
+                            <p>User nhập mã affiliate</p>
+                        </a>
+                    </li>
                 </ul>
             </li>
             @if (Session::has('user') && Session::get('user')['is_affiliate'] == 1 ) 
@@ -56,12 +64,6 @@
                             <a href="{{ route('affiliate.refAffiliate') }}" class="nav-link">
                                 <i class="far fa-list-alt nav-icon"></i>
                                 <p>Thống kê bán SP</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('affiliate.userImportCodeAffiliate') }}" class="nav-link">
-                                <i class="far fa-list-alt nav-icon"></i>
-                                <p>User nhập mã affiliate</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -104,7 +106,7 @@
                     </ul>
                 </li>
             @endif
-            @if (Session::has('user') && (Session::get('user')['user_type_id'] > 1 && Session::get('user')['user_type_id'] <= 10 || Session::get('user')['is_affiliate'] == 1))
+            @if (Session::has('user'))
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fab fa-first-order"></i>
@@ -120,16 +122,15 @@
                                 <p>Danh sách đơn hàng</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="{{route('prescrip')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Thuốc theo toa</p>
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </li>
             @endif
-
             @if ((Session::has('user') && Session::get('user')['user_type_id'] > 1 && Session::get('user')['user_type_id'] <= 10)) 
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
@@ -298,12 +299,12 @@
                 </ul>
             </li>
             @endif
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a href="{{route('user.logout')}}" class="nav-link">
                     <i class="nav-icon fas fa-sign-out-alt"></i>
                     <p>Đăng xuất</p>
                 </a>
-            </li>
+            </li> -->
         </ul>
     </nav>
 </div>

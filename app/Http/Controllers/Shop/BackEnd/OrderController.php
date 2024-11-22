@@ -38,27 +38,23 @@ class OrderController extends BackEndController
         $session->put('params.search.value', $request->has('search_value') ? $request->get('search_value') : ($session->has('params.search.value') ? $session->get('params.search.value') : ''));
         $session->put('params.pagination.totalItemsPerPage', $this->totalItemsPerPage);
         $this->params     = $session->get('params');
-        if($session->get('user.is_affiliate') == 1){
-            $userAffiliate = (new AffiliateModel)->getItem(['user_id' => $session->get('user.user_id')], ['task' => 'get-item']);
-            $this->params['code_ref'] = $userAffiliate['code_ref'];
-            $this->params['user_type_id'] = $session->get('user.user_type_id');
-            $items = $this->model->listItems($this->params, ['task'  => 'user-list-items-affiliate']);
-        }else{
-            $items            = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
-        }
+       // $userCurrent= $session->get('user');
+       // $this->params['codeRef']=$userCurrent['codeRef'];
+        // if($session->get('user.is_affiliate') == 1){
+        //     $userAffiliate = (new AffiliateModel)->getItem(['user_id' => $session->get('user.user_id')], ['task' => 'get-item']);
+        //     $this->params['code_ref'] = $userAffiliate['code_ref'];
+        //     $this->params['user_type_id'] = $session->get('user.user_type_id');
+        //     $items = $this->model->listItems($this->params, ['task'  => 'user-list-items-affiliate']);
+        // }else{
+        //     $items  = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
+        // }
+        $items  = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
         if ($items->currentPage() > $items->lastPage()) {
             $lastPage = $items->lastPage();
             Paginator::currentPageResolver(function () use ($lastPage) {
                 return $lastPage;
             });
-            if($session->get('user.is_affiliate') == 1){
-                $userAffiliate = (new AffiliateModel)->getItem(['user_id' => $session->get('user.user_id')], ['task' => 'get-item']);
-                $this->params['code_ref'] = $userAffiliate['code_ref'];
-                $this->params['user_type_id'] = $session->get('user.user_type_id');
-                $items = $this->model->listItems($this->params, ['task'  => 'user-list-items-affiliate']);
-            }else{
-                $items = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
-            }
+            $items  = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
         }
         $itemStatusOrderCount = $this->model->countItems($this->params, ['task' => 'admin-count-items-group-by-status-order']);
         return view($this->pathViewController .  'index', [

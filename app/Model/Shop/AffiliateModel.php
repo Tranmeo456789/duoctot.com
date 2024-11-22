@@ -103,11 +103,11 @@ class AffiliateModel extends BackEndModel
             DB::beginTransaction();
             try {
                 $this->setCreatedHistory($params);
-                $paramsCode = [
-                    'type' => 'affiliate',
-                    'value' => date('Ymd')
-                ];
-                $params['code_ref'] = 'MDL' . date('Ymd') . sprintf("%05d",self::getMaxCode($paramsCode));
+                // $paramsCode = [
+                //     'type' => 'affiliate',
+                //     'value' => date('Ymd')
+                // ];
+                //$params['code_ref'] = 'MDL' . date('Ymd') . sprintf("%05d",self::getMaxCode($paramsCode));
                 self::insert($this->prepareParams($params));
                 DB::commit();
                 return $params['code_ref'];

@@ -182,6 +182,7 @@ class UserController extends ApiController
                             }
                         }
                     }
+                    $this->model->saveItem(['user_id'=>$user->user_id,'codeRef' => 'T'.$user->user_id], ['task' => 'update-item-api']);
                     $current_user= $this->model->getItem(['user_id'=>$user->user_id],['task'=>'get-item-api']);
                     $data = JWTCustom::encode($current_user, $this->jwt_key);
                     return response()->json([
@@ -218,7 +219,6 @@ class UserController extends ApiController
                     //setcookie("Tdoctor-token",JWTCustom::encode($current_user, $this->jwt_key),time() + 365*60*60*24,"/", $_SERVER['SERVER_NAME']);
                     $dataToken = JWTCustom::encode($current_user, $this->jwt_key);
                     $currentUser=$this->model->getItem(['user_id'=>$current_user['user_id']],['task'=>'get-item-api']);
-                    Log::info('đúng mk');
                     return response()->json([
                         'status' => 200,
                         'success' => true,
@@ -230,7 +230,6 @@ class UserController extends ApiController
                     ], 200);
                 }
             }
-            Log::info('không check được mk');
         }
         return response()->json([
             'success' => false,
@@ -366,13 +365,6 @@ class UserController extends ApiController
         if ($data_token['message'] == 'OK') {
             $userCurrent =  (array)$data_token['payload'];
             $this->res['data']= $this->model->getItem(['user_id'=>$userCurrent['user_id']],['task'=>'get-item-api']);
-            $userAff = (new AffiliateModel)->getItem(['user_id' => $userCurrent['user_id']], ['task' => 'get-item-api']);
-            if(isset($userAff) && !empty($userAff)){
-                $codeRef = $userAff['code_ref'];
-            }
-            $codeRef = isset($userAff['code_ref']) ? $userAff['code_ref'] : null;
-            $this->res['data']['codeRef'] = $codeRef;
-            Log::info('infoget',['infoget' => $this->res['data']]);
         }
         return $this->setResponse($this->res);
     }

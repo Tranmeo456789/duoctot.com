@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator as FacadesValidator;
 use Symfony\Component\HttpFoundation\Session\Session;
 use App\Helpers\HttpClient;
+use App\Model\Shop\UsersModel;
 use App\Http\Requests\UserRequest as MainRequest;
 use App\Users as MainModel;
 class UserController extends Controller
@@ -39,7 +40,7 @@ class UserController extends Controller
             }
             $userModel = new MainModel();
             $current_user = $userModel->saveItem($params, ['task' => $task]);
-
+            (new UsersModel)->saveItem(['user_id'=>$current_user->user_id,'codeRef' => 'T'.$current_user->user_id], ['task' => 'update-item-api']);
             if (!empty($current_user)){
                 $request->session()->put('user', $current_user);
                 return response()->json([
@@ -109,7 +110,7 @@ class UserController extends Controller
     public function logout(Request $request)
     {
         $request->session()->forget('user');
-        return redirect()->back();
+        return redirect()->route('home');
     }
     public function logoutbe(Request $request)
     {
