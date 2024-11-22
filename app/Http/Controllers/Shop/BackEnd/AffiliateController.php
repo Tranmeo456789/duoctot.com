@@ -194,74 +194,6 @@ class AffiliateController extends BackEndController
             'userInfo'=> $userInfo
         ]);
     }
-    public function refAffiliate(Request $request)
-    {
-        $userInfo = $request->session()->get('user');
-        $userInfo=(new UsersModel)->getItem(['user_id' => $userInfo['user_id']],['task'=>'get-item']);
-        $item = $this->model->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
-        $codeRef = $item['code_ref'];
-        $session = $request->session();
-        if ($session->has('currentController') &&  ($session->get('currentController') != $this->controllerName)) {
-            $session->forget('params');
-        } else {
-            $session->put('currentController', $this->controllerName);
-        }
-        $sumMoney=$item->sumMoneyRefAffiliate($codeRef);
-        $sumQuantity=$item->sumQuantityRefAffiliate($codeRef);
-        $sumLinkCount = AffiliateProductModel::where('code_ref', $codeRef)->sum('sum_click')+$item['sum_click'];
-        $params['group_id'] = collect($item->listIdProduct)->pluck('product_id')->toArray();
-        if ($request->has('deleteValueSearch') && $request->get('deleteValueSearch') == 1) {
-            $session->forget('params.search.value');
-        }
-        $session->put('params.search.field', $request->has('search_field') ? $request->get('search_field') : ($session->has('params.search.field') ? $session->get('params.search.field') : ''));
-        $session->put('params.search.value', $request->has('search_value') ? $request->get('search_value') : ($session->has('params.search.value') ? $session->get('params.search.value') : ''));
-        $session->put('params.group_id', $params['group_id']);
-        $session->put('params.pagination.totalItemsPerPage', $this->totalItemsPerPage);
-        
-        $this->params     = $session->get('params');
-        $infoProduct=(new ProductModel)->listItems($this->params,['task'=>'user-list-items-simple-affiliate']);
-        if ($infoProduct->currentPage() > $infoProduct->lastPage()) {
-            $lastPage = $infoProduct->lastPage();
-            Paginator::currentPageResolver(function () use ($lastPage) {
-                return $lastPage;
-            });
-            $infoProduct             = (new ProductModel)->listItems($this->params, ['task'  => 'user-list-items-simple-affiliate']);
-        }
-        return view($this->pathViewController .  'references.index',
-        [
-            'params'           => $this->params,
-            'item' => $item,
-            'infoProduct' => $infoProduct,
-            'sumMoney'=> $sumMoney,
-            'sumQuantity' => $sumQuantity,
-            'sumLinkCount' => $sumLinkCount,
-            'userInfo'=> $userInfo
-        ]);
-    }
-    public function infoBank(Request $request){
-        $userInfo = $request->session()->get('user');
-        $item = $this->model->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
-        $infoBank = $item['info_bank'];
-        return view($this->pathViewController .  'references.info_bank',['item'=>$infoBank]);
-    }
-    public function saveInfoBank(Request $request){
-        $userInfo = $request->session()->get('user');
-        $item = $this->model->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
-        $infoBank = [
-            'fullname' => $request->input('info_bank.fullname'),
-            'stk_bank' => $request->input('info_bank.stk_bank'),
-            'name_bank' => $request->input('info_bank.name_bank'),
-        ];
-        
-        $notify = "Cập nhật thành công!";
-        $this->model->saveItem(['id'=> $item['id'],'info_bank'=>$infoBank], ['task' => 'edit-item']);
-        $request->session()->put('app_notify', $notify);
-        return response()->json([
-            'fail' => false,
-            'redirect_url' => route('affiliate.infoBank'),
-            'message'      => $notify,
-        ]);
-    }
     public function dashboardRef(Request $request){
         $userInfo = $request->session()->get('user');
         $item = $this->model->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
@@ -273,33 +205,5 @@ class AffiliateController extends BackEndController
         $sumLinkCount = ($sumClickLinkProduct ?? 0) + ($sumClickLinkComon ?? 0);
         $sumPayment=(new CouponPaymentModel)->sumMoney(['code_ref'=>$codeRef],['task'=>'tinh-tong-tien-affiliate']);
         return view($this->pathViewController .  'references.dashboard', compact('sumMoney','sumPayment','sumQuantity','sumLinkCount'));
-    }
-    public function userImportCodeAffiliate(Request $request){
-        $session = $request->session();
-        $userInfo = $request->session()->get('user');
-        //$item = $this->model->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
-        if ($session->has('currentController') &&  ($session->get('currentController') == $this->controllerName)) {
-            $session->forget('params');
-        } else {
-            $session->put('currentController', $this->controllerName);
-        }
-        $session->put('params.filter.status', $request->has('filter_status') ? $request->get('filter_status') : ($session->has('params.filter.status') ? $session->get('params.filter.status') : 'all'));
-        $session->put('params.search.field', $request->has('search_field') ? $request->get('search_field') : ($session->has('params.search.field') ? $session->get('params.search.field') : ''));
-        $session->put('params.search.value', $request->has('search_value') ? $request->get('search_value') : ($session->has('params.search.value') ? $session->get('params.search.value') : ''));
-        $session->put('params.pagination.totalItemsPerPage', $this->totalItemsPerPage);
-        $this->params =  $session->get('params');
-        $this->params['ref_register']=$userInfo['codeRef'];
-        $items              = (new UsersModel)->listItems($this->params, ['task'  => 'list-items-import-code-ref']);
-        if ($items->currentPage() > $items->lastPage()) {
-            $lastPage = $items->lastPage();
-            Paginator::currentPageResolver(function () use ($lastPage) {
-                return $lastPage;
-            });
-            $items  = (new UsersModel)->listItems($this->params, ['task'  => 'list-items-import-code-ref']);
-        }
-        return view($this->pathViewController .  'references.users_import_codeRef', [
-            'params'           => $this->params,
-            'items'            => $items,
-        ]);
     }
 }

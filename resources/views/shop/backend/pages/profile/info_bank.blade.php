@@ -53,7 +53,7 @@
             <div class="card-body">
             {{ Form::open([
                 'method'         => 'POST',
-                'url'            => route("affiliate.saveInfoBank"),
+                'url'            => route("profile.saveInfoBank"),
                 'accept-charset' => 'UTF-8',
                 'class'          => 'form-horizontal form-label-left',
                 'id'             => 'main-form' ])  }}

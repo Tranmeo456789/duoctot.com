@@ -37,16 +37,10 @@ class DashboardController extends BackEndController
                 $userInfo=UsersModel::where('user_id',$userInfoId)->first();
                 $request->session()->put('web_view', 1);
                 $request->session()->put('user',$userInfo);
-                if ( $userInfo['user_type_id']== 10 ){
-                    return redirect()->route('affiliate.dashboardRef');
-                }else if($userInfo['user_type_id'] == 1){
-                    return redirect()->route('profile.info');
-                }
             }else{
                 return view('shop.frontend.pages.error.page_404'); 
             }
         }
-        
         if($session->get('user.is_affiliate') == 1){
             $userAffiliate = (new AffiliateModel)->getItem(['user_id' => $session->get('user.user_id')], ['task' => 'get-item']);
             $params['code_ref'] = $userAffiliate['code_ref'];

@@ -16,6 +16,7 @@ class UsersModel extends BackEndModel
     ];
     protected $casts = [
         'details'   => 'array',
+        'info_bank' => 'array'
     ];
     public function __construct() {
         $this->controllerName      = 'user';

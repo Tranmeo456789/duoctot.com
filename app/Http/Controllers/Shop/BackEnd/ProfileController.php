@@ -160,4 +160,28 @@ class ProfileController extends BackEndController
     {
         return view('shop.backend.profile.setting');
     }
+    public function infoBank(Request $request){
+        $userInfo = $request->session()->get('user');
+        $item = $this->model->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
+        $infoBank = $item['info_bank'];
+        return view($this->pathViewController .  'info_bank',['item'=>$infoBank]);
+    }
+    public function saveInfoBank(Request $request){
+        $userInfo = $request->session()->get('user');
+        $item = $this->model->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
+        $infoBank = [
+            'fullname' => $request->input('info_bank.fullname'),
+            'stk_bank' => $request->input('info_bank.stk_bank'),
+            'name_bank' => $request->input('info_bank.name_bank')
+        ];
+        $infoBank = json_encode($infoBank);
+        $notify = "Cập nhật thành công!";
+        $this->model->saveItem(['user_id' => $userInfo['user_id'],'info_bank' => $infoBank], ['task' => 'update-item-api']);
+        $request->session()->put('app_notify', $notify);
+        return response()->json([
+            'fail' => false,
+            'redirect_url' => route('profile.infoBank'),
+            'message'      => $notify,
+        ]);
+    }
 }

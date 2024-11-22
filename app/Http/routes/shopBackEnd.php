@@ -22,6 +22,12 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
     Route::get('/thay-doi-mat-khau', 'ProfileController@change_password')->name('profile.password');
     Route::post('/luu-thay-doi-mat-khau', 'ProfileController@saveChangePassword')->name('profile.saveChangePassword');
     Route::get('/thiet-lap-cai-dat-khac', 'ProfileController@setting')->name('profile.setting');
+    Route::get('/thong-tin-tai-khoan-ngan-hang', 'ProfileController@infoBank')->name('profile.infoBank');
+    Route::post('/luu-thong-tin-tai-khoan-ngan-hang', 'ProfileController@saveInfoBank')->name('profile.saveInfoBank');
+
+    Route::get('/thong-ke-hoa-hong-theo-san-pham-dai-ly', 'UserController@refAffiliate')->name('affiliate.refAffiliate');
+    Route::get('/trang-tong-quan-tai-khoan-affiliate', 'UserController@dashboardRef')->name('affiliate.dashboardRef');
+
     Route::group(['middleware' => ['permission.shop']], function () {
 
         Route::get('/danh-sach-san-pham', 'ProductController@index')->name('product');
@@ -81,10 +87,6 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
     Route::group(['middleware' => ['permission.dashboard']], function () {
     });
     Route::group(['middleware' => ['permission.affiliate']], function () {
-        Route::get('/thong-ke-hoa-hong-theo-san-pham-dai-ly', 'AffiliateController@refAffiliate')->name('affiliate.refAffiliate');
-        Route::get('/trang-tong-quan-tai-khoan-affiliate', 'AffiliateController@dashboardRef')->name('affiliate.dashboardRef');
-        Route::get('/thong-tin-tai-khoan-ngan-hang-affiliate', 'AffiliateController@infoBank')->name('affiliate.infoBank');
-        Route::post('/luu-thong-tin-tai-khoan-ngan-hang-affiliate', 'AffiliateController@saveInfoBank')->name('affiliate.saveInfoBank');
     });
     Route::group(['middleware' => ['permission.editProduct']], function () {
         Route::get('/sua-san-pham/{id}', 'ProductController@form')->name('product.edit');
@@ -92,7 +94,7 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
         Route::get('/cap-nhat-trang-thai-don-hang-{value}/{id}', 'OrderController@changeStatusOrder')->name('order.changeStatusOrder');
         Route::post('/luu-don-hang', 'OrderController@save')->name('order.save');
     });
-    Route::get('/nguoi-dung-da-nhap-ma-affiliate', 'AffiliateController@userImportCodeAffiliate')->name('affiliate.userImportCodeAffiliate');
+    Route::get('/nguoi-dung-da-nhap-ma-affiliate', 'UserController@userImportCodeAffiliate')->name('affiliate.userImportCodeAffiliate');
     Route::get('/danh-sach-don-hang', 'OrderController@index')->name('order');
     Route::get('/chi-tiet-don-hang/{id}', 'OrderController@detail')->name('order.detail');
 
