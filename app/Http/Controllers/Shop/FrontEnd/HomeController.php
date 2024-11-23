@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Shop\FrontEnd;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use App\Model\Shop\ProductModel;
 use App\Model\Shop\UsersModel;
@@ -24,14 +25,43 @@ class HomeController extends ShopFrontEndController
     public function index(Request $request)
     {
         $numTake=10;
-        $product_selling = (new ProductModel())->listItems(null, ['task' => 'frontend-list-items'])->take($numTake);
-        $product_covid=(new ProductModel())->listItems(['type'=>'hau_covid'], ['task' => 'frontend-list-items'])->take(10);
-        $productInObject=(new ProductModel())->listItems(['type'=>'tre_em'], ['task' => 'frontend-list-items'])->take(10);
-        $countproductInObject=(new ProductModel())->countItems(['type'=>'tre_em'], ['task' => 'count-items-product-frontend']);
-        $countproductInObject=$countproductInObject[0]['count']-10;
-        $itemsProduct['new'] = (new ProductModel())->listItems(['type'=>'new'], ['task' => 'frontend-list-items'])->take(10);
-        $itemsProduct['best'] = (new ProductModel())->listItems(['type'=>'noi_bat'], ['task' => 'frontend-list-items'])->take(10);
-        $couterSumProduct=(new ProductModel())->countItems(null, ['task' => 'count-items-product-frontend']);
+        $keyCache = 'cache_product_data';
+        $dataCache = Cache::get($keyCache);
+
+        if (!empty($dataCache)) {
+            // Lấy dữ liệu từ cache
+            $product_selling = $dataCache['product_selling'];
+            $product_covid = $dataCache['product_covid'];
+            $productInObject = $dataCache['productInObject'];
+            $countproductInObject = $dataCache['countproductInObject'];
+            $itemsProduct = $dataCache['itemsProduct'];
+            $couterSumProduct = $dataCache['couterSumProduct'];
+            $itemsArticle = $dataCache['itemsArticle'];
+        } else {
+            // Tạo dữ liệu nếu cache trống
+            $product_selling = (new ProductModel())->listItems(null, ['task' => 'frontend-list-items'])->take($numTake);
+            $product_covid = (new ProductModel())->listItems(['type' => 'hau_covid'], ['task' => 'frontend-list-items'])->take(10);
+            $productInObject = (new ProductModel())->listItems(['type' => 'tre_em'], ['task' => 'frontend-list-items'])->take(10);
+            $countproductInObject = (new ProductModel())->countItems(['type' => 'tre_em'], ['task' => 'count-items-product-frontend']);
+            $countproductInObject = $countproductInObject[0]['count'] - 10;
+            $itemsProduct['new'] = (new ProductModel())->listItems(['type' => 'new'], ['task' => 'frontend-list-items'])->take(10);
+            $itemsProduct['best'] = (new ProductModel())->listItems(['type' => 'noi_bat'], ['task' => 'frontend-list-items'])->take(10);
+            $couterSumProduct = (new ProductModel())->countItems(null, ['task' => 'count-items-product-frontend']);
+            $itemsArticle = (new PostModel)->listItems(['take'=>5], ['task' => 'frontend-list-items']);
+
+            // Lưu tất cả dữ liệu vào cache
+            $cacheData = [
+                'product_selling' => $product_selling,
+                'product_covid' => $product_covid,
+                'productInObject' => $productInObject,
+                'countproductInObject' => $countproductInObject,
+                'itemsProduct' => $itemsProduct,
+                'couterSumProduct' => $couterSumProduct,
+                'itemsArticle' => $itemsArticle,
+            ];
+
+            Cache::put($keyCache, $cacheData, 100000000);
+        }
         $couterSumProduct=$couterSumProduct[0]['count']-$numTake;
         // if ($request->has('codeRef')) {
         //     $request->session()->put('codeRef', $request->query('codeRef'));
@@ -42,7 +72,6 @@ class HomeController extends ShopFrontEndController
         //      }
         // }
         //$itemsQuangCao = QuangCaoModel::where('status', 'active')->get();
-        $itemsArticle = (new PostModel)->listItems(['take'=>5], ['task' => 'frontend-list-items']);
         return view(
             $this->pathViewController . 'index',
             compact('product_selling','product_covid','productInObject','itemsProduct','couterSumProduct','countproductInObject','itemsArticle')
