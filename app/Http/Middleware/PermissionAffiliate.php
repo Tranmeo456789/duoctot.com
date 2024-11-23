@@ -17,7 +17,7 @@ class PermissionAffiliate
     {
         if($request->session()->has('user'))  {
             $userInfo = $request->session()->get('user');
-            if ($userInfo['is_affiliate'] == 1){
+            if ($userInfo['is_add_product'] == 1){
                 return $next($request);
             }  
             return redirect()->route('profile.info');

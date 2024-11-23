@@ -121,11 +121,15 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
         Route::get('/danh-sach-thuoc-admin', 'ProductController@listProductAdmin')->name('admin.product.list');
         Route::get('/thay-doi-trang-thai-thuoc-admin/{id}/{status}', 'ProductController@changeProductInAdmin')->name('admin.product.change.status');
         Route::post('/upload-image', 'PostController@upload');
+
+        
     });
     Route::group(['middleware' => ['permission.admin']], function () {
         Route::get('/danh-sach-nguoi-dung', 'UserController@index')->name('user');
         Route::get('/sua-nguoi-dung/{id}', 'UserController@form')->name('user.edit');
         Route::post('/luu-nguoi-dung', 'UserController@save')->name('user.save');
+        Route::get('/them-san-pham-cho-shop-hien-thi/{userId}', 'UserController@formAddProductShop')->name('user.formAddProductShop');
+        Route::post('/luu-san-pham-them-cho-shop-hien-thi', 'UserController@saveAddProductShop')->name('user.saveAddProductShop');
         
         Route::get('/quan-ly-editor', 'EditorController@index')->name('editor');
         Route::get('/them-editor', 'EditorController@form')->name('editor.add');

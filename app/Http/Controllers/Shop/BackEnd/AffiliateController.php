@@ -111,7 +111,7 @@ class AffiliateController extends BackEndController
                 if (!empty($commonProductIds)) {
                     AffiliateProductModel::whereIn('product_id', $commonProductIds)->where('code_ref', $codeRef)->update(['active' => 1,'user_id' => $item['user_id']]);
                 }
-                (new UsersModel())->saveItem(['user_id'=>$item['user_id'],'is_affiliate'=> 1], ['task' => 'update-item-simple']);
+                (new UsersModel())->saveItem(['user_id'=>$item['user_id'],'is_add_product'=> 1], ['task' => 'update-item-simple']);
             } else {
                 $existingAffiliate = $this->model->getItem(['user_id' => $params['user_id']], ['task' => 'get-item']);
                 if ($existingAffiliate) {
@@ -124,7 +124,7 @@ class AffiliateController extends BackEndController
                         'redirect_url' => route($this->controllerName)
                     ], 200);
                 } else {
-                    (new UsersModel())->saveItem(['user_id'=>$params['user_id'],'is_affiliate'=> 1], ['task' => 'update-item-simple']);
+                    (new UsersModel())->saveItem(['user_id'=>$params['user_id'],'is_add_product'=> 1], ['task' => 'update-item-simple']);
                     $userAffiliate=UsersModel::where('user_id',$params['user_id'])->first();
                     $params['code_ref'] = $userAffiliate['codeRef'];                  
                     $codeRef=$this->model->saveItem($params, ['task' => $task]); 

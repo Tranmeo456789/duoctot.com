@@ -40,12 +40,6 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('affiliate.userImportCodeAffiliate') }}" class="nav-link">
-                            <i class="far fa-list-alt nav-icon"></i>
-                            <p>User nhập mã affiliate</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a href="{{ route('profile.infoBank') }}" class="nav-link">
                             <i class="fas fa-money-check-alt nav-icon"></i>
                             <p>TK ngân hàng</p>
@@ -53,7 +47,7 @@
                     </li>
                 </ul>
             </li>
-            @if (Session::has('user')) 
+            @if (Session::has('user') && Session::get('user')['is_admin'] != 1)
                 <li class="nav-item">
                     <a href="" class="nav-link">
                         <i class="nav-icon fas fa-external-link-square-alt"></i>
@@ -67,12 +61,17 @@
                             </a>
                         </li> -->
                         <li class="nav-item">
+                            <a href="{{ route('affiliate.userImportCodeAffiliate') }}" class="nav-link">
+                                <i class="far fa-list-alt nav-icon"></i>
+                                <p>User nhập mã affiliate</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('affiliate.refAffiliate') }}" class="nav-link">
                                 <i class="far fa-list-alt nav-icon"></i>
                                 <p>Danh sách SP affiliate</p>
                             </a>
                         </li>
-                        
                     </ul>
                 </li>
             @endif

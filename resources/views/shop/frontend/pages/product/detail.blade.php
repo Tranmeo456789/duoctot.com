@@ -100,11 +100,7 @@ use Illuminate\Support\Str;
                     <div class="wp-link-affiliate position-relative">
                         <div id="copy-notification" style="display:none;position:absolute;background-color:#28a745;color:white;padding:3px;border-radius:5px;z-index:1000;font-size:14px;">Đã copy!</div>
                         @if(Session::has('user'))
-                            @if(Session::get('user')['is_affiliate'] == 1)
-                                 <div class="value-link d-none">{{route('fe.product.detail',['slug'=> $item['slug'], 'codeRef'=>$codeRefLogin])}}</div>
-                            @else
-                                <div class="value-link d-none">{{route('fe.product.detail',$item['slug'])}}</div>
-                            @endif
+                            <div class="value-link d-none">{{route('fe.product.detail',['slug'=> $item['slug'], 'codeRef'=>$codeRefLogin])}}</div>
                         @else
                             <div class="value-link d-none">{{route('fe.product.detail',$item['slug'])}}</div>
                         @endif

@@ -12,6 +12,7 @@ use App\Model\Shop\WardModel;
 use App\Model\Shop\AffiliateModel;
 use App\Helpers\MyFunction;
 use App\Model\Shop\ProductModel;
+use App\Model\Shop\ShopProductAddModel;
 use DB;
 use Hash;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
@@ -228,5 +229,58 @@ class UserController extends BackEndController
             'userInfo'=> $userInfo
         ]);
     }
-    
+    public function formAddProductShop(Request $request)
+    {
+        $item = null;
+        $infoProduct=[];
+        $userInfo=[];
+        // if ($request->id !== null) {
+        //     $params["id"] = $request->id;
+        //     $item = $this->model->getItem($params, ['task' => 'get-item']);
+        //     $infoProduct= collect($item->listIdProduct)->pluck('product_id')->toArray();
+        //     $userInfo=$this->model->getItem(['user_id'=>$item['user_id']],['task'=>'get-item']);
+        // }
+        if ($request->userId !== null) {
+            $userInfo=$this->model->getItem(['user_id'=>$request->userId],['task'=>'get-item']);
+            if($userInfo['is_add_product'] == 1){
+                $infoProduct= collect($userInfo->listIdProduct)->pluck('product_id')->toArray();
+            }
+           // return $infoProduct;
+            $itemsProduct = (new ProductModel())->listItems(['status_product'=>'da_duyet'], ['task' => 'admin-list-items-in-selectbox']);
+            return view(
+                $this->pathViewController .  'form_add_product_shop',
+                compact('item', 'itemsProduct','infoProduct','userInfo')
+            );
+        }  
+    }
+    public function saveAddProductShop(MainRequest $request)
+    {
+        if (!$request->ajax()) return view("errors." .  'notfound', []);
+        if (isset($request->validator) && $request->validator->fails()) {
+            return response()->json([
+                'fail' => true,
+                'errors' => $request->validator->errors()
+            ]);
+        }
+        if ($request->method() == 'POST') {
+            $params = $request->all();
+            $task   = "add-item";
+            $notify = "Thêm mới $this->pageTitle thành công!";
+            foreach ($params['info_product'] as $value) {
+                $paramsProduct['product_id']=$value;
+                $paramsProduct['user_id']=$params['user_id'];
+                (new ShopProductAddModel)->saveItem($paramsProduct, ['task' => 'add-item']);
+            }
+            $this->model->saveItem(['user_id'=>$params['user_id'],'is_add_product'=> 1], ['task' => 'update-item-simple']);
+            $request->session()->put('app_notify', $notify);
+            return response()->json([
+                'status' => 200,
+                'success' => true,
+                'data' =>  null,
+                'errors' => null,
+                'message' => $notify,
+                'redirect_url' => route($this->controllerName)
+            ], 200);
+        }
+    }
 }

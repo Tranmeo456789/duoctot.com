@@ -36,12 +36,7 @@ class ProductController extends ShopFrontEndController
         if ($session->has('user')) {
             $userInfoCurrent = $request->session()->get('user');
             $userInfoCurrent = (new UsersModel)->getItem(['user_id' => $userInfoCurrent['user_id']], ['task' => 'get-item']);
-            $itemAffiliate = (new AffiliateModel)->getItem(['user_id' => $userInfoCurrent['user_id']], ['task' => 'get-item']);
-            if ($itemAffiliate && isset($itemAffiliate['code_ref'])) {
-                $codeRefLogin = $itemAffiliate['code_ref'];
-            } else {
-                $codeRefLogin = '';
-            }
+            $codeRefLogin = $userInfoCurrent['codeRef'];
             $codeRefRegister=$userInfoCurrent['ref_register']??'';
         } else {
             $codeRefLogin = '';
@@ -55,12 +50,6 @@ class ProductController extends ShopFrontEndController
             return redirect()->route('home');
         }
         $userInfo = (new UsersModel)->getItem(['user_id' => $item['user_id']],['task'=>'get-item']);
-        $affiliateProduct = AffiliateProductModel::where('code_ref', $codeRef)
-            ->where('product_id', $item['id'])
-            ->first();
-        if ($affiliateProduct) {
-            $affiliateProduct->increment('sum_click');
-        }
         $albumImageCurrent=!empty($item['albumImageHash']) ? explode('|', $item['albumImageHash']) : [];
         $productViewed  = (isset($_COOKIE["productViewed"]))?json_decode($_COOKIE["productViewed"],true):[];
         $productCurrent = [];
@@ -78,7 +67,6 @@ class ProductController extends ShopFrontEndController
             ];
 
         }
-
         $productViewed = $productCurrent + $productViewed;
         $params['id']=$item['id'];
         if (count($productViewed) > 8){
@@ -149,17 +137,13 @@ class ProductController extends ShopFrontEndController
         if ($request->has('codeRef')) {
             $request->session()->put('codeRef', $request->query('codeRef'));
             $codeRef = $request->codeRef ?? ($request->session()->get('codeRef') ?? '');
-            $affiliate = AffiliateModel::where('code_ref', $codeRef)->first();
-            if ($affiliate) {
-                $affiliate->increment('sum_click');
-             }
         }
-        $item = (new AffiliateModel)->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
-        if ($item) {
-            $listIdProductAdd = [];
-            $params['group_id'] = array_merge(collect($item->listIdProduct)->pluck('product_id')->toArray(), $listIdProductAdd);
-            $productDrugstore = $this->model->listItems(['group_id' => $params['group_id'],'user_id' => $shopId], ['task' => 'frontend-list-item-shop'])??[];
-        } 
+        //$item = (new AffiliateModel)->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
+        // if ($item) {
+        //     $listIdProductAdd = [];
+        //     $params['group_id'] = array_merge(collect($item->listIdProduct)->pluck('product_id')->toArray(), $listIdProductAdd);
+        //     $productDrugstore = $this->model->listItems(['group_id' => $params['group_id'],'user_id' => $shopId], ['task' => 'frontend-list-item-shop'])??[];
+        // } 
         $address='';
         $map='';
         $ward='';

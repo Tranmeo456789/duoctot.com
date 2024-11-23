@@ -244,7 +244,7 @@ class UsersModel extends BackEndModel
             ])->get();
         }
         if($options['task'] == "admin-list-items-of-shop") {
-            $query = $this::select('user_id','email','fullname','phone','user_type_id','gender','is_admin','created_at','is_affiliate')
+            $query = $this::select('user_id','email','fullname','phone','user_type_id','gender','is_admin','created_at','is_add_product')
             ->where(function ($query) {
                 $query->where('domain_register', 'shop.tdoctor.vn')
                       ->orWhere('domain_register', 'tdoctor.net')
@@ -272,7 +272,7 @@ class UsersModel extends BackEndModel
             }
         }
         if($options['task'] == "list-items-import-code-ref") {
-            $query = $this::select('user_id','email','fullname','phone','user_type_id','gender','is_admin','created_at','is_affiliate','ref_register');
+            $query = $this::select('user_id','email','fullname','phone','user_type_id','gender','is_admin','created_at','is_add_product','ref_register');
             if (isset($params['ref_register'])){
                 $query =  $query->where('ref_register',$params['ref_register']);
             }
@@ -295,7 +295,7 @@ class UsersModel extends BackEndModel
             }
         }
         if($options['task'] == "list-item-user-type-id-up3-of-shop") {
-            $query = $this::select('user_id','email','fullname','phone','user_type_id','gender','is_affiliate')
+            $query = $this::select('user_id','email','fullname','phone','user_type_id','gender','is_add_product')
             ->where(function ($query) {
                 $query->where('domain_register', 'shop.tdoctor.vn')
                       ->orWhere('domain_register', 'tdoctor.net');
@@ -368,5 +368,8 @@ class UsersModel extends BackEndModel
         $patient->profile_image = $this->avatar;;
         $patient->email = $this->email;
         return $patient;
+    }
+    public function listIdProduct(){
+        return $this->hasMany('App\Model\Shop\ShopProductAddModel','user_id','user_id');
     }
 }

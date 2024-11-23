@@ -41,14 +41,7 @@ class DashboardController extends BackEndController
                 return view('shop.frontend.pages.error.page_404'); 
             }
         }
-        if($session->get('user.is_affiliate') == 1){
-            $userAffiliate = (new AffiliateModel)->getItem(['user_id' => $session->get('user.user_id')], ['task' => 'get-item']);
-            $params['code_ref'] = $userAffiliate['code_ref'];
-            $params['user_type_id'] = $session->get('user.user_type_id');
-            $order_day=(new OrderModel)->listItems($params, ['task' => 'user-list-items-in-day']);
-        }else{
-            $order_day=(new OrderModel)->listItems($params, ['task' => 'user-list-items-in-day']);
-        }
+        $order_day=(new OrderModel)->listItems($params, ['task' => 'user-list-items-in-day']);
         if(!empty($order_day)){
             $sum_money_day = $order_day->sum('total');
         }     
@@ -58,14 +51,7 @@ class DashboardController extends BackEndController
         $sum_quantity=100;
         $sum_money=100000000;
         $session = $request->session();
-        if($session->get('user.is_affiliate') == 1){
-            $userAffiliate = (new AffiliateModel)->getItem(['user_id' => $session->get('user.user_id')], ['task' => 'get-item']);
-            $this->params['code_ref'] = $userAffiliate['code_ref'];
-            $this->params['user_type_id'] = $session->get('user.user_type_id');
-            $itemOrder = (new OrderModel())->listItems($this->params, ['task'  => 'user-list-items-affiliate']);
-        }else{
-            $itemOrder=(new OrderModel())->listItems(null, ['task' => 'user-list-items']);
-        }
+        $itemOrder=(new OrderModel())->listItems(null, ['task' => 'user-list-items']);
          if(!empty($itemOrder)){
              $total_revenue=$itemOrder->sum('total');
          }
