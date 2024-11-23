@@ -58,30 +58,3 @@ use App\Helpers\MyFunction;
     </li>
   </ul>
 </div>
-<div class="modal" id="replyModal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="replyModalLabel">Trả lời</h5>
-        <button type="button" class="close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="content-quest">
-          <textarea name="content" placeholder="Nhập nội dung câu hỏi"></textarea>
-          @if(Session::has('user'))
-          <span class="btn btn-primary submit-comment" data-user="{{Session::get('user')['user_id']}}" data-url="{{route('fe.product.addCommentProduct')}}" data-shop="{{$userInfo['user_id']??$shopId}}" data-parentid="">Gửi bình luận</span>
-          @else
-          <span class="btn btn-primary no-login">Gửi bình luận</span>
-          @endif
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<style>
-  .modal {
-    background-color: rgba(0, 0, 0, 0.5); 
-  }
-</style>

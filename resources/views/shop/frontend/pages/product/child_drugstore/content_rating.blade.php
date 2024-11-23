@@ -33,12 +33,7 @@ $ratingPercentages=(new CommentModel)->ratingPercentages(['shop_id'=>$userInfo['
         </div>
         <div class="average-rating-right text-center d-flex align-self-center">
             <div class="">
-                <p>Bạn đã dùng sản phẩm này</p>
-                @if(Session::has('user'))
                 <span class="btn btn-primary show-form-rating">Gửi đánh giá</span>
-                @else
-                <span class="btn btn-primary no-login">Gửi đánh giá</span>
-                @endif
             </div>
         </div>
     </div>

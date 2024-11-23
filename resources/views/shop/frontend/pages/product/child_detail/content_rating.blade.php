@@ -3,9 +3,7 @@ use App\Model\Shop\CommentModel;
 $averageRating=(new CommentModel)->averageRating(['product_id'=>$item['id']],['task' => 'rating-star-average'])??'';
 $ratingPercentages=(new CommentModel)->ratingPercentages(['product_id'=>$item['id']],['task' => 'rating-percentage-star'])??[];
 @endphp
-<div class="title-rating">Đánh Giá & Nhận Xét
-    <!-- <span class="coutn-dn">3</span> -->
-</div>
+<div class="title-rating">Đánh Giá & Nhận Xét</div>
 <div class="average-rating">
     <div class="d-flex justify-content-between flex-wrap">
         <div class="average-rating-left text-center">
@@ -18,7 +16,6 @@ $ratingPercentages=(new CommentModel)->ratingPercentages(['product_id'=>$item['i
                 <span class="star" data-rating="4">★</span>
                 <span class="star" data-rating="5">★</span>
             </div>
-            <!-- <span class="text-muted">3 đánh giá</span> -->
         </div>
         <div class="col-md-6 col-12">
             @for ($i = 5; $i >= 1; $i--)
@@ -34,29 +31,15 @@ $ratingPercentages=(new CommentModel)->ratingPercentages(['product_id'=>$item['i
         <div class="average-rating-right text-center d-flex align-self-center">
             <div class="">
                 <p>Bạn đã dùng sản phẩm này</p>
-                @if(Session::has('user'))
                 <span class="btn btn-primary show-form-rating">Gửi đánh giá</span>
-                @else
-                <span class="btn btn-primary no-login">Gửi đánh giá</span>
-                @endif
             </div>
         </div>
     </div>
 </div>
 <ul class="list-comment position-relative">
-    <!-- <div class="btnselecthc">
-        <div class="dropdown">
-            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mới nhất</button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Cũ nhất</a>
-                <a class="dropdown-item" href="#">Hữu ích nhất</a>
-            </div>
-        </div>
-    </div> -->
     @if(count($ratingProduct)>0)
     @foreach($ratingProduct as $val)
     @include("$moduleName.partial.comment_rating",['$ratingProduct'=>$val])
     @endforeach
     @endif
 </ul>
-<!-- <p class="text-center"><a href="" class="add-comment">Xem thêm bình luận <i class="fas fa-angle-down"></i></a></p> -->

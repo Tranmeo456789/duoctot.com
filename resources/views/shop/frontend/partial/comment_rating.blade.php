@@ -2,8 +2,8 @@
 use App\Helpers\MyFunction;
 
 $timeComment = MyFunction::formatDateFrontend($val['created_at']);
-$fullname = $val->userComment->fullname ?? '';
-$content = $val['content'];
+$fullname = $val['fullname'] ?? '';
+$content = $val['content'] ?? '';
 $words = explode(' ', $fullname);
 $lastWord = end($words);
 if ($lastWord) {

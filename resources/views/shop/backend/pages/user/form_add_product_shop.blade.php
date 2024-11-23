@@ -29,12 +29,11 @@
             'type'    => "btn-submit-center"
         ]
     ];
-    $title = (!isset($item['id']) || $item['id'] == '')  ?'Thêm mới':'Sửa thông tin';
+    $title = 'Thêm sản phẩm hiển thị trong Shop';
 @endphp
 @extends('shop.layouts.backend')
 @section('title',$pageTitle)
 @section('content')
-@include ("$moduleName.blocks.page_header", ['pageIndex' => false])
 <section class="content">
     <div class="container-fluid">
         <div class="row">

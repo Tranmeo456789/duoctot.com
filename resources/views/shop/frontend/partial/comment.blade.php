@@ -2,7 +2,7 @@
 use App\Helpers\MyFunction;
 
 $timeComment = MyFunction::formatDateFrontend($val['created_at']);
-$fullname = $val->userComment->fullname ?? '';
+$fullname = $val['fullname'] ?? '';
 $content = $val['content'];
 $words = explode(' ', $fullname);
 $lastWord = end($words);

@@ -12,7 +12,6 @@ class CommentModel extends BackEndModel
         $this->folderUpload        = '' ;
         $this->crudNotAccepted     = ['_token','btn_save'];
     }
-
     public function listItems($params = null, $options = null) {
         $result = null;
         if($options['task'] == "user-list-items") {
@@ -21,7 +20,7 @@ class CommentModel extends BackEndModel
                             ->paginate($params['pagination']['totalItemsPerPage']);
         }
         if($options['task'] == "list-items-frontend") {
-            $query = $this::select('id','user_id','product_id','shop_id','parent_id','content','rating','created_by', 'created_at', 'updated_at');
+            $query = $this::select('id','user_id','product_id','shop_id','fullname','phone','email','parent_id','content','rating','created_by', 'created_at', 'updated_at');
             if (isset($params['product_id'])) {
                 $query->where('product_id', $params['product_id']);
             }
@@ -50,12 +49,10 @@ class CommentModel extends BackEndModel
         return $result;
     }
     public function saveItem($params = null, $options = null) {
-
         if($options['task'] == 'add-item') {
             $this->setCreatedHistory($params);
             self::insert($this->prepareParams($params));
         }
-
         if($options['task'] == 'edit-item') {
             $this->setModifiedHistory($params);
             self::where('id', $params['id'])->update($this->prepareParams($params));
@@ -100,8 +97,7 @@ class CommentModel extends BackEndModel
                                  ->groupBy('rating')
                                  ->selectRaw('rating, COUNT(*) as count')
                                  ->pluck('count', 'rating')
-                                 ->toArray();
-        
+                                 ->toArray();       
             $totalRatings = array_sum($ratingsCount);
             $percentages = [];
             for ($i = 1; $i <= 5; $i++) {
@@ -111,7 +107,6 @@ class CommentModel extends BackEndModel
             }
             $result = $percentages;
         }
-        
         return $result;
     }
     public function userComment(){
@@ -121,7 +116,6 @@ class CommentModel extends BackEndModel
     {
         return $this->hasMany('App\Model\Shop\CommentModel', 'parent_id', 'id')->orderBy('created_at', 'desc');
     }
-
     public function getAllReplies($parentId)
     {
         return $this->replies()->where('parent_id', $parentId)->get();
@@ -134,11 +128,9 @@ class CommentModel extends BackEndModel
         $commentsTree = self::buildTree($comments);
         return $commentsTree;
     }
-
     protected static function buildTree($comments, $parentId = 0, $level = 0)
     {
         $tree = [];
-
         foreach ($comments as $comment) {
             if ($comment->parent_id == $parentId) {
                 $comment->level = $level;
@@ -146,8 +138,6 @@ class CommentModel extends BackEndModel
                 $tree = array_merge($tree, self::buildTree($comments, $comment->id, $level + 1));
             }
         }
-
         return $tree;
     }
-
 }

@@ -184,6 +184,8 @@ class ProductController extends ShopFrontEndController
         $params['product_id']=$request->productId;
         $params['shop_id']=$request->shopId;
         $params['content']=$request->content;
+        $params['fullname']=$request->fullname;
+        $params['phone']=$request->phone;
         $params['parent_id']=$request->parentid;
         $params['rating']=$request->rating??null;
         (new CommentModel)->saveItem($params,['task' => 'add-item']);

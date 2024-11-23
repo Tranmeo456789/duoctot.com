@@ -2061,6 +2061,8 @@ $(document).on('click', '.no-login', function(event) {
 });
 $(document).on('click', '.submit-comment', function(event) {
     var content = $(this).closest('.content-quest').find('textarea[name="content"]').val();
+    var fullname = $(this).closest('.content-quest').find('input[name="fullname"]').val();
+    var phone = $(this).closest('.content-quest').find('input[name="phone"]').val();
     var rating = $(this).attr("data-rating") !== undefined ? $(this).attr("data-rating") : null;
     var trimmedContent = content.trim();
     if (!rating) {
@@ -2087,6 +2089,8 @@ $(document).on('click', '.submit-comment', function(event) {
             productId: productId,
             shopId: shopId,
             content: content,
+            fullname: fullname,
+            phone: phone,
             parentid: parentid,
             rating: rating
         },
@@ -2171,15 +2175,18 @@ $(document).ready(function() {
     });
     $('.show-form-rating').on('click', function() {
         $('#ratingModal').fadeIn(200);
+        $('.black-screen').css('display', 'block');
     });
     $('.close').on('click', function() {
         $('#modalFilter').fadeOut(200);
         $('#replyModal').fadeOut(200);
         $('#ratingModal').fadeOut(200);
+        $('.black-screen').css('display', 'none');
     });
     $('.submit-comment').on('click', function() {
         $('#replyModal').fadeOut(200);
         $('#ratingModal').fadeOut(200);
+        $('.black-screen').css('display', 'none');
     });
     $('.btnFilterProductInCat').on('click', function() {
         $('#modalFilter').fadeOut(200);
