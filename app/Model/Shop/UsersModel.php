@@ -244,7 +244,7 @@ class UsersModel extends BackEndModel
             ])->get();
         }
         if($options['task'] == "admin-list-items-of-shop") {
-            $query = $this::select('user_id','email','fullname','phone','user_type_id','gender','is_admin','created_at','is_add_product')
+            $query = $this::select('user_id','email','fullname','phone','user_type_id','gender','is_admin','created_at','is_add_product','codeRef')
             ->where(function ($query) {
                 $query->where('domain_register', 'shop.tdoctor.vn')
                       ->orWhere('domain_register', 'tdoctor.net')

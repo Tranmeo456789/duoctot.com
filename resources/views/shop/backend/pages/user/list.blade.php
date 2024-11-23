@@ -10,7 +10,7 @@
         <thead>
             <tr class="row-heading">
                 <th>#</th>
-                <th>Họ tên</th>
+                <th>Họ tên, Mã affiliate</th>
                 <th>Email, Số điện thoại</th>
                 <th>Thuộc đối tượng</th>
                 <th>Thao tác</th>
@@ -28,7 +28,10 @@
                     @endphp
                     <tr>
                         <th scope="row" style="width: 5%">{{$temp}}</th>
-                        <td style="width: 25%">{!! $fullname !!}</td>
+                        <td style="width: 25%">
+                            {!! $fullname !!}
+                            <p>Mã affiliate: {{$val['codeRef']}}</p>
+                        </td>
                         <td style="width: 30%">
                             <div>{!! $email !!}</div>
                             <div class="font-weight-bold">{!! $phone !!}</div>
@@ -36,8 +39,10 @@
                         <td style="width: 20%">{{$userType}}</td>
                         <td style="width: 25%">
                             <a href="{{route("$controllerName.edit",$val->user_id)}}" class="btn btn-success btn-sm rounded-0 text-white p-2 mr-2" type="button" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit"></i></a>
-                            @if($val['user_type_id'] > 1 )
+                            @if($val['user_type_id'] > 1)
                                 <a href="{{route("user.formAddProductShop",$val->user_id)}}" class="btn btn-primary btn-sm rounded-0 text-white p-2" type="button" data-toggle="tooltip" data-placement="top" title="Thêm thuốc hiển thị trong Shop">Thêm thuốc</a>
+                            @elseif($val['user_type_id'] > 1 && $val['is_add_product']==1)
+                                <a href="{{route("user.formAddProductShop",$val->user_id)}}" class="btn btn-primary btn-sm rounded-0 text-white p-2" type="button" data-toggle="tooltip" data-placement="top" title="Cập nhật hiển thị trong Shop">Cập nhật thuốc</a>
                             @endif
                         </td>
                 </tr>

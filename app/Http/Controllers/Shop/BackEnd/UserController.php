@@ -234,18 +234,11 @@ class UserController extends BackEndController
         $item = null;
         $infoProduct=[];
         $userInfo=[];
-        // if ($request->id !== null) {
-        //     $params["id"] = $request->id;
-        //     $item = $this->model->getItem($params, ['task' => 'get-item']);
-        //     $infoProduct= collect($item->listIdProduct)->pluck('product_id')->toArray();
-        //     $userInfo=$this->model->getItem(['user_id'=>$item['user_id']],['task'=>'get-item']);
-        // }
         if ($request->userId !== null) {
             $userInfo=$this->model->getItem(['user_id'=>$request->userId],['task'=>'get-item']);
             if($userInfo['is_add_product'] == 1){
                 $infoProduct= collect($userInfo->listIdProduct)->pluck('product_id')->toArray();
             }
-           // return $infoProduct;
             $itemsProduct = (new ProductModel())->listItems(['status_product'=>'da_duyet'], ['task' => 'admin-list-items-in-selectbox']);
             return view(
                 $this->pathViewController .  'form_add_product_shop',
@@ -265,13 +258,24 @@ class UserController extends BackEndController
         if ($request->method() == 'POST') {
             $params = $request->all();
             $task   = "add-item";
-            $notify = "Thêm mới $this->pageTitle thành công!";
-            foreach ($params['info_product'] as $value) {
-                $paramsProduct['product_id']=$value;
-                $paramsProduct['user_id']=$params['user_id'];
-                (new ShopProductAddModel)->saveItem($paramsProduct, ['task' => 'add-item']);
-            }
-            $this->model->saveItem(['user_id'=>$params['user_id'],'is_add_product'=> 1], ['task' => 'update-item-simple']);
+            $notify = "Thêm mới sản phẩm cho Shop thành công!";
+            $userInfo=$this->model->getItem(['user_id'=>$params['user_id']],['task'=>'get-item']);
+            if($userInfo['is_add_product'] == 1){
+                $notify = "Cập nhật sản phẩm cho Shop thành công!";
+                ShopProductAddModel::where('user_id', $params['user_id'])->delete();
+                foreach ($params['info_product'] as $value) {
+                    $paramsProduct['product_id']=$value;
+                    $paramsProduct['user_id']=$params['user_id'];
+                    (new ShopProductAddModel)->saveItem($paramsProduct, ['task' => 'add-item']);
+                }
+            }else{
+                foreach ($params['info_product'] as $value) {
+                    $paramsProduct['product_id']=$value;
+                    $paramsProduct['user_id']=$params['user_id'];
+                    (new ShopProductAddModel)->saveItem($paramsProduct, ['task' => 'add-item']);
+                }
+                $this->model->saveItem(['user_id'=>$params['user_id'],'is_add_product'=> 1], ['task' => 'update-item-simple']);
+            } 
             $request->session()->put('app_notify', $notify);
             return response()->json([
                 'status' => 200,

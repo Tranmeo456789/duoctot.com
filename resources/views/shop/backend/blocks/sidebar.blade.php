@@ -278,7 +278,7 @@
                     <p>Quản lý Editor</p>
                 </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a href="" class="nav-link">
                     <i class="nav-icon fas fa-external-link-square-alt"></i>
                     <p>Affiliate<i class="right fas fa-angle-left"></i></p>
@@ -297,7 +297,7 @@
                         </a>
                     </li>
                 </ul>
-            </li>
+            </li> -->
             @endif
             <!-- <li class="nav-item">
                 <a href="{{route('user.logout')}}" class="nav-link">
