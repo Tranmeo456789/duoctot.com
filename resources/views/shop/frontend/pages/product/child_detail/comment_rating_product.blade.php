@@ -18,9 +18,9 @@
         </li>
     </ul>
 </div>
-<!-- <div class="content-comment-product">
+<div class="content-comment-product">
     @include("$moduleName.pages.$controllerName.child_detail.content_comment")
-</div> -->
+</div>
 <div class="question-often content-rating-product mt-3">
     @include("$moduleName.pages.$controllerName.child_detail.content_rating")
 </div>
@@ -60,6 +60,32 @@
             </div>
         </div>
     </div>
+</div>
+<div class="modal" id="commentModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Bình luận sản phẩm</h5>
+        <button type="button" class="close">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="content-quest">
+            <div class="row mb-3">
+                <div class="col-12 mb-3">
+                    <input name="fullname" value="{{ e(Session::get('user')['fullname'] ?? '') }}" placeholder='Họ và tên'>
+                </div>
+                <div class="col-12">
+                    <input name="phone" value="{{ e(Session::get('user')['phone'] ?? '') }}" placeholder='Số điện thoại'>
+                </div>
+            </div>
+          <textarea name="content" placeholder="Nhập nội dung câu hỏi"></textarea>
+          <span class="btn btn-primary submit-comment" data-user="{{Session::get('user')['user_id'] ?? ''}}" data-url="{{route('fe.product.addCommentProduct')}}" data-product="{{$item['id']??$productId}}" data-parentid="0">Gửi bình luận</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="modal" id="replyModal">
   <div class="modal-dialog" role="document">

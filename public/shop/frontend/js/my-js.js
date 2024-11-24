@@ -2181,14 +2181,19 @@ $(document).ready(function() {
         $('#modalFilter').fadeOut(200);
         $('#replyModal').fadeOut(200);
         $('#ratingModal').fadeOut(200);
+        $("#commentModal").fadeOut(200);
         $('.black-screen').css('display', 'none');
     });
     $('.submit-comment').on('click', function() {
         $('#replyModal').fadeOut(200);
         $('#ratingModal').fadeOut(200);
+        $("#commentModal").fadeOut(200);
         $('.black-screen').css('display', 'none');
     });
     $('.btnFilterProductInCat').on('click', function() {
         $('#modalFilter').fadeOut(200);
     });
+});
+$(document).on('click', '.create-comment', function(event){
+    $("#commentModal").fadeIn(200);
 });

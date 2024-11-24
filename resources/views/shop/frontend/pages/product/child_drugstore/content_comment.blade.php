@@ -4,12 +4,7 @@ use App\Helpers\MyFunction;
 <div class="question-often mt-3">
   <div class="title-rating">Bình luận</div>
   <div class="content-quest">
-    <textarea name="content" placeholder="Nhập nội dung câu hỏi"></textarea>
-    @if(Session::has('user'))
-    <span class="btn btn-primary submit-comment" data-user="{{Session::get('user')['user_id']}}" data-url="{{route('fe.product.addCommentProduct')}}" data-shop="{{$userInfo['user_id']??$shopId}}" data-parentid="0">Gửi bình luận</span>
-    @else
-    <span class="btn btn-primary no-login">Gửi bình luận</span>
-    @endif
+    <span class="btn btn-primary create-comment" data-user="{{Session::get('user')['user_id'] ?? ''}}" data-url="{{route('fe.product.addCommentProduct')}}" data-shop="{{$userInfo['user_id']??$shopId}}" data-parentid="0">Gửi bình luận</span>
   </div>
   <ul class="list-comment position-relative">
     <div class="btnselecthc">
@@ -26,7 +21,7 @@ use App\Helpers\MyFunction;
     @include("$moduleName.partial.comment",['$commentShop'=>$val])
     @endforeach
     @endif
-    <li>
+    <!-- <li>
       <div class="pb-3">
         <div class="commentq position-relative">
           <span class="name">Trần Hùng</span>
@@ -55,6 +50,6 @@ use App\Helpers\MyFunction;
           <div class="roud-img text-light rounded-circle text-uppercase">L</div>
         </div>
       </div>
-    </li>
+    </li> -->
   </ul>
 </div>

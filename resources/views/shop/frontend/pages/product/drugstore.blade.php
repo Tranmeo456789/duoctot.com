@@ -40,7 +40,7 @@
         @include("$moduleName.pages.$controllerName.child_drugstore.list_product",['productDrugstore'=>$productDrugstore])
     </div>
     <div class="comment-product">
-        @include("$moduleName.pages.$controllerName.child_drugstore.comment_drugstore")
+        @include("$moduleName.pages.$controllerName.child_drugstore.comment_rating_drugstore")
     </div>
 </div>
 

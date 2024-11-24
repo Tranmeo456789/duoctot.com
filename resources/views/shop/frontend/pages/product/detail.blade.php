@@ -148,7 +148,7 @@ use Illuminate\Support\Str;
             @include("$moduleName.pages.$controllerName.child_detail.product_relate",['items'=>$listProductRelate])
         </div>
         <div class="comment-product">
-            @include("$moduleName.pages.$controllerName.child_detail.comment_product")
+            @include("$moduleName.pages.$controllerName.child_detail.comment_rating_product")
         </div>
     </div>
 </div>

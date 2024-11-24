@@ -6,7 +6,7 @@ use App\Helpers\MyFunction;
     Bình luận
   </div>
   <div class="content-quest">
-    <span class="btn btn-primary submit-comment" data-user="{{Session::get('user')['user_id'] ?? ''}}" data-url="{{route('fe.product.addCommentProduct')}}" data-product="{{$item['id']??$productId}}" data-parentid="0">Gửi bình luận</span>
+    <span class="btn btn-primary create-comment" data-user="{{Session::get('user')['user_id'] ?? ''}}" data-url="{{route('fe.product.addCommentProduct')}}" data-product="{{$item['id']??$productId}}" data-parentid="0">Gửi bình luận</span>
   </div>
   <ul class="list-comment position-relative">
     <div class="btnselecthc">
@@ -23,7 +23,7 @@ use App\Helpers\MyFunction;
     @include("$moduleName.partial.comment",['commentProduct'=>$val])
     @endforeach
     @endif
-    <li>
+    <!-- <li>
       <div class="pb-3">
         <div class="commentq position-relative">
           <span class="name">Trần Hùng</span>
@@ -52,6 +52,6 @@ use App\Helpers\MyFunction;
           <div class="roud-img text-light rounded-circle text-uppercase">L</div>
         </div>
       </div>
-    </li>
+    </li> -->
   </ul>
 </div>
