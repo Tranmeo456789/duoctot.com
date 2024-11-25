@@ -41,7 +41,7 @@
             <p>Số tài khoản: 19040023026018</p>
             <p>Chủ tài khoản: CONG TY CO PHAN TDOCTOR PHARMA</p>
             <p>Nội dung ck: Số điện thoại</p>
-            <p class="mb-2">Liên hệ hotline/Zalo 0349444164 để xác nhận thanh toán và hỗ trợ</p>
+            <p class="mb-2">Liên hệ hotline/Zalo 0345488247 để xác nhận thanh toán và hỗ trợ</p>
             <p class="font-weight-bold">4/ Qui định hoàn trả tiền khi thanh toán trực tuyến</p>
             <p>Trong trường hợp Quý khách hàng đã mua hàng và thanh toán trực tuyến thành công nhưng trả lại sản phẩm, Chúng tôi sẽ hoàn tiền vào thẻ Quý khách dùng để thanh toán: thời gian nhận được tiền hoàn từ 7 - 10 ngày làm việc kể từ khi chúng tôi nhận được đề nghị của khách hàng.</p>
         </div>

@@ -21,5 +21,5 @@ $hotline = ConfigModel::where('name', 'hotline_duoc')->first()->content ?? '';
 @endphp
 <div class="text-center child_buy">
     <div class="text-center btn-buynn mb-3"><a href="{{route('fe.prescrip.index')}}">MUA THUỐC NGAY</a></div>
-    <span>Hoặc mua qua hotline <a href="tel:0349444164" class="font-weight-bold" style="font-size: 30px;">{{$hotline ?? '0393167234' }}</a></span>
+    <span>Hoặc mua qua hotline <a href="tel:0345488247" class="font-weight-bold" style="font-size: 30px;">{{$hotline ?? '0393167234' }}</a></span>
 </div>

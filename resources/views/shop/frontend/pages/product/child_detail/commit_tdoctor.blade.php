@@ -15,7 +15,7 @@
 }
 </style>
 @php
-    $contact=$item['contact']??'0349444164';
+    $contact=$item['contact']??'0345488247';
 @endphp
 <div class="mt-3">
     <span class="contact-buy">Liên hệ Hotline <span class="phone">{{ implode('.', str_split($contact, 4)) }}</span></span>
@@ -93,7 +93,7 @@
     </div>
 </div>
 <div class="mess_free bg-orange">
-    <a href='https://zalo.me/0349444164' target='_blank'>
+    <a href='https://zalo.me/0345488247' target='_blank'>
         <span class="text-light">Nhận tư vấn miễn phí</span>
         <img src="{{asset('images/shop/mess.png')}}" alt="">
     </a>  

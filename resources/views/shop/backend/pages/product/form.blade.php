@@ -173,7 +173,7 @@
             ],
             [
                 'label'   => HTML::decode(Form::label('contact','SĐT liên hệ', $formLabelAttr)),
-                'element' => Form::text('contact', $item['contact']??'0349444164', array_merge($formInputAttr,['placeholder'=>'SĐT liên hệ'])),
+                'element' => Form::text('contact', $item['contact']??'0345488247', array_merge($formInputAttr,['placeholder'=>'SĐT liên hệ'])),
                 'widthElement' => 'col-3'
             ],[
                 'label'   => HTML::decode(Form::label('prescription_drug','Thuốc cần kê toa', $formLabelAttr)),

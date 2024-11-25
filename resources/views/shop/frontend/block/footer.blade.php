@@ -89,7 +89,7 @@
                             <img src="{{asset('images/shop/dc4.png')}}" alt="tdoctor">
                         </div>
                     </div>
-                    <p>Điện thoại: 0393 167 234</p>
+                    <p>Điện thoại: 0345488247 - 0393167234</p>
                 </div>
                 <div class="d-flex mb-3">
                     <div>

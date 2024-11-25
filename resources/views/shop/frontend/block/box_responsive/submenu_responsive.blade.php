@@ -5,7 +5,7 @@ $listCatLevel1=(new CatProductModel())->listItems(['parent_id' => 1],['task'=>'f
 $listCatAll=(new CatProductModel())->listItems(null, ['task' => 'list-items-front-end']);
 $iconZalo=asset('images/shop/zalo-2.png');
 $iconCall=asset('images/shop/icon-call.png');
-$phoneContact=$phoneContact??'0349444164';
+$phoneContact=$phoneContact??'0345488247';
 @endphp
 <h3>
     <div class="container-menures"><a href="{{route('home')}}">Trang chủ</a></div>

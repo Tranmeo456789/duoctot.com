@@ -228,7 +228,7 @@
                                             <p>Số tài khoản: <span class="font-weight-bold">19040023026018</span></p>
                                             <p>Chủ tài khoản: CONG TY CO PHAN TDOCTOR PHARMA</p>
                                             <p>Nội dung ck: <span class="phone-customer font-weight-bold">{{$user->phone??null}}</span></p>
-                                            <p>Liên hệ hotline/Zalo 0349444164 để xác nhận thanh toán và hỗ trợ</p>
+                                            <p>Liên hệ hotline/Zalo 0345488247 để xác nhận thanh toán và hỗ trợ</p>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-3 text-center">

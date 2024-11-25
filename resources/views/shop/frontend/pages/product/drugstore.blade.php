@@ -6,7 +6,7 @@
         $imageSrc  = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/nhathuocmau10.jpg';
     }
     $imageMap = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/mapduphong.jpeg';
-    $phoneContact = $userInfo['phone'] != '' ? $userInfo['phone'] : '0349444164';
+    $phoneContact = $userInfo['phone'] != '' ? $userInfo['phone'] : '0345488247';
     $phoneShop=implode('.', str_split($phoneContact, 4));
 @endphp
 
