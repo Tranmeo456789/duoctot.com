@@ -24,7 +24,7 @@ body{
 .brand-link {
     text-align: center;
     padding: 0.5rem 0.5rem;
-    background-color: #def3d4;
+    background-color: #f9f9f9;
 }
 .content-wrapper > .content {
     padding: 0.5rem;
@@ -40,7 +40,7 @@ body{
     width: 30px;
 }
 .my-sidebar {
-    background-color: #def3d4;
+    background-color: #f9f9f9;
 }
 
 .sidebar .nav-link {

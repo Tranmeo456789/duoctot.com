@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Model\Shop\BackEndModel;
 use App\Model\Shop\WarehouseModel;
 use App\Model\Shop\CatProductModel;
+use Illuminate\Support\Facades\Cache;
 use App\Helpers\HttpClient;
 use Illuminate\Support\Str;
 use DB;
@@ -30,23 +31,18 @@ class ProductModel extends BackEndModel
     {
         if (\Session::has('user')){
             $user = \Session::get('user');
-
             $refer_id = $user->refer_id ;
             $collaborator = CollaboratorsUserModel::where('code',$refer_id)->first();
-
             if ($collaborator)  {
                 $collaborator_code = $collaborator->code;
-
                 $arrUserID = CollaboratorsClinicDoctor::select("user_id")
                                 ->where("collaborators_clinic_doctor.collaborator_code",$collaborator_code)
                                 ->first();
-
                 if (!empty($arrUserID)) {
                     $query->whereIn('user_id',$arrUserID->user_id);
                 }
             }
         }
-
         return $query;
     }
     public function scopeOfUser($query)
@@ -559,8 +555,8 @@ class ProductModel extends BackEndModel
     }
     public function saveItem($params = null, $options = null)
     {
+        Cache::forget('cache_product_data'); 
         if ($options['task'] == 'add-item') {
-
             $this->setCreatedHistory($params);
             $params['tick'] = isset($params['tick'])?json_encode($params['tick'],JSON_NUMERIC_CHECK ): NULL;
             $params['featurer'] = isset($params['featurer'])?json_encode($params['featurer']): NULL;

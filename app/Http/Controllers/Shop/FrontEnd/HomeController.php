@@ -48,7 +48,6 @@ class HomeController extends ShopFrontEndController
             $itemsProduct['best'] = (new ProductModel())->listItems(['type' => 'noi_bat'], ['task' => 'frontend-list-items'])->take(10);
             $couterSumProduct = (new ProductModel())->countItems(null, ['task' => 'count-items-product-frontend']);
             $itemsArticle = (new PostModel)->listItems(['take'=>5], ['task' => 'frontend-list-items']);
-
             // Lưu tất cả dữ liệu vào cache
             $cacheData = [
                 'product_selling' => $product_selling,
@@ -59,19 +58,9 @@ class HomeController extends ShopFrontEndController
                 'couterSumProduct' => $couterSumProduct,
                 'itemsArticle' => $itemsArticle,
             ];
-
             Cache::put($keyCache, $cacheData, 100000000);
         }
         $couterSumProduct=$couterSumProduct[0]['count']-$numTake;
-        // if ($request->has('codeRef')) {
-        //     $request->session()->put('codeRef', $request->query('codeRef'));
-        //     $codeRef = $request->codeRef ?? ($request->session()->get('codeRef') ?? '');
-        //     $affiliate = AffiliateModel::where('code_ref', $codeRef)->first();
-        //     if ($affiliate) {
-        //         $affiliate->increment('sum_click');
-        //      }
-        // }
-        //$itemsQuangCao = QuangCaoModel::where('status', 'active')->get();
         return view(
             $this->pathViewController . 'index',
             compact('product_selling','product_covid','productInObject','itemsProduct','couterSumProduct','countproductInObject','itemsArticle')
