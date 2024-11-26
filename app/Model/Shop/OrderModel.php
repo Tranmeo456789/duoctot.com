@@ -443,9 +443,25 @@ class OrderModel extends BackEndModel
                 self::where('id', $params['id'])->update($this->prepareParams($params));
                 $item = self::getItem(['id' => $params['id']], ['task' => 'get-item']);
                 if ($params['status_order'] == 'hoanTat'){ // Cập nhật lại số lượng đơn hàng
-                    (new ProductWarehouseModel())->saveItem(['warehouse_id'=>$params['warehouse_id'],
-                    'list_products'=>$item->info_product],
-                    ['task' => 'output-warehouse']);
+                    (new ProductWarehouseModel())->saveItem(['warehouse_id'=>$params['warehouse_id'],'list_products'=>$item->info_product],['task' => 'output-warehouse']);
+                    if(!empty($item->user_id)){
+                        $currentUser= (new UsersModel())->getItem(['user_id'=>$item->user_id],['task'=>'get-item']);
+                        if ($currentUser && isset($currentUser->reward_points)) {
+                            $rewardPoints=$currentUser->reward_points + 10;
+                        (new UsersModel())->saveItem(['user_id'=>$currentUser->user_id,'reward_points' => $rewardPoints], ['task' => 'update-item-api']);
+                        }
+                    }
+                    // cập nhật điểm thưởng cho affiliate nếu có
+                    $listProductOrder=$item->listProductInOrder();
+                    foreach($listProductOrder as $productOrder){
+                        if(!empty($productOrder->code_ref)){
+                            $currentUser= (new UsersModel())->getItem(['codeRef'=>$productOrder->code_ref],['task'=>'get-item-code-ref']);
+                            if ($currentUser && isset($currentUser->reward_points)) {
+                                $rewardPoints=$currentUser->reward_points + 10;
+                                (new UsersModel())->saveItem(['user_id'=>$currentUser->user_id,'reward_points' => $rewardPoints], ['task' => 'update-item-api']);
+                            }
+                        }
+                    }
                 }
                 DB::commit();
                 return true;
@@ -462,5 +478,8 @@ class OrderModel extends BackEndModel
     }
     public function userSell(){
         return $this->belongsTo('App\Model\Shop\UsersModel','user_sell','user_id');
+    }
+    public function listProductInOrder(){
+        return $this->hasMany('App\Model\Shop\OrderProductModel','order_id','id');
     }
 }

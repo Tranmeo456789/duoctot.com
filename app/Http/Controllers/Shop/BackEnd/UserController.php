@@ -230,8 +230,9 @@ class UserController extends BackEndController
     }
     public function detailListProductAffiliate(Request $request)
     {
-        $userId=$request->user_id;
-        $userInfo=$this->model->getItem(['user_id' => $userId],['task'=>'get-item']);
+        $codeRef=$request->codeRef;
+
+        $userInfo=$this->model->getItem(['codeRef' => $codeRef],['task'=>'get-item-code-ref']);
         $session = $request->session();
         if ($session->has('currentController') &&  ($session->get('currentController') != $this->controllerName)) {
             $session->forget('params');

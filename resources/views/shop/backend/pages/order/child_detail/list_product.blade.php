@@ -51,7 +51,7 @@
                         <td style="width: 5%" class="text-center">{{$val['quantity']}}</td>
                         <td style="width: 19%" class="text-center">
                         @if (Session::has('user') && Session::get('user')['is_admin'] == 1 ) 
-                            <a href="{{route('affiliate.detail',$codeRef)}}" target="_blank">{{$codeRef}}</a>
+                            <a href="{{route('user.detailListProductAffiliate', $codeRef)}}" target="_blank">{{$codeRef}}</a>
                         @else
                             <span>{{$codeRef}}</span>
                         @endif

@@ -30,7 +30,7 @@
                         <th scope="row" style="width: 5%">{{$temp}}</th>
                         <td style="width: 25%">
                             {!! $fullname !!}
-                            <p>Mã affiliate: <a href="{{route('user.detailListProductAffiliate', $val->user_id )}}">{{$val['codeRef']}}</a></p>
+                            <p>Mã affiliate: <a href="{{route('user.detailListProductAffiliate', $val->codeRef )}}">{{$val['codeRef']}}</a></p>
                         </td>
                         <td style="width: 30%">
                             <div>{!! $email !!}</div>

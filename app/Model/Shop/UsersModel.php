@@ -32,6 +32,13 @@ class UsersModel extends BackEndModel
         if($options['task'] == 'get-item') {
             $result = self::where('user_id', $params['user_id'])->first();
         }
+        if($options['task'] == 'get-item-code-ref') {
+            if (isset($params['codeRef'])){
+                $result = self::where('codeRef', $params['codeRef'])->first();
+            }else{
+                $result = self::where('user_id', $params['user_id'])->first();
+            }
+        }
         if ($options['task'] == 'get-item-api') {
             $result = self::select('user_id', 'email', 'fullname', 'phone', 'user_type_id','ref_register','codeRef','reward_points')
                           ->where('user_id', $params['user_id'])

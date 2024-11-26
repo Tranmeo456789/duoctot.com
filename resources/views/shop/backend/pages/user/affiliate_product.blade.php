@@ -35,6 +35,9 @@ $xhtmlAreaSeach = Template::showAreaSearch('product', $params['search']);
                             <tr>
                                 <td colspan="2" style="width: 60%" class="text-center">
                                  <div class="wp-link-affiliate">
+                                    <div>
+                                        <p>Thông tin user affiliate: {{$userInfo['fullname']}}-{{$userInfo['phone']}}-{{$userInfo['email']}}</p>
+                                    </div>
                                     <div class="text-center">Link chung</div>
                                     @if(isset($userInfo))
                                         @php
