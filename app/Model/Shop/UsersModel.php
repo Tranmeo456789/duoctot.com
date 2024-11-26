@@ -251,12 +251,12 @@ class UsersModel extends BackEndModel
             ])->get();
         }
         if($options['task'] == "admin-list-items-of-shop") {
-            $query = $this::select('user_id','email','fullname','phone','user_type_id','gender','is_admin','created_at','is_add_product','codeRef')
-            ->where(function ($query) {
-                $query->where('domain_register', 'shop.tdoctor.vn')
-                      ->orWhere('domain_register', 'tdoctor.net')
-                      ->orWhere('domain_register', 'app');
-            });
+            $query = $this::select('user_id','email','fullname','phone','user_type_id','gender','is_admin','created_at','is_add_product','codeRef');
+            // ->where(function ($query) {
+            //     $query->where('domain_register', 'shop.tdoctor.vn')
+            //           ->orWhere('domain_register', 'tdoctor.net')
+            //           ->orWhere('domain_register', 'app');
+            // });
             if(isset($params['filter_in_day'])){
                 $query->whereBetween('created_at', ["{$params['filter_in_day']['day_start']}", "{$params['filter_in_day']['day_end']}"]);
             }

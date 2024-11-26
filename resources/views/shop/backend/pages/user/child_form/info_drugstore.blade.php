@@ -26,8 +26,8 @@
     $linkGetListWard = route('ward.getListByParentID',['parentID' => 'value_new']);
     $elements = [
         [
-            'label'   => HTML::decode(Form::label('member_id', $label['member_id'] .  $star, $formLabelAttr)),
-            'element' => Form::text('details[member_id]', $details['member_id']??null, array_merge($formInputAttr,['placeholder'=>$label['member_id'],'readonly' => 'readonly'])),
+            'label'   => HTML::decode(Form::label('member_id', 'Mã affiliate(mã giới thiệu)', $formLabelAttr)),
+            'element' => Form::text('codeRef', $item['codeRef']??null, array_merge($formInputAttr,['placeholder'=>'Mã affiliate(mã giới thiệu)','readonly' => 'readonly'])),
             'widthElement' => 'col-12 col-md-4'
         ],[
             'label'   => HTML::decode(Form::label('fullname', 'Họ tên' .  $star, $formLabelAttr)),
@@ -85,12 +85,23 @@
         ],[
                 'label'   => Form::label('map', 'Bản đồ', $formLabelAttr),
                 'element' => Form::textarea('details[map]', $item['details']['map']?? '', array_merge($formInputAttr,['placeholder'=>'Bản đồ',"rows"=>"5"]))
-        ],[
-            'element' => $inputHiddenID . $inputHiddenTask .Form::submit('Cập nhật', ['class'=>'btn btn-primary']),
-            'type'    => "btn-submit-center"
         ]
     ];
-
+    $arrTypeUser = config('myconfig.template.type_user');
+    foreach($arrTypeUser as $key_user => $type_user){
+        $isChecked = isset($item['user_type_id']) ? ($item['user_type_id'] == $key_user) : ($key_user == 1);
+        $elements[] = [
+            'label'   => Form::label('name', $type_user, $formLabelAttr),
+            'element' => Form::radio('user_type_id', $key_user,$isChecked,false ,array_merge($formInputAttr)),
+            'type' =>'inline-text-right',
+            'widthElement' => 'col-6 p-0',
+            'styleFormGroup' => 'mb-2 h-35',
+        ];
+    }
+    $elementInputHidden = [[
+        'element' => $inputHiddenID . $inputHiddenTask .Form::submit('Cập nhật', ['class'=>'btn btn-primary']),
+        'type'    => "btn-submit-center"
+        ]];
     $title = 'Cập nhật thông tin';
 @endphp
 
@@ -102,5 +113,6 @@
     'id'             => 'main-form' ])  }}
     <div class="row">
         {!! FormTemplate::show($elements,$formInputWidth)  !!}
+        {!! FormTemplate::show( $elementInputHidden,$formInputWidth)  !!}
     </div>
 {{ Form::close() }}

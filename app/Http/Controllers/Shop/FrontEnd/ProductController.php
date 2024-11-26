@@ -138,12 +138,8 @@ class ProductController extends ShopFrontEndController
             $request->session()->put('codeRef', $request->query('codeRef'));
             $codeRef = $request->codeRef ?? ($request->session()->get('codeRef') ?? '');
         }
-        //$item = (new AffiliateModel)->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
-        // if ($item) {
-        //     $listIdProductAdd = [];
-        //     $params['group_id'] = array_merge(collect($item->listIdProduct)->pluck('product_id')->toArray(), $listIdProductAdd);
-        //     $productDrugstore = $this->model->listItems(['group_id' => $params['group_id'],'user_id' => $shopId], ['task' => 'frontend-list-item-shop'])??[];
-        // } 
+        $params['group_id'] = array_merge(collect($userInfo->listIdProduct)->pluck('product_id')->toArray(), $listIdProductAdd);
+        $productDrugstore = $this->model->listItems(['group_id' => $params['group_id'],'user_id' => $shopId], ['task' => 'frontend-list-item-shop'])??[];
         $address='';
         $map='';
         $ward='';
