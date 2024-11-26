@@ -27,6 +27,7 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
 
     Route::get('/thong-ke-hoa-hong-theo-san-pham-dai-ly', 'UserController@refAffiliate')->name('affiliate.refAffiliate');
     Route::get('/trang-tong-quan-tai-khoan-affiliate', 'UserController@dashboardRef')->name('affiliate.dashboardRef');
+    Route::get('/chi-tiet-hoa-hong-theo-san-pham-dai-ly-affiliate/{user_id}', 'UserController@detailListProductAffiliate')->name('user.detailListProductAffiliate');
 
     Route::group(['middleware' => ['permission.shop']], function () {
 

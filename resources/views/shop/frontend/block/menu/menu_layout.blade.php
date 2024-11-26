@@ -11,14 +11,14 @@
         </div>
     </div> -->
     <div class="head_topon_reponsive">
-        <!-- <div class="wp-inner">
+        <div class="wp-inner">
             <div class="d-flex justify-content-center">
                 <div class="d-flex justify-content-center">
                     <div><span class="circle-ripple"></span></div>
-                    <p class="p-head-topon">@lang('lang.connecting_home_medical_with_online_doctors') <span class="font-weight-bold text-danger" style="font-size: 20px;"><a href="tel:0345488247" class="text-danger">0345.488.247</a></span></p>
+                    <p class="p-head-topon">Liên hệ Hotline/Zalo <span class="font-weight-bold text-danger" style="font-size: 20px;"><a href="tel:0345488247" class="text-danger">0345.488.247</a></span></p>
                 </div>
             </div>
-        </div> -->
+        </div>
         <div class="fix1screen">
             <div class="wp-cart-res">
                 @include("$moduleName.templates.menu_cart")
