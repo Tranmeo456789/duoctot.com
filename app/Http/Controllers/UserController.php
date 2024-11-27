@@ -41,6 +41,7 @@ class UserController extends Controller
             $userModel = new MainModel();
             $current_user = $userModel->saveItem($params, ['task' => $task]);
             (new UsersModel)->saveItem(['user_id'=>$current_user->user_id,'codeRef' => 'T'.$current_user->user_id], ['task' => 'update-item-api']);
+            $current_user = UsersModel::where('user_id', $current_user->user_id)->first();
             if (!empty($current_user)){
                 $request->session()->put('user', $current_user);
                 return response()->json([

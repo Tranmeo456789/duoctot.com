@@ -48,10 +48,11 @@ class OrderModel extends BackEndModel
     {
         if (\Session::has('user')){
             $user = \Session::get('user');
+            $user = UsersModel::where('user_id', $user->user_id)->first();
             if($user['is_admin']==1){
                 return  $query;
             }else{
-                $codeRef=$user->codeRef;
+                $codeRef=$user->codeRef ?? 'MCNULL';
                 return  $query->where('user_sell',$user->user_id)->orWhere('info_product', 'LIKE', "%$codeRef%");
             }
 
