@@ -31,7 +31,7 @@ class MessagesController extends ShopFrontEndController
         event(
             $e = new RedisEvent($messages)
         );
-        return redirect()->back();
+        return response()->json($messages);
     }
     public function noticeDeviceToken(Request $request){
         return view($this->pathViewController . 'notice_device_token');
