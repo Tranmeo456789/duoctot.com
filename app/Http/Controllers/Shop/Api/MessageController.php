@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers\Shop\Api;
+
 use Illuminate\Http\Request;
 use Kreait\Firebase\Factory;
 use App\Http\Requests;
@@ -21,6 +23,7 @@ use Kreait\Firebase\Messaging\Notification;
 use Google_Client;
 use Google\Client as GoogleClient;
 use Exception;
+
 class MessageController extends ApiController
 {
     protected $limit;
@@ -107,8 +110,8 @@ class MessageController extends ApiController
 
     public function receiveNoticeToDeciveToKen(Request $request)
     {
-        $deviceToken = $request->decive_token??'';
-        if ($deviceToken=='') {
+        $deviceToken = $request->decive_token ?? '';
+        if ($deviceToken == '') {
             return response()->json(['error' => 'Device token is required.'], 400);
         }
         if (!is_string($deviceToken) || strlen($deviceToken) < 10) {
@@ -125,7 +128,7 @@ class MessageController extends ApiController
     public function receiveNoticeToDeviceToKen2(Request $request)
     {
         $deviceToken = $request->device_token;
-        if ($deviceToken=='') {
+        if ($deviceToken == '') {
             return response()->json(['error' => 'Device token is required.'], 400);
         }
         if (!is_string($deviceToken) || strlen($deviceToken) < 10) {
@@ -133,7 +136,7 @@ class MessageController extends ApiController
         }
         $deviceToken = trim($request->device_token);
         $post_data = array(
-            'to' => $deviceToken, 
+            'to' => $deviceToken,
             'notification' => array(
                 'title' => 'title',
                 'click_action' => 'click_action',
@@ -144,7 +147,7 @@ class MessageController extends ApiController
                 'icon' => 'icon'
             )
         );
-        $is_show_result=true;
+        $is_show_result = true;
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => 'https://fcm.googleapis.com/fcm/send',
@@ -157,36 +160,37 @@ class MessageController extends ApiController
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => json_encode($post_data),
             CURLOPT_HTTPHEADER => array(
-            'Authorization: key=AAAA1ZEv8zo:APA91bHNlGpAbsDXqF2qW-jo08NNQ8Ln4zbXyIyHRWv9LMaB0-fHMR5_8-t6r86b9gb0ltHmYQCnQjF32rP-103jLGa8jLuVDgMefP1lpHDI7QSwZ9osrwHQo0_qP00MqSv41fmRKNjK',
-            'Content-Type: application/json'
+                'Authorization: key=AAAA1ZEv8zo:APA91bHNlGpAbsDXqF2qW-jo08NNQ8Ln4zbXyIyHRWv9LMaB0-fHMR5_8-t6r86b9gb0ltHmYQCnQjF32rP-103jLGa8jLuVDgMefP1lpHDI7QSwZ9osrwHQo0_qP00MqSv41fmRKNjK',
+                'Content-Type: application/json'
             ),
         ));
         $response = curl_exec($curl);
         curl_close($curl);
-        if($is_show_result){
+        if ($is_show_result) {
             return response()->json([
                 'status' => true,
-                'message'=>'Success',
+                'message' => 'Success',
                 'data' => $response,
                 'date' =>  time()
             ]);
         }
     }
 
-    function sendPushMessageFirebase($user_id, $title, $url, $body, $icon, $type, $is_show_result = true, $agora_app_id = '', $agora_token = '', $channel_name = '', $agora_client_name = ''){
+    function sendPushMessageFirebase($user_id, $title, $url, $body, $icon, $type, $is_show_result = true, $agora_app_id = '', $agora_token = '', $channel_name = '', $agora_client_name = '')
+    {
 
         if (strpos($user_id, ',') !== false) {
             $user_id = str_replace('{,', '', $user_id);
             $user_id = str_replace(',}', '', $user_id);
             $user_ids = explode(',', $user_id);
             $user_tokens = UserTokenModel::whereIn('user_id', $user_ids)->get();
-        }else{
+        } else {
             $user_tokens = UserTokenModel::where('user_id', $user_id)->get();
         }
         logger($user_tokens);
-        if($user_tokens != null){
+        if ($user_tokens != null) {
             $registration_ids = array();
-            foreach($user_tokens as $item){
+            foreach ($user_tokens as $item) {
                 $registration_ids[] = base64_decode($item->token);
             }
             $post_data = array(
@@ -212,19 +216,19 @@ class MessageController extends ApiController
             );
             $curl = curl_init();
             curl_setopt_array($curl, array(
-              CURLOPT_URL => 'https://fcm.googleapis.com/fcm/send',
-              CURLOPT_RETURNTRANSFER => true,
-              CURLOPT_ENCODING => '',
-              CURLOPT_MAXREDIRS => 10,
-              CURLOPT_TIMEOUT => 0,
-              CURLOPT_FOLLOWLOCATION => true,
-              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-              CURLOPT_CUSTOMREQUEST => 'POST',
-              CURLOPT_POSTFIELDS => json_encode($post_data),
-              CURLOPT_HTTPHEADER => array(
-                'Authorization: key=AAAA1ZEv8zo:APA91bHNlGpAbsDXqF2qW-jo08NNQ8Ln4zbXyIyHRWv9LMaB0-fHMR5_8-t6r86b9gb0ltHmYQCnQjF32rP-103jLGa8jLuVDgMefP1lpHDI7QSwZ9osrwHQo0_qP00MqSv41fmRKNjK',
-                'Content-Type: application/json'
-              ),
+                CURLOPT_URL => 'https://fcm.googleapis.com/fcm/send',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => json_encode($post_data),
+                CURLOPT_HTTPHEADER => array(
+                    'Authorization: key=AAAA1ZEv8zo:APA91bHNlGpAbsDXqF2qW-jo08NNQ8Ln4zbXyIyHRWv9LMaB0-fHMR5_8-t6r86b9gb0ltHmYQCnQjF32rP-103jLGa8jLuVDgMefP1lpHDI7QSwZ9osrwHQo0_qP00MqSv41fmRKNjK',
+                    'Content-Type: application/json'
+                ),
             ));
 
             $response = curl_exec($curl);
@@ -237,7 +241,7 @@ class MessageController extends ApiController
 
             logger($log);
             curl_close($curl);
-            if($is_show_result){
+            if ($is_show_result) {
                 return response()->json([
                     'status' => true,
                     'data' => $response,
@@ -246,7 +250,8 @@ class MessageController extends ApiController
             }
         }
     }
-    function sendPushMessage(Request $rq){
+    function sendPushMessage(Request $rq)
+    {
         if (isset(Session::get('user')->user_id)) {
             $user_id = str_replace('room_', '', $rq->chat_to);
             $title = $rq->title;
@@ -262,6 +267,53 @@ class MessageController extends ApiController
             'date' =>  time()
         ]);
     }
+    private function sendNotificationFromReciver($deviceToken = '', $title = 'Thông báo', $body = '')
+    {
+        if (empty($deviceToken)) {
+            return response()->json([
+                'status' => true,
+                'message' => 'No device token provided, no notification sent.',
+            ]);
+        }
+        $messageData = [
+            'title' => $title,
+            'body' => $body,
+            'data' => [
+                'key1' => 'value1',
+                'key2' => 'value2',
+            ]
+        ];
+        try {
+            $client = new Google_Client();
+            $filePath = public_path('firebase/firebase.json');
+            $client->setAuthConfig($filePath);
+            $client->addScope('https://www.googleapis.com/auth/firebase.messaging');
+            $accessToken = $client->fetchAccessTokenWithAssertion();
+            $url = 'https://fcm.googleapis.com/v1/projects/medix-link/messages:send';
+            $postData = [
+                'message' => [
+                    'token' => $deviceToken,
+                    'notification' => [
+                        'title' => $messageData['title'],
+                        'body' => $messageData['body']
+                    ],
+                    'data' => $messageData['data'] ?? []
+                ]
+            ];
+            $response = $this->sendCurlRequest($url, $accessToken['access_token'], $postData);
+            return response()->json([
+                'status' => true,
+                'message' => 'Notification sent successfully',
+                'data' => $response
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Notification sent with some errors',
+                'data' => $e->getMessage()
+            ]);
+        }
+    }
     public function sendMessage(Request $request)
     {
         $this->res['data'] = null;
@@ -272,129 +324,134 @@ class MessageController extends ApiController
         if ($data_token['message'] == 'OK') {
             $params['user'] =  (array)$data_token['payload'];
             $request->session()->put('user', $params['user']);
-            $infoUserSend=(array)$data_token['payload'];
-            $roomIdCurrent=0;
-            if(!$request->roomId){
-                $existRoom=(new RoomModel)->where('created_by',$infoUserSend['user_id'])
-                ->where('type_room',$params['type_room'])->first();
-                if(!$existRoom){
-                    $paramsRoom['name'] = 'room_'.$infoUserSend['user_id'].'_'.$params['type_room'];
+            $infoUserSend = (array)$data_token['payload'];
+            $roomIdCurrent = 0;
+            if (!$request->roomId) {
+                $existRoom = (new RoomModel)->where('created_by', $infoUserSend['user_id'])
+                    ->where('type_room', $params['type_room'])->first();
+                if (!$existRoom) {
+                    $paramsRoom['name'] = 'room_' . $infoUserSend['user_id'] . '_' . $params['type_room'];
                     $paramsRoom['type_room'] = $params['type_room'];
                     $paramsRoom['created_by'] = $infoUserSend['user_id'];
-                    $roomCurrent=(new RoomModel)->saveItem($paramsRoom,['task'=>'add-item']);
-                    (new RoomUserModel)->saveItem(['room_id'=>$roomCurrent['id'],'user_id'=>$infoUserSend['user_id']],['task'=>'add-item']);
-                    if($params['type_room']=='group_bac_si'){
-                        (new RoomUserModel)->saveItem(['room_id'=>$roomCurrent['id'],'user_id'=>90007044],['task'=>'add-item']);
-                    }else if($params['type_room']=='group_duoc_si'){
-                        (new RoomUserModel)->saveItem(['room_id'=>$roomCurrent['id'],'user_id'=>1014110310],['task'=>'add-item']);
+                    $roomCurrent = (new RoomModel)->saveItem($paramsRoom, ['task' => 'add-item']);
+                    (new RoomUserModel)->saveItem(['room_id' => $roomCurrent['id'], 'user_id' => $infoUserSend['user_id']], ['task' => 'add-item']);
+                    if ($params['type_room'] == 'group_bac_si') {
+                        (new RoomUserModel)->saveItem(['room_id' => $roomCurrent['id'], 'user_id' => 90007044], ['task' => 'add-item']);
+                    } else if ($params['type_room'] == 'group_duoc_si') {
+                        (new RoomUserModel)->saveItem(['room_id' => $roomCurrent['id'], 'user_id' => 1014110310], ['task' => 'add-item']);
                     }
-                }else{
-                    $roomCurrent=$existRoom;
+                } else {
+                    $roomCurrent = $existRoom;
                 }
-                $paramsMessage=[];
+                $paramsMessage = [];
                 $paramsMessage['room_id'] = $roomCurrent->id;
-                $roomIdCurrent=$roomCurrent->id;
+                $roomIdCurrent = $roomCurrent->id;
                 $paramsMessage['content'] = $params['content'];
                 $paramsMessage['user_id'] = $infoUserSend['user_id'];
                 $this->model->saveItem($paramsMessage, ['task' => 'add-item']);
-            }else{
+            } else {
                 $paramsMessage['room_id'] = $request->roomId ?? 0;
-                $roomIdCurrent=$request->roomId ?? 0;
+                $roomIdCurrent = $request->roomId ?? 0;
                 $paramsMessage['content'] = $params['content'];
                 $paramsMessage['user_id'] = $infoUserSend['user_id'];
-                $this->model->saveItem($paramsMessage, ['task' => 'add-item']);                
+                $this->model->saveItem($paramsMessage, ['task' => 'add-item']);
             }
-            //get user in room current
             $listUserInRoom = RoomUserModel::where('room_id', $roomIdCurrent)->pluck('user_id');
-            // foreach ($listUserInRoom as $value) {
-            //     if($value!=$infoUserSend['user_id']){
-            //         $this->sendPushMessageFirebase($value['user_id'], $infoUserSend['fullname'].' đã gửi tin nhắn', '', $params['content'], 'https://tdoctor.vn/images/logo.png', 'chat');
-            //     }
-            // }
-
-            //response
+            $title='Tin nhắn mới';
+            $body=$params['content'];
+            foreach ($listUserInRoom as $value) {
+                if($value!=$infoUserSend['user_id']){
+                    $UserTokenCurrent=UserTokenModel::where('user_id', $value)->first();
+                    $deciveToken=$UserTokenCurrent['token']??'';
+                    $this->sendNotificationFromReciver($deciveToken,$title,$body);
+                }
+            }
+            // $deciveToken='eiVQ6aUZT5GLcW7ZIc0UvU:APA91bGjuAxZ_zErJIHchs4kMjxrc5yJtGCMOgx_ojvETii0CS04wgBJEpCifokugCV1LSmlpx7psUSV3VpDrBn4OsOl_woey3676dbYBdGHNZ2Ux850QTM';
+            // $title='Thông báo';
+            // $body='Tin nhắn mới';
+            // $this->sendNotificationFromReciver($deciveToken,$title,$body);
             $this->res['data'] = [];
             $this->res['message']  = 'Gửi tin nhắn thành công!';
         }
-        return $this->setResponse($this->res);     
+        return $this->setResponse($this->res);
     }
     public function getListMessage(Request $request)
     {
-        $token = $request->header('Tdoctor-Token')??'hhhhh';
-        $typeRoom= $request->typeRoom??'group_bac_si';
+        $token = $request->header('Tdoctor-Token') ?? 'hhhhh';
+        $typeRoom = $request->typeRoom ?? 'group_bac_si';
         $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
-        $listRoom=[];
+        $listRoom = [];
         if ($data_token['message'] == 'OK') {
             $params['user'] =  (array)$data_token['payload'];
-            $infoUserGetList=(array)$data_token['payload'];
-            if($infoUserGetList['user_type_id']==1){
-                if($request->typeRoom){
-                    $listRoom=(new RoomModel)->listItems(['type_room'=>$typeRoom,'created_by'=>$infoUserGetList['user_id']], ['task' => 'frontend-list-items-api']);
-                }else{
-                    $listRoom=(new RoomModel)->listItems(['created_by'=>$infoUserGetList['user_id']], ['task' => 'frontend-list-items-api']);
+            $infoUserGetList = (array)$data_token['payload'];
+            if ($infoUserGetList['user_type_id'] == 1) {
+                if ($request->typeRoom) {
+                    $listRoom = (new RoomModel)->listItems(['type_room' => $typeRoom, 'created_by' => $infoUserGetList['user_id']], ['task' => 'frontend-list-items-api']);
+                } else {
+                    $listRoom = (new RoomModel)->listItems(['created_by' => $infoUserGetList['user_id']], ['task' => 'frontend-list-items-api']);
                 }
-            }else if($infoUserGetList['user_type_id']==2){
-                $listRoom=(new RoomModel)->listItems(['type_room'=>'group_bac_si'], ['task' => 'frontend-list-items-api']);
-            }else if($infoUserGetList['user_type_id']==5){
-                $listRoom=(new RoomModel)->listItems(['type_room'=>'group_duoc_si'], ['task' => 'frontend-list-items-api']);
+            } else if ($infoUserGetList['user_type_id'] == 2) {
+                $listRoom = (new RoomModel)->listItems(['type_room' => 'group_bac_si'], ['task' => 'frontend-list-items-api']);
+            } else if ($infoUserGetList['user_type_id'] == 5) {
+                $listRoom = (new RoomModel)->listItems(['type_room' => 'group_duoc_si'], ['task' => 'frontend-list-items-api']);
             }
         }
         foreach ($listRoom as $key => $value) {
-            $item=$value->listMessageLast()->first();
-            $role=0;
-            if($value['created_by']==$item['user_id']) {
-                $role=1;
+            $item = $value->listMessageLast()->first();
+            $role = 0;
+            if ($value['created_by'] == $item['user_id']) {
+                $role = 1;
             }
-            $item['role']=$role;
-            $listRoom[$key]['list_messages']=$item;
+            $item['role'] = $role;
+            $listRoom[$key]['list_messages'] = $item;
         }
-        $this->res['data']=$listRoom;
+        $this->res['data'] = $listRoom;
         return $this->setResponse($this->res);
     }
     public function getListMessageInRoomId(Request $request)
     {
-        $params=[];
-        $params['room_id']= $request->roomId??0;
-        $params['page']= $request->page??1;
-        $params['perPage']= $request->perPage??10;
-        $roomCurrent=(new RoomModel)->getItem(['id'=>$params['room_id']], ['task' => 'get-item']);
-        $listMessage=(new MessagesModel)->listItems($params, ['task' => 'frontend-list-items-api']);
+        $params = [];
+        $params['room_id'] = $request->roomId ?? 0;
+        $params['page'] = $request->page ?? 1;
+        $params['perPage'] = $request->perPage ?? 10;
+        $roomCurrent = (new RoomModel)->getItem(['id' => $params['room_id']], ['task' => 'get-item']);
+        $listMessage = (new MessagesModel)->listItems($params, ['task' => 'frontend-list-items-api']);
         $listMessage = $listMessage->reverse()->values();
-        $roomCurrent['created_by']=0;
-        $message['user_id']=0;
-        foreach($listMessage as $k=>$message) {
-            $role=0;
-            if($roomCurrent['created_by']==$message['user_id']) {
-                $role=1;
+        $roomCurrent['created_by'] = 0;
+        $message['user_id'] = 0;
+        foreach ($listMessage as $k => $message) {
+            $role = 0;
+            if ($roomCurrent['created_by'] == $message['user_id']) {
+                $role = 1;
             }
-            $listMessage[$k]['role']=$role;
+            $listMessage[$k]['role'] = $role;
         }
-        $this->res['data']=$listMessage;
+        $this->res['data'] = $listMessage;
         return $this->setResponse($this->res);
     }
     public function getListMessageDoctor(Request $request)
     {
-        $token = $request->header('Tdoctor-Token')??'hhhhh';
+        $token = $request->header('Tdoctor-Token') ?? 'hhhhh';
         $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
-        $listRoom=[];
+        $listRoom = [];
         if ($data_token['message'] == 'OK') {
             $params['user'] =  (array)$data_token['payload'];
-            $infoUserGetList=(array)$data_token['payload'];
-            if($infoUserGetList['user_type_id']==2){
-                $listRoom=(new RoomModel)->listItems(['type_room'=>'group_bac_si'], ['task' => 'frontend-list-items-api']);
-            }else if($infoUserGetList['user_type_id']==5){
-                $listRoom=(new RoomModel)->listItems(['type_room'=>'group_duoc_si'], ['task' => 'frontend-list-items-api']);
+            $infoUserGetList = (array)$data_token['payload'];
+            if ($infoUserGetList['user_type_id'] == 2) {
+                $listRoom = (new RoomModel)->listItems(['type_room' => 'group_bac_si'], ['task' => 'frontend-list-items-api']);
+            } else if ($infoUserGetList['user_type_id'] == 5) {
+                $listRoom = (new RoomModel)->listItems(['type_room' => 'group_duoc_si'], ['task' => 'frontend-list-items-api']);
             }
         }
         foreach ($listRoom as $key => $value) {
-            $item=$value->listMessageLast()->first();
-            $role=0;
-            if($value['created_by']==$item['user_id']) {
-                $role=1;
+            $item = $value->listMessageLast()->first();
+            $role = 0;
+            if ($value['created_by'] == $item['user_id']) {
+                $role = 1;
             }
-            $item['role']=$role;
-            $listRoom[$key]['list_messages']=$item;
-            $userCreatedRoom=UsersModel::where('user_id',$value['created_by'])->first();
+            $item['role'] = $role;
+            $listRoom[$key]['list_messages'] = $item;
+            $userCreatedRoom = UsersModel::where('user_id', $value['created_by'])->first();
             $listRoom[$key]['list_messages']['user_send'] = [
                 'user_id' => $userCreatedRoom->user_id ?? '',
                 'fullname' => $userCreatedRoom->fullname ?? '',
@@ -402,7 +459,7 @@ class MessageController extends ApiController
                 'phone' => $userCreatedRoom->phone ?? ''
             ];
         }
-        $this->res['data']=$listRoom;
+        $this->res['data'] = $listRoom;
         return $this->setResponse($this->res);
     }
     public function sendNotification3(Request $request)
@@ -500,4 +557,3 @@ class MessageController extends ApiController
         return json_decode($response, true);
     }
 }
-
