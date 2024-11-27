@@ -1,22 +1,49 @@
-var io = require('socket.io')(5000)
-console.log('connected to port 5000')
+const fs = require('fs');
+const https = require('https');
+const socketIo = require('socket.io');
+const Redis = require('ioredis');
 
-io.on('error', function(socket){
-    console.log('error: ' + socket)
-})
-io.on('connection', function(socket){
-    console.log('co nguoi vua ket noi'+socket.id)
-})
-var Redis = require('ioredis')
-var redis = new Redis(6379)
-redis.psubscribe("*",function(error, count) {
+// Đọc chứng chỉ SSL
+const privateKey = fs.readFileSync('/etc/letsencrypt/live/tdoctor.vn/privkey.pem'); // Đường dẫn đến khóa riêng
+const certificate = fs.readFileSync('/etc/letsencrypt/live/tdoctor.vn/fullchain.pem'); // Đường dẫn đến chứng chỉ
 
-})
-redis.on('pmessage', function(partner, channel, message){
-    console.log('partner: ' + partner)
-    console.log('channel: ' + channel)
-    console.log('message: ' + message)
-    message = JSON.parse(message)
-    io.emit(channel + ':'+message.event,message.data.message)
-    console.log('send')
-})
+// Tạo server HTTPS
+const server = https.createServer({
+    key: privateKey,
+    cert: certificate
+});
+
+// Khởi tạo Socket.IO với server HTTPS
+const io = socketIo(server);
+
+// Lắng nghe cổng 5000
+server.listen(5000, () => {
+    console.log('Server running on port 5000');
+});
+
+// Xử lý sự kiện kết nối
+io.on('error', function(socket) {
+    console.log('error: ' + socket);
+});
+
+io.on('connection', function(socket) {
+    console.log('Có người vừa kết nối: ' + socket.id);
+    socket.on('sendMessage', (data) => {
+        io.emit('newMessage', { content: data.content, author: data.author });
+    });
+});
+
+// Khởi tạo Redis
+const redis = new Redis(6379);
+redis.psubscribe("*", function(error, count) {
+    // Xử lý lỗi nếu có
+});
+
+redis.on('pmessage', function(partner, channel, message) {
+    console.log('partner: ' + partner);
+    console.log('channel: ' + channel);
+    console.log('message: ' + message);
+    message = JSON.parse(message);
+    io.emit(channel + ':' + message.event, message.data.message);
+    console.log('send');
+});

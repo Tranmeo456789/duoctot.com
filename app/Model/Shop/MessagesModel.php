@@ -52,7 +52,7 @@ class MessagesModel extends BackEndModel
                         $query->whereRaw("LOWER({$params['search']['field']})" . " LIKE BINARY " .  "LOWER('%{$params['search']['value']}%')" );
                 }
             }
-            $query->orderBy('created_at', 'desc');
+            $query->orderBy('created_at', 'asc');
             if (isset($params['pagination']['totalItemsPerPage'])){
                 $result =  $query->paginate($params['pagination']['totalItemsPerPage']);
             }else{
@@ -70,7 +70,7 @@ class MessagesModel extends BackEndModel
             if(isset($params['take'])){
                 $query->take($params['take']);
             }
-            $query->orderBy('id', 'desc');
+            $query->orderBy('id', 'asc');
             if(isset($params['limit'])){
                 $result=$query->paginate($params['limit']);
             }else{
