@@ -21,13 +21,12 @@
     text-decoration: none;
     color: #0d6799;
     display: block;
-    padding-top: 5px;
     font-size: 12px;
     font-weight: bold;
 }
 .contact-menu img {
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
     margin: 0 auto;
 }
 
@@ -56,26 +55,26 @@
 <contact-menu class="contact-menu">
     <ul>
         <li id="icon-fixed__facebook">
-            <a class="image-contact" href="https://www.facebook.com/bacsitdoctor" rel="nofollow" target="_blank" title="Facebook" previewlistener="true">
-                <img src="https://nhakhoathuyanh.com/wp-content/uploads/2024/05/fb.webp" alt="Facebook Tdentist">
+            <a class="image-contact" href="https://www.facebook.com/tdoctoronline/" rel="nofollow" target="_blank" title="Facebook" previewlistener="true">
+                <img src="https://nhakhoathuyanh.com/wp-content/uploads/2024/05/fb.webp" alt="Facebook">
             </a>
-            <a href="https://www.facebook.com/bacsitdoctor" rel="nofollow" target="_blank" title="Facebook Tdoctor" previewlistener="true">Facebook</a>
+            <a href="https://www.facebook.com/tdoctoronline/" rel="nofollow" target="_blank" title="Facebook Tdoctor" previewlistener="true">Facebook</a>
         </li>
         <li id="icon-fixed__messenger">
-            <a class="image-contact" href="https://m.me/bacsitdoctor" rel="nofollow" target="_blank" title="Messenger" previewlistener="true">
-                <img src="https://nhakhoathuyanh.com/wp-content/uploads/2024/05/mes.webp" alt="Messenger Tdoctor">
+            <a class="image-contact" href='tel:0345488247' rel="nofollow" title="Gọi điện" previewlistener="true">
+                <img src="https://png.pngtree.com/png-clipart/20230301/original/pngtree-phone-call-icon-logo-symbol-vector-design-transparent-png-image_8967987.png" alt="Gọi điện Tdoctor">
             </a>
-            <a href="https://m.me/bacsitdoctor" rel="nofollow" target="_blank" title="Messenger Tdoctor" previewlistener="true">Messenger</a>
+            <a href='tel:0345488247' rel="nofollow" title="Call Tdoctor" previewlistener="true">Call</a>
         </li>
         <li id="icon-fixed__zalo">
-            <a class="image-contact" href="https://zalo.me/0393167234" rel="nofollow" target="_blank" title="Zalo" previewlistener="true">
+            <a class="image-contact" href="https://zalo.me/0345488247" rel="nofollow" target="_blank" title="Zalo" previewlistener="true">
                 <img src="https://nhakhoathuyanh.com/wp-content/uploads/2024/05/zalo.webp" alt="Zalo Tdoctor">
             </a>
-            <a href="https://zalo.me/0393167234" rel="nofollow" target="_blank" title="Zalo Tdoctor" previewlistener="true">Zalo</a>
+            <a href="https://zalo.me/0345488247" rel="nofollow" target="_blank" title="Zalo Tdoctor" previewlistener="true">Zalo</a>
         </li>
         <li id="icon-fixed__youtube">
-            <a class="image-contact" href="https://www.youtube.com/results?search_query=tdoctor" rel="nofollow" target="_blank" title="Youtube" previewlistener="true">
-                <img src="https://nhakhoathuyanh.com/wp-content/uploads/2024/05/yt.webp" alt="Youtube Tdentist">
+            <a class="image-contact" href="https://www.youtube.com/@tdoctor8100" rel="nofollow" target="_blank" title="Youtube" previewlistener="true">
+                <img src="https://nhakhoathuyanh.com/wp-content/uploads/2024/05/yt.webp" alt="Youtube Tdoctor">
             </a>
             <a href="https://www.youtube.com/results?search_query=tdoctor" rel="nofollow" target="_blank" title="Youtube Tdoctor" previewlistener="true">Youtube</a>
         </li>
