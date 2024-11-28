@@ -1,20 +1,27 @@
 const fs = require('fs');
-const https = require('https');
+// const https = require('https');
+const http = require('http');
 const socketIo = require('socket.io');
 const Redis = require('ioredis');
 
 // Đọc chứng chỉ SSL
-const privateKey = fs.readFileSync('/etc/letsencrypt/live/tdoctor.vn/privkey.pem'); // Đường dẫn đến khóa riêng
-const certificate = fs.readFileSync('/etc/letsencrypt/live/tdoctor.vn/fullchain.pem'); // Đường dẫn đến chứng chỉ
+// const privateKey = fs.readFileSync('/etc/letsencrypt/live/tdoctor.vn/privkey.pem'); // Đường dẫn đến khóa riêng
+// const certificate = fs.readFileSync('/etc/letsencrypt/live/tdoctor.vn/fullchain.pem'); // Đường dẫn đến chứng chỉ
 
 // Tạo server HTTPS
-const server = https.createServer({
-    key: privateKey,
-    cert: certificate
-});
+// const server = https.createServer({
+//     key: privateKey,
+//     cert: certificate
+// });
+const server = http.createServer();
 
 // Khởi tạo Socket.IO với server HTTPS
-const io = socketIo(server);
+const io = socketIo(server, {
+    cors: {
+        origin: "https://socket.tdoctor.net", // Thay bằng domain của bạn
+        methods: ["GET", "POST"]
+    }
+});
 
 // Lắng nghe cổng 5000
 server.listen(5000, () => {
