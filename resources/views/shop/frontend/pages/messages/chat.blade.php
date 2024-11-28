@@ -26,7 +26,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js"></script>
 <script>
     // Kết nối tới Socket.IO server
-    var socket = io('https://103.1.236.126:5000/');
+    var socket = io('https://socket.tdoctor.net/');
     socket.on('connect', function() {
         console.log('Connected to Socket.io server');
     });
