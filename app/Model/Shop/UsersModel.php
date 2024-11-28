@@ -379,4 +379,7 @@ class UsersModel extends BackEndModel
     public function listIdProduct(){
         return $this->hasMany('App\Model\Shop\ShopProductAddModel','user_id','user_id');
     }
+    public function listIdProductGetNumberClick(){
+        return $this->hasMany('App\Model\Shop\AffiliateProductModel','user_id','user_id');
+    }
 }

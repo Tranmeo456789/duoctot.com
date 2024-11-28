@@ -11,6 +11,7 @@ use App\Model\Shop\DistrictModel;
 use App\Model\Shop\WardModel;
 use App\Model\Shop\AffiliateModel;
 use App\Helpers\MyFunction;
+use App\Model\Shop\AffiliateProductModel;
 use App\Model\Shop\ProductModel;
 use App\Model\Shop\ShopProductAddModel;
 use DB;
@@ -161,11 +162,7 @@ class UserController extends BackEndController
     public function userImportCodeAffiliate(Request $request){
         $session = $request->session();
         $userInfo = $request->session()->get('user');
-        if ($session->has('currentController') &&  ($session->get('currentController') == $this->controllerName)) {
-            $session->forget('params');
-        } else {
-            $session->put('currentController', $this->controllerName);
-        }
+        $session->forget('params');
         $session->put('params.filter.status', $request->has('filter_status') ? $request->get('filter_status') : ($session->has('params.filter.status') ? $session->get('params.filter.status') : 'all'));
         $session->put('params.search.field', $request->has('search_field') ? $request->get('search_field') : ($session->has('params.search.field') ? $session->get('params.search.field') : ''));
         $session->put('params.search.value', $request->has('search_value') ? $request->get('search_value') : ($session->has('params.search.value') ? $session->get('params.search.value') : ''));
@@ -191,23 +188,15 @@ class UserController extends BackEndController
         $userInfo=$this->model->getItem(['user_id' => $userInfo['user_id']],['task'=>'get-item']);
         $codeRef = $userInfo['codeRef'];
         $session = $request->session();
-        if ($session->has('currentController') &&  ($session->get('currentController') != $this->controllerName)) {
-            $session->forget('params');
-        } else {
-            $session->put('currentController', $this->controllerName);
-        }
-       // $sumMoney=$item->sumMoneyRefAffiliate($codeRef);
-       // $sumQuantity=$item->sumQuantityRefAffiliate($codeRef);
-        //$sumLinkCount = AffiliateProductModel::where('code_ref', $codeRef)->sum('sum_click')+$item['sum_click'];
-        //$params['group_id'] = collect($item->listIdProduct)->pluck('product_id')->toArray();
+        $session->forget('params');
         if ($request->has('deleteValueSearch') && $request->get('deleteValueSearch') == 1) {
             $session->forget('params.search.value');
         }
         $session->put('params.search.field', $request->has('search_field') ? $request->get('search_field') : ($session->has('params.search.field') ? $session->get('params.search.field') : ''));
         $session->put('params.search.value', $request->has('search_value') ? $request->get('search_value') : ($session->has('params.search.value') ? $session->get('params.search.value') : ''));
-        //$session->put('params.group_id', $params['group_id']);
         $session->put('params.pagination.totalItemsPerPage', $this->totalItemsPerPage);
-        
+        $infoProductClick = collect($userInfo->listIdProductGetNumberClick)->pluck('sum_click', 'product_id')->toArray();
+        $sumLinkCount = AffiliateProductModel::where('user_id', $userInfo['user_id'])->sum('sum_click');
         $this->params     = $session->get('params');
         $infoProduct=(new ProductModel)->listItems($this->params,['task'=>'user-list-items-simple-affiliate']);
         if ($infoProduct->currentPage() > $infoProduct->lastPage()) {
@@ -220,49 +209,45 @@ class UserController extends BackEndController
         return view($this->pathViewController .  'affiliate_product',
         [
             'params'           => $this->params,
-            //'item' => $item,
+            'infoProductClick' => $infoProductClick,
             'infoProduct' => $infoProduct,
             //'sumMoney'=> $sumMoney,
             //'sumQuantity' => $sumQuantity,
-            //'sumLinkCount' => $sumLinkCount,
+            'sumLinkCount' => $sumLinkCount,
             'userInfo'=> $userInfo
         ]);
     }
     public function detailListProductAffiliate(Request $request)
     {
         $codeRef=$request->codeRef;
-
         $userInfo=$this->model->getItem(['codeRef' => $codeRef],['task'=>'get-item-code-ref']);
         $session = $request->session();
-        if ($session->has('currentController') &&  ($session->get('currentController') != $this->controllerName)) {
-            $session->forget('params');
-        } else {
-            $session->put('currentController', $this->controllerName);
-        }
+        $session->forget('params');
         if ($request->has('deleteValueSearch') && $request->get('deleteValueSearch') == 1) {
             $session->forget('params.search.value');
         }
         $session->put('params.search.field', $request->has('search_field') ? $request->get('search_field') : ($session->has('params.search.field') ? $session->get('params.search.field') : ''));
         $session->put('params.search.value', $request->has('search_value') ? $request->get('search_value') : ($session->has('params.search.value') ? $session->get('params.search.value') : ''));
         $session->put('params.pagination.totalItemsPerPage', $this->totalItemsPerPage);
-        
         $this->params     = $session->get('params');
         $infoProduct=(new ProductModel)->listItems($this->params,['task'=>'user-list-items-simple-affiliate']);
+        $infoProductClick = collect($userInfo->listIdProductGetNumberClick)->pluck('sum_click', 'product_id')->toArray();
+        $sumLinkCount = AffiliateProductModel::where('user_id', $userInfo['user_id'])->sum('sum_click');
         if ($infoProduct->currentPage() > $infoProduct->lastPage()) {
             $lastPage = $infoProduct->lastPage();
             Paginator::currentPageResolver(function () use ($lastPage) {
                 return $lastPage;
             });
-            $infoProduct             = (new ProductModel)->listItems($this->params, ['task'  => 'user-list-items-simple-affiliate']);
+            $infoProduct = (new ProductModel)->listItems($this->params, ['task'  => 'user-list-items-simple-affiliate']);
         }
         return view($this->pathViewController .  'affiliate_product',
         [
             'params'           => $this->params,
-            //'item' => $item,
+            'infoProductClick' => $infoProductClick,
             'infoProduct' => $infoProduct,
             //'sumMoney'=> $sumMoney,
             //'sumQuantity' => $sumQuantity,
-            //'sumLinkCount' => $sumLinkCount,
+            'sumLinkCount' => $sumLinkCount,
             'userInfo'=> $userInfo
         ]);
     }

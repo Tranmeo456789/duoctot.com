@@ -28,12 +28,7 @@ $xhtmlAreaSeach = Template::showAreaSearch('product', $params['search']);
                     <table class="mb-0 table table-bordered table-striped table-hover table-head-fixed text-wrap" id="tbList">
                         <tbody>
                             <tr>
-                                <td colspan="2" style="width: 60%" class='text-center'>
-                                    <span class="font-weight-bold">Tổng</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" style="width: 60%" class="text-center">
+                                <td colspan="3" style="width: 100%" class="text-center">
                                  <div class="wp-link-affiliate">
                                     <div>
                                         <p>Thông tin user affiliate: {{$userInfo['fullname']}}-{{$userInfo['phone']}}-{{$userInfo['email']}}</p>
@@ -55,6 +50,12 @@ $xhtmlAreaSeach = Template::showAreaSearch('product', $params['search']);
                                  </div>
                                 </td>
                             </tr>
+                            <tr>
+                                <td colspan="2" style="width: 85%" class='text-center'>
+                                    <span class="font-weight-bold">Tổng SLTT link</span>
+                                </td>
+                                <td scope="row" style="width: 15%" class="text-center">{{$sumLinkCount??0}}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -67,6 +68,7 @@ $xhtmlAreaSeach = Template::showAreaSearch('product', $params['search']);
                             <tr class="row-heading">
                                 <th>STT</th>
                                 <th>Thông tin sản phẩm</th>
+                                <th>SLTT link</th>
                             </tr>
                         </thead>
                         @php
@@ -83,10 +85,11 @@ $xhtmlAreaSeach = Template::showAreaSearch('product', $params['search']);
                                 $linkAffiliate=route('fe.product.detail', ['slug' => $val['slug'], 'codeRef' => $codeRef]);
                                 $name = Hightlight::show($val['name'], $params['search'], 'name');
                                 $moneyDiscountRef=($val['discount_ref']*$val['discount_tdoctor']/10000)*$val['price']??0;
+                                $sumClick = array_key_exists($val->id, $infoProductClick) ? $infoProductClick[$val->id] : 0;
                                 @endphp
                             <tr>
                                 <td scope="row" style="width: 5%">{{$index}}</td>
-                                <td style="width: 55%" class='name'>
+                                <td style="width: 80%" class='name'>
                                     <div><span class="text-success">{!! $name !!}</span></div>
                                     <div>Giá: <span class="text-danger">{{MyFunction::formatNumber($val['price'])}} đ</span></div>
                                     <div>Hoa hồng(~): <span class="text-danger">{{MyFunction::formatNumber($moneyDiscountRef)}} vnđ</span></div>
@@ -98,6 +101,7 @@ $xhtmlAreaSeach = Template::showAreaSearch('product', $params['search']);
                                         </span>
                                     </div>
                                 </td>
+                                <td scope="row" style="width: 15%" class="text-center">{{ $sumClick }}</td>
                             </tr>
                             @endforeach
                         @else

@@ -326,7 +326,7 @@ class MessageController extends ApiController
             $request->session()->put('user', $params['user']);
             $infoUserSend = (array)$data_token['payload'];
             $roomIdCurrent = 0;
-            if (!$request->roomId) {
+            if (!$request->roomId || !is_numeric($request->roomId)) {
                 $existRoom = (new RoomModel)->where('created_by', $infoUserSend['user_id'])
                     ->where('type_room', $params['type_room'])->first();
                 if (!$existRoom) {
@@ -380,32 +380,33 @@ class MessageController extends ApiController
         $token = $request->header('Tdoctor-Token') ?? 'hhhhh';
         $typeRoom = $request->typeRoom ?? 'group_bac_si';
         $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
-        $listRoom = [];
+        $roomCurrent= [];
+        $paramsMess['page'] = $request->page ?? 1;
+        $paramsMess['perPage'] = $request->perPage ?? 10;
         if ($data_token['message'] == 'OK') {
             $params['user'] =  (array)$data_token['payload'];
             $infoUserGetList = (array)$data_token['payload'];
             if ($infoUserGetList['user_type_id'] == 1) {
                 if ($request->typeRoom) {
-                    $listRoom = (new RoomModel)->listItems(['type_room' => $typeRoom, 'created_by' => $infoUserGetList['user_id']], ['task' => 'frontend-list-items-api']);
-                } else {
-                    $listRoom = (new RoomModel)->listItems(['created_by' => $infoUserGetList['user_id']], ['task' => 'frontend-list-items-api']);
+                    $roomCurrent = RoomModel::where('type_room', $typeRoom)->where('created_by', $infoUserGetList['user_id'])->first();
+                } 
+            }
+        }
+        if(!empty($roomCurrent)){
+            $paramsMess['room_id'] = $roomCurrent->id;
+            $listMessage = (new MessagesModel)->listItems($paramsMess, ['task' => 'frontend-list-items-api']);
+            $listMessage = $listMessage->reverse()->values();
+            foreach ($listMessage as $key => $value) {
+                $role = 0;
+                if ($roomCurrent['created_by'] == $value['user_id']) {
+                    $role = 1;
                 }
-            } else if ($infoUserGetList['user_type_id'] == 2) {
-                $listRoom = (new RoomModel)->listItems(['type_room' => 'group_bac_si'], ['task' => 'frontend-list-items-api']);
-            } else if ($infoUserGetList['user_type_id'] == 5) {
-                $listRoom = (new RoomModel)->listItems(['type_room' => 'group_duoc_si'], ['task' => 'frontend-list-items-api']);
+                $listMessage[$key]['role'] = $role;
+                $listMessage[$key]['user_send'] = $value->userSend();
             }
+            $roomCurrent['list_message'] = $listMessage;
         }
-        foreach ($listRoom as $key => $value) {
-            $item = $value->listMessageLast()->first();
-            $role = 0;
-            if ($value['created_by'] == $item['user_id']) {
-                $role = 1;
-            }
-            $item['role'] = $role;
-            $listRoom[$key]['list_messages'] = $item;
-        }
-        $this->res['data'] = $listRoom;
+        $this->res['data'] = $roomCurrent;
         return $this->setResponse($this->res);
     }
     public function getListMessageInRoomId(Request $request)
@@ -443,21 +444,27 @@ class MessageController extends ApiController
                 $listRoom = (new RoomModel)->listItems(['type_room' => 'group_duoc_si'], ['task' => 'frontend-list-items-api']);
             }
         }
-        foreach ($listRoom as $key => $value) {
-            $item = $value->listMessageLast()->first();
-            $role = 0;
-            if ($value['created_by'] == $item['user_id']) {
-                $role = 1;
+        if(!empty($listRoom)){
+            foreach ($listRoom as $key => $value) {
+                $item = $value->listMessageLast()->first();
+                if($item){
+                    $role = 0;
+                    if ($value['created_by'] == $item['user_id']) {
+                        $role = 1;
+                    }
+                    $item['role'] = $role;
+                    $listRoom[$key]['list_messages'] = $item;
+                    $userCreatedRoom = UsersModel::where('user_id', $value['created_by'])->first();
+                    $listRoom[$key]['list_messages']['user_send'] = [
+                        'user_id' => $userCreatedRoom->user_id ?? '',
+                        'fullname' => $userCreatedRoom->fullname ?? '',
+                        'email' => $userCreatedRoom->email ?? '',
+                        'phone' => $userCreatedRoom->phone ?? ''
+                    ];
+                }else{
+                    $listRoom[$key]['list_messages'] = null;
+                }
             }
-            $item['role'] = $role;
-            $listRoom[$key]['list_messages'] = $item;
-            $userCreatedRoom = UsersModel::where('user_id', $value['created_by'])->first();
-            $listRoom[$key]['list_messages']['user_send'] = [
-                'user_id' => $userCreatedRoom->user_id ?? '',
-                'fullname' => $userCreatedRoom->fullname ?? '',
-                'email' => $userCreatedRoom->email ?? '',
-                'phone' => $userCreatedRoom->phone ?? ''
-            ];
         }
         $this->res['data'] = $listRoom;
         return $this->setResponse($this->res);

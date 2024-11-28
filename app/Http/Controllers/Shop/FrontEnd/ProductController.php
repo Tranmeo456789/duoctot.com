@@ -49,6 +49,17 @@ class ProductController extends ShopFrontEndController
         if (!$item) {
             return redirect()->route('home');
         }
+        if($request->codeRef){
+            $userCodeRef=UsersModel::where('codeRef',$request->codeRef)->first();
+            if($userCodeRef){
+                $existProductAffiliate=AffiliateProductModel::where('product_id',$item['id'])->where('user_id',$userCodeRef['user_id'])->first();
+                if ($existProductAffiliate) {
+                    $existProductAffiliate->increment('sum_click');
+                } else {
+                    (new AffiliateProductModel)->saveItem(['product_id' => $item['id'],'user_id' => $userCodeRef['user_id'],'sum_click' => 1], ['task' => 'add-item']);
+                }
+            }
+        }
         $userInfo = (new UsersModel)->getItem(['user_id' => $item['user_id']],['task'=>'get-item']);
         $albumImageCurrent=!empty($item['albumImageHash']) ? explode('|', $item['albumImageHash']) : [];
         $productViewed  = (isset($_COOKIE["productViewed"]))?json_decode($_COOKIE["productViewed"],true):[];
