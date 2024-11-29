@@ -39,4 +39,10 @@ class MyFunction {
         }
         return $arrChild;
     }
+    public static function formatPhoneNumber($contact) {
+        $firstPart = substr($contact, 0, 4); 
+        $secondPart = substr($contact, 4, 3); 
+        $thirdPart = substr($contact, 7); 
+        return $firstPart . '.' . $secondPart . '.' . $thirdPart;
+    }
 }

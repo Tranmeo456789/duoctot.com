@@ -1,4 +1,6 @@
 @php
+    use App\Helpers\MyFunction;
+
     $imageSrc = isset($userInfo['details']['image']) ? $userInfo['details']['image'] : route('home') . '/laravel-filemanager/fileUpload/nhathuoc/nhathuocmau10.jpg';
     if (isset($userInfo['details']['image']) && $userInfo['details']['image'] != ''){
         $imageSrc  = route('home') . $userInfo['details']['image'];
@@ -6,8 +8,12 @@
         $imageSrc  = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/nhathuocmau10.jpg';
     }
     $imageMap = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/mapduphong.jpeg';
-    $phoneContact = $userInfo['phone'] != '' ? $userInfo['phone'] : '0345488247';
-    $phoneShop=implode('.', str_split($phoneContact, 4));
+    if($userInfo['user_type_id']==9){
+        $phoneContact = '0345488247';
+    }else{
+        $phoneContact = $userInfo['phone'] != '' ? $userInfo['phone'] : '0345488247';
+    }
+    $phoneShop=MyFunction::formatPhoneNumber($phoneContact);
 @endphp
 
 @extends('shop.layouts.frontend')

@@ -14,12 +14,7 @@
     z-index: 10;
 }
 </style>
-@php
-    $contact=$item['contact']??'0345488247';
-@endphp
-<div class="mt-3">
-    <span class="contact-buy">Liên hệ Hotline <span class="phone">{{ implode('.', str_split($contact, 4)) }}</span></span>
-</div>
+
 <div class="pnote-view d-flex">
     <div>
         <div class="roud25y-img"><img src="{{asset('images/shop/star2.png')}}" alt=""></div>

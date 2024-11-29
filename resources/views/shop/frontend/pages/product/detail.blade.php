@@ -1,6 +1,9 @@
 @php
-use Illuminate\Support\Str;
+    use Illuminate\Support\Str;
+    use App\Helpers\MyFunction;
 
+    $contact=$item['contact']??'0345488247';
+    $contact=MyFunction::formatPhoneNumber($contact);
 @endphp
 @extends('shop.layouts.frontend')
 @section('content')
@@ -128,6 +131,9 @@ use Illuminate\Support\Str;
                         <input type="hidden" id="code_ref" value="{{$codeRef??''}}">
                         <input type="hidden" id="user_sell" value="{{$item->userProduct->user_id}}">
                     </div>
+                </div>
+                <div class="mt-3 text-center">
+                    <span class="contact-buy">Liên hệ Hotline <span class="phone">{{$contact}}</span></span>
                 </div>
                 <div class="commit-tdoctor text-center">
                     @include("$moduleName.pages.$controllerName.child_detail.commit_tdoctor")

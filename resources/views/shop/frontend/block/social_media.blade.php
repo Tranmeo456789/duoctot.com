@@ -67,10 +67,10 @@
             <a href='tel:0345488247' rel="nofollow" title="Call Tdoctor" previewlistener="true">Call</a>
         </li>
         <li id="icon-fixed__zalo">
-            <a class="image-contact" href="https://zalo.me/0345488247" rel="nofollow" target="_blank" title="Zalo" previewlistener="true">
+            <a class="image-contact" href="https://zalo.me/0393167234" rel="nofollow" target="_blank" title="Zalo" previewlistener="true">
                 <img src="https://nhakhoathuyanh.com/wp-content/uploads/2024/05/zalo.webp" alt="Zalo Tdoctor">
             </a>
-            <a href="https://zalo.me/0345488247" rel="nofollow" target="_blank" title="Zalo Tdoctor" previewlistener="true">Zalo</a>
+            <a href="https://zalo.me/0393167234" rel="nofollow" target="_blank" title="Zalo Tdoctor" previewlistener="true">Zalo</a>
         </li>
         <li id="icon-fixed__youtube">
             <a class="image-contact" href="https://www.youtube.com/@tdoctor8100" rel="nofollow" target="_blank" title="Youtube" previewlistener="true">
