@@ -107,7 +107,7 @@ class ProductModel extends BackEndModel
         }
         if ($options['task'] == "user-list-items-simple-affiliate") {
             $query = $this::with('unitProduct')
-                            ->select('id','slug','name','price','image','discount_ref','discount_tdoctor','created_at', 'updated_at')->where('id','>',1);
+                            ->select('id','slug','name','price','image','discount_ref','discount_tdoctor','created_at', 'updated_at')->where('id','>',1)->where('status_product','da_duyet');
             if (isset($params['group_id'])){
                 $query->whereIn('id',$params['group_id']);
             }
