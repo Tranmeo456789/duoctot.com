@@ -7,6 +7,7 @@ use App\Http\Controllers\Shop\Api\ApiController;
 use App\Model\Shop\AffiliateProductModel;
 use App\Model\Shop\UsersModel;
 use App\Model\Shop\ProductModel as MainModel;
+use App\Model\Shop\ProductModel;
 use \Firebase\JWTCustom\JWTCustom as JWTCustom;
 
 class ProductController extends ApiController
@@ -38,10 +39,21 @@ class ProductController extends ApiController
     }
     public function getListProductFeaturer(Request $request){
         $params=[];
-        $params['order_by'] = $request->order_by ?? 'san_pham_moi';
         $params['type']='noi_bat';
         $this->res['data'] = null;
-        $this->res['data'] = $this->model->listItems($params,['task' => 'frontend-list-items-api'])->take(10);
+        $params['take']=14;
+        if($request->header('Tdoctor-Token')){
+            $token = $request->header('Tdoctor-Token');
+            $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
+            if ($data_token['message'] == 'OK') {
+                $userLogin = (array)$data_token['payload'];
+                $arrProductIdOfUserLogin = ProductModel::where('user_id', $userLogin['user_id'])->orderBy('id', 'desc')->take(4)->pluck('id')->toArray();
+                $params['group_id'] = $arrProductIdOfUserLogin;
+                $this->res['data'] = $this->model->listItems($params,['task' => 'frontend-list-items-feature-api-login']);
+            }
+        }else{
+            $this->res['data'] = $this->model->listItems($params,['task' => 'frontend-list-items-feature-api']);
+        }
         return $this->setResponse($this->res);
     }
     public function index(Request $request)

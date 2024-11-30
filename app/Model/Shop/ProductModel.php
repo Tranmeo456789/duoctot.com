@@ -206,14 +206,16 @@ class ProductModel extends BackEndModel
             if (isset($params['cat_product_id']) && ($params['cat_product_id'] != 0)){
                 $query->whereIn('cat_product_id', CatProductModel::getChild($params['cat_product_id']));
             }
+            if (isset($params['group_id'])) {
+                $query->whereIn('id', $params['group_id']);
+            }
             if (isset($params['type'])){
                 $query->whereRaw("FIND_IN_SET('\"{$params['type']}\"',REPLACE(REPLACE(`featurer`, '[',''),']',''))");
             }
-            if (isset($params['group_id'])){
-                $query->whereIn('id',$params['group_id']);
-            }
-            if(isset($params['user_id'])){
-                $query->where('user_id',$params['user_id']);
+            if (isset($params['user_id'])) {
+                $query->orWhere([
+                    ['user_id', $params['user_id']]
+                ]);
             }
             if(isset($params['offset'])){
                 $query->skip($params['offset']);
@@ -268,6 +270,32 @@ class ProductModel extends BackEndModel
             } else {
                 $result = $query->get();
             }
+        }
+        if ($options['task'] == "frontend-list-items-feature-api") {
+            $query = $this::with('unitProduct')->select('id','name','price','percent_discount','unit_id','image','slug','show_price')->where('status_product','da_duyet');
+            if (isset($params['type'])){
+                $query->whereRaw("FIND_IN_SET('\"{$params['type']}\"',REPLACE(REPLACE(`featurer`, '[',''),']',''))");
+            }
+            if (isset($params['take'])) {
+                $query->orderBy('id', 'desc')->take($params['take']);
+            }
+            $result = $query->get();
+        }
+        if ($options['task'] == "frontend-list-items-feature-api-login") {
+            $query = $this::with('unitProduct')->select('id','name','price','percent_discount','unit_id','image','slug','show_price')->where('status_product','da_duyet');
+            if (isset($params['group_id'])) {
+                $query->whereIn('id', $params['group_id']);
+            }
+            if (isset($params['type'])) {
+                $query->orWhere(function($query) use ($params) {
+                    $query->where('status_product', 'da_duyet')
+                          ->whereRaw("FIND_IN_SET('\"{$params['type']}\"', REPLACE(REPLACE(`featurer`, '[',''),']',''))");
+                });
+            }
+            if (isset($params['take'])) {
+                $query->orderBy('id', 'desc')->take($params['take']);
+            }
+            $result = $query->get();
         }
         if ($options['task'] == "frontend-list-item-shop") {
             $query = $this::select('id', 'name', 'type', 'code', 'cat_product_id', 'price', 'price_vat', 'percent_discount', 'unit_id', 'specification', 'image', 'user_id', 'featurer', 'slug', 'discount_ref', 'dosage_forms', 'elements','show_price')
