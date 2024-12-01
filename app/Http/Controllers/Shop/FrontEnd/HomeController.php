@@ -61,6 +61,10 @@ class HomeController extends ShopFrontEndController
             Cache::put($keyCache, $cacheData, 100000000);
         }
         $couterSumProduct=$couterSumProduct[0]['count']-$numTake;
+        if ($request->has('codeRef')) {
+            $request->session()->put('codeRef', $request->query('codeRef'));
+            $codeRef = $request->codeRef ?? ($request->session()->get('codeRef') ?? '');
+        }
         return view(
             $this->pathViewController . 'index',
             compact('product_selling','product_covid','productInObject','itemsProduct','couterSumProduct','countproductInObject','itemsArticle')

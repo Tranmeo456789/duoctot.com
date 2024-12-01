@@ -31,6 +31,8 @@ class UserController extends Controller
             ]);
         }
         $params = $request->all();
+        $pointAdd=0;
+        $numImportCodeRef=0;
         $params['domain_register'] = config("myconfig.url.prod");
         if ($request->method() == 'POST') {
             $task   = "register";
@@ -40,7 +42,15 @@ class UserController extends Controller
             }
             $userModel = new MainModel();
             $current_user = $userModel->saveItem($params, ['task' => $task]);
-            (new UsersModel)->saveItem(['user_id'=>$current_user->user_id,'codeRef' => 'T'.$current_user->user_id], ['task' => 'update-item-api']);
+            if(!empty($params['ref_register'])){
+                $userShareCodeRef = UsersModel::where('codeRef', $params['ref_register'])->first();
+                if($userShareCodeRef){
+                    $pointAdd=10;
+                    $numImportCodeRef=1;
+                    (new UsersModel)->saveItem(['user_id'=>$userShareCodeRef->user_id,'reward_points'=>$userShareCodeRef->reward_points + $pointAdd], ['task' => 'update-item-api']);
+                }
+            }
+            (new UsersModel)->saveItem(['user_id'=>$current_user->user_id,'codeRef' => 'T'.$current_user->user_id,'reward_points'=>$pointAdd,'num_import_code_ref'=>$numImportCodeRef], ['task' => 'update-item-api']);
             $current_user = UsersModel::where('user_id', $current_user->user_id)->first();
             if (!empty($current_user)){
                 $request->session()->put('user', $current_user);

@@ -14,6 +14,7 @@ use App\Helpers\MyFunction;
 use App\Model\Shop\AffiliateProductModel;
 use App\Model\Shop\ProductModel;
 use App\Model\Shop\ShopProductAddModel;
+use App\Model\Shop\UsersModel;
 use DB;
 use Hash;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
@@ -110,6 +111,19 @@ class UserController extends BackEndController
             $task   = $params['task'];
             $notify = "Cập nhật $this->pageTitle thành công!";
             $redirect_url = route($this->controllerName);
+            if(!empty($params['ref_register'])){
+                $userShareCodeRef = UsersModel::where('codeRef', $params['ref_register'])->first();
+                if($userShareCodeRef){
+                    $userLogin = \Session::get('user');
+                    $userLogin = UsersModel::where('user_id', $userLogin['user_id'])->first();
+                    if($userLogin['num_import_code_ref'] < 2){
+                        $pointAdd=10;
+                        $params['reward_points'] = $userLogin['reward_points']+$pointAdd;
+                        $params['num_import_code_ref'] =  $userLogin['num_import_code_ref']+1;
+                        (new UsersModel)->saveItem(['user_id'=>$userShareCodeRef->user_id,'reward_points'=>$userShareCodeRef->reward_points + $pointAdd], ['task' => 'update-item-api']);
+                    }
+                }
+            }
             if ($this->model->saveItem($params, ['task' => 'update-item'])){
                 $request->session()->put('app_notify', $notify);
                 return response()->json([

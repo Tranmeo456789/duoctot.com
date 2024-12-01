@@ -6,6 +6,7 @@
     
     $formInputWidth['widthInput']  =  'col-12 p-0';
     $inputHiddenTask    = Form::hidden('task', 'register');
+    $codeRef = Session::has('codeRef') ? Session::get('codeRef') : '';
     $elements = [
         [
             'label'   => '',
@@ -37,7 +38,7 @@
             'styleFormGroup' => 'has-border',
         ],[
             'label'   => '',
-            'element' => Form::text('ref_register', null, array_merge($formInputAttr,['placeholder'=>'Nhập Mã giới thiệu (không bắt buộc)'])),
+            'element' => Form::text('ref_register', $codeRef, array_merge($formInputAttr,['placeholder'=>'Nhập Mã giới thiệu (không bắt buộc)'])),
             'type' => 'input-group-addon-image-before',
             'image' => '',
             'widthElement' => 'col-12 p-0',

@@ -182,7 +182,17 @@ class UserController extends ApiController
                             }
                         }
                     }
-                    $this->model->saveItem(['user_id'=>$user->user_id,'codeRef' => 'T'.$user->user_id], ['task' => 'update-item-api']);
+                    $pointAdd=0;
+                    $numImportCodeRef=0;
+                    if(!empty($ref_register)){
+                        $userShareCodeRef = UsersModel::where('codeRef', $ref_register)->first();
+                        if($userShareCodeRef){
+                            $pointAdd=10;
+                            $numImportCodeRef=1;
+                            (new UsersModel)->saveItem(['user_id'=>$userShareCodeRef->user_id,'reward_points'=>$userShareCodeRef->reward_points + $pointAdd], ['task' => 'update-item-api']);
+                        }
+                    }
+                    $this->model->saveItem(['user_id'=>$user->user_id,'codeRef' => 'T'.$user->user_id,'reward_points'=>$pointAdd,'num_import_code_ref'=>$numImportCodeRef], ['task' => 'update-item-api']);
                     $current_user= $this->model->getItem(['user_id'=>$user->user_id],['task'=>'get-item-api']);
                     $data = JWTCustom::encode($current_user, $this->jwt_key);
                     return response()->json([
@@ -350,6 +360,18 @@ class UserController extends ApiController
         if ($data_token['message'] == 'OK') {
             $userCurrent =  (array)$data_token['payload'];
             $params['user_id'] = $userCurrent['user_id'];
+            if(!empty($params['ref_register'])){
+                $userShareCodeRef = UsersModel::where('codeRef', $params['ref_register'])->first();
+                if($userShareCodeRef){
+                    $userLogin = UsersModel::where('user_id',$userCurrent['user_id'])->first();
+                    if($userLogin['num_import_code_ref'] < 2){
+                        $pointAdd=10;
+                        $params['reward_points'] = $userLogin['reward_points']+$pointAdd;
+                        $params['num_import_code_ref'] =  $userLogin['num_import_code_ref']+1;
+                        (new UsersModel)->saveItem(['user_id'=>$userShareCodeRef->user_id,'reward_points'=>$userShareCodeRef->reward_points + $pointAdd], ['task' => 'update-item-api']);
+                    }
+                }
+            }
             $this->model->saveItem($params,['task'=>'update-item-api']);
             $this->res['data']= null;
         }
@@ -364,7 +386,9 @@ class UserController extends ApiController
         $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
         if ($data_token['message'] == 'OK') {
             $userCurrent =  (array)$data_token['payload'];
-            $this->res['data']= $this->model->getItem(['user_id'=>$userCurrent['user_id']],['task'=>'get-item-api']);
+            $infoUserCurrent=$this->model->getItem(['user_id'=>$userCurrent['user_id']],['task'=>'get-item-api']);
+            $infoUserCurrent->url_share=url('/') . '?codeRef=' . $infoUserCurrent['codeRef'];
+            $this->res['data']= $infoUserCurrent;
         }
         return $this->setResponse($this->res);
     }

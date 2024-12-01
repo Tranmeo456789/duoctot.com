@@ -10,6 +10,8 @@ use App\Model\Shop\ProvinceModel;
 use App\Model\Shop\DistrictModel;
 use App\Model\Shop\WardModel;
 use App\Model\Shop\AffiliateModel;
+use App\Model\Shop\UsersModel;
+
 class ProfileController extends BackEndController
 {
     public function __construct()
@@ -79,6 +81,19 @@ class ProfileController extends BackEndController
             if ($task == 'change-password') {
                 $notify = "Thay đổi mật khẩu thành công!";
                 $redirect_url = route($this->controllerName .'.password');
+            }
+            if(!empty($params['ref_register'])){
+                $userShareCodeRef = UsersModel::where('codeRef', $params['ref_register'])->first();
+                if($userShareCodeRef){
+                    $userLogin = \Session::get('user');
+                    $userLogin = UsersModel::where('user_id', $userLogin['user_id'])->first();
+                    if($userLogin['num_import_code_ref'] < 2){
+                        $pointAdd=10;
+                        $params['reward_points'] = $userLogin['reward_points'] + $pointAdd;
+                        $params['num_import_code_ref'] =  $userLogin['num_import_code_ref'] + 1;
+                        (new UsersModel)->saveItem(['user_id'=>$userShareCodeRef->user_id,'reward_points'=>$userShareCodeRef->reward_points + $pointAdd], ['task' => 'update-item-api']);
+                    }
+                }
             }
             if ($this->model->saveItem($params, ['task' => 'update-item'])){
                 $request->session()->put('app_notify', $notify);

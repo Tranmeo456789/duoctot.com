@@ -18,6 +18,8 @@
                             );
     $formSelect2GetChildAttr = MyFunction::array_fill_muti_values($formSelect2GetChildAttr);
     $star             = config('myconfig.template.star');
+    $noteCodeRef="<small class='text-red ml-2'>(dùng mã này để chia sẻ cho người khác)</small>";
+    $noteRefRegister="<small class='text-red ml-2'>(mã của người dùng khác chia sẻ cho tôi)</small>";
     $formInputWidth['widthInput']  =  'col-12';
     $inputHiddenID    = Form::hidden('user_id', $item['user_id']??null);
     $inputHiddenTask    = Form::hidden('task', 'update-item');
@@ -26,13 +28,13 @@
     $linkGetListWard = route('ward.getListByParentID',['parentID' => 'value_new']);
     $elements = [
         [
-            'label'   => HTML::decode(Form::label('codeRef', 'Mã của tôi', $formLabelAttr)),
+            'label'   => HTML::decode(Form::label('codeRef', 'Mã của tôi'.$noteCodeRef, $formLabelAttr)),
             'element' => Form::text('codeRef', $item['codeRef']??null, array_merge($formInputAttr,['placeholder'=>'Mã của tôi','readonly' => 'readonly'])),
             'widthElement' => 'col-12 col-md-6',
             'type' => 'input-has-copy'
         ],
         [
-            'label'   => HTML::decode(Form::label('ref_register', 'Mã giới thiệu' .  $star, $formLabelAttr)),
+            'label'   => HTML::decode(Form::label('ref_register', 'Mã giới thiệu'.$noteRefRegister, $formLabelAttr)),
             'element' => Form::text('ref_register', $item['ref_register']??null, array_merge($formInputAttr,['placeholder'=>'Mã giới thiệu'])),
             'widthElement' => 'col-12 col-md-6'
         ],
