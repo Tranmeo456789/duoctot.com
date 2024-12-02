@@ -41,14 +41,26 @@ class ProductController extends ApiController
         $params=[];
         $params['type']='noi_bat';
         $this->res['data'] = null;
-        $params['take']=14;
+        //$params['take']=14;
         if($request->header('Tdoctor-Token')){
             $token = $request->header('Tdoctor-Token');
             $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
             if ($data_token['message'] == 'OK') {
                 $userLogin = (array)$data_token['payload'];
-                $arrProductIdOfUserLogin = ProductModel::where('user_id', $userLogin['user_id'])->orderBy('id', 'desc')->take(4)->pluck('id')->toArray();
-                $params['group_id'] = $arrProductIdOfUserLogin;
+                $userLogin=UsersModel::where('user_id', $userLogin['user_id'])->first();
+                $arrProductIdOfUserLogin = ProductModel::where('user_id', $userLogin['user_id'])->orderBy('id', 'desc')->take(10)->pluck('id')->toArray() ?? [];
+                $userShareCodeRef=[];
+                $arrProductIdShowLimited =[];
+                if(!empty($userLogin['ref_register'])){
+                    $userShareCodeRef=UsersModel::where('codeRef', $userLogin['ref_register'])->first();
+                    if($userShareCodeRef){
+                        $arrProductIdOfUserShareCodeRef = ProductModel::where('user_id', $userShareCodeRef['user_id'])->orderBy('id', 'desc')->take(10)->pluck('id')->toArray() ?? [];
+                        $arrProductIdAddShop=collect($userShareCodeRef->listIdProduct)->pluck('product_id')->take(10)->toArray() ?? [];
+                        $arrProductIdShow=array_merge($arrProductIdOfUserLogin, $arrProductIdOfUserShareCodeRef, $arrProductIdAddShop);
+                        $arrProductIdShowLimited = array_slice($arrProductIdShow, 0, 10);
+                    }
+                }
+                $params['group_id'] = $arrProductIdShowLimited;
                 $this->res['data'] = $this->model->listItems($params,['task' => 'frontend-list-items-feature-api-login']);
             }
         }else{

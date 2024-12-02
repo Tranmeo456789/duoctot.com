@@ -1,8 +1,8 @@
-<div class="content-comment-product">
-    @include("$moduleName.pages.$controllerName.child_drugstore.content_comment")
-</div>
 <div class="question-often content-rating-product mt-3">
     @include("$moduleName.pages.$controllerName.child_drugstore.content_rating")
+</div>
+<div class="content-comment-product">
+    @include("$moduleName.pages.$controllerName.child_drugstore.content_comment")
 </div>
 <div class="modal" id="ratingModal">
     <div class="modal-dialog" role="document">
