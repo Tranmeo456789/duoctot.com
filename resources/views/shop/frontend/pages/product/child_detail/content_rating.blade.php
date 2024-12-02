@@ -36,6 +36,7 @@ $ratingPercentages=(new CommentModel)->ratingPercentages(['product_id'=>$item['i
         </div>
     </div>
 </div>
+<hr>
 <ul class="list-comment position-relative">
     @if(count($ratingProduct)>0)
     @foreach($ratingProduct as $val)
