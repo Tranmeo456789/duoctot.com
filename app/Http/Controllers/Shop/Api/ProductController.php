@@ -50,10 +50,10 @@ class ProductController extends ApiController
                 $userLogin=UsersModel::where('user_id', $userLogin['user_id'])->first();
                 $arrProductIdOfUserLogin = ProductModel::where('user_id', $userLogin['user_id'])->orderBy('id', 'desc')->take(10)->pluck('id')->toArray() ?? [];
                 $userShareCodeRef=[];
-                $arrProductIdShowLimited =[];
+                $arrProductIdShowLimited =$arrProductIdOfUserLogin;
                 if(!empty($userLogin['ref_register'])){
                     $userShareCodeRef=UsersModel::where('codeRef', $userLogin['ref_register'])->first();
-                    if($userShareCodeRef){
+                    if(!empty($userShareCodeRef)){
                         $arrProductIdOfUserShareCodeRef = ProductModel::where('user_id', $userShareCodeRef['user_id'])->orderBy('id', 'desc')->take(10)->pluck('id')->toArray() ?? [];
                         $arrProductIdAddShop=collect($userShareCodeRef->listIdProduct)->pluck('product_id')->take(10)->toArray() ?? [];
                         $arrProductIdShow=array_merge($arrProductIdOfUserLogin, $arrProductIdOfUserShareCodeRef, $arrProductIdAddShop);
