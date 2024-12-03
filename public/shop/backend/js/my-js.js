@@ -592,7 +592,10 @@ $(document).on('click', '#checkAll', function(event) {
     var checkAllStatus = $(this).prop('checked');
     $('input[name="info_product[]"]').prop('checked', checkAllStatus);
 });
-
+$(document).on('click', '.checlAllInCat', function(event) {
+    var checkAllStatus = $(this).prop('checked');
+    $(this).closest('.card').find('input[name="info_product[]"]').prop('checked', checkAllStatus);
+});
 $(document).on('click', 'input[name="info_product[]"]', function(event) {
     if ($('input[name="info_product[]"]:checked').length === $('input[name="info_product[]"]').length) {
         $('#checkAll').prop('checked', true);

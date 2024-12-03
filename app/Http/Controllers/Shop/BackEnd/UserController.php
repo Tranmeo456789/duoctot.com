@@ -12,6 +12,7 @@ use App\Model\Shop\WardModel;
 use App\Model\Shop\AffiliateModel;
 use App\Helpers\MyFunction;
 use App\Model\Shop\AffiliateProductModel;
+use App\Model\Shop\CatProductModel;
 use App\Model\Shop\ProductModel;
 use App\Model\Shop\ShopProductAddModel;
 use App\Model\Shop\UsersModel;
@@ -267,7 +268,6 @@ class UserController extends BackEndController
     }
     public function formAddProductShop(Request $request)
     {
-        $item = null;
         $infoProduct=[];
         $userInfo=[];
         if ($request->userId !== null) {
@@ -275,10 +275,10 @@ class UserController extends BackEndController
             if($userInfo['is_add_product'] == 1){
                 $infoProduct= collect($userInfo->listIdProduct)->pluck('product_id')->toArray();
             }
-            $itemsProduct = (new ProductModel())->listItems(['status_product'=>'da_duyet'], ['task' => 'admin-list-items-in-selectbox']);
+            $itemsCatLevel2 = (new CatProductModel())->listItems(null, ['task' => 'frontend-list-items-level-2']);
             return view(
                 $this->pathViewController .  'form_add_product_shop',
-                compact('item', 'itemsProduct','infoProduct','userInfo')
+                compact('infoProduct','userInfo','itemsCatLevel2')
             );
         }  
     }

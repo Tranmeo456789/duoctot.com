@@ -9,9 +9,7 @@ use Illuminate\Support\Str;
 $arrTypeUser = config('myconfig.template.type_user');
 $temp=0;
 $label = config('myconfig.template.label');
-$formLabelAttr = MyFunction::array_fill_muti_values(array_merge_recursive(
-config('myconfig.template.form_element.label'),
-['class' => 'col-12 ']));
+$formLabelAttr = MyFunction::array_fill_muti_values(array_merge_recursive(config('myconfig.template.form_element.label'),['class' => 'col-12 ']));
 $formInputAttr = config('myconfig.template.form_element.input');
 $formNumberAttr = config('myconfig.template.form_element.input_number');
 $formSelect2Attr = config('myconfig.template.form_element.select2');
@@ -27,11 +25,11 @@ $userAffiliate=$userInfo['fullname'].'-'.$userInfo['phone'].'-'.$userInfo['email
 $slugName = Str::slug($userInfo['fullname']);
 $linkShop=route('fe.product.drugstore', ['slug' => $slugName,'shopId'=> $userInfo['user_id']]);
 $elementsBtn = [
-[
-'element' => $inputHiddenID .Form::submit('Lưu', ['class'=>'btn btn-primary']),
-'type' => "btn-submit-center"
-]
-];
+        [
+            'element' => $inputHiddenID .Form::submit('Lưu', ['class'=>'btn btn-primary']),
+            'type' => "btn-submit-center"
+        ]
+    ];
 $title = 'Thêm sản phẩm hiển thị trong Shop';
 @endphp
 @extends('shop.layouts.backend')
@@ -56,41 +54,55 @@ $title = 'Thêm sản phẩm hiển thị trong Shop';
                         <h6>Link shop hiển thị danh sách sản phẩm:<a href="{{ $linkShop }}" target="_blank">{{ $linkShop }}</a></h6>
                         <div class="font-weight-bold my-2">Danh sách sản phẩm hiển thị trong Shop:</div>
                         <div>
-                            <div class="font-weight-bold text-right mr-5">Thao tác check all(chọn tất cả sản phẩm) <input id="checkAll" type="checkbox" {{ isset($infoProduct) && count($infoProduct) == count($itemsProduct) ? 'checked' : '' }}></div>
-                            <div class="card card-primary">
-                                @include("$moduleName.blocks.x_title", ['title' => 'Danh sách sản phẩm'])
-                                <div class="card-body p-0">
+                            <div class="font-weight-bold text-right mr-5">Thao tác check all(chọn tất cả sản phẩm) <input id="checkAll" type="checkbox"></div>
+                            @foreach($itemsCatLevel2 as $itemCat)
+                                @php
+                                $products=(new ProductModel())->listItems(['status_product'=>'da_duyet','cat_product_id'=>$itemCat['id']],['task'=>'admin-list-items-in-selectbox']);
+                                @endphp
+                                @if(count($products) > 0)
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title"> <span class="mr-3">{{ $itemCat['name'] }}</span><input class="checlAllInCat" type="checkbox"></h3>
+                                        <div class="card-tools">
+                                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body p-0">
                                     <table class="table table-bordered table-striped table-hover table-head-fixed text-wrap" id="tbList">
-                                        @php
-                                        $temp=0;
-                                        @endphp
-                                        <tbody>
-                                            @if (count($itemsProduct) > 0)
-                                            @foreach ($itemsProduct as $key=>$val)
                                             @php
-                                            $temp++;
+                                            $temp=0;
                                             @endphp
-                                            <tr>
-                                                <td style="width: 10%">{{$temp}}</td>
-                                                <td style="width: 70%" class="img-in-table">
-                                                    <div class="info-product ml-1 d-flex">
-                                                        <p class="text-primary font-weight-bold mb-1">{{$val}}</p>
-                                                    </div>
-                                                </td>
-                                                <td style="width: 20%" class="text-center">
-                                                    <div>
-                                                        <input class="" name="info_product[]" value="{{ $key }}" type="checkbox" {{ in_array($key, $infoProduct ?? [] ) ? 'checked' : '' }}>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                            @else
-                                            @include("$moduleName.blocks.list_empty", ['colspan' => 3])
-                                            @endif
-                                        </tbody>
-                                    </table>
+                                            <tbody>
+                                                @if (count($products) > 0)
+                                                @foreach ($products as $key=>$val)
+                                                @php
+                                                $temp++;
+                                                @endphp
+                                                <tr>
+                                                    <td style="width: 10%">{{$temp}}</td>
+                                                    <td style="width: 70%" class="img-in-table">
+                                                        <div class="info-product ml-1 d-flex">
+                                                            <p class="text-primary font-weight-bold mb-1">{{$val}}</p>
+                                                        </div>
+                                                    </td>
+                                                    <td style="width: 20%" class="text-center">
+                                                        <div>
+                                                            <input class="" name="info_product[]" value="{{ $key }}" type="checkbox" {{ in_array($key, $infoProduct ?? [] ) ? 'checked' : '' }}>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                                @else
+                                                @include("$moduleName.blocks.list_empty", ['colspan' => 3])
+                                                @endif
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                            </div>
+                                @endif
+                            @endforeach
                         </div>
                         <div class="row">
                             {!! FormTemplate::show($elementsBtn,$formInputWidth) !!}

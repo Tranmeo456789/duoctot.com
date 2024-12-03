@@ -398,6 +398,9 @@ class ProductModel extends BackEndModel
             if(isset($params['status_product'])){
                 $query=$query->where('status_product',$params['status_product']);
             }
+            if (isset($params['cat_product_id']) && ($params['cat_product_id'] != 0)){
+                $query->whereIn('cat_product_id', CatProductModel::getChild($params['cat_product_id']));
+            }
             $result = $query->orderBy('name', 'asc')->pluck('name', 'id')->toArray();
         }
         if ($options['task'] == "list-items-search") {
