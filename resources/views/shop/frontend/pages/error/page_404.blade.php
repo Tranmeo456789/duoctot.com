@@ -12,7 +12,7 @@
       <h1 class="error-code">404</h1>
       <p class="error-message">Oops! Page Not Found</p>
       <p class="error-description">The page you are looking for might have been moved or deleted.</p>
-      <a href="/" class="home-link">Go back to Home</a>
+      <a href="{{route('home')}}" class="home-link">Go back to Home</a>
     </div>
   </div>
 </body>

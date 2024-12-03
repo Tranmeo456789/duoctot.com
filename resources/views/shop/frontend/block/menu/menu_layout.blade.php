@@ -12,10 +12,22 @@
     </div> -->
     <div class="head_topon_reponsive">
         <div class="wp-inner">
-            <div class="d-flex justify-content-center">
+            <!-- <div class="d-flex justify-content-center">
                 <div class="d-flex justify-content-center">
                     <div><span class="circle-ripple"></span></div>
                     <p class="p-head-topon">Liên hệ Hotline/Zalo <span class="font-weight-bold text-danger" style="font-size: 20px;"><a href="tel:0345488247" class="text-danger">0345.488.247</a></span></p>
+                </div>
+            </div> -->
+            <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-center">
+                    <div style="width: 30px;"><img src="{{asset('images/shop/icon-app-tdoctor.jpg')}}" alt="Tdoctor"></div>
+                    <div style="font-size: 12px;line-height: 12px;">
+                        <div class="font-weight-bold mb-1">Ứng dụng Tdoctor</div>
+                        <small>Siêu ưu đãi, siêu trải nghiệm</small>
+                    </div>
+                </div>
+                <div class="btn btn-primary btn-sm rounded m-0 p-1" style="font-size: 12px;">
+                    <a href="{{route('fe.home.downloadAppTdoctor')}}" class="text-light font-weight-bold">MỞ ỨNG DỤNG</a>
                 </div>
             </div>
         </div>
@@ -56,7 +68,7 @@
     <div id="form-login-register">
         @include('shop.frontend.block.form_login_register')
     </div>
-    <div id="head-top-respon">
+    <div id="head-top-respon" style="background: #fbfbfb">
         @include("$moduleName.block.box_responsive.box_head_top_responsive")
     </div>
     <div id="head-body">
@@ -70,9 +82,9 @@
                 <div class="flag pt-2">
                     <div class="position-relative">
                         @if(session()->has('locale'))
-                            <img src="{{asset('images/shop/')}}/fg_{{session()->get('locale')}}.png">
+                        <img src="{{asset('images/shop/')}}/fg_{{session()->get('locale')}}.png">
                         @else
-                            <img src="{{asset('images/shop/flag.png')}}">
+                        <img src="{{asset('images/shop/flag.png')}}">
                         @endif
                         <div class="dropdown">
                             <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('lang.language')</button>

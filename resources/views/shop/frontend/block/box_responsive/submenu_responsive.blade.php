@@ -89,19 +89,27 @@ $phoneContact=$phoneContact??'0345488247';
         </div>
     </li>
     @endif
+    <li>
+        <div class="container-menures parentsmenu pb-2">
+            <p><small>Trải nghiệm tốt hơn với ứng dụng TDOCTOR</small></p>
+            <div class="btn btn-primary btn-sm rounded m-0 p-1">
+                <a href="{{route('fe.home.downloadAppTdoctor')}}" style="font-size: 14px;line-height: 10px;" class="text-light font-weight-bold">↓ TẢI NGAY</a>
+            </div>
+        </div>
+    </li>
     <li class="mt-3 pb-3">
         <p class='mb-2'>Nhận tư vấn miễn phí</p>
         <div>
             <a href='https://zalo.me/{{$phoneContact}}' target='_blank'>
                 <div class='d-flex align-items-center'>
                     <div class='icon-contact'><img alt='Zalo' src='{{$iconZalo}}'></div>
-                    <span>Liên hệ Zalo</span>
+                    <span>Liên hệ Zalo(<span class="font-weight-bold text-danger">0345.488.247</span>)</span>
                 </div>
             </a>
             <a href='tel:{{$phoneContact}}'>
                 <div class='d-flex align-items-center'>
                     <div class='icon-contact'><img alt='Zalo' src='{{$iconCall}}'></div>
-                    <span>Gọi điện</span>
+                    <span>Gọi điện(<span class="font-weight-bold text-danger">0345.488.247</span>)</span>
                 </div>
             </a>
         </div>

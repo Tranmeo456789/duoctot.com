@@ -256,4 +256,14 @@ class HomeController extends ShopFrontEndController
             'title'=>$title
         ]);
     }
+    public function downloadAppTdoctor(Request $request){
+        $userAgent = $request->header('User-Agent');
+        if (strpos($userAgent, 'Android') !== false) {
+            return redirect('https://play.google.com/store/apps/details?id=com.app.khambenh.bacsiviet');
+        }
+        if (strpos($userAgent, 'iPhone') !== false || strpos($userAgent, 'iPad') !== false) {
+            return redirect('https://apps.apple.com/vn/app/tdoctor/id1443310734?l=vi');
+        }
+        return view('shop.frontend.pages.error.page_404');
+    }
 }

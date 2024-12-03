@@ -7,6 +7,22 @@ $feedbacks=[
 $imgCustomer=['1.jpg', '2.jpg'];
 @endphp
 <div class="row mx-0">
+    <div class="col-xl-3 col-lg-12 dlapp pb-3 mb-3">
+        <div class="dlapp1">
+            <div class="mb-4">
+                <h6 class="font-weight-bold">TẢI ỨNG DỤNG TDOCTOR</h6>
+                <div class="my-2">Mua thuốc trực tuyến, giao hàng tận nơi dễ dàng và nhanh chóng</div>
+                <div class="d-flex justify-content-center">
+                    <div class="align-self-center d-md-none">
+                        <div class="btn btn-primary btn-sm rounded m-0 p-1">
+                            <a href="{{route('fe.home.downloadAppTdoctor')}}" style="font-size: 14px;line-height: 10px;" class="text-light font-weight-bold">↓ TẢI NGAY</a>
+                        </div>
+                    </div>
+                    <div style="width: 200px;"><img src="{{asset('images/shop/qr-app-tdoctor.jpg')}}" alt="Tdoctor"></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="col-xl-6 col-lg-12">
         <ul>
             @foreach($feedbacks as $val)
@@ -40,8 +56,7 @@ $imgCustomer=['1.jpg', '2.jpg'];
             </li> -->
         </ul>
     </div>
-
-    <div class="col-xl-3 col-lg-12 dlapp pb-0">
+    <!-- <div class="col-xl-3 col-lg-12 dlapp pb-0">
         <div class="dlapp1">
             <div class="mb-4">
                 <h6>App Tdoctor dành cho bệnh nhân</h6>
@@ -54,5 +69,5 @@ $imgCustomer=['1.jpg', '2.jpg'];
                 <div><a href="https://play.google.com/store/apps/details?id=com.app.khambenh.doctor"><img class="lazy" data-src="{{asset('images/shop/app2.png')}}" alt="Tdoctor"></a></div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
