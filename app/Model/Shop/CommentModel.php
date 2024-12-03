@@ -35,7 +35,7 @@ class CommentModel extends BackEndModel
                       ->orWhere('rating', '');
                 });
             }
-            $result =  $query->orderBy('id', 'desc')->get();
+            $result =  $query->get();
             $result = self::buildTree($result);
         }
         return $result;

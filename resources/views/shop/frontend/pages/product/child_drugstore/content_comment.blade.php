@@ -7,15 +7,6 @@ use App\Helpers\MyFunction;
     <span class="btn btn-primary create-comment" data-user="{{Session::get('user')['user_id'] ?? ''}}" data-url="{{route('fe.product.addCommentProduct')}}" data-shop="{{$userInfo['user_id']??$shopId}}" data-parentid="0">Gửi bình luận</span>
   </div>
   <ul class="list-comment position-relative">
-    <div class="btnselecthc">
-      <div class="dropdown">
-        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mới nhất</button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Cũ nhất</a>
-          <a class="dropdown-item" href="#">Hữu ích nhất</a>
-        </div>
-      </div>
-    </div>
     @if(count($commentShop)>0)
     @foreach($commentShop as $val)
     @include("$moduleName.partial.comment",['$commentShop'=>$val])

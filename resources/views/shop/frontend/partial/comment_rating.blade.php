@@ -54,7 +54,7 @@ $firstLetter = 'T';
                 <div class="roud-img text-light rounded-circle text-uppercase">{{$firstLetter}}</div>
             </div>
             <p class="mt-1">
-                <span class="text-primary repply-comment btn" data-commenter-name="{{ $fullname }}" data-comment-id="{{ $val['id'] }}" data-rating="0">Trả lời</span>
+                <span class="text-primary repply-comment btn" data-commenter-name="{{ $fullname }}" data-comment-id="{{ $val['parent_id'] }}" data-rating="0">Trả lời</span>
             </p>
         </div>
     </div>
