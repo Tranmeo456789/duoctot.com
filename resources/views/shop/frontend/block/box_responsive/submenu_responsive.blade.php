@@ -93,7 +93,7 @@ $phoneContact=$phoneContact??'0345488247';
         <div class="container-menures parentsmenu pb-2">
             <p><small>Trải nghiệm tốt hơn với ứng dụng TDOCTOR</small></p>
             <div class="btn btn-primary btn-sm rounded m-0 p-1">
-                <a href="{{route('fe.home.downloadAppTdoctor')}}" style="font-size: 14px;line-height: 10px;" class="text-light font-weight-bold">↓ TẢI NGAY</a>
+                <a href="{{route('fe.home.downloadAppTdoctor')}}" style="font-size: 14px;line-height: 10px;" class="text-light font-weight-bold px-2">↓ TẢI NGAY</a>
             </div>
         </div>
     </li>

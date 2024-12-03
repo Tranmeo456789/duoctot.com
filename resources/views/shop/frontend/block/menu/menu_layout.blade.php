@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="btn btn-primary btn-sm rounded m-0 p-1" style="font-size: 12px;">
-                    <a href="{{route('fe.home.downloadAppTdoctor')}}" class="text-light font-weight-bold">MỞ ỨNG DỤNG</a>
+                    <a href="{{route('fe.home.downloadAppTdoctor')}}" class="text-light font-weight-bold px-2">MỞ ỨNG DỤNG</a>
                 </div>
             </div>
         </div>

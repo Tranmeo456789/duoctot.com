@@ -59,7 +59,7 @@ $title = 'Thêm sản phẩm hiển thị trong Shop';
                             <div class="font-weight-bold text-right mr-5">Thao tác check all(chọn tất cả sản phẩm) <input id="checkAll" type="checkbox" {{ isset($infoProduct) && count($infoProduct) == count($itemsProduct) ? 'checked' : '' }}></div>
                             <div class="card card-primary">
                                 @include("$moduleName.blocks.x_title", ['title' => 'Danh sách sản phẩm'])
-                                <div class="card-body">
+                                <div class="card-body p-0">
                                     <table class="table table-bordered table-striped table-hover table-head-fixed text-wrap" id="tbList">
                                         @php
                                         $temp=0;
