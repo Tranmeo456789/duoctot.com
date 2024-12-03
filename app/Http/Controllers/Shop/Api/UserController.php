@@ -387,7 +387,7 @@ class UserController extends ApiController
         if ($data_token['message'] == 'OK') {
             $userCurrent =  (array)$data_token['payload'];
             $infoUserCurrent=$this->model->getItem(['user_id'=>$userCurrent['user_id']],['task'=>'get-item-api']);
-            $infoUserCurrent->url_share=url('/') . '?codeRef=' . $infoUserCurrent['codeRef'];
+            $infoUserCurrent->url_share=url('/') . '?codeRef=' . $infoUserCurrent['codeRef'] .'&formRegister=1';
             $this->res['data']= $infoUserCurrent;
         }
         return $this->setResponse($this->res);
