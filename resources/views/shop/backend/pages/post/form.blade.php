@@ -36,14 +36,9 @@
             'element' => Form::select('cat_post_id',$itemsCatPost, $item['cat_post_id']??null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
             'widthElement' => 'col-12'
         ],[
-            'label'   => Form::label('','Ảnh đại diện', ['class' => 'col-12 col-form-label']),
-            'element' => Form::label('','Chọn ảnh', ['class' => 'btn btn-primary label-select-image']),
-            'widthInput' => '',
-        ],
-        [
-            'label'   => '',
-            'element' => Template::showImageAndInputSingle('image', $item['image']?? null),
-            'widthInput' => 'col-12',
+            'label'   => HTML::decode(Form::label('image', 'Chọn ảnh đại diện', $formLabelAttr)),
+            'element' => Template::showImageAndInputSingleFile('image', $item['image']?? ($item['details']['image']??null)),
+            'widthInput' => 'col-11',
         ],
         [
             'label'   =>  HTML::decode(Form::label('description', $label['description'] .  $star, $formLabelAttr)),

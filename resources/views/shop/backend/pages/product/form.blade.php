@@ -200,13 +200,8 @@
     $elements = array_merge($elements,
         [
             [
-                'label'   => Form::label('','Ảnh đại diện', ['class' => 'col-1 col-form-label']),
-                'element' => Form::label('','Chọn ảnh', ['class' => 'btn btn-primary label-select-image']),
-                'widthInput' => '',
-            ],
-            [
-                'label'   => '',
-                'element' => Template::showImageAndInputSingle('image', $item['image']?? null),
+                'label'   => HTML::decode(Form::label('image', 'Chọn ảnh đại diện', $formLabelAttr)),
+                'element' => Template::showImageAndInputSingleFile('image', $item['image']?? ($item['details']['image']??null)),
                 'widthInput' => 'col-11',
             ],[
                 'label'   => Form::label('albumImage', 'Album ảnh', ['class' => 'col-1 col-form-label']),

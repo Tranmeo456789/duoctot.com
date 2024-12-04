@@ -52,7 +52,6 @@ class PrescripController extends ShopFrontEndController
                                                                 ['task'=>'admin-list-items-in-selectbox']);
         }
         $stores = (new UsersModel())->listItems(['user_type_id'=>4],['task'=>'list-store-select-of-shop']);
-        return redirect()->route('home');
         return view($this->pathViewController . 'index',compact('user','stores'));
     }
     public function save(Request $request){

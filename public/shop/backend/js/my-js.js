@@ -307,7 +307,19 @@ $(document).ready(function() {
             "margin-bottom": "0px"
         });
     }
-
+    
+    $('#image-file').change(function(event) {
+        var file = event.target.files[0]; 
+        if (file) {
+            // Tạo một FileReader để đọc ảnh
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                // Hiển thị ảnh mới trên thẻ img
+                $('#image-thumb').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(file); // Đọc file dưới dạng URL
+        }
+    });
     $('.datemask').datepicker({
         format: 'dd/mm/yyyy',
         autoclose: true,

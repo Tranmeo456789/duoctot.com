@@ -73,6 +73,13 @@ class PostController extends BackEndController
                 $task   = "edit-item";
                 $notify = "Cập nhật $this->pageTitle thành công!";
             }
+            if ($request->hasFile('new_image_name')) {
+                $file = $request->file('new_image_name');
+                $fileName = time() . '_' . $file->getClientOriginalName();
+                $destinationPath = public_path('fileUpload/post'); 
+                $file->move($destinationPath, $fileName);
+                $params['image'] = '/laravel-filemanager/fileUpload/post/'.$fileName;
+            }
             $params['slug'] = !empty($params['slug']) ? $params['slug'] : Str::slug($params['title']);
             $idCat=$params['cat_post_id'];
             $catPost=(new CatalogModel)->getItem(['id'=>$idCat],['task'=>'get-item']);

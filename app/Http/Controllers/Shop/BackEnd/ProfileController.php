@@ -82,6 +82,13 @@ class ProfileController extends BackEndController
                 $notify = "Thay đổi mật khẩu thành công!";
                 $redirect_url = route($this->controllerName .'.password');
             }
+            if ($request->hasFile('new_image_name')) {
+                $file = $request->file('new_image_name');
+                $fileName = time() . '_' . $file->getClientOriginalName();
+                $destinationPath = public_path('fileUpload/nhathuoc'); 
+                $file->move($destinationPath, $fileName);
+                $params['image'] = '/laravel-filemanager/fileUpload/nhathuoc/'.$fileName;
+            }
             if(!empty($params['ref_register'])){
                 $userShareCodeRef = UsersModel::where('codeRef', $params['ref_register'])->first();
                 if($userShareCodeRef){

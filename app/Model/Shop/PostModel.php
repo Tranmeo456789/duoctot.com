@@ -18,7 +18,7 @@ class PostModel extends BackEndModel
         $this->folderUpload        = 'post';
         $filedSearch               = array_key_exists($this->controllerName, config('myconfig.config.search')) ? $this->controllerName : 'default';
         $this->fieldSearchAccepted = array_diff(config('myconfig.config.search.' . $filedSearch),['all']);
-        $this->crudNotAccepted     = ['_token', 'btn_save','file-del','files'];
+        $this->crudNotAccepted     = ['_token', 'btn_save','file-del','files','new_image_name'];
     }
     public function scopeOfUser($query)
     {

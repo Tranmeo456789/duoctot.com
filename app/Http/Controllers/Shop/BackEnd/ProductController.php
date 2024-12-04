@@ -136,6 +136,13 @@ class ProductController extends BackEndController
             // if ($urlImgBB) {
             //     $params['image'] = $urlImgBB;
             // }
+            if ($request->hasFile('new_image_name')) {
+                $file = $request->file('new_image_name');
+                $fileName = time() . '_' . $file->getClientOriginalName();
+                $destinationPath = public_path('fileUpload/product'); 
+                $file->move($destinationPath, $fileName);
+                $params['image'] = '/laravel-filemanager/fileUpload/product/'.$fileName;
+            }
             $params['slug'] = !empty($params['slug']) ? $params['slug'] : Str::slug($params['name']);
             $this->model->saveItem($params, ['task' => $task]);
             $request->session()->put('app_notify', $notify);

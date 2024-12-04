@@ -190,6 +190,19 @@ class Template {
         ";
         return $xhtml;
     }
+    public static function showImageAndInputSingleFile($name,$filePath='',$params=[]){
+        $thumb = $name . '-thumb';
+        $src = ($filePath)?asset($filePath):'';
+        $xhtml = "
+            <div class='input-group position-relative'>
+                <input id='$name' class='form-control' name='$name' type='hidden' value='$filePath'>
+                <label for='image-file' class='btn btn-primary'>Chọn ảnh đại diện</label>
+                <input type='file' class='position-absolute' name='new_image_name' id='image-file' style='z-index: -1'>
+            </div>
+            <img id='$thumb' style='margin-top:15px;max-height:100px;' src='$src'>
+        ";
+        return $xhtml;
+    }
     public static function showImagePreview ($controllerName, $fileName,$fileAlt,$options = array()) {
         if (isset($options['subFolderUpload'])){
             $fileName = $options['subFolderUpload']. '/' . $fileName;
