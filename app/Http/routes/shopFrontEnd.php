@@ -86,11 +86,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::post('send-messages','MessagesController@sendMessages')->name('fe.messages.sendMessages');
     Route::get('notice-device-token','MessagesController@noticeDeviceToken')->name('fe.messages.noticeDeviceToken');
 
-    Route::get('sitemap.xml', function () {
-        $sitemaps = config('myconfig.urlSitemap');;
-        return view('shop.frontend.pages.home.sitemap', compact('sitemaps'));
-    });
-
+    Route::get('sitemap.xml','HomeController@indexSitemap');
     Route::get('post-sitemap.xml','HomeController@sitemapPost');
     Route::get('page-sitemap.xml','HomeController@sitemapPage');
     Route::get('cat_product-sitemap.xml','HomeController@siteCatProduct');

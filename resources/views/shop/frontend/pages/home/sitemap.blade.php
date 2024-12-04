@@ -1,33 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sitemap</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-<div class="container mt-4">
-    <div class="container">
-        <h6 class="mb-4">This XML Sitemap Index file contains {{ count($sitemaps) }} sitemaps.</h6>
-        <table class="table table-striped">
-            <thead class="">
-            <tr style="background-color: #4275f4; color: white">
-                <th>Sitemap</th>
-                <th>Last Modified</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach ($sitemaps as $sitemap)
-                <tr style="color: #05809e; font-size: 14px; cursor: pointer;" onclick="window.location='{{ $sitemap['url'] }}';">
-                    <td><a style="color: #05809e !important;" href="{{ $sitemap['url'] }}" target="_blank">{{ $sitemap['url'] }}</a></td>
-                    <td>{{ \Carbon\Carbon::parse($sitemap['last_modified'])->format('Y-m-d H:i') }}</td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
-    </div>
-</div>
-</body>
-</html>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    @foreach ($sitemaps as $sitemap)
+    <url>
+        <loc>{{ $sitemap['url'] }}</loc>
+        <lastmod>{{ \Carbon\Carbon::parse($sitemap['last_modified'])->toDateString() }}</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    @endforeach
+</urlset>

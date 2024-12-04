@@ -12,7 +12,7 @@ use App\Model\Shop\CatProductModel;
 use App\Model\Shop\AffiliateModel;
 use App\Model\Shop\PostModel;
 use App\Model\Shop\QuangCaoModel;
-
+use Illuminate\Http\Response;
 class HomeController extends ShopFrontEndController
 {
     public function __construct()
@@ -196,13 +196,21 @@ class HomeController extends ShopFrontEndController
             'title'=>$title
         ]);
     }
+    public function indexSitemap()
+    {
+        $sitemaps = config('myconfig.urlSitemap');
+        $xmlContent = view('shop.frontend.pages.home.sitemap', compact('sitemaps'))->render();
+        return response($xmlContent, 200)->header('Content-Type', 'application/xml');
+        
+    }
     public function getSitemap($filePath)
     {
         if (!file_exists($filePath)) {
             abort(404, 'File not found');
         }
         $links = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        return view('shop.frontend.pages.home.sitemap_detail', compact('links'));
+        $xmlContent = view('shop.frontend.pages.home.sitemap_detail', compact('links'))->render();
+        return response($xmlContent, 200)->header('Content-Type', 'application/xml');
     }
     public function sitemapPost(){
         $filePath = public_path('xml/post.txt');
