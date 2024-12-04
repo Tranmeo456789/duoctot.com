@@ -4,8 +4,10 @@
     use App\Model\Shop\DistrictModel;
     use App\Model\Shop\WardModel;
     use Illuminate\Support\Str;
-    $hotline = ConfigModel::where('name', 'hotline_duoc')->first()->content ?? '';
+    use App\Helpers\MyFunction;
 
+    $hotline = ConfigModel::where('name', 'hotline_duoc')->first()->content ?? '';
+    $hotline=MyFunction::formatPhoneNumber($hotline);
 @endphp
 <div class="table-responsive table-list-drugstore">
     <table class="table table-bordered">
@@ -72,7 +74,7 @@
                             </li>
                             <li>
                                 <img src="{{asset('public/images/shop/dc4.png')}}" alt="MST của Tdoctor.vn">
-                                <span>Số điện thoại: {{($val['phone'] != '') ?$val['phone']:$hotline}}</span>
+                                <span>Số điện thoại: {{$hotline}}</span>
                             </li>
                         </ul>
                     </div>

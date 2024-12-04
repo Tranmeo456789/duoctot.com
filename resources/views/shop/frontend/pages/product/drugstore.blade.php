@@ -8,12 +8,7 @@
         $imageSrc  = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/nhathuocmau10.jpg';
     }
     $imageMap = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/mapduphong.jpeg';
-    if($userInfo['user_type_id']==9){
-        $phoneContact = '0345488247';
-    }else{
-        $phoneContact = $userInfo['phone'] != '' ? $userInfo['phone'] : '0345488247';
-    }
-    $phoneShop=MyFunction::formatPhoneNumber($phoneContact);
+    $phoneShop=MyFunction::formatPhoneNumber('0345488247');
 @endphp
 
 @extends('shop.layouts.frontend')
@@ -24,7 +19,7 @@
     <h6 class="mb-4">THÔNG TIN SHOP</h6>
     <div class="mb-4">
         <div class="row">
-            <div class="cod-12 col-md-6">
+            <div class="cod-12 col-md-6 pb-3">
                 <div class="text-center"><img class="border border-secondary rounded" src="{{ $imageSrc }}" style="width: 300px;" alt=""></div>
                 <div class="mt-3 wp-info-shop">
                     <h6 class="text-danger text-center font-weight-bold">{{$userInfo['fullname']??''}}</h6>
