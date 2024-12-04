@@ -62,7 +62,7 @@
         </li>
         <li id="icon-fixed__messenger">
             <a class="image-contact" href='tel:0345488247' rel="nofollow" title="Gọi điện" previewlistener="true">
-                <img src="https://png.pngtree.com/png-clipart/20230301/original/pngtree-phone-call-icon-logo-symbol-vector-design-transparent-png-image_8967987.png" alt="Gọi điện Tdoctor">
+                <img src="{{asset('images/shop/icon-call-green.jpg')}}" alt="Gọi điện Tdoctor">
             </a>
             <a href='tel:0345488247' rel="nofollow" title="Call Tdoctor" previewlistener="true">Call</a>
         </li>

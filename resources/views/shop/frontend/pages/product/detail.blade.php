@@ -71,7 +71,7 @@
                     <div style="font-size: 22px" class="mb-2">Liên hệ mua lẻ <span class="font-weight-bold" ><a href="tel:0345488247" style="font-size: 30px; color:red">0345.488.247</a></span></div>
                     <div style="font-size: 22px">Liên hệ mua sỉ 
                         <a class="image-contact" href='tel:0345488247' rel="nofollow" title="Gọi điện" previewlistener="true">
-                            <img src="https://png.pngtree.com/png-clipart/20230301/original/pngtree-phone-call-icon-logo-symbol-vector-design-transparent-png-image_8967987.png" alt="Gọi điện Tdoctor" style="width: 45px;">
+                            <img src="{{asset('images/shop/icon-call-green.jpg')}}" alt="Gọi điện Tdoctor" style="width: 45px;">
                         </a>
                     </div>
                 </div>

@@ -57,7 +57,7 @@
     </div>
 </div>
 <div class="wp-inner">
-    <h1 class="d-none">Tdoctor</h1>
+    <h1 class="d-none">Sàn thương mại điện tử trong y dược số 1 Việt Nam</h1>
     <div id="hisd" class="position-relative">
         <div class="d-flex justify-content-center">
             <div id="form-search" class="d-flex justify-content-center">
