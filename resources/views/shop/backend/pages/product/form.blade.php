@@ -208,7 +208,7 @@
                 'element' => Form::file('albumImage[]', array_merge($formInputAttr,['multiple'=>'multiple','accept'=>'image/*'])),
                 'fileAttach'   => (!empty($item['id'])) ? Template::showImageAttachPreview($controllerName, $item['albumImage'],$item['albumImageHash'], $item['id'],['btn' => 'delete']) : null ,
                 'type'    => "fileAttachPreview",
-                'widthInput' => 'col-11' . (Session::get('user')['user_id'] == 864108238 ? '' : ' d-none'),
+                'widthInput' => 'col-11',
             ],[
                 'label'   =>  HTML::decode(Form::label('meta_keywords', $label['meta_keywords'] .  $star, $formLabelAttr)),
                 'element' => Form::textarea('meta_keywords', $item['meta_keywords']?? null, array_merge($formInputAttr,['placeholder'=>$label['meta_keywords'],"rows"=>"5"]))

@@ -13,6 +13,7 @@ use App\Model\Shop\AffiliateModel;
 use App\Model\Shop\AffiliateProductModel;
 use App\Model\Shop\CatalogModel;
 use App\Model\Shop\CatProductModel;
+use App\Model\Shop\CommentModel;
 use App\Model\Shop\ProductModel;
 use App\Model\Shop\OrderModel;
 use App\Model\Shop\ProvinceModel;
@@ -87,9 +88,31 @@ class SearchController extends ShopFrontEndController
     }
     public function updateFieldSearchKeyword(Request $request)
     {
-        // $slugs = ProductModel::orderBy('id', 'desc')->pluck('slug');
+
+        // $products = ProductModel::select('id','image','albumImage','albumImageHash')->get();
+        // foreach($products as $val){
+        //     $image = basename($val['image']);
+        //     $params['albumImage'] = '2.jpeg';
+        //     $params['albumImageHash'] = $image;
+        //     ProductModel::where('id', $val['id'])->update(['albumImage' => '2.jpeg','albumImageHash'=>$image]);
+        // }
+        // return 'ok';
+        //$products = ProductModel::where('status_product', 'da_duyet')->pluck('id');
+        // $commnets=CommentModel::select('id', 'product_id')->where('id','>', 1969)->get();
+        // $params['fullname']='DS Lý Thị Mỹ Ngân';
+        // $params['user_id']=1014110310;
+        // $params['phone']='0937507947';
+        // $params['content']='Cảm ơn bạn đã đánh giá sản phẩm!';
+        // $params['rating']=0;
+        // foreach($commnets as $val){
+        //     $params['parent_id']=$val['id'];
+        //     $params['product_id']=$val['product_id'];
+        //     (new CommentModel)->saveItem($params,['task' => 'add-item']);
+        // }
+        // return 'ok';
+        // $slugs = PostModel::orderBy('id', 'desc')->pluck('slug');
         // $urls = $slugs->map(function ($slug) {
-        //     return 'https://tdoctor.net/chi-tiet-san-pham/' . $slug.'.html';
+        //     return 'https://tdoctor.net/tin-tuc/' . $slug.'.html';
         // });
         // foreach ($urls as $url) {
         //     echo $url . '<br>';
