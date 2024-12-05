@@ -1,6 +1,6 @@
 <div class="form-login">
     <div class="header d-flex justify-content-between">
-        <a class="titlek btn-register">Đăng Ký <span class="text-member">Thành Viên</span></a>
+        <a class="titlek btn-register active-formkn">Đăng Ký <span class="text-member">Thành Viên</span></a>
         <a class="titlen btn-login">Đăng Nhập <span class="text-member">Thành Viên</span></a>
         <button class="btn-closenk rimg-center"><img src="{{asset('images/shop/dn4.png')}}" alt=""></button>
     </div>

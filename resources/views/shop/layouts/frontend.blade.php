@@ -41,4 +41,10 @@
     @include('shop.frontend.block.script')
     @yield('scriptadd')
 </body>
+@if(isset($formRegister) && $formRegister==1)
+    <style>
+        .form-login {display: block;}
+        .black-screen{display: block}
+    </style>
+@endif
 </html>

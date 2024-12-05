@@ -26,8 +26,18 @@ class HomeController extends ShopFrontEndController
     {
         $numTake=10;
         $keyCache = 'cache_product_data';
+        $keyCachePost = 'cache_post_data';
         $dataCache = Cache::get($keyCache);
-
+        $dataPostCache = Cache::get($keyCachePost);
+        if(!empty($dataPostCache)){
+            $itemsArticle = $dataPostCache['itemsArticle'];
+        }else{
+            $itemsArticle = (new PostModel)->listItems(['take'=>5], ['task' => 'frontend-list-items']);
+            $cacheData = [
+                'itemsArticle' => $itemsArticle,
+            ];
+            Cache::put($keyCachePost, $cacheData, 100000000);
+        }
         if (!empty($dataCache)) {
             // Lấy dữ liệu từ cache
             $product_selling = $dataCache['product_selling'];
@@ -36,7 +46,6 @@ class HomeController extends ShopFrontEndController
             $countproductInObject = $dataCache['countproductInObject'];
             $itemsProduct = $dataCache['itemsProduct'];
             $couterSumProduct = $dataCache['couterSumProduct'];
-            $itemsArticle = $dataCache['itemsArticle'];
         } else {
             // Tạo dữ liệu nếu cache trống
             $product_selling = (new ProductModel())->listItems(null, ['task' => 'frontend-list-items'])->take($numTake);
@@ -47,7 +56,6 @@ class HomeController extends ShopFrontEndController
             $itemsProduct['new'] = (new ProductModel())->listItems(['type' => 'new'], ['task' => 'frontend-list-items'])->take(10);
             $itemsProduct['best'] = (new ProductModel())->listItems(['type' => 'noi_bat'], ['task' => 'frontend-list-items'])->take(10);
             $couterSumProduct = (new ProductModel())->countItems(null, ['task' => 'count-items-product-frontend']);
-            $itemsArticle = (new PostModel)->listItems(['take'=>5], ['task' => 'frontend-list-items']);
             // Lưu tất cả dữ liệu vào cache
             $cacheData = [
                 'product_selling' => $product_selling,
@@ -56,7 +64,6 @@ class HomeController extends ShopFrontEndController
                 'countproductInObject' => $countproductInObject,
                 'itemsProduct' => $itemsProduct,
                 'couterSumProduct' => $couterSumProduct,
-                'itemsArticle' => $itemsArticle,
             ];
             Cache::put($keyCache, $cacheData, 100000000);
         }
@@ -65,9 +72,13 @@ class HomeController extends ShopFrontEndController
             $request->session()->put('codeRef', $request->query('codeRef'));
             $codeRef = $request->codeRef ?? ($request->session()->get('codeRef') ?? '');
         }
+        $formRegister =0;
+        if($request->formRegister){
+            $formRegister =1;
+        }
         return view(
             $this->pathViewController . 'index',
-            compact('product_selling','product_covid','productInObject','itemsProduct','couterSumProduct','countproductInObject','itemsArticle')
+            compact('product_selling','product_covid','productInObject','itemsProduct','couterSumProduct','countproductInObject','itemsArticle','formRegister')
         );
     }
     public function ajaxHoverCatLevel1(Request $request)

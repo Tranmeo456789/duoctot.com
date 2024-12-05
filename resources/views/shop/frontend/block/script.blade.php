@@ -20,18 +20,6 @@
         }
     });
 </script>
-<script>
-    window.onload = function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const formRegister = urlParams.get('formRegister');
-        if (formRegister === '1') {
-            const registerButton = document.querySelector('.btn-register');
-            if (registerButton) {
-                registerButton.click();
-            }
-        }
-    };
-</script>
 <script src="{{ asset('/shop/frontend/js/combined_library.min.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/shop/frontend/js/my-js.min.js')}}?t=@php echo time() @endphp" type="text/javascript"></script>
 <script src="https://www.googletagmanager.com/gtag/js?id=G-PZKFD196QW" defer></script>
