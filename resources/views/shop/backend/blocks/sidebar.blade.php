@@ -106,7 +106,7 @@
                     </ul>
                 </li>
             @endif
-            @if (Session::has('user'))
+            @if (Session::has('user') && Session::get('user')['is_admin'] != 1)
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fab fa-first-order"></i>

@@ -17,31 +17,31 @@
                 <div class="social">
                     <div class="d-flex">
                         <div class="icon-social">
-                            <a href="https://www.facebook.com/tdoctoronline/"><img src="{{asset('images/shop/ict1.png')}}" alt="tdoctor"></a>
+                            <a href="https://www.facebook.com/tdoctoronline/"><img src="{{asset('images/shop/ict1.webp')}}" alt="tdoctor"></a>
                         </div>
                         <p><a href="https://www.facebook.com/tdoctoronline/">Facebook</a></p>
                     </div>
                     <div class="d-flex">
                         <div class="icon-social">
-                            <a href="https://twitter.com/TDoctor2"><img src="{{asset('images/shop/ict2.png')}}" alt="tdoctor"></a>
+                            <a href="https://twitter.com/TDoctor2"><img src="{{asset('images/shop/ict2.webp')}}" alt="tdoctor"></a>
                         </div>
                         <p><a href="https://twitter.com/TDoctor2">Twitter</a></p>
                     </div>
                     <div class="d-flex">
                         <div class="icon-social">
-                            <a href="https://www.linkedin.com/in/tdoctor"><img src="{{asset('images/shop/ict3.png')}}" alt="tdoctor"></a>
+                            <a href="https://www.linkedin.com/in/tdoctor"><img src="{{asset('images/shop/ict3.webp')}}" alt="tdoctor"></a>
                         </div>
                         <p><a href="https://www.linkedin.com/in/tdoctor">Linkedin</a></p>
                     </div>
                     <div class="d-flex">
                         <div class="icon-social">
-                            <a href="https://www.youtube.com/channel/UCm3h1QVkgGg6xvyEHElMx7Q/videos"><img src="{{asset('images/shop/ict4.png')}}" alt="tdoctor"></a>
+                            <a href="https://www.youtube.com/channel/UCm3h1QVkgGg6xvyEHElMx7Q/videos"><img src="{{asset('images/shop/ict4.webp')}}" alt="tdoctor"></a>
                         </div>
                         <p><a href="https://www.youtube.com/channel/UCm3h1QVkgGg6xvyEHElMx7Q/videos">Youtube</a></p>
                     </div>
                     <div class="d-flex">
                         <div class="icon-social">
-                            <a href="https://www.instagram.com/tdoctorcom/"><img src="{{asset('images/shop/ict5.png')}}" alt="tdoctor"></a>
+                            <a href="https://www.instagram.com/tdoctorcom/"><img src="{{asset('images/shop/ict5c.webp')}}" alt="tdoctor"></a>
                         </div>
                         <p><a href="https://www.instagram.com/tdoctorcom/">Instagram</a></p>
                     </div>

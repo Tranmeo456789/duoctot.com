@@ -23,6 +23,7 @@ use Kreait\Firebase\Messaging\Notification;
 use Google_Client;
 use Google\Client as GoogleClient;
 use Exception;
+use Illuminate\Support\Facades\Redis;
 
 class MessageController extends ApiController
 {
@@ -314,6 +315,63 @@ class MessageController extends ApiController
             ]);
         }
     }
+    // public function sendMessage(Request $request)
+    // {
+    //     $this->res['data'] = null;
+    //     $params['content'] = $request->content ?? '';
+    //     $params['type_room'] = $request->typeRoom ?? 'group_bac_si';
+    //     $token = $request->header('Tdoctor-Token');
+    //     $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
+    //     if ($data_token['message'] == 'OK') {
+    //         $params['user'] =  (array)$data_token['payload'];
+    //         $request->session()->put('user', $params['user']);
+    //         $infoUserSend = (array)$data_token['payload'];
+    //         $roomIdCurrent = 0;
+    //         if (!$request->roomId || !is_numeric($request->roomId)) {
+    //             $existRoom = (new RoomModel)->where('created_by', $infoUserSend['user_id'])
+    //                 ->where('type_room', $params['type_room'])->first();
+    //             if (!$existRoom) {
+    //                 $paramsRoom['name'] = 'room_' . $infoUserSend['user_id'] . '_' . $params['type_room'];
+    //                 $paramsRoom['type_room'] = $params['type_room'];
+    //                 $paramsRoom['created_by'] = $infoUserSend['user_id'];
+    //                 $roomCurrent = (new RoomModel)->saveItem($paramsRoom, ['task' => 'add-item']);
+    //                 (new RoomUserModel)->saveItem(['room_id' => $roomCurrent['id'], 'user_id' => $infoUserSend['user_id']], ['task' => 'add-item']);
+    //                 if ($params['type_room'] == 'group_bac_si') {
+    //                     (new RoomUserModel)->saveItem(['room_id' => $roomCurrent['id'], 'user_id' => 90007044], ['task' => 'add-item']);
+    //                 } else if ($params['type_room'] == 'group_duoc_si') {
+    //                     (new RoomUserModel)->saveItem(['room_id' => $roomCurrent['id'], 'user_id' => 1014110310], ['task' => 'add-item']);
+    //                 }
+    //             } else {
+    //                 $roomCurrent = $existRoom;
+    //             }
+    //             $paramsMessage = [];
+    //             $paramsMessage['room_id'] = $roomCurrent->id;
+    //             $roomIdCurrent = $roomCurrent->id;
+    //             $paramsMessage['content'] = $params['content'];
+    //             $paramsMessage['user_id'] = $infoUserSend['user_id'];
+    //             $this->model->saveItem($paramsMessage, ['task' => 'add-item']);
+    //         } else {
+    //             $paramsMessage['room_id'] = $request->roomId ?? 0;
+    //             $roomIdCurrent = $request->roomId ?? 0;
+    //             $paramsMessage['content'] = $params['content'];
+    //             $paramsMessage['user_id'] = $infoUserSend['user_id'];
+    //             $this->model->saveItem($paramsMessage, ['task' => 'add-item']);
+    //         }
+    //         $listUserInRoom = RoomUserModel::where('room_id', $roomIdCurrent)->pluck('user_id');
+    //         $title='Tin nhắn mới';
+    //         $body=$params['content'];
+    //         foreach ($listUserInRoom as $value) {
+    //             if($value!=$infoUserSend['user_id']){
+    //                 $UserTokenCurrent=UserTokenModel::where('user_id', $value)->first();
+    //                 $deciveToken=$UserTokenCurrent['token']??'';
+    //                 $this->sendNotificationFromReciver($deciveToken,$title,$body);
+    //             }
+    //         }
+    //         $this->res['data'] = [];
+    //         $this->res['message']  = 'Gửi tin nhắn thành công!';
+    //     }
+    //     return $this->setResponse($this->res);
+    // }
     public function sendMessage(Request $request)
     {
         $this->res['data'] = null;
@@ -321,20 +379,27 @@ class MessageController extends ApiController
         $params['type_room'] = $request->typeRoom ?? 'group_bac_si';
         $token = $request->header('Tdoctor-Token');
         $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
+
         if ($data_token['message'] == 'OK') {
             $params['user'] =  (array)$data_token['payload'];
             $request->session()->put('user', $params['user']);
             $infoUserSend = (array)$data_token['payload'];
             $roomIdCurrent = 0;
+
+            // Kiểm tra và tạo phòng nếu chưa có
             if (!$request->roomId || !is_numeric($request->roomId)) {
                 $existRoom = (new RoomModel)->where('created_by', $infoUserSend['user_id'])
                     ->where('type_room', $params['type_room'])->first();
+
                 if (!$existRoom) {
+                    // Tạo phòng mới nếu không có
                     $paramsRoom['name'] = 'room_' . $infoUserSend['user_id'] . '_' . $params['type_room'];
                     $paramsRoom['type_room'] = $params['type_room'];
                     $paramsRoom['created_by'] = $infoUserSend['user_id'];
                     $roomCurrent = (new RoomModel)->saveItem($paramsRoom, ['task' => 'add-item']);
                     (new RoomUserModel)->saveItem(['room_id' => $roomCurrent['id'], 'user_id' => $infoUserSend['user_id']], ['task' => 'add-item']);
+
+                    // Thêm bác sĩ hoặc dược sĩ vào nhóm nếu cần
                     if ($params['type_room'] == 'group_bac_si') {
                         (new RoomUserModel)->saveItem(['room_id' => $roomCurrent['id'], 'user_id' => 90007044], ['task' => 'add-item']);
                     } else if ($params['type_room'] == 'group_duoc_si') {
@@ -343,6 +408,8 @@ class MessageController extends ApiController
                 } else {
                     $roomCurrent = $existRoom;
                 }
+
+                // Lưu tin nhắn vào database
                 $paramsMessage = [];
                 $paramsMessage['room_id'] = $roomCurrent->id;
                 $roomIdCurrent = $roomCurrent->id;
@@ -356,23 +423,35 @@ class MessageController extends ApiController
                 $paramsMessage['user_id'] = $infoUserSend['user_id'];
                 $this->model->saveItem($paramsMessage, ['task' => 'add-item']);
             }
+
+            // Lấy danh sách người dùng trong phòng
             $listUserInRoom = RoomUserModel::where('room_id', $roomIdCurrent)->pluck('user_id');
-            $title='Tin nhắn mới';
-            $body=$params['content'];
+
+            // Gửi thông báo đến người dùng qua Firebase (hoặc hệ thống notification khác)
+            $title = 'Tin nhắn mới';
+            $body = $params['content'];
             foreach ($listUserInRoom as $value) {
-                if($value!=$infoUserSend['user_id']){
-                    $UserTokenCurrent=UserTokenModel::where('user_id', $value)->first();
-                    $deciveToken=$UserTokenCurrent['token']??'';
-                    $this->sendNotificationFromReciver($deciveToken,$title,$body);
+                if ($value != $infoUserSend['user_id']) {
+                    $UserTokenCurrent = UserTokenModel::where('user_id', $value)->first();
+                    $deciveToken = $UserTokenCurrent['token'] ?? '';
+                    $this->sendNotificationFromReciver($deciveToken, $title, $body);
                 }
             }
-            // $deciveToken='eiVQ6aUZT5GLcW7ZIc0UvU:APA91bGjuAxZ_zErJIHchs4kMjxrc5yJtGCMOgx_ojvETii0CS04wgBJEpCifokugCV1LSmlpx7psUSV3VpDrBn4OsOl_woey3676dbYBdGHNZ2Ux850QTM';
-            // $title='Thông báo';
-            // $body='Tin nhắn mới';
-            // $this->sendNotificationFromReciver($deciveToken,$title,$body);
+
+            // Phát sự kiện tin nhắn qua Redis
+            Redis::publish('chat', json_encode([
+                'event' => 'newMessage',
+                'data' => [
+                    'content' => $params['content'],
+                    'sender' => $infoUserSend['fullname']
+                ]
+            ]));
+
+            // Cập nhật phản hồi API
             $this->res['data'] = [];
-            $this->res['message']  = 'Gửi tin nhắn thành công!';
+            $this->res['message'] = 'Gửi tin nhắn thành công!';
         }
+
         return $this->setResponse($this->res);
     }
     public function getListMessage(Request $request)
