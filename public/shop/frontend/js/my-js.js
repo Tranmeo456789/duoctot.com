@@ -938,8 +938,9 @@ $(document).ready(function () {
                     if (response.success) {
                         $(".loading-text").text("Đang đăng ký...");
                         alert('Đăng ký thành công!');
-                       // window.location.href = response.redirect_url;
-                        location.reload();
+                       //window.location.href = response.redirect_url;
+                        //location.reload();
+                        window.location.replace(window.location.pathname);
                     } else {
                         stopRotateEffect();
                         alert('Kiểm tra lại thông tin đã tồn tại, vui lòng thử lại');
