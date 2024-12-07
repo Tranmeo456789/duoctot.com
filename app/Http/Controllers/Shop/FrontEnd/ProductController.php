@@ -136,15 +136,15 @@ class ProductController extends ShopFrontEndController
     public function drugstore(Request $request){
         $shopId=$request->shopId;
         $userInfo=(new UsersModel)->getItem(['user_id' => $shopId],['task'=>'get-item']);
+        if (!$userInfo || $userInfo['user_type_id'] < 3) {
+            return redirect()->route('home');
+        }
         $productDrugstore=[];
         $listIdProductAdd=[1901, 1902, 1903, 1904, 1905, 1906, 1907, 1908, 1909, 1910];
         if (isset($userInfo['user_type_id']) && $userInfo['user_type_id'] == 9) {
             $listIdProductAdd = [];
         } 
         $productDrugstore = $this->model->listItems(['group_id'=>$listIdProductAdd, 'user_id'=>$shopId], ['task' => 'frontend-list-item-shop']);
-        if (!$userInfo) {
-            return redirect()->route('home');
-        }
         if ($request->has('codeRef')) {
             $request->session()->put('codeRef', $request->query('codeRef'));
             $codeRef = $request->codeRef ?? ($request->session()->get('codeRef') ?? '');

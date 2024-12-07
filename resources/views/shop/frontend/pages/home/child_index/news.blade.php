@@ -8,7 +8,7 @@ unset($itemsArticle[0]);
 <div class="newsh mt-3 mt-lg-5">
     @include("$moduleName.templates.box_title_product",['title' => 'Tin tức và góc sức khỏe','classBackground'=>'bg-info','img'=>'news1.png'])
     <div class="row px-2">
-        <div class="col-xl-6 col-lg-12 news-content-right px-0 mb-xl-0 mb-lg-3">
+        <div class="col-xl-6 col-lg-12 news-content-right px-0 mb-xl-0 mb-lg-3 d-lg-block d-none">
             <a href="{{route('fe.post.detail',$firstAricle['slug'])}}" class="wp-thumb-first d-block">
                 <div class="text-center">
                     <img class="lazy" data-src="{{asset($firstAricle['image'])}}" alt="{{$firstAricle['title']}}" style="max-height: 400px;">

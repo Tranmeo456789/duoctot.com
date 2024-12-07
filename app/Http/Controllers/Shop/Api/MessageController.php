@@ -439,13 +439,13 @@ class MessageController extends ApiController
             }
 
             // Phát sự kiện tin nhắn qua Redis
-            Redis::publish('chat', json_encode([
-                'event' => 'newMessage',
-                'data' => [
-                    'content' => $params['content'],
-                    'sender' => $infoUserSend['fullname']
-                ]
-            ]));
+            // Redis::publish('chat', json_encode([
+            //     'event' => 'newMessage',
+            //     'data' => [
+            //         'content' => $params['content'],
+            //         'sender' => $infoUserSend['fullname']
+            //     ]
+            // ]));
 
             // Cập nhật phản hồi API
             $this->res['data'] = [];
@@ -468,6 +468,12 @@ class MessageController extends ApiController
             if ($infoUserGetList['user_type_id'] == 1) {
                 if ($request->typeRoom) {
                     $roomCurrent = RoomModel::where('type_room', $typeRoom)->where('created_by', $infoUserGetList['user_id'])->first();
+                    if (!$roomCurrent) {
+                        $paramsRoom['name'] = 'room_' . $infoUserGetList['user_id'] . '_' . $typeRoom;
+                        $paramsRoom['type_room'] = $typeRoom;
+                        $paramsRoom['created_by'] = $infoUserGetList['user_id'];
+                        $roomCurrent = (new RoomModel)->saveItem($paramsRoom, ['task' => 'add-item']);
+                    }
                 } 
             }
         }
