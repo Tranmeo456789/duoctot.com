@@ -17,6 +17,9 @@
             </div>
         </div>
     </div>
+    @if ((Session::has('user') && Session::get('user')['is_admin'] == 1))
+        @include("$moduleName.pages.$controllerName.child_index.filter_day")
+    @endif
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">

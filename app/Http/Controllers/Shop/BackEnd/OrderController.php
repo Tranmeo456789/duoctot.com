@@ -11,6 +11,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Shop\BackEnd\BackEndController;
 use App\Model\Shop\AffiliateModel;
 use App\Model\Shop\OrderModel as MainModel;
+use App\Helpers\MyFunction;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 class OrderController extends BackEndController
 {
@@ -38,6 +39,12 @@ class OrderController extends BackEndController
         $session->put('params.search.value', $request->has('search_value') ? $request->get('search_value') : ($session->has('params.search.value') ? $session->get('params.search.value') : ''));
         $session->put('params.pagination.totalItemsPerPage', $this->totalItemsPerPage);
         $this->params     = $session->get('params');
+        if ($request->has('day_start') && $request->has('day_end')) {
+            $this->params['filter_in_day'] = [
+                'day_start' => MyFunction::formatDateLikeMySQL($request->get('day_start')),
+                'day_end' => MyFunction::formatDateLikeMySQL($request->get('day_end')),
+            ];
+        }
         $items  = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
         if ($items->currentPage() > $items->lastPage()) {
             $lastPage = $items->lastPage();

@@ -451,6 +451,29 @@ $(document).on('click', "button#btn-search", function(event) {
         window.location.replace(url);
     }
 });
+$(document).on('click', "button#btn-filter-day", function(event) {
+    let $inputDayStart = $("input[name  = day_start]");
+    let $inputDayEnd = $("input[name  = day_end]");
+    let pathname = window.location.pathname;
+    let params = ['filter_status'];
+    let searchParams = new URLSearchParams(window.location.search); // ?filter_status=active
+
+    let link = "";
+    $.each(params, function(key, param) { // filter_status
+        if (searchParams.has(param)) {
+            link += param + "=" + searchParams.get(param) + "&" // filter_status=active
+        }
+    });
+    let day_start = $inputDayStart.val();
+    let day_end = $inputDayEnd.val();
+    if (day_start.replace(/\s/g, "") == "" || day_end.replace(/\s/g, "")== "") {
+        alert("Chọn giá trị ngày tháng !!");
+    } else {
+        event.preventDefault();
+        url = pathname + "?" + link + 'day_start=' + day_start + '&day_end=' + day_end;
+        window.location.replace(url);
+    }
+});
 $(document).on('click', "button#btn-clear-search", function(event) {
     var pathname = window.location.pathname;
     let searchParams = new URLSearchParams(window.location.search);
