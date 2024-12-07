@@ -30,11 +30,13 @@
     <script>
         // Kết nối tới Socket.IO server
         var socket = io('https://socket.tdoctor.net/');
+        const urlParams = new URLSearchParams(window.location.search);
+        const roomId = urlParams.get('roomId'); 
         socket.on('connect', function() {
             console.log('Connected to Socket.io server');
 
             // Tham gia phòng chat (tùy chỉnh theo yêu cầu, nếu có)
-            // socket.emit('join', { roomId: 'room1' });
+             socket.emit('join', { roomId: roomId });
         });
 
         document.getElementById('message-form').addEventListener('click', function(e) {
@@ -49,7 +51,7 @@
             const messageData = {
                 author: author,
                 content: content,
-                room_id: $roomId, // ID phòng, có thể lấy từ biến frontend hoặc input
+                room_id: roomId, // ID phòng, có thể lấy từ biến frontend hoặc input
                 user_id: userId, // ID người dùng, có thể lấy từ session hoặc thông tin người dùng
                 role: 0, // Role người dùng (0 - user, 1 - admin,...)
                 created_at: new Date(), // Thời gian gửi tin nhắn

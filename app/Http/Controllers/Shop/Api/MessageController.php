@@ -454,6 +454,31 @@ class MessageController extends ApiController
 
         return $this->setResponse($this->res);
     }
+    public function saveMessageAxios(Request $request)
+    {
+        $params = [
+            'content' => $request->content ?? '',
+            'room_id' => $request->room_id ?? 1,
+            'user_id' => $request->user_id ?? 994110172,
+        ];
+        $this->model->saveItem($params, ['task' => 'add-item']);
+        $listUserInRoom = RoomUserModel::where('room_id', $params['room_id'])
+                                        ->where('user_id', '!=', $params['user_id'])
+                                        ->pluck('user_id');
+        // Lấy các token của người dùng trong phòng (ngoại trừ người gửi)
+        $userTokens = UserTokenModel::whereIn('user_id', $listUserInRoom)->pluck('token')->toArray();
+        // Gửi thông báo nếu có người dùng trong phòng
+        if (count($userTokens) > 0) {
+            $title = 'Tin nhắn mới';
+            $body = $params['content'];
+            foreach ($userTokens as $deviceToken) {
+                if ($deviceToken) {
+                    $this->sendNotificationFromReciver($deviceToken, $title, $body);
+                }
+            }
+        }
+    }
+
     public function getListMessage(Request $request)
     {
         $token = $request->header('Tdoctor-Token') ?? 'hhhhh';

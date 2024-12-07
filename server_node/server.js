@@ -3,6 +3,7 @@ const fs = require('fs');
 const http = require('http');
 const socketIo = require('socket.io');
 const Redis = require('ioredis');
+const axios = require('axios');
 // Đọc chứng chỉ SSL
 // const privateKey = fs.readFileSync('/etc/letsencrypt/live/tdoctor.vn/privkey.pem'); // Đường dẫn đến khóa riêng
 // const certificate = fs.readFileSync('/etc/letsencrypt/live/tdoctor.vn/fullchain.pem'); // Đường dẫn đến chứng chỉ
@@ -17,14 +18,14 @@ const server = http.createServer();
 // Khởi tạo Socket.IO với server HTTP
 const io = socketIo(server, {
     cors: {
-        origin: "https://socket.tdoctor.net",  // Đảm bảo URL này là chính xác và được phép kết nối
+        origin: "*",  // Đảm bảo URL này là chính xác và được phép kết nối
         methods: ["GET", "POST"]
     }
 });
 
 // Lắng nghe cổng 5000
-server.listen(5001, () => {
-    console.log('Server running on port 5001');
+server.listen(5000, () => {
+    console.log('Server running on port 5000');
 });
 
 // Xử lý sự kiện kết nối
@@ -35,14 +36,19 @@ io.on('connection', (socket) => {
     socket.on('sendMessage', (data) => {
         console.log('Received message from Flutter:', data);
 
-        // Phát sự kiện 'newMessage' tới tất cả các client (bao gồm cả client đang gửi)
-        io.emit('newMessage', {
+        // Phát sự kiện 'newMessage' các client join room Id (bao gồm cả client đang gửi)
+        io.to(data.room_id).emit('newMessage', {
             room_id: data.room_id,       // Room ID
             content: data.content,       // Nội dung tin nhắn
             user_id: data.user_id,       // ID người gửi
-            role: data.role || 0,   // Nếu có thể có role (mặc định là 'user')
+            role: data.role || 0,        // Nếu có thể có role (mặc định là 'user')
             created_at: data.created_at, // Thời gian gửi tin nhắn
             user_send: data.user_send    // Thông tin người gửi (nếu có)
+        });
+        axios.post('https://tdoctor.net/api/message/saveMessageAxios', {
+            content: data.content,
+            room_id: data.room_id,
+            user_id: data.user_id
         });
     });
 
