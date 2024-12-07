@@ -19,10 +19,11 @@ class MessagesController extends ShopFrontEndController
         parent::__construct();
         $this->model = new MainModel();
     }
-    public function chatTest()
+    public function chatTest(Request $request)
     {
-        $messages=$this->model->listItems(null, ['task'  => 'frontend-list-items']);
-        return view($this->pathViewController . 'chat', compact('messages'));
+        $rooomId= $request->roomId ?? 1;
+        $messages=$this->model->listItems(['room_id'=> $rooomId], ['task'  => 'frontend-list-items']);
+        return view($this->pathViewController . 'chat', compact('messages','rooomId'));
     }
     public function sendMessages(Request $request){
         $params['author'] =$request->author;

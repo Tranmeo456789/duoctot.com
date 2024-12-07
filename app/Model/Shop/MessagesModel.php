@@ -60,9 +60,12 @@ class MessagesModel extends BackEndModel
             }
         }
         if ($options['task'] == "frontend-list-items") {
-            $query = $this::select('id','author','content','created_at','updated_at','created_by', 'updated_by');
+            $query = $this::select('id','author','content','room_id','user_id','created_at','updated_at','created_by', 'updated_by');
             if (isset($params['group_id'])){
                 $query->whereIn('id',$params['group_id']);
+            }
+            if (isset($params['room_id'])){
+                $query->where('room_id',$params['room_id']);
             }
             if(isset($params['offset'])){
                 $query->skip($params['offset']);
