@@ -51,24 +51,21 @@ class ProfileController extends BackEndController
             $itemsWard = (new WardModel())->listItems(['parentID' => $params['district_id']],
                                                                 ['task'=>'admin-list-items-in-selectbox']);
         }
-        $userInfo = $request->session()->get('user');
-        $userAff = (new AffiliateModel)->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
-        if(isset($userAff) && !empty($userAff)){
-            $codeRef = $userAff['code_ref'];
-        }
-        $codeRef = isset($userAff['code_ref']) ? $userAff['code_ref'] : null;
+        //$userInfo = $request->session()->get('user');
+        //$userAff = (new AffiliateModel)->getItem(['user_id' => $userInfo['user_id']], ['task' => 'get-item']);
+        // if(isset($userAff) && !empty($userAff)){
+        //     $codeRef = $userAff['code_ref'];
+        // }
+        $codeRef = $item['codeRef'] ?? '';
         return view($this->pathViewController .  'info',
                     compact('item','details', 'itemsProvince' ,'itemsDistrict','itemsWard','codeRef')
                 );
     }
     public function save(MainRequest $request)
     {
-     //   if (!$request->ajax()) return view("errors." .  'notfound', []);
         if (isset($request->validator) && $request->validator->fails()) {
             return response()->json([
-                'status' => 200,
-                'data' => null,
-                'success' => false,
+                'fail' => true,
                 'errors' => $request->validator->errors()
             ]);
         }

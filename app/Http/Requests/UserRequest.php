@@ -24,7 +24,7 @@ class UserRequest extends AjaxFormRequest
      */
     public function rules()
     {
-        $id = $this->id;
+        $user_id = $this->user_id;
         $task = $this->task;
 
         switch ($task) {
@@ -48,6 +48,27 @@ class UserRequest extends AjaxFormRequest
                     'province_id' => $condProvince
                 ];
                 break;
+                case 'update-item':
+                    $condName  = "bail|required|between:1,255";
+                    $condEmail = '';
+                    $condPhone = '';
+                    $condSlug  = '';
+                    if ($this->slug) {
+                        $condSlug = 'bail|required|unique:user,slug,' . $user_id . ',user_id'; 
+                    }
+                    // if (!empty($this->email)) {
+                    //     $condEmail = 'bail|required|email|unique:user,email,' . $user_id . ',user_id'; 
+                    // }
+                    // if (!empty($this->phone)) {
+                    //     $condPhone = 'bail|required|numeric|phone|unique:user,phone,' . $user_id . ',user_id'; 
+                    // }
+                    return [
+                        'fullname'    => $condName,
+                        'slug'        => $condSlug,
+                        'email'       => $condEmail,
+                        'phone'       => $condPhone,
+                    ];
+                    break;
             case 'login':
                 $condEmail = '';
                 if (str_contains($this->email,'@')){

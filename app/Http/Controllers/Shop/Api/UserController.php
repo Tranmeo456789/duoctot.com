@@ -22,6 +22,7 @@ use App\Model\Shop\DoctorServiceModel;
 use App\Model\Shop\ConfigModel;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use \Firebase\JWTCustom\JWTCustom as JWTCustom;
 class UserController extends ApiController
 {
@@ -37,6 +38,7 @@ class UserController extends ApiController
         $email_info = $rq->mobile_phone;
         $phone = $rq->mobile_phone;
         $name = $rq->fullName;
+        $slug= Str::slug($name)??'';
         $password = $rq->password;
         $present = "";
         $type = $rq->user_type_id ?? 1;
@@ -92,6 +94,7 @@ class UserController extends ApiController
                 $user->type_account = $type_account;
                 $user->domain_register = $domain_register;
                 $user->ref_register = $ref_register;
+                $user->slug = $ref_register;
                 if ($user->save()) {
                     if($email != null){
                         $user = UsersModel::where('email', '=', $email)->orWhere(function ($query) use ($phone) {

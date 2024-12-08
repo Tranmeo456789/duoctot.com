@@ -43,6 +43,12 @@
             'element' => Form::text('fullname', $item['fullname']??null, array_merge($formInputAttr,['placeholder'=>'Họ tên'])),
             'widthElement' => 'col-12 col-md-8'
         ],[
+            'label'   => HTML::decode(Form::label('slug', 'Link Shop', $formLabelAttr)),
+            'prefix' => url('/').'/',
+            'element' => Form::text('slug', $item['slug']??null, array_merge($formInputAttr,['placeholder'=>'Nếu để trống tự động lấy theo slug họ và tên'])),
+            'type'    => "url-page",
+            'widthInput' => 'col-12'
+        ],[
             'label'   => HTML::decode(Form::label('phone', $label['phone'], $formLabelAttr)),
             'element' => Form::text('phone', $item['phone']??null, array_merge($formInputAttr,['placeholder'=>$label['phone']])),
             'widthElement' => 'col-12 col-md-6'

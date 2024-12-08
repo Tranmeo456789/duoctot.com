@@ -3,7 +3,6 @@
     use App\Model\Shop\ProvinceModel;
     use App\Model\Shop\DistrictModel;
     use App\Model\Shop\WardModel;
-    use Illuminate\Support\Str;
     use App\Helpers\MyFunction;
     
     $hotline = ConfigModel::where('name', 'hotline_duoc')->first()->content ?? '';
@@ -30,9 +29,8 @@
                     } else{
                         $imgThumb = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/nhathuocmau10.jpg';
                     }
-                    $slugInName = Str::slug($val['fullname']);
-                    $slug = $val['details']['slug'] ?? ($drugstore['drugstore_url'] ?? $slugInName);
-                    $linkShop = route('home') . '/' . $slug . '.html?shopId=' . $val['user_id'];
+                    $slug = $val['slug'];
+                    $linkShop = route('fe.product.drugstore', $slug);
                     $address='';
                     $ward='';
                     if(isset($val['details'])){

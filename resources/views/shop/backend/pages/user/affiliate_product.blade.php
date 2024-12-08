@@ -29,25 +29,32 @@ $xhtmlAreaSeach = Template::showAreaSearch('product', $params['search']);
                         <tbody>
                             <tr>
                                 <td colspan="3" style="width: 100%" class="text-center">
-                                 <div class="wp-link-affiliate">
-                                    <div>
-                                        <p>Thông tin user affiliate: {{$userInfo['fullname']}}-{{$userInfo['phone']}}-{{$userInfo['email']}}</p>
-                                    </div>
-                                    <div class="text-center">Link chung</div>
-                                    @if(isset($userInfo))
+                                    <div class="wp-link-affiliate">
+                                        <div>
+                                            <p>Thông tin user affiliate: {{$userInfo['fullname']}}-{{$userInfo['phone']}}-{{$userInfo['email']}}</p>
+                                        </div>
                                         @php
                                             $slugName = Str::slug($userInfo['fullname']);                                        
                                             $codeRef = $userInfo['codeRef'];
-                                            $routeParams = ['slug' => $slugName,'shopId'=> $userInfo['user_id'], 'codeRef' => $codeRef];
+                                            $slug = $userInfo['slug'];
                                         @endphp
+                                        <div class="text-center">Link chung</div>
                                         <div class="wp-link-affiliate">
                                             <a href="{{ url('/') . '?codeRef=' . $userInfo['codeRef'] }}" class="text-primary value-link d-inline-block" target="_blank">{{ url('/') . '?codeRef=' . $userInfo['codeRef'] }}</a>
                                             <span class="btn btn-sm btn-danger d-inline-block ml-2 btn-copy-link">
                                                 <i class="far fa-copy"></i>
                                             </span>
                                         </div>
-                                    @endif
-                                 </div>
+                                        @if($userInfo['user_type_id'] > 1)
+                                        <div class="text-center">Link Shop</div>
+                                        <div class="wp-link-affiliate mb-3">
+                                            <a href="{{ route('fe.product.drugstore', $slug) . '?codeRef=' . $userInfo['codeRef'] }}" class="text-primary value-link d-inline-block" target="_blank">{{ route('fe.product.drugstore', $slug) . '?codeRef=' . $userInfo['codeRef'] }}</a>
+                                            <span class="btn btn-sm btn-danger d-inline-block ml-2 btn-copy-link">
+                                                <i class="far fa-copy"></i>
+                                            </span>
+                                        </div>   
+                                        @endif
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
