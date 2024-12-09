@@ -498,6 +498,11 @@ class MessageController extends ApiController
                         $paramsRoom['type_room'] = $typeRoom;
                         $paramsRoom['created_by'] = $infoUserGetList['user_id'];
                         $roomCurrent = (new RoomModel)->saveItem($paramsRoom, ['task' => 'add-item']);
+                        if ($typeRoom == 'group_bac_si') {
+                            (new RoomUserModel)->saveItem(['room_id' => $roomCurrent['id'], 'user_id' => 90007044], ['task' => 'add-item']);
+                        } else if ($typeRoom == 'group_duoc_si') {
+                            (new RoomUserModel)->saveItem(['room_id' => $roomCurrent['id'], 'user_id' => 1014110310], ['task' => 'add-item']);
+                        }
                     }
                 } 
             }

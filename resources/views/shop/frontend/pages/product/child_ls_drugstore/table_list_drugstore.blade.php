@@ -6,7 +6,7 @@
     use App\Helpers\MyFunction;
 
     $hotline = ConfigModel::where('name', 'hotline_duoc')->first()->content ?? '';
-    $hotline=MyFunction::formatPhoneNumber($hotline);
+    
 @endphp
 <div class="table-responsive table-list-drugstore">
     <table class="table table-bordered">
@@ -33,6 +33,8 @@
                 $linkShop = route('fe.product.drugstore', $slug);
                 $address='';
                 $ward='';
+                $phoneOfShop = !empty($val['phone']) ? $val['phone'] : $hotline;
+                $phoneOfShop=MyFunction::formatPhoneNumber($phoneOfShop);
                 if(isset($val['details'])){
                     $ward_detail=(new WardModel())->getItem(['id'=> $val['details']['ward_id']],['task' => 'get-item-full']);
                     if($ward_detail){
@@ -72,7 +74,7 @@
                             </li>
                             <li>
                                 <img src="{{asset('public/images/shop/dc4.png')}}" alt="MST của Tdoctor.vn">
-                                <span>Số điện thoại: {{$hotline}}</span>
+                                <span>Số điện thoại: {{$phoneOfShop}}</span>
                             </li>
                         </ul>
                     </div>

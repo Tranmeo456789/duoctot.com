@@ -95,10 +95,10 @@
                     <p><span class="font-weight-bold">Hạn sử dụng: </span>{{$item['expiration_date']??'...'}}</p>
                 </div>
                     @php
-                        $slugName = Str::slug($userInfo['fullname']);                                     
+                        $slug = $userInfo['slug'];                                     
                     @endphp
                 <div class="mb-3 d-flex justify-content-between">
-                    <a href="{{ route('fe.product.drugstore', ['slug' => $slugName,'shopId'=> $userInfo['user_id']]) }}" class="btn btn-sm btn-outline-secondary py-1 px-2 btn-buy-search">Xem shop</a>
+                    <a href="{{ route('fe.product.drugstore', ['slug' => $slug]) }}" class="btn btn-sm btn-outline-secondary py-1 px-2 btn-buy-search">Xem shop</a>
                     <div class="wp-link-affiliate position-relative">
                         <div id="copy-notification" style="display:none;position:absolute;background-color:#28a745;color:white;padding:3px;border-radius:5px;z-index:1000;font-size:14px;">Đã copy!</div>
                         @if(Session::has('user'))
