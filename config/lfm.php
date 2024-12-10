@@ -93,6 +93,7 @@ return [
         'image/png',
         'image/gif',
         'image/svg+xml',
+        'image/webp',
     ],
 
     // If true, image thumbnails would be created during upload

@@ -490,21 +490,21 @@ class MessageController extends ApiController
         if ($data_token['message'] == 'OK') {
             $params['user'] =  (array)$data_token['payload'];
             $infoUserGetList = (array)$data_token['payload'];
-            if ($infoUserGetList['user_type_id'] == 1) {
-                if ($request->typeRoom) {
-                    $roomCurrent = RoomModel::where('type_room', $typeRoom)->where('created_by', $infoUserGetList['user_id'])->first();
-                    if (!$roomCurrent) {
-                        $paramsRoom['name'] = 'room_' . $infoUserGetList['user_id'] . '_' . $typeRoom;
-                        $paramsRoom['type_room'] = $typeRoom;
-                        $paramsRoom['created_by'] = $infoUserGetList['user_id'];
-                        $roomCurrent = (new RoomModel)->saveItem($paramsRoom, ['task' => 'add-item']);
-                        if ($typeRoom == 'group_bac_si') {
-                            (new RoomUserModel)->saveItem(['room_id' => $roomCurrent['id'], 'user_id' => 90007044], ['task' => 'add-item']);
-                        } else if ($typeRoom == 'group_duoc_si') {
-                            (new RoomUserModel)->saveItem(['room_id' => $roomCurrent['id'], 'user_id' => 1014110310], ['task' => 'add-item']);
-                        }
-                    }
-                } 
+            $roomCurrent = RoomModel::where('type_room', $typeRoom)->where('created_by', $infoUserGetList['user_id'])->first();
+            if (!$roomCurrent) {
+                $paramsRoom['name'] = 'room_' . $infoUserGetList['user_id'] . '_' . $typeRoom;
+                $paramsRoom['type_room'] = $typeRoom;
+                $paramsRoom['created_by'] = $infoUserGetList['user_id'];
+                $roomCurrent = (new RoomModel)->saveItem($paramsRoom, ['task' => 'add-item']);
+                $idUserGetList=$infoUserGetList['user_id'];
+                (new RoomUserModel)->saveItem(['room_id' => $roomCurrent['id'], 'user_id' => $idUserGetList], ['task' => 'add-item']);
+                if ($typeRoom == 'group_bac_si') {
+                    (new RoomUserModel)->saveItem(['room_id' => $roomCurrent['id'], 'user_id' => 90007044], ['task' => 'add-item']);
+                } else if ($typeRoom == 'group_duoc_si') {
+                    (new RoomUserModel)->saveItem(['room_id' => $roomCurrent['id'], 'user_id' => 1014110310], ['task' => 'add-item']);
+                }elseif ($typeRoom == 'chat_shop') {
+                    (new RoomUserModel)->saveItem(['room_id' => $roomCurrent['id'], 'user_id' => 864108238], ['task' => 'add-item']);
+                }
             }
         }
         if(!empty($roomCurrent)){

@@ -71,10 +71,10 @@
                             <td style="width: 30%">Phương thức thanh toán</td>
                             <td style="width: 70%" class='name'>{{$order['payment']==2 ? 'Thanh toán ngay(ck)' : 'Thanh toán tại nhà'}}</td>
                         </tr>
-                        <tr class="bb_order">
+                        <!-- <tr class="bb_order">
                             <td style="width: 30%">Thời gian dự kiến</td>
                             <td style="width: 70%" class='name'>Có hàng trước ...</td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>

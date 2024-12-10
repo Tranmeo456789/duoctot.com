@@ -31,7 +31,7 @@ foreach($status_order as $value){
 <div class="wp-content">
     <div class="top-tab-order">
         <h4 class="mb-0">Đơn hàng <span class="text-info">{{$order_detail['code_order']}}</span></h4>
-        <p>Đặt hàng ngày {{$ngayDatHang}}</p>
+        <p class="font-weight-bold mt-2">Đặt hàng ngày {{$ngayDatHang}}</p>
     </div>
     <div class="tab-header">
         <p>Trạng thái đơn hàng</p>
@@ -97,10 +97,10 @@ foreach($status_order as $value){
                     <td style="width: 30%">Trạng thái đối soát</td>
                     <td style="width: 70%" class='name'>{!! $statusControlOrderValue[$order_detail['status_control']]!!}</td>
                 </tr>
-                <tr class="bb_order pb-1">
+                <!-- <tr class="bb_order pb-1">
                     <td style="width: 30%">Thời gian dự kiến</td>
                     <td style="width: 70%" class='name'>.....</td>
-                </tr>
+                </tr> -->
             </tbody>
         </table>
     </div>
