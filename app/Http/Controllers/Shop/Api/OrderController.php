@@ -55,9 +55,32 @@ class OrderController extends ApiController
 
         return $this->setResponse($this->res);
     }
+    public function getListOrderOfUserLogin(Request $request)
+    {
+        $this->res['data'] = null;
+        $token = $request->header('Tdoctor-Token');
+
+        $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
+        if ($data_token['message'] == 'OK') {
+            $userLogin = (array)$data_token['payload'];
+            $params['user_id'] = $userLogin['user_id'];
+            $params['status_order'] = $request->status_order ??'all';
+            $params['limit']        = $this->limit;
+            $this->res['data']  = $this->model->listItems($params,['task'=>'list-items-api-user-login']);
+        }
+
+        return $this->setResponse($this->res);
+    }
     public function getListOrder(Request $request)
     {
         $this->res['data'] = null;
+        $token = $request->header('Tdoctor-Token');
+
+        $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
+        if ($data_token['message'] == 'OK') {
+            $userLogin = (array)$data_token['payload'];
+            $params['user_id'] = $userLogin['user_id'];
+        }
         $params['status_order'] = $request->status_order ??'all';
         $params['search'] = $request->phone??'unknown';
         $params['page']        = $this->page??1;

@@ -376,82 +376,20 @@ class MessageController extends ApiController
     {
         $this->res['data'] = null;
         $params['content'] = $request->content ?? '';
-        $params['type_room'] = $request->typeRoom ?? 'group_bac_si';
+        //$params['type_room'] = $request->typeRoom ?? 'group_bac_si';
+        $roomId = $request->roomId ?? 1;
         $token = $request->header('Tdoctor-Token');
         $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
-
         if ($data_token['message'] == 'OK') {
             $params['user'] =  (array)$data_token['payload'];
-            $request->session()->put('user', $params['user']);
             $infoUserSend = (array)$data_token['payload'];
-            $roomIdCurrent = 0;
-
-            // Kiểm tra và tạo phòng nếu chưa có
-            if (!$request->roomId || !is_numeric($request->roomId)) {
-                $existRoom = (new RoomModel)->where('created_by', $infoUserSend['user_id'])
-                    ->where('type_room', $params['type_room'])->first();
-
-                if (!$existRoom) {
-                    // Tạo phòng mới nếu không có
-                    $paramsRoom['name'] = 'room_' . $infoUserSend['user_id'] . '_' . $params['type_room'];
-                    $paramsRoom['type_room'] = $params['type_room'];
-                    $paramsRoom['created_by'] = $infoUserSend['user_id'];
-                    $roomCurrent = (new RoomModel)->saveItem($paramsRoom, ['task' => 'add-item']);
-                    (new RoomUserModel)->saveItem(['room_id' => $roomCurrent['id'], 'user_id' => $infoUserSend['user_id']], ['task' => 'add-item']);
-
-                    // Thêm bác sĩ hoặc dược sĩ vào nhóm nếu cần
-                    if ($params['type_room'] == 'group_bac_si') {
-                        (new RoomUserModel)->saveItem(['room_id' => $roomCurrent['id'], 'user_id' => 90007044], ['task' => 'add-item']);
-                    } else if ($params['type_room'] == 'group_duoc_si') {
-                        (new RoomUserModel)->saveItem(['room_id' => $roomCurrent['id'], 'user_id' => 1014110310], ['task' => 'add-item']);
-                    }
-                } else {
-                    $roomCurrent = $existRoom;
-                }
-
-                // Lưu tin nhắn vào database
-                $paramsMessage = [];
-                $paramsMessage['room_id'] = $roomCurrent->id;
-                $roomIdCurrent = $roomCurrent->id;
-                $paramsMessage['content'] = $params['content'];
-                $paramsMessage['user_id'] = $infoUserSend['user_id'];
-                $this->model->saveItem($paramsMessage, ['task' => 'add-item']);
-            } else {
-                $paramsMessage['room_id'] = $request->roomId ?? 0;
-                $roomIdCurrent = $request->roomId ?? 0;
-                $paramsMessage['content'] = $params['content'];
-                $paramsMessage['user_id'] = $infoUserSend['user_id'];
-                $this->model->saveItem($paramsMessage, ['task' => 'add-item']);
-            }
-
-            // Lấy danh sách người dùng trong phòng
-            $listUserInRoom = RoomUserModel::where('room_id', $roomIdCurrent)->pluck('user_id');
-
-            // Gửi thông báo đến người dùng qua Firebase (hoặc hệ thống notification khác)
-            $title = 'Tin nhắn mới';
-            $body = $params['content'];
-            foreach ($listUserInRoom as $value) {
-                if ($value != $infoUserSend['user_id']) {
-                    $UserTokenCurrent = UserTokenModel::where('user_id', $value)->first();
-                    $deciveToken = $UserTokenCurrent['token'] ?? '';
-                    $this->sendNotificationFromReciver($deciveToken, $title, $body);
-                }
-            }
-
-            // Phát sự kiện tin nhắn qua Redis
-            // Redis::publish('chat', json_encode([
-            //     'event' => 'newMessage',
-            //     'data' => [
-            //         'content' => $params['content'],
-            //         'sender' => $infoUserSend['fullname']
-            //     ]
-            // ]));
-
-            // Cập nhật phản hồi API
+            $paramsMessage['room_id'] = $roomId;
+            $paramsMessage['content'] = $params['content'];
+            $paramsMessage['user_id'] = $infoUserSend['user_id'] ?? 1;
+            $this->model->saveItem($paramsMessage, ['task' => 'add-item']);
             $this->res['data'] = [];
             $this->res['message'] = 'Gửi tin nhắn thành công!';
         }
-
         return $this->setResponse($this->res);
     }
     public function saveMessageAxios(Request $request)
@@ -478,7 +416,6 @@ class MessageController extends ApiController
             }
         }
     }
-
     public function getListMessage(Request $request)
     {
         $token = $request->header('Tdoctor-Token') ?? 'hhhhh';
@@ -500,11 +437,47 @@ class MessageController extends ApiController
                 (new RoomUserModel)->saveItem(['room_id' => $roomCurrent['id'], 'user_id' => $idUserGetList], ['task' => 'add-item']);
                 if ($typeRoom == 'group_bac_si') {
                     (new RoomUserModel)->saveItem(['room_id' => $roomCurrent['id'], 'user_id' => 90007044], ['task' => 'add-item']);
+                    $paramsMessageFirst = [
+                        'content' => 'Chào bạn. Bạn đang cần tư vấn về vấn đề gì ạ?',
+                        'room_id' => $roomCurrent['id'] ?? 1,
+                        'user_id' => 90007044,
+                    ];
+                    $this->model->saveItem($paramsMessageFirst, ['task' => 'add-item']);
                 } else if ($typeRoom == 'group_duoc_si') {
                     (new RoomUserModel)->saveItem(['room_id' => $roomCurrent['id'], 'user_id' => 1014110310], ['task' => 'add-item']);
-                }elseif ($typeRoom == 'chat_shop') {
-                    (new RoomUserModel)->saveItem(['room_id' => $roomCurrent['id'], 'user_id' => 864108238], ['task' => 'add-item']);
+                    $paramsMessageFirst = [
+                        'content' => 'Chào bạn. Bạn đang cần tư vấn về vấn đề gì ạ?',
+                        'room_id' => $roomCurrent['id'] ?? 1,
+                        'user_id' => 1014110310,
+                    ];
+                    $this->model->saveItem($paramsMessageFirst, ['task' => 'add-item']);
+                }elseif ($typeRoom == 'shop_chat') {
+                    $userCurent= UsersModel::where('user_id',$idUserGetList)->first();
+                    if($userCurent){
+                        $refRegister = $userCurent['ref_register'];
+                        if(!empty($refRegister)){
+                            $userShareCodeRef=UsersModel::where('codeRef',$refRegister)->first();
+                            if($userShareCodeRef){
+                                (new RoomUserModel)->saveItem(['room_id' => $roomCurrent['id'], 'user_id' => $userShareCodeRef->user_id], ['task' => 'add-item']);
+                                $paramsMessageFirst = [
+                                    'content' => 'Chào bạn. Bạn đang cần tư vấn về vấn đề gì ạ?',
+                                    'room_id' => $roomCurrent['id'] ?? 1,
+                                    'user_id' => $userShareCodeRef->user_id,
+                                ];
+                                $this->model->saveItem($paramsMessageFirst, ['task' => 'add-item']);
+                            }
+                        }else{
+                            (new RoomUserModel)->saveItem(['room_id' => $roomCurrent['id'], 'user_id' => 864108238], ['task' => 'add-item']);
+                            $paramsMessageFirst = [
+                                'content' => 'Chào bạn. Bạn đang cần tư vấn về vấn đề gì ạ?',
+                                'room_id' => $roomCurrent['id'] ?? 1,
+                                'user_id' => 864108238,
+                            ];
+                            $this->model->saveItem($paramsMessageFirst, ['task' => 'add-item']);
+                        }
+                    }
                 }
+                
             }
         }
         if(!empty($roomCurrent)){
@@ -520,6 +493,75 @@ class MessageController extends ApiController
                 $listMessage[$key]['user_send'] = $value->userSend();
             }
             $roomCurrent['list_message'] = $listMessage;
+        }
+        
+        $this->res['data'] = $roomCurrent;
+        return $this->setResponse($this->res);
+    }
+    public function functionCreateRoomAndSaveMessageFirst($createdBy, $typeRoom, $userReceiver) {
+        // Kiểm tra phòng đã tồn tại chưa
+        $roomCurrent = RoomModel::where('created_by', $createdBy)->where('user_receiver', $userReceiver)->first();
+        if (empty($roomCurrent)) {
+            // Nếu phòng chưa tồn tại, tạo phòng mới
+            $paramsRoom = [
+                'name' => 'room_' . $createdBy . '_' . $typeRoom,
+                'type_room' => $typeRoom,
+                'created_by' => $createdBy,
+                'user_receiver' => $userReceiver,
+            ];
+            // Lưu phòng
+            $roomCurrent = (new RoomModel)->saveItem($paramsRoom, ['task' => 'add-item']);
+            // Thêm người dùng vào phòng
+            (new RoomUserModel)->saveItem(['room_id' => $roomCurrent['id'], 'user_id' => $createdBy], ['task' => 'add-item']);
+            (new RoomUserModel)->saveItem(['room_id' => $roomCurrent['id'], 'user_id' => $userReceiver], ['task' => 'add-item']);
+            // Gửi tin nhắn đầu tiên
+            $paramsMessageFirst = [
+                'content' => 'Chào bạn. Bạn đang cần tư vấn về vấn đề gì ạ?',
+                'room_id' => $roomCurrent['id'] ?? 1,
+                'user_id' => $userReceiver,
+            ];
+            $this->model->saveItem($paramsMessageFirst, ['task' => 'add-item']);
+        }
+        // Trả về phòng đã tạo
+        return $roomCurrent;
+    }
+    public function createRoom(Request $request)
+    {
+        $token = $request->header('Tdoctor-Token') ?? 'hhhhh';
+        $typeRoom = $request->typeRoom ?? 'group_bac_si';
+        $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
+        $roomCurrent = [];  
+        if ($data_token['message'] == 'OK') {
+            $infoUserGetList = (array)$data_token['payload'];
+            $idUserGetList = $infoUserGetList['user_id'];
+            if ($typeRoom == 'shop_chat') {
+                $userCurent = UsersModel::where('user_id', $idUserGetList)->first();
+                if ($userCurent) {
+                    $refRegister = $userCurent['ref_register'];
+                    $userReceiverId = 864108238;
+                    // Kiểm tra xem người dùng có mã giới thiệu hay không
+                    if (!empty($refRegister)) {
+                        $userShareCodeRef = UsersModel::where('codeRef', $refRegister)->first();
+                        if ($userShareCodeRef) {
+                            $userReceiverId = $userShareCodeRef['user_id'];
+                        }
+                    }
+                    // Tạo phòng và tin nhắn đầu tiên, và nhận lại phòng đã tạo
+                    $roomCurrent = $this->functionCreateRoomAndSaveMessageFirst($idUserGetList, $typeRoom, $userReceiverId);
+                }
+            } else if ($typeRoom == 'group_bac_si') {
+                $roomCurrent = $this->functionCreateRoomAndSaveMessageFirst($idUserGetList, $typeRoom, 90007044);
+            } else if ($typeRoom == 'group_duoc_si') {
+                $roomCurrent = $this->functionCreateRoomAndSaveMessageFirst($idUserGetList, $typeRoom, 1014110310);
+            }
+        }
+        // Kiểm tra và cập nhật tên phòng dựa trên thông tin người nhận
+        $idUserReceiver = $roomCurrent['user_receiver'] ?? 864108238;
+        $userReceiver = UsersModel::where('user_id', $idUserReceiver)->first();
+        if ($userReceiver) {
+            $roomCurrent->name = $userReceiver['fullname'] ?? 'No Name';
+        } else {
+            $roomCurrent->name = 'No Name';
         }
         $this->res['data'] = $roomCurrent;
         return $this->setResponse($this->res);
@@ -545,6 +587,58 @@ class MessageController extends ApiController
         $this->res['data'] = $listMessage;
         return $this->setResponse($this->res);
     }
+    public function getListRoomOfUser(Request $request)
+    {
+        $token = $request->header('Tdoctor-Token') ?? 'hhhhh';
+        $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
+        $listRoom = [];
+        $this->res['data']=[];
+        if ($data_token['message'] == 'OK') {
+            $params['user'] =  (array)$data_token['payload'];
+            $infoUserGetList = (array)$data_token['payload'];
+            $userIdGetList=$infoUserGetList['user_id'];
+            if ($infoUserGetList['user_type_id'] == 2) {
+                $listRoom = (new RoomModel)->listItems(['type_room' => 'group_bac_si'], ['task' => 'frontend-list-items-api']);
+            } else if ($infoUserGetList['user_type_id'] == 5) {
+                $listRoom = (new RoomModel)->listItems(['type_room' => 'group_duoc_si'], ['task' => 'frontend-list-items-api']);
+            }else{
+                $groupIdRoomOfUser = RoomUserModel::where('user_id', $userIdGetList)->pluck('room_id');
+                $listRoom = (new RoomModel)->listItems(['group_id' => $groupIdRoomOfUser], ['task' => 'frontend-list-items-api']);
+            }
+            if(!empty($listRoom)){
+                foreach ($listRoom as $key => $value) {
+                    $userReceiverInRoom = RoomUserModel::where('user_id','<>',$userIdGetList)->where('room_id',$value['id'])->first();
+                    $idUserReceiver=$userReceiverInRoom['user_id'] ?? 1;
+                    $userReceiver=UsersModel::where('user_id',$idUserReceiver)->first();
+                    if($userReceiver){
+                        $listRoom[$key]['user_receiver'] = $userReceiver['fullname']??'No Name';
+                    }else{
+                        $listRoom[$key]['user_receiver'] = null;
+                    }
+                    $item = $value->listMessageLast()->first();
+                    if($item){
+                        $role = 0;
+                        if ($value['created_by'] == $item['user_id']) {
+                            $role = 1;
+                        }
+                        $item['role'] = $role;
+                        $listRoom[$key]['list_messages'] = $item;
+                        $userCreatedRoom = UsersModel::where('user_id', $value['created_by'])->first();
+                        $listRoom[$key]['list_messages']['user_send'] = [
+                            'user_id' => $userCreatedRoom->user_id ?? '',
+                            'fullname' => $userCreatedRoom->fullname ?? '',
+                            'email' => $userCreatedRoom->email ?? '',
+                            'phone' => $userCreatedRoom->phone ?? ''
+                        ];
+                    }else{
+                        $listRoom[$key]['list_messages'] = null;
+                    }
+                }
+            }
+            $this->res['data'] = $listRoom;
+        }
+        return $this->setResponse($this->res);
+    }
     public function getListMessageDoctor(Request $request)
     {
         $token = $request->header('Tdoctor-Token') ?? 'hhhhh';
@@ -553,14 +647,26 @@ class MessageController extends ApiController
         if ($data_token['message'] == 'OK') {
             $params['user'] =  (array)$data_token['payload'];
             $infoUserGetList = (array)$data_token['payload'];
+            $userIdGetList=$infoUserGetList['user_id'];
             if ($infoUserGetList['user_type_id'] == 2) {
                 $listRoom = (new RoomModel)->listItems(['type_room' => 'group_bac_si'], ['task' => 'frontend-list-items-api']);
             } else if ($infoUserGetList['user_type_id'] == 5) {
                 $listRoom = (new RoomModel)->listItems(['type_room' => 'group_duoc_si'], ['task' => 'frontend-list-items-api']);
+            }else{
+                $groupIdRoomOfUser = RoomUserModel::where('user_id', $userIdGetList)->pluck('room_id');
+                $listRoom = (new RoomModel)->listItems(['group_id' => $groupIdRoomOfUser], ['task' => 'frontend-list-items-api']);
             }
         }
         if(!empty($listRoom)){
             foreach ($listRoom as $key => $value) {
+                $userReceiverInRoom = RoomUserModel::where('user_id','<>',$value['created_by'])->where('room_id',$value['id'])->first();
+                $idUserReceiver=$userReceiverInRoom['user_id'] ?? 1;
+                $userReceiver=UsersModel::where('user_id',$idUserReceiver)->first();
+                if($userReceiver){
+                    $listRoom[$key]['user_receiver'] = $userReceiver['fullname']??'No Name';
+                }else{
+                    $listRoom[$key]['user_receiver'] = null;
+                }
                 $item = $value->listMessageLast()->first();
                 if($item){
                     $role = 0;

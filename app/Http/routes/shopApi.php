@@ -68,6 +68,7 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
         Route::post('orderCompleted', ['uses' => $controller . 'orderCompleted']);
         Route::post('getListOrder', ['uses' => $controller . 'getListOrder']);
         Route::get('detailOrder', ['uses' => $controller . 'detailOrder']);
+        Route::get('getListOrderOfUserLogin', ['uses' => $controller . 'getListOrderOfUserLogin']);
     });
     $prefix         = 'province';
     $controllerName = 'province';
@@ -100,7 +101,9 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
         $controller = ucfirst($controllerName)  . 'Controller@';
         Route::post('sendMessage', ['uses' => $controller . 'sendMessage']);
         Route::get('getListMessage', ['uses' => $controller . 'getListMessage']);
+        Route::post('createRoom', ['uses' => $controller . 'createRoom']);
         Route::get('getListMessageDoctor', ['uses' => $controller . 'getListMessageDoctor']);
+        Route::get('getListRoomOfUser', ['uses' => $controller . 'getListRoomOfUser']);
         Route::get('getListMessageInRoomId', ['uses' => $controller . 'getListMessageInRoomId']);
         Route::post('receiveNoticeToDeciveToKen', ['uses' => $controller . 'receiveNoticeToDeciveToKen']);
         Route::post('receiveNoticeToDeviceToKen2', ['uses' => $controller . 'receiveNoticeToDeviceToKen2']);

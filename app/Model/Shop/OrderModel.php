@@ -217,6 +217,44 @@ class OrderModel extends BackEndModel
             if(isset($params['search'])){
                 $query=$this::where('buyer','LIKE', "%{$params['search']}%");
             } 
+            if(isset($params['user_id'])){
+                $query=$query->orWhere('user_id',$params['user_id']);
+            } 
+            if(isset($params['status_order'])){
+                switch ($params['status_order'])
+                {
+                    case 'chua_hoan_tat' :
+                        $query = $query->whereIn('status_order',['choThanhToan','dangXuLy','daXacNhan','dangGiaoHang','daGiaoHang']);
+                        break;
+                    case 'hoan_tat' :
+                        $query = $query->whereIn('status_order',['hoanTat']);
+                        break;
+                    case 'da_huy' :
+                        $query = $query->whereIn('status_order',['daHuy']);
+                        break;
+                    case 'tra_hang' :
+                        $query = $query->whereIn('status_order',['traHang']);
+                        break;
+                    default:
+                    $query = $query;
+                        break;
+                }
+            }          
+            if (isset($params['page']) && isset($params['perPage'])) {
+                $query = $query->orderBy('id', 'desc')->paginate($params['perPage'],['id','code_order','total','created_at','status_order','total_product'], 'page', $params['page']);
+            }else{
+                $query=$query->orderBy('id', 'desc')->get();
+            }
+            $result =  $query;
+        }
+        if ($options['task'] == "list-items-api-user-login") {
+            $query = $this::select('id','code_order','total','created_at','status_order','total_product');
+            if(isset($params['search'])){
+                $query=$this::where('buyer','LIKE', "%{$params['search']}%");
+            } 
+            if(isset($params['user_id'])){
+                $query=$query->orWhere('user_id',$params['user_id']);
+            } 
             if(isset($params['status_order'])){
                 switch ($params['status_order'])
                 {

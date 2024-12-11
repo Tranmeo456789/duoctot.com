@@ -67,12 +67,15 @@ class RoomModel extends BackEndModel
             if (isset($params['type_room'])){
                 $query->where('type_room',$params['type_room']);
             }
+            if (isset($params['group_id'])){
+                $query->whereIn('id',$params['group_id']);
+            }
             if (isset($params['page'])) {
                 $currentPage = isset($params['page']) ? (int)$params['page'] : 1;
                 $perPage = isset($params['perPage']) ? (int)$params['perPage'] : 20;
                 $result = $query->paginate($perPage, ['*'], 'page', $currentPage);
             } else {
-                $result = $query->get();
+                $result = $query->orderBy('id', 'desc')->get();
             }
         }
         return $result;
