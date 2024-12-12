@@ -26,7 +26,7 @@ use App\Helpers\MyFunction;
                 </li>
                 <li class="item">
                     <div>
-                        <a href="" style="color:black">
+                        <a href="{{route('order')}}" style="color:black">
                             <div class="icon"><i class="far fa-newspaper"></i></i></div>
                             <div>
                                 <h6>Đơn hàng mới</h6>
@@ -37,7 +37,7 @@ use App\Helpers\MyFunction;
                 </li>
                 <li class="item">
                     <div>
-                        <a href="" style="color:black">
+                        <a href="{{route('order')}}" style="color:black">
                             <div class="icon"><i class="fas fa-outdent"></i></div>
                             <div>
                                 <h6>Đơn hàng trả</h6>
@@ -49,7 +49,7 @@ use App\Helpers\MyFunction;
                 </li>
                 <li class="item">
                     <div>
-                        <a href="" style="color:black">
+                        <a href="{{route('order')}}" style="color:black">
                             <div class="icon"><i class="fas fa-times"></i></div>
                             <div>
                                 <h6>Đơn hàng hủy</h6>
@@ -81,7 +81,7 @@ use App\Helpers\MyFunction;
                     $count = $itemStatus['count'] ?? 0;
                 @endphp
                 <li class="">
-                    <a href="" style="color:black">
+                    <a href="{{route('order')}}" style="color:black">
                         <div class="icon">
                             <i class="fas {{$item['icon']}}"></i>
                         </div>

@@ -82,9 +82,13 @@ class OrderController extends ApiController
             $params['user_id'] = $userLogin['user_id'];
         }
         $params['status_order'] = $request->status_order ??'all';
-        $params['search'] = $request->phone??'unknown';
+        if(!empty($request->phone)&& strlen($request->phone) >= 8){
+            $params['search'] = $request->phone;
+        }else {
+            $params['search'] = 'unknown';
+        }
         $params['page']        = $this->page??1;
-        $params['perPage']        = $this->perPage??20;
+        $params['perPage']        = $this->perPage??100;
         $this->res['data']  = $this->model->listItems($params,['task'=>'list-items-api']);
         return $this->setResponse($this->res);
     }
