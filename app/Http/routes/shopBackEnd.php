@@ -97,6 +97,7 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
     });
     Route::get('/nguoi-dung-da-nhap-ma-affiliate', 'UserController@userImportCodeAffiliate')->name('affiliate.userImportCodeAffiliate');
     Route::get('/danh-sach-don-hang', 'OrderController@index')->name('order');
+    Route::get('/export-list-order-file-excel', 'OrderController@exportListOrderFileExcel')->name('order.exportListOrderFileExcel');
     Route::get('/chi-tiet-don-hang/{id}', 'OrderController@detail')->name('order.detail');
 
     Route::group(['middleware' => ['permission.editorOrAdmin']], function () {

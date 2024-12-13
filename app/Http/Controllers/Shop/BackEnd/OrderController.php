@@ -13,6 +13,9 @@ use App\Model\Shop\AffiliateModel;
 use App\Model\Shop\OrderModel as MainModel;
 use App\Helpers\MyFunction;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 class OrderController extends BackEndController
 {
     public function __construct()
@@ -175,5 +178,106 @@ class OrderController extends BackEndController
             'items'            => $items,
             'itemStatusOrderCount' => $itemStatusOrderCount
         ]);
+    }
+    public function exportListOrderFileExcel(Request $request)
+    {
+        $params=[
+            'status_order' => 'all'
+        ];
+        if ($request->has('day_start') && $request->has('day_end')) {
+            $params['filter_in_day'] = [
+                'day_start' => MyFunction::formatDateLikeMySQL($request->get('day_start')),
+                'day_end' => MyFunction::formatDateLikeMySQL($request->get('day_end')),
+            ];
+        }
+        $items = $this->model->listItems($params, ['task' => 'order-list-items-export-file-excel']);
+        $statusOrderValue = array_combine(array_keys(config("myconfig.template.column.status_order")),array_column(config("myconfig.template.column.status_order"),'name'));
+        unset($statusOrderValue['all']);
+        $statusControlOrderValue = array_combine(array_keys(config("myconfig.template.column.status_control")),array_column(config("myconfig.template.column.status_control"),'name'));
+        // Tạo một đối tượng Spreadsheet mới
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        // Thiết lập tiêu đề cột
+        $sheet->setCellValue('A1', 'Mã đơn hàng');
+        $sheet->setCellValue('B1', 'Doanh thu');
+        $sheet->setCellValue('C1', 'Số lượng sản phẩm');
+        $sheet->setCellValue('D1', 'Khách hàng');
+        $sheet->setCellValue('E1', 'Số điện thoại');
+        $sheet->setCellValue('F1', 'Thời gian đặt hàng');
+        $sheet->setCellValue('G1', 'Trạng thái đơn hàng');
+        $sheet->setCellValue('H1', 'Trạng thái đối soát');
+        $sheet->setCellValue('I1', 'Sản phẩm trong đơn hàng');
+        // In đậm chữ cho các ô trên
+        $sheet->getStyle('A1')->getFont()->setBold(true);
+        $sheet->getStyle('B1')->getFont()->setBold(true);
+        $sheet->getStyle('C1')->getFont()->setBold(true);
+        $sheet->getStyle('D1')->getFont()->setBold(true);
+        $sheet->getStyle('E1')->getFont()->setBold(true);
+        $sheet->getStyle('F1')->getFont()->setBold(true);
+        $sheet->getStyle('G1')->getFont()->setBold(true);
+        $sheet->getStyle('H1')->getFont()->setBold(true);
+        $sheet->getStyle('I1')->getFont()->setBold(true);
+        $row = 2; // Bắt đầu từ dòng 2 để điền dữ liệu sau tiêu đề
+        foreach ($items as $item) {
+            $codeOrder = $item->code_order;
+            $total = MyFunction::formatNumber($item->total) . ' đ';
+            $totalProduct = $item->total_product;
+            $buyer = json_decode($item['buyer'],true) ?? '';
+            $fullname = $buyer['fullname'] ?? '';
+            $phone = $buyer['phone'] ?? '';
+            $ngayDatHang = MyFunction::formatDateFrontend($item['created_at']);
+            $listsProduct = $item->listProductInOrder;
+            $productDetails = '';
+            $listsProduct = json_decode($listsProduct, true);
+            foreach ($listsProduct as $productOrder) {
+                $product = ProductModel::find($productOrder['product_id']);  
+                if ($product) {
+                    $unit=$product->unitProduct;
+                    $productName = $product->name; 
+                    $productPrice = MyFunction::formatNumber($product->price) . ' đ';
+                    $productUnit = $unit['name']; 
+                    $productQuantity = $productOrder['quantity'];  
+                    $productQuantity = $productOrder['quantity'];  
+                    $productDetails .= "Tên sản phẩm: $productName, Đơn vị: $productUnit, Giá: $productPrice, Số lượng: $productQuantity\n";
+                }
+            }
+            $sheet->setCellValue('A' . $row, $codeOrder); 
+            $sheet->setCellValue('B' . $row, $total); 
+            $sheet->setCellValue('C' . $row, $totalProduct); 
+            $sheet->setCellValue('D' . $row, $fullname);  
+            $sheet->setCellValue('E' . $row, $phone);  
+            $sheet->setCellValue('F' . $row, $ngayDatHang);
+            $sheet->setCellValue('G' . $row, $statusOrderValue[$item['status_order']]);
+            $sheet->setCellValue('H' . $row, $statusControlOrderValue[$item['status_control']]);
+            $sheet->setCellValue('I' . $row, $productDetails);
+            $row++;  
+
+            $sheet->getStyle('C')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+            $sheet->getColumnDimension('A')->setAutoSize(true);
+            $sheet->getColumnDimension('B')->setAutoSize(true);
+            $sheet->getColumnDimension('C')->setAutoSize(true);
+            $sheet->getColumnDimension('D')->setAutoSize(true);
+            $sheet->getColumnDimension('E')->setAutoSize(true);
+            $sheet->getColumnDimension('F')->setAutoSize(true);
+            $sheet->getColumnDimension('G')->setAutoSize(true);
+            $sheet->getColumnDimension('H')->setAutoSize(true);
+            $sheet->getColumnDimension('I')->setAutoSize(true);
+        }
+        // Tạo writer để xuất file Excel (định dạng xlsx)
+        $writer = new Xlsx($spreadsheet);
+        // Đặt tên file
+        $fileName = 'orders_export_' . date('Y_m_d_H_i_s') . '.xlsx'; // Tên file với thời gian
+        // Trả về file Excel cho người dùng tải xuống
+        return response()->stream(
+            function () use ($writer) {
+                $writer->save('php://output'); // Lưu file vào output stream
+            },
+            200,
+            [
+                'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'Content-Disposition' => 'attachment;filename="' . $fileName . '"',
+                'Cache-Control' => 'max-age=0',
+            ]
+        );
     }
 }

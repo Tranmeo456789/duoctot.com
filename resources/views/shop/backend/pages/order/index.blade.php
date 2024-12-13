@@ -24,7 +24,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card card-outline card-primary">
-                    @include("$moduleName.blocks.x_title", ['title' => 'Danh sách'])
+                    @include("$moduleName.pages.$controllerName.x_title", ['title' => 'Danh sách','hideBtn'=> 1])
                     <div class="card-body p-0">
                         <div class="set-withscreen">
                             {!! Template::showTabFilter($controllerName, $itemStatusOrderCount, $params['filter']['status_order'], $params,'status_order'); !!}

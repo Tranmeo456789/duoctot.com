@@ -116,6 +116,18 @@ class OrderModel extends BackEndModel
 
             $result =  $query;
         }
+        if ($options['task'] == "order-list-items-export-file-excel") {
+            $query = $this::select('id','code_order','total','total_product','created_at','status_order','user_id','buyer','payment','status_control')
+                                ->where('id','>',1)->OfUser();
+            if ((isset($params['filter']['status_order'])) && ($params['filter']['status_order'] != 'all')) {
+                $query = $query->where('status_order',$params['filter']['status_order']);
+            }
+            if(isset($params['filter_in_day'])){
+                $query->whereBetween('created_at', ["{$params['filter_in_day']['day_start']}", "{$params['filter_in_day']['day_end']}"]);
+            }
+            $query=$query->get();
+            $result =  $query;
+        }
         if ($options['task'] == "user-list-items-affiliate") {
             $query = $this::with('userBuy')
                                 ->select('id','code_order','total','created_at','status_order','user_id','buyer','payment','status_control')
