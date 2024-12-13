@@ -33,7 +33,11 @@
                 $linkShop = route('fe.product.drugstore', $slug);
                 $address='';
                 $ward='';
-                $phoneOfShop = !empty($val['phone']) ? $val['phone'] : $hotline;
+                if($val['type_account'] != 'code_import'){
+                    $phoneOfShop = !empty($val['phone']) ? $val['phone'] : $hotline;
+                }else{
+                    $phoneOfShop = $hotline;
+                }
                 $phoneOfShop=MyFunction::formatPhoneNumber($phoneOfShop);
                 if(isset($val['details'])){
                     $ward_detail=(new WardModel())->getItem(['id'=> $val['details']['ward_id']],['task' => 'get-item-full']);

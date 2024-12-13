@@ -94,7 +94,7 @@ class UserController extends ApiController
                 $user->type_account = $type_account;
                 $user->domain_register = $domain_register;
                 $user->ref_register = $ref_register;
-                $user->slug = $ref_register;
+                $user->slug = $slug;
                 if ($user->save()) {
                     if($email != null){
                         $user = UsersModel::where('email', '=', $email)->orWhere(function ($query) use ($phone) {

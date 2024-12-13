@@ -45,15 +45,14 @@ $xhtmlAreaSeach = Template::showAreaSearch('product', $params['search']);
                                                 <i class="far fa-copy"></i>
                                             </span>
                                         </div>
-                                        @if($userInfo['user_type_id'] > 1)
-                                        <div class="text-center">Link Shop</div>
+                                        
+                                        <div class="text-center mt-2">Link Shop</div>
                                         <div class="wp-link-affiliate mb-3">
                                             <a href="{{ route('fe.product.drugstore', $slug) . '?codeRef=' . $userInfo['codeRef'] }}" class="text-primary value-link d-inline-block" target="_blank">{{ route('fe.product.drugstore', $slug) . '?codeRef=' . $userInfo['codeRef'] }}</a>
                                             <span class="btn btn-sm btn-danger d-inline-block ml-2 btn-copy-link">
                                                 <i class="far fa-copy"></i>
                                             </span>
                                         </div>   
-                                        @endif
                                     </div>
                                 </td>
                             </tr>

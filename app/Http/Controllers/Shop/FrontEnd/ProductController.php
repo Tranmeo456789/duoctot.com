@@ -137,7 +137,7 @@ class ProductController extends ShopFrontEndController
         //$shopId=$request->shopId;
         $userInfo = UsersModel::where('slug',$slug)->first();
         //$userInfo=(new UsersModel)->getItem(['user_id' => $shopId],['task'=>'get-item']);
-        if (!$userInfo || $userInfo['user_type_id'] < 3) {
+        if (!$userInfo || empty($slug)) {
             return redirect()->route('home');
         }
         $shopId=$userInfo['user_id'];

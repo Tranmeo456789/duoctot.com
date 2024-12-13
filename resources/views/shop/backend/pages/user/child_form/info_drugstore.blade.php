@@ -26,13 +26,19 @@
     $linkGetListWard = route('ward.getListByParentID',['parentID' => 'value_new']);
     $elements = [
         [
-            'label'   => HTML::decode(Form::label('member_id', 'Mã affiliate(mã giới thiệu)', $formLabelAttr)),
+            'label'   => HTML::decode(Form::label('member_id', 'Mã affiliate', $formLabelAttr)),
             'element' => Form::text('codeRef', $item['codeRef']??null, array_merge($formInputAttr,['placeholder'=>'Mã affiliate(mã giới thiệu)','readonly' => 'readonly'])),
-            'widthElement' => 'col-12 col-md-4'
-        ],[
+            'widthElement' => 'col-12 col-md-6'
+        ],
+        [
+            'label'   => HTML::decode(Form::label('ref_register', 'Mã giới thiệu', $formLabelAttr)),
+            'element' => Form::text('ref_register', $item['ref_register']??null, array_merge($formInputAttr,['placeholder'=>'Mã giới thiệu'])),
+            'widthElement' => 'col-12 col-md-6'
+        ],
+        [
             'label'   => HTML::decode(Form::label('fullname', 'Họ tên' .  $star, $formLabelAttr)),
             'element' => Form::text('fullname', $item['fullname']??null, array_merge($formInputAttr,['placeholder'=>'Họ tên'])),
-            'widthElement' => 'col-12 col-md-8'
+            'widthElement' => 'col-12'
         ],[
             'label'   => HTML::decode(Form::label('slug', 'Link Shop', $formLabelAttr)),
             'prefix' => url('/').'/',
