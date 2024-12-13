@@ -525,6 +525,13 @@ class MessageController extends ApiController
                 'room_id' => $roomCurrent['id'] ?? 1,
                 'user_id' => $userReceiver,
             ];
+            if($typeRoom=='group_bac_si'){
+                $paramsMessageFirst['content']='Chào bạn. Bạn đang muốn tư vấn về vấn đề gì ạ? Bạn cần cung cấp thông tin sau:
+ 1. Tuổi giới tính của bệnh nhân.
+ 2. Các bệnh cũ đã mắc, các thuốc đang dùng thường xuyên.
+ 3. Các triệu chứng hiện tại, thời điểm bắt đầu xuất hiện triệu chứng(mô tả càng chi tiết càng tốt).
+ 4. Các thông tin khác nếu có.';
+            }
             $this->model->saveItem($paramsMessageFirst, ['task' => 'add-item']);
         }
         // Trả về phòng đã tạo
