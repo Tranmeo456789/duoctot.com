@@ -2,7 +2,7 @@
     <div class="wp-inner">
         <div class="row">
             <div class="col-xl-3 col-lg-12">
-                <h6 class="mb-3">TDOCTOR</h6>
+                <h6 class="mb-3 font-weight-bold">TDOCTOR</h6>
                 <p><a href="{{route('fe.home.pageAboutUs')}}">Về chúng tôi</a></p>
                 <p><a href="{{route('fe.home.pageContact')}}">Liên hệ</a></p>
                 <p><a href="{{route('fe.post')}}">Tin tức</a></p>
@@ -13,7 +13,7 @@
                 <p><a href="{{route('fe.home.pageChinhsachThanhToan')}}">Chính sách thanh toán</a></p>
             </div>
             <div class="col-xl-3 col-lg-12">
-                <h6 class="mb-2">Liên hệ</h6>
+                <h6 class="mb-2 font-weight-bold">Liên hệ</h6>
                 <div class="social">
                     <div class="d-flex">
                         <div class="icon-social">

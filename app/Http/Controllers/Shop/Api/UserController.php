@@ -319,11 +319,7 @@ class UserController extends ApiController
             if (!$exists) {
                 $paramsToken['user_id']=$params['user']['user_id'];
                 $paramsToken['token']=$tokenDevice;
-                if($existingUser){
-                    UserTokenModel::where('user_id', $params['user']['user_id'])->update(
-                        ['token' => $tokenDevice]
-                    );
-                }else if($existingToken){
+                if($existingToken){
                     UserTokenModel::where('token', $tokenDevice)->update(
                         ['user_id' => $params['user']['user_id']]
                     );

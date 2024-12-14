@@ -44,7 +44,6 @@
         @include("$moduleName.pages.$controllerName.child_drugstore.comment_rating_drugstore")
     </div>
 </div>
-
 <div class="service-tdoctor mt-3 mt-lg-4">
     @include("$moduleName.templates.info_service")
 </div>
@@ -56,5 +55,6 @@
         @include("$moduleName.templates.feedback_customer")
     </div>
 </div>
+@include("$moduleName.templates.banner_doitac")
 <div class="lc-mask-search"></div>
 @endsection

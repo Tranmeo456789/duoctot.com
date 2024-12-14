@@ -409,15 +409,10 @@ class MessageController extends ApiController
         if (count($userTokens) > 0) {
             $title = 'Tin nhắn mới';
             $body = $params['content'];
-            $num = 0;
             foreach ($userTokens as $deviceToken) {
-                if($num < 1){
-                    if ($deviceToken) {
-                        $this->sendNotificationFromReciver($deviceToken, $title, $body);
-                        break;
-                    }
+                if ($deviceToken) {
+                    $this->sendNotificationFromReciver($deviceToken, $title, $body);
                 }
-                $num++;
             }
         }
     }
