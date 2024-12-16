@@ -1226,7 +1226,8 @@ $(document).ready(function () {
         loop: true,
         onSliderLoad: function() {
             $('#image-gallery').removeClass('cS-hidden');
-        }
+        },
+        adaptiveHeight: true
     });
     $('#image-gallery').on('click', function() {
         slider.pause();

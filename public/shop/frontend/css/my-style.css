@@ -3373,6 +3373,7 @@ label.error{
 .desc_product {
     padding: 20px 0px;
     border-bottom: 1px solid #7991B7;
+    font-size: 20px;
 }
 
 .desc_product p,
