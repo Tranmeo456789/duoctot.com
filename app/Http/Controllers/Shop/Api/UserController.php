@@ -72,7 +72,7 @@ class UserController extends ApiController
             if ($user == null) {
                 $user = new UsersModel;
                 if($email == null){
-                    $user->email = $phone;
+                    $user->email = '';
                 }else{
                     $user->email = $email;
                 }
@@ -218,37 +218,32 @@ class UserController extends ApiController
         return response()->json(array('status' => 400, 'success' => false, 'data' => null, 'message' => 'Có lỗi xảy ra, vui lòng thử lại'), 400);
     }
     public function login(Request $request){
-        $username = $request->username;
-        $password = $request->password;
-        // $type = (isset($request->type))?intval($request->type):1;
-        $current_user = UsersModel::where('email', '=', $username)->orWhere(function ($query) use ($username) {
-            $query->where('phone', $username)
-            ->where('phone', '!=', '0');
-        })->first();
-        if ($current_user != null) {
-            if (Hash::check($password, $current_user->password)) {
-                if($current_user != null){
-                    //$request->session()->put('user', $current_user);
-                    //setcookie("Tdoctor-token",JWTCustom::encode($current_user, $this->jwt_key),time() + 365*60*60*24,"/", $_SERVER['SERVER_NAME']);
-                    $dataToken = JWTCustom::encode($current_user, $this->jwt_key);
-                    $currentUser=$this->model->getItem(['user_id'=>$current_user['user_id']],['task'=>'get-item-api']);
-                    return response()->json([
-                        'status' => 200,
-                        'success' => true,
-                        'data' => array(
-                            'token' => $dataToken,
-                            'current_user' => $currentUser
-                        ),
-                        'detail' => 'success'
-                    ], 200);
-                }
-            }
+        $params['email'] = $request->username ?? 'Uknown';
+        $params['password'] = $request->password ?? 'Uknown';
+        if (!str_contains($params['email'],'@')){
+            $params['phone'] = $params['email'];
+            unset($params['email']);
+        }
+        $userModel = new MainModel();
+        $current_user = $userModel->getItem($params, ['task' => 'user-login']);
+        if ($current_user!= null) {
+            $dataToken = JWTCustom::encode($current_user, $this->jwt_key);
+            $currentUser=$this->model->getItem(['user_id'=>$current_user['user_id']],['task'=>'get-item-api']);
+            return response()->json([
+                'status' => 200,
+                'success' => true,
+                'data' => array(
+                    'token' => $dataToken,
+                    'current_user' => $currentUser
+                ),
+                'detail' => 'success'
+            ], 200);
         }
         return response()->json([
             'success' => false,
             'data' => NULL,
             'detail' => 'Tài khoản hoặc mật khẩu chưa đúng, vui lòng thử lại!'
-        ]);
+        ]);    
     }
     public function detailShop(Request $request){
         $params=[];
@@ -386,7 +381,12 @@ class UserController extends ApiController
         if ($data_token['message'] == 'OK') {
             $userCurrent =  (array)$data_token['payload'];
             $infoUserCurrent=$this->model->getItem(['user_id'=>$userCurrent['user_id']],['task'=>'get-item-api']);
-            $infoUserCurrent->url_share=url('/') . '?codeRef=' . $infoUserCurrent['codeRef'] .'&formRegister=1';
+            $fullname = $infoUserCurrent['fullname'] ?? 'Tdoctor';
+            $textFirstUrlShare = 'Mời bạn vào link này để đăng ký tài khoản sau đó tải App Tdoctor trên Store để tham gia là thành viên của '. $fullname .' để được hỗ trợ và hưởng nhiều ưu đãi
+';
+            $urlShare = url('/') . '?codeRef=' . $infoUserCurrent['codeRef'] .'&formRegister=1';
+            $urlShare = $textFirstUrlShare . $urlShare;
+            $infoUserCurrent->url_share = $urlShare;
             $this->res['data']= $infoUserCurrent;
         }
         return $this->setResponse($this->res);

@@ -104,6 +104,7 @@ return [
         'image/jpeg',
         'image/pjpeg',
         'image/png',
+        'image/webp',
     ],
 
     // permissions to be set when create a new folder or when it creates automatically with thumbnails
@@ -125,6 +126,7 @@ return [
         'image/svg+xml',
         'application/pdf',
         'text/plain',
+        'image/webp',
     ],
 
     /*
@@ -155,6 +157,7 @@ return [
         'png'  => 'PNG Image',
         'ppt'  => 'Microsoft PowerPoint',
         'pptx' => 'Microsoft PowerPoint',
+        'webp' => 'WebP Image',
     ],
 
     'file_icon_array' => [

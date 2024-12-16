@@ -56,12 +56,15 @@ class UserRequest extends AjaxFormRequest
                     if ($this->slug) {
                         $condSlug = 'bail|required|unique:user,slug,' . $user_id . ',user_id'; 
                     }
-                    // if (!empty($this->email)) {
-                    //     $condEmail = 'bail|required|email|unique:user,email,' . $user_id . ',user_id'; 
-                    // }
-                    // if (!empty($this->phone)) {
-                    //     $condPhone = 'bail|required|numeric|phone|unique:user,phone,' . $user_id . ',user_id'; 
-                    // }
+                    if (empty($this->email) && empty($this->phone)) {
+                        $condPhone = 'required'; 
+                    }
+                    if (!empty($this->email)) {
+                        $condEmail = 'bail|required|email|unique:user,email,' . $user_id . ',user_id'; 
+                    }
+                    if (!empty($this->phone)) {
+                        $condPhone = 'bail|required|numeric|phone|unique:user,phone,' . $user_id . ',user_id'; 
+                    }
                     return [
                         'fullname'    => $condName,
                         'slug'        => $condSlug,
@@ -102,7 +105,8 @@ class UserRequest extends AjaxFormRequest
     {
         $arrAttr = config('myconfig.template.label');
         $arrAttr['name'] = 'Họ tên';
-        $arrAttr['email'] = (str_contains($this->email,'@'))?'Email':'Số điện thoại';
+        $arrAttr['email'] = 'Email';
+        $arrAttr['phone'] = 'Số điện thoại';
         $arrAttr['province_id'] = 'Địa chỉ';
         $arrAttr['password_old'] = 'Mật khẩu cũ';
         $arrAttr['password_confirmation'] = 'Mật khẩu mới (nhập lại)';

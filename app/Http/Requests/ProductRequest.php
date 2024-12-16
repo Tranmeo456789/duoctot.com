@@ -57,7 +57,7 @@ class ProductRequest extends AjaxFormRequest
             $condSlug  .= ",$id";
         }
         $rulesAlbumImage = array();
-        $condAlbumImage = "image";
+        $condAlbumImage = "mimes:jpeg,png,gif,webp";
         if ((!empty($this->albumImage)) && count($this->albumImage) > 0) {
             $albumImage = $this->albumImage;
             foreach ($albumImage as $key => $file) {

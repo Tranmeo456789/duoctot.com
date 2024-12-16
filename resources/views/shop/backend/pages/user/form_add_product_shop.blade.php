@@ -23,7 +23,7 @@ $fullname=$userRef['fullname']??'';
 $phone= $userRef['phone']??'';
 $userAffiliate=$userInfo['fullname'].'-'.$userInfo['phone'].'-'.$userInfo['email']??'';
 $slugName = Str::slug($userInfo['fullname']);
-$linkShop=route('fe.product.drugstore', ['slug' => $slugName,'shopId'=> $userInfo['user_id']]);
+$linkShop=route('fe.product.drugstore', ['slug' => $slugName]);
 $elementsBtn = [
         [
             'element' => $inputHiddenID .Form::submit('Lưu', ['class'=>'btn btn-primary']),

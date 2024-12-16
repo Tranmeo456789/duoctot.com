@@ -268,7 +268,7 @@ class MessageController extends ApiController
             'date' =>  time()
         ]);
     }
-    private function sendNotificationFromReciver($deviceToken = '', $title = 'Thông báo', $body = '')
+    private function sendNotificationFromReciver($deviceToken = '', $title = 'Thông báo', $body = '', $nameRoom = 'shop', $roomId = '1', $content='')
     {
         if (empty($deviceToken)) {
             return response()->json([
@@ -282,6 +282,9 @@ class MessageController extends ApiController
             'data' => [
                 'key1' => 'value1',
                 'key2' => 'value2',
+                'nameRoom' => $nameRoom,
+                'roomId' => $roomId,
+                'content' => $content,
             ]
         ];
         try {
@@ -396,22 +399,29 @@ class MessageController extends ApiController
     {
         $params = [
             'content' => $request->content ?? '',
-            'room_id' => $request->room_id ?? 1,
+            'room_id' => strval($request->room_id) ?? '1',
             'user_id' => $request->user_id ?? 994110172,
         ];
         $this->model->saveItem($params, ['task' => 'add-item']);
+        $userSend = UsersModel::where('user_id', $params['user_id'])->first();
+        if($userSend){
+            $nameRoom = $userSend['fullname'] ?? '';
+        }
+        // Lấy các token của người dùng trong phòng (ngoại trừ người gửi)
         $listUserInRoom = RoomUserModel::where('room_id', $params['room_id'])
                                         ->where('user_id', '!=', $params['user_id'])
                                         ->pluck('user_id');
-        // Lấy các token của người dùng trong phòng (ngoại trừ người gửi)
         $userTokens = UserTokenModel::whereIn('user_id', $listUserInRoom)->pluck('token')->toArray();
         // Gửi thông báo nếu có người dùng trong phòng
         if (count($userTokens) > 0) {
             $title = 'Tin nhắn mới';
             $body = $params['content'];
+            $content = $params['content'];
+            $nameRoom = $nameRoom ?? 'Unknown';
+            $roomId = $params['room_id'] ?? 'Unknown';
             foreach ($userTokens as $deviceToken) {
                 if ($deviceToken) {
-                    $this->sendNotificationFromReciver($deviceToken, $title, $body);
+                    $this->sendNotificationFromReciver($deviceToken, $title, $body, $nameRoom, $roomId, $content);
                 }
             }
         }
@@ -545,12 +555,14 @@ class MessageController extends ApiController
                 $userCurent = UsersModel::where('user_id', $idUserGetList)->first();
                 if ($userCurent) {
                     $refRegister = $userCurent['ref_register'];
-                    $userReceiverId = 864108238;
+                    $typeRoom = 'group_bac_si';
+                    $userReceiverId = 90007044;
                     // Kiểm tra xem người dùng có mã giới thiệu hay không
                     if (!empty($refRegister)) {
                         $userShareCodeRef = UsersModel::where('codeRef', $refRegister)->first();
                         if ($userShareCodeRef) {
                             $userReceiverId = $userShareCodeRef['user_id'];
+                            $typeRoom = 'shop_chat';
                         }
                     }
                     // Tạo phòng và tin nhắn đầu tiên, và nhận lại phòng đã tạo

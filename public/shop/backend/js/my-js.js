@@ -40,6 +40,12 @@ $(document).on('submit', 'form#main-form', function(event) {
                         $('[name=' + control + ']').siblings('span.help-block').html(response.errors[control]).addClass("help-block-show");
                         //  $msg += "<br/>" + data.errors[control];
                     }
+                    var firstError = $('.has-error').first();
+                    if (firstError.length > 0) {
+                        $('html, body').animate({
+                            scrollTop: firstError.offset().top - 50
+                        }, 500);
+                    }
                 } else {
                     alert(response.message);
                 }
