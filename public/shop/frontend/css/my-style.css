@@ -4443,7 +4443,6 @@ input[type=number]::-webkit-outer-spin-button {
     max-width: 1300px;
     width: 100%;
     margin: 0 auto;
-    max-height: 213px;
     overflow: hidden;
 }
 .body-prescrip {

@@ -114,6 +114,12 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
         Route::post('/luu-tin-tuc', 'PostController@save')->name('post.save');
         Route::get('/xoa-tin-tuc/{id}', 'PostController@delete')->name('post.delete');
 
+        Route::get('/danh-sach-banner-quang-cao', 'BannerController@index')->name('banner');
+        Route::get('/them-banner-quang-cao', 'BannerController@form')->name('banner.add');
+        Route::get('/sua-banner-quang-cao/{id}', 'BannerController@form')->name('banner.edit');
+        Route::post('/luu-banner-quang-cao', 'BannerController@save')->name('banner.save');
+        Route::get('/xoa-banner-quang-cao/{id}', 'BannerController@delete')->name('banner.delete');
+
         Route::get('/danh-sach-danh-muc-tin-tuc', 'CatalogController@index')->name('catalog');
         Route::get('/them-danh-muc-tin-tuc', 'CatalogController@form')->name('catalog.add');
         Route::get('/sua-danh-muc-tin-tuc/{id}', 'CatalogController@form')->name('catalog.edit');

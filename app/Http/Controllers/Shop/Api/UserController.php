@@ -347,7 +347,7 @@ class UserController extends ApiController
         $this->res['data'] = null;
         $params['fullname'] = $request->fullname??'';
         $params['phone'] = $request->phone??'';
-        $params['email'] = $request->email??'';
+        $params['email'] = filter_var($request->email ?? '', FILTER_VALIDATE_EMAIL) ? $request->email : '';
         $params['ref_register'] = $request->ref_register??'';
         $token = $request->header('Tdoctor-Token');
         $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));

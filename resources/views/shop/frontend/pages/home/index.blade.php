@@ -7,41 +7,21 @@
             <div class="d-none d-md-block">
                 <ul class="banner_doitac list-unstyled cS-hidden">
                     <li class="text-center">
-                        <img src="{{asset('images/shop/banner2.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
-                    </li>
-                    <!-- <li class="text-center">
-                        <img src="{{asset('images/shop/banner3.jpeg')}}" alt="tdoctor" class="img-fluid" loading="lazy" style="width: 100%;">
-                    </li> -->
-                    <li class="text-center">
-                        <img src="{{asset('images/shop/banner4.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
-                    </li>
-                    <!-- <li class="text-center">
-                        <img src="{{asset('images/shop/banner5.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
+                        <a href="https://tdoctor.net/chi-tiet-san-pham/bot-phyto-precollagen-vitac-biotin-3500.html">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner11.webp')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
+                        </a>
                     </li>
                     <li class="text-center">
-                        <img src="{{asset('images/shop/banner6.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
-                    </li> -->
-                    <!-- <li class="text-center">
-                        <img src="{{asset('images/shop/banner7.jpeg')}}" alt="tdoctor" class="img-fluid" loading="lazy" style="width: 100%;">
+                        <a href="https://tdoctor.net/chi-tiet-san-pham/bot-phyto-precollagen-vitac-biotin-3500.html">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner11.webp')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
+                        </a>
                     </li>
-                    <li class="text-center">
-                        <img src="{{asset('images/shop/banner8.jpeg')}}" alt="tdoctor" class="img-fluid" loading="lazy" style="width: 100%;">
-                    </li>
-                    <li class="text-center">
-                        <img src="{{asset('images/shop/banner9.jpeg')}}" alt="tdoctor" class="img-fluid" loading="lazy" style="width: 100%;">
-                    </li>
-                    <li class="text-center">
-                        <img src="{{asset('images/shop/banner10.jpeg')}}" alt="tdoctor" class="img-fluid" loading="lazy" style="width: 100%;">
-                    </li>
-                    <li class="text-center">
-                        <img src="{{asset('images/shop/banner1.jpeg')}}" alt="tdoctor" class="img-fluid" loading="lazy" style="width: 100%;">
-                    </li> -->
                 </ul>
             </div>
             <div class="d-block d-md-none">
                 <ul class="banner_doitac list-unstyled cS-hidden">
                     <li class="text-center">
-                        <img src="{{asset('images/shop/banner14_mobi.webp')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
+                        <img src="{{asset('laravel-filemanager/fileUpload/banner/banner11.webp')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
                     </li>
                     <li class="text-center">
                         <img src="{{asset('images/shop/banner14_mobi.webp')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">

@@ -84,7 +84,7 @@
             </li>
             <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-wallet"></i>
+                        <i class="nav-icon fas fa-pager"></i>
                         <p>
                             Tin tức
                             <i class="right fas fa-angle-left"></i>
@@ -278,6 +278,12 @@
                     <p>Quản lý Editor</p>
                 </a>
             </li>
+            <!-- <li class="nav-item">
+                <a href="{{route('banner')}}" class="nav-link">
+                    <i class="nav-icon far fa-images"></i>
+                    <p>Quản lý Banner, Quảng cáo</p>
+                </a>
+            </li> -->
             <!-- <li class="nav-item">
                 <a href="" class="nav-link">
                     <i class="nav-icon fas fa-external-link-square-alt"></i>
