@@ -81,7 +81,7 @@ class MessagesModel extends BackEndModel
             }
         }
         if ($options['task'] == "frontend-list-items-api") {
-            $query = $this::with('userSend')->select('id','content','user_id','room_id','created_at')->orderBy('id', 'desc');
+            $query = $this::with('userSend')->select('id','content','user_id','room_id','type','created_at')->orderBy('id', 'desc');
             if (isset($params['room_id'])) {
                 $query = $query->where('room_id',$params['room_id']);
             }

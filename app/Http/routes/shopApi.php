@@ -109,5 +109,7 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
         Route::post('receiveNoticeToDeviceToKen2', ['uses' => $controller . 'receiveNoticeToDeviceToKen2']);
         Route::post('sendNotification3', ['uses' => $controller . 'sendNotification3']);
         Route::post('saveMessageAxios', ['uses' => $controller . 'saveMessageAxios']);
+        Route::post('sendImageMessage', ['uses' => $controller . 'sendImageMessage']);
+        Route::post('saveMessageImage', ['uses' => $controller . 'saveMessageImage']);
     });
 });

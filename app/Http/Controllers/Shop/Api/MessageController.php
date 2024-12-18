@@ -803,4 +803,84 @@ class MessageController extends ApiController
         curl_close($ch);
         return json_decode($response, true);
     }
+    public function sendImageMessage(Request $request){
+        $token = $request->header('Tdoctor-Token') ?? 'hhhhh';
+        $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
+        $roomId = $request->roomId ?? 1;  
+        $messageCurrent = [];
+        $content = '';
+        if ($data_token['message'] == 'OK') {
+            $infoUserGetList = (array)$data_token['payload'];
+            $idUserGetList = $infoUserGetList['user_id'];
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $fileName = time() . '_' . $file->getClientOriginalName();
+                $destinationPath = public_path('fileUpload/message'); 
+                $file->move($destinationPath, $fileName);
+                $content = asset('/laravel-filemanager/fileUpload/message/' . $fileName);
+            }
+            $params = [
+                'content' => $content,
+                'room_id' => $roomId,
+                'user_id' => $idUserGetList,
+                'type' => 'image'
+            ];
+            $messageCurrent = $this->model->saveItem($params, ['task' => 'add-item']);
+        }
+        $this->res['data'] = [];
+        $this->res['message'] = 'Gửi tin nhắn thành công!';
+        return $this->setResponse($this->res);
+    }
+    public function saveMessageImage(Request $request){
+        $content='';
+        if ($request->has('content')){
+            $base64Image = $request->content;
+            // Giải mã chuỗi Base64 thành dữ liệu nhị phân
+            $imageData = base64_decode($base64Image, true);
+            if ($imageData !== false && !empty($imageData)) {
+                // Tạo tên file duy nhất (sử dụng timestamp hoặc UUID)
+                $fileName = 'image_' . time() . '.jpg'; 
+                // Đặt đường dẫn lưu ảnh trong thư mục public/fileUpload/message
+                $destinationPath = public_path('fileUpload/message');
+                // Kiểm tra nếu thư mục chưa tồn tại thì tạo mới
+                if (!file_exists($destinationPath)) {
+                    mkdir($destinationPath, 0777, true); // Tạo thư mục nếu chưa có
+                }
+                // Lưu dữ liệu nhị phân vào tệp
+                $filePath = $destinationPath . '/' . $fileName;
+                file_put_contents($filePath, $imageData);
+                // Tạo đường dẫn URL của ảnh đã lưu (để trả lại cho client)
+                $content = asset('/laravel-filemanager/fileUpload/message/' . $fileName);
+            }
+        }
+        $params = [
+            'content' => $content,
+            'room_id' => strval($request->room_id) ?? '1',
+            'user_id' => $request->user_id ?? 994110172,
+            'type' => 'image'
+        ];
+        $this->model->saveItem($params, ['task' => 'add-item']);
+        $userSend = UsersModel::where('user_id', $params['user_id'])->first();
+        if($userSend){
+            $nameRoom = $userSend['fullname'] ?? '';
+        }
+        // Lấy các token của người dùng trong phòng (ngoại trừ người gửi)
+        $listUserInRoom = RoomUserModel::where('room_id', $params['room_id'])
+                                        ->where('user_id', '!=', $params['user_id'])
+                                        ->pluck('user_id');
+        $userTokens = UserTokenModel::whereIn('user_id', $listUserInRoom)->pluck('token')->toArray();
+        // Gửi thông báo nếu có người dùng trong phòng
+        if (count($userTokens) > 0) {
+            $title = 'Tin nhắn mới';
+            $body = $params['content'];
+            $content = $params['content'];
+            $nameRoom = $nameRoom ?? 'Unknown';
+            $roomId = $params['room_id'] ?? 'Unknown';
+            foreach ($userTokens as $deviceToken) {
+                if ($deviceToken) {
+                    $this->sendNotificationFromReciver($deviceToken, $title, $body, $nameRoom, $roomId, $content);
+                }
+            }
+        }
+    }
 }
