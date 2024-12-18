@@ -279,6 +279,17 @@ $(document).on('click', '.btn-delete-row', function() {
     }
     $(this).closest('.row-detail').remove();
 });
+$(document).on('click', ".btn-add-row-unit-price", function(event) {
+    event.preventDefault();
+    rowCurrent = $(this).closest('.row-detail');
+    rowNew = rowCurrent.clone();
+    //$(rowNew).find("input").val(0);
+    rowNew.insertAfter(rowCurrent);
+    rowNew.find('.select2').parent().find('span.select2-container').remove();
+    $(rowNew).find('.select2').removeAttr('tabindex');
+    $('.select2').select2();
+    //$(rowNew).find('.select2').val('null').trigger("change");
+});
 $(document).on('click', "#btnDeleteFile", function(event) {
     if ($("input[name='file-del']").length) {
         if ($("input[name='file-del']").val() != '') {

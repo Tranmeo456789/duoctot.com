@@ -97,7 +97,6 @@
 
     $itemsTypeVAT = config("myconfig.template.yes_no");
     $itemsTypePrice = config("myconfig.template.type_price");
-
     $elements = array_merge($elements,
         [
             [
@@ -112,7 +111,56 @@
                 'type' =>'inline-text-right',
                 'widthElement' => 'col-3',
                 'styleFormGroup' => 'mb-1',
+            ],[
+                'label'   => HTML::decode(Form::label('', 'Đơn vị'.  $star, $formLabelAttr)),
+                'element' => '',
+                'widthElement' => 'col-5 p-0 text-center'
+            ],[
+                'label'   => HTML::decode(Form::label('', 'Giá bán thuốc'.  $star, $formLabelAttr)),
+                'element' => '',
+                'widthElement' => 'col-5 p-0 text-center'
+            ]
+        ]
+    );
+    $elementsUnitPrice=[];
+    if (isset($item['list_prices']) && (count($item['list_prices']) > 0)) {
+        foreach($item['list_prices'] as $key => $priceUnit) {
+            $elementsUnitPrice[] = [
+                [
+                    'label'   => '',
+                    'element' => Form::select('list_prices[unit_id][]',$itemsUnit, $priceUnit['unit_id']??null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
+                    'widthElement' => 'col-5'
+                ],
+                [
+                    'label'   => '',
+                    'element' => Form::text('list_prices[price][]', $priceUnit['price']??null, array_merge($formInputAttr,['placeholder'=>'Giá thuốc'])),
+                    'widthElement' => 'col-5'
+                ],[
+                    'label'   => '',
+                    'element' => Form::button("<i class='fa fa-plus'></i>",['class'=>'btn btn-sm btn-primary btn-add-row-unit-price']) . " " . Form::button("<i class='fa fa-times'></i>",['class'=>'btn btn-sm btn-danger btn-delete-row']),
+                    'widthElement' => 'col-2 text-right'
+                ]
+            ];
+        }
+    }else{
+        $elementsUnitPrice[] = [
+            [
+                'label'   => '',
+                'element' => Form::select('list_prices[unit_id][]',$itemsUnit, $item['unit_id']??null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
+                'widthElement' => 'col-5'
             ],
+            [
+                'label'   => '',
+                'element' => Form::text('list_prices[price][]', $item['price']??null, array_merge($formInputAttr,['placeholder'=>'Giá thuốc'])),
+                'widthElement' => 'col-5'
+            ],[
+                'label'   => '',
+                'element' => Form::button("<i class='fa fa-plus'></i>",['class'=>'btn btn-sm btn-primary btn-add-row-unit-price']) . " " . Form::button("<i class='fa fa-times'></i>",['class'=>'btn btn-sm btn-danger btn-delete-row']),
+                'widthElement' => 'col-2 text-right'
+            ]
+        ];
+    }
+    $elements2= [
             [
                 'label'   => HTML::decode(Form::label('coefficient',$label['coefficient'], $formLabelAttr)),
                 'element' => Form::text('coefficient', $item['coefficient']??null, array_merge($formInputAttr,['placeholder'=>$label['coefficient']])),
@@ -120,14 +168,6 @@
             ],[
                 'label'   => HTML::decode(Form::label('type_vat', $label['type_vat'], $formLabelAttr)),
                 'element' => Form::select('type_vat',$itemsTypeVAT, $item['type_vat']??null, array_merge($formInputAttr,['style' =>'width:100%'])),
-                'widthElement' => 'col-3'
-            ],[
-                'label'   => HTML::decode(Form::label('price',$label['price'] .  $star, $formLabelAttr)),
-                'element' => Form::text('price', $item['price']??null, array_merge($formInputAttr,['placeholder'=>$label['price']])),
-                'widthElement' => 'col-3'
-            ],[
-                'label'   => HTML::decode(Form::label('price_vat',$label['price_vat'] .  $star, $formLabelAttr)),
-                'element' => Form::text('price_vat', $item['price_vat']??null, array_merge($formInputAttr,['placeholder'=>$label['price_vat']])),
                 'widthElement' => 'col-3'
             ],
             [
@@ -138,10 +178,6 @@
             [
                 'label'   => HTML::decode(Form::label('expiration_date',$label['expiration_date'], $formLabelAttr)),
                 'element' => Form::text('expiration_date', $item['expiration_date']??'Xem trên bao bì sản phẩm', array_merge($formInputAttr,['placeholder'=>$label['expiration_date']])),
-                'widthElement' => 'col-3'
-            ],[
-                'label'   => HTML::decode(Form::label('unit_id', $label['unit_id'] .  $star , $formLabelAttr)),
-                'element' => Form::select('unit_id',$itemsUnit, $item['unit_id']??null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
                 'widthElement' => 'col-3'
             ],[
                 'label'   => HTML::decode(Form::label('amout_max',$label['amout_max'], $formLabelAttr)),
@@ -169,7 +205,7 @@
             [
                 'label'   => HTML::decode(Form::label('sell_area', $label['sell_area'], $formLabelAttr)),
                 'element' => Form::select('sell_area',$itemsProvince, $item['sell_area']??null, array_merge($formSelect2Attr,['data-placeholder'=>"Mặc định(Cả nước)",'style' =>'width:100%','multiple' => 'multiple'])),
-                'widthElement' => 'col-6'
+                'widthElement' => 'col-3'
             ],
             [
                 'label'   => HTML::decode(Form::label('contact','SĐT liên hệ', $formLabelAttr)),
@@ -185,11 +221,10 @@
                 'element' =>'',
                 'widthElement' => 'col-12',
             ]
-        ]
-    );
+        ];
     $arrFeaturer = config('myconfig.template.type_featurer');
     foreach($arrFeaturer as $key_featurer => $type_featurer){
-        $elements[] = [
+        $elements2[] = [
             'label'   => Form::label('', $type_featurer, $formLabelAttr),
             'element' => Form::checkbox('featurer[]', $key_featurer,isset($item['featurer']) && in_array($key_featurer,$item['featurer']??'') ,array_merge($formInputAttr)),
             'type' =>'inline-text-right',
@@ -197,7 +232,7 @@
             'styleFormGroup' => 'mb-1',
         ];
     }
-    $elements = array_merge($elements,
+    $elements2 = array_merge($elements2,
         [
             [
                 'label'   => HTML::decode(Form::label('image', 'Chọn ảnh đại diện', $formLabelAttr)),
@@ -281,6 +316,14 @@
                             'id'             => 'main-form' ])  }}
                             <div class="row">
                                 {!! FormTemplate::show($elements,$formInputWidth)  !!}
+                            </div>
+                            @foreach($elementsUnitPrice as $element)
+                                <div class="row row-detail">
+                                    {!! FormTemplate::show($element,$formInputWidth)  !!}
+                                </div>
+                            @endforeach
+                            <div class="row">
+                                {!! FormTemplate::show($elements2,$formInputWidth)  !!}
                             </div>
                         {{ Form::close() }}
                     </div>

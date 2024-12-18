@@ -44,7 +44,7 @@ class ProductRequest extends AjaxFormRequest
         $condPrice  =  "bail|required|numeric";
         $condTypePrice  =  "bail|required|in:"  . implode(',',array_keys(config('myconfig.template.type_price')));
         $condInventory  =  ($this->invenotry_min != '')?"bail|required|numeric":'';
-        $condPriceVat  =  "bail|required|numeric";
+        //$condPriceVat  =  "bail|required|numeric";
         $condGeneralInfo  =  "bail|required";
         $condBenefit  =  "bail|required";
         $condUnit  =  "bail|required|exists:$this->tableUnit,id";
@@ -74,11 +74,9 @@ class ProductRequest extends AjaxFormRequest
             'producer_id'    => $condProducer,
             //'trademark_id'   => $condTrademark,
             'country_id'     => $condCountry,
-            'price'          => $condPrice,
+            //'list_prices.*.price' => $condPrice,
             'type_price'          => $condTypePrice,
-            'unit_id'        => $condUnit,
             'inventory_min'  => $condInventory,
-            'price_vat'      => $condPriceVat,
             'general_info'   => $condGeneralInfo,
             'benefit'        => $condBenefit
         ];
@@ -89,6 +87,7 @@ class ProductRequest extends AjaxFormRequest
         $arrAttr = config('myconfig.template.label');
         $arrAttr['name'] = 'Tên thuốc';
         $arrAttr['code'] = 'Mã thuốc';
+        $arrAttr['list_prices.*.price'] = 'Giá thuốc';
         return $arrAttr;
     }
 }

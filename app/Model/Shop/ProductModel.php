@@ -16,7 +16,8 @@ class ProductModel extends BackEndModel
     protected $casts = [
         'tick'   => 'array',
         'featurer' =>'array',
-        'sell_area' => 'array'
+        'sell_area' => 'array',
+        'list_prices'   => 'array'
     ];
     public function __construct()
     {
@@ -459,7 +460,7 @@ class ProductModel extends BackEndModel
         $result = null;
         if ($options['task'] == 'get-item') {
             $result = self::select('id','name','type','code','cat_product_id','producer_id',
-                                    'tick','type_price','price','price_vat','percent_discount','coefficient',
+                                    'tick','type_price','price','list_prices','price_vat','percent_discount','coefficient',
                                     'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id','brand_origin_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
@@ -477,7 +478,7 @@ class ProductModel extends BackEndModel
         if ($options['task'] == 'frontend-get-item') {
             $query = self::with(['unitProduct', 'catProduct'])
                             ->select('id','name','type','code','cat_product_id','producer_id',
-                                    'tick','type_price','price','price_vat','percent_discount','coefficient',
+                                    'tick','type_price','price','list_prices','price_vat','percent_discount','coefficient',
                                     'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id','brand_origin_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
@@ -494,7 +495,7 @@ class ProductModel extends BackEndModel
         if ($options['task'] == 'frontend-get-item-api') {
             $query = self::with(['unitProduct', 'catProduct'])
                             ->select('id','name','type','code','cat_product_id','producer_id',
-                                    'tick','type_price','price','price_vat','percent_discount','coefficient',
+                                    'tick','type_price','price','list_prices','price_vat','percent_discount','coefficient',
                                     'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id','brand_origin_id',
                                     'dosage_forms','country_id','specification','benefit','elements',

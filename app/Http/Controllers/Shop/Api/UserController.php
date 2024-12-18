@@ -345,15 +345,19 @@ class UserController extends ApiController
     {
         $params=[];
         $this->res['data'] = null;
-        $params['fullname'] = $request->fullname??'';
-        $params['phone'] = $request->phone??'';
+        $params['fullname'] = $request->fullname ?? '';
+        $params['phone'] = $request->phone ?? '';
         $params['email'] = filter_var($request->email ?? '', FILTER_VALIDATE_EMAIL) ? $request->email : '';
-        $params['ref_register'] = $request->ref_register??'';
+        $params['ref_register'] = $request->ref_register ?? '';
         $token = $request->header('Tdoctor-Token');
         $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
         if ($data_token['message'] == 'OK') {
             $userCurrent =  (array)$data_token['payload'];
             $params['user_id'] = $userCurrent['user_id'];
+            $existingPhone = UsersModel::where('phone', $params['phone'])->where('user_id', '<>', $userCurrent['user_id'])->first();
+            if ($existingPhone) {
+                $params['phone'] = $userCurrent['phone'];
+            }
             if(!empty($params['ref_register'])){
                 $userShareCodeRef = UsersModel::where('codeRef', $params['ref_register'])->first();
                 if($userShareCodeRef){

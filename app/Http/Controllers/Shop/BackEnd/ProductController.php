@@ -144,6 +144,36 @@ class ProductController extends BackEndController
                 $params['image'] = '/laravel-filemanager/fileUpload/product/'.$fileName;
             }
             $params['slug'] = !empty($params['slug']) ? $params['slug'] : Str::slug($params['name']);
+            // foreach($params['list_prices'] as $key => $val){
+            //     $price = str_replace(' ', '', $val['price']);
+            //     $price = preg_replace('/\D/', '', $val['price']);
+            //     $params['list_prices'][$key]['price'] = $price;
+            //     if($key == 0){
+            //         $params['price'] = $price;
+            //         $params['unit_id'] = $params['list_prices'][0]['unit_id'] ?? 1;
+            //     }
+            // }
+            $listPrice=$params['list_prices'];
+            if (count($listPrice['unit_id']) > 0){
+                $arrProduct = [];
+                foreach($listPrice['unit_id'] as $key=>$val){
+                    $price = str_replace(' ', '', $listPrice['price'][$key]);
+                    $price = preg_replace('/\D/', '', $listPrice['price'][$key]);
+                    $arrProduct[$listPrice['unit_id'][$key]] = [
+                        'price' => $price,
+                        'unit_id' => $listPrice['unit_id'][$key]
+                    ];
+                    if($key == 0){
+                        $params['price'] = $price ?? 0;
+                        $params['unit_id'] = $listPrice['unit_id'][$key] ?? 1;
+                    }
+                }
+                $params['list_prices'] = json_encode($arrProduct);
+                if(count($listPrice['unit_id']) < 2){
+                    $params['list_prices'] = '';
+                }
+            }
+            $params['price_vat'] = $params['price'];
             $this->model->saveItem($params, ['task' => $task]);
             $request->session()->put('app_notify', $notify);
             if(Session::get('user')['is_admin'] == 1 || Session::get('user')['is_admin'] == 2){

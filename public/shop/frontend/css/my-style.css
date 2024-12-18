@@ -1364,7 +1364,7 @@ li .wp-discount
     color: #fff;
     font-size: 10px;
     right: 3px;
-    top: -22px;
+    top: -26px;
     position: absolute;
 }
 .cat-product-out .icon-sticky span{
@@ -3385,7 +3385,7 @@ label.error{
 }
 
 .desc_product .price_product {
-    font-size: 32px;
+    font-size: 40px;
     line-height: 39px;
 }
 

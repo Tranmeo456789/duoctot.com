@@ -1346,6 +1346,7 @@ $(document).on('click', '.btn-select-buy', function (event) {
     total_product = Number(total_product) + Number(quantity);
     $('.hrcart .number_cartmenu').text(total_product);
     var product_id = $('#product_id').val();
+    var unit_id = $('#unit_id').val();
     var user_sell = $('#user_sell').val();
     var codeRef = $('#code_ref').val();
     url = $(this).data('href');
@@ -1356,6 +1357,7 @@ $(document).on('click', '.btn-select-buy', function (event) {
         dataType: 'html',
         data: {
             product_id: product_id,
+            unit_id: unit_id,
             quantity: quantity,
             user_sell: user_sell,
             codeRef: codeRef,
@@ -2198,4 +2200,12 @@ $(document).ready(function() {
 });
 $(document).on('click', '.create-comment', function(event){
     $("#commentModal").fadeIn(200);
+});
+$(document).on('click', ".btnSelectUnitPriceProduct", function (event) {
+    $('.slect-item-customer').removeClass("active-slect");
+    $(this).addClass("active-slect");
+    var priceFormat = $(this).attr("data-priceFormat") || null;
+    var unitId = $(this).attr("data-unitId") || 1;
+    $("#show-price-buy-product").text(priceFormat);
+    $("#unit_id").val(unitId);
 });
