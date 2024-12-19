@@ -1,5 +1,6 @@
 @php
 use App\Helpers\MyFunction;
+use App\Model\Shop\UnitModel;
 @endphp
 
 <div class="info-product-cart">
@@ -9,6 +10,9 @@ use App\Helpers\MyFunction;
         </div>
     </div>
     @foreach($item['product'] as $val )
+    @php
+        $unitItem = UnitModel::find($val['unit_id']) ?? [];
+    @endphp
     <div class="item-product" data-id="{{$val['product_id']}}">
         <div class="container-fluid py-2">
             <div class="row">
@@ -19,7 +23,7 @@ use App\Helpers\MyFunction;
                     <div class="row">
                         <div class="col-12 col-md-7 mb-1">
                             <a href="" class="title-product d-block truncate3">{{$val['name']}}</a>
-                            <span>Đơn giá: <span class="price">{{MyFunction::formatNumber($val['price'])}}</span> đ</span>
+                            <span>Đơn giá: <span class="price">{{MyFunction::formatNumber($val['price'])}}</span> đ / {{$unitItem['name'] ?? ''}}</span>
                         </div>
                         <div class="col-12 col-md-5">
                             <div class="row">

@@ -41,26 +41,31 @@ io.on('connection', (socket) => {
     // Lắng nghe sự kiện 'sendMessage' từ Flutter client
     socket.on('sendMessage', (data) => {
         //console.log('Received message from Flutter:', data);
-        if (data.content && isBinaryData(data.content)) {
+        if (data.type && data.type === 'imageMedia') {
             io.to(data.room_id).emit('newMessage', {
                 room_id: data.room_id,       // Room ID
-                content: data.content,       // Nội dung tin nhắn
+                content: data.content, 
+                image_content: data.image_content,  
+                type: data.type,    
                 user_id: data.user_id,       // ID người gửi
                 role: data.role || 0,        // Nếu có thể có role (mặc định là 'user')
                 created_at: data.created_at, // Thời gian gửi tin nhắn
                 user_send: data.user_send    // Thông tin người gửi (nếu có)
             });
-            const imageBuffer = Buffer.from(data.content.split(',')[1], 'base64');  // Chuyển dữ liệu nhị phân thành Buffer
             axios.post('https://tdoctor.net/api/message/saveMessageImage', {
-                content: imageBuffer.toString('base64'),
+                content: data.content,
+                image_content: data.image_content, 
                 room_id: data.room_id,
-                user_id: data.user_id
+                user_id: data.user_id,
+                type: data.type
             });
         }else{
             // Phát sự kiện 'newMessage' các client join room Id (bao gồm cả client đang gửi)
             io.to(data.room_id).emit('newMessage', {
                 room_id: data.room_id,       // Room ID
-                content: data.content,       // Nội dung tin nhắn
+                content: data.content,
+                image_content: '',  
+                type: 'text',       
                 user_id: data.user_id,       // ID người gửi
                 role: data.role || 0,        // Nếu có thể có role (mặc định là 'user')
                 created_at: data.created_at, // Thời gian gửi tin nhắn

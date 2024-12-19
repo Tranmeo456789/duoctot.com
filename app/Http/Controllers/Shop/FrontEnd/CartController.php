@@ -67,8 +67,20 @@ class CartController extends ShopFrontEndController
         $id = intval($request->product_id);
         $quantity = intval($request->quantity);
         $user_sell = intval($request->user_sell);
+        $unitId = intval($request->unit_id);
         $codeRef = $request->codeRef ?? '';
         $product = ProductModel::find($id);
+        $priceCurrent = $product->price;
+        if($product->unit_id != $unitId){
+            if(!empty($product->list_prices)){
+                foreach($product->list_prices as $unitPrice){
+                    if($unitId == $unitPrice['unit_id']){
+                        $priceCurrent = $unitPrice['price'];
+                        break;
+                    }
+                }
+            }
+        }
         $image = $product->image;
         $cart = $request->session()->has('cart')?$request->session()->get('cart'):[];
         if (!isset($cart[$user_sell]))  {
@@ -80,20 +92,20 @@ class CartController extends ShopFrontEndController
         $cart[$user_sell]['total_product'] += $quantity;
         if (isset($cart[$user_sell]['product'][$id])){
             $cart[$user_sell]['product'][$id]['quantity'] += $quantity;
-            $cart[$user_sell]['total'] =  $cart[$user_sell]['total'] -  $cart[$user_sell]['product'][$id]['total_money'] +  $product->price * $quantity;
-            $cart[$user_sell]['product'][$id]['total_money'] = $product->price * $quantity;
+            $cart[$user_sell]['total'] =  $cart[$user_sell]['total'] -  $cart[$user_sell]['product'][$id]['total_money'] +  $priceCurrent * $quantity;
+            $cart[$user_sell]['product'][$id]['total_money'] = $priceCurrent * $quantity;
         }else{
             $cart[$user_sell]['product'][$id] = [
                 'product_id' => $id,
                 'name' => $product->name,
-                'price' => $product->price,
-                'total_money' => $product->price * $quantity,
+                'price' => $priceCurrent,
+                'total_money' => $priceCurrent * $quantity,
                 'quantity' => $quantity,
                 'image' => $image,
-                'unit_id' => $product->unit_id,
+                'unit_id' => $unitId,
                 'codeRef'=>$codeRef,
             ];
-            $cart[$user_sell]['total'] += $product->price * $quantity;
+            $cart[$user_sell]['total'] += $priceCurrent * $quantity;
         }
 
         $request->session()->put('cart', $cart);

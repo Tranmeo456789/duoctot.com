@@ -8,7 +8,11 @@
         $imageSrc  = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/nhathuocmau10.jpg';
     }
     $imageMap = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/mapduphong.jpeg';
-    $phoneShop=MyFunction::formatPhoneNumber('0345488247');
+    $phoneShop = '0345488247';
+    if($userInfo['user_type_id'] == 4 && !empty($userInfo['phone']) && $userInfo['type_account'] != 'code_import'){
+        $phoneShop = $userInfo['phone'];
+    }
+    $phoneShop=MyFunction::formatPhoneNumber($phoneShop);
 @endphp
 
 @extends('shop.layouts.frontend')

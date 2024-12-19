@@ -832,9 +832,9 @@ class MessageController extends ApiController
         return $this->setResponse($this->res);
     }
     public function saveMessageImage(Request $request){
-        $content='';
-        if ($request->has('content')){
-            $base64Image = $request->content;
+        $imageContent = '';
+        if ($request->has('image_content')){
+            $base64Image = $request->image_content;
             // Giải mã chuỗi Base64 thành dữ liệu nhị phân
             $imageData = base64_decode($base64Image, true);
             if ($imageData !== false && !empty($imageData)) {
@@ -850,14 +850,15 @@ class MessageController extends ApiController
                 $filePath = $destinationPath . '/' . $fileName;
                 file_put_contents($filePath, $imageData);
                 // Tạo đường dẫn URL của ảnh đã lưu (để trả lại cho client)
-                $content = asset('/laravel-filemanager/fileUpload/message/' . $fileName);
+                $imageContent = asset('/laravel-filemanager/fileUpload/message/' . $fileName);
             }
         }
         $params = [
-            'content' => $content,
+            'content' => $request->content ?? '',
+            'image_content' => $imageContent,
             'room_id' => strval($request->room_id) ?? '1',
             'user_id' => $request->user_id ?? 994110172,
-            'type' => 'image'
+            'type' => $request->type ?? 'text'
         ];
         $this->model->saveItem($params, ['task' => 'add-item']);
         $userSend = UsersModel::where('user_id', $params['user_id'])->first();
