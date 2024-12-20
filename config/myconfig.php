@@ -134,9 +134,16 @@
                 //'3' => 'Phòng khám',
                 '4' => 'Nhà thuốc',
                 '5' => 'Dược sỹ',
-                //'6' => 'Trung tâm y tế',
+                '6' => 'Trình dược viên',
                 //'7' => 'Nha khoa',
                // '8' => 'Thẩm mỹ viện',
+                '11' => 'Shop mẹ và bé',
+            ],
+            'type_user_register' => [
+                '1' => 'Thành viên',
+                '4'=>'Nhà thuốc',
+                '9' => 'Công ty dược phẩm',
+                '10'=> 'Shop dược phẩm'
             ],
             'type_gender' => [
                 '1' => 'Anh',

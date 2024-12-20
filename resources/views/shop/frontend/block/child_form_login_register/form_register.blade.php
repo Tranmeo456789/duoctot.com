@@ -45,7 +45,7 @@
             'styleFormGroup' => 'has-border',
         ],
     ];
-    $arrTypeUser = config('myconfig.template.type_user');
+    $arrTypeUser = config('myconfig.template.type_user_register');
     foreach($arrTypeUser as $key_user => $type_user){
         $isChecked = ($key_user == 1) ? true : false;
         $elements[] = [

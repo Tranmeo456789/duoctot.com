@@ -35,14 +35,21 @@ $phoneContact=$phoneContact??'0345488247';
     <li>
         <div class="container-menures position-relative parentsmenu">
             <div class=" pr-4">
-                <a href="{{route('fe.product.listDrugstore')}}">@lang('lang.pharmacy')</a>
+                <a href="{{route('fe.product.listDrugstore')}}">Danh mục Nhà Thuốc Online</a>
             </div>
         </div>
     </li>
     <li>
         <div class="container-menures position-relative parentsmenu">
             <div class=" pr-4">
-                <a href="{{route('fe.product.listShop')}}">@lang('lang.shop')</a>
+                <a href="{{route('fe.product.listShop')}}">Danh mục Shop chung</a>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="container-menures position-relative parentsmenu">
+            <div class=" pr-4">
+                <a href="{{route('fe.product.listShopMomBaby')}}">Danh mục Shop Mẹ và Bé</a>
             </div>
         </div>
     </li>

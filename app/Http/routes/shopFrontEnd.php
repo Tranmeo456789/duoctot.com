@@ -80,6 +80,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('loc-san-pham-trong-danh-muc','CatController@filterProduct')->name('fe.cat.filterProduct');
     
     Route::get('danh-sach-shop','ProductController@listShop')->name('fe.product.listShop');
+    Route::get('danh-sach-shop-me-va-be','ProductController@listShopMomBaby')->name('fe.product.listShopMomBaby');
     Route::get('danh-sach-nha-thuoc','ProductController@listDrugstore')->name('fe.product.listDrugstore');
 
     Route::get('chat-test','MessagesController@chatTest')->name('fe.messages.chatTest');
