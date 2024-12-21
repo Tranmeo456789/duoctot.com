@@ -2,9 +2,12 @@
 
 @section('content')
 <div class="wp-inner mt-3 mt-lg-4">
+    <div class="mb-3 text-center">
+        <img src="{{asset('public/shop/frontend/images/aboutUs/ve-chung-toi-anh-1.jpg')}}" alt="">
+    </div>
     <div class="abu-cnt">
         <div class="top-new">
-            <p style="font-size: 16px;">Chúng tôi là những bác sĩ nhiều kinh nghiệm, chúng tôi phục vụ người bệnh mọi lúc mọi nơi. <a style="font-size: 16px; color: #2b96cc;" href="https://tdoctor.net/">tdoctor.net</a> là công ty công nghệ với mong muốn sẽ xây dựng được một hệ thống chăm sóc sức khỏe toàn diện thông qua ứng dụng trên điện thoại và web. Ứng dụng tdoctor trên smartphone / tablet phiên bản Android và IOS cung cấp dịch vụ chăm sóc sức khỏe chủ động đầu tiên tại Việt Nam. Dựa trên nền tảng công nghệ thông tin, ứng dụng tdoctor giúp kết nối người dùng và Bác Sĩ dễ dàng ở mọi lúc, mọi nơi. Người dùng có thể sử dụng ứng dụng để được tư vấn sức khỏe, tra cứu SP & phòng khám, cùng các dịch vụ sức khỏe khác.</p>
+            <p style="font-size: 16px;">Chúng tôi là sàn thương mại điện tử trong y dược số 1 Việt nam với những bác sĩ nhiều kinh nghiệm, chúng tôi phục vụ người bệnh mọi lúc mọi nơi. <a style="font-size: 16px; color: #2b96cc;" href="https://tdoctor.net/">tdoctor.net</a> là công ty công nghệ với mong muốn sẽ xây dựng được một hệ thống chăm sóc sức khỏe toàn diện thông qua ứng dụng trên điện thoại và web. Ứng dụng tdoctor trên smartphone / tablet phiên bản Android và IOS cung cấp dịch vụ chăm sóc sức khỏe chủ động đầu tiên tại Việt Nam. Dựa trên nền tảng công nghệ thông tin, ứng dụng tdoctor giúp kết nối người dùng và Bác Sĩ dễ dàng ở mọi lúc, mọi nơi. Người dùng có thể sử dụng ứng dụng để được tư vấn sức khỏe, tra cứu SP & phòng khám, cùng các dịch vụ sức khỏe khác.</p>
             <br />
             <h2>ĐỘI NGŨ SÁNG LẬP VÀ NGƯỜI LÃNH ĐẠO</h2>
             <br />

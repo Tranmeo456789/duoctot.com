@@ -329,6 +329,54 @@ class ProductController extends ShopFrontEndController
             ]
         );
     }
+    public function listTrinhDuocVien(Request $request){
+        $itemsProvince = (new ProvinceModel())->listItems(null,['task'=>'admin-list-items-in-selectbox']);
+        $itemsDistrict=[];
+        $query = UsersModel::whereIn('user_type_id', [6])->orderBy('user_id', 'DESC');
+        if (isset($_COOKIE['province']) && $_COOKIE['province'] != "") {
+            $query = $query->where('province_id', $this->getProvinceID($_COOKIE['province']));
+
+        }
+        if ($request->input('province_id') != null) {
+            $prv = ProvinceModel::where('id', intval($request->input('province_id')))->first();
+
+            if ($prv != null) {
+                $query = $query->where('province_id', $prv->id);
+            }
+            $itemsDistrict= (new DistrictModel())->listItems(['parentID' =>  $prv->id],['task'=>'admin-list-items-in-selectbox']);
+        }
+        if ($request->input('district_id') != null) {
+            $itemDistrict = DistrictModel::where('id', intval($request->input('district_id')))->first();
+
+            if ($itemDistrict != null) {
+                $arrUserID = UserValuesModel::select('user_id')
+                                            ->where('value',$itemDistrict->id)
+                                            ->where('user_field','district_id')
+                                            ->pluck('user_id')->toArray();
+                $query = $query->whereIn('user_id',$arrUserID);
+            }
+        }
+        if ($request->input('fullname') != null) {
+            $fullname = htmlspecialchars($request->input('fullname'), ENT_QUOTES, 'UTF-8');
+            $query = $query->where(function($q) use ($fullname) {
+                $q->where([
+                    ['fullname', 'like', "%$fullname%"],
+                ])->orWhere([
+                    ['phone', 'like', "%$fullname%"],
+                ]);
+            });
+        }
+        $items = $query->paginate(10);
+        $title = 'Danh sách Shop Mẹ và Bé | Tdoctor';
+        return view($this->pathViewController . 'ls_shop',
+            [
+                'itemsProvinces' => $itemsProvince,
+                'itemsDistricts' => $itemsDistrict,
+                'items' => $items,
+                'title'=> $title
+            ]
+        );
+    }
     public function listDrugstore(Request $request){
         $itemsProvince = (new ProvinceModel())->listItems(null,['task'=>'admin-list-items-in-selectbox']);
         $itemsDistrict=[];
