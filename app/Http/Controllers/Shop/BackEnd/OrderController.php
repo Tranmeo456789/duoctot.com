@@ -207,6 +207,7 @@ class OrderController extends BackEndController
         $sheet->setCellValue('G1', 'Trạng thái đơn hàng');
         $sheet->setCellValue('H1', 'Trạng thái đối soát');
         $sheet->setCellValue('I1', 'Sản phẩm trong đơn hàng');
+        $sheet->setCellValue('J1', 'Địa chỉ giao hàng');
         // In đậm chữ cho các ô trên
         $sheet->getStyle('A1')->getFont()->setBold(true);
         $sheet->getStyle('B1')->getFont()->setBold(true);
@@ -217,6 +218,7 @@ class OrderController extends BackEndController
         $sheet->getStyle('G1')->getFont()->setBold(true);
         $sheet->getStyle('H1')->getFont()->setBold(true);
         $sheet->getStyle('I1')->getFont()->setBold(true);
+        $sheet->getStyle('J1')->getFont()->setBold(true);
         $row = 2; // Bắt đầu từ dòng 2 để điền dữ liệu sau tiêu đề
         foreach ($items as $item) {
             $codeOrder = $item->code_order;
@@ -226,6 +228,7 @@ class OrderController extends BackEndController
             $fullname = $buyer['fullname'] ?? '';
             $phone = $buyer['phone'] ?? '';
             $ngayDatHang = MyFunction::formatDateFrontend($item['created_at']);
+            $addressDetail= $item['address_detail'] ?? '';
             $listsProduct = $item->listProductInOrder;
             $productDetails = '';
             $listsProduct = json_decode($listsProduct, true);
@@ -250,6 +253,7 @@ class OrderController extends BackEndController
             $sheet->setCellValue('G' . $row, $statusOrderValue[$item['status_order']]);
             $sheet->setCellValue('H' . $row, $statusControlOrderValue[$item['status_control']]);
             $sheet->setCellValue('I' . $row, $productDetails);
+            $sheet->setCellValue('J' . $row, $addressDetail);
             $row++;  
 
             $sheet->getStyle('C')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
@@ -262,6 +266,7 @@ class OrderController extends BackEndController
             $sheet->getColumnDimension('G')->setAutoSize(true);
             $sheet->getColumnDimension('H')->setAutoSize(true);
             $sheet->getColumnDimension('I')->setAutoSize(true);
+            $sheet->getColumnDimension('J')->setAutoSize(true);
         }
         // Tạo writer để xuất file Excel (định dạng xlsx)
         $writer = new Xlsx($spreadsheet);
