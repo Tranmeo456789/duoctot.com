@@ -26,8 +26,13 @@
                         </a>
                     </li>
                     <li class="text-center">
-                        <img src="{{asset('images/shop/banner14_mobi.webp')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
+                        <a href="https://tdoctor.net/chi-tiet-san-pham/bot-phyto-precollagen-vitac-biotin-3500.html">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner11.webp')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
+                        </a>
                     </li>
+                    <!-- <li class="text-center">
+                        <img src="{{asset('images/shop/banner14_mobi.webp')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
+                    </li> -->
                 </ul>
             </div>
         </div>

@@ -367,7 +367,7 @@ class ProductController extends ShopFrontEndController
             });
         }
         $items = $query->paginate(10);
-        $title = 'Danh sách Shop Mẹ và Bé | Tdoctor';
+        $title = 'Danh sách Shop Trình dược viên | Tdoctor';
         return view($this->pathViewController . 'ls_shop',
             [
                 'itemsProvinces' => $itemsProvince,
