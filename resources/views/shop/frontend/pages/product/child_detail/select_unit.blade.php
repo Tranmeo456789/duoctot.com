@@ -25,7 +25,7 @@ $select=0;
 @else
 <div class="wp-slect-customer">
     <div class="slect-customer">
-        <div class="d-flex gap-2 align-items-baseline">
+        <div class="d-flex gap-2 align-items-baseline flex-wrap">
             <span class="font-weight-bold bcn mr-4">Chọn đơn vị: </span>
             @foreach($item['list_prices'] as $k => $unitPrice)
             @php

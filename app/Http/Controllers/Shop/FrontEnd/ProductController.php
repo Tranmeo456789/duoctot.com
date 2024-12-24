@@ -143,15 +143,18 @@ class ProductController extends ShopFrontEndController
         $shopId=$userInfo['user_id'];
         $productDrugstore=[];
         $listIdProductAdd=[1901, 1902, 1903, 1904, 1905, 1906, 1907, 1908, 1909, 1910];
+        $listIdProductAddSelect = collect($userInfo->listIdProduct)->pluck('product_id')->toArray();
         if (isset($userInfo['user_type_id']) && $userInfo['user_type_id'] == 9) {
             $listIdProductAdd = [];
         } 
-        $productDrugstore = $this->model->listItems(['group_id'=>$listIdProductAdd, 'user_id'=>$shopId], ['task' => 'frontend-list-item-shop']);
+        if(!empty($listIdProductAddSelect)){
+            $listIdProductAdd = [];
+        }
         if ($request->has('codeRef')) {
             $request->session()->put('codeRef', $request->query('codeRef'));
             $codeRef = $request->codeRef ?? ($request->session()->get('codeRef') ?? '');
         }
-        $params['group_id'] = array_merge(collect($userInfo->listIdProduct)->pluck('product_id')->toArray(), $listIdProductAdd);
+        $params['group_id'] = array_merge($listIdProductAddSelect, $listIdProductAdd);
         $productDrugstore = $this->model->listItems(['group_id' => $params['group_id'],'user_id' => $shopId], ['task' => 'frontend-list-item-shop'])??[];
         $address='';
         $map='';
