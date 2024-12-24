@@ -49,10 +49,31 @@
             </div>
         </div>
     </div>
+    <!-- <div id="buy-medicine" class="mt-2 pt-2">
+        @include("$moduleName.pages.$controllerName.child_index.buy_medicine")
+    </div> -->
+    <!-- <div id="doi-tac" class="mt-2 pt-2">
+        @include("$moduleName.pages.$controllerName.child_index.banner_shop")
+    </div> -->
 </div>
-<div class="wp-inner mt-3 mt-lg-4">
-    @include("$moduleName.templates.box_title_product",['title' => 'Sản phẩm nổi bật','classBackground'=>'bg-danger'])
-    @include("$moduleName.templates.list_product",['items'=>$itemsProduct['best']])
+<div id="feature-product-wp">
+    <!-- <div class="product-backround  mt-3 mt-lg-4 py-4">
+        <div class="wp-inner">
+            @include("$moduleName.templates.box_title_product",['title' => 'Sản phẩm mới','classBackground'=>'bg-danger'])
+            <ul class="list-item">
+                @include("$moduleName.partial.product",['items'=>$itemsProduct['new']])
+            </ul>
+        </div>
+    </div> -->
+    <div class="mt-3 mt-lg-4">
+        <div class="wp-inner">
+            @include("$moduleName.templates.box_title_product",['title' => 'Sản phẩm nổi bật','classBackground'=>'bg-danger'])
+            <!-- <ul class="list-item">
+                @include("$moduleName.partial.product",['items'=>$itemsProduct['best']])
+            </ul> -->
+            @include("$moduleName.templates.list_product",['items'=>$itemsProduct['best']])
+        </div>
+    </div>
 </div>
 <div class="wp-inner mt-3 mt-lg-4">
     <div id="selling-product" class="parent-btn-view-add">
@@ -60,6 +81,14 @@
         @include("$moduleName.block.btn_view_add",['countProduct'=>$couterSumProduct])
     </div>
 </div>
+<!-- @if(count($product_covid)>0)
+<div class="product-backround  mt-3 mt-lg-4 py-4">
+    <div class="wp-inner">
+        @include("$moduleName.templates.box_title_product",['title' => 'Sản phẩm hậu covid','classBackground'=>'bg-danger'])
+        @include("$moduleName.templates.list_product",['items'=>$product_covid])
+    </div>
+</div>
+@endif -->
 <div class="wp-inner mt-3 mt-lg-4">
     <div id="product-by-object" class="parent-btn-view-add">
         @include("$moduleName.pages.$controllerName.child_index.product_by_object")

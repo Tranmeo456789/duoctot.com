@@ -33,6 +33,6 @@
     "@context": "https://schema.org",
     "@type": "Organization",
     "url": "https://tdoctor.net",
-    "logo": "https://tdoctor.net/images/shop/logo_topbar3.png"
+    "logo": "https://tdoctor.net/images/shop/logo_topbar4.webp"
   }
 </script>

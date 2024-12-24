@@ -21,7 +21,7 @@
                 <i class="fas fa-bars icon-top"></i>
             </div>
             <div class="logotop"><a href="{{route('home')}}">
-                    <div class="rimg-center"><img src="{{asset('images/shop/logo_topbar3.png')}}" alt="tdoctor"></div>
+                    <div class="rimg-center"><img src="{{asset('images/shop/logo_topbar3.webp')}}" alt="tdoctor"></div>
                 </a></div>
             <ul class="d-flex align-items-center">
                 <li class="hrcart">
