@@ -26,6 +26,7 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
         Route::get('getListProduct', ['uses' => $controller . 'getListProduct']);
         Route::get('getListProductFeaturer', ['uses' => $controller . 'getListProductFeaturer']);
         Route::get('getListProductInObject', ['uses' => $controller . 'getListProductInObject']);
+        Route::post('addCommentOrRatingProduct', ['uses' => $controller . 'addCommentOrRatingProduct']);
      });
 
     $prefix         = 'catProduct';

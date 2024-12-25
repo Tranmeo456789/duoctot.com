@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Shop\Api\ApiController;
 use App\Model\Shop\AffiliateProductModel;
 use App\Model\Shop\UsersModel;
+use App\Model\Shop\CommentModel;
 use App\Model\Shop\ProductModel as MainModel;
 use App\Model\Shop\ProductModel;
 use \Firebase\JWTCustom\JWTCustom as JWTCustom;
@@ -91,17 +92,14 @@ class ProductController extends ApiController
         $this->res['data'] = null;
         $params['parent_id'] = $request->parent_id;
         $params['id'] = intval($request->id);
-        // $token = $request->header('Tdoctor-Token');
-        // $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
-        // if ($data_token['message'] == 'OK') {
-        //     $params['user'] =  json_decode(json_encode($data_token['payload']));
-        //     $request->session()->put('user', $params['user']);
-        //     $this->res['data']  = $this->model->getItem($params,['task'=>'frontend-get-item-api']);
-        // }
+        $listRating = (new CommentModel)->listItems(['product_id'=>$params['id'],'rating'=>true],['task'=>'list-items-api']);
+        $listComment = (new CommentModel)->listItems(['product_id'=>$params['id']],['task'=>'list-items-api']);
         $itemCurrent=$this->model->getItem($params,['task'=>'frontend-get-item-api']);
         $sellerProduct=UsersModel::where('user_id',$itemCurrent['user_id'])->first();
         $itemCurrent['url'] = route('fe.product.detail', ['slug' => $itemCurrent['slug']]) ?? '';
         $itemCurrent['fullname_sell'] = $sellerProduct['fullname']??'';
+        $itemCurrent['list_rating'] = $listRating;
+        $itemCurrent['list_comment'] = $listComment;
         $this->res['data']  = $itemCurrent;
         return $this->setResponse($this->res);
     }
@@ -157,6 +155,28 @@ class ProductController extends ApiController
         $this->res['data'] = array_merge($dataPermanent->toArray(),$data->toArray()['data']);
         return $this->setResponse($this->res);
     }
-
+    public function addCommentOrRatingProduct(Request $request){
+        $token = $request->header('Tdoctor-Token') ?? 'hhhhh';
+        $data_token = (JWTCustom::decode($token, $this->jwt_key, array('HS256')));
+        $idUserComment = '';
+        if ($data_token['message'] == 'OK') {
+            $infoUserComment = (array)$data_token['payload'];
+            $idUserComment = $infoUserComment['user_id'];
+        }
+        $params['user_id']=$idUserComment;
+        $params['product_id']=$request->productId ?? 1;
+        $params['content']=$request->content ?? 'Unknow';
+        $params['fullname']=$request->fullname ?? 'Anonymous';
+        $params['phone']=$request->phone ?? '';
+        $params['parent_id']=$request->parentid ?? 0;
+        $params['rating']=$request->rating??null;
+        if($request->rating == 'null' || $request->rating == 'NULL'){
+            $params['rating']='';
+        }
+        (new CommentModel)->saveItem($params,['task' => 'add-item']);
+        $this->res['data'] = [];
+        $this->res['message'] = 'Gửi bình luận thành công!';
+        return $this->setResponse($this->res);
+    }
 
 }
