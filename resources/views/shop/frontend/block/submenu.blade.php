@@ -52,6 +52,9 @@ $listCatAll=(new CatProductModel())->listItems(null, ['task'  => 'list-items-fro
     <li>
         <a href="{{route('fe.booking_online')}}">@lang('lang.onlinebooking')</a>
     </li>
+    <li>
+        <a href="{{route('fe.post')}}">Góc Sức Khỏe</a>
+    </li>
     <li class="align-self-center">
         <div class="position-relative">
             <div class="dropdown">

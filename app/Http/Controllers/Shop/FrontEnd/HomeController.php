@@ -54,7 +54,7 @@ class HomeController extends ShopFrontEndController
             $countproductInObject = (new ProductModel())->countItems(['type' => 'tre_em'], ['task' => 'count-items-product-frontend']);
             $countproductInObject = $countproductInObject[0]['count'] - 10;
             $itemsProduct['new'] = (new ProductModel())->listItems(['type' => 'new'], ['task' => 'frontend-list-items'])->take(10);
-            $itemsProduct['best'] = (new ProductModel())->listItems(['type' => 'noi_bat'], ['task' => 'frontend-list-items'])->take(10);
+            $itemsProduct['best'] = (new ProductModel())->listItems(['type' => 'noi_bat'], ['task' => 'frontend-list-items'])->take(20);
             $couterSumProduct = (new ProductModel())->countItems(null, ['task' => 'count-items-product-frontend']);
             // Lưu tất cả dữ liệu vào cache
             $cacheData = [

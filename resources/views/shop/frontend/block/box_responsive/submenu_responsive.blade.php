@@ -56,7 +56,7 @@ $phoneContact=$phoneContact??'0345488247';
     <li>
         <div class="container-menures position-relative parentsmenu">
             <div class="pr-4">
-                <a href="{{route('fe.post')}}">Tin tức</a>
+                <a href="{{route('fe.post')}}">Góc Sức Khỏe</a>
             </div>
         </div>
     </li>
