@@ -89,12 +89,13 @@ class SearchController extends ShopFrontEndController
     public function updateFieldSearchKeyword(Request $request)
     {
         
-        // $users = UsersModel::select('user_id','fullname')->get();
+        // $users = UsersModel::select('user_id','fullname')->where('user_id', '>', 1124150056)->get();
         // foreach($users as $val){
         //     $slugInName = Str::slug($val['fullname']);
-        //     UsersModel::where('user_id', $val['user_id'])->update(['slug' => $slugInName]);
+        //     $codeRef = 'T'. $val['user_id'];
+        //     UsersModel::where('user_id', $val['user_id'])->update(['slug' => $slugInName,'codeRef' => $codeRef]);
         // }
-        // return 'ok';
+        //  return 'ok';
         //$products = ProductModel::where('status_product', 'da_duyet')->pluck('id');
         // $commnets=CommentModel::select('id', 'product_id')->where('id','>', 1969)->get();
         // $params['fullname']='DS Lý Thị Mỹ Ngân';
@@ -259,75 +260,76 @@ class SearchController extends ShopFrontEndController
             //             $record->D = '0' . $record->D;
             //         }
             //     }
-            //     $record->E = 79; //tinh
             //     $record->save();
             // }
-            // return $userNeedAdd;
+            // return 'ok';
         //add lên bảng user
             //$userNeedAdd = MyTableModel::orderBy('A')->skip(3000)->take(1000)->get();
-            $userNeedAdd = MyTableModel::orderBy('A')->take(302)->get();
-            $count = 1;
-            try {
-                $successCount = 0;
-                $failureCount = 0;
-                $maxRecords = 302; // Giới hạn số bản ghi tối đa cần thêm
-                foreach ($userNeedAdd as $val) {
-                    if ($successCount >= $maxRecords) {
-                        break; 
-                    }
-                    $params = [
-                        'domain_register' => 'shop.tdoctor.vn',
-                        'fullname' => $val['C'],
-                        'phone' => $val['D'],
-                        'password' => 1234567,
-                        'province_id' => $val['E'],
-                        'district_id' => '',
-                        'user_type_id' => 11,
-                        'gender' => 3,
-                        'paid' => 1,
-                        'type_account'=>'code_import',
-                        'details' => [
-                            'member_id' => $val['A'],
-                            'province_id' => $val['E'],
-                            'district_id' => '',
-                            'ward_id' => '',
-                            'address' => $val['B'],
-                            'sell_area' => 0,
-                            'tax_code' => '',
-                            'person_represent' => '',
-                            'map' => "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1003428.2468612179!2d106.02563410844273!3d10.762081222681092!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752eefdb25d923%3A0x4bcf54ddca2b7214!2zSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1734663190998!5m2!1svi!2s\" width=\"100%\" height=\"340px\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>",
-                            'slug' => Str::slug($val['C']),
-                            'image' => "/laravel-filemanager/fileUpload/nhathuoc/nhathuocmau" . $count . ".jpg",
-                        ]
-                    ];
-                    $count++;
-                    if ($count > 10) {
-                        $count = 1;
-                    }
-                    $currentIdUser = (new UsersModel())->saveItem($params, ['task' => 'register']);
-            
-                    if ($currentIdUser) {
-                        //$currentIdDelete = UserValuesModel::where('user_id', $currentIdUser)->delete();
-            
-                        foreach ($params['details'] as $key => $value) {
-                            $paramsUserValue = [
-                                'user_id' => $currentIdUser,
-                                'user_field' => $key,
-                                'value' => $value
-                            ];
-                            UserValuesModel::insert((new UsersModel())->prepareParams($paramsUserValue));
-                        }
-                        echo "Thêm người dùng thành công: " . $val['A'] . "<br>";
-                        $successCount++;
-                    } else {
-                        echo "Thêm người dùng thất bại: " . $val['A'] . "<br>";
-                        $failureCount++;
-                    }
-                }
-                return "Thêm dữ liệu thành công! Số bản ghi thành công: $successCount, Số bản ghi thất bại: $failureCount.";
-            } catch (\Exception $e) {
-                return "Đã xảy ra lỗi khi thêm dữ liệu vào cơ sở dữ liệu: " . $e->getMessage();
-            }        
-            return 1;
+            // $userNeedAdd = MyTableModel::orderBy('A')->take(173)->get();
+            // $count = 1;
+            // try {
+            //     $successCount = 0;
+            //     $failureCount = 0;
+            //     $maxRecords = 173; // Giới hạn số bản ghi tối đa cần thêm
+            //     foreach ($userNeedAdd as $val) {
+            //         if ($successCount >= $maxRecords) {
+            //             break; 
+            //         }
+            //         $params = [
+            //             'domain_register' => 'shop.tdoctor.vn',
+            //             'fullname' => $val['C'],
+            //             'phone' => $val['D'],
+            //             'password' => 1234567,
+            //             'province_id' => $val['E'],
+            //             'district_id' => '',
+            //             'user_type_id' => $val['F'],
+            //             'gender' => 3,
+            //             'paid' => 1,
+            //             'type_account'=>'code_import',
+            //             'details' => [
+            //                 'member_id' => $val['A'],
+            //                 'province_id' => $val['E'],
+            //                 'district_id' => '',
+            //                 'ward_id' => '',
+            //                 'address' => $val['B'],
+            //                 'sell_area' => 0,
+            //                 'tax_code' => '',
+            //                 'person_represent' => '',
+            //                 'map' => $val['G'],
+            //                 'slug' => Str::slug($val['C']),
+            //                 'image' => "/laravel-filemanager/fileUpload/nhathuoc/nhathuocmau" . $count . ".jpg",
+            //             ]
+            //         ];
+            //         $count++;
+            //         if ($count > 10) {
+            //             $count = 1;
+            //         }
+            //         $currentIdUser = (new UsersModel())->saveItem($params, ['task' => 'register']);
+            //         $userCurrent = UsersModel::select('user_id','fullname')->where('user_id', $currentIdUser)->first();
+            //         $slugInName = Str::slug($userCurrent['fullname']);
+            //         $codeRef = 'T'. $userCurrent['user_id'];
+            //         UsersModel::where('user_id', $currentIdUser)->update(['slug' => $slugInName,'codeRef' => $codeRef]);
+            //         if ($currentIdUser) {
+            //             //$currentIdDelete = UserValuesModel::where('user_id', $currentIdUser)->delete();
+            //             foreach ($params['details'] as $key => $value) {
+            //                 $paramsUserValue = [
+            //                     'user_id' => $currentIdUser,
+            //                     'user_field' => $key,
+            //                     'value' => $value
+            //                 ];
+            //                 UserValuesModel::insert((new UsersModel())->prepareParams($paramsUserValue));
+            //             }
+            //             echo "Thêm người dùng thành công: " . $val['A'] . "<br>";
+            //             $successCount++;
+            //         } else {
+            //             echo "Thêm người dùng thất bại: " . $val['A'] . "<br>";
+            //             $failureCount++;
+            //         }
+            //     }
+            //     return "Thêm dữ liệu thành công! Số bản ghi thành công: $successCount, Số bản ghi thất bại: $failureCount.";
+            // } catch (\Exception $e) {
+            //     return "Đã xảy ra lỗi khi thêm dữ liệu vào cơ sở dữ liệu: " . $e->getMessage();
+            // }        
+            // return 1;
     }
 }

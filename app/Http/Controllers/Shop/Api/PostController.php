@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Shop\Api\ApiController;
 use App\Model\Shop\AffiliateProductModel;
 use App\Model\Shop\PostModel as MainModel;
+use App\Model\Shop\QuangCaoModel;
 use \Firebase\JWTCustom\JWTCustom as JWTCustom;
 
 class PostController extends ApiController
@@ -35,6 +36,20 @@ class PostController extends ApiController
         }
         $this->res['data'] = null;
         $this->res['data']  = $this->model->getItem($params,['task'=>'get-item']);
+        return $this->setResponse($this->res);
+    }
+    public function getListBannerPageHome(Request $request){
+        $params=[];
+        $params['group_id'] = [14,15];
+        $urlImage = asset('laravel-filemanager/fileUpload/banner/');
+        $listBannerPageHome = (new QuangCaoModel)->listItems($params,['task'=>'list-items-api']);
+        if($listBannerPageHome){
+            foreach($listBannerPageHome as $key => $value){
+                $listBannerPageHome[$key]['urlImage'] = $urlImage.'/'.$value['banner_mobile'];
+                unset($listBannerPageHome[$key]['banner_mobile']);
+            }
+        }
+        $this->res['data']  = $listBannerPageHome;
         return $this->setResponse($this->res);
     }
 }

@@ -57,6 +57,27 @@ class CommentModel extends BackEndModel
             $result =  $query->get();
             $result = self::buildTree($result);
         }
+        if($options['task'] == "list-items-parent-id-0-api") {
+            $query = $this::select('id','fullname','parent_id','content','rating', 'created_at');
+            if (isset($params['parent_id'])) {
+                $query->where('parent_id', $params['parent_id']);
+            }
+            if (isset($params['product_id'])) {
+                $query->where('product_id', $params['product_id']);
+            }
+            if (isset($params['shop_id'])) {
+                $query->where('shop_id', $params['shop_id']);
+            }
+            if (isset($params['rating'])) {
+                $query->whereNotNull('rating')->where('rating', '!=', '');
+            }else {
+                $query->where(function($q) {
+                    $q->whereNull('rating')
+                      ->orWhere('rating', '');
+                });
+            }
+            $result =  $query->get();
+        }
         return $result;
     }
     public function getItem($params = null, $options = null) {

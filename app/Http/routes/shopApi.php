@@ -95,6 +95,7 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
         $controller = ucfirst($controllerName)  . 'Controller@';
         Route::get('getListPost', ['uses' => $controller . 'getListPost']);
         Route::get('detailPost', ['uses' => $controller . 'detailPost']);
+        Route::get('getListBannerPageHome', ['uses' => $controller . 'getListBannerPageHome']);
     });
     $prefix         = 'message';
     $controllerName = 'message';

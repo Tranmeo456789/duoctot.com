@@ -12,6 +12,9 @@
     if($userInfo['user_type_id'] == 4 && !empty($userInfo['phone']) && $userInfo['type_account'] != 'code_import'){
         $phoneShop = $userInfo['phone'];
     }
+    if($userInfo['user_type_id'] == 6 || $userInfo['user_type_id'] == 11){
+        $phoneShop = $userInfo['phone'];
+    }
     $phoneShop=MyFunction::formatPhoneNumber($phoneShop);
 @endphp
 

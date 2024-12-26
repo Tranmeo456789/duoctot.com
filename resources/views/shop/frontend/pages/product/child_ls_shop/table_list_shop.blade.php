@@ -5,8 +5,7 @@
     use App\Model\Shop\WardModel;
     use App\Helpers\MyFunction;
     
-    $hotline = ConfigModel::where('name', 'hotline_duoc')->first()->content ?? '';
-    $hotline=MyFunction::formatPhoneNumber($hotline);
+    $phoneOfShop = ConfigModel::where('name', 'hotline_duoc')->first()->content ?? '';
 @endphp
 <div class="table-responsive table-list-drugstore">
     <table class="table table-bordered">
@@ -47,6 +46,11 @@
                         }
                         $address=$val['details']['address'].$ward.$district.$province;
                     }
+                    if($val['user_type_id'] == 6 || $val['user_type_id'] ==11){
+                        $phoneOfShop = $val['phone'] ?? $phoneOfShop;
+                    }
+                    $phoneOfShop=MyFunction::formatPhoneNumber($phoneOfShop);
+                    
                 @endphp
             <tr>
                 <td>
@@ -72,7 +76,7 @@
                             </li>
                             <li>
                                 <img src="{{asset('public/images/shop/dc4.png')}}" alt="MST của Tdoctor.vn">
-                                <span>Số điện thoại: {{$hotline}}</span>
+                                <span>Số điện thoại: {{$phoneOfShop}}</span>
                             </li>
                         </ul>
                     </div>

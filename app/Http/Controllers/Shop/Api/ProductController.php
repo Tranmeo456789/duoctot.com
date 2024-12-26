@@ -92,8 +92,20 @@ class ProductController extends ApiController
         $this->res['data'] = null;
         $params['parent_id'] = $request->parent_id;
         $params['id'] = intval($request->id);
-        $listRating = (new CommentModel)->listItems(['product_id'=>$params['id'],'rating'=>true],['task'=>'list-items-api']);
-        $listComment = (new CommentModel)->listItems(['product_id'=>$params['id']],['task'=>'list-items-api']);
+        $listRating = (new CommentModel)->listItems(['product_id'=>$params['id'],'rating'=>true,'parent_id'=>0],['task'=>'list-items-parent-id-0-api']);
+        if($listRating){
+            foreach($listRating as $key=>$rating0){
+                $listRatingChild = (new CommentModel)->listItems(['product_id'=>$params['id'],'rating'=>true,'parent_id'=>$rating0->id],['task'=>'list-items-parent-id-0-api']);
+                $listRating[$key]['comment_child']=$listRatingChild;
+            }
+        }
+        $listComment = (new CommentModel)->listItems(['product_id'=>$params['id'],'parent_id'=>0],['task'=>'list-items-parent-id-0-api']);
+        if($listComment){
+            foreach($listComment as $key=>$comment0){
+                $listCommentChild = (new CommentModel)->listItems(['product_id'=>$params['id'],'parent_id'=>$comment0->id],['task'=>'list-items-parent-id-0-api']);
+                $listComment[$key]['comment_child']=$listCommentChild;
+            }
+        }
         $itemCurrent=$this->model->getItem($params,['task'=>'frontend-get-item-api']);
         $sellerProduct=UsersModel::where('user_id',$itemCurrent['user_id'])->first();
         $itemCurrent['url'] = route('fe.product.detail', ['slug' => $itemCurrent['slug']]) ?? '';
@@ -168,9 +180,12 @@ class ProductController extends ApiController
         $params['content']=$request->content ?? 'Unknow';
         $params['fullname']=$request->fullname ?? 'Anonymous';
         $params['phone']=$request->phone ?? '';
-        $params['parent_id']=$request->parentid ?? 0;
-        $params['rating']=$request->rating??null;
-        if($request->rating == 'null' || $request->rating == 'NULL'){
+        $params['parent_id']=$request->parent_id ?? 0;
+        if($params['parent_id']=='null' || $params['parent_id']=='NULL'){
+            $params['parent_id']= 0;
+        }
+        $params['rating']=$request->rating??'';
+        if($params['rating'] == 'null' || $params['rating'] == 'NULL'){
             $params['rating']='';
         }
         (new CommentModel)->saveItem($params,['task' => 'add-item']);
