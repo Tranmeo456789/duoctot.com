@@ -272,6 +272,52 @@ class ProductModel extends BackEndModel
                 $result = $query->get();
             }
         }
+        if ($options['task'] == "list-items-search-api") {
+            $query = $this::with('unitProduct')->select('id','name','price','percent_discount','unit_id','image','slug','show_price')
+                ->where('id','>',1)->where('status_product','da_duyet');
+            if (isset($params['keyword'])) {
+                $keyword = $params['keyword'];
+                $keyword = strip_tags($keyword);
+                $keyword = preg_replace('/[^\p{L}\p{N}\s]/u', '', $keyword);
+                $keywords = array_filter(explode(' ', trim($keyword)));
+                $keywords = array_values($keywords);
+                // Lọc kết quả theo từ khóa
+                $results = $query->where(function ($query) use ($keywords) {
+                    foreach ($keywords as $word) {
+                        $query->where(function ($query) use ($word) {
+                            $query->orWhere('name', 'LIKE', "%{$word}%")
+                                ->orWhere('benefit', 'LIKE', "%{$word}%")
+                                ->orWhere('keyword_search', 'LIKE', "%{$word}%");
+                        });
+                    }
+                })->get();
+                // Xử lý điểm số
+                $results = $results->map(function ($result) use ($keywords) {
+                    $score = collect($keywords)->sum(function ($word) use ($result) {
+                        return mb_stripos($result->name, $word, 0, 'UTF-8') !== false ? mb_strlen($word, 'UTF-8') : 0;
+                    });
+                    return ['score' => $score, 'result' => $result];
+                });
+                // Sắp xếp kết quả theo điểm số giảm dần
+                $results = $results->sortByDesc('score')->pluck('result');
+                // Xử lý phân trang
+                if (isset($params['page'])) {
+                    $currentPage = (int) $params['page']; // Trang hiện tại
+                    $perPage = isset($params['perPage']) ? (int)$params['perPage'] : 100; 
+                    // Phân trang trên bộ kết quả đã được xử lý
+                    $result = new \Illuminate\Pagination\LengthAwarePaginator(
+                        $results->forPage($currentPage, $perPage),  // Cắt phần tử cho trang hiện tại
+                        $results->count(),  // Tổng số kết quả
+                        $perPage,  // Số phần tử mỗi trang
+                        $currentPage,  // Trang hiện tại
+                        ['path' => \Illuminate\Pagination\Paginator::resolveCurrentPath()]  // Đường dẫn cho các trang
+                    );
+                } else {
+                    // Nếu không có tham số phân trang, trả về toàn bộ kết quả
+                    $result = $results->all();
+                }
+            }
+        }
         if ($options['task'] == "frontend-list-items-feature-api") {
             $query = $this::with('unitProduct')->select('id','name','price','percent_discount','unit_id','image','slug','show_price')->where('status_product','da_duyet');
             if (isset($params['type'])){

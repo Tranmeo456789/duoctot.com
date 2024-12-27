@@ -26,7 +26,13 @@ class ProductController extends ApiController
         $params['perPage']=$request->perPage ?? 20;
         $params['keyword']=$request->keywordSearch ?? '';
         $this->res['data'] = null;
-        $this->res['data']  = $this->model->listItems($params,['task'=>'frontend-list-items-api']);
+        if($params['keyword'] != ''){
+            $params['page']=1;
+            $params['perPage']=100;
+            $this->res['data']  = $this->model->listItems($params,['task'=>'list-items-search-api']);
+        }else{
+            $this->res['data']  = $this->model->listItems($params,['task'=>'frontend-list-items-api']);
+        }
         return $this->setResponse($this->res);
     }
     public function getListProductInObject(Request $request){
@@ -181,10 +187,13 @@ class ProductController extends ApiController
         $params['fullname']=$request->fullname ?? 'Anonymous';
         $params['phone']=$request->phone ?? '';
         $params['parent_id']=$request->parent_id ?? 0;
+        $params['rating']=$request->rating??'';
         if($params['parent_id']=='null' || $params['parent_id']=='NULL'){
             $params['parent_id']= 0;
         }
-        $params['rating']=$request->rating??'';
+        if($params['parent_id'] != 0){
+            $params['rating']='';
+        }
         if($params['rating'] == 'null' || $params['rating'] == 'NULL'){
             $params['rating']='';
         }

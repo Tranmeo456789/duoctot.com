@@ -24,6 +24,9 @@ class HomeController extends ShopFrontEndController
     }
     public function index(Request $request)
     {
+        if ($request->has('t')) {
+            return redirect()->to(route('home'));
+        }
         $numTake=10;
         $keyCache = 'cache_product_data';
         $keyCachePost = 'cache_post_data';

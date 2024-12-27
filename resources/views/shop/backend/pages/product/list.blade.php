@@ -46,9 +46,9 @@
                 <td style="width: 8%"><span class="badge {{$val->status_product=='da_duyet'?'badge-success':'badge-warning'}}">{!! $statusProductValue[$val['status_product']]!!}</span></td>
                 <td style="width: 8%">
                     <a href="{{route("$controllerName.edit",$val->id)}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit"></i></a>
-                    <a data-href="{{route("$controllerName.delete",$val->id)}}" class="btn btn-sm btn-danger btn-delete text-white" data-id="{{$val->id}}" data-toggle="tooltip" data-placement="top" title="Xóa" data-token="{{csrf_token()}}">
+                    <!-- <a data-href="{{route("$controllerName.delete",$val->id)}}" class="btn btn-sm btn-danger btn-delete text-white" data-id="{{$val->id}}" data-toggle="tooltip" data-placement="top" title="Xóa" data-token="{{csrf_token()}}">
                         <i class="fa fa-trash"></i>
-                    </a>
+                    </a> -->
                 </td>
             </tr>
         @endforeach
