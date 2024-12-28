@@ -44,12 +44,6 @@ $firstLetter = 'T';
                 <div class="comment_reply-branch__NKquM"></div>
                 <span class="name">{{ $fullname }}</span>
                 <span class="text-muted">{{ $timeComment }}</span>
-                @if($val['rating']>0)
-                <div class="d-flex mb-1">
-                    <span class="pr-1">{{$val['rating']}}</span>
-                    <span class="star star-medium" data-rating="1">★</span>
-                </div>
-                @endif
                 <p>{{ $content }}</p>
                 <div class="roud-img text-light rounded-circle text-uppercase">{{$firstLetter}}</div>
             </div>

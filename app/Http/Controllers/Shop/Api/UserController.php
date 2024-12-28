@@ -391,6 +391,8 @@ class UserController extends ApiController
             $urlShare = url('/') . '?codeRef=' . $infoUserCurrent['codeRef'] .'&formRegister=1';
             $urlShare = $textFirstUrlShare . $urlShare;
             $infoUserCurrent->url_share = $urlShare;
+            $urlUser = route('fe.product.drugstore', $infoUserCurrent['slug']);
+            $infoUserCurrent->url_user = $urlUser.'?codeRef='.$infoUserCurrent['codeRef'];
             $this->res['data']= $infoUserCurrent;
         }
         return $this->setResponse($this->res);
