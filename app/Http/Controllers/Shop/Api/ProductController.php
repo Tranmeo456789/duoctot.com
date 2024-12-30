@@ -187,16 +187,16 @@ class ProductController extends ApiController
         $params['fullname']=$request->fullname ?? 'Anonymous';
         $params['phone']=$request->phone ?? '';
         $params['parent_id']=$request->parent_id ?? 0;
-        $params['rating']=$request->rating??'';
-        if($params['parent_id']=='null' || $params['parent_id']=='NULL'){
-            $params['parent_id']= 0;
+        $params['rating']=$request->rating ?? '';
+        if($params['parent_id'] == 'null' || $params['parent_id']=='NULL'){
+            $params['parent_id'] = 0;
         }
         if($params['parent_id'] != 0){
-            $params['rating']='';
+            $params['rating'] = 0;
         }
-        if($params['rating'] == 'null' || $params['rating'] == 'NULL'){
-            $params['rating']='';
-        }
+        // if($params['rating'] == 'null' || $params['rating'] == 'NULL'){
+        //     $params['rating']='';
+        // }
         (new CommentModel)->saveItem($params,['task' => 'add-item']);
         $this->res['data'] = [];
         $this->res['message'] = 'Gửi bình luận thành công!';
