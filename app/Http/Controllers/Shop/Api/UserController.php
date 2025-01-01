@@ -388,7 +388,8 @@ class UserController extends ApiController
             $fullname = $infoUserCurrent['fullname'] ?? 'Tdoctor';
             $textFirstUrlShare = 'Mời bạn vào link này để đăng ký tài khoản sau đó tải App Tdoctor trên Store để tham gia là thành viên của '. $fullname .' để được hỗ trợ và hưởng nhiều ưu đãi
 ';
-            $urlShare = url('/') . '?codeRef=' . $infoUserCurrent['codeRef'] .'&formRegister=1';
+            //$urlShare = url('/') . '?codeRef=' . $infoUserCurrent['codeRef'] .'&formRegister=1';
+            $urlShare = route('fe.user.invitationFromUser', $infoUserCurrent['codeRef']);
             $urlShare = $textFirstUrlShare . $urlShare;
             $infoUserCurrent->url_share = $urlShare;
             $urlUser = route('fe.product.drugstore', $infoUserCurrent['slug']);

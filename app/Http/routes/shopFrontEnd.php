@@ -51,6 +51,10 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('/gio-hang-full','CartController@cartFull')->name('fe.product.cartFull');
     Route::post('/them-san-pham-gio-hang','CartController@addproduct')->name('fe.cart.addproduct');
     Route::post('/thay-doi-so-luong-san-pham/{user_sell}-{id}-{quantity}','CartController@changeQuatity')->name('fe.cart.change_quatity');
+    
+    Route::get('/referral/{codeRef}','UserController@invitationFromUser')->name('fe.user.invitationFromUser');
+    Route::get('/consultant/{codeRef}','UserController@infoUserRef')->name('fe.user.infoUserRef');
+    
     Route::group(['middleware' => ['check.login']], function () {
         
     });
