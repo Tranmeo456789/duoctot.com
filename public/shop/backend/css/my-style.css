@@ -212,6 +212,9 @@ span.highlight {
 .wp-link-affiliate .value-link{
     display: none;
 }
+.wp-copy input{
+    color: blue;
+}
 .copy-message {
     background-color: #333;
     color: white;

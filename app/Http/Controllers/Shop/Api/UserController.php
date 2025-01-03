@@ -390,6 +390,7 @@ class UserController extends ApiController
 ';
             //$urlShare = url('/') . '?codeRef=' . $infoUserCurrent['codeRef'] .'&formRegister=1';
             $urlShare = route('fe.user.invitationFromUser', $infoUserCurrent['codeRef']);
+            $infoUserCurrent->url_ref = $urlShare;
             $urlShare = $textFirstUrlShare . $urlShare;
             $infoUserCurrent->url_share = $urlShare;
             $urlUser = route('fe.product.drugstore', $infoUserCurrent['slug']);

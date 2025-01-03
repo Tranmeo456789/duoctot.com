@@ -2,6 +2,7 @@
     use App\Helpers\Template as Template;
     use App\Helpers\MyFunction;
     use Illuminate\Support\Str;
+    use App\Model\Shop\ProductModel;
 @endphp
 <div class="card card-info">
     @include("$moduleName.blocks.x_title", ['title' => 'Sản phẩm đã đặt'])
@@ -33,7 +34,8 @@
                         $code = $pos !== false ? $itemsProduct[$pos]['code'] : '';
                         $unit = $pos !== false ? $itemsProduct[$pos]->unitProduct->name : '';
                         $codeRef=$val['codeRef']??'';
-                        $slug=Str::slug($val['name'])??'';
+                        $productcurrent=ProductModel::find($productId);
+                        $slug=$productcurrent['slug']??'';
                     @endphp
                     <tr>
                         <td style="width: 3%">{{$index}}</td>

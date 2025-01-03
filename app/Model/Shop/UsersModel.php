@@ -24,7 +24,7 @@ class UsersModel extends BackEndModel
         $this->folderUpload        = '' ;
         $filedSearch               = array_key_exists($this->controllerName, config('myconfig.config.search')) ? $this->controllerName : 'default';
         $this->fieldSearchAccepted = array_diff(config('myconfig.config.search.' . $filedSearch),['all']);
-        $this->crudNotAccepted     = ['_token','isnumber','password_confirmation','password_old','submit','btn-register','task','id','code_ref','new_image_name'];
+        $this->crudNotAccepted     = ['_token','isnumber','password_confirmation','password_old','submit','btn-register','task','id','code_ref','new_image_name','link_ref'];
     }
     public function getItem($params = null, $options = null) {
         $result = null;

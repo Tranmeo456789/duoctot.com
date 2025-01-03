@@ -57,8 +57,9 @@ class ProfileController extends BackEndController
         //     $codeRef = $userAff['code_ref'];
         // }
         $codeRef = $item['codeRef'] ?? '';
+        $urlRef = route('fe.user.invitationFromUser', $codeRef);
         return view($this->pathViewController .  'info',
-                    compact('item','details', 'itemsProvince' ,'itemsDistrict','itemsWard','codeRef')
+                    compact('item','details', 'itemsProvince' ,'itemsDistrict','itemsWard','codeRef','urlRef')
                 );
     }
     public function save(MainRequest $request)

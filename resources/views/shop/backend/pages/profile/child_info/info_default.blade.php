@@ -41,7 +41,13 @@
         [
             'label'   => HTML::decode(Form::label('fullname', 'Họ tên' .  $star, $formLabelAttr)),
             'element' => Form::text('fullname', $item['fullname']??null, array_merge($formInputAttr,['placeholder'=>'Họ tên'])),
-            'widthElement' => 'col-12'
+            'widthElement' => 'col-12 col-md-6'
+        ],
+        [
+            'label'   => HTML::decode(Form::label('linkRef', 'Link giới thiệu', $formLabelAttr)),
+            'element' => Form::text('link_ref', $urlRef??null, array_merge($formInputAttr,['placeholder'=>'Link giới thiệu','readonly' => 'readonly'])),
+            'widthElement' => 'col-12 col-md-6',
+            'type' => 'input-has-copy'
         ],[
             'label'   => HTML::decode(Form::label('phone', $label['phone'], $formLabelAttr)),
             'element' => Form::text('phone', $item['phone']??null, array_merge($formInputAttr,['placeholder'=>$label['phone']])),
