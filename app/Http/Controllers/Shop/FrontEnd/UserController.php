@@ -32,11 +32,13 @@ class UserController extends ShopFrontEndController
             $imageSrc  = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/nhathuocmau10.jpg';
         }
         $urlShare = url('/') . '?codeRef=' . $codeRef .'&formRegister=1';
+        $slugRef=$infoUserRef['slug'];
         return view($this->pathViewController . 'invitation_from_user',[
             'infoUserRef' => $infoUserRef,
             'urlShare' => $urlShare,
             'codeRef' => $codeRef,
-            'imageSrc' => $imageSrc
+            'imageSrc' => $imageSrc,
+            'slugRef' => $slugRef
         ]);
     }
 
