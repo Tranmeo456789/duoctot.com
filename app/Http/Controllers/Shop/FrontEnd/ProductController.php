@@ -142,11 +142,12 @@ class ProductController extends ShopFrontEndController
         }
         $shopId=$userInfo['user_id'];
         $productDrugstore=[];
-        $listIdProductAdd=[1901, 1902, 1903, 1904, 1905, 1906, 1907, 1908, 1909, 1910, 2318, 2319, 2320, 2321, 2322, 2323];
+//        $listIdProductAdd=[1901, 1902, 1903, 1904, 1905, 1906, 1907, 1908, 1909, 1910, 2318, 2319, 2320, 2321, 2322, 2323];
+        $listIdProductAdd=[];
         $listIdProductAddSelect = collect($userInfo->listIdProduct)->pluck('product_id')->toArray();
         if (isset($userInfo['user_type_id']) && $userInfo['user_type_id'] == 9) {
             $listIdProductAdd = [];
-        } 
+        }
         if(!empty($listIdProductAddSelect)){
             $listIdProductAdd = [];
         }
@@ -171,7 +172,7 @@ class ProductController extends ShopFrontEndController
                 $district_detail=(new ProvinceModel)->getItem(['id'=> $userInfo['details']['district_id']],['task' => 'get-item-full']);
                 $district = isset($district_detail['name']) ? ', ' . $district_detail['name'] : '';
             }
-            
+
             $address=$userInfo['details']['address'].$ward.$district.$province;
             $map=isset($userInfo['details']['map']) ? $userInfo['details']['map'] : '';
         }
@@ -186,7 +187,7 @@ class ProductController extends ShopFrontEndController
                 'map'=>$map,
                 'title'=> $title,
                 'commentShop' => $commentShop,
-                'ratingShop' => $ratingShop       
+                'ratingShop' => $ratingShop
             ]
         );
     }
@@ -232,9 +233,9 @@ class ProductController extends ShopFrontEndController
                     'productId'=>$params['product_id']
                 ]);
             }
-            
+
         }
-        
+
     }
     public function listShop(Request $request){
         $itemsProvince = (new ProvinceModel())->listItems(null,['task'=>'admin-list-items-in-selectbox']);
