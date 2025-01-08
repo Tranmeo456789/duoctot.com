@@ -34,11 +34,11 @@
                 $address='';
                 $ward='';
                 if($val['type_account'] != 'code_import'){
-                    $phoneOfShop = !empty($val['phone']) ? $val['phone'] : $hotline;
+                    $phoneOfShopShowShow = $val['phone'] ?? $hotline;
                 }else{
-                    $phoneOfShop = $hotline;
+                    $phoneOfShopShowShow = $val['phone'] ?? $hotline;
                 }
-                $phoneOfShop=MyFunction::formatPhoneNumber($phoneOfShop);
+                $phoneOfShop=MyFunction::formatPhoneNumber($phoneOfShopShowShow) ?? '';
                 if(isset($val['details'])){
                     $ward_detail=(new WardModel())->getItem(['id'=> $val['details']['ward_id']],['task' => 'get-item-full']);
                     if($ward_detail){

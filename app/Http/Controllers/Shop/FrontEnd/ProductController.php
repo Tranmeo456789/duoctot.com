@@ -142,12 +142,11 @@ class ProductController extends ShopFrontEndController
         }
         $shopId=$userInfo['user_id'];
         $productDrugstore=[];
-//        $listIdProductAdd=[1901, 1902, 1903, 1904, 1905, 1906, 1907, 1908, 1909, 1910, 2318, 2319, 2320, 2321, 2322, 2323];
-        $listIdProductAdd=[];
+        $listIdProductAdd=[1901, 1902, 1903, 1904, 1905, 1906, 1907, 1908, 1909, 1910, 2318, 2319, 2320, 2321, 2322, 2323];
         $listIdProductAddSelect = collect($userInfo->listIdProduct)->pluck('product_id')->toArray();
         if (isset($userInfo['user_type_id']) && $userInfo['user_type_id'] == 9) {
             $listIdProductAdd = [];
-        }
+        } 
         if(!empty($listIdProductAddSelect)){
             $listIdProductAdd = [];
         }
@@ -172,13 +171,16 @@ class ProductController extends ShopFrontEndController
                 $district_detail=(new ProvinceModel)->getItem(['id'=> $userInfo['details']['district_id']],['task' => 'get-item-full']);
                 $district = isset($district_detail['name']) ? ', ' . $district_detail['name'] : '';
             }
-
+            
             $address=$userInfo['details']['address'].$ward.$district.$province;
             $map=isset($userInfo['details']['map']) ? $userInfo['details']['map'] : '';
         }
         $title = isset($userInfo['fullname']) && $userInfo['fullname'] !== '' ? $userInfo['fullname'] . ', Shop dược phẩm Tdoctor' : 'Sàn thương mại điện tử trong y dược số 1 Việt Nam';
         $commentShop = (new CommentModel)->listItems(['shop_id' => $userInfo['user_id']], ['task' => 'list-items-frontend']);
         $ratingShop = (new CommentModel)->listItems(['shop_id' => $userInfo['user_id'],'rating'=>1], ['task' => 'list-items-frontend']);
+        if ($userInfo['type_account']=='code_import') {
+            $productDrugstore=[];
+        }
         return view($this->pathViewController . 'drugstore',
             [
                 'userInfo' => $userInfo,
@@ -187,7 +189,7 @@ class ProductController extends ShopFrontEndController
                 'map'=>$map,
                 'title'=> $title,
                 'commentShop' => $commentShop,
-                'ratingShop' => $ratingShop
+                'ratingShop' => $ratingShop       
             ]
         );
     }
@@ -233,9 +235,9 @@ class ProductController extends ShopFrontEndController
                     'productId'=>$params['product_id']
                 ]);
             }
-
+            
         }
-
+        
     }
     public function listShop(Request $request){
         $itemsProvince = (new ProvinceModel())->listItems(null,['task'=>'admin-list-items-in-selectbox']);
@@ -384,6 +386,7 @@ class ProductController extends ShopFrontEndController
     public function listDrugstore(Request $request){
         $itemsProvince = (new ProvinceModel())->listItems(null,['task'=>'admin-list-items-in-selectbox']);
         $itemsDistrict=[];
+        //$query = UsersModel::whereIn('user_type_id', [4])->orderBy('user_id', 'DESC')->where('type_account','<>','code_import');
         $query = UsersModel::whereIn('user_type_id', [4])->orderBy('user_id', 'DESC');
         if (isset($_COOKIE['province']) && $_COOKIE['province'] != "") {
             $query = $query->where('province_id', $this->getProvinceID($_COOKIE['province']));

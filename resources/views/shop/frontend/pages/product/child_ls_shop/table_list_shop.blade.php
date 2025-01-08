@@ -5,7 +5,7 @@
     use App\Model\Shop\WardModel;
     use App\Helpers\MyFunction;
     
-    $phoneOfShop = ConfigModel::where('name', 'hotline_duoc')->first()->content ?? '';
+    $phoneOfShopConfig = ConfigModel::where('name', 'hotline_duoc')->first()->content ?? '';
 @endphp
 <div class="table-responsive table-list-drugstore">
     <table class="table table-bordered">
@@ -47,10 +47,11 @@
                         $address=$val['details']['address'].$ward.$district.$province;
                     }
                     if($val['user_type_id'] == 6 || $val['user_type_id'] ==11){
-                        $phoneOfShop = $val['phone'] ?? $phoneOfShop;
+                        $phoneOfShopShow = $val['phone'] ?? $phoneOfShopConfig;
+                    }else{
+                        $phoneOfShopShow = $phoneOfShopConfig;
                     }
-                    $phoneOfShop=MyFunction::formatPhoneNumber($phoneOfShop);
-                    
+                    $phoneOfShop=MyFunction::formatPhoneNumber($phoneOfShopShow) ?? '';
                 @endphp
             <tr>
                 <td>

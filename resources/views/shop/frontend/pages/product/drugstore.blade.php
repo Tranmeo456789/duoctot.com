@@ -9,7 +9,7 @@
     }
     $imageMap = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/mapduphong.jpeg';
     $phoneShop = '0345488247';
-    if($userInfo['user_type_id'] == 4 && !empty($userInfo['phone']) && $userInfo['type_account'] != 'code_import'){
+    if($userInfo['user_type_id'] == 4 && !empty($userInfo['phone'])){
         $phoneShop = $userInfo['phone'];
     }
     if($userInfo['user_type_id'] == 6 || $userInfo['user_type_id'] == 11){
@@ -44,12 +44,14 @@
             </div>
         </div>
     </div>
+    @if(count($productDrugstore) > 0)
     <div id="selling-product" class="parent-btn-view-add">
         @include("$moduleName.pages.$controllerName.child_drugstore.list_product",['productDrugstore'=>$productDrugstore])
     </div>
     <div class="comment-product">
         @include("$moduleName.pages.$controllerName.child_drugstore.comment_rating_drugstore")
     </div>
+    @endif
 </div>
 <div class="service-tdoctor mt-3 mt-lg-4">
     @include("$moduleName.templates.info_service")
