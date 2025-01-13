@@ -2,6 +2,12 @@
     <div class="d-none d-md-block">
         <ul class="banner_doitac list-unstyled cS-hidden">
             <li class="text-center">
+                <img src="{{asset('images/shop/banner17.webp')}}" alt="tdoctor" class="img-fluid" loading="lazy" style="width: 100%;">
+            </li>
+            <li class="text-center">
+                <img src="{{asset('images/shop/banner18.webp')}}" alt="tdoctor" class="img-fluid" loading="lazy" style="width: 100%;">
+            </li>
+            <li class="text-center">
                 <img src="{{asset('images/shop/banner2.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
             </li>
             <li class="text-center">
@@ -35,6 +41,12 @@
     </div>
     <div class="d-block d-md-none">
         <ul class="banner_doitac list-unstyled cS-hidden">
+            <li class="text-center">
+                <img src="{{asset('images/shop/banner17.webp')}}" alt="tdoctor" class="img-fluid" loading="lazy" style="width: 100%;">
+            </li>
+            <li class="text-center">
+                <img src="{{asset('images/shop/banner18.webp')}}" alt="tdoctor" class="img-fluid" loading="lazy" style="width: 100%;">
+            </li>
             <li class="text-center">
                 <img src="{{asset('images/shop/banner2_mobi.jpeg')}}" alt="tdoctor" class="img-fluid" style="width: 100%;">
             </li>

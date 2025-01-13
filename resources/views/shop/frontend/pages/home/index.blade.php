@@ -12,8 +12,13 @@
                         </a>
                     </li>
                     <li class="text-center">
+                        <a href="https://tdoctor.net/chi-tiet-san-pham/kem-po2-tone-up-cream-nang-tong-duong-trang-da.html">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner17.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
                         <a href="https://tdoctor.net/chi-tiet-san-pham/bot-phyto-precollagen-vitac-biotin-3500.html">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner11.webp')}}" alt="tdoctor" class="img-fluid">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner18.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                 </ul>
@@ -26,8 +31,13 @@
                         </a>
                     </li>
                     <li class="text-center">
+                        <a href="https://tdoctor.net/chi-tiet-san-pham/kem-po2-tone-up-cream-nang-tong-duong-trang-da.html">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner17.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
                         <a href="https://tdoctor.net/chi-tiet-san-pham/bot-phyto-precollagen-vitac-biotin-3500.html">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner16_mobi.webp')}}" alt="tdoctor" class="img-fluid">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner18.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                 </ul>
