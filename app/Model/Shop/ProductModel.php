@@ -133,7 +133,44 @@ class ProductModel extends BackEndModel
                 $result = $query->get();
             }
         }
-
+        if ($options['task'] == "user-list-items-simple-affiliate-order-by-click") {
+            $query = $this::with('unitProduct')
+                         ->select('products.id', 'slug', 'name', 'price', 'image', 'discount_ref', 'discount_tdoctor', 'created_at', 'updated_at')
+                         ->leftJoin('affiliate_product', 'products.id', '=', 'affiliate_product.product_id') // LEFT JOIN với affiliate_product
+                         // Tính tổng số click cho sản phẩm của user, trả về 0 khi không có click
+                         ->selectRaw('IFNULL(SUM(CASE WHEN affiliate_product.user_id = ? THEN affiliate_product.sum_click ELSE 0 END), 0) as sum_click', [$params['user_id']])
+                         ->where('products.status_product', 'da_duyet'); // Lọc các sản phẩm đã duyệt
+            // Lọc theo nhóm sản phẩm nếu có
+            if (isset($params['group_id'])) {
+                $query->whereIn('products.id', $params['group_id']);
+            }
+            // Lọc theo trạng thái sản phẩm nếu có
+            if ((isset($params['filter']['status_product'])) && ($params['filter']['status_product'] != 'all')) {
+                $query->where('products.status_product', $params['filter']['status_product']);
+            }
+            // Lọc theo tìm kiếm nếu có
+            if (isset($params['search']['value']) && ($params['search']['value'] !== "")) {
+                if ($params['search']['field'] == "all") {
+                    $query->where(function ($query) use ($params) {
+                        foreach ($this->fieldSearchAccepted as $column) {
+                            $query->orWhereRaw("LOWER($column)" . ' LIKE BINARY ' . "LOWER('%{$params['search']['value']}%')");
+                        }
+                    });
+                } else if (in_array($params['search']['field'], $this->fieldSearchAccepted)) {
+                    $query->whereRaw("LOWER({$params['search']['field']})" . " LIKE BINARY " . "LOWER('%{$params['search']['value']}%')");
+                }
+            }
+            // Nhóm theo sản phẩm để tính tổng số click
+            $query->groupBy('products.id') // Nhóm theo id sản phẩm để tính tổng click
+                  ->orderByDesc('sum_click'); // Sắp xếp theo tổng số click giảm dần
+            // Nếu không có phân trang, lấy tất cả sản phẩm
+            if (isset($params['pagination']['totalItemsPerPage'])) {
+                $result = $query->paginate($params['pagination']['totalItemsPerPage']);
+            } else {
+                // Nếu không có phân trang, lấy tất cả sản phẩm
+                $result = $query->get();
+            }
+        }
         if ($options['task'] == "user-list-items-in-warehouse") {
             $query = $this::with('productWarehouse')
                             ->select('id','name','code','image','quantity_in_stock','slug')

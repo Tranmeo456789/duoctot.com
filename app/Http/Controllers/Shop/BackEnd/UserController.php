@@ -206,13 +206,14 @@ class UserController extends BackEndController
         $infoProductClick = collect($userInfo->listIdProductGetNumberClick)->pluck('sum_click', 'product_id')->toArray();
         $sumLinkCount = AffiliateProductModel::where('user_id', $userInfo['user_id'])->sum('sum_click');
         $this->params     = $session->get('params');
-        $infoProduct=(new ProductModel)->listItems($this->params,['task'=>'user-list-items-simple-affiliate']);
+        $this->params['user_id'] = $userInfo['user_id'];
+        $infoProduct=(new ProductModel)->listItems($this->params,['task'=>'user-list-items-simple-affiliate-order-by-click']);
         if ($infoProduct->currentPage() > $infoProduct->lastPage()) {
             $lastPage = $infoProduct->lastPage();
             Paginator::currentPageResolver(function () use ($lastPage) {
                 return $lastPage;
             });
-            $infoProduct             = (new ProductModel)->listItems($this->params, ['task'  => 'user-list-items-simple-affiliate']);
+            $infoProduct             = (new ProductModel)->listItems($this->params, ['task'  => 'user-list-items-simple-affiliate-order-by-click']);
         }
         return view($this->pathViewController .  'affiliate_product',
         [
@@ -238,7 +239,8 @@ class UserController extends BackEndController
         $session->put('params.search.value', $request->has('search_value') ? $request->get('search_value') : ($session->has('params.search.value') ? $session->get('params.search.value') : ''));
         $session->put('params.pagination.totalItemsPerPage', $this->totalItemsPerPage);
         $this->params     = $session->get('params');
-        $infoProduct=(new ProductModel)->listItems($this->params,['task'=>'user-list-items-simple-affiliate']);
+        $this->params['user_id'] = $userInfo['user_id'];
+        $infoProduct=(new ProductModel)->listItems($this->params,['task'=>'user-list-items-simple-affiliate-order-by-click']);
         $infoProductClick = collect($userInfo->listIdProductGetNumberClick)->pluck('sum_click', 'product_id')->toArray();
         $sumLinkCount = AffiliateProductModel::where('user_id', $userInfo['user_id'])->sum('sum_click');
         if ($infoProduct->currentPage() > $infoProduct->lastPage()) {
@@ -246,7 +248,7 @@ class UserController extends BackEndController
             Paginator::currentPageResolver(function () use ($lastPage) {
                 return $lastPage;
             });
-            $infoProduct = (new ProductModel)->listItems($this->params, ['task'  => 'user-list-items-simple-affiliate']);
+            $infoProduct = (new ProductModel)->listItems($this->params, ['task'  => 'user-list-items-simple-affiliate-order-by-click']);
         }
         return view($this->pathViewController .  'affiliate_product',
         [

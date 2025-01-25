@@ -107,7 +107,7 @@ $xhtmlAreaSeach = Template::showAreaSearch('product', $params['search']);
                                         </span>
                                     </div>
                                 </td>
-                                <td scope="row" style="width: 15%" class="text-center">{{ $sumClick }}</td>
+                                <td scope="row" style="width: 15%" class="text-center">{{$val['sum_click'] ?? 0}}</td>
                             </tr>
                             @endforeach
                         @else
