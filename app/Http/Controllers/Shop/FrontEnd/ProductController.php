@@ -432,4 +432,7 @@ class ProductController extends ShopFrontEndController
             ]
         );
     }
+    public function contentIntroduce(Request $request){
+        return view($this->pathViewController . 'content_introduce');
+    }
 }
