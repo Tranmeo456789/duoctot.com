@@ -9,7 +9,7 @@ class CommentModel extends BackEndModel
     public function __construct() {
         $this->table               = 'comment';
         $this->controllerName      = 'comment';
-        $this->folderUpload        = '' ;
+        $this->folderUpload        = 'comment' ;
         $this->crudNotAccepted     = ['_token','btn_save'];
     }
     public function listItems($params = null, $options = null) {
@@ -20,7 +20,7 @@ class CommentModel extends BackEndModel
                             ->paginate($params['pagination']['totalItemsPerPage']);
         }
         if($options['task'] == "list-items-frontend") {
-            $query = $this::select('id','user_id','product_id','shop_id','fullname','phone','email','parent_id','content','rating','created_by', 'created_at', 'updated_at');
+            $query = $this::select('id','user_id','product_id','shop_id','fullname','phone','email','parent_id','content','rating','albumImage','albumImageHash','created_by', 'created_at', 'updated_at');
             if (isset($params['product_id'])) {
                 $query->where('product_id', $params['product_id']);
             }
@@ -91,6 +91,11 @@ class CommentModel extends BackEndModel
     public function saveItem($params = null, $options = null) {
         if($options['task'] == 'add-item') {
             $this->setCreatedHistory($params);
+            if (isset($params['albumImage'])) {
+                $resultFileUpload       = $this->uploadFile($params['albumImage']);
+                $params['albumImage']   = $resultFileUpload['fileAttach'];
+                $params['albumImageHash']     = $resultFileUpload['fileHash'];
+            }
             self::insert($this->prepareParams($params));
         }
         if($options['task'] == 'edit-item') {

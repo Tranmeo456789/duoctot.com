@@ -1,3 +1,19 @@
+@php
+    use App\Helpers\Form as FormTemplate;
+    use App\Helpers\Template as Template;
+    use App\Helpers\MyFunction;
+    $formInputAttr = config('myconfig.template.form_element.input');
+    $elements = [
+        [
+            'label'   => '',
+            'element' => Form::file('albumImage[]', array_merge($formInputAttr,['multiple'=>'multiple','accept'=>'image/*'])),
+            'fileAttach'   => (!empty($item['id'])) ? Template::showImageAttachPreview('comment', null,null, $item['id'],['btn' => 'delete']) : null ,
+            'type'    => "fileAttachPreview",
+            'widthInput' => 'col-12',
+        ]
+    ];
+    $formInputWidth['widthInput'] = 'col-12';
+@endphp
 <div class="question-often mt-3">
     <div class="title-rating">
         Câu hỏi thường gặp
@@ -33,30 +49,35 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="d-flex mb-2">
-                    <div> <img src="{{asset($item['image'])}}" style="max-width: 100px; max-height:100px;" /></div>
-                    <div class="font-weight-bold">{{$item['name']}}</div>
-                </div>
-                <div class="rating text-center mb-2" id="starRating">
-                    <span class="star star-big active" data-rating="1">★</span>
-                    <span class="star star-big active" data-rating="2">★</span>
-                    <span class="star star-big active" data-rating="3">★</span>
-                    <span class="star star-big active" data-rating="4">★</span>
-                    <span class="star star-big active" data-rating="5">★</span>
-                </div>
-                <div class="content-quest">
-                    <div class="row mb-3">
-                        <div class="col-12 mb-3">
-                            <input name="fullname" value="{{ e(Session::get('user')['fullname'] ?? '') }}" placeholder='Họ và tên'>
-                        </div>
-                        <div class="col-12">
-                            <input name="phone" value="{{ e(Session::get('user')['phone'] ?? '') }}" placeholder='Số điện thoại'>
-                        </div>
-                    </div>
-                    <div><textarea name="content" placeholder="Nhập nội dung (Vui lòng gõ tiếng Việt có dấu)..."></textarea></div>
-                    <span class="btn btn-primary submit-comment rounded-pill btn-block" data-user="{{Session::has('user') ? Session::get('user')['user_id'] : ''}}" data-url="{{route('fe.product.addCommentProduct')}}" data-product="{{$item['id']??$productId}}" data-parentid="0" data-rating="5">Gửi</span>
-                </div>
+            <div style="overflow: scroll">
+              <div class="modal-body" style="height: 400px">
+                  <!-- <div class="d-flex mb-2">
+                      <div> <img src="{{asset($item['image'])}}" style="max-width: 100px; max-height:100px;" /></div>
+                      <div class="font-weight-bold">{{$item['name']}}</div>
+                  </div> -->
+                  <div class="rating text-center mb-2" id="starRating">
+                      <span class="star star-big active" data-rating="1">★</span>
+                      <span class="star star-big active" data-rating="2">★</span>
+                      <span class="star star-big active" data-rating="3">★</span>
+                      <span class="star star-big active" data-rating="4">★</span>
+                      <span class="star star-big active" data-rating="5">★</span>
+                  </div>
+                  <div class="content-quest">
+                      <div class="row mb-3">
+                          <div class="col-12 mb-3">
+                              <input name="fullname" value="{{ e(Session::get('user')['fullname'] ?? '') }}" placeholder='Họ và tên'>
+                          </div>
+                          <div class="col-12">
+                              <input name="phone" value="{{ e(Session::get('user')['phone'] ?? '') }}" placeholder='Số điện thoại'>
+                          </div>
+                      </div>
+                      <div><textarea name="content" placeholder="Nhập nội dung (Vui lòng gõ tiếng Việt có dấu)..."></textarea></div>
+                      <div class="tcy-upload-content text-center f-w-600">
+                          {!! FormTemplate::show($elements,$formInputWidth)  !!}
+                      </div>
+                      <span class="btn btn-primary submit-comment rounded-pill btn-block" data-user="{{Session::has('user') ? Session::get('user')['user_id'] : ''}}" data-url="{{route('fe.product.addCommentProduct')}}" data-product="{{$item['id']??$productId}}" data-parentid="0" data-rating="5">Gửi</span>
+                  </div>
+              </div>
             </div>
         </div>
     </div>

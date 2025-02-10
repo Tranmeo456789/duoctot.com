@@ -88,6 +88,7 @@ class ProductController extends ShopFrontEndController
         $listProductRelate = $this->model->listItems(['cat_product_id'=>$item['cat_product_id'],'limit'=>4],['task' => 'frontend-list-items'])??[];
         $commentProduct = (new CommentModel)->listItems(['product_id' => $item['id']], ['task' => 'list-items-frontend']);
         $ratingProduct = (new CommentModel)->listItems(['product_id' => $item['id'],'rating'=>1], ['task' => 'list-items-frontend']);
+        //return $ratingProduct;
         return view($this->pathViewController . 'detail',compact('params','item','albumImageCurrent','codeRef','userInfo','codeRefLogin','listProductRelate','commentProduct','ratingProduct'));
     }
     public function searchProductAjax(Request $request){
@@ -195,14 +196,15 @@ class ProductController extends ShopFrontEndController
     }
     public function addCommentProduct(Request $request){
         $data = $request->all();
-        $params['user_id']=$request->userId;
-        $params['product_id']=$request->productId;
-        $params['shop_id']=$request->shopId;
-        $params['content']=$request->content;
-        $params['fullname']=$request->fullname;
-        $params['phone']=$request->phone;
-        $params['parent_id']=$request->parentid;
-        $params['rating']=$request->rating??null;
+        $params['user_id']=$request->input('userId');
+        $params['product_id']=$request->input('productId');
+        $params['shop_id']=$request->input('shopId');
+        $params['content']=$request->input('content');
+        $params['fullname']=$request->input('fullname');
+        $params['phone']=$request->input('phone');
+        $params['parent_id']=$request->input('parentid');
+        $params['rating']=$request->input('rating')??null;
+        $params['albumImage']=$request->file('albumImage')??null;
         (new CommentModel)->saveItem($params,['task' => 'add-item']);
         if($request->rating != null){
             if($request->shopId){

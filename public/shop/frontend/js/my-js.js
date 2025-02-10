@@ -2082,29 +2082,35 @@ $(document).on('click', '.submit-comment', function(event) {
     var userId = $(this).attr("data-user");
     var parentid = $(this).attr("data-parentid");
     var _token = $('input[name="_token"]').val();
+    var files = $('input[name="albumImage[]"]')[0].files; 
+    var formData = new FormData();
+    for (var i = 0; i < files.length; i++) {
+        formData.append('albumImage[]', files[i]); 
+    }
+    formData.append('_token', _token);
+    formData.append('userId', userId);
+    formData.append('productId', productId);
+    formData.append('shopId', shopId);
+    formData.append('content', content);
+    formData.append('fullname', fullname);
+    formData.append('phone', phone);
+    formData.append('parentid', parentid);
+    formData.append('rating', rating);
     $.ajax({
         url: url,
-        cache: false,
-        method: "GET",
+        method: 'POST', 
         dataType: 'html',
-        data: {
-            _token: _token,
-            userId: userId,
-            productId: productId,
-            shopId: shopId,
-            content: content,
-            fullname: fullname,
-            phone: phone,
-            parentid: parentid,
-            rating: rating
-        },
+        data: formData,
+        processData: false, 
+        contentType: false,  
         success: function(data) {
+            location.reload();
             if (rating && rating !== null) {
                 $('.content-rating-product').html(data);
             } else {
                 $('.content-comment-product').html(data);
             }
-        },
+        }
     });
 });
 $(document).on('click', '.repply-comment', function(event){

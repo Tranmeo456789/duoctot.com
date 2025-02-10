@@ -11,6 +11,7 @@ $firstLetter = mb_substr($lastWord, 0, 1);
 } else {
 $firstLetter = 'T';
 }
+$albumImageCurrentRating=!empty($val['albumImageHash']) ? explode('|', $val['albumImageHash']) : [];
 @endphp
 @if($val['parent_id']==0)
 <li>
@@ -28,6 +29,13 @@ $firstLetter = 'T';
                 @endif
                 <p>{{ $content }}</p>
                 <div class="roud-img text-light rounded-circle text-uppercase">{{$firstLetter}}</div>
+            </div>
+            <div>
+                @if(!empty($albumImageCurrentRating))
+                    @foreach($albumImageCurrentRating as $val1)
+                        <span><img style="max-width: 150px;" src="{{asset('laravel-filemanager/fileUpload/comment/'.$val1)}}" /></span>
+                    @endforeach
+                @endif
             </div>
             <p class="mt-1">
                 <span class="text-primary repply-comment btn" data-commenter-name="{{ $fullname }}" data-comment-id="{{ $val['id'] }}" data-rating="0">Trả lời</span>
