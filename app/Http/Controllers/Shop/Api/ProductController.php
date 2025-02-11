@@ -103,6 +103,9 @@ class ProductController extends ApiController
             foreach($listRating as $key=>$rating0){
                 $listRatingChild = (new CommentModel)->listItems(['product_id'=>$params['id'],'rating'=>true,'parent_id'=>$rating0->id],['task'=>'list-items-parent-id-0-api']);
                 $listRating[$key]['comment_child']=$listRatingChild;
+                $albumImageCurrent=!empty($rating0['albumImageHash']) ? explode('|', $rating0['albumImageHash']) : [];
+                $listRating[$key]['albumImage'] = $albumImageCurrent;
+                $listRating[$key]['linkPrefix'] = 'https://tdoctor.net/laravel-filemanager/fileUpload/comment/';
             }
         }
         $listComment = (new CommentModel)->listItems(['product_id'=>$params['id'],'parent_id'=>0],['task'=>'list-items-parent-id-0-api']);
@@ -197,6 +200,7 @@ class ProductController extends ApiController
         // if($params['rating'] == 'null' || $params['rating'] == 'NULL'){
         //     $params['rating']='';
         // }
+        $params['albumImage'] = $request->file('albumImage') ?? null;
         (new CommentModel)->saveItem($params,['task' => 'add-item']);
         $this->res['data'] = [];
         $this->res['message'] = 'Gửi bình luận thành công!';

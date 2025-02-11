@@ -21,6 +21,76 @@
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner18.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
+                    <li class="text-center">
+                        <a href="">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner19.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
+                        <a href="">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner20.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
+                        <a href="">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner21.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
+                        <a href="">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner22.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
+                        <a href="">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner23.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
+                        <a href="">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner24.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
+                        <a href="">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner25.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
+                        <a href="">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner26.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
+                        <a href="">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner27.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
+                        <a href="">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner28.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
+                        <a href="">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner29.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
+                        <a href="">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner30.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
+                        <a href="">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner31.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
+                        <a href="">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner32.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="d-block d-md-none">
@@ -38,6 +108,76 @@
                     <li class="text-center">
                         <a href="https://tdoctor.net/chi-tiet-san-pham/bot-phyto-precollagen-vitac-biotin-3500.html">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner18.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
+                        <a href="">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner19.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
+                        <a href="">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner20.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
+                        <a href="">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner21.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
+                        <a href="">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner22.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
+                        <a href="">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner23.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
+                        <a href="">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner24.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
+                        <a href="">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner25.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
+                        <a href="">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner26.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
+                        <a href="">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner27.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
+                        <a href="">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner28.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
+                        <a href="">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner29.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
+                        <a href="">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner30.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
+                        <a href="">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner31.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
+                        <a href="">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner32.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                 </ul>

@@ -40,7 +40,7 @@ class PostController extends ApiController
     }
     public function getListBannerPageHome(Request $request){
         $params=[];
-        $params['group_id'] = [14,15,16];
+        $params['group_id'] = [14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
         $urlImage = asset('laravel-filemanager/fileUpload/banner/');
         $listBannerPageHome = (new QuangCaoModel)->listItems($params,['task'=>'list-items-api']);
         if($listBannerPageHome){

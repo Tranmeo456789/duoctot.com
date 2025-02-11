@@ -58,7 +58,7 @@ class CommentModel extends BackEndModel
             $result = self::buildTree($result);
         }
         if($options['task'] == "list-items-parent-id-0-api") {
-            $query = $this::select('id','fullname','parent_id','content','rating', 'created_at');
+            $query = $this::select('id','fullname','parent_id','content','rating','albumImageHash','created_at');
             if (isset($params['parent_id'])) {
                 $query->where('parent_id', $params['parent_id']);
             }
