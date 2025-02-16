@@ -7,47 +7,42 @@
             <div class="d-none d-md-block">
                 <ul class="banner_doitac list-unstyled cS-hidden">
                     <li class="text-center">
-                        <a href="https://tdoctor.net/chi-tiet-san-pham/bot-phyto-precollagen-vitac-biotin-3500.html">
+                        <a href="https://tdoctor.net/cong-ty-tnhh-nohtus-vietnam.html">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner11.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="https://tdoctor.net/chi-tiet-san-pham/kem-po2-tone-up-cream-nang-tong-duong-trang-da.html">
+                        <a href="https://tdoctor.net/cong-ty-duoc-pham-dongsung-bio-pharm.html">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner17.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="https://tdoctor.net/chi-tiet-san-pham/bot-phyto-precollagen-vitac-biotin-3500.html">
+                        <a href="https://tdoctor.net/cong-ty-tnhh-nohtus-vietnam.html">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner18.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner19.webp')}}" alt="tdoctor" class="img-fluid">
-                        </a>
-                    </li>
-                    <li class="text-center">
-                        <a href="">
+                        <a href="{{route('fe.search.viewHome', ['keyword' => 'abbvie'])}}">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner20.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="">
+                        <a href="https://tdoctor.net/trungson-healthcare.html">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner21.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="">
+                        <a href="{{route('fe.search.viewHome', ['keyword' => 'astrazeneca'])}}">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner22.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="">
+                        <a href="{{route('fe.search.viewHome', ['keyword' => 'merck'])}}">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner23.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="">
+                        <a href="{{route('fe.search.viewHome', ['keyword' => 'roche'])}}">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner24.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
@@ -96,47 +91,42 @@
             <div class="d-block d-md-none">
                 <ul class="banner_doitac list-unstyled cS-hidden">
                     <li class="text-center">
-                        <a href="https://tdoctor.net/chi-tiet-san-pham/bot-phyto-precollagen-vitac-biotin-3500.html">
+                        <a href="https://tdoctor.net/cong-ty-tnhh-nohtus-vietnam.html">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner16_mobi.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="https://tdoctor.net/chi-tiet-san-pham/kem-po2-tone-up-cream-nang-tong-duong-trang-da.html">
+                        <a href="https://tdoctor.net/cong-ty-duoc-pham-dongsung-bio-pharm.html">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner17.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="https://tdoctor.net/chi-tiet-san-pham/bot-phyto-precollagen-vitac-biotin-3500.html">
+                        <a href="https://tdoctor.net/cong-ty-tnhh-nohtus-vietnam.html">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner18.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner19.webp')}}" alt="tdoctor" class="img-fluid">
-                        </a>
-                    </li>
-                    <li class="text-center">
-                        <a href="">
+                        <a href="{{route('fe.search.viewHome', ['keyword' => 'abbvie'])}}">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner20.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="">
+                        <a href="https://tdoctor.net/trungson-healthcare.html">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner21.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="">
+                        <a href="{{route('fe.search.viewHome', ['keyword' => 'astrazeneca'])}}">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner22.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="">
+                        <a href="{{route('fe.search.viewHome', ['keyword' => 'merck'])}}">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner23.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="">
+                        <a href="{{route('fe.search.viewHome', ['keyword' => 'roche'])}}">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner24.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>

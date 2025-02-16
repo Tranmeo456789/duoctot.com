@@ -181,55 +181,55 @@ class SearchController extends ShopFrontEndController
         //     echo "Có lỗi xảy ra: " . $e->getMessage();
         // }
         //add keywords product search
-        // if($request->product){
-        //     try {
-        //         DB::beginTransaction();
-        //         $products = ProductModel::with('trademarkProduct')->select('id', 'name', 'benefit', 'trademark_id','user_id','cat_product_id')->where('status_product', 'da_duyet')->get();
-        //         foreach ($products as $product) {
-        //             $trademarkName = $product->trademarkProduct ? $product->trademarkProduct->name : '';
-        //             $userSell = $product->userProduct ? $product->userProduct->fullname : '';
-        //             $catProduct = $product->catProduct ? $product->catProduct->name : '';
-        //             $keywordSearch = implode(' ', [
-        //                 $trademarkName,
-        //                 Str::ascii($trademarkName),
-        //                 $userSell,
-        //                 Str::ascii($userSell),
-        //                 $catProduct,
-        //                 Str::ascii($catProduct),
-        //                 Str::ascii($product->name),
-        //                 Str::ascii($product->benefit),
-        //             ]);
+        if($request->product){
+            try {
+                DB::beginTransaction();
+                $products = ProductModel::with('trademarkProduct')->select('id', 'name', 'benefit', 'trademark_id','user_id','cat_product_id')->where('status_product', 'da_duyet')->get();
+                foreach ($products as $product) {
+                    $trademarkName = $product->trademarkProduct ? $product->trademarkProduct->name : '';
+                    $userSell = $product->userProduct ? $product->userProduct->fullname : '';
+                    $catProduct = $product->catProduct ? $product->catProduct->name : '';
+                    $keywordSearch = implode(' ', [
+                        $trademarkName,
+                        Str::ascii($trademarkName),
+                        $userSell,
+                        Str::ascii($userSell),
+                        $catProduct,
+                        Str::ascii($catProduct),
+                        Str::ascii($product->name),
+                        Str::ascii($product->benefit),
+                    ]);
 
-        //             ProductModel::where('id', $product['id'])->update(['keyword_search' => $keywordSearch]);
-        //         }
-        //         DB::commit();
-        //         return response()->json(['success' => true, 'message' => 'Cập nhật keyword product thành công']);
-        //     } catch (\Exception $e) {
-        //         DB::rollBack();
-        //         return response()->json(['success' => false, 'message' => $e->getMessage()]);
-        //     }
-        // }else{
-        //     try {
-        //         DB::beginTransaction();
-        //         $affiliates = AffiliateModel::with('userRef')->select('id', 'code_ref', 'user_id', 'info_user')->get();
-        //         foreach ($affiliates as $affiliate) {
-        //             $fullname = $affiliate->userRef ? $affiliate->userRef->fullname : '';
-        //             $phone = $affiliate->userRef ? $affiliate->userRef->phone : '';
-        //             $email = $affiliate->userRef ? $affiliate->userRef->email : '';
-        //             $infoUser = implode(' ', [
-        //                 $fullname,
-        //                 $phone,
-        //                 $email
-        //             ]);
-        //             AffiliateModel::where('id', $affiliate['id'])->update(['info_user' => $infoUser]);
-        //         }
-        //         DB::commit();
-        //         return response()->json(['success' => true, 'message' => 'Cập nhật info user affiliate thành công']);
-        //     } catch (\Exception $e) {
-        //         DB::rollBack();
-        //         return response()->json(['success' => false, 'message' => $e->getMessage()]);
-        //     }
-        // }
+                    ProductModel::where('id', $product['id'])->update(['keyword_search' => $keywordSearch]);
+                }
+                DB::commit();
+                return response()->json(['success' => true, 'message' => 'Cập nhật keyword product thành công']);
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return response()->json(['success' => false, 'message' => $e->getMessage()]);
+            }
+        }else{
+            try {
+                DB::beginTransaction();
+                $affiliates = AffiliateModel::with('userRef')->select('id', 'code_ref', 'user_id', 'info_user')->get();
+                foreach ($affiliates as $affiliate) {
+                    $fullname = $affiliate->userRef ? $affiliate->userRef->fullname : '';
+                    $phone = $affiliate->userRef ? $affiliate->userRef->phone : '';
+                    $email = $affiliate->userRef ? $affiliate->userRef->email : '';
+                    $infoUser = implode(' ', [
+                        $fullname,
+                        $phone,
+                        $email
+                    ]);
+                    AffiliateModel::where('id', $affiliate['id'])->update(['info_user' => $infoUser]);
+                }
+                DB::commit();
+                return response()->json(['success' => true, 'message' => 'Cập nhật info user affiliate thành công']);
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return response()->json(['success' => false, 'message' => $e->getMessage()]);
+            }
+        }
 
         // add infomation for table order_product
         // $listOrders = OrderModel::all();

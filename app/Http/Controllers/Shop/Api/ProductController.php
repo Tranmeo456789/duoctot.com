@@ -113,6 +113,9 @@ class ProductController extends ApiController
             foreach($listComment as $key=>$comment0){
                 $listCommentChild = (new CommentModel)->listItems(['product_id'=>$params['id'],'parent_id'=>$comment0->id],['task'=>'list-items-parent-id-0-api']);
                 $listComment[$key]['comment_child']=$listCommentChild;
+                $albumImageCurrent=!empty($comment0['albumImageHash']) ? explode('|', $comment0['albumImageHash']) : [];
+                $listRating[$key]['albumImage'] = $albumImageCurrent;
+                $listRating[$key]['linkPrefix'] = 'https://tdoctor.net/laravel-filemanager/fileUpload/comment/';
             }
         }
         $itemCurrent=$this->model->getItem($params,['task'=>'frontend-get-item-api']);
