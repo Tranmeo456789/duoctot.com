@@ -55,7 +55,7 @@
                 <p>2. Đổi - Trả sản phẩm lỗi do quá trình vận chuyển sản phẩm</p>
             </div>
             <p class="font-weight-bold">Bước 2: Thông báo đến tdoctor.net.</p>
-            <p>Quý khách vui lòng liên hệ với tdoctor.net qua Hotline : 0345488247 - 0393167234 hoặc gửi Email: tdoctorvn@gmail.com , cung cấp thông tin chi tiết về sản phẩm lỗi gồm:</p>
+            <p>Quý khách vui lòng liên hệ với tdoctor.net qua Hotline : 0393167234 hoặc gửi Email: tdoctorvn@gmail.com , cung cấp thông tin chi tiết về sản phẩm lỗi gồm:</p>
             <div class="ml-1">
                 <p>● Thông tin liên lạc của Quý Khách</p>
                 <p>● Tên sản phẩm cần Đổi/Trả</p>

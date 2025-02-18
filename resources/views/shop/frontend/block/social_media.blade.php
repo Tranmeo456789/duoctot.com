@@ -61,10 +61,10 @@
             <a href="https://www.facebook.com/tdoctoronline/" rel="nofollow" target="_blank" title="Facebook Tdoctor" previewlistener="true">Facebook</a>
         </li>
         <li id="icon-fixed__messenger">
-            <a class="image-contact" href='tel:0345488247' rel="nofollow" title="Gọi điện" previewlistener="true">
+            <a class="image-contact" href='tel:0393167234' rel="nofollow" title="Gọi điện" previewlistener="true">
                 <img src="{{asset('images/shop/icon-call-green.jpg')}}" alt="Gọi điện Tdoctor">
             </a>
-            <a href='tel:0345488247' rel="nofollow" title="Call Tdoctor" previewlistener="true">Call</a>
+            <a href='tel:0393167234' rel="nofollow" title="Call Tdoctor" previewlistener="true">Call</a>
         </li>
         <li id="icon-fixed__zalo">
             <a class="image-contact" href="https://zalo.me/0393167234" rel="nofollow" target="_blank" title="Zalo" previewlistener="true">

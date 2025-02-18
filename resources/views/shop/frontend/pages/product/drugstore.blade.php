@@ -8,7 +8,7 @@
         $imageSrc  = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/nhathuocmau10.jpg';
     }
     $imageMap = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/mapduphong.jpeg';
-    $phoneShop = '0345488247';
+    $phoneShop = '0393167234';
     if($userInfo['user_type_id'] == 4 && !empty($userInfo['phone'])){
         $phoneShop = $userInfo['phone'];
     }

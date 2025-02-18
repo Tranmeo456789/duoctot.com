@@ -25,7 +25,7 @@
                 <p>Chủ tài khoản: CONG TY CO PHAN TDOCTOR PHARMA</p>
                 <p>Nội dung ck: {{$buyer['phone']}}</p>
                 <p>Nếu quý khách đã thanh toán</p>
-                <p>Liên hệ hotline/Zalo 0345488247 để xác nhận thanh toán và hỗ trợ</p>
+                <p>Liên hệ hotline/Zalo 0393167234 để xác nhận thanh toán và hỗ trợ</p>
             </div>
             @endif
             <div class="title-info-order">

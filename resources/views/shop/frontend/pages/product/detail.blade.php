@@ -2,7 +2,7 @@
     use Illuminate\Support\Str;
     use App\Helpers\MyFunction;
 
-    $contact=$item['contact']??'0345488247';
+    $contact=$item['contact']??'0393167234';
     $contact=MyFunction::formatPhoneNumber($contact);
 @endphp
 @extends('shop.layouts.frontend')
@@ -59,9 +59,9 @@
                             </span>
                         </div>
                     </div>
-                    <div style="font-size: 22px" class="mb-2">Liên hệ mua lẻ <span class="font-weight-bold" ><a href="tel:0345488247" style="font-size: 30px; color:red">0345.488.247</a></span></div>
+                    <div style="font-size: 22px" class="mb-2">Liên hệ mua lẻ <span class="font-weight-bold" ><a href="tel:0393167234" style="font-size: 30px; color:red">0393.167.234</a></span></div>
                     <div style="font-size: 22px">Liên hệ mua sỉ 
-                        <a class="image-contact" href='tel:0345488247' rel="nofollow" title="Gọi điện" previewlistener="true">
+                        <a class="image-contact" href='tel:0393167234' rel="nofollow" title="Gọi điện" previewlistener="true">
                             <img src="{{asset('images/shop/icon-call-green.jpg')}}" alt="Gọi điện Tdoctor" style="width: 45px;">
                         </a>
                     </div>
@@ -74,10 +74,10 @@
                         <div id="show-price-buy-product" class="price_product mb-4 text-primary font-weight-bold">{{ number_format( $item['price'], 0, "" ,"." )}}đ </div>
                     @else
                         <div class="mb-2">
-                            <a href='https://zalo.me/0345488247' target='_blank'>
+                            <a href='https://zalo.me/0393167234' target='_blank'>
                                 <button class="btn text-white rounded-pill font-weight-bold view-price"><i class="fas fa-eye"></i> <span>Xem giá</span></button>
                             </a>
-                            <span class="contact-buy">Liên hệ Hotline/ Zalo <a href="tel:0345488247"><span class="phone">0345.488.247</span></a></span>
+                            <span class="contact-buy">Liên hệ Hotline/ Zalo <a href="tel:0393167234"><span class="phone">0393.167.234</span></a></span>
                         </div>
                     @endif
                     @include("$moduleName.pages.$controllerName.child_detail.select_unit")
@@ -132,7 +132,7 @@
                     </div>
                 </div>
                 <div class="mt-3 text-center">
-                    <span class="contact-buy">Liên hệ Hotline <a href="tel:0345488247"><span class="phone">{{$contact}}</span></a></span>
+                    <span class="contact-buy">Liên hệ Hotline <a href="tel:0393167234"><span class="phone">{{$contact}}</span></a></span>
                 </div>
                 <div class="commit-tdoctor text-center">
                     @include("$moduleName.pages.$controllerName.child_detail.commit_tdoctor")

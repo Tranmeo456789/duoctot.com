@@ -5,7 +5,7 @@ $listCatLevel1=(new CatProductModel())->listItems(['parent_id' => 1],['task'=>'f
 $listCatAll=(new CatProductModel())->listItems(null, ['task' => 'list-items-front-end']);
 $iconZalo=asset('images/shop/zalo-2.png');
 $iconCall=asset('images/shop/icon-call.png');
-$phoneContact=$phoneContact??'0345488247';
+$phoneContact=$phoneContact??'0393167234';
 @endphp
 <h3>
     <div class="container-menures"><a href="{{route('home')}}">Trang chủ</a></div>
@@ -105,13 +105,13 @@ $phoneContact=$phoneContact??'0345488247';
             <a href='https://zalo.me/{{$phoneContact}}' target='_blank'>
                 <div class='d-flex align-items-center'>
                     <div class='icon-contact'><img alt='Zalo' src='{{$iconZalo}}'></div>
-                    <span>Liên hệ Zalo(<span class="font-weight-bold text-danger">0345.488.247</span>)</span>
+                    <span>Liên hệ Zalo(<span class="font-weight-bold text-danger">0393.167.234</span>)</span>
                 </div>
             </a>
             <a href='tel:{{$phoneContact}}'>
                 <div class='d-flex align-items-center'>
                     <div class='icon-contact'><img alt='Zalo' src='{{$iconCall}}'></div>
-                    <span>Gọi điện(<span class="font-weight-bold text-danger">0345.488.247</span>)</span>
+                    <span>Gọi điện(<span class="font-weight-bold text-danger">0393.167.234</span>)</span>
                 </div>
             </a>
         </div>

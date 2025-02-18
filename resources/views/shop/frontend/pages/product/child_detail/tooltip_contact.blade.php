@@ -1,7 +1,7 @@
 @php
  $iconZalo=asset('images/shop/zalo-2.png');
  $iconCall=asset('images/shop/icon-call.png');
- $phoneContact=$phoneContact??'0345488247';
+ $phoneContact=$phoneContact??'0393167234';
 @endphp
 <div>
     <h6 class='mb-2'>Sđt liên hệ: {{implode('.', str_split($phoneContact, 4))}}</h6>

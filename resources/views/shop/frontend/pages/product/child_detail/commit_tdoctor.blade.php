@@ -88,7 +88,7 @@
     </div>
 </div>
 <div class="mess_free bg-orange">
-    <a href='https://zalo.me/0345488247' target='_blank'>
+    <a href='https://zalo.me/0393167234' target='_blank'>
         <span class="text-light">Nhận tư vấn miễn phí</span>
         <img src="{{asset('images/shop/mess.png')}}" alt="">
     </a>  

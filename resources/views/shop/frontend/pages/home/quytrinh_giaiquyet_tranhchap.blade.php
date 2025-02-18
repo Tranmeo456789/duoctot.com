@@ -27,7 +27,7 @@
             <p><strong>Trụ sở chính:</strong> Số 03, Đường Huỳnh Khương Ninh, Phường Đa Kao, Quận 1, Thành phố Hồ Chí Minh, Việt Nam</p>
             <p><strong>Chi nhánh:</strong> Số 209, Đường 30/4, Phường Xuân Khánh, Quận Ninh Kiều, Thành phố Cần Thơ</p>
             <p><strong>Email:</strong> tdoctorvn@gmail.com</p>
-            <p><strong>Hotline:</strong> 0345488247 - 0393167234</p>
+            <p><strong>Hotline:</strong>0393167234</p>
 
             <h3><strong>Các bước giải quyết tranh chấp, khiếu nại</strong></h3>
 
