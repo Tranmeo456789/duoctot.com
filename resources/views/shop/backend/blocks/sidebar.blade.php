@@ -1,6 +1,6 @@
 <!-- sidebar: style can be found in sidebar.less -->
 <!-- Brand Logo -->
-@if(!Session::has('web_view')) 
+@if(!Session::has('web_view'))
 <a href="{{route('home')}}" class="brand-link">
     <img src="{{asset('shop/images/logo.png')}}" alt="Tdoctor" class="brand-image img-fluid">
 </a>
@@ -17,7 +17,7 @@
                 </a>
             </li>
             @endif
-           
+
             <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-chalkboard-teacher"></i>
@@ -75,7 +75,7 @@
                     </ul>
                 </li>
             @endif
-            @if ((Session::has('user') && Session::get('user')['is_admin'] == 1) || (Session::has('user') && Session::get('user')['is_admin'] == 2) )         
+            @if ((Session::has('user') && Session::get('user')['is_admin'] == 1) || (Session::has('user') && Session::get('user')['is_admin'] == 2) )
             <li class="nav-item">
                 <a href="{{ route('catProduct') }}" class="nav-link">
                     <i class="nav-icon fas fa-wallet"></i>
@@ -131,7 +131,7 @@
                     </ul>
                 </li>
             @endif
-            @if ((Session::has('user') && Session::get('user')['user_type_id'] > 1 && Session::get('user')['user_type_id'] <= 10)) 
+            @if ((Session::has('user') && Session::get('user')['user_type_id'] > 1 && Session::get('user')['user_type_id'] <= 10))
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fab fa-product-hunt"></i>
@@ -305,12 +305,12 @@
                 </ul>
             </li> -->
             @endif
-            <!-- <li class="nav-item">
+            <li class="nav-item">
                 <a href="{{route('user.logout')}}" class="nav-link">
                     <i class="nav-icon fas fa-sign-out-alt"></i>
                     <p>Đăng xuất</p>
                 </a>
-            </li> -->
+            </li>
         </ul>
     </nav>
 </div>
