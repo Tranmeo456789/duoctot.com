@@ -219,6 +219,7 @@
                 'info_user' => ['name'=>'Tìm kiếm theo thông tin user'],
                 'key_search'=> ['name'=>'Tìm kiếm'],
                 'buyer'=> ['name'=>'Tìm kiếm'],
+                'code_order'=> ['name'=>'Tìm kiếm mã đơn hàng'],
 
             ],
         ],
@@ -232,7 +233,7 @@
                 'product'=>['name'],
                 'affiliate'=>['code_ref','info_user'],
                 'post'=>['key_search'],
-                'order'=>['buyer'],
+                'order'=>['buyer','code_order'],
                 'catalog'=>['name'],
             ]
         ],

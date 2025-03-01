@@ -2,6 +2,7 @@
     use App\Helpers\Template as Template;
     use App\Helpers\MyFunction;
     use App\Model\Shop\UnitModel;
+    $ngayDatHang = MyFunction::formatDateFrontend($order['created_at']) ?? '';
 @endphp
 @extends('shop.layouts.frontend')
 
@@ -37,6 +38,10 @@
                         <tr class="bb_order">
                             <td style="width: 30%">Số đơn hàng <span class="text-info">{{$order['code_order']}}</span></td>
                             <td style="width: 70%" class='name'><a href="{{route('fe.order.formSearch')}}"><span class="search-ttdh">Tra cứu đơn hàng</span></a></td>
+                        </tr>
+                        <tr class="bb_order">
+                            <td style="width: 30%">Thời gian đặt hàng</td>
+                            <td style="width: 70%" class='name'>{{$ngayDatHang}}</td>
                         </tr>
                         <tr class="bb_order">
                             <td style="width: 30%">Họ và tên người đặt</td>

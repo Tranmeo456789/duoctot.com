@@ -151,6 +151,10 @@ class ProductController extends ShopFrontEndController
         if(!empty($listIdProductAddSelect)){
             $listIdProductAdd = [];
         }
+        if (isset($userInfo['user_type_id']) && $userInfo['user_type_id'] == 10) {
+            $listIdProductAddShopChung = [2066, 2065, 2064];
+            $listIdProductAdd = array_merge($listIdProductAddShopChung, [2066, 2065, 2064]);
+        } 
         if ($request->has('codeRef')) {
             $request->session()->put('codeRef', $request->query('codeRef'));
             $codeRef = $request->codeRef ?? ($request->session()->get('codeRef') ?? '');

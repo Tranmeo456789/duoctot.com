@@ -7,8 +7,11 @@ use App\Http\Controllers\Shop\Api\ApiController;
 use App\Model\Shop\AffiliateProductModel;
 use App\Model\Shop\UsersModel;
 use App\Model\Shop\CommentModel;
+use App\Model\Shop\CountryModel;
+use App\Model\Shop\ProducerModel;
 use App\Model\Shop\ProductModel as MainModel;
 use App\Model\Shop\ProductModel;
+use App\Model\Shop\TrademarkModel;
 use \Firebase\JWTCustom\JWTCustom as JWTCustom;
 
 class ProductController extends ApiController
@@ -124,6 +127,10 @@ class ProductController extends ApiController
         $itemCurrent['fullname_sell'] = $sellerProduct['fullname']??'';
         $itemCurrent['list_rating'] = $listRating;
         $itemCurrent['list_comment'] = $listComment;
+        $itemCurrent['brand_origin'] = CountryModel::find($itemCurrent['brand_origin_id'])['name'] ?? '';
+        $itemCurrent['country'] = CountryModel::find($itemCurrent['country_id'])['name'] ?? '';
+        $itemCurrent['trademark'] = TrademarkModel::find($itemCurrent['trademark_id'])['name'] ?? '';
+        $itemCurrent['producer'] = ProducerModel::find($itemCurrent['producer_id'])['name'] ?? '';
         $this->res['data']  = $itemCurrent;
         return $this->setResponse($this->res);
     }
