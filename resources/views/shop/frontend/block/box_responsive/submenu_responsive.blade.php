@@ -60,6 +60,26 @@ $phoneContact=$phoneContact??'0393167234';
             </div>
         </div>
     </li>
+    <li>
+        <div class="container-menures position-relative parentsmenu">
+            <div class=" pr-4">
+                <a>Thương hiệu</a>
+            </div>
+            <div class="iconmnrhv"><img src="{{asset('images/shop/arrowd.png')}}" alt=""></div>
+            <div class="submenu1res">
+                <ul>
+                    <li><a href="{{route('fe.search.viewHome', ['keyword' => 'pfizer'])}}">Pfizer</a></li>
+                    <li><a href="{{route('fe.search.viewHome', ['keyword' => 'astrazeneca'])}}">Astrazeneca</a></li>
+                    <li><a href="{{route('fe.search.viewHome', ['keyword' => 'sanofi'])}}">Sanofi</a></li>
+                    <li><a href="{{route('fe.search.viewHome', ['keyword' => 'GSK'])}}">GSK</a></li>
+                    <li><a href="{{route('fe.search.viewHome', ['keyword' => 'Mekophar'])}}">Mekophar</a></li>
+                    <li><a href="{{route('fe.search.viewHome', ['keyword' => 'Novartis'])}}">Novartis</a></li>
+                    <li><a href="{{route('fe.search.viewHome', ['keyword' => 'trungson'])}}">TRUNGSON HEALTHCARE</a></li>
+                    <li><a href="{{route('fe.search.viewHome', ['keyword' => 'NOHTUS'])}}">NOHTUS</a></li>
+                </ul>
+            </div>
+        </div>
+    </li>
     @if(Session::has('user'))
     <li>
         <div class="container-menures position-relative parentsmenu">

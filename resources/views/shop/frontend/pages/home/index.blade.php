@@ -47,43 +47,48 @@
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="">
+                        <a href="{{route('fe.search.viewHome', ['keyword' => 'pfizer'])}}">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner25.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="">
+                        <a href="{{route('fe.search.viewHome', ['keyword' => 'nordisk'])}}">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner26.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="">
+                        <a href="{{route('fe.search.viewHome', ['keyword' => 'sanofi'])}}">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner27.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="">
+                        <a href="{{route('fe.search.viewHome', ['keyword' => 'amgen'])}}">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner28.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="">
+                        <a href="{{route('fe.search.viewHome', ['keyword' => 'novartis'])}}">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner29.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="">
+                        <a href="{{route('fe.search.viewHome', ['keyword' => 'Bristol'])}}">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner30.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="">
+                        <a href="{{route('fe.search.viewHome', ['keyword' => 'GSK'])}}">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner31.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="">
+                        <a href="{{route('fe.search.viewHome', ['keyword' => 'Lilly'])}}">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner32.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
+                        <a href="{{route('fe.search.viewHome', ['keyword' => 'mekophar'])}}">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner33.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                 </ul>
@@ -131,43 +136,48 @@
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="">
+                        <a href="{{route('fe.search.viewHome', ['keyword' => 'pfizer'])}}">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner25.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="">
+                        <a href="{{route('fe.search.viewHome', ['keyword' => 'nordisk'])}}">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner26.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="">
+                        <a href="{{route('fe.search.viewHome', ['keyword' => 'sanofi'])}}">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner27.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="">
+                        <a href="{{route('fe.search.viewHome', ['keyword' => 'amgen'])}}">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner28.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="">
+                        <a href="{{route('fe.search.viewHome', ['keyword' => 'novartis'])}}">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner29.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="">
+                        <a href="{{route('fe.search.viewHome', ['keyword' => 'Bristol'])}}">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner30.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="">
+                        <a href="{{route('fe.search.viewHome', ['keyword' => 'GSK'])}}">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner31.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="">
+                        <a href="{{route('fe.search.viewHome', ['keyword' => 'Lilly'])}}">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner32.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
+                        <a href="{{route('fe.search.viewHome', ['keyword' => 'mekophar'])}}">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner33.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                 </ul>

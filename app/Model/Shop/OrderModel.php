@@ -93,8 +93,13 @@ class OrderModel extends BackEndModel
             if ((isset($params['filter']['status_order'])) && ($params['filter']['status_order'] != 'all')) {
                 $query = $query->where('status_order',$params['filter']['status_order']);
             }
-            if(isset($params['filter_in_day'])){
-                $query->whereBetween('created_at', ["{$params['filter_in_day']['day_start']}", "{$params['filter_in_day']['day_end']}"]);
+            if (isset($params['filter_in_day'])) {
+                $startDate = $params['filter_in_day']['day_start'];
+                $endDate = $params['filter_in_day']['day_end'];
+                $query->whereBetween('created_at', [
+                    "{$startDate} 00:00:00", // Bắt đầu từ 00:00:00 của ngày bắt đầu
+                    "{$endDate} 23:59:59"    // Kết thúc tại 23:59:59 của ngày kết thúc
+                ]);
             }
             if (isset($params['search']['value']) && ($params['search']['value'] !== ""))  {
                 if($params['search']['field'] == "all") {
