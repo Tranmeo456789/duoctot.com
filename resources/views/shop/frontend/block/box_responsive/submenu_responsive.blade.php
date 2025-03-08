@@ -44,6 +44,7 @@ $phoneContact=$phoneContact??'0393167234';
                     <li><a href="{{route('fe.product.listShop')}}">Danh mục Shop chung</a></li>
                     <li><a href="{{route('fe.product.listShopMomBaby')}}">Danh mục Shop Mẹ và Bé</a></li>
                     <li><a href="{{route('fe.product.listTrinhDuocVien')}}">Danh mục Shop Trình dược viên</a></li>
+                    <li><a href="{{route('fe.product.listNhaCungCap')}}">Danh mục Nhà Cung Cấp</a></li>
                 </ul>
             </div>
         </div>

@@ -64,6 +64,7 @@ $listCatAll=(new CatProductModel())->listItems(null, ['task'  => 'list-items-fro
                     <a class="dropdown-item" href="{{route('fe.product.listShop')}}"><span class="pl-2">Danh mục Shop chung</span></a>
                     <a class="dropdown-item" href="{{route('fe.product.listShopMomBaby')}}"><span class="pl-2">Danh mục Shop Mẹ và Bé</span></a>
                     <a class="dropdown-item" href="{{route('fe.product.listTrinhDuocVien')}}"><span class="pl-2">Danh mục Shop Trình dược viên</span></a>
+                    <a class="dropdown-item" href="{{route('fe.product.listNhaCungCap')}}"><span class="pl-2">Danh mục Nhà Cung Cấp</span></a>
                 </div>
             </div>
         </div>
