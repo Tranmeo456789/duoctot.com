@@ -315,7 +315,7 @@ class ProductModel extends BackEndModel
             if (isset($params['keyword'])) {
                 $keyword = $params['keyword'];
                 $keyword = strip_tags($keyword);
-                $keyword = preg_replace('/[^\p{L}\p{N}\s]/u', '', $keyword);
+                $keyword = preg_replace('/[^\p{L}\p{N}\s\-]/u', '', $keyword);
                 $keywords = array_filter(explode(' ', trim($keyword)));
                 $keywords = array_values($keywords);
                 // Lọc kết quả theo từ khóa
@@ -492,7 +492,7 @@ class ProductModel extends BackEndModel
             if (isset($params['keyword'])) {
                 $keyword = $params['keyword'];
                 $keyword = strip_tags($keyword);
-                $keyword = preg_replace('/[^\p{L}\p{N}\s]/u', '', $keyword);
+                $keyword = preg_replace('/[^\p{L}\p{N}\s\-]/u', '', $keyword);
                 $keywords = array_filter(explode(' ', trim($keyword)));
                 $keywords = array_values($keywords);
                 $results = $query->where(function ($query) use ($keywords) {
