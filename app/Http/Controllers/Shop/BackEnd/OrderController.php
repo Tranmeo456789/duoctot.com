@@ -15,7 +15,6 @@ use App\Helpers\MyFunction;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-
 class OrderController extends BackEndController
 {
     public function __construct()
@@ -116,6 +115,7 @@ class OrderController extends BackEndController
             $params['status_order'] = $request->status_order;
             $params['status_control'] = $request->status_control;
             $params['warehouse_id'] = intval($request->warehouse_id);
+            $params['created_at'] = MyFunction::formatDateMySQL($request->created_at);
             $task   = "update-item";
             $notify = "Cập nhật trạng thái đơn hàng thành công!";
             $this->model->saveItem($params, ['task' => $task]);

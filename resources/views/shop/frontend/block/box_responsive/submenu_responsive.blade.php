@@ -44,6 +44,7 @@ $phoneContact=$phoneContact??'0393167234';
                     <li><a href="{{route('fe.product.listShop')}}">Danh mục Shop chung</a></li>
                     <li><a href="{{route('fe.product.listShopMomBaby')}}">Danh mục Shop Mẹ và Bé</a></li>
                     <li><a href="{{route('fe.product.listTrinhDuocVien')}}">Danh mục Shop Trình dược viên</a></li>
+                    <li><a href="{{route('fe.product.listNhaCungCap')}}">Danh mục Nhà Cung Cấp</a></li>
                 </ul>
             </div>
         </div>
@@ -57,6 +58,26 @@ $phoneContact=$phoneContact??'0393167234';
         <div class="container-menures position-relative parentsmenu">
             <div class="pr-4">
                 <a href="{{route('fe.post')}}">Góc Sức Khỏe</a>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="container-menures position-relative parentsmenu">
+            <div class=" pr-4">
+                <a>Thương hiệu</a>
+            </div>
+            <div class="iconmnrhv"><img src="{{asset('images/shop/arrowd.png')}}" alt=""></div>
+            <div class="submenu1res">
+                <ul>
+                    <li><a href="{{route('fe.search.viewHome', ['keyword' => 'pfizer'])}}">Pfizer</a></li>
+                    <li><a href="{{route('fe.search.viewHome', ['keyword' => 'astrazeneca'])}}">Astrazeneca</a></li>
+                    <li><a href="{{route('fe.search.viewHome', ['keyword' => 'sanofi'])}}">Sanofi</a></li>
+                    <li><a href="{{route('fe.search.viewHome', ['keyword' => 'GSK'])}}">GSK</a></li>
+                    <li><a href="{{route('fe.search.viewHome', ['keyword' => 'Mekophar'])}}">Mekophar</a></li>
+                    <li><a href="{{route('fe.search.viewHome', ['keyword' => 'Novartis'])}}">Novartis</a></li>
+                    <li><a href="{{route('fe.search.viewHome', ['keyword' => 'trungson'])}}">TRUNGSON HEALTHCARE</a></li>
+                    <li><a href="{{route('fe.search.viewHome', ['keyword' => 'NOHTUS'])}}">NOHTUS</a></li>
+                </ul>
             </div>
         </div>
     </li>

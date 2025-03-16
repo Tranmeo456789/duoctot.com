@@ -51,7 +51,7 @@
             'widthElement' => 'col-12 col-lg-4'
         ],[
             'label'   => HTML::decode(Form::label('', 'Thời gian đặt hàng', $formLabelAttr)),
-            'element' => Form::text('', $ngayDatHang, array_merge($formInputAttr,['readonly' =>true])),
+            'element' => Form::text('created_at', $ngayDatHang, array_merge($formInputAttr,['style' =>'width:100%'])),
             'widthElement' => 'col-12 col-lg-4'
         ]
     ];
