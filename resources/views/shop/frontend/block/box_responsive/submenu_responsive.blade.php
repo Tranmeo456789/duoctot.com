@@ -77,6 +77,9 @@ $phoneContact=$phoneContact??'0393167234';
                     <li><a href="{{route('fe.search.viewHome', ['keyword' => 'Novartis'])}}">Novartis</a></li>
                     <li><a href="{{route('fe.search.viewHome', ['keyword' => 'trungson'])}}">TRUNGSON HEALTHCARE</a></li>
                     <li><a href="{{route('fe.search.viewHome', ['keyword' => 'NOHTUS'])}}">NOHTUS</a></li>
+                    <li><a href="{{route('fe.search.viewHome', ['keyword' => 'TRAPHACO'])}}">TRAPHACO</a></li>
+                    <li><a href="{{route('fe.search.viewHome', ['keyword' => 'DOMESCO'])}}">DOMESCO</a></li>
+                    <li><a href="{{route('fe.search.viewHome', ['keyword' => 'NAM DƯỢC'])}}">NAM DƯỢC</a></li>
                 </ul>
             </div>
         </div>
