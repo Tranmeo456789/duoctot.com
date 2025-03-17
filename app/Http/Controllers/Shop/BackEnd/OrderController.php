@@ -181,9 +181,9 @@ class OrderController extends BackEndController
     }
     public function exportListOrderFileExcel(Request $request)
     {
-        $params=[
-            'status_order' => 'all'
-        ];
+        $session = $request->session();
+        $statusOrder = $session->get('params')['filter']['status_order'] ?? 'all';
+        $params['filter']['status_order']=$statusOrder;
         if ($request->has('day_start') && $request->has('day_end')) {
             $params['filter_in_day'] = [
                 'day_start' => MyFunction::formatDateLikeMySQL($request->get('day_start')),
@@ -222,7 +222,8 @@ class OrderController extends BackEndController
         $row = 2; // Bắt đầu từ dòng 2 để điền dữ liệu sau tiêu đề
         foreach ($items as $item) {
             $codeOrder = $item->code_order;
-            $total = MyFunction::formatNumber($item->total) . ' đ';
+            //$total = MyFunction::formatNumber($item->total) . ' đ';
+            $total = $item->total;
             $totalProduct = $item->total_product;
             $buyer = json_decode($item['buyer'],true) ?? '';
             $fullname = $buyer['fullname'] ?? '';
