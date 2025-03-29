@@ -485,7 +485,7 @@ class ProductModel extends BackEndModel
             if (isset($params['cat_product_id']) && ($params['cat_product_id'] != 0)){
                 $query->whereIn('cat_product_id', CatProductModel::getChild($params['cat_product_id']));
             }
-            $result = $query->orderBy('name', 'asc')->pluck('name', 'id')->toArray();
+            $result = $query->orderBy('id', 'asc')->pluck('name', 'id')->toArray();
         }
         if ($options['task'] == "list-items-search") {
             $query = $this::with(['unitProduct', 'trademarkProduct'])->select('id', 'name', 'image', 'price', 'percent_discount', 'unit_id','trademark_id', 'specification', 'slug','show_price')->where('status_product', 'da_duyet');

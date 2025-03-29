@@ -22,6 +22,11 @@
                         </a>
                     </li>
                     <li class="text-center">
+                        <a href="https://tdoctor.net/cong-ty-tnhh-duoc-pham-pegasus.html">
+                            <img src="https://tdoctor.net/laravel-filemanager/fileUpload/nhathuoc/1741247469_ab.webp" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
                         <a href="{{route('fe.search.viewHome', ['keyword' => 'abbvie'])}}">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner20.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
@@ -108,6 +113,11 @@
                     <li class="text-center">
                         <a href="https://tdoctor.net/cong-ty-tnhh-nohtus-vietnam.html">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner18.webp')}}" alt="tdoctor" class="img-fluid">
+                        </a>
+                    </li>
+                    <li class="text-center">
+                        <a href="https://tdoctor.net/cong-ty-tnhh-duoc-pham-pegasus.html">
+                            <img src="https://tdoctor.net/laravel-filemanager/fileUpload/nhathuoc/1741247469_ab.webp" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
