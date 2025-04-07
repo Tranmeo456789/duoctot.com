@@ -88,8 +88,10 @@ class ProductController extends ShopFrontEndController
         $listProductRelate = $this->model->listItems(['cat_product_id'=>$item['cat_product_id'],'limit'=>4],['task' => 'frontend-list-items'])??[];
         $commentProduct = (new CommentModel)->listItems(['product_id' => $item['id']], ['task' => 'list-items-frontend']);
         $ratingProduct = (new CommentModel)->listItems(['product_id' => $item['id'],'rating'=>1], ['task' => 'list-items-frontend']);
-        //return $ratingProduct;
-        return view($this->pathViewController . 'detail',compact('params','item','albumImageCurrent','codeRef','userInfo','codeRefLogin','listProductRelate','commentProduct','ratingProduct'));
+        $productId = $item['id'] ?? '';
+        $listUserHasProduct = (new UsersModel)->listItems(['product_id' => $productId],['task'=>'list-users-nha-cung-cap-has-product-id']);
+        //return $listUserHasProduct;
+        return view($this->pathViewController . 'detail',compact('params','item','albumImageCurrent','codeRef','userInfo','codeRefLogin','listProductRelate','commentProduct','ratingProduct','listUserHasProduct'));
     }
     public function searchProductAjax(Request $request){
         $data = $request->all();
