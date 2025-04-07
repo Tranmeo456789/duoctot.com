@@ -152,7 +152,7 @@
                     <b class="cl-b">Kinh nghiệm: </b><span style="text-align: justify;font-size: 18px;">Hơn 10 năm kinh nghiệm lãnh đạo các startup và tập đoàn tại Việt Nam. Các vị trí trước đây của anh bao gồm: Giám đốc Đối tác tại ACCESSTRADE, Giám đốc Kinh doanh tại Haravan, và Trưởng phòng Đối tác tại VinFast.</span>
                 </p>
             </div>
-            <div class="media" id="leader">
+            <!-- <div class="media" id="leader">
                 <h2>10. NGUYỄN XUÂN HOÀNG</h2>
                 <img src="{{asset('public/shop/frontend/images/aboutUs/NguyenXuanHoang.jpg')}}" alt="">
                 <p>
@@ -166,9 +166,9 @@
                     <br><br>
                     <b class="cl-b">Kinh nghiệm: </b><span style="text-align: justify;font-size: 18px;">Quản lý bán hàng công ty TNHH Daesang Việt Nam</span>
                 </p>
-            </div>
+            </div> -->
             <div class="media" id="leader">
-                <h2>11. LƯU THU QUANG</h2>
+                <h2>10. LƯU THU QUANG</h2>
                 <img src="{{asset('public/shop/frontend/images/aboutUs/luuthuquang.jpg')}}" alt="Sunil Shroff">
                 <p>
                     <b class="cl-b">Chức danh:</b> <b>CỐ VẤN CHIẾN LƯỢC </b>
@@ -183,7 +183,7 @@
             <br />
             <br />
             <div class="media" id="leader">
-                <h2>12. LƯƠNG MỘNG ÁI NHI</h2>
+                <h2>11. LƯƠNG MỘNG ÁI NHI</h2>
                 <img src="{{asset('public/shop/frontend/images/aboutUs/luongmongainhi.jpg')}}" alt="Sunil Shroff">
                 <p>
                     <b class="cl-b">Chức danh:</b> <b>CỐ VẤN CHIẾN LƯỢC </b>

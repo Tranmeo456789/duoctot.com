@@ -143,7 +143,8 @@ class ProductController extends ShopFrontEndController
         }
         $shopId=$userInfo['user_id'];
         $productDrugstore=[];
-        $listIdProductAdd=[1901, 1902, 1903, 1904, 1905, 1906, 1907, 1908, 1909, 1910, 2318, 2319, 2320, 2321, 2322, 2323];
+        //$listIdProductAdd=[1901, 1902, 1903, 1904, 1905, 1906, 1907, 1908, 1909, 1910, 2318, 2319, 2320, 2321, 2322, 2323];
+        $listIdProductAdd=[2066, 2065, 2064];
         $listIdProductAddSelect = collect($userInfo->listIdProduct)->pluck('product_id')->toArray();
         if (isset($userInfo['user_type_id']) && $userInfo['user_type_id'] == 9) {
             $listIdProductAdd = [];

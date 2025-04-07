@@ -80,6 +80,10 @@ $phoneContact=$phoneContact??'0393167234';
                     <li><a href="{{route('fe.search.viewHome', ['keyword' => 'TRAPHACO'])}}">TRAPHACO</a></li>
                     <li><a href="{{route('fe.search.viewHome', ['keyword' => 'DOMESCO'])}}">DOMESCO</a></li>
                     <li><a href="{{route('fe.search.viewHome', ['keyword' => 'NAM DƯỢC'])}}">NAM DƯỢC</a></li>
+                    <li><a href="{{route('fe.search.viewHome', ['keyword' => 'Sâm Ngọc Linh'])}}">Sâm Ngọc Linh</a></li>
+                    <li><a href="{{route('fe.search.viewHome', ['keyword' => 'ORYKO'])}}">ORYKO</a></li>
+                    <li><a href="{{route('fe.search.viewHome', ['keyword' => 'Nhung Hươu Việt'])}}">Nhung Hươu Việt</a></li>
+                    <li><a href="{{route('fe.search.viewHome', ['keyword' => 'Nano Curcumin'])}}">Nano Curcumin</a></li>
                 </ul>
             </div>
         </div>
