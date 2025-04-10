@@ -2,6 +2,7 @@
 use App\Helpers\Template as Template;
 use App\Helpers\MyFunction;
 use App\Model\Shop\UnitModel;
+use App\Model\Shop\ProductModel;
 $status_order=[
     ['temp'=>5,'name'=>'Hoàn tất','slug'=>'hoanTat'],
     ['temp'=>4,'name'=>'Đã giao hàng','slug'=>'daGiaoHang'],
@@ -125,6 +126,8 @@ foreach($status_order as $value){
                     $price = MyFunction::formatNumber($val['price']) . ' đ';
                     $total_money = MyFunction::formatNumber($val['total_money']) . ' đ';
                     $unit=(new UnitModel())->getItem(['id'=>$val['unit_id']],['task' => 'get-item'])->name;
+                    $productCurrent = (new ProductModel)->getItem(['id'=>$val['product_id']],['task' => 'get-item']);
+                    $slug = $productCurrent['slug'] ?? '';
                 @endphp
                 <tr class="bb_order">
                     <td style="width: 10%" class='name'>
@@ -132,7 +135,7 @@ foreach($status_order as $value){
                     </td>
                     <td style="width: 40%">
                         <div>
-                            <p class="namep-order truncate2">{{$val['name']}}</p>
+                            <p class="namep-order truncate2"><a href="{{route('fe.product.detail',$slug)}}" target="_blank" rel="noopener noreferrer">{{$val['name']}}</a></p>
                             <p class="namep-order d-block d-md-none">Đơn vị: {{$unit}}</p>
                             <p class="namep-order d-block d-md-none">Số lượng: {{$val['quantity']}}</p>
                         </div>

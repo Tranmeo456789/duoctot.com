@@ -2,6 +2,7 @@
     use App\Helpers\Template as Template;
     use App\Helpers\MyFunction;
     use App\Model\Shop\UnitModel;
+    use App\Model\Shop\ProductModel;
     $ngayDatHang = MyFunction::formatDateFrontend($order['created_at']) ?? '';
 @endphp
 @extends('shop.layouts.frontend')
@@ -101,6 +102,8 @@
                         $image = Template::showImagePreviewFileManager($val['image'],$val['slug']??$val['name']);
                         $price = MyFunction::formatNumber($val['price']) . ' đ';
                         $total_money = MyFunction::formatNumber($val['total_money']) . ' đ';
+                        $productCurrent = (new ProductModel)->getItem(['id'=>$val['product_id']],['task' => 'get-item']);
+                        $slug = $productCurrent['slug'] ?? '';
                         @endphp
                         <tr class="bb_order">
                             <td style="width:12%" class='name'>
@@ -108,7 +111,7 @@
                             </td>
                             <td style="width: 47%">
                                 <div class="">
-                                    <p class="namep-order truncate2 text-info">{{$val['name']}}</p>
+                                    <p class="namep-order truncate2 text-info"><a href="{{route('fe.product.detail',$slug)}}" target="_blank" rel="noopener noreferrer">{{$val['name']}}</a></p>
                                     <p class="unit-order">Đơn vị: <span>{{$unit}}</span></p>
                                 </div>
                             </td>
