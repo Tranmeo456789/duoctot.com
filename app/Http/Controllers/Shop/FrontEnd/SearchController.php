@@ -208,6 +208,24 @@ class SearchController extends ShopFrontEndController
                 DB::rollBack();
                 return response()->json(['success' => false, 'message' => $e->getMessage()]);
             }
+        }else if($request->cat){
+            try {
+                DB::beginTransaction();
+                $products = ProductModel::select('id', 'name','user_id','cat_product_id','show_price')->get();
+                $arrIdCatThuoc=[139,149,150,162,151,152,153,154,184,157,158,159,163,181,188,161,164,165,197,203,204,178,148,160,187,183,175,189,205,207,209];
+                foreach ($products as $product) {
+                    if(in_array($product['cat_product_id'], $arrIdCatThuoc)){
+                        ProductModel::where('id', $product['id'])->update(['show_price' => 2]);
+                    }else{
+                        ProductModel::where('id', $product['id'])->update(['show_price' => 1]);
+                    }
+                }
+                DB::commit();
+                return response()->json(['success' => true, 'message' => 'ẩn giá thuốc thành công']);
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return response()->json(['success' => false, 'message' => $e->getMessage()]);
+            }
         }else{
             try {
                 DB::beginTransaction();

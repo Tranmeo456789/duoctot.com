@@ -145,7 +145,7 @@ class ProductController extends ShopFrontEndController
         }
         $shopId=$userInfo['user_id'];
         $productDrugstore=[];
-        $listIdProductAdd=[2052, 1454, 2331, 2339, 4065, 3844, 2363, 2361, 2332, 2339];
+        $listIdProductAdd=[2052, 1454, 2331, 2339, 4065, 3844, 2363, 2361, 2332, 2339, 4223, 4246, 1183, 4219];
         $listIdProductAddSelect = collect($userInfo->listIdProduct)->pluck('product_id')->toArray();
         if (isset($userInfo['user_type_id']) && $userInfo['user_type_id'] == 9) {
             $listIdProductAdd = [];
@@ -154,8 +154,8 @@ class ProductController extends ShopFrontEndController
             $listIdProductAdd = [];
         }
         if (isset($userInfo['user_type_id']) && $userInfo['user_type_id'] == 10) {
-            $listIdProductAddShopChung = [2052, 1454, 2331, 2339, 4065, 3844, 2363, 2361, 2332, 2339];
-            $listIdProductAdd = array_merge($listIdProductAddShopChung, [2052, 1454, 2331, 2339, 4065, 3844, 2363, 2361, 2332, 2339]);
+            $listIdProductAddShopChung = [2052, 1454, 2331, 2339, 4065, 3844, 2363, 2361, 2332, 2339, 4223, 4246, 1183, 4219];
+            $listIdProductAdd = array_merge($listIdProductAddShopChung, [2052, 1454, 2331, 2339, 4065, 3844, 2363, 2361, 2332, 2339, 4223, 4246, 1183, 4219]);
         } 
         if ($request->has('codeRef')) {
             $request->session()->put('codeRef', $request->query('codeRef'));

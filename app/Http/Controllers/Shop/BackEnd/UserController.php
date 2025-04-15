@@ -291,22 +291,26 @@ class UserController extends BackEndController
             $task   = "add-item";
             $notify = "Thêm mới sản phẩm cho Shop thành công!";
             $userInfo=$this->model->getItem(['user_id'=>$params['user_id']],['task'=>'get-item']);
-            if($userInfo['is_add_product'] == 1){
+            if (empty($params['info_product'])) {
                 $notify = "Cập nhật sản phẩm cho Shop thành công!";
                 ShopProductAddModel::where('user_id', $params['user_id'])->delete();
+            } else {
+                $notify = "Cập nhật sản phẩm cho Shop thành công!";
+                // Xóa sản phẩm cũ nếu đã thêm trước đó
+                if ($userInfo['is_add_product'] == 1) {
+                    ShopProductAddModel::where('user_id', $params['user_id'])->delete();
+                }
+                // Thêm sản phẩm mới
                 foreach ($params['info_product'] as $value) {
-                    $paramsProduct['product_id']=$value;
-                    $paramsProduct['user_id']=$params['user_id'];
+                    $paramsProduct['product_id'] = $value;
+                    $paramsProduct['user_id'] = $params['user_id'];
                     (new ShopProductAddModel)->saveItem($paramsProduct, ['task' => 'add-item']);
                 }
-            }else{
-                foreach ($params['info_product'] as $value) {
-                    $paramsProduct['product_id']=$value;
-                    $paramsProduct['user_id']=$params['user_id'];
-                    (new ShopProductAddModel)->saveItem($paramsProduct, ['task' => 'add-item']);
+                // Nếu chưa từng thêm, cập nhật trạng thái
+                if ($userInfo['is_add_product'] != 1) {
+                    $this->model->saveItem(['user_id' => $params['user_id'], 'is_add_product' => 1], ['task' => 'update-item-simple']);
                 }
-                $this->model->saveItem(['user_id'=>$params['user_id'],'is_add_product'=> 1], ['task' => 'update-item-simple']);
-            } 
+            }
             $request->session()->put('app_notify', $notify);
             return response()->json([
                 'status' => 200,
