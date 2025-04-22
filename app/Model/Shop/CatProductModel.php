@@ -152,6 +152,10 @@ class CatProductModel extends BackEndModel
             $result = $query->get()
                 ->toArray();
         }
+        if ($options['task'] == "get-list-all-items") {
+            $query = self::all();
+            $result = $query->toArray();
+        }
         return $result;
     }
     public function countItems($params = null, $options  = null)

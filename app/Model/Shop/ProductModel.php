@@ -522,6 +522,20 @@ class ProductModel extends BackEndModel
             }
             $result = $results;
         }
+        if ($options['task'] == "get-list-items-add-database-wordpress") {
+            $query = $this::select('id','name','type','code','cat_product_id','price','trademark_id','country_id','specification','image','slug','dosage_forms','elements','expiration_date','brand_origin_id','benefit','general_info','prescribe','dosage','producer_id','note','preserve')
+                                ->where('id','>',1)->where('status_product','da_duyet');
+            if (isset($params['group_id'])){
+                $query->whereIn('id',$params['group_id']);
+            }
+            if(isset($params['offset'])){
+                $query->skip($params['offset']);
+            }
+            if(isset($params['take'])){
+                $query->take($params['take']);
+            }
+            $result =  $query->get();
+        }
         return $result;
     }
     public function listItemsNoPaginate(){

@@ -26,6 +26,7 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
         Route::get('getListProduct', ['uses' => $controller . 'getListProduct']);
         Route::get('getListProductFeaturer', ['uses' => $controller . 'getListProductFeaturer']);
         Route::get('getListProductInObject', ['uses' => $controller . 'getListProductInObject']);
+        Route::get('getListProductAll', ['uses' => $controller . 'getListProductAll']);
         Route::post('addCommentOrRatingProduct', ['uses' => $controller . 'addCommentOrRatingProduct']);
      });
 
@@ -38,6 +39,7 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
         Route::get('getListProductByCatId', ['uses' => $controller . 'getListProductByCatId']);
         Route::get('getListCatProductLevel1AndChild', ['uses' => $controller . 'getListCatProductLevel1AndChild']);
         Route::get('getListCatFeature', ['uses' => $controller . 'getListCatFeature']);
+        Route::get('getListCatAll', ['uses' => $controller . 'getListCatAll']);
     });
 
     $prefix         = 'affiliate';

@@ -91,4 +91,8 @@ class CatProductController extends ApiController
         }
         return $this->setResponse($this->res);
     }
+    public function getListCatAll(Request $request){
+        $this->res['data']  = $this->model->listItems($params,['task'=>'get-list-all-items']);
+        return $this->setResponse($this->res);
+    }
 }

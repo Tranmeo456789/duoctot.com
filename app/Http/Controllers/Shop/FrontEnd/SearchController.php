@@ -96,19 +96,21 @@ class SearchController extends ShopFrontEndController
         //     UsersModel::where('user_id', $val['user_id'])->update(['slug' => $slugInName,'codeRef' => $codeRef]);
         // }
         //  return 'ok';
-        //$products = ProductModel::where('status_product', 'da_duyet')->pluck('id');
-        // $commnets=CommentModel::select('id', 'product_id')->where('id','>', 1969)->get();
-        // $params['fullname']='DS Lý Thị Mỹ Ngân';
-        // $params['user_id']=1014110310;
-        // $params['phone']='0937507947';
-        // $params['content']='Cảm ơn bạn đã đánh giá sản phẩm!';
-        // $params['rating']=0;
-        // foreach($commnets as $val){
-        //     $params['parent_id']=$val['id'];
-        //     $params['product_id']=$val['product_id'];
-        //     (new CommentModel)->saveItem($params,['task' => 'add-item']);
+        // add comment product to 4362
+        //$commnets=CommentModel::select('id', 'product_id')->where('id','>', 2300)->get();
+        // $products = ProductModel::where('status_product', 'da_duyet')->where('id','>', 2300)->pluck('id');
+        // $params['fullname']='Nguyễn Trường';
+        // $params['user_id']='';
+        // $params['phone']='0936766560';
+        // $params['content']='Tôi đã mua sản phẩm cảm thấy rất tốt';
+        // $params['rating'] = 5;
+        // foreach($products as $val){
+        //     $params['parent_id'] = 0;
+        //     $params['product_id'] = $val; // vì $val chính là id
+        //     (new CommentModel)->saveItem($params, ['task' => 'add-item']);
         // }
-        // return 'ok';
+        // return 'add comment ok';
+
         // $slugs = PostModel::orderBy('id', 'desc')->pluck('slug');
         // $urls = $slugs->map(function ($slug) {
         //     return 'https://tdoctor.net/tin-tuc/' . $slug.'.html';
