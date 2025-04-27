@@ -31,7 +31,12 @@ class BackEndModel extends Model
       if(Session::has('user')){
         $params['created_by'] = \Session::get('user')['user_id'];
       }
-      
+    }
+    public function setCreatedHistoryHasParamsCreatedAt(&$params){
+      $params['created_at'] = $params['created_at'] ?? date('Y-m-d H:i:s');
+      if(Session::has('user')){
+        $params['created_by'] = \Session::get('user')['user_id'];
+      }
     }
     public function setCreatedHistoryNoCreateAt(&$params){
       $params['created_at']    = date('Y-m-d H:i:s');

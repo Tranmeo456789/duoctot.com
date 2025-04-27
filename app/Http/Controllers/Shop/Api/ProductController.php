@@ -269,4 +269,56 @@ class ProductController extends ApiController
         $this->res['data'] = $listProduct;
         return $this->setResponse($this->res);
     }
+    public function getListProductHanibody(Request $request){
+        $catTdoctor = CatProductModel::where('id', '!=', 1)->pluck('id')->toArray();
+        $catWordpress = range(83, 83 + count($catTdoctor) - 1);
+        $params['offset']=$request->offset ?? 0;
+        $params['take']=$request->take ?? 0;
+        $listProduct = $this->model->listItems($params,['task'=>'get-list-items-add-database-hanibody']);
+        $catMap = array_combine($catTdoctor, $catWordpress);
+
+        foreach($listProduct as $key => $val) {
+            if (isset($catMap[$val['cat_product_id']])) {
+                $listProduct[$key]['cat_product_id'] = $catMap[$val['cat_product_id']];
+            }
+            $listProduct[$key]['url_image'] = 'https://tdoctor.net'.$val['image'];
+            $dangBaoChe=$val['dosage_forms'] ?? '';
+            $quyCach=$val['specification'] ?? '';
+            $xuatXu=$val->trademarkProduct['name'] ?? '';
+            $nhaSanXuat=$val->producerProduct['name'] ?? '';
+            $nuocSanXuat=$val->countryProduct['name'] ?? '';
+            $hanSuDung=$val['expiration_date'] ?? '';
+            $moTaNgan=$val['prescribe'] ?? '';
+            $thanhPhan=$val['elements'] ?? '';
+            $congDung=$val['benefit'] ?? '';
+            $cachDung=$val['dosage'] ?? '';
+            $luuY=$val['note'] ?? '';
+            $baoQuan=$val['preserve'] ?? '';
+            $thuongHieu=$val->brandOriginIdProduct['name'] ?? '';
+            $listProduct[$key]['post_content'] = 
+            '<strong>Dạng bào chế:</strong> ' . $dangBaoChe . '<br>' .
+            '<strong>Quy cách:</strong> ' . $quyCach . '<br>' .
+            '<strong>Thương hiệu:</strong> ' . $thuongHieu . '<br>' .
+            '<strong>Xuất xứ thương hiệu:</strong> ' . $xuatXu . '<br>' .
+            '<strong>Nhà sản xuất:</strong> ' . $nhaSanXuat . '<br>' .
+            '<strong>Nước sản xuất:</strong> ' . $nuocSanXuat . '<br>' .
+            '<strong>Hạn sử dụng:</strong> ' . $hanSuDung.
+            '<h2>Mô tả sản phẩm</h2>'
+            .$moTaNgan.
+            '<h3>Thành phần</h3>'
+            .$thanhPhan.
+            '<h3>Công dụng</h3>'
+            .$congDung.
+            '<h3>Cách dùng</h3>'
+            .$cachDung.
+            '<h3>Lưu ý</h3>'
+            .$luuY.
+            '<h3>Bảo quản</h3>'
+            . $baoQuan.
+            ''
+            ;
+        }
+        $this->res['data'] = $listProduct;
+        return $this->setResponse($this->res);
+    }
 }

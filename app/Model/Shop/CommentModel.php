@@ -90,7 +90,7 @@ class CommentModel extends BackEndModel
     }
     public function saveItem($params = null, $options = null) {
         if($options['task'] == 'add-item') {
-            $this->setCreatedHistory($params);
+            $this->setCreatedHistoryHasParamsCreatedAt($params);
             if (isset($params['albumImage'])) {
                 $resultFileUpload       = $this->uploadFile($params['albumImage']);
                 $params['albumImage']   = $resultFileUpload['fileAttach'];

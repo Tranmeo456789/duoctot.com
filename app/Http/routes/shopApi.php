@@ -27,6 +27,7 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
         Route::get('getListProductFeaturer', ['uses' => $controller . 'getListProductFeaturer']);
         Route::get('getListProductInObject', ['uses' => $controller . 'getListProductInObject']);
         Route::get('getListProductAll', ['uses' => $controller . 'getListProductAll']);
+        Route::get('getListProductHanibody', ['uses' => $controller . 'getListProductHanibody']);
         Route::post('addCommentOrRatingProduct', ['uses' => $controller . 'addCommentOrRatingProduct']);
      });
 

@@ -96,20 +96,39 @@ class SearchController extends ShopFrontEndController
         //     UsersModel::where('user_id', $val['user_id'])->update(['slug' => $slugInName,'codeRef' => $codeRef]);
         // }
         //  return 'ok';
-        // add comment product to 4362
-        //$commnets=CommentModel::select('id', 'product_id')->where('id','>', 2300)->get();
-        // $products = ProductModel::where('status_product', 'da_duyet')->where('id','>', 2300)->pluck('id');
-        // $params['fullname']='Nguyễn Trường';
-        // $params['user_id']='';
-        // $params['phone']='0936766560';
-        // $params['content']='Tôi đã mua sản phẩm cảm thấy rất tốt';
-        // $params['rating'] = 5;
-        // foreach($products as $val){
-        //     $params['parent_id'] = 0;
-        //     $params['product_id'] = $val; // vì $val chính là id
-        //     (new CommentModel)->saveItem($params, ['task' => 'add-item']);
+
+        // sửa comment
+        // $comments = CommentModel::select('id', 'product_id')
+        //     ->where('fullname', 'Nguyễn Văn Sanh')
+        //     ->get();
+
+        // $productIdUpdated = []; // Mảng lưu các product_id đã đổi rồi
+
+        // foreach ($comments as $val) {
+        //     if (in_array($val['product_id'], $productIdUpdated)) {
+        //         continue; // Nếu sản phẩm đã đổi comment thì bỏ qua
+        //     }
+
+        //     $params = [
+        //         'id'          => $val['id'],
+        //         'fullname'    => 'Quyết Thắng',
+        //         'user_id'     => '',
+        //         'phone'       => '0983526438',
+        //         'content'     => 'Đúng như mô tả',
+        //         'rating'      => 5,
+        //         'parent_id'   => 0,
+        //         'product_id'  => $val['product_id'],
+        //         'created_at'  => '2024-08-20 00:00:00', // Thay đổi ngày tạo comment
+        //     ];
+
+        //     (new CommentModel)->saveItem($params, ['task' => 'edit-item']);
+
+        //     $productIdUpdated[] = $val['product_id']; // Ghi nhớ sản phẩm đã đổi
         // }
-        // return 'add comment ok';
+
+        // return 'Thay tên thành công';
+
+
 
         // $slugs = PostModel::orderBy('id', 'desc')->pluck('slug');
         // $urls = $slugs->map(function ($slug) {
@@ -228,7 +247,43 @@ class SearchController extends ShopFrontEndController
                 DB::rollBack();
                 return response()->json(['success' => false, 'message' => $e->getMessage()]);
             }
-        }else{
+        }else if($request->comment){
+            // add comment product
+            $comments = CommentModel::select('id', 'product_id')->get()->groupBy('product_id');
+            $products = ProductModel::where('status_product', 'da_duyet')->where('id','>',4500)->pluck('id');
+            $names = ['Nguyễn Văn Sanh', 'Trần Văn Đại', 'Phương Anh', 'Lê Tuấn Khang', 'Hữu Tĩnh'];
+            $phones = ['0936766560', '0988776655', '0911223344', '0977888999', '0909000001'];
+            $contents = [
+                'Cám ơn tdoctor đã có sản phẩm tốt',
+                'Đã nhận hàng và dùng ổn',
+                'Sản phẩm tốt và dịch vụ giao hàng chu đáo',
+                'Dịch vụ quá tốt',
+                'Sản phẩm tốt. Cám ơn đã phân phối'
+            ];
+            $ratings = [4, 5, 5, 4, 5];
+            $created_at = ['2020-04-24 00:00:00', '2023-06-15 00:00:00', '2022-01-05 00:00:00', '2024-07-09 00:00:00', '2022-09-14 00:00:00'];
+
+            foreach ($products as $productId) {
+                // Nếu sản phẩm này CHƯA có comment thì mới thêm
+                if (empty($comments[$productId])) {
+                    for ($i = 0; $i < 5; $i++) {
+                        $params = [
+                            'fullname'   => $names[$i],
+                            'user_id'    => '',
+                            'phone'      => $phones[$i],
+                            'content'    => $contents[$i],
+                            'rating'     => $ratings[$i],
+                            'parent_id'  => 0,
+                            'product_id' => $productId,
+                            'created_at' => $created_at[$i]
+                        ];
+                        (new CommentModel)->saveItem($params, ['task' => 'add-item']);
+                    }
+                }
+            }
+            return 'Đã thêm 5 comment cho các sản phẩm chưa có comment';
+        }
+        else{
             try {
                 DB::beginTransaction();
                 $affiliates = AffiliateModel::with('userRef')->select('id', 'code_ref', 'user_id', 'info_user')->get();
