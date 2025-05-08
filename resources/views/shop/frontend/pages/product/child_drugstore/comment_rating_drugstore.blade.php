@@ -1,9 +1,25 @@
+@php
+    use App\Helpers\Form as FormTemplate;
+    use App\Helpers\Template as Template;
+    use App\Helpers\MyFunction;
+    $formInputAttr = config('myconfig.template.form_element.input');
+    $elements = [
+        [
+            'label'   => '',
+            'element' => Form::file('albumImage[]', array_merge($formInputAttr,['multiple'=>'multiple','accept'=>'image/*'])),
+            'fileAttach'   => (!empty($item['id'])) ? Template::showImageAttachPreview('comment', null,null, $item['id'],['btn' => 'delete']) : null ,
+            'type'    => "fileAttachPreview",
+            'widthInput' => 'col-12',
+        ]
+    ];
+    $formInputWidth['widthInput'] = 'col-12';
+@endphp
 <div class="question-often content-rating-product mt-3">
     @include("$moduleName.pages.$controllerName.child_drugstore.content_rating")
 </div>
-<div class="content-comment-product">
-    @include("$moduleName.pages.$controllerName.child_drugstore.content_comment")
-</div>
+<!-- <div class="content-comment-product">
+    phần bình luận shop
+</div> -->
 <div class="modal" id="ratingModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -33,7 +49,10 @@
                             <input name="phone" value="{{ e(Session::get('user')['phone'] ?? '') }}" placeholder='Số điện thoại'>
                         </div>
                     </div>
-                    <textarea name="content" placeholder="Nhập nội dung (Vui lòng gõ tiếng Việt có dấu)..."></textarea>
+                    <div><textarea name="content" placeholder="Nhập nội dung (Vui lòng gõ tiếng Việt có dấu)..."></textarea></div>
+                    <div class="tcy-upload-content text-center f-w-600">
+                          {!! FormTemplate::show($elements,$formInputWidth)  !!}
+                      </div>
                     <span class="btn btn-primary submit-comment rounded-pill btn-block" data-user="{{Session::has('user') ? Session::get('user')['user_id'] : ''}}" data-url="{{route('fe.product.addCommentProduct')}}" data-shop="{{$userInfo['user_id']??$shopId}}" data-parentid="0" data-rating="5">Gửi</span>
                 </div>
             </div>

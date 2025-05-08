@@ -129,14 +129,18 @@ class SearchController extends ShopFrontEndController
         // return 'Thay tên thành công';
 
 
+        // lấy sitemap
+        $slugs = ProductModel::orderBy('id', 'asc')->where('status_product','da_duyet')
+    ->skip(4000)
+    ->take(1000)
+    ->pluck('slug');
+        $urls = $slugs->map(function ($slug) {
+            return 'https://tdoctor.net/chi-tiet-san-pham/' . $slug.'.html';
+        });
+        foreach ($urls as $url) {
+            echo $url . '<br>';
+        }
 
-        // $slugs = PostModel::orderBy('id', 'desc')->pluck('slug');
-        // $urls = $slugs->map(function ($slug) {
-        //     return 'https://tdoctor.net/tin-tuc/' . $slug.'.html';
-        // });
-        // foreach ($urls as $url) {
-        //     echo $url . '<br>';
-        // }
         // $orderAll = OrderModel::all();
         //     foreach ($orderAll as $order) {
         //         $receive = $order->receive;
@@ -202,109 +206,140 @@ class SearchController extends ShopFrontEndController
         //     echo "Có lỗi xảy ra: " . $e->getMessage();
         // }
         //add keywords product search
-        if($request->product){
-            try {
-                DB::beginTransaction();
-                $products = ProductModel::with('trademarkProduct')->select('id', 'name', 'benefit', 'trademark_id','user_id','cat_product_id')->where('status_product', 'da_duyet')->get();
-                foreach ($products as $product) {
-                    $trademarkName = $product->trademarkProduct ? $product->trademarkProduct->name : '';
-                    $userSell = $product->userProduct ? $product->userProduct->fullname : '';
-                    $catProduct = $product->catProduct ? $product->catProduct->name : '';
-                    $keywordSearch = implode(' ', [
-                        $trademarkName,
-                        Str::ascii($trademarkName),
-                        $userSell,
-                        Str::ascii($userSell),
-                        $catProduct,
-                        Str::ascii($catProduct),
-                        Str::ascii($product->name),
-                        Str::ascii($product->benefit),
-                    ]);
+        // if($request->product){
+        //     try {
+        //         DB::beginTransaction();
+        //         $products = ProductModel::with('trademarkProduct')->select('id', 'name', 'benefit', 'trademark_id','user_id','cat_product_id')->where('status_product', 'da_duyet')->get();
+        //         foreach ($products as $product) {
+        //             $trademarkName = $product->trademarkProduct ? $product->trademarkProduct->name : '';
+        //             $userSell = $product->userProduct ? $product->userProduct->fullname : '';
+        //             $catProduct = $product->catProduct ? $product->catProduct->name : '';
+        //             $keywordSearch = implode(' ', [
+        //                 $trademarkName,
+        //                 Str::ascii($trademarkName),
+        //                 $userSell,
+        //                 Str::ascii($userSell),
+        //                 $catProduct,
+        //                 Str::ascii($catProduct),
+        //                 Str::ascii($product->name),
+        //                 Str::ascii($product->benefit),
+        //             ]);
 
-                    ProductModel::where('id', $product['id'])->update(['keyword_search' => $keywordSearch]);
-                }
-                DB::commit();
-                return response()->json(['success' => true, 'message' => 'Cập nhật keyword product thành công']);
-            } catch (\Exception $e) {
-                DB::rollBack();
-                return response()->json(['success' => false, 'message' => $e->getMessage()]);
-            }
-        }else if($request->cat){
-            try {
-                DB::beginTransaction();
-                $products = ProductModel::select('id', 'name','user_id','cat_product_id','show_price')->get();
-                $arrIdCatThuoc=[139,149,150,162,151,152,153,154,184,157,158,159,163,181,188,161,164,165,197,203,204,178,148,160,187,183,175,189,205,207,209];
-                foreach ($products as $product) {
-                    if(in_array($product['cat_product_id'], $arrIdCatThuoc)){
-                        ProductModel::where('id', $product['id'])->update(['show_price' => 2]);
-                    }else{
-                        ProductModel::where('id', $product['id'])->update(['show_price' => 1]);
-                    }
-                }
-                DB::commit();
-                return response()->json(['success' => true, 'message' => 'ẩn giá thuốc thành công']);
-            } catch (\Exception $e) {
-                DB::rollBack();
-                return response()->json(['success' => false, 'message' => $e->getMessage()]);
-            }
-        }else if($request->comment){
-            // add comment product
-            $comments = CommentModel::select('id', 'product_id')->get()->groupBy('product_id');
-            $products = ProductModel::where('status_product', 'da_duyet')->where('id','>',4500)->pluck('id');
-            $names = ['Nguyễn Văn Sanh', 'Trần Văn Đại', 'Phương Anh', 'Lê Tuấn Khang', 'Hữu Tĩnh'];
-            $phones = ['0936766560', '0988776655', '0911223344', '0977888999', '0909000001'];
-            $contents = [
-                'Cám ơn tdoctor đã có sản phẩm tốt',
-                'Đã nhận hàng và dùng ổn',
-                'Sản phẩm tốt và dịch vụ giao hàng chu đáo',
-                'Dịch vụ quá tốt',
-                'Sản phẩm tốt. Cám ơn đã phân phối'
-            ];
-            $ratings = [4, 5, 5, 4, 5];
-            $created_at = ['2020-04-24 00:00:00', '2023-06-15 00:00:00', '2022-01-05 00:00:00', '2024-07-09 00:00:00', '2022-09-14 00:00:00'];
+        //             ProductModel::where('id', $product['id'])->update(['keyword_search' => $keywordSearch]);
+        //         }
+        //         DB::commit();
+        //         return response()->json(['success' => true, 'message' => 'Cập nhật keyword product thành công']);
+        //     } catch (\Exception $e) {
+        //         DB::rollBack();
+        //         return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        //     }
+        // }else if($request->cat){
+        //     try {
+        //         DB::beginTransaction();
+        //         $products = ProductModel::select('id', 'name','user_id','cat_product_id','show_price')->get();
+        //         $arrIdCatThuoc=[139,149,150,162,151,152,153,154,184,157,158,159,163,181,188,161,164,165,197,203,204,178,148,160,187,183,175,189,205,207,209];
+        //         foreach ($products as $product) {
+        //             if(in_array($product['cat_product_id'], $arrIdCatThuoc)){
+        //                 ProductModel::where('id', $product['id'])->update(['show_price' => 2]);
+        //             }else{
+        //                 ProductModel::where('id', $product['id'])->update(['show_price' => 1]);
+        //             }
+        //         }
+        //         DB::commit();
+        //         return response()->json(['success' => true, 'message' => 'ẩn giá thuốc thành công']);
+        //     } catch (\Exception $e) {
+        //         DB::rollBack();
+        //         return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        //     }
+        // }else if($request->comment){
+        //     // add comment product
+        //     $comments = CommentModel::select('id', 'product_id')->get()->groupBy('product_id');
+        //     $products = ProductModel::where('status_product', 'da_duyet')->where('id','>',4500)->pluck('id');
+        //     $names = ['Nguyễn Văn Sanh', 'Trần Văn Đại', 'Phương Anh', 'Lê Tuấn Khang', 'Hữu Tĩnh'];
+        //     $phones = ['0936766560', '0988776655', '0911223344', '0977888999', '0909000001'];
+        //     $contents = [
+        //         'Cám ơn tdoctor đã có sản phẩm tốt',
+        //         'Đã nhận hàng và dùng ổn',
+        //         'Sản phẩm tốt và dịch vụ giao hàng chu đáo',
+        //         'Dịch vụ quá tốt',
+        //         'Sản phẩm tốt. Cám ơn đã phân phối'
+        //     ];
+        //     $ratings = [4, 5, 5, 4, 5];
+        //     $created_at = ['2020-04-24 00:00:00', '2023-06-15 00:00:00', '2022-01-05 00:00:00', '2024-07-09 00:00:00', '2022-09-14 00:00:00'];
 
-            foreach ($products as $productId) {
-                // Nếu sản phẩm này CHƯA có comment thì mới thêm
-                if (empty($comments[$productId])) {
-                    for ($i = 0; $i < 5; $i++) {
-                        $params = [
-                            'fullname'   => $names[$i],
-                            'user_id'    => '',
-                            'phone'      => $phones[$i],
-                            'content'    => $contents[$i],
-                            'rating'     => $ratings[$i],
-                            'parent_id'  => 0,
-                            'product_id' => $productId,
-                            'created_at' => $created_at[$i]
-                        ];
-                        (new CommentModel)->saveItem($params, ['task' => 'add-item']);
-                    }
-                }
-            }
-            return 'Đã thêm 5 comment cho các sản phẩm chưa có comment';
-        }
-        else{
-            try {
-                DB::beginTransaction();
-                $affiliates = AffiliateModel::with('userRef')->select('id', 'code_ref', 'user_id', 'info_user')->get();
-                foreach ($affiliates as $affiliate) {
-                    $fullname = $affiliate->userRef ? $affiliate->userRef->fullname : '';
-                    $phone = $affiliate->userRef ? $affiliate->userRef->phone : '';
-                    $email = $affiliate->userRef ? $affiliate->userRef->email : '';
-                    $infoUser = implode(' ', [
-                        $fullname,
-                        $phone,
-                        $email
-                    ]);
-                    AffiliateModel::where('id', $affiliate['id'])->update(['info_user' => $infoUser]);
-                }
-                DB::commit();
-                return response()->json(['success' => true, 'message' => 'Cập nhật info user affiliate thành công']);
-            } catch (\Exception $e) {
-                DB::rollBack();
-                return response()->json(['success' => false, 'message' => $e->getMessage()]);
-            }
-        }
+        //     foreach ($products as $productId) {
+        //         // Nếu sản phẩm này CHƯA có comment thì mới thêm
+        //         if (empty($comments[$productId])) {
+        //             for ($i = 0; $i < 5; $i++) {
+        //                 $params = [
+        //                     'fullname'   => $names[$i],
+        //                     'user_id'    => '',
+        //                     'phone'      => $phones[$i],
+        //                     'content'    => $contents[$i],
+        //                     'rating'     => $ratings[$i],
+        //                     'parent_id'  => 0,
+        //                     'product_id' => $productId,
+        //                     'created_at' => $created_at[$i]
+        //                 ];
+        //                 (new CommentModel)->saveItem($params, ['task' => 'add-item']);
+        //             }
+        //         }
+        //     }
+        //     return 'Đã thêm 5 comment cho các sản phẩm chưa có comment';
+        // }else if($request->shop){
+        //     // add comment shop
+        //     $comments = CommentModel::select('id', 'shop_id')->get()->groupBy('shop_id');
+        //     $users = UsersModel::where('user_type_id','=',9)->where('user_id','=',1144150755)->pluck('user_id');
+        //     $names = ['Nguyễn Văn Bình', 'Phương Uyên', 'Hữu Tú', 'Lê Minh Đức', 'Phạm Thảo Ly'];
+        //     $phones = ['0936766560', '0988776655', '0911223344', '0977888999', '0909000001'];
+        //     $contents = [
+        //         'Cảm ơn sản phẩm của Shop, tôi đã dùng và thấy tốt',
+        //         'Đã nhận hàng và dùng ổn Shop tư vấn nhiệt tình',
+        //         'Dịch vụ giao hàng chu đáo',
+        //         'Dịch vụ quá tốt có tư vấn miễn phí qua app Tdoctor',
+        //         'Sản phẩm tốt. Cám ơn đã phân phối'
+        //     ];
+        //     $ratings = [4, 5, 5, 4, 5];
+        //     $created_at = ['2020-04-24 00:00:00', '2023-06-15 00:00:00', '2022-01-05 00:00:00', '2024-07-09 00:00:00', '2022-09-14 00:00:00'];
+        //     foreach ($users as $userId) {
+        //         // Nếu shop này CHƯA có comment thì mới thêm
+        //             for ($i = 0; $i < 5; $i++) {
+        //                 $params = [
+        //                     'fullname'   => $names[$i],
+        //                     'user_id'    => '',
+        //                     'phone'      => $phones[$i],
+        //                     'content'    => $contents[$i],
+        //                     'rating'     => $ratings[$i],
+        //                     'parent_id'  => 0,
+        //                     'shop_id' => $userId,
+        //                     'created_at' => $created_at[$i]
+        //                 ];
+        //                 (new CommentModel)->saveItem($params, ['task' => 'add-item']);
+        //             }
+        //     }
+        //     return 'Đã thêm 5 comment cho các Shop chưa có comment';
+        // }else{
+        //     try {
+        //         DB::beginTransaction();
+        //         $affiliates = AffiliateModel::with('userRef')->select('id', 'code_ref', 'user_id', 'info_user')->get();
+        //         foreach ($affiliates as $affiliate) {
+        //             $fullname = $affiliate->userRef ? $affiliate->userRef->fullname : '';
+        //             $phone = $affiliate->userRef ? $affiliate->userRef->phone : '';
+        //             $email = $affiliate->userRef ? $affiliate->userRef->email : '';
+        //             $infoUser = implode(' ', [
+        //                 $fullname,
+        //                 $phone,
+        //                 $email
+        //             ]);
+        //             AffiliateModel::where('id', $affiliate['id'])->update(['info_user' => $infoUser]);
+        //         }
+        //         DB::commit();
+        //         return response()->json(['success' => true, 'message' => 'Cập nhật info user affiliate thành công']);
+        //     } catch (\Exception $e) {
+        //         DB::rollBack();
+        //         return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        //     }
+        // }
 
         // add infomation for table order_product
         // $listOrders = OrderModel::all();

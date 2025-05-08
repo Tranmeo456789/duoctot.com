@@ -242,7 +242,9 @@
                 ['url' => env('APP_URL') . 'page-sitemap.xml', 'last_modified' => '2024-10-09 07:13:00'],
                 ['url' => env('APP_URL') . 'category-sitemap.xml', 'last_modified' => '2024-11-04 04:57:00'],
                 ['url' => env('APP_URL') . 'post-sitemap.xml', 'last_modified' => '2024-11-04 04:57:00'],
-                ['url' => env('APP_URL') . 'product-sitemap.xml', 'last_modified' => '2024-11-04 04:57:00'],
+                ['url' => env('APP_URL') . 'product-sitemap.xml', 'last_modified' => '2025-05-08 04:57:00'],
+                ['url' => env('APP_URL') . 'product1-sitemap.xml', 'last_modified' => '2025-05-08 04:57:00'],
+                ['url' => env('APP_URL') . 'product2-sitemap.xml', 'last_modified' => '2025-05-08 04:57:00'],
         ],
     ];
 ?>
