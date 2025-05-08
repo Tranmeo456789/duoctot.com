@@ -1792,18 +1792,18 @@ $(document).on('click', '.minus', function () {
         $(this).parents('.input-group').find('.number-product').change();
     }
 });
-$(document).on('input', '.number-product', function () {
-    var inputValue = $(this).val();
-    if (isNaN(inputValue)) {
+$(document).on('blur', '.number-product', function () {
+    var inputValue = $(this).val().trim();
+    var numericValue = parseInt(inputValue, 10);
+    if (inputValue === '' || isNaN(numericValue) || numericValue < 1) {
         $(this).val(1);
+    } else if (numericValue > 999) {
+        $(this).val(999); 
     } else {
-        if (inputValue < 1) {
-            $(this).val(1);
-        } else if (inputValue > 999) {
-            $(this).val(999);
-        }
+        $(this).val(numericValue);
     }
 });
+
 $(document).on('click', '.delele-item-in-cart', function () {
 
     url = $(this).data('href');
