@@ -9,7 +9,7 @@ $title = $title ?? 'Sàn thương mại điện tử trong y dược số 1 Vi�
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="SF3DQyzJn3obwShXlf3gfh6NC1HX20ronORFCHD5y8g" />
     <title>{{$title}}</title>
-    <link rel="icon" href="{{ asset('images/shop/favicon.png') }}" type="image/png">
+    <link rel="icon" href="{{ asset('images/shop/logo-favicon.png') }}" type="image/png">
     @include('shop.frontend.block.head')
 </head>
 

@@ -18,33 +18,10 @@
     <meta name="twitter:title" content="{{ $title }}" />
     <meta name="twitter:description" content="{{$description}}" />
     <meta name="twitter:image" content="{{ asset($imageItem) }}" />
-    <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "url": "https://tdoctor.net",
-            "potentialAction": {
-            "@type": "SearchAction",
-            "target": {
-                "@type": "EntryPoint",
-                "urlTemplate": "https://tdoctor.net/tim-kiem?s={search_term_string}"
-            },
-            "query-input": "required name=search_term_string"
-            }
-        }
-    </script>
-    <script id="logo-organization-script" type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            "url": "https://tdoctor.net",
-            "logo": "https://tdoctor.net/images/shop/favicon.png"
-        }
-    </script>
     <meta name="keywords" content="{{ $metaKeywords }}">
     <meta name="google-site-verification" content="SF3DQyzJn3obwShXlf3gfh6NC1HX20ronORFCHD5y8g" />
     <title>{{$title}}</title>
-    <link rel="icon" href="{{ asset('images/shop/favicon.png') }}" type="image/png">
+    <link rel="icon" href="{{ asset('images/shop/logo-favicon.png') }}" type="image/png">
     @include('shop.frontend.block.head')
 </head>
 <body>
