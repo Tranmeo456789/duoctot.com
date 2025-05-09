@@ -131,9 +131,9 @@ class SearchController extends ShopFrontEndController
 
         // lấy sitemap
         $slugs = ProductModel::orderBy('id', 'asc')->where('status_product','da_duyet')
-    ->skip(4000)
-    ->take(1000)
-    ->pluck('slug');
+        ->skip(4000)
+        ->take(1000)
+        ->pluck('slug');
         $urls = $slugs->map(function ($slug) {
             return 'https://tdoctor.net/chi-tiet-san-pham/' . $slug.'.html';
         });
@@ -237,7 +237,7 @@ class SearchController extends ShopFrontEndController
         //     try {
         //         DB::beginTransaction();
         //         $products = ProductModel::select('id', 'name','user_id','cat_product_id','show_price')->get();
-        //         $arrIdCatThuoc=[139,149,150,162,151,152,153,154,184,157,158,159,163,181,188,161,164,165,197,203,204,178,148,160,187,183,175,189,205,207,209];
+        //         $arrIdCatThuoc=[139,149,150,162,151,152,153,154,184,157,158,159,163,181,187,188,161,164,165,197,203,204,178,148,160,187,183,175,189,205,207,209];
         //         foreach ($products as $product) {
         //             if(in_array($product['cat_product_id'], $arrIdCatThuoc)){
         //                 ProductModel::where('id', $product['id'])->update(['show_price' => 2]);
@@ -255,8 +255,8 @@ class SearchController extends ShopFrontEndController
         //     // add comment product
         //     $comments = CommentModel::select('id', 'product_id')->get()->groupBy('product_id');
         //     $products = ProductModel::where('status_product', 'da_duyet')->where('id','>',4500)->pluck('id');
-        //     $names = ['Nguyễn Văn Sanh', 'Trần Văn Đại', 'Phương Anh', 'Lê Tuấn Khang', 'Hữu Tĩnh'];
-        //     $phones = ['0936766560', '0988776655', '0911223344', '0977888999', '0909000001'];
+        //     $names = ['Nguyễn Hữu Sinh', 'Trần Thị Thảo', 'Phạm Khánh', 'Tuấn Khang', 'Đình Hùng'];
+        //     $phones = ['0936766561', '0988776651', '0911223341', '0977888991', '0909000011'];
         //     $contents = [
         //         'Cám ơn tdoctor đã có sản phẩm tốt',
         //         'Đã nhận hàng và dùng ổn',
