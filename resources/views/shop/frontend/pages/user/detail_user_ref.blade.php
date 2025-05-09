@@ -1,6 +1,6 @@
 @php
 $title = 'Người hướng dẫn tại Tdoctor';
-$imageItem = 'images/shop/ogimg_home.jpg';
+$imageItem = 'images/shop/favicon.png';
 $description = 'Tdoctor là một giải pháp cho các nhà thuốc, các doanh nghiệp, công ty dược phẩm tăng doanh thu một cách nhanh chóng.';
 @endphp
 <!DOCTYPE html>
@@ -13,7 +13,7 @@ $description = 'Tdoctor là một giải pháp cho các nhà thuốc, các doanh
     <meta property="og:image" content="{{ asset($imageItem) }}?v=1">
     <meta property="og:description" content="{{$description}}">
     <title>{{$title}}</title>
-    <link rel="icon" href="{{ asset('images/shop/favicon.jpg') }}" type="image/jpeg">
+    <link rel="icon" href="{{ asset('images/shop/favicon.png') }}" type="image/png">
     @include('shop.frontend.block.head')
     <style>
         .container-ref {

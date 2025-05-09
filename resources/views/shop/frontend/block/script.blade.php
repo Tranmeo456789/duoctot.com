@@ -13,26 +13,3 @@
   gtag('js', new Date());
   gtag('config', 'G-PZKFD196QW');
 </script>
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "url": "https://tdoctor.net",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": "https://tdoctor.net/tim-kiem?s={search_term_string}"
-      },
-      "query-input": "required name=search_term_string"
-    }
-  }
-</script>
-<script id="logo-organization-script" type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "url": "https://tdoctor.net",
-    "logo": "https://tdoctor.net/images/shop/logo_topbar4.webp"
-  }
-</script>
