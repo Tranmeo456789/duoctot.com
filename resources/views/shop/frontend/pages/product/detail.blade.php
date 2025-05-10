@@ -18,21 +18,21 @@ $contact=MyFunction::formatPhoneNumber($contact);
             <div class="col-md-5">
                 <div class="demo">
                     <div class="item">
-                        <div class="clearfix" style="max-width:474px;">
-                            <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
-                                @if(!empty($albumImageCurrent))
-                                @foreach($albumImageCurrent as $val)
-                                <li data-thumb="{{asset('laravel-filemanager/fileUpload/product/'.$val)}}" class="text-center">
-                                    <img src="{{asset('laravel-filemanager/fileUpload/product/'.$val)}}" />
-                                </li>
-                                @endforeach
-                                @endif
-                                <li data-thumb="{{asset($item['image'])}}" class="text-center">
-                                    <img src="{{asset($item['image'])}}" />
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+    <div class="clearfix" style="max-width:474px;">
+        <ul id="image-gallery" class="gallery list-unstyled lightSlider lsGrab lSSlide">
+            @foreach($albumImageCurrent as $val)
+                <li data-thumb="{{ asset('laravel-filemanager/fileUpload/product/'.$val) }}" class="text-center">
+                    <img src="{{ asset('laravel-filemanager/fileUpload/product/'.$val) }}" class="zoom" />
+                </li>
+            @endforeach
+            <li data-thumb="{{ asset($item['image']) }}" class="text-center">
+                <img src="{{ asset($item['image']) }}" class="zoom" />
+            </li>
+        </ul>
+        <!-- Thêm Zoom Lens -->
+        <div class="zoom-lens"></div>
+    </div>
+</div>
                 </div>
             </div>
             <div class="col-md-7">

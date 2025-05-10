@@ -7311,3 +7311,4 @@ input[type="radio"] {
 .content-post ul{margin: auto;padding-left: 20px;margin-bottom: 1rem;} .content-post ul li{list-style: initial; padding: 5px;} 
 .progress{display: -ms-flexbox;display: flex;height: 1rem;overflow: hidden;line-height: 0;font-size: .75rem;background-color: #e9ecef;border-radius: .25rem;}.fa-eye-slash:before{content:"\f070"}
 .comment_reply-branch__NKquM{position: absolute;width: 31px;border-bottom-left-radius: 21px;height: 132px;border-left: 2px solid #e4e8ed;border-bottom: 2px solid #e4e8ed;left: -71px;bottom: calc(100% - 30px);;z-index: 0}
+.item .gallery img{cursor:pointer;transition:transform .3s;object-fit:cover;width:100%}.item .zoom-lens{position:absolute;border:2px solid rgba(255,255,255,.6);width:150px;height:150px;pointer-events:none;display:none;border-radius:50%}.item .zoom-lens.active{display:block}.item .zoomed{transform:scale(2);transition:transform .3s;object-position:center}

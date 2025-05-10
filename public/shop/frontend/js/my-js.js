@@ -2215,3 +2215,30 @@ $(document).on('click', ".btnSelectUnitPriceProduct", function (event) {
     $("#show-price-buy-product").text(priceFormat);
     $("#unit_id").val(unitId);
 });
+$(document).ready(function() {
+    $('.item .gallery img').on('mousemove', function(e) {
+        var $this = $(this);
+        var lens = $('.zoom-lens');
+        var offset = $this.offset();
+        var width = $this.width();
+        var height = $this.height();
+        var x = e.pageX - offset.left;
+        var y = e.pageY - offset.top;
+        var lensX = x - lens.width() / 2;
+        var lensY = y - lens.height() / 2;
+        lens.css({
+            left: lensX,
+            top: lensY,
+        });
+        $this.addClass('zoomed');
+        $this.css({
+            'transform-origin': `${(x / width) * 100}% ${(y / height) * 100}%`
+        });
+        lens.addClass('active');
+    });
+    $('.item .gallery img').on('mouseleave', function() {
+        $(this).removeClass('zoomed');
+        $(this).css('transform-origin', 'center center');
+        $('.zoom-lens').removeClass('active');
+    });
+});

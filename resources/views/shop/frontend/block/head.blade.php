@@ -573,7 +573,7 @@
     amp-accordion:not(.i-amphtml-built)>section[expanded]>:last-child {
         display: block!important
     }
-
+    
     /*# sourceURL=/css/ampshared.css*/
 </style>
 <script async src="https://cdn.ampproject.org/v0.mjs" type="module" crossorigin="anonymous"></script>
