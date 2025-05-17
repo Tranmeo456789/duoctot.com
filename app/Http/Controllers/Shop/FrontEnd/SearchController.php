@@ -254,7 +254,7 @@ class SearchController extends ShopFrontEndController
             // add comment product
             $comments = CommentModel::select('id', 'product_id')->get()->groupBy('product_id');
             $products = ProductModel::where('status_product', 'da_duyet')->where('id','>',4500)->pluck('id');
-            $names = ['Nguyễn Hữu Sinh', 'Trần Thị Thảo', 'Phạm Khánh', 'Tuấn Khang', 'Đình Hùng'];
+            $names = ['Như Lương', 'Trần Thị Mai', 'Phạm Hữu Tú', 'Đức Cần', 'Nguyễn Tâm An'];
             $phones = ['0936766561', '0988776651', '0911223341', '0977888991', '0909000011'];
             $contents = [
                 'Cám ơn tdoctor đã có sản phẩm tốt',
@@ -284,12 +284,29 @@ class SearchController extends ShopFrontEndController
                     }
                 }
             }
-            return 'Đã thêm 5 comment cho các sản phẩm chưa có comment';
-        }else if($request->shop){
+             return 'Đã thêm 5 comment cho các sản phẩm chưa có comment';
+            }else if ($request->thay_ncc) {
+                $LsIdProductChange = range(444, 469);
+                $idNCCNew = 1144150713;
+                $newWarehouseId = 157;
+
+                // Cập nhật bảng products
+                ProductModel::whereIn('id', $LsIdProductChange)->update([
+                    'user_id'    => $idNCCNew,
+                    'created_by' => $idNCCNew,
+                ]);
+
+                // Cập nhật bảng product_warehouse
+                DB::table('product_warehouse')
+                    ->whereIn('product_id', $LsIdProductChange)
+                    ->update(['warehouse_id' => $newWarehouseId]);
+
+                return 'Đã thay đổi NCC và kho thành công';
+            }else if($request->shop){
             // add comment shop
             $comments = CommentModel::select('id', 'shop_id')->get()->groupBy('shop_id');
-            $users = UsersModel::where('user_type_id','=',9)->where('user_id','=',1144150755)->pluck('user_id');
-            $names = ['Nguyễn Văn Bình', 'Phương Uyên', 'Hữu Tú', 'Lê Minh Đức', 'Phạm Thảo Ly'];
+            $users = UsersModel::where('user_type_id','=',9)->pluck('user_id');
+            $names = ['Đinh Văn Lượng', 'Duy Điều', 'Trần Thanh Sang', 'Lê Văn Sơn', 'Văn Thạch'];
             $phones = ['0936766560', '0988776655', '0911223344', '0977888999', '0909000001'];
             $contents = [
                 'Cảm ơn sản phẩm của Shop, tôi đã dùng và thấy tốt',

@@ -321,4 +321,10 @@ class ProductController extends ApiController
         $this->res['data'] = $listProduct;
         return $this->setResponse($this->res);
     }
+    public function getListProductStatusTuChoi(Request $request){
+        $params=[];
+        $listProduct = $this->model->listItems($params,['task'=>'get-list-items-status-tuc-choi']);
+        $this->res['data'] = $listProduct;
+        return $this->setResponse($this->res);
+    }
 }
