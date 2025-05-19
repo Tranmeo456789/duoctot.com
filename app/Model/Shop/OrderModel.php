@@ -88,7 +88,7 @@ class OrderModel extends BackEndModel
         }
         if ($options['task'] == "user-list-items") {
             $query = $this::with('userBuy')
-                                ->select('id','code_order','total','created_at','status_order','user_id','buyer','payment','status_control')
+                                ->select('id','code_order','total','created_at','status_order','user_id','buyer','payment','status_control','info_product')
                                 ->where('id','>',1)->OfUser();
             if ((isset($params['filter']['status_order'])) && ($params['filter']['status_order'] != 'all')) {
                 $query = $query->where('status_order',$params['filter']['status_order']);

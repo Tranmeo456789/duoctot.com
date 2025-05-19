@@ -283,26 +283,26 @@ class SearchController extends ShopFrontEndController
                         (new CommentModel)->saveItem($params, ['task' => 'add-item']);
                     }
                 }
-            }
+                }
              return 'Đã thêm 5 comment cho các sản phẩm chưa có comment';
-            }else if ($request->thay_ncc) {
-                $LsIdProductChange = range(444, 469);
-                $idNCCNew = 1144150713;
-                $newWarehouseId = 157;
+        }else if ($request->thay_ncc) {
+            $LsIdProductChange = range(612,626);
+            $idNCCNew = 1144150808;
+            $newWarehouseId = 205;
 
-                // Cập nhật bảng products
-                ProductModel::whereIn('id', $LsIdProductChange)->update([
-                    'user_id'    => $idNCCNew,
-                    'created_by' => $idNCCNew,
-                ]);
+            // Cập nhật bảng products
+            ProductModel::whereIn('id', $LsIdProductChange)->update([
+                'user_id'    => $idNCCNew,
+                'created_by' => $idNCCNew,
+            ]);
 
-                // Cập nhật bảng product_warehouse
-                DB::table('product_warehouse')
-                    ->whereIn('product_id', $LsIdProductChange)
-                    ->update(['warehouse_id' => $newWarehouseId]);
+            // Cập nhật bảng product_warehouse
+            DB::table('product_warehouse')
+                ->whereIn('product_id', $LsIdProductChange)
+                ->update(['warehouse_id' => $newWarehouseId]);
 
-                return 'Đã thay đổi NCC và kho thành công';
-            }else if($request->shop){
+            return 'Đã thay đổi NCC và kho thành công';
+        }else if($request->shop){
             // add comment shop
             $comments = CommentModel::select('id', 'shop_id')->get()->groupBy('shop_id');
             $users = UsersModel::where('user_type_id','=',9)->pluck('user_id');

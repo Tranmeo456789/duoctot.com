@@ -48,6 +48,7 @@ class OrderController extends BackEndController
             ];
         }
         $items  = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
+       // return $items;
         if ($items->currentPage() > $items->lastPage()) {
             $lastPage = $items->lastPage();
             Paginator::currentPageResolver(function () use ($lastPage) {
