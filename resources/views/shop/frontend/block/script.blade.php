@@ -13,3 +13,10 @@
   gtag('js', new Date());
   gtag('config', 'G-PZKFD196QW');
 </script>
+<script>
+  const url = new URL(window.location);
+  if (url.searchParams.has('t')) {
+    url.searchParams.delete('t');
+    window.history.replaceState({}, '', url.pathname + url.search);
+  }
+</script>
