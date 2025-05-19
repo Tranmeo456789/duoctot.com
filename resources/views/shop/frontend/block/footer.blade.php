@@ -54,7 +54,7 @@
                 </div>
                 <div class="d-flex">
                     <a href="http://online.gov.vn/Home/WebDetails/125559" target="_blank">
-                        <img style="width: 200px; margin-left: -15px;" src="{{asset('images/shop/bocongthuong.png')}}" alt="tdoctor">
+                        <img style="width: 200px; margin-left: -15px;height: 80px" src="{{asset('images/shop/bocongthuong.png')}}" alt="tdoctor">
                     </a>
                 </div>
             </div>

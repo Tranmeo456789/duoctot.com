@@ -1,22 +1,3 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const lazyImages = document.querySelectorAll('.lazy');
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const lazyImage = entry.target;
-                lazyImage.src = lazyImage.getAttribute('data-src');
-                lazyImage.setAttribute('data-thumb', lazyImage.getAttribute('data-thumb'));
-                lazyImage.classList.remove('lazy');
-                observer.unobserve(lazyImage);
-            }
-        });
-    }, {
-        rootMargin: '0px 0px 200px 0px',
-    });
-    lazyImages.forEach(image => {
-        imageObserver.observe(image);
-    });
-});
 (function($) {
     defaults = {
         formDataKey: "files",
@@ -1638,11 +1619,6 @@ $(document).on('click', ".view-btn-add-product", function (event) {
             currentElement.attr("data-offset", offset);
             var listProductContainer = currentElement.closest('.parent-btn-view-add').find('ul.ls_product-view-add');
             listProductContainer.append(data);
-            listProductContainer.find('img.lazy').each(function() {
-                var img = $(this);
-                img.attr('src', img.attr('data-src')); 
-                img.removeClass('lazy'); 
-            });
         },
     }); 
 });
@@ -1667,11 +1643,6 @@ $(document).on('click', ".btnFilterProductInHome", function (event) {
         },
         success: function (data) {
             $('#product-by-object').html(data);
-            $('#product-by-object').find('img.lazy').each(function() {
-                var img = $(this);
-                img.attr('src', img.attr('data-src'));  
-                img.removeClass('lazy'); 
-            });
         },
     });
 });

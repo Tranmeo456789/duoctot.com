@@ -18,7 +18,7 @@ $imgCustomer=['1.jpg', '2.jpg'];
                             <a href="{{route('fe.home.downloadAppTdoctor')}}" style="font-size: 14px;line-height: 10px;" class="text-light font-weight-bold">↓ TẢI NGAY</a>
                         </div>
                     </div>
-                    <div style="width: 200px;"><img src="{{asset('images/shop/qr-app-tdoctor.jpg')}}" alt="Tdoctor"></div>
+                    <div style="width: 200px;"><img src="{{asset('images/shop/qr-app-tdoctor.jpg')}}" alt="Tdoctor" style="width:180px;height: 180px"></div>
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@ $imgCustomer=['1.jpg', '2.jpg'];
     <div class="col-xl-3 col-lg-12">
         <ul class="list-unstyled text-center">
             <li class="text-center">
-                <img class="lazy" data-src="{{asset('images/shop/1.jpg')}}" alt="tdoctor" class="img-fluid">
+                <img class="lazy" src="{{asset('images/shop/1.jpg')}}" alt="tdoctor" class="img-fluid">
             </li>
             <!-- <li class="text-center">
                 <img src="{{asset('images/shop/2.jpg')}}" alt="tdoctor" class="img-fluid">
@@ -60,13 +60,13 @@ $imgCustomer=['1.jpg', '2.jpg'];
         <div class="dlapp1">
             <div class="mb-4">
                 <h6>App Tdoctor dành cho bệnh nhân</h6>
-                <div class="my-2"><a href="https://apps.apple.com/us/app/tdoctor/id1443310734"><img class="lazy" data-src="{{asset('images/shop/app1.png')}}" alt="Tdoctor"></a></div>
-                <div><a href="https://play.google.com/store/apps/details?id=com.app.khambenh.bacsiviet"><img class="lazy" data-src="{{asset('images/shop/app2.png')}}" alt="Tdoctor"></a></div>
+                <div class="my-2"><a href="https://apps.apple.com/us/app/tdoctor/id1443310734"><img class="lazy" src="{{asset('images/shop/app1.png')}}" alt="Tdoctor"></a></div>
+                <div><a href="https://play.google.com/store/apps/details?id=com.app.khambenh.bacsiviet"><img class="lazy" src="{{asset('images/shop/app2.png')}}" alt="Tdoctor"></a></div>
             </div>
             <div class="pb-4">
                 <h6>App Tdoctor dành cho Bác sĩ</h6>
-                <div class="my-2"><a href="https://apps.apple.com/vn/app/tdoctor-for-doctor/id1555758280"><img class="lazy" data-src="{{asset('images/shop/app1.png')}}" alt="Tdoctor"></a></div>
-                <div><a href="https://play.google.com/store/apps/details?id=com.app.khambenh.doctor"><img class="lazy" data-src="{{asset('images/shop/app2.png')}}" alt="Tdoctor"></a></div>
+                <div class="my-2"><a href="https://apps.apple.com/vn/app/tdoctor-for-doctor/id1555758280"><img class="lazy" src="{{asset('images/shop/app1.png')}}" alt="Tdoctor"></a></div>
+                <div><a href="https://play.google.com/store/apps/details?id=com.app.khambenh.doctor"><img class="lazy" src="{{asset('images/shop/app2.png')}}" alt="Tdoctor"></a></div>
             </div>
         </div>
     </div> -->

@@ -4,14 +4,14 @@ use App\Helpers\MyFunction;
 $firstAricle = $itemsArticle[0];
 unset($itemsArticle[0]);
 @endphp
-<div class="text-center"><img class="lazy" data-src="{{asset('images/shop/banner12.jpeg')}}" alt="tdoctor" style="max-width: 600px;width:100%"></div>
+<div class="text-center"><img class="lazy" src="{{asset('images/shop/banner12.jpeg')}}" alt="tdoctor" style="max-width: 600px;width:100%"></div>
 <div class="newsh mt-3 mt-lg-5">
     @include("$moduleName.templates.box_title_product",['title' => 'Tin tức và góc sức khỏe','classBackground'=>'bg-info','img'=>'news1.png'])
     <div class="row px-2">
         <div class="col-xl-6 col-lg-12 news-content-right px-0 mb-xl-0 mb-lg-3 d-lg-block d-none">
             <a href="{{route('fe.post.detail',$firstAricle['slug'])}}" class="wp-thumb-first d-block">
-                <div class="text-center">
-                    <img class="lazy" data-src="{{asset($firstAricle['image'])}}" alt="{{$firstAricle['title']}}" style="max-height: 400px;">
+                <div class="text-center wp-image-post-400">
+                    <img class="lazy" src="{{asset($firstAricle['image'])}}" alt="{{$firstAricle['title']}}" style="max-height: 400px;">
                 </div>
                 <p class="truncate2 pb-0 px-2">{{$firstAricle['title']}}</p>
             </a>
@@ -28,7 +28,7 @@ unset($itemsArticle[0]);
                     @foreach($itemsArticle as $val)
                     <li class="d-flex">
                         <a href="{{route('fe.post.detail',$val['slug'])}}" class="wp-thumb-item d-block">
-                            <img class="lazy" data-src="{{asset($val['image'])}}" alt="{{$val['title']}}">
+                            <img class="lazy" src="{{asset($val['image'])}}" alt="{{$val['title']}}" style="width: 100%">
                         </a>
                         <div class="nctright pl-2">
                             <div class="news-known d-flex mb-1">
