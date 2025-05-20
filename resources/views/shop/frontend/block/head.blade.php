@@ -15,3 +15,5 @@
 <meta name="geo.placename" content="Ho Chi Minh City">
 <meta name="geo.position" content="10.8008148;106.7157678">
 <meta name="ICBM" content="10.8008148, 106.7157678">
+<script src="{{ asset('/shop/frontend/js/jquery-3.1.1.min.js')}}" type="text/javascript"></script>
+<script src="{{ asset('/shop/frontend/js/lightslider.min.js')}}" type="text/javascript"></script>
