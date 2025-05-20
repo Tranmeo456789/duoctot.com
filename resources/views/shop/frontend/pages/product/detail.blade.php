@@ -48,11 +48,11 @@ $contact=MyFunction::formatPhoneNumber($contact);
                         <span class="text-muted">({{$item->code??''}})</span>
                         <div class="position-relative">
                             <span class="">
-                                <img src="{{asset('images/shop/star.png')}}" alt="">
-                                <img src="{{asset('images/shop/star.png')}}" alt="">
-                                <img src="{{asset('images/shop/star.png')}}" alt="">
-                                <img src="{{asset('images/shop/star.png')}}" alt="">
-                                <img src="{{asset('images/shop/star.png')}}" alt="">
+                                <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                                <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                                <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                                <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                                <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
                             </span>
                             <span class="text-muted">
                                 3 Đánh giá
@@ -62,7 +62,7 @@ $contact=MyFunction::formatPhoneNumber($contact);
                     <div style="font-size: 22px" class="mb-2">Liên hệ mua lẻ <span class="font-weight-bold"><a href="tel:0393167234" style="font-size: 30px; color:red">0393.167.234</a></span></div>
                     <div style="font-size: 22px">Liên hệ mua sỉ
                         <a class="image-contact" href='tel:0393167234' rel="nofollow" title="Gọi điện" previewlistener="true">
-                            <img src="{{asset('images/shop/icon-call-green.jpg')}}" alt="Gọi điện Tdoctor" style="width: 45px;">
+                            <img src="{{asset('images/shop/icon-call-green.jpg')}}" alt="Gọi điện Tdoctor" style="width: 45px;" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
                         </a>
                     </div>
                 </div>

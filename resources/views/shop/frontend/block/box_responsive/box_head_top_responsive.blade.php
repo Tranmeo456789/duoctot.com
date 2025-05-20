@@ -20,9 +20,11 @@
             <div id="btnmenu-resp" class="rimg-center">
                 <i class="fas fa-bars icon-top"></i>
             </div>
-            <div class="logotop"><a href="{{route('home')}}">
-                    <div class="rimg-center"><img src="{{asset('images/shop/logo_topbar4.webp')}}" alt="tdoctor" style="width:150px;height:36px"></div>
-                </a></div>
+            <div class="logotop" style="height: 36px">
+                <a href="{{route('home')}}">
+                    <div class="rimg-center"><img src="{{asset('images/shop/logo_topbar4.webp')}}" alt="tdoctor" style="width:150px;height:36px" width="150" height="36"></div>
+                </a>
+            </div>
             <ul class="d-flex align-items-center">
                 <li class="hrcart">
                     <!-- <a href="{{route('fe.product.cartFull')}}">

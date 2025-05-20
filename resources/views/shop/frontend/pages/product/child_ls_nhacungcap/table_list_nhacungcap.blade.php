@@ -68,15 +68,15 @@
                     <div class="info-drustore mt-2">
                         <ul class="list-unstyled address__list">
                             <li class="mb-2">
-                                <img src="{{asset('public/images/shop/dc1.png')}}" alt="Head Office Tdoctor.vn">
+                                <img src="{{asset('public/images/shop/dc1.png')}}" alt="Head Office Tdoctor.vn" loading="lazy" width="30" height="30" decoding="async">
                                 <span>Địa chỉ : {{$address}}</span>
                             </li>
                             <li class="mb-2">
-                                <img src="{{asset('public/images/shop/dc3.png')}}" alt="Hotline Tdoctor.vn">
+                                <img src="{{asset('public/images/shop/dc3.png')}}" alt="Hotline Tdoctor.vn" loading="lazy" width="30" height="30" decoding="async">
                                 <span>Mở cửa: lúc 6h sáng đến 10h tối</span>
                             </li>
                             <li>
-                                <img src="{{asset('public/images/shop/dc4.png')}}" alt="MST của Tdoctor.vn">
+                                <img src="{{asset('public/images/shop/dc4.png')}}" alt="MST của Tdoctor.vn" loading="lazy" width="30" height="30" decoding="async">
                                 <span>Số điện thoại: {{$phoneOfShop}}</span>
                             </li>
                         </ul>

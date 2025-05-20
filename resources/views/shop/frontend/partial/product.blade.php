@@ -7,7 +7,9 @@
     <li class="position-relative">
         <a href="{{route('fe.product.detail',$val['slug'])}}" class="d-block">
             <div class="wp-img-thumb-product mb-2">
-                <img class="lazy" src="{{asset($val['image'])}}" alt="{{$val['name']}}">
+                <div style="width: 180px;height:180px">
+                    <img loading="lazy" src="{{asset($val['image'])}}" alt="{{$val['name']}}" width="180" height="180" decoding="async">
+                </div>
             </div>
             <div class="pl-1">
                 <div class="d-flex align-items-center wp-name-product">

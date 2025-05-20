@@ -77,7 +77,7 @@
                                 <span>Mở cửa: lúc 6h sáng đến 10h tối</span>
                             </li>
                             <li>
-                                <img src="{{asset('public/images/shop/dc4.png')}}" alt="MST của Tdoctor.vn">
+                                <img src="{{asset('public/images/shop/dc4.png')}}" alt="MST của Tdoctor.vn" loading="lazy" width="30" height="30" decoding="async">
                                 <span>Số điện thoại: {{$phoneOfShop}}</span>
                             </li>
                         </ul>

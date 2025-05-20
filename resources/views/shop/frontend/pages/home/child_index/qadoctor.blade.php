@@ -8,17 +8,17 @@
                         <p class="q-content">Chào bác sĩ. Tôi năm nay 22 tuổi. Chuyện là gia đình tôi có nuôi một bé mèo và bé mèo này bị bọ chét. Khi tôi lại ghế sofa nằm chỗ con mèo nằm thì một chặp, tôi đứng lên làm việc thì có cảm giác có gì đó xẹt qua tai, nên tôi lo lắng không biết có phải bọ chét nó chui vô tai hay không?Vì cứ lo lắng nên tai</p>
                         <div class="a-doctor d-flex mt-2">
                             <div class="img-person">
-                                <img src="{{asset('images/shop/person.png')}}" alt="" srcset="">
+                                <img src="{{asset('images/shop/person.png')}}" alt="tdoctor" loading="lazy" width="50" height="50" decoding="async">
                             </div>
                             <div>
                                 <p>Đã trả lời bởi</p>
                                 <p class="name-doctor mb-2">Bác sĩ Lê Ngọc Vũ</p>
                                 <span class="">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
                                     4.8
                                 </span>
                             </div>
@@ -26,22 +26,22 @@
                     </div>
                     <div class="qcustomer">
                         <p class="q-content">
-                            <img src="{{asset('images/shop/qa1.png')}}" alt="">
+                            <img src="{{asset('images/shop/qa1.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
                             <span>Hỏi: Tiêm vắc xin Covid về cảm thấy mệt mỏi, đổ mồ hôi, cần làm gì?</span>
                         </p>
                         <div class="a-doctor d-flex mt-2">
                             <div class="img-person">
-                                <img src="{{asset('images/shop/person.png')}}" alt="" srcset="">
+                                <img src="{{asset('images/shop/person.png')}}" alt="tdoctor" loading="lazy" width="50" height="50" decoding="async">
                             </div>
                             <div>
                                 <p>Đã trả lời bởi</p>
                                 <p class="name-doctor mb-2">Bác sĩ Lê Ngọc Vũ</p>
                                 <span class="">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
                                     4.8
                                 </span>
                             </div>
@@ -52,22 +52,22 @@
                 <div class="col-md-6 pr-0">
                     <div class="qcustomer">
                         <p class="q-content">
-                            <img src="{{asset('images/shop/qa1.png')}}" alt="">
+                            <img src="{{asset('images/shop/qa1.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
                             <span>Hỏi: Tiêm vắc xin Covid về cảm thấy mệt mỏi, đổ mồ hôi, cần làm gì?</span>
                         </p>
                         <div class="a-doctor d-flex mt-2">
                             <div class="img-person">
-                                <img src="{{asset('images/shop/person.png')}}" alt="" srcset="">
+                                <img src="{{asset('images/shop/person.png')}}" alt="tdoctor" loading="lazy" width="50" height="50" decoding="async">
                             </div>
                             <div>
                                 <p>Đã trả lời bởi</p>
                                 <p class="name-doctor mb-2">Bác sĩ Lê Ngọc Vũ</p>
                                 <span class="">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
                                     4.8
                                 </span>
                             </div>
@@ -77,17 +77,17 @@
                         <p class="q-content">Chào bác sĩ. Tôi năm nay 22 tuổi. Chuyện là gia đình tôi có nuôi một bé mèo và bé mèo này bị bọ chét. Khi tôi lại ghế sofa nằm chỗ con mèo nằm thì một chặp, tôi đứng lên làm việc thì có cảm giác có gì đó xẹt qua tai, nên tôi lo lắng không biết có phải bọ chét nó chui vô tai hay không?Vì cứ lo lắng nên tai</p>
                         <div class="a-doctor d-flex mt-2">
                             <div class="img-person">
-                                <img src="{{asset('images/shop/person.png')}}" alt="" srcset="">
+                                <img src="{{asset('images/shop/person.png')}}" alt="tdoctor" loading="lazy" width="50" height="50" decoding="async">
                             </div>
                             <div>
                                 <p>Đã trả lời bởi</p>
                                 <p class="name-doctor mb-2">Bác sĩ Lê Ngọc Vũ</p>
                                 <span class="">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
                                     4.8
                                 </span>
                             </div>

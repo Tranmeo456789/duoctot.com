@@ -217,7 +217,7 @@
             <h4 class="h4-abu">1. Mục tiêu</h4>
             <p class="p-abu">Ước muốn của chúng tôi là đem công nghệ để phục vụ người bệnh. Tình trạng quá tải bệnh viện hiện nay thật vất vả cho người dân việt nam. Chúng tôi muốn cải thiện điều này</p>
             <div class="div-abu" style="text-align:center">
-                <img style="width: 60%;" src="{{asset('public/shop/frontend/images/aboutUs/1.jpg')}}">
+                <img style="width: 60%;" src="{{asset('public/shop/frontend/images/aboutUs/1.jpg')}}" width="233" height="488" loading="lazy" decoding="async">
             </div>
             <p>Bây giờ người bệnh có thể tương tác với bác sĩ trực tiếp mọi lúc mọi nơi</p>
             <br>

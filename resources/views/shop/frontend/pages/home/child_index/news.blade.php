@@ -4,7 +4,7 @@ use App\Helpers\MyFunction;
 $firstAricle = $itemsArticle[0];
 unset($itemsArticle[0]);
 @endphp
-<div class="text-center"><img class="lazy" src="{{asset('images/shop/banner12.jpeg')}}" alt="tdoctor" style="max-width: 600px;width:100%"></div>
+<div class="text-center"><img class="lazy" src="{{asset('images/shop/banner12.jpeg')}}" alt="tdoctor" width="600" height="200" style="max-width: 600px;width:100%"></div>
 <div class="newsh mt-3 mt-lg-5">
     @include("$moduleName.templates.box_title_product",['title' => 'Tin tức và góc sức khỏe','classBackground'=>'bg-info','img'=>'news1.png'])
     <div class="row px-2">

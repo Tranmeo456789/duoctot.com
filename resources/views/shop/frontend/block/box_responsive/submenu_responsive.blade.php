@@ -18,7 +18,7 @@ $phoneContact=$phoneContact??'0393167234';
                 <div class=" pr-4">
                     <a href="{{route('fe.cat',$itemLevel1['slug'])}}">{{$itemLevel1['name']}}</a>
                 </div>
-                <div class="iconmnrhv"><img src="{{asset('images/shop/arrowd.png')}}" alt=""></div>
+                <div class="iconmnrhv"><img src="{{asset('images/shop/arrowd.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async"></div>
                 <div class="submenu1res">
                     <ul>
                         @foreach ($listCatAll as $itemLevel2)
@@ -37,7 +37,7 @@ $phoneContact=$phoneContact??'0393167234';
             <div class=" pr-4">
                 <a>Danh Mục Shop</a>
             </div>
-            <div class="iconmnrhv"><img src="{{asset('images/shop/arrowd.png')}}" alt=""></div>
+            <div class="iconmnrhv"><img src="{{asset('images/shop/arrowd.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async"></div>
             <div class="submenu1res">
                 <ul>
                     <li><a href="{{route('fe.product.listDrugstore')}}">Danh mục Nhà Thuốc Online</a></li>
@@ -66,7 +66,7 @@ $phoneContact=$phoneContact??'0393167234';
             <div class=" pr-4">
                 <a>Thương hiệu</a>
             </div>
-            <div class="iconmnrhv"><img src="{{asset('images/shop/arrowd.png')}}" alt=""></div>
+            <div class="iconmnrhv"><img src="{{asset('images/shop/arrowd.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async"></div>
             <div class="submenu1res">
                 <ul>
                     <li><a href="{{route('fe.search.viewHome', ['keyword' => 'pfizer'])}}">Pfizer</a></li>
@@ -132,13 +132,13 @@ $phoneContact=$phoneContact??'0393167234';
         <div>
             <a href='https://zalo.me/{{$phoneContact}}' target='_blank'>
                 <div class='d-flex align-items-center'>
-                    <div class='icon-contact'><img alt='Zalo' src='{{$iconZalo}}'></div>
+                    <div class='icon-contact'><img alt='Zalo' src='{{$iconZalo}}' loading="lazy" width="30" height="30" decoding="async"></div>
                     <span>Liên hệ Zalo(<span class="font-weight-bold text-danger">0393.167.234</span>)</span>
                 </div>
             </a>
             <a href='tel:{{$phoneContact}}'>
                 <div class='d-flex align-items-center'>
-                    <div class='icon-contact'><img alt='Zalo' src='{{$iconCall}}'></div>
+                    <div class='icon-contact'><img alt='Zalo' src='{{$iconCall}}' loading="lazy" width="30" height="30" decoding="async"></div>
                     <span>Gọi điện(<span class="font-weight-bold text-danger">0393.167.234</span>)</span>
                 </div>
             </a>

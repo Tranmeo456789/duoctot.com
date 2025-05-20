@@ -20,7 +20,7 @@
             </div> -->
             <div class="d-flex justify-content-between">
                 <div class="d-flex justify-content-center">
-                    <div style="width: 30px;"><img src="{{asset('images/shop/icon-app-tdoctor.jpg')}}" alt="Tdoctor"></div>
+                    <div style="width: 30px;"><img src="{{asset('images/shop/icon-app-tdoctor.jpg')}}" alt="Tdoctor" loading="lazy" width="30" height="30" decoding="async" style="width: 30px;height: 29px"></div>
                     <div style="font-size: 12px;line-height: 12px;">
                         <div class="font-weight-bold mb-1">Ứng dụng Tdoctor</div>
                         <small>Siêu ưu đãi, siêu trải nghiệm</small>
@@ -103,12 +103,12 @@
     <div id="head-body-respon">
         <div class="tlogo-menu position-relative">
             <div class="rimg-startm"><a href=""><img src="{{asset('images/shop/logo_topbar4.webp')}}" alt="tdoctor" style="width:150px;height:36px"></a></div>
-            <div class="rimg-center closem" id="closem"><img src="{{asset('images/shop/closem.png')}}" alt=""></div>
+            <div class="rimg-center closem" id="closem"><img src="{{asset('images/shop/closem.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async"></div>
         </div>
         <div class="body-responhoder">
             <a href="{{route('fe.order.formSearch')}}">
                 <div class="container-menures d-flex">
-                    <div class="rimg-center"><img src="{{asset('images/shop/news1.png')}}" alt=""></div>
+                    <div class="rimg-center"><img src="{{asset('images/shop/news1.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async"></div>
                     <h2>@lang('lang.order_history')</h2>
                 </div>
             </a>

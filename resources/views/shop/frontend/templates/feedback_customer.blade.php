@@ -34,11 +34,11 @@ $imgCustomer=['1.jpg', '2.jpg'];
                 <div class="ml-3">
                     <p class="font-weight-bold">{{$val['fullname']}}</p>
                     <span>
-                        <img src="{{asset('images/shop/star.png')}}" alt="tdoctor">
-                        <img src="{{asset('images/shop/star.png')}}" alt="tdoctor">
-                        <img src="{{asset('images/shop/star.png')}}" alt="tdoctor">
-                        <img src="{{asset('images/shop/star.png')}}" alt="tdoctor">
-                        <img src="{{asset('images/shop/star.png')}}" alt="tdoctor">
+                        <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                        <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                        <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                        <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                        <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
                     </span>
                     <p>{{$val['content']}}</p>
                 </div>
@@ -49,7 +49,7 @@ $imgCustomer=['1.jpg', '2.jpg'];
     <div class="col-xl-3 col-lg-12">
         <ul class="list-unstyled text-center">
             <li class="text-center">
-                <img class="lazy" src="{{asset('images/shop/1.jpg')}}" alt="tdoctor" class="img-fluid">
+                <img src="{{asset('images/shop/1.jpg')}}" alt="tdoctor" class="img-fluid" width="233" height="488" loading="lazy" decoding="async">
             </li>
             <!-- <li class="text-center">
                 <img src="{{asset('images/shop/2.jpg')}}" alt="tdoctor" class="img-fluid">
