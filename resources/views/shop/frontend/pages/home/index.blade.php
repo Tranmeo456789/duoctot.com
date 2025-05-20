@@ -98,7 +98,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="d-block d-md-none">
+            <div class="d-block d-md-none height-135-500">
                 <ul class="banner_doitac list-unstyled cS-hidden">
                     <li class="text-center">
                         <a href="https://tdoctor.net/cong-ty-tnhh-nohtus-vietnam.html">
@@ -107,12 +107,12 @@
                     </li>
                     <li class="text-center">
                         <a href="https://tdoctor.net/cong-ty-duoc-pham-dongsung-bio-pharm.html">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner17.webp')}}" alt="tdoctor" class="img-fluid">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner17_mobi.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
                         <a href="https://tdoctor.net/cong-ty-tnhh-nohtus-vietnam.html">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner18.webp')}}" alt="tdoctor" class="img-fluid">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner18_mobi.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
