@@ -20,14 +20,14 @@ $contact=MyFunction::formatPhoneNumber($contact);
                     <div class="item">
     <div class="clearfix" style="max-width:474px;">
         <ul id="image-gallery" class="gallery list-unstyled lightSlider lsGrab lSSlide">
+            <li data-thumb="{{ asset($item['image']) }}" class="text-center">
+                <img src="{{ asset($item['image']) }}" class="zoom" />
+            </li>
             @foreach($albumImageCurrent as $val)
                 <li data-thumb="{{ asset('laravel-filemanager/fileUpload/product/'.$val) }}" class="text-center">
                     <img src="{{ asset('laravel-filemanager/fileUpload/product/'.$val) }}" class="zoom" />
                 </li>
             @endforeach
-            <li data-thumb="{{ asset($item['image']) }}" class="text-center">
-                <img src="{{ asset($item['image']) }}" class="zoom" />
-            </li>
         </ul>
         <!-- Thêm Zoom Lens -->
         <div class="zoom-lens"></div>
