@@ -9,13 +9,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="{{ $description }}">
     <meta name="keywords" content="{{ $metaKeywords }}">
     <meta name="google-site-verification" content="SF3DQyzJn3obwShXlf3gfh6NC1HX20ronORFCHD5y8g" />
-
-    <title>{{ $title }}</title>
-
     <!-- Favicon đầy đủ -->
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-96x96.png') }}">
@@ -25,7 +22,6 @@
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
     <link rel="manifest" href="{{ asset('site.webmanifest') }}">
     <meta name="theme-color" content="#ffffff">
-
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
@@ -34,14 +30,18 @@
     <meta property="og:image" content="{{ asset($imageItem) }}">
     <meta property="og:image:width" content="300">
     <meta property="og:image:height" content="300">
-
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="{{ $title }}" />
     <meta name="twitter:description" content="{{ $description }}" />
     <meta name="twitter:image" content="{{ asset($imageItem) }}">
     <meta name="twitter:url" content="{{ url()->current() }}">
-
+    <!-- Geo -->
+    <meta name="geo.region" content="VN-HN">
+    <meta name="geo.placename" content="Hà Nội">
+    <meta name="geo.position" content="21.024359;105.841175">
+    <meta name="ICBM" content="21.024359, 105.841175"> 
+    <title>{{ $title }}</title>
     <!-- JSON-LD: Search Schema -->
     <script type="application/ld+json">
         {
@@ -58,7 +58,6 @@
             }
         }
     </script>
-
     <!-- JSON-LD: Logo Schema -->
     <script id="logo-organization-script" type="application/ld+json">
         {
@@ -68,8 +67,8 @@
             "logo": "https://tdoctor.net/images/shop/logo-favicon.png"
         }
     </script>
-
     @include('shop.frontend.block.head')
+    @yield('headadd')
 </head>
 <body>
     <div id="site">
