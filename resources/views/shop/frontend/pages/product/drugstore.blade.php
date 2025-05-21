@@ -19,9 +19,11 @@
 @endphp
 
 @extends('shop.layouts.frontend')
-
+@section('headadd')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+@endsection
 @section('content')
-
 <div class="wp-inner mt-3 mt-lg-4">
     <h6 class="mb-4">THÔNG TIN SHOP</h6>
     <div class="mb-4">

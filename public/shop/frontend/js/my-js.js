@@ -560,18 +560,6 @@ $.ajaxSetup({
     }
 });
 $(document).ready(function () {
-    if ($("input[name='albumImage[]']").length) {
-        myUploadImage = $("input[name='albumImage[]']").uploadPreviewer({
-            buttonText: "Thêm ảnh",
-        });
-    }
-    if (($(".file-preview-table").length > 0) &&
-        ($(".file-preview-table").find('td').length == 0)) {
-        $(".file-preview-table").css({
-            "margin-top": "0px",
-            "margin-bottom": "0px"
-        });
-    }
     //  Cat hover
     $('.cat1name').hover(
         function() {
@@ -963,32 +951,44 @@ $(document).ready(function () {
             $(element).closest(".input-group").removeClass('has-error');
         }
     });
-    $('#image-gallery').lightSlider({
-        gallery: true,
-        item: 1,
-        thumbItem: 4,
-        slideMargin: 0,
-        speed: 500,
-        auto: false,
+    const swiperThumb = new Swiper(".swiperProductThumb", {
+        spaceBetween: 10,
+        slidesPerView: 4,
+        freeMode: true,
+        watchSlidesProgress: true,
+    });
+    const swiperMain = new Swiper(".swiperProductMain", {
         loop: true,
-        onSliderLoad: function() {
-            $('#image-gallery').removeClass('cS-hidden');
-        },
-        adaptiveHeight: true
-    });
-    $('#image-gallery').on('click', function() {
-        slider.pause();
-    });
-    $('.banner_doitac').lightSlider({
-        item: 1,
-        slideMargin: 0,
+        spaceBetween: 0,
         speed: 1000,
-        auto: true,
+        slidesPerView: 1,
+        thumbs: {
+            swiper: swiperThumb,
+        },
+        on: {
+            init: function () {
+                document.querySelector(".swiperProductMain").classList.remove("cS-hidden");
+            },
+        },
+    });
+    const swiper = new Swiper(".banner_doitac", {
         loop: true,
-        pager: false,
-        onSliderLoad: function() {
-            $('.banner_doitac').removeClass('cS-hidden');
-        }
+        speed: 1000,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        slidesPerView: 1,
+        spaceBetween: 0,
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+        on: {
+            init: function () {
+                document.querySelector(".banner_doitac").classList.remove("cS-hidden");
+            },
+        },
     });
     $('#feature-product-wp .list-item').lightSlider({
         item: 5, // Giá trị tối đa cho màn hình lớn

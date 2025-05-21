@@ -6,6 +6,10 @@ $contact=$item['contact']??'0393167234';
 $contact=MyFunction::formatPhoneNumber($contact);
 @endphp
 @extends('shop.layouts.frontend')
+@section('headadd')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+@endsection
 @section('content')
 <div class="wp-inner mt-2">
     @if(Session::has('user'))
@@ -18,21 +22,37 @@ $contact=MyFunction::formatPhoneNumber($contact);
             <div class="col-md-5">
                 <div class="demo">
                     <div class="item">
-    <div class="clearfix" style="max-width:474px;">
-        <ul id="image-gallery" class="gallery list-unstyled lightSlider lsGrab lSSlide">
-            <li data-thumb="{{ asset($item['image']) }}" class="text-center">
-                <img src="{{ asset($item['image']) }}" class="zoom" />
-            </li>
-            @foreach($albumImageCurrent as $val)
-                <li data-thumb="{{ asset('laravel-filemanager/fileUpload/product/'.$val) }}" class="text-center">
-                    <img src="{{ asset('laravel-filemanager/fileUpload/product/'.$val) }}" class="zoom" />
-                </li>
-            @endforeach
-        </ul>
-        <!-- Thêm Zoom Lens -->
-        <div class="zoom-lens"></div>
-    </div>
-</div>
+                        <div class="clearfix" style="max-width:474px;">
+                            <!-- Swiper chính hiển thị ảnh to -->
+                            <div class="swiper swiperProductMain gallery">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide text-center">
+                                        <img src="{{ asset($item['image']) }}" class="zoom img-fluid" />
+                                    </div>
+                                    @foreach($albumImageCurrent as $val)
+                                    <div class="swiper-slide text-center">
+                                        <img src="{{ asset('laravel-filemanager/fileUpload/product/'.$val) }}" class="zoom img-fluid" />
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <!-- Swiper thumbnail bên dưới -->
+                            <div class="swiper swiperProductThumb mt-2">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <img src="{{ asset($item['image']) }}" class="img-thumbnail" />
+                                    </div>
+                                    @foreach($albumImageCurrent as $val)
+                                    <div class="swiper-slide">
+                                        <img src="{{ asset('laravel-filemanager/fileUpload/product/'.$val) }}" class="img-thumbnail" />
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <!-- Thêm Zoom Lens -->
+                            <div class="zoom-lens"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-md-7">
@@ -87,11 +107,11 @@ $contact=MyFunction::formatPhoneNumber($contact);
                     <p><span class="font-weight-bold">Xuất xứ thương hiệu: </span>{{ $item->brandOriginIdProduct->name ?? '...' }}</p>
                     <p><span class="font-weight-bold">Nhà sản xuất: </span>{{$item->producerProduct->name ?? '...'}}</p>
                     @if($item['id'] > 1900 && $item['id'] < 1911)
-                    <p><span class="font-weight-bold">Thuốc cần kê toa: </span>Không</p>
-                    @endif
-                    <p><span class="font-weight-bold">Nước sản xuất: </span>{{$item->countryProduct->name ?? '...'}}</p>
-                    <p><span class="font-weight-bold">Công dụng: </span>{!!$item->benefit!!}</p>
-                    <p><span class="font-weight-bold">Hạn sử dụng: </span>{{$item['expiration_date']??'...'}}</p>
+                        <p><span class="font-weight-bold">Thuốc cần kê toa: </span>Không</p>
+                        @endif
+                        <p><span class="font-weight-bold">Nước sản xuất: </span>{{$item->countryProduct->name ?? '...'}}</p>
+                        <p><span class="font-weight-bold">Công dụng: </span>{!!$item->benefit!!}</p>
+                        <p><span class="font-weight-bold">Hạn sử dụng: </span>{{$item['expiration_date']??'...'}}</p>
                 </div>
                 @php
                 $slugUserInfo = $userInfo['slug'] ?? 'unknow';
@@ -107,8 +127,8 @@ $contact=MyFunction::formatPhoneNumber($contact);
                                 <a class="dropdown-item" href="{{ route('fe.product.drugstore', ['slug' => $slugUserInfo]) }}" style="white-space: normal;width: 90vw; display: block;">{{$fullNameUserInfo}}</a>
                                 @foreach($listUserHasProduct as $val)
                                 @php
-                                    $slugUserHasProduct = $val['slug'] ?? 'unknow';
-                                    $fullNameUserHasProduct = $val['fullname'] ?? 'unknow';                    
+                                $slugUserHasProduct = $val['slug'] ?? 'unknow';
+                                $fullNameUserHasProduct = $val['fullname'] ?? 'unknow';
                                 @endphp
                                 <a class="dropdown-item" href="{{ route('fe.product.drugstore', ['slug' => $slugUserHasProduct]) }}" style="white-space: normal;width: 90vw; display: block;">{{$fullNameUserHasProduct}}</a>
                                 @endforeach
