@@ -7,14 +7,14 @@
     <li class="position-relative">
         <a href="{{route('fe.product.detail',$val['slug'])}}" class="d-block">
             <div class="rdimg mb-2">
-                <img class="lazy" src="{{asset($val['image'])}}" alt="{{$val['name']}}">
+                <img loading="lazy" src="{{asset($val['image'])}}" alt="{{$val['name']}}" width="180" height="180" decoding="async">
             </div>
             <div class="pl-1">
                 <div class="d-flex align-items-center wp-name-product">
                     <p class="truncate3">{{$val['name']}}</p>
                 </div>
                 @if($val['show_price'] == 1)
-                <span class="text-info">{{ number_format( $val['price'], 0, "" ,"." )}}đ / {{$val->unitProduct->name}}</span>
+                <span class="text-info" style="font-size: 16px;font-weight:700">{{ number_format( $val['price'], 0, "" ,"." )}}đ / {{$val->unitProduct->name}}</span>
                 <div class="price-old">
                     @if(!empty($val['percent_discount']))
                         {{ number_format( $priceOld, 0, "" ,"." )}}đ

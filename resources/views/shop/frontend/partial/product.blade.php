@@ -16,7 +16,7 @@
                     <p class="truncate3">{{$val['name']}}</p>
                 </div>
                 @if($val['show_price'] == 1)
-                <span class="text-info">{{ number_format( $val['price'], 0, "" ,"." )}}đ / {{$val->unitProduct->name}}</span>
+                <span class="text-info" style="font-size: 16px;font-weight:700">{{ number_format( $val['price'], 0, "" ,"." )}}đ / {{$val->unitProduct->name}}</span>
                 <div class="price-old">
                     @if(!empty($val['percent_discount']))
                         {{ number_format( $priceOld, 0, "" ,"." )}}đ

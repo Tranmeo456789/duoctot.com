@@ -7,8 +7,11 @@ $contact=MyFunction::formatPhoneNumber($contact);
 @endphp
 @extends('shop.layouts.frontend')
 @section('headadd')
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded",function(){let e=tns({container:".sliderProductMain",items:1,slideBy:"page",speed:1e3,nav:!1,controls:!1,autoplay:!1,mouseDrag:!0,loop:!0,onInit:function(){document.querySelector(".sliderProductMain").classList.remove("cS-hidden")}});tns({container:".sliderProductThumb",items:4,gutter:10,slideBy:1,nav:!1,controls:!1,autoplay:!1,mouseDrag:!0,loop:!1});let t=document.querySelectorAll(".sliderProductThumb > div");function o(e){t.forEach((t,o)=>{t.classList.toggle("active",o===e)})}t.forEach((t,n)=>{t.addEventListener("click",function(){e.goTo(n),o(n)})}),e.events.on("indexChanged",function(e){let t=e.displayIndex-1;o(t)}),o(0)});
+</script>
 @endsection
 @section('content')
 <div class="wp-inner mt-2">
@@ -22,34 +25,30 @@ $contact=MyFunction::formatPhoneNumber($contact);
             <div class="col-md-5">
                 <div class="demo">
                     <div class="item">
-                        <div class="clearfix" style="max-width:474px;">
-                            <!-- Swiper chính hiển thị ảnh to -->
-                            <div class="swiper swiperProductMain gallery">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide text-center">
-                                        <img src="{{ asset($item['image']) }}" class="zoom img-fluid" />
-                                    </div>
-                                    @foreach($albumImageCurrent as $val)
-                                    <div class="swiper-slide text-center">
-                                        <img src="{{ asset('laravel-filemanager/fileUpload/product/'.$val) }}" class="zoom img-fluid" />
-                                    </div>
-                                    @endforeach
+                        <div class="product-gallery clearfix" style="max-width:474px;">
+                            <!-- Slider chính -->
+                            <div class="sliderProductMain tns-slider cS-hidden gallery">
+                                <div class="text-center">
+                                    <img src="{{ asset($item['image']) }}" class="zoom img-fluid" />
                                 </div>
-                            </div>
-                            <!-- Swiper thumbnail bên dưới -->
-                            <div class="swiper swiperProductThumb mt-2">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset($item['image']) }}" class="img-thumbnail" />
-                                    </div>
-                                    @foreach($albumImageCurrent as $val)
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset('laravel-filemanager/fileUpload/product/'.$val) }}" class="img-thumbnail" />
-                                    </div>
-                                    @endforeach
+                                @foreach($albumImageCurrent as $val)
+                                <div class="text-center">
+                                    <img src="{{ asset('laravel-filemanager/fileUpload/product/'.$val) }}" class="zoom img-fluid" />
                                 </div>
+                                @endforeach
                             </div>
-                            <!-- Thêm Zoom Lens -->
+                            <!-- Thumbnail slider -->
+                            <div class="sliderProductThumb mt-2">
+                                <div>
+                                    <img src="{{ asset($item['image']) }}" class="img-thumbnail" />
+                                </div>
+                                @foreach($albumImageCurrent as $val)
+                                <div>
+                                    <img src="{{ asset('laravel-filemanager/fileUpload/product/'.$val) }}" class="img-thumbnail" />
+                                </div>
+                                @endforeach
+                            </div>
+                            <!-- Zoom lens nếu có -->
                             <div class="zoom-lens"></div>
                         </div>
                     </div>
