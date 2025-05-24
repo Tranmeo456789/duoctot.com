@@ -19,7 +19,7 @@ $dataHref = route('fe.product.searchListProductShort');
                     <span class="clear-keyword" style="display: none;">X</span>
                 </div>
                 <button type="submit" class="btn-search-home" name="btn_search" value="1">
-                    <img src="{{asset('images/shop/icon-search.png')}}" alt="">
+                    <img src="{{asset('images/shop/icon-search.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
                 </button>
             </div>
         </form>

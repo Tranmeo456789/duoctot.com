@@ -14,11 +14,11 @@
                                 <p>Đã trả lời bởi</p>
                                 <p class="name-doctor mb-2">Bác sĩ Lê Ngọc Vũ</p>
                                 <span class="">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
                                     4.8
                                 </span>
                             </div>
@@ -37,11 +37,11 @@
                                 <p>Đã trả lời bởi</p>
                                 <p class="name-doctor mb-2">Bác sĩ Lê Ngọc Vũ</p>
                                 <span class="">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
                                     4.8
                                 </span>
                             </div>
@@ -63,11 +63,11 @@
                                 <p>Đã trả lời bởi</p>
                                 <p class="name-doctor mb-2">Bác sĩ Lê Ngọc Vũ</p>
                                 <span class="">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
                                     4.8
                                 </span>
                             </div>
@@ -83,11 +83,11 @@
                                 <p>Đã trả lời bởi</p>
                                 <p class="name-doctor mb-2">Bác sĩ Lê Ngọc Vũ</p>
                                 <span class="">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
-                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
+                                    <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
                                     4.8
                                 </span>
                             </div>

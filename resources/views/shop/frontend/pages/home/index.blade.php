@@ -93,11 +93,6 @@
                         </a>
                     </div>
                     <div class="swiper-slide text-center">
-                        <a href="{{route('fe.search.viewHome', ['keyword' => 'Lilly'])}}">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner_lilly.webp')}}" alt="tdoctor" class="img-fluid" width="860" height="260" loading="lazy">
-                        </a>
-                    </div>
-                    <div class="swiper-slide text-center">
                         <a href="{{route('fe.search.viewHome', ['keyword' => 'mekophar'])}}">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner_mekophar.webp')}}" alt="tdoctor" class="img-fluid" width="860" height="260" loading="lazy">
                         </a>
@@ -187,11 +182,6 @@
                         </a>
                     </div>
                     <div class="swiper-slide text-center">
-                        <a href="{{route('fe.search.viewHome', ['keyword' => 'Lilly'])}}">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner_lilly_mobi.webp')}}" alt="tdoctor" class="img-fluid" width="428" height="131" loading="lazy">
-                        </a>
-                    </div>
-                    <div class="swiper-slide text-center">
                         <a href="{{route('fe.search.viewHome', ['keyword' => 'mekophar'])}}">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner_mekophar_mobi.webp')}}" alt="tdoctor" class="img-fluid" width="428" height="131" loading="lazy">
                         </a>
@@ -231,11 +221,10 @@
         @include("$moduleName.pages.$controllerName.child_index.product_by_object")
     </div>
 </div>
-<div class="wp-inner">
-    @include("$moduleName.pages.$controllerName.child_index.news")
-</div>
-<div class="service-tdoctor mt-3 mt-lg-4">
-    @include("$moduleName.templates.info_service")
+<div class="d-none d-md-block">
+    <div class="service-tdoctor mt-3 mt-lg-4">
+        @include("$moduleName.templates.info_service")
+    </div>
 </div>
 <div class="local">
     @include("$moduleName.templates.local_drugstore")

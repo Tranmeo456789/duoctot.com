@@ -88,11 +88,6 @@
                             </a>
                         </div>
                         <div class="swiper-slide text-center">
-                            <a href="{{route('fe.search.viewHome', ['keyword' => 'Lilly'])}}">
-                                <img src="{{asset('laravel-filemanager/fileUpload/banner/banner_lilly.webp')}}" alt="tdoctor" class="img-fluid" width="860" height="260" loading="lazy">
-                            </a>
-                        </div>
-                        <div class="swiper-slide text-center">
                             <a href="{{route('fe.search.viewHome', ['keyword' => 'mekophar'])}}">
                                 <img src="{{asset('laravel-filemanager/fileUpload/banner/banner_mekophar.webp')}}" alt="tdoctor" class="img-fluid" width="860" height="260" loading="lazy">
                             </a>
@@ -181,11 +176,6 @@
                         <div class="swiper-slide text-center">
                             <a href="{{route('fe.search.viewHome', ['keyword' => 'GSK'])}}">
                                 <img src="{{asset('laravel-filemanager/fileUpload/banner/banner_gsk_mobi.webp')}}" alt="tdoctor" class="img-fluid" width="428" height="131" loading="lazy">
-                            </a>
-                        </div>
-                        <div class="swiper-slide text-center">
-                            <a href="{{route('fe.search.viewHome', ['keyword' => 'Lilly'])}}">
-                                <img src="{{asset('laravel-filemanager/fileUpload/banner/banner_lilly_mobi.webp')}}" alt="tdoctor" class="img-fluid" width="428" height="131" loading="lazy">
                             </a>
                         </div>
                         <div class="swiper-slide text-center">

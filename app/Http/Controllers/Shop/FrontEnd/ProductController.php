@@ -197,7 +197,7 @@ class ProductController extends ShopFrontEndController
         }
         // Tiêu đề trang
         $title = !empty($userInfo['fullname'])
-            ? $userInfo['fullname'] . ', Shop dược phẩm Tdoctor'
+            ? $userInfo['fullname']
             : 'Sàn thương mại điện tử trong y dược số 1 Việt Nam';
 
         // Lấy đánh giá & bình luận shop

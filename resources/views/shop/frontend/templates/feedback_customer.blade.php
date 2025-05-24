@@ -10,15 +10,19 @@ $imgCustomer=['1.jpg', '2.jpg'];
     <div class="col-xl-3 col-lg-12 dlapp pb-3 mb-3">
         <div class="dlapp1">
             <div class="mb-4">
-                <div class="font-weight-bold">TẢI ỨNG DỤNG TDOCTOR</div>
-                <div class="my-2">Mua thuốc trực tuyến, giao hàng tận nơi dễ dàng và nhanh chóng</div>
-                <div class="d-flex justify-content-center">
-                    <div class="align-self-center d-md-none">
-                        <div class="btn btn-primary btn-sm rounded m-0 p-1">
-                            <a href="{{route('fe.home.downloadAppTdoctor')}}" style="font-size: 14px;line-height: 10px;" class="text-light font-weight-bold">↓ TẢI NGAY</a>
+                <div class="row">
+                    <div class="col-6 col-lg-12">
+                        <div class="font-weight-bold">TẢI ỨNG DỤNG TDOCTOR</div>
+                        <div class="my-2">Mua thuốc trực tuyến, giao hàng tận nơi dễ dàng và nhanh chóng</div>
+                        <div class="align-self-center d-md-none">
+                            <div class="btn btn-primary btn-sm rounded m-0 p-1">
+                                <a href="{{route('fe.home.downloadAppTdoctor')}}" style="font-size: 14px;line-height: 10px;" class="text-light font-weight-bold">↓ TẢI NGAY</a>
+                            </div>
                         </div>
                     </div>
-                    <div style="width: 200px;"><img src="{{asset('images/shop/qr-app-tdoctor.jpg')}}" alt="Tdoctor" style="width:180px;height: 180px"></div>
+                    <div class="col-6 col-lg-12 text-center">
+                        <img src="{{asset('images/shop/qr-app-tdoctor.jpg')}}" alt="Tdoctor" width="181" height="161" loading="lazy">
+                    </div>
                 </div>
             </div>
         </div>
@@ -34,11 +38,11 @@ $imgCustomer=['1.jpg', '2.jpg'];
                 <div class="ml-3">
                     <p class="font-weight-bold">{{$val['fullname']}}</p>
                     <span>
-                        <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
-                        <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
-                        <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
-                        <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
-                        <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                        <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
+                        <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
+                        <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
+                        <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
+                        <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
                     </span>
                     <p>{{$val['content']}}</p>
                 </div>

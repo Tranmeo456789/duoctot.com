@@ -67,11 +67,11 @@ document.addEventListener("DOMContentLoaded",function(){let e=tns({container:".s
                         <span class="text-muted">({{$item->code??''}})</span>
                         <div class="position-relative">
                             <span class="">
-                                <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
-                                <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
-                                <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
-                                <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
-                                <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                                <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
+                                <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
+                                <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
+                                <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
+                                <img src="{{asset('images/shop/star.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
                             </span>
                             <span class="text-muted">
                                 3 Đánh giá
