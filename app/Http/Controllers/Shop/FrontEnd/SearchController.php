@@ -254,7 +254,7 @@ class SearchController extends ShopFrontEndController
         //     // add comment product
         //     $comments = CommentModel::select('id', 'product_id')->get()->groupBy('product_id');
         //     $products = ProductModel::where('status_product', 'da_duyet')->where('id','>',4500)->pluck('id');
-        //     $names = ['Nguyễn Lợi', 'Trần Thu Hà', 'Phương Diễm My ', 'Văn Long', 'Sỹ Tráng'];
+        //     $names = ['Phi Long', 'Trần Thu Hằng', 'Lê Phương Nam', 'Văn Đô', 'Hữu Bằng'];
         //     $phones = ['0936766561', '0988776651', '0911223341', '0977888991', '0909000011'];
         //     $contents = [
         //         'Cám ơn Tdoctor đã có sản phẩm tốt',

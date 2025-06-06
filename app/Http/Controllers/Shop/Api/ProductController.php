@@ -230,6 +230,18 @@ class ProductController extends ApiController
                 $listProduct[$key]['cat_product_id'] = $catMap[$val['cat_product_id']];
             }
             $listProduct[$key]['url_image'] = 'https://tdoctor.net'.$val['image'];
+
+            // Xử lý danh sách ảnh chi tiết
+            $albumHash = $val['albumImageHash'] ?? '';
+            $imagePaths = [];
+            if (!empty($albumHash)) {
+                $hashArray = explode('|', $albumHash);
+                foreach ($hashArray as $hash) {
+                    $imagePaths[] = 'https://tdoctor.net/laravel-filemanager/fileUpload/product/' . $hash;
+                }
+            }
+            $listProduct[$key]['album_images'] = $imagePaths;
+
             $dangBaoChe=$val['dosage_forms'] ?? '';
             $quyCach=$val['specification'] ?? '';
             $xuatXu=$val->trademarkProduct['name'] ?? '';
@@ -282,6 +294,16 @@ class ProductController extends ApiController
                 $listProduct[$key]['cat_product_id'] = $catMap[$val['cat_product_id']];
             }
             $listProduct[$key]['url_image'] = 'https://tdoctor.net'.$val['image'];
+            // Xử lý danh sách ảnh chi tiết
+            $albumHash = $val['albumImageHash'] ?? '';
+            $imagePaths = [];
+            if (!empty($albumHash)) {
+                $hashArray = explode('|', $albumHash);
+                foreach ($hashArray as $hash) {
+                    $imagePaths[] = 'https://tdoctor.net/laravel-filemanager/fileUpload/product/' . $hash;
+                }
+            }
+            $listProduct[$key]['album_images'] = $imagePaths;
             $dangBaoChe=$val['dosage_forms'] ?? '';
             $quyCach=$val['specification'] ?? '';
             $xuatXu=$val->trademarkProduct['name'] ?? '';
