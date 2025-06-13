@@ -20,7 +20,7 @@
             <tbody>
                 @php
                     $index = 0;
-
+                    $totalProduct=0;
                     $arrProduct = array_column($itemsProduct->toArray(),'id');
                 @endphp
                 @foreach($infoProduct as $val)
@@ -28,7 +28,10 @@
                         $index++;
                         $image = Template::showImagePreviewFileManager($val['image'],$val['slug']??$val['name']);
                         $price = MyFunction::formatNumber($val['price']) . ' đ';
-                        $total_money = MyFunction::formatNumber($val['total_money']) . ' đ';
+                        $quantity = isset($val['quantity']) ? (float)$val['quantity'] : 0;
+                        $price = isset($val['price']) ? (float)$val['price'] : 0;
+                        $totalProduct += $quantity * $price;
+                        $total_money = MyFunction::formatNumber($totalProduct) . ' đ';
                         $productId = (int)$val['product_id'];
                         $pos = array_search($productId, array_map('intval', $arrProduct));
                         $code = $pos !== false ? $itemsProduct[$pos]['code'] : '';

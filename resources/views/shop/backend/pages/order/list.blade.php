@@ -39,7 +39,15 @@
                 $fullname = isset($buyer['fullname']) ? Hightlight::show($buyer['fullname'], $params['search'], 'fullname') : '';
                 $phone = isset($buyer['phone']) ? Hightlight::show($buyer['phone'], $params['search'], 'buyer') : '';
                 //Form::select('status_order',$statusOrderValue, $val['status_order']??null, array_merge($formInputChangeValueAttr,['style' =>'width:100%','data-href'=>$linkStatusOrder]))
-            @endphp
+                $total=0;
+                if (!empty($val['info_product']) && is_array($val['info_product'])) {
+                    foreach ($val['info_product'] as $product) {
+                        $quantity = isset($product['quantity']) ? (float)$product['quantity'] : 0;
+                        $price = isset($product['price']) ? (float)$product['price'] : 0;
+                        $total += $quantity * $price;
+                    }
+                }                   
+                @endphp
             <tr>
                 <td style="width: 3%">{{$index}}</td>
                 <td style="width: 15%">
@@ -47,10 +55,9 @@
                     <p class="mb-0">{!! $fullname !!}</p>
                     <p>{!! $phone !!}</p>
                 </td>
-                <td style="width: 12%;text-align:right">{{MyFunction::formatNumber($val['total'])}}</td>
+                <td style="width: 12%;text-align:right">{{MyFunction::formatNumber($total)}}</td>
                 <td style="width: 20%" class="text-justify">
                     @php $indexProduct = 0; @endphp
-
                     @if(!empty($val['info_product']) && is_array($val['info_product']))
                         @foreach($val['info_product'] as $product)
                             @php

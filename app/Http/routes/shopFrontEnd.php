@@ -102,6 +102,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('product-sitemap.xml','HomeController@siteProduct');
     Route::get('product1-sitemap.xml','HomeController@siteProduct1');
     Route::get('product2-sitemap.xml','HomeController@siteProduct2');
+    Route::get('product3-sitemap.xml','HomeController@siteProduct3');
 
     Route::get('{slug}.html','ProductController@drugstore')->name('fe.product.drugstore');
 

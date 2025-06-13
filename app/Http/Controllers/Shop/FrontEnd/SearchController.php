@@ -131,7 +131,7 @@ class SearchController extends ShopFrontEndController
 
         // lấy sitemap
         $slugs = ProductModel::orderBy('id', 'asc')->where('status_product','da_duyet')
-        ->skip(4000)
+        ->skip(5000)
         ->take(1000)
         ->pluck('slug');
         $urls = $slugs->map(function ($slug) {

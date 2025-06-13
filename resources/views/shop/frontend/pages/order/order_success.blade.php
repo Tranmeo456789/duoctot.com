@@ -84,7 +84,6 @@
                     </tbody>
                 </table>
             </div>
-
             <div class="item-info">
                 <div class="set-screen-375">
                 <table class="table pd-order mb-0" id="tbList">
@@ -96,12 +95,20 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                            $totalProduct=0;
+                            $totalMoneyProducts=0;
+                        @endphp
                         @foreach($info_product as $k => $val)
                         @php
                         $unit=(new UnitModel())->getItem(['id'=>$val['unit_id']],['task' => 'get-item'])->name;
                         $image = Template::showImagePreviewFileManager($val['image'],$val['slug']??$val['name']);
                         $price = MyFunction::formatNumber($val['price']) . ' đ';
-                        $total_money = MyFunction::formatNumber($val['total_money']) . ' đ';
+                        $quantity = isset($val['quantity']) ? (float)$val['quantity'] : 0;
+                        $price1 = isset($val['price']) ? (float)$val['price'] : 0;
+                        $totalProduct += $quantity * $price1;
+                        $totalMoneyProducts += $totalProduct;
+                        $total_money = MyFunction::formatNumber($totalProduct) . ' đ';
                         $productCurrent = (new ProductModel)->getItem(['id'=>$val['product_id']],['task' => 'get-item']);
                         $slug = $productCurrent['slug'] ?? '';
                         @endphp
@@ -112,7 +119,7 @@
                             <td style="width: 47%">
                                 <div class="">
                                     <p class="namep-order truncate2 text-info"><a href="{{route('fe.product.detail',$slug)}}" target="_blank" rel="noopener noreferrer">{{$val['name']}}</a></p>
-                                    <p class="unit-order">Đơn vị: <span>{{$unit}}</span></p>
+                                    <p class="unit-order">Đơn vị: <span>{{MyFunction::formatNumber($val['price']??0)}}/{{$unit}}</span></p>
                                 </div>
                             </td>
                             <td style="width: 16%" class="text-center">{{$val['quantity']}}</td>
@@ -121,7 +128,7 @@
                         @endforeach
                         <tr class="bb_order">
                             <td colspan="2" style="width: 16%" class="text-right">Tổng tiền</td>
-                            <td colspan="2" style="width: 16%" class='text-left'>{{MyFunction::formatNumber($order['total'])}} đ</td>
+                            <td colspan="2" style="width: 16%" class='text-left'>{{MyFunction::formatNumber($totalMoneyProducts)}} đ</td>
                         </tr>
                         <tr class="bb_order">
                             <td colspan="2" style="width: 16%" class="text-right">Phí giao hàng</td>
@@ -129,12 +136,11 @@
                         </tr>
                         <tr class="bb_order">
                             <td colspan="2" style="width: 16%" class="text-right font-weight-bold">Cần thanh toán</td>
-                            <td colspan="2" style="width: 16%" class='text-left font-weight-bold'>{{MyFunction::formatNumber($order['total']+$order['money_ship'])}} đ</td>
+                            <td colspan="2" style="width: 16%" class='text-left font-weight-bold'>{{MyFunction::formatNumber($totalMoneyProducts + $order['money_ship'])}} đ</td>
                         </tr>
                     </tbody>
                 </table>
                 </div>
-
             </div>
             <div class="text-center mt-2">
                 <a href="{{route('home')}}" class="exit-home-order">VỀ TRANG CHỦ</a>
@@ -142,6 +148,4 @@
         </div>
     </div>
 </div>
-
-
 @endsection
