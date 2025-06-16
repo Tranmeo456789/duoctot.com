@@ -13,7 +13,14 @@
     $statusOrderValue = array_combine(array_keys(config("myconfig.template.column.status_order")),array_column(config("myconfig.template.column.status_order"),'name'));
     unset($statusOrderValue['all']);
     $statusControlOrderValue = array_combine(array_keys(config("myconfig.template.column.status_control")),array_column(config("myconfig.template.column.status_control"),'name'));
-
+    $total=0;
+    if (!empty($item['info_product']) && is_array($item['info_product'])) {
+        foreach ($item['info_product'] as $product) {
+            $quantity = isset($product['quantity']) ? (float)$product['quantity'] : 0;
+            $price = isset($product['price']) ? (float)$product['price'] : 0;
+            $total += $quantity * $price;
+        }
+    } 
     $ngayDatHang = MyFunction::formatDateFrontend($item['created_at']);
     $payment = $item['payment']==2 ? 'Thanh toán ngay(ck)' : 'Thanh toán tại nhà';
     $elements = [
@@ -27,7 +34,7 @@
             'widthElement' => 'col-12 col-lg-4'
         ],[
             'label'   => HTML::decode(Form::label('total', 'Tổng tiền đơn hàng' , $formLabelAttr)),
-            'element' => Form::text('total', MyFunction::formatNumber($item['total']??0) . ' đ', array_merge($formInputAttr,['readonly' =>true,'style'=>'text-align:right'])),
+            'element' => Form::text('total', MyFunction::formatNumber($total??0) . ' đ', array_merge($formInputAttr,['readonly' =>true,'style'=>'text-align:right'])),
             'widthElement' => 'col-12 col-lg-4'
         ],[
             'label'   => HTML::decode(Form::label('total_product', 'Số lượng sản phẩm', $formLabelAttr)),

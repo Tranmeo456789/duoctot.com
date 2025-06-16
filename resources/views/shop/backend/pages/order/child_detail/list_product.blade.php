@@ -30,7 +30,7 @@
                         $price = MyFunction::formatNumber($val['price']) . ' đ';
                         $quantity = isset($val['quantity']) ? (float)$val['quantity'] : 0;
                         $price = isset($val['price']) ? (float)$val['price'] : 0;
-                        $totalProduct += $quantity * $price;
+                        $totalProduct = $quantity * $price;
                         $total_money = MyFunction::formatNumber($totalProduct) . ' đ';
                         $productId = (int)$val['product_id'];
                         $pos = array_search($productId, array_map('intval', $arrProduct));
