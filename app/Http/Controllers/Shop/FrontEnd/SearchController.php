@@ -209,7 +209,7 @@ class SearchController extends ShopFrontEndController
         if($request->product){
             try {
                 DB::beginTransaction();
-                $products = ProductModel::with('trademarkProduct')->select('id', 'name', 'benefit', 'trademark_id','user_id','cat_product_id')->where('status_product', 'da_duyet')->get();
+                $products = ProductModel::with('trademarkProduct')->select('id', 'name', 'benefit', 'trademark_id','user_id','cat_product_id','elements')->where('status_product', 'da_duyet')->get();
                 foreach ($products as $product) {
                     $trademarkName = $product->trademarkProduct ? $product->trademarkProduct->name : '';
                     $userSell = $product->userProduct ? $product->userProduct->fullname : '';
@@ -223,6 +223,7 @@ class SearchController extends ShopFrontEndController
                         Str::ascii($catProduct),
                         Str::ascii($product->name),
                         Str::ascii($product->benefit),
+                        Str::ascii($product->elements),
                     ]);
 
                     ProductModel::where('id', $product['id'])->update(['keyword_search' => $keywordSearch]);
