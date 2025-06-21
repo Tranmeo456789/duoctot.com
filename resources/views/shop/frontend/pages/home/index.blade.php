@@ -7,104 +7,94 @@
 </script>
 @endsection
 @section('content')
-<div class="container-slider mt-0 mt-lg-2 pl-0 pl-lg-2">
+<div class="container-slider mt-0 mt-lg-2 pl-0 pl-lg-2 mb-2">
     <div class="row">
-        <div class="col-12 col-lg-8">
-            <div class="d-none d-md-block" style="height: 263.97px">
+        <div class="col-12">
+            <div class="d-none d-md-block">
                 <div class="banner_doitac cS-hidden">
                     <div class="swiper-slide text-center">
                         <a href="{{route('fe.search.viewHome', ['keyword' => 'hanibody'])}}">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/tdoctor_net.webp')}}" alt="tdoctor" class="img-fluid" width="860" height="260" loading="lazy">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/tdoctor_netm.webp')}}" alt="tdoctor" class="img-fluid" width="1600" height="284">
                         </a>
                     </div>
                     <div class="swiper-slide text-center">
                         <a href="{{route('fe.search.viewHome', ['keyword' => 'hanibody'])}}">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/hanibody.webp')}}" alt="tdoctor" class="img-fluid" width="860" height="260" loading="lazy">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/hanibody1.webp')}}" alt="tdoctor" class="img-fluid" width="1600" height="284" loading="lazy">
                         </a>
                     </div>
                     <div class="swiper-slide text-center">
                         <a href="https://tdoctor.net/cong-ty-tnhh-nohtus-vietnam.html">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner11.webp')}}" alt="tdoctor" class="img-fluid" width="860" height="260">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/nohtus.webp')}}" alt="tdoctor" class="img-fluid" width="1600" height="284" loading="lazy">
                         </a>
                     </div>
                     <div class="swiper-slide text-center">
                         <a href="https://tdoctor.net/cong-ty-duoc-pham-dongsung-bio-pharm.html">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner17.webp')}}" alt="tdoctor" class="img-fluid" width="860" height="260" loading="lazy">
-                        </a>
-                    </div>
-                    <div class="swiper-slide text-center">
-                        <a href="https://tdoctor.net/cong-ty-tnhh-nohtus-vietnam.html">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner18.webp')}}" alt="tdoctor" class="img-fluid" width="860" height="260" loading="lazy">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/dongsung.webp')}}" alt="tdoctor" class="img-fluid" width="1600" height="284" loading="lazy">
                         </a>
                     </div>
                     <div class="swiper-slide text-center">
                         <a href="https://tdoctor.net/cong-ty-tnhh-duoc-pham-pegasus.html">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner_pegasus.webp')}}" alt="tdoctor" class="img-fluid" width="860" height="260" loading="lazy">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner_pegasus1.webp')}}" alt="tdoctor" class="img-fluid" width="1600" height="284" loading="lazy">
                         </a>
                     </div>
                     <div class="swiper-slide text-center">
                         <a href="{{route('fe.search.viewHome', ['keyword' => 'abbvie'])}}">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner_abbvie.webp')}}" alt="tdoctor" class="img-fluid" width="860" height="260" loading="lazy">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/abbvie1.webp')}}" alt="tdoctor" class="img-fluid" width="1600" height="284" loading="lazy">
                         </a>
                     </div>
                     <div class="swiper-slide text-center">
                         <a href="https://tdoctor.net/trungson-healthcare.html">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner21.webp')}}" alt="tdoctor" class="img-fluid" width="860" height="260" loading="lazy">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/trungson1.webp')}}" alt="tdoctor" class="img-fluid" width="1600" height="284" loading="lazy">
                         </a>
                     </div>
                     <div class="swiper-slide text-center">
                         <a href="{{route('fe.search.viewHome', ['keyword' => 'astrazeneca'])}}">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner_astrazeneca.webp')}}" alt="tdoctor" class="img-fluid" width="860" height="260" loading="lazy">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/astrazenceca1.webp')}}" alt="tdoctor" class="img-fluid" width="1600" height="284" loading="lazy">
                         </a>
                     </div>
                     <div class="swiper-slide text-center">
                         <a href="{{route('fe.search.viewHome', ['keyword' => 'merck'])}}">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner_merck.webp')}}" alt="tdoctor" class="img-fluid" width="860" height="260" loading="lazy">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/merck1.webp')}}" alt="tdoctor" class="img-fluid" width="1600" height="284" loading="lazy">
                         </a>
                     </div>
                     <div class="swiper-slide text-center">
                         <a href="{{route('fe.search.viewHome', ['keyword' => 'roche'])}}">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner_roche.webp')}}" alt="tdoctor" class="img-fluid" width="860" height="260" loading="lazy">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/roche1.webp')}}" alt="tdoctor" class="img-fluid" width="1600" height="284" loading="lazy">
                         </a>
                     </div>
                     <div class="swiper-slide text-center">
                         <a href="{{route('fe.search.viewHome', ['keyword' => 'pfizer'])}}">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner_pfizer.webp')}}" alt="tdoctor" class="img-fluid" width="860" height="260" loading="lazy">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/pfizer1.webp')}}" alt="tdoctor" class="img-fluid" width="1600" height="284" loading="lazy">
                         </a>
                     </div>
                     <div class="swiper-slide text-center">
                         <a href="{{route('fe.search.viewHome', ['keyword' => 'nordisk'])}}">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner_novo_nordisk.webp')}}" alt="tdoctor" class="img-fluid" width="860" height="260" loading="lazy">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/nordisk1.webp')}}" alt="tdoctor" class="img-fluid" width="1600" height="284" loading="lazy">
                         </a>
                     </div>
                     <div class="swiper-slide text-center">
                         <a href="{{route('fe.search.viewHome', ['keyword' => 'sanofi'])}}">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner_sanofi.webp')}}" alt="tdoctor" class="img-fluid" width="860" height="260" loading="lazy">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/sanofi1.webp')}}" alt="tdoctor" class="img-fluid" width="1600" height="284" loading="lazy">
                         </a>
                     </div>
                     <div class="swiper-slide text-center">
                         <a href="{{route('fe.search.viewHome', ['keyword' => 'amgen'])}}">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner_amgen.webp')}}" alt="tdoctor" class="img-fluid" width="860" height="260" loading="lazy">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/amgen1.webp')}}" alt="tdoctor" class="img-fluid" width="1600" height="284" loading="lazy">
                         </a>
                     </div>
                     <div class="swiper-slide text-center">
                         <a href="{{route('fe.search.viewHome', ['keyword' => 'novartis'])}}">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner_novartis.webp')}}" alt="tdoctor" class="img-fluid" width="860" height="260" loading="lazy">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/novarits1.webp')}}" alt="tdoctor" class="img-fluid" width="1600" height="284" loading="lazy">
                         </a>
                     </div>
                     <div class="swiper-slide text-center">
                         <a href="{{route('fe.search.viewHome', ['keyword' => 'Bristol'])}}">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner_bristol _yers_squibb.webp')}}" alt="tdoctor" class="img-fluid" width="860" height="260" loading="lazy">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/bristol_myers_squibb1.webp')}}" alt="tdoctor" class="img-fluid" width="1600" height="284" loading="lazy">
                         </a>
                     </div>
                     <div class="swiper-slide text-center">
                         <a href="{{route('fe.search.viewHome', ['keyword' => 'GSK'])}}">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner_gsk.webp')}}" alt="tdoctor" class="img-fluid" width="860" height="260" loading="lazy">
-                        </a>
-                    </div>
-                    <div class="swiper-slide text-center">
-                        <a href="{{route('fe.search.viewHome', ['keyword' => 'mekophar'])}}">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner_mekophar.webp')}}" alt="tdoctor" class="img-fluid" width="860" height="260" loading="lazy">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/gsk1.webp')}}" alt="tdoctor" class="img-fluid" width="860" height="260" loading="lazy">
                         </a>
                     </div>
                 </div>
@@ -113,17 +103,17 @@
                 <div class="banner_doitac_mobi cS-hidden">
                     <div class="swiper-slide text-center">
                         <a href="{{route('fe.search.viewHome', ['keyword' => 'hanibody'])}}">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/tdoctor_net.webp')}}" alt="tdoctor" class="img-fluid" width="860" height="260" loading="lazy">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/tdoctor_netm_mobi.webp')}}" alt="tdoctor" class="img-fluid" width="428" height="131">
                         </a>
                     </div>
                     <div class="swiper-slide text-center">
                         <a href="{{route('fe.search.viewHome', ['keyword' => 'hanibody'])}}">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/hanibody_mobi1.webp')}}" alt="tdoctor" class="img-fluid" width="428" height="131">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/hanibody_mobi1.webp')}}" alt="tdoctor" class="img-fluid" width="428" height="131" loading="lazy">
                         </a>
                     </div>
                     <div class="swiper-slide text-center">
                         <a href="https://tdoctor.net/cong-ty-tnhh-nohtus-vietnam.html">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner16_mobi.webp')}}" alt="tdoctor" class="img-fluid" width="428" height="131">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/banner16_mobi.webp')}}" alt="tdoctor" class="img-fluid" width="428" height="131" loading="lazy">
                         </a>
                     </div>
                     <div class="swiper-slide text-center">
@@ -209,11 +199,11 @@
                 </div>
             </div>
         </div>
-        <div class="d-none d-lg-block col-lg-4">
+        <!-- <div class="d-none d-lg-block col-lg-4">
             <div>
                 <a href="https://tdoctor.net/danh-muc/cham-soc-ca-nhan/duoc-my-pham-trang-diem"><img src="{{asset('images/shop/banner-right-home1.webp')}}" alt="tdotor" class="img-fluid" width="428" height="253" loading="lazy"></a>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 <div class="wp-inner">

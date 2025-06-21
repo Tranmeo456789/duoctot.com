@@ -1,9 +1,8 @@
 <style>
 .contact-menu {
     position: fixed;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
+    bottom: 50px;
+    left: 2px;
     z-index: 100;
     display: block;
     opacity: 1;
@@ -11,7 +10,7 @@
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 40px;
-    padding: 20px 8px 10px 8px;
+    padding: 5px 5px 5px 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .contact-menu li {
@@ -72,11 +71,11 @@
             </a>
             <a href="https://zalo.me/0393167234" rel="nofollow" target="_blank" title="Zalo Tdoctor" previewlistener="true">Zalo</a>
         </li>
-        <li id="icon-fixed__youtube">
+        <!-- <li id="icon-fixed__youtube">
             <a class="image-contact" href="https://www.youtube.com/@tdoctor8100" rel="nofollow" target="_blank" title="Youtube" previewlistener="true">
                 <img src="https://nhakhoathuyanh.com/wp-content/uploads/2024/05/yt.webp" alt="Youtube Tdoctor">
             </a>
             <a href="https://www.youtube.com/results?search_query=tdoctor" rel="nofollow" target="_blank" title="Youtube Tdoctor" previewlistener="true">Youtube</a>
-        </li>
+        </li> -->
     </ul>
 </contact-menu>

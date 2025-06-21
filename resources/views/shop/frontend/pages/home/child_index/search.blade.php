@@ -6,7 +6,7 @@ $dataHref = route('fe.product.searchListProductShort');
 
 @endphp
 <div class="form-search-inner">
-    <h6>@lang('lang.search_for_drugs')...</h6>
+    <!-- <h6>@lang('lang.search_for_drugs')...</h6> -->
     <div class="position-relative wp-search-list-product">
         <form action="{{route('fe.search.saveHome')}}" method="POST">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">

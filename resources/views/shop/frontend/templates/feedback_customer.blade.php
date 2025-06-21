@@ -34,7 +34,7 @@ $imgCustomer=['1.jpg', '2.jpg'];
             $thumb = asset('images/shop/') . '/' . $val['thumb'];
             @endphp
             <li class="d-flex mb-3">
-                <!-- <div class="rimg-start"><img src="{{$thumb}}" alt="tdoctor"></div> -->
+                <div class="rimg-start"><img src="{{$thumb}}" alt="tdoctor"></div>
                 <div class="ml-3">
                     <p class="font-weight-bold">{{$val['fullname']}}</p>
                     <span>

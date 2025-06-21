@@ -1199,7 +1199,7 @@ h1.title-name{
     height: 27px;
 }
 .wp-title .title-name {
-    font-size: 18px;
+    font-size: 20px;
     line-height: 24px;
     font-weight: 600;
     align-self: center;
@@ -2629,7 +2629,7 @@ ul{
     padding-left: 10px;
     padding-right: 10px;}
 .wp-inner{
-    max-width: 1300px;
+    max-width: 1220px;
     margin: 0px auto;
     padding-left: 12px;
     padding-right: 12px;
@@ -5698,7 +5698,7 @@ input[type="radio"] {
 /*RESPONSIVE*/
 @media screen and (max-width: 1400px) {
     #head-body #main-menu>li>a {
-        font-size: 17px;
+        font-size: 15px;
     }
 }
 
