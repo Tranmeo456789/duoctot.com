@@ -1,5 +1,5 @@
 @php
-    $title = $item['name'] ?? $item['title'] ?? $title ?? 'Sàn thương mại điện tử trong y dược số 1 Việt Nam';
+    $title = $item['name'] ?? $item['title'] ?? $title ?? 'Sàn thương mại điện tử trong y dược số 1 Việt Nam Dược Tốt';
     $imageItem = $item['image'] ?? 'images/shop/logo-favicon.png';
     $description = $item['description'] ?? $item['meta_description'] ?? 'Tdoctor là một giải pháp cho các nhà thuốc, các doanh nghiệp, công ty dược phẩm tăng doanh thu một cách nhanh chóng.';
     $metaKeywords = $item['meta_keywords']?? 'Shop trực tuyến, mua hàng online, tư vấn dược phẩm, giao hàng tận nhà, giảm đau, vitamin bổ sung';

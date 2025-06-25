@@ -198,7 +198,7 @@ class ProductController extends ShopFrontEndController
         // Tiêu đề trang
         $title = !empty($userInfo['fullname'])
             ? $userInfo['fullname']
-            : 'Sàn thương mại điện tử trong y dược số 1 Việt Nam';
+            : 'Sàn thương mại điện tử trong y dược số 1 Việt Nam Dược Tốt';
 
         // Lấy đánh giá & bình luận shop
         $commentShop = (new CommentModel())->listItems([

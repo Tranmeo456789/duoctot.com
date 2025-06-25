@@ -58,7 +58,7 @@ $listCatAll=(new CatProductModel())->listItems(null, ['task'  => 'list-items-fro
     <li class="align-self-center">
         <div class="position-relative">
             <div class="dropdown">
-                <button class="btn dropdown-toggle font-weight-bold text-secondary pl-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Danh Mục Shop</button>
+                <button class="btn dropdown-toggle font-weight-bold text-secondary pl-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 15px;">Danh Mục Shop</button>
                 <div class="dropdown-menu dropdown-menu-right bg-light" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="{{route('fe.product.listDrugstore')}}"><span class="pl-2">Danh mục Nhà Thuốc Online</span></a>
                     <a class="dropdown-item" href="{{route('fe.product.listShop')}}"><span class="pl-2">Danh mục Shop chung</span></a>

@@ -102,7 +102,7 @@
     </div>
     <div id="head-body-respon">
         <div class="tlogo-menu position-relative">
-            <div class="rimg-startm"><a href=""><img src="{{asset('images/shop/logo_topbar4.webp')}}" alt="tdoctor" style="width:150px;height:36px"></a></div>
+            <div class="rimg-startm"><a href=""><img src="{{asset('images/shop/logo_duoctot.jpg')}}" alt="tdoctor" style="width:150px;height:36px"></a></div>
             <div class="rimg-center closem" id="closem"><img src="{{asset('images/shop/closem.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async"></div>
         </div>
         <div class="body-responhoder">
