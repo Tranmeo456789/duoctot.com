@@ -14,7 +14,7 @@
                 <div class="banner_doitac cS-hidden">
                     <div class="swiper-slide text-center">
                         <a href="{{route('fe.search.viewHome', ['keyword' => 'hanibody'])}}">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/tdoctor_netm.webp')}}" alt="tdoctor" class="img-fluid" width="1600" height="284">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/duoctot1.webp')}}" alt="tdoctor" class="img-fluid" width="1600" height="284">
                         </a>
                     </div>
                     <div class="swiper-slide text-center">
@@ -103,7 +103,7 @@
                 <div class="banner_doitac_mobi cS-hidden">
                     <div class="swiper-slide text-center">
                         <a href="{{route('fe.search.viewHome', ['keyword' => 'hanibody'])}}">
-                            <img src="{{asset('laravel-filemanager/fileUpload/banner/tdoctor_netm_mobi.webp')}}" alt="tdoctor" class="img-fluid" width="428" height="131">
+                            <img src="{{asset('laravel-filemanager/fileUpload/banner/duoctot1_mobi.webp')}}" alt="tdoctor" class="img-fluid" width="428" height="131">
                         </a>
                     </div>
                     <div class="swiper-slide text-center">
