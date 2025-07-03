@@ -10,7 +10,7 @@
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 40px;
-    padding: 5px 5px 5px 5px;
+    padding: 10px 5px 20px 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .contact-menu li {
@@ -20,12 +20,11 @@
     text-decoration: none;
     color: #0d6799;
     display: block;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: bold;
 }
 .contact-menu img {
     width: 30px;
-    height: 30px;
     margin: 0 auto;
 }
 
@@ -54,28 +53,34 @@
 <contact-menu class="contact-menu">
     <ul>
         <li id="icon-fixed__facebook">
-            <a class="image-contact" href="https://www.facebook.com/tdoctoronline/" rel="nofollow" target="_blank" title="Facebook" previewlistener="true">
-                <img src="https://nhakhoathuyanh.com/wp-content/uploads/2024/05/fb.webp" alt="Facebook">
+            <a class="image-contact" href="{{route('home')}}">
+                <img src="{{asset('images/shop/trangchu.jpg')}}" alt="trang chủ">
             </a>
-            <a href="https://www.facebook.com/tdoctoronline/" rel="nofollow" target="_blank" title="Facebook Tdoctor" previewlistener="true">Facebook</a>
+            <a href="{{route('home')}}" class="text-secondary">Trang chủ</a>
         </li>
-        <li id="icon-fixed__messenger">
-            <a class="image-contact" href='tel:0393167234' rel="nofollow" title="Gọi điện" previewlistener="true">
-                <img src="{{asset('images/shop/icon-call-green.jpg')}}" alt="Gọi điện Tdoctor">
+        <li id="icon-fixed__facebook">
+            <a class="image-contact" href="{{route('fe.home.pageKhuyenMai')}}">
+                <img src="{{asset('images/shop/khuyenmai.jpg')}}" alt="khuyến mãi">
             </a>
-            <a href='tel:0393167234' rel="nofollow" title="Call Tdoctor" previewlistener="true">Call</a>
+            <a href="{{route('fe.home.pageKhuyenMai')}}" class="text-secondary">Khuyến mãi</a>
         </li>
-        <li id="icon-fixed__zalo">
-            <a class="image-contact" href="https://zalo.me/0393167234" rel="nofollow" target="_blank" title="Zalo" previewlistener="true">
-                <img src="https://nhakhoathuyanh.com/wp-content/uploads/2024/05/zalo.webp" alt="Zalo Tdoctor">
+        <li id="icon-fixed__facebook">
+            <a class="image-contact" href="{{route('fe.home.pageDiemTichLuy')}}">
+                <img src="{{asset('images/shop/tichluy.jpg')}}" alt="Điểm tích lũy">
             </a>
-            <a href="https://zalo.me/0393167234" rel="nofollow" target="_blank" title="Zalo Tdoctor" previewlistener="true">Zalo</a>
+            <a href="{{route('fe.home.pageDiemTichLuy')}}" class="text-secondary">Điểm tích lũy</a>
         </li>
-        <!-- <li id="icon-fixed__youtube">
-            <a class="image-contact" href="https://www.youtube.com/@tdoctor8100" rel="nofollow" target="_blank" title="Youtube" previewlistener="true">
-                <img src="https://nhakhoathuyanh.com/wp-content/uploads/2024/05/yt.webp" alt="Youtube Tdoctor">
+        <li id="icon-fixed__facebook">
+            <a class="image-contact" href="{{route('fe.home.pageRiengChoBan')}}">
+                <img src="{{asset('images/shop/riengchoban.jpg')}}" alt="riêng cho bạn">
             </a>
-            <a href="https://www.youtube.com/results?search_query=tdoctor" rel="nofollow" target="_blank" title="Youtube Tdoctor" previewlistener="true">Youtube</a>
-        </li> -->
+            <a href="{{route('fe.home.pageRiengChoBan')}}" class="text-secondary">Riêng cho bạn</a>
+        </li>
+        <li id="icon-fixed__facebook">
+            <a class="image-contact" href="{{route('fe.home.pageDanhSachDonMua')}}">
+                <img src="{{asset('images/shop/donmua.jpg')}}" alt="Đơn mua">
+            </a>
+            <a href="{{route('fe.home.pageDanhSachDonMua')}}" class="text-secondary">Đơn mua</a>
+        </li>
     </ul>
 </contact-menu>

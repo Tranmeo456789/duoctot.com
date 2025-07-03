@@ -166,8 +166,8 @@
                 '2' => 'Giá theo doanh thu'
             ],
             'type_featurer' => [
-                'new' => 'Sản phẩm mới',
-                'noi_bat' => 'Sản phẩm nổi bật',
+                'new' => 'Sản phẩm khuyến mãi',
+                'noi_bat' => 'Sản phẩm giá sốc',
                 'hau_covid' => 'Sản phẩm hậu covid',
                 'goi_y'=>'Sản phẩm gợi ý',
                 'tre_em' => 'Trẻ em',

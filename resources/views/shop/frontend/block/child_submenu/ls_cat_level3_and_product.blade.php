@@ -17,7 +17,7 @@
 @if(isset($listProductCatLevel2))
 @if(count($listProductCatLevel2) > 0)
 <div class="list-productmn pt-3">
-    @include("$moduleName.templates.box_title_product",['title' => 'Sản phẩm nổi bật','classBackground'=>'bg-danger'])
+    @include("$moduleName.templates.box_title_product",['title' => 'Giá sốc','classBackground'=>'bg-danger'])
     <div class="productimenu">
         <ul>
             <div class="row">

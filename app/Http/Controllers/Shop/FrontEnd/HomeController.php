@@ -11,6 +11,7 @@ use App\Model\Shop\UsersModel;
 use App\Model\Shop\CatProductModel;
 use App\Model\Shop\AffiliateModel;
 use App\Model\Shop\PostModel;
+use App\Model\Shop\ProducerModel;
 use App\Model\Shop\QuangCaoModel;
 use Illuminate\Http\Response;
 class HomeController extends ShopFrontEndController
@@ -79,9 +80,10 @@ class HomeController extends ShopFrontEndController
         if($request->formRegister){
             $formRegister =1;
         }
+        $productcers=UsersModel::whereIn('user_type_id', [9])->orderBy('user_id', 'DESC')->take(20)->get();
         return view(
             $this->pathViewController . 'index',
-            compact('product_selling','product_covid','productInObject','itemsProduct','couterSumProduct','countproductInObject','itemsArticle','formRegister')
+            compact('product_selling','product_covid','productInObject','itemsProduct','couterSumProduct','countproductInObject','itemsArticle','formRegister','productcers')
         );
     }
     public function ajaxHoverCatLevel1(Request $request)
@@ -299,5 +301,38 @@ class HomeController extends ShopFrontEndController
             return redirect('https://apps.apple.com/vn/app/tdoctor/id1443310734?l=vi');
         }
         return view('shop.frontend.pages.error.page_404');
+    }
+    public function pageKhuyenMai(){
+        $title = 'Khuyến Mãi | Tdoctor';
+        return view("$this->pathViewController.khuyen_mai",[
+            'title'=>$title
+        ]);
+    }
+    public function pageDiemTichLuy(Request $request) {
+        if ($request->session()->has('user')) {
+            $title = 'Điểm tích lũy | Tdoctor';
+            return view("{$this->pathViewController}.diem_tich_luy", [
+                'title' => $title
+            ]);
+        } else {
+            return view('shop.frontend.pages.error.vui_long_dang_nhap');
+        }
+    }
+    public function pageRiengChoBan(Request $request) {
+        if ($request->session()->has('user')) {
+            $title = 'Riêng cho bạn | Tdoctor';
+            return view("{$this->pathViewController}.diem_tich_luy", [
+                'title' => $title
+            ]);
+        } else {
+            return view('shop.frontend.pages.error.vui_long_dang_nhap');
+        }
+    }
+    public function pageDanhSachDonMua(Request $request) {
+        if ($request->session()->has('user')) {
+            return redirect()->route('order');
+        } else {
+            return view('shop.frontend.pages.error.vui_long_dang_nhap');
+        }
     }
 }

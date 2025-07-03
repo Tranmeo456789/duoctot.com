@@ -34,7 +34,7 @@
                             {!! $image !!}
                         </div>
                         <div class="info-product ml-1">
-                            <p class="text-primary font-weight-bold mb-1">{!! $title !!}</p>
+                            <p class="text-primary font-weight-bold mb-1"><a href="{{route('fe.post.detail',$val['slug'])}}">{!! $title !!}</a></p>
                         </div>
                     </div>
                 </td>

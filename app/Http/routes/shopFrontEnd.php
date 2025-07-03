@@ -20,6 +20,10 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('dieu-khoan-su-dung.html','HomeController@pageDieukhoanSudung')->name('fe.home.pageDieukhoanSudung');
     Route::get('web-view','HomeController@pageHomeWebView')->name('fe.home.pageHomeWebView');
     Route::get('download-app-tdoctor','HomeController@downloadAppTdoctor')->name('fe.home.downloadAppTdoctor');
+    Route::get('khuyen-mai.html','HomeController@pageKhuyenMai')->name('fe.home.pageKhuyenMai');
+    Route::get('diem-tich-luy.html','HomeController@pageDiemTichLuy')->name('fe.home.pageDiemTichLuy');
+    Route::get('rieng-cho-ban.html','HomeController@pageRiengChoBan')->name('fe.home.pageRiengChoBan');
+    Route::get('danh-sach-don-mua.html','HomeController@pageDanhSachDonMua')->name('fe.home.pageDanhSachDonMua');
 
     Route::get('/chi-tiet-san-pham/{slug}.html','ProductController@detail')->name('fe.product.detail');
     Route::get('/tim-kiem-san-pham-theo-ten','ProductController@searchProductAjax')->name('fe.product.searchProductAjax');

@@ -207,7 +207,7 @@
 <div id="feature-product-wp">
     <div class="mt-3 mt-lg-4">
         <div class="wp-inner">
-            @include("$moduleName.templates.box_title_product",['title' => 'Sản phẩm nổi bật','classBackground'=>'bg-danger'])
+            @include("$moduleName.templates.box_title_product",['title' => 'Giá sốc','classBackground'=>'bg-danger'])
             <ul class="list-item">
                 @include("$moduleName.partial.product",['items'=>$itemsProduct['best']])
             </ul>
