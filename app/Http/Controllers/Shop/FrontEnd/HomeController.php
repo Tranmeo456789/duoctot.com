@@ -28,6 +28,8 @@ class HomeController extends ShopFrontEndController
         if ($request->has('t')) {
             return redirect()->to(route('home'));
         }
+        //Cache::forget('cache_product_data'); 
+        //Cache::forget('cache_post_data');
         $numTake=10;
         $keyCache = 'cache_product_data';
         $keyCachePost = 'cache_post_data';
@@ -59,6 +61,7 @@ class HomeController extends ShopFrontEndController
             $countproductInObject = $countproductInObject[0]['count'] - 10;
             $itemsProduct['new'] = (new ProductModel())->listItems(['type' => 'new'], ['task' => 'frontend-list-items'])->take(10);
             $itemsProduct['best'] = (new ProductModel())->listItems(['type' => 'noi_bat'], ['task' => 'frontend-list-items'])->take(20);
+            $itemsProduct['goi_y'] = (new ProductModel())->listItems(['type' => 'goi_y'], ['task' => 'frontend-list-items'])->take(20);
             $couterSumProduct = (new ProductModel())->countItems(null, ['task' => 'count-items-product-frontend']);
             // Lưu tất cả dữ liệu vào cache
             $cacheData = [

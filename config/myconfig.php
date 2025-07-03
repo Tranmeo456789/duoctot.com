@@ -166,10 +166,10 @@
                 '2' => 'Giá theo doanh thu'
             ],
             'type_featurer' => [
-                'new' => 'Sản phẩm khuyến mãi',
+                'new' => 'Sản phẩm mới / Bán chạy',
                 'noi_bat' => 'Sản phẩm giá sốc',
                 'hau_covid' => 'Sản phẩm hậu covid',
-                'goi_y'=>'Sản phẩm gợi ý',
+                'goi_y'=>'Sản phẩm Khuyến Mãi',
                 'tre_em' => 'Trẻ em',
                 'nguoi_cao_tuoi' => 'Người cao tuổi',
                 'phu_nu_cho_con_bu' => 'Phụ nữ cho con bú',

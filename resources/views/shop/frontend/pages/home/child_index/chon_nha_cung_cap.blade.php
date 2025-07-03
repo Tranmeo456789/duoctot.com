@@ -66,7 +66,7 @@
                     </div>
                     <div class="pl-1">
                         <div class="text-center wp-name-product">
-                            <p class="truncate3" style="font-size: 16px;">{{ $val['fullname'] }}</p>
+                            <p class="truncate3" style="font-size: 18px;">{{ $val['fullname'] }}</p>
                         </div>
                     </div>
                 </a>

@@ -13,26 +13,50 @@
             <div class="d-none d-md-block">
                 <div class="banner_doitac cS-hidden">
                     <div class="swiper-slide text-center">
-                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot1.jpg')}}" alt="tdoctor" class="img-fluid">
+                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot5.jpg')}}" alt="tdoctor" class="img-fluid">
                     </div>
                     <div class="swiper-slide text-center">
-                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot2.jpg')}}" alt="tdoctor" class="img-fluid">
+                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot6.jpg')}}" alt="tdoctor" class="img-fluid">
                     </div>
                     <div class="swiper-slide text-center">
-                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot3.jpg')}}" alt="tdoctor" class="img-fluid">
+                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot7.jpg')}}" alt="tdoctor" class="img-fluid">
+                    </div>
+                    <div class="swiper-slide text-center">
+                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot8.jpg')}}" alt="tdoctor" class="img-fluid">
+                    </div>
+                    <div class="swiper-slide text-center">
+                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot9.jpg')}}" alt="tdoctor" class="img-fluid">
+                    </div>
+                    <div class="swiper-slide text-center">
+                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot10.jpg')}}" alt="tdoctor" class="img-fluid">
+                    </div>
+                    <div class="swiper-slide text-center">
+                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot11.jpg')}}" alt="tdoctor" class="img-fluid">
                     </div>
                 </div>
             </div>
             <div class="d-block d-md-none">
                 <div class="banner_doitac_mobi cS-hidden">
                     <div class="swiper-slide text-center">
-                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot1.jpg')}}" alt="tdoctor" class="img-fluid">
+                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot5.jpg')}}" alt="tdoctor" class="img-fluid">
                     </div>
                     <div class="swiper-slide text-center">
-                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot2.jpg')}}" alt="tdoctor" class="img-fluid">
+                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot6.jpg')}}" alt="tdoctor" class="img-fluid">
                     </div>
                     <div class="swiper-slide text-center">
-                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot3.jpg')}}" alt="tdoctor" class="img-fluid">
+                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot7.jpg')}}" alt="tdoctor" class="img-fluid">
+                    </div>
+                    <div class="swiper-slide text-center">
+                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot8.jpg')}}" alt="tdoctor" class="img-fluid">
+                    </div>
+                    <div class="swiper-slide text-center">
+                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot9.jpg')}}" alt="tdoctor" class="img-fluid">
+                    </div>
+                    <div class="swiper-slide text-center">
+                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot10.jpg')}}" alt="tdoctor" class="img-fluid">
+                    </div>
+                    <div class="swiper-slide text-center">
+                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot11.jpg')}}" alt="tdoctor" class="img-fluid">
                     </div>
                 </div>
             </div>
@@ -68,9 +92,12 @@
 </div>
 <div class="wp-inner mt-3 mt-lg-4">
     @include("$moduleName.templates.box_title_product",['title' => 'SẢN PHẨM KHUYẾN MÃI','classBackground'=>'bg-danger'])
-    @include("$moduleName.pages.$controllerName.child_index.list_product_khuyen_mai",['items'=>$itemsProduct['new']])
+    @include("$moduleName.pages.$controllerName.child_index.list_product_khuyen_mai",['items'=>$itemsProduct['goi_y']])
 </div>
-
+<div class="wp-inner mt-3 mt-lg-4">
+    @include("$moduleName.templates.box_title_product",['title' => 'SẢN PHẨM MỚI/ BÁN CHẠY','classBackground'=>'bg-danger'])
+    @include("$moduleName.pages.$controllerName.child_index.list_product_moi_ban_chay",['items'=>$itemsProduct['new']])
+</div>
 
 <div class="lc-mask-search"></div>
 @endsection

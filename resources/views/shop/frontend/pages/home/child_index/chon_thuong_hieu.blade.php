@@ -53,130 +53,48 @@
 <div class="clearfix list-unstyled ls_chon_thuong_hieu ls_product-view-add">
     <div class="swiper-slide p-1">
         <li class="position-relative">
-            <a href="{{route('fe.search.viewHome', ['keyword' => 'hanibody'])}}" class="d-block">
+            <a href="{{route('fe.search.viewHome', ['keyword' => 'abbott'])}}" class="d-block">
                 <div class="wp-img-thumb-product mb-2">
-                    <img loading="lazy" src="{{asset('laravel-filemanager/fileUpload/banner/hanibody_mobi1.webp')}}" alt="hanibody" width="180" height="180" decoding="async">
-                </div>
-                <div class="pl-1">
-                    <div class="text-center wp-name-product">
-                        <p class="truncate3">Hanibody</p>
-                    </div>
+                    <img loading="lazy" src="{{asset('laravel-filemanager/fileUpload/banner/th_abbott.jpg')}}" alt="th_abbott" decoding="async">
                 </div>
             </a>
         </li>
         <li class="position-relative">
-            <a href="https://tdoctor.net/cong-ty-tnhh-nohtus-vietnam.html" class="d-block">
+            <a href="{{route('fe.search.viewHome', ['keyword' => 'boehringer'])}}" class="d-block">
                 <div class="wp-img-thumb-product mb-2">
-                    <img loading="lazy" src="{{asset('laravel-filemanager/fileUpload/banner/banner16_mobi.webp')}}" alt="nohtus" width="180" height="180" decoding="async">
-                </div>
-                <div class="pl-1">
-                    <div class="text-center wp-name-product">
-                        <p class="truncate3">Nohtus</p>
-                    </div>
+                    <img loading="lazy" src="{{asset('laravel-filemanager/fileUpload/banner/th_boehringer_ingelheim.jpg')}}" alt="th_boehringer_ingelheim" decoding="async">
                 </div>
             </a>
         </li>
     </div>
     <div class="swiper-slide p-1">
         <li class="position-relative">
-            <a href="https://tdoctor.net/cong-ty-duoc-pham-dongsung-bio-pharm.html" class="d-block">
+            <a href="{{route('fe.search.viewHome', ['keyword' => 'servier'])}}" class="d-block">
                 <div class="wp-img-thumb-product mb-2">
-                    <img loading="lazy" src="{{asset('laravel-filemanager/fileUpload/banner/banner17_mobi.webp')}}" alt="dong sung" width="180" height="180" decoding="async">
-                </div>
-                <div class="pl-1">
-                    <div class="text-center wp-name-product">
-                        <p class="truncate3">Dược phẩm Đông Sung</p>
-                    </div>
+                    <img loading="lazy" src="{{asset('laravel-filemanager/fileUpload/banner/th_servier.jpg')}}" alt="servier" decoding="async">
                 </div>
             </a>
         </li>
         <li class="position-relative">
-            <a href="https://tdoctor.net/cong-ty-tnhh-duoc-pham-pegasus.html" class="d-block">
+            <a href="{{route('fe.search.viewHome', ['keyword' => 'uip'])}}" class="d-block">
                 <div class="wp-img-thumb-product mb-2">
-                    <img loading="lazy" src="{{asset('laravel-filemanager/fileUpload/banner/banner_pegasus_mobi.webp')}}" alt="pegasus" width="180" height="180" decoding="async">
-                </div>
-                <div class="pl-1">
-                    <div class="text-center wp-name-product">
-                        <p class="truncate3">Pegasus</p>
-                    </div>
+                    <img loading="lazy" src="{{asset('laravel-filemanager/fileUpload/banner/th_uip.jpg')}}" alt="uip" decoding="async">
                 </div>
             </a>
         </li>
     </div>
     <div class="swiper-slide p-1">
         <li class="position-relative">
-            <a href="{{route('fe.search.viewHome', ['keyword' => 'abbvie'])}}" class="d-block">
+            <a href="{{route('fe.search.viewHome', ['keyword' => 'nordisk'])}}" class="d-block">
                 <div class="wp-img-thumb-product mb-2">
-                    <img loading="lazy" src="{{asset('laravel-filemanager/fileUpload/banner/banner_abbvie_mobi.webp')}}" alt="abbvie" width="180" height="180" decoding="async">
-                </div>
-                <div class="pl-1">
-                    <div class="text-center wp-name-product">
-                        <p class="truncate3">Abbvie</p>
-                    </div>
+                    <img loading="lazy" src="{{asset('laravel-filemanager/fileUpload/banner/th_novo_nordisk.jpg')}}" alt="nordisk" decoding="async">
                 </div>
             </a>
         </li>
         <li class="position-relative">
-            <a href="https://tdoctor.net/trungson-healthcare.html" class="d-block">
+            <a href="{{route('fe.search.viewHome', ['keyword' => 'santen'])}}" class="d-block">
                 <div class="wp-img-thumb-product mb-2">
-                    <img loading="lazy" src="{{asset('laravel-filemanager/fileUpload/banner/banner21.webp')}}" alt="trungson healthcare" width="180" height="180" decoding="async">
-                </div>
-                <div class="pl-1">
-                    <div class="text-center wp-name-product">
-                        <p class="truncate3">Trung Sơn HealthCare</p>
-                    </div>
-                </div>
-            </a>
-        </li>
-    </div>
-    <div class="swiper-slide p-1">
-        <li class="position-relative">
-            <a href="{{route('fe.search.viewHome', ['keyword' => 'astrazeneca'])}}" class="d-block">
-                <div class="wp-img-thumb-product mb-2">
-                    <img loading="lazy" src="{{asset('laravel-filemanager/fileUpload/banner/banner_astrazeneca_mobi.webp')}}" alt="astrazeneca" width="180" height="180" decoding="async">
-                </div>
-                <div class="pl-1">
-                    <div class="text-center wp-name-product">
-                        <p class="truncate3">Astrazeneca</p>
-                    </div>
-                </div>
-            </a>
-        </li>
-        <li class="position-relative">
-            <a href="{{route('fe.search.viewHome', ['keyword' => 'merck'])}}" class="d-block">
-                <div class="wp-img-thumb-product mb-2">
-                    <img loading="lazy" src="{{asset('laravel-filemanager/fileUpload/banner/banner_merck_mobi.webp')}}" alt="merck" width="180" height="180" decoding="async">
-                </div>
-                <div class="pl-1">
-                    <div class="text-center wp-name-product">
-                        <p class="truncate3">Merck</p>
-                    </div>
-                </div>
-            </a>
-        </li>
-    </div>
-    <div class="swiper-slide p-1">
-        <li class="position-relative">
-            <a href="{{route('fe.search.viewHome', ['keyword' => 'roche'])}}" class="d-block">
-                <div class="wp-img-thumb-product mb-2">
-                    <img loading="lazy" src="{{asset('laravel-filemanager/fileUpload/banner/banner_roche_mobi.webp')}}" alt="roche" width="180" height="180" decoding="async">
-                </div>
-                <div class="pl-1">
-                    <div class="text-center wp-name-product">
-                        <p class="truncate3">Roche</p>
-                    </div>
-                </div>
-            </a>
-        </li>
-        <li class="position-relative">
-            <a href="{{route('fe.search.viewHome', ['keyword' => 'pfizer'])}}" class="d-block">
-                <div class="wp-img-thumb-product mb-2">
-                    <img loading="lazy" src="{{asset('laravel-filemanager/fileUpload/banner/banner_pfizer_mobi.webp')}}" alt="merck" width="180" height="180" decoding="async">
-                </div>
-                <div class="pl-1">
-                    <div class="text-center wp-name-product">
-                        <p class="truncate3">Pfizer</p>
-                    </div>
+                    <img loading="lazy" src="{{asset('laravel-filemanager/fileUpload/banner/th_santen.jpg')}}" alt="santen" decoding="async">
                 </div>
             </a>
         </li>
