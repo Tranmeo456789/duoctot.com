@@ -31,7 +31,7 @@
                         <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot10.jpg')}}" alt="tdoctor" class="img-fluid">
                     </div>
                     <div class="swiper-slide text-center">
-                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot11.jpg')}}" alt="tdoctor" class="img-fluid">
+                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot12.jpg')}}" alt="tdoctor" class="img-fluid">
                     </div>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                         <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot10.jpg')}}" alt="tdoctor" class="img-fluid">
                     </div>
                     <div class="swiper-slide text-center">
-                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot11.jpg')}}" alt="tdoctor" class="img-fluid">
+                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot12.jpg')}}" alt="tdoctor" class="img-fluid">
                     </div>
                 </div>
             </div>
@@ -69,7 +69,7 @@
     </div>
 </div>
 <div class="wp-inner">
-    <h1 class="d-none">Sàn thương mại điện tử trong y dược số 1 Việt Nam Dược Tốt</h1>
+    <h1 class="d-none">DƯỢC TỐT là Nền tảng kết nối y dược nhà thuốc, phòng khám , bệnh nhân với công ty dược và thực phẩm chức năng uy tín nhất Việt nam</h1>
     <div id="hisd" class="position-relative">
         <div class="d-flex justify-content-center">
             <div id="form-search" class="d-flex justify-content-center">

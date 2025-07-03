@@ -155,6 +155,22 @@ class HomeController extends ShopFrontEndController
                     ]);
         }
     }
+    public function ajaxShowProductNccInKhuyenmai(Request $request){
+        $data = $request->all();
+        $slug = $request->slug;
+        $nccInfo = UsersModel::where('slug', $slug)->first();
+        $idnccInfo = $nccInfo->user_id ?? 1;
+        $listIdProductAddSelect = collect($nccInfo->listIdProduct)->pluck('product_id')->toArray();
+        $lsProductKm = (new ProductModel)->listItems([
+            'group_id' => $listIdProductAddSelect,
+            'user_id' => $idnccInfo,
+            'take' => 5
+        ], ['task' => 'frontend-list-item-shop']) ?? [];
+        return view("$this->pathViewController.child_khuyen_mai.ls_product_ncc",
+        [
+            'lsProductKm'=>$lsProductKm
+        ]);
+    }
     public function writeContentAi(){
         $title = 'Hướng dẫn viết content bằng AI | Tdoctor';
         return view("$this->pathViewController.write_content",[
@@ -307,8 +323,23 @@ class HomeController extends ShopFrontEndController
     }
     public function pageKhuyenMai(){
         $title = 'Khuyến Mãi | Tdoctor';
+        $arrayIds = [1144150873, 1144150856, 1144150849, 1144150845, 1144150836, 1144150835, 1144150833, 1144150821, 1144150811, 1144150788];
+        $productcers = UsersModel::whereIn('user_id', $arrayIds)
+        ->orderBy('user_id', 'DESC')
+        ->take(10)
+        ->get();
+        $firstUser = $productcers->first();
+        $idFirstUser = $firstUser->user_id ?? 1; // Truy cập bằng object
+        $listIdProductAddSelect = collect($firstUser->listIdProduct)->pluck('product_id')->toArray();
+        $lsProductKm = (new ProductModel)->listItems([
+            'group_id' => $listIdProductAddSelect,
+            'user_id' => $idFirstUser,
+            'take' => 5
+        ], ['task' => 'frontend-list-item-shop']) ?? [];
         return view("$this->pathViewController.khuyen_mai",[
-            'title'=>$title
+            'title'=>$title,
+            'productcers'=>$productcers,
+            'lsProductKm'=>$lsProductKm,
         ]);
     }
     public function pageDiemTichLuy(Request $request) {
@@ -324,9 +355,12 @@ class HomeController extends ShopFrontEndController
     public function pageRiengChoBan(Request $request) {
         if ($request->session()->has('user')) {
             $title = 'Riêng cho bạn | Tdoctor';
-            return view("{$this->pathViewController}.diem_tich_luy", [
-                'title' => $title
-            ]);
+            $user = $request->session()->get('user');
+            $userId = $user['user_id'] ?? null;
+            $userInfo=UsersModel::where('user_id', $userId)->first();
+            $userDetails= $userInfo->details;
+            $slug=$userDetails['slug'];
+            return redirect()->route('fe.product.drugstore', ['slug' => $slug]);
         } else {
             return view('shop.frontend.pages.error.vui_long_dang_nhap');
         }

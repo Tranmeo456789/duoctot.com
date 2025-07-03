@@ -33,6 +33,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
    // Route::post('/loc-drugstore-trong-danh-sach','ProductController@filterDrugstore')->name('fe.product.filterDrugstore');
     
     Route::get('/ajax-filter-product-object','HomeController@ajax_filter')->name('fe.home.ajaxfilter');
+    Route::get('/ajax-show-product-ncc-in-khuyen-mai','HomeController@ajaxShowProductNccInKhuyenmai')->name('fe.home.ajaxShowProductNccInKhuyenmai');
     
     Route::get('/tin-tuc','PostController@index')->name('fe.post');
     Route::get('/tin-tuc-web-view','PostController@indexWebView')->name('fe.post.indexWebView');

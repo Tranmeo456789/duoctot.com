@@ -1,0 +1,1 @@
+@include("$moduleName.templates.list_product",['items'=>$lsProductKm])

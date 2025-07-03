@@ -11,13 +11,7 @@
         </div>
     </div> -->
     <div class="head_topon_reponsive">
-        <div class="wp-inner">
-            <!-- <div class="d-flex justify-content-center">
-                <div class="d-flex justify-content-center">
-                    <div><span class="circle-ripple"></span></div>
-                    <p class="p-head-topon">Liên hệ Hotline/Zalo <span class="font-weight-bold text-danger" style="font-size: 20px;"><a href="tel:0345488247" class="text-danger">0345.488.247</a></span></p>
-                </div>
-            </div> -->
+        <!-- <div class="wp-inner">
             <div class="d-flex justify-content-between">
                 <div class="d-flex justify-content-center">
                     <div style="width: 30px;"><img src="{{asset('images/shop/icon-app-tdoctor.jpg')}}" alt="Tdoctor" loading="lazy" width="30" height="30" decoding="async" style="width: 30px;height: 29px"></div>
@@ -30,7 +24,7 @@
                     <a href="{{route('fe.home.downloadAppTdoctor')}}" class="text-light font-weight-bold px-2">MỞ ỨNG DỤNG</a>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="fix1screen">
             <div class="wp-cart-res">
                 @include("$moduleName.templates.menu_cart")
