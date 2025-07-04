@@ -78,9 +78,9 @@
         </li>
         <li id="icon-fixed__facebook">
             <a class="image-contact" href="{{route('fe.home.pageDanhSachDonMua')}}">
-                <img src="{{asset('images/shop/donmua.jpg')}}" alt="Đơn mua">
+                <img src="{{asset('images/shop/donmua.jpg')}}" alt="Đơn hàng">
             </a>
-            <a href="{{route('fe.home.pageDanhSachDonMua')}}" class="text-secondary">Đơn mua</a>
+            <a href="{{route('fe.home.pageDanhSachDonMua')}}" class="text-secondary">Đơn hàng</a>
         </li>
     </ul>
 </contact-menu>

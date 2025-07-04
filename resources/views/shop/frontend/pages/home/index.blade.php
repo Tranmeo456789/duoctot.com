@@ -10,62 +10,54 @@
 <div class="container-slider mt-0 mt-lg-2 pl-0 pl-lg-2 mb-2">
     <div class="row">
         <div class="col-12">
-            <div class="d-none d-md-block">
+            <div class="d-none d-md-block" style="height:285px">
                 <div class="banner_doitac cS-hidden">
-                    <div class="swiper-slide text-center">
+                    <!-- <div class="swiper-slide text-center">
                         <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot5.jpg')}}" alt="tdoctor" class="img-fluid">
+                    </div> -->
+                    <div class="swiper-slide text-center">
+                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot6.jpg')}}" alt="tdoctor" class="img-fluid" width="700" height="285">
                     </div>
                     <div class="swiper-slide text-center">
-                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot6.jpg')}}" alt="tdoctor" class="img-fluid">
+                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot7.jpg')}}" alt="tdoctor" class="img-fluid" width="700" height="285">
                     </div>
                     <div class="swiper-slide text-center">
-                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot7.jpg')}}" alt="tdoctor" class="img-fluid">
+                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot8.jpg')}}" alt="tdoctor" class="img-fluid" width="700" height="285">
                     </div>
                     <div class="swiper-slide text-center">
-                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot8.jpg')}}" alt="tdoctor" class="img-fluid">
+                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot9.jpg')}}" alt="tdoctor" class="img-fluid" width="700" height="285">
                     </div>
                     <div class="swiper-slide text-center">
-                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot9.jpg')}}" alt="tdoctor" class="img-fluid">
+                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot10.jpg')}}" alt="tdoctor" class="img-fluid" width="700" height="285">
                     </div>
                     <div class="swiper-slide text-center">
-                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot10.jpg')}}" alt="tdoctor" class="img-fluid">
-                    </div>
-                    <div class="swiper-slide text-center">
-                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot12.jpg')}}" alt="tdoctor" class="img-fluid">
+                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot12.jpg')}}" alt="tdoctor" class="img-fluid" width="700" height="285">
                     </div>
                 </div>
             </div>
-            <div class="d-block d-md-none">
+            <div class="d-block d-md-none" style="height:145px">
                 <div class="banner_doitac_mobi cS-hidden">
                     <div class="swiper-slide text-center">
-                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot5.jpg')}}" alt="tdoctor" class="img-fluid">
+                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot6.jpg')}}" alt="tdoctor" class="img-fluid" width="428" height="145">
                     </div>
                     <div class="swiper-slide text-center">
-                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot6.jpg')}}" alt="tdoctor" class="img-fluid">
+                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot7.jpg')}}" alt="tdoctor" class="img-fluid" width="428" height="145">
                     </div>
                     <div class="swiper-slide text-center">
-                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot7.jpg')}}" alt="tdoctor" class="img-fluid">
+                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot8.jpg')}}" alt="tdoctor" class="img-fluid" width="428" height="145">
                     </div>
                     <div class="swiper-slide text-center">
-                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot8.jpg')}}" alt="tdoctor" class="img-fluid">
+                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot9.jpg')}}" alt="tdoctor" class="img-fluid" width="428" height="145">
                     </div>
                     <div class="swiper-slide text-center">
-                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot9.jpg')}}" alt="tdoctor" class="img-fluid">
+                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot10.jpg')}}" alt="tdoctor" class="img-fluid" width="428" height="145">
                     </div>
                     <div class="swiper-slide text-center">
-                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot10.jpg')}}" alt="tdoctor" class="img-fluid">
-                    </div>
-                    <div class="swiper-slide text-center">
-                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot12.jpg')}}" alt="tdoctor" class="img-fluid">
+                        <img src="{{asset('laravel-filemanager/fileUpload/banner/bn_duoctot12.jpg')}}" alt="tdoctor" class="img-fluid" width="428" height="145">
                     </div>
                 </div>
             </div>
         </div>
-        <!-- <div class="d-none d-lg-block col-lg-4">
-            <div>
-                <a href="https://tdoctor.net/danh-muc/cham-soc-ca-nhan/duoc-my-pham-trang-diem"><img src="{{asset('images/shop/banner-right-home1.webp')}}" alt="tdotor" class="img-fluid" width="428" height="253" loading="lazy"></a>
-            </div>
-        </div> -->
     </div>
 </div>
 <div class="wp-inner">

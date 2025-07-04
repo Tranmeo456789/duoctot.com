@@ -33,8 +33,23 @@ class HomeController extends ShopFrontEndController
         $numTake=10;
         $keyCache = 'cache_product_data';
         $keyCachePost = 'cache_post_data';
+        $keyCacheNcc = 'cache_ncc_data';
         $dataCache = Cache::get($keyCache);
         $dataPostCache = Cache::get($keyCachePost);
+        $dataNccCache = Cache::get($keyCacheNcc);
+        if(!empty($dataNccCache)){
+            $productcers = $dataNccCache['productcers'];
+        }else{
+            $arrayIds = [1144150808, 1144150821, 1144150807, 1144150805, 1144150804, 1144150797, 1144150796, 1144150792, 1144150791, 1144150788];
+            $productcers = UsersModel::whereIn('user_id', $arrayIds)
+            ->orderBy('user_id', 'DESC')
+            ->take(10)
+            ->get();
+            $cacheData = [
+                'productcers' => $productcers,
+            ];
+            Cache::put($keyCacheNcc, $cacheData, 100000000);
+        }
         if(!empty($dataPostCache)){
             $itemsArticle = $dataPostCache['itemsArticle'];
         }else{
@@ -83,7 +98,6 @@ class HomeController extends ShopFrontEndController
         if($request->formRegister){
             $formRegister =1;
         }
-        $productcers=UsersModel::whereIn('user_type_id', [9])->orderBy('user_id', 'DESC')->take(20)->get();
         return view(
             $this->pathViewController . 'index',
             compact('product_selling','product_covid','productInObject','itemsProduct','couterSumProduct','countproductInObject','itemsArticle','formRegister','productcers')
@@ -323,7 +337,7 @@ class HomeController extends ShopFrontEndController
     }
     public function pageKhuyenMai(){
         $title = 'Khuyến Mãi | Tdoctor';
-        $arrayIds = [1144150873, 1144150856, 1144150849, 1144150845, 1144150836, 1144150835, 1144150833, 1144150821, 1144150811, 1144150788];
+        $arrayIds = [1144150808, 1144150821, 1144150807, 1144150805, 1144150804, 1144150797, 1144150796, 1144150792, 1144150791, 1144150788];
         $productcers = UsersModel::whereIn('user_id', $arrayIds)
         ->orderBy('user_id', 'DESC')
         ->take(10)
@@ -349,7 +363,7 @@ class HomeController extends ShopFrontEndController
                 'title' => $title
             ]);
         } else {
-            return view('shop.frontend.pages.error.vui_long_dang_nhap');
+            return view('shop.frontend.pages.error.diem_tich_luy_chua_login');
         }
     }
     public function pageRiengChoBan(Request $request) {
