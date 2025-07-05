@@ -109,7 +109,7 @@ class ProductController extends ApiController
                 $listRating[$key]['comment_child']=$listRatingChild;
                 $albumImageCurrent=!empty($rating0['albumImageHash']) ? explode('|', $rating0['albumImageHash']) : [];
                 $listRating[$key]['albumImage'] = $albumImageCurrent;
-                $listRating[$key]['linkPrefix'] = 'https://tdoctor.net/laravel-filemanager/fileUpload/comment/';
+                $listRating[$key]['linkPrefix'] = 'https://duoctot.com/laravel-filemanager/fileUpload/comment/';
             }
         }
         $listComment = (new CommentModel)->listItems(['product_id'=>$params['id'],'parent_id'=>0],['task'=>'list-items-parent-id-0-api']);
@@ -119,7 +119,7 @@ class ProductController extends ApiController
                 $listComment[$key]['comment_child']=$listCommentChild;
                 $albumImageCurrent=!empty($comment0['albumImageHash']) ? explode('|', $comment0['albumImageHash']) : [];
                 $listRating[$key]['albumImage'] = $albumImageCurrent;
-                $listRating[$key]['linkPrefix'] = 'https://tdoctor.net/laravel-filemanager/fileUpload/comment/';
+                $listRating[$key]['linkPrefix'] = 'https://duoctot.com/laravel-filemanager/fileUpload/comment/';
             }
         }
         $itemCurrent=$this->model->getItem($params,['task'=>'frontend-get-item-api']);
@@ -229,7 +229,7 @@ class ProductController extends ApiController
             if (isset($catMap[$val['cat_product_id']])) {
                 $listProduct[$key]['cat_product_id'] = $catMap[$val['cat_product_id']];
             }
-            $listProduct[$key]['url_image'] = 'https://tdoctor.net'.$val['image'];
+            $listProduct[$key]['url_image'] = 'https://duoctot.com'.$val['image'];
 
             // Xử lý danh sách ảnh chi tiết
             $albumHash = $val['albumImageHash'] ?? '';
@@ -237,7 +237,7 @@ class ProductController extends ApiController
             if (!empty($albumHash)) {
                 $hashArray = explode('|', $albumHash);
                 foreach ($hashArray as $hash) {
-                    $imagePaths[] = 'https://tdoctor.net/laravel-filemanager/fileUpload/product/' . $hash;
+                    $imagePaths[] = 'https://duoctot.com/laravel-filemanager/fileUpload/product/' . $hash;
                 }
             }
             $listProduct[$key]['album_images'] = $imagePaths;
@@ -293,14 +293,14 @@ class ProductController extends ApiController
             if (isset($catMap[$val['cat_product_id']])) {
                 $listProduct[$key]['cat_product_id'] = $catMap[$val['cat_product_id']];
             }
-            $listProduct[$key]['url_image'] = 'https://tdoctor.net'.$val['image'];
+            $listProduct[$key]['url_image'] = 'https://duoctot.com'.$val['image'];
             // Xử lý danh sách ảnh chi tiết
             $albumHash = $val['albumImageHash'] ?? '';
             $imagePaths = [];
             if (!empty($albumHash)) {
                 $hashArray = explode('|', $albumHash);
                 foreach ($hashArray as $hash) {
-                    $imagePaths[] = 'https://tdoctor.net/laravel-filemanager/fileUpload/product/' . $hash;
+                    $imagePaths[] = 'https://duoctot.com/laravel-filemanager/fileUpload/product/' . $hash;
                 }
             }
             $listProduct[$key]['album_images'] = $imagePaths;

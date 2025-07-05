@@ -7,12 +7,12 @@
             <div class="d-none d-md-block">
                 <ul class="banner_doitac list-unstyled cS-hidden">
                     <li class="text-center">
-                        <a href="https://tdoctor.net/chi-tiet-san-pham/bot-phyto-precollagen-vitac-biotin-3500.html">
+                        <a href="https://duoctot.com/chi-tiet-san-pham/bot-phyto-precollagen-vitac-biotin-3500.html">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner11.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="https://tdoctor.net/chi-tiet-san-pham/bot-phyto-precollagen-vitac-biotin-3500.html">
+                        <a href="https://duoctot.com/chi-tiet-san-pham/bot-phyto-precollagen-vitac-biotin-3500.html">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner11.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
@@ -21,12 +21,12 @@
             <div class="d-block d-md-none">
                 <ul class="banner_doitac list-unstyled cS-hidden">
                     <li class="text-center">
-                        <a href="https://tdoctor.net/chi-tiet-san-pham/bot-phyto-precollagen-vitac-biotin-3500.html">
+                        <a href="https://duoctot.com/chi-tiet-san-pham/bot-phyto-precollagen-vitac-biotin-3500.html">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner16_mobi.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
                     <li class="text-center">
-                        <a href="https://tdoctor.net/chi-tiet-san-pham/bot-phyto-precollagen-vitac-biotin-3500.html">
+                        <a href="https://duoctot.com/chi-tiet-san-pham/bot-phyto-precollagen-vitac-biotin-3500.html">
                             <img src="{{asset('laravel-filemanager/fileUpload/banner/banner16_mobi.webp')}}" alt="tdoctor" class="img-fluid">
                         </a>
                     </li>
@@ -35,7 +35,7 @@
         </div>
         <div class="d-none d-lg-block col-lg-4">
             <div>
-                <a href="https://tdoctor.net/danh-muc/cham-soc-ca-nhan/duoc-my-pham-trang-diem"><img src="{{asset('images/shop/banner-right-home1.webp')}}" alt="tdotor" class="img-fluid"></a>
+                <a href="https://duoctot.com/danh-muc/cham-soc-ca-nhan/duoc-my-pham-trang-diem"><img src="{{asset('images/shop/banner-right-home1.webp')}}" alt="tdotor" class="img-fluid"></a>
             </div>
         </div>
     </div>

@@ -135,7 +135,7 @@ class SearchController extends ShopFrontEndController
         // ->take(1000)
         // ->pluck('slug');
         // $urls = $slugs->map(function ($slug) {
-        //     return 'https://tdoctor.net/chi-tiet-san-pham/' . $slug.'.html';
+        //     return 'https://duoctot.com/chi-tiet-san-pham/' . $slug.'.html';
         // });
         // foreach ($urls as $url) {
         //     echo $url . '<br>';

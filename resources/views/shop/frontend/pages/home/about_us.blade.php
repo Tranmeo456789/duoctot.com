@@ -17,7 +17,7 @@
             <img src="{{asset('public/shop/frontend/images/aboutUs/ve-chung-toi-anh-2.jpg')}}" alt="">
         </div>
         <div class="top-new">
-            <p style="font-size: 16px;">Chúng tôi là DƯỢC TỐT là Nền tảng kết nối y dược nhà thuốc, phòng khám , bệnh nhân với công ty dược và thực phẩm chức năng uy tín nhất Việt nam với những bác sĩ nhiều kinh nghiệm, chúng tôi phục vụ người bệnh mọi lúc mọi nơi. <a style="font-size: 16px; color: #2b96cc;" href="https://tdoctor.net/">tdoctor.net</a> là công ty công nghệ với mong muốn sẽ xây dựng được một hệ thống chăm sóc sức khỏe toàn diện thông qua ứng dụng trên điện thoại và web. Ứng dụng tdoctor trên smartphone / tablet phiên bản Android và IOS cung cấp dịch vụ chăm sóc sức khỏe chủ động đầu tiên tại Việt Nam. Dựa trên nền tảng công nghệ thông tin, ứng dụng tdoctor giúp kết nối người dùng và Bác Sĩ dễ dàng ở mọi lúc, mọi nơi. Người dùng có thể sử dụng ứng dụng để được tư vấn sức khỏe, tra cứu SP & phòng khám, cùng các dịch vụ sức khỏe khác.</p>
+            <p style="font-size: 16px;">Chúng tôi là DƯỢC TỐT là Nền tảng kết nối y dược nhà thuốc, phòng khám , bệnh nhân với công ty dược và thực phẩm chức năng uy tín nhất Việt nam với những bác sĩ nhiều kinh nghiệm, chúng tôi phục vụ người bệnh mọi lúc mọi nơi. <a style="font-size: 16px; color: #2b96cc;" href="https://duoctot.com/">tdoctor.net</a> là công ty công nghệ với mong muốn sẽ xây dựng được một hệ thống chăm sóc sức khỏe toàn diện thông qua ứng dụng trên điện thoại và web. Ứng dụng tdoctor trên smartphone / tablet phiên bản Android và IOS cung cấp dịch vụ chăm sóc sức khỏe chủ động đầu tiên tại Việt Nam. Dựa trên nền tảng công nghệ thông tin, ứng dụng tdoctor giúp kết nối người dùng và Bác Sĩ dễ dàng ở mọi lúc, mọi nơi. Người dùng có thể sử dụng ứng dụng để được tư vấn sức khỏe, tra cứu SP & phòng khám, cùng các dịch vụ sức khỏe khác.</p>
             <br />
             <div class="mb-3 text-center">
                 <img src="{{asset('public/shop/frontend/images/aboutUs/ve-chung-toi-3.jpg')}}" alt="">
@@ -221,7 +221,7 @@
             </div>
             <p>Bây giờ người bệnh có thể tương tác với bác sĩ trực tiếp mọi lúc mọi nơi</p>
             <br>
-            <h4 class="h4-abu">2. Văn hóa tại <a class="link-p" href="https://tdoctor.net/">www.tdoctor.net</a></h4>
+            <h4 class="h4-abu">2. Văn hóa tại <a class="link-p" href="https://duoctot.com/">www.tdoctor.net</a></h4>
             <p class="p-abu">Chúng tôi là mô hình công bằng với hệ thống tổ chức phẳng, chúng tôi tôn trọng chuyên môn của các bác sĩ giỏi, nhiều kinh nghiệm và tâm huyết với nghề. Chúng tôi luôn tôn trọng người dùng là bệnh nhân. Với chúng tôi bệnh nhân chính là đối tượng được phục vụ, là trung tâm của hệ thống</p>
             <div class="div-abu" style="text-align:center">
                 <img style="width: 60%;" src="{{asset('public/shop/frontend/images/aboutUs/2.jpg')}}">

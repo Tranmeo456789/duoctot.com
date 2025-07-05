@@ -8,22 +8,22 @@
                 <div class="swiper banner_doitac">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide text-center">
-                            <a href="https://tdoctor.net/cong-ty-tnhh-nohtus-vietnam.html">
+                            <a href="https://duoctot.com/cong-ty-tnhh-nohtus-vietnam.html">
                                 <img src="{{asset('laravel-filemanager/fileUpload/banner/banner11.webp')}}" alt="tdoctor" class="img-fluid" width="860" height="260">
                             </a>
                         </div>
                         <div class="swiper-slide text-center">
-                            <a href="https://tdoctor.net/cong-ty-duoc-pham-dongsung-bio-pharm.html">
+                            <a href="https://duoctot.com/cong-ty-duoc-pham-dongsung-bio-pharm.html">
                                 <img src="{{asset('laravel-filemanager/fileUpload/banner/banner17.webp')}}" alt="tdoctor" class="img-fluid" width="860" height="260" loading="lazy">
                             </a>
                         </div>
                         <div class="swiper-slide text-center">
-                            <a href="https://tdoctor.net/cong-ty-tnhh-nohtus-vietnam.html">
+                            <a href="https://duoctot.com/cong-ty-tnhh-nohtus-vietnam.html">
                                 <img src="{{asset('laravel-filemanager/fileUpload/banner/banner18.webp')}}" alt="tdoctor" class="img-fluid" width="860" height="260" loading="lazy">
                             </a>
                         </div>
                         <div class="swiper-slide text-center">
-                            <a href="https://tdoctor.net/cong-ty-tnhh-duoc-pham-pegasus.html">
+                            <a href="https://duoctot.com/cong-ty-tnhh-duoc-pham-pegasus.html">
                                 <img src="{{asset('laravel-filemanager/fileUpload/banner/banner_pegasus.webp')}}" alt="tdoctor" class="img-fluid" width="860" height="260" loading="lazy">
                             </a>
                         </div>
@@ -33,7 +33,7 @@
                             </a>
                         </div>
                         <div class="swiper-slide text-center">
-                            <a href="https://tdoctor.net/trungson-healthcare.html">
+                            <a href="https://duoctot.com/trungson-healthcare.html">
                                 <img src="{{asset('laravel-filemanager/fileUpload/banner/banner21.webp')}}" alt="tdoctor" class="img-fluid" width="860" height="260" loading="lazy">
                             </a>
                         </div>
@@ -99,22 +99,22 @@
                 <div class="swiper banner_doitac">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide text-center">
-                            <a href="https://tdoctor.net/cong-ty-tnhh-nohtus-vietnam.html">
+                            <a href="https://duoctot.com/cong-ty-tnhh-nohtus-vietnam.html">
                                 <img src="{{asset('laravel-filemanager/fileUpload/banner/banner16_mobi.webp')}}" alt="tdoctor" class="img-fluid" width="428" height="131">
                             </a>
                         </div>
                         <div class="swiper-slide text-center">
-                            <a href="https://tdoctor.net/cong-ty-duoc-pham-dongsung-bio-pharm.html">
+                            <a href="https://duoctot.com/cong-ty-duoc-pham-dongsung-bio-pharm.html">
                                 <img src="{{asset('laravel-filemanager/fileUpload/banner/banner17_mobi.webp')}}" alt="tdoctor" class="img-fluid" width="428" height="131" loading="lazy">
                             </a>
                         </div>
                         <div class="swiper-slide text-center">
-                            <a href="https://tdoctor.net/cong-ty-tnhh-nohtus-vietnam.html">
+                            <a href="https://duoctot.com/cong-ty-tnhh-nohtus-vietnam.html">
                                 <img src="{{asset('laravel-filemanager/fileUpload/banner/banner18_mobi.webp')}}" alt="tdoctor" class="img-fluid" width="428" height="131" loading="lazy">
                             </a>
                         </div>
                         <div class="swiper-slide text-center">
-                            <a href="https://tdoctor.net/cong-ty-tnhh-duoc-pham-pegasus.html">
+                            <a href="https://duoctot.com/cong-ty-tnhh-duoc-pham-pegasus.html">
                                 <img src="{{asset('laravel-filemanager/fileUpload/banner/banner_pegasus_mobi.webp')}}" alt="tdoctor" class="img-fluid" width="428" height="131" loading="lazy">
                             </a>
                         </div>
@@ -124,7 +124,7 @@
                             </a>
                         </div>
                         <div class="swiper-slide text-center">
-                            <a href="https://tdoctor.net/trungson-healthcare.html">
+                            <a href="https://duoctot.com/trungson-healthcare.html">
                                 <img src="{{asset('laravel-filemanager/fileUpload/banner/banner21.webp')}}" alt="tdoctor" class="img-fluid" width="428" height="131" loading="lazy">
                             </a>
                         </div>

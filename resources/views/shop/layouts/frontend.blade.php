@@ -47,12 +47,12 @@
         {
             "@context": "https://schema.org",
             "@type": "WebSite",
-            "url": "https://tdoctor.net",
+            "url": "https://duoctot.com",
             "potentialAction": {
                 "@type": "SearchAction",
                 "target": {
                     "@type": "EntryPoint",
-                    "urlTemplate": "https://tdoctor.net/tim-kiem?s={search_term_string}"
+                    "urlTemplate": "https://duoctot.com/tim-kiem?s={search_term_string}"
                 },
                 "query-input": "required name=search_term_string"
             }
@@ -63,8 +63,8 @@
         {
             "@context": "https://schema.org",
             "@type": "Organization",
-            "url": "https://tdoctor.net",
-            "logo": "https://tdoctor.net/images/shop/logo-favicon.png"
+            "url": "https://duoctot.com",
+            "logo": "https://duoctot.com/images/shop/logo-favicon.png"
         }
     </script>
     @include('shop.frontend.block.head')

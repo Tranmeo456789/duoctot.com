@@ -51,7 +51,7 @@ io.on('connection', (socket) => {
                 user_send: data.user_send    // Thông tin người gửi (nếu có)
             });
             const imageBuffer = Buffer.from(data.content.split(',')[1], 'base64');  // Chuyển dữ liệu nhị phân thành Buffer
-            axios.post('https://tdoctor.net/api/message/saveMessageImage', {
+            axios.post('https://duoctot.com/api/message/saveMessageImage', {
                 content: imageBuffer.toString('base64'),
                 room_id: data.room_id,
                 user_id: data.user_id
@@ -66,7 +66,7 @@ io.on('connection', (socket) => {
                 created_at: data.created_at, // Thời gian gửi tin nhắn
                 user_send: data.user_send    // Thông tin người gửi (nếu có)
             });
-            axios.post('https://tdoctor.net/api/message/saveMessageAxios', {
+            axios.post('https://duoctot.com/api/message/saveMessageAxios', {
                 content: data.content,
                 room_id: data.room_id,
                 user_id: data.user_id

@@ -23,7 +23,7 @@ class Form
         $widthElement = isset($element['widthElement']) ? $element['widthElement'] : "col-12";
         $xhtml = null;
         $styleFormGroup = isset($element['styleFormGroup']) ? $element['styleFormGroup'] : '';
-        $prefix = isset($element['prefix']) ? $element['prefix'] : "https://tdoctor.net/";
+        $prefix = isset($element['prefix']) ? $element['prefix'] : "https://duoctot.com/";
         switch ($type) {
             case 'input':
                 $xhtml .= sprintf(

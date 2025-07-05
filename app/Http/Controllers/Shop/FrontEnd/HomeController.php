@@ -28,7 +28,7 @@ class HomeController extends ShopFrontEndController
         if ($request->has('t')) {
             return redirect()->to(route('home'));
         }
-        //Cache::forget('cache_product_data'); 
+        Cache::forget('cache_product_data'); 
         //Cache::forget('cache_post_data');
         $numTake=10;
         $keyCache = 'cache_product_data';
