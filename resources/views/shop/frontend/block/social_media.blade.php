@@ -48,6 +48,9 @@
         justify-content: space-between;
         width: 100%;
     }
+    .contact-menu ul li a{
+        font-size: 12px;
+    }
 }
 </style>
 <contact-menu class="contact-menu">
@@ -56,31 +59,31 @@
             <a class="image-contact" href="{{route('home')}}">
                 <img src="{{asset('images/shop/trangchu.jpg')}}" alt="trang chủ">
             </a>
-            <a href="{{route('home')}}" class="text-secondary">Trang chủ</a>
+            <a href="{{route('home')}}" class="text-primary font-weight-bold">Trang chủ</a>
         </li>
         <li id="icon-fixed__facebook">
             <a class="image-contact" href="{{route('fe.home.pageKhuyenMai')}}">
                 <img src="{{asset('images/shop/khuyenmai.jpg')}}" alt="khuyến mãi">
             </a>
-            <a href="{{route('fe.home.pageKhuyenMai')}}" class="text-secondary">Khuyến mãi</a>
+            <a href="{{route('fe.home.pageKhuyenMai')}}" class="text-primary font-weight-bold">Khuyến mãi</a>
         </li>
         <li id="icon-fixed__facebook">
             <a class="image-contact" href="{{route('fe.home.pageDiemTichLuy')}}">
                 <img src="{{asset('images/shop/tichluy.jpg')}}" alt="Điểm tích lũy">
             </a>
-            <a href="{{route('fe.home.pageDiemTichLuy')}}" class="text-secondary">Điểm tích lũy</a>
+            <a href="{{route('fe.home.pageDiemTichLuy')}}" class="text-primary font-weight-bold">Điểm tích lũy</a>
         </li>
         <li id="icon-fixed__facebook">
             <a class="image-contact" href="{{route('fe.home.pageRiengChoBan')}}">
                 <img src="{{asset('images/shop/riengchoban.jpg')}}" alt="riêng cho bạn">
             </a>
-            <a href="{{route('fe.home.pageRiengChoBan')}}" class="text-secondary">Riêng cho bạn</a>
+            <a href="{{route('fe.home.pageRiengChoBan')}}" class="text-primary font-weight-bold">Riêng cho bạn</a>
         </li>
         <li id="icon-fixed__facebook">
             <a class="image-contact" href="{{route('fe.home.pageDanhSachDonMua')}}">
                 <img src="{{asset('images/shop/donmua.jpg')}}" alt="Đơn hàng">
             </a>
-            <a href="{{route('fe.home.pageDanhSachDonMua')}}" class="text-secondary">Đơn hàng</a>
+            <a href="{{route('fe.home.pageDanhSachDonMua')}}" class="text-primary font-weight-bold">Đơn hàng</a>
         </li>
     </ul>
 </contact-menu>
