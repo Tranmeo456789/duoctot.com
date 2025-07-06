@@ -110,5 +110,15 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('product3-sitemap.xml','HomeController@siteProduct3');
 
     Route::get('{slug}.html','ProductController@drugstore')->name('fe.product.drugstore');
-
+    
+    Route::get('dong-du-lieu-bang-user','SyncTdoctorController@transferUsers')->name('fe.SyncTdoctor.transferUsers');
+    Route::get('dong-du-lieu-bang-user_token','SyncTdoctorController@transferUserToken')->name('fe.SyncTdoctor.transferUserToken');
+    Route::get('dong-du-lieu-bang-user_values','SyncTdoctorController@transferUserValues')->name('fe.SyncTdoctor.transferUserValues');
+    Route::get('dong-du-lieu-bang-warehouses','SyncTdoctorController@transferWarehouses')->name('fe.SyncTdoctor.transferWarehouses');
+    Route::get('dong-du-lieu-bang-producers','SyncTdoctorController@transferProducers')->name('fe.SyncTdoctor.transferProducers');
+    Route::get('dong-du-lieu-bang-units','SyncTdoctorController@transferUnits')->name('fe.SyncTdoctor.transferUnits');
+    Route::get('dong-du-lieu-bang-trademarks','SyncTdoctorController@transferTrademarks')->name('fe.SyncTdoctor.transferTrademarks');
+    Route::get('dong-du-lieu-bang-products','SyncTdoctorController@transferProducts')->name('fe.SyncTdoctor.transferProducts');
+    Route::get('dong-du-lieu-bang-product_warehouse','SyncTdoctorController@productWarehouse')->name('fe.SyncTdoctor.productWarehouse');
+    Route::get('dong-du-lieu-bang-import_coupon','SyncTdoctorController@transferImportCoupon')->name('fe.SyncTdoctor.transferImportCoupon');
 });

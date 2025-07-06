@@ -278,32 +278,74 @@
                     <p>Quản lý Editor</p>
                 </a>
             </li>
-            <!-- <li class="nav-item">
-                <a href="{{route('banner')}}" class="nav-link">
-                    <i class="nav-icon far fa-images"></i>
-                    <p>Quản lý Banner, Quảng cáo</p>
-                </a>
-            </li> -->
-            <!-- <li class="nav-item">
+            <li class="nav-item">
                 <a href="" class="nav-link">
-                    <i class="nav-icon fas fa-external-link-square-alt"></i>
-                    <p>Affiliate<i class="right fas fa-angle-left"></i></p>
+                    <i class="nav-icon fas fa-cog"></i>
+                    <p>Sync Tdoctor.net<i class="right fas fa-angle-left"></i></p>
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('affiliate')}}" class="nav-link">
+                        <a href="{{route('fe.SyncTdoctor.transferUsers')}}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
-                            <p>Quản lý chung</p>
+                            <p>Sync Users</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('couponPayment')}}" class="nav-link">
+                        <a href="{{route('fe.SyncTdoctor.transferUserToken')}}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
-                            <p>DS phiếu thanh toán</p>
+                            <p>Sync UserToken</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('fe.SyncTdoctor.transferUserValues')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Sync UserValues</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('fe.SyncTdoctor.transferWarehouses')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Sync Warehouses</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('fe.SyncTdoctor.transferProducers')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Sync Producers</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('fe.SyncTdoctor.transferUnits')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Sync Units</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('fe.SyncTdoctor.transferTrademarks')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Sync Trademarks</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('fe.SyncTdoctor.transferProducts')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Sync Products</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('fe.SyncTdoctor.productWarehouse')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Sync Warehouse</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('fe.SyncTdoctor.transferImportCoupon')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Sync ImportCoupon</p>
                         </a>
                     </li>
                 </ul>
-            </li> -->
+            </li>
             @endif
             <li class="nav-item">
                 <a href="{{route('user.logout')}}" class="nav-link">
