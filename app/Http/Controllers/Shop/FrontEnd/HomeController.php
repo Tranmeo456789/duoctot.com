@@ -29,7 +29,7 @@ class HomeController extends ShopFrontEndController
             return redirect()->to(route('home'));
         }
         Cache::forget('cache_product_data'); 
-        //Cache::forget('cache_post_data');
+        //Cache::forget('cache_ncc_data');
         $numTake=10;
         $keyCache = 'cache_product_data';
         $keyCachePost = 'cache_post_data';
@@ -40,7 +40,7 @@ class HomeController extends ShopFrontEndController
         if(!empty($dataNccCache)){
             $productcers = $dataNccCache['productcers'];
         }else{
-            $arrayIds = [1144150808, 1144150821, 1144150807, 1144150805, 1144150804, 1144150797, 1144150796, 1144150792, 1144150791, 1144150788];
+            $arrayIds = [1144150905, 1144150808, 1144150821, 1144150807, 1144150805, 1144150804, 1144150797, 1144150796, 1144150792, 1144150791, 1144150788];
             $productcers = UsersModel::whereIn('user_id', $arrayIds)
             ->orderBy('user_id', 'DESC')
             ->take(10)
