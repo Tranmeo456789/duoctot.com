@@ -7,7 +7,11 @@
 </script>
 @endsection
 @section('content')
-<div class="container-slider mt-0 mt-lg-2 pl-0 pl-lg-2 mb-2">
+<div class="wp-inner mt-2 mt-lg-3">
+    @include("$moduleName.templates.box_title_product",['title' => 'CHỌN NHÀ CUNG CẤP','classBackground'=>'bg-danger'])
+    @include("$moduleName.pages.$controllerName.child_index.chon_nha_cung_cap",['items'=>$productcers])
+</div>
+<div class="container-slider mt-3 mt-lg-4 pl-0 pl-lg-2 mb-2">
     <div class="row">
         <div class="col-12">
             <div class="d-none d-md-block" style="height:285px">
@@ -73,10 +77,6 @@
 <div class="wp-inner mt-3 mt-lg-4">
     @include("$moduleName.templates.box_title_product",['title' => 'Giá sốc','classBackground'=>'bg-danger'])
     @include("$moduleName.pages.$controllerName.child_index.list_product_gia_soc",['items'=>$itemsProduct['best']])
-</div>
-<div class="wp-inner mt-3 mt-lg-4">
-    @include("$moduleName.templates.box_title_product",['title' => 'CHỌN NHÀ CUNG CẤP','classBackground'=>'bg-danger'])
-    @include("$moduleName.pages.$controllerName.child_index.chon_nha_cung_cap",['items'=>$productcers])
 </div>
 <div class="wp-inner mt-3 mt-lg-4">
     @include("$moduleName.templates.box_title_product",['title' => 'CHỌN THƯƠNG HIỆU','classBackground'=>'bg-danger'])
