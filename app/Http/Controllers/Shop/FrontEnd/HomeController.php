@@ -40,7 +40,7 @@ class HomeController extends ShopFrontEndController
         if(!empty($dataNccCache)){
             $productcers = $dataNccCache['productcers'];
         }else{
-            $arrayIds = [1144150682, 1144150691, 994110253, 1144150905, 1144150808, 1144150821, 1144150807, 1144150805, 1144150804, 1144150797, 1144150796, 1144150792, 1144150791, 1144150788];
+            $arrayIds = [1144150923, 1144150918,1144150682, 1144150691, 994110253, 1144150905, 1144150808, 1144150821, 1144150807, 1144150805, 1144150804, 1144150797, 1144150796, 1144150792, 1144150791, 1144150788];
             $productcers = UsersModel::whereIn('user_id', $arrayIds)->get();
             $cacheData = [
                 'productcers' => $productcers,
