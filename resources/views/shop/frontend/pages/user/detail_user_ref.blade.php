@@ -1,7 +1,7 @@
 @php
 $title = 'Người hướng dẫn tại Tdoctor';
 $imageItem = 'images/shop/favicon.png';
-$description = 'Tdoctor là một giải pháp cho các nhà thuốc, các doanh nghiệp, công ty dược phẩm tăng doanh thu một cách nhanh chóng.';
+$description = 'DƯỢC TỐT là Nền tảng kết nối y dược nhà thuốc, phòng khám , bệnh nhân với công ty dược và thực phẩm chức năng uy tín nhất Việt nam.';
 @endphp
 <!DOCTYPE html>
 <html>
