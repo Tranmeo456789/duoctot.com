@@ -209,6 +209,16 @@ class ProductController extends ShopFrontEndController
             'shop_id' => $shopId,
             'rating' => 1
         ], ['task' => 'list-items-frontend']);
+        $productKhuyenMai = $this->model->listItems(['type' => 'khuyen_mai','user_id'=>$shopId], ['task' => 'frontend-list-items'])->take(10);
+        if(count($productKhuyenMai)<2){
+            $listIdProductAddSelect = collect($userInfo->listIdProduct)->pluck('product_id')->toArray();
+            $productKhuyenMai = $this->model->listItems([
+            'group_id' => $listIdProductAddSelect,
+            'user_id' => $shopId,
+            'take' => 5,
+            'random' => true,
+        ], ['task' => 'frontend-list-item-shop']) ?? [];
+        }
         // Trả về view
         return view($this->pathViewController . 'drugstore', [
             'userInfo' => $userInfo,
@@ -217,7 +227,8 @@ class ProductController extends ShopFrontEndController
             'map' => $map,
             'title' => $title,
             'commentShop' => $commentShop,
-            'ratingShop' => $ratingShop
+            'ratingShop' => $ratingShop,
+            'productKhuyenMai'=>$productKhuyenMai
         ]);
     }
     public function addCommentProduct(Request $request)

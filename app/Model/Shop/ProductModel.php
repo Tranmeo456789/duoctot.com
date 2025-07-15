@@ -382,9 +382,9 @@ class ProductModel extends BackEndModel
             $result = $query->orderBy('id', 'desc')->get();
         }
         if ($options['task'] == "frontend-list-item-shop") {
-            $query = $this::select('id', 'name', 'type', 'code', 'cat_product_id', 'price', 'price_vat', 'percent_discount', 'unit_id', 'specification', 'image', 'user_id', 'featurer', 'slug', 'discount_ref', 'dosage_forms', 'elements','show_price')
-            ->where('id', '>', 1)
-            ->where('status_product', 'da_duyet');
+            $query = $this::select('id','name','type','code','cat_product_id','price','price_vat','percent_discount','unit_id','specification','image','user_id','featurer','slug','discount_ref','dosage_forms','elements','show_price')
+                ->where('id', '>', 1)
+                ->where('status_product', 'da_duyet');
             if (isset($params['group_id'])) {
                 $query->whereIn('id', $params['group_id']);
             }
@@ -400,7 +400,13 @@ class ProductModel extends BackEndModel
             if (isset($params['take'])) {
                 $query->take($params['take']);
             }
-            $result = $query->orderBy('id', 'desc')->get();
+            // Nếu có tham số random, lấy sản phẩm ngẫu nhiên
+            if (!empty($params['random']) && $params['random'] === true) {
+                $query->inRandomOrder();
+            } else {
+                $query->orderBy('id', 'desc');
+            }
+            $result = $query->get();
         }
         if ($options['task'] == "frontend-list-item-shop-api") {
             $query = $this::select('id', 'name', 'code', 'cat_product_id', 'price', 'unit_id', 'image', 'user_id','show_price')
