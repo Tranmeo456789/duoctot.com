@@ -3,7 +3,7 @@
 @section('content')
 <style>
     .element-1500>ul {
-        width: 1500px;
+        width: 3000px;
     }
 
     .element-1500>ul li {

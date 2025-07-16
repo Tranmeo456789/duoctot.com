@@ -40,8 +40,11 @@ class HomeController extends ShopFrontEndController
         if(!empty($dataNccCache)){
             $productcers = $dataNccCache['productcers'];
         }else{
-            $arrayIds = [1144150924, 1144150923, 1144150918,1144150682, 1144150691, 994110253, 1144150905, 1144150808, 1144150821, 1144150807, 1144150805, 1144150804, 1144150797, 1144150796, 1144150792, 1144150791, 1144150788];
-            $productcers = UsersModel::whereIn('user_id', $arrayIds)->get();
+            $arrayIds = [1144150936,1144150924, 1144150923, 1144150918,1144150682, 1144150691, 994110253, 1144150905, 1144150808, 1144150821, 1144150807, 1144150805, 1144150804, 1144150797, 1144150796, 1144150792, 1144150791, 1144150788];
+            $productcersRaw = UsersModel::whereIn('user_id', $arrayIds)->get()->keyBy('user_id');
+            $productcers = collect($arrayIds)->map(function ($id) use ($productcersRaw) {
+                return $productcersRaw->get($id);
+            })->filter();
             $cacheData = [
                 'productcers' => $productcers,
             ];
@@ -334,11 +337,11 @@ class HomeController extends ShopFrontEndController
     }
     public function pageKhuyenMai(){
         $title = 'Khuyến Mãi | Tdoctor';
-        $arrayIds = [1144150924, 1144150923, 1144150918,1144150682, 1144150691, 994110253, 1144150905, 1144150808, 1144150821, 1144150807, 1144150805, 1144150804, 1144150797, 1144150796, 1144150792, 1144150791, 1144150788];
-        $productcers = UsersModel::whereIn('user_id', $arrayIds)
-        ->orderBy('user_id', 'DESC')
-        ->take(10)
-        ->get();
+        $arrayIds = [1144150936,1144150924, 1144150923, 1144150918,1144150682, 1144150691, 994110253, 1144150905, 1144150808, 1144150821, 1144150807, 1144150805, 1144150804, 1144150797, 1144150796, 1144150792, 1144150791, 1144150788];
+            $productcersRaw = UsersModel::whereIn('user_id', $arrayIds)->get()->keyBy('user_id');
+            $productcers = collect($arrayIds)->map(function ($id) use ($productcersRaw) {
+                return $productcersRaw->get($id);
+            })->filter();
         $firstUser = $productcers->first();
         $idFirstUser = $firstUser->user_id ?? 1; // Truy cập bằng object
         $listIdProductAddSelect = collect($firstUser->listIdProduct)->pluck('product_id')->toArray();
