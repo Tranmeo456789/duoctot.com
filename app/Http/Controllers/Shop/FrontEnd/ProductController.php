@@ -158,7 +158,7 @@ class ProductController extends ShopFrontEndController
             $listIdProductAdd = [];
         }
         // Loại bỏ sản phẩm nếu user nằm trong danh sách không có sản phẩm
-        $usersWithoutProductAdd = [1144150760,1144150864];
+        $usersWithoutProductAdd = [1144150760,1144150864,1144150947];
         if (in_array($userInfo['user_id'], $usersWithoutProductAdd)) {
             $listIdProductAdd = [];
         }
