@@ -88,14 +88,18 @@ class SearchController extends ShopFrontEndController
     }
     public function updateFieldSearchKeyword(Request $request)
     {
-        // $users = UsersModel::select('user_id','fullname')->where('user_id', '>', 1124150056)->get();
-        // foreach($users as $val){
-        //     $slugInName = Str::slug($val['fullname']);
-        //     $codeRef = 'T'. $val['user_id'];
-        //     UsersModel::where('user_id', $val['user_id'])->update(['slug' => $slugInName,'codeRef' => $codeRef]);
-        // }
-        //  return 'ok';
-
+        // $newImage = '/laravel-filemanager/fileUpload/nhathuoc/6880e04c0fa57.jpg';
+        // UsersModel::where('user_type_id', 3)
+        //     ->orderBy('user_id') // Sắp xếp theo cột user_id để tránh lỗi
+        //     ->chunk(500, function ($users) use ($newImage) {
+        //         foreach ($users as $user) {
+        //             $details = $user->details ?? [];
+        //             $details['image'] = $newImage;
+        //             UsersModel::where('user_id', $user->user_id)
+        //                 ->update(['details' => json_encode($details, JSON_UNESCAPED_UNICODE)]);
+        //         }
+        //     });
+        // return 'Đã cập nhật ảnh thành công';
         // sửa comment
         // $comments = CommentModel::select('id', 'product_id')
         //     ->where('fullname', 'Nguyễn Văn Sanh')

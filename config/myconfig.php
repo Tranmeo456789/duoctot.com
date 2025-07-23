@@ -131,7 +131,7 @@
                 '9' => 'Công ty dược phẩm',
                 '10'=> 'Shop dược phẩm',
                 '2' => 'Bác sĩ',
-                //'3' => 'Phòng khám',
+                '3' => 'Phòng khám',
                 '4' => 'Nhà thuốc',
                 '5' => 'Dược sỹ',
                 '6' => 'Trình dược viên',
