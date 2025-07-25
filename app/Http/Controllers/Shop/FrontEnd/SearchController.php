@@ -100,6 +100,10 @@ class SearchController extends ShopFrontEndController
         //         }
         //     });
         // return 'Đã cập nhật ảnh thành công';
+        // $count = UsersModel::where('fullname', 'like', '%Phòng khám%')
+        // ->update(['user_type_id' => 3]);
+
+        // return "Đã cập nhật $count bác sỹ thành công";
         // sửa comment
         // $comments = CommentModel::select('id', 'product_id')
         //     ->where('fullname', 'Nguyễn Văn Sanh')
