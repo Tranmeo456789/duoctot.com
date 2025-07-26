@@ -379,4 +379,28 @@ class SyncTdoctorController extends ShopFrontEndController
             'total_inserted' => $totalInserted
         ]);
     }
+    public function transferShopProductAdd()
+    {
+        // Lấy id lớn nhất hiện tại ở database chính
+        $lastItemId = DB::connection('mysql')->table('shop_product_add')->max('id');
+        $totalInserted = 0;
+        // Lấy các item có id lớn hơn id lớn nhất ở database chính
+        DB::connection('mysql_share_data')->table('shop_product_add')
+            ->where('id', '>', $lastItemId)
+            ->orderBy('id', 'asc')
+            ->chunk(100, function ($items) use (&$totalInserted) {
+                foreach ($items as $item) {
+                    DB::connection('mysql')->table('shop_product_add')->insert([
+                        'id' => $item->id,
+                        'product_id' => $item->product_id,
+                        'user_id' => $item->user_id
+                    ]);
+                    $totalInserted++;
+                }
+            });
+        return response()->json([
+            'message' => 'transferShopProductAdd completed successfully!',
+            'total_inserted' => $totalInserted
+        ]);
+    }
 }
