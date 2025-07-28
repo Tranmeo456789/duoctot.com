@@ -154,7 +154,7 @@ class ProductController extends ShopFrontEndController
         $listIdProductAdd = $defaultProducts;
         $listIdProductAddSelect = collect($userInfo->listIdProduct)->pluck('product_id')->toArray();
         // Điều kiện loại bỏ danh sách sản phẩm mặc định
-        if ($userInfo['user_type_id'] == 9 || !empty($listIdProductAddSelect)) {
+        if ($userInfo['user_type_id'] == 9 || !empty($listIdProductAddSelect || $userInfo['user_type_id'] == 3)) {
             $listIdProductAdd = [];
         }
         // Loại bỏ sản phẩm nếu user nằm trong danh sách không có sản phẩm

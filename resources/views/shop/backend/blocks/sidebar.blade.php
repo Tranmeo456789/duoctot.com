@@ -2,7 +2,7 @@
 <!-- Brand Logo -->
 @if(!Session::has('web_view'))
 <a href="{{route('home')}}" class="brand-link">
-    <img src="{{asset('shop/images/logo.png')}}" alt="Tdoctor" class="brand-image img-fluid">
+    <img src="{{asset('images/shop/logo_duoctot.jpg')}}" alt="Tdoctor" class="brand-image img-fluid">
 </a>
 @endif
 <div class="sidebar">

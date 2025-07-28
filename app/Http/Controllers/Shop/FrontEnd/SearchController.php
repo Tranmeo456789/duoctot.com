@@ -100,7 +100,7 @@ class SearchController extends ShopFrontEndController
         //         }
         //     });
         // return 'Đã cập nhật ảnh thành công';
-        $count = UsersModel::where('fullname', 'like', '%phòng%')
+        $count = UsersModel::where('fullname', 'like', '%khám%')
         ->update(['user_type_id' => 3]);
 
         return "Đã cập nhật $count PK thành công";

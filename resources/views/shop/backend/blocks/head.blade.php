@@ -2,7 +2,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<link rel="icon" href="{{asset('shop/images/logo.png')}}" type="image/ico"/>
+<link rel="icon" href="{{asset('images/shop/logo_duoctot.jpg')}}" type="image/ico"/>
 <title>@yield('title')</title>
 <!-- Font Awesome Free 5.13.0 -->
 <link rel="stylesheet" href="{{asset('shop/template/css/fontawesome.min.css')}}">

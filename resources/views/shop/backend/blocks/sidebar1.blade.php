@@ -1,6 +1,6 @@
 <div id="logo-admin" class="position-relative">
     <a href="{{route('dashboard')}}">
-        <img src="{{ asset('/shop/images/logo.png')}}" alt="" srcset="" class="img-fluid">
+        <img src="{{ asset('images/shop/logo_duoctot.jpg')}}" alt="" srcset="" class="img-fluid">
     </a>
     <div class="hide-sidebar" id="hide-sidebar"><i class="fas fa-times"></i></div>
 </div>
