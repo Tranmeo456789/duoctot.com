@@ -3,25 +3,21 @@
 @section('content')
 <style>
     .element-1500>ul {
-        width: 3000px;
+        width: 5000px;
     }
-
     .element-1500>ul li {
         cursor: pointer;
         user-select: none;
     }
-
     .element-1500 {
         width: 100vw;
         overflow-x: scroll;
     }
-
     .item-ncc-km {
         cursor: pointer;
         padding-bottom: 5px;
         transition: border-bottom 0.2s ease;
     }
-
     .item-ncc-km.active {
         border-bottom: 3px solid #007BFF;
     }
