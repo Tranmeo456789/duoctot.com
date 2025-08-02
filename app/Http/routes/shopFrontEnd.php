@@ -111,6 +111,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
 
     Route::get('{slug}.html','ProductController@drugstore')->name('fe.product.drugstore');
     
+    Route::get('trang-chu-dong-du-lieu-tu-tdoctor','SyncTdoctorController@indexPage')->name('fe.SyncTdoctor.indexPage');
     Route::get('dong-du-lieu-bang-user','SyncTdoctorController@transferUsers')->name('fe.SyncTdoctor.transferUsers');
     Route::get('dong-du-lieu-bang-user_token','SyncTdoctorController@transferUserToken')->name('fe.SyncTdoctor.transferUserToken');
     Route::get('dong-du-lieu-bang-user_values','SyncTdoctorController@transferUserValues')->name('fe.SyncTdoctor.transferUserValues');

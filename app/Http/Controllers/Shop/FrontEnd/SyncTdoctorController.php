@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\DB;
 
 class SyncTdoctorController extends ShopFrontEndController
 {
+    public function indexPage(){
+        $pageTitle ='Sync Data from Tdoctor';
+        return view('shop.backend.pages.syncTdoctor.index');
+    }
     public function transferUsers()
     {
         // Lấy user_id lớn nhất hiện tại ở database chính
@@ -69,10 +73,9 @@ class SyncTdoctorController extends ShopFrontEndController
                     $totalInserted++;
                 }
             });
-        return response()->json([
-            'message' => 'Transfer User completed successfully!',
-            'total_inserted' => $totalInserted
-        ]);
+        $pageTitle ='Sync Data from Tdoctor';
+        $notification='transferUsers';
+        return view('shop.backend.pages.syncTdoctor.index',compact('pageTitle','totalInserted','notification'));
     }
     public function transferUserToken()
     {
@@ -96,10 +99,9 @@ class SyncTdoctorController extends ShopFrontEndController
                     $totalInserted++;
                 }
             });
-        return response()->json([
-            'message' => 'transferUserToken completed successfully!',
-            'total_inserted' => $totalInserted
-        ]);
+        $pageTitle ='Sync Data from Tdoctor';
+        $notification='transferUserToken';
+        return view('shop.backend.pages.syncTdoctor.index',compact('pageTitle','totalInserted','notification'));
     }
     public function transferUserValues()
     {
@@ -121,10 +123,9 @@ class SyncTdoctorController extends ShopFrontEndController
                     $totalInserted++;
                 }
             });
-        return response()->json([
-            'message' => 'transferUserValues completed successfully!',
-            'total_inserted' => $totalInserted
-        ]);
+        $pageTitle ='Sync Data from Tdoctor';
+        $notification='transferUserValues';
+        return view('shop.backend.pages.syncTdoctor.index',compact('pageTitle','totalInserted','notification'));
     }
     public function transferWarehouses()
     {
@@ -155,10 +156,9 @@ class SyncTdoctorController extends ShopFrontEndController
                     $totalInserted++;
                 }
             });
-        return response()->json([
-            'message' => 'transferWarehouses completed successfully!',
-            'total_inserted' => $totalInserted
-        ]);
+        $pageTitle ='Sync Data from Tdoctor';
+        $notification='transferWarehouses';
+        return view('shop.backend.pages.syncTdoctor.index',compact('pageTitle','totalInserted','notification'));
     }
     public function transferProducers()
     {
@@ -182,10 +182,9 @@ class SyncTdoctorController extends ShopFrontEndController
                     $totalInserted++;
                 }
             });
-        return response()->json([
-            'message' => 'transferProducers completed successfully!',
-            'total_inserted' => $totalInserted
-        ]);
+        $pageTitle ='Sync Data from Tdoctor';
+        $notification='transferProducers';
+        return view('shop.backend.pages.syncTdoctor.index',compact('pageTitle','totalInserted','notification'));
     }
     public function transferUnits()
     {
@@ -209,10 +208,9 @@ class SyncTdoctorController extends ShopFrontEndController
                     $totalInserted++;
                 }
             });
-        return response()->json([
-            'message' => 'transferUnits completed successfully!',
-            'total_inserted' => $totalInserted
-        ]);
+        $pageTitle ='Sync Data from Tdoctor';
+        $notification='transferUnits';
+        return view('shop.backend.pages.syncTdoctor.index',compact('pageTitle','totalInserted','notification'));
     }
     public function transferTrademarks()
     {
@@ -236,10 +234,9 @@ class SyncTdoctorController extends ShopFrontEndController
                     $totalInserted++;
                 }
             });
-        return response()->json([
-            'message' => 'transferTrademarks completed successfully!',
-            'total_inserted' => $totalInserted
-        ]);
+        $pageTitle ='Sync Data from Tdoctor';
+        $notification='transferTrademarks';
+        return view('shop.backend.pages.syncTdoctor.index',compact('pageTitle','totalInserted','notification'));
     }
     public function transferProducts()
     {
@@ -315,10 +312,9 @@ class SyncTdoctorController extends ShopFrontEndController
                     $totalInserted++;
                 }
             });
-        return response()->json([
-            'message' => 'transferProducts completed successfully!',
-            'total_inserted' => $totalInserted
-        ]);
+        $pageTitle ='Sync Data from Tdoctor';
+        $notification='transferProducts';
+        return view('shop.backend.pages.syncTdoctor.index',compact('pageTitle','totalInserted','notification'));
     }
     public function productWarehouse()
     {
@@ -340,10 +336,9 @@ class SyncTdoctorController extends ShopFrontEndController
                     $totalInserted++;
                 }
             });
-        return response()->json([
-            'message' => 'productWarehouse completed successfully!',
-            'total_inserted' => $totalInserted
-        ]);
+        $pageTitle ='Sync Data from Tdoctor';
+        $notification='productWarehouse';
+        return view('shop.backend.pages.syncTdoctor.index',compact('pageTitle','totalInserted','notification'));
     }
     public function transferImportCoupon()
     {
@@ -374,10 +369,9 @@ class SyncTdoctorController extends ShopFrontEndController
                     $totalInserted++;
                 }
             });
-        return response()->json([
-            'message' => 'transferImportCoupon completed successfully!',
-            'total_inserted' => $totalInserted
-        ]);
+        $pageTitle ='Sync Data from Tdoctor';
+        $notification='transferImportCoupon';
+        return view('shop.backend.pages.syncTdoctor.index',compact('pageTitle','totalInserted','notification'));
     }
     public function transferShopProductAdd()
     {
@@ -398,9 +392,8 @@ class SyncTdoctorController extends ShopFrontEndController
                     $totalInserted++;
                 }
             });
-        return response()->json([
-            'message' => 'transferShopProductAdd completed successfully!',
-            'total_inserted' => $totalInserted
-        ]);
+        $pageTitle ='Sync Data from Tdoctor';
+        $notification='transferShopProductAdd';
+        return view('shop.backend.pages.syncTdoctor.index',compact('pageTitle','totalInserted','notification'));
     }
 }

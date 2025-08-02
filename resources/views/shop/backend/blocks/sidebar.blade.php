@@ -279,78 +279,10 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="" class="nav-link">
-                    <i class="nav-icon fas fa-cog"></i>
-                    <p>Sync Tdoctor.net<i class="right fas fa-angle-left"></i></p>
+                <a href="{{route('fe.SyncTdoctor.indexPage')}}" class="nav-link">
+                    <i class="nav-icon fas fa-sync"></i>
+                    <p>Sync Tdoctor.net</p>
                 </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="{{route('fe.SyncTdoctor.transferUsers')}}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Sync Users</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('fe.SyncTdoctor.transferUserToken')}}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Sync UserToken</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('fe.SyncTdoctor.transferUserValues')}}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Sync UserValues</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('fe.SyncTdoctor.transferWarehouses')}}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Sync Warehouses</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('fe.SyncTdoctor.transferProducers')}}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Sync Producers</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('fe.SyncTdoctor.transferUnits')}}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Sync Units</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('fe.SyncTdoctor.transferTrademarks')}}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Sync Trademarks</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('fe.SyncTdoctor.transferProducts')}}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Sync Products</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('fe.SyncTdoctor.productWarehouse')}}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Sync Warehouse</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('fe.SyncTdoctor.transferImportCoupon')}}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Sync ImportCoupon</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('fe.SyncTdoctor.transferShopProductAdd')}}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Sync ShopProductAdd</p>
-                        </a>
-                    </li>
-                </ul>
             </li>
             @endif
             <li class="nav-item">
