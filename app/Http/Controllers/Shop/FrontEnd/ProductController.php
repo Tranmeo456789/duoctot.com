@@ -154,11 +154,11 @@ class ProductController extends ShopFrontEndController
         $listIdProductAdd = $defaultProducts;
         $listIdProductAddSelect = collect($userInfo->listIdProduct)->pluck('product_id')->toArray();
         // Điều kiện loại bỏ danh sách sản phẩm mặc định
-        if ($userInfo['user_type_id'] == 9 || !empty($listIdProductAddSelect || $userInfo['user_type_id'] == 3)) {
+        if ($userInfo['user_type_id'] == 9 || !empty($listIdProductAddSelect || $userInfo['user_type_id'] == 3 || $userInfo['user_type_id'] == 2)) {
             $listIdProductAdd = [];
         }
         // Loại bỏ sản phẩm nếu user nằm trong danh sách không có sản phẩm
-        $usersWithoutProductAdd = [1144150760,1144150864,1144150947];
+        $usersWithoutProductAdd = [1144150760, 1144150864, 1144150947];
         if (in_array($userInfo['user_id'], $usersWithoutProductAdd)) {
             $listIdProductAdd = [];
         }
@@ -209,15 +209,15 @@ class ProductController extends ShopFrontEndController
             'shop_id' => $shopId,
             'rating' => 1
         ], ['task' => 'list-items-frontend']);
-        $productKhuyenMai = $this->model->listItems(['type' => 'khuyen_mai','user_id'=>$shopId], ['task' => 'frontend-list-items'])->take(10);
-        if(count($productKhuyenMai)<2){
+        $productKhuyenMai = $this->model->listItems(['type' => 'khuyen_mai', 'user_id' => $shopId], ['task' => 'frontend-list-items'])->take(10);
+        if (count($productKhuyenMai) < 2) {
             $listIdProductAddSelect = collect($userInfo->listIdProduct)->pluck('product_id')->toArray();
             $productKhuyenMai = $this->model->listItems([
-            'group_id' => $listIdProductAddSelect,
-            'user_id' => $shopId,
-            'take' => 5,
-            'random' => true,
-        ], ['task' => 'frontend-list-item-shop']) ?? [];
+                'group_id' => $listIdProductAddSelect,
+                'user_id' => $shopId,
+                'take' => 5,
+                'random' => true,
+            ], ['task' => 'frontend-list-item-shop']) ?? [];
         }
         // Trả về view
         return view($this->pathViewController . 'drugstore', [
@@ -228,7 +228,7 @@ class ProductController extends ShopFrontEndController
             'title' => $title,
             'commentShop' => $commentShop,
             'ratingShop' => $ratingShop,
-            'productKhuyenMai'=>$productKhuyenMai
+            'productKhuyenMai' => $productKhuyenMai
         ]);
     }
     public function addCommentProduct(Request $request)
@@ -521,7 +521,153 @@ class ProductController extends ShopFrontEndController
             ]
         );
     }
+    public function listPhongKham(Request $request)
+    {
+        $itemsProvince = (new ProvinceModel())->listItems(null, ['task' => 'admin-list-items-in-selectbox']);
+        $itemsDistrict = [];
+        $query = UsersModel::whereIn('user_type_id', [3])->orderBy('user_id', 'DESC');
+        if (isset($_COOKIE['province']) && $_COOKIE['province'] != "") {
+            $query = $query->where('province_id', $this->getProvinceID($_COOKIE['province']));
+        }
+        if ($request->input('province_id') != null) {
+            $prv = ProvinceModel::where('id', intval($request->input('province_id')))->first();
 
+            if ($prv != null) {
+                $query = $query->where('province_id', $prv->id);
+            }
+            $itemsDistrict = (new DistrictModel())->listItems(['parentID' =>  $prv->id], ['task' => 'admin-list-items-in-selectbox']);
+        }
+        if ($request->input('district_id') != null) {
+            $itemDistrict = DistrictModel::where('id', intval($request->input('district_id')))->first();
+
+            if ($itemDistrict != null) {
+                $arrUserID = UserValuesModel::select('user_id')
+                    ->where('value', $itemDistrict->id)
+                    ->where('user_field', 'district_id')
+                    ->pluck('user_id')->toArray();
+                $query = $query->whereIn('user_id', $arrUserID);
+            }
+        }
+        if ($request->input('fullname') != null) {
+            $fullname = htmlspecialchars($request->input('fullname'), ENT_QUOTES, 'UTF-8');
+            $query = $query->where(function ($q) use ($fullname) {
+                $q->where([
+                    ['fullname', 'like', "%$fullname%"],
+                ])->orWhere([
+                    ['phone', 'like', "%$fullname%"],
+                ]);
+            });
+        }
+        $items = $query->paginate(10);
+        $title = 'Danh sách Phòng Khám | Tdoctor';
+        return view(
+            $this->pathViewController . 'ls_phongkham',
+            [
+                'itemsProvinces' => $itemsProvince,
+                'itemsDistricts' => $itemsDistrict,
+                'items' => $items,
+                'title' => $title
+            ]
+        );
+    }
+    public function listThamMyVien(Request $request)
+    {
+        $itemsProvince = (new ProvinceModel())->listItems(null, ['task' => 'admin-list-items-in-selectbox']);
+        $itemsDistrict = [];
+        $query = UsersModel::whereIn('user_type_id', [8])->orderBy('user_id', 'DESC');
+        if (isset($_COOKIE['province']) && $_COOKIE['province'] != "") {
+            $query = $query->where('province_id', $this->getProvinceID($_COOKIE['province']));
+        }
+        if ($request->input('province_id') != null) {
+            $prv = ProvinceModel::where('id', intval($request->input('province_id')))->first();
+
+            if ($prv != null) {
+                $query = $query->where('province_id', $prv->id);
+            }
+            $itemsDistrict = (new DistrictModel())->listItems(['parentID' =>  $prv->id], ['task' => 'admin-list-items-in-selectbox']);
+        }
+        if ($request->input('district_id') != null) {
+            $itemDistrict = DistrictModel::where('id', intval($request->input('district_id')))->first();
+
+            if ($itemDistrict != null) {
+                $arrUserID = UserValuesModel::select('user_id')
+                    ->where('value', $itemDistrict->id)
+                    ->where('user_field', 'district_id')
+                    ->pluck('user_id')->toArray();
+                $query = $query->whereIn('user_id', $arrUserID);
+            }
+        }
+        if ($request->input('fullname') != null) {
+            $fullname = htmlspecialchars($request->input('fullname'), ENT_QUOTES, 'UTF-8');
+            $query = $query->where(function ($q) use ($fullname) {
+                $q->where([
+                    ['fullname', 'like', "%$fullname%"],
+                ])->orWhere([
+                    ['phone', 'like', "%$fullname%"],
+                ]);
+            });
+        }
+        $items = $query->paginate(10);
+        $title = 'Danh sách Thẩm Mỹ Viện | Tdoctor';
+        return view(
+            $this->pathViewController . 'ls_thammyvien',
+            [
+                'itemsProvinces' => $itemsProvince,
+                'itemsDistricts' => $itemsDistrict,
+                'items' => $items,
+                'title' => $title
+            ]
+        );
+    }
+    public function listBacSi(Request $request)
+    {
+        $itemsProvince = (new ProvinceModel())->listItems(null, ['task' => 'admin-list-items-in-selectbox']);
+        $itemsDistrict = [];
+        $query = UsersModel::whereIn('user_type_id', [2])->orderBy('user_id', 'DESC');
+        if (isset($_COOKIE['province']) && $_COOKIE['province'] != "") {
+            $query = $query->where('province_id', $this->getProvinceID($_COOKIE['province']));
+        }
+        if ($request->input('province_id') != null) {
+            $prv = ProvinceModel::where('id', intval($request->input('province_id')))->first();
+
+            if ($prv != null) {
+                $query = $query->where('province_id', $prv->id);
+            }
+            $itemsDistrict = (new DistrictModel())->listItems(['parentID' =>  $prv->id], ['task' => 'admin-list-items-in-selectbox']);
+        }
+        if ($request->input('district_id') != null) {
+            $itemDistrict = DistrictModel::where('id', intval($request->input('district_id')))->first();
+
+            if ($itemDistrict != null) {
+                $arrUserID = UserValuesModel::select('user_id')
+                    ->where('value', $itemDistrict->id)
+                    ->where('user_field', 'district_id')
+                    ->pluck('user_id')->toArray();
+                $query = $query->whereIn('user_id', $arrUserID);
+            }
+        }
+        if ($request->input('fullname') != null) {
+            $fullname = htmlspecialchars($request->input('fullname'), ENT_QUOTES, 'UTF-8');
+            $query = $query->where(function ($q) use ($fullname) {
+                $q->where([
+                    ['fullname', 'like', "%$fullname%"],
+                ])->orWhere([
+                    ['phone', 'like', "%$fullname%"],
+                ]);
+            });
+        }
+        $items = $query->paginate(10);
+        $title = 'Danh sách Bác Sĩ | Tdoctor';
+        return view(
+            $this->pathViewController . 'ls_bacsi',
+            [
+                'itemsProvinces' => $itemsProvince,
+                'itemsDistricts' => $itemsDistrict,
+                'items' => $items,
+                'title' => $title
+            ]
+        );
+    }
     public function contentIntroduce(Request $request)
     {
         return view($this->pathViewController . 'content_introduce');

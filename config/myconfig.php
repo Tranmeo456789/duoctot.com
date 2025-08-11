@@ -136,7 +136,7 @@
                 '5' => 'Dược sỹ',
                 '6' => 'Trình dược viên',
                 //'7' => 'Nha khoa',
-               // '8' => 'Thẩm mỹ viện',
+                '8' => 'Thẩm mỹ viện',
                 '11' => 'Shop mẹ và bé',
             ],
             'type_user_register' => [

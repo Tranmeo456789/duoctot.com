@@ -1,19 +1,18 @@
 @php
 use App\Helpers\MyFunction;
 
-$imageSrc = isset($userInfo['details']['image']) ? $userInfo['details']['image'] : route('home') . '/laravel-filemanager/fileUpload/nhathuoc/nhathuocmau10.jpg';
+$imageSrc = isset($userInfo['details']['image']) ? $userInfo['details']['image'] : route('home') . '/laravel-filemanager/fileUpload/nhathuoc/6875c9e1945c0.jpg';
 if (isset($userInfo['details']['image']) && $userInfo['details']['image'] != ''){
 $imageSrc = route('home') . $userInfo['details']['image'];
-} else{
-$imageSrc = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/nhathuocmau10.jpg';
+} elseif ($userInfo['user_type_id'] == 2) {
+    $imageSrc = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/6898c9b8bf789.jpg';
+}else{
+    $imageSrc = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/nhathuocmau10.jpg';
 }
 $imageMap = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/mapduphong.jpeg';
 $phoneShop = '0393167234';
-if($userInfo['user_type_id'] == 4 && !empty($userInfo['phone'])){
-$phoneShop = $userInfo['phone'];
-}
-if($userInfo['user_type_id'] == 6 || $userInfo['user_type_id'] == 11){
-$phoneShop = $userInfo['phone'];
+if (in_array($userInfo['user_type_id'], [2, 3, 4, 8]) && !empty($userInfo['phone'])) {
+    $phoneShop = $userInfo['phone'];
 }
 $phoneShop=MyFunction::formatPhoneNumber($phoneShop);
 @endphp

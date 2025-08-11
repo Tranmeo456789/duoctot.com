@@ -93,6 +93,9 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('danh-sach-shop-trinh-duoc-vien','ProductController@listTrinhDuocVien')->name('fe.product.listTrinhDuocVien');
     Route::get('danh-sach-nha-thuoc','ProductController@listDrugstore')->name('fe.product.listDrugstore');
     Route::get('danh-sach-nha-cung-cap','ProductController@listNhaCungCap')->name('fe.product.listNhaCungCap');
+    Route::get('danh-sach-phong-kham','ProductController@listPhongKham')->name('fe.product.listPhongKham');
+    Route::get('danh-sach-tham-my-vien','ProductController@listThamMyVien')->name('fe.product.listThamMyVien');
+    Route::get('danh-sach-bac-si','ProductController@listBacSi')->name('fe.product.listBacSi');
     Route::get('nhathuoconline.html','ProductController@contentIntroduce')->name('fe.product.contentIntroduce');
 
     Route::get('chat-test','MessagesController@chatTest')->name('fe.messages.chatTest');

@@ -40,6 +40,12 @@
                         </div>
                         <p><a href="https://www.instagram.com/tdoctorcom/">Instagram</a></p>
                     </div>
+                    <div class="d-flex">
+                        <div class="icon-social">
+                            <a href="https://qr.bitly.ac/s/i2-cdkgU"><img src="{{asset('images/shop/zalo_video.jpg')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async"></a>
+                        </div>
+                        <p><a href="https://qr.bitly.ac/s/i2-cdkgU">Zalo Video</a></p>
+                    </div>
                 </div>
                 <div class="d-flex">
                     <a href="http://online.gov.vn/Home/WebDetails/125559" target="_blank">

@@ -26,7 +26,7 @@
                     if (isset($val['details']['image']) && $val['details']['image'] != ''){
                         $imgThumb = route('home') . $val['details']['image'];
                     } else{
-                        $imgThumb = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/nhathuocmau10.jpg';
+                        $imgThumb = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/6875c9e1945c0.jpg';
                     }
                     $slug = $val['slug'];
                     $linkShop = route('fe.product.drugstore', $slug);
