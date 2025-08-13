@@ -364,13 +364,13 @@ class UsersModel extends BackEndModel
         if ($options['task'] == "list-users-nha-cung-cap-has-product-id") {
             if (isset($params['product_id'])) {
                 $productId = $params['product_id'] ?? null;
-                $result = self::where('user_type_id', 9)
-                    ->whereIn('user_id', function ($query) use ($productId) {
-                        $query->select('user_id')
+                $result = self::whereIn('user_type_id', [2, 4, 6, 9])
+                ->whereIn('user_id', function ($query) use ($productId) {
+                    $query->select('user_id')
                             ->from('shop_product_add')
                             ->where('product_id', $productId);
-                    })
-                    ->get();
+                })
+                ->get();
             }
         }
         return $result;
