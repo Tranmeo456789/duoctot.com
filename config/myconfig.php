@@ -246,6 +246,8 @@
                 ['url' => env('APP_URL') . 'product1-sitemap.xml', 'last_modified' => '2025-05-08 04:57:00'],
                 ['url' => env('APP_URL') . 'product2-sitemap.xml', 'last_modified' => '2025-05-08 04:57:00'],
                 ['url' => env('APP_URL') . 'product3-sitemap.xml', 'last_modified' => '2025-06-13 04:57:00'],
+                ['url' => env('APP_URL') . 'product4-sitemap.xml', 'last_modified' => '2025-06-13 04:57:00'],
+                ['url' => env('APP_URL') . 'product5-sitemap.xml', 'last_modified' => '2025-06-13 04:57:00'],
         ],
     ];
 ?>
