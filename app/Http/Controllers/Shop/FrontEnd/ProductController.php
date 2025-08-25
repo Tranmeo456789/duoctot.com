@@ -416,7 +416,7 @@ class ProductController extends ShopFrontEndController
         $items = $query->paginate(10);
         $title = 'Danh sách Shop Trình dược viên | Tdoctor';
         return view(
-            $this->pathViewController . 'ls_shop',
+            $this->pathViewController . 'ls_trinhduocvien',
             [
                 'itemsProvinces' => $itemsProvince,
                 'itemsDistricts' => $itemsDistrict,
