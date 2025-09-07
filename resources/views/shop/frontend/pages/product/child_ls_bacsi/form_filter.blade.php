@@ -38,7 +38,7 @@
 @endphp
 {{ Form::open([
     'method'         => 'GET',
-    'url'            => route('fe.product.listThamMyVien'),
+    'url'            => route('fe.product.listBacSi'),
     'accept-charset' => 'UTF-8',
     'class'          => 'form-in-modal',
     'id'             => '' ])  }}
