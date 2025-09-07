@@ -1,7 +1,18 @@
 <div id="footer-wp">
     <div class="wp-inner">
         <div class="row">
-            <div class="col-xl-6 col-lg-12">
+            <div class="col-xl-3 col-lg-12">
+                <h6 class="mb-3 font-weight-bold">TDOCTOR</h6>
+                <p><a href="{{route('fe.home.pageAboutUs')}}">Về chúng tôi</a></p>
+                <p><a href="{{route('fe.home.pageContact')}}">Liên hệ</a></p>
+                <p><a href="{{route('fe.post')}}">Tin tức</a></p>
+                <p><a href="{{route('fe.home.pageQuytrinhGiaiquyetTranhchap')}}">Quy trình giải quyết tranh chấp</a></p>
+                <p><a href="{{route('fe.home.pageChinhsachBaomatThongtin')}}">Chính sách bảo mật</a></p>
+                <p><a href="{{route('fe.home.pageChinhsachGiaoNhan')}}">Chính sách giao nhận</a></p>
+                <p><a href="{{route('fe.home.pageChinhSachDoiTra')}}">Chính sách kiểm hàng, đổi trả</a></p>
+                <p><a href="{{route('fe.home.pageChinhsachThanhToan')}}">Chính sách thanh toán</a></p>
+            </div>
+            <div class="col-xl-3 col-lg-12">
                 <h6 class="mb-2 font-weight-bold">Liên hệ</h6>
                 <div class="social">
                     <div class="d-flex">
@@ -53,7 +64,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-md-6 social2">
+            <div class="col-xl-3 social2">
                 <div class="mb-2">
                     <p class="font-weight-bold" style="font-size: 20px;">CÔNG TY CỔ PHẦN TDOCTOR PHARMA</p>
                 </div>
