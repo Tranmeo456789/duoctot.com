@@ -84,7 +84,7 @@
 </div>
 <div class="wp-inner mt-3 mt-lg-4">
     @include("$moduleName.templates.box_title_product",['title' => 'SẢN PHẨM KHUYẾN MÃI','classBackground'=>'bg-danger'])
-    @include("$moduleName.pages.$controllerName.child_index.list_product_khuyen_mai",['items'=>$itemsProduct['goi_y']])
+    @include("$moduleName.pages.$controllerName.child_index.list_product_khuyen_mai",['items'=>$itemsProduct['km']])
 </div>
 <div class="wp-inner mt-3 mt-lg-4">
     @include("$moduleName.templates.box_title_product",['title' => 'SẢN PHẨM MỚI/ BÁN CHẠY','classBackground'=>'bg-danger'])

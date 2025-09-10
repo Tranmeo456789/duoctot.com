@@ -25,18 +25,22 @@ class HomeController extends ShopFrontEndController
     }
     public function index(Request $request)
     {
-        if ($request->has('t')) {
-            return redirect()->to(route('home'));
-        }
-        Cache::forget('cache_product_data'); 
-        Cache::forget('cache_ncc_data');
+        // if ($request->has('t')) {
+        //     return redirect()->to(route('home'));
+        // }
+        //Cache::forget('cache_product_best_data'); 
+        //Cache::forget('cache_product_new_data'); 
         $numTake=10;
-        $keyCache = 'cache_product_data';
-        $keyCachePost = 'cache_post_data';
         $keyCacheNcc = 'cache_ncc_data';
-        $dataCache = Cache::get($keyCache);
-        $dataPostCache = Cache::get($keyCachePost);
+        $keyCacheProductNew = 'cache_product_new_data';
+        $keyCacheProductBest = 'cache_product_best_data';
+        $keyCacheProductKhuyenMai = 'cache_product_km_data';
+
         $dataNccCache = Cache::get($keyCacheNcc);
+        $dataProductNewCache = Cache::get($keyCacheProductNew);
+        $dataProductBestCache = Cache::get($keyCacheProductBest);
+        $dataProductKhuyenMaiCache = Cache::get($keyCacheProductKhuyenMai);
+
         if(!empty($dataNccCache)){
             $productcers = $dataNccCache['productcers'];
         }else{
@@ -45,51 +49,38 @@ class HomeController extends ShopFrontEndController
             $productcers = collect($arrayIds)->map(function ($id) use ($productcersRaw) {
                 return $productcersRaw->get($id);
             })->filter();
-            $cacheData = [
+            $cacheDataNcc = [
                 'productcers' => $productcers,
             ];
-            Cache::put($keyCacheNcc, $cacheData, 100000000);
+            Cache::put($keyCacheNcc, $cacheDataNcc, 100000000);
         }
-        if(!empty($dataPostCache)){
-            $itemsArticle = $dataPostCache['itemsArticle'];
-        }else{
-            $itemsArticle = (new PostModel)->listItems(['take'=>5], ['task' => 'frontend-list-items']);
-            $cacheData = [
-                'itemsArticle' => $itemsArticle,
-            ];
-            Cache::put($keyCachePost, $cacheData, 100000000);
-        }
-        if (!empty($dataCache)) {
-            // Lấy dữ liệu từ cache
-            $product_selling = $dataCache['product_selling'];
-            $product_covid = $dataCache['product_covid'];
-            $productInObject = $dataCache['productInObject'];
-            $countproductInObject = $dataCache['countproductInObject'];
-            $itemsProduct = $dataCache['itemsProduct'];
-            $couterSumProduct = $dataCache['couterSumProduct'];
+        if (!empty($dataProductNewCache)) {
+            $itemsProduct['new'] = $dataProductNewCache['new'];
         } else {
-            // Tạo dữ liệu nếu cache trống
-            $product_selling = (new ProductModel())->listItems(null, ['task' => 'frontend-list-items'])->take($numTake);
-            $product_covid = (new ProductModel())->listItems(['type' => 'hau_covid'], ['task' => 'frontend-list-items'])->take(10);
-            $productInObject = (new ProductModel())->listItems(['type' => 'tre_em'], ['task' => 'frontend-list-items'])->take(10);
-            $countproductInObject = (new ProductModel())->countItems(['type' => 'tre_em'], ['task' => 'count-items-product-frontend']);
-            $countproductInObject = $countproductInObject[0]['count'] - 10;
             $itemsProduct['new'] = (new ProductModel())->listItems(['type' => 'new'], ['task' => 'frontend-list-items'])->take(10);
-            $itemsProduct['best'] = (new ProductModel())->listItems(['type' => 'noi_bat'], ['task' => 'frontend-list-items'])->take(20);
-            $itemsProduct['goi_y'] = (new ProductModel())->listItems(['type' => 'goi_y'], ['task' => 'frontend-list-items'])->take(20);
-            $couterSumProduct = (new ProductModel())->countItems(null, ['task' => 'count-items-product-frontend']);
-            // Lưu tất cả dữ liệu vào cache
-            $cacheData = [
-                'product_selling' => $product_selling,
-                'product_covid' => $product_covid,
-                'productInObject' => $productInObject,
-                'countproductInObject' => $countproductInObject,
-                'itemsProduct' => $itemsProduct,
-                'couterSumProduct' => $couterSumProduct,
+            $cacheDataProductNew = [
+                'new' => $itemsProduct['new']
             ];
-            Cache::put($keyCache, $cacheData, 100000000);
+            Cache::put($keyCacheProductNew, $cacheDataProductNew, 100000000);
         }
-        $couterSumProduct=$couterSumProduct[0]['count']-$numTake;
+        if (!empty($dataProductBestCache)) {
+            $itemsProduct['best'] = $dataProductBestCache['best'];
+        } else {
+            $itemsProduct['best'] = (new ProductModel())->listItems(['type' => 'noi_bat'], ['task' => 'frontend-list-items'])->take(10);
+            $cacheDataProductBest = [
+                'best' => $itemsProduct['best']
+            ];
+            Cache::put($keyCacheProductBest, $cacheDataProductBest, 100000000);
+        }
+        if (!empty($dataProductKhuyenMaiCache)) {
+            $itemsProduct['km'] = $dataProductKhuyenMaiCache['km'];
+        } else {
+            $itemsProduct['km'] = (new ProductModel())->listItems(['type' => 'goi_y'], ['task' => 'frontend-list-items'])->take(10);
+            $cacheDataProductKhuyenMai = [
+                'km' => $itemsProduct['km']
+            ];
+            Cache::put($keyCacheProductKhuyenMai, $cacheDataProductKhuyenMai, 100000000);
+        }
         if ($request->has('codeRef')) {
             $request->session()->put('codeRef', $request->query('codeRef'));
             $codeRef = $request->codeRef ?? ($request->session()->get('codeRef') ?? '');
@@ -100,7 +91,7 @@ class HomeController extends ShopFrontEndController
         }
         return view(
             $this->pathViewController . 'index',
-            compact('product_selling','product_covid','productInObject','itemsProduct','couterSumProduct','countproductInObject','itemsArticle','formRegister','productcers')
+            compact('itemsProduct','formRegister','productcers')
         );
     }
     public function ajaxHoverCatLevel1(Request $request)

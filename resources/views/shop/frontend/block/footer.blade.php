@@ -64,7 +64,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-xl-3 social2">
+            <div class="col-xl-6 social2">
                 <div class="mb-2">
                     <p class="font-weight-bold" style="font-size: 20px;">CÔNG TY CỔ PHẦN TDOCTOR PHARMA</p>
                 </div>
