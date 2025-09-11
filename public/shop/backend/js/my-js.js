@@ -655,18 +655,27 @@ $(document).on('click', 'input[name="info_product[]"]', function(event) {
         $('#checkAll').prop('checked', false);
     }
 });
-document.getElementById('copyBtn').addEventListener('click', function() {
-    var copyText = document.getElementById('code_ref');
-    copyText.select();
-    copyText.setSelectionRange(0, 99999);
-    document.execCommand('copy');
-    var tooltip = new bootstrap.Tooltip(document.getElementById('copyBtn'), {
+$(document).on('click', '#copyBtn', function () {
+    var copyText = $('#code_ref');
+    if (copyText.is('input, textarea')) {
+        copyText[0].select();
+        copyText[0].setSelectionRange(0, 99999);
+        document.execCommand('copy');
+    } else {
+        var textToCopy = copyText.text();
+        var tempInput = $('<input>');
+        $('body').append(tempInput);
+        tempInput.val(textToCopy).select();
+        document.execCommand('copy');
+        tempInput.remove();
+    }
+    var $btn = $(this);
+    $btn.tooltip({
         title: 'Copied!',
-        placement: 'top', 
-        trigger: 'manual' 
-    });
-    tooltip.show();
-    setTimeout(function() {
-        tooltip.hide();
+        placement: 'top',
+        trigger: 'manual'
+    }).tooltip('show');
+    setTimeout(function () {
+        $btn.tooltip('hide');
     }, 2000);
 });

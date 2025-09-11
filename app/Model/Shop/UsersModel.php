@@ -119,40 +119,52 @@ class UsersModel extends BackEndModel
                 \App\Model\Shop\UserValuesModel::insert($this->prepareParams($paramsUserValue));
             }
         }
-        if($options['task'] == 'update-item'){
-            $details = $params['details'];
-            $params['province_id'] =$details['province_id'];
-
+        if ($options['task'] == 'update-item') {
             DB::beginTransaction();
             try {
                 $details = $params['details'];
-                $details['slug']= Str::slug($params['fullname']);
+                // Tạo slug + gán ảnh
+                $details['slug'] = Str::slug($params['fullname']);
                 $details['image'] = $params['image'];
                 unset($params['image']);
-
-                if (isset($details['sell_area'])){
-                    $details['sell_area'] = ($details['sell_area'] != '')? json_encode($details['sell_area'],JSON_NUMERIC_CHECK ): NULL;;
+                // Encode sell_area nếu có
+                if (!empty($details['sell_area'])) {
+                    $details['sell_area'] = json_encode($details['sell_area'], JSON_NUMERIC_CHECK);
+                } else {
+                    $details['sell_area'] = null;
                 }
+                // Province
                 $params['province_id'] = $details['province_id'];
+                // Lưu details dưới dạng JSON
+                $params['details'] = json_encode($details, JSON_NUMERIC_CHECK);
+                // Update bảng chính
                 $user = self::where('user_id', $params['user_id'])->first();
-                $params['details'] = json_encode($details,JSON_NUMERIC_CHECK );
+                if (!$user) {
+                    throw new \Exception("Không tìm thấy user_id={$params['user_id']} để cập nhật");
+                }
                 self::where('user_id', $params['user_id'])->update($this->prepareParams($params));
-                $paramsUserValue =[];
+                // Xóa + insert lại user values
                 \App\Model\Shop\UserValuesModel::where('user_id', $params['user_id'])->delete();
-                foreach ($details as $key => $value){
-                    $paramsUserValue =[
-                        'user_id' =>$params['user_id'],
-                        'user_field' =>$key,
-                        'value' =>$value
+                foreach ($details as $key => $value) {
+                    $paramsUserValue = [
+                        'user_id'    => $params['user_id'],
+                        'user_field' => $key,
+                        'value'      => $value
                     ];
                     \App\Model\Shop\UserValuesModel::insert($this->prepareParams($paramsUserValue));
                 }
                 DB::commit();
                 return true;
             } catch (\Throwable $th) {
-                DB::rollback();
+                DB::rollBack();
+                // log lỗi để xem trong storage/logs/laravel.log
+                \Log::error('Lỗi khi update user_id=' . ($params['user_id'] ?? 'NULL') . ' : ' . $th->getMessage(), [
+                    'trace' => $th->getTraceAsString(),
+                    'params' => $params
+                ]);
+                // gán lỗi cho model để controller có thể lấy ra
+                $this->errorMessage = $th->getMessage();
                 return false;
-                throw $th;
             }
         }
         if($options['task'] == 'update-item-api'){

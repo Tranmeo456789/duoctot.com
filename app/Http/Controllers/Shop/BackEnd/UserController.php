@@ -118,25 +118,36 @@ class UserController extends BackEndController
                     }
                 }
             }
-            if ($this->model->saveItem($params, ['task' => 'update-item'])){
-                $request->session()->put('app_notify', $notify);
+            try {
+                if ($this->model->saveItem($params, ['task' => 'update-item'])) {
+                    $request->session()->put('app_notify', $notify);
+                    return response()->json([
+                        'status' => 200,
+                        'success' => true,
+                        'data' => null,
+                        'errors' => null,
+                        'message' => $notify,
+                        'redirect_url' => $redirect_url
+                    ], 200);
+                } else {
+                    return response()->json([
+                        'status' => 200,
+                        'success' => false,
+                        'data' => null,
+                        'errors' => $this->model->errorMessage ?? null, // lấy lỗi chi tiết
+                        'message' => 'Không thể cập nhật dữ liệu',
+                        'redirect_url' => ''
+                    ], 200);
+                }
+            } catch (\Exception $e) {
                 return response()->json([
-                    'status' => 200,
-                    'success' => true,
-                    'data' =>  null,
-                    'errors' => null,
-                    'message' => $notify,
-                    'redirect_url' => $redirect_url
-                ], 200);
-            }else{
-                return response()->json([
-                    'status' => 200,
+                    'status' => 500,
                     'success' => false,
-                    'data' =>  null,
-                    'errors' => null,
-                    'message' => 'lỗi xảy ra trong quá trình cập nhật thông tin',
+                    'data' => null,
+                    'errors' => $e->getMessage(), // Hiển thị lỗi chi tiết
+                    'message' => 'Đã xảy ra lỗi trong quá trình xử lý',
                     'redirect_url' => ''
-                ], 200);
+                ], 500);
             }
 
         }
