@@ -21,7 +21,7 @@ class UsersModel extends BackEndModel
     public function __construct() {
         $this->controllerName      = 'user';
         $this->table               = 'user';
-        $this->folderUpload        = '' ;
+        $this->folderUpload        = 'user' ;
         $filedSearch               = array_key_exists($this->controllerName, config('myconfig.config.search')) ? $this->controllerName : 'default';
         $this->fieldSearchAccepted = array_diff(config('myconfig.config.search.' . $filedSearch),['all']);
         $this->crudNotAccepted     = ['_token','isnumber','password_confirmation','password_old','submit','btn-register','task','id','code_ref','new_image_name','link_ref'];
@@ -127,6 +127,11 @@ class UsersModel extends BackEndModel
                 $details['slug'] = Str::slug($params['fullname']);
                 $details['image'] = $params['image'];
                 unset($params['image']);
+                if (isset($params['albumImage'])) {
+                    $resultFileUpload       = $this->uploadFile($params['albumImage']);
+                    $params['albumImage']   = $resultFileUpload['fileAttach'];
+                    $params['albumImageHash']     = $resultFileUpload['fileHash'];
+                }
                 // Encode sell_area nếu có
                 if (!empty($details['sell_area'])) {
                     $details['sell_area'] = json_encode($details['sell_area'], JSON_NUMERIC_CHECK);

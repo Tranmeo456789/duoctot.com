@@ -21,41 +21,36 @@ $phoneShop=MyFunction::formatPhoneNumber($phoneShop);
 @section('headadd')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
+<style>
+    .prev-btn,.next-btn {top: 50%;transform: translateY(-50%);border: none;padding: 10px;cursor: pointer;z-index: 10;font-size: 30px;}
+</style>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        tns({
+        var sliderThumb = tns({
             container: ".banner_doitac",
             items: 1,
-            slideBy: "page",
-            loop: !0,
-            speed: 1e3,
-            autoplay: !0,
-            autoplayTimeout: 3e3,
-            autoplayButtonOutput: !1,
-            controls: !1,
-            nav: !1,
-            mouseDrag: !0,
-            gutter: 0,
+            slideBy: 1,
+            loop: true,
+            speed: 400,
+            autoplay: false,
+            autoplayTimeout: 5000,
+            autoplayButtonOutput: false,
+            controls: false,
+            nav: false,
+            mouseDrag: true,
+            touch: true,
+            gutter: 4,
+            edgePadding: 0,
             onInit: function() {
                 document.querySelector(".banner_doitac").classList.remove("cS-hidden")
             }
-        }), tns({
-            container: ".banner_doitac_mobi",
-            items: 1,
-            slideBy: "page",
-            loop: !0,
-            speed: 1e3,
-            autoplay: !0,
-            autoplayTimeout: 3e3,
-            autoplayButtonOutput: !1,
-            controls: !1,
-            nav: !1,
-            mouseDrag: !0,
-            gutter: 0,
-            onInit: function() {
-                document.querySelector(".banner_doitac_mobi").classList.remove("cS-hidden")
-            }
-        })
+        });
+        document.querySelector('.prev-btn').addEventListener('click', function() {
+            sliderThumb.goTo('prev');
+        });
+        document.querySelector('.next-btn').addEventListener('click', function() {
+            sliderThumb.goTo('next');
+        });
     });
 </script>
 @endsection
@@ -65,7 +60,7 @@ $phoneShop=MyFunction::formatPhoneNumber($phoneShop);
     <div class="mb-4">
         <div class="row">
             <div class="col-12">
-                <div class="text-center"><img class="border border-secondary rounded" src="{{ $imageSrc }}" style="width: 300px;" alt=""></div>
+                @include("$moduleName.pages.$controllerName.child_drugstore.list_thumb",['albumImageCurrent'=>$albumImageCurrent])
                 <div class="mt-3 wp-info-shop text-center">
                     <h6 class="text-danger text-center font-weight-bold">{{$userInfo['fullname']??''}}</h6>
                     <p class="font-weight-bold">*Số lượng sản phẩm: <span>{{count($productDrugstore)}}</span></p>
@@ -108,6 +103,6 @@ $phoneShop=MyFunction::formatPhoneNumber($phoneShop);
         @include("$moduleName.templates.feedback_customer")
     </div>
 </div>
-@include("$moduleName.templates.banner_doitac")
+<!-- @include("$moduleName.templates.banner_doitac") -->
 <div class="lc-mask-search"></div>
 @endsection

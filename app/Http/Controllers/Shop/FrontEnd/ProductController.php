@@ -150,7 +150,7 @@ class ProductController extends ShopFrontEndController
         }
         $shopId = $userInfo['user_id'];
         // Danh sách sản phẩm mặc định
-        $defaultProducts = [2052, 1454, 2331, 2339, 4065, 3844, 2363, 2361, 2332, 2339, 4223, 4246, 1183, 4219];
+        //$defaultProducts = [2052, 1454, 2331, 2339, 4065, 3844, 2363, 2361, 2332, 2339, 4223, 4246, 1183, 4219];
         $defaultProducts=[];
         $listIdProductAdd = $defaultProducts;
         $listIdProductAddSelect = collect($userInfo->listIdProduct)->pluck('product_id')->toArray();
@@ -159,10 +159,10 @@ class ProductController extends ShopFrontEndController
             $listIdProductAdd = [];
         }
         // Loại bỏ sản phẩm nếu user nằm trong danh sách không có sản phẩm
-        $usersWithoutProductAdd = [1144150760, 1144150864, 1144150947];
-        if (in_array($userInfo['user_id'], $usersWithoutProductAdd)) {
-            $listIdProductAdd = [];
-        }
+        // $usersWithoutProductAdd = [1144150760, 1144150864, 1144150947];
+        // if (in_array($userInfo['user_id'], $usersWithoutProductAdd)) {
+        //     $listIdProductAdd = [];
+        // }
         // Lưu mã giới thiệu nếu có
         if ($request->has('codeRef')) {
             $request->session()->put('codeRef', $request->query('codeRef'));
@@ -174,9 +174,9 @@ class ProductController extends ShopFrontEndController
             'user_id' => $shopId
         ], ['task' => 'frontend-list-item-shop']) ?? [];
         // Nếu tài khoản là loại nhập mã thì không hiển thị sản phẩm
-        if ($userInfo['type_account'] === 'code_import') {
-            $productDrugstore = [];
-        }
+        // if ($userInfo['type_account'] === 'code_import') {
+        //     $productDrugstore = [];
+        // }
         // Xử lý địa chỉ và bản đồ
         $address = $map = $ward = $district = $province = '';
         if (isset($userInfo['details'])) {
@@ -220,6 +220,8 @@ class ProductController extends ShopFrontEndController
                 'random' => true,
             ], ['task' => 'frontend-list-item-shop']) ?? [];
         }
+        $albumImageCurrent = !empty($userInfo['albumImageHash']) ? explode('|', $userInfo['albumImageHash']) : [];
+        //return $albumImageCurrent;
         // Trả về view
         return view($this->pathViewController . 'drugstore', [
             'userInfo' => $userInfo,
@@ -229,7 +231,8 @@ class ProductController extends ShopFrontEndController
             'title' => $title,
             'commentShop' => $commentShop,
             'ratingShop' => $ratingShop,
-            'productKhuyenMai' => $productKhuyenMai
+            'productKhuyenMai' => $productKhuyenMai,
+            'albumImageCurrent' => $albumImageCurrent
         ]);
     }
     public function addCommentProduct(Request $request)

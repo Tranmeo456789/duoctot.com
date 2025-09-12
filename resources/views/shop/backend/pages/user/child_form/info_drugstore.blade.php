@@ -110,6 +110,13 @@
             'styleFormGroup' => 'mb-2 h-35',
         ];
     }
+    $elementThumb = [[
+                'label'   => Form::label('albumImage', 'Album ảnh', ['class' => 'col-1 col-form-label']),
+                'element' => Form::file('albumImage[]', array_merge($formInputAttr,['multiple'=>'multiple','accept'=>'image/*'])),
+                'fileAttach'   => (!empty($item['user_id'])) ? Template::showImageAttachPreview($controllerName, $item['albumImage'],$item['albumImageHash'], $item['user_id'],['btn' => 'delete']) : null ,
+                'type'    => "fileAttachPreview",
+                'widthInput' => 'col-11',
+            ]];
     $elementInputHidden = [[
         'element' => $inputHiddenID . $inputHiddenTask .Form::submit('Cập nhật', ['class'=>'btn btn-primary']),
         'type'    => "btn-submit-center"
@@ -125,6 +132,7 @@
     'id'             => 'main-form' ])  }}
     <div class="row">
         {!! FormTemplate::show($elements,$formInputWidth)  !!}
+        {!! FormTemplate::show($elementThumb,$formInputWidth)  !!}
         {!! FormTemplate::show( $elementInputHidden,$formInputWidth)  !!}
     </div>
 {{ Form::close() }}
