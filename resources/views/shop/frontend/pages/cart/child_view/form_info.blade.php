@@ -220,7 +220,7 @@
                         <div class="row rowHome py-0">
                             {!!FormTemplate::show($elementHome,$formInputWidth)   !!}
                             <div class="info-payment-ck col-12 d-none">
-                                <div class="row">
+                                <!-- <div class="row">
                                     <div class="col-12 col-md-9">
                                         <div class="box-dhtc">
                                             <p>Vui lòng thanh toán số tiền: <b><span class="total_thanh_toan">{{MyFunction::formatNumber($item['total']+20000)}}</span> đ</b> vào tài khoản ngân hàng</p>
@@ -234,7 +234,8 @@
                                     <div class="col-12 col-md-3 text-center">
                                         <img src="{{asset('public/shop/frontend/images/shop/qrcode_techcombank.jpg')}}" style="width: 150px;" alt="">
                                     </div>
-                                </div>
+                                </div> -->
+                                <p class="font-weight-bold">Liên hệ hotline/Zalo <span style="font-size: 20px; color:red">0393.167.234</span> để xác nhận thanh toán và hỗ trợ</p>
                             </div>
                         </div>
                     </div>

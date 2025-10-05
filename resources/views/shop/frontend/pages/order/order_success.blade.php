@@ -20,7 +20,7 @@
                 <p><span class="font-weight-bold">"Tra cứu đơn hàng"</span> ngay bên dưới</p>
             </div>
             @if($order['payment']==2)
-            <div class="text-center box-dhtc">
+            <!-- <div class="text-center box-dhtc">
                 <p>Vui lòng thanh toán số tiền(nếu chưa): <b>{{ MyFunction::formatNumber($order['total']+$order['money_ship']) . ' đ'}}</b> vào tài khoản ngân hàng</p>
                 <p>Ngân hàng Kỹ thương (Techcombank)</p>
                 <p>Số tài khoản: 19040023026018</p>
@@ -28,7 +28,8 @@
                 <p>Nội dung ck: {{$buyer['phone']}}</p>
                 <p>Nếu quý khách đã thanh toán</p>
                 <p>Liên hệ hotline/Zalo 0393167234 để xác nhận thanh toán và hỗ trợ</p>
-            </div>
+            </div> -->
+            <p class="font-weight-bold">Liên hệ hotline/Zalo <span style="font-size: 20px; color:red">0393.167.234</span> để xác nhận thanh toán và hỗ trợ</p>
             @endif
             <div class="title-info-order">
                 <h1 class=" pd-order">Thông tin giao hàng</h1>

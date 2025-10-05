@@ -157,7 +157,7 @@ foreach($status_order as $value){
             </ul>
         </div>
         @if($order_detail['status_control'] == 'chuaThanhToan')
-            <div class="text-center box-dhtc">
+            <!-- <div class="text-center box-dhtc">
                 <p>Vui lòng thanh toán số tiền(nếu chưa): <b>{{ MyFunction::formatNumber($order_detail['total']+$order_detail['money_ship']) . ' đ'}}</b> vào tài khoản ngân hàng</p>
                 <p>Ngân hàng Kỹ thương (Techcombank)</p>
                 <p>Số tài khoản: 19040023026018</p>
@@ -165,7 +165,8 @@ foreach($status_order as $value){
                 <p>Nội dung ck: {{$info_buyer['phone']}}</p>
                 <p>Nếu quý khách đã thanh toán</p>
                 <p>Liên hệ hotline/Zalo 0393167234 để xác nhận thanh toán và hỗ trợ</p>
-            </div>
+            </div> -->
+            <p class="font-weight-bold">Liên hệ hotline/Zalo <span style="font-size: 20px; color:red">0393.167.234</span> để xác nhận thanh toán và hỗ trợ</p>
         @endif
     </div>
 </div>
