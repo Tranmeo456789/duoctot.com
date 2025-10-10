@@ -1905,3 +1905,18 @@ $(document).ready(function() {
         $('.zoom-lens').removeClass('active');
     });
 });
+$(document).ready(function() {
+  // Khi click vào ảnh chính hoặc ảnh trong slider
+  $('.sliderProductMain img').on('click', function() {
+    var imgSrc = $(this).attr('src');
+    $('#imagePopup img').attr('src', imgSrc);
+    $('#imagePopup').fadeIn(200).css('display', 'flex');
+  });
+
+  // Khi bấm nút đóng hoặc nền mờ thì tắt popup
+  $('#imagePopup, .close-popup').on('click', function(e) {
+    if (e.target !== $('#imagePopup img')[0]) {
+      $('#imagePopup').fadeOut(200);
+    }
+  });
+});
