@@ -367,48 +367,95 @@ $(document).ready(function() {
     // Initialize summernote with LFM button in the popover button group
     // Please note that you can add this button to any other button group you'd like
     function sendFile(file) {
-        var formData = new FormData();
-        formData.append('file', file);
-    
-        $.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            url: '/backend/upload-image', // Endpoint để tải ảnh lên server
-            type: 'POST',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function(response) {
-                const fullUrl = response.url;
-                console.log('URL ảnh:', fullUrl);
-                $('.editor').summernote('insertImage', fullUrl);
-            },
-            error: function(xhr, status, error) {
-                console.error('Lỗi khi tải ảnh lên:', error);
-            }
-        });
+    var formData = new FormData();
+    formData.append('file', file);
+    $.ajax({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: '/backend/upload-image',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+        const fullUrl = response.url;
+        $('.editor').summernote('insertImage', fullUrl);
+        },
+        error: function (xhr, status, error) {
+        console.error('Lỗi khi tải ảnh lên:', error);
+        }
+    });
+    }
+    // --- Ghi đè hỗ trợ YouTube & Google Drive ---
+    if ($.summernote && $.summernote.options && $.summernote.options.modules.videoDialog) {
+    const proto = $.summernote.options.modules.videoDialog.prototype;
+    const originalCreateVideoNode = proto.createVideoNode;
+    proto.createVideoNode = function (url) {
+        // YouTube
+        const youtubeMatch = url.match(/(?:v=|\/shorts\/|youtu\.be\/)([0-9A-Za-z_-]{11})/);
+        if (youtubeMatch && youtubeMatch[1]) {
+        const iframe = document.createElement('iframe');
+        iframe.src = 'https://www.youtube.com/embed/' + youtubeMatch[1];
+        iframe.width = '100%';
+        iframe.style.maxWidth = '100%';
+        iframe.style.aspectRatio = '16/9';
+        iframe.frameBorder = '0';
+        iframe.allowFullscreen = true;
+        return iframe;
+        }
+        // Google Drive
+        const driveMatch = url.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
+        if (driveMatch && driveMatch[1]) {
+        const iframe = document.createElement('iframe');
+        iframe.src = 'https://drive.google.com/file/d/' + driveMatch[1] + '/preview';
+        iframe.width = '100%';
+        iframe.style.maxWidth = '100%';
+        iframe.style.aspectRatio = '16/9';
+        iframe.frameBorder = '0';
+        iframe.allowFullscreen = true;
+        return iframe;
+        }
+        return originalCreateVideoNode ? originalCreateVideoNode.call(this, url) : null;
+    };
     }
     $('.editor').summernote({
-        tabsize: 2,
-        height: 100,
-
-        callbacks: {
-            onPaste: function(e) {
-                var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
-
-                e.preventDefault();
-
-                // Firefox fix
-                setTimeout(function() {
-                    document.execCommand('insertText', false, bufferText);
-                }, 10);
-            },
-            onImageUpload: function(files) {
-                sendFile(files[0]); // Gọi hàm sendFile khi người dùng tải ảnh lên
+    height: 200,
+    dialogsInBody: true,
+    codeviewFilter: false,
+    codeviewIframeFilter: false,
+    callbacks: {
+        // Khi chọn ảnh thủ công từ nút Insert Image
+        onImageUpload: function(files) {
+            sendFile(files[0]);
+        },
+        onPaste: function (e) {
+        var text = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+        // YouTube
+        if (/youtube\.com|youtu\.be/.test(text)) {
+            e.preventDefault();
+            var match = text.match(/(?:v=|\/shorts\/|youtu\.be\/)([0-9A-Za-z_-]{11})/);
+            if (match && match[1]) {
+            var embed = '<iframe width="100%" style="max-width:100%;aspect-ratio:16/9;" src="https://www.youtube.com/embed/' + match[1] + '" frameborder="0" allowfullscreen></iframe>';
+            document.execCommand('insertHTML', false, embed);
             }
         }
-    })
+        //  Google Drive
+        else if (/drive\.google\.com\/file\/d\//.test(text)) {
+            e.preventDefault();
+            var driveMatch = text.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
+            if (driveMatch && driveMatch[1]) {
+            var embedDrive = '<iframe src="https://drive.google.com/file/d/' + driveMatch[1] + '/preview" width="100%" style="max-width:100%;aspect-ratio:16/9;" frameborder="0" allowfullscreen></iframe>';
+            document.execCommand('insertHTML', false, embedDrive);
+            }
+        }
+        e.preventDefault();
+            setTimeout(function() {
+                document.execCommand('insertText', false, text);
+            }, 10);
+        }
+    }
+    });
 
     $("#choices-multiple-remove-button").select2();
     $('#submit-all1').click(function() {

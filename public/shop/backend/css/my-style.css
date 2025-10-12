@@ -226,6 +226,11 @@ span.highlight {
     transform: translateX(-50%);
     display: none;  /* Ban đầu ẩn */
 }
+.note-editor iframe {
+  max-width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 16 / 9;
+}
 @media screen and (max-width: 1400px) {
     .business-results li {
         width: 50%;
