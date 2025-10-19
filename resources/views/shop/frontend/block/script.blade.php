@@ -12,12 +12,33 @@
 	defer
 	data-preny-bot-id="68ed2a29bd7aa11c0f3d4743"
 ></script> -->
-<script>var LHC_API = LHC_API||{};
-LHC_API.args = {mode:'widget',lhc_base_url:'//chat.duoctot.com/index.php/',wheight:450,wwidth:350,pheight:520,pwidth:500,domain:'duoctot.com',leaveamessage:true,department:["1"],check_messages:false};
+<script>
+var LHC_API = LHC_API||{};
+LHC_API.args = {
+  mode:'widget',
+  lhc_base_url:'//chat.duoctot.com/index.php/',
+  wheight:300,
+  wwidth:350,
+  pheight:300,
+  pwidth:400,
+  leaveamessage:true,
+  department:["1"],
+  check_messages:false,
+  lang:'site_admin/'
+};
+// ✅ Nếu đang ở điện thoại → chỉ cao 50% màn hình
+if (window.innerWidth < 768) {
+  LHC_API.args.wheight = window.innerHeight * 0.5; // 50% chiều cao
+}
 (function() {
-var po = document.createElement('script'); po.type = 'text/javascript'; po.setAttribute('crossorigin','anonymous'); po.async = true;
-var date = new Date();po.src = '//chat.duoctot.com/design/defaulttheme/js/widgetv2/index.js?'+(""+date.getFullYear() + date.getMonth() + date.getDate());
-var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  var po = document.createElement('script'); 
+  po.type = 'text/javascript'; 
+  po.setAttribute('crossorigin','anonymous'); 
+  po.async = true;
+  var date = new Date();
+  po.src = '//chat.duoctot.com/design/defaulttheme/js/widgetv2/index.js?'+(""+date.getFullYear() + date.getMonth() + date.getDate());
+  var s = document.getElementsByTagName('script')[0]; 
+  s.parentNode.insertBefore(po, s);
 })();
 </script>
 <script>
