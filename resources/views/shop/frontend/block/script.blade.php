@@ -4,6 +4,28 @@
 <script src="{{ asset('/shop/frontend/js/combined_library.min.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/shop/frontend/js/my-js.min.js')}}" type="text/javascript"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-96P2DL9CDP"></script>
+
+<link rel="stylesheet" href="https://tdoctor.net/shop/frontend/css/chatbot.css">
+<script src="https://tdoctor.net/shop/frontend/js/chatbot.js" defer></script>
+<!-- Chatbot rút gọn -->
+<div id="chat-widget">💬</div>
+
+<div id="chat-box">
+  <div id="chat-box-header">Chat với Duoctot</div>
+  <div id="chat-box-content">
+    <form id="chat-form">
+      <input type="text" id="chat-name" placeholder="Nhập tên của bạn" required />
+      <input type="text" id="chat-phone" placeholder="Nhập số điện thoại" required />
+      <button type="submit">Bắt đầu chat</button>
+    </form>
+    <div id="chat-box-messages"></div>
+  </div>
+  <div id="chat-box-input" style="display:none;">
+    <input type="text" id="chat-input" placeholder="Nhập tin nhắn..." />
+    <button id="chat-send">Gửi</button>
+  </div>
+</div>
+
 <!-- <script data-name-bot="Chat Bot Tdoctor"
 	src="https://app.preny.ai/embed-global.js"
 	data-button-style="width:300px;height:300px;"
@@ -13,7 +35,7 @@
 	data-preny-bot-id="68ed2a29bd7aa11c0f3d4743"
 ></script> -->
 
-<script>var LHC_API = LHC_API||{};
+<!-- <script>var LHC_API = LHC_API||{};
 LHC_API.args = {mode:'widget',lhc_base_url:'//chat.duoctot.com/index.php/',wheight:450,wwidth:350,pheight:520,pwidth:500,domain:'duoctot.com',department:["1"],check_messages:false,lang:'site_admin/'};
 (function() {
 var po = document.createElement('script'); po.type = 'text/javascript'; po.setAttribute('crossorigin','anonymous'); po.async = true;
@@ -31,7 +53,7 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po
 	min-height: auto !important;    /* không chiếm phần trên */
   }
 }
-</style>
+</style> -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}

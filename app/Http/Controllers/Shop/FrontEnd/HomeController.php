@@ -29,7 +29,7 @@ class HomeController extends ShopFrontEndController
         //     return redirect()->to(route('home'));
         // }
         //Cache::forget('cache_product_best_data'); 
-        Cache::forget('cache_ncc_data'); 
+        //Cache::forget('cache_ncc_data'); 
         $numTake=10;
         $keyCacheNcc = 'cache_ncc_data';
         $keyCacheProductNew = 'cache_product_new_data';
