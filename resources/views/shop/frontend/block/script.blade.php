@@ -5,51 +5,26 @@
 <script src="{{ asset('/shop/frontend/js/my-js.min.js')}}" type="text/javascript"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-96P2DL9CDP"></script>
 
-<link rel="stylesheet" href="https://tdoctor.net/shop/frontend/css/chatbot.css">
-<!-- <script src="https://tdoctor.net/shop/frontend/js/chatbot.js" defer></script> -->
+<link rel="stylesheet" href="https://tdoctor.net/shop/frontend/css/chatbot.css?t=@php echo time() @endphp">
+<script src="https://tdoctor.net/shop/frontend/js/chatbot.js?t=@php echo time() @endphp" defer></script>
+<!-- Chatbot rút gọn -->
+<div id="chat-widget">💬</div>
 
-<div id="chatbot">
-  <input type="text" id="chat-name" placeholder="Tên">
-  <input type="text" id="chat-phone" placeholder="Số điện thoại">
-  <button id="chat-start">Bắt đầu Chat</button>
-  <div id="chat-messages"></div>
-  <input type="text" id="chat-input" placeholder="Nhập tin nhắn">
-  <button id="chat-send">Gửi</button>
+<div id="chat-box">
+  <div id="chat-box-header">Chat với DUOCTOT.COM (hotline/zalo 0393167234)</div>
+  <div id="chat-box-content">
+    <form id="chat-form">
+      <input type="text" id="chat-name" placeholder="Nhập tên của bạn" required />
+      <input type="text" id="chat-phone" placeholder="Nhập số điện thoại" required />
+      <button type="submit">Bắt đầu chat</button>
+    </form>
+    <div id="chat-box-messages"></div>
+  </div>
+  <div id="chat-box-input" style="display:none;">
+    <input type="text" id="chat-input" placeholder="Nhập tin nhắn..." />
+    <button id="chat-send">Gửi</button>
+  </div>
 </div>
-
-<script>
-let userId = null;
-
-document.getElementById("chat-start").addEventListener("click", async () => {
-  const name = document.getElementById("chat-name").value;
-  const phone = document.getElementById("chat-phone").value;
-
-  const res = await fetch("https://n8n.tdoctor.net/webhook/chat-init", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name, phone })
-  });
-  const data = await res.json();
-  userId = data.user_id;
-
-  document.getElementById("chat-messages").innerHTML = "Chat đã khởi tạo. Bạn có thể gửi tin nhắn.";
-});
-
-document.getElementById("chat-send").addEventListener("click", async () => {
-  const message = document.getElementById("chat-input").value;
-  if (!userId) { alert("Vui lòng khởi tạo chat trước!"); return; }
-
-  const res = await fetch("https://n8n.tdoctor.net/webhook/chat-message", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ user_id: userId, message })
-  });
-  const data = await res.json();
-  document.getElementById("chat-messages").innerHTML += `<div><b>Bạn:</b> ${message}</div>`;
-  document.getElementById("chat-messages").innerHTML += `<div><b>Bot:</b> ${data.reply}</div>`;
-  document.getElementById("chat-input").value = "";
-});
-</script>
 
 <!-- <script data-name-bot="Chat Bot Tdoctor"
 	src="https://app.preny.ai/embed-global.js"
