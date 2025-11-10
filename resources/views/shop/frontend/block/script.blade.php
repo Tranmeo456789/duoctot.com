@@ -5,34 +5,7 @@
 <script src="{{ asset('/shop/frontend/js/my-js.min.js')}}" type="text/javascript"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-96P2DL9CDP"></script>
 
-<!-- <script data-name-bot="Chat Bot Tdoctor"
-	src="https://app.preny.ai/embed-global.js"
-	data-button-style="width:300px;height:300px;"
-	data-language="vi"
-	async
-	defer
-	data-preny-bot-id="68ed2a29bd7aa11c0f3d4743"
-></script> -->
 
-<!-- <script>var LHC_API = LHC_API||{};
-LHC_API.args = {mode:'widget',lhc_base_url:'//chat.duoctot.com/index.php/',wheight:450,wwidth:350,pheight:520,pwidth:500,domain:'duoctot.com',department:["1"],check_messages:false,lang:'site_admin/'};
-(function() {
-var po = document.createElement('script'); po.type = 'text/javascript'; po.setAttribute('crossorigin','anonymous'); po.async = true;
-var date = new Date();po.src = '//chat.duoctot.com/design/defaulttheme/js/widgetv2/index.js?'+(""+date.getFullYear() + date.getMonth() + date.getDate());
-var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-})();
-</script>
-<style>
-	@media (max-width: 768px) {
-  iframe#lhc_widget_v2.lhc-mobile.lhc-mode-widget {
-    height: 50vh !important;    /* nửa chiều cao màn hình */
-    max-height: 50vh !important;
-    bottom: 0 !important;       /* bám sát cạnh dưới */
-    top: auto !important;   
-	min-height: auto !important;    /* không chiếm phần trên */
-  }
-}
-</style> -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}

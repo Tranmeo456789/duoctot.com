@@ -37,4 +37,10 @@ class MessagesController extends ShopFrontEndController
     public function noticeDeviceToken(Request $request){
         return view($this->pathViewController . 'notice_device_token');
     }
+    public function pageClientChat(Request $request){
+        return view($this->pathViewController . 'client');
+    }
+    public function pageAdminChat(Request $request){
+        return view($this->pathViewController . 'admin');
+    }
 }

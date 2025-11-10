@@ -101,6 +101,8 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('chat-test','MessagesController@chatTest')->name('fe.messages.chatTest');
     Route::post('send-messages','MessagesController@sendMessages')->name('fe.messages.sendMessages');
     Route::get('notice-device-token','MessagesController@noticeDeviceToken')->name('fe.messages.noticeDeviceToken');
+    Route::get('page-client-chat','MessagesController@pageClientChat')->name('fe.messages.pageClientChat');
+    Route::get('page-admin-chat','MessagesController@pageAdminChat')->name('fe.messages.pageAdminChat');
 
     Route::get('sitemap.xml','HomeController@indexSitemap');
     Route::get('post-sitemap.xml','HomeController@sitemapPost');
