@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>Chat hỗ trợ - Tdoctor</title>
+  <title>Chat hỗ trợ - Duoctot.com</title>
   <style>
     :root {
       --blue: #007bff;
@@ -27,6 +27,10 @@
       border-radius: 12px;
       box-shadow: 0 6px 18px rgba(0, 0, 0, .12);
       overflow: hidden;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      height: 100%;
     }
 
     .header {
@@ -38,10 +42,12 @@
     }
 
     .form {
-      padding: 16px;
+      padding: 12px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      justify-content: center;
+      gap: 25px;
+      flex: auto;
     }
 
     .form input {
@@ -65,6 +71,7 @@
     .chatwrap {
       display: flex;
       flex-direction: column;
+      flex: auto;
       height: 300px;
     }
 
@@ -73,7 +80,7 @@
     }
 
     .chatbox {
-      flex: 1;
+      flex: auto;
       padding: 12px;
       overflow-y: auto;
       background: #f7f9fc;
@@ -134,7 +141,7 @@
 
 <body>
   <div class="card">
-    <div class="header">Chat với TDOCTOR.NET (hotline/zalo 0393167234)</div>
+    <div class="header">Chat với DUOCTOT.COM (hotline/zalo 0393167234)</div>
     <div id="stepForm" class="form">
       <input id="inputName" placeholder="Nhập tên của bạn" required />
       <input id="inputPhone" placeholder="Nhập số điện thoại" required />
@@ -257,49 +264,7 @@
           //addBotMsg("⚠️ Lỗi kết nối WebSocket.");
         };
       }
-
       imgBtn.onclick = () => imgInput.click();
-      // imgInput.onchange = () => {
-      //   const file = imgInput.files[0];
-      //   if (!file) return;
-      //   const reader = new FileReader();
-      //   reader.onload = async () => {
-      //     const base64 = reader.result;
-      //     addUserImage(base64);
-      //     try {
-      //       const res = await fetch("https://tdoctor.net/api/message/saveMessageImageWeb", {
-      //         method: "POST",
-      //         headers: {
-      //           "Content-Type": "application/json"
-      //         },
-      //         body: JSON.stringify({
-      //           fileName: file.name,
-      //           imageBase64: base64
-      //         })
-      //       });
-      //       const data = await res.json();
-
-      //       if (data.success && data.url) {
-      //         ws.send(JSON.stringify({
-      //           session_id,
-      //           user,
-      //           phone,
-      //           text: "",
-      //           role: "user",
-      //           image: data.url // ✅ Gửi URL thay vì base64
-      //         }));
-      //         addUserImage(data.url); // ✅ Hiển thị bằng URL
-      //       } else {
-      //         addBotMsg("⚠️ Lỗi tải ảnh, vui lòng thử lại.");
-      //       }
-      //     } catch (err) {
-      //       console.error(err);
-      //       addBotMsg("⚠️ Không thể upload ảnh.");
-      //     }
-      //   };
-      //   reader.readAsDataURL(file);
-      //   imgInput.value = "";
-      // };
       imgInput.onchange = async () => {
         const file = imgInput.files[0];
         if (!file) return;
@@ -406,20 +371,33 @@
           if (messages.length > 0) {
             addBotMsg("💬 Tiếp tục cuộc trò chuyện nhé, " + user + "!");
           } else {
-            setTimeout(() => addBotMsg("Xin chào " + user + "! A/c cần hỗ trợ gì ạ?"), 400);
+            setTimeout(() => addBotMsg(""), 400);
           }
         } catch (err) {
           console.warn("Không tải được lịch sử chat:", err);
-          setTimeout(() => addBotMsg("Xin chào " + user + "! A/c cần hỗ trợ gì ạ?"), 400);
         }
 
         // ✅ 2. Gửi URL hiện tại cho admin (tin nhắn đầu tiên khi bắt đầu chat)
         let currentUrl = "";
-        try {
-          currentUrl = window.parent.location.href; // nếu cùng domain => lấy URL cha
-        } catch (e) {
-          currentUrl = window.location.href; // fallback nếu bị CORS chặn
+
+        // 1️⃣ Ưu tiên lấy từ query param
+        const params = new URLSearchParams(window.location.search);
+        if (params.get("parentUrl")) {
+          currentUrl = decodeURIComponent(params.get("parentUrl"));
+        } else {
+          try {
+            currentUrl = window.parent.location.href;
+          } catch (e) {
+            currentUrl = window.location.href;
+          }
         }
+        // 2️⃣ Dự phòng qua postMessage
+        window.addEventListener("message", (event) => {
+          if (event.data.parentUrl) {
+            currentUrl = event.data.parentUrl;
+          }
+        });
+
         sendWhenConnected({
           session_id,
           user,

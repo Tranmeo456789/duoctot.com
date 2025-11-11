@@ -13,8 +13,9 @@ use Illuminate\Support\Facades\DB;
 
 class SyncTdoctorController extends ShopFrontEndController
 {
-    public function indexPage(){
-        $pageTitle ='Sync Data from Tdoctor';
+    public function indexPage()
+    {
+        $pageTitle = 'Sync Data from Tdoctor';
         return view('shop.backend.pages.syncTdoctor.index');
     }
     public function transferUsers()
@@ -73,9 +74,9 @@ class SyncTdoctorController extends ShopFrontEndController
                     $totalInserted++;
                 }
             });
-        $pageTitle ='Sync Data from Tdoctor';
-        $notification='transferUsers';
-        return view('shop.backend.pages.syncTdoctor.index',compact('pageTitle','totalInserted','notification'));
+        $pageTitle = 'Sync Data from Tdoctor';
+        $notification = 'transferUsers';
+        return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalInserted', 'notification'));
     }
     public function transferUserToken()
     {
@@ -99,9 +100,9 @@ class SyncTdoctorController extends ShopFrontEndController
                     $totalInserted++;
                 }
             });
-        $pageTitle ='Sync Data from Tdoctor';
-        $notification='transferUserToken';
-        return view('shop.backend.pages.syncTdoctor.index',compact('pageTitle','totalInserted','notification'));
+        $pageTitle = 'Sync Data from Tdoctor';
+        $notification = 'transferUserToken';
+        return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalInserted', 'notification'));
     }
     public function transferUserValues()
     {
@@ -123,9 +124,9 @@ class SyncTdoctorController extends ShopFrontEndController
                     $totalInserted++;
                 }
             });
-        $pageTitle ='Sync Data from Tdoctor';
-        $notification='transferUserValues';
-        return view('shop.backend.pages.syncTdoctor.index',compact('pageTitle','totalInserted','notification'));
+        $pageTitle = 'Sync Data from Tdoctor';
+        $notification = 'transferUserValues';
+        return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalInserted', 'notification'));
     }
     public function transferWarehouses()
     {
@@ -156,9 +157,9 @@ class SyncTdoctorController extends ShopFrontEndController
                     $totalInserted++;
                 }
             });
-        $pageTitle ='Sync Data from Tdoctor';
-        $notification='transferWarehouses';
-        return view('shop.backend.pages.syncTdoctor.index',compact('pageTitle','totalInserted','notification'));
+        $pageTitle = 'Sync Data from Tdoctor';
+        $notification = 'transferWarehouses';
+        return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalInserted', 'notification'));
     }
     public function transferProducers()
     {
@@ -182,9 +183,9 @@ class SyncTdoctorController extends ShopFrontEndController
                     $totalInserted++;
                 }
             });
-        $pageTitle ='Sync Data from Tdoctor';
-        $notification='transferProducers';
-        return view('shop.backend.pages.syncTdoctor.index',compact('pageTitle','totalInserted','notification'));
+        $pageTitle = 'Sync Data from Tdoctor';
+        $notification = 'transferProducers';
+        return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalInserted', 'notification'));
     }
     public function transferUnits()
     {
@@ -208,9 +209,9 @@ class SyncTdoctorController extends ShopFrontEndController
                     $totalInserted++;
                 }
             });
-        $pageTitle ='Sync Data from Tdoctor';
-        $notification='transferUnits';
-        return view('shop.backend.pages.syncTdoctor.index',compact('pageTitle','totalInserted','notification'));
+        $pageTitle = 'Sync Data from Tdoctor';
+        $notification = 'transferUnits';
+        return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalInserted', 'notification'));
     }
     public function transferTrademarks()
     {
@@ -234,9 +235,9 @@ class SyncTdoctorController extends ShopFrontEndController
                     $totalInserted++;
                 }
             });
-        $pageTitle ='Sync Data from Tdoctor';
-        $notification='transferTrademarks';
-        return view('shop.backend.pages.syncTdoctor.index',compact('pageTitle','totalInserted','notification'));
+        $pageTitle = 'Sync Data from Tdoctor';
+        $notification = 'transferTrademarks';
+        return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalInserted', 'notification'));
     }
     public function transferProducts()
     {
@@ -312,9 +313,9 @@ class SyncTdoctorController extends ShopFrontEndController
                     $totalInserted++;
                 }
             });
-        $pageTitle ='Sync Data from Tdoctor';
-        $notification='transferProducts';
-        return view('shop.backend.pages.syncTdoctor.index',compact('pageTitle','totalInserted','notification'));
+        $pageTitle = 'Sync Data from Tdoctor';
+        $notification = 'transferProducts';
+        return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalInserted', 'notification'));
     }
     public function productWarehouse()
     {
@@ -336,9 +337,9 @@ class SyncTdoctorController extends ShopFrontEndController
                     $totalInserted++;
                 }
             });
-        $pageTitle ='Sync Data from Tdoctor';
-        $notification='productWarehouse';
-        return view('shop.backend.pages.syncTdoctor.index',compact('pageTitle','totalInserted','notification'));
+        $pageTitle = 'Sync Data from Tdoctor';
+        $notification = 'productWarehouse';
+        return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalInserted', 'notification'));
     }
     public function transferImportCoupon()
     {
@@ -369,9 +370,9 @@ class SyncTdoctorController extends ShopFrontEndController
                     $totalInserted++;
                 }
             });
-        $pageTitle ='Sync Data from Tdoctor';
-        $notification='transferImportCoupon';
-        return view('shop.backend.pages.syncTdoctor.index',compact('pageTitle','totalInserted','notification'));
+        $pageTitle = 'Sync Data from Tdoctor';
+        $notification = 'transferImportCoupon';
+        return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalInserted', 'notification'));
     }
     public function transferShopProductAdd()
     {
@@ -392,8 +393,93 @@ class SyncTdoctorController extends ShopFrontEndController
                     $totalInserted++;
                 }
             });
-        $pageTitle ='Sync Data from Tdoctor';
-        $notification='transferShopProductAdd';
-        return view('shop.backend.pages.syncTdoctor.index',compact('pageTitle','totalInserted','notification'));
+        $pageTitle = 'Sync Data from Tdoctor';
+        $notification = 'transferShopProductAdd';
+        return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalInserted', 'notification'));
+    }
+    public function updateProductsBySlug()
+    {
+        $startId = 8336;
+        $endId = 8923;
+        $totalUpdated = 0;
+
+        // Lấy danh sách sản phẩm trong DB share theo khoảng ID
+        DB::connection('mysql_share_data')->table('products')
+            ->whereBetween('id', [$startId, $endId])
+            ->orderBy('id', 'asc')
+            ->chunk(100, function ($items) use (&$totalUpdated) {
+                foreach ($items as $item) {
+                    // Tìm sản phẩm có slug trùng trong DB chính
+                    $exists = DB::connection('mysql')->table('products')
+                        ->where('slug', $item->slug)
+                        ->exists();
+
+                    if ($exists) {
+                        DB::connection('mysql')->table('products')
+                            ->where('slug', $item->slug)
+                            ->update([
+                                'name' => $item->name,
+                                'type' => $item->type,
+                                'code' => $item->code,
+                                'cat_product_id' => $item->cat_product_id,
+                                'cat_product_parent_id' => $item->cat_product_parent_id,
+                                'producer_id' => $item->producer_id,
+                                'tick' => $item->tick,
+                                'type_price' => $item->type_price,
+                                'price' => $item->price,
+                                'list_prices' => $item->list_prices,
+                                'price_vat' => $item->price_vat,
+                                'percent_discount' => $item->percent_discount,
+                                'coefficient' => $item->coefficient,
+                                'type_vat' => $item->type_vat,
+                                'packing' => $item->packing,
+                                'expiration_date' => $item->expiration_date,
+                                'unit_id' => $item->unit_id,
+                                'sell_area' => $item->sell_area,
+                                'amout_max' => $item->amout_max,
+                                'quantity_in_stock' => $item->quantity_in_stock,
+                                'country_id' => $item->country_id,
+                                'dosage_forms' => $item->dosage_forms,
+                                'trademark_id' => $item->trademark_id,
+                                'brand_origin_id' => $item->brand_origin_id,
+                                'inventory' => $item->inventory,
+                                'inventory_min' => $item->inventory_min,
+                                'specification' => $item->specification,
+                                'benefit' => $item->benefit,
+                                'elements' => $item->elements,
+                                'general_info' => $item->general_info,
+                                'prescribe' => $item->prescribe,
+                                'dosage' => $item->dosage,
+                                'note' => $item->note,
+                                'preserve' => $item->preserve,
+                                'image' => $item->image,
+                                'albumImage' => $item->albumImage,
+                                'albumImageHash' => $item->albumImageHash,
+                                'featurer' => $item->featurer,
+                                'long' => $item->long,
+                                'wide' => $item->wide,
+                                'high' => $item->high,
+                                'mass' => $item->mass,
+                                'status_product' => $item->status_product,
+                                'discount_ref' => $item->discount_ref,
+                                'discount_tdoctor' => $item->discount_tdoctor,
+                                'contact' => $item->contact,
+                                'keyword_search' => $item->keyword_search,
+                                'meta_keywords' => $item->meta_keywords,
+                                'meta_description' => $item->meta_description,
+                                'show_price' => $item->show_price,
+                                'prescription_drug' => $item->prescription_drug,
+                                'updated_by' => $item->updated_by,
+                                'updated_at' => $item->updated_at,
+                            ]);
+
+                        $totalUpdated++;
+                    }
+                }
+            });
+
+        $pageTitle = 'Update Data from Tdoctor';
+        $notification = 'updateProductsBySlug';
+        return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalUpdated', 'notification'));
     }
 }

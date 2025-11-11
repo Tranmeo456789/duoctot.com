@@ -79,6 +79,12 @@
                         <p>Sync ShopProductAdd</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('fe.SyncTdoctor.updateProductsBySlug')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Cập nhật dữ liệu bảng Product</p>
+                    </a>
+                </li>
             </ul>
         </li>
     </ul>

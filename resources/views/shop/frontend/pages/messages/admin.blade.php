@@ -131,7 +131,21 @@
       font-weight: bold;
     }
 
-    /* 🌐 Responsive cho mobile */
+    .last-message {
+      font-size: 13px;
+      color: #666;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.4em;
+      max-height: calc(1.4em * 2);
+      word-break: break-word;
+    }
+
+    .chat-phone {font-weight: bold; color: red;}
+
     @media (max-width: 768px) {
       .sidebar {
         width: 100%;
@@ -194,25 +208,46 @@
       chatHeader = document.getElementById("chatHeader"),
       adminInput = document.getElementById("adminInput"),
       sendBtn = document.getElementById("sendBtn");
-
+    // ✅ Yêu cầu quyền hiển thị thông báo
+    if (Notification.permission === "default") {
+      Notification.requestPermission().then(permission => {
+        console.log("Notification permission:", permission);
+      });
+    }
     async function loadUsers() {
       try {
-        const r = await fetch(API_USERS);
-        const d = await r.json();
-        const users = d.users || d;
+        const res = await fetch(API_USERS);
+        const data = await res.json();
+        const users = data.users || data;
+
+        // Xóa danh sách cũ
         userList.innerHTML = "";
+
         users.forEach(u => {
           const div = document.createElement("div");
           div.className = "user";
-          div.innerHTML = `<b>${u.name||u.user_name}</b><br><small>${u.phone||''}</small>`;
-          div.onclick = e => selectUser(e, u.session_id, u.name || u.user_name);
+
+          const name = u.name || u.user_name || "Khách chưa đặt tên";
+          const phone = u.phone ?? "";
+          const lastMsg = u.last_message ?
+            (u.last_message.startsWith("data:image") ? "[Hình ảnh]" : u.last_message) :
+            "(Chưa có tin nhắn)";
+
+          div.innerHTML = `
+        <b>${name}</b> SĐT: <small class="chat-phone">${phone}</small><br>
+        <span class="last-message">${lastMsg}</span>
+      `;
+
+          div.onclick = e => selectUser(e, u.session_id, name);
           userList.appendChild(div);
         });
-      } catch {
-        userList.innerHTML = "<p style='padding:10px;color:red'>Không tải được danh sách.</p>";
+
+      } catch (e) {
+        console.error(e);
+        userList.innerHTML = "<p style='padding:10px;color:red'>Đang tải danh sách...</p>";
       }
     }
-    
+
     async function loadMessages(sid) {
       const r = await fetch(`${API_MESSAGES}?session_id=${sid}`);
       const d = await r.json();
@@ -245,7 +280,14 @@
         try {
           const msg = JSON.parse(e.data);
           if (msg.operation === "broadcastToAll") {
-            if (msg.role === "user") updateUserList(msg.session_id, msg.sender);
+            if (msg.role === "user") {
+              updateUserList(msg.session_id, msg.sender, msg.message);
+              // Nếu không đang mở đoạn chat này → phát chuông + popup
+              if (msg.session_id !== selectedSession) {
+                playNotifySound();
+                showNotification(msg.sender || "Khách hàng", msg.message || "Gửi tin nhắn mới", msg.session_id);
+              }
+            }
             if (!selectedSession || msg.session_id !== selectedSession) return;
             if (msg.image) {
               if (msg.image.startsWith("http")) addUserImage(msg.image);
@@ -297,14 +339,22 @@
       chatBox.scrollTop = chatBox.scrollHeight;
     }
 
-    function updateUserList(sid, name) {
-      const ex = [...document.querySelectorAll(".user")].find(u => u.textContent.includes(name));
-      if (!ex) {
+    function updateUserList(session_id, name, lastMsg) {
+      let existing = [...document.querySelectorAll(".user")]
+        .find(u => u.textContent.includes(name));
+
+      if (existing) {
+        existing.querySelector("span").textContent = lastMsg.startsWith("data:image") ? "[Hình ảnh]" : lastMsg;
+        userList.prepend(existing);
+      } else {
         const div = document.createElement("div");
         div.className = "user";
-        div.innerHTML = `<b>${name}</b>`;
-        div.onclick = e => selectUser(e, sid, name);
-        userList.appendChild(div);
+        div.innerHTML = `
+      <b>${name}</b><br>
+      <span style="font-size:13px;color:#666;">${lastMsg.startsWith("data:image") ? "[Hình ảnh]" : lastMsg}</span>
+    `;
+        div.onclick = e => selectUser(e, session_id, name);
+        userList.prepend(div);
       }
     }
 
@@ -353,47 +403,6 @@
     const imgInput = document.getElementById("imgInput"),
       imgBtn = document.getElementById("imgBtn");
     imgBtn.onclick = () => imgInput.click();
-    // imgInput.onchange = () => {
-    //   const f = imgInput.files[0];
-    //   if (!f) return;
-    //   const r = new FileReader();
-    //   r.onload = async () => {
-    //     const base64 = r.result;
-
-    //     try {
-    //       const res = await fetch("https://tdoctor.net/api/message/saveMessageImageWeb", {
-    //         method: "POST",
-    //         headers: {
-    //           "Content-Type": "application/json"
-    //         },
-    //         body: JSON.stringify({
-    //           fileName: f.name,
-    //           imageBase64: base64
-    //         })
-    //       });
-    //       const data = await res.json();
-
-    //       if (data.success && data.url) {
-    //         ws.send(JSON.stringify({
-    //           session_id: selectedSession,
-    //           user: "Admin",
-    //           phone: "",
-    //           text: "",
-    //           role: "admin",
-    //           image: data.url // ✅ gửi link thay vì base64
-    //         }));
-    //         addAdminImage(data.url);
-    //       } else {
-    //         alert("Tải ảnh thất bại, vui lòng thử lại!");
-    //       }
-    //     } catch (err) {
-    //       console.error(err);
-    //       alert("Lỗi upload ảnh!");
-    //     }
-    //   };
-    //   r.readAsDataURL(f);
-    //   imgInput.value = "";
-    // };
     imgInput.onchange = async () => {
       const file = imgInput.files[0];
       if (!file || !selectedSession) return alert("Chưa chọn người để chat!");
@@ -454,7 +463,34 @@
       }));
     }, 20000);
     setInterval(loadUsers, 10000);
+
+    function playNotifySound() {
+      const audio = document.getElementById("notifySound");
+      if (!audio) return;
+      audio.currentTime = 0;
+      audio.play().catch(err => console.log("Không thể phát âm thanh:", err));
+    }
+
+    function showNotification(title, body, sessionId) {
+      if (Notification.permission !== "granted") return;
+
+      const notification = new Notification(title, {
+        body,
+        icon: "https://tdoctor.net/apple-touch-icon.png" // icon nhỏ của bạn
+      });
+
+      // Khi bấm vào thông báo → mở lại trang admin
+      notification.onclick = () => {
+        window.focus();
+        if (sessionId) {
+          window.location.href = "https://duoctot.com/page-admin-chat?session_id=" + sessionId;
+        } else {
+          window.focus();
+        }
+      };
+    }
   </script>
+  <audio id="notifySound" src="https://tdoctor.net/shop/frontend/css/new-notification-026-380249.mp3" preload="auto"></audio>
 </body>
 
 </html>
