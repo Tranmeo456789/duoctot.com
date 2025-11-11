@@ -198,7 +198,7 @@
     </div>
   </div>
   <script>
-    const WS_URL = "wss://n8n.tdoctor.net/websoketduoctot";
+    const WS_URL = "wss://n8n.tdoctor.net/websoket";
     const API_USERS = "https://n8n.tdoctor.net/webhook/chat_users_duoctot";
     const API_MESSAGES = "https://n8n.tdoctor.net/webhook/chat_messages_duoctot";
     let ws = null,
@@ -216,7 +216,7 @@
     }
     async function loadUsers() {
       try {
-        const res = await fetch(API_USERS);
+        const res = await fetch(`${API_USERS}?_=${Date.now()}`);
         const data = await res.json();
         const users = data.users || data;
 
@@ -249,7 +249,7 @@
     }
 
     async function loadMessages(sid) {
-      const r = await fetch(`${API_MESSAGES}?session_id=${sid}`);
+      const r = await fetch(`${API_MESSAGES}?session_id=${sid}&_=${Date.now()}`);
       const d = await r.json();
       chatBox.innerHTML = "";
       (d.messages || d).forEach(m => {
@@ -427,7 +427,7 @@
 
       try {
         // ✅ 4. Upload qua API (nhanh, không cần base64)
-        const res = await fetch("https://tdoctor.net/api/message/saveMessageImageFileWeb", {
+        const res = await fetch("https://duoctot.com/api/message/saveMessageImageFileWeb", {
           method: "POST",
           body: formData
         });

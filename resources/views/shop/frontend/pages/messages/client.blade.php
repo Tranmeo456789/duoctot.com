@@ -167,7 +167,7 @@
   </div>
   <script>
     (function() {
-      const WS_URL = "wss://n8n.tdoctor.net/websoketduoctot";
+      const WS_URL = "wss://n8n.tdoctor.net/websoket";
       const inputName = document.getElementById("inputName");
       const inputPhone = document.getElementById("inputPhone");
       const startBtn = document.getElementById("startBtn");
@@ -289,7 +289,7 @@
 
         try {
           // ✅ 4. Upload qua API nhanh chóng
-          const res = await fetch("https://tdoctor.net/api/message/saveMessageImageFileWeb", {
+          const res = await fetch("https://duoctot.com/api/message/saveMessageImageFileWeb", {
             method: "POST",
             body: formData
           });
@@ -325,7 +325,7 @@
         if (!phone) return alert("Vui lòng nhập số điện thoại.");
 
         // ✅ Dùng số điện thoại làm session_id
-        session_id = phone;
+        session_id = phone+'duoctot';
 
         // ✅ Ẩn form, hiện khung chat
         stepForm.classList.add("hidden");
@@ -345,7 +345,7 @@
 
         // ✅ 1. Lấy lịch sử tin nhắn cũ (nếu có)
         try {
-          const res = await fetch(`https://n8n.tdoctor.net/webhook/chat_messages_duoctot?session_id=${encodeURIComponent(session_id)}`);
+          const res = await fetch(`https://n8n.tdoctor.net/webhook/chat_messages_duoctot?session_id=${encodeURIComponent(session_id)}&_=${Date.now()}`);
           const data = await res.json();
           const messages = data.messages || data || [];
 

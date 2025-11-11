@@ -117,5 +117,6 @@ Route::group(['prefix' => $prefixShopApi,'namespace' => 'Shop\Api','middleware' 
         Route::post('saveMessageAxios', ['uses' => $controller . 'saveMessageAxios']);
         Route::post('sendImageMessage', ['uses' => $controller . 'sendImageMessage']);
         Route::post('saveMessageImage', ['uses' => $controller . 'saveMessageImage']);
+        Route::post('saveMessageImageFileWeb', ['uses' => $controller . 'saveMessageImageFileWeb']);
     });
 });

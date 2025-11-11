@@ -884,4 +884,26 @@ class MessageController extends ApiController
             }
         }
     }
+    public function saveMessageImageFileWeb(Request $request)
+    {
+        if (!$request->hasFile('file')) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Không nhận được file hợp lệ.'
+            ]);
+        }
+
+        $file = $request->file('file');
+        $fileName = time() . '_' . $file->getClientOriginalName();
+        $path = public_path('uploads/chat');
+        $file->move($path, $fileName);
+
+        $url = url('uploads/chat/' . $fileName);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Upload thành công!',
+            'url' => $url
+        ]);
+    }
 }
