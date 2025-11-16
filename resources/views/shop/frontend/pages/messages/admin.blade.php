@@ -261,9 +261,9 @@
           div.innerHTML = `<span><img src="${m.message}" style="max-width:200px;border-radius:8px;"></span>`;
         } else if (m.message.startsWith("http")) {
           div.innerHTML = `<span><a href="${m.message}" target="_blank" style="color:#007bff;text-decoration:underline;">${m.message}</a></span>`;
-        } else if (m.message.startsWith("Khách đang ở trang: http")) {
-          const url = m.message.replace("Khách đang ở trang: ", "").trim();
-          div.innerHTML = `<span>Khách đang ở trang: <a href="${url}" target="_blank" style="color:#007bff;text-decoration:underline;">${url}</a></span>`;
+        } else if (m.message.startsWith("A/C đang quan tâm: http")) {
+          const url = m.message.replace("A/C đang quan tâm: ", "").trim();
+          div.innerHTML = `<span>A/C đang quan tâm: <a href="${url}" target="_blank" style="color:#007bff;text-decoration:underline;">${url}</a></span>`;
         } else {
           div.innerHTML = `<span>${m.message || m.text || ""}</span>`;
         }
@@ -298,9 +298,9 @@
 
               if (msg.message.startsWith("http")) {
                 div.innerHTML = `<span><a href="${msg.message}" target="_blank" style="color:#007bff;text-decoration:underline;">${msg.message}</a></span>`;
-              } else if (msg.message.startsWith("Khách đang ở trang: http")) {
-                const url = msg.message.replace("Khách đang ở trang: ", "").trim();
-                div.innerHTML = `<span>Khách đang ở trang: <a href="${url}" target="_blank" style="color:#007bff;text-decoration:underline;">${url}</a></span>`;
+              } else if (msg.message.startsWith("A/C đang quan tâm: http")) {
+                const url = msg.message.replace("A/C đang quan tâm: ", "").trim();
+                div.innerHTML = `<span>A/C đang quan tâm: <a href="${url}" target="_blank" style="color:#007bff;text-decoration:underline;">${url}</a></span>`;
               } else {
                 div.innerHTML = `<span>${msg.message}</span>`;
               }

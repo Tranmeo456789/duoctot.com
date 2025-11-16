@@ -402,7 +402,7 @@
           session_id,
           user,
           phone,
-          text: "Khách đang ở trang: " + currentUrl,
+          text: "A/C đang quan tâm: " + currentUrl,
           role: "user"
         });
       };
