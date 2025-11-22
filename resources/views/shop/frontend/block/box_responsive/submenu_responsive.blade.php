@@ -1,8 +1,8 @@
 @php
 use App\Helpers\MyFunction;
-use App\Model\Shop\CatProductModel;
-$listCatLevel1=(new CatProductModel())->listItems(['parent_id' => 1],['task'=>'frontend-list-items-by-parent-id']);
-$listCatAll=(new CatProductModel())->listItems(null, ['task' => 'list-items-front-end']);
+$model = new \App\Model\Shop\CatProductModel();
+$listCatLevel1 = $model->getCatLevel1();
+$listCatAll    = $model->getAllCats();
 $iconZalo=asset('images/shop/zalo-2.png');
 $iconCall=asset('images/shop/icon-call.png');
 $phoneContact=$phoneContact??'0393167234';

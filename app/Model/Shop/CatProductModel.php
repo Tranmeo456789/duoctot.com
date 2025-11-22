@@ -11,6 +11,7 @@ use App\Model\Shop\ProductModel;
 use App\Model\Shop\CollaboratorsUserModel;
 use App\Model\Shop\CollaboratorsClinicDoctor;
 use DB;
+use Illuminate\Support\Facades\Cache;
 
 class CatProductModel extends BackEndModel
 {
@@ -71,9 +72,9 @@ class CatProductModel extends BackEndModel
             $query = self::select('id', 'name', 'image', 'slug', 'parent_id')
                 ->where('status', '=', 'active')
                 ->orderBy('_lft');
-                if (isset($params['group_id'])){
-                    $query->whereIn('id',$params['group_id']);
-                }
+            if (isset($params['group_id'])) {
+                $query->whereIn('id', $params['group_id']);
+            }
             $result = $query->get();
         }
         if ($options['task'] == "list-items-api-by-depth") {
@@ -138,9 +139,9 @@ class CatProductModel extends BackEndModel
                 ->where('cat_product.status', '=', 'active')
                 ->having('depth', '=', 2)
                 ->orderBy('cat_product._lft');
-                if (isset($params['take'])) {
-                    $query = $query->take($params['take']);
-                }
+            if (isset($params['take'])) {
+                $query = $query->take($params['take']);
+            }
             $result = $query->get()
                 ->toArray();
         }
@@ -174,7 +175,7 @@ class CatProductModel extends BackEndModel
     {
         $result = null;
         if ($options['task'] == 'get-item') {
-            $result = self::select('id', 'name', 'parent_id', 'image', 'slug','status')
+            $result = self::select('id', 'name', 'parent_id', 'image', 'slug', 'status')
                 ->where('id', $params['id'])->first();
         }
         if ($options['task'] == 'get-item-parent') {
@@ -253,7 +254,7 @@ class CatProductModel extends BackEndModel
     }
     public function parent()
     {
-        return $this->belongsTo(self::class, 'parent_id','id');
+        return $this->belongsTo(self::class, 'parent_id', 'id');
     }
     // public function child()
     // {
@@ -275,5 +276,24 @@ class CatProductModel extends BackEndModel
     public function productsOfChild()
     {
         return $this->hasMany('App\Model\Shop\ProductModel', 'cat_product_parent_id');
+    }
+    public function getCatLevel1()
+    {
+        return Cache::remember('cat_product_level_1', 86400, function () {
+            return $this->listItems(
+                ['parent_id' => 1],
+                ['task' => 'frontend-list-items-by-parent-id']
+            );
+        });
+    }
+
+    public function getAllCats()
+    {
+        return Cache::remember('cat_product_all', 86400, function () {
+            return $this->listItems(
+                null,
+                ['task' => 'list-items-front-end']
+            );
+        });
     }
 }
