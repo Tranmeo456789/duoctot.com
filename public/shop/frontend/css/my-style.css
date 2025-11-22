@@ -5042,7 +5042,7 @@ input[type="radio"] {
     color: #1250dc;
     font-weight: 500;
     height: 28px;
-    width: 28px;
+    width: 50px;
     margin-right: 0.25rem;
     margin-left: 0.25rem;
     border-radius: 50px !important;
@@ -5071,7 +5071,7 @@ input[type="radio"] {
 .input-search-small {
     border-radius: 100px 0 0 100px;
     padding: 0 8px 0 16px;
-    min-height: 36px;
+    min-height: 45px;
     position: relative;
     display: flex;
     width: 100%;
@@ -5086,14 +5086,14 @@ input[type="radio"] {
     outline: none;
     border: none;
     width: 100%;
-    font-size: 14px;
+    font-size: 18px;
     line-height: 20px;
 }
 .wp-input-search-simple input{
     outline: none;
     border: none;
     width: 100%;
-    font-size: 14px;
+    font-size: 18px;
     line-height: 20px;
 }
 .wp-btn-search {
@@ -5113,10 +5113,13 @@ input[type="radio"] {
     background: blue;
     outline: none;
     border-radius: 0px 100px 100px 0px;
-    padding: 0 28px;
+    padding: 0 20px;
     height: 100%;
+    font-size: 18px;
 }
-
+.btn-search-respon.btn-search-home img {
+    width: 50px;
+}
 .ls-history {
     position: absolute;
     width: 100%;
@@ -6499,9 +6502,6 @@ input[type="radio"] {
     }
     .wp-detail-order .wp-content .top-tab-order h4{
         font-size: 16px;
-    }
-    .element-input-search input{
-        min-height: 35px;
     }
     .font-size-600-14{
         font-size: 14px!important;
