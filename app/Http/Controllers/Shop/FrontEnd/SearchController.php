@@ -308,9 +308,9 @@ class SearchController extends ShopFrontEndController
                 }
              return 'Đã thêm 5 comment cho các sản phẩm chưa có comment';
         }else if ($request->thay_ncc) {
-            $LsIdProductChange = range(2231,2231);
-            $idNCCNew = 1984151355;
-            $newWarehouseId = 305;
+            $LsIdProductChange = range(9416,9416);
+            $idNCCNew = 1984151388;
+            $newWarehouseId = 311;
 
             // Cập nhật bảng products
             ProductModel::whereIn('id', $LsIdProductChange)->update([
@@ -324,7 +324,15 @@ class SearchController extends ShopFrontEndController
                 ->update(['warehouse_id' => $newWarehouseId]);
 
             return 'Đã thay đổi NCC và kho thành công';
-        }else if($request->shop){
+        }
+        else if ($request->an_ncc) {
+            $idNCCHideProduct=1124150624;
+            ProductModel::where('user_id', $idNCCHideProduct)->update([
+                'status_product'    => 'tu_choi'
+            ]);
+            return 'Ẩn sp thành công';
+        }
+        else if($request->shop){
             // add comment shop
             $comments = CommentModel::select('id', 'shop_id')->get()->groupBy('shop_id');
             $users = UsersModel::where('user_type_id','=',9)->pluck('user_id');
