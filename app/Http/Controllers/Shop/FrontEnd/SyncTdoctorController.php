@@ -8,8 +8,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
 use App\Model\Shop\UsersModel as MainModel;
 use App\Model\Shop\UsersModel;
+use App\Model\Shop\ProductModel;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
 
 class SyncTdoctorController extends ShopFrontEndController
 {
@@ -481,5 +483,18 @@ class SyncTdoctorController extends ShopFrontEndController
         $pageTitle = 'Update Data from Tdoctor';
         $notification = 'updateProductsBySlug';
         return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalUpdated', 'notification'));
+    }
+    public function deleteAllCacheproduct()
+    {
+        $getAllId = ProductModel::pluck('id')->toArray();
+        $totalInserted=0;
+        foreach ($getAllId as $id) {
+            $keyCacheProduct = 'cache_product_data_' . $id;
+            Cache::forget($keyCacheProduct);
+            $totalInserted++;
+        }
+        $pageTitle = 'Xóa cache product thành công';
+        $notification = 'Xóa cache product thành công';
+        return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalInserted', 'notification'));
     }
 }

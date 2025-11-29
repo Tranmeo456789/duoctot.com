@@ -131,4 +131,5 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('dong-du-lieu-bang-import_coupon','SyncTdoctorController@transferImportCoupon')->name('fe.SyncTdoctor.transferImportCoupon');
     Route::get('dong-du-lieu-bang-shop_product_add','SyncTdoctorController@transferShopProductAdd')->name('fe.SyncTdoctor.transferShopProductAdd');
     Route::get('cap-nhat-du-lieu-bang-products','SyncTdoctorController@updateProductsBySlug')->name('fe.SyncTdoctor.updateProductsBySlug');
+    Route::get('xoa-cache-tat-ca-cac-san-pham','SyncTdoctorController@deleteAllCacheproduct')->name('fe.SyncTdoctor.deleteAllCacheproduct');
 });

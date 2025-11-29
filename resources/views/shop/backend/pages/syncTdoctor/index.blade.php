@@ -85,6 +85,12 @@
                         <p>Cập nhật dữ liệu bảng Product</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('fe.SyncTdoctor.deleteAllCacheproduct')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Xóa cache tất cả sản phẩm</p>
+                    </a>
+                </li>
             </ul>
         </li>
     </ul>
