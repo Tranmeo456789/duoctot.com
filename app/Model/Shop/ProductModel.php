@@ -735,6 +735,8 @@ class ProductModel extends BackEndModel
             self::find($id)->warehouse()->attach($wareHouseIDs);
         }
         if ($options['task'] == 'edit-item') {
+            $keyCacheProduct='cache_product_data_'.$params['id'];
+            Cache::forget($keyCacheProduct);
             $this->setModifiedHistory($params);
             $item = self::getItem($params,['task'=>'get-item']);
             $this->updateFileUpload($item,$params,'albumImage');

@@ -19,6 +19,7 @@ use App\Model\Shop\UserValuesModel;
 use App\Model\Shop\WardModel;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Cache;
 
 class ProductController extends ShopFrontEndController
 {
@@ -52,14 +53,25 @@ class ProductController extends ShopFrontEndController
             return redirect()->route('home');
         }
         if ($request->codeRef) {
-            $userCodeRef = UsersModel::where('codeRef', $request->codeRef)->first();
+            $cacheCodeRef   = Cache::get('user_by_codeRef:' . $request->codeRef);
+            if ($cacheCodeRef !== null) {
+              $userCodeRef = !empty($cached) ? $cached : null;
+            } else {
+              $model = UsersModel::where('codeRef', $request->codeRef)->first();
+
+              $payload = $model ? $model->toArray() : [];
+              Cache::put('user_by_codeRef:' . $request->codeRef, $payload, 100000000);
+
+              $userCodeRef = $model ? $payload : null;
+            }
+            //            $userCodeRef = UsersModel::where('codeRef', $request->codeRef)->first();
             if ($userCodeRef) {
-                $existProductAffiliate = AffiliateProductModel::where('product_id', $item['id'])->where('user_id', $userCodeRef['user_id'])->first();
-                if ($existProductAffiliate) {
-                    $existProductAffiliate->increment('sum_click');
-                } else {
-                    (new AffiliateProductModel)->saveItem(['product_id' => $item['id'], 'user_id' => $userCodeRef['user_id'], 'sum_click' => 1], ['task' => 'add-item']);
-                }
+              $existProductAffiliate = AffiliateProductModel::where('product_id', $item['id'])->where('user_id', $userCodeRef['user_id'])->first();
+              if ($existProductAffiliate) {
+                $existProductAffiliate->increment('sum_click');
+              } else {
+                (new AffiliateProductModel)->saveItem(['product_id' => $item['id'], 'user_id' => $userCodeRef['user_id'], 'sum_click' => 1], ['task' => 'add-item']);
+              }
             }
         }
         $userInfo = (new UsersModel)->getItem(['user_id' => $item['user_id']], ['task' => 'get-item']);
@@ -71,12 +83,12 @@ class ProductController extends ShopFrontEndController
             unset($productViewed[$item['id']]);
         } else {
             $productCurrent[$item['id']] = [
-                'product_id' => $item->id,
-                'name'       => $item->name,
-                'price'      => $item->price,
-                'image'      => $item->image,
-                'unit'       => $item->unitProduct->name,
-                'slug' => $item->slug
+              'product_id' => $item->id,
+              'name'       => $item->name,
+              'price'      => $item->price,
+              'image'      => $item->image,
+              'unit'       => $item->unitProduct->name,
+              'slug' => $item->slug
             ];
         }
         $productViewed = $productCurrent + $productViewed;
@@ -86,11 +98,50 @@ class ProductController extends ShopFrontEndController
         }
         setcookie("productViewed", json_encode($productViewed), time() + config('myconfig.time_cookie'), "/");
         $_COOKIE["productViewed"] = json_encode($productViewed);
-        $listProductRelate = $this->model->listItems(['cat_product_id' => $item['cat_product_id'], 'limit' => 4], ['task' => 'frontend-list-items']) ?? [];
-        $commentProduct = (new CommentModel)->listItems(['product_id' => $item['id']], ['task' => 'list-items-frontend']);
-        $ratingProduct = (new CommentModel)->listItems(['product_id' => $item['id'], 'rating' => 1], ['task' => 'list-items-frontend']);
-        $productId = $item['id'] ?? '';
-        $listUserHasProduct = (new UsersModel)->listItems(['product_id' => $productId], ['task' => 'list-users-nha-cung-cap-has-product-id']);
+        //        $listProductRelate = $this->model->listItems(['cat_product_id' => $item['cat_product_id'], 'limit' => 4], ['task' => 'frontend-list-items']) ?? [];
+        //        $commentProduct = (new CommentModel)->listItems(['product_id' => $item['id']], ['task' => 'list-items-frontend']);
+        //        $ratingProduct = (new CommentModel)->listItems(['product_id' => $item['id'], 'rating' => 1], ['task' => 'list-items-frontend']);
+        //        $productId = $item['id'] ?? '';
+        //        $listUserHasProduct = (new UsersModel)->listItems(['product_id' => $productId], ['task' => 'list-users-nha-cung-cap-has-product-id']);
+        $keyCache = 'cache_product_data_' . $item['id'];
+        $dataCache = Cache::get($keyCache);
+
+        if (!empty($dataCache)) {
+            $listProductRelate   = $dataCache['listProductRelate'];
+            $commentProduct      = $dataCache['commentProduct'];
+            $ratingProduct       = $dataCache['ratingProduct'];
+            $listUserHasProduct  = $dataCache['listUserHasProduct'];
+        } else {
+            $listProductRelate = $this->model->listItems(
+              ['cat_product_id' => $item['cat_product_id'], 'limit' => 4],
+              ['task' => 'frontend-list-items']
+            ) ?? [];
+
+            $commentProduct = (new CommentModel)->listItems(
+              ['product_id' => $item['id']],
+              ['task' => 'list-items-frontend']
+            );
+
+            $ratingProduct = (new CommentModel)->listItems(
+              ['product_id' => $item['id'], 'rating' => 1],
+              ['task' => 'list-items-frontend']
+            );
+
+            $productId = $item['id'] ?? '';
+            $listUserHasProduct = (new UsersModel)->listItems(
+              ['product_id' => $productId],
+              ['task' => 'list-users-nha-cung-cap-has-product-id']
+            );
+
+            $dataCache = [
+              'listProductRelate'  => $listProductRelate,
+              'commentProduct'     => $commentProduct,
+              'ratingProduct'      => $ratingProduct,
+              'listUserHasProduct' => $listUserHasProduct,
+            ];
+
+            Cache::put($keyCache, $dataCache, 100000000);
+        }
         //return $listUserHasProduct;
         return view($this->pathViewController . 'detail', compact('params', 'item', 'albumImageCurrent', 'codeRef', 'userInfo', 'codeRefLogin', 'listProductRelate', 'commentProduct', 'ratingProduct', 'listUserHasProduct'));
     }
