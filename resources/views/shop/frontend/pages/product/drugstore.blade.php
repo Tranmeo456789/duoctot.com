@@ -24,35 +24,7 @@ $phoneShop=MyFunction::formatPhoneNumber($phoneShop);
 <style>
     .prev-btn,.next-btn {top: 50%;transform: translateY(-50%);border: none;padding: 10px;cursor: pointer;z-index: 10;font-size: 30px;}
 </style>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var sliderThumb = tns({
-            container: ".banner_doitac",
-            items: 1,
-            slideBy: 1,
-            loop: true,
-            speed: 400,
-            autoplay: false,
-            autoplayTimeout: 5000,
-            autoplayButtonOutput: false,
-            controls: false,
-            nav: false,
-            mouseDrag: true,
-            touch: true,
-            gutter: 4,
-            edgePadding: 0,
-            onInit: function() {
-                document.querySelector(".banner_doitac").classList.remove("cS-hidden")
-            }
-        });
-        document.querySelector('.prev-btn').addEventListener('click', function() {
-            sliderThumb.goTo('prev');
-        });
-        document.querySelector('.next-btn').addEventListener('click', function() {
-            sliderThumb.goTo('next');
-        });
-    });
-</script>
+<script>document.addEventListener("DOMContentLoaded",function(){var sliderThumb=tns({container:".banner_doitac",items:1,slideBy:1,loop:!0,speed:400,autoplay:!1,autoplayTimeout:5e3,autoplayButtonOutput:!1,controls:!1,nav:!1,mouseDrag:!0,touch:!0,gutter:4,edgePadding:0,onInit:function(){document.querySelector(".banner_doitac").classList.remove("cS-hidden")}});var sliderThumb2=tns({container:".banner_doitac_mobi",items:1,slideBy:1,loop:!0,speed:400,autoplay:!1,autoplayTimeout:5e3,autoplayButtonOutput:!1,controls:!1,nav:!1,mouseDrag:!0,touch:!0,gutter:4,edgePadding:0,onInit:function(){document.querySelector(".banner_doitac_mobi").classList.remove("cS-hidden")}});document.querySelector(".prev-btn").addEventListener("click",function(){sliderThumb.goTo("prev")});document.querySelector(".next-btn").addEventListener("click",function(){sliderThumb.goTo("next")})});</script>
 @endsection
 @section('content')
 <div class="wp-inner mt-3 mt-lg-4">
@@ -95,6 +67,7 @@ $phoneShop=MyFunction::formatPhoneNumber($phoneShop);
 <div class="service-tdoctor mt-3 mt-lg-4">
     @include("$moduleName.templates.info_service")
 </div>
+@include("$moduleName.templates.banner_doitac")
 <div class="local">
     @include("$moduleName.templates.local_drugstore")
 </div>
@@ -103,6 +76,5 @@ $phoneShop=MyFunction::formatPhoneNumber($phoneShop);
         @include("$moduleName.templates.feedback_customer")
     </div>
 </div>
-<!-- @include("$moduleName.templates.banner_doitac") -->
 <div class="lc-mask-search"></div>
 @endsection
