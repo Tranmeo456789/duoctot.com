@@ -5,7 +5,7 @@
     </div>
     @else
     <button class="prev-btn position-absolute" style="left: 0;">‹</button>
-    <div class="banner_doitac cS-hidden">
+    <div class="list_thumb_user cS-hidden">
         <div class="swiper-slide text-center">
             <img class="border border-secondary rounded" src="{{ $imageSrc }}" alt="tdoctor">
         </div>
