@@ -177,61 +177,61 @@ class HomeController extends ShopFrontEndController
         ]);
     }
     public function writeContentAi(){
-        $title = 'Hướng dẫn viết content bằng AI | Tdoctor';
+        $title = 'Hướng dẫn viết content bằng AI | Duoctot.com';
         return view("$this->pathViewController.write_content",[
             'title'=>$title
         ]);
     }
     public function pageChinhSachDoiTra(){
-        $title = 'Chính sách đổi trả | Tdoctor';
+        $title = 'Chính sách đổi trả | Duoctot.com';
         return view("$this->pathViewController.chinhsach_doitra",[
             'title'=>$title
         ]);
     }
     public function pageAboutUs(){
-        $title = 'Về chúng tôi | Tdoctor';
+        $title = 'Về chúng tôi | Duoctot.com';
         return view("$this->pathViewController.about_us",[
             'title'=>$title
         ]);
     }
     public function pageAboutUsWebView(){
-        $title = 'Về chúng tôi | Tdoctor';
+        $title = 'Về chúng tôi | Duoctot.com';
         return view("$this->pathViewController.about_us_web_view",[
             'title'=>$title
         ]);
     }
     public function pageContact(){
-        $title = 'Liên hệ | Tdoctor';
+        $title = 'Liên hệ | Duoctot.com';
         return view("$this->pathViewController.contact",[
             'title'=>$title
         ]);
     }
     public function pageContactWebView(){
-        $title = 'Liên hệ | Tdoctor';
+        $title = 'Liên hệ | Duoctot.com';
         return view("$this->pathViewController.contact_webview",[
             'title'=>$title
         ]);
     }
     public function pageQuytrinhGiaiquyetTranhchap(){
-        $title = 'Quy trình giải quyết tranh chấp | Tdoctor';
+        $title = 'Quy trình giải quyết tranh chấp | Duoctot.com';
         return view("$this->pathViewController.quytrinh_giaiquyet_tranhchap",[
             'title'=>$title
         ]);
     }
     public function pageChinhsachBaomatThongtin(){
-        $title = 'Chính sách bảo mật thông tin | Tdoctor';
+        $title = 'Chính sách bảo mật thông tin | Duoctot.com';
         return view("$this->pathViewController.chinhsach_baomat_thongtin",[
             'title'=>$title
         ]);
     }
     public function pageChinhsachGiaoNhan(){
-        $title = 'Chính sách giao nhận | Tdoctor';
+        $title = 'Chính sách giao nhận | Duoctot.com';
         return view("$this->pathViewController.chinhsach_giaonhan",[
             'title'=>$title
         ]);
     }
     public function pageChinhsachThanhToan(){
-        $title = 'Chính sách thanh toán | Tdoctor';
+        $title = 'Chính sách thanh toán | Duoctot.com';
         return view("$this->pathViewController.chinhsach_thanhtoan",[
             'title'=>$title
         ]);
@@ -319,7 +319,7 @@ class HomeController extends ShopFrontEndController
         );
     }
     public function pageDieukhoanSudung(){
-        $title = 'Điều khoản sử dụng | Tdoctor';
+        $title = 'Điều khoản sử dụng | Duoctot.com';
         return view("$this->pathViewController.dieukhoan_sudung",[
             'title'=>$title
         ]);
@@ -335,7 +335,7 @@ class HomeController extends ShopFrontEndController
         return view('shop.frontend.pages.error.page_404');
     }
     public function pageKhuyenMai(){
-        $title = 'Khuyến Mãi | Tdoctor';
+        $title = 'Khuyến Mãi | Duoctot.com';
         $arrayIds = [1144150976,1144150977,1144150972,1144150971,1144150953,1144150969,1144150968,1144150959,1144150936,1144150924,1144150923,1144150918,1144150682,1144150915,1144150691,994110253,1144150905,1144150808,1144150821,1144150807,1144150805,1144150804,1144150797,1144150796,1144150792,1144150791,1144150788,1144150954,1144151048,1984151214,1144150711,1984151316];
             $productcersRaw = UsersModel::whereIn('user_id', $arrayIds)->get()->keyBy('user_id');
             $productcers = collect($arrayIds)->map(function ($id) use ($productcersRaw) {
@@ -357,7 +357,7 @@ class HomeController extends ShopFrontEndController
     }
     public function pageDiemTichLuy(Request $request) {
         if ($request->session()->has('user')) {
-            $title = 'Điểm tích lũy | Tdoctor';
+            $title = 'Điểm tích lũy | Duoctot.com';
             return view("{$this->pathViewController}.diem_tich_luy", [
                 'title' => $title
             ]);
@@ -367,7 +367,7 @@ class HomeController extends ShopFrontEndController
     }
     public function pageRiengChoBan(Request $request) {
         if ($request->session()->has('user')) {
-            $title = 'Riêng cho bạn | Tdoctor';
+            $title = 'Riêng cho bạn | Duoctot.com';
             $user = $request->session()->get('user');
             $userId = $user['user_id'] ?? null;
             $userInfo=UsersModel::where('user_id', $userId)->first();

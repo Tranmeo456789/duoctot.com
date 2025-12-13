@@ -370,7 +370,7 @@ class ProductController extends ShopFrontEndController
             });
         }
         $items = $query->paginate(10);
-        $title = 'Danh sách Shop dược | Tdoctor';
+        $title = 'Danh sách Shop dược | Duoctot.com';
         return view(
             $this->pathViewController . 'ls_shop',
             [
@@ -419,7 +419,7 @@ class ProductController extends ShopFrontEndController
             });
         }
         $items = $query->paginate(10);
-        $title = 'Danh sách Shop Mẹ và Bé | Tdoctor';
+        $title = 'Danh sách Shop Mẹ và Bé | Duoctot.com';
         return view(
             $this->pathViewController . 'ls_shop',
             [
@@ -468,7 +468,7 @@ class ProductController extends ShopFrontEndController
             });
         }
         $items = $query->paginate(10);
-        $title = 'Danh sách Shop Trình dược viên | Tdoctor';
+        $title = 'Danh sách Shop Trình dược viên | Duoctot.com';
         return view(
             $this->pathViewController . 'ls_trinhduocvien',
             [
@@ -517,7 +517,7 @@ class ProductController extends ShopFrontEndController
             });
         }
         $items = $query->paginate(10);
-        $title = 'Danh sách Nhà thuốc | Tdoctor';
+        $title = 'Danh sách Nhà thuốc | Duoctot.com';
         return view(
             $this->pathViewController . 'ls_drugstore',
             [
@@ -565,7 +565,7 @@ class ProductController extends ShopFrontEndController
             });
         }
         $items = $query->paginate(10);
-        $title = 'Danh sách Nhà cung cấp | Tdoctor';
+        $title = 'Danh sách Nhà cung cấp | Duoctot.com';
         return view(
             $this->pathViewController . 'ls_nhacungcap',
             [
@@ -614,7 +614,7 @@ class ProductController extends ShopFrontEndController
             });
         }
         $items = $query->paginate(10);
-        $title = 'Danh sách Phòng Khám | Tdoctor';
+        $title = 'Danh sách Phòng Khám | Duoctot.com';
         return view(
             $this->pathViewController . 'ls_phongkham',
             [
@@ -663,7 +663,7 @@ class ProductController extends ShopFrontEndController
             });
         }
         $items = $query->paginate(10);
-        $title = 'Danh sách Thẩm Mỹ Viện | Tdoctor';
+        $title = 'Danh sách Thẩm Mỹ Viện | Duoctot.com';
         return view(
             $this->pathViewController . 'ls_thammyvien',
             [
@@ -712,7 +712,7 @@ class ProductController extends ShopFrontEndController
             });
         }
         $items = $query->paginate(10);
-        $title = 'Danh sách Bác Sĩ | Tdoctor';
+        $title = 'Danh sách Bác Sĩ | Duoctot.com';
         return view(
             $this->pathViewController . 'ls_bacsi',
             [
