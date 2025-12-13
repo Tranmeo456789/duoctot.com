@@ -308,9 +308,9 @@ class SearchController extends ShopFrontEndController
                 }
              return 'Đã thêm 5 comment cho các sản phẩm chưa có comment';
         }else if ($request->thay_ncc) {
-            $LsIdProductChange = range(9390,9393);
-            $idNCCNew = 1984151388;
-            $newWarehouseId = 311;
+            $LsIdProductChange = range(7271,7271);
+            $idNCCNew = 1144150685;
+            $newWarehouseId = 318;
 
             // Cập nhật bảng products
             ProductModel::whereIn('id', $LsIdProductChange)->update([
