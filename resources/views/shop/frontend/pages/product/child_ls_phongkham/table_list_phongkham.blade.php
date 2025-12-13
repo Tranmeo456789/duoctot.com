@@ -33,18 +33,18 @@
                     $address='';
                     $ward='';
                     if(isset($val['details'])){
-                        $ward_detail=(new WardModel())->getItem(['id'=> $val['details']['ward_id']],['task' => 'get-item-full']);
+                        $ward_detail = !empty($val['details']['ward_id']) ? (new WardModel())->getItem(['id' => $val['details']['ward_id']], ['task' => 'get-item-full']): null;
                         if($ward_detail){
                             $ward = isset($ward_detail['name']) ? ' ' . $ward_detail['name'] : '';
                             $district = isset($ward_detail['district']['name']) ? ', ' . $ward_detail['district']['name'] : '';
                             $province = isset($ward_detail['district']['province']['name']) ? ', ' . $ward_detail['district']['province']['name'] : '';
                         }else{
-                            $province_detail=(new ProvinceModel)->getItem(['id'=> $val['details']['province_id']],['task' => 'get-item-full']);
+                            $province_detail = !empty($val['details']['province_id']) ? (new ProvinceModel)->getItem(['id' => $val['details']['province_id']], ['task' => 'get-item-full']): null;
                             $province = isset($province_detail['name']) ? ', ' . $province_detail['name'] : '';
-                            $district_detail=(new ProvinceModel)->getItem(['id'=> $val['details']['district_id']],['task' => 'get-item-full']);
+                            $district_detail = !empty($val['details']['district_id']) ? (new DistrictModel())->getItem(['id' => $val['details']['district_id']], ['task' => 'get-item-full']): null;
                             $district = isset($district_detail['name']) ? $district_detail['name'] : '';
                         }
-                        $address=$val['details']['address'].$ward.$district.$province;
+                        $address = ($val['details']['address'] ?? '') . $ward . $district . $province;
                     }
                     $phoneOfShopShow = $val['phone'] ?? $phoneOfShopConfig;
                     $phoneOfShop=MyFunction::formatPhoneNumber($phoneOfShopShow) ?? '';
