@@ -62,15 +62,12 @@
             'widthElement' => 'col-12 col-lg-4'
         ]
     ];
-    $elementSubmits=[];
-    if(Session::has('user') && Session::get('user')['is_admin'] == 1){
-        $elementSubmits = [
+    $elementSubmits = [
         [
             'element' => $inputHiddenID  .Form::submit('Cập nhật', ['class'=>'btn btn-primary']),
             'type'    => "btn-submit-center"
         ]
     ];
-    }
 @endphp
 @extends('shop.layouts.backend')
 @section('title',$pageTitle)
@@ -98,11 +95,9 @@
                     </div>
                 </div>
             </div>
-            @if(Session::has('user') && Session::get('user')['is_admin'] == 1)
             <div class="col-12">
                 @include("$moduleName.pages.$controllerName.child_detail.info_customer",['item' => $item->userBuy])
             </div>
-            @endif
             <div class="col-12">
                 @include("$moduleName.pages.$controllerName.child_detail.list_product",['infoProduct' => $item['info_product']])
             </div>
