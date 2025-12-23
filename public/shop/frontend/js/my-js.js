@@ -1919,4 +1919,31 @@ $(document).ready(function() {
       $('#imagePopup').fadeOut(200);
     }
   });
+  $('.list_thumb_user img').on('click', function() {
+    var imgSrc = $(this).attr('src');
+    $('#imagePopup img').attr('src', imgSrc);
+    $('#imagePopup').fadeIn(200).css('display', 'flex');
+  });
+});
+$(document).ready(function() {
+    $('.item-ncc-km').click(function() {
+        $('.item-ncc-km').removeClass('active'); 
+        $(this).addClass('active'); 
+        var url = $(this).attr("data-href");
+        var slug = $(this).attr("data-slug");
+        var _token = $('input[name="_token"]').val();
+        $.ajax({
+            url: url,
+            cache: false,
+            method: "GET",
+            dataType: 'html',
+            data: {
+                slug: slug,
+                _token: _token
+            },
+            success: function (data) {
+                $('#product-ncc-km').html(data);
+            },
+        });
+    });
 });

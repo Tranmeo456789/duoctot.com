@@ -24,7 +24,7 @@ $phoneShop=MyFunction::formatPhoneNumber($phoneShop);
 <style>
     .prev-btn,.next-btn {top: 50%;transform: translateY(-50%);border: none;padding: 10px;cursor: pointer;z-index: 10;font-size: 30px;}
 </style>
-<script>document.addEventListener("DOMContentLoaded",function(){var s1=tns({container:".banner_doitac",items:1,slideBy:1,loop:!0,speed:400,autoplay:!0,autoplayTimeout:5e3,autoplayButtonOutput:!1,controls:!1,nav:!1,mouseDrag:!0,touch:!0,gutter:4,edgePadding:0,onInit:function(){document.querySelector(".banner_doitac").classList.remove("cS-hidden")}});var s2=tns({container:".banner_doitac_mobi",items:1,slideBy:1,loop:!0,speed:400,autoplay:!0,autoplayTimeout:5e3,autoplayButtonOutput:!1,controls:!1,nav:!1,mouseDrag:!0,touch:!0,gutter:4,edgePadding:0,onInit:function(){document.querySelector(".banner_doitac_mobi").classList.remove("cS-hidden")}});var s3=tns({container:".list_thumb_user",items:1,slideBy:1,loop:!0,speed:400,autoplay:!1,autoplayTimeout:5e3,autoplayButtonOutput:!1,controls:!1,nav:!1,mouseDrag:!0,touch:!0,gutter:4,edgePadding:0,onInit:function(){document.querySelector(".list_thumb_user").classList.remove("cS-hidden")}});document.querySelector(".prev-btn").addEventListener("click",function(){s3.goTo("prev")});document.querySelector(".next-btn").addEventListener("click",function(){s3.goTo("next")})});</script>
+<script>document.addEventListener("DOMContentLoaded",function(){var s1=tns({container:".banner_doitac",items:1,slideBy:1,loop:!0,speed:400,autoplay:!0,autoplayTimeout:5e3,autoplayButtonOutput:!1,controls:!1,nav:!1,mouseDrag:!0,touch:!0,gutter:4,edgePadding:0,onInit:function(){document.querySelector(".banner_doitac").classList.remove("cS-hidden")}});var s2=tns({container:".banner_doitac_mobi",items:1,slideBy:1,loop:!0,speed:400,autoplay:!0,autoplayTimeout:5e3,autoplayButtonOutput:!1,controls:!1,nav:!1,mouseDrag:!0,touch:!0,gutter:4,edgePadding:0,onInit:function(){document.querySelector(".banner_doitac_mobi").classList.remove("cS-hidden")}});var s3=tns({container:".list_thumb_user",items:1,slideBy:1,loop:!0,speed:400,autoplay:!1,autoplayTimeout:5e3,autoplayButtonOutput:!1,controls:!1,nav:!1,mouseDrag:!0,touch:!0,gutter:4,edgePadding:0,autoHeight: !0,onInit:function(){document.querySelector(".list_thumb_user").classList.remove("cS-hidden")}});document.querySelector(".prev-btn").addEventListener("click",function(){s3.goTo("prev")});document.querySelector(".next-btn").addEventListener("click",function(){s3.goTo("next")})});</script>
 
 @endsection
 @section('content')
@@ -78,4 +78,10 @@ $phoneShop=MyFunction::formatPhoneNumber($phoneShop);
     </div>
 </div>
 <div class="lc-mask-search"></div>
+<!-- Popup hiển thị ảnh -->
+<div class="image-popup-overlay" id="imagePopup">
+  <span class="close-popup">&times;</span>
+  <img src="" alt="Zoomed Image">
+</div>
+<style>.image-popup-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:black;display:none;justify-content:center;align-items:center;z-index:9999}.image-popup-overlay img{max-width:90%;max-height:90%;border-radius:8px;box-shadow:0 0 20px rgba(255,255,255,.3);object-fit:contain}.image-popup-overlay .close-popup{position:absolute;top:20px;right:30px;font-size:35px;color:#fff;cursor:pointer;font-weight:700}.content-detail-product iframe {max-width: 100% !important;height: auto !important;aspect-ratio: 16 / 9;}</style>
 @endsection
