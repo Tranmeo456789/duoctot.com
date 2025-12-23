@@ -98,11 +98,19 @@
         ],[
                 'label'   => Form::label('map', 'Bản đồ', $formLabelAttr),
                 'element' => Form::textarea('details[map]', $item['details']['map']?? '', array_merge($formInputAttr,['placeholder'=>'Bản đồ',"rows"=>"5"]))
-        ],[
-            'element' => $inputHiddenID . $inputHiddenTask .Form::submit('Cập nhật', ['class'=>'btn btn-primary']),
-            'type'    => "btn-submit-center"
         ]
     ];
+    $elementThumb = [[
+                'label'   => Form::label('albumImage', 'Album ảnh', ['class' => 'col-1 col-form-label']),
+                'element' => Form::file('albumImage[]', array_merge($formInputAttr,['multiple'=>'multiple','accept'=>'image/*'])),
+                'fileAttach'   => (!empty($item['user_id'])) ? Template::showImageAttachPreview('user', $item['albumImage'],$item['albumImageHash'], $item['user_id'],['btn' => 'delete']) : null ,
+                'type'    => "fileAttachPreview",
+                'widthInput' => 'col-11',
+            ]];
+    $elementInputHidden = [[
+        'element' => $inputHiddenID . $inputHiddenTask .Form::submit('Cập nhật', ['class'=>'btn btn-primary']),
+        'type'    => "btn-submit-center"
+        ]];
     $title = 'Cập nhật thông tin';
 @endphp
 
@@ -114,5 +122,7 @@
     'id'             => 'main-form' ])  }}
     <div class="row">
         {!! FormTemplate::show($elements,$formInputWidth)  !!}
+        {!! FormTemplate::show($elementThumb,$formInputWidth)  !!}
+        {!! FormTemplate::show( $elementInputHidden,$formInputWidth)  !!}
     </div>
 {{ Form::close() }}
