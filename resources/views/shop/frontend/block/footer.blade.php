@@ -41,9 +41,9 @@
                     </div>
                     <div class="d-flex">
                         <div class="icon-social">
-                            <a href="https://www.youtube.com/@duoctot"><img src="{{asset('images/shop/ict4.webp')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async"></a>
+                            <a href="https://www.youtube.com/@duoctot/shorts"><img src="{{asset('images/shop/ict4.webp')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async"></a>
                         </div>
-                        <p><a href="https://www.youtube.com/@duoctot">Youtube</a></p>
+                        <p><a href="https://www.youtube.com/@duoctot/shorts">Youtube</a></p>
                     </div>
                     <div class="d-flex">
                         <div class="icon-social">
