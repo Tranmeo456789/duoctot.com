@@ -45,6 +45,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('/dat-hang/thanh-cong/{code}','OrderController@success')->name('fe.order.success');
     Route::get('/don-hang-cua-toi','OrderController@list')->name('fe.order.list');
     Route::get('/chi-tiet-don-hang-cua-toi','OrderController@detail')->name('fe.order.detail');
+    Route::get('/trang-chi-tiet-don-hang-cua-toi/{code}','OrderController@detailPage')->name('fe.order.detailPage');
     Route::get('/loc-don-hang-cua-toi','OrderController@ajaxFliter')->name('fe.order.ajaxFliter');
     Route::get('/tra-cuu-don-hang','OrderController@formSearch')->name('fe.order.formSearch');
     Route::post('/tra-cuu-don-hang-theo-so-dien-thoai','OrderController@searchInPhone')->name('fe.order.searchInPhone');

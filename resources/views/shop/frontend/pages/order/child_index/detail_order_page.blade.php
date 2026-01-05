@@ -1,25 +1,17 @@
 @php
-use App\Helpers\Template as Template;
-use App\Helpers\MyFunction;
-use App\Model\Shop\UnitModel;
-use App\Model\Shop\ProductModel;
-$status_order=[
-    ['temp'=>5,'name'=>'Hoàn tất','slug'=>'hoanTat'],
-    ['temp'=>4,'name'=>'Đã giao hàng','slug'=>'daGiaoHang'],
-    ['temp'=>3,'name'=>'Đang giao hàng','slug'=>'dangGiaoHang'],
-    ['temp'=>2,'name'=>'Đã xác nhận','slug'=>'daXacNhan'],
-    ['temp'=>1,'name'=>'Đang xử lý','slug'=>'dangXuLy'],
-];
+    use App\Helpers\Template as Template;
+    use App\Helpers\MyFunction;
+    use App\Model\Shop\UnitModel;
+    use App\Model\Shop\ProductModel;
+    $status_order=[
+        ['temp'=>5,'name'=>'Hoàn tất','slug'=>'hoanTat'],
+        ['temp'=>4,'name'=>'Đã giao hàng','slug'=>'daGiaoHang'],
+        ['temp'=>3,'name'=>'Đang giao hàng','slug'=>'dangGiaoHang'],
+        ['temp'=>2,'name'=>'Đã xác nhận','slug'=>'daXacNhan'],
+        ['temp'=>1,'name'=>'Đang xử lý','slug'=>'dangXuLy'],
+    ];
 
 $statusControlOrderValue = array_combine(array_keys(config("myconfig.template.column.status_control")),array_column(config("myconfig.template.column.status_control"),'name'));
-
-@endphp
-@if(isset($order_detail))
-<div class="header d-flex justify-content-between">
-    <div class="tshorder">Chi tiết đơn hàng</div>
-    <button class="btn-closenk rimg-center"><img src="{{asset('images/shop/dn4.png')}}" alt=""></button>
-</div>
-@php
 $info_buyer=json_decode($order_detail['buyer'], true);
 $ngayDatHang = MyFunction::formatDateFrontend($order_detail['created_at']);
 foreach($status_order as $value){
@@ -30,7 +22,11 @@ foreach($status_order as $value){
 }
 $codeOrder=$order_detail['code_order'];
 @endphp
-<div class="wp-content">
+@extends('shop.layouts.frontend')
+
+@section('content')
+<div style="display: flex;justify-content: center;" class="my-4">
+    <div class="wp-content p-2" style="max-width: 600px;background: #f1f1f0;">
     <div class="top-tab-order">
         <h4 class="mb-0">Đơn hàng <span class="text-info"><a href="{{route('fe.order.detailPage',$codeOrder)}}">{{$codeOrder}}</a></span></h4>
         <div class="wp-link-affiliate position-relative">
@@ -175,5 +171,7 @@ $codeOrder=$order_detail['code_order'];
             <p class="font-weight-bold">Liên hệ hotline/Zalo <span style="font-size: 20px; color:red">0393.167.234</span> để xác nhận thanh toán và hỗ trợ</p>
         @endif
     </div>
+    </div>
 </div>
-@endif
+
+@endsection

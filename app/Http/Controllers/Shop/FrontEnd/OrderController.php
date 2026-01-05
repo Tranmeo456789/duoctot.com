@@ -74,6 +74,23 @@ class OrderController extends ShopFrontEndController
         }
         return view("$this->moduleName.pages.order.child_index.detail_order",compact('order_detail','address'));
     }
+    public function detailPage($code){
+        $order_detail=$this->model->getItem(['code_order'=>$code], ['task' => 'get-item-frontend-code']);
+        $info_buyer=json_decode($order_detail['buyer'], true);
+        $address='';
+        if($order_detail->delivery_method ==1){
+            $warehouse_id=$order_detail['pharmacy']['warehouse_id'];
+            $address=(new WarehouseModel())->getItem(['id'=>$warehouse_id],['task' => 'get-item-of-id'])->address;
+        }else{
+            $ward_detail=(new WardModel())->getItem(['id'=>$order_detail->receive['ward_id']],['task' => 'get-item-full']);
+            $ward=$ward_detail['name']??'';
+            $district=$ward_detail['district']['name']??'';
+            $province=$ward_detail['district']['province']['name']??'';
+            $address=$order_detail->receive['address'].' '.$ward.' '.$district.' '.$province;
+        }
+        $title="Chi tiết đơn hàng";
+        return view("$this->moduleName.pages.order.child_index.detail_order_page",compact('order_detail','address','title'));
+    }
     public function completed(Request $request)
     {
       //  if (!$request->ajax()) return view("errors." .  'notfound', []);
