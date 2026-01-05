@@ -1,24 +1,24 @@
 @php
-    use App\Helpers\Template as Template;
-    use App\Helpers\MyFunction;
-    use App\Model\Shop\UnitModel;
-    use App\Model\Shop\ProductModel;
-    $status_order=[
-        ['temp'=>5,'name'=>'Hoàn tất','slug'=>'hoanTat'],
-        ['temp'=>4,'name'=>'Đã giao hàng','slug'=>'daGiaoHang'],
-        ['temp'=>3,'name'=>'Đang giao hàng','slug'=>'dangGiaoHang'],
-        ['temp'=>2,'name'=>'Đã xác nhận','slug'=>'daXacNhan'],
-        ['temp'=>1,'name'=>'Đang xử lý','slug'=>'dangXuLy'],
-    ];
+use App\Helpers\Template as Template;
+use App\Helpers\MyFunction;
+use App\Model\Shop\UnitModel;
+use App\Model\Shop\ProductModel;
+$status_order=[
+['temp'=>5,'name'=>'Hoàn tất','slug'=>'hoanTat'],
+['temp'=>4,'name'=>'Đã giao hàng','slug'=>'daGiaoHang'],
+['temp'=>3,'name'=>'Đang giao hàng','slug'=>'dangGiaoHang'],
+['temp'=>2,'name'=>'Đã xác nhận','slug'=>'daXacNhan'],
+['temp'=>1,'name'=>'Đang xử lý','slug'=>'dangXuLy'],
+];
 
 $statusControlOrderValue = array_combine(array_keys(config("myconfig.template.column.status_control")),array_column(config("myconfig.template.column.status_control"),'name'));
 $info_buyer=json_decode($order_detail['buyer'], true);
 $ngayDatHang = MyFunction::formatDateFrontend($order_detail['created_at']);
 foreach($status_order as $value){
-    if($value['slug']==$order_detail['status_order']){
-        $indexCurent=$value['temp'];
-        break;
-    }
+if($value['slug']==$order_detail['status_order']){
+$indexCurent=$value['temp'];
+break;
+}
 }
 $codeOrder=$order_detail['code_order'];
 @endphp
@@ -27,102 +27,102 @@ $codeOrder=$order_detail['code_order'];
 @section('content')
 <div style="display: flex;justify-content: center;" class="my-4">
     <div class="wp-content p-2" style="max-width: 600px;background: #f1f1f0;">
-    <div class="top-tab-order">
-        <h4 class="mb-0">Đơn hàng <span class="text-info"><a href="{{route('fe.order.detailPage',$codeOrder)}}">{{$codeOrder}}</a></span></h4>
-        <div class="wp-link-affiliate position-relative">
-            <div id="copy-notification" style="position: absolute; background-color: rgb(40, 167, 69); color: white; padding: 3px; border-radius: 5px; z-index: 1000; font-size: 14px; display: none;">Đã copy!</div>
+        <div class="top-tab-order">
+            <h4 class="mb-0">Đơn hàng <span class="text-info"><a href="{{route('fe.order.detailPage',$codeOrder)}}">{{$codeOrder}}</a></span></h4>
+            <div class="wp-link-affiliate position-relative">
+                <div id="copy-notification" style="position: absolute; background-color: rgb(40, 167, 69); color: white; padding: 3px; border-radius: 5px; z-index: 1000; font-size: 14px; display: none;">Đã copy!</div>
                 <div class="value-link d-none">{{route('fe.order.detailPage',$codeOrder)}}</div>
-                    <span class="text-primary share-link btn-copy-link">Share <i class="fas fa-share"></i></span>
+                <span class="text-primary share-link btn-copy-link">Share <i class="fas fa-share"></i></span>
             </div>
-        <p class="font-weight-bold mt-2">Đặt hàng ngày {{$ngayDatHang}}</p>
-    </div>
-    <div class="tab-header">
-        <p>Trạng thái đơn hàng</p>
-    </div>
-    <div class="wp-status-order">
-        <ul class="ls-status-order">
-            @foreach($status_order as $item)
-            <li>
-                <div class="d-flex">
-                    <div class="stepper-circle">
-                        <div class="{{$item['slug']==$order_detail['status_order']?'stepper-circle-icon':''}} {{$item['temp'] < $indexCurent?'stepper-circle-icon-old':''}}"></div>
+            <p class="font-weight-bold mt-2">Đặt hàng ngày {{$ngayDatHang}}</p>
+        </div>
+        <div class="tab-header">
+            <p>Trạng thái đơn hàng</p>
+        </div>
+        <div class="wp-status-order">
+            <ul class="ls-status-order">
+                @foreach($status_order as $item)
+                <li>
+                    <div class="d-flex">
+                        <div class="stepper-circle">
+                            <div class="{{$item['slug']==$order_detail['status_order']?'stepper-circle-icon':''}} {{$item['temp'] < $indexCurent?'stepper-circle-icon-old':''}}"></div>
+                        </div>
+                        <div class="stepper-label ml-2">{{$item['name']}}</div>
                     </div>
-                    <div class="stepper-label ml-2">{{$item['name']}}</div>
-                </div>
-            </li>
-            @endforeach
-        </ul>
-    </div>
-    <div class="tab-header">
-        <p>Thông tin giao hàng</p>
-    </div>
-    <div class="item-info">
-        <table class="table pd-order mb-0" id="tbList">
-            <tbody>
-                <tr class="bb_order">
-                    <td style="width: 30%">Số đơn hàng</td>
-                    <td style="width: 70%" class='name text-info'>{{$order_detail['code_order']}}</td>
-                </tr>
-                <tr class="bb_order">
-                    <td style="width: 30%">Họ và tên</td>
-                    <td style="width: 70%" class='name'>{{$info_buyer['fullname']}}</td>
-                </tr>
-                <tr class="bb_order pb-1">
-                    <td style="width: 30%">Số điện thoại người đặt</td>
-                    <td style="width: 70%" class='name'>{{$info_buyer['phone']}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="tab-header">
-        <p>Thông tin nhận hàng & thanh toán</p>
-    </div>
-    <div class="item-info">
-        <table class="table pd-order mb-0" id="tbList">
-            <tbody>
-                <tr class="bb_order">
-                    <td style="width: 30%">Họ và tên người nhận</td>
-                    <td style="width: 70%">{{$info_buyer['fullname']}}</td>
-                </tr>
-                <tr class="bb_order">
-                    <td style="width: 30%">Số điện thoại người nhận</td>
-                    <td style="width: 70%" class='name'>{{$info_buyer['phone']}}</td>
-                </tr>
-                <tr class="bb_order pb-1">
-                    <td style="width: 30%">Nhận hàng tại</td>
-                    <td style="width: 70%" class='name'>{{$address}}</td>
-                </tr>
-                <tr class="bb_order pb-1">
-                    <td style="width: 30%">Phương thức thanh toán</td>
-                    <td style="width: 70%" class='name'>{{$order_detail['payment']==2 ? 'Thanh toán ngay(ck)' : 'Thanh toán tại nhà'}}</td>
-                </tr>
-                <tr class="bb_order pb-1">
-                    <td style="width: 30%">Trạng thái đối soát</td>
-                    <td style="width: 70%" class='name'>{!! $statusControlOrderValue[$order_detail['status_control']]!!}</td>
-                </tr>
-                <!-- <tr class="bb_order pb-1">
+                </li>
+                @endforeach
+            </ul>
+        </div>
+        <div class="tab-header">
+            <p>Thông tin giao hàng</p>
+        </div>
+        <div class="item-info">
+            <table class="table pd-order mb-0" id="tbList">
+                <tbody>
+                    <tr class="bb_order">
+                        <td style="width: 30%">Số đơn hàng</td>
+                        <td style="width: 70%" class='name text-info'>{{$order_detail['code_order']}}</td>
+                    </tr>
+                    <tr class="bb_order">
+                        <td style="width: 30%">Họ và tên</td>
+                        <td style="width: 70%" class='name'>{{$info_buyer['fullname']}}</td>
+                    </tr>
+                    <tr class="bb_order pb-1">
+                        <td style="width: 30%">Số điện thoại người đặt</td>
+                        <td style="width: 70%" class='name'>{{$info_buyer['phone']}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-header">
+            <p>Thông tin nhận hàng & thanh toán</p>
+        </div>
+        <div class="item-info">
+            <table class="table pd-order mb-0" id="tbList">
+                <tbody>
+                    <tr class="bb_order">
+                        <td style="width: 30%">Họ và tên người nhận</td>
+                        <td style="width: 70%">{{$info_buyer['fullname']}}</td>
+                    </tr>
+                    <tr class="bb_order">
+                        <td style="width: 30%">Số điện thoại người nhận</td>
+                        <td style="width: 70%" class='name'>{{$info_buyer['phone']}}</td>
+                    </tr>
+                    <tr class="bb_order pb-1">
+                        <td style="width: 30%">Nhận hàng tại</td>
+                        <td style="width: 70%" class='name'>{{$address}}</td>
+                    </tr>
+                    <tr class="bb_order pb-1">
+                        <td style="width: 30%">Phương thức thanh toán</td>
+                        <td style="width: 70%" class='name'>{{$order_detail['payment']==2 ? 'Thanh toán ngay(ck)' : 'Thanh toán tại nhà'}}</td>
+                    </tr>
+                    <tr class="bb_order pb-1">
+                        <td style="width: 30%">Trạng thái đối soát</td>
+                        <td style="width: 70%" class='name'>{!! $statusControlOrderValue[$order_detail['status_control']]!!}</td>
+                    </tr>
+                    <!-- <tr class="bb_order pb-1">
                     <td style="width: 30%">Thời gian dự kiến</td>
                     <td style="width: 70%" class='name'>.....</td>
                 </tr> -->
-            </tbody>
-        </table>
-    </div>
-    <div class="item-info px-0">
-        <table class="table pd-order mb-0" id="tbList">
-            <thead>
-                <tr>
-                    <th scope="col" colspan="2">Thông tin đơn hàng</th>
-                    <th scope="col" class="d-none d-md-table-cell">Đơn vị</th>
-                    <th scope="col" class="d-none d-md-table-cell">Số lượng</th>
-                    <th scope="col" class="text-center">Thành tiền</th>
-                </tr>
-            </thead>
-            <tbody>
-                @php
+                </tbody>
+            </table>
+        </div>
+        <div class="item-info px-0">
+            <table class="table pd-order mb-0" id="tbList">
+                <thead>
+                    <tr>
+                        <th scope="col" colspan="2">Thông tin đơn hàng</th>
+                        <th scope="col" class="d-none d-md-table-cell">Đơn vị</th>
+                        <th scope="col" class="d-none d-md-table-cell">Số lượng</th>
+                        <th scope="col" class="text-center">Thành tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
                     $index = 0;
-                @endphp
-                @foreach($order_detail['info_product'] as $val)
-                @php
+                    @endphp
+                    @foreach($order_detail['info_product'] as $val)
+                    @php
                     $index++;
                     $image = Template::showImagePreviewFileManager($val['image'],$val['slug']??$val['name']);
                     $price = MyFunction::formatNumber($val['price']) . ' đ';
@@ -130,35 +130,41 @@ $codeOrder=$order_detail['code_order'];
                     $unit=(new UnitModel())->getItem(['id'=>$val['unit_id']],['task' => 'get-item'])->name;
                     $productCurrent = (new ProductModel)->getItem(['id'=>$val['product_id']],['task' => 'get-item']);
                     $slug = $productCurrent['slug'] ?? '';
-                @endphp
-                <tr class="bb_order">
-                    <td style="width: 10%" class='name'>
-                        {!! $image !!}
-                    </td>
-                    <td style="width: 40%">
-                        <div>
-                            <p class="namep-order truncate2"><a href="{{route('fe.product.detail',$slug)}}" target="_blank" rel="noopener noreferrer">{{$val['name']}}</a></p>
-                            <p class="namep-order d-block d-md-none">Đơn vị: {{$unit}}</p>
-                            <p class="namep-order d-block d-md-none">Số lượng: {{$val['quantity']}}</p>
-                        </div>
-                    </td>
-                    <td style="width: 14%" class="d-none d-md-table-cell">{{$unit}}</td>
-                    <td style="width: 10%" class="d-none d-md-table-cell">{{$val['quantity']}}</td>
-                    <td style="width: 20%" class="text-center font-md-14">{{$total_money}}</td>
-                </tr>
-                @endforeach
-                
-            </tbody>
-            
-        </table>
-        <div class="money-order-detail">
-            <ul>
-                <li><div class="font-md-14 text-right">Tổng tiền: {{MyFunction::formatNumber($order_detail['total'])}} đ</div></li>
-                <li><div class="font-md-14 text-right">Phí giao hàng: {{MyFunction::formatNumber($order_detail['money_ship'])}} đ</div></li>
-                <li><div class="font-md-14 text-right font-weight-bold">Cần thanh toán: {{MyFunction::formatNumber($order_detail['total']+$order_detail['money_ship'])}} đ</div></li>
-            </ul>
-        </div>
-        @if($order_detail['status_control'] == 'chuaThanhToan')
+                    @endphp
+                    <tr class="bb_order">
+                        <td style="width: 10%" class='name'>
+                            {!! $image !!}
+                        </td>
+                        <td style="width: 40%">
+                            <div>
+                                <p class="namep-order truncate2"><a href="{{route('fe.product.detail',$slug)}}" target="_blank" rel="noopener noreferrer">{{$val['name']}}</a></p>
+                                <p class="namep-order d-block d-md-none">Đơn vị: {{$unit}}</p>
+                                <p class="namep-order d-block d-md-none">Số lượng: {{$val['quantity']}}</p>
+                            </div>
+                        </td>
+                        <td style="width: 14%" class="d-none d-md-table-cell">{{$unit}}</td>
+                        <td style="width: 10%" class="d-none d-md-table-cell">{{$val['quantity']}}</td>
+                        <td style="width: 20%" class="text-center font-md-14">{{$total_money}}</td>
+                    </tr>
+                    @endforeach
+
+                </tbody>
+
+            </table>
+            <div class="money-order-detail">
+                <ul>
+                    <li>
+                        <div class="font-md-14 text-right">Tổng tiền: {{MyFunction::formatNumber($order_detail['total'])}} đ</div>
+                    </li>
+                    <li>
+                        <div class="font-md-14 text-right">Phí giao hàng: {{MyFunction::formatNumber($order_detail['money_ship'])}} đ</div>
+                    </li>
+                    <li>
+                        <div class="font-md-14 text-right font-weight-bold">Cần thanh toán: {{MyFunction::formatNumber($order_detail['total']+$order_detail['money_ship'])}} đ</div>
+                    </li>
+                </ul>
+            </div>
+            @if($order_detail['status_control'] == 'chuaThanhToan')
             <!-- <div class="text-center box-dhtc">
                 <p>Vui lòng thanh toán số tiền(nếu chưa): <b>{{ MyFunction::formatNumber($order_detail['total']+$order_detail['money_ship']) . ' đ'}}</b> vào tài khoản ngân hàng</p>
                 <p>Ngân hàng Kỹ thương (Techcombank)</p>
@@ -169,8 +175,8 @@ $codeOrder=$order_detail['code_order'];
                 <p>Liên hệ hotline/Zalo 0393167234 để xác nhận thanh toán và hỗ trợ</p>
             </div> -->
             <p class="font-weight-bold">Liên hệ hotline/Zalo <span style="font-size: 20px; color:red">0393.167.234</span> để xác nhận thanh toán và hỗ trợ</p>
-        @endif
-    </div>
+            @endif
+        </div>
     </div>
 </div>
 
