@@ -152,7 +152,7 @@ class SearchController extends ShopFrontEndController
         // return 'Đã xóa bớt các comment trùng lặp cho các tên trong danh sách.';
         // lấy sitemap
         $slugs = ProductModel::orderBy('id', 'asc')->where('status_product','da_duyet')
-        ->skip(8000)
+        ->skip(9000)
         ->take(1000)
         ->pluck('slug');
         $urls = $slugs->map(function ($slug) {
