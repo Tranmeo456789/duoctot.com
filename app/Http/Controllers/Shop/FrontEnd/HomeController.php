@@ -292,6 +292,18 @@ class HomeController extends ShopFrontEndController
         $filePath = public_path('xml/product5.txt');
         return $this->getSitemap($filePath);
     }
+    public function siteProduct6(){
+        $filePath = public_path('xml/product6.txt');
+        return $this->getSitemap($filePath);
+    }
+    public function siteProduct7(){
+        $filePath = public_path('xml/product7.txt');
+        return $this->getSitemap($filePath);
+    }
+    public function siteProduct8(){
+        $filePath = public_path('xml/product8.txt');
+        return $this->getSitemap($filePath);
+    }
     public function pageHomeWebView(Request $request){
         $numTake=20;
         $product_selling = (new ProductModel())->listItems(null, ['task' => 'frontend-list-items'])->take($numTake);
