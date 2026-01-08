@@ -15,6 +15,9 @@ use App\Helpers\MyFunction;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+
 class OrderController extends BackEndController
 {
     public function __construct()
@@ -60,6 +63,148 @@ class OrderController extends BackEndController
         return view($this->pathViewController .  'index', [
             'params'           => $this->params,
             'items'            => $items,
+            'itemStatusOrderCount' => $itemStatusOrderCount
+        ]);
+    }
+    public function indexTestLogStogare(Request $request)
+    {
+        $t0 = microtime(true);
+
+        Log::info('ORDERS PAGE REQUEST START', [
+            'url' => $request->fullUrl(),
+            'ip'  => $request->ip()
+        ]);
+
+        // =============================
+        // Log truy vấn DB chậm > 300ms
+        // =============================
+        DB::listen(function ($q) {
+            if ($q->time > 300) {
+                Log::warning('SLOW QUERY', [
+                    'time_ms' => $q->time,
+                    'sql'     => $q->sql
+                ]);
+            }
+        });
+
+        // =============================
+        // BƯỚC 1 — xử lý session param
+        // =============================
+        $t1 = microtime(true);
+
+        $session = $request->session();
+        if ($session->has('currentController') && ($session->get('currentController') != $this->controllerName)) {
+            $session->forget('params');
+        } else {
+            $session->put('currentController', $this->controllerName);
+        }
+
+        if ($request->has('deleteValueSearch') && $request->get('deleteValueSearch') == 1) {
+            $session->forget('params.search.value');
+        }
+
+        $session->put('params.filter.status_order',
+            $request->has('filter_status_order')
+                ? $request->get('filter_status_order')
+                : ($session->has('params.filter.status_order')
+                    ? $session->get('params.filter.status_order')
+                    : 'all')
+        );
+
+        $session->put('params.search.field',
+            $request->has('search_field')
+                ? $request->get('search_field')
+                : ($session->has('params.search.field')
+                    ? $session->get('params.search.field')
+                    : '')
+        );
+
+        $session->put('params.search.value',
+            $request->has('search_value')
+                ? $request->get('search_value')
+                : ($session->has('params.search.value')
+                    ? $session->get('params.search.value')
+                    : '')
+        );
+
+        $session->put('params.pagination.totalItemsPerPage', $this->totalItemsPerPage);
+
+        $this->params = $session->get('params');
+
+        if ($request->has('day_start') && $request->has('day_end')) {
+            $this->params['filter_in_day'] = [
+                'day_start' => MyFunction::formatDateLikeMySQL($request->get('day_start')),
+                'day_end'   => MyFunction::formatDateLikeMySQL($request->get('day_end')),
+            ];
+        }
+
+        Log::info('CHECKPOINT 1 — SESSION + PARAM DONE', [
+            'duration_ms' => round((microtime(true) - $t1) * 1000, 2)
+        ]);
+
+        // =============================
+        // BƯỚC 2 — lấy danh sách đơn
+        // =============================
+        $t2 = microtime(true);
+
+        $items  = $this->model->listItems($this->params, [
+            'task'  => 'user-list-items'
+        ]);
+
+        Log::info('CHECKPOINT 2 — listItems DONE', [
+            'duration_ms' => round((microtime(true) - $t2) * 1000, 2),
+            'total_items' => method_exists($items, 'total') ? $items->total() : null,
+            'page'        => method_exists($items, 'currentPage') ? $items->currentPage() : null
+        ]);
+
+        // =============================
+        // BƯỚC 3 — fix out-of-range page
+        // =============================
+        $t3 = microtime(true);
+
+        if ($items->currentPage() > $items->lastPage()) {
+            $lastPage = $items->lastPage();
+            Paginator::currentPageResolver(function () use ($lastPage) {
+                return $lastPage;
+            });
+
+            $items  = $this->model->listItems($this->params, [
+                'task'  => 'user-list-items'
+            ]);
+
+            Log::warning('PAGE RESET TO LAST', [
+                'last_page' => $lastPage
+            ]);
+        }
+
+        Log::info('CHECKPOINT 3 — PAGINATION DONE', [
+            'duration_ms' => round((microtime(true) - $t3) * 1000, 2)
+        ]);
+
+        // =============================
+        // BƯỚC 4 — thống kê theo trạng thái
+        // =============================
+        $t4 = microtime(true);
+
+        $itemStatusOrderCount = $this->model->countItems(
+            $this->params,
+            ['task' => 'admin-count-items-group-by-status-order']
+        );
+
+        Log::info('CHECKPOINT 4 — COUNT STATUS DONE', [
+            'duration_ms' => round((microtime(true) - $t4) * 1000, 2)
+        ]);
+
+        // =============================
+        // TỔNG THỜI GIAN REQUEST
+        // =============================
+        Log::info('ORDERS PAGE FINISHED', [
+            'total_duration_ms' => round((microtime(true) - $t0) * 1000, 2)
+        ]);
+
+        return view($this->pathViewController . 'index', [
+            'params'               => $this->params,
+            'items'                => $items,
             'itemStatusOrderCount' => $itemStatusOrderCount
         ]);
     }
