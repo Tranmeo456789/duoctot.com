@@ -220,7 +220,7 @@
                 'key_search'=> ['name'=>'Tìm kiếm'],
                 'buyer'=> ['name'=>'Tìm kiếm'],
                 'code_order'=> ['name'=>'Tìm kiếm mã đơn hàng'],
-
+                'info_product'=> ['name'=>'Tìm kiếm sản phẩm'],
             ],
         ],
         'folderUpload' => [
@@ -233,7 +233,7 @@
                 'product'=>['name'],
                 'affiliate'=>['code_ref','info_user'],
                 'post'=>['key_search'],
-                'order'=>['buyer','code_order'],
+                'order'=>['buyer','code_order','info_product'],
                 'catalog'=>['name'],
             ]
         ],

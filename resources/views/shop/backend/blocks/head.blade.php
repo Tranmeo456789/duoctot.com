@@ -18,4 +18,4 @@
 <!-- Theme style AdminLTE v3.0.5-->
 <link rel="stylesheet" href="{{asset('shop/template/css/adminlte.css')}}">
 <link rel="stylesheet" href="{{asset('shop/backend/css/style.css')}}">
-<link rel="stylesheet" href="{{asset('shop/backend/css/my-style.css')}}?t=@php echo time() @endphp">
+<link rel="stylesheet" href="{{asset('shop/backend/css/my-style.css')}}">

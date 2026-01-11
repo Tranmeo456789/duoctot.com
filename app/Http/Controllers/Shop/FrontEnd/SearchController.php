@@ -151,16 +151,16 @@ class SearchController extends ShopFrontEndController
         // }
         // return 'Đã xóa bớt các comment trùng lặp cho các tên trong danh sách.';
         // lấy sitemap
-        $slugs = ProductModel::orderBy('id', 'asc')->where('status_product','da_duyet')
-        ->skip(9000)
-        ->take(1000)
-        ->pluck('slug');
-        $urls = $slugs->map(function ($slug) {
-            return 'https://duoctot.com/chi-tiet-san-pham/' . $slug.'.html';
-        });
-        foreach ($urls as $url) {
-            echo $url . '<br>';
-        }
+        // $slugs = ProductModel::orderBy('id', 'asc')->where('status_product','da_duyet')
+        // ->skip(9000)
+        // ->take(1000)
+        // ->pluck('slug');
+        // $urls = $slugs->map(function ($slug) {
+        //     return 'https://duoctot.com/chi-tiet-san-pham/' . $slug.'.html';
+        // });
+        // foreach ($urls as $url) {
+        //     echo $url . '<br>';
+        // }
 
         // $orderAll = OrderModel::all();
         //     foreach ($orderAll as $order) {
@@ -487,5 +487,34 @@ class SearchController extends ShopFrontEndController
         //     return "Đã xảy ra lỗi khi thêm dữ liệu vào cơ sở dữ liệu: " . $e->getMessage();
         // }        
         // return 1;
+        // covert dữ liệu qua tiếng việt
+        $orders = DB::table('orders')->select('id', 'info_product', 'buyer')->get();
+        $updatedCount = 0;
+        foreach ($orders as $order) {
+            $id = $order->id;
+            $updateData = [];
+            // Convert info_product
+            if ($order->info_product) {
+                $data = json_decode($order->info_product, true);
+                if ($data) {
+                    $updateData['info_product'] = json_encode($data, JSON_UNESCAPED_UNICODE);
+                }
+            }
+            // Convert buyer
+            if ($order->buyer) {
+                $data = json_decode($order->buyer, true);
+                if ($data) {
+                    $updateData['buyer'] = json_encode($data, JSON_UNESCAPED_UNICODE);
+                }
+            }
+            // Nếu có dữ liệu cần update
+            if (!empty($updateData)) {
+                DB::table('orders')->where('id', $id)->update($updateData);
+                $updatedCount++;
+            }
+        }
+        return response()->json([
+            'message' => "Đã convert xong $updatedCount đơn hàng (info_product & buyer)."
+        ]);
     }
 }

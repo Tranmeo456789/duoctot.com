@@ -36,6 +36,7 @@
                 $ngayDatHang = MyFunction::formatDateFrontend($val['created_at']);
                 $linkStatusOrder = route('order.changeStatusOrder',['id'=>$val['id'],'value' => 'value_new']);
                 $buyer=json_decode($val['buyer'],true)??'';
+                $codeOrder=isset($val['code_order']) ? Hightlight::show($val['code_order'], $params['search'], 'code_order') : '';
                 $fullname = isset($buyer['fullname']) ? Hightlight::show($buyer['fullname'], $params['search'], 'fullname') : '';
                 $phone = isset($buyer['phone']) ? Hightlight::show($buyer['phone'], $params['search'], 'buyer') : '';
                 //Form::select('status_order',$statusOrderValue, $val['status_order']??null, array_merge($formInputChangeValueAttr,['style' =>'width:100%','data-href'=>$linkStatusOrder]))
@@ -51,7 +52,7 @@
             <tr>
                 <td style="width: 3%">{{$index}}</td>
                 <td style="width: 15%">
-                    <a href="{{route('order.detail',$val['id'])}}">{{$val['code_order']}}</a>
+                    <a href="{{route('order.detail',$val['id'])}}">{!! $codeOrder !!}</a>
                     <p class="mb-0">{!! $fullname !!}</p>
                     <p>{!! $phone !!}</p>
                 </td>
@@ -65,12 +66,13 @@
                                 $productId = (int)($product['product_id'] ?? 0);
                                 $productcurrent = ProductModel::find($productId);
                                 $slug = $productcurrent['slug'] ?? '';
+                                $nameProduct=isset($productcurrent['name']) ? Hightlight::show($productcurrent['name'], $params['search'], 'info_product') : '';
                             @endphp
                             @if($productcurrent)
                                 <span>{{ $indexProduct }}.</span>
                                 <span class="text-primary font-weight-bold">
                                     <a href="{{ route('fe.product.detail', $slug) }}" rel="noopener noreferrer">
-                                        {{ $productcurrent['name'] }}
+                                    {!! $nameProduct !!}
                                     </a>
                                 </span><br>
                             @endif
