@@ -442,6 +442,16 @@ class OrderModel extends BackEndModel
                     'value' => date('Ymd')
                 ];
                 $params['code_order'] ='DHTD' . date('Ymd') . sprintf("%05d",self::getMaxCode($paramsCode));
+                if (isset($params['info_product']) && is_array($params['info_product'])) {
+                    // Encode giữ nguyên tiếng Việt
+                    $params['info_product'] = json_encode($params['info_product'], JSON_UNESCAPED_UNICODE);
+                }
+                if (isset($params['buyer']) && is_array($params['buyer'])) {
+                    $params['buyer'] = json_encode(
+                        $params['buyer'],
+                        JSON_UNESCAPED_UNICODE
+                    );
+                }
                 self::insert($this->prepareParams($params));
 
                 //Cập nhật khách hàng

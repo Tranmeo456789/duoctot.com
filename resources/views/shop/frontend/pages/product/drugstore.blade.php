@@ -11,7 +11,7 @@ $imageSrc = route('home') . $userInfo['details']['image'];
 }
 $imageMap = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/mapduphong.jpeg';
 $phoneShop = '0393167234';
-if (in_array($userInfo['user_type_id'], [2, 3, 4, 8]) && !empty($userInfo['phone'])) {
+if (in_array($userInfo['user_type_id'], [2, 3, 4, 6, 8]) && !empty($userInfo['phone'])) {
     $phoneShop = $userInfo['phone'];
 }
 $phoneShop=MyFunction::formatPhoneNumber($phoneShop);
