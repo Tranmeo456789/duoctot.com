@@ -37,18 +37,14 @@ class PostController extends ShopFrontEndController
     }
     public function lieuThuocTay(Request $request){
         $items = $this->model->listItems( null , ['task' => 'frontend-list-items']);
-        $paramsItemNews['group_id']=[166,167,168,164,165];
-        $itemNews = $this->model->listItems( $paramsItemNews , ['task' => 'frontend-list-items']);
+       // $paramsItemNews['group_id']=[166,167,168,164,165];
+        //$itemNews = $this->model->listItems( $paramsItemNews , ['task' => 'frontend-list-items']);
         $catItems=(new CatalogModel)->getCatLieuThuocTay();
         foreach($catItems as $key=>$val){
             $catItems[$key]['post'] = $val->posts()->take(4)->get();
-            if(count($catItems[$key]['post']) < 1){
-                unset($catItems[$key]);
-            }
         }
         return view($this->pathViewController . 'lieu_thuoc_tay',[
             'items' => $items,
-            'itemNews' => $itemNews,
             'catItems' => $catItems
         ]);
     }

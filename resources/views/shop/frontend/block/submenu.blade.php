@@ -46,7 +46,7 @@ $listCatLieuThuocTay = $modelCatalog->getCatLieuThuocTay();
     @endforeach
     <li class="catc1">
         <a href="{{route('fe.lieuThuocTay')}}" class="cat1name">
-            Liều thuốc tây
+            Cắt liều thuốc tây
             <i class="fas fa-chevron-down arrow"></i>
         </a>
         <div class="content-submenu">
