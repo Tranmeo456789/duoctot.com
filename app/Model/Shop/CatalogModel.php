@@ -9,6 +9,7 @@ use App\Model\Shop\PostModel;
 use App\Helpers\HttpClient;
 use Illuminate\Support\Str;
 use DB;
+use Illuminate\Support\Facades\Cache;
 class CatalogModel extends BackEndModel
 {
     protected $casts = [];
@@ -123,6 +124,7 @@ class CatalogModel extends BackEndModel
     }
     public function saveItem($params = null, $options = null)
     {
+        Cache::forget('cat_lieu_thuoc_tay');
         if ($options['task'] == 'add-item') {
             $this->setCreatedHistory($params);
             self::insertGetId ($this->prepareParams($params));
@@ -142,5 +144,12 @@ class CatalogModel extends BackEndModel
     public function posts()
     {
         return $this->hasMany('App\Model\Shop\PostModel', 'cat_post_id', 'id')->select('id','title','slug','image','cat_post_id');
+    }
+    public function getCatLieuThuocTay()
+    {
+        return Cache::remember('cat_lieu_thuoc_tay', 86400, function () {
+            $catIds = [29, 67];
+            return $this->whereIn('id', $catIds)->get();
+        });
     }
 }

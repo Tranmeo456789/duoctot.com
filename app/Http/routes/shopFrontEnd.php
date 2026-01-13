@@ -36,6 +36,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('/ajax-show-product-ncc-in-khuyen-mai','HomeController@ajaxShowProductNccInKhuyenmai')->name('fe.home.ajaxShowProductNccInKhuyenmai');
     
     Route::get('/tin-tuc','PostController@index')->name('fe.post');
+    Route::get('/lieu-thuoc-tay','PostController@lieuThuocTay')->name('fe.lieuThuocTay');
     Route::get('/tin-tuc-web-view','PostController@indexWebView')->name('fe.post.indexWebView');
     Route::get('/danh-muc-tin-tuc/{slug}','PostController@listPostOfCat')->name('fe.post.listPostOfCat');
     Route::get('/tin-tuc/{slug}.html','PostController@detail')->name('fe.post.detail');

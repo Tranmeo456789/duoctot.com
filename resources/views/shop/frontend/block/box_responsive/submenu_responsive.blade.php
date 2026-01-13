@@ -1,8 +1,10 @@
 @php
 use App\Helpers\MyFunction;
 $model = new \App\Model\Shop\CatProductModel();
+$modelCatalog = new \App\Model\Shop\CatalogModel();
 $listCatLevel1 = $model->getCatLevel1();
 $listCatAll    = $model->getAllCats();
+$listCatLieuThuocTay = $modelCatalog->getCatLieuThuocTay();
 $iconZalo=asset('images/shop/zalo-2.png');
 $iconCall=asset('images/shop/icon-call.png');
 $phoneContact=$phoneContact??'0393167234';
@@ -87,6 +89,21 @@ $phoneContact=$phoneContact??'0393167234';
                     <li><a href="{{route('fe.search.viewHome', ['keyword' => 'ORYKO'])}}">ORYKO</a></li>
                     <li><a href="{{route('fe.search.viewHome', ['keyword' => 'Nhung Hươu Việt'])}}">Nhung Hươu Việt</a></li>
                     <li><a href="{{route('fe.search.viewHome', ['keyword' => 'Nano Curcumin'])}}">Nano Curcumin</a></li>
+                </ul>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="container-menures position-relative parentsmenu">
+            <div class=" pr-4">
+                <a href="{{route('fe.lieuThuocTay')}}">Cắt liều thuốc tây</a>
+            </div>
+            <div class="iconmnrhv"><img src="{{asset('images/shop/arrowd.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async"></div>
+            <div class="submenu1res">
+                <ul>
+                    @foreach ($listCatLieuThuocTay as $itemCatLieuThuocTay)
+                    <li><a href="{{route('fe.post.listPostOfCat',$itemCatLieuThuocTay['name_url'])}}">{{$itemCatLieuThuocTay['name']}}</a></li>
+                    @endforeach
                 </ul>
             </div>
         </div>

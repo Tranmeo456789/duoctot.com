@@ -1,8 +1,10 @@
 @php
 use App\Helpers\MyFunction;
 $model = new \App\Model\Shop\CatProductModel();
+$modelCatalog = new \App\Model\Shop\CatalogModel();
 $listCatLevel1 = $model->getCatLevel1();
 $listCatAll    = $model->getAllCats();
+$listCatLieuThuocTay = $modelCatalog->getCatLieuThuocTay();
 @endphp
 <ul id="main-menu" class="d-flex list-item">
     @foreach ($listCatLevel1 as $itemLevel1)
@@ -42,8 +44,26 @@ $listCatAll    = $model->getAllCats();
         </div>
     </li>
     @endforeach
-    <li>
-        <a href="{{route('fe.post')}}">Góc Sức Khỏe</a>
+    <li class="catc1">
+        <a href="{{route('fe.lieuThuocTay')}}" class="cat1name">
+            Liều thuốc tây
+            <i class="fas fa-chevron-down arrow"></i>
+        </a>
+        <div class="content-submenu">
+            <div class="row mx-0">
+                <div class="px-0 col-3 right-fol">
+                    <ul class="sub-menu1">
+                        @foreach ($listCatLieuThuocTay as $itemCatLieuThuocTay)
+                        <li>
+                            <div class="himg-menu">
+                                <a href="{{route('fe.post.listPostOfCat',$itemCatLieuThuocTay['name_url'])}}" class="titlec2">{{$itemCatLieuThuocTay['name']}}</a>
+                            </div>
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
     </li>
     <li class="align-self-center">
         <div class="position-relative">
