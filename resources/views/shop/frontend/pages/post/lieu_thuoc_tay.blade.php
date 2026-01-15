@@ -9,10 +9,10 @@ use App\Helpers\MyFunction;
     <div class="" id="breadcrumb-wp">
         <ul class="list-item clearfix">
             <li>
-                <a href="{{route('home')}}">Trang chủ</a>
+                <a href="{{route('home')}}">Trang Chủ</a>
             </li>
             <li>
-                <span>Cắt liều thuốc tây</span>
+                <span>Cắt Liều Thuốc Tây</span>
             </li>
         </ul>
     </div>

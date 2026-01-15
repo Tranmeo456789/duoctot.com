@@ -10,7 +10,7 @@ $iconCall=asset('images/shop/icon-call.png');
 $phoneContact=$phoneContact??'0393167234';
 @endphp
 <h3>
-    <div class="container-menures"><a href="{{route('home')}}">Trang chủ</a></div>
+    <div class="container-menures"><a href="{{route('home')}}">Trang Chủ</a></div>
 </h3>
 <ul>
     @foreach ($listCatLevel1 as $itemLevel1)
@@ -69,7 +69,7 @@ $phoneContact=$phoneContact??'0393167234';
     <li>
         <div class="container-menures position-relative parentsmenu">
             <div class=" pr-4">
-                <a>Thương hiệu</a>
+                <a>Thương Hiệu</a>
             </div>
             <div class="iconmnrhv"><img src="{{asset('images/shop/arrowd.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async"></div>
             <div class="submenu1res">
@@ -96,7 +96,7 @@ $phoneContact=$phoneContact??'0393167234';
     <li>
         <div class="container-menures position-relative parentsmenu">
             <div class=" pr-4">
-                <a href="{{route('fe.lieuThuocTay')}}">Cắt liều thuốc tây</a>
+                <a href="{{route('fe.lieuThuocTay')}}">Cắt Liều Thuốc Tây</a>
             </div>
             <div class="iconmnrhv"><img src="{{asset('images/shop/arrowd.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async"></div>
             <div class="submenu1res">

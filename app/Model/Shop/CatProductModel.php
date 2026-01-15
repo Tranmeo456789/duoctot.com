@@ -197,7 +197,8 @@ class CatProductModel extends BackEndModel
     public function saveItem($params = null, $options = null)
     {
         $image = '';
-
+        Cache::forget('cat_product_all');
+        Cache::forget('cat_product_level_1');
         if ($options['task'] == 'add-item') {
             $this->setCreatedHistory($params);
             $params['slug'] =  Str::slug($params['name']);
