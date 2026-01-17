@@ -8,6 +8,7 @@ use App\Model\Shop\BackEndModel;
 use App\Helpers\HttpClient;
 use Illuminate\Support\Str;
 use DB;
+use Illuminate\Support\Facades\Cache;
 class PostModel extends BackEndModel
 {
     protected $casts = [];
@@ -139,6 +140,7 @@ class PostModel extends BackEndModel
     }
     public function saveItem($params = null, $options = null)
     {
+        Cache::forget('cache_catalog_post');
         if ($options['task'] == 'add-item') {
             $this->setCreatedHistory($params);
             self::insertGetId ($this->prepareParams($params));

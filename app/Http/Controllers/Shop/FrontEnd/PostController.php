@@ -9,6 +9,7 @@ use App\Model\Shop\CatalogModel;
 use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
 use App\Model\Shop\PostModel as MainModel;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Cache;
 class PostController extends ShopFrontEndController
 {
     public function __construct()
@@ -36,12 +37,22 @@ class PostController extends ShopFrontEndController
         ]);
     }
     public function lieuThuocTay(Request $request){
-        $items = $this->model->listItems( null , ['task' => 'frontend-list-items']);
-       // $paramsItemNews['group_id']=[166,167,168,164,165];
-        //$itemNews = $this->model->listItems( $paramsItemNews , ['task' => 'frontend-list-items']);
         $catItems=(new CatalogModel)->getCatLieuThuocTay();
-        foreach($catItems as $key=>$val){
-            $catItems[$key]['post'] = $val->posts()->take(4)->get();
+        $keyCacheCatalogPost = 'cache_catalog_post';
+        $dataCacheCatalogPost = Cache::get($keyCacheCatalogPost);
+        if (!empty($dataCacheCatalogPost)) {
+            $items  = $dataCacheCatalogPost['items'];
+            $catItems = $dataCacheCatalogPost['catItems'];
+        } else{
+            $items = $this->model->listItems( null , ['task' => 'frontend-list-items']);
+            foreach($catItems as $key=>$val){
+                $catItems[$key]['post'] = $val->posts()->take(10)->get();
+            }
+            $dataCacheCatalogPost = [
+              'items'  => $items,
+              'catItems'     => $catItems,
+            ];
+            Cache::put($keyCacheCatalogPost, $dataCacheCatalogPost, 100000000);
         }
         $title="Cắt liều thuốc tây cho dược sĩ";
         return view($this->pathViewController . 'lieu_thuoc_tay',[
