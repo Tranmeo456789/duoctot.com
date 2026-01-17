@@ -43,9 +43,11 @@ class PostController extends ShopFrontEndController
         foreach($catItems as $key=>$val){
             $catItems[$key]['post'] = $val->posts()->take(4)->get();
         }
+        $title="Cắt liều thuốc tây cho dược sĩ";
         return view($this->pathViewController . 'lieu_thuoc_tay',[
             'items' => $items,
-            'catItems' => $catItems
+            'catItems' => $catItems,
+            'title' => $title,
         ]);
     }
     public function indexWebView(Request $request){
