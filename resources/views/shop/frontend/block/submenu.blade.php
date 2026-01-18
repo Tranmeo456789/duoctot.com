@@ -44,23 +44,15 @@ $listCatLieuThuocTay = $modelCatalog->getCatLieuThuocTay();
         </div>
     </li>
     @endforeach
-    <li class="catc1">
-        <a href="{{route('fe.lieuThuocTay')}}" class="cat1name">
-            Cắt Liều Thuốc Tây
-            <i class="fas fa-chevron-down arrow"></i>
-        </a>
-        <div class="content-submenu">
-            <div class="row mx-0">
-                <div class="px-0 col-3 right-fol">
-                    <ul class="sub-menu1">
-                        @foreach ($listCatLieuThuocTay as $itemCatLieuThuocTay)
-                        <li>
-                            <div class="himg-menu">
-                                <a href="{{route('fe.post.listPostOfCat',$itemCatLieuThuocTay['name_url'])}}" class="titlec2">{{$itemCatLieuThuocTay['name']}}</a>
-                            </div>
-                        </li>
-                        @endforeach
-                    </ul>
+    <li class="align-self-center">
+        <div class="position-relative">
+            <div class="dropdown">
+                <button class="btn dropdown-toggle font-weight-bold text-secondary pl-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 15px;">Cắt Liều Thuốc Tây</button>
+                <div class="dropdown-menu dropdown-menu-right bg-light" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item font-weight-bold" href="{{route('fe.lieuThuocTay')}}"><span class="pl-2">Cắt Liều Thuốc Tây</span></a>
+                    @foreach ($listCatLieuThuocTay as $itemCatLieuThuocTay)
+                        <a class="dropdown-item" href="{{route('fe.post.listPostOfCat',$itemCatLieuThuocTay['name_url'])}}"><span class="pl-2">{{$itemCatLieuThuocTay['name']}}</span></a>
+                    @endforeach
                 </div>
             </div>
         </div>
