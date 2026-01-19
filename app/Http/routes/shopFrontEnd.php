@@ -37,6 +37,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     
     Route::get('/tin-tuc','PostController@index')->name('fe.post');
     Route::get('/cat-lieu-thuoc-tay','PostController@lieuThuocTay')->name('fe.lieuThuocTay');
+    Route::get('/phan-hoi-tu-benh-nhan-duoc-sy-bac-sy','PostController@feedBackCustomer')->name('fe.feedBackCustomer');
     Route::get('/tin-tuc-web-view','PostController@indexWebView')->name('fe.post.indexWebView');
     Route::get('/danh-muc-tin-tuc/{slug}','PostController@listPostOfCat')->name('fe.post.listPostOfCat');
     Route::get('/tin-tuc/{slug}.html','PostController@detail')->name('fe.post.detail');

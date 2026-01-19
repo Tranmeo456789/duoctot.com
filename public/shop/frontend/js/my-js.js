@@ -1905,9 +1905,9 @@ $(document).ready(function() {
         $('.zoom-lens').removeClass('active');
     });
 });
-$(document).ready(function() {
+ $(document).ready(function() {
   // Khi click vào ảnh chính hoặc ảnh trong slider
-  $('.sliderProductMain img').on('click', function() {
+  $('img.image-zoom-popup').on('click', function() {
     var imgSrc = $(this).attr('src');
     $('#imagePopup img').attr('src', imgSrc);
     $('#imagePopup').fadeIn(200).css('display', 'flex');
@@ -1918,11 +1918,6 @@ $(document).ready(function() {
     if (e.target !== $('#imagePopup img')[0]) {
       $('#imagePopup').fadeOut(200);
     }
-  });
-  $('.list_thumb_user img').on('click', function() {
-    var imgSrc = $(this).attr('src');
-    $('#imagePopup img').attr('src', imgSrc);
-    $('#imagePopup').fadeIn(200).css('display', 'flex');
   });
 });
 $(document).ready(function() {

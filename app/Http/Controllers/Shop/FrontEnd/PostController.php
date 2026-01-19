@@ -118,4 +118,8 @@ class PostController extends ShopFrontEndController
             ]
         );
     }
+    public function feedBackCustomer(){
+        $title="Phản hồi từ Bệnh Nhân, Dược Sỹ và Bác Sỹ";
+        return view($this->pathViewController . 'feedback_customer');
+    }
 }

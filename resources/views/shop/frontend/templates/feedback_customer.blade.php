@@ -1,33 +1,20 @@
 @php
 $feedbacks=[
-['thumb'=>'phanhoi1.png','fullname'=>'Duy Nguyễn Nhất','content'=>'Rất tuyệt vời, đặc biệt trong mùa dịch đi lại khó khăn. Chúc tdoctor ngày càng phát triển và mở rộng phạm vi ra nhiều tỉnh hơn, nhất là vùng Đồng bằng sông Cửu Long.'],
+['thumb'=>'phanhoi1.png','fullname'=>'Duy Nguyễn Nhất','content'=>'Rất tuyệt vời, đặc biệt trong mùa dịch đi lại khó khăn. Chúc Dược Tốt ngày càng phát triển và mở rộng phạm vi ra nhiều tỉnh hơn, nhất là vùng Đồng bằng sông Cửu Long.'],
 ['thumb'=>'phanhoi2.png','fullname'=>'Quốc Bình Vũ','content'=>'Ứng dụng rất hay. Giúp mọi người hạn chế bệnh gì cũng phải đến bệnh viện khám. Đỡ mất thời gian, công sức và tiền bạc vì nhiều khi vô gặp bs cũng chỉ cần hỏi vài câu và cho SP.'],
-['thumb'=>'phanhoi3.png','fullname'=>'Nguyễn Ngọc Minh','content'=>'Em bị ung thư thấy bác sĩ tuyến trung ương trong hệ thống tdoctor, bác sĩ bên tdoctor rất nhiệt tình, rất tiện cho trường hợp mua sản phẩm dược và thực phẩm chức uy tín online.']
+['thumb'=>'phanhoi3.png','fullname'=>'Nguyễn Ngọc Minh','content'=>'Em bị ung thư thấy bác sĩ tuyến trung ương trong hệ thống tdoctor, bác sĩ bên Dược Tốt rất nhiệt tình, rất tiện cho trường hợp mua sản phẩm dược và thực phẩm chức uy tín online.']
 ];
 $imgCustomer=['1.jpg', '2.jpg'];
 @endphp
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
+<style>.prev-btn-thumb-feedback,.next-btn-thumb-feedback{top:50%;transform:translateY(-50%);border:none;padding:10px;cursor:pointer;z-index:10;font-size:30px}</style>
+<script>document.addEventListener("DOMContentLoaded",function(){var sliderListThumbFeedBack=tns({container:".list_thumb_feedback",items:1,slideBy:1,loop:!0,speed:600,autoplay:!0,autoplayTimeout:5e3,autoplayButtonOutput:!1,controls:!1,nav:!1,mouseDrag:!0,touch:!0,gutter:4,edgePadding:0,autoHeight:!1,onInit:function(){document.querySelector(".list_thumb_feedback").classList.remove("cS-hidden")}});document.querySelector(".prev-btn-thumb-feedback").addEventListener("click",function(){sliderListThumbFeedBack.goTo("prev")}),document.querySelector(".next-btn-thumb-feedback").addEventListener("click",function(){sliderListThumbFeedBack.goTo("next")})});</script>
 <div class="row mx-0">
-    <div class="col-xl-3 col-lg-12 dlapp pb-3 mb-3">
-        <div class="dlapp1">
-            <div class="mb-4">
-                <div class="row">
-                    <div class="col-6 col-lg-12">
-                        <div class="font-weight-bold">TẢI ỨNG DỤNG TDOCTOR</div>
-                        <div class="my-2">Mua thuốc trực tuyến, giao hàng tận nơi dễ dàng và nhanh chóng</div>
-                        <div class="align-self-center d-md-none">
-                            <div class="btn btn-primary btn-sm rounded m-0 p-1">
-                                <a href="{{route('fe.home.downloadAppTdoctor')}}" style="font-size: 14px;line-height: 10px;" class="text-light font-weight-bold">↓ TẢI NGAY</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 col-lg-12 text-center">
-                        <img src="{{asset('images/shop/qr-app-tdoctor.jpg')}}" alt="Tdoctor" width="181" height="161" loading="lazy">
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="col-12">
+        <a href="{{route('fe.feedBackCustomer')}}">@include("$moduleName.templates.box_title_product",['title' => 'Phản hồi từ Bệnh Nhân, Dược Sỹ và Bác Sỹ','classBackground'=>'bg-danger'])</a>
     </div>
-    <div class="col-xl-6 col-lg-12">
+    <div class="col-xl-8 col-lg-12">
         <ul>
             @foreach($feedbacks as $val)
             @php
@@ -50,15 +37,19 @@ $imgCustomer=['1.jpg', '2.jpg'];
             @endforeach
         </ul>
     </div>
-    <div class="col-xl-3 col-lg-12">
-        <ul class="list-unstyled text-center">
-            <li class="text-center">
-                <img src="{{asset('images/shop/1.jpg')}}" alt="tdoctor" class="img-fluid" width="233" height="488" loading="lazy" decoding="async">
-            </li>
-            <!-- <li class="text-center">
-                <img src="{{asset('images/shop/2.jpg')}}" alt="tdoctor" class="img-fluid">
-            </li> -->
-        </ul>
+    <div class="col-xl-4 col-lg-12">
+        <div class="container-slider mt-0 mt-lg-2 position-relative">
+            <button class="prev-btn-thumb-feedback position-absolute" style="left: 0;">‹</button>
+            <div class="list_thumb_feedback cS-hidden">
+                <div class="swiper-slide text-center">
+                    <img class="img-thumbnail image-zoom-popup" src="{{asset('images/shop/1.jpg')}}" alt="phan hoi">
+                </div>
+                <div class="swiper-slide text-center">
+                    <img src="{{asset('images/shop/2.jpg')}}" class="img-thumbnail image-zoom-popup" loading="lazy" alt="phan hoi" />
+                </div>
+            </div>
+            <button class="next-btn-thumb-feedback position-absolute" style="right: 0;">›</button>
+        </div>
     </div>
     <!-- <div class="col-xl-3 col-lg-12 dlapp pb-0">
         <div class="dlapp1">

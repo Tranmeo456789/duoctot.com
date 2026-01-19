@@ -29,11 +29,11 @@ document.addEventListener("DOMContentLoaded",function(){let e=tns({container:".s
                             <!-- Slider chính -->
                             <div class="sliderProductMain tns-slider cS-hidden gallery">
                                 <div class="text-center">
-                                    <img src="{{ asset($item['image']) }}" class="img-fluid" />
+                                    <img src="{{ asset($item['image']) }}" class="img-fluid image-zoom-popup" />
                                 </div>
                                 @foreach($albumImageCurrent as $val)
                                 <div class="text-center">
-                                    <img src="{{ asset('laravel-filemanager/fileUpload/product/'.$val) }}" class="zoom img-fluid" />
+                                    <img src="{{ asset('laravel-filemanager/fileUpload/product/'.$val) }}" class="zoom img-fluid image-zoom-popup" />
                                 </div>
                                 @endforeach
                             </div>
@@ -211,10 +211,4 @@ document.addEventListener("DOMContentLoaded",function(){let e=tns({container:".s
         @include("$moduleName.templates.feedback_customer")
     </div>
 </div>
-<!-- Popup hiển thị ảnh -->
-<div class="image-popup-overlay" id="imagePopup">
-  <span class="close-popup">&times;</span>
-  <img src="" alt="Zoomed Image">
-</div>
-<style>.image-popup-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:black;display:none;justify-content:center;align-items:center;z-index:9999}.image-popup-overlay img{max-width:90%;max-height:90%;border-radius:8px;box-shadow:0 0 20px rgba(255,255,255,.3);object-fit:contain}.image-popup-overlay .close-popup{position:absolute;top:20px;right:30px;font-size:35px;color:#fff;cursor:pointer;font-weight:700}.content-detail-product iframe {max-width: 100% !important;height: auto !important;aspect-ratio: 16 / 9;}</style>
 @endsection

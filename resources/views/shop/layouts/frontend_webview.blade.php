@@ -37,6 +37,11 @@
         <div id="fixscreen-respon"></div>
         <div class="black-screen"></div>
         @include('shop.frontend.block.spinner_screen')
+        <!-- Popup hiển thị ảnh -->
+        <div class="image-popup-overlay" id="imagePopup">
+            <span class="close-popup">&times;</span>
+            <img src="" alt="Zoomed Image">
+        </div>
     </div>
     @include('shop.frontend.block.script')
     @yield('scriptadd')

@@ -78,10 +78,4 @@ $phoneShop=MyFunction::formatPhoneNumber($phoneShop);
     </div>
 </div>
 <div class="lc-mask-search"></div>
-<!-- Popup hiển thị ảnh -->
-<div class="image-popup-overlay" id="imagePopup">
-  <span class="close-popup">&times;</span>
-  <img src="" alt="Zoomed Image">
-</div>
-<style>.image-popup-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:black;display:none;justify-content:center;align-items:center;z-index:9999}.image-popup-overlay img{max-width:90%;max-height:90%;border-radius:8px;box-shadow:0 0 20px rgba(255,255,255,.3);object-fit:contain}.image-popup-overlay .close-popup{position:absolute;top:20px;right:30px;font-size:35px;color:#fff;cursor:pointer;font-weight:700}.content-detail-product iframe {max-width: 100% !important;height: auto !important;aspect-ratio: 16 / 9;}</style>
 @endsection

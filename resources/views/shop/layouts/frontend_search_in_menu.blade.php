@@ -30,6 +30,11 @@ $title = $title ?? 'DƯỢC TỐT là Nền tảng kết nối y dược nhà th
         </div>
         <div id="fixscreen-respon"></div>
         @include('shop.frontend.block.spinner_screen')
+        <!-- Popup hiển thị ảnh -->
+        <div class="image-popup-overlay" id="imagePopup">
+            <span class="close-popup">&times;</span>
+            <img src="" alt="Zoomed Image">
+        </div>
     </div>
 </body>
 @include('shop.frontend.block.script')

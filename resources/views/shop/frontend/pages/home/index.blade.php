@@ -94,5 +94,10 @@
 <div class="wp-inner mt-3 mt-lg-4">
     @include("$moduleName.pages.$controllerName.child_index.info_page",['items'=>$itemsProduct['new']])
 </div>
+<div class="wp-inner mt-3 mt-lg-4">
+    <div class="feedback-customer">
+        @include("$moduleName.templates.feedback_customer")
+    </div>
+</div>
 <div class="lc-mask-search"></div>
 @endsection
