@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Shop\CatalogModel;
 use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
 use App\Model\Shop\PostModel as MainModel;
+use App\Model\Shop\CustomerFeedBackModel;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Cache;
 class PostController extends ShopFrontEndController
@@ -118,8 +119,20 @@ class PostController extends ShopFrontEndController
             ]
         );
     }
-    public function feedBackCustomer(){
+    public function feedBackCustomer(Request $request){
+        $items = (new CustomerFeedBackModel)->listItems( null , ['task' => 'frontend-list-items']);
+        $catItems=(new CatalogModel)->listItems(null, ['task' => 'frontend-list-items']);
+        foreach($catItems as $key=>$val){
+            $catItems[$key]['customerFeedBack'] = $val->customerFeedBack()->take(10)->get();
+            if(count($catItems[$key]['customerFeedBack']) < 1){
+                unset($catItems[$key]);
+            }
+        }
         $title="Phản hồi từ Bệnh Nhân, Dược Sỹ và Bác Sỹ";
-        return view($this->pathViewController . 'feedback_customer');
+        return view($this->pathViewController . 'feedback_customer',[
+            'items' => $items,
+            'catItems' => $catItems,
+            'title' => $title,
+        ]);
     }
 }

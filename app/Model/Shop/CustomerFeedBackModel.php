@@ -5,51 +5,26 @@ use Session;
 use App\Http\Requests\Request;
 use Illuminate\Database\Eloquent\Model;
 use App\Model\Shop\BackEndModel;
-use App\Model\Shop\PostModel;
 use App\Helpers\HttpClient;
 use Illuminate\Support\Str;
 use DB;
-use Illuminate\Support\Facades\Cache;
-class CatalogModel extends BackEndModel
+class CustomerFeedBackModel extends BackEndModel
 {
     protected $casts = [];
     public function __construct()
     {
-        $this->table               = 'catalog';
-        $this->controllerName      = 'catalog';
-        $this->folderUpload        = 'catalog';
+        $this->table               = 'customer_feedback';
+        $this->controllerName      = 'customerFeedback';
+        $this->folderUpload        = 'customerFeedback';
         $filedSearch               = array_key_exists($this->controllerName, config('myconfig.config.search')) ? $this->controllerName : 'default';
         $this->fieldSearchAccepted = array_diff(config('myconfig.config.search.' . $filedSearch),['all']);
         $this->crudNotAccepted     = ['_token', 'btn_save','file-del','files'];
-    }
-    public function scopeOfCollaboratorCode($query)
-    {
-        if (\Session::has('user')){
-            $user = \Session::get('user');
-
-            $refer_id = $user->refer_id ;
-            $collaborator = CollaboratorsUserModel::where('code',$refer_id)->first();
-
-            if ($collaborator)  {
-                $collaborator_code = $collaborator->code;
-
-                $arrUserID = CollaboratorsClinicDoctor::select("user_id")
-                                ->where("collaborators_clinic_doctor.collaborator_code",$collaborator_code)
-                                ->first();
-
-                if (!empty($arrUserID)) {
-                    $query->whereIn('user_id',$arrUserID->user_id);
-                }
-            }
-        }
-
-        return $query;
     }
     public function scopeOfUser($query)
     {
         if (\Session::has('user')){
             $user = \Session::get('user');
-            if($user['is_admin']==1 || $user['is_admin']==2){
+            if($user['is_admin']==1){
                 return  $query;
             }else{
                 return  $query->where('user_id',$user->user_id);
@@ -62,9 +37,12 @@ class CatalogModel extends BackEndModel
         $result = null;
         $user = Session::get('user');
         if ($options['task'] == "user-list-items") {
-            $query = $this::select('id','name','name_url','meta_desc','meta_key','parent_id','created_at','updated_at','created_by', 'updated_by')->ofUser();
+            $query = $this::with('catCustomerFeedBack')->select('id','image','cat_post_id','created_at', 'updated_at')->ofUser();
             if (isset($params['group_id'])){
                 $query->whereIn('id',$params['group_id']);
+            }
+            if ((isset($params['filter']['status_post'])) && ($params['filter']['status_post'] != 'all')) {
+                $query = $query->where('status_post',$params['filter']['status_post']);
             }
             if (isset($params['search']['value']) && ($params['search']['value'] !== ""))  {
                 if($params['search']['field'] == "all") {
@@ -85,19 +63,48 @@ class CatalogModel extends BackEndModel
             }
         }
         if ($options['task'] == "frontend-list-items") {
-            $query = $this::select('id', 'name', 'name_url');
-            if (isset($params['group_id'])) {
-                $query->whereIn('id', $params['group_id']);
+            $query = $this::with('catCustomerFeedBack')->select('id','image','cat_post_id','created_at', 'updated_at');
+            if (isset($params['group_id'])){
+                $query->whereIn('id',$params['group_id']);
             }
-            if (isset($params['take'])) {
+            if (isset($params['cat_post_id'])){
+                $query->where('cat_post_id',$params['cat_post_id']);
+            }
+            if(isset($params['offset'])){
+                $query->skip($params['offset']);
+            }
+            if(isset($params['take'])){
                 $query->take($params['take']);
             }
             $query->orderBy('id', 'desc');
-            $result = $query->get();
+            if(isset($params['limit'])){
+                $result=$query->paginate($params['limit']);
+            }else{
+                $result =  $query->get();
+            }
         }
-        if($options['task'] == "admin-list-items-in-selectbox") {
-            $query = $this->select('id', 'name')->OfUser();
-            $result = $query->orderBy('name', 'asc')->pluck('name', 'id')->toArray();
+        if ($options['task'] == "frontend-list-items-api") {
+            $query = $this::with('catCustomerFeedBack')->select('id','image','cat_post_id','created_at', 'updated_at');
+            if (isset($params['group_id'])){
+                $query->whereIn('id',$params['group_id']);
+            }
+            if (isset($params['cat_post_id'])){
+                $query->where('cat_post_id',$params['cat_post_id']);
+            }
+            if(isset($params['offset'])){
+                $query->skip($params['offset']);
+            }
+            if(isset($params['take'])){
+                $query->take($params['take']);
+            }
+            $query->orderBy('id', 'desc');
+            if (isset($params['page'])) {
+                $currentPage = isset($params['page']) ? (int)$params['page'] : 1;
+                $perPage = isset($params['perPage']) ? (int)$params['perPage'] : 20;
+                $result = $query->paginate($perPage, ['*'], 'page', $currentPage);
+            } else {
+                $result = $query->get();
+            }
         }
         return $result;
     }
@@ -105,18 +112,17 @@ class CatalogModel extends BackEndModel
     {
         $result = null;
         if ($options['task'] == 'get-item') {
-            $result = self::select('id','name','name_url','meta_desc','meta_key','parent_id','created_at','updated_at','created_by', 'updated_by')
+            $result = self::select('id','image','cat_post_id','created_at', 'updated_at')
                             ->where('id', $params['id'])
-                            ->OfCollaboratorCode()
                             ->first();
         }
         if ($options['task'] == 'frontend-get-item') {
-            $query = self::select('id','name','name_url','meta_desc','meta_key','parent_id','created_at','updated_at','created_by', 'updated_by');
+            $query = self::select('id','image','cat_post_id','created_at', 'updated_at');
             if(isset($params['id'])){
                 $query->where('id', $params['id']);
             }
-            if(isset($params['name_url'])){
-                $query->where('name_url', $params['name_url']);
+            if(isset($params['slug'])){
+                $query->where('slug', $params['slug']);
             }
             $result = $query->first();
         }
@@ -124,7 +130,6 @@ class CatalogModel extends BackEndModel
     }
     public function saveItem($params = null, $options = null)
     {
-        Cache::forget('cat_lieu_thuoc_tay');
         if ($options['task'] == 'add-item') {
             $this->setCreatedHistory($params);
             self::insertGetId ($this->prepareParams($params));
@@ -141,19 +146,9 @@ class CatalogModel extends BackEndModel
            self::where('id', $params['id'])->delete();
         }
     }
-    public function posts()
+    public function catCustomerFeedBack()
     {
-        return $this->hasMany('App\Model\Shop\PostModel', 'cat_post_id', 'id')->select('id','title','slug','image','cat_post_id');
-    }
-    public function getCatLieuThuocTay()
-    {
-        return Cache::remember('cat_lieu_thuoc_tay', 86400, function () {
-            $catIds = [22,29, 67,68,69,70,71,72,73,74,75,76];
-            return $this->whereIn('id', $catIds)->get();
-        });
-    }
-    public function customerFeedBack()
-    {
-        return $this->hasMany('App\Model\Shop\CustomerFeedBackModel', 'cat_post_id', 'id')->select('id','image','cat_post_id');
+        return $this->belongsTo('App\Model\Shop\CatalogModel', 'cat_post_id', 'id')
+                    ->select('id', 'name', 'name_url');
     }
 }

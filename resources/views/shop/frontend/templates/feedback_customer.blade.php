@@ -14,7 +14,7 @@ $imgCustomer=['1.jpg', '2.jpg'];
     <div class="col-12">
         <a href="{{route('fe.feedBackCustomer')}}">@include("$moduleName.templates.box_title_product",['title' => 'Phản hồi từ Bệnh Nhân, Dược Sỹ và Bác Sỹ','classBackground'=>'bg-danger'])</a>
     </div>
-    <div class="col-xl-8 col-lg-12">
+    <div class="col-xl-9 col-lg-12">
         <ul>
             @foreach($feedbacks as $val)
             @php
@@ -37,15 +37,15 @@ $imgCustomer=['1.jpg', '2.jpg'];
             @endforeach
         </ul>
     </div>
-    <div class="col-xl-4 col-lg-12">
+    <div class="col-xl-3 col-lg-12">
         <div class="container-slider mt-0 mt-lg-2 position-relative">
             <button class="prev-btn-thumb-feedback position-absolute" style="left: 0;">‹</button>
             <div class="list_thumb_feedback cS-hidden">
                 <div class="swiper-slide text-center">
-                    <img class="img-thumbnail image-zoom-popup" src="{{asset('images/shop/1.jpg')}}" alt="phan hoi">
+                    <img src="{{asset('images/shop/z7450288731436_f55d721b8c2df0e5a95d13fb9b65ad64.jpg')}}" class="img-thumbnail image-zoom-popup" loading="lazy" alt="phan hoi" />
                 </div>
                 <div class="swiper-slide text-center">
-                    <img src="{{asset('images/shop/2.jpg')}}" class="img-thumbnail image-zoom-popup" loading="lazy" alt="phan hoi" />
+                    <img src="{{asset('images/shop/z7450288736049_c81341310cd573feacc4e720abdfb4ea.jpg')}}" class="img-thumbnail image-zoom-popup" loading="lazy" alt="phan hoi" />
                 </div>
             </div>
             <button class="next-btn-thumb-feedback position-absolute" style="right: 0;">›</button>
