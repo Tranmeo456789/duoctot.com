@@ -279,6 +279,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                    <a href="{{route('customerFeedback')}}" class="nav-link">
+                        <i class="nav-icon fas fa-search-dollar"></i>
+                        <p>Phản hồi khách hàng</p>
+                    </a>
+                </li>
+            <li class="nav-item">
                 <a href="{{route('fe.SyncTdoctor.indexPage')}}" class="nav-link">
                     <i class="nav-icon fas fa-sync"></i>
                     <p>Sync Tdoctor.net</p>
