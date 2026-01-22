@@ -13,6 +13,9 @@ $imageMap = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/mapduphong
 $phoneShop = '0393167234';
 if (in_array($userInfo['user_type_id'], [2, 3, 4, 6, 8]) && !empty($userInfo['phone'])) {
     $phoneShop = $userInfo['phone'];
+    if(in_array($userInfo['user_type_id'], [6])){
+        $phoneShop = substr($phoneShop, 0, -1) . '*';
+    }
 }
 $phoneShop=MyFunction::formatPhoneNumber($phoneShop);
 @endphp

@@ -46,8 +46,13 @@
                         }
                         $address=$val['details']['address'].$ward.$district.$province;
                     }
-                    if($val['user_type_id'] == 6 || $val['user_type_id'] ==11){
-                        $phoneOfShopShow = $val['phone'] ?? $phoneOfShopConfig;
+                    if ($val['user_type_id'] == 6 || $val['user_type_id'] == 11) {
+                        $phoneShop = $val['phone'] ?? $phoneOfShopConfig;
+                        if (!empty($phoneShop) && strlen($phoneShop) > 1) {
+                            $phoneOfShopShow = substr($phoneShop, 0, -1) . '*';
+                        } else {
+                            $phoneOfShopShow = $phoneShop;
+                        }
                     }else{
                         $phoneOfShopShow = $phoneOfShopConfig;
                     }
