@@ -47,7 +47,7 @@ class PostController extends ShopFrontEndController
         } else{
             $items = $this->model->listItems( null , ['task' => 'frontend-list-items']);
             foreach($catItems as $key=>$val){
-                $catItems[$key]['post'] = $val->posts()->take(10)->get();
+                $catItems[$key]['post'] = $val->posts()->take(16)->get();
             }
             $dataCacheCatalogPost = [
               'items'  => $items,
