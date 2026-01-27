@@ -14,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
+        //chỉ áp dụng ở local
         $this->app['request']->server->set('HTTP','on');
 
         //$this->app['request']->server->set('HTTPS','off');
