@@ -4,7 +4,4 @@
 <link rel="canonical" href="{{ url()->current() }}">
 <link rel="stylesheet" href="{{ asset('/shop/template/css/combined_library.min.css')}}" type="text/css"/>
 <link href="{{ asset('/shop/frontend/css/my-style.min.css')}}?v={{ filemtime(public_path('shop/frontend/css/my-style.min.css')) }}" rel="stylesheet" type="text/css"/>
-<script
-    src="https://cdn.fchat.vn/assets/embed/webchat.js?id=6978d8f60386f1c82d048319&v={{ time() }}"
-    async
-></script>
+<!--Start of Fchat.vn--><script type="text/javascript" src="https://cdn.fchat.vn/assets/embed/webchat.js?id=697b0bf86a39a778d90ae212" async="async"></script><!--End of Fchat.vn-->
