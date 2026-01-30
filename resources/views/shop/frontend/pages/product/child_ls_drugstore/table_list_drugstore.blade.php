@@ -15,7 +15,6 @@
                 <th style="width: 15%;" class="text-center">Hình ảnh nhà thuốc</th>
                 <th style="width: 50%;" class="text-center">Thông tin nhà thuốc</th>
                 <th class="d-none d-md-table-cell text-center" style="width: 20%;">Dịch vụ</th>
-                <th class="d-none d-md-table-cell text-center" style="width: 15%;">Khu vực</th>
             </tr>
         </thead>
         <tbody>
@@ -116,7 +115,6 @@
                         <label for="someCheckboxId">Đổi trả nguyên giá</label>
                     </div>
                 </td>
-                <td class="d-none d-md-table-cell">Khu vực 1</td>
             </tr>
             @endforeach
         </tbody>
