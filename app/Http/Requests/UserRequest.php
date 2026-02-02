@@ -63,7 +63,7 @@ class UserRequest extends AjaxFormRequest
                         $condEmail = 'bail|required|email|unique:user,email,' . $user_id . ',user_id'; 
                     }
                     if (!empty($this->phone)) {
-                        $condPhone = 'bail|required|numeric|phone|unique:user,phone,' . $user_id . ',user_id'; 
+                        $condPhone = "bail|required|numeric|phone";  
                     }
                     return [
                         'fullname'    => $condName,
