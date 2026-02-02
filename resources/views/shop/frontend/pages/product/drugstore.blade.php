@@ -10,17 +10,26 @@ $imageSrc = route('home') . $userInfo['details']['image'];
     $imageSrc = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/nhathuocmau10.jpg';
 }
 $imageMap = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/mapduphong.jpeg';
-$phoneShop = $userInfo['email'] ?? 'Đang cập nhật';
-if (in_array($userInfo['user_type_id'], [1, 2, 3, 4, 6, 8, 10]) && !empty($userInfo['phone'])) {
-    $phoneShop = $userInfo['phone'];
-    if(in_array($userInfo['user_type_id'], [6])){
-         if($phoneShop ='0393167234'){
-            $phoneShop ='0393167234';
-        }else{
-            $phoneShop = substr($phoneShop, 0, -1) . '*';
-        }
+$userType = $userInfo['user_type_id'] ?? null;
+$phone    = $userInfo['phone'] ?? '';
+$email    = $userInfo['email'] ?? 'Đang cập nhật';
+$defaultPhone = '0393167234';
+$phoneShop = $email;
+$isPhone   = false;
+if (!empty($phone)) {
+    $phoneShop = $phone;
+    $isPhone   = true;
+    if ($userType == 6) {
+        $phoneShop = substr($phoneShop, 0, -1) . '*';
     }
-    $phoneShop=MyFunction::formatPhoneNumber($phoneShop);
+} else {
+    if (in_array($userType, [6, 9])) {
+        $phoneShop = $defaultPhone;
+        $isPhone   = true;
+    }
+}
+if ($isPhone) {
+    $phoneShop = MyFunction::formatPhoneNumber($phoneShop);
 }
 @endphp
 

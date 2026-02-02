@@ -10,7 +10,48 @@ $contact=MyFunction::formatPhoneNumber($contact);
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded",function(){let e=tns({container:".sliderProductMain",items:1,slideBy:"page",speed:1e3,nav:!1,controls:!1,autoplay:!1,mouseDrag:!0,loop:!0,onInit:function(){document.querySelector(".sliderProductMain").classList.remove("cS-hidden")}});tns({container:".sliderProductThumb",items:4,gutter:10,slideBy:1,nav:!1,controls:!1,autoplay:!1,mouseDrag:!0,loop:!1});let t=document.querySelectorAll(".sliderProductThumb > div");function o(e){t.forEach((t,o)=>{t.classList.toggle("active",o===e)})}t.forEach((t,n)=>{t.addEventListener("click",function(){e.goTo(n),o(n)})}),e.events.on("indexChanged",function(e){let t=e.displayIndex-1;o(t)}),o(0)});
+    document.addEventListener("DOMContentLoaded", function() {
+        let e = tns({
+            container: ".sliderProductMain",
+            items: 1,
+            slideBy: "page",
+            speed: 1e3,
+            nav: !1,
+            controls: !1,
+            autoplay: !1,
+            mouseDrag: !0,
+            loop: !0,
+            onInit: function() {
+                document.querySelector(".sliderProductMain").classList.remove("cS-hidden")
+            }
+        });
+        tns({
+            container: ".sliderProductThumb",
+            items: 4,
+            gutter: 10,
+            slideBy: 1,
+            nav: !1,
+            controls: !1,
+            autoplay: !1,
+            mouseDrag: !0,
+            loop: !1
+        });
+        let t = document.querySelectorAll(".sliderProductThumb > div");
+
+        function o(e) {
+            t.forEach((t, o) => {
+                t.classList.toggle("active", o === e)
+            })
+        }
+        t.forEach((t, n) => {
+            t.addEventListener("click", function() {
+                e.goTo(n), o(n)
+            })
+        }), e.events.on("indexChanged", function(e) {
+            let t = e.displayIndex - 1;
+            o(t)
+        }), o(0)
+    });
 </script>
 @endsection
 @section('content')
@@ -122,11 +163,18 @@ document.addEventListener("DOMContentLoaded",function(){let e=tns({container:".s
                             <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="{{ route('fe.product.drugstore', ['slug' => $slugUserInfo]) }}" style="white-space: normal;width: 90vw; display: block;">{{$fullNameUserInfo}}</a>
                                 @foreach($listUserHasProduct as $val)
+                                @if(!empty($userInfo['user_id']) && $val['user_id'] != $userInfo['user_id'])
                                 @php
                                 $slugUserHasProduct = $val['slug'] ?? 'unknow';
                                 $fullNameUserHasProduct = $val['fullname'] ?? 'unknow';
                                 @endphp
-                                <a class="dropdown-item" href="{{ route('fe.product.drugstore', ['slug' => $slugUserHasProduct]) }}" style="white-space: normal;width: 90vw; display: block;">{{$fullNameUserHasProduct}}</a>
+                                <a
+                                    class="dropdown-item"
+                                    href="{{ route('fe.product.drugstore', ['slug' => $slugUserHasProduct]) }}"
+                                    style="white-space: normal; width: 90vw; display: block;">
+                                    {{ $fullNameUserHasProduct }}
+                                </a>
+                                @endif
                                 @endforeach
                             </div>
                         </div>
