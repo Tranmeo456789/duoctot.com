@@ -10,14 +10,14 @@ $imageSrc = route('home') . $userInfo['details']['image'];
     $imageSrc = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/nhathuocmau10.jpg';
 }
 $imageMap = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/mapduphong.jpeg';
-$phoneShop = '0393167234';
-if (in_array($userInfo['user_type_id'], [2, 3, 4, 6, 8]) && !empty($userInfo['phone'])) {
+$phoneShop = $userInfo['email'] ?? 'Đang cập nhật';
+if (in_array($userInfo['user_type_id'], [1, 2, 3, 4, 6, 8]) && !empty($userInfo['phone'])) {
     $phoneShop = $userInfo['phone'];
     if(in_array($userInfo['user_type_id'], [6])){
         $phoneShop = substr($phoneShop, 0, -1) . '*';
     }
+    $phoneShop=MyFunction::formatPhoneNumber($phoneShop);
 }
-$phoneShop=MyFunction::formatPhoneNumber($phoneShop);
 @endphp
 
 @extends('shop.layouts.frontend')
@@ -41,7 +41,7 @@ $phoneShop=MyFunction::formatPhoneNumber($phoneShop);
                     <h6 class="text-danger text-center font-weight-bold">{{$userInfo['fullname']??''}}</h6>
                     <p class="font-weight-bold">*Số lượng sản phẩm: <span>{{count($productDrugstore)}}</span></p>
                     <p class="font-weight-bold">*Địa chỉ: <span>{{$address??''}}</span></p>
-                    <p class="font-weight-bold">*Số điện thoại: <span>{{$phoneShop}}</span></p>
+                    <p class="font-weight-bold">*Số điện thoại / Email: <span>{{$phoneShop}}</span></p>
                 </div>
             </div>
         </div>
