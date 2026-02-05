@@ -14,20 +14,30 @@ $userType = $userInfo['user_type_id'] ?? null;
 $phone    = $userInfo['phone'] ?? '';
 $email    = $userInfo['email'] ?? 'Đang cập nhật';
 $defaultPhone = '0393167234';
+// Mặc định là email
 $phoneShop = $email;
 $isPhone   = false;
-if (!empty($phone)) {
-    $phoneShop = $phone;
+// USER TYPE 9 → luôn dùng số mặc định
+if ($userType == 9) {
+    $phoneShop = $defaultPhone;
     $isPhone   = true;
-    if ($userType == 6) {
-        $phoneShop = substr($phoneShop, 0, -1) . '*';
-    }
-} else {
-    if (in_array($userType, [6, 9])) {
+} elseif ($userType == 6) {
+    if (!empty($phone)) {
+        // Có phone → che số
+        $phoneShop = substr($phone, 0, -1) . '*';
+    } else {
+        // Không có phone → số mặc định
         $phoneShop = $defaultPhone;
+    }
+    $isPhone = true;
+}else {
+    if (!empty($phone)) {
+        $phoneShop = $phone;
         $isPhone   = true;
     }
+    // Không có phone → giữ email
 }
+// Chỉ format nếu là phone
 if ($isPhone) {
     $phoneShop = MyFunction::formatPhoneNumber($phoneShop);
 }
