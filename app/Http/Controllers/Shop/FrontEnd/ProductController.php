@@ -230,28 +230,47 @@ class ProductController extends ShopFrontEndController
         // }
         // Xử lý địa chỉ và bản đồ
         $address = $map = $ward = $district = $province = '';
-        if (isset($userInfo['details'])) {
-            $details = $userInfo['details'];
-            $wardDetail = (new WardModel())->getItem(['id' => $details['ward_id']], ['task' => 'get-item-full']);
-            if ($wardDetail) {
-                $ward = ' ' . ($wardDetail['name'] ?? '');
-                $district = ', ' . ($wardDetail['district']['name'] ?? '');
-                $province = ', ' . ($wardDetail['district']['province']['name'] ?? '');
-            } else {
-                $districtDetail = (new ProvinceModel())->getItem(['id' => $details['district_id']], ['task' => 'get-item-full']);
-                $provinceDetail = (new ProvinceModel())->getItem(['id' => $details['province_id']], ['task' => 'get-item-full']);
-
+        $details = $userInfo['details'] ?? [];
+        if (!empty($details)) {
+            $wardId     = $details['ward_id']     ?? null;
+            $districtId = $details['district_id'] ?? null;
+            $provinceId = $details['province_id'] ?? null;
+            // Ưu tiên ward (đầy đủ nhất)
+            if ($wardId) {
+                $wardDetail = (new WardModel())->getItem(
+                    ['id' => $wardId],
+                    ['task' => 'get-item-full']
+                );
+                if (!empty($wardDetail)) {
+                    $ward     = ' ' . ($wardDetail['name'] ?? '');
+                    $district = ', ' . ($wardDetail['district']['name'] ?? '');
+                    $province = ', ' . ($wardDetail['district']['province']['name'] ?? '');
+                }
+            }
+            // Nếu KHÔNG có ward hoặc ward không tồn tại → fallback district + province
+            if ($district === '' && $districtId) {
+                $districtDetail = (new DistrictModel())->getItem(
+                    ['id' => $districtId],
+                    ['task' => 'get-item-full']
+                );
                 $district = ', ' . ($districtDetail['name'] ?? '');
+            }
+            if ($province === '' && $provinceId) {
+                $provinceDetail = (new ProvinceModel())->getItem(
+                    ['id' => $provinceId],
+                    ['task' => 'get-item-full']
+                );
                 $province = ', ' . ($provinceDetail['name'] ?? '');
             }
-            $address = $details['address'] . $ward . $district . $province;
-            $map = $details['map'] ?? '';
+            // Address & map
+            $addressBase = $details['address'] ?? '';
+            $address = trim($addressBase . $ward . $district . $province);
+            $map     = $details['map'] ?? '';
         }
         // Tiêu đề trang
         $title = !empty($userInfo['fullname'])
             ? $userInfo['fullname']
             : 'DƯỢC TỐT là Nền tảng kết nối y dược nhà thuốc, phòng khám , bệnh nhân với công ty dược và thực phẩm chức năng uy tín nhất Việt nam';
-
         // Lấy đánh giá & bình luận shop
         $commentShop = (new CommentModel())->listItems([
             'shop_id' => $shopId
