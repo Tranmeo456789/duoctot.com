@@ -123,7 +123,7 @@ class PostController extends ShopFrontEndController
         $items = (new CustomerFeedBackModel)->listItems( null , ['task' => 'frontend-list-items']);
         $catItems=(new CatalogModel)->listItems(null, ['task' => 'frontend-list-items']);
         foreach($catItems as $key=>$val){
-            $catItems[$key]['customerFeedBack'] = $val->customerFeedBack()->take(10)->get();
+            $catItems[$key]['customerFeedBack'] = $val->customerFeedBack()->take(30)->get();
             if(count($catItems[$key]['customerFeedBack']) < 1){
                 unset($catItems[$key]);
             }

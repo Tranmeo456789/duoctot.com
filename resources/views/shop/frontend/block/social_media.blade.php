@@ -55,11 +55,17 @@
 </style>
 <contact-menu class="contact-menu">
     <ul>
-        <li id="icon-fixed__facebook">
+        <!-- <li id="icon-fixed__facebook">
             <a class="image-contact" href="{{route('home')}}">
                 <img src="{{asset('images/shop/trangchu.jpg')}}" alt="trang chủ">
             </a>
             <a href="{{route('home')}}" class="text-primary font-weight-bold">Trang chủ</a>
+        </li> -->
+        <li id="icon-fixed__facebook" class="pl-2">
+            <a class="image-contact" href="https://zalo.me/0345488247" rel="nofollow" target="_blank" title="Zalo" previewlistener="true">
+                <img src="{{asset('images/shop/icon_zalo.png')}}" alt="Zalo DuocTot">
+            </a>
+            <a href="https://zalo.me/0345488247" rel="nofollow" target="_blank" title="Zalo Tdoctor" previewlistener="true">Zalo</a>
         </li>
         <li id="icon-fixed__facebook">
             <a class="image-contact" href="{{route('fe.home.pageKhuyenMai')}}">
