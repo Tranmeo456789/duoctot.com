@@ -509,7 +509,7 @@ class ProductModel extends BackEndModel
                                 ->orWhere('keyword_search', 'LIKE', "%{$word}%");
                         });
                     }
-                })->get();
+                })->limit(40)->get();
                 $results = $results->map(function ($result) use ($keywords) {
                     $score = collect($keywords)->sum(function ($word) use ($result) {
                         return mb_stripos($result->name, $word, 0, 'UTF-8') !== false ? mb_strlen($word, 'UTF-8') : 0;
