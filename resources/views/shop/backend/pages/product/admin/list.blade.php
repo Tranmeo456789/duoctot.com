@@ -23,7 +23,7 @@
             @foreach ($items as $val)
                 @php
                     $temp++;
-                    $image = Template::showImagePreviewFileManager($val['image'],$val['slug']??$val['name']);
+                    $image = Template::showImagePreviewFileManager('/public'.$val['image'],$val['slug']??$val['name']);
                     $statusProductValue = array_combine(array_keys(config("myconfig.template.column.status_product")),array_column(config("myconfig.template.column.status_product"),'name'));
                     unset($statusProductValue['all']);
                     $name = Hightlight::show($val->name, $params['search'], 'name');
