@@ -70,7 +70,7 @@ $contact=MyFunction::formatPhoneNumber($contact);
                             <!-- Slider chính -->
                             <div class="sliderProductMain tns-slider cS-hidden gallery">
                                 <div class="text-center">
-                                    <img src="{{ asset($item['image']) }}" class="img-fluid image-zoom-popup" />
+                                    <img src="{{ asset('public/'.$item['image']) }}" class="img-fluid image-zoom-popup" />
                                 </div>
                                 @foreach($albumImageCurrent as $val)
                                 <div class="text-center">
@@ -81,7 +81,7 @@ $contact=MyFunction::formatPhoneNumber($contact);
                             <!-- Thumbnail slider -->
                             <div class="sliderProductThumb mt-2">
                                 <div>
-                                    <img src="{{ asset($item['image']) }}" class="img-thumbnail" />
+                                    <img src="{{ asset('public/'.$item['image']) }}" class="img-thumbnail" />
                                 </div>
                                 @foreach($albumImageCurrent as $val)
                                 <div>
