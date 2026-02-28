@@ -711,8 +711,9 @@ class ProductModel extends BackEndModel
     }
     public function saveItem($params = null, $options = null)
     {
-        Cache::forget('cache_product_data'); 
-        Cache::forget('cache_post_data');
+        Cache::forget('cache_product_new_data');
+        Cache::forget('cache_product_best_data');
+        Cache::forget('cache_product_km_data');
         if ($options['task'] == 'add-item') {
             $this->setCreatedHistory($params);
             $params['tick'] = isset($params['tick'])?json_encode($params['tick'],JSON_NUMERIC_CHECK ): NULL;
