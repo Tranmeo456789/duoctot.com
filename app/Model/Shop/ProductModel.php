@@ -277,7 +277,6 @@ class ProductModel extends BackEndModel
                     foreach ($keywords as $word) {
                         $query->where(function ($query) use ($word) {
                             $query->orWhere('name', 'LIKE', "%{$word}%")
-                                ->orWhere('benefit', 'LIKE', "%{$word}%")
                                 ->orWhere('keyword_search', 'LIKE', "%{$word}%");
                         });
                     }
@@ -493,7 +492,7 @@ class ProductModel extends BackEndModel
             }
             $result = $query->orderBy('id', 'asc')->pluck('name', 'id')->toArray();
         }
-        if ($options['task'] == "list-items-search") {
+        if ($options['task'] == "list-items-search-truoc-dung") {
             $query = $this::with(['unitProduct', 'trademarkProduct'])->select('id', 'name', 'image', 'price', 'percent_discount', 'unit_id','trademark_id', 'specification', 'slug','show_price')->where('status_product', 'da_duyet');
             if (isset($params['keyword'])) {
                 $keyword = $params['keyword'];
@@ -505,7 +504,6 @@ class ProductModel extends BackEndModel
                     foreach ($keywords as $word) {
                         $query->where(function ($query) use ($word) {
                             $query->orWhere('name', 'LIKE', "%{$word}%")
-                                ->orWhere('benefit', 'LIKE', "%{$word}%")
                                 ->orWhere('keyword_search', 'LIKE', "%{$word}%");
                         });
                     }
@@ -527,6 +525,43 @@ class ProductModel extends BackEndModel
                 $query->limit($params['limit']);
             }
             $result = $results;
+        }
+        if ($options['task'] == "list-items-search") {
+            $query = $this::query()
+                ->with(['unitProduct'])
+                ->select('id','name','image','price','percent_discount','unit_id','specification','slug','show_price')
+                ->where('status_product', 'da_duyet');
+            // filter user bán trước để tận dụng index
+            if (!empty($params['user_sell'])) {
+                $query->where('user_id', $params['user_sell']);
+            }
+            // SEARCH tối ưu bằng FULLTEXT
+            if (!empty($params['keyword'])) {
+                $keyword = strip_tags($params['keyword']);
+                $keyword = preg_replace('/[^\p{L}\p{N}\s\-]/u', '', $keyword);
+                $keyword = trim($keyword);
+                if ($keyword !== '') {
+                    // dùng BOOLEAN MODE để match nhiều từ
+                    $searchString = collect(explode(' ', $keyword))
+                        ->filter()
+                        ->map(fn($word) => '+' . $word . '*')
+                        ->implode(' ');
+                    $query->whereRaw(
+                        "MATCH(keyword_search) AGAINST(? IN BOOLEAN MODE)",
+                        [$searchString]
+                    );
+                    $query->orderByRaw(
+                        "MATCH(keyword_search) AGAINST(? IN BOOLEAN MODE) DESC",
+                        [$searchString]
+                    );
+                }
+            } else {
+                // nếu không search thì sort bình thường
+                $query->orderBy('id', 'asc');
+            }
+            // limit cuối cùng
+            $limit = $params['limit'] ?? 30;
+            $result = $query->limit($limit)->get();
         }
         if ($options['task'] == "get-list-items-add-database-wordpress") {
             $query = $this::select('id','name','type','code','cat_product_id','price','trademark_id','country_id','specification','image','slug','dosage_forms','elements','expiration_date','brand_origin_id','benefit','general_info','prescribe','dosage','producer_id','note','preserve','albumImageHash')

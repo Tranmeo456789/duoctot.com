@@ -254,10 +254,17 @@
             console.warn("Tin không đọc được:", e.data);
           }
         };
+        //ws.onclose = () => {
+         // connected = false;
+          //if (pingTimer) clearInterval(pingTimer);
+          //setTimeout(connectWS, 3000);
+        //};
         ws.onclose = () => {
           connected = false;
-          if (pingTimer) clearInterval(pingTimer);
-          setTimeout(connectWS, 3000);
+          if (pingTimer) {
+            clearInterval(pingTimer);
+            pingTimer = null;
+          }
         };
         ws.onerror = () => {
           connected = false;
