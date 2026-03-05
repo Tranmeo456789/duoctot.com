@@ -54,8 +54,7 @@
     </div>
     @if(!isset($viewNoSearchHeader))
         <div class="search-header-mobi">
-            <form action="{{route('fe.search.saveHome')}}" method="POST">
-                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+            <form action="{{route('fe.search.saveHome')}}" method="GET">
                 @include("$moduleName.block.input_search")
             </form>
         </div>

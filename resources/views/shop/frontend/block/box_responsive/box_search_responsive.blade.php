@@ -5,8 +5,7 @@
     <div class="d-flex header-box-search">
         <span class="icon-back-search"><i class="fas fa-arrow-left"></i></span>
         <div class="position-relative" style="flex: auto">
-            <form action="{{route('fe.search.saveHome')}}" method="POST">
-                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+            <form action="{{route('fe.search.saveHome')}}" method="GET">
                 <div class="d-flex">
                     <div class="wp-input-search fc-search-js input form-search-show-list input-search-small">
                         <input type="text" name="keyword" class="input-search-info" data-href="{{$dataHref}}" value="{{$keyword??''}}" placeholder="Tìm kiếm Thuốc, TPCN..." autocomplete="off">

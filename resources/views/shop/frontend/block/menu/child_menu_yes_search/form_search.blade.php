@@ -2,8 +2,7 @@
     $dataHref = route('fe.product.searchListProductShort');
 @endphp
 <div class="position-relative wp-search-list-product">
-    <form action="{{route('fe.search.saveHome')}}" method="POST">
-        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+    <form action="{{route('fe.search.saveHome')}}" method="GET">
         <div class="d-flex">
             <div class="wp-input-search fc-search-js form-search-show-list input input-search-small">
                 <input type="text" name="keyword" class="input-search-info" data-href="{{$dataHref}}" value="{{$keyword??''}}" placeholder="Nhập tìm theo tên hoặc công dụng..." autocomplete="off">

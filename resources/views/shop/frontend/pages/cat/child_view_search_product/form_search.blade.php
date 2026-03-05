@@ -6,8 +6,7 @@
         <h1 class="mb-2 mb-md-0 pr-4 col-12 col-md-3">Tra cứu SP</h1>
         <div class="search-product col-12 col-md-9">
             <div id="wp-search" class="wp-search-menu">
-                <form action="{{route('fe.search.saveHome')}}" method="POST">
-                    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                <form action="{{route('fe.search.saveHome')}}" method="GET">
                     @include("$moduleName.block.input_search",['dataHref'=>$dataHref])
                 </form>
                 <div class="wp-list-product-short">

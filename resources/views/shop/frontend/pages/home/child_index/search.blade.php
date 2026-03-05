@@ -8,8 +8,7 @@ $dataHref = route('fe.product.searchListProductShort');
 <div class="form-search-inner">
     <!-- <h6>@lang('lang.search_for_drugs')...</h6> -->
     <div class="position-relative wp-search-list-product">
-        <form action="{{route('fe.search.saveHome')}}" method="POST">
-            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+        <form action="{{route('fe.search.saveHome')}}" method="GET">
             <div class="position-relative">
                 <div class="wp-input-search fc-search-js form-search-show-list form-search-scroll form-search-show-list">
                     <input type="text" name="keyword" class="input-search-info" data-href="{{$dataHref}}" value="" placeholder="@lang('lang.search_for_drugs')..." autocomplete="off">
@@ -27,8 +26,6 @@ $dataHref = route('fe.product.searchListProductShort');
             @include("$moduleName.block.menu.child_menu_yes_search.list_history_keyword")
         </div>
     </div>
-
-
     <h5 class="mt-3 mb-2">@lang('lang.top_search')</h5>
     @if(isset($listKeywordHight))
     <ul class="d-flex justify-content-between list-hight-home">
