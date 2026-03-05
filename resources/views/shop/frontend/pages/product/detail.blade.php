@@ -238,16 +238,6 @@ $contact=MyFunction::formatPhoneNumber($contact);
         </div>
     </div>
 </div>
-<div class="wp-inner mt-2">
-    <div class="row">
-        <div class="col-md-12">
-            <div>
-                @include("$moduleName.templates.list_product_new_view")
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="service-tdoctor mt-5">
     @include("$moduleName.templates.info_service")
 </div>

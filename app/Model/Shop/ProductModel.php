@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\Model\Shop\BackEndModel;
 use App\Model\Shop\WarehouseModel;
 use App\Model\Shop\CatProductModel;
+use App\Model\Shop\TrademarkModel;
+use App\Model\Shop\UsersModel;
 use Illuminate\Support\Facades\Cache;
 use App\Helpers\HttpClient;
 use Illuminate\Support\Str;
@@ -80,7 +82,7 @@ class ProductModel extends BackEndModel
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
                                     'preserve','note','image','featurer','long','user_id','status_product','slug','wide','high',
-                                    'mass','quantity_in_stock','discount_ref','discount_tdoctor','created_at', 'updated_at','show_price')->where('id','>',1)
+                                    'mass','quantity_in_stock','discount_ref','discount_tdoctor','created_at', 'updated_at','show_price')
                                     ->ofUser();
             if (isset($params['group_id'])){
                 $query->whereIn('id',$params['group_id']);
@@ -108,7 +110,7 @@ class ProductModel extends BackEndModel
         }
         if ($options['task'] == "user-list-items-simple-affiliate") {
             $query = $this::with('unitProduct')
-                            ->select('id','slug','name','price','image','discount_ref','discount_tdoctor','created_at', 'updated_at')->where('id','>',1)->where('status_product','da_duyet');
+                            ->select('id','slug','name','price','image','discount_ref','discount_tdoctor','created_at', 'updated_at')->where('status_product','da_duyet');
             if (isset($params['group_id'])){
                 $query->whereIn('id',$params['group_id']);
             }
@@ -174,7 +176,6 @@ class ProductModel extends BackEndModel
         if ($options['task'] == "user-list-items-in-warehouse") {
             $query = $this::with('productWarehouse')
                             ->select('id','name','code','image','quantity_in_stock','slug')
-                            ->where('id','>',1)
                             ->ofUser();
             $result =  $query->orderBy('id', 'desc')
                               ->paginate($params['pagination']['totalItemsPerPage']);
@@ -182,21 +183,19 @@ class ProductModel extends BackEndModel
         if ($options['task'] == "user-list-items-in-warehouse-no-pagination") {
             $query = $this::with('productWarehouse')
                             ->select('id','name','code','price','image','quantity_in_stock','user_id','slug')
-                            ->where('id','>',1)
                             ->ofUser();
             $result =  $query->orderBy('id', 'desc')
                               ->get();
         }
         if ($options['task'] == 'user-list-all-items'){
             $result = $this::selectRaw("id as product_id")
-                                    ->where('id','>',1)
                                     ->ofUser()
                                     ->get()
                                     ->toArray();
         }
         if ($options['task'] == "frontend-list-items") {
             $query = $this::select('id','name','type','code','cat_product_id','price','price_vat','percent_discount','unit_id','trademark_id','country_id','specification','image','user_id','featurer','slug','discount_ref','dosage_forms','elements','show_price')
-                                ->where('id','>',1)->where('status_product','da_duyet');
+                                ->where('status_product','da_duyet');
             if (isset($params['cat_product_id']) && ($params['cat_product_id'] != 0)){
                 $query->whereIn('cat_product_id', CatProductModel::getChild($params['cat_product_id']));
             }
@@ -240,7 +239,7 @@ class ProductModel extends BackEndModel
         }
         if ($options['task'] == "frontend-list-items-api") {
             $query = $this::with('unitProduct')->select('id','name','price','percent_discount','unit_id','image','slug','show_price')
-                                ->where('id','>',1)->where('status_product','da_duyet');
+                                ->where('status_product','da_duyet');
             if (isset($params['cat_product_id']) && ($params['cat_product_id'] != 0)){
                 $query->whereIn('cat_product_id', CatProductModel::getChild($params['cat_product_id']));
             }
@@ -310,7 +309,7 @@ class ProductModel extends BackEndModel
         }
         if ($options['task'] == "list-items-search-api") {
             $query = $this::with('unitProduct')->select('id','name','price','percent_discount','unit_id','image','slug','show_price')
-                ->where('id','>',1)->where('status_product','da_duyet');
+                ->where('status_product','da_duyet');
             if (isset($params['keyword'])) {
                 $keyword = $params['keyword'];
                 $keyword = strip_tags($keyword);
@@ -382,7 +381,6 @@ class ProductModel extends BackEndModel
         }
         if ($options['task'] == "frontend-list-item-shop") {
             $query = $this::select('id','name','type','code','cat_product_id','price','price_vat','percent_discount','unit_id','specification','image','user_id','featurer','slug','discount_ref','dosage_forms','elements','show_price')
-                ->where('id', '>', 1)
                 ->where('status_product', 'da_duyet');
             if (isset($params['group_id'])) {
                 $query->whereIn('id', $params['group_id']);
@@ -409,7 +407,6 @@ class ProductModel extends BackEndModel
         }
         if ($options['task'] == "frontend-list-item-shop-api") {
             $query = $this::select('id', 'name', 'code', 'cat_product_id', 'price', 'unit_id', 'image', 'user_id','show_price')
-            ->where('id', '>', 1)
             ->where('status_product', 'da_duyet');
             if (isset($params['group_id'])) {
                 $query->whereIn('id', $params['group_id']);
@@ -436,7 +433,7 @@ class ProductModel extends BackEndModel
         }
         if ($options['task'] == "frontend-list-items-simple") {
             $query = $this::select('id','name','slug')
-                                ->where('id','>',1)->where('status_product','da_duyet')->orderBy('id', 'desc');
+                                ->where('status_product','da_duyet')->orderBy('id', 'desc');
             if(isset($params['limit'])){
                 $result=$query->paginate($params['limit']);
             }else{
@@ -482,7 +479,6 @@ class ProductModel extends BackEndModel
         }
         if($options['task'] == "admin-list-items-in-selectbox") {
             $query = $this->select('id', 'name')
-                        ->where('id','>',1)
                         ->OfUser();
             if(isset($params['status_product'])){
                 $query=$query->where('status_product',$params['status_product']);
@@ -565,7 +561,7 @@ class ProductModel extends BackEndModel
         }
         if ($options['task'] == "get-list-items-add-database-wordpress") {
             $query = $this::select('id','name','type','code','cat_product_id','price','trademark_id','country_id','specification','image','slug','dosage_forms','elements','expiration_date','brand_origin_id','benefit','general_info','prescribe','dosage','producer_id','note','preserve','albumImageHash')
-                                ->where('id','>',1)->where('status_product','da_duyet');
+                                ->where('status_product','da_duyet');
             if (isset($params['group_id'])){
                 $query->whereIn('id',$params['group_id']);
             }
@@ -584,7 +580,6 @@ class ProductModel extends BackEndModel
         if ($options['task'] == "get-list-items-add-database-hanibody") {
             $catIdHanibody = [15, 48, 51, 174, 75, 63, 76, 77, 78, 79, 80, 69, 70, 74, 81, 82, 85, 87, 83, 86, 64, 68, 94, 95, 198];
             $query = $this::select('id','name','type','code','cat_product_id','price','trademark_id','country_id','specification','image','slug','dosage_forms','elements','expiration_date','brand_origin_id','benefit','general_info','prescribe','dosage','producer_id','note','preserve','albumImageHash')
-                ->where('id', '>', 1)
                 ->where('status_product', 'da_duyet')
                 ->whereIn('cat_product_id', $catIdHanibody);
             if (isset($params['group_id'])){
@@ -685,7 +680,7 @@ class ProductModel extends BackEndModel
         if($options['task'] == 'admin-count-items-group-by-user-id') {
             $query = $this::groupBy('user_id')
                             ->select(DB::raw('user_id , COUNT(id) as count'))
-                            ->where('id','>',1)->where('user_id',$params['user_id']);
+                            ->where('user_id',$params['user_id']);
             if(isset($params['filter_in_day'])){
                 $query->whereBetween('created_at', ["{$params['filter_in_day']['day_start']}", "{$params['filter_in_day']['day_end']}"]);
             }
@@ -694,7 +689,6 @@ class ProductModel extends BackEndModel
         if($options['task'] == 'admin-count-items-group-by-status-product') {
             $query = $this::groupBy('status_product')
                             ->select(DB::raw('status_product , COUNT(id) as count') )
-                            ->where('id','>',1)
                             ->OfUser();
 
             $result = $query->get()->toArray();
@@ -702,7 +696,6 @@ class ProductModel extends BackEndModel
          if($options['task'] == 'count-items-product-frontend') {
             $query = $this::groupBy('status_product')
                     ->select(DB::raw('status_product, COUNT(id) as count'))
-                    ->where('id', '>', 1)
                     ->where('status_product', 'da_duyet');
             if (isset($params['type'])){
                 $query->whereRaw("FIND_IN_SET('\"{$params['type']}\"',REPLACE(REPLACE(`featurer`, '[',''),']',''))");
@@ -727,7 +720,7 @@ class ProductModel extends BackEndModel
         if ($options['task'] == "sum-quantity-product-in-warehouse-of-user-id") {
             $query = $this::with('productWarehouse')
                             ->select('id','price','quantity_in_stock','user_id','created_at')
-                            ->where('id','>',1)->OfUser();
+                            ->OfUser();
             if(isset($params['filter_in_day'])){
                 $query->whereBetween('created_at', ["{$params['filter_in_day']['day_start']}", "{$params['filter_in_day']['day_end']}"]);
             }
@@ -736,13 +729,44 @@ class ProductModel extends BackEndModel
         if ($options['task'] == "sum-money-product-in-warehouse-of-user-id") {
             $query = $this::with('productWarehouse')
                             ->select('id','price','quantity_in_stock','user_id','created_at')
-                            ->where('id','>',1)->OfUser();
+                            ->OfUser();
             if(isset($params['filter_in_day'])){
                 $query->whereBetween('created_at', ["{$params['filter_in_day']['day_start']}", "{$params['filter_in_day']['day_end']}"]);
             }
             $result = $query->select(DB::raw('SUM(price * quantity_in_stock) as total'))->get()->first()->total;
         }
         return $result;
+    }
+    private static function buildKeywordSearch($params, $productId = null)
+    {
+        //Xác định user_id
+        if (isset($params['user_id'])) {
+            $userId = $params['user_id']; // trường hợp ADD
+        } elseif ($productId) {
+            $product = self::find($productId); // trường hợp EDIT
+            $userId  = $product ? $product->user_id : null;
+        } else {
+            $userId = null;
+        }
+        //Lấy dữ liệu liên quan
+        $trademark = isset($params['trademark_id'])
+            ? TrademarkModel::find($params['trademark_id'])
+            : null;
+        $user = $userId
+            ? UsersModel::where('user_id', $userId)->first()
+            : null;
+        $cat = isset($params['cat_product_id'])
+            ? CatProductModel::find($params['cat_product_id'])
+            : null;
+        //Build keyword
+        return trim(implode(' ', [
+            $trademark ? $trademark->name : null,
+            $user ? $user->fullname : null,
+            $cat ? $cat->name : null,
+            isset($params['name']) ? $params['name'] : null,
+            isset($params['benefit']) ? $params['benefit'] : null,
+            isset($params['elements']) ? $params['elements'] : null,
+        ]));
     }
     public function saveItem($params = null, $options = null)
     {
@@ -754,7 +778,7 @@ class ProductModel extends BackEndModel
             $params['tick'] = isset($params['tick'])?json_encode($params['tick'],JSON_NUMERIC_CHECK ): NULL;
             $params['featurer'] = isset($params['featurer'])?json_encode($params['featurer']): NULL;
             $params['user_id'] = \Session::get('user')['user_id'];
-
+            $params['keyword_search'] = self::buildKeywordSearch($params);
             if (isset($params['albumImage'])) {
                 $resultFileUpload       = $this->uploadFile($params['albumImage']);
                 $params['albumImage']   = $resultFileUpload['fileAttach'];
@@ -783,6 +807,7 @@ class ProductModel extends BackEndModel
             if ($catProduct){
                 $params['cat_product_parent_id'] = $catProduct->parent_id;
             }
+            $params['keyword_search'] = self::buildKeywordSearch($params, $params['id']);
             self::where('id', $params['id'])->update($this->prepareParams($params));
         }
         if($options['task'] == 'update-status-item-of-admin'){

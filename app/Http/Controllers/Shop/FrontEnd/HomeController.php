@@ -94,41 +94,143 @@ class HomeController extends ShopFrontEndController
             compact('itemsProduct','formRegister','productcers')
         );
     }
+    // public function ajaxHoverCatLevel1(Request $request)
+    // {
+    //     $data = $request->all();
+    //     $idCatLevel1 = $request->idCatLevel1;
+    //     $itemCatCurent=(new CatProductModel())->getItem(['id'=>$idCatLevel1],['task'=>'get-item']);
+    //     $slugCatLevel1=$itemCatCurent['slug'];
+    //     $params['parent_id']=$itemCatCurent['id'];
+    //     $listItemLevel2=(new CatProductModel())->listItems($params,['task'=>'frontend-list-items-by-parent-id']);
+    //     $itemLevel2First=$listItemLevel2[0];
+    //     $slugCatLevel2=$itemLevel2First['slug'];
+    //     $params['parent_id']=$itemLevel2First['id'];
+    //     $listItemLevel3=(new CatProductModel())->listItems($params,['task'=>'frontend-list-items-by-parent-id']);
+    //     unset($params['parent_id']);
+    //     $params['cat_product_id']=$itemLevel2First['id'];
+    //     $params['limit']=4;
+    //     $listProductCatLevel2=(new ProductModel())->listItems($params,['task'=>'frontend-list-items']);
+    //     return view("$this->moduleName.block.child_submenu.ls_cat_level3_and_product",compact('listItemLevel3','listProductCatLevel2','slugCatLevel1','slugCatLevel2'));
+    // }
     public function ajaxHoverCatLevel1(Request $request)
     {
-        $cats = CatProductModel::all();
-        $data = $request->all();
         $idCatLevel1 = $request->idCatLevel1;
-        $itemCatCurent=(new CatProductModel())->getItem(['id'=>$idCatLevel1],['task'=>'get-item']);
-        $slugCatLevel1=$itemCatCurent['slug'];
-        $params['parent_id']=$itemCatCurent['id'];
-        $listItemLevel2=(new CatProductModel())->listItems($params,['task'=>'frontend-list-items-by-parent-id']);
-        $itemLevel2First=$listItemLevel2[0];
-        $slugCatLevel2=$itemLevel2First['slug'];
-        $params['parent_id']=$itemLevel2First['id'];
-        $listItemLevel3=(new CatProductModel())->listItems($params,['task'=>'frontend-list-items-by-parent-id']);
-        unset($params['parent_id']);
-        $params['cat_product_id']=$itemLevel2First['id'];
-        $params['limit']=4;
-        $listProductCatLevel2=(new ProductModel())->listItems($params,['task'=>'frontend-list-items']);
-        return view("$this->moduleName.block.child_submenu.ls_cat_level3_and_product",compact('listItemLevel3','listProductCatLevel2','slugCatLevel1','slugCatLevel2'));
+        if (!$idCatLevel1) {
+            return response()->json([], 400);
+        }
+        $cacheKey = 'cache_hover_cat_level1_' . $idCatLevel1;
+        $data = Cache::remember($cacheKey, 300, function () use ($idCatLevel1) {
+            $itemCatCurent = (new CatProductModel())
+                ->getItem(['id'=>$idCatLevel1], ['task'=>'get-item']);
+            if (!$itemCatCurent) {
+                return null;
+            }
+            $slugCatLevel1 = $itemCatCurent['slug'] ?? null;
+            $params['parent_id'] = $itemCatCurent['id'];
+            $listItemLevel2 = (new CatProductModel())
+                ->listItems($params, ['task'=>'frontend-list-items-by-parent-id']);
+            if (empty($listItemLevel2)) {
+                return null;
+            }
+            $itemLevel2First = $listItemLevel2[0];
+            $slugCatLevel2 = $itemLevel2First['slug'] ?? null;
+            // Lấy level 3
+            $params['parent_id'] = $itemLevel2First['id'];
+            $listItemLevel3 = (new CatProductModel())
+                ->listItems($params, ['task'=>'frontend-list-items-by-parent-id']);
+            unset($params['parent_id']);
+            // Lấy sản phẩm
+            $params['cat_product_id'] = $itemLevel2First['id'];
+            $params['limit'] = 4;
+            $listProductCatLevel2 = (new ProductModel())
+                ->listItems($params, ['task'=>'frontend-list-items']);
+            return compact(
+                'listItemLevel3',
+                'listProductCatLevel2',
+                'slugCatLevel1',
+                'slugCatLevel2'
+            );
+        });
+        if (!$data) {
+            return response()->json([], 404);
+        }
+        return view(
+            "$this->moduleName.block.child_submenu.ls_cat_level3_and_product",
+            $data
+        );
     }
+    // public function ajaxHoverCatLevel2(Request $request)
+    // {
+    //     $idCatLevel2 = $request->idCatLevel2;
+    //     if (!$idCatLevel2) {
+    //         return response()->json([], 400);
+    //     }
+    //     $itemCatCurent = (new CatProductModel())
+    //         ->getItem(['id'=>$idCatLevel2], ['task'=>'get-item']);
+    //     if (!$itemCatCurent) {
+    //         return response()->json([], 404);
+    //     }
+    //     $slugCatLevel2 = $itemCatCurent['slug'] ?? null;
+    //     $itemCatParent = (new CatProductModel())
+    //         ->getItem(['parent_id'=>$itemCatCurent['parent_id']], ['task'=>'get-item-parent']);
+    //     $slugCatLevel1 = $itemCatParent['slug'] ?? null;
+    //     $params['parent_id'] = $idCatLevel2;
+    //     $listItemLevel3 = (new CatProductModel())
+    //         ->listItems($params, ['task'=>'frontend-list-items-by-parent-id']);
+    //     unset($params['parent_id']);
+    //     $params['cat_product_id'] = $idCatLevel2;
+    //     $params['limit'] = 4;
+    //     $listProductCatLevel2 = (new ProductModel())
+    //         ->listItems($params, ['task'=>'frontend-list-items']);
+    //     return view(
+    //         "$this->moduleName.block.child_submenu.ls_cat_level3_and_product",
+    //         compact(
+    //             'listItemLevel3',
+    //             'listProductCatLevel2',
+    //             'slugCatLevel1',
+    //             'slugCatLevel2'
+    //         )
+    //     );
+    // }
     public function ajaxHoverCatLevel2(Request $request)
     {
-        $cats = CatProductModel::all();
-        $data = $request->all();
         $idCatLevel2 = $request->idCatLevel2;
-        $itemCatCurent=(new CatProductModel())->getItem(['id'=>$idCatLevel2],['task'=>'get-item']);
-        $slugCatLevel2=$itemCatCurent['slug'];
-        $itemCatParent=(new CatProductModel())->getItem(['parent_id'=>$itemCatCurent['parent_id']],['task'=>'get-item-parent']);
-        $slugCatLevel1=$itemCatParent['slug'];
-        $params['parent_id']=$idCatLevel2;
-        $listItemLevel3=(new CatProductModel())->listItems($params,['task'=>'frontend-list-items-by-parent-id']);
-        unset($params['parent_id']);
-        $params['cat_product_id']=$idCatLevel2;
-        $params['limit']=4;
-        $listProductCatLevel2=(new ProductModel())->listItems($params,['task'=>'frontend-list-items']);
-        return view("$this->moduleName.block.child_submenu.ls_cat_level3_and_product",compact('listItemLevel3','listProductCatLevel2','slugCatLevel1','slugCatLevel2'));
+        if (!$idCatLevel2) {
+            return response()->json([], 400);
+        }
+        $cacheKey = 'cache_hover_cat_level2_' . $idCatLevel2;
+        $data = Cache::remember($cacheKey, 300, function () use ($idCatLevel2) {
+            $itemCatCurent = (new CatProductModel())
+                ->getItem(['id'=>$idCatLevel2],['task'=>'get-item']);
+            if (!$itemCatCurent) {
+                return null;
+            }
+            $slugCatLevel2 = $itemCatCurent['slug'] ?? null;
+            $itemCatParent = (new CatProductModel())
+                ->getItem(['parent_id'=>$itemCatCurent['parent_id']],['task'=>'get-item-parent']);
+            $slugCatLevel1 = $itemCatParent['slug'] ?? null;
+            $params['parent_id'] = $idCatLevel2;
+            $listItemLevel3 = (new CatProductModel())
+                ->listItems($params,['task'=>'frontend-list-items-by-parent-id']);
+            unset($params['parent_id']);
+            $params['cat_product_id'] = $idCatLevel2;
+            $params['limit'] = 4;
+            $listProductCatLevel2 = (new ProductModel())
+                ->listItems($params,['task'=>'frontend-list-items']);
+            return compact(
+                'listItemLevel3',
+                'listProductCatLevel2',
+                'slugCatLevel1',
+                'slugCatLevel2'
+            );
+        });
+        if (!$data) {
+            return response()->json([],404);
+        }
+        return view(
+            "$this->moduleName.block.child_submenu.ls_cat_level3_and_product",
+            $data
+        );
     }
     public function ajax_filter(Request $request){
         $data = $request->all();

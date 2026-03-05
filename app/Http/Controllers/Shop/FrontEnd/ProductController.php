@@ -31,119 +31,272 @@ class ProductController extends ShopFrontEndController
         $this->model = new MainModel();
         parent::__construct();
     }
+    // public function detail(Request $request)
+    // {
+    //     $slug = $request->slug;
+    //     $codeRefRegister = '';
+    //     $session = $request->session();
+    //     if ($session->has('user')) {
+    //         $userInfoCurrent = $request->session()->get('user');
+    //         $userInfoCurrent = (new UsersModel)->getItem(['user_id' => $userInfoCurrent['user_id']], ['task' => 'get-item']);
+    //         $codeRefLogin = $userInfoCurrent['codeRef'];
+    //         $codeRefRegister = $userInfoCurrent['ref_register'] ?? '';
+    //     } else {
+    //         $codeRefLogin = '';
+    //     }
+    //     $codeRef = $request->codeRef ?? ($request->session()->get('codeRef') ?? $codeRefRegister);
+    //     if ((empty($request->codeRef) && session('codeRef')) || (empty($request->codeRef) && $codeRefRegister != '')) {
+    //         return redirect()->route('fe.product.detail', ['slug' => $slug, 'codeRef' => $codeRef]);
+    //     }
+    //     $item = $this->model->getItem(['slug' => $slug], ['task' => 'frontend-get-item']);
+    //     if (!$item) {
+    //         return redirect()->route('home');
+    //     }
+    //     if ($request->codeRef) {
+    //         $cacheCodeRef   = Cache::get('user_by_codeRef:' . $request->codeRef);
+    //         if ($cacheCodeRef !== null) {
+    //           $userCodeRef = !empty($cached) ? $cached : null;
+    //         } else {
+    //           $model = UsersModel::where('codeRef', $request->codeRef)->first();
+
+    //           $payload = $model ? $model->toArray() : [];
+    //           Cache::put('user_by_codeRef:' . $request->codeRef, $payload, 100000000);
+
+    //           $userCodeRef = $model ? $payload : null;
+    //         }
+    //         if ($userCodeRef) {
+    //           $existProductAffiliate = AffiliateProductModel::where('product_id', $item['id'])->where('user_id', $userCodeRef['user_id'])->first();
+    //           if ($existProductAffiliate) {
+    //             $existProductAffiliate->increment('sum_click');
+    //           } else {
+    //             (new AffiliateProductModel)->saveItem(['product_id' => $item['id'], 'user_id' => $userCodeRef['user_id'], 'sum_click' => 1], ['task' => 'add-item']);
+    //           }
+    //         }
+    //     }
+    //     $userInfo = (new UsersModel)->getItem(['user_id' => $item['user_id']], ['task' => 'get-item']);
+    //     $albumImageCurrent = !empty($item['albumImageHash']) ? explode('|', $item['albumImageHash']) : [];
+    //     $productViewed  = (isset($_COOKIE["productViewed"])) ? json_decode($_COOKIE["productViewed"], true) : [];
+    //     $productCurrent = [];
+    //     if (isset($productViewed[$item['id']])) {
+    //         $productCurrent[$item['id']] = $productViewed[$item['id']];
+    //         unset($productViewed[$item['id']]);
+    //     } else {
+    //         $productCurrent[$item['id']] = [
+    //           'product_id' => $item->id,
+    //           'name'       => $item->name,
+    //           'price'      => $item->price,
+    //           'image'      => $item->image,
+    //           'unit'       => $item->unitProduct->name,
+    //           'slug' => $item->slug
+    //         ];
+    //     }
+    //     $productViewed = $productCurrent + $productViewed;
+    //     $params['id'] = $item['id'];
+    //     if (count($productViewed) > 8) {
+    //         array_pop($productViewed);
+    //     }
+    //     setcookie("productViewed", json_encode($productViewed), time() + config('myconfig.time_cookie'), "/");
+    //     $_COOKIE["productViewed"] = json_encode($productViewed);
+    //     $keyCache = 'cache_product_data_' . $item['id'];
+    //     $dataCache = Cache::get($keyCache);
+    //     if (!empty($dataCache)) {
+    //         $listProductRelate   = $dataCache['listProductRelate'];
+    //         $ratingProduct       = $dataCache['ratingProduct'];
+    //         $listUserHasProduct  = $dataCache['listUserHasProduct'];
+    //     } else {
+    //         $listProductRelate = $this->model->listItems(
+    //           ['cat_product_id' => $item['cat_product_id'], 'limit' => 4],
+    //           ['task' => 'frontend-list-items']
+    //         ) ?? [];
+    //         // $commentProduct = (new CommentModel)->listItems(  ['product_id' => $item['id']], ['task' => 'list-items-frontend'] );
+    //         $ratingProduct = (new CommentModel)->listItems(
+    //           ['product_id' => $item['id'], 'rating' => 1],
+    //           ['task' => 'list-items-frontend']
+    //         );
+    //         $productId = $item['id'] ?? '';
+    //         $listUserHasProduct = (new UsersModel)->listItems(
+    //           ['product_id' => $productId],
+    //           ['task' => 'list-users-nha-cung-cap-has-product-id']
+    //         );
+    //         $dataCache = [
+    //           'listProductRelate'  => $listProductRelate,
+    //           'ratingProduct'      => $ratingProduct,
+    //           'listUserHasProduct' => $listUserHasProduct,
+    //         ];
+    //         Cache::put($keyCache, $dataCache, 100000000);
+    //     }
+    //     return view($this->pathViewController . 'detail', compact('params', 'item', 'albumImageCurrent', 'codeRef', 'userInfo', 'codeRefLogin', 'listProductRelate','ratingProduct', 'listUserHasProduct'));
+    // }
     public function detail(Request $request)
     {
         $slug = $request->slug;
-        $codeRefRegister = '';
         $session = $request->session();
+        $codeRefLogin = '';
+        $codeRefRegister = '';
+        // user login
         if ($session->has('user')) {
-            $userInfoCurrent = $request->session()->get('user');
-            $userInfoCurrent = (new UsersModel)->getItem(['user_id' => $userInfoCurrent['user_id']], ['task' => 'get-item']);
-            $codeRefLogin = $userInfoCurrent['codeRef'];
+            $userInfoCurrent = $session->get('user');
+            $userInfoCurrent = Cache::remember(
+                'user_login_'.$userInfoCurrent['user_id'],
+                86400,
+                function() use ($userInfoCurrent){
+                    return (new UsersModel)->getItem(
+                        ['user_id'=>$userInfoCurrent['user_id']],
+                        ['task'=>'get-item']
+                    );
+                }
+            );
+            $codeRefLogin    = $userInfoCurrent['codeRef'];
             $codeRefRegister = $userInfoCurrent['ref_register'] ?? '';
-        } else {
-            $codeRefLogin = '';
         }
-        $codeRef = $request->codeRef ?? ($request->session()->get('codeRef') ?? $codeRefRegister);
-        if ((empty($request->codeRef) && session('codeRef')) || (empty($request->codeRef) && $codeRefRegister != '')) {
-            return redirect()->route('fe.product.detail', ['slug' => $slug, 'codeRef' => $codeRef]);
+        $codeRef = $request->codeRef ?? ($session->get('codeRef') ?? $codeRefRegister);
+        // redirect nếu cần thêm codeRef
+        if (empty($request->codeRef) && !empty($codeRef)) {
+            return redirect()->route('fe.product.detail', [
+                'slug'=>$slug,
+                'codeRef'=>$codeRef
+            ]);
         }
-        $item = $this->model->getItem(['slug' => $slug], ['task' => 'frontend-get-item']);
+        // lấy sản phẩm (cache)
+        $item = Cache::remember(
+            'product_slug_'.$slug,
+            86400,
+            function() use ($slug){
+                return $this->model->getItem(
+                    ['slug'=>$slug],
+                    ['task'=>'frontend-get-item']
+                );
+            }
+        );
         if (!$item) {
             return redirect()->route('home');
         }
+        // xử lý affiliate click
         if ($request->codeRef) {
-            $cacheCodeRef   = Cache::get('user_by_codeRef:' . $request->codeRef);
-            if ($cacheCodeRef !== null) {
-              $userCodeRef = !empty($cached) ? $cached : null;
-            } else {
-              $model = UsersModel::where('codeRef', $request->codeRef)->first();
-
-              $payload = $model ? $model->toArray() : [];
-              Cache::put('user_by_codeRef:' . $request->codeRef, $payload, 100000000);
-
-              $userCodeRef = $model ? $payload : null;
-            }
-            //            $userCodeRef = UsersModel::where('codeRef', $request->codeRef)->first();
+            $userCodeRef = Cache::remember(
+                'user_by_codeRef_'.$request->codeRef,
+                86400,
+                function() use ($request){
+                    $model = UsersModel::where('codeRef',$request->codeRef)->first();
+                    return $model ? $model->toArray() : null;
+                }
+            );
             if ($userCodeRef) {
-              $existProductAffiliate = AffiliateProductModel::where('product_id', $item['id'])->where('user_id', $userCodeRef['user_id'])->first();
-              if ($existProductAffiliate) {
-                $existProductAffiliate->increment('sum_click');
-              } else {
-                (new AffiliateProductModel)->saveItem(['product_id' => $item['id'], 'user_id' => $userCodeRef['user_id'], 'sum_click' => 1], ['task' => 'add-item']);
-              }
+                $exist = AffiliateProductModel::where([
+                    'product_id'=>$item['id'],
+                    'user_id'=>$userCodeRef['user_id']
+                ])->first();
+                if ($exist) {
+                    $exist->increment('sum_click');
+                } else {
+                    (new AffiliateProductModel)->saveItem([
+                        'product_id'=>$item['id'],
+                        'user_id'=>$userCodeRef['user_id'],
+                        'sum_click'=>1
+                    ],['task'=>'add-item']);
+                }
             }
         }
-        $userInfo = (new UsersModel)->getItem(['user_id' => $item['user_id']], ['task' => 'get-item']);
-        $albumImageCurrent = !empty($item['albumImageHash']) ? explode('|', $item['albumImageHash']) : [];
-        $productViewed  = (isset($_COOKIE["productViewed"])) ? json_decode($_COOKIE["productViewed"], true) : [];
-        $productCurrent = [];
-        if (isset($productViewed[$item['id']])) {
-            $productCurrent[$item['id']] = $productViewed[$item['id']];
-            unset($productViewed[$item['id']]);
-        } else {
-            $productCurrent[$item['id']] = [
-              'product_id' => $item->id,
-              'name'       => $item->name,
-              'price'      => $item->price,
-              'image'      => $item->image,
-              'unit'       => $item->unitProduct->name,
-              'slug' => $item->slug
-            ];
-        }
-        $productViewed = $productCurrent + $productViewed;
+        // cache user bán sản phẩm
+        $userInfo = Cache::remember(
+            'user_info_'.$item['user_id'],
+            86400,
+            function() use ($item){
+                return (new UsersModel)->getItem(
+                    ['user_id'=>$item['user_id']],
+                    ['task'=>'get-item']
+                );
+            }
+        );
+        // album ảnh
+        $albumImageCurrent = !empty($item['albumImageHash'])
+            ? explode('|',$item['albumImageHash'])
+            : [];
+        // sản phẩm đã xem
+        // $productViewed = isset($_COOKIE["productViewed"])
+        //     ? json_decode($_COOKIE["productViewed"],true)
+        //     : [];
+        // if (!isset($productViewed[$item['id']])) {
+        //     $productViewed[$item['id']] = [
+        //         'product_id'=>$item->id,
+        //         'name'=>$item->name,
+        //         'price'=>$item->price,
+        //         'image'=>$item->image,
+        //         'unit'=>$item->unitProduct->name ?? '',
+        //         'slug'=>$item->slug
+        //     ];
+        // }
+        // if (count($productViewed) > 8) {
+        //     array_pop($productViewed);
+        // }
+        // setcookie(
+        //     "productViewed",
+        //     json_encode($productViewed),
+        //     time()+config('myconfig.time_cookie'),
+        //     "/"
+        // );
+        // cache sản phẩm liên quan
+        $listProductRelate = Cache::remember(
+            'product_relate_'.$item['id'],
+            86400,
+            function() use ($item){
+                return $this->model->listItems(
+                    ['cat_product_id'=>$item['cat_product_id'],'limit'=>4],
+                    ['task'=>'frontend-list-items']
+                );
+            }
+        );
+        // cache rating
+        $ratingProduct = Cache::remember(
+            'product_rating_'.$item['id'],
+            3600,
+            function() use ($item){
+                return (new CommentModel)->listItems(
+                    ['product_id'=>$item['id'],'rating'=>1],
+                    ['task'=>'list-items-frontend']
+                );
+            }
+        );
+        // cache nhà cung cấp
+        $listUserHasProduct = Cache::remember(
+            'product_supplier_'.$item['id'],
+            86400,
+            function() use ($item){
+                return (new UsersModel)->listItems(
+                    ['product_id'=>$item['id']],
+                    ['task'=>'list-users-nha-cung-cap-has-product-id']
+                );
+            }
+        );
         $params['id'] = $item['id'];
-        if (count($productViewed) > 8) {
-            array_pop($productViewed);
-        }
-        setcookie("productViewed", json_encode($productViewed), time() + config('myconfig.time_cookie'), "/");
-        $_COOKIE["productViewed"] = json_encode($productViewed);
-        //        $listProductRelate = $this->model->listItems(['cat_product_id' => $item['cat_product_id'], 'limit' => 4], ['task' => 'frontend-list-items']) ?? [];
-        //        $commentProduct = (new CommentModel)->listItems(['product_id' => $item['id']], ['task' => 'list-items-frontend']);
-        //        $ratingProduct = (new CommentModel)->listItems(['product_id' => $item['id'], 'rating' => 1], ['task' => 'list-items-frontend']);
-        //        $productId = $item['id'] ?? '';
-        //        $listUserHasProduct = (new UsersModel)->listItems(['product_id' => $productId], ['task' => 'list-users-nha-cung-cap-has-product-id']);
-        $keyCache = 'cache_product_data_' . $item['id'];
-        $dataCache = Cache::get($keyCache);
-
-        if (!empty($dataCache)) {
-            $listProductRelate   = $dataCache['listProductRelate'];
-            $commentProduct      = $dataCache['commentProduct'];
-            $ratingProduct       = $dataCache['ratingProduct'];
-            $listUserHasProduct  = $dataCache['listUserHasProduct'];
-        } else {
-            $listProductRelate = $this->model->listItems(
-              ['cat_product_id' => $item['cat_product_id'], 'limit' => 4],
-              ['task' => 'frontend-list-items']
-            ) ?? [];
-
-            $commentProduct = (new CommentModel)->listItems(
-              ['product_id' => $item['id']],
-              ['task' => 'list-items-frontend']
-            );
-
-            $ratingProduct = (new CommentModel)->listItems(
-              ['product_id' => $item['id'], 'rating' => 1],
-              ['task' => 'list-items-frontend']
-            );
-
-            $productId = $item['id'] ?? '';
-            $listUserHasProduct = (new UsersModel)->listItems(
-              ['product_id' => $productId],
-              ['task' => 'list-users-nha-cung-cap-has-product-id']
-            );
-
-            $dataCache = [
-              'listProductRelate'  => $listProductRelate,
-              'commentProduct'     => $commentProduct,
-              'ratingProduct'      => $ratingProduct,
-              'listUserHasProduct' => $listUserHasProduct,
-            ];
-
-            Cache::put($keyCache, $dataCache, 100000000);
-        }
-        //return $listUserHasProduct;
-        return view($this->pathViewController . 'detail', compact('params', 'item', 'albumImageCurrent', 'codeRef', 'userInfo', 'codeRefLogin', 'listProductRelate', 'commentProduct', 'ratingProduct', 'listUserHasProduct'));
+        $keyCachePage = 'page_product_'.$item['id'].'_'.$codeRef;
+        $html = Cache::remember($keyCachePage, 3600, function() use (
+            $params,
+            $item,
+            $albumImageCurrent,
+            $codeRef,
+            $userInfo,
+            $codeRefLogin,
+            $listProductRelate,
+            $ratingProduct,
+            $listUserHasProduct
+        ){
+            return view(
+                $this->pathViewController.'detail',
+                compact(
+                    'params',
+                    'item',
+                    'albumImageCurrent',
+                    'codeRef',
+                    'userInfo',
+                    'codeRefLogin',
+                    'listProductRelate',
+                    'ratingProduct',
+                    'listUserHasProduct'
+                )
+            )->render();
+        });
+        return response($html);
     }
     public function searchProductAjax(Request $request)
     {
