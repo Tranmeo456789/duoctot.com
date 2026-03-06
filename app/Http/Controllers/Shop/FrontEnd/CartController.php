@@ -124,7 +124,10 @@ class CartController extends ShopFrontEndController
         $quantity = intval($request->quantity);
         $user_sell = intval($request->user_sell);
         $cart = $request->session()->get('cart');
-        $cart[$user_sell]['total_product'] = $cart[$user_sell]['total_product'] - $cart[$user_sell]['product'][$id]['quantity'] +  $quantity;
+        //$cart[$user_sell]['total_product'] = $cart[$user_sell]['total_product'] - $cart[$user_sell]['product'][$id]['quantity'] +  $quantity;
+        if (isset($cart[$user_sell]['product'][$id]['quantity'])) {
+            $cart[$user_sell]['total_product'] = $cart[$user_sell]['total_product'] - $cart[$user_sell]['product'][$id]['quantity'] + $quantity;
+        }
         $cart[$user_sell]['product'][$id]['quantity'] =  $quantity;
         $cart[$user_sell]['total'] =   $cart[$user_sell]['total']  -  $cart[$user_sell]['product'][$id]['total_money'] + $cart[$user_sell]['product'][$id]['price'] * $quantity;
         $cart[$user_sell]['product'][$id]['total_money'] = $cart[$user_sell]['product'][$id]['price'] * $quantity;

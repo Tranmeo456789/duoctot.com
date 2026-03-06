@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Kalnoy\Nestedset\NodeTrait;
 use App\Model\Shop\ProductModel;
 use DB;
+use Illuminate\Support\Facades\Cache;
 class SearchModel extends BackEndModel
 {
     public function __construct() {
@@ -16,16 +17,18 @@ class SearchModel extends BackEndModel
         $this->folderUpload        = '' ;
         $this->crudNotAccepted     = ['_token','btn_search'];
     }
-    public function listItems($params = null, $options = null){
+    public function listItems($params = null, $options = null)
+    {
         $result = null;
         if ($options['task'] == 'list-keyword-search-most') {
-            $query = self::select('id','keyword','number_search','created_at');                         
-            $query->orderBy('number_search', 'DESC');
-            if(isset($params['limit'])){
-                 $query->limit($params['limit']);
-            }
-
-            $result=$query->get();
+            $limit = $params['limit'] ?? 6;
+            $cacheKey = "keyword_search_most_" . $limit;
+            $result = Cache::remember($cacheKey, 86400, function () use ($limit) {
+                return self::select('id','keyword','number_search','created_at')
+                    ->orderBy('number_search', 'DESC')
+                    ->limit($limit)
+                    ->get();
+            });
         }
         return $result;
     }
