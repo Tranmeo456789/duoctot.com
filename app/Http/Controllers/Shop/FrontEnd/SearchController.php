@@ -27,7 +27,7 @@ use App\Model\Shop\UsersModel;
 use App\Model\Shop\UserValuesModel;
 use App\Model\Shop\SearchModel as MainModel;
 use Illuminate\Support\Str;
-
+use Illuminate\Support\Facades\Cache;
 class SearchController extends ShopFrontEndController
 {
     public function __construct()
@@ -75,10 +75,77 @@ class SearchController extends ShopFrontEndController
             } else {
                 $this->model->saveItem($params, ['task' => 'add-item-home']);
             }
-            return redirect()->route('fe.search.viewHome', ['keyword' => $params['keyword']]);
+            $keyword=$params['keyword'];
+            $itemSearch = (new ProductModel)->listItems($params, ['task' => 'list-items-search']);
+            $title = 'Kết quả tìm kiếm';
+            return view($this->pathViewController . 'view', ['keyword' => $keyword, 'itemSearch' => $itemSearch, 'title' => $title]);
         } else {
             return redirect()->back();
         }
+    }
+    public function search(Request $request)
+    {
+        $keyword = trim($request->input('keyword'));
+        if (empty($keyword)) {
+            return redirect()->back();
+        }
+        $params['keyword'] = $keyword;
+        // Lưu lịch sử tìm kiếm
+        $keywordHistory = isset($_COOKIE["keywordHistory"])
+            ? json_decode($_COOKIE["keywordHistory"], true)
+            : [];
+        $keywordCurrent = [];
+        $keywordCurrent[$keyword] = [
+            'keyword' => $keyword
+        ];
+        unset($keywordHistory[$keyword]);
+        $keywordHistory = $keywordCurrent + $keywordHistory;
+        if (count($keywordHistory) > 5) {
+            array_pop($keywordHistory);
+        }
+        setcookie(
+            "keywordHistory",
+            json_encode($keywordHistory),
+            time() + config('myconfig.time_cookie'),
+            "/"
+        );
+        $_COOKIE["keywordHistory"] = json_encode($keywordHistory);
+        // Save keyword search most
+        $itemExist = $this->model->getItem($params, ['task' => 'get-item']);
+        if ($itemExist) {
+            $params['id'] = $itemExist['id'];
+            $params['number_search'] = $itemExist['number_search'];
+            $this->model->saveItem($params, [
+                'task' => 'update-number-search-item'
+            ]);
+        } else {
+            $this->model->saveItem($params, [
+                'task' => 'add-item-home'
+            ]);
+        }
+        //Cache::flush();
+        // Lấy sản phẩm
+        $session = $request->session();
+        if ($session->has('user')) {
+        $cacheKey = 'search_login_'.$keyword;
+            $itemSearch = Cache::remember($cacheKey, 1800, function () use ($params) {
+                return (new ProductModel)->listItems($params, [
+                    'task' => 'list-items-search-user-has-login'
+                ]);
+            });
+        } else {
+            $cacheKey = 'search_guest_'.$keyword;
+            $itemSearch = Cache::remember($cacheKey, 1800, function () use ($params) {
+                return (new ProductModel)->listItems($params, [
+                    'task' => 'list-items-search'
+                ]);
+            });
+        }
+        $title = 'Kết quả tìm kiếm';
+        return view(
+            $this->pathViewController . 'view',
+            compact('keyword', 'itemSearch', 'title')
+        );
     }
     public function deleteHistory(Request $request)
     {

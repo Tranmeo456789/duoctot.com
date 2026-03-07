@@ -46,6 +46,24 @@ class ProductController extends ShopFrontEndController
             );
             $codeRefLogin    = $userInfoCurrent['codeRef'];
             $codeRefRegister = $userInfoCurrent['ref_register'] ?? '';
+            $cacheKey = 'product_login_' . $slug;
+            $item = Cache::remember($cacheKey, 3600, function () use ($slug) {
+                return $this->model->getItem(
+                    ['slug' => $slug],
+                    ['task' => 'frontend-get-item-has-login']
+                );
+            });
+        }else {
+            $cacheKey = 'product_guest_' . $slug;
+            $item = Cache::remember($cacheKey, 3600, function () use ($slug) {
+                return $this->model->getItem(
+                    ['slug' => $slug],
+                    ['task' => 'frontend-get-item']
+                );
+            });
+        }
+        if (!$item) {
+            return redirect()->route('home');
         }
         $codeRef = $request->codeRef ?? ($session->get('codeRef') ?? $codeRefRegister);
         // redirect thêm codeRef
@@ -54,14 +72,6 @@ class ProductController extends ShopFrontEndController
                 'slug'=>$slug,
                 'codeRef'=>$codeRef
             ]);
-        }
-        // lấy sản phẩm
-        $item = $this->model->getItem(
-            ['slug'=>$slug],
-            ['task'=>'frontend-get-item']
-        );
-        if (!$item) {
-            return redirect()->route('home');
         }
         if ($request->codeRef) {
             $cacheCodeRef = Cache::get('user_by_codeRef_'.$request->codeRef);
@@ -171,7 +181,6 @@ class ProductController extends ShopFrontEndController
             )
         );
     }
-    
     public function searchProductAjax(Request $request)
     {
         $data = $request->all();

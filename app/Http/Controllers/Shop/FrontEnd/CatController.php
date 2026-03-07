@@ -10,6 +10,7 @@ use App\Model\Shop\ProductModel;
 use App\Model\Shop\TrademarkModel;
 use App\Model\Shop\CountryModel;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Cache;
 class CatController extends ShopFrontEndController
 {
     public function __construct()
@@ -54,19 +55,64 @@ class CatController extends ShopFrontEndController
     }
     public function catLevel3($slug, $slug1, $slug2)
     {
-        $itemCatCurent = (new CatProductModel())->getItem(['slug'=>$slug2],['task'=>'get-item-slug']);
-        $params['parent_id']=$itemCatCurent['parent_id'];
-        $itemCatParentLevel1=(new CatProductModel)->getItem($params,['task'=>'get-item-parent']);
-        $params['up_level']=2;
-        $itemCatParentLevel2=(new CatProductModel)->getItem($params,['task'=>'get-item-parent']);
-        $products=(new ProductModel())->listItems(['cat_product_id'=>$itemCatCurent['id'],'take'=>20],['task'=>'frontend-list-items']);
-        $couterSumProduct=(new ProductModel())->countItems(['cat_product_id'=>$itemCatCurent['id']],['task'=>'count-number-product-in-cat']);
-        $couterSumProduct=$couterSumProduct-20;
-        $arrIdTrademark = $products->pluck('trademark_id')->unique()->values()->toArray();
-        $listTrademark = (new TrademarkModel)->listItems(['group_id'=>$arrIdTrademark], ['task'=>'admin-list-items-in-selectbox']);
-        $arrIdCountry = $products->pluck('country_id')->unique()->values()->toArray();
-        $listCountry = (new CountryModel)->listItems(['group_id'=>$arrIdCountry], ['task'=>'admin-list-items-in-selectbox']);
-        return view($this->pathViewController . 'cat_level3', compact('itemCatCurent','itemCatParentLevel1','itemCatParentLevel2', 'products','couterSumProduct','listTrademark','listCountry'));
+        $cacheKey = 'cat_level3_' . $slug2;
+        $data = Cache::remember($cacheKey, 3600, function () use ($slug2) {
+            $itemCatCurent = (new CatProductModel())->getItem(
+                ['slug' => $slug2],
+                ['task' => 'get-item-slug']
+            );
+            if (!$itemCatCurent) {
+                return redirect()->to(route('home'));
+            }
+            $params['parent_id'] = $itemCatCurent['parent_id'];
+            $itemCatParentLevel1 = (new CatProductModel)->getItem(
+                $params,
+                ['task' => 'get-item-parent']
+            );
+            $params['up_level'] = 2;
+            $itemCatParentLevel2 = (new CatProductModel)->getItem(
+                $params,
+                ['task' => 'get-item-parent']
+            );
+            $products = (new ProductModel())->listItems(
+                ['cat_product_id' => $itemCatCurent['id'], 'take' => 20],
+                ['task' => 'frontend-list-items']
+            );
+            $couterSumProduct = (new ProductModel())->countItems(
+                ['cat_product_id' => $itemCatCurent['id']],
+                ['task' => 'count-number-product-in-cat']
+            );
+            $couterSumProduct = $couterSumProduct - 20;
+            $arrIdTrademark = $products->pluck('trademark_id')
+                ->unique()
+                ->values()
+                ->toArray();
+            $listTrademark = (new TrademarkModel)->listItems(
+                ['group_id' => $arrIdTrademark],
+                ['task' => 'admin-list-items-in-selectbox']
+            );
+            $arrIdCountry = $products->pluck('country_id')
+                ->unique()
+                ->values()
+                ->toArray();
+            $listCountry = (new CountryModel)->listItems(
+                ['group_id' => $arrIdCountry],
+                ['task' => 'admin-list-items-in-selectbox']
+            );
+            return [
+                'itemCatCurent' => $itemCatCurent,
+                'itemCatParentLevel1' => $itemCatParentLevel1,
+                'itemCatParentLevel2' => $itemCatParentLevel2,
+                'products' => $products,
+                'couterSumProduct' => $couterSumProduct,
+                'listTrademark' => $listTrademark,
+                'listCountry' => $listCountry
+            ];
+        });
+        return view(
+            $this->pathViewController . 'cat_level3',
+            $data
+        );
     }
     public function filterProduct(Request $request){
         $data = $request->all();

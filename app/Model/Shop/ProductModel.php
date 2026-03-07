@@ -559,6 +559,43 @@ class ProductModel extends BackEndModel
             $limit = $params['limit'] ?? 30;
             $result = $query->limit($limit)->get();
         }
+        if ($options['task'] == "list-items-search-user-has-login") {
+            $query = $this::query()
+                ->with(['unitProduct'])
+                ->select('id','name','image','price','percent_discount','unit_id','specification','slug','show_price')
+                 ->whereIn('status_product', ['da_duyet', 'sp_an']);
+            // filter user bán trước để tận dụng index
+            if (!empty($params['user_sell'])) {
+                $query->where('user_id', $params['user_sell']);
+            }
+            // SEARCH tối ưu bằng FULLTEXT
+            if (!empty($params['keyword'])) {
+                $keyword = strip_tags($params['keyword']);
+                $keyword = preg_replace('/[^\p{L}\p{N}\s\-]/u', '', $keyword);
+                $keyword = trim($keyword);
+                if ($keyword !== '') {
+                    // dùng BOOLEAN MODE để match nhiều từ
+                    $searchString = collect(explode(' ', $keyword))
+                        ->filter()
+                        ->map(fn($word) => '+' . $word . '*')
+                        ->implode(' ');
+                    $query->whereRaw(
+                        "MATCH(keyword_search) AGAINST(? IN BOOLEAN MODE)",
+                        [$searchString]
+                    );
+                    $query->orderByRaw(
+                        "MATCH(keyword_search) AGAINST(? IN BOOLEAN MODE) DESC",
+                        [$searchString]
+                    );
+                }
+            } else {
+                // nếu không search thì sort bình thường
+                $query->orderBy('id', 'asc');
+            }
+            // limit cuối cùng
+            $limit = $params['limit'] ?? 30;
+            $result = $query->limit($limit)->get();
+        }
         if ($options['task'] == "get-list-items-add-database-wordpress") {
             $query = $this::select('id','name','type','code','cat_product_id','price','trademark_id','country_id','specification','image','slug','dosage_forms','elements','expiration_date','brand_origin_id','benefit','general_info','prescribe','dosage','producer_id','note','preserve','albumImageHash')
                                 ->where('status_product','da_duyet');
@@ -631,17 +668,24 @@ class ProductModel extends BackEndModel
         }
         if ($options['task'] == 'frontend-get-item') {
             $query = self::with(['unitProduct', 'catProduct'])
-                            ->select('id','name','type','code','cat_product_id','producer_id',
-                                    'tick','type_price','price','list_prices','price_vat','percent_discount','coefficient',
-                                    'type_vat','packing','expiration_date','unit_id','sell_area','amout_max',
-                                    'inventory','inventory_min','general_info','prescribe','dosage','trademark_id','brand_origin_id',
-                                    'dosage_forms','country_id','specification','benefit','elements',
-                                    'preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','long','wide','high',
-                                    'mass','discount_ref','contact','meta_keywords','meta_description','show_price','prescription_drug')->where('status_product','da_duyet');
+                            ->select('id','name','type','code','cat_product_id','producer_id','tick','type_price','price','list_prices','price_vat','percent_discount','coefficient','type_vat','packing','expiration_date','unit_id','sell_area','amout_max','inventory','inventory_min','general_info','prescribe','dosage','trademark_id','brand_origin_id','dosage_forms','country_id','specification','benefit','elements','preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','discount_ref','contact','meta_keywords','meta_description','show_price','prescription_drug')
+                            ->where('status_product','da_duyet');
             if(isset($params['id'])){
                 $query->where('id', $params['id']);
             }
             if(isset($params['slug'])){
+                $query->where('slug', $params['slug']);
+            }
+            $result = $query->first();
+        }
+        if ($options['task'] == 'frontend-get-item-has-login') {
+            $query = self::with(['unitProduct', 'catProduct'])
+                ->select('id','name','type','code','cat_product_id','producer_id','tick','type_price','price','list_prices','price_vat','percent_discount','coefficient','type_vat','packing','expiration_date','unit_id','sell_area','amout_max','inventory','inventory_min','general_info','prescribe','dosage','trademark_id','brand_origin_id','dosage_forms','country_id','specification','benefit','elements','preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','discount_ref','contact','meta_keywords','meta_description','show_price','prescription_drug')
+                ->whereIn('status_product', ['da_duyet', 'sp_an']);
+            if (isset($params['id'])) {
+                $query->where('id', $params['id']);
+            }
+            if (isset($params['slug'])) {
                 $query->where('slug', $params['slug']);
             }
             $result = $query->first();
@@ -796,7 +840,11 @@ class ProductModel extends BackEndModel
         }
         if ($options['task'] == 'edit-item') {
             $keyCacheProduct='cache_product_data_'.$params['id'];
+            $keyCacheProductSlugLogin = 'product_login_' . $params['slug'];
+            $keyCacheProductSlug = 'product_guest_' . $params['slug'];
             Cache::forget($keyCacheProduct);
+            Cache::forget($keyCacheProductSlugLogin);
+            Cache::forget($keyCacheProductSlug);
             $this->setModifiedHistory($params);
             $item = self::getItem($params,['task'=>'get-item']);
             $this->updateFileUpload($item,$params,'albumImage');
