@@ -57,13 +57,6 @@ $timePost = MyFunction::formatDateLongTime($item['created_at']);
             @endforeach
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div>
-                @include("$moduleName.templates.list_product_new_view")
-            </div>
-        </div>
-    </div>
 </div>
 <div class="service-tdoctor mt-5">
     @include("$moduleName.templates.info_service")

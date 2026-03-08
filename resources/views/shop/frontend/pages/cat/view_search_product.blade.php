@@ -14,13 +14,6 @@
     <div class="mb-3">
         @include("$moduleName.pages.$controllerName.child_view_search_product.list_product",['items'=>$productAlls])
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="mt-3">
-                @include("$moduleName.templates.list_product_new_view")
-            </div>
-        </div>
-    </div>
 </div>
 
 <div class="service-tdoctor mt-5">

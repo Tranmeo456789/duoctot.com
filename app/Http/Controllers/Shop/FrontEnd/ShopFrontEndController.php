@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Shop\FrontEnd;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Cache;
 use App\Model\Shop\ProvinceModel;
 class ShopFrontEndController extends Controller
 {
@@ -17,15 +17,12 @@ class ShopFrontEndController extends Controller
     protected $pageTitle          = '';
     public function __construct()
     {
-        // $this->middleware(function ($request, $next) {
-        //     view()->share([
-        //         'moduleName'                => $this->moduleName,
-        //         'controllerName'            => $this->controllerName,
-        //         'pageTitle'                 => $this->pageTitle
-        //     ]);
-        //     return $next($request);
-        // });
-        $itemsProvince = (new ProvinceModel())->listItems(null,['task' => 'admin-list-items-in-selectbox']);
+        $itemsProvince = Cache::remember('province_selectbox', 86400, function () {
+            return (new ProvinceModel())->listItems(
+                null,
+                ['task' => 'admin-list-items-in-selectbox']
+            );
+        });
         view()->share([
             'moduleName'     => $this->moduleName,
             'controllerName' => $this->controllerName,

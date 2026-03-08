@@ -13,9 +13,6 @@
                             @include("$moduleName.pages.$controllerName.child_cat_level1.list_cat_child_responsive")
                         </div>
                     </div>
-                    <!-- <div>
-                        @include("$moduleName.pages.$controllerName.templates.product_selling")
-                    </div> -->
                 </div>
                 <div class="col-12">
                     <div class="box-filter-advanced row">
@@ -30,13 +27,6 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="mt-5">
-                    @include("$moduleName.templates.list_product_new_view")
-                    </div>
-                </div>
-            </div>     
     </div>
     <div class="service-tdoctor mt-5">
         @include("$moduleName.templates.info_service")

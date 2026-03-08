@@ -10,10 +10,6 @@
         @else
             @include("$moduleName.pages.$controllerName.child_view.cart_null")
         @endif
-
-        <div class="mt-3 mt-lg-4">
-             @include("$moduleName.templates.list_product_new_view")
-        </div>
     </div>
 </div>
 <div class="service-tdoctor mt-3 mt-lg-4">

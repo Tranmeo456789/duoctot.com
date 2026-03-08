@@ -23,9 +23,6 @@
         <div class="search-result">
             @include("$moduleName.templates.list_product",['items'=>$itemSearch])
         </div>
-        <!-- <div class="mt-2">
-            @include("$moduleName.templates.list_product_new_view")
-        </div>   -->
     </div>
 </div>
 <div class="service-tdoctor mt-5">
