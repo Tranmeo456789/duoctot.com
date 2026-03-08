@@ -111,18 +111,18 @@ class SearchController extends ShopFrontEndController
         );
         $_COOKIE["keywordHistory"] = json_encode($keywordHistory);
         // Save keyword search most
-        $itemExist = $this->model->getItem($params, ['task' => 'get-item']);
-        if ($itemExist) {
-            $params['id'] = $itemExist['id'];
-            $params['number_search'] = $itemExist['number_search'];
-            $this->model->saveItem($params, [
-                'task' => 'update-number-search-item'
-            ]);
-        } else {
-            $this->model->saveItem($params, [
-                'task' => 'add-item-home'
-            ]);
-        }
+        // $itemExist = $this->model->getItem($params, ['task' => 'get-item']);
+        // if ($itemExist) {
+        //     $params['id'] = $itemExist['id'];
+        //     $params['number_search'] = $itemExist['number_search'];
+        //     $this->model->saveItem($params, [
+        //         'task' => 'update-number-search-item'
+        //     ]);
+        // } else {
+        //     $this->model->saveItem($params, [
+        //         'task' => 'add-item-home'
+        //     ]);
+        // }
         //Cache::flush();
         // Lấy sản phẩm
         $session = $request->session();
