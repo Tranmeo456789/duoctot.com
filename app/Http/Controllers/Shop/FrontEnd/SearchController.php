@@ -123,7 +123,8 @@ class SearchController extends ShopFrontEndController
         //         'task' => 'add-item-home'
         //     ]);
         // }
-        //Cache::flush();
+        //Cache::forget('search_login_'.$keyword);
+        //Cache::forget('search_guest_'.$keyword);
         // Lấy sản phẩm
         $session = $request->session();
         if ($session->has('user')) {

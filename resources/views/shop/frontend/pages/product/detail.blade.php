@@ -37,7 +37,6 @@ $contact=MyFunction::formatPhoneNumber($contact);
             loop: !1
         });
         let t = document.querySelectorAll(".sliderProductThumb > div");
-
         function o(e) {
             t.forEach((t, o) => {
                 t.classList.toggle("active", o === e)
@@ -56,11 +55,6 @@ $contact=MyFunction::formatPhoneNumber($contact);
 @endsection
 @section('content')
 <div class="wp-inner mt-2">
-    @if(Session::has('user'))
-    <div class="" id="breadcrumb-wp">
-        @include("$moduleName.pages.$controllerName.child_detail.breadcrumb")
-    </div>
-    @endif
     <div id="detail_product">
         <div class="row">
             <div class="col-md-5">
@@ -74,7 +68,7 @@ $contact=MyFunction::formatPhoneNumber($contact);
                                 </div>
                                 @foreach($albumImageCurrent as $val)
                                 <div class="text-center">
-                                    <img src="{{ asset('laravel-filemanager/fileUpload/product/'.$val) }}" class="zoom img-fluid image-zoom-popup" />
+                                    <img src="{{ asset('public/fileUpload/product/'.$val) }}" class="zoom img-fluid image-zoom-popup" />
                                 </div>
                                 @endforeach
                             </div>
@@ -85,7 +79,7 @@ $contact=MyFunction::formatPhoneNumber($contact);
                                 </div>
                                 @foreach($albumImageCurrent as $val)
                                 <div>
-                                    <img src="{{ asset('laravel-filemanager/fileUpload/product/'.$val) }}" class="img-thumbnail" />
+                                    <img src="{{ asset('public/fileUpload/product/'.$val) }}" class="img-thumbnail" />
                                 </div>
                                 @endforeach
                             </div>

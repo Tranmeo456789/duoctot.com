@@ -537,15 +537,23 @@ class ProductModel extends BackEndModel
                 $keyword = preg_replace('/[^\p{L}\p{N}\s\-]/u', '', $keyword);
                 $keyword = trim($keyword);
                 if ($keyword !== '') {
-                    // dùng BOOLEAN MODE để match nhiều từ
                     $searchString = collect(explode(' ', $keyword))
                         ->filter()
                         ->map(fn($word) => '+' . $word . '*')
                         ->implode(' ');
-                    $query->whereRaw(
-                        "MATCH(keyword_search) AGAINST(? IN BOOLEAN MODE)",
-                        [$searchString]
+                    $query->where(function ($q) use ($searchString, $keyword) {
+                        $q->whereRaw(
+                            "MATCH(keyword_search) AGAINST(? IN BOOLEAN MODE)",
+                            [$searchString]
+                        )
+                        ->orWhere('name', 'LIKE', '%' . $keyword . '%');
+                    });
+                    // Ưu tiên name match trước
+                    $query->orderByRaw(
+                        "CASE WHEN name LIKE ? THEN 1 ELSE 2 END",
+                        ['%' . $keyword . '%']
                     );
+                    // Sau đó mới tới điểm FULLTEXT
                     $query->orderByRaw(
                         "MATCH(keyword_search) AGAINST(? IN BOOLEAN MODE) DESC",
                         [$searchString]
@@ -574,15 +582,23 @@ class ProductModel extends BackEndModel
                 $keyword = preg_replace('/[^\p{L}\p{N}\s\-]/u', '', $keyword);
                 $keyword = trim($keyword);
                 if ($keyword !== '') {
-                    // dùng BOOLEAN MODE để match nhiều từ
                     $searchString = collect(explode(' ', $keyword))
                         ->filter()
                         ->map(fn($word) => '+' . $word . '*')
                         ->implode(' ');
-                    $query->whereRaw(
-                        "MATCH(keyword_search) AGAINST(? IN BOOLEAN MODE)",
-                        [$searchString]
+                    $query->where(function ($q) use ($searchString, $keyword) {
+                        $q->whereRaw(
+                            "MATCH(keyword_search) AGAINST(? IN BOOLEAN MODE)",
+                            [$searchString]
+                        )
+                        ->orWhere('name', 'LIKE', '%' . $keyword . '%');
+                    });
+                    // Ưu tiên name match trước
+                    $query->orderByRaw(
+                        "CASE WHEN name LIKE ? THEN 1 ELSE 2 END",
+                        ['%' . $keyword . '%']
                     );
+                    // Sau đó mới tới điểm FULLTEXT
                     $query->orderByRaw(
                         "MATCH(keyword_search) AGAINST(? IN BOOLEAN MODE) DESC",
                         [$searchString]

@@ -31,8 +31,159 @@ class ProductController extends ShopFrontEndController
         $this->model = new MainModel();
         parent::__construct();
     }
+    // public function detail(Request $request)
+    // {
+    //     $slug = $request->slug;
+    //     $session = $request->session();
+    //     $codeRefLogin = '';
+    //     $codeRefRegister = '';
+    //     // user login
+    //     if ($session->has('user')) {
+    //         $userInfoCurrent = $session->get('user');
+    //         $userInfoCurrent = (new UsersModel)->getItem(
+    //             ['user_id'=>$userInfoCurrent['user_id']],
+    //             ['task'=>'get-item']
+    //         );
+    //         $codeRefLogin    = $userInfoCurrent['codeRef'];
+    //         $codeRefRegister = $userInfoCurrent['ref_register'] ?? '';
+    //         $cacheKey = 'product_login_' . $slug;
+    //         $item = Cache::remember($cacheKey, 3600, function () use ($slug) {
+    //             return $this->model->getItem(
+    //                 ['slug' => $slug],
+    //                 ['task' => 'frontend-get-item-has-login']
+    //             );
+    //         });
+    //     }else {
+    //         $cacheKey = 'product_guest_' . $slug;
+    //         $item = Cache::remember($cacheKey, 3600, function () use ($slug) {
+    //             return $this->model->getItem(
+    //                 ['slug' => $slug],
+    //                 ['task' => 'frontend-get-item']
+    //             );
+    //         });
+    //     }
+    //     if (!$item) {
+    //         return redirect()->route('home');
+    //     }
+    //     $codeRef = $request->codeRef ?? ($session->get('codeRef') ?? $codeRefRegister);
+    //     // redirect thêm codeRef
+    //     if ((empty($request->codeRef) && session('codeRef')) || (empty($request->codeRef) && $codeRefRegister != '')) {
+    //         return redirect()->route('fe.product.detail', [
+    //             'slug'=>$slug,
+    //             'codeRef'=>$codeRef
+    //         ]);
+    //     }
+    //     if ($request->codeRef) {
+    //         $cacheCodeRef = Cache::get('user_by_codeRef_'.$request->codeRef);
+    //         if ($cacheCodeRef !== null) {
+    //             $userCodeRef = !empty($cacheCodeRef) ? $cacheCodeRef : null;
+    //         } else {
+    //             $model = UsersModel::where('codeRef',$request->codeRef)->first();
+    //             $payload = $model ? $model->toArray() : [];
+    //             Cache::put('user_by_codeRef_'.$request->codeRef,$payload,100000000);
+    //             $userCodeRef = $model ? $payload : null;
+    //         }
+    //         if ($userCodeRef) {
+    //             $existProductAffiliate = AffiliateProductModel::where([
+    //                 'product_id'=>$item['id'],
+    //                 'user_id'=>$userCodeRef['user_id']
+    //             ])->first();
+    //             if ($existProductAffiliate) {
+    //                 $existProductAffiliate->increment('sum_click');
+
+    //             } else {
+    //                 (new AffiliateProductModel)->saveItem([
+    //                     'product_id'=>$item['id'],
+    //                     'user_id'=>$userCodeRef['user_id'],
+    //                     'sum_click'=>1
+    //                 ],['task'=>'add-item']);
+    //             }
+    //         }
+    //     }
+    //     $userInfo = (new UsersModel)->getItem(
+    //         ['user_id'=>$item['user_id']],
+    //         ['task'=>'get-item']
+    //     );
+    //     $albumImageCurrent = !empty($item['albumImageHash'])
+    //         ? explode('|',$item['albumImageHash'])
+    //         : [];
+    //     // $productViewed = isset($_COOKIE["productViewed"])
+    //     //     ? json_decode($_COOKIE["productViewed"],true)
+    //     //     : [];
+    //     // $productCurrent = [];
+    //     // if (isset($productViewed[$item['id']])) {
+    //     //     $productCurrent[$item['id']] = $productViewed[$item['id']];
+    //     //     unset($productViewed[$item['id']]);
+    //     // } else {
+    //     //     $productCurrent[$item['id']] = [
+    //     //         'product_id'=>$item->id,
+    //     //         'name'=>$item->name,
+    //     //         'price'=>$item->price,
+    //     //         'image'=>$item->image,
+    //     //         'unit'=>$item->unitProduct->name,
+    //     //         'slug'=>$item->slug
+    //     //     ];
+    //     // }
+    //     // $productViewed = $productCurrent + $productViewed;
+    //     // if (count($productViewed) > 8) {
+    //     //     array_pop($productViewed);
+    //     // }
+    //     // setcookie(
+    //     //     "productViewed",
+    //     //     json_encode($productViewed),
+    //     //     time()+config('myconfig.time_cookie'),
+    //     //     "/"
+    //     // );
+    //     // $_COOKIE["productViewed"] = json_encode($productViewed);
+    //     $keyCache = 'cache_product_data_'.$item['id'];
+    //     $dataCache = Cache::get($keyCache);
+    //     if (!empty($dataCache)) {
+    //         $listProductRelate  = $dataCache['listProductRelate'];
+    //         $ratingProduct      = $dataCache['ratingProduct'];
+    //         $listUserHasProduct = $dataCache['listUserHasProduct'];
+    //     } else {
+    //         $listProductRelate = $this->model->listItems(
+    //             ['cat_product_id'=>$item['cat_product_id'],'limit'=>4],
+    //             ['task'=>'frontend-list-items']
+    //         ) ?? [];
+    //         // $commentProduct = (new CommentModel)->listItems(
+    //         //     ['product_id'=>$item['id']],
+    //         //     ['task'=>'list-items-frontend']
+    //         // );
+    //         $ratingProduct = (new CommentModel)->listItems(
+    //             ['product_id'=>$item['id'],'rating'=>1],
+    //             ['task'=>'list-items-frontend']
+    //         );
+    //         $listUserHasProduct = (new UsersModel)->listItems(
+    //             ['product_id'=>$item['id']],
+    //             ['task'=>'list-users-nha-cung-cap-has-product-id']
+    //         );
+    //         $dataCache = [
+    //             'listProductRelate'=>$listProductRelate,
+    //             'ratingProduct'=>$ratingProduct,
+    //             'listUserHasProduct'=>$listUserHasProduct
+    //         ];
+    //         Cache::put($keyCache,$dataCache,100000000);
+    //     }
+    //     $params['id']=$item['id'];
+    //     return view(
+    //         $this->pathViewController.'detail',
+    //         compact(
+    //             'params',
+    //             'item',
+    //             'albumImageCurrent',
+    //             'codeRef',
+    //             'userInfo',
+    //             'codeRefLogin',
+    //             'listProductRelate',
+    //             'ratingProduct',
+    //             'listUserHasProduct'
+    //         )
+    //     );
+    // }
     public function detail(Request $request)
     {
+        //Cache::flush();
         $slug = $request->slug;
         $session = $request->session();
         $codeRefLogin = '';
@@ -40,11 +191,7 @@ class ProductController extends ShopFrontEndController
         // user login
         if ($session->has('user')) {
             $userInfoCurrent = $session->get('user');
-            $userInfoCurrent = (new UsersModel)->getItem(
-                ['user_id'=>$userInfoCurrent['user_id']],
-                ['task'=>'get-item']
-            );
-            $codeRefLogin    = $userInfoCurrent['codeRef'];
+            $codeRefLogin    = $userInfoCurrent['codeRef'] ?? '';
             $codeRefRegister = $userInfoCurrent['ref_register'] ?? '';
             $cacheKey = 'product_login_' . $slug;
             $item = Cache::remember($cacheKey, 3600, function () use ($slug) {
@@ -100,56 +247,26 @@ class ProductController extends ShopFrontEndController
                 }
             }
         }
-        $userInfo = (new UsersModel)->getItem(
-            ['user_id'=>$item['user_id']],
-            ['task'=>'get-item']
-        );
         $albumImageCurrent = !empty($item['albumImageHash'])
             ? explode('|',$item['albumImageHash'])
             : [];
-        // $productViewed = isset($_COOKIE["productViewed"])
-        //     ? json_decode($_COOKIE["productViewed"],true)
-        //     : [];
-        // $productCurrent = [];
-        // if (isset($productViewed[$item['id']])) {
-        //     $productCurrent[$item['id']] = $productViewed[$item['id']];
-        //     unset($productViewed[$item['id']]);
-        // } else {
-        //     $productCurrent[$item['id']] = [
-        //         'product_id'=>$item->id,
-        //         'name'=>$item->name,
-        //         'price'=>$item->price,
-        //         'image'=>$item->image,
-        //         'unit'=>$item->unitProduct->name,
-        //         'slug'=>$item->slug
-        //     ];
-        // }
-        // $productViewed = $productCurrent + $productViewed;
-        // if (count($productViewed) > 8) {
-        //     array_pop($productViewed);
-        // }
-        // setcookie(
-        //     "productViewed",
-        //     json_encode($productViewed),
-        //     time()+config('myconfig.time_cookie'),
-        //     "/"
-        // );
-        // $_COOKIE["productViewed"] = json_encode($productViewed);
         $keyCache = 'cache_product_data_'.$item['id'];
         $dataCache = Cache::get($keyCache);
         if (!empty($dataCache)) {
             $listProductRelate  = $dataCache['listProductRelate'];
             $ratingProduct      = $dataCache['ratingProduct'];
             $listUserHasProduct = $dataCache['listUserHasProduct'];
+            $userInfo = $dataCache['userInfo'];
+            $itemCatCurent = $dataCache['itemCatCurent'];
+            $itemCatParentLevel1 = $dataCache['itemCatParentLevel1'];
+            $itemCatParentLevel2 = $dataCache['itemCatParentLevel2'];
+            $averageRating = $dataCache['averageRating'];
+            $ratingPercentages = $dataCache['ratingPercentages'];
         } else {
             $listProductRelate = $this->model->listItems(
                 ['cat_product_id'=>$item['cat_product_id'],'limit'=>4],
                 ['task'=>'frontend-list-items']
             ) ?? [];
-            // $commentProduct = (new CommentModel)->listItems(
-            //     ['product_id'=>$item['id']],
-            //     ['task'=>'list-items-frontend']
-            // );
             $ratingProduct = (new CommentModel)->listItems(
                 ['product_id'=>$item['id'],'rating'=>1],
                 ['task'=>'list-items-frontend']
@@ -158,10 +275,26 @@ class ProductController extends ShopFrontEndController
                 ['product_id'=>$item['id']],
                 ['task'=>'list-users-nha-cung-cap-has-product-id']
             );
+            $userInfo = (new UsersModel)->getItem(
+                ['user_id'=>$item['user_id']],
+                ['task'=>'get-item']
+            );
+            $itemCatCurent = $item->catProduct;
+            $idCatParentLevel1=$itemCatCurent['parent_id'];
+            $itemCatParentLevel1=(new CatProductModel)->getItem(['parent_id'=>$idCatParentLevel1],['task'=>'get-item-parent']);
+            $itemCatParentLevel2=(new CatProductModel)->getItem(['parent_id'=>$idCatParentLevel1,'up_level'=>2],['task'=>'get-item-parent']);
+            $averageRating=(new CommentModel)->averageRating(['product_id'=>$item['id']],['task' => 'rating-star-average'])??'';
+            $ratingPercentages=(new CommentModel)->ratingPercentages(['product_id'=>$item['id']],['task' => 'rating-percentage-star'])??[];
             $dataCache = [
                 'listProductRelate'=>$listProductRelate,
                 'ratingProduct'=>$ratingProduct,
-                'listUserHasProduct'=>$listUserHasProduct
+                'listUserHasProduct'=>$listUserHasProduct,
+                'userInfo'=>$userInfo,
+                'itemCatCurent'=>$itemCatCurent,
+                'itemCatParentLevel1'=>$itemCatParentLevel1,
+                'itemCatParentLevel2'=>$itemCatParentLevel2,
+                'averageRating'=>$averageRating,
+                'ratingPercentages'=>$ratingPercentages,
             ];
             Cache::put($keyCache,$dataCache,100000000);
         }
@@ -177,7 +310,12 @@ class ProductController extends ShopFrontEndController
                 'codeRefLogin',
                 'listProductRelate',
                 'ratingProduct',
-                'listUserHasProduct'
+                'listUserHasProduct',
+                'itemCatCurent',
+                'itemCatParentLevel1',
+                'itemCatParentLevel2',
+                'averageRating',
+                'ratingPercentages',
             )
         );
     }
