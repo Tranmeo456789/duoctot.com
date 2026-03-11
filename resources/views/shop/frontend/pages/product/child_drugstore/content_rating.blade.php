@@ -1,8 +1,3 @@
-@php
-use App\Model\Shop\CommentModel;
-$averageRating=(new CommentModel)->averageRating(['shop_id'=>$userInfo['user_id']],['task' => 'rating-star-average'])??'';
-$ratingPercentages=(new CommentModel)->ratingPercentages(['shop_id'=>$userInfo['user_id']],['task' => 'rating-percentage-star'])??[];
-@endphp
 <div class="title-rating">Đánh Giá & Nhận Xét
     <!-- <span class="coutn-dn">3</span> -->
 </div>

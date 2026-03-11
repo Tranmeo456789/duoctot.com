@@ -366,118 +366,239 @@ class ProductController extends ShopFrontEndController
         }
         return view($viewName, ['items' => $listProductAddView]);
     }
+    // public function drugstore(Request $request, $slug)
+    // {
+    //     // Lấy thông tin người dùng từ slug
+    //     $userInfo = UsersModel::where('slug', $slug)->first();
+    //     if (!$userInfo || empty($slug)) {
+    //         return redirect()->route('home');
+    //     }
+    //     $shopId = $userInfo['user_id'];
+    //     // Danh sách sản phẩm mặc định
+    //     //$defaultProducts = [2052, 1454, 2331, 2339, 4065, 3844, 2363, 2361, 2332, 2339, 4223, 4246, 1183, 4219];
+    //     $defaultProducts=[];
+    //     $listIdProductAdd = $defaultProducts;
+    //     $listIdProductAddSelect = collect($userInfo->listIdProduct)->pluck('product_id')->toArray();
+    //     // Điều kiện loại bỏ danh sách sản phẩm mặc định
+    //     if ($userInfo['user_type_id'] == 9 || !empty($listIdProductAddSelect || $userInfo['user_type_id'] == 3 || $userInfo['user_type_id'] == 2)) {
+    //         $listIdProductAdd = [];
+    //     }
+    //     // Loại bỏ sản phẩm nếu user nằm trong danh sách không có sản phẩm
+    //     // $usersWithoutProductAdd = [1144150760, 1144150864, 1144150947];
+    //     // if (in_array($userInfo['user_id'], $usersWithoutProductAdd)) {
+    //     //     $listIdProductAdd = [];
+    //     // }
+    //     // Lưu mã giới thiệu nếu có
+    //     if ($request->has('codeRef')) {
+    //         $request->session()->put('codeRef', $request->query('codeRef'));
+    //     }
+    //     // Lấy danh sách sản phẩm theo group_id
+    //     $params['group_id'] = array_merge($listIdProductAddSelect, $listIdProductAdd);
+    //     $productDrugstore = $this->model->listItems([
+    //         'group_id' => $params['group_id'],
+    //         'user_id' => $shopId
+    //     ], ['task' => 'frontend-list-item-shop']) ?? [];
+    //     // Nếu tài khoản là loại nhập mã thì không hiển thị sản phẩm
+    //     // if ($userInfo['type_account'] === 'code_import') {
+    //     //     $productDrugstore = [];
+    //     // }
+    //     // Xử lý địa chỉ và bản đồ
+    //     $address = $map = $ward = $district = $province = '';
+    //     $details = $userInfo['details'] ?? [];
+    //     if (!empty($details)) {
+    //         $wardId     = $details['ward_id']     ?? null;
+    //         $districtId = $details['district_id'] ?? null;
+    //         $provinceId = $details['province_id'] ?? null;
+    //         // Ưu tiên ward (đầy đủ nhất)
+    //         if ($wardId) {
+    //             $wardDetail = (new WardModel())->getItem(
+    //                 ['id' => $wardId],
+    //                 ['task' => 'get-item-full']
+    //             );
+    //             if (!empty($wardDetail)) {
+    //                 $ward     = ' ' . ($wardDetail['name'] ?? '');
+    //                 $district = ', ' . ($wardDetail['district']['name'] ?? '');
+    //                 $province = ', ' . ($wardDetail['district']['province']['name'] ?? '');
+    //             }
+    //         }
+    //         // Nếu KHÔNG có ward hoặc ward không tồn tại → fallback district + province
+    //         if ($district === '' && $districtId) {
+    //             $districtDetail = (new DistrictModel())->getItem(
+    //                 ['id' => $districtId],
+    //                 ['task' => 'get-item-full']
+    //             );
+    //             $district = ', ' . ($districtDetail['name'] ?? '');
+    //         }
+    //         if ($province === '' && $provinceId) {
+    //             $provinceDetail = (new ProvinceModel())->getItem(
+    //                 ['id' => $provinceId],
+    //                 ['task' => 'get-item-full']
+    //             );
+    //             $province = ', ' . ($provinceDetail['name'] ?? '');
+    //         }
+    //         // Address & map
+    //         $addressBase = $details['address'] ?? '';
+    //         $address = trim($addressBase . $ward . $district . $province);
+    //         $map     = $details['map'] ?? '';
+    //     }
+    //     // Tiêu đề trang
+    //     $title = !empty($userInfo['fullname'])
+    //         ? $userInfo['fullname']
+    //         : 'DƯỢC TỐT là Nền tảng kết nối y dược nhà thuốc, phòng khám , bệnh nhân với công ty dược và thực phẩm chức năng uy tín nhất Việt nam';
+    //     // Lấy đánh giá & bình luận shop
+    //     $commentShop = (new CommentModel())->listItems([
+    //         'shop_id' => $shopId
+    //     ], ['task' => 'list-items-frontend']);
+
+    //     $ratingShop = (new CommentModel())->listItems([
+    //         'shop_id' => $shopId,
+    //         'rating' => 1
+    //     ], ['task' => 'list-items-frontend']);
+    //     $productKhuyenMai = $this->model->listItems(['type' => 'khuyen_mai', 'user_id' => $shopId], ['task' => 'frontend-list-items'])->take(10);
+    //     if (count($productKhuyenMai) < 2) {
+    //         $listIdProductAddSelect = collect($userInfo->listIdProduct)->pluck('product_id')->toArray();
+    //         $productKhuyenMai = $this->model->listItems([
+    //             'group_id' => $listIdProductAddSelect,
+    //             'user_id' => $shopId,
+    //             'take' => 5,
+    //             'random' => true,
+    //         ], ['task' => 'frontend-list-item-shop']) ?? [];
+    //     }
+    //     $albumImageCurrent = !empty($userInfo['albumImageHash']) ? explode('|', $userInfo['albumImageHash']) : [];
+    //     //return $albumImageCurrent;
+    //     // Trả về view
+    //     return view($this->pathViewController . 'drugstore', [
+    //         'userInfo' => $userInfo,
+    //         'productDrugstore' => $productDrugstore,
+    //         'address' => $address,
+    //         'map' => $map,
+    //         'title' => $title,
+    //         'commentShop' => $commentShop,
+    //         'ratingShop' => $ratingShop,
+    //         'productKhuyenMai' => $productKhuyenMai,
+    //         'albumImageCurrent' => $albumImageCurrent
+    //     ]);
+    // }
     public function drugstore(Request $request, $slug)
     {
-        // Lấy thông tin người dùng từ slug
-        $userInfo = UsersModel::where('slug', $slug)->first();
-        if (!$userInfo || empty($slug)) {
+        if (empty($slug)) {
             return redirect()->route('home');
         }
-        $shopId = $userInfo['user_id'];
-        // Danh sách sản phẩm mặc định
-        //$defaultProducts = [2052, 1454, 2331, 2339, 4065, 3844, 2363, 2361, 2332, 2339, 4223, 4246, 1183, 4219];
-        $defaultProducts=[];
-        $listIdProductAdd = $defaultProducts;
-        $listIdProductAddSelect = collect($userInfo->listIdProduct)->pluck('product_id')->toArray();
-        // Điều kiện loại bỏ danh sách sản phẩm mặc định
-        if ($userInfo['user_type_id'] == 9 || !empty($listIdProductAddSelect || $userInfo['user_type_id'] == 3 || $userInfo['user_type_id'] == 2)) {
-            $listIdProductAdd = [];
-        }
-        // Loại bỏ sản phẩm nếu user nằm trong danh sách không có sản phẩm
-        // $usersWithoutProductAdd = [1144150760, 1144150864, 1144150947];
-        // if (in_array($userInfo['user_id'], $usersWithoutProductAdd)) {
-        //     $listIdProductAdd = [];
-        // }
-        // Lưu mã giới thiệu nếu có
+        // lưu codeRef nếu có
         if ($request->has('codeRef')) {
             $request->session()->put('codeRef', $request->query('codeRef'));
         }
-        // Lấy danh sách sản phẩm theo group_id
-        $params['group_id'] = array_merge($listIdProductAddSelect, $listIdProductAdd);
-        $productDrugstore = $this->model->listItems([
-            'group_id' => $params['group_id'],
-            'user_id' => $shopId
-        ], ['task' => 'frontend-list-item-shop']) ?? [];
-        // Nếu tài khoản là loại nhập mã thì không hiển thị sản phẩm
-        // if ($userInfo['type_account'] === 'code_import') {
-        //     $productDrugstore = [];
-        // }
-        // Xử lý địa chỉ và bản đồ
-        $address = $map = $ward = $district = $province = '';
-        $details = $userInfo['details'] ?? [];
-        if (!empty($details)) {
-            $wardId     = $details['ward_id']     ?? null;
-            $districtId = $details['district_id'] ?? null;
-            $provinceId = $details['province_id'] ?? null;
-            // Ưu tiên ward (đầy đủ nhất)
-            if ($wardId) {
-                $wardDetail = (new WardModel())->getItem(
-                    ['id' => $wardId],
-                    ['task' => 'get-item-full']
-                );
-                if (!empty($wardDetail)) {
-                    $ward     = ' ' . ($wardDetail['name'] ?? '');
-                    $district = ', ' . ($wardDetail['district']['name'] ?? '');
-                    $province = ', ' . ($wardDetail['district']['province']['name'] ?? '');
+        $cacheKey = 'drugstore_' . $slug;
+        $data = Cache::remember($cacheKey, 1800, function () use ($slug) {
+            $userInfo = UsersModel::where('slug', $slug)->first();
+            if (!$userInfo) {
+                return null;
+            }
+            $shopId = $userInfo->user_id;
+            // PRODUCT ID LIST
+            $listIdProduct = collect($userInfo->listIdProduct)
+                ->pluck('product_id')
+                ->toArray();
+            // PRODUCT SHOP
+            $productDrugstore = [];
+            if ($userInfo->type_account !== 'code_import') {
+                $productDrugstore = $this->model->listItems([
+                    'group_id' => $listIdProduct,
+                    'user_id'  => $shopId
+                ], [
+                    'task' => 'frontend-list-item-shop'
+                ]) ?? [];
+            }
+            // ADDRESS
+            $address = '';
+            $map = '';
+            $details = $userInfo->details ?? [];
+            if (!empty($details)) {
+                $addressBase = $details['address'] ?? '';
+                $wardId     = $details['ward_id'] ?? null;
+                $districtId = $details['district_id'] ?? null;
+                $provinceId = $details['province_id'] ?? null;
+                $ward = '';
+                $district = '';
+                $province = '';
+                // ưu tiên ward
+                if ($wardId) {
+                    $wardDetail = WardModel::with('district.province')->find($wardId);
+                    if ($wardDetail) {
+                        $ward     = ' ' . $wardDetail->name;
+                        $district = ', ' . ($wardDetail->district->name ?? '');
+                        $province = ', ' . ($wardDetail->district->province->name ?? '');
+                    }
                 }
+                // fallback district
+                if ($district === '' && $districtId) {
+                    $districtDetail = DistrictModel::with('province')->find($districtId);
+                    if ($districtDetail) {
+                        $district = ', ' . $districtDetail->name;
+                        $province = ', ' . ($districtDetail->province->name ?? '');
+                    }
+                }
+                // fallback province
+                if ($province === '' && $provinceId) {
+                    $provinceDetail = ProvinceModel::find($provinceId);
+                    if ($provinceDetail) {
+                        $province = ', ' . $provinceDetail->name;
+                    }
+                }
+                $address = trim($addressBase . $ward . $district . $province);
+                $map     = $details['map'] ?? '';
             }
-            // Nếu KHÔNG có ward hoặc ward không tồn tại → fallback district + province
-            if ($district === '' && $districtId) {
-                $districtDetail = (new DistrictModel())->getItem(
-                    ['id' => $districtId],
-                    ['task' => 'get-item-full']
-                );
-                $district = ', ' . ($districtDetail['name'] ?? '');
-            }
-            if ($province === '' && $provinceId) {
-                $provinceDetail = (new ProvinceModel())->getItem(
-                    ['id' => $provinceId],
-                    ['task' => 'get-item-full']
-                );
-                $province = ', ' . ($provinceDetail['name'] ?? '');
-            }
-            // Address & map
-            $addressBase = $details['address'] ?? '';
-            $address = trim($addressBase . $ward . $district . $province);
-            $map     = $details['map'] ?? '';
-        }
-        // Tiêu đề trang
-        $title = !empty($userInfo['fullname'])
-            ? $userInfo['fullname']
-            : 'DƯỢC TỐT là Nền tảng kết nối y dược nhà thuốc, phòng khám , bệnh nhân với công ty dược và thực phẩm chức năng uy tín nhất Việt nam';
-        // Lấy đánh giá & bình luận shop
-        $commentShop = (new CommentModel())->listItems([
-            'shop_id' => $shopId
-        ], ['task' => 'list-items-frontend']);
-
-        $ratingShop = (new CommentModel())->listItems([
-            'shop_id' => $shopId,
-            'rating' => 1
-        ], ['task' => 'list-items-frontend']);
-        $productKhuyenMai = $this->model->listItems(['type' => 'khuyen_mai', 'user_id' => $shopId], ['task' => 'frontend-list-items'])->take(10);
-        if (count($productKhuyenMai) < 2) {
-            $listIdProductAddSelect = collect($userInfo->listIdProduct)->pluck('product_id')->toArray();
+            // COMMENT SHOP
+            $ratingShop = (new CommentModel)->listItems([
+                'shop_id' => $shopId,
+                'rating'  => 1
+            ], [
+                'task' => 'list-items-frontend'
+            ]);
+            // PRODUCT KHUYẾN MÃI
             $productKhuyenMai = $this->model->listItems([
-                'group_id' => $listIdProductAddSelect,
-                'user_id' => $shopId,
-                'take' => 5,
-                'random' => true,
-            ], ['task' => 'frontend-list-item-shop']) ?? [];
+                'type'    => 'khuyen_mai',
+                'user_id' => $shopId
+            ], [
+                'task' => 'frontend-list-items'
+            ])->take(10);
+            if (count($productKhuyenMai) < 2) {
+                $productKhuyenMai = $this->model->listItems([
+                    'group_id' => $listIdProduct,
+                    'user_id'  => $shopId,
+                    'take'     => 5,
+                    'random'   => true
+                ], [
+                    'task' => 'frontend-list-item-shop'
+                ]) ?? [];
+            }
+            $averageRating=(new CommentModel)->averageRating(['shop_id'=>$userInfo['user_id']],['task' => 'rating-star-average'])??'';
+            $ratingPercentages=(new CommentModel)->ratingPercentages(['shop_id'=>$userInfo['user_id']],['task' => 'rating-percentage-star'])??[];
+            // ALBUM
+            $albumImageCurrent = !empty($userInfo->albumImageHash)
+                ? explode('|', $userInfo->albumImageHash)
+                : [];
+            // TITLE
+            $title = !empty($userInfo->fullname)
+                ? $userInfo->fullname
+                : 'Sàn thương mại điện tử trong y dược số 1 Việt Nam';
+            return [
+                'userInfo' => $userInfo,
+                'productDrugstore' => $productDrugstore,
+                'address' => $address,
+                'map' => $map,
+                'title' => $title,
+                'ratingShop' => $ratingShop,
+                'productKhuyenMai' => $productKhuyenMai,
+                'albumImageCurrent' => $albumImageCurrent,
+                'averageRating' => $averageRating,
+                'ratingPercentages' => $ratingPercentages,
+            ];
+        });
+        if (!$data) {
+            return redirect()->route('home');
         }
-        $albumImageCurrent = !empty($userInfo['albumImageHash']) ? explode('|', $userInfo['albumImageHash']) : [];
-        //return $albumImageCurrent;
-        // Trả về view
-        return view($this->pathViewController . 'drugstore', [
-            'userInfo' => $userInfo,
-            'productDrugstore' => $productDrugstore,
-            'address' => $address,
-            'map' => $map,
-            'title' => $title,
-            'commentShop' => $commentShop,
-            'ratingShop' => $ratingShop,
-            'productKhuyenMai' => $productKhuyenMai,
-            'albumImageCurrent' => $albumImageCurrent
-        ]);
+        return view($this->pathViewController . 'drugstore', $data);
     }
     public function addCommentProduct(Request $request)
     {

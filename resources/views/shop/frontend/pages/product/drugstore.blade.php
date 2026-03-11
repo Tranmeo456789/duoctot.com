@@ -51,7 +51,7 @@ if ($isPhone) {
     .prev-btn,.next-btn {top: 50%;transform: translateY(-50%);border: none;padding: 10px;cursor: pointer;z-index: 10;font-size: 30px;}
 </style>
 <script>document.addEventListener("DOMContentLoaded",function(){var s1=tns({container:".banner_doitac",items:1,slideBy:1,loop:!0,speed:400,autoplay:!0,autoplayTimeout:5e3,autoplayButtonOutput:!1,controls:!1,nav:!1,mouseDrag:!0,touch:!0,gutter:4,edgePadding:0,onInit:function(){document.querySelector(".banner_doitac").classList.remove("cS-hidden")}});var s2=tns({container:".banner_doitac_mobi",items:1,slideBy:1,loop:!0,speed:400,autoplay:!0,autoplayTimeout:5e3,autoplayButtonOutput:!1,controls:!1,nav:!1,mouseDrag:!0,touch:!0,gutter:4,edgePadding:0,onInit:function(){document.querySelector(".banner_doitac_mobi").classList.remove("cS-hidden")}});var s3=tns({container:".list_thumb_user",items:1,slideBy:1,loop:!0,speed:400,autoplay:!1,autoplayTimeout:5e3,autoplayButtonOutput:!1,controls:!1,nav:!1,mouseDrag:!0,touch:!0,gutter:4,edgePadding:0,autoHeight: !0,onInit:function(){document.querySelector(".list_thumb_user").classList.remove("cS-hidden")}});document.querySelector(".prev-btn").addEventListener("click",function(){s3.goTo("prev")});document.querySelector(".next-btn").addEventListener("click",function(){s3.goTo("next")})});</script>
-
+<script>document.addEventListener("DOMContentLoaded",function(){var sliderPkTmv=tns({container:".banner_pk_tmv",items:1,slideBy:1,loop:!0,speed:400,autoplay:!0,autoplayTimeout:5e3,autoplayButtonOutput:!1,controls:!1,nav:!1,mouseDrag:!0,touch:!0,gutter:4,edgePadding:0,onInit:function(){document.querySelector(".banner_pk_tmv").classList.remove("cS-hidden")}})});</script>
 @endsection
 @section('content')
 <div class="wp-inner mt-3 mt-lg-4">
@@ -91,9 +91,11 @@ if ($isPhone) {
         @endif
     </div>
 </div>
-<div class="service-tdoctor mt-3 mt-lg-4">
-    @include("$moduleName.templates.info_service")
+@if($userType==3 || $userType==8)
+<div class="my-3">
+    @include("$moduleName.pages.$controllerName.child_drugstore.banner_in_pk_tmv")
 </div>
+@endif
 @include("$moduleName.templates.banner_doitac")
 <div class="local">
     @include("$moduleName.templates.local_drugstore")
