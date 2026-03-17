@@ -28,13 +28,13 @@ class HomeController extends ShopFrontEndController
         // if ($request->has('t')) {
         //     return redirect()->to(route('home'));
         // }
-        //Cache::forget('cache_product_best_data'); 
-        //Cache::forget('cache_ncc_data'); 
+        //Cache::forget('duoctot_cache_product_best_data'); 
+        //Cache::forget('duoctot_cache_ncc_data'); 
         $numTake=10;
-        $keyCacheNcc = 'cache_ncc_data';
-        $keyCacheProductNew = 'cache_product_new_data';
-        $keyCacheProductBest = 'cache_product_best_data';
-        $keyCacheProductKhuyenMai = 'cache_product_km_data';
+        $keyCacheNcc = 'duoctot_cache_ncc_data';
+        $keyCacheProductNew = 'duoctot_cache_product_new_data';
+        $keyCacheProductBest = 'duoctot_cache_product_best_data';
+        $keyCacheProductKhuyenMai = 'duoctot_cache_product_km_data';
 
         $dataNccCache = Cache::get($keyCacheNcc);
         $dataProductNewCache = Cache::get($keyCacheProductNew);
@@ -118,7 +118,7 @@ class HomeController extends ShopFrontEndController
         if (!$idCatLevel1) {
             return response()->json([], 400);
         }
-        $cacheKey = 'cache_hover_cat_level1_' . $idCatLevel1;
+        $cacheKey = 'duoctot_cache_hover_cat_level1_' . $idCatLevel1;
         $data = Cache::remember($cacheKey, 300, function () use ($idCatLevel1) {
             $itemCatCurent = (new CatProductModel())
                 ->getItem(['id'=>$idCatLevel1], ['task'=>'get-item']);
@@ -198,7 +198,7 @@ class HomeController extends ShopFrontEndController
         if (!$idCatLevel2) {
             return response()->json([], 400);
         }
-        $cacheKey = 'cache_hover_cat_level2_' . $idCatLevel2;
+        $cacheKey = 'duoctot_cache_hover_cat_level2_' . $idCatLevel2;
         $data = Cache::remember($cacheKey, 300, function () use ($idCatLevel2) {
             $itemCatCurent = (new CatProductModel())
                 ->getItem(['id'=>$idCatLevel2],['task'=>'get-item']);
