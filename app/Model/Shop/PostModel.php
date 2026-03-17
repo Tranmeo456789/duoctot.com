@@ -140,7 +140,7 @@ class PostModel extends BackEndModel
     }
     public function saveItem($params = null, $options = null)
     {
-        Cache::forget('cache_catalog_post');
+        Cache::forget('duoctot_cache_catalog_post');
         if ($options['task'] == 'add-item') {
             $this->setCreatedHistory($params);
             self::insertGetId ($this->prepareParams($params));

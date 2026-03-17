@@ -55,7 +55,7 @@ class CatController extends ShopFrontEndController
     }
     public function catLevel3($slug, $slug1, $slug2)
     {
-        $cacheKey = 'cat_level3_' . $slug2;
+        $cacheKey = 'duoctot_cat_level3_' . $slug2;
         $data = Cache::remember($cacheKey, 3600, function () use ($slug2) {
             $itemCatCurent = (new CatProductModel())->getItem(
                 ['slug' => $slug2],

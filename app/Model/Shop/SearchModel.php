@@ -22,7 +22,7 @@ class SearchModel extends BackEndModel
         $result = null;
         if ($options['task'] == 'list-keyword-search-most') {
             $limit = $params['limit'] ?? 6;
-            $cacheKey = "keyword_search_most_" . $limit;
+            $cacheKey = "duoctot_keyword_search_most_" . $limit;
             $result = Cache::remember($cacheKey, 86400, function () use ($limit) {
                 return self::select('id','keyword','number_search','created_at')
                     ->orderBy('number_search', 'DESC')

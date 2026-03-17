@@ -17,7 +17,7 @@ class ShopFrontEndController extends Controller
     protected $pageTitle          = '';
     public function __construct()
     {
-        $itemsProvince = Cache::remember('province_selectbox', 86400, function () {
+        $itemsProvince = Cache::remember('duoctot_province_selectbox', 86400, function () {
             return (new ProvinceModel())->listItems(
                 null,
                 ['task' => 'admin-list-items-in-selectbox']

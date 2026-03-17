@@ -39,7 +39,7 @@ class PostController extends ShopFrontEndController
     }
     public function lieuThuocTay(Request $request){
         $catItems=(new CatalogModel)->getCatLieuThuocTay();
-        $keyCacheCatalogPost = 'cache_catalog_post';
+        $keyCacheCatalogPost = 'duoctot_cache_catalog_post';
         $dataCacheCatalogPost = Cache::get($keyCacheCatalogPost);
         if (!empty($dataCacheCatalogPost)) {
             $items  = $dataCacheCatalogPost['items'];
