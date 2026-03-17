@@ -6,9 +6,6 @@
         </div>
         @include ("$moduleName.pages.cart.child_cart_full.list_product")       
 </div>
-<div class="service-tdoctor mt-5">
-    @include("$moduleName.templates.info_service")
-</div>
 <div class="local">
     @include("$moduleName.templates.local_drugstore")
 </div>

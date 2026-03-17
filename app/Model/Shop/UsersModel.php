@@ -8,6 +8,7 @@ use Hash;
 use App\Helpers\Format;
 use App\Model\Shop\PatientModel;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
 class UsersModel extends BackEndModel
 {
     //protected $connection = 'mysql_share_data';
@@ -158,6 +159,8 @@ class UsersModel extends BackEndModel
                     ];
                     \App\Model\Shop\UserValuesModel::insert($this->prepareParams($paramsUserValue));
                 }
+                $slugCache=$details['slug'];
+                Cache::forget('drugstore_'.$slugCache);
                 DB::commit();
                 return true;
             } catch (\Throwable $th) {

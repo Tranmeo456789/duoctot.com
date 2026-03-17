@@ -50,10 +50,6 @@
             @include("$moduleName.pages.$controllerName.child_index.form_search_product")
         </div>
     </div>
-
-    <div class="service-tdoctor mt-3 mt-lg-4">
-        @include("$moduleName.templates.info_service")
-    </div>
     <div class="local">
         @include("$moduleName.templates.local_drugstore")
     </div>

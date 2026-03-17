@@ -19,9 +19,6 @@
         @include("$moduleName.pages.$controllerName.child_ls_trinhduocvien.table_list_trinhduocvien",['items'=>$items])
     </div>
 </div>
-<div class="service-tdoctor mt-3 mt-lg-4">
-    @include("$moduleName.templates.info_service")
-</div>
 <div class="local">
     @include("$moduleName.templates.local_drugstore")
 </div>
