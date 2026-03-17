@@ -123,19 +123,19 @@ class SearchController extends ShopFrontEndController
         //         'task' => 'add-item-home'
         //     ]);
         // }
-        //Cache::forget('search_login_'.$keyword);
-        //Cache::forget('search_guest_'.$keyword);
+        //Cache::forget('duoctot_search_login_'.$keyword);
+        //Cache::forget('duoctot_search_guest_'.$keyword);
         // Lấy sản phẩm
         $session = $request->session();
         if ($session->has('user')) {
-        $cacheKey = 'search_login_'.$keyword;
+        $cacheKey = 'duoctot_search_login_'.$keyword;
             $itemSearch = Cache::remember($cacheKey, 1800, function () use ($params) {
                 return (new ProductModel)->listItems($params, [
                     'task' => 'list-items-search-user-has-login'
                 ]);
             });
         } else {
-            $cacheKey = 'search_guest_'.$keyword;
+            $cacheKey = 'duoctot_search_guest_'.$keyword;
             $itemSearch = Cache::remember($cacheKey, 1800, function () use ($params) {
                 return (new ProductModel)->listItems($params, [
                     'task' => 'list-items-search'
