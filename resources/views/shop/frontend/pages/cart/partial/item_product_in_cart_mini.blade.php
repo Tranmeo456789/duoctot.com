@@ -4,7 +4,7 @@
 <li data-id="{{$item['product_id']}}" class="item-product item-product-{{$item['product_id']}}">
     <div class="d-flex">
         <div class="col-2 thumb-img-product px-0">
-            <img src="{{asset($item['image'])}}">
+            <img src="{{asset('public'.$item['image'])}}">
         </div>
         <div class="col-10 cart-info pl-1 pr-0">
             <a href="" class="name mb-1 d-block"><p class="truncate2">{{$item['name']}}</p></a>

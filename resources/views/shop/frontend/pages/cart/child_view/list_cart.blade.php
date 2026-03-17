@@ -17,7 +17,7 @@ use App\Model\Shop\UnitModel;
         <div class="container-fluid py-2">
             <div class="row">
                 <div class="col-3 col-md-2 pr-0">
-                    <a href="" style="display:block; text-align:center"><img src="{{asset($val['image'])}}" alt="" style="width: 100px;"></a>
+                    <a href="" style="display:block; text-align:center"><img src="{{asset('public'.$val['image'])}}" alt="" style="width: 100px;"></a>
                 </div>
                 <div class="col-9 col-md-10">
                     <div class="row">

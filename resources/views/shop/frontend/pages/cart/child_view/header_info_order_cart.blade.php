@@ -4,7 +4,7 @@ use App\Helpers\MyFunction;
 @endphp
 <div class="title-order d-flex justify-content-center">
     <img src="{{asset('images/shop/ode1.png')}}" alt="">
-    <h2 class="">THÔNG TIN ĐƠN HÀNG </h2>
+    <div class="font-weight-bold text-primary align-self-center">THÔNG TIN ĐƠN HÀNG</div>
 </div>
 <table>
     <tbody>
