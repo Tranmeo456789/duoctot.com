@@ -160,7 +160,7 @@ class UsersModel extends BackEndModel
                     \App\Model\Shop\UserValuesModel::insert($this->prepareParams($paramsUserValue));
                 }
                 $slugCache=$details['slug'];
-                Cache::forget('drugstore_'.$slugCache);
+                Cache::forget('duoctot_drugstore_'.$slugCache);
                 DB::commit();
                 return true;
             } catch (\Throwable $th) {

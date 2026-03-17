@@ -487,7 +487,7 @@ class ProductController extends ShopFrontEndController
         if ($request->has('codeRef')) {
             $request->session()->put('codeRef', $request->query('codeRef'));
         }
-        $cacheKey = 'drugstore_' . $slug;
+        $cacheKey = 'duoctot_drugstore_' . $slug;
         $data = Cache::remember($cacheKey, 1800, function () use ($slug) {
             $userInfo = UsersModel::where('slug', $slug)->first();
             if (!$userInfo) {
