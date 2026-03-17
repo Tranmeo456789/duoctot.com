@@ -489,7 +489,7 @@ class SyncTdoctorController extends ShopFrontEndController
         $getAllId = ProductModel::pluck('id')->toArray();
         $totalInserted=0;
         foreach ($getAllId as $id) {
-            $keyCacheProduct = 'cache_product_data_' . $id;
+            $keyCacheProduct = 'duoctot_cache_product_data_' . $id;
             Cache::forget($keyCacheProduct);
             $totalInserted++;
         }

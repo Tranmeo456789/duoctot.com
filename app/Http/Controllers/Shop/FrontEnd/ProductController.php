@@ -46,7 +46,7 @@ class ProductController extends ShopFrontEndController
     //         );
     //         $codeRefLogin    = $userInfoCurrent['codeRef'];
     //         $codeRefRegister = $userInfoCurrent['ref_register'] ?? '';
-    //         $cacheKey = 'product_login_' . $slug;
+    //         $cacheKey = 'duoctot_product_login_' . $slug;
     //         $item = Cache::remember($cacheKey, 3600, function () use ($slug) {
     //             return $this->model->getItem(
     //                 ['slug' => $slug],
@@ -54,7 +54,7 @@ class ProductController extends ShopFrontEndController
     //             );
     //         });
     //     }else {
-    //         $cacheKey = 'product_guest_' . $slug;
+    //         $cacheKey = 'duoctot_product_guest_' . $slug;
     //         $item = Cache::remember($cacheKey, 3600, function () use ($slug) {
     //             return $this->model->getItem(
     //                 ['slug' => $slug],
@@ -74,13 +74,13 @@ class ProductController extends ShopFrontEndController
     //         ]);
     //     }
     //     if ($request->codeRef) {
-    //         $cacheCodeRef = Cache::get('user_by_codeRef_'.$request->codeRef);
+    //         $cacheCodeRef = Cache::get('duoctot_user_by_codeRef_'.$request->codeRef);
     //         if ($cacheCodeRef !== null) {
     //             $userCodeRef = !empty($cacheCodeRef) ? $cacheCodeRef : null;
     //         } else {
     //             $model = UsersModel::where('codeRef',$request->codeRef)->first();
     //             $payload = $model ? $model->toArray() : [];
-    //             Cache::put('user_by_codeRef_'.$request->codeRef,$payload,100000000);
+    //             Cache::put('duoctot_user_by_codeRef_'.$request->codeRef,$payload,100000000);
     //             $userCodeRef = $model ? $payload : null;
     //         }
     //         if ($userCodeRef) {
@@ -135,7 +135,7 @@ class ProductController extends ShopFrontEndController
     //     //     "/"
     //     // );
     //     // $_COOKIE["productViewed"] = json_encode($productViewed);
-    //     $keyCache = 'cache_product_data_'.$item['id'];
+    //     $keyCache = 'duoctot_cache_product_data_'.$item['id'];
     //     $dataCache = Cache::get($keyCache);
     //     if (!empty($dataCache)) {
     //         $listProductRelate  = $dataCache['listProductRelate'];
@@ -183,7 +183,6 @@ class ProductController extends ShopFrontEndController
     // }
     public function detail(Request $request)
     {
-        //Cache::flush();
         $slug = $request->slug;
         $session = $request->session();
         $codeRefLogin = '';
@@ -193,7 +192,7 @@ class ProductController extends ShopFrontEndController
             $userInfoCurrent = $session->get('user');
             $codeRefLogin    = $userInfoCurrent['codeRef'] ?? '';
             $codeRefRegister = $userInfoCurrent['ref_register'] ?? '';
-            $cacheKey = 'product_login_' . $slug;
+            $cacheKey = 'duoctot_product_login_' . $slug;
             $item = Cache::remember($cacheKey, 3600, function () use ($slug) {
                 return $this->model->getItem(
                     ['slug' => $slug],
@@ -201,7 +200,7 @@ class ProductController extends ShopFrontEndController
                 );
             });
         }else {
-            $cacheKey = 'product_guest_' . $slug;
+            $cacheKey = 'duoctot_product_guest_' . $slug;
             $item = Cache::remember($cacheKey, 3600, function () use ($slug) {
                 return $this->model->getItem(
                     ['slug' => $slug],
@@ -221,13 +220,13 @@ class ProductController extends ShopFrontEndController
             ]);
         }
         if ($request->codeRef) {
-            $cacheCodeRef = Cache::get('user_by_codeRef_'.$request->codeRef);
+            $cacheCodeRef = Cache::get('duoctot_user_by_codeRef_'.$request->codeRef);
             if ($cacheCodeRef !== null) {
                 $userCodeRef = !empty($cacheCodeRef) ? $cacheCodeRef : null;
             } else {
                 $model = UsersModel::where('codeRef',$request->codeRef)->first();
                 $payload = $model ? $model->toArray() : [];
-                Cache::put('user_by_codeRef_'.$request->codeRef,$payload,100000000);
+                Cache::put('duoctot_user_by_codeRef_'.$request->codeRef,$payload,100000000);
                 $userCodeRef = $model ? $payload : null;
             }
             if ($userCodeRef) {
@@ -250,7 +249,7 @@ class ProductController extends ShopFrontEndController
         $albumImageCurrent = !empty($item['albumImageHash'])
             ? explode('|',$item['albumImageHash'])
             : [];
-        $keyCache = 'cache_product_data_'.$item['id'];
+        $keyCache = 'duoctot_cache_product_data_'.$item['id'];
         $dataCache = Cache::get($keyCache);
         if (!empty($dataCache)) {
             $listProductRelate  = $dataCache['listProductRelate'];

@@ -11,6 +11,7 @@ $title = $title ?? 'DƯỢC TỐT là Nền tảng kết nối y dược nhà th
     <title>{{$title}}</title>
     <link rel="icon" href="{{ asset('images/shop/logo-favicon.png') }}" type="image/png">
     @include('shop.frontend.block.head')
+    @yield('headadd')
 </head>
 
 <body>
