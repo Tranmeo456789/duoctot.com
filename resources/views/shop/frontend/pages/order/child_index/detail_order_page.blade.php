@@ -124,7 +124,8 @@ $codeOrder=$order_detail['code_order'];
                     @foreach($order_detail['info_product'] as $val)
                     @php
                     $index++;
-                    $image = Template::showImagePreviewFileManager($val['image'],$val['slug']??$val['name']);
+                    $urlImage='public'.$val['image'];
+                    $image = Template::showImagePreviewFileManager($urlImage,$val['slug']??$val['name']);
                     $price = MyFunction::formatNumber($val['price']) . ' đ';
                     $total_money = MyFunction::formatNumber($val['total_money']) . ' đ';
                     $unit=(new UnitModel())->getItem(['id'=>$val['unit_id']],['task' => 'get-item'])->name;

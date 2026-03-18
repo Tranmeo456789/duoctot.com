@@ -103,7 +103,8 @@
                         @foreach($info_product as $k => $val)
                         @php
                         $unit=(new UnitModel())->getItem(['id'=>$val['unit_id']],['task' => 'get-item'])->name;
-                        $image = Template::showImagePreviewFileManager($val['image'],$val['slug']??$val['name']);
+                        $urlImage='public'.$val['image'];
+                        $image = Template::showImagePreviewFileManager($urlImage,$val['slug']??$val['name']);
                         $price = MyFunction::formatNumber($val['price']) . ' đ';
                         $quantity = isset($val['quantity']) ? (float)$val['quantity'] : 0;
                         $price1 = isset($val['price']) ? (float)$val['price'] : 0;

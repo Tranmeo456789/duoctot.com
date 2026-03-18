@@ -26,7 +26,8 @@
                 @foreach($infoProduct as $val)
                     @php
                         $index++;
-                        $image = Template::showImagePreviewFileManager($val['image'],$val['slug']??$val['name']);
+                        $urlImage='public'.$val['image'];
+                        $image = Template::showImagePreviewFileManager($urlImage,$val['slug']??$val['name']);
                         $price = MyFunction::formatNumber($val['price']) . ' đ';
                         $quantity = isset($val['quantity']) ? (float)$val['quantity'] : 0;
                         $price = isset($val['price']) ? (float)$val['price'] : 0;
