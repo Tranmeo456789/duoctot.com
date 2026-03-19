@@ -50,6 +50,7 @@ $phoneContact=$phoneContact??'0393167234';
                     <li><a href="{{route('fe.product.listPhongKham')}}">Danh mục Phòng Khám</a></li>
                     <li><a href="{{route('fe.product.listThamMyVien')}}">Danh mục Thẩm Mỹ Viện</a></li>
                     <li><a href="{{route('fe.product.listBacSi')}}">Danh mục Bác Sĩ</a></li>
+                    <li><a href="{{route('fe.product.listBenhVien')}}">Danh mục Bệnh Viện</a></li>
                 </ul>
             </div>
         </div>

@@ -70,6 +70,7 @@ $listCatLieuThuocTay = $modelCatalog->getCatLieuThuocTay();
                     <a class="dropdown-item" href="{{route('fe.product.listPhongKham')}}"><span class="pl-2">Danh mục Phòng Khám</span></a>
                     <a class="dropdown-item" href="{{route('fe.product.listThamMyVien')}}"><span class="pl-2">Danh mục Thẩm Mỹ Viện</span></a>
                     <a class="dropdown-item" href="{{route('fe.product.listBacSi')}}"><span class="pl-2">Danh mục Bác Sĩ</span></a>                
+                    <a class="dropdown-item" href="{{route('fe.product.listBenhVien')}}"><span class="pl-2">Danh mục Bệnh Viện</span></a>                
                 </div>
             </div>
         </div>

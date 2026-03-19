@@ -19,6 +19,8 @@ use App\Model\Shop\UsersModel;
 use DB;
 use Hash;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
 class UserController extends BackEndController
 {
     public function __construct()
@@ -322,6 +324,8 @@ class UserController extends BackEndController
                     $this->model->saveItem(['user_id' => $params['user_id'], 'is_add_product' => 1], ['task' => 'update-item-simple']);
                 }
             }
+            $slugName = Str::slug($userInfo['fullname']);
+            Cache::forget('tdoctor_drugstore_'.$slugName);
             $request->session()->put('app_notify', $notify);
             return response()->json([
                 'status' => 200,
