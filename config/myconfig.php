@@ -138,6 +138,7 @@
                 //'7' => 'Nha khoa',
                 '8' => 'Thẩm mỹ viện',
                 '11' => 'Shop mẹ và bé',
+                '12' => 'Bệnh viện',
             ],
             'type_user_register' => [
                 '1' => 'Thành viên',

@@ -85,7 +85,7 @@ class ProfileController extends BackEndController
                 $fileName = time() . '_' . $file->getClientOriginalName();
                 $destinationPath = public_path('fileUpload/nhathuoc'); 
                 $file->move($destinationPath, $fileName);
-                $params['image'] = '/laravel-filemanager/fileUpload/nhathuoc/'.$fileName;
+                $params['image'] = '/fileUpload/nhathuoc/'.$fileName;
             }
             if(!empty($params['ref_register'])){
                 $userShareCodeRef = UsersModel::where('codeRef', $params['ref_register'])->first();

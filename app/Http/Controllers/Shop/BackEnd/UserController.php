@@ -121,6 +121,13 @@ class UserController extends BackEndController
                 }
             }
             try {
+                if ($request->hasFile('new_image_name')) {
+                    $file = $request->file('new_image_name');
+                    $fileName = time() . '_' . $file->getClientOriginalName();
+                    $destinationPath = public_path('fileUpload/nhathuoc'); 
+                    $file->move($destinationPath, $fileName);
+                    $params['image'] = '/fileUpload/nhathuoc/'.$fileName;
+                }
                 if ($this->model->saveItem($params, ['task' => 'update-item'])) {
                     $request->session()->put('app_notify', $notify);
                     return response()->json([
