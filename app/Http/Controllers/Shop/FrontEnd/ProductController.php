@@ -17,6 +17,8 @@ use App\Model\Shop\TrademarkModel;
 use App\Model\Shop\UsersModel;
 use App\Model\Shop\UserValuesModel;
 use App\Model\Shop\WardModel;
+use App\Model\Shop\ConfigModel;
+use App\Helpers\MyFunction;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Cache;
@@ -1038,55 +1040,91 @@ class ProductController extends ShopFrontEndController
     }
     public function listBacSi(Request $request)
     {
+        $phoneOfShopConfig = Cache::remember('config_hotline_duoc', 3600, function () {
+            return ConfigModel::where('name', 'hotline_duoc')->value('content') ?? '';
+        });
         $itemsProvince = (new ProvinceModel())->listItems(null, ['task' => 'admin-list-items-in-selectbox']);
         $itemsDistrict = [];
         $query = UsersModel::whereIn('user_type_id', [2])->orderBy('user_id', 'DESC');
-        if (isset($_COOKIE['province']) && $_COOKIE['province'] != "") {
-            $query = $query->where('province_id', $this->getProvinceID($_COOKIE['province']));
+        if (!empty($_COOKIE['province'])) {
+            $query->where('province_id', $this->getProvinceID($_COOKIE['province']));
         }
-        if ($request->input('province_id') != null) {
-            $prv = ProvinceModel::where('id', intval($request->input('province_id')))->first();
-
-            if ($prv != null) {
-                $query = $query->where('province_id', $prv->id);
+        if ($request->input('province_id')) {
+            $prv = ProvinceModel::find((int)$request->input('province_id'));
+            if ($prv) {
+                $query->where('province_id', $prv->id);
+                $itemsDistrict = (new DistrictModel())->listItems(
+                    ['parentID' => $prv->id],
+                    ['task' => 'admin-list-items-in-selectbox']
+                );
             }
-            $itemsDistrict = (new DistrictModel())->listItems(['parentID' =>  $prv->id], ['task' => 'admin-list-items-in-selectbox']);
         }
-        if ($request->input('district_id') != null) {
-            $itemDistrict = DistrictModel::where('id', intval($request->input('district_id')))->first();
-
-            if ($itemDistrict != null) {
-                $arrUserID = UserValuesModel::select('user_id')
-                    ->where('value', $itemDistrict->id)
+        // Filter district
+        if ($request->input('district_id')) {
+            $itemDistrict = DistrictModel::find((int)$request->input('district_id'));
+            if ($itemDistrict) {
+                $arrUserID = UserValuesModel::where('value', $itemDistrict->id)
                     ->where('user_field', 'district_id')
-                    ->pluck('user_id')->toArray();
-                $query = $query->whereIn('user_id', $arrUserID);
+                    ->pluck('user_id')
+                    ->toArray();
+
+                $query->whereIn('user_id', $arrUserID);
             }
         }
-        if ($request->input('fullname') != null) {
+        // Search
+        if ($request->input('fullname')) {
             $fullname = htmlspecialchars($request->input('fullname'), ENT_QUOTES, 'UTF-8');
-            $query = $query->where(function ($q) use ($fullname) {
-                $q->where([
-                    ['fullname', 'like', "%$fullname%"],
-                ])->orWhere([
-                    ['phone', 'like', "%$fullname%"],
-                ]);
+
+            $query->where(function ($q) use ($fullname) {
+                $q->where('fullname', 'like', "%$fullname%")
+                    ->orWhere('phone', 'like', "%$fullname%");
             });
         }
         $items = $query->paginate(10);
-        $title = 'Danh sách Bác Sĩ | Duoctot.com';
-        return view(
-            $this->pathViewController . 'ls_bacsi',
-            [
-                'itemsProvinces' => $itemsProvince,
-                'itemsDistricts' => $itemsDistrict,
-                'items' => $items,
-                'title' => $title
-            ]
-        );
+        // ✅ Transform dữ liệu cho view (QUAN TRỌNG)
+        $items->getCollection()->transform(function ($val) use ($phoneOfShopConfig) {
+            // ảnh
+            $val->imgThumb = !empty($val['details']['image'])
+                ? route('home') . $val['details']['image']
+                : route('home') . '/public/fileUpload/nhathuoc/6898c9b8bf789.jpg';
+            // link
+            $val->linkShop = route('fe.product.drugstore', $val['slug']);
+            // 👉 DÙNG HÀM Ở ĐÂY
+            $val->address = $this->buildAddress($val['details'] ?? null);
+            // phone
+            $phoneOfShopShow = $val['phone'] ?? $phoneOfShopConfig;
+            $val->phoneFormatted = MyFunction::formatPhoneNumber($phoneOfShopShow) ?? '';
+            return $val;
+        });
+        return view($this->pathViewController . 'ls_bacsi', [
+            'itemsProvinces' => $itemsProvince,
+            'itemsDistricts' => $itemsDistrict,
+            'items' => $items,
+            'title' => 'Danh sách Bác Sĩ | Tdoctor'
+        ]);
     }
     public function contentIntroduce(Request $request)
     {
         return view($this->pathViewController . 'content_introduce');
+    }
+    private function buildAddress($details)
+    {
+        if (!$details) return '';
+        $address = $details['address'] ?? '';
+        if (!empty($details['ward_id'])) {
+            $ward = Cache::remember('ward_full_' . $details['ward_id'], 3600, function () use ($details) {
+                return (new WardModel())->getItem(
+                    ['id' => $details['ward_id']],
+                    ['task' => 'get-item-full']
+                );
+            });
+            if ($ward) {
+                return $address
+                    . ' ' . ($ward['name'] ?? '')
+                    . ', ' . ($ward['district']['name'] ?? '')
+                    . ', ' . ($ward['district']['province']['name'] ?? '');
+            }
+        }
+        return $address;
     }
 }

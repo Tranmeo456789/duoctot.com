@@ -110,6 +110,9 @@ class PostController extends ShopFrontEndController
     public function listPostOfCat(Request $request){
         $slug = $request->slug;
         $itemCat= (new CatalogModel)->getItem(['name_url'=>$slug],['task' => 'frontend-get-item']);
+        if (!$itemCat) {
+            return redirect()->route('home'); 
+        }
         $params['cat_post_id'] = $itemCat['id'];
         $listPostOfCat=$this->model->listItems( $params , ['task' => 'frontend-list-items']);
         return view($this->pathViewController . 'list_post_cat',
