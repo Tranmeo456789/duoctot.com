@@ -796,52 +796,71 @@ class ProductController extends ShopFrontEndController
     }
     public function listDrugstore(Request $request)
     {
-        $itemsProvince = (new ProvinceModel())->listItems(null, ['task' => 'admin-list-items-in-selectbox']);
-        $itemsDistrict = [];
-        //$query = UsersModel::whereIn('user_type_id', [4])->orderBy('user_id', 'DESC')->where('type_account','<>','code_import');
-        $query = UsersModel::whereIn('user_type_id', [4])->orderBy('user_id', 'DESC');
-        if (isset($_COOKIE['province']) && $_COOKIE['province'] != "") {
-            $query = $query->where('province_id', $this->getProvinceID($_COOKIE['province']));
-        }
-        if ($request->input('province_id') != null) {
-            $prv = ProvinceModel::where('id', intval($request->input('province_id')))->first();
-
-            if ($prv != null) {
-                $query = $query->where('province_id', $prv->id);
-            }
-            $itemsDistrict = (new DistrictModel())->listItems(['parentID' =>  $prv->id], ['task' => 'admin-list-items-in-selectbox']);
-        }
-        if ($request->input('district_id') != null) {
-            $itemDistrict = DistrictModel::where('id', intval($request->input('district_id')))->first();
-            if ($itemDistrict != null) {
-                $arrUserID = UserValuesModel::select('user_id')
-                    ->where('value', $itemDistrict->id)
-                    ->where('user_field', 'district_id')
-                    ->pluck('user_id')->toArray();
-                $query = $query->whereIn('user_id', $arrUserID);
-            }
-        }
-        if ($request->input('fullname') != null) {
-            $fullname = htmlspecialchars($request->input('fullname'), ENT_QUOTES, 'UTF-8');
-            $query = $query->where(function ($q) use ($fullname) {
-                $q->where([
-                    ['fullname', 'like', "%$fullname%"],
-                ])->orWhere([
-                    ['phone', 'like', "%$fullname%"],
-                ]);
+        // Cache key theo full query (page + filter)
+        $cacheKey = 'duoctot_list_nhathuoc_' . md5(json_encode($request->all()));
+        $data = Cache::tags(['tdoctor_bacsi'])->remember($cacheKey, 600, function () use ($request) {
+            $phoneOfShopConfig = Cache::tags(['duoctot_config'])->remember('duoctot_config_hotline_duoc', 3600, function () {
+                return ConfigModel::where('name', 'hotline_duoc')->value('content') ?? '';
             });
-        }
-        $items = $query->paginate(10);
-        $title = 'Danh sách Nhà thuốc | Duoctot.com';
-        return view(
-            $this->pathViewController . 'ls_drugstore',
-            [
+            $itemsProvince = (new ProvinceModel())->listItems(null, ['task' => 'admin-list-items-in-selectbox']);
+            $itemsDistrict = [];
+            $query = UsersModel::whereIn('user_type_id', [4])
+                ->orderBy('user_id', 'DESC');
+            // Cookie province
+            if (!empty($_COOKIE['province'])) {
+                $query->where('province_id', $this->getProvinceID($_COOKIE['province']));
+            }
+            // Province filter
+            if ($request->input('province_id')) {
+                $prv = ProvinceModel::find((int)$request->input('province_id'));
+                if ($prv) {
+                    $query->where('province_id', $prv->id);
+                    $itemsDistrict = (new DistrictModel())->listItems(
+                        ['parentID' => $prv->id],
+                        ['task' => 'admin-list-items-in-selectbox']
+                    );
+                }
+            }
+            // District filter
+            if ($request->input('district_id')) {
+                $itemDistrict = DistrictModel::find((int)$request->input('district_id'));
+                if ($itemDistrict) {
+                    $arrUserID = UserValuesModel::where('value', $itemDistrict->id)
+                        ->where('user_field', 'district_id')
+                        ->pluck('user_id')
+                        ->toArray();
+                    $query->whereIn('user_id', $arrUserID);
+                }
+            }
+            // Search
+            if ($request->input('fullname')) {
+                $fullname = htmlspecialchars($request->input('fullname'), ENT_QUOTES, 'UTF-8');
+                $query->where(function ($q) use ($fullname) {
+                    $q->where('fullname', 'like', "%$fullname%")
+                        ->orWhere('phone', 'like', "%$fullname%");
+                });
+            }
+            $items = $query->paginate(10);
+            // Transform
+            $items->getCollection()->transform(function ($val) use ($phoneOfShopConfig) {
+                $val->imgThumb = !empty($val['details']['image'])
+                    ? route('home') . $val['details']['image']
+                    : route('home') . '/public/fileUpload/nhathuoc/nhathuocmau10.jpg';
+
+                $val->linkShop = route('fe.product.drugstore', $val['slug']);
+                $val->address = $this->buildAddress($val['details'] ?? null);
+                $phoneOfShopShow = $val['phone'] ?? $phoneOfShopConfig;
+                $val->phoneFormatted = MyFunction::formatPhoneNumber($phoneOfShopShow) ?? '';
+                return $val;
+            });
+            return [
                 'itemsProvinces' => $itemsProvince,
                 'itemsDistricts' => $itemsDistrict,
                 'items' => $items,
-                'title' => $title
-            ]
-        );
+                'title' => 'Danh sách Nhà thuốc | Duoctot.com'
+            ];
+        });
+        return view($this->pathViewController . 'ls_drugstore', $data);
     }
     public function listNhaCungCap(Request $request)
     {
@@ -1041,9 +1060,9 @@ class ProductController extends ShopFrontEndController
     public function listBacSi(Request $request)
     {
         // Cache key theo full query (page + filter)
-        $cacheKey = 'tdoctor_list_bacsi_' . md5(json_encode($request->all()));
-        $data = Cache::tags(['tdoctor_bacsi'])->remember($cacheKey, 600, function () use ($request) {
-            $phoneOfShopConfig = Cache::tags(['tdoctor_config'])->remember('tdoctor_config_hotline_duoc', 3600, function () {
+        $cacheKey = 'duoctot_list_bacsi_' . md5(json_encode($request->all()));
+        $data = Cache::tags(['duoctot_bacsi'])->remember($cacheKey, 600, function () use ($request) {
+            $phoneOfShopConfig = Cache::tags(['duoctot_config'])->remember('duoctot_config_hotline_duoc', 3600, function () {
                 return ConfigModel::where('name', 'hotline_duoc')->value('content') ?? '';
             });
             $itemsProvince = (new ProvinceModel())->listItems(null, ['task' => 'admin-list-items-in-selectbox']);
@@ -1101,7 +1120,7 @@ class ProductController extends ShopFrontEndController
                 'itemsProvinces' => $itemsProvince,
                 'itemsDistricts' => $itemsDistrict,
                 'items' => $items,
-                'title' => 'Danh sách Bác Sĩ | Tdoctor'
+                'title' => 'Danh sách Bác Sĩ | Duoctot.com'
             ];
         });
         return view($this->pathViewController . 'ls_bacsi', $data);

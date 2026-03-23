@@ -2,8 +2,8 @@
     <table class="table table-bordered">
         <thead class="custom-thead">
             <tr>
-                <th style="width: 15%;" class="text-center">Hình ảnh Shop</th>
-                <th style="width: 50%;" class="text-center">Thông tin Shop</th>
+                <th style="width: 15%;" class="text-center">Hình ảnh Bác sĩ</th>
+                <th style="width: 50%;" class="text-center">Thông tin Bác sĩ</th>
                 <th class="d-none d-md-table-cell text-center" style="width: 20%;">Dịch vụ</th>
             </tr>
         </thead>
