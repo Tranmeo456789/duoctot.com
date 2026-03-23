@@ -138,10 +138,18 @@ class ProductController extends BackEndController
             // }
             if ($request->hasFile('new_image_name')) {
                 $file = $request->file('new_image_name');
-                $fileName = time() . '_' . $file->getClientOriginalName();
-                $destinationPath = public_path('fileUpload/product'); 
-                $file->move($destinationPath, $fileName);
-                $params['image'] = '/laravel-filemanager/fileUpload/product/'.$fileName;
+                $ext = strtolower($file->getClientOriginalExtension());
+                $mime = $file->getMimeType();
+                if (!in_array($ext, ['jpg','jpeg','png','gif']) ||
+                    !in_array($mime, ['image/jpeg','image/png','image/gif'])) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'File không hợp lệ'
+                    ]);
+                }
+                $fileName = time() . '.' . $ext;
+                $file->move(public_path('fileUpload/product'), $fileName);
+                $params['image'] = '/fileUpload/product/'.$fileName;
             }
             $params['slug'] = !empty($params['slug']) ? $params['slug'] : Str::slug($params['name']);
             // foreach($params['list_prices'] as $key => $val){
