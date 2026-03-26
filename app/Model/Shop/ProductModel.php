@@ -564,7 +564,7 @@ class ProductModel extends BackEndModel
                 $query->orderBy('id', 'asc');
             }
             // limit cuối cùng
-            $limit = $params['limit'] ?? 10;
+            $limit = $params['limit'] ?? 30;
             $result = $query->limit($limit)->get();
         }
         if ($options['task'] == "list-items-search-user-has-login") {
@@ -609,7 +609,7 @@ class ProductModel extends BackEndModel
                 $query->orderBy('id', 'asc');
             }
             // limit cuối cùng
-            $limit = $params['limit'] ?? 10;
+            $limit = $params['limit'] ?? 30;
             $result = $query->limit($limit)->get();
         }
         if ($options['task'] == "get-list-items-add-database-wordpress") {
