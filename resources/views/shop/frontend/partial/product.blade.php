@@ -7,7 +7,7 @@
     <li class="position-relative">
         <a href="{{route('fe.product.detail',$val['slug'])}}" class="d-block">
             <div class="wp-img-thumb-product mb-2">
-                <img class="lazy" loading="lazy" data-src="{{asset('public'.$val['image'])}}" src="{{asset('fileUpload/product/anh-san-pham-mac-dinh-blur1.jpg')}}" alt="{{$val['name']}}" width="180" height="180" decoding="async">
+                <img class="lazy" data-src="{{asset('public'.$val['image'])}}" src="{{asset('fileUpload/product/anh-san-pham-mac-dinh-blur1.jpg')}}" alt="{{$val['name']}}" width="180" height="180" decoding="async">
             </div>
             <div class="pl-1">
                 <div class="d-flex align-items-center wp-name-product">
