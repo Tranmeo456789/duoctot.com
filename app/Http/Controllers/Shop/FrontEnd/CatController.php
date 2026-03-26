@@ -56,13 +56,16 @@ class CatController extends ShopFrontEndController
     public function catLevel3($slug, $slug1, $slug2)
     {
         $cacheKey = 'duoctot_cat_level3_' . $slug2;
-        $data = Cache::remember($cacheKey, 3600, function () use ($slug2) {
+        // if (Cache::tags('duoctot_cat_product')->has($cacheKey)) {
+        //     Cache::tags('duoctot_cat_product')->forget($cacheKey);
+        // }
+        $data = Cache::tags('duoctot_cat_product')->remember($cacheKey, 3600, function () use ($slug2) {
             $itemCatCurent = (new CatProductModel())->getItem(
                 ['slug' => $slug2],
                 ['task' => 'get-item-slug']
             );
             if (!$itemCatCurent) {
-                return redirect()->to(route('home'));
+                return null;
             }
             $params['parent_id'] = $itemCatCurent['parent_id'];
             $itemCatParentLevel1 = (new CatProductModel)->getItem(
@@ -81,20 +84,14 @@ class CatController extends ShopFrontEndController
             $couterSumProduct = (new ProductModel())->countItems(
                 ['cat_product_id' => $itemCatCurent['id']],
                 ['task' => 'count-number-product-in-cat']
-            );
-            $couterSumProduct = $couterSumProduct - 20;
-            $arrIdTrademark = $products->pluck('trademark_id')
-                ->unique()
-                ->values()
-                ->toArray();
+            ) - 20;
+            $arrIdTrademark = $products->pluck('trademark_id')->unique()->values()->toArray();
+            
             $listTrademark = (new TrademarkModel)->listItems(
                 ['group_id' => $arrIdTrademark],
                 ['task' => 'admin-list-items-in-selectbox']
             );
-            $arrIdCountry = $products->pluck('country_id')
-                ->unique()
-                ->values()
-                ->toArray();
+            $arrIdCountry = $products->pluck('country_id')->unique()->values()->toArray();
             $listCountry = (new CountryModel)->listItems(
                 ['group_id' => $arrIdCountry],
                 ['task' => 'admin-list-items-in-selectbox']
@@ -103,16 +100,16 @@ class CatController extends ShopFrontEndController
                 'itemCatCurent' => $itemCatCurent,
                 'itemCatParentLevel1' => $itemCatParentLevel1,
                 'itemCatParentLevel2' => $itemCatParentLevel2,
-                'products' => $products,
-                'couterSumProduct' => $couterSumProduct,
                 'listTrademark' => $listTrademark,
-                'listCountry' => $listCountry
+                'couterSumProduct' => $couterSumProduct,
+                'listCountry' => $listCountry,
+                'products' => $products,
             ];
         });
-        return view(
-            $this->pathViewController . 'cat_level3',
-            $data
-        );
+        if (!$data) {
+            return redirect()->route('home');
+        }
+        return view($this->pathViewController . 'cat_level3', $data);
     }
     public function filterProduct(Request $request){
         $data = $request->all();

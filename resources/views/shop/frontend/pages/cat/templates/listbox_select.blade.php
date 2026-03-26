@@ -14,6 +14,7 @@
                             <label for="">Tất cả</label>
                         </div>
                 </li>
+                @isset($listTrademark)
                 @foreach($listTrademark as $key=>$val)
                 <li>
                     <div class="d-flex">
@@ -22,6 +23,7 @@
                     </div>
                 </li>
                 @endforeach
+                @endisset
             </ul>
         </div>
     </li>
@@ -35,6 +37,7 @@
                         <label for="">Tất cả</label>
                     </div>
                 </li>
+                @isset($listCountry)
                 @foreach($listCountry as $key=>$val)
                 <li>
                     <div class="d-flex">
@@ -43,6 +46,7 @@
                     </div>
                 </li>
                 @endforeach
+                @endisset
             </ul>
         </div>
     </li>

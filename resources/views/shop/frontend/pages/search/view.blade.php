@@ -33,7 +33,6 @@
         </div>
     </div>
 </div>
-@include("$moduleName.templates.banner_doitac")
 <div class="local">
     @include("$moduleName.templates.local_drugstore")
 </div>

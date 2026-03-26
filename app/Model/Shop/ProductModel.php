@@ -194,7 +194,7 @@ class ProductModel extends BackEndModel
                                     ->toArray();
         }
         if ($options['task'] == "frontend-list-items") {
-            $query = $this::with('unitProduct')->select('id','name','price','percent_discount','unit_id','specification','image','slug','discount_ref','show_price')
+            $query = $this::with('unitProduct')->select('id','name','price','percent_discount','unit_id','specification','image','slug','discount_ref','show_price','trademark_id','country_id')
                                 ->where('status_product','da_duyet');
             if (isset($params['cat_product_id']) && ($params['cat_product_id'] != 0)){
                 $query->whereIn('cat_product_id', CatProductModel::getChild($params['cat_product_id']));
@@ -564,7 +564,7 @@ class ProductModel extends BackEndModel
                 $query->orderBy('id', 'asc');
             }
             // limit cuối cùng
-            $limit = $params['limit'] ?? 30;
+            $limit = $params['limit'] ?? 10;
             $result = $query->limit($limit)->get();
         }
         if ($options['task'] == "list-items-search-user-has-login") {
@@ -609,7 +609,7 @@ class ProductModel extends BackEndModel
                 $query->orderBy('id', 'asc');
             }
             // limit cuối cùng
-            $limit = $params['limit'] ?? 30;
+            $limit = $params['limit'] ?? 10;
             $result = $query->limit($limit)->get();
         }
         if ($options['task'] == "get-list-items-add-database-wordpress") {
