@@ -91,6 +91,24 @@
                         <p>Xóa cache tất cả sản phẩm</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('fe.SyncTdoctor.clearSearchCache')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Xóa cache tất cả từ khóa tìm kiếm</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('fe.SyncTdoctor.clearListBacSiCache')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Xóa cache danh sách Bác sĩ</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('fe.SyncTdoctor.clearListNhaThuocCache')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Xóa cache danh sách Nhà thuốc</p>
+                    </a>
+                </li>
             </ul>
         </li>
     </ul>

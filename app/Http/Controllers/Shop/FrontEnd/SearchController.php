@@ -128,15 +128,15 @@ class SearchController extends ShopFrontEndController
         // Lấy sản phẩm
         $session = $request->session();
         if ($session->has('user')) {
-        $cacheKey = 'duoctot_search_login_'.$keyword;
-            $itemSearch = Cache::remember($cacheKey, 1800, function () use ($params) {
+            $cacheKey = 'duoctot_search_login_'.$keyword;
+            $itemSearch = Cache::tags('duoctot_search')->remember($cacheKey, 1800, function () use ($params) {
                 return (new ProductModel)->listItems($params, [
                     'task' => 'list-items-search-user-has-login'
                 ]);
             });
         } else {
             $cacheKey = 'duoctot_search_guest_'.$keyword;
-            $itemSearch = Cache::remember($cacheKey, 1800, function () use ($params) {
+            $itemSearch = Cache::tags('duoctot_search')->remember($cacheKey, 1800, function () use ($params) {
                 return (new ProductModel)->listItems($params, [
                     'task' => 'list-items-search'
                 ]);

@@ -497,4 +497,36 @@ class SyncTdoctorController extends ShopFrontEndController
         $notification = 'Xóa cache product thành công';
         return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalInserted', 'notification'));
     }
+    public function clearAllCache()
+    {
+        Cache::flush();
+        $totalInserted=9;
+        $pageTitle = 'Xóa cache thành công';
+        $notification = 'Xóa cache thành công';
+        return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalInserted', 'notification'));
+    }
+    public function clearSearchCache()
+    {
+        Cache::tags(['duoctot_search'])->flush();
+        $totalInserted=9;
+        $pageTitle = 'Xóa cache search thành công';
+        $notification = 'Xóa cache search thành công';
+        return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalInserted', 'notification'));
+    }
+    public function clearListBacSiCache()
+    {
+        Cache::tags(['duoctot_bacsi'])->flush();
+        $totalInserted=9;
+        $pageTitle = 'Xóa cache danh sách bác sĩ thành công';
+        $notification = 'Xóa cache danh sách bác sĩ thành công';
+        return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalInserted', 'notification'));
+    }
+    public function clearListNhaThuocCache()
+    {
+        Cache::tags(['duoctot_nhathuoc'])->flush();
+        $totalInserted=9;
+        $pageTitle = 'Xóa cache danh sách nhà thuốc thành công';
+        $notification = 'Xóa cache danh sách nhà thuốc thành công';
+        return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalInserted', 'notification'));
+    }
 }

@@ -798,7 +798,7 @@ class ProductController extends ShopFrontEndController
     {
         // Cache key theo full query (page + filter)
         $cacheKey = 'duoctot_list_nhathuoc_' . md5(json_encode($request->all()));
-        $data = Cache::tags(['tdoctor_bacsi'])->remember($cacheKey, 600, function () use ($request) {
+        $data = Cache::tags(['duoctot_nhathuoc'])->remember($cacheKey, 600, function () use ($request) {
             $phoneOfShopConfig = Cache::tags(['duoctot_config'])->remember('duoctot_config_hotline_duoc', 3600, function () {
                 return ConfigModel::where('name', 'hotline_duoc')->value('content') ?? '';
             });

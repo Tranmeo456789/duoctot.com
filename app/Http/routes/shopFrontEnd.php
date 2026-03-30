@@ -139,4 +139,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('dong-du-lieu-bang-shop_product_add','SyncTdoctorController@transferShopProductAdd')->name('fe.SyncTdoctor.transferShopProductAdd');
     Route::get('cap-nhat-du-lieu-bang-products','SyncTdoctorController@updateProductsBySlug')->name('fe.SyncTdoctor.updateProductsBySlug');
     Route::get('xoa-cache-tat-ca-cac-san-pham','SyncTdoctorController@deleteAllCacheproduct')->name('fe.SyncTdoctor.deleteAllCacheproduct');
+    Route::get('xoa-cache-search-keyword','SyncTdoctorController@clearSearchCache')->name('fe.SyncTdoctor.clearSearchCache');
+    Route::get('xoa-cache-danh-sach-bac-si-keyword','SyncTdoctorController@clearListBacSiCache')->name('fe.SyncTdoctor.clearListBacSiCache');
+    Route::get('xoa-cache-danh-sach-nha-thuoc-keyword','SyncTdoctorController@clearListNhaThuocCache')->name('fe.SyncTdoctor.clearListNhaThuocCache');
 });
