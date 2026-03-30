@@ -529,4 +529,12 @@ class SyncTdoctorController extends ShopFrontEndController
         $notification = 'Xóa cache danh sách nhà thuốc thành công';
         return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalInserted', 'notification'));
     }
+    public function clearUserCache()
+    {
+        Cache::tags(['duoctot_drugstore'])->flush();
+        $totalInserted=9;
+        $pageTitle = 'Xóa cache user thành công';
+        $notification = 'Xóa cache user thành công';
+        return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalInserted', 'notification'));
+    }
 }

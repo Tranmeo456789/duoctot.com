@@ -98,6 +98,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{route('fe.SyncTdoctor.clearUserCache')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Xóa cache tất cả user</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{route('fe.SyncTdoctor.clearListBacSiCache')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Xóa cache danh sách Bác sĩ</p>
