@@ -340,7 +340,8 @@ class UserController extends BackEndController
                 }
             }
             $slugName = Str::slug($userInfo['fullname']);
-            Cache::forget('tdoctor_drugstore_'.$slugName);
+            $cacheKey = 'duoctot_drugstore_' . $slugName;
+            Cache::tags(['duoctot_drugstore'])->forget($cacheKey);
             $request->session()->put('app_notify', $notify);
             return response()->json([
                 'status' => 200,
