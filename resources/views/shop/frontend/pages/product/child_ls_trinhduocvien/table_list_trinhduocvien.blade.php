@@ -47,8 +47,13 @@
                     }
                     if ($val['user_type_id'] == 6 || $val['user_type_id'] == 11) {
                         $phoneShop = $val['phone'] ?? $phoneOfShopConfig;
-                        if (!empty($phoneShop) && strlen($phoneShop) > 1) {
-                            $phoneOfShopShow = substr($phoneShop, 0, -1) . '*';
+                        if (!empty($phoneShop)) {
+                            $len = strlen($phoneShop);
+                            if ($len > 3) {
+                                $phoneOfShopShow = substr($phoneShop, 0, -3) . '***';
+                            } else {
+                                $phoneOfShopShow = str_repeat('*', $len);
+                            }
                         } else {
                             $phoneOfShopShow = $phoneShop;
                         }

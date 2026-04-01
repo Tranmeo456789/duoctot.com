@@ -45,8 +45,8 @@
                         }
                         $address=$val['details']['address'].$ward.$district.$province;
                     }
-                    if($val['user_type_id'] == 6 || $val['user_type_id'] ==11){
-                        $phoneOfShopShow = $val['phone'] ?? $phoneOfShopConfig;
+                    if($val['user_id'] == 1984151811){
+                        $phoneOfShopShow = $val['phone'] ?? $val['email'];
                     }else{
                         $phoneOfShopShow = $phoneOfShopConfig;
                     }

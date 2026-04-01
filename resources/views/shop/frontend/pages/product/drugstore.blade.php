@@ -20,11 +20,18 @@ $isPhone   = false;
 // USER TYPE 9 → luôn dùng số mặc định
 if ($userType == 9) {
     $phoneShop = $defaultPhone;
+    if($userInfo['user_id']==1984151811){
+        $phoneShop=$userInfo['phone'] ?? '';
+    }
     $isPhone   = true;
 } elseif ($userType == 6) {
     if (!empty($phone)) {
-        // Có phone → che số
-        $phoneShop = substr($phone, 0, -1) . '*';
+        $len = strlen($phone);
+        if ($len > 3) {
+            $phoneShop = substr($phone, 0, -3) . '***';
+        } else {
+            $phoneShop = str_repeat('*', $len);
+        }
     } else {
         // Không có phone → số mặc định
         $phoneShop = $defaultPhone;
