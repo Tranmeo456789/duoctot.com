@@ -1,24 +1,43 @@
 <script>
-  window.addEventListener("load", function () {
-      const images = document.querySelectorAll(".lazy");
-      const observer = new IntersectionObserver((entries, observer) => {
-          entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                  const img = entry.target;
-                  const realSrc = img.dataset.src;
-                  if (realSrc) {
-                      img.src = realSrc;
-                      img.classList.add("loaded");
-                  }
-                  observer.unobserve(img);
-              }
-          });
-      }, {
-          rootMargin: "300px 0px",
-          threshold: 0
-      });
-      images.forEach(img => observer.observe(img));
-  });
+window.addEventListener("load", function () {
+    const placeholder = "{{ asset('fileUpload/product/anh-san-pham-mac-dinh-blur1.jpg') }}"; // ảnh dự phòng
+    const images = document.querySelectorAll(".lazy"); // chỉ ảnh lazy
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                const realSrc = img.dataset.src;
+                // Nếu có data-src → load ảnh thật
+                if (realSrc) {
+                    img.src = realSrc;
+                }
+                // 2s sau nếu chưa load hoặc load lỗi → dùng placeholder
+                const timeoutId = setTimeout(() => {
+                    if (!img.complete || img.naturalWidth === 0) {
+                        img.src = placeholder;
+                        img.classList.add("loaded");
+                    }
+                }, 2000);
+                // Khi load xong → hủy timeout và fade
+                img.addEventListener("load", () => {
+                    clearTimeout(timeoutId);
+                    img.classList.add("loaded");
+                });
+                // Khi load lỗi → fallback ngay
+                img.addEventListener("error", () => {
+                    clearTimeout(timeoutId);
+                    img.src = placeholder;
+                    img.classList.add("loaded");
+                });
+                observer.unobserve(img); // ngừng quan sát
+            }
+        });
+    }, {
+        rootMargin: "300px 0px", // cách 300px mới load
+        threshold: 0
+    });
+    images.forEach(img => observer.observe(img));
+});
 </script>
 <script src="{{ asset('/shop/frontend/js/jquery-3.1.1.min.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/shop/frontend/js/combined_library.min.js')}}" type="text/javascript"></script>

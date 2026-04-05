@@ -64,22 +64,22 @@ $contact=MyFunction::formatPhoneNumber($contact);
                             <!-- Slider chính -->
                             <div class="sliderProductMain tns-slider cS-hidden gallery">
                                 <div class="text-center">
-                                    <img src="{{ asset('public'.$item['image']) }}" class="img-fluid image-zoom-popup" />
+                                    <img src="{{ asset('public'.$item['image']) }}" class="img-fluid image-zoom-popup" alt="{{$item['name'] ?? ''}}" width="295" height="295"/>
                                 </div>
                                 @foreach($albumImageCurrent as $val)
                                 <div class="text-center">
-                                    <img src="{{ asset('public/fileUpload/product/'.$val) }}" class="zoom img-fluid image-zoom-popup" />
+                                    <img src="{{ asset('public/fileUpload/product/'.$val) }}" class="zoom img-fluid image-zoom-popup lazy" alt="{{$item['name'] ?? ''}}" width="295" height="295"/>
                                 </div>
                                 @endforeach
                             </div>
                             <!-- Thumbnail slider -->
                             <div class="sliderProductThumb mt-2">
                                 <div>
-                                    <img src="{{ asset('public'.$item['image']) }}" class="img-thumbnail" />
+                                    <img src="{{ asset('public'.$item['image']) }}" class="img-thumbnail lazy" width="60" height="60"/>
                                 </div>
                                 @foreach($albumImageCurrent as $val)
                                 <div>
-                                    <img src="{{ asset('public/fileUpload/product/'.$val) }}" class="img-thumbnail" />
+                                    <img src="{{ asset('public/fileUpload/product/'.$val) }}" class="img-thumbnail lazy" width="60" height="60"/>
                                 </div>
                                 @endforeach
                             </div>
