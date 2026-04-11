@@ -747,52 +747,81 @@ class ProductController extends ShopFrontEndController
     }
     public function listTrinhDuocVien(Request $request)
     {
-        $itemsProvince = (new ProvinceModel())->listItems(null, ['task' => 'admin-list-items-in-selectbox']);
-        $itemsDistrict = [];
-        $query = UsersModel::whereIn('user_type_id', [6])->orderBy('user_id', 'DESC');
-        if (isset($_COOKIE['province']) && $_COOKIE['province'] != "") {
-            $query = $query->where('province_id', $this->getProvinceID($_COOKIE['province']));
-        }
-        if ($request->input('province_id') != null) {
-            $prv = ProvinceModel::where('id', intval($request->input('province_id')))->first();
-
-            if ($prv != null) {
-                $query = $query->where('province_id', $prv->id);
-            }
-            $itemsDistrict = (new DistrictModel())->listItems(['parentID' =>  $prv->id], ['task' => 'admin-list-items-in-selectbox']);
-        }
-        if ($request->input('district_id') != null) {
-            $itemDistrict = DistrictModel::where('id', intval($request->input('district_id')))->first();
-
-            if ($itemDistrict != null) {
-                $arrUserID = UserValuesModel::select('user_id')
-                    ->where('value', $itemDistrict->id)
-                    ->where('user_field', 'district_id')
-                    ->pluck('user_id')->toArray();
-                $query = $query->whereIn('user_id', $arrUserID);
-            }
-        }
-        if ($request->input('fullname') != null) {
-            $fullname = htmlspecialchars($request->input('fullname'), ENT_QUOTES, 'UTF-8');
-            $query = $query->where(function ($q) use ($fullname) {
-                $q->where([
-                    ['fullname', 'like', "%$fullname%"],
-                ])->orWhere([
-                    ['phone', 'like', "%$fullname%"],
-                ]);
+        // Cache key theo full query (page + filter)
+        $cacheKey = 'duoctot_list_trinhduocvien_' . md5(json_encode($request->all()));
+        $data = Cache::tags(['duoctot_trinhduocvien'])->remember($cacheKey, 600, function () use ($request) {
+            $phoneOfShopConfig = Cache::tags(['duoctot_config'])->remember('duoctot_config_hotline_duoc', 3600, function () {
+                return ConfigModel::where('name', 'hotline_duoc')->value('content') ?? '';
             });
-        }
-        $items = $query->paginate(10);
-        $title = 'Danh sách Shop Trình dược viên | Duoctot.com';
-        return view(
-            $this->pathViewController . 'ls_trinhduocvien',
-            [
+            $itemsProvince = (new ProvinceModel())->listItems(null, ['task' => 'admin-list-items-in-selectbox']);
+            $itemsDistrict = [];
+            $query = UsersModel::whereIn('user_type_id', [6])
+                ->orderBy('user_id', 'DESC');
+            // Cookie province
+            if (!empty($_COOKIE['province'])) {
+                $query->where('province_id', $this->getProvinceID($_COOKIE['province']));
+            }
+            // Province filter
+            if ($request->input('province_id')) {
+                $prv = ProvinceModel::find((int)$request->input('province_id'));
+                if ($prv) {
+                    $query->where('province_id', $prv->id);
+                    $itemsDistrict = (new DistrictModel())->listItems(
+                        ['parentID' => $prv->id],
+                        ['task' => 'admin-list-items-in-selectbox']
+                    );
+                }
+            }
+            // District filter
+            if ($request->input('district_id')) {
+                $itemDistrict = DistrictModel::find((int)$request->input('district_id'));
+                if ($itemDistrict) {
+                    $arrUserID = UserValuesModel::where('value', $itemDistrict->id)
+                        ->where('user_field', 'district_id')
+                        ->pluck('user_id')
+                        ->toArray();
+                    $query->whereIn('user_id', $arrUserID);
+                }
+            }
+            // Search
+            if ($request->input('fullname')) {
+                $fullname = htmlspecialchars($request->input('fullname'), ENT_QUOTES, 'UTF-8');
+                $query->where(function ($q) use ($fullname) {
+                    $q->where('fullname', 'like', "%$fullname%")
+                        ->orWhere('phone', 'like', "%$fullname%");
+                });
+            }
+            $items = $query->paginate(10);
+            // Transform
+            $items->getCollection()->transform(function ($val) use ($phoneOfShopConfig) {
+                $val->imgThumb = !empty($val['details']['image'])
+                    ? route('home') . $val['details']['image']
+                    : route('home') . '/fileUpload/nhathuoc/nhathuocmau10.jpg';
+
+                $val->linkShop = route('fe.product.drugstore', $val['slug']);
+                $val->address = $this->buildAddress($val['details'] ?? null);
+                $phoneShop = $val['phone'] ?? $phoneOfShopConfig;
+                if (!empty($phoneShop)) {
+                    $len = strlen($phoneShop);
+                    if ($len > 3) {
+                        $phoneOfShopShow = substr($phoneShop, 0, -3) . '***';
+                    } else {
+                        $phoneOfShopShow = str_repeat('*', $len);
+                    }
+                } else {
+                    $phoneOfShopShow = $phoneShop;
+                }
+                $val->phoneFormatted = MyFunction::formatPhoneNumber($phoneOfShopShow) ?? '';
+                return $val;
+            });
+            return [
                 'itemsProvinces' => $itemsProvince,
                 'itemsDistricts' => $itemsDistrict,
                 'items' => $items,
-                'title' => $title
-            ]
-        );
+                'title' => 'Danh sách Trình Dược Viên | Duoctot.com'
+            ];
+        });
+        return view($this->pathViewController . 'ls_trinhduocvien', $data);
     }
     public function listDrugstore(Request $request)
     {
@@ -980,52 +1009,71 @@ class ProductController extends ShopFrontEndController
     }
     public function listBenhVien(Request $request)
     {
-        $itemsProvince = (new ProvinceModel())->listItems(null, ['task' => 'admin-list-items-in-selectbox']);
-        $itemsDistrict = [];
-        $query = UsersModel::whereIn('user_type_id', [12])->orderBy('user_id', 'DESC');
-        if (isset($_COOKIE['province']) && $_COOKIE['province'] != "") {
-            $query = $query->where('province_id', $this->getProvinceID($_COOKIE['province']));
-        }
-        if ($request->input('province_id') != null) {
-            $prv = ProvinceModel::where('id', intval($request->input('province_id')))->first();
-
-            if ($prv != null) {
-                $query = $query->where('province_id', $prv->id);
-            }
-            $itemsDistrict = (new DistrictModel())->listItems(['parentID' =>  $prv->id], ['task' => 'admin-list-items-in-selectbox']);
-        }
-        if ($request->input('district_id') != null) {
-            $itemDistrict = DistrictModel::where('id', intval($request->input('district_id')))->first();
-
-            if ($itemDistrict != null) {
-                $arrUserID = UserValuesModel::select('user_id')
-                    ->where('value', $itemDistrict->id)
-                    ->where('user_field', 'district_id')
-                    ->pluck('user_id')->toArray();
-                $query = $query->whereIn('user_id', $arrUserID);
-            }
-        }
-        if ($request->input('fullname') != null) {
-            $fullname = htmlspecialchars($request->input('fullname'), ENT_QUOTES, 'UTF-8');
-            $query = $query->where(function ($q) use ($fullname) {
-                $q->where([
-                    ['fullname', 'like', "%$fullname%"],
-                ])->orWhere([
-                    ['phone', 'like', "%$fullname%"],
-                ]);
+        // Cache key theo full query (page + filter)
+        $cacheKey = 'duoctot_list_benhvien_' . md5(json_encode($request->all()));
+        $data = Cache::tags(['duoctot_benhvien'])->remember($cacheKey, 600, function () use ($request) {
+            $phoneOfShopConfig = Cache::tags(['duoctot_config'])->remember('duoctot_config_hotline_duoc', 3600, function () {
+                return ConfigModel::where('name', 'hotline_duoc')->value('content') ?? '';
             });
-        }
-        $items = $query->paginate(10);
-        $title = 'Danh sách Bệnh Viện | Tdoctor';
-        return view(
-            $this->pathViewController . 'ls_benhvien',
-            [
+            $itemsProvince = (new ProvinceModel())->listItems(null, ['task' => 'admin-list-items-in-selectbox']);
+            $itemsDistrict = [];
+            $query = UsersModel::whereIn('user_type_id', [12])
+                ->orderBy('user_id', 'DESC');
+            // Cookie province
+            if (!empty($_COOKIE['province'])) {
+                $query->where('province_id', $this->getProvinceID($_COOKIE['province']));
+            }
+            // Province filter
+            if ($request->input('province_id')) {
+                $prv = ProvinceModel::find((int)$request->input('province_id'));
+                if ($prv) {
+                    $query->where('province_id', $prv->id);
+                    $itemsDistrict = (new DistrictModel())->listItems(
+                        ['parentID' => $prv->id],
+                        ['task' => 'admin-list-items-in-selectbox']
+                    );
+                }
+            }
+            // District filter
+            if ($request->input('district_id')) {
+                $itemDistrict = DistrictModel::find((int)$request->input('district_id'));
+                if ($itemDistrict) {
+                    $arrUserID = UserValuesModel::where('value', $itemDistrict->id)
+                        ->where('user_field', 'district_id')
+                        ->pluck('user_id')
+                        ->toArray();
+                    $query->whereIn('user_id', $arrUserID);
+                }
+            }
+            // Search
+            if ($request->input('fullname')) {
+                $fullname = htmlspecialchars($request->input('fullname'), ENT_QUOTES, 'UTF-8');
+                $query->where(function ($q) use ($fullname) {
+                    $q->where('fullname', 'like', "%$fullname%")
+                        ->orWhere('phone', 'like', "%$fullname%");
+                });
+            }
+            $items = $query->paginate(10);
+            // Transform
+            $items->getCollection()->transform(function ($val) use ($phoneOfShopConfig) {
+                $val->imgThumb = !empty($val['details']['image'])
+                    ? route('home') . $val['details']['image']
+                    : route('home') . '/fileUpload/nhathuoc/benh_vien_mac_dinh.jpg';
+
+                $val->linkShop = route('fe.product.drugstore', $val['slug']);
+                $val->address = $this->buildAddress($val['details'] ?? null);
+                $phoneOfShopShow = $val['phone'] ?? $phoneOfShopConfig;
+                $val->phoneFormatted = MyFunction::formatPhoneNumber($phoneOfShopShow) ?? '';
+                return $val;
+            });
+            return [
                 'itemsProvinces' => $itemsProvince,
                 'itemsDistricts' => $itemsDistrict,
                 'items' => $items,
-                'title' => $title
-            ]
-        );
+                'title' => 'Danh sách Bệnh Viện | Duoctot.com'
+            ];
+        });        
+        return view($this->pathViewController . 'ls_benhvien', $data);
     }
     public function listThamMyVien(Request $request)
     {
@@ -1169,22 +1217,50 @@ class ProductController extends ShopFrontEndController
     }
     private function buildAddress($details)
     {
-        if (!$details) return '';
-        $address = $details['address'] ?? '';
-        if (!empty($details['ward_id'])) {
-            $ward = Cache::remember('ward_full_' . $details['ward_id'], 3600, function () use ($details) {
-                return (new WardModel())->getItem(
-                    ['id' => $details['ward_id']],
-                    ['task' => 'get-item-full']
-                );
+        if (empty($details)) return '';
+        $addressBase = trim($details['address'] ?? '');
+        $wardId     = $details['ward_id'] ?? null;
+        $districtId = $details['district_id'] ?? null;
+        $provinceId = $details['province_id'] ?? null;
+        $ward = '';
+        $district = '';
+        $province = '';
+        // ===== 1. Ưu tiên ward =====
+        if ($wardId) {
+            $wardDetail = Cache::remember('ward_full_' . $wardId, 3600, function () use ($wardId) {
+                return WardModel::with('district.province')->find($wardId) ?: '__null__';
             });
-            if ($ward) {
-                return $address
-                    . ' ' . ($ward['name'] ?? '')
-                    . ', ' . ($ward['district']['name'] ?? '')
-                    . ', ' . ($ward['district']['province']['name'] ?? '');
+            if ($wardDetail !== '__null__' && $wardDetail) {
+                $ward     = $wardDetail->name ?? '';
+                $district = $wardDetail->district->name ?? '';
+                $province = $wardDetail->district->province->name ?? '';
             }
         }
-        return $address;
+        // ===== 2. Fallback district =====
+        if (empty($district) && $districtId) {
+            $districtDetail = Cache::remember('district_full_' . $districtId, 3600, function () use ($districtId) {
+                return DistrictModel::with('province')->find($districtId) ?: '__null__';
+            });
+            if ($districtDetail !== '__null__' && $districtDetail) {
+                $district = $districtDetail->name ?? '';
+                $province = $districtDetail->province->name ?? '';
+            }
+        }
+        // ===== 3. Fallback province =====
+        if (empty($province) && $provinceId) {
+            $provinceDetail = Cache::remember('province_' . $provinceId, 3600, function () use ($provinceId) {
+                return ProvinceModel::find($provinceId) ?: '__null__';
+            });
+            if ($provinceDetail !== '__null__' && $provinceDetail) {
+                $province = $provinceDetail->name ?? '';
+            }
+        }
+        // ===== 4. Build chuỗi =====
+        $parts = [];
+        if ($addressBase) $parts[] = $addressBase;
+        if ($ward)        $parts[] = $ward;
+        if ($district)    $parts[] = $district;
+        if ($province)    $parts[] = $province;
+        return !empty($parts) ? implode(', ', $parts) : '';
     }
 }

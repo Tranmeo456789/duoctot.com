@@ -1,12 +1,3 @@
-@php
-    use App\Model\Shop\ConfigModel;
-    use App\Model\Shop\ProvinceModel;
-    use App\Model\Shop\DistrictModel;
-    use App\Model\Shop\WardModel;
-    use App\Helpers\MyFunction;
-    
-    $phoneOfShopConfig = ConfigModel::where('name', 'hotline_duoc')->first()->content ?? '';
-@endphp
 <div class="table-responsive table-list-drugstore">
     <table class="table table-bordered">
         <thead class="custom-thead">
@@ -18,103 +9,69 @@
         </thead>
         <tbody>
             @foreach($items as $val)
-                @php
-                    $drugstore = isset($val->drugstore)?$val->drugstore:null;
-                    $imgThumb = '';
-
-                    if (isset($val['details']['image']) && $val['details']['image'] != ''){
-                        $imgThumb = route('home') . '/public'.$val['details']['image'];
-                    } else{
-                        $imgThumb = route('home') . '/public/fileUpload/nhathuoc/benh_vien_mac_dinh.jpg';
-                    }
-                    $slug = $val['slug'];
-                    $linkShop = route('fe.product.drugstore', $slug);
-                    $address='';
-                    $ward='';
-                    if(isset($val['details'])){
-                        $ward_detail = !empty($val['details']['ward_id']) ? (new WardModel())->getItem(['id' => $val['details']['ward_id']], ['task' => 'get-item-full']): null;
-                        if($ward_detail){
-                            $ward = isset($ward_detail['name']) ? ' ' . $ward_detail['name'] : '';
-                            $district = isset($ward_detail['district']['name']) ? ', ' . $ward_detail['district']['name'] : '';
-                            $province = isset($ward_detail['district']['province']['name']) ? ', ' . $ward_detail['district']['province']['name'] : '';
-                        }else{
-                            $province_detail = !empty($val['details']['province_id']) ? (new ProvinceModel)->getItem(['id' => $val['details']['province_id']], ['task' => 'get-item-full']): null;
-                            $province = isset($province_detail['name']) ? ', ' . $province_detail['name'] : '';
-                            $district_detail = !empty($val['details']['district_id']) ? (new DistrictModel())->getItem(['id' => $val['details']['district_id']], ['task' => 'get-item-full']): null;
-                            $district = isset($district_detail['name']) ? $district_detail['name'] : '';
-                        }
-                        $address = ($val['details']['address'] ?? '') . $ward . $district . $province;
-                    }
-                    $phoneOfShopShow = $val['phone'] ?? $val['email'];
-                    $phoneOfShop=MyFunction::formatPhoneNumber($phoneOfShopShow) ?? '';
-                @endphp
             <tr>
                 <td>
                     <div class="wp-img">
-                        <a href="{{$linkShop}}">
-                            <img src="{{$imgThumb}}" alt="tdoctor" loading="lazy" width="100" height="100" decoding="async">
+                        <a href="{{ $val->linkShop }}">
+                            <img 
+                                src="{{ $val->imgThumb }}" 
+                                alt="tdoctor"
+                                loading="lazy"
+                                width="100"
+                                height="100"
+                            >
                         </a>
                     </div>
                 </td>
                 <td>
-                    <a href="{{$linkShop}}" class="text-danger font-weight-bold">
-                        <span>{{$val['fullname']}}</span>
+                    <a href="{{ $val->linkShop }}" class="text-danger font-weight-bold">
+                        {{ $val->fullname }}
                     </a>
                     <div class="info-drustore mt-2">
                         <ul class="list-unstyled address__list">
                             <li class="mb-2">
-                                <img src="{{asset('public/images/shop/dc1.png')}}" alt="Head Office Tdoctor.vn" loading="lazy" width="30" height="30" decoding="async">
-                                <span>Địa chỉ : {{$address}}</span>
+                                <img src="{{ asset('public/images/shop/dc1.png') }}" width="30">
+                                <span>Địa chỉ: {{ $val->address }}</span>
                             </li>
                             <li class="mb-2">
-                                <img src="{{asset('public/images/shop/dc3.png')}}" alt="Hotline Tdoctor.vn" loading="lazy" width="30" height="30" decoding="async">
-                                <span>Mở cửa: lúc 6h sáng đến 10h tối</span>
+                                <img src="{{ asset('public/images/shop/dc3.png') }}" width="30">
+                                <span>Mở cửa: 6h - 22h</span>
                             </li>
                             <li>
-                                <img src="{{asset('public/images/shop/dc4.png')}}" alt="MST của Tdoctor.vn" loading="lazy" width="30" height="30" decoding="async">
-                                <span>Số điện thoại: {{$phoneOfShop}}</span>
+                                <img src="{{ asset('public/images/shop/dc4.png') }}" width="30">
+                                <span>Số điện thoại: {{ $val->phoneFormatted }}</span>
                             </li>
                         </ul>
                     </div>
                     <div class="text-center">
-                        <a href="{{$linkShop}}" class="btn btn-sm btn-primary">Chi tiết</a>
+                        <a href="{{ $val->linkShop }}" class="btn btn-sm btn-primary">
+                            Chi tiết
+                        </a>
                     </div>
                 </td>
                 <td class="d-none d-md-table-cell">
-                    <div class="icheck-info">
-                        <input type="checkbox" class="check-input-readonly" checked readonly />
-                        <label for="someCheckboxId">Nhà thuốc chính hãng</label>
-                    </div>
-                    <div class="icheck-info">
-                        <input type="checkbox" class="check-input-readonly" checked readonly />
-                        <label for="someCheckboxId">Dược sỹ tư vấn tại chỗ</label>
-                    </div>
-                    <div class="icheck-info">
-                        <input type="checkbox" class="check-input-readonly" checked readonly />
-                        <label for="someCheckboxId">Giao hàng tận nơi</label>
-                    </div>
-                    <div class="icheck-info">
-                        <input type="checkbox" class="check-input-readonly" checked readonly />
-                        <label for="someCheckboxId">Dược sỹ tư vấn tại chỗ</label>
-                    </div>
-                    <div class="icheck-info">
-                        <input type="checkbox" class="check-input-readonly" checked readonly />
-                        <label for="someCheckboxId">Chuyên thuốc theo toa</label>
-                    </div>
-                    <div class="icheck-info">
-                        <input type="checkbox" class="check-input-readonly" checked readonly />
-                        <label for="someCheckboxId">Mua lẻ với giá sỉ</label>
-                    </div>
-                    <div class="icheck-info">
-                        <input type="checkbox" class="check-input-readonly" checked readonly />
-                        <label for="someCheckboxId">Đổi trả nguyên giá</label>
-                    </div>
+                    @php
+                        $services = [
+                            'Nhà thuốc chính hãng',
+                            'Dược sỹ tư vấn tại chỗ',
+                            'Giao hàng tận nơi',
+                            'Chuyên thuốc theo toa',
+                            'Mua lẻ với giá sỉ',
+                            'Đổi trả nguyên giá'
+                        ];
+                    @endphp
+                    @foreach($services as $service)
+                        <div class="icheck-info">
+                            <input type="checkbox" checked readonly>
+                            <label>{{ $service }}</label>
+                        </div>
+                    @endforeach
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
     <div class="pagination">
-   		{!! $items->appends(request()->input())->links('shop.frontend.pages.pagination.pagination_admin'); !!}
+        {!! $items->appends(request()->input())->links('shop.frontend.pages.pagination.pagination_admin') !!}
     </div>
 </div>

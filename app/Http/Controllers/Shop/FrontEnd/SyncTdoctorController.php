@@ -12,6 +12,7 @@ use App\Model\Shop\ProductModel;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
+use GuzzleHttp\Client;
 
 class SyncTdoctorController extends ShopFrontEndController
 {
@@ -536,5 +537,46 @@ class SyncTdoctorController extends ShopFrontEndController
         $pageTitle = 'Xóa cache user thành công';
         $notification = 'Xóa cache user thành công';
         return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalInserted', 'notification'));
+    }
+    public function preloadProductImagesBatch($startId = 1, $endId = 100, $batchSize = 50, $sleep = 2)
+    {
+        $products = DB::table('products')
+            ->whereBetween('id', [$startId, $endId])
+            ->select('image', 'albumImageHash')
+            ->get();
+        $images = [];
+        foreach ($products as $item) {
+            // Ảnh chính
+            if (!empty($item->image)) {
+                $images[] = asset('public' . $item->image);
+            }
+            // Album
+            if (!empty($item->albumImageHash)) {
+                $album = explode('|', $item->albumImageHash);
+                foreach ($album as $img) {
+                    $images[] = asset('public/fileUpload/product/' . $img);
+                }
+            }
+        }
+        if (empty($images)) {
+            return;
+        }
+        $client = new Client(['timeout' => 10, 'verify' => false]);
+        $chunks = array_chunk($images, $batchSize);
+        foreach ($chunks as $chunk) {
+            foreach ($chunk as $url) {
+                try {
+                    $res = $client->get($url);
+                    if ($res->getStatusCode() == 200) {
+                        \Log::info("Preloaded image: {$url}");
+                    } else {
+                        \Log::warning("Failed to preload: {$url} - status {$res->getStatusCode()}");
+                    }
+                } catch (\Exception $e) {
+                    \Log::error("Error preloading {$url}: " . $e->getMessage());
+                }
+            }
+            sleep($sleep); // tránh quá tải server
+        }
     }
 }
