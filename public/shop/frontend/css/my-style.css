@@ -5716,6 +5716,22 @@ input[type="radio"] {
         width: 100%;
         overflow: auto;
     }
+    #hisd {
+        display: none;
+    }
+    #box-search-fixed{
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        height: 100%;
+        z-index: 502;
+        display: none;
+        overflow-x: hidden;
+        width: 100%;
+        transition: all ease-out 0.3s;
+        background-color: #edf2f8;
+    }
     .presp {
         padding-bottom: 0.5rem;
     }
@@ -6402,10 +6418,6 @@ input[type="radio"] {
         margin-right: 0px;
     }
 
-    #hisd {
-        display: none;
-    }
-
     #service-doctor .list_servicetdoctor li {
         padding: 30px 15px;
         width: 30%;
@@ -6422,19 +6434,6 @@ input[type="radio"] {
 @media screen and (max-width: 768px) {
     .item-product-simple {
         min-height: auto;
-    }
-    #box-search-fixed{
-        position: fixed;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        height: 100%;
-        z-index: 502;
-        display: none;
-        overflow-x: hidden;
-        width: 100%;
-        transition: all ease-out 0.3s;
-        background-color: #edf2f8;
     }
     .header-box-search{
         padding: 8px 10px 8px 10px;
