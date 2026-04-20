@@ -51,7 +51,7 @@
         </div>
         <div class="span col-4 col-sm-2 m alone text-center mb-3">
             <a href="">
-                <h5 class="counter ctr4">9.100</h5>
+                <h5 class="counter ctr4">10.737</h5>
                 <em>Sản phẩm</em>
             </a>
         </div>

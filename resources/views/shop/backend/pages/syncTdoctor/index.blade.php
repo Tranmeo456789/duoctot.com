@@ -115,6 +115,18 @@
                         <p>Xóa cache danh sách Nhà thuốc</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('fe.SyncTdoctor.clearListBenhVienCache')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Xóa cache danh sách Bệnh Viện</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('fe.SyncTdoctor.clearListPhongKhamCache')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Xóa cache danh sách Phòng Khám</p>
+                    </a>
+                </li>
             </ul>
         </li>
     </ul>

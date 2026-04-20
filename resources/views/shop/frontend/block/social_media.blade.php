@@ -38,6 +38,7 @@
         width: 100%;
         border-radius: 0;
         padding: 0;
+        padding-left: 10px;
         display: flex;
         justify-content: center;
         box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
