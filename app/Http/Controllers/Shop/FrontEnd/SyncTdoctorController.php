@@ -554,6 +554,22 @@ class SyncTdoctorController extends ShopFrontEndController
         $notification = 'Xóa cache danh sách phòng khám thành công';
         return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalInserted', 'notification'));
     }
+    public function clearListShopChungCache()
+    {
+        Cache::tags(['duoctot_shopchung'])->flush();
+        $totalInserted=9;
+        $pageTitle = 'Xóa cache danh sách shop chung thành công';
+        $notification = 'Xóa cache danh sách shop chung thành công';
+        return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalInserted', 'notification'));
+    }
+    public function clearListTrinhDuocVienCache()
+    {
+        Cache::tags(['duoctot_trinhduocvien'])->flush();
+        $totalInserted=9;
+        $pageTitle = 'Xóa cache danh sách trình dược viên thành công';
+        $notification = 'Xóa cache danh sách trình dược viên thành công';
+        return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalInserted', 'notification'));
+    }
     public function preloadProductImagesBatch($startId = 1, $endId = 100, $batchSize = 50, $sleep = 2)
     {
         $products = DB::table('products')

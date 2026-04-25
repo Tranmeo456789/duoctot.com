@@ -11,7 +11,7 @@
         </div>
         @foreach($albumImageCurrent as $val)
         <div class="swiper-slide text-center">
-            <img src="{{ asset('laravel-filemanager/fileUpload/user/'.$val) }}" class="img-thumbnail image-zoom-popup" loading="lazy" alt="tdoctor" />
+            <img src="{{ asset('public/fileUpload/user/'.$val) }}" class="img-thumbnail image-zoom-popup" loading="lazy" alt="tdoctor" />
         </div>
         @endforeach
     </div>

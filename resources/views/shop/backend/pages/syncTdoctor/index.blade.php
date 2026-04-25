@@ -127,6 +127,18 @@
                         <p>Xóa cache danh sách Phòng Khám</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('fe.SyncTdoctor.clearListShopChungCache')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Xóa cache danh sách Shop Chung</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('fe.SyncTdoctor.clearListTrinhDuocVienCache')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Xóa cache danh sách Trình Dược Viên</p>
+                    </a>
+                </li>
             </ul>
         </li>
     </ul>

@@ -146,4 +146,6 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('xoa-cache-user-front-end','SyncTdoctorController@clearUserCache')->name('fe.SyncTdoctor.clearUserCache');
     Route::get('xoa-cache-danh-sach-benh-vien','SyncTdoctorController@clearListBenhVienCache')->name('fe.SyncTdoctor.clearListBenhVienCache');
     Route::get('xoa-cache-danh-sach-phong-kham','SyncTdoctorController@clearListPhongKhamCache')->name('fe.SyncTdoctor.clearListPhongKhamCache');
+    Route::get('xoa-cache-danh-sach-shop-chung','SyncTdoctorController@clearListShopChungCache')->name('fe.SyncTdoctor.clearListShopChungCache');
+    Route::get('xoa-cache-danh-sach-trinh-duoc-vien','SyncTdoctorController@clearListTrinhDuocVienCache')->name('fe.SyncTdoctor.clearListTrinhDuocVienCache');
     });
