@@ -147,10 +147,8 @@ class CatalogModel extends BackEndModel
     }
     public function getCatLieuThuocTay()
     {
-        return Cache::remember('duoctot_cat_lieu_thuoc_tay', 86400, function () {
-            $catIds = [16,22,29,33,67,68,69,70,71,72,73,74,75,76];
-            return $this->whereIn('id', $catIds)->get();
-        });
+        $catIds = [22,29,33,67,68,69,70,71,72,73,74,75,76];
+        return $this->whereIn('id', $catIds)->get();
     }
     public function customerFeedBack()
     {

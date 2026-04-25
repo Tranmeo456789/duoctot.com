@@ -1,15 +1,15 @@
 @php
 use App\Helpers\MyFunction;
 
-$imageSrc = isset($userInfo['details']['image']) ? $userInfo['details']['image'] : route('home') . '/laravel-filemanager/fileUpload/nhathuoc/6875c9e1945c0.jpg';
+$imageSrc = isset($userInfo['details']['image']) ? $userInfo['details']['image'] : route('home') . '/public/fileUpload/nhathuoc/6875c9e1945c0.jpg';
 if (isset($userInfo['details']['image']) && $userInfo['details']['image'] != ''){
-$imageSrc = route('home') . $userInfo['details']['image'];
+$imageSrc = route('home') .'/public'. $userInfo['details']['image'];
 } elseif ($userInfo['user_type_id'] == 2) {
-    $imageSrc = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/6898c9b8bf789.jpg';
+    $imageSrc = route('home') . '/public/fileUpload/nhathuoc/6898c9b8bf789.jpg';
 }else{
-    $imageSrc = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/nhathuocmau10.jpg';
+    $imageSrc = route('home') . '/public/fileUpload/nhathuoc/nhathuocmau10.jpg';
 }
-$imageMap = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/mapduphong.jpeg';
+$imageMap = route('home') . '/public/fileUpload/nhathuoc/mapduphong.jpeg';
 $userType = $userInfo['user_type_id'] ?? null;
 $phone    = $userInfo['phone'] ?? '';
 $email    = $userInfo['email'] ?? 'Đang cập nhật';

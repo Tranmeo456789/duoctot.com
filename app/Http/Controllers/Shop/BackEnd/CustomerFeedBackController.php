@@ -78,7 +78,7 @@ class CustomerFeedBackController extends BackEndController
                 $fileName = time() . '_' . $file->getClientOriginalName();
                 $destinationPath = public_path('fileUpload/customerFeedback'); 
                 $file->move($destinationPath, $fileName);
-                $params['image'] = '/laravel-filemanager/fileUpload/customerFeedback/'.$fileName;
+                $params['image'] = '/fileUpload/customerFeedback/'.$fileName;
             }
             $idCat=$params['cat_post_id'];
             $catPost=(new CatalogModel)->getItem(['id'=>$idCat],['task'=>'get-item']);
@@ -122,7 +122,7 @@ class CustomerFeedBackController extends BackEndController
             $file->move($destinationPath, $fileName);
     
             // Tạo URL cho file đã lưu
-            $url = asset('/laravel-filemanager/fileUpload/post/' . $fileName); 
+            $url = asset('/fileUpload/post/' . $fileName); 
             return response()->json(['url' => $url]);
         }
         return response()->json(['error' => 'File không hợp lệ.'], 400);

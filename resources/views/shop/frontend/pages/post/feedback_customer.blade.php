@@ -23,7 +23,7 @@ use App\Helpers\MyFunction;
         <div class="row mb-3">
             @foreach($catItem['customerFeedBack'] as $customerFeedBack)
             <div class="col-xl-3 col-6 pb-2">
-                <div class="wp-thumb-item"><img class="lazy image-zoom-popup" src="{{ asset($customerFeedBack['image']) }}" alt="phan hoi" class="rounded" style="width: 100%"></div>
+                <div class="wp-thumb-item"><img class="lazy image-zoom-popup" src="{{ asset('public'.$customerFeedBack['image']) }}" alt="phan hoi" class="rounded" style="width: 100%"></div>
             </div>
             @endforeach
         </div>

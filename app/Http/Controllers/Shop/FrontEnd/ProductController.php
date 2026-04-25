@@ -873,7 +873,7 @@ class ProductController extends ShopFrontEndController
             // Transform
             $items->getCollection()->transform(function ($val) use ($phoneOfShopConfig) {
                 $val->imgThumb = !empty($val['details']['image'])
-                    ? route('home') . $val['details']['image']
+                    ? route('home') .'public'.$val['details']['image']
                     : route('home') . '/public/fileUpload/nhathuoc/nhathuocmau10.jpg';
 
                 $val->linkShop = route('fe.product.drugstore', $val['slug']);
