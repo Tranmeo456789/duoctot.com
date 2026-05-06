@@ -28,8 +28,10 @@ class HomeController extends ShopFrontEndController
         // if ($request->has('t')) {
         //     return redirect()->to(route('home'));
         // }
-        //Cache::forget('duoctot_cache_product_best_data'); 
-        //Cache::forget('duoctot_cache_ncc_data'); 
+        // Cache::forget('duoctot_cache_product_best_data'); 
+        // Cache::forget('duoctot_cache_ncc_data'); 
+        // Cache::forget('duoctot_cache_product_new_data'); 
+        // Cache::forget('duoctot_cache_product_km_data'); 
         $numTake=10;
         $keyCacheNcc = 'duoctot_cache_ncc_data';
         $keyCacheProductNew = 'duoctot_cache_product_new_data';

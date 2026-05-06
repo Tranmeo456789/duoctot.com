@@ -71,8 +71,8 @@
             @foreach($group as $val)
             @php
             $imgThumb = isset($val['details']['image']) && $val['details']['image'] != ''
-            ? route('home') . $val['details']['image']
-            : route('home') . '/laravel-filemanager/fileUpload/nhathuoc/nhathuocmau10.jpg';
+            ? route('home') .'/public'. $val['details']['image']
+            : route('home') . '/public/fileUpload/nhathuoc/nhathuocmau10.jpg';
 
             $slug = $val['slug'];
             $linkShop = route('fe.product.drugstore', $slug);

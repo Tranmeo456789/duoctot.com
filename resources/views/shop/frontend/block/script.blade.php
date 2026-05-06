@@ -17,7 +17,7 @@ window.addEventListener("load", function () {
                         img.src = placeholder;
                         img.classList.add("loaded");
                     }
-                }, 2000);
+                }, 6000);
                 // Khi load xong → hủy timeout và fade
                 img.addEventListener("load", () => {
                     clearTimeout(timeoutId);
@@ -33,7 +33,7 @@ window.addEventListener("load", function () {
             }
         });
     }, {
-        rootMargin: "300px 0px", // cách 300px mới load
+        rootMargin: "100px 0px", // cách 300px mới load
         threshold: 0
     });
     images.forEach(img => observer.observe(img));
