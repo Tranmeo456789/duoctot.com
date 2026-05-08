@@ -230,25 +230,25 @@ class SearchController extends ShopFrontEndController
         //     echo $url . '<br>';
         // }
     // lấy sitemap post
-        // $slugs = PostModel::orderBy('id', 'asc')
-        // ->take(1000)
-        // ->pluck('slug');
-        // $urls = $slugs->map(function ($slug) {
-        //     return 'https://duoctot.com/tin-tuc/' . $slug.'.html';
-        // });
-        // foreach ($urls as $url) {
-        //     echo $url . '<br>';
-        // }
-        // lấy sitemap user
-        $slugs = UsersModel::where('user_type_id',12)->orderBy('user_id', 'asc')
+        $slugs = PostModel::orderBy('id', 'asc')
         ->take(1000)
         ->pluck('slug');
         $urls = $slugs->map(function ($slug) {
-            return 'https://duoctot.com/' . $slug.'.html';
+            return 'https://duoctot.com/tin-tuc/' . $slug.'.html';
         });
         foreach ($urls as $url) {
             echo $url . '<br>';
         }
+        // lấy sitemap user
+        // $slugs = UsersModel::where('user_type_id',12)->orderBy('user_id', 'asc')
+        // ->take(1000)
+        // ->pluck('slug');
+        // $urls = $slugs->map(function ($slug) {
+        //     return 'https://duoctot.com/' . $slug.'.html';
+        // });
+        // foreach ($urls as $url) {
+        //     echo $url . '<br>';
+        // }
         // $orderAll = OrderModel::all();
         //     foreach ($orderAll as $order) {
         //         $receive = $order->receive;
