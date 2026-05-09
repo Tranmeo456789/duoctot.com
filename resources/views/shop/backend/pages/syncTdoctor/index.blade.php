@@ -139,6 +139,18 @@
                         <p>Xóa cache danh sách Trình Dược Viên</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('fe.SyncTdoctor.clearListMeVaBeCache')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Xóa cache danh sách Mẹ và Bé</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('fe.SyncTdoctor.clearListThamMyVien')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Xóa cache danh sách Thẩm Mỹ Viện</p>
+                    </a>
+                </li>
             </ul>
         </li>
     </ul>
