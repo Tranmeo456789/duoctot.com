@@ -1,4 +1,4 @@
-@foreach($items as $val)
+@foreach($items as $index => $val)
     @php
         if(!empty($val['percent_discount'])){
             $priceOld=$val['price']*(1+$val['percent_discount']/100);
@@ -7,7 +7,12 @@
     <li class="position-relative">
         <a href="{{route('fe.product.detail',$val['slug'])}}" class="d-block">
             <div class="wp-img-thumb-product mb-2">
-                <img class="lazy" src="{{asset('public'.$val['image'])}}" width="180" height="180" decoding="async" alt="{{$val['name'] ?? ''}}">
+                 <img src="{{ asset('public'.$val['image']) }}"
+                    width="180"
+                    height="180"
+                    alt="{{ $val['name'] ?? '' }}"
+                    loading="{{ $index < 4 ? 'eager' : 'lazy' }}"
+                    fetchpriority="{{ $index < 2 ? 'high' : 'auto' }}">
             </div>
             <div class="pl-1">
                 <div class="d-flex align-items-center wp-name-product">

@@ -11,13 +11,13 @@ use App\Helpers\MyFunction;
             <div class="row">
                 <div class="pb-3 col-xl-12 col-6">
                     <a href="{{route('fe.post.detail.webview',$itemNews[2]['slug'])}}" class="d-block">
-                        <div class="wp-thumb-item"><img class="lazy" src="{{asset($itemNews[2]['image'])}}" alt="{{$itemNews[2]['title']}}" class="rounded"></div>
+                        <div class="wp-thumb-item"><img loading="lazy" src="{{asset($itemNews[2]['image'])}}" alt="{{$itemNews[2]['title']}}" class="rounded"></div>
                         <p class="truncate2 pb-0 text-dark font-weight-bold">{{$itemNews[2]['title']}}</p>
                     </a>
                 </div>
                 <div class="col-xl-12 col-6">
                     <a href="{{route('fe.post.detail.webview',$itemNews[1]['slug'])}}" class="d-block">
-                        <div class="wp-thumb-item"><img class="lazy" src="{{asset($itemNews[1]['image'])}}" alt="{{$itemNews[1]['title']}}" class="rounded"></div>
+                        <div class="wp-thumb-item"><img loading="lazy" src="{{asset($itemNews[1]['image'])}}" alt="{{$itemNews[1]['title']}}" class="rounded"></div>
                         <p class="truncate2 pb-0 text-dark font-weight-bold">{{$itemNews[1]['title']}}</p>
                     </a>
                 </div>
@@ -25,7 +25,7 @@ use App\Helpers\MyFunction;
         </div>
         <div class="col-xl-6 col-lg-12">
             <a href="{{route('fe.post.detail.webview',$itemNews[0]['slug'])}}" class="d-block">
-                <div class="wp-thumb-item"><img class="lazy" src="{{asset($itemNews[0]['image'])}}" alt="{{$itemNews[0]['title']}}" class="rounded"></div>
+                <div class="wp-thumb-item"><img loading="lazy" src="{{asset($itemNews[0]['image'])}}" alt="{{$itemNews[0]['title']}}" class="rounded"></div>
                 <p class="truncate2 pb-0 text-dark font-weight-bold pb-3">{{$itemNews[0]['title']}}</p>
             </a>
         </div>
@@ -33,13 +33,13 @@ use App\Helpers\MyFunction;
             <div class="row">
                 <div class="pb-3 col-xl-12 col-6">
                     <a href="{{route('fe.post.detail.webview',$itemNews[3]['slug'])}}" class="d-block">
-                        <div class="wp-thumb-item"><img class="lazy" src="{{asset($itemNews[3]['image'])}}" alt="{{$itemNews[3]['title']}}" class="rounded"></div>
+                        <div class="wp-thumb-item"><img loading="lazy" src="{{asset($itemNews[3]['image'])}}" alt="{{$itemNews[3]['title']}}" class="rounded"></div>
                         <p class="truncate2 pb-0 text-dark font-weight-bold">{{$itemNews[3]['title']}}</p>
                     </a>
                 </div>
                 <div class="col-xl-12 col-6">
                     <a href="{{route('fe.post.detail.webview',$itemNews[4]['slug'])}}" class="d-block">
-                        <div class="wp-thumb-item"><img class="lazy" src="{{asset($itemNews[4]['image'])}}" alt="{{$itemNews[4]['title']}}" class="rounded"></div>
+                        <div class="wp-thumb-item"><img loading="lazy" src="{{asset($itemNews[4]['image'])}}" alt="{{$itemNews[4]['title']}}" class="rounded"></div>
                         <p class="truncate2 pb-0 text-dark font-weight-bold">{{$itemNews[4]['title']}}</p>
                     </a>
                 </div>
@@ -53,7 +53,7 @@ use App\Helpers\MyFunction;
         @foreach($catItem['post'] as $post)
         <div class="col-xl-3 col-6 pb-2">
             <a href="{{route('fe.post.detail.webview',$post['slug'])}}" class="d-block">
-                <div class="wp-thumb-item"><img class="lazy" src="{{asset($post['image'])}}" alt="{{$post['title']}}" class="rounded"></div>
+                <div class="wp-thumb-item"><img loading="lazy" src="{{asset($post['image'])}}" alt="{{$post['title']}}" class="rounded"></div>
                 <p class="truncate2 pb-0 text-dark font-weight-bold">{{$post['title']}}</p>
             </a>
         </div>
