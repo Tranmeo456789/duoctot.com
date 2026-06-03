@@ -489,9 +489,12 @@ class SyncTdoctorController extends ShopFrontEndController
     {
         $getAllId = ProductModel::pluck('id')->toArray();
         $totalInserted=0;
-        foreach ($getAllId as $id) {
-            $keyCacheProduct = 'duoctot_cache_product_data_' . $id;
-            Cache::forget($keyCacheProduct);
+        foreach ($getAllId as $product) {
+            $slug = $product->slug;
+            // Xóa cache guest
+            Cache::forget('duoctot_product_guest_' . $slug);
+            // Xóa cache login
+            Cache::forget('duoctot_product_login_' . $slug);
             $totalInserted++;
         }
         $pageTitle = 'Xóa cache product thành công';

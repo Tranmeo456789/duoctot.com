@@ -24,7 +24,7 @@ use App\Helpers\MyFunction;
         <div class="col-xl-3 col-6 pb-2">
             <a href="{{route('fe.post.detail',$post['slug'])}}" class="d-block">
                 <div class="wp-thumb-item">
-                    <img data-src="{{asset($post['image'])}}" src="{{asset('fileUpload/post/anh-bai-viet-mac-dinh-blur.jpg')}}" alt="{{$post['title']}}" class="rounded" loading="lazy">
+                    <img src="{{asset($post['image'])}}" alt="{{$post['title']}}" class="rounded" loading="lazy">
                 </div>
                 <p class="truncate2 pb-0 text-dark font-weight-bold">{{$post['title']}}</p>
             </a>
