@@ -614,8 +614,11 @@ class ProductController extends ShopFrontEndController
         $params['rating'] = $request->input('rating') ?? null;
         $params['albumImage'] = $request->file('albumImage') ?? null;
         (new CommentModel)->saveItem($params, ['task' => 'add-item']);
+        $keyCache = 'duoctot_cache_product_data_' . $params['product_id'];
+        Cache::forget($keyCache);
         if ($request->rating != null) {
             if ($request->shopId) {
+                Cache::tags('duoctot_drugstore')->flush();
                 $ratingShop = (new CommentModel)->listItems(['shop_id' => $params['shop_id'], 'rating' => 1], ['task' => 'list-items-frontend']);
                 $userInfo['user_id'] = $params['shop_id'];
                 return view("$this->moduleName.pages.product.child_drugstore.content_rating", [

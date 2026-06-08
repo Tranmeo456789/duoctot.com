@@ -5,7 +5,7 @@
     <div class="d-flex justify-content-between flex-wrap">
         <div class="average-rating-left text-center">
             <p>Trung bình</p>
-            <span class="sst">{{$averageRating}}/5</span>
+            <span class="sst">{{ $averageRating ?? 0 }}/5</span>
             <div class="rating text-warning" id="starRating">
                 <span class="star" data-rating="1">★</span>
                 <span class="star" data-rating="2">★</span>
@@ -16,6 +16,9 @@
             <!-- <span class="text-muted">3 đánh giá</span> -->
         </div>
         <div class="col-md-6 col-12">
+            @php
+                $ratingPercentages = $ratingPercentages ?? [5=>0,4=>0,3=>0,2=>0,1=>0];
+            @endphp
             @for ($i = 5; $i >= 1; $i--)
             <div class="d-flex align-items-center justify-content-center pb-1">
                 <small class="text-muted mr-2">{{$i}} <span class="star" data-rating="1">★</span></small>
