@@ -222,15 +222,17 @@
                 'widthElement' => 'col-12',
             ]
         ];
-    $arrFeaturer = config('myconfig.template.type_featurer');
-    foreach($arrFeaturer as $key_featurer => $type_featurer){
-        $elements2[] = [
-            'label'   => Form::label('', $type_featurer, $formLabelAttr),
-            'element' => Form::checkbox('featurer[]', $key_featurer,isset($item['featurer']) && in_array($key_featurer,$item['featurer']??'') ,array_merge($formInputAttr)),
-            'type' =>'inline-text-right',
-            'widthElement' => 'col-3',
-            'styleFormGroup' => 'mb-1',
-        ];
+    if ((Session::has('user') && Session::get('user')['is_admin'] == 1) || (Session::has('user') && Session::get('user')['is_admin'] == 2) ){
+        $arrFeaturer = config('myconfig.template.type_featurer');
+        foreach($arrFeaturer as $key_featurer => $type_featurer){
+            $elements2[] = [
+                'label'   => Form::label('', $type_featurer, $formLabelAttr),
+                'element' => Form::checkbox('featurer[]', $key_featurer,isset($item['featurer']) && in_array($key_featurer,$item['featurer']??'') ,array_merge($formInputAttr)),
+                'type' =>'inline-text-right',
+                'widthElement' => 'col-3',
+                'styleFormGroup' => 'mb-1',
+            ];
+        }
     }
     $elements2 = array_merge($elements2,
         [

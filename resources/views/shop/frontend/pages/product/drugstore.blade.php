@@ -20,8 +20,8 @@ $isPhone   = false;
 // USER TYPE 9 → luôn dùng số mặc định
 if ($userType == 9) {
     $phoneShop = $defaultPhone;
-    if($userInfo['user_id']==1984151811){
-        $phoneShop=$userInfo['phone'] ?? '';
+    if (in_array($userInfo['user_id'], [1984151811, 1984152436])) {
+        $phoneShop = $userInfo['phone'] ?? '';
     }
     $isPhone   = true;
 } elseif ($userType == 6) {
