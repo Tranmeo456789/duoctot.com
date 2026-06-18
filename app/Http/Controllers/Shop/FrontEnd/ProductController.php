@@ -583,6 +583,57 @@ class ProductController extends ShopFrontEndController
             $title = !empty($userInfo->fullname)
                 ? $userInfo->fullname
                 : 'Sàn thương mại điện tử trong y dược số 1 Việt Nam';
+            $item['name']=$userInfo->fullname??'';
+            $item['description']=$userInfo->fullname??'';
+            
+            $imageSrc = isset($userInfo['details']['image']) ? $userInfo['details']['image'] : route('home') . '/public/fileUpload/nhathuoc/6875c9e1945c0.jpg';
+            if (isset($userInfo['details']['image']) && $userInfo['details']['image'] != ''){
+            $imageSrc = route('home') .'/public'. $userInfo['details']['image'];
+            } elseif ($userInfo['user_type_id'] == 2) {
+                $imageSrc = route('home') . '/public/fileUpload/nhathuoc/6898c9b8bf789.jpg';
+            }else{
+                $imageSrc = route('home') . '/public/fileUpload/nhathuoc/nhathuocmau10.jpg';
+            }
+            $item['image']=$imageSrc;
+            $imageMap = route('home') . '/public/fileUpload/nhathuoc/mapduphong.jpeg';
+            $userType = $userInfo['user_type_id'] ?? null;
+            $phone    = $userInfo['phone'] ?? '';
+            $email    = $userInfo['email'] ?? 'Đang cập nhật';
+            $defaultPhone = '0393167234';
+            // Mặc định là email
+            $phoneShop = $email;
+            $isPhone   = false;
+            // USER TYPE 9 → luôn dùng số mặc định
+            if ($userType == 9) {
+                $phoneShop = $defaultPhone;
+                if (in_array($userInfo['user_id'], [1984151811, 1984152436])) {
+                    $phoneShop = $userInfo['phone'] ?? '';
+                }
+                $isPhone   = true;
+            } elseif ($userType == 6) {
+                if (!empty($phone)) {
+                    $len = strlen($phone);
+                    if ($len > 3) {
+                        $phoneShop = substr($phone, 0, -3) . '***';
+                    } else {
+                        $phoneShop = str_repeat('*', $len);
+                    }
+                } else {
+                    // Không có phone → số mặc định
+                    $phoneShop = $defaultPhone;
+                }
+                $isPhone = true;
+            }else {
+                if (!empty($phone)) {
+                    $phoneShop = $phone;
+                    $isPhone   = true;
+                }
+                // Không có phone → giữ email
+            }
+            // Chỉ format nếu là phone
+            if ($isPhone) {
+                $phoneShop = MyFunction::formatPhoneNumber($phoneShop);
+            }
             return [
                 'userInfo' => $userInfo,
                 'productDrugstore' => $productDrugstore,
@@ -594,6 +645,11 @@ class ProductController extends ShopFrontEndController
                 'albumImageCurrent' => $albumImageCurrent,
                 'averageRating' => $averageRating,
                 'ratingPercentages' => $ratingPercentages,
+                'imageMap' => $imageMap,
+                'phoneShop' => $phoneShop,
+                'item' => $item,            
+                'imageSrc' => $imageSrc,            
+                'userType' => $userType,            
             ];
         });
         if (!$data) {
