@@ -22,7 +22,7 @@ use App\Helpers\MyFunction;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Cache;
-
+use Illuminate\Support\Str;
 class ProductController extends ShopFrontEndController
 {
     public function __construct()
@@ -186,6 +186,14 @@ class ProductController extends ShopFrontEndController
     public function detail(Request $request)
     {
         $slug = $request->slug;
+        $slugNormalize = Str::slug($slug);
+        // User nhập hoa/thường, tiếng Việt, ký tự lạ
+        if ($slug !== $slugNormalize) {
+            return redirect()->to(
+                url('/chi-tiet-san-pham/' . $slugNormalize . '.html'),
+                301
+            );
+        }
         $session = $request->session();
         $codeRefLogin = '';
         $codeRefRegister = '';

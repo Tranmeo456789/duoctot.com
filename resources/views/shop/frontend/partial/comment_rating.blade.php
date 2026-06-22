@@ -33,7 +33,7 @@ $albumImageCurrentRating=!empty($val['albumImageHash']) ? explode('|', $val['alb
             <div>
                 @if(!empty($albumImageCurrentRating))
                     @foreach($albumImageCurrentRating as $val1)
-                        <span><img style="max-width: 150px;" src="{{asset('laravel-filemanager/fileUpload/comment/'.$val1)}}" /></span>
+                        <span><img style="max-width: 150px;" src="{{asset('public/fileUpload/comment/'.$val1)}}" /></span>
                     @endforeach
                 @endif
             </div>

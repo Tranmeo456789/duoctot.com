@@ -66,29 +66,35 @@
             <a class="image-contact" href="https://zalo.me/0345488247" rel="nofollow" target="_blank" title="Zalo" previewlistener="true">
                 <img src="{{asset('images/shop/icon_zalo.png')}}" alt="Zalo DuocTot">
             </a>
-            <a href="https://zalo.me/0345488247" rel="nofollow" target="_blank" title="Zalo Tdoctor" previewlistener="true">Zalo</a>
+            <a href="https://zalo.me/0345488247" rel="nofollow" target="_blank" title="Zalo Tdoctor" previewlistener="true" class="text-primary font-weight-bold">Zalo</a>
         </li>
         <li id="icon-fixed__facebook">
             <a class="image-contact" href="{{route('fe.home.pageKhuyenMai')}}">
-                <img src="{{asset('images/shop/khuyenmai.jpg')}}" alt="khuyến mãi">
+                <img src="{{asset('images/shop/khuyenmai.jpg')}}" alt="khuyến mãi" style="height:30px">
             </a>
             <a href="{{route('fe.home.pageKhuyenMai')}}" class="text-primary font-weight-bold">Khuyến mãi</a>
         </li>
-        <li id="icon-fixed__facebook">
+        <!-- <li id="icon-fixed__facebook">
             <a class="image-contact" href="{{route('fe.home.pageDiemTichLuy')}}">
                 <img src="{{asset('images/shop/tichluy.jpg')}}" alt="Điểm tích lũy">
             </a>
             <a href="{{route('fe.home.pageDiemTichLuy')}}" class="text-primary font-weight-bold">Điểm tích lũy</a>
+        </li> -->
+        <li id="icon-fixed__facebook" style="padding-top: 2px;">
+            <a class="image-contact" href='tel:0345488247' rel="nofollow" title="Gọi điện" previewlistener="true">
+                <img src="{{asset('images/shop/icon_goidien.png')}}" alt="Gọi điện Duoctot">
+            </a>
+            <a href='tel:0345488247' rel="nofollow" title="Call Duoctot" previewlistener="true" class="text-primary font-weight-bold">Gọi điện</a>
         </li>
         <li id="icon-fixed__facebook">
             <a class="image-contact" href="{{route('fe.home.pageRiengChoBan')}}">
-                <img src="{{asset('images/shop/riengchoban.jpg')}}" alt="riêng cho bạn">
+                <img src="{{asset('images/shop/riengchoban.jpg')}}" alt="riêng cho bạn" style="height:30px">
             </a>
             <a href="{{route('fe.home.pageRiengChoBan')}}" class="text-primary font-weight-bold">Riêng cho bạn</a>
         </li>
         <li id="icon-fixed__facebook">
             <a class="image-contact" href="{{route('fe.home.pageDanhSachDonMua')}}">
-                <img src="{{asset('images/shop/donmua.jpg')}}" alt="Đơn hàng">
+                <img src="{{asset('images/shop/donmua.jpg')}}" alt="Đơn hàng" style="height:30px">
             </a>
             <a href="{{route('fe.home.pageDanhSachDonMua')}}" class="text-primary font-weight-bold">Đơn hàng</a>
         </li>

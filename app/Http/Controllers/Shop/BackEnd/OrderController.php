@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Shop\BackEnd;
 use Illuminate\Http\Request;
 use App\Model\Shop\WarehouseModel;
 use App\Model\Shop\ProductModel;
+use App\Model\Shop\PostModel;
 use App\Model\Shop\OrderProductModel;
 use App\Model\Shop\WardModel;
 use App\Model\Shop\UsersModel;
@@ -429,6 +430,150 @@ class OrderController extends BackEndController
                 'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
                 'Content-Disposition' => 'attachment;filename="' . $fileName . '"',
                 'Cache-Control' => 'max-age=0',
+            ]
+        );
+    }
+    public function exportListPostFileExcel(Request $request)
+    {
+        $items = PostModel::orderBy('id')->limit(1000)->get();
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        // HEADER
+        $sheet->setCellValue('A1', 'Tên bài viết');
+        $sheet->setCellValue('B1', 'URL');
+        $sheet->setCellValue('C1', 'Title tag');
+        $sheet->setCellValue('D1', 'Meta description');
+        $sheet->setCellValue('E1', 'SL ảnh');
+        $sheet->setCellValue('F1', 'Độ dài ND');
+        $sheet->setCellValue('G1', 'Danh mục');
+        $sheet->setCellValue('H1', 'Ngày đăng');
+        foreach (range('A', 'H') as $col) {
+            $sheet->getStyle($col . '1')->getFont()->setBold(true);
+            $sheet->getColumnDimension($col)->setAutoSize(true);
+        }
+        $row = 2;
+        foreach ($items as $item) {
+            // A: Tên bài viết
+            $sheet->setCellValue('A' . $row, $item->title);
+            // B: URL
+            $url = 'https://duoctot.com/tin-tuc/' . $item->slug . '.html';
+            $sheet->setCellValue('B' . $row, $url);
+            // C: Title tag = title
+            $sheet->setCellValue('C' . $row, $item->title);
+            // D: Meta description = description
+            $sheet->setCellValue('D' . $row, $item->description);
+            //đếm số lượng ảnh
+            $imageCount = max(1, substr_count($item->content ?? '', 'fileUpload'));
+            $sheet->setCellValue('E' . $row, $imageCount);
+            // F: Độ dài nội dung content (strip HTML)
+            $text = $item->title . ' ' . strip_tags($item->content ?? '');
+            // chuẩn hoá khoảng trắng
+            $text = trim(preg_replace('/\s+/u', ' ', $text));
+            // tách từ tiếng Việt
+            $words = preg_split('/\s+/u', $text, -1, PREG_SPLIT_NO_EMPTY);
+            $wordCount = count($words);
+            $sheet->setCellValue('F' . $row, $wordCount);
+            // G: Danh mục
+            $category = $item->catPost->name ?? '';
+            $sheet->setCellValue('G' . $row, $category);
+            // H: Ngày đăng
+            $sheet->setCellValue('H' . $row, $item->created_at);
+            $row++;
+        }
+        $writer = new Xlsx($spreadsheet);
+        $fileName = 'posts_export_' . date('Y_m_d_H_i_s') . '.xlsx';
+        return response()->stream(
+            function () use ($writer) {
+                $writer->save('php://output');
+            },
+            200,
+            [
+                'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'Content-Disposition' => 'attachment;filename="' . $fileName . '"',
+            ]
+        );
+    }
+    public function exportListProductFileExcel(Request $request)
+    {
+        // $items = ProductModel::with('catProduct')
+        // ->where('status_product', 'da_duyet')
+        // ->orderBy('id')
+        // ->limit(1000)
+        // ->get();
+        $items = ProductModel::with('catProduct')
+        ->where('status_product', 'da_duyet')
+        ->orderBy('id')
+        ->offset(10000)
+        ->limit(2000)
+        ->get();
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        // HEADER
+        $sheet->setCellValue('A1', 'Tên sản phẩm');
+        $sheet->setCellValue('B1', 'URL');
+        $sheet->setCellValue('C1', 'Title tag');
+        $sheet->setCellValue('D1', 'Meta description');
+        $sheet->setCellValue('E1', 'SL ảnh');
+        $sheet->setCellValue('F1', 'Độ dài ND');
+        $sheet->setCellValue('G1', 'Danh mục');
+        $sheet->setCellValue('H1', 'Ngày đăng');
+        foreach (range('A', 'H') as $col) {
+            $sheet->getStyle($col . '1')->getFont()->setBold(true);
+            $sheet->getColumnDimension($col)->setAutoSize(true);
+        }
+        $row = 2;
+        foreach ($items as $item) {
+            // A: Tên sản phẩm
+            $sheet->setCellValue('A' . $row, $item->name);
+            // B: URL
+            $url = 'https://duoctot.com/chi-tiet-san-pham/' . $item->slug . '.html';
+            $sheet->setCellValue('B' . $row, $url);
+            // C: Title tag
+            $sheet->setCellValue('C' . $row, $item->name);
+            // D: Meta description
+            $sheet->setCellValue('D' . $row, $item->meta_description);
+            // E: SL ảnh (albumImage + image)
+            $imageCount = 0;
+            if (!empty($item->image)) {
+                $imageCount += 1;
+            }
+            if (!empty($item->albumImage)) {
+                $imageCount += 1;
+            }
+            $imageCount = max(1, $imageCount);
+            $sheet->setCellValue('E' . $row, $imageCount);
+            // F: Độ dài ND (tổng các field)
+            $text =
+                $item->name . ' ' .
+                $item->expiration_date . ' ' .
+                $item->dosage_forms . ' ' .
+                $item->specification . ' ' .
+                $item->benefit . ' ' .
+                $item->elements . ' ' .
+                strip_tags($item->general_info) . ' ' .
+                $item->dosage . ' ' .
+                $item->note . ' ' .
+                $item->preserve;
+            $text = trim(preg_replace('/\s+/u', ' ', $text));
+            $words = preg_split('/\s+/u', $text, -1, PREG_SPLIT_NO_EMPTY);
+            $wordCount = count($words);
+            $sheet->setCellValue('F' . $row, $wordCount);
+            // G: Danh mục
+            $sheet->setCellValue('G' . $row, $item->catProduct->name ?? 'Đang cập nhật');
+            // H: Ngày đăng
+            $sheet->setCellValue('H' . $row, $item->created_at);
+            $row++;
+        }
+        $writer = new Xlsx($spreadsheet);
+        $fileName = 'products_export_' . date('Y_m_d_H_i_s') . '.xlsx';
+        return response()->stream(
+            function () use ($writer) {
+                $writer->save('php://output');
+            },
+            200,
+            [
+                'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'Content-Disposition' => 'attachment;filename="' . $fileName . '"',
             ]
         );
     }

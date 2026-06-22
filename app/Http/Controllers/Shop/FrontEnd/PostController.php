@@ -11,6 +11,7 @@ use App\Model\Shop\PostModel as MainModel;
 use App\Model\Shop\CustomerFeedBackModel;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 class PostController extends ShopFrontEndController
 {
     public function __construct()
@@ -80,6 +81,15 @@ class PostController extends ShopFrontEndController
     }
     public function detail(Request $request){
         $slug = $request->slug;
+        // Chuẩn hóa slug
+        $slugNormalize = Str::slug($slug);
+        // Nếu URL hiện tại không đúng chuẩn thì 301
+        if ($slug !== $slugNormalize) {
+            return redirect()->to(
+                url('/tin-tuc/' . $slugNormalize . '.html'),
+                301
+            );
+        }
         $item= $this->model->getItem(['slug'=>$slug],['task' => 'frontend-get-item']);
         if (!$item) {
             return redirect()->route('home');
@@ -126,7 +136,7 @@ class PostController extends ShopFrontEndController
         $items = (new CustomerFeedBackModel)->listItems( null , ['task' => 'frontend-list-items']);
         $catItems=(new CatalogModel)->listItems(null, ['task' => 'frontend-list-items']);
         foreach($catItems as $key=>$val){
-            $catItems[$key]['customerFeedBack'] = $val->customerFeedBack()->take(30)->get();
+            $catItems[$key]['customerFeedBack'] = $val->customerFeedBack()->get();
             if(count($catItems[$key]['customerFeedBack']) < 1){
                 unset($catItems[$key]);
             }
