@@ -7,7 +7,7 @@ $listCatAll    = $model->getAllCats();
 $listCatLieuThuocTay = $modelCatalog->getCatLieuThuocTay();
 $iconZalo=asset('images/shop/zalo-2.png');
 $iconCall=asset('images/shop/icon-call.png');
-$phoneContact=$phoneContact??'0393167234';
+$phoneContact=$phoneContact??'0345488247';
 @endphp
 <h3>
     <div class="container-menures"><a href="{{route('home')}}">Trang Chủ</a></div>
@@ -154,13 +154,13 @@ $phoneContact=$phoneContact??'0393167234';
             <a href='https://zalo.me/{{$phoneContact}}' target='_blank'>
                 <div class='d-flex align-items-center'>
                     <div class='icon-contact'><img alt='Zalo' src='{{$iconZalo}}' loading="lazy" width="30" height="30" decoding="async"></div>
-                    <span>Liên hệ Zalo(<span class="font-weight-bold text-danger">0393.167.234</span>)</span>
+                    <span>Liên hệ Zalo(<span class="font-weight-bold text-danger">0345.488.247</span>)</span>
                 </div>
             </a>
             <a href='tel:{{$phoneContact}}'>
                 <div class='d-flex align-items-center'>
                     <div class='icon-contact'><img alt='Zalo' src='{{$iconCall}}' loading="lazy" width="30" height="30" decoding="async"></div>
-                    <span>Gọi điện(<span class="font-weight-bold text-danger">0393.167.234</span>)</span>
+                    <span>Gọi điện(<span class="font-weight-bold text-danger">0345.488.247</span>)</span>
                 </div>
             </a>
         </div>

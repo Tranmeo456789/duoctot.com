@@ -51,7 +51,7 @@
                         <p>Văn phòng đại diện: Tầng 3, Tòa 35 Hùng Vương, P. Điện Biên, Q. Ba Đình, Hà Nội</p>
                         <p>Chi nhánh Cần Thơ: Số 209, Đường 30/4, Phường Xuân Khánh, Quận Ninh Kiều, Thành phố Cần Thơ</p>
                     </div>
-                    <p>● Điện thoại: 0393.167.234</p>
+                    <p>● Điện thoại: 0345.488.247</p>
                     <p>● Email: tdoctorvn@gmail.com</p>
                 </div>
             </div>

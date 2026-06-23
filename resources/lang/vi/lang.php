@@ -11,7 +11,7 @@
     'chinese'=>'Tiếng Trung',
     'korean'=>'Tiếng Hàn',
     'connecting_home_medical_with_online_doctors'=>'Mua tại nhà hotline',
-    'instruction'=>'0393.167.234',
+    'instruction'=>'0345.488.247',
     'onlinebooking' => 'Đặt Khám',
     'pharmacy' => 'Nhà thuốc',
     'shop' => 'Shop',

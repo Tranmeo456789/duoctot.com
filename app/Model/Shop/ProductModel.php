@@ -855,12 +855,13 @@ class ProductModel extends BackEndModel
             self::find($id)->warehouse()->attach($wareHouseIDs);
         }
         if ($options['task'] == 'edit-item') {
-            $keyCacheProduct='duoctot_cache_product_data_'.$params['id'];
-            $keyCacheProductSlugLogin = 'duoctot_product_login_' . $params['slug'];
-            $keyCacheProductSlug = 'duoctot_product_guest_' . $params['slug'];
-            Cache::forget($keyCacheProduct);
-            Cache::forget($keyCacheProductSlugLogin);
-            Cache::forget($keyCacheProductSlug);
+            // $keyCacheProduct='duoctot_cache_product_data_'.$params['id'];
+            // $keyCacheProductSlugLogin = 'duoctot_product_login_' . $params['slug'];
+            // $keyCacheProductSlug = 'duoctot_product_guest_' . $params['slug'];
+            // Cache::forget($keyCacheProduct);
+            // Cache::forget($keyCacheProductSlugLogin);
+            // Cache::forget($keyCacheProductSlug);
+            Cache::tags(['duoctot_product'])->flush();
             $this->setModifiedHistory($params);
             $item = self::getItem($params,['task'=>'get-item']);
             $this->updateFileUpload($item,$params,'albumImage');

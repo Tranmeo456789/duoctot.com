@@ -183,11 +183,167 @@ class ProductController extends ShopFrontEndController
     //         )
     //     );
     // }
+    // public function detail(Request $request)
+    // {
+    //     $slug = $request->slug;
+    //     $slugNormalize = Str::slug($slug);
+    //     // User nhập hoa/thường, tiếng Việt, ký tự lạ
+    //     if ($slug !== $slugNormalize) {
+    //         return redirect()->to(
+    //             url('/chi-tiet-san-pham/' . $slugNormalize . '.html'),
+    //             301
+    //         );
+    //     }
+    //     $session = $request->session();
+    //     $codeRefLogin = '';
+    //     $codeRefRegister = '';
+    //     // user login
+    //     if ($session->has('user')) {
+    //         $userInfoCurrent = $session->get('user');
+    //         $codeRefLogin    = $userInfoCurrent['codeRef'] ?? '';
+    //         $codeRefRegister = $userInfoCurrent['ref_register'] ?? '';
+    //         $cacheKey = 'duoctot_product_login_' . $slug;
+    //         $item = Cache::remember($cacheKey, 3600, function () use ($slug) {
+    //             return $this->model->getItem(
+    //                 ['slug' => $slug],
+    //                 ['task' => 'frontend-get-item-has-login']
+    //             );
+    //         });
+    //     }else {
+    //         $cacheKey = 'duoctot_product_guest_' . $slug;
+    //         $item = Cache::remember($cacheKey, 3600, function () use ($slug) {
+    //             return $this->model->getItem(
+    //                 ['slug' => $slug],
+    //                 ['task' => 'frontend-get-item']
+    //             );
+    //         });
+    //     }
+    //     if (!$item) {
+    //         return redirect()->route('home');
+    //     }
+    //     $codeRef = $request->codeRef ?? ($session->get('codeRef') ?? $codeRefRegister);
+    //     // redirect thêm codeRef
+    //     if ((empty($request->codeRef) && session('codeRef')) || (empty($request->codeRef) && $codeRefRegister != '')) {
+    //         return redirect()->route('fe.product.detail', [
+    //             'slug'=>$slug,
+    //             'codeRef'=>$codeRef
+    //         ]);
+    //     }
+    //     if ($request->codeRef) {
+    //         $cacheCodeRef = Cache::get('duoctot_user_by_codeRef_'.$request->codeRef);
+    //         if ($cacheCodeRef !== null) {
+    //             $userCodeRef = !empty($cacheCodeRef) ? $cacheCodeRef : null;
+    //         } else {
+    //             $model = UsersModel::where('codeRef',$request->codeRef)->first();
+    //             $payload = $model ? $model->toArray() : [];
+    //             Cache::put('duoctot_user_by_codeRef_'.$request->codeRef,$payload,100000000);
+    //             $userCodeRef = $model ? $payload : null;
+    //         }
+    //         if ($userCodeRef) {
+    //             $existProductAffiliate = AffiliateProductModel::where([
+    //                 'product_id'=>$item['id'],
+    //                 'user_id'=>$userCodeRef['user_id']
+    //             ])->first();
+    //             if ($existProductAffiliate) {
+    //                 $existProductAffiliate->increment('sum_click');
+
+    //             } else {
+    //                 (new AffiliateProductModel)->saveItem([
+    //                     'product_id'=>$item['id'],
+    //                     'user_id'=>$userCodeRef['user_id'],
+    //                     'sum_click'=>1
+    //                 ],['task'=>'add-item']);
+    //             }
+    //         }
+    //     }
+    //     $albumImageCurrent = !empty($item['albumImageHash'])
+    //         ? explode('|',$item['albumImageHash'])
+    //         : [];
+    //     $keyCache = 'duoctot_cache_product_data_'.$item['id'];
+    //     $dataCache = Cache::get($keyCache);
+    //     if (!empty($dataCache)) {
+    //         $listProductRelate  = $dataCache['listProductRelate'];
+    //         $ratingProduct      = $dataCache['ratingProduct'];
+    //         $listUserHasProduct = $dataCache['listUserHasProduct'];
+    //         $userInfo = $dataCache['userInfo'];
+    //         $itemCatCurent = $dataCache['itemCatCurent'];
+    //         $itemCatParentLevel1 = $dataCache['itemCatParentLevel1'];
+    //         $itemCatParentLevel2 = $dataCache['itemCatParentLevel2'];
+    //         $averageRating = $dataCache['averageRating'];
+    //         $ratingPercentages = $dataCache['ratingPercentages'];
+    //     } else {
+    //         $listProductRelate = $this->model->listItems(
+    //             ['cat_product_id'=>$item['cat_product_id'],'limit'=>4],
+    //             ['task'=>'frontend-list-items']
+    //         ) ?? [];
+    //         $ratingProduct = (new CommentModel)->listItems(
+    //             ['product_id'=>$item['id'],'rating'=>1],
+    //             ['task'=>'list-items-frontend']
+    //         );
+    //         $listUserHasProduct = (new UsersModel)->listItems(
+    //             ['product_id'=>$item['id']],
+    //             ['task'=>'list-users-nha-cung-cap-has-product-id']
+    //         );
+    //         $userInfo = (new UsersModel)->getItem(
+    //             ['user_id'=>$item['user_id']],
+    //             ['task'=>'get-item']
+    //         );
+    //         $itemCatCurent = $item->catProduct;
+    //         $idCatParentLevel1=$itemCatCurent['parent_id'];
+    //         $itemCatParentLevel1=(new CatProductModel)->getItem(['parent_id'=>$idCatParentLevel1],['task'=>'get-item-parent']);
+    //         $itemCatParentLevel2=(new CatProductModel)->getItem(['parent_id'=>$idCatParentLevel1,'up_level'=>2],['task'=>'get-item-parent']);
+    //         $averageRating=(new CommentModel)->averageRating(['product_id'=>$item['id']],['task' => 'rating-star-average'])??'';
+    //         $ratingPercentages=(new CommentModel)->ratingPercentages(['product_id'=>$item['id']],['task' => 'rating-percentage-star'])??[];
+    //         $dataCache = [
+    //             'listProductRelate'=>$listProductRelate,
+    //             'ratingProduct'=>$ratingProduct,
+    //             'listUserHasProduct'=>$listUserHasProduct,
+    //             'userInfo'=>$userInfo,
+    //             'itemCatCurent'=>$itemCatCurent,
+    //             'itemCatParentLevel1'=>$itemCatParentLevel1,
+    //             'itemCatParentLevel2'=>$itemCatParentLevel2,
+    //             'averageRating'=>$averageRating,
+    //             'ratingPercentages'=>$ratingPercentages,
+    //         ];
+    //         Cache::put($keyCache,$dataCache,100000000);
+    //     }
+    //     $params['id']=$item['id'];
+    //     $title = $item['name'] ?? $item['title'] ?? $title ?? 'Sàn thương mại điện tử trong y dược số 1 Việt Nam';
+    //     $imageItem = isset($item['image']) ? $item['image'] : 'images/shop/logo-favicon.png';
+    //     $description = $item['description'] ?? $item['meta_description'] ?? 'Duoctot.com là một giải pháp cho các nhà thuốc, các doanh nghiệp, công ty dược phẩm tăng doanh thu một cách nhanh chóng.';
+    //     $metaKeywords = $item['meta_keywords']?? 'Shop trực tuyến, mua hàng online, tư vấn dược phẩm, giao hàng tận nhà, giảm đau, vitamin bổ sung';
+    //     $productCode = $item['description']??'';
+    //     $price = $item['price']??'';
+    //     return view(
+    //         $this->pathViewController.'detail',
+    //         compact(
+    //             'params',
+    //             'item',
+    //             'albumImageCurrent',
+    //             'codeRef',
+    //             'userInfo',
+    //             'codeRefLogin',
+    //             'listProductRelate',
+    //             'ratingProduct',
+    //             'listUserHasProduct',
+    //             'itemCatCurent',
+    //             'itemCatParentLevel1',
+    //             'itemCatParentLevel2',
+    //             'averageRating',
+    //             'ratingPercentages',
+    //             'title',
+    //             'imageItem',
+    //             'description',
+    //             'metaKeywords',
+    //             'productCode',
+    //             'price'
+    //         )
+    //     );
+    // }
     public function detail(Request $request)
     {
         $slug = $request->slug;
         $slugNormalize = Str::slug($slug);
-        // User nhập hoa/thường, tiếng Việt, ký tự lạ
         if ($slug !== $slugNormalize) {
             return redirect()->to(
                 url('/chi-tiet-san-pham/' . $slugNormalize . '.html'),
@@ -197,119 +353,158 @@ class ProductController extends ShopFrontEndController
         $session = $request->session();
         $codeRefLogin = '';
         $codeRefRegister = '';
-        // user login
+        /*
+        |--------------------------------------------------------------------------
+        | 1. PRODUCT CACHE (LOGIN / GUEST)
+        |--------------------------------------------------------------------------
+        */
         if ($session->has('user')) {
             $userInfoCurrent = $session->get('user');
             $codeRefLogin    = $userInfoCurrent['codeRef'] ?? '';
             $codeRefRegister = $userInfoCurrent['ref_register'] ?? '';
-            $cacheKey = 'duoctot_product_login_' . $slug;
-            $item = Cache::remember($cacheKey, 3600, function () use ($slug) {
-                return $this->model->getItem(
-                    ['slug' => $slug],
-                    ['task' => 'frontend-get-item-has-login']
-                );
-            });
-        }else {
-            $cacheKey = 'duoctot_product_guest_' . $slug;
-            $item = Cache::remember($cacheKey, 3600, function () use ($slug) {
-                return $this->model->getItem(
-                    ['slug' => $slug],
-                    ['task' => 'frontend-get-item']
-                );
-            });
+            $item = Cache::tags(['duoctot_product', 'duoctot_product_detail', 'duoctot_product_login'])
+                ->remember("duoctot_product_login_{$slug}", 3600, function () use ($slug) {
+                    return $this->model->getItem(
+                        ['slug' => $slug],
+                        ['task' => 'frontend-get-item-has-login']
+                    );
+                });
+        } else {
+            $item = Cache::tags(['duoctot_product', 'duoctot_product_detail', 'duoctot_product_guest'])
+                ->remember("duoctot_product_guest_{$slug}", 3600, function () use ($slug) {
+                    return $this->model->getItem(
+                        ['slug' => $slug],
+                        ['task' => 'frontend-get-item']
+                    );
+                });
         }
         if (!$item) {
             return redirect()->route('home');
         }
+        /*
+        |--------------------------------------------------------------------------
+        | 2. AFFILIATE CODE REF CACHE
+        |--------------------------------------------------------------------------
+        */
         $codeRef = $request->codeRef ?? ($session->get('codeRef') ?? $codeRefRegister);
-        // redirect thêm codeRef
         if ((empty($request->codeRef) && session('codeRef')) || (empty($request->codeRef) && $codeRefRegister != '')) {
             return redirect()->route('fe.product.detail', [
-                'slug'=>$slug,
-                'codeRef'=>$codeRef
+                'slug' => $slug,
+                'codeRef' => $codeRef
             ]);
         }
         if ($request->codeRef) {
-            $cacheCodeRef = Cache::get('duoctot_user_by_codeRef_'.$request->codeRef);
-            if ($cacheCodeRef !== null) {
-                $userCodeRef = !empty($cacheCodeRef) ? $cacheCodeRef : null;
-            } else {
-                $model = UsersModel::where('codeRef',$request->codeRef)->first();
-                $payload = $model ? $model->toArray() : [];
-                Cache::put('duoctot_user_by_codeRef_'.$request->codeRef,$payload,100000000);
-                $userCodeRef = $model ? $payload : null;
-            }
+            $userCodeRef = Cache::tags(['duoctot_product', 'duoctot_product_user'])
+                ->remember("duoctot_user_codeRef_{$request->codeRef}", 86400, function () use ($request) {
+                    $model = UsersModel::where('codeRef', $request->codeRef)->first();
+                    return $model ? $model->toArray() : null;
+                });
             if ($userCodeRef) {
                 $existProductAffiliate = AffiliateProductModel::where([
-                    'product_id'=>$item['id'],
-                    'user_id'=>$userCodeRef['user_id']
+                    'product_id' => $item['id'],
+                    'user_id' => $userCodeRef['user_id']
                 ])->first();
                 if ($existProductAffiliate) {
                     $existProductAffiliate->increment('sum_click');
-
                 } else {
                     (new AffiliateProductModel)->saveItem([
-                        'product_id'=>$item['id'],
-                        'user_id'=>$userCodeRef['user_id'],
-                        'sum_click'=>1
-                    ],['task'=>'add-item']);
+                        'product_id' => $item['id'],
+                        'user_id' => $userCodeRef['user_id'],
+                        'sum_click' => 1
+                    ], ['task' => 'add-item']);
                 }
             }
         }
+        /*
+        |--------------------------------------------------------------------------
+        | 3. ALBUM IMAGE
+        |--------------------------------------------------------------------------
+        */
         $albumImageCurrent = !empty($item['albumImageHash'])
-            ? explode('|',$item['albumImageHash'])
+            ? explode('|', $item['albumImageHash'])
             : [];
-        $keyCache = 'duoctot_cache_product_data_'.$item['id'];
-        $dataCache = Cache::get($keyCache);
-        if (!empty($dataCache)) {
-            $listProductRelate  = $dataCache['listProductRelate'];
-            $ratingProduct      = $dataCache['ratingProduct'];
-            $listUserHasProduct = $dataCache['listUserHasProduct'];
-            $userInfo = $dataCache['userInfo'];
-            $itemCatCurent = $dataCache['itemCatCurent'];
-            $itemCatParentLevel1 = $dataCache['itemCatParentLevel1'];
-            $itemCatParentLevel2 = $dataCache['itemCatParentLevel2'];
-            $averageRating = $dataCache['averageRating'];
-            $ratingPercentages = $dataCache['ratingPercentages'];
-        } else {
-            $listProductRelate = $this->model->listItems(
-                ['cat_product_id'=>$item['cat_product_id'],'limit'=>4],
-                ['task'=>'frontend-list-items']
-            ) ?? [];
-            $ratingProduct = (new CommentModel)->listItems(
-                ['product_id'=>$item['id'],'rating'=>1],
-                ['task'=>'list-items-frontend']
-            );
-            $listUserHasProduct = (new UsersModel)->listItems(
-                ['product_id'=>$item['id']],
-                ['task'=>'list-users-nha-cung-cap-has-product-id']
-            );
-            $userInfo = (new UsersModel)->getItem(
-                ['user_id'=>$item['user_id']],
-                ['task'=>'get-item']
-            );
-            $itemCatCurent = $item->catProduct;
-            $idCatParentLevel1=$itemCatCurent['parent_id'];
-            $itemCatParentLevel1=(new CatProductModel)->getItem(['parent_id'=>$idCatParentLevel1],['task'=>'get-item-parent']);
-            $itemCatParentLevel2=(new CatProductModel)->getItem(['parent_id'=>$idCatParentLevel1,'up_level'=>2],['task'=>'get-item-parent']);
-            $averageRating=(new CommentModel)->averageRating(['product_id'=>$item['id']],['task' => 'rating-star-average'])??'';
-            $ratingPercentages=(new CommentModel)->ratingPercentages(['product_id'=>$item['id']],['task' => 'rating-percentage-star'])??[];
-            $dataCache = [
-                'listProductRelate'=>$listProductRelate,
-                'ratingProduct'=>$ratingProduct,
-                'listUserHasProduct'=>$listUserHasProduct,
-                'userInfo'=>$userInfo,
-                'itemCatCurent'=>$itemCatCurent,
-                'itemCatParentLevel1'=>$itemCatParentLevel1,
-                'itemCatParentLevel2'=>$itemCatParentLevel2,
-                'averageRating'=>$averageRating,
-                'ratingPercentages'=>$ratingPercentages,
-            ];
-            Cache::put($keyCache,$dataCache,100000000);
-        }
-        $params['id']=$item['id'];
+        /*
+        |--------------------------------------------------------------------------
+        | 4. BLOCK CACHE (RELATE + RATING + CATEGORY)
+        |--------------------------------------------------------------------------
+        */
+        $productId = $item['id'];
+        $dataCache = Cache::tags(['duoctot_product', 'duoctot_product_block'])
+            ->remember("duoctot_product_block_{$productId}", 3600, function () use ($item) {
+                $listProductRelate = $this->model->listItems(
+                    ['cat_product_id' => $item['cat_product_id'], 'limit' => 4],
+                    ['task' => 'frontend-list-items']
+                ) ?? [];
+                $ratingProduct = (new CommentModel)->listItems(
+                    ['product_id' => $item['id'], 'rating' => 1],
+                    ['task' => 'list-items-frontend']
+                );
+                $listUserHasProduct = (new UsersModel)->listItems(
+                    ['product_id' => $item['id']],
+                    ['task' => 'list-users-nha-cung-cap-has-product-id']
+                );
+                $userInfo = (new UsersModel)->getItem(
+                    ['user_id' => $item['user_id']],
+                    ['task' => 'get-item']
+                );
+                $itemCatCurent = $item->catProduct;
+                $idCatParentLevel1 = $itemCatCurent['parent_id'];
+                $itemCatParentLevel1 = (new CatProductModel)->getItem(
+                    ['parent_id' => $idCatParentLevel1],
+                    ['task' => 'get-item-parent']
+                );
+                $itemCatParentLevel2 = (new CatProductModel)->getItem(
+                    ['parent_id' => $idCatParentLevel1, 'up_level' => 2],
+                    ['task' => 'get-item-parent']
+                );
+                $averageRating = (new CommentModel)->averageRating(
+                    ['product_id' => $item['id']],
+                    ['task' => 'rating-star-average']
+                ) ?? '';
+                $ratingPercentages = (new CommentModel)->ratingPercentages(
+                    ['product_id' => $item['id']],
+                    ['task' => 'rating-percentage-star']
+                ) ?? [];
+                return compact(
+                    'listProductRelate',
+                    'ratingProduct',
+                    'listUserHasProduct',
+                    'userInfo',
+                    'itemCatCurent',
+                    'itemCatParentLevel1',
+                    'itemCatParentLevel2',
+                    'averageRating',
+                    'ratingPercentages'
+                );
+            });
+        extract($dataCache);
+        /*
+        |--------------------------------------------------------------------------
+        | 5. SEO META
+        |--------------------------------------------------------------------------
+        */
+        $params['id'] = $item['id'];
+        $title = $item['name']
+            ?? $item['title']
+            ?? 'Sàn thương mại điện tử số 1 Việt Nam';
+        $imageItem = $item['image'] ?? 'images/shop/logo-favicon.png';
+
+        $description = $item['description']
+            ?? $item['meta_description']
+            ?? 'Duoctot.com giúp nhà thuốc và doanh nghiệp dược tăng doanh thu hiệu quả.';
+
+        $metaKeywords = $item['meta_keywords']
+            ?? 'Shop dược phẩm, mua thuốc online, tư vấn sức khỏe, giao hàng tận nơi';
+
+        $productCode = $item['description'] ?? '';
+        $price = $item['price'] ?? '';
+        /*
+        |--------------------------------------------------------------------------
+        | 6. RETURN VIEW
+        |--------------------------------------------------------------------------
+        */
         return view(
-            $this->pathViewController.'detail',
+            $this->pathViewController . 'detail',
             compact(
                 'params',
                 'item',
@@ -325,6 +520,12 @@ class ProductController extends ShopFrontEndController
                 'itemCatParentLevel2',
                 'averageRating',
                 'ratingPercentages',
+                'title',
+                'imageItem',
+                'description',
+                'metaKeywords',
+                'productCode',
+                'price'
             )
         );
     }
@@ -607,16 +808,17 @@ class ProductController extends ShopFrontEndController
             $userType = $userInfo['user_type_id'] ?? null;
             $phone    = $userInfo['phone'] ?? '';
             $email    = $userInfo['email'] ?? 'Đang cập nhật';
-            $defaultPhone = '0393167234';
+            $defaultPhone = '0345488247';
             // Mặc định là email
             $phoneShop = $email;
             $isPhone   = false;
             // USER TYPE 9 → luôn dùng số mặc định
             if ($userType == 9) {
                 $phoneShop = $defaultPhone;
-                if (in_array($userInfo['user_id'], [1984151811, 1984152436])) {
+                if (in_array($userInfo['user_id'], [1984151811, 1984152436, 1984152512])) {
                     $phoneShop = $userInfo['phone'] ?? '';
                 }
+                
                 $isPhone   = true;
             } elseif ($userType == 6) {
                 if (!empty($phone)) {
@@ -641,6 +843,9 @@ class ProductController extends ShopFrontEndController
             // Chỉ format nếu là phone
             if ($isPhone) {
                 $phoneShop = MyFunction::formatPhoneNumber($phoneShop);
+                if (in_array($userInfo['user_id'], [1984152512])) {
+                    $phoneShop = '0989966668 - 0902281251 - banquatang@vkdgroup.vn';
+                }
             }
             return [
                 'userInfo' => $userInfo,
@@ -678,8 +883,8 @@ class ProductController extends ShopFrontEndController
         $params['rating'] = $request->input('rating') ?? null;
         $params['albumImage'] = $request->file('albumImage') ?? null;
         (new CommentModel)->saveItem($params, ['task' => 'add-item']);
-        $keyCache = 'duoctot_cache_product_data_' . $params['product_id'];
-        Cache::forget($keyCache);
+        $productId=$params['product_id'];
+        Cache::tags(['duoctot_product'])->flush();
         if ($request->rating != null) {
             if ($request->shopId) {
                 Cache::tags('duoctot_drugstore')->flush();

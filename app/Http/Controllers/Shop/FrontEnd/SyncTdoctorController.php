@@ -487,16 +487,8 @@ class SyncTdoctorController extends ShopFrontEndController
     }
     public function deleteAllCacheproduct()
     {
-        $getAllId = ProductModel::pluck('id')->toArray();
         $totalInserted=0;
-        foreach ($getAllId as $product) {
-            $slug = $product->slug;
-            // Xóa cache guest
-            Cache::forget('duoctot_product_guest_' . $slug);
-            // Xóa cache login
-            Cache::forget('duoctot_product_login_' . $slug);
-            $totalInserted++;
-        }
+        Cache::tags(['duoctot_product'])->flush();
         $pageTitle = 'Xóa cache product thành công';
         $notification = 'Xóa cache product thành công';
         return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalInserted', 'notification'));

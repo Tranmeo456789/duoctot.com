@@ -171,9 +171,9 @@ $codeOrder=$order_detail['code_order'];
                 <p>Chủ tài khoản: CONG TY CO PHAN TDOCTOR PHARMA</p>
                 <p>Nội dung ck: {{$info_buyer['phone']}}</p>
                 <p>Nếu quý khách đã thanh toán</p>
-                <p>Liên hệ hotline/Zalo 0393167234 để xác nhận thanh toán và hỗ trợ</p>
+                <p>Liên hệ hotline/Zalo 0345488247 để xác nhận thanh toán và hỗ trợ</p>
             </div> -->
-            <p class="font-weight-bold">Liên hệ hotline/Zalo <span style="font-size: 20px; color:red">0393.167.234</span> để xác nhận thanh toán và hỗ trợ</p>
+            <p class="font-weight-bold">Liên hệ hotline/Zalo <span style="font-size: 20px; color:red">0345.488.247</span> để xác nhận thanh toán và hỗ trợ</p>
         @endif
     </div>
 </div>

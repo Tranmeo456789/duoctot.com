@@ -25,6 +25,9 @@
             <div class="mb-3 text-center">
                 <img src="{{asset('public/shop/frontend/images/aboutUs/ve-chung-toi-4.jpg')}}" alt="">
             </div>
+            <div class="mb-3 text-center">
+                <img src="{{asset('public/shop/frontend/images/aboutUs/ve-chung-toi-5.jpg')}}" alt="">
+            </div>
             <h2>ĐỘI NGŨ SÁNG LẬP VÀ NGƯỜI LÃNH ĐẠO</h2>
             <br />
             <br />

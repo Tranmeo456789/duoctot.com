@@ -27,7 +27,7 @@
                     <p>Văn phòng đại diện: Tầng 3, Tòa 35 Hùng Vương, P. Điện Biên, Q. Ba Đình, Hà Nội</p>
                     <p>Chi nhánh Cần Thơ: Số 209, Đường 30/4, Phường Xuân Khánh, Quận Ninh Kiều, Thành phố Cần Thơ</p>
                 </div>
-                <p>● Điện thoại: 0393.167.234</p>
+                <p>● Điện thoại: 0345.488.247</p>
                 <p>● Email: tdoctorvn@gmail.com</p>
             </div>
             <p class="font-weight-bold">Nhân viên công ty/ cở sở sẽ trực tiếp thu phí số lượng đơn hàng khách hàng cần mua.</p>
@@ -41,7 +41,7 @@
             <p>Số tài khoản: 19040023026018</p>
             <p>Chủ tài khoản: CONG TY CO PHAN TDOCTOR PHARMA</p>
             <p>Nội dung ck: Số điện thoại</p>
-            <p class="mb-2">Liên hệ hotline/Zalo 0393167234 để xác nhận thanh toán và hỗ trợ</p>
+            <p class="mb-2">Liên hệ hotline/Zalo 0345488247 để xác nhận thanh toán và hỗ trợ</p>
             <p class="font-weight-bold">4/ Qui định hoàn trả tiền khi thanh toán trực tuyến</p>
             <p>Trong trường hợp Quý khách hàng đã mua hàng và thanh toán trực tuyến thành công nhưng trả lại sản phẩm, Chúng tôi sẽ hoàn tiền vào thẻ Quý khách dùng để thanh toán: thời gian nhận được tiền hoàn từ 7 - 10 ngày làm việc kể từ khi chúng tôi nhận được đề nghị của khách hàng.</p>
         </div>
