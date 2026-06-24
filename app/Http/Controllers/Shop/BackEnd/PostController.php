@@ -134,7 +134,7 @@ class PostController extends BackEndController
             $file->move($destinationPath, $fileName);
     
             // Tạo URL cho file đã lưu
-            $url = asset('/laravel-filemanager/fileUpload/post/' . $fileName); 
+            $url = asset('/public/fileUpload/post/' . $fileName); 
             return response()->json(['url' => $url]);
         }
         return response()->json(['error' => 'File không hợp lệ.'], 400);

@@ -35,7 +35,17 @@
             'label'   => HTML::decode(Form::label('cat_post_id', 'Danh mục' .  $star , $formLabelAttr)),
             'element' => Form::select('cat_post_id',$itemsCatPost, $item['cat_post_id']??null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
             'widthElement' => 'col-12'
+        ],
+        [
+            'label'   => HTML::decode(Form::label('alt_image', 'Alt ảnh', $formLabelAttr)),
+            'element' => Form::text('alt_image', $item['alt_image']??'', array_merge($formInputAttr,['placeholder'=>'Alt ảnh'])),
+            'widthElement' => 'col-6'
         ],[
+            'label'   => HTML::decode(Form::label('title_image', 'Title ảnh', $formLabelAttr)),
+            'element' => Form::text('title_image', $item['title_image']??'', array_merge($formInputAttr,['placeholder'=>'Title ảnh'])),
+            'widthElement' => 'col-6'
+        ]
+        ,[
             'label'   => HTML::decode(Form::label('image', 'Chọn ảnh đại diện', $formLabelAttr)),
             'element' => Template::showImageAndInputSingleFile('image', $item['image']?? ($item['details']['image']??null)),
             'widthInput' => 'col-11',

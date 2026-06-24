@@ -11,4 +11,4 @@
 <script src="{{asset('shop/backend/js/tempusdominus-bootstrap-4.min.js')}}"></script>
 <script src="{{asset('shop/template/js/adminlte.min.js')}}"></script>
 <script src="{{asset('vendor/laravel-filemanager/js/lfm.js')}}"></script>
-<script src="{{asset('shop/backend/js/my-js.js')}}"></script>
+<script src="{{asset('shop/backend/js/my-js.js')}}?t=@php echo time() @endphp"></script>

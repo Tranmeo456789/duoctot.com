@@ -7,6 +7,11 @@ $contact=MyFunction::formatPhoneNumber($contact);
 @endphp
 @extends('shop.layouts.frontend')
 @section('headadd')
+<style>
+    .content-detail-product p{
+        margin-top: 16px;
+    }
+</style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
 <script>
@@ -170,7 +175,7 @@ $contact=MyFunction::formatPhoneNumber($contact);
                             <!-- Slider chính -->
                             <div class="sliderProductMain tns-slider cS-hidden gallery">
                                 <div class="text-center">
-                                    <img src="{{ asset('public'.$item['image']) }}" class="img-fluid image-zoom-popup" alt="{{$item['name'] ?? ''}}" width="295" height="295"/>
+                                    <img src="{{ asset('public'.$item['image']) }}" class="img-fluid image-zoom-popup" alt="{{$item['alt_image'] ?? ''}}" title ="{{$item['title_image'] ?? ''}}" width="295" height="295"/>
                                 </div>
                                 @foreach($albumImageCurrent as $val)
                                 <div class="text-center">

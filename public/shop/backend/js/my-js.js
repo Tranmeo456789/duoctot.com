@@ -379,8 +379,13 @@ $(document).ready(function() {
         contentType: false,
         processData: false,
         success: function (response) {
-        const fullUrl = response.url;
-        $('.editor').summernote('insertImage', fullUrl);
+            const fullUrl = response.url;
+            let alt = prompt('Nhập ALT cho ảnh:', '') || '';
+            let title = prompt('Nhập TITLE cho ảnh:', alt) || alt;
+            $('.editor').summernote('insertImage', fullUrl, function($image) {
+                $image.attr('alt', alt);
+                $image.attr('title', title);
+            });
         },
         error: function (xhr, status, error) {
         console.error('Lỗi khi tải ảnh lên:', error);

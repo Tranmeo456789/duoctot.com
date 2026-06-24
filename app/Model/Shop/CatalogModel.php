@@ -143,7 +143,7 @@ class CatalogModel extends BackEndModel
     }
     public function posts()
     {
-        return $this->hasMany('App\Model\Shop\PostModel', 'cat_post_id', 'id')->select('id','title','slug','image','cat_post_id');
+        return $this->hasMany('App\Model\Shop\PostModel', 'cat_post_id', 'id')->select('id','title','slug','image','cat_post_id','alt_image','title_image');
     }
     public function getCatLieuThuocTay()
     {
@@ -152,6 +152,6 @@ class CatalogModel extends BackEndModel
     }
     public function customerFeedBack()
     {
-        return $this->hasMany('App\Model\Shop\CustomerFeedBackModel', 'cat_post_id', 'id')->select('id','image','cat_post_id');
+        return $this->hasMany('App\Model\Shop\CustomerFeedBackModel', 'cat_post_id', 'id')->select('id','image','cat_post_id','alt_image','title_image');
     }
 }
