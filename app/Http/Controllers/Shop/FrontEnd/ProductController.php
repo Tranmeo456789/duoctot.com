@@ -844,7 +844,8 @@ class ProductController extends ShopFrontEndController
             if ($isPhone) {
                 $phoneShop = MyFunction::formatPhoneNumber($phoneShop);
                 if (in_array($userInfo['user_id'], [1984152512])) {
-                    $phoneShop = '0989966668 - 0902281251 - banquatang@vkdgroup.vn';
+                    //$phoneShop = '0989966668 - 0902281251 - banquatang@vkdgroup.vn';
+                    $phoneShop = $phone.' - '.$email;
                 }
             }
             return [

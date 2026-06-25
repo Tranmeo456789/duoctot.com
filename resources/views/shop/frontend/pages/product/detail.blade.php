@@ -9,7 +9,7 @@ $contact=MyFunction::formatPhoneNumber($contact);
 @section('headadd')
 <style>
     .content-detail-product p{
-        margin-top: 16px;
+        margin-top: 16px;line-height: 24px;
     }
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">

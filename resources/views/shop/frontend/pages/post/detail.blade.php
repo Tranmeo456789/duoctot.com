@@ -6,6 +6,13 @@ $timePost = MyFunction::formatDateLongTime($item['created_at']);
 @endphp
 @extends('shop.layouts.frontend')
 @section('content')
+<style>
+    .content-post p {
+        line-height: 26px;
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+</style>
 <div class="wp-inner mt-2">
     <div id="breadcrumb-wp">
         <ul class="list-item clearfix">
@@ -20,13 +27,13 @@ $timePost = MyFunction::formatDateLongTime($item['created_at']);
             </li>
         </ul>
     </div>
+</div>
+<div class="wp-inner mt-3" style="max-width: 597px;">
     <h1 class="title-name">{{$item['title']}}</h1>
     <p>{{$timePost}}</p>
-    <div class="content-post">
+    <div class="content-post mb-4">
         {!! $item['content'] !!}
     </div>
-</div>
-<div class="wp-inner mt-3">
     @include("$moduleName.templates.box_title_product",['title' => 'Tin liên quan','img'=>'mat.png'])
     <div class="mb-2">
         <div class="row">

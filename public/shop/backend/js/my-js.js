@@ -429,6 +429,19 @@ $(document).ready(function() {
     dialogsInBody: true,
     codeviewFilter: false,
     codeviewIframeFilter: false,
+    toolbar: [
+        ['style', ['style']], 
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+        ['font', ['strikethrough']],
+        ['fontname', ['fontname']],
+        ['fontsize', ['fontsize']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture', 'video']],
+        ['view', ['fullscreen', 'codeview', 'help']],
+    ],
+    fontSizes: ['10', '12', '13', '14', '16', '18', '20','22', '24', '26','28','30','32','34', '36','40'],
     callbacks: {
         // Khi chọn ảnh thủ công từ nút Insert Image
         onImageUpload: function(files) {
