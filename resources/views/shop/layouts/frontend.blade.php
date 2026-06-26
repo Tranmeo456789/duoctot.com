@@ -1,6 +1,6 @@
 @php
     $title = $item['name'] ?? $item['title'] ?? $title ?? 'DƯỢC TỐT là Nền tảng kết nối y dược nhà thuốc, phòng khám , bệnh nhân với công ty dược và thực phẩm chức năng uy tín nhất Việt nam';
-    $imageItem = $item['image'] ?? 'images/shop/logo-favicon.png';
+    $imageItem = $imageItem ?? $item['image'] ?? 'images/shop/logo-favicon.png';
     $description = $item['description'] ?? $item['meta_description'] ?? 'DƯỢC TỐT là Nền tảng kết nối y dược nhà thuốc, phòng khám , bệnh nhân với công ty dược và thực phẩm chức năng uy tín nhất Việt nam.';
     $metaKeywords = $item['meta_keywords']?? 'Shop trực tuyến, mua hàng online, tư vấn dược phẩm, giao hàng tận nhà, giảm đau, vitamin bổ sung';
 @endphp
