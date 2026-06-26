@@ -9,6 +9,7 @@ use App\Model\Shop\WarehouseModel;
 use App\Model\Shop\CatProductModel;
 use App\Model\Shop\TrademarkModel;
 use App\Model\Shop\UsersModel;
+use App\Model\Shop\QuestionModel;
 use Illuminate\Support\Facades\Cache;
 use App\Helpers\HttpClient;
 use Illuminate\Support\Str;
@@ -683,7 +684,7 @@ class ProductModel extends BackEndModel
                             ->first();
         }
         if ($options['task'] == 'frontend-get-item') {
-            $query = self::with(['unitProduct','catProduct','brandOriginIdProduct','trademarkProduct','producerProduct','countryProduct','userProduct'])
+            $query = self::with(['unitProduct','catProduct','brandOriginIdProduct','trademarkProduct','producerProduct','countryProduct','userProduct','questions'])
                 ->select('id','name','type','code','cat_product_id','producer_id','tick','type_price','price','list_prices','price_vat','percent_discount','coefficient','type_vat','packing','expiration_date','unit_id','sell_area','amout_max','inventory','inventory_min','general_info','prescribe','dosage','trademark_id','brand_origin_id','dosage_forms','country_id','specification','benefit','elements','preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','discount_ref','contact','meta_keywords','meta_description','show_price','prescription_drug','alt_image','title_image')
                 ->where('status_product', 'da_duyet');
             if(isset($params['id'])){
@@ -942,5 +943,9 @@ class ProductModel extends BackEndModel
     public function productWarehouse()
     {
         return $this->hasMany(ProductWarehouseModel::class,'product_id','id');
+    }
+    public function questions()
+    {
+        return $this->hasMany(QuestionModel::class, 'product_id', 'id');
     }
 }

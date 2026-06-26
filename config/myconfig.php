@@ -123,6 +123,8 @@
                 'description'=>'Mô tả ngắn',
                 'meta_keywords'=>'Meta Keyword',
                 'meta_description'=>'Meta Description',
+                'ques'=>'Câu hỏi',
+                'ans'=>'Câu trả lời',
                 'slug'=>'Url trang'
             ],
             'type_user' => [

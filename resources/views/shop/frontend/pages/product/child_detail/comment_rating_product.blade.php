@@ -13,25 +13,45 @@
         ]
     ];
     $formInputWidth['widthInput'] = 'col-12';
+    $questionProduct = $item['questions'] ?? collect();
 @endphp
 <div class="question-often mt-3">
     <div class="title-rating">
         Câu hỏi thường gặp
     </div>
     <ul class="list-question">
-        <li class="catparentc">
-            <h3 class="">Thực phẩm chức năng hỗ trợ sức khỏe tình dục nam giới có tác dụng gì?<img src="{{asset('images/shop/hoi.png')}}" alt="">
-                <div class="vissubmenu"><i class="fas fa-angle-down"></i></div>
-            </h3>
-            <div class="submenua1">
-                <ul>
+        @if($questionProduct->count() > 0)
+            @foreach($questionProduct as $question)
+                <li class="catparentc">
+                    <h3>
+                        {{ $question['ques'] }}
+                        <img src="{{ asset('images/shop/hoi.png') }}" alt="">
+                        <div class="vissubmenu">
+                            <i class="fas fa-angle-down"></i>
+                        </div>
+                    </h3>
+                    <div class="submenua1">
+                        {!! $question['ans'] !!}
+                    </div>
+                </li>
+            @endforeach
+        @else
+            <li class="catparentc">
+                <h3>
+                    Thực phẩm chức năng hỗ trợ sức khỏe tình dục nam giới có tác dụng gì?
+                    <img src="{{ asset('images/shop/hoi.png') }}" alt="">
+                    <div class="vissubmenu">
+                        <i class="fas fa-angle-down"></i>
+                    </div>
+                </h3>
+                <div class="submenua1">
                     <p>* Giúp kích hoạt cơ chế sản sinh Hormone sinh dục nam nội sinh một cách tự nhiên.</p>
                     <p>* Bổ thận tráng dương, tăng cường sinh lý, phục hồi khả năng sinh lý nam giới.</p>
                     <p>* Hỗ trợ điều trị rối loạn cương dương, xuất tinh sớm, di tinh, mộng tinh… làm chậm quá trình mãn dục nam.</p>
                     <p>* Giúp tăng cường lưu thông máu, tăng cường ham muốn, khắc phục tình trạng rối loạn cương dương ở nam giới.</p>
-                </ul>
-            </div>
-        </li>
+                </div>
+            </li>
+        @endif
     </ul>
 </div>
 <div class="question-often content-rating-product mt-3">

@@ -50,6 +50,7 @@
                         <a href="{{route('admin.product.change.status',[$val->id,'cho_kiem_duyet'])}}" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top">Chờ phê duyệt</a>
                         <a href="{{route('admin.product.change.status',[$val->id,'sp_an'])}}" class="btn btn-secondary btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top">Ẩn SP</a>
                         <a href="{{route('product.edit',$val->id)}}" class="btn btn-primary btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top">Chỉnh sửa</a>
+                        <a href="{{route('question',$val->id)}}" class="btn btn-primary btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top">Câu hỏi</a>
                     </td>
                 </tr>
             @endforeach

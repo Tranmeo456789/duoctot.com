@@ -138,6 +138,11 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
         Route::get('/thay-doi-trang-thai-thuoc-admin/{id}/{status}', 'ProductController@changeProductInAdmin')->name('admin.product.change.status');
         Route::post('/upload-image', 'PostController@upload');
 
+        Route::get('/danh-sach-cau-hoi/product/{productId}', 'QuestionController@index')->name('question');
+        Route::get('/them-cau-hoi/product/{productId}', 'QuestionController@form')->name('question.add');
+        Route::get('/sua-cau-hoi/product/{productId}/{id}', 'QuestionController@form')->name('question.edit');
+        Route::post('/luu-cau-hoi', 'QuestionController@save')->name('question.save');
+        Route::get('/xoa-cau-hoi/{id}', 'QuestionController@delete')->name('question.delete');
         
     });
     Route::group(['middleware' => ['permission.admin']], function () {
@@ -176,6 +181,7 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
         Route::get('/chi-tiet-phieu-thanh-toan/{id}', 'CouponPaymentController@detail')->name('couponPayment.detail');
         Route::post('/luu-phieu-thanh-toan', 'CouponPaymentController@save')->name('couponPayment.save');
         Route::get('/xoa-phieu-thanh-toan/{id}', 'CouponPaymentController@delete')->name('couponPayment.delete');
+
 
         // Route::get('/them-nguoi-dung', 'UserController@form')->name('user.add');
         // Route::get('/sua-nguoi-dung/{id}', 'UserController@form')->name('user.edit');

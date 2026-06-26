@@ -42,6 +42,13 @@ class Form
                     $element['element']
                 );
                 break;
+                case 'input-hidden':
+                    $xhtml .= sprintf(
+                        "<input type='hidden' name='%s' value='%s'>",
+                        $element['element'],
+                        $element['value'],
+                    );
+                break;
                 case 'input-has-copy':
                     $xhtml .= sprintf(
                         "<div class='%s'>

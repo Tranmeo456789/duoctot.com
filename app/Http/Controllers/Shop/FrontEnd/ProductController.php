@@ -487,8 +487,7 @@ class ProductController extends ShopFrontEndController
         $title = $item['name']
             ?? $item['title']
             ?? 'Sàn thương mại điện tử số 1 Việt Nam';
-        $item['image']='public'.$item['image'];    
-        $imageItem = $item['image'] ?? 'images/shop/logo-favicon.png';
+        $imageItem = 'public'.$item['image'] ?? 'images/shop/logo-favicon.png';
 
         $description = $item['description']
             ?? $item['meta_description']
