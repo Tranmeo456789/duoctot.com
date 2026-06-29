@@ -90,4 +90,17 @@ class QuestionController extends BackEndController
             'item'
         ));
     }
+    public function delete(Request $request)
+    {
+        $params["id"]             = $request->id;
+        $productId=$request->productId;
+        $this->model->deleteItem($params, ['task' => 'delete-item']);
+        $notify = "Xóa $this->pageTitle thành công!";
+        $request->session()->put('notify', $notify);
+        return response()->json([
+            'fail'         => false,
+            'redirect_url' => route($this->controllerName, ['productId' => $productId]),
+            'message'      => $notify,
+        ]);
+    }
 }

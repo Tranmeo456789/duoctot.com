@@ -69,6 +69,7 @@ class QuestionModel extends BackEndModel
         if($options['task'] == 'delete-item') {
            self::where('id', $params['id'])->delete();
         }
+        Cache::tags(['duoctot_product'])->flush();
     }
     
 }

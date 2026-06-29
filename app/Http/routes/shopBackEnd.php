@@ -142,7 +142,7 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
         Route::get('/them-cau-hoi/product/{productId}', 'QuestionController@form')->name('question.add');
         Route::get('/sua-cau-hoi/product/{productId}/{id}', 'QuestionController@form')->name('question.edit');
         Route::post('/luu-cau-hoi', 'QuestionController@save')->name('question.save');
-        Route::get('/xoa-cau-hoi/{id}', 'QuestionController@delete')->name('question.delete');
+        Route::get('/xoa-cau-hoi/product/{productId}/{id}', 'QuestionController@delete')->name('question.delete');
         
     });
     Route::group(['middleware' => ['permission.admin']], function () {

@@ -11,6 +11,9 @@ $contact=MyFunction::formatPhoneNumber($contact);
     .content-detail-product p{
         margin-top: 16px;line-height: 24px;
     }
+    .submenua1.display-vis {
+        font-size: 18px;
+    }
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
