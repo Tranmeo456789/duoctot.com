@@ -184,7 +184,7 @@ class ProductController extends BackEndController
             $params['price_vat'] = $params['price'];
             $this->model->saveItem($params, ['task' => $task]);
             $request->session()->put('app_notify', $notify);
-            if(Session::get('user')['is_admin'] == 1 || Session::get('user')['is_admin'] == 2){
+            if(Session::get('user')['is_admin'] == 1){
                 $notify='Cập nhật thông tin thuốc thành công!';
                 $request->session()->put('app_notify', 'Cập nhật thông tin thuốc thành công!');
                 return response()->json([

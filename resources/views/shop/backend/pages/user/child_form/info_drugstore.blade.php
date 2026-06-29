@@ -82,9 +82,15 @@
             'label'   => HTML::decode(Form::label('tax_code', $label['tax_code'], $formLabelAttr)),
             'element' => Form::text('details[tax_code]', $details['tax_code']??null, array_merge($formInputAttr,['placeholder'=>$label['tax_code']])),
             'widthElement' => 'col-12 col-md-6'
-        ],[
+        ],
+        [
             'label'   => HTML::decode(Form::label('person_represent', $label['person_represent'], $formLabelAttr)),
             'element' => Form::text('details[person_represent]', $details['person_represent']??null, array_merge($formInputAttr,['placeholder'=>$label['person_represent']])),
+            'widthElement' => 'col-12 col-md-6'
+        ],
+        [
+            'label'   => HTML::decode(Form::label('is_admin', 'Quyền', $formLabelAttr)),
+            'element' => Form::text('is_admin', $item['is_admin']??null, array_merge($formInputAttr,['placeholder'=>'Editor 2'])),
             'widthElement' => 'col-12 col-md-6'
         ],[
             'label'   => HTML::decode(Form::label('image', 'Chọn ảnh đại diện', $formLabelAttr)),

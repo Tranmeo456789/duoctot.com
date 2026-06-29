@@ -135,7 +135,7 @@
                 '2' => 'Bác sĩ',
                 '3' => 'Phòng khám',
                 '4' => 'Nhà thuốc',
-                '5' => 'Dược sỹ',
+                '5' => 'Dược sĩ',
                 '6' => 'Trình dược viên',
                 //'7' => 'Nha khoa',
                 '8' => 'Thẩm mỹ viện',

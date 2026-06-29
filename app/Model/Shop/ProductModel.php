@@ -102,7 +102,7 @@ class ProductModel extends BackEndModel
                         $query->whereRaw("LOWER({$params['search']['field']})" . " LIKE BINARY " .  "LOWER('%{$params['search']['value']}%')" );
                 }
             }
-            $query->orderBy('created_at', 'desc');
+            $query->orderBy('updated_at', 'desc');
             if (isset($params['pagination']['totalItemsPerPage'])){
                 $result =  $query->paginate($params['pagination']['totalItemsPerPage']);
             }else{

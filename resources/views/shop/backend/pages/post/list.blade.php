@@ -24,7 +24,7 @@
                 $image = Template::showImagePreviewFileManager($val['image'],$val['slug']??$val['title']);
                 $title = Hightlight::show($val->title, $params['search'], 'key_search');
                 $nameCatPost = Hightlight::show($val->catPost->name??'', $params['search'], 'key_search');
-                $timePost = MyFunction::formatDateFrontend($val['created_at']);
+                $timePost = MyFunction::formatDateFrontend($val['updated_at']);
             @endphp
             <tr>
                 <td style="width: 5%">{{$temp}}</td>

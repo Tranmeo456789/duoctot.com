@@ -28,6 +28,7 @@ class BackEndModel extends Model
     }
     public function setCreatedHistory(&$params){
       $params['created_at']    = date('Y-m-d H:i:s');
+      $params['updated_at']    = date('Y-m-d H:i:s');
       if(Session::has('user')){
         $params['created_by'] = \Session::get('user')['user_id'];
       }
