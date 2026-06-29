@@ -302,7 +302,7 @@ class SyncTdoctorController extends ShopFrontEndController
                         'slug' => $item->slug,
                         'discount_ref' => $item->discount_ref,
                         'discount_tdoctor' => $item->discount_tdoctor,
-                        'contact' => $item->contact,
+                        'contact' => '0345488247',
                         'keyword_search' => $item->keyword_search,
                         'meta_keywords' => $item->meta_keywords,
                         'meta_description' => $item->meta_description,
@@ -312,6 +312,8 @@ class SyncTdoctorController extends ShopFrontEndController
                         'created_at' => $item->created_at,
                         'updated_by' => $item->updated_by,
                         'updated_at' => $item->updated_at,
+                        'alt_image' => $item->alt_image,
+                        'title_image' => $item->title_image
                     ]);
                     $totalInserted++;
                 }
@@ -515,6 +517,14 @@ class SyncTdoctorController extends ShopFrontEndController
         $totalInserted=9;
         $pageTitle = 'Xóa cache danh sách bác sĩ thành công';
         $notification = 'Xóa cache danh sách bác sĩ thành công';
+        return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalInserted', 'notification'));
+    }
+    public function clearListDuocSiCache()
+    {
+        Cache::tags(['duoctot_duocsi'])->flush();
+        $totalInserted=9;
+        $pageTitle = 'Xóa cache danh sách dược sĩ thành công';
+        $notification = 'Xóa cache danh sách dược sĩ thành công';
         return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalInserted', 'notification'));
     }
     public function clearListNhaThuocCache()

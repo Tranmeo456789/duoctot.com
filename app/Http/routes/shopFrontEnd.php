@@ -100,6 +100,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('danh-sach-benh-vien','ProductController@listBenhVien')->name('fe.product.listBenhVien');
     Route::get('danh-sach-tham-my-vien','ProductController@listThamMyVien')->name('fe.product.listThamMyVien');
     Route::get('danh-sach-bac-si','ProductController@listBacSi')->name('fe.product.listBacSi');
+    Route::get('danh-sach-duoc-si','ProductController@listDuocSi')->name('fe.product.listDuocSi');
     Route::get('nhathuoconline.html','ProductController@contentIntroduce')->name('fe.product.contentIntroduce');
 
     Route::get('chat-test','MessagesController@chatTest')->name('fe.messages.chatTest');
@@ -142,6 +143,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('xoa-cache-tat-ca-cac-san-pham','SyncTdoctorController@deleteAllCacheproduct')->name('fe.SyncTdoctor.deleteAllCacheproduct');
     Route::get('xoa-cache-search-keyword','SyncTdoctorController@clearSearchCache')->name('fe.SyncTdoctor.clearSearchCache');
     Route::get('xoa-cache-danh-sach-bac-si-keyword','SyncTdoctorController@clearListBacSiCache')->name('fe.SyncTdoctor.clearListBacSiCache');
+    Route::get('xoa-cache-danh-sach-duoc-si-keyword','SyncTdoctorController@clearListDuocSiCache')->name('fe.SyncTdoctor.clearListDuocSiCache');
     Route::get('xoa-cache-danh-sach-nha-thuoc-keyword','SyncTdoctorController@clearListNhaThuocCache')->name('fe.SyncTdoctor.clearListNhaThuocCache');
     Route::get('xoa-cache-user-front-end','SyncTdoctorController@clearUserCache')->name('fe.SyncTdoctor.clearUserCache');
     Route::get('xoa-cache-danh-sach-benh-vien','SyncTdoctorController@clearListBenhVienCache')->name('fe.SyncTdoctor.clearListBenhVienCache');

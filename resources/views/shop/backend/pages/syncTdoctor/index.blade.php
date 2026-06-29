@@ -110,6 +110,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{route('fe.SyncTdoctor.clearListDuocSiCache')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Xóa cache danh sách Dược sĩ</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{route('fe.SyncTdoctor.clearListNhaThuocCache')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Xóa cache danh sách Nhà thuốc</p>
