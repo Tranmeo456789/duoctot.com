@@ -125,7 +125,9 @@
                 'meta_description'=>'Meta Description',
                 'ques'=>'Câu hỏi',
                 'ans'=>'Câu trả lời',
-                'slug'=>'Url trang'
+                'slug'=>'Url trang',
+                'education_level'=>'Cấp bậc học',
+                'experience'=>'Kinh nghiệm làm việc',
             ],
             'type_user' => [
                 '1' => 'Thành viên',

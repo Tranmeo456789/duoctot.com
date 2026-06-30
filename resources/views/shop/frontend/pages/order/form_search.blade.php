@@ -25,7 +25,7 @@ $elements = [
         <div class="d1 step1">
             <span>Tra cứu thông tin đơn hàng</span>
             {{ Form::open([
-                'method'         => 'POST',
+                'method'         => 'GET',
                 'url'            => route('fe.order.searchInPhone'),
                 'accept-charset' => 'UTF-8',
                 'class'          => 'form-search-phone-order',
@@ -33,7 +33,6 @@ $elements = [
 
             {!! FormTemplate::show($elements,$formInputWidth) !!}
             <div class="text-center col-12">
-                {{$inputHiddenTask }}
                 <button type="submit" class="btn mt-4" name="btnSearchPhoneOrder" value="1">Tiếp tục</button>
             </div>
             {{ Form::close() }}

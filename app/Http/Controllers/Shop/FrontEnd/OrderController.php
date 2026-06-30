@@ -33,12 +33,17 @@ class OrderController extends ShopFrontEndController
 
     }
     public function searchInPhone(Request $request){
-        if ($request->method() == 'POST') {
-            $params = $request->all();
-            $phone = trim((string)$params['phone']);
-            $order=(new OrderModel)->listItems(['search'=>$phone],['task'=>'list-items-in-phone']);
-            return view($this->moduleName.'.pages.order.index',compact('order','phone'));
-        }  
+        $phone = trim((string) $request->get('phone', ''));
+
+        // Chưa nhập phone -> hiển thị form trống, không query DB
+        if ($phone === '') {
+            return view($this->moduleName.'.pages.order.form_search');
+        }
+        $order = (new OrderModel)->listItems(
+            ['search' => $phone],
+            ['task' => 'list-items-in-phone']
+        );
+        return view($this->moduleName.'.pages.order.index', compact('order', 'phone'));
     }
     public function list(){
         $params['status']='tat_ca';

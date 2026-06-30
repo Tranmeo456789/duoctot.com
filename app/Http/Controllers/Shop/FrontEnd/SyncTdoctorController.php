@@ -72,7 +72,10 @@ class SyncTdoctorController extends ShopFrontEndController
                         'info_bank' => $user->info_bank,
                         'reward_points' => $user->reward_points,
                         'num_import_code_ref' => $user->num_import_code_ref,
-                        'slug' => $user->slug
+                        'slug' => $user->slug,
+                        'meta_description' => $user->meta_description,
+                        'education_level' => $user->education_level,
+                        'experience' => $user->experience,
                     ]);
                     $totalInserted++;
                 }
