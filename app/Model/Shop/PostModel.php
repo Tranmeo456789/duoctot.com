@@ -122,12 +122,12 @@ class PostModel extends BackEndModel
     {
         $result = null;
         if ($options['task'] == 'get-item') {
-            $result = self::select('id','title','meta_keywords','description','content','slug','image','cat_post_id','created_at', 'updated_at','alt_image','title_image')
+            $result = self::select('id','title','meta_keywords','description','content','slug','image','cat_post_id','created_at', 'updated_at','alt_image','title_image','approver_by')
                             ->where('id', $params['id'])
                             ->first();
         }
         if ($options['task'] == 'frontend-get-item') {
-            $query = self::select('id','title','meta_keywords','description','content','slug','image','cat_post_id','created_at', 'updated_at','alt_image','title_image');
+            $query = self::select('id','title','meta_keywords','description','content','slug','image','cat_post_id','created_at', 'updated_at','alt_image','title_image','approver_by');
             if(isset($params['id'])){
                 $query->where('id', $params['id']);
             }

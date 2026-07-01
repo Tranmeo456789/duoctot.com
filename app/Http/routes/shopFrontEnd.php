@@ -50,7 +50,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('/trang-chi-tiet-don-hang-cua-toi/{code}','OrderController@detailPage')->name('fe.order.detailPage');
     Route::get('/loc-don-hang-cua-toi','OrderController@ajaxFliter')->name('fe.order.ajaxFliter');
     Route::get('/tra-cuu-don-hang','OrderController@formSearch')->name('fe.order.formSearch');
-    Route::post('/tra-cuu-don-hang-theo-so-dien-thoai','OrderController@searchInPhone')->name('fe.order.searchInPhone');
+    Route::get('/tra-cuu-don-hang-theo-so-dien-thoai','OrderController@searchInPhone')->name('fe.order.searchInPhone');
 
     Route::get('/don-thuoc','PrescripController@index')->name('fe.prescrip.index');
     Route::post('/luu-don-thuoc-khach-hang','PrescripController@save')->name('fe.prescrip.save');
@@ -126,6 +126,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('user_benhvien-sitemap.xml','HomeController@siteUserBenhVien');
 
     Route::get('{slug}.html','ProductController@drugstore')->name('fe.product.drugstore');
+    Route::get('doi-ngu-chuyen-mon/{slug}.html','ProductController@detailDoiNguChuyenMon')->name('fe.product.detailDoiNguChuyenMon');
     
     Route::get('trang-chu-dong-du-lieu-tu-tdoctor','SyncTdoctorController@indexPage')->name('fe.SyncTdoctor.indexPage');
     Route::get('dong-du-lieu-bang-user','SyncTdoctorController@transferUsers')->name('fe.SyncTdoctor.transferUsers');

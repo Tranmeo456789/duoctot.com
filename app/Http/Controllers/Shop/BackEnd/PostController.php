@@ -96,6 +96,9 @@ class PostController extends BackEndController
                 $params['title'],
                 $nameCatPost
             ]);
+            if(Session::has('user')){
+                $params['approver_by'] = \Session::get('user')['user_id']??'';
+            }
             $this->model->saveItem($params, ['task' => $task]);
             $request->session()->put('app_notify', $notify);
             return response()->json([

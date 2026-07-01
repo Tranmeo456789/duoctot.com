@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Model\Shop\CatalogModel;
+use App\Model\Shop\UsersModel;
 use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
 use App\Model\Shop\PostModel as MainModel;
 use App\Model\Shop\CustomerFeedBackModel;
@@ -95,11 +96,18 @@ class PostController extends ShopFrontEndController
             return redirect()->route('home');
         }
         $listItemRelate = $this->model->where('id', '!=', $item['id'])->where('cat_post_id', $item['cat_post_id'])->take(4)->get();
-
+        $approver = null;
+        if (!empty($item) && !empty($item->approver_by)) {
+            $approver = (new UsersModel)->getItem(
+                ['user_id' => $item->approver_by],
+                ['task' => 'get-item']
+            );
+        }
         return view($this->pathViewController . 'detail',
             [
                 'item' => $item,
                 'listItemRelate' => $listItemRelate,            
+                'approver' => $approver,            
             ]
         );
     }

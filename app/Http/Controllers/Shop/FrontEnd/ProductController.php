@@ -19,6 +19,7 @@ use App\Model\Shop\UserValuesModel;
 use App\Model\Shop\WardModel;
 use App\Model\Shop\ConfigModel;
 use App\Helpers\MyFunction;
+use App\Model\Shop\PostModel;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Cache;
@@ -870,6 +871,37 @@ class ProductController extends ShopFrontEndController
             return redirect()->route('home');
         }
         return view($this->pathViewController . 'drugstore', $data);
+    }
+    public function detailDoiNguChuyenMon(Request $request, $slug){
+        if (empty($slug)) {
+            return redirect()->route('home');
+        }
+        $approver = UsersModel::where('slug', $slug)->first();
+        if (!$approver) {
+            return redirect()->route('home');
+        }
+        if (!empty($approver) && isset($approver['details']['image']) && $approver['details']['image'] != '') {
+        $imageSrcApprover = route('home') . '/public' . $approver['details']['image'];
+        } else {
+        $imageSrcApprover = route('home') . '/public/fileUpload/nhathuoc/6875c9e1945c0.jpg';
+        }
+        $title = !empty($approver->fullname)
+                ? $approver->fullname
+                : 'Sàn thương mại điện tử trong y dược số 1 Việt Nam';
+        $item['name']=$approver->fullname??'';
+        $item['description']=$approver->meta_description??'';
+        $item['image']=$imageSrcApprover??'';
+        $arrTypeUser = config('myconfig.template.type_user');
+        $userType=$arrTypeUser[$approver->user_type_id]??'';
+        $approver['user_type']=$userType;
+        $listItemRelate = (new PostModel)->where('approver_by', $approver['user_id'])->take(4)->get();
+        return view($this->pathViewController . 'detail_expert', [
+                    'approver' => $approver,
+                    'imageSrcApprover' => $imageSrcApprover,
+                    'title' => $title,
+                    'item' => $item,
+                    'listItemRelate' => $listItemRelate,
+                ]);
     }
     public function addCommentProduct(Request $request)
     {
