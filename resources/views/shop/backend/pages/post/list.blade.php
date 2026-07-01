@@ -9,6 +9,7 @@
                 <th>STT</th>
                 <th>Tin tức</th>
                 <th>Danh mục</th>
+                <th>Người sửa</th>
                 <th>Thời gian</th>
                 <th>Tác vụ</th>
             </tr>
@@ -25,10 +26,11 @@
                 $title = Hightlight::show($val->title, $params['search'], 'key_search');
                 $nameCatPost = Hightlight::show($val->catPost->name??'', $params['search'], 'key_search');
                 $timePost = MyFunction::formatDateFrontend($val['updated_at']);
+                $personEdit = $val->userEditPost['fullname'] ?? '';
             @endphp
             <tr>
                 <td style="width: 5%">{{$temp}}</td>
-                <td style="width: 55%" class="img-in-table">
+                <td style="width: 35%" class="img-in-table">
                     <div class="d-flex">
                         <div class="align-items-center"  style="width:15%">
                             {!! $image !!}
@@ -39,6 +41,7 @@
                     </div>
                 </td>
                 <td style="width: 15%">{!! $nameCatPost !!}</td>
+                <td style="width: 20%">{{$personEdit}}</td>
                 <td style="width: 10%">{{$timePost}}</td>
                 <td style="width: 15%">
                     <a href="{{route("$controllerName.edit",$val->id)}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit"></i></a>

@@ -58,6 +58,7 @@ class ProductController extends BackEndController
             });
             $items              = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
         }
+        //return $items;
         $pathView = $request->ajax() ? 'ajax' : 'index';
         return view($this->pathViewController .  $pathView, [
             'params'           => $this->params,
@@ -182,6 +183,9 @@ class ProductController extends BackEndController
                 }
             }
             $params['price_vat'] = $params['price'];
+            if(Session::has('user') && in_array(Session::get('user')['user_type_id'] ?? 0, [2, 5])){
+                $params['approver_by'] = Session::get('user')['user_id'] ?? '';
+            }
             $this->model->saveItem($params, ['task' => $task]);
             $request->session()->put('app_notify', $notify);
             if(Session::get('user')['is_admin'] == 1){

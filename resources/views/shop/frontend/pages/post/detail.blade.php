@@ -76,6 +76,9 @@ $timePost = MyFunction::formatDateLongTime($item['created_at']);
     </div>
 </div>
 <div class="wp-inner mt-3" style="max-width: 597px;">
+    @if ((Session::has('user') && in_array(Session::get('user')['is_admin'], [1, 2])))
+        <a href="{{route('post.edit',$item->id)}}" class="btn btn-sm btn-secondary">chỉnh sửa</a>
+    @endif
     <h1 class="title-name">{{$item['title']}}</h1>
     <p>{{$timePost}}</p>
     <div class="content-post mb-4">
@@ -114,6 +117,7 @@ $timePost = MyFunction::formatDateLongTime($item['created_at']);
         <a href="{{route('fe.product.detailDoiNguChuyenMon',$approver->slug)}}" class="read-more">Xem thêm thông tin</a>
     </div>
     @endif
+    @if(!empty($listItemRelate))
     @include("$moduleName.templates.box_title_product",['title' => 'Tin liên quan','img'=>'mat.png'])
     <div class="mb-2">
         <div class="row">
@@ -144,6 +148,7 @@ $timePost = MyFunction::formatDateLongTime($item['created_at']);
             @endforeach
         </div>
     </div>
+    @endif
 </div>
 <div class="local">
     @include("$moduleName.templates.local_drugstore")

@@ -8,8 +8,7 @@
                 <th>STT</th>
                 <th>Thuốc</th>
                 <th>Đơn vị</th>
-                <th>Tổng đơn <br/>đặt hàng</th>
-                <th>Tồn trong kho</th>
+                <th>Người sửa</th>
                 <th>Trạng thái</th>
                 <th>Tác vụ</th>
             </tr>
@@ -26,6 +25,7 @@
                 $statusProductValue = array_combine(array_keys(config("myconfig.template.column.status_product")),array_column(config("myconfig.template.column.status_product"),'name'));
                 unset($statusProductValue['all']);
                 $name = Hightlight::show($val->name, $params['search'], 'name');
+                $personEdit = $val->userEditProduct['fullname'] ?? '';
             @endphp
             <tr>
                 <td style="width: 3%">{{$temp}}</td>
@@ -35,14 +35,13 @@
                             {!! $image !!}
                         </div>
                         <div class="info-product ml-1">
-                            <p class="text-primary font-weight-bold mb-1">{!! $name !!}</p>
+                            <p class="text-primary font-weight-bold mb-1"><a href="{{route('fe.product.detail',$val->slug)}}">{!! $name !!}</a></p>
                             <p mb-1>Giá: {{ number_format( $val->price, 0, "" ,"." )}}đ</p>
                         </div>
                     </div>
                 </td>
                 <td style="width: 5%">{{$val->unitProduct->name}}</td>
-                <td style="width: 12%" class="text-center">0</td>
-                <td style="width: 7%" class="text-right">{{$val->quantity_in_stock}}</td>
+                <td style="width: 19%" class="text-center">{{$personEdit}}</td>
                 <td style="width: 8%"><span class="badge {{$val->status_product=='da_duyet'?'badge-success':'badge-warning'}}">{!! $statusProductValue[$val['status_product']]!!}</span></td>
                 <td style="width: 8%">
                     <a href="{{route("$controllerName.edit",$val->id)}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit"></i></a>

@@ -38,7 +38,7 @@ class PostModel extends BackEndModel
         $result = null;
         $user = Session::get('user');
         if ($options['task'] == "user-list-items") {
-            $query = $this::with('catPost')->select('id','title','meta_keywords','description','content','slug','image','cat_post_id','created_at', 'updated_at','alt_image','title_image')->ofUser();
+            $query = $this::with('catPost')->select('id','title','meta_keywords','description','content','slug','image','cat_post_id','created_at', 'updated_at','updated_by','alt_image','title_image')->ofUser();
             if (isset($params['group_id'])){
                 $query->whereIn('id',$params['group_id']);
             }
@@ -161,5 +161,8 @@ class PostModel extends BackEndModel
     {
         return $this->belongsTo('App\Model\Shop\CatalogModel', 'cat_post_id', 'id')
                     ->select('id', 'name', 'name_url');
+    }
+    public function userEditPost(){
+        return $this->belongsTo('App\Model\Shop\UsersModel','updated_by','user_id');
     }
 }

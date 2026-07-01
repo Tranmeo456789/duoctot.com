@@ -363,13 +363,17 @@ class ProductController extends ShopFrontEndController
             $userInfoCurrent = $session->get('user');
             $codeRefLogin    = $userInfoCurrent['codeRef'] ?? '';
             $codeRefRegister = $userInfoCurrent['ref_register'] ?? '';
-            $item = Cache::tags(['duoctot_product', 'duoctot_product_detail', 'duoctot_product_login'])
+            if(in_array($userInfoCurrent['is_admin'], [1, 2])){
+                $item = $this->model->getItem(['slug' => $slug],['task' => 'get-item']);
+            }else{
+                $item = Cache::tags(['duoctot_product', 'duoctot_product_detail', 'duoctot_product_login'])
                 ->remember("duoctot_product_login_{$slug}", 3600, function () use ($slug) {
                     return $this->model->getItem(
                         ['slug' => $slug],
                         ['task' => 'frontend-get-item-has-login']
                     );
                 });
+            }
         } else {
             $item = Cache::tags(['duoctot_product', 'duoctot_product_detail', 'duoctot_product_guest'])
                 ->remember("duoctot_product_guest_{$slug}", 3600, function () use ($slug) {
@@ -466,6 +470,13 @@ class ProductController extends ShopFrontEndController
                     ['product_id' => $item['id']],
                     ['task' => 'rating-percentage-star']
                 ) ?? [];
+                $approver = null;
+                if (!empty($item) && !empty($item->approver_by)) {
+                    $approver = (new UsersModel)->getItem(
+                        ['user_id' => $item->approver_by],
+                        ['task' => 'get-item']
+                    );
+                }
                 return compact(
                     'listProductRelate',
                     'ratingProduct',
@@ -475,7 +486,8 @@ class ProductController extends ShopFrontEndController
                     'itemCatParentLevel1',
                     'itemCatParentLevel2',
                     'averageRating',
-                    'ratingPercentages'
+                    'ratingPercentages',
+                    'approver'
                 );
             });
         extract($dataCache);
@@ -526,7 +538,8 @@ class ProductController extends ShopFrontEndController
                 'description',
                 'metaKeywords',
                 'productCode',
-                'price'
+                'price',
+                'approver'
             )
         );
     }

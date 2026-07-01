@@ -12,14 +12,14 @@ use App\Helpers\MyFunction;
     .bio-box       { font-size: 1rem; background: #f3f6f9; border-radius: 12px; padding: 16px 20px; color: #374151; line-height: 1.65; box-shadow: 6px 6px 0 0 rgba(114,138,161,0.3); margin-top: 16px; }
     .section-title { gap: 8px; margin-bottom: 14px; }
     .section-title h2 { font-size: 1.5rem; font-weight: 600; color: #111827; margin: 0; }
-    .rich-content p  { margin-top: .5rem; margin-bottom: .5rem; font-size: 1rem; line-height: 1.5rem; }
+    .rich-content p  { margin-top: .5rem; margin-bottom: .5rem; font-size: 1.25rem; line-height: 1.5rem; }
     .rich-content strong { color: #111827; font-weight: 700; display: block; margin-top: 12px; margin-bottom: 2px; }
     .rich-content strong:first-child { margin-top: 0; }
 </style>
 @endsection
 @section('content')
 <div class="wp-inner mt-3 mt-lg-4">
-    <div class="expert-introduction">
+    <div class="expert-introduction mb-4">
         <div class="row g-4">
             <!-- CỘT TRÁI -->
             <div class="col-12 col-md-4 d-flex flex-column align-items-center pb-4">
@@ -46,10 +46,10 @@ use App\Helpers\MyFunction;
             </div>
         </div>
     </div>
+    @if(!empty($listItemRelate))
     @include("$moduleName.templates.box_title_product",['title' => 'Bài viết cùng chuyên gia','img'=>'mat.png'])
     <div class="mb-2">
         <div class="row">
-            @if(!empty($listItemRelate))
             @foreach($listItemRelate as $val)
             <div class="col-xl-6 col-lg-12 newsh py-2">
                 <div class="news-content-left">
@@ -75,9 +75,9 @@ use App\Helpers\MyFunction;
                 </div>
             </div>
             @endforeach
-            @endif
         </div>
     </div>
+    @endif
 </div>
 <div class="local">
     @include("$moduleName.templates.local_drugstore")

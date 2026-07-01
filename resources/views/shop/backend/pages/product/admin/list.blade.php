@@ -10,7 +10,7 @@
                 <th>STT</th>
                 <th>Thuốc</th>
                 <th>Giá bán</th>
-                <th>Người bán</th>
+                <th>Người sửa</th>
                 <th>Trạng thái</th>
                 <th>Tác vụ</th>
             </tr>
@@ -36,13 +36,13 @@
                                 {!! $image !!}
                             </div>
                             <div class="info-product ml-1">
-                                <p class="text-primary font-weight-bold mb-1">{!! $name !!}</p>
+                                <p class="text-primary font-weight-bold mb-1"><a href="{{route('fe.product.detail',$val->slug)}}">{!! $name !!}</a></p>
                                 <p mb-1><span>Đơn vị: {{$val->unitProduct->name}}</span></p>
                             </div>
                         </div>
                     </td>
                     <td style="width: 10%" class="text-center">{{MyFunction::formatNumber($val->price) . ' đ'}}</td>
-                    <td style="width: 17%" >{{$val->userProduct['fullname']??''}}</td>            
+                    <td style="width: 17%" >{{$val->userEditProduct['fullname']??''}}</td>            
                     <td style="width: 10%" class="text-center"><span class="badge {{$val->status_product=='da_duyet'?'badge-success':'badge-warning'}} ">{!! $statusProductValue[$val['status_product']]!!}</span></td>
                     <td style="width: 15%" class="text-center">
                         <a href="{{route('admin.product.change.status',[$val->id,'da_duyet'])}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top">Phê duyệt</a>
