@@ -23,6 +23,7 @@
                 <div class="card card-outline card-primary">
                     @include("$moduleName.blocks.x_title", ['title' => 'Danh sách'])
                     <div class="card-body p-0">
+                        {!! Template::showTabFilter($controllerName, $itemStatusPostCount, $params['filter']['status_post'], $params,'status_post'); !!}
                         @include("$moduleName.pages.$controllerName.list")
                     </div>
                     <div class="card-footer my-card-pagination clearfix">

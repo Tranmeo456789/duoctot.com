@@ -91,7 +91,12 @@ class PostController extends ShopFrontEndController
                 301
             );
         }
-        $item= $this->model->getItem(['slug'=>$slug],['task' => 'frontend-get-item']);
+        $session = $request->session();
+        if ($session->has('user') && in_array($session->get('user')['is_admin'] ?? null, [1, 2])) {
+            $item = $this->model->getItem(['slug' => $slug], ['task' => 'get-item']);
+        } else {
+            $item = $this->model->getItem(['slug' => $slug], ['task' => 'frontend-get-item']);
+        }
         if (!$item) {
             return redirect()->route('home');
         }

@@ -115,6 +115,7 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
         Route::get('/sua-tin-tuc/{id}', 'PostController@form')->name('post.edit');
         Route::post('/luu-tin-tuc', 'PostController@save')->name('post.save');
         Route::get('/xoa-tin-tuc/{id}', 'PostController@delete')->name('post.delete');
+        Route::get('/thay-doi-trang-thai-bai-viet/{id}/{status}', 'PostController@changeStatusPost')->name('admin.post.change.status');
 
         Route::get('/danh-sach-phan-hoi-khach-hang', 'CustomerFeedBackController@index')->name('customerFeedback');
         Route::get('/them-phan-hoi-khach-hang', 'CustomerFeedBackController@form')->name('customerFeedback.add');

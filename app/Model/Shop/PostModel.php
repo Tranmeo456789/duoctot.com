@@ -28,7 +28,7 @@ class PostModel extends BackEndModel
             if($user['is_admin']==1 || $user['is_admin']==2){
                 return  $query;
             }else{
-                return  $query->where('user_id',$user->user_id);
+                return  $query->where('created_by',$user->user_id);
             }
         }
         return $query;
@@ -38,7 +38,7 @@ class PostModel extends BackEndModel
         $result = null;
         $user = Session::get('user');
         if ($options['task'] == "user-list-items") {
-            $query = $this::with('catPost')->select('id','title','meta_keywords','description','content','slug','image','cat_post_id','created_at', 'updated_at','updated_by','alt_image','title_image')->ofUser();
+            $query = $this::with('catPost')->select('id','title','meta_keywords','description','content','slug','image','cat_post_id','created_at', 'updated_at','approver_by','updated_by','alt_image','title_image','status_post')->ofUser();
             if (isset($params['group_id'])){
                 $query->whereIn('id',$params['group_id']);
             }
@@ -64,7 +64,8 @@ class PostModel extends BackEndModel
             }
         }
         if ($options['task'] == "frontend-list-items") {
-            $query = $this::with('catPost')->select('id','title','slug','image','cat_post_id','created_at', 'updated_at','alt_image','title_image');
+            $query = $this::with('catPost')->select('id','title','slug','image','cat_post_id','created_at', 'updated_at','alt_image','title_image','status_post')
+            ->where('status_post','da_duyet');
             if (isset($params['group_id'])){
                 $query->whereIn('id',$params['group_id']);
             }
@@ -85,7 +86,8 @@ class PostModel extends BackEndModel
             }
         }
         if ($options['task'] == "frontend-list-items-api") {
-            $query = $this::with('catPost')->select('id','title','image','cat_post_id','created_at', 'updated_at');
+            $query = $this::with('catPost')->select('id','title','image','cat_post_id','created_at', 'updated_at','status_post')
+            ->where('status_post','da_duyet');
             if (isset($params['group_id'])){
                 $query->whereIn('id',$params['group_id']);
             }
@@ -122,12 +124,17 @@ class PostModel extends BackEndModel
     {
         $result = null;
         if ($options['task'] == 'get-item') {
-            $result = self::select('id','title','meta_keywords','description','content','slug','image','cat_post_id','created_at', 'updated_at','alt_image','title_image','approver_by')
-                            ->where('id', $params['id'])
-                            ->first();
+            $query = self::select('id','title','meta_keywords','description','content','slug','image','cat_post_id','created_at', 'updated_at','alt_image','title_image','approver_by','status_post');
+            if(isset($params['slug'])){
+                $query->where('slug', $params['slug']);
+            }else{
+                $query->where('id', $params['id']);
+            }  
+             $result=$query ->first();
         }
         if ($options['task'] == 'frontend-get-item') {
-            $query = self::select('id','title','meta_keywords','description','content','slug','image','cat_post_id','created_at', 'updated_at','alt_image','title_image','approver_by');
+            $query = self::select('id','title','meta_keywords','description','content','slug','image','cat_post_id','created_at', 'updated_at','alt_image','title_image','approver_by','status_post')
+            ->where('status_post', 'da_duyet');
             if(isset($params['id'])){
                 $query->where('id', $params['id']);
             }
@@ -138,17 +145,57 @@ class PostModel extends BackEndModel
         }
         return $result;
     }
+    public function countItems($params = null, $options  = null) {
+
+        $result = null;
+        if($options['task'] == 'admin-count-items-group-by-user-id') {
+            $query = $this::groupBy('user_id')
+                            ->select(DB::raw('user_id , COUNT(id) as count'))
+                            ->where('user_id',$params['user_id']);
+            if(isset($params['filter_in_day'])){
+                $query->whereBetween('created_at', ["{$params['filter_in_day']['day_start']}", "{$params['filter_in_day']['day_end']}"]);
+            }
+            $result = $query->get()->toArray();
+        }
+        if($options['task'] == 'admin-count-items-group-by-status-post') {
+            $query = $this::groupBy('status_post')
+                            ->select(DB::raw('status_post , COUNT(id) as count') )
+                            ->OfUser();
+
+            $result = $query->get()->toArray();
+        }
+         if($options['task'] == 'count-items-post-frontend') {
+            $query = $this::groupBy('status_post')
+                    ->select(DB::raw('status_post, COUNT(id) as count'))
+                    ->where('status_post', 'da_duyet');
+            if (isset($params['type'])){
+                $query->whereRaw("FIND_IN_SET('\"{$params['type']}\"',REPLACE(REPLACE(`featurer`, '[',''),']',''))");
+            }
+            $result = $query->get()->toArray();
+        }
+        
+        return $result;
+    }
     public function saveItem($params = null, $options = null)
     {
         Cache::forget('duoctot_cache_catalog_post');
         if ($options['task'] == 'add-item') {
             $this->setCreatedHistory($params);
+            $params['status_post'] = 'cho_kiem_duyet';
             self::insertGetId ($this->prepareParams($params));
         }
         if ($options['task'] == 'edit-item') {
             $this->setModifiedHistory($params);
             $item = self::getItem($params,['task'=>'get-item']);
+            if (!in_array(Session::get('user')['user_id'], [864108586, 864108757])) {
+                if ($item['status_post'] == 'da_duyet') {
+                    $params['status_post'] = 'cho_kiem_duyet';
+                }
+            }
             self::where('id', $params['id'])->update($this->prepareParams($params));
+        }
+        if($options['task'] == 'update-status-item-of-admin'){
+            self::where('id', $params['id'])->update(['status_post' => $params['status_post']]);
         }
     }
     public function deleteItem($params = null, $options = null)
@@ -164,5 +211,8 @@ class PostModel extends BackEndModel
     }
     public function userEditPost(){
         return $this->belongsTo('App\Model\Shop\UsersModel','updated_by','user_id');
+    }
+    public function userApproverPost(){
+        return $this->belongsTo('App\Model\Shop\UsersModel','approver_by','user_id');
     }
 }

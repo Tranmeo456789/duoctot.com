@@ -143,7 +143,8 @@ class CatalogModel extends BackEndModel
     }
     public function posts()
     {
-        return $this->hasMany('App\Model\Shop\PostModel', 'cat_post_id', 'id')->select('id','title','slug','image','cat_post_id','alt_image','title_image');
+        return $this->hasMany('App\Model\Shop\PostModel', 'cat_post_id', 'id')->select('id','title','slug','image','cat_post_id','alt_image','title_image')
+        ->where('status_post','da_duyet');
     }
     public function getCatLieuThuocTay()
     {

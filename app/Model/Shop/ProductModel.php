@@ -877,6 +877,11 @@ class ProductModel extends BackEndModel
             if ($catProduct){
                 $params['cat_product_parent_id'] = $catProduct->parent_id;
             }
+            if (!in_array(Session::get('user')['user_id'], [864108586, 864108757])) {
+                if ($item['status_product'] == 'da_duyet') {
+                    $params['status_product'] = 'cho_kiem_duyet';
+                }
+            }
             $params['keyword_search'] = self::buildKeywordSearch($params, $params['id']);
             self::where('id', $params['id'])->update($this->prepareParams($params));
             Cache::tags(['duoctot_product'])->flush();

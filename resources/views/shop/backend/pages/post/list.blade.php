@@ -9,8 +9,8 @@
                 <th>STT</th>
                 <th>Tin tức</th>
                 <th>Danh mục</th>
-                <th>Người sửa</th>
-                <th>Thời gian</th>
+                <th>Người sửa gần nhất</br>BS, DS phê duyệt</th>
+                <th>Thời gian</br>Trạng thái</th>
                 <th>Tác vụ</th>
             </tr>
         </thead>
@@ -27,6 +27,9 @@
                 $nameCatPost = Hightlight::show($val->catPost->name??'', $params['search'], 'key_search');
                 $timePost = MyFunction::formatDateFrontend($val['updated_at']);
                 $personEdit = $val->userEditPost['fullname'] ?? '';
+                $personApprover = $val->userApproverPost['fullname'] ?? '';
+                $statusPostValue = array_combine(array_keys(config("myconfig.template.column.status_post")),array_column(config("myconfig.template.column.status_post"),'name'));
+                unset($statusPostValue['all']);
             @endphp
             <tr>
                 <td style="width: 5%">{{$temp}}</td>
@@ -41,13 +44,24 @@
                     </div>
                 </td>
                 <td style="width: 15%">{!! $nameCatPost !!}</td>
-                <td style="width: 20%">{{$personEdit}}</td>
-                <td style="width: 10%">{{$timePost}}</td>
+                <td style="width: 20%">
+                    <div>{{$personEdit}}</div>
+                    <div class="text-success">{{$personApprover}}</div>
+                </td>
+                <td style="width: 10%">
+                    <div>{{$timePost}}</div>
+                    <div><span class="badge {{$val->status_post=='da_duyet'?'badge-success':'badge-warning'}} ">{!! $statusPostValue[$val['status_post']]!!}</span></div>
+                </td>
                 <td style="width: 15%">
                     <a href="{{route("$controllerName.edit",$val->id)}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit"></i></a>
+                    @if (in_array(Session::get('user')['user_id'], [864108586, 864108757]))
+                    <a href="{{route('admin.post.change.status',[$val->id,'da_duyet'])}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top">Phê duyệt</a>
+                    <a href="{{route('admin.post.change.status',[$val->id,'tu_choi'])}}" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top">Từ chối</a>
+                    <a href="{{route('admin.post.change.status',[$val->id,'cho_kiem_duyet'])}}" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top">Chờ phê duyệt</a>
                     <!-- <a data-href="{{route("$controllerName.delete",$val->id)}}" class="btn btn-sm btn-danger btn-delete text-white" data-id="{{$val->id}}" data-toggle="tooltip" data-placement="top" title="Xóa" data-token="{{csrf_token()}}">
                         <i class="fa fa-trash"></i>
                     </a> -->
+                    @endif
                 </td>
             </tr>
         @endforeach

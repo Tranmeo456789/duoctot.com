@@ -36,13 +36,15 @@ class PostController extends BackEndController
         if ($request->has('deleteValueSearch') && $request->get('deleteValueSearch') == 1) {
             $session->forget('params.search.value');
         }
-        $session->put('params.filter.status_product', $request->has('filter_status_product') ? $request->get('filter_status_product') : ($session->has('params.filter.status_product') ? $session->get('params.filter.status_product') : 'all'));
+        $session->forget('params.filter');
+        $session->put('params.filter.status_post', $request->has('filter_status_post') ? $request->get('filter_status_post') : ($session->has('params.filter.status_post') ? $session->get('params.filter.status_post') : 'all'));
         $session->put('params.search.field', $request->has('search_field') ? $request->get('search_field') : ($session->has('params.search.field') ? $session->get('params.search.field') : ''));
         $session->put('params.search.value', $request->has('search_value') ? $request->get('search_value') : ($session->has('params.search.value') ? $session->get('params.search.value') : ''));
         $session->put('params.pagination.totalItemsPerPage', $this->totalItemsPerPage);
         $this->params     = $session->get('params');
 
         $items            = $this->model->listItems($this->params, ['task'  => 'user-list-items']);
+        $itemStatusPostCount = $this->model->countItems($this->params, ['task' => 'admin-count-items-group-by-status-post']);
         if ($items->currentPage() > $items->lastPage()) {
             $lastPage = $items->lastPage();
             Paginator::currentPageResolver(function () use ($lastPage) {
@@ -54,6 +56,7 @@ class PostController extends BackEndController
         return view($this->pathViewController .  $pathView, [
             'params'           => $this->params,
             'items'            => $items,
+            'itemStatusPostCount'            => $itemStatusPostCount,
          ]);     
     }
     public function save(MainRequest $request)
@@ -142,4 +145,11 @@ class PostController extends BackEndController
         }
         return response()->json(['error' => 'File không hợp lệ.'], 400);
     }
+    public function changeStatusPost(Request $request,$id,$status){
+        $params['id']=$request->id;
+        $params['status_post']=$request->status;
+        $this->model->saveItem($params, ['task' => 'update-status-item-of-admin']);
+        $request->session()->put('app_notify', 'Thay đổi trạng thái bài viết thành công!');
+        return back()->withInput();
+   }
 }
