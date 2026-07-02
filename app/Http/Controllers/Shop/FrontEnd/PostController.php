@@ -96,10 +96,22 @@ class PostController extends ShopFrontEndController
             return redirect()->route('home');
         }
         $listItemRelate = $this->model->where('id', '!=', $item['id'])->where('cat_post_id', $item['cat_post_id'])->take(4)->get();
+        $defaultApproverId = 1984152539;
         $approver = null;
+        $approverId = $defaultApproverId; // mặc định
         if (!empty($item) && !empty($item->approver_by)) {
-            $approver = (new UsersModel)->getItem(
+            $temp = (new UsersModel)->getItem(
                 ['user_id' => $item->approver_by],
+                ['task' => 'get-item']
+            );
+            if (in_array($temp['user_type_id'] ?? 0, [2, 5])) {
+                $approverId = $item->approver_by; // dùng approver của item
+                $approver = $temp;
+            }
+        }
+        if (empty($approver)) {
+            $approver = (new UsersModel)->getItem(
+                ['user_id' => $approverId],
                 ['task' => 'get-item']
             );
         }
