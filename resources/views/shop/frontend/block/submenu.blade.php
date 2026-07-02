@@ -1,3 +1,38 @@
+<style>
+    .cat-level1-duoctot {
+    position: relative; 
+}
+.cat-level1-duoctot .content-submenu-duoctot {
+    display: none;
+    position: absolute;
+    top: 100%;     
+    right: -400px;
+    background: #faf8f8;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 999;
+    padding: 10px 0;
+}
+.cat-level1-duoctot:hover .content-submenu-duoctot {
+    display: block;
+}
+.cat-level1-duoctot:hover > a {
+    
+}
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 2px;
+    font-size: 10px;
+}
+.content-submenu-duoctot a{
+    font-size: 16px;
+    line-height: 20px;
+    color: #1E1E1E;
+    padding: 5px;
+    display: block;
+}
+</style>
 @php
 use App\Helpers\MyFunction;
 $model = new \App\Model\Shop\CatProductModel();
@@ -44,7 +79,31 @@ $listCatLieuThuocTay = $modelCatalog->getCatLieuThuocTay();
         </div>
     </li>
     @endforeach
-    <li class="align-self-center">
+    <li class="cat-level1-duoctot">
+        <a href="{{route('fe.post')}}">
+            Blog
+            <i class="fas fa-chevron-down arrow"></i>
+        </a>
+        <div class="content-submenu-duoctot" style="width: 700px;">
+            <div class="row mx-0">
+                <div class="col-6 px-0">
+                    <a class="" href="{{route('fe.lieuThuocTay')}}">
+                        <span class="pl-2">Cắt liều thuốc tây</span>
+                    </a>
+                </div>
+                @foreach ($listCatLieuThuocTay->chunk(2) as $pair)
+                    @foreach ($pair as $item)
+                    <div class="col-6 px-0">
+                        <a class="" href="{{route('fe.post.listPostOfCat',$item['name_url'])}}">
+                            <span class="pl-2">{{ $item['name'] }}</span>
+                        </a>
+                    </div>
+                    @endforeach
+                @endforeach
+            </div>
+        </div>
+    </li>
+    <!-- <li class="align-self-center">
         <div class="position-relative">
             <div class="dropdown">
                 <button class="btn dropdown-toggle font-weight-bold text-secondary pl-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 15px;">Cắt Liều Thuốc Tây</button>
@@ -56,7 +115,7 @@ $listCatLieuThuocTay = $modelCatalog->getCatLieuThuocTay();
                 </div>
             </div>
         </div>
-    </li>
+    </li> -->
     <li class="align-self-center">
         <div class="position-relative">
             <div class="dropdown">

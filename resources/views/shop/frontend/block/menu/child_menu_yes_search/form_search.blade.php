@@ -13,7 +13,7 @@
             </div>
             <div class="wp-btn-search">
                 <button type="submit" class="btn-search-home btn" name="btn_search" value="1">
-                    <img src="{{asset('images/shop/icon-search.png')}}" alt="tdoctor" loading="lazy" width="20" height="20" decoding="async">
+                    <img src="{{asset('images/shop/icon-search.png')}}" alt="tdoctor" loading="lazy" width="52" height="52" decoding="async">
                 </button>
             </div>
         </div>

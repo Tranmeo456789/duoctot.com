@@ -98,11 +98,12 @@ $phoneContact=$phoneContact??'0345488247';
     <li>
         <div class="container-menures position-relative parentsmenu">
             <div class=" pr-4">
-                <a href="{{route('fe.lieuThuocTay')}}">Cắt Liều Thuốc Tây</a>
+                <a href="{{route('fe.post')}}">Blog</a>
             </div>
             <div class="iconmnrhv"><img src="{{asset('images/shop/arrowd.png')}}" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async"></div>
             <div class="submenu1res">
                 <ul>
+                    <li><a href="{{route('fe.lieuThuocTay')}}">Cắt liều thuốc tây</a></li>
                     @foreach ($listCatLieuThuocTay as $itemCatLieuThuocTay)
                     <li><a href="{{route('fe.post.listPostOfCat',$itemCatLieuThuocTay['name_url'])}}">{{$itemCatLieuThuocTay['name']}}</a></li>
                     @endforeach
