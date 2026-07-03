@@ -1634,11 +1634,6 @@ $(document).on('click', ".form-search-scroll", function (event) {
     $("HTML, BODY").animate({ scrollTop: position }, 500);
 });
 
-$(document).on('click', ".form-search-show-list", function (event) {
-    $('.lc-mask-search').css("opacity", 1);
-    $('.lc-mask-search').css("visibility", "visible"); 
-    $('.ls-history').css("display", "block");
-});
 $(document).on('click', ".search-header-mobi .wp-input-search-simple", function (event) {
     $('#box-search-fixed').css("display", "block");
     var input = $('#box-search-fixed .input-search-info')[0];

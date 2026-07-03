@@ -4989,8 +4989,8 @@ input[type="radio"] {
 .wp-search-menu {
     position: relative;
     padding-top: 20px;
-    margin-left: 150px;
-    width: 35%;
+    margin-left: 80px;
+    width: 40%;
 }
 .note-video-clip{
     width:100%;
@@ -5071,7 +5071,7 @@ input[type="radio"] {
 .input-search-small {
     border-radius: 100px 0 0 100px;
     padding: 0 8px 0 16px;
-    min-height: 45px;
+    min-height: 52px;
     position: relative;
     display: flex;
     width: 100%;
@@ -5203,7 +5203,7 @@ input[type="radio"] {
     cursor: pointer;
     margin-right: 6px;
     margin-bottom: 6px;
-    color: #1E1E1E;
+    color: #05afe3;
 }
 
 .ls-top-keyword a:hover {

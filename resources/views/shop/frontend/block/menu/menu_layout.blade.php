@@ -73,24 +73,6 @@
                         @include('shop.frontend.block.submenu')
                     </div>
                 </div>
-                <div class="flag pt-2">
-                    <div class="position-relative">
-                        @if(session()->has('locale'))
-                        <img src="{{asset('images/shop/')}}/fg_{{session()->get('locale')}}.png">
-                        @else
-                        <img src="{{asset('images/shop/flag.png')}}">
-                        @endif
-                        <div class="dropdown">
-                            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('lang.language')</button>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="{{url('lang/vi')}}"><span><img src="{{asset('images/shop/fg_vi.png')}}"></span><span class="pl-2">@lang('lang.vietnam')</span></a>
-                                <a class="dropdown-item" href="{{url('lang/en')}}"><span><img src="{{asset('images/shop/fg_en.png')}}"></span><span class="pl-2">@lang('lang.english')</span></a>
-                                <a class="dropdown-item" href="{{url('lang/zh')}}"><span><img src="{{asset('images/shop/fg_zh.png')}}"></span><span class="pl-2">@lang('lang.chinese')</span></a>
-                                <a class="dropdown-item" href="{{url('lang/ko')}}"><span><img src="{{asset('images/shop/fg_ko.png')}}"></span><span class="pl-2">@lang('lang.korean')</span></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

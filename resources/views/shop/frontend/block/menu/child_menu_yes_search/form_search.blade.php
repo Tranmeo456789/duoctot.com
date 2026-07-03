@@ -1,5 +1,12 @@
 @php
     $dataHref = route('fe.product.searchListProductShort');
+    use App\Model\Shop\SearchModel;
+    $params['limit']=6;
+    $listKeywordHight=(new SearchModel)->listItems($params, ['task'=>'list-keyword-search-most']);
+    $listKeywordHistory=[];
+    if(isset($_COOKIE["keywordHistory"])){
+        $listKeywordHistory=json_decode($_COOKIE["keywordHistory"],true);
+    }
 @endphp
 <div class="position-relative wp-search-list-product">
     <form action="{{route('fe.search.saveHome')}}" method="GET">
@@ -18,8 +25,14 @@
             </div>
         </div>
     </form>
-    <div class="data-history">
-    @include("$moduleName.block.menu.child_menu_yes_search.list_history_keyword")
+</div>
+<div class="top-keyword">
+    @if(isset($listKeywordHight))
+    <div class="ls-top-keyword">
+        @foreach($listKeywordHight as $val)
+        <a href="{{route('fe.search.viewHome',$val['keyword'])}}">{{$val['keyword']}}</a>
+        @endforeach
     </div>
+    @endif
 </div>
 
