@@ -17,8 +17,7 @@ use DB;
 class ProductModel extends BackEndModel
 {
     protected $casts = [
-        'tick'   => 'array',
-        'featurer' =>'array',
+        'featurer' => 'array',
         'sell_area' => 'array',
         'list_prices'   => 'array'
     ];
@@ -673,7 +672,10 @@ class ProductModel extends BackEndModel
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id','brand_origin_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
                                     'preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','long','wide','high',
-                                    'mass','discount_ref','discount_tdoctor','contact','meta_keywords','meta_description','show_price','prescription_drug','alt_image','title_image','created_by','approver_by','created_at','updated_at');
+                                    'mass','discount_ref','discount_tdoctor','contact','meta_keywords','meta_description','show_price',
+                                    'prescription_drug','alt_image','title_image','created_by','approver_by','created_at','updated_at',
+                                    'brand_manufacturer','company_registered','number_registered','elements_mini'
+                                    );
             if(isset($params['slug'])){
                 $query->where('slug', $params['slug']);
             }else{
@@ -688,9 +690,18 @@ class ProductModel extends BackEndModel
                             ->first();
         }
         if ($options['task'] == 'frontend-get-item') {
-            $query = self::with(['unitProduct','catProduct','brandOriginIdProduct','trademarkProduct','producerProduct','countryProduct','userProduct','questions'])
-                ->select('id','name','type','code','cat_product_id','producer_id','tick','type_price','price','list_prices','price_vat','percent_discount','coefficient','type_vat','packing','expiration_date','unit_id','sell_area','amout_max','inventory','inventory_min','general_info','prescribe','dosage','trademark_id','brand_origin_id','dosage_forms','country_id','specification','benefit','elements','preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','discount_ref','contact','meta_keywords','meta_description','show_price','prescription_drug','alt_image','title_image','created_by','approver_by','created_at','updated_at')
-                ->where('status_product', 'da_duyet');
+            $query = self::with(['unitProduct','catProduct','brandOriginIdProduct','trademarkProduct',
+            'producerProduct','countryProduct','userProduct','questions'])
+                ->select('id','name','type','code','cat_product_id','producer_id','tick','type_price','price',
+                'list_prices','price_vat','percent_discount','coefficient','type_vat','packing','expiration_date',
+                'unit_id','sell_area','amout_max','inventory','inventory_min','general_info','prescribe',
+                'dosage','trademark_id','brand_origin_id','dosage_forms','country_id','specification',
+                'benefit','elements','preserve','note','image','albumImage','albumImageHash','user_id',
+                'featurer','slug','discount_ref','contact','meta_keywords','meta_description',
+                'show_price','prescription_drug','alt_image','title_image','created_by',
+                'approver_by','created_at','updated_at','brand_manufacturer','company_registered',
+                'number_registered','elements_mini'
+                )->where('status_product', 'da_duyet');
             if(isset($params['id'])){
                 $query->where('id', $params['id']);
             }
@@ -700,8 +711,17 @@ class ProductModel extends BackEndModel
             $result = $query->first();
         }
         if ($options['task'] == 'frontend-get-item-has-login') {
-            $query = self::with(['unitProduct','catProduct','brandOriginIdProduct','trademarkProduct','producerProduct','countryProduct','userProduct'])
-                ->select('id','name','type','code','cat_product_id','producer_id','tick','type_price','price','list_prices','price_vat','percent_discount','coefficient','type_vat','packing','expiration_date','unit_id','sell_area','amout_max','inventory','inventory_min','general_info','prescribe','dosage','trademark_id','brand_origin_id','dosage_forms','country_id','specification','benefit','elements','preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','discount_ref','contact','meta_keywords','meta_description','show_price','prescription_drug','alt_image','title_image','created_by','approver_by','created_at','updated_at')
+            $query = self::with(['unitProduct','catProduct','brandOriginIdProduct','trademarkProduct',
+            'producerProduct','countryProduct','userProduct'])
+                ->select('id','name','type','code','cat_product_id','producer_id','tick','type_price',
+                'price','list_prices','price_vat','percent_discount','coefficient','type_vat','packing',
+                'expiration_date','unit_id','sell_area','amout_max','inventory','inventory_min',
+                'general_info','prescribe','dosage','trademark_id','brand_origin_id','dosage_forms',
+                'country_id','specification','benefit','elements','preserve','note','image',
+                'albumImage','albumImageHash','user_id','featurer','slug','discount_ref','contact',
+                'meta_keywords','meta_description','show_price','prescription_drug','alt_image',
+                'title_image','created_by','approver_by','created_at','updated_at','brand_manufacturer',
+                'company_registered','number_registered','elements_mini')
                 ->whereIn('status_product', ['da_duyet', 'sp_an']);
             if (isset($params['id'])) {
                 $query->where('id', $params['id']);
@@ -840,7 +860,6 @@ class ProductModel extends BackEndModel
         Cache::forget('duoctot_cache_product_km_data');
         if ($options['task'] == 'add-item') {
             $this->setCreatedHistory($params);
-            $params['tick'] = isset($params['tick'])?json_encode($params['tick'],JSON_NUMERIC_CHECK ): NULL;
             $params['featurer'] = isset($params['featurer'])?json_encode($params['featurer']): NULL;
             $params['user_id'] = \Session::get('user')['user_id'];
             $params['keyword_search'] = self::buildKeywordSearch($params);
@@ -851,6 +870,7 @@ class ProductModel extends BackEndModel
             }
             $params['status_product'] = 'cho_kiem_duyet';
             $params['sell_area'] = (isset($params['sell_area']) && $params['sell_area'] !== '') ? json_encode($params['sell_area'], JSON_NUMERIC_CHECK) : 0;
+                        
             $catProduct = CatProductModel::find($params['cat_product_id']);
             if ($catProduct){
                 $params['cat_product_parent_id'] = $catProduct->parent_id;
@@ -870,8 +890,7 @@ class ProductModel extends BackEndModel
             $this->setModifiedHistory($params);
             $item = self::getItem($params,['task'=>'get-item']);
             $this->updateFileUpload($item,$params,'albumImage');
-            $params['tick'] = isset($params['tick'])?json_encode($params['tick'],JSON_NUMERIC_CHECK ): NULL;
-            $params['featurer'] = isset($params['featurer'])?json_encode($params['featurer']): NULL;
+            $params['featurer'] = isset($params['featurer']) ? json_encode($params['featurer']) : NULL;
             $params['sell_area'] = (isset($params['sell_area']) && $params['sell_area'] !== '') ? json_encode($params['sell_area'], JSON_NUMERIC_CHECK) : 0;
             $catProduct = CatProductModel::find($params['cat_product_id']);
             if ($catProduct){
@@ -883,6 +902,7 @@ class ProductModel extends BackEndModel
                 }
             }
             $params['keyword_search'] = self::buildKeywordSearch($params, $params['id']);
+            
             self::where('id', $params['id'])->update($this->prepareParams($params));
             Cache::tags(['duoctot_product'])->flush();
         }

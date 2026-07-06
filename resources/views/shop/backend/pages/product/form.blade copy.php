@@ -149,10 +149,19 @@
                 'label'   => HTML::decode(Form::label('expiration_date',$label['expiration_date'], $formLabelAttr)),
                 'element' => Form::text('expiration_date', $item['expiration_date']??'Xem trên bao bì sản phẩm', array_merge($formInputAttr,['placeholder'=>$label['expiration_date']])),
                 'widthElement' => 'col-6'
+            ],
+            [
+                'label'   => HTML::decode(Form::label('amout_max',$label['amout_max'], $formLabelAttr)),
+                'element' => Form::text('amout_max', $item['amout_max']??10, array_merge($formInputAttr,['placeholder'=>$label['amout_max']])),
+                'widthElement' => 'col-6'
+            ],[
+                'label'   => HTML::decode(Form::label('inventory_min',$label['inventory_min'], $formLabelAttr)),
+                'element' => Form::text('inventory_min', $item['inventory_min']??10, array_merge($formInputAttr,['placeholder'=>$label['inventory_min']])),
+                'widthElement' => 'col-3'
             ],[
                 'label'   => HTML::decode(Form::label('type_price', $label['type_price'] .  $star , $formLabelAttr)),
                 'element' => Form::select('type_price',$itemsTypePrice, $item['type_price']??null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
-                'widthElement' => 'col-6'
+                'widthElement' => 'col-3'
             ],
             [
                 'label'   => HTML::decode(Form::label('discount_tdoctor',$label['discount_tdoctor'], $formLabelAttr)),
@@ -162,21 +171,21 @@
             [
                 'label'   => HTML::decode(Form::label('discount_ref',$label['discount_ref'], $formLabelAttr)),
                 'element' => Form::text('discount_ref', $item['discount_ref']??33, array_merge($formInputAttr,['placeholder'=>$label['discount_ref']])),
-                'widthElement' => 'col-6'
+                'widthElement' => 'col-3'
             ],
             [
                 'label'   => HTML::decode(Form::label('sell_area', $label['sell_area'], $formLabelAttr)),
                 'element' => Form::select('sell_area',$itemsProvince, $item['sell_area']??null, array_merge($formSelect2Attr,['data-placeholder'=>"Mặc định(Cả nước)",'style' =>'width:100%','multiple' => 'multiple'])),
-                'widthElement' => 'col-6'
+                'widthElement' => 'col-3'
             ],
             [
                 'label'   => HTML::decode(Form::label('contact','SĐT liên hệ', $formLabelAttr)),
                 'element' => Form::text('contact', $item['contact']??'0345488247', array_merge($formInputAttr,['placeholder'=>'SĐT liên hệ'])),
-                'widthElement' => 'col-6'
+                'widthElement' => 'col-3'
             ],[
                 'label'   => HTML::decode(Form::label('prescription_drug','Thuốc cần kê toa', $formLabelAttr)),
                 'element' => Form::text('prescription_drug', $item['prescription_drug']??'Không', array_merge($formInputAttr,['placeholder'=>'Thuốc cần kê toa'])),
-                'widthElement' => 'col-6'
+                'widthElement' => 'col-3'
             ],
             [
                 'label' => HTML::decode(Form::label('', 'Chọn đặc tính sản phẩm' , $formLabelAttr)),

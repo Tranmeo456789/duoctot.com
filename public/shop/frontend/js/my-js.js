@@ -997,10 +997,6 @@ $(document).on('click', ".changeTypePassword", function (event) {
         $(this).html("<i class='fa fa-eye'></i>");
     }
 });
-$(document).on('click', ".cat-content .list-content-product li a", function (event) {
-    $('.cat-content .list-content-product li a').removeClass("active-ndsp");
-    $(this).addClass("active-ndsp");
-});
 function visible_cart_respon() {
     $('.dropdown_cart').css("opacity", 1);
     $('.dropdown_cart').css("visibility", "visible");

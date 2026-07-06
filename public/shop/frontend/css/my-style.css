@@ -914,7 +914,6 @@ p, label, ul {
 #main-content-wp {
     padding-bottom: 20px;
     position: relative;
-    overflow: hidden;
 }
 #form-search {
     width: 87%;
@@ -3385,7 +3384,7 @@ label.error{
 }
 
 .desc_product .price_product {
-    font-size: 40px;
+    font-size: 50px;
     line-height: 39px;
 }
 
@@ -3474,7 +3473,7 @@ label.error{
 
 .btn-buy-search .btn-select-buy {
     font-size: 20px;
-    padding: 10px 100px;
+    padding: 7px 100px;
     border-radius: 30px;
 }
 
@@ -3642,9 +3641,13 @@ label.error{
 }
 
 .cat-content .list-content-product li:hover {
-    background: #FFFFFF
+    background: #05afe3;
+    color: #fff;
 }
-
+.cat-content .list-content-product li:hover a {color: #fff;}
+.cat-content .list-content-product li:hover .cat-content .list-content-product li a{
+    color: #fff;
+}
 .title-content-detail-product {
     padding-bottom: 21px;
     border-bottom: 1px solid #7991B7;
@@ -4185,7 +4188,7 @@ input[type=number]::-webkit-outer-spin-button {
 .content-detail-product h2 {
     font-size: 24px;
     font-weight: 600;
-    margin: 10px 0px 5px 0px;
+    color:#05afe3;
 }
 
 .cat-content .list-content-product li a {
@@ -4195,7 +4198,7 @@ input[type=number]::-webkit-outer-spin-button {
     font-size: 20px;
     line-height: 24px;
     color: #1E1E1E;
-    padding: 15px 20px;
+    padding: 5px 10px;
     cursor: pointer;
     display: block;
 }
@@ -6297,10 +6300,6 @@ input[type="radio"] {
         padding: 2px 5px;
     }
 
-    .cat-content {
-        display: none;
-    }
-
     .cat-product-out #body-nbox li,
     .viewnproduct li {
         width: 32.66%;
@@ -6592,7 +6591,6 @@ input[type="radio"] {
     }
 
     .btn-buy-search .btn-select-buy {
-        font-size: 16px;
         padding: 5px 20px;
         border-radius: 30px;
     }

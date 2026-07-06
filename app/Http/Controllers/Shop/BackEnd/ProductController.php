@@ -153,16 +153,7 @@ class ProductController extends BackEndController
                 $params['image'] = '/fileUpload/product/'.$fileName;
             }
             $params['slug'] = !empty($params['slug']) ? $params['slug'] : Str::slug($params['name']);
-            // foreach($params['list_prices'] as $key => $val){
-            //     $price = str_replace(' ', '', $val['price']);
-            //     $price = preg_replace('/\D/', '', $val['price']);
-            //     $params['list_prices'][$key]['price'] = $price;
-            //     if($key == 0){
-            //         $params['price'] = $price;
-            //         $params['unit_id'] = $params['list_prices'][0]['unit_id'] ?? 1;
-            //     }
-            // }
-            $listPrice=$params['list_prices'];
+                        $listPrice=$params['list_prices'];
             if (count($listPrice['unit_id']) > 0){
                 $arrProduct = [];
                 foreach($listPrice['unit_id'] as $key=>$val){
@@ -186,6 +177,7 @@ class ProductController extends BackEndController
             if(Session::has('user') && in_array(Session::get('user')['user_type_id'] ?? 0, [2, 5])){
                 $params['approver_by'] = Session::get('user')['user_id'] ?? '';
             }
+
             $this->model->saveItem($params, ['task' => $task]);
             $request->session()->put('app_notify', $notify);
             if(Session::get('user')['is_admin'] == 1){

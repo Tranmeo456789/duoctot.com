@@ -54,7 +54,7 @@
         @endif
     </ul>
 </div>
-<div class="question-often content-rating-product mt-3">
+<div class="question-often content-rating-product mt-3" id="new-reviews">
     @include("$moduleName.pages.$controllerName.child_detail.content_rating")
 </div>
 <!-- <div class="content-comment-product">
