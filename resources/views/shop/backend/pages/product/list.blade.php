@@ -8,7 +8,7 @@
                 <th>STT</th>
                 <th>Thuốc</th>
                 <th>Đơn vị</th>
-                <th>Người sửa</th>
+                <th>Người sửa gần nhất</br>BS, DS phê duyệt</th>
                 <th>Trạng thái</th>
                 <th>Tác vụ</th>
             </tr>
@@ -26,6 +26,7 @@
                 unset($statusProductValue['all']);
                 $name = Hightlight::show($val->name, $params['search'], 'name');
                 $personEdit = $val->userEditProduct['fullname'] ?? '';
+                $personApprover = $val->userApproverProduct['fullname'] ?? '';
             @endphp
             <tr>
                 <td style="width: 3%">{{$temp}}</td>
@@ -41,7 +42,10 @@
                     </div>
                 </td>
                 <td style="width: 5%">{{$val->unitProduct->name}}</td>
-                <td style="width: 19%" class="text-center">{{$personEdit}}</td>
+                <td style="width: 19%" class="text-center">
+                    <div>{{$personEdit}}</div>
+                    <div class="text-success">{{$personApprover}}</div>
+                </td>
                 <td style="width: 8%"><span class="badge {{$val->status_product=='da_duyet'?'badge-success':'badge-warning'}}">{!! $statusProductValue[$val['status_product']]!!}</span></td>
                 <td style="width: 8%">
                     <a href="{{route("$controllerName.edit",$val->id)}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit"></i></a>

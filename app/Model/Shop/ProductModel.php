@@ -82,7 +82,7 @@ class ProductModel extends BackEndModel
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
                                     'preserve','note','image','featurer','long','user_id','status_product','slug','wide','high',
-                                    'mass','quantity_in_stock','discount_ref','discount_tdoctor','created_at','updated_by', 'updated_at','show_price')
+                                    'mass','quantity_in_stock','discount_ref','discount_tdoctor','created_at','updated_by', 'updated_at','show_price','approver_by')
                                     ->ofUser();
             if (isset($params['group_id'])){
                 $query->whereIn('id',$params['group_id']);
@@ -980,5 +980,8 @@ class ProductModel extends BackEndModel
     }
     public function userEditProduct(){
         return $this->belongsTo('App\Model\Shop\UsersModel','updated_by','user_id');
+    }
+    public function userApproverProduct(){
+        return $this->belongsTo('App\Model\Shop\UsersModel','approver_by','user_id');
     }
 }

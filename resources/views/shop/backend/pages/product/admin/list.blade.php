@@ -10,7 +10,7 @@
                 <th>STT</th>
                 <th>Thuốc</th>
                 <th>Giá bán</th>
-                <th>Người sửa</th>
+                <th>Người sửa gần nhất</br>BS, DS phê duyệt</th>
                 <th>Trạng thái</th>
                 <th>Tác vụ</th>
             </tr>
@@ -27,6 +27,8 @@
                     $statusProductValue = array_combine(array_keys(config("myconfig.template.column.status_product")),array_column(config("myconfig.template.column.status_product"),'name'));
                     unset($statusProductValue['all']);
                     $name = Hightlight::show($val->name, $params['search'], 'name');
+                    $personEdit = $val->userEditProduct['fullname'] ?? '';
+                    $personApprover = $val->userApproverProduct['fullname'] ?? '';
                 @endphp
                 <tr>
                     <td style="width: 3%">{{$temp}}</td>
@@ -42,7 +44,10 @@
                         </div>
                     </td>
                     <td style="width: 10%" class="text-center">{{MyFunction::formatNumber($val->price) . ' đ'}}</td>
-                    <td style="width: 17%" >{{$val->userEditProduct['fullname']??''}}</td>            
+                    <td style="width: 17%" >
+                        <div>{{$personEdit}}</div>
+                        <div class="text-success">{{$personApprover}}</div>
+                    </td>            
                     <td style="width: 10%" class="text-center"><span class="badge {{$val->status_product=='da_duyet'?'badge-success':'badge-warning'}} ">{!! $statusProductValue[$val['status_product']]!!}</span></td>
                     <td style="width: 15%" class="text-center">
                         <a href="{{route('admin.product.change.status',[$val->id,'da_duyet'])}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top">Phê duyệt</a>
