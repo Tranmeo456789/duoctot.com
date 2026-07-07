@@ -4186,9 +4186,9 @@ input[type=number]::-webkit-outer-spin-button {
     right: 0;
 }
 .content-detail-product h2 {
-    font-size: 24px;
     font-weight: 600;
     color:#05afe3;
+    margin-bottom: 15px;
 }
 
 .cat-content .list-content-product li a {

@@ -1,7 +1,7 @@
-<div class="col-6 text-center pb-2">
+<div class="col-7 text-center pb-2">
    <span class="product-tab-name">CHI TIẾT SẢN PHẨM</span>
 </div>
-<div class="col-6 text-center pb-2">
+<div class="col-5 text-center pb-2">
     <span class="product-tab-name"><a href="#new-reviews">ĐÁNH GIÁ</a></span>
 </div>
 <div class="short-infohr mb-3 w-100"></div>
@@ -15,9 +15,9 @@
     <div class="content-detail-product" id="toc-content-product">
         <h2 class="pt-3">1 Thành phần</h2>
         <p>{!!$item->elements ?? ''!!}</p>
-        <h2 class="mt-2">2 Tác dụng - Chỉ định</h2>
+        <h2 class="mt-2">2 Tác dụng - Chỉ định {{$item->name_short ?? ''}}</h2>
         <p>{!!$item->benefit!!}</p>
-        <h2 class="mt-2">3 Liều dùng - Cách dùng</h2>
+        <h2 class="mt-2">3 Liều dùng - Cách dùng {{$item->name_short ?? ''}}</h2>
         <p>{!!$item->dosage??''!!}</p>
         <h2>4 Lưu ý khi dùng</h2>
         <p>{!!$item->note!!}</p>

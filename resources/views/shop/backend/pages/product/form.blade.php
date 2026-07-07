@@ -23,9 +23,13 @@
             'element' => Form::text('code', $item['code']??$codeProduct, array_merge($formInputAttr,['placeholder'=>'Mã thuốc'])),
             'widthElement' => 'col-3'
         ],[
+            'label'   => HTML::decode(Form::label('name_short', 'Tên ngắn gọn thuốc', $formLabelAttr)),
+            'element' => Form::text('name_short', $item['name_short']??null, array_merge($formInputAttr,['placeholder'=>'Tên ngắn gọn thuốc'])),
+            'widthElement' => 'col-9'
+        ],[
             'label'   => HTML::decode(Form::label('name', 'Tên thuốc' .  $star, $formLabelAttr)),
             'element' => Form::text('name', $item['name']??null, array_merge($formInputAttr,['placeholder'=>'Tên thuốc'])),
-            'widthElement' => 'col-9'
+            'widthElement' => 'col-12'
         ],
         [
             'label'   => HTML::decode(Form::label('slug', $label['slug'], $formLabelAttr)),

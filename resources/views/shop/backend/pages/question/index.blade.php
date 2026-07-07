@@ -10,7 +10,7 @@
             <div class="col-12">
                 <div class="card card-outline card-primary">
                     @include("$moduleName.blocks.x_title", ['title' => 'Danh sách câu hỏi của sản phẩm'])
-                    <div class="p-2">{{$product['name']??''}}</div>
+                    <div class="p-2"><a href="{{route('fe.product.detail',$product['slug'])}}">{{$product['name']??''}}</a></div>
                     <div class="card-body p-0">
                         @include("$moduleName.pages.$controllerName.list")
                     </div>

@@ -414,7 +414,7 @@ class SearchController extends ShopFrontEndController
             return 'Đã thay đổi NCC và kho thành công';
         }
         else if ($request->an_ncc) {
-            $idNCCHideProduct = 1984152512;
+            $idNCCHideProduct = 1144150805;
             $products = ProductModel::where('user_id', $idNCCHideProduct)->get();
             foreach ($products as $product) {
                 $slug = $product->slug;

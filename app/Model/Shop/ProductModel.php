@@ -674,7 +674,7 @@ class ProductModel extends BackEndModel
                                     'preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','long','wide','high',
                                     'mass','discount_ref','discount_tdoctor','contact','meta_keywords','meta_description','show_price',
                                     'prescription_drug','alt_image','title_image','created_by','approver_by','created_at','updated_at',
-                                    'brand_manufacturer','company_registered','number_registered','elements_mini'
+                                    'brand_manufacturer','company_registered','number_registered','elements_mini','name_short'
                                     );
             if(isset($params['slug'])){
                 $query->where('slug', $params['slug']);
@@ -700,7 +700,7 @@ class ProductModel extends BackEndModel
                 'featurer','slug','discount_ref','contact','meta_keywords','meta_description',
                 'show_price','prescription_drug','alt_image','title_image','created_by',
                 'approver_by','created_at','updated_at','brand_manufacturer','company_registered',
-                'number_registered','elements_mini'
+                'number_registered','elements_mini','name_short'
                 )->where('status_product', 'da_duyet');
             if(isset($params['id'])){
                 $query->where('id', $params['id']);
@@ -721,7 +721,7 @@ class ProductModel extends BackEndModel
                 'albumImage','albumImageHash','user_id','featurer','slug','discount_ref','contact',
                 'meta_keywords','meta_description','show_price','prescription_drug','alt_image',
                 'title_image','created_by','approver_by','created_at','updated_at','brand_manufacturer',
-                'company_registered','number_registered','elements_mini')
+                'company_registered','number_registered','elements_mini','name_short')
                 ->whereIn('status_product', ['da_duyet', 'sp_an']);
             if (isset($params['id'])) {
                 $query->where('id', $params['id']);
@@ -739,7 +739,7 @@ class ProductModel extends BackEndModel
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id','brand_origin_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
                                     'preserve','note','image','albumImage','albumImageHash','user_id','slug','long','wide','high',
-                                    'mass','discount_ref','contact','show_price','prescription_drug');
+                                    'mass','discount_ref','contact','show_price','prescription_drug','name_short');
             if(isset($params['id'])){
                 $query->where('id', $params['id']);
             }

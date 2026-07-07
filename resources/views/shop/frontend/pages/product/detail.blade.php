@@ -9,10 +9,18 @@ $contact=MyFunction::formatPhoneNumber($contact);
 @section('headadd')
 <style>
     .content-detail-product p {
-        margin-top: 16px;
+        margin-bottom: 16px;
         line-height: 24px;
     }
-
+    .content-detail-product div {
+        margin-bottom: 16px;
+        line-height: 24px;
+    }
+    .content-detail-product h3 {
+        margin-top: 8px;
+        margin-bottom: 16px;
+        line-height: 24px;
+    }
     .submenua1.display-vis {
         font-size: 18px;
     }
@@ -92,7 +100,7 @@ $contact=MyFunction::formatPhoneNumber($contact);
     }
     @media (max-width: 767px) {
     .product-tab-name {
-        font-size: 14px;
+        font-size: 18px;
     }
 }
 </style>
