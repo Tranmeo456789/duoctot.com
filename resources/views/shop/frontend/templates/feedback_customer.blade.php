@@ -14,7 +14,7 @@ $imgCustomer=['1.jpg', '2.jpg'];
     <div class="col-12">
         <a href="{{route('fe.feedBackCustomer')}}">@include("$moduleName.templates.box_title_product",['title' => 'Phản hồi từ Bệnh Nhân, Dược Sỹ và Bác Sỹ','classBackground'=>'bg-danger'])</a>
     </div>
-    <div class="col-xl-9 col-lg-12">
+    <div class="col-xl-9 col-lg-12 pt-3">
         <ul>
             @foreach($feedbacks as $val)
             @php
@@ -38,7 +38,7 @@ $imgCustomer=['1.jpg', '2.jpg'];
         </ul>
     </div>
     <div class="col-xl-3 col-lg-12">
-        <div class="container-slider mt-0 mt-lg-2 position-relative">
+        <div class="container-slider mt-0 mt-lg-2 position-relative px-md-5">
             <button class="prev-btn-thumb-feedback position-absolute" style="left: 0;">‹</button>
             <div class="list_thumb_feedback cS-hidden">
                 <div class="swiper-slide text-center">

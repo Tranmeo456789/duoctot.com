@@ -231,6 +231,9 @@ span.highlight {
   height: auto !important;
   aspect-ratio: 16 / 9;
 }
+#main-form h3,#main-form h3 p,#main-form h3 b, #main-form h3 span {
+        font-size: 1.75rem !important;
+}
 @media screen and (max-width: 1400px) {
     .business-results li {
         width: 50%;
