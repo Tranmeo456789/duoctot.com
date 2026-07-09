@@ -133,11 +133,13 @@ class PostController extends ShopFrontEndController
                 }
             }
         }
+        $imageThumb = route('home') . '/public' . $item['image'] ?? 'https://duoctot.com/images/shop/logo_duoctot.jpg';
         return view($this->pathViewController . 'detail',
             [
                 'item' => $item,
                 'listItemRelate' => $listItemRelate,            
                 'approver' => $approver,            
+                'imageThumb' => $imageThumb,            
             ]
         );
     }

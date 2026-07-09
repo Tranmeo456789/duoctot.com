@@ -424,60 +424,199 @@ $(document).ready(function() {
         return originalCreateVideoNode ? originalCreateVideoNode.call(this, url) : null;
     };
     }
-    $('.editor').summernote({
-    height: 200,
-    dialogsInBody: true,
-    codeviewFilter: false,
-    codeviewIframeFilter: false,
-    toolbar: [
-        ['style', ['style']], 
-        ['style', ['bold', 'italic', 'underline', 'clear']],
-        ['font', ['strikethrough']],
-        ['fontname', ['fontname']],
-        ['fontsize', ['fontsize']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['height', ['height']],
-        ['table', ['table']],
-        ['insert', ['link', 'picture', 'video']],
-        ['view', ['fullscreen', 'codeview', 'help']],
-    ],
-    fontSizes: ['10', '12', '13', '14', '16', '18', '20','22', '24', '26','28','30','32','34', '36','40'],
-    callbacks: {
-        // Khi chọn ảnh thủ công từ nút Insert Image
-        onImageUpload: function(files) {
-            sendFile(files[0]);
-        },
-        onPaste: function (e) {
-        var text = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
-        // YouTube
-        if (/youtube\.com|youtu\.be/.test(text)) {
-            e.preventDefault();
-            var match = text.match(/(?:v=|\/shorts\/|youtu\.be\/)([0-9A-Za-z_-]{11})/);
-            if (match && match[1]) {
-            var embed = '<iframe width="100%" style="max-width:100%;aspect-ratio:16/9;" src="https://www.youtube.com/embed/' + match[1] + '" frameborder="0" allowfullscreen></iframe>';
-            document.execCommand('insertHTML', false, embed);
+    var ClearLineButton = function (context) {
+        var ui = $.summernote.ui;
+        var button = ui.button({
+            contents: '<i class="fa fa-eraser"/> Xóa định dạng dòng',
+            tooltip: 'Xóa hết thẻ/style của dòng đang chọn',
+            click: function () {
+                var editorEl = context.layoutInfo.editable.get(0);
+                var sel = window.getSelection();
+                if (!sel.rangeCount) return;
+                var node = sel.getRangeAt(0).startContainer;
+                var el = node.nodeType === 3 ? node.parentNode : node;
+                if (!$.contains(editorEl, el)) return;
+                // Leo lên tới khi cha là .note-editable thì dừng -> lấy đúng block ngoài cùng của dòng
+                var outer = el;
+                while (
+                    outer.parentNode &&
+                    !$(outer.parentNode).hasClass('note-editable')
+                ) {
+                    outer = outer.parentNode;
+                }
+                // Bóc hết thẻ định dạng lồng bên trong, chỉ giữ text + <br>
+                var plainHtml = stripFormatting(outer);
+                var newP = $('<p>' + (plainHtml.trim() === '' ? '<br>' : plainHtml) + '</p>');
+                $(outer).replaceWith(newP);
+                // Đưa con trỏ về cuối dòng vừa xóa định dạng
+                var range = document.createRange();
+                range.selectNodeContents(newP.get(0));
+                range.collapse(false);
+                sel.removeAllRanges();
+                sel.addRange(range);
+                context.invoke('editor.focus');
             }
-        }
-        //  Google Drive
-        else if (/drive\.google\.com\/file\/d\//.test(text)) {
-            e.preventDefault();
-            var driveMatch = text.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
-            if (driveMatch && driveMatch[1]) {
-            var embedDrive = '<iframe src="https://drive.google.com/file/d/' + driveMatch[1] + '/preview" width="100%" style="max-width:100%;aspect-ratio:16/9;" frameborder="0" allowfullscreen></iframe>';
-            document.execCommand('insertHTML', false, embedDrive);
+        });
+        return button.render();
+    };
+    function stripFormatting(node) {
+        var result = '';
+        $(node).contents().each(function () {
+            if (this.nodeType === 3) {
+                result += this.textContent;
+            } else if (this.nodeName === 'BR') {
+                result += '<br>';
+            } else {
+                result += stripFormatting(this);
             }
-        }
-        e.preventDefault();
-            setTimeout(function() {
-                document.execCommand('insertText', false, text);
-            }, 10);
-        },
-        // ===== THÊM MỚI: xử lý Enter xuống dòng không giữ style dòng trên
-        
+        });
+        return result;
     }
-    });
+    //format html
+    var VOID_TAGS = new Set(['br','img','input','hr','meta','link','source','area','base','col','embed','param','track','wbr']);
+    function tokenizeHtml(html) {
+        var re = /<!--[\s\S]*?-->|<[^>]+>|[^<]+/g;
+        return html.match(re) || [];
+    }
+    function parseTagInfo(token) {
+        var closing = token.indexOf('</') === 0;
+        var selfClosing = /\/>\s*$/.test(token);
+        var tagMatch = token.match(/^<\/?\s*([a-zA-Z0-9\-]+)/);
+        var tag = tagMatch ? tagMatch[1].toLowerCase() : '';
+        return { closing: closing, selfClosing: selfClosing, tag: tag };
+    }
+    function parseNodes(tokens, start) {
+        var nodes = [];
+        var i = start;
+        while (i < tokens.length) {
+            var t = tokens[i];
+            if (t.indexOf('<!--') === 0) {
+                nodes.push({ type: 'comment', raw: t });
+                i++;
+                continue;
+            }
+            if (t[0] === '<') {
+                var info = parseTagInfo(t);
+                if (info.closing) {
+                    return { nodes: nodes, nextIndex: i }; // trả về, cha sẽ tự "ăn" thẻ đóng này
+                }
+                if (info.selfClosing || VOID_TAGS.has(info.tag)) {
+                    nodes.push({ type: 'void', raw: t });
+                    i++;
+                    continue;
+                }
+                var result = parseNodes(tokens, i + 1);
+                var nextIdx = result.nextIndex;
+                if (nextIdx < tokens.length) nextIdx++; // bỏ qua thẻ đóng
+                nodes.push({ type: 'element', open: t, children: result.nodes });
+                i = nextIdx;
+                continue;
+            } else {
+                var text = t.trim();
+                if (text !== '') nodes.push({ type: 'text', text: text });
+                i++;
+            }
+        }
+        return { nodes: nodes, nextIndex: i };
+    }
+    function renderNodes(nodes, level, tab) {
+        var out = '';
+        var pad = tab.repeat(level);
+        nodes.forEach(function (node) {
+            if (node.type === 'text') {
+                out += pad + node.text + '\n';
+            } else if (node.type === 'void' || node.type === 'comment') {
+                out += pad + node.raw + '\n';
+            } else if (node.type === 'element') {
+                var tagMatch = node.open.match(/^<\s*([a-zA-Z0-9\-]+)/);
+                var tagName = tagMatch ? tagMatch[1] : '';
+                var closeTag = '</' + tagName + '>';
 
+                if (node.children.length === 0) {
+                    out += pad + node.open + closeTag + '\n';
+                } else if (node.children.length === 1 && node.children[0].type === 'text') {
+                    // Chỉ chứa text -> gọn 1 dòng, không xuống dòng/thụt lề thêm
+                    out += pad + node.open + node.children[0].text + closeTag + '\n';
+                } else {
+                    out += pad + node.open + '\n';
+                    out += renderNodes(node.children, level + 1, tab);
+                    out += pad + closeTag + '\n';
+                }
+            }
+        });
+        return out;
+    }
+    function formatHtml(html) {
+        var tokens = tokenizeHtml(html);
+        var parsed = parseNodes(tokens, 0);
+        return renderNodes(parsed.nodes, 0, '    ').trim();
+    }
+    $('.editor').summernote({
+        height: 200,
+        dialogsInBody: true,
+        codeviewFilter: false,
+        codeviewIframeFilter: false,
+        buttons: {
+            clearLine: ClearLineButton
+        },
+        toolbar: [
+            ['style', ['style']], 
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['font', ['strikethrough']],
+            ['fontname', ['fontname']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height', ['height']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']],
+            ['myGroup', ['clearLine']],
+        ],
+        fontSizes: ['10', '12', '13', '14', '16', '18', '20','22', '24', '26','28','30','32','34', '36','40'],
+        callbacks: {
+            // Khi chọn ảnh thủ công từ nút Insert Image
+            onImageUpload: function(files) {
+                sendFile(files[0]);
+            },
+            onPaste: function (e) {
+                var text = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+                // YouTube
+                if (/youtube\.com|youtu\.be/.test(text)) {
+                    e.preventDefault();
+                    var match = text.match(/(?:v=|\/shorts\/|youtu\.be\/)([0-9A-Za-z_-]{11})/);
+                    if (match && match[1]) {
+                    var embed = '<iframe width="100%" style="max-width:100%;aspect-ratio:16/9;" src="https://www.youtube.com/embed/' + match[1] + '" frameborder="0" allowfullscreen></iframe>';
+                    document.execCommand('insertHTML', false, embed);
+                    }
+                }
+                //  Google Drive
+                else if (/drive\.google\.com\/file\/d\//.test(text)) {
+                    e.preventDefault();
+                    var driveMatch = text.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
+                    if (driveMatch && driveMatch[1]) {
+                    var embedDrive = '<iframe src="https://drive.google.com/file/d/' + driveMatch[1] + '/preview" width="100%" style="max-width:100%;aspect-ratio:16/9;" frameborder="0" allowfullscreen></iframe>';
+                    document.execCommand('insertHTML', false, embedDrive);
+                    }
+                }
+                e.preventDefault();
+                setTimeout(function() {
+                    document.execCommand('insertText', false, text);
+                }, 10);
+            },
+            onCodeviewToggled: function() {
+                var $holder = $(this);
+                var isCodeview = $holder.summernote('codeview.isActivated');
+                if (isCodeview) {
+                    var $codeArea = $holder.next('.note-editor').find('.note-codable');
+                    if ($codeArea.length) {
+                        var raw = $codeArea.val();
+                        $codeArea.val(formatHtml(raw));
+                    }
+                }
+            }
+        }
+    });
     $("#choices-multiple-remove-button").select2();
     $('#submit-all1').click(function() {
         var x = document.getElementsByClassName("name-img");

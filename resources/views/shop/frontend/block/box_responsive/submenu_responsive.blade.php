@@ -56,18 +56,6 @@ $phoneContact=$phoneContact??'0345488247';
             </div>
         </div>
     </li>
-    <li class="">
-        <div class="container-menures position-relative parentsmenu">
-            <a href="https://tdoctor.vn/booking-online">@lang('lang.onlinebooking')</a>
-        </div>
-    </li>
-    <li>
-        <div class="container-menures position-relative parentsmenu">
-            <div class="pr-4">
-                <a href="{{route('fe.post')}}">Góc Sức Khỏe</a>
-            </div>
-        </div>
-    </li>
     <li>
         <div class="container-menures position-relative parentsmenu">
             <div class=" pr-4">
