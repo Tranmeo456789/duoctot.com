@@ -19,7 +19,6 @@ $contact=MyFunction::formatPhoneNumber($contact);
     .content-detail-product h3 {
         margin-top: 8px;
         margin-bottom: 16px;
-        line-height: 24px;
     }
     .content-detail-product h3 b,
     .content-detail-product h3 span,
@@ -103,11 +102,19 @@ $contact=MyFunction::formatPhoneNumber($contact);
         position: sticky;
         align-self: flex-start;
     }
-    @media (max-width: 767px) {
-    .product-tab-name {
-        font-size: 18px;
+    .cat-content ol{
+        padding-left: 10px;
     }
-}
+    #toc-content-product ul li {
+        list-style: disc;
+        margin-left: 25px;
+        padding-bottom: 6px;
+    }
+    @media (max-width: 767px) {
+        .product-tab-name {
+            font-size: 18px;
+        }
+    }
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
@@ -274,87 +281,68 @@ $contact=MyFunction::formatPhoneNumber($contact);
     }
 </script>
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-
-    const content = document.querySelector("#toc-content-product");
-    const toc = document.querySelector(".toc-list-product");
-
-    if (!content || !toc) return;
-
-    const headings = content.querySelectorAll("h2, h3, h4");
-
-    let html = "";
-    let h2Open = false;
-    let h3Open = false;
-
-    headings.forEach((h, index) => {
-
-        // remove id cũ nếu có
-        h.removeAttribute("id");
-
-        // tạo slug
-        let slug = h.textContent
-            .trim()
-            .toLowerCase()
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .replace(/[^a-z0-9\s]/gi, '')
-            .replace(/\s+/g, '-');
-
-        let id = slug + "-" + index;
-        h.id = id;
-
-        // H2
-        if (h.tagName === "H2") {
-
-            if (h3Open) {
-                html += "</ol></li>";
-                h3Open = false;
+    document.addEventListener("DOMContentLoaded", function () {
+        const content = document.querySelector("#toc-content-product");
+        const toc = document.querySelector(".toc-list-product");
+        if (!content || !toc) return;
+        const headings = content.querySelectorAll("h2, h3, h4");
+        let html = "";
+        let h2Open = false;
+        let h3Open = false;
+        headings.forEach((h, index) => {
+            // remove id cũ nếu có
+            h.removeAttribute("id");
+            // tạo slug
+            let slug = h.textContent
+                .trim()
+                .toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .replace(/[^a-z0-9\s]/gi, '')
+                .replace(/\s+/g, '-');
+            let id = slug + "-" + index;
+            h.id = id;
+            // H2
+            if (h.tagName === "H2") {
+                if (h3Open) {
+                    html += "</ol></li>";
+                    h3Open = false;
+                }
+                if (h2Open) {
+                    html += "</li>";
+                }
+                html += `
+                    <li>
+                        <a href="#${id}">${h.textContent}</a>
+                `;
+                h2Open = true;
             }
-
-            if (h2Open) {
-                html += "</li>";
+            // H3
+            if (h.tagName === "H3") {
+                if (!h3Open) {
+                    html += "<ol>";
+                    h3Open = true;
+                }
+                html += `
+                    <li>
+                        <a href="#${id}">${h.textContent}</a>
+                    </li>
+                `;
             }
+            // H4 (con của H3)
+            if (h.tagName === "H4") {
 
-            html += `
-                <li>
-                    <a href="#${id}">${h.textContent}</a>
-            `;
-
-            h2Open = true;
-        }
-
-        // H3
-        if (h.tagName === "H3") {
-
-            if (!h3Open) {
-                html += "<ol>";
-                h3Open = true;
+                html += `
+                    <li style="margin-left:15px">
+                        <a href="#${id}">${h.textContent}</a>
+                    </li>
+                `;
             }
-
-            html += `
-                <li>
-                    <a href="#${id}">${h.textContent}</a>
-                </li>
-            `;
-        }
-
-        // H4 (con của H3)
-        if (h.tagName === "H4") {
-
-            html += `
-                <li style="margin-left:15px">
-                    <a href="#${id}">${h.textContent}</a>
-                </li>
-            `;
-        }
+        });
+        if (h3Open) html += "</ol>";
+        if (h2Open) html += "</li>";
+        toc.innerHTML = html;
     });
-
-    if (h3Open) html += "</ol>";
-    if (h2Open) html += "</li>";
-
-    toc.innerHTML = html;
-});
 </script>
 @endsection
 @section('content')
@@ -407,8 +395,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div id="show-price-buy-product" class="price_product mb-4 text-primary font-weight-bold">{{ number_format( $item['price'], 0, "" ,"." )}}đ </div>
                     @endif
                     @include("$moduleName.pages.$controllerName.child_detail.select_unit")
-                    <div class="mb-3 text-center rounded py-3" style="background: #05afe3;">
-                        <span class="contact-buy font-weight-bold"><span class="text-light pb-3">Liên hệ Hotline </span><a href="tel:0345488247"><span class="phone">{{$contact}}</span></a></span>
+                    <div class="mb-3 text-center rounded py-1" style="background: #05afe3;">
+                        <span class="contact-buy font-weight-bold">
+                            <span class="text-light pb-3">Liên hệ Hotline </span>
+                            <a href="tel:0345488247" class="d-inline-block py-2 px-3 bg-white rounded">
+                                <span class="phone">{{$contact}}</span>
+                            </a>
+                        </span>
                     </div>
                     <div class="btn-buy-search d-flex justify-content-between flex-wrap mb-3">
                         {!! csrf_field() !!}

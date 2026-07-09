@@ -177,7 +177,8 @@ class ProductController extends BackEndController
             if(Session::has('user') && in_array(Session::get('user')['user_type_id'] ?? 0, [2, 5])){
                 $params['approver_by'] = Session::get('user')['user_id'] ?? '';
             }
-
+            $params['alt_image']   = !empty($params['alt_image'])   ? $params['alt_image']   : $params['name'];
+            $params['title_image'] = !empty($params['title_image']) ? $params['title_image'] : $params['name'];
             $this->model->saveItem($params, ['task' => $task]);
             $request->session()->put('app_notify', $notify);
             if(Session::get('user')['is_admin'] == 1){

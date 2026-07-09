@@ -234,6 +234,20 @@ span.highlight {
 #main-form h3,#main-form h3 p,#main-form h3 b, #main-form h3 span {
         font-size: 1.75rem !important;
 }
+#main-form h2{
+    font-weight: 600!important;
+    color: #05afe3!important;
+    margin-bottom: 15px!important;
+}
+#main-form h2 span{
+    font-weight: 600!important;
+}
+#main-form h2 b,
+#main-form h2 span,
+#main-form h2 p{
+    font-weight: 600!important;
+    font-size: 2rem!important;
+}
 @media screen and (max-width: 1400px) {
     .business-results li {
         width: 50%;

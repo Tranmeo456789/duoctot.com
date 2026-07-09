@@ -472,7 +472,9 @@ $(document).ready(function() {
             setTimeout(function() {
                 document.execCommand('insertText', false, text);
             }, 10);
-        }
+        },
+        // ===== THÊM MỚI: xử lý Enter xuống dòng không giữ style dòng trên
+        
     }
     });
 

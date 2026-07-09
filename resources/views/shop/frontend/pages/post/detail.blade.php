@@ -8,8 +8,31 @@ $timePost = MyFunction::formatDateLongTime($item['created_at']);
 <style>
     .content-post p {
         line-height: 26px;
+        margin-bottom: 12px;
+    }
+    .content-post div {
+        margin-bottom: 16px;
+        line-height: 24px;
+    }
+    .content-post h3 {
         margin-top: 8px;
-        margin-bottom: 8px;
+        margin-bottom: 10px;
+    }
+    .content-post h3 b,
+    .content-post h3 span,
+    .content-post h3 p {
+        font-size: 1.75rem !important;
+    }
+    .content-post h2 {
+        font-weight: 600;
+        color: #05afe3;
+        margin-bottom: 15px;
+    }
+    .content-post h2 b,
+    .content-post h2 span,
+    .content-post h2 p{
+        font-weight: 600!important;
+        font-size: 2rem!important;
     }
     .avatar-wrap {
         flex-shrink: 0;
@@ -26,10 +49,10 @@ $timePost = MyFunction::formatDateLongTime($item['created_at']);
         font-weight: 600;
     }
     .expert-name {
-        font-size: 1.275rem;
+        font-size: 14px;
         font-weight: 700;
         color: #111827;
-        text-decoration: none;
+        text-align: center;
     }
     .verified-badge {
         display: inline-flex;
@@ -59,7 +82,77 @@ $timePost = MyFunction::formatDateLongTime($item['created_at']);
         color: #2563eb;
         text-decoration: none;
     }
+    .container-toc-list-post{
+        position: sticky;
+        align-self: flex-start;
+    }
+    .cat-content ol{
+        padding-left: 10px;
+    }
 </style>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const content = document.querySelector("#toc-content-post");
+        const toc = document.querySelector(".toc-list-post");
+        if (!content || !toc) return;
+        const headings = content.querySelectorAll("h2, h3, h4");
+        let html = "";
+        let h2Open = false;
+        let h3Open = false;
+        headings.forEach((h, index) => {
+            // remove id cũ nếu có
+            h.removeAttribute("id");
+            // tạo slug
+            let slug = h.textContent
+                .trim()
+                .toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .replace(/[^a-z0-9\s]/gi, '')
+                .replace(/\s+/g, '-');
+            let id = slug + "-" + index;
+            h.id = id;
+            // H2
+            if (h.tagName === "H2") {
+                if (h3Open) {
+                    html += "</ol></li>";
+                    h3Open = false;
+                }
+                if (h2Open) {
+                    html += "</li>";
+                }
+                html += `
+                    <li>
+                        <a href="#${id}">${h.textContent}</a>
+                `;
+                h2Open = true;
+            }
+            // H3
+            if (h.tagName === "H3") {
+                if (!h3Open) {
+                    html += "<ol>";
+                    h3Open = true;
+                }
+                html += `
+                    <li>
+                        <a href="#${id}">${h.textContent}</a>
+                    </li>
+                `;
+            }
+            // H4 (con của H3)
+            if (h.tagName === "H4") {
+                html += `
+                    <li style="margin-left:15px">
+                        <a href="#${id}">${h.textContent}</a>
+                    </li>
+                `;
+            }
+        });
+        if (h3Open) html += "</ol>";
+        if (h2Open) html += "</li>";
+        toc.innerHTML = html;
+    });
+</script>
 <div class="wp-inner mt-2">
     <div id="breadcrumb-wp">
         <ul class="list-item clearfix">
@@ -75,48 +168,62 @@ $timePost = MyFunction::formatDateLongTime($item['created_at']);
         </ul>
     </div>
 </div>
-<div class="wp-inner mt-3" style="max-width: 597px;">
-    @if ((Session::has('user') && in_array(Session::get('user')['is_admin'], [1, 2])))
-        <a href="{{route('post.edit',$item->id)}}" class="btn btn-sm btn-secondary">chỉnh sửa</a>
-    @endif
-    <h1 class="title-name">{{$item['title']}}</h1>
-    <p>{{$timePost}}</p>
-    <div class="content-post mb-4">
-        {!! $item['content'] !!}
-    </div>
-    @if(!empty($approver))
-    @php
-    if (!empty($approver) && isset($approver['details']['image']) && $approver['details']['image'] != '') {
-    $imageSrcApprover = route('home') . '/public' . $approver['details']['image'];
-    } else {
-    $imageSrcApprover = route('home') . '/public/fileUpload/nhathuoc/6875c9e1945c0.jpg';
-    }
-    @endphp
-    <div class="card-header mb-4">
-        <div class="d-flex">
-            <div class="avatar-wrap mr-4">
-                <a href="{{route('fe.product.detailDoiNguChuyenMon',$approver->slug)}}">
-                    <img src="{{$imageSrcApprover}}" alt="{{$approver['fullname']??'duoctot'}}">
-                </a>
-            </div>
-            <div class="expert-info">
-                <div class="expert-title">Dược sĩ Đại học</div>
-                <div><a href="{{route('fe.product.detailDoiNguChuyenMon',$approver->slug)}}" class="expert-name">{{$approver['fullname']??'duoctot'}}</a></div>
-                <div class="verified-badge">
-                    <svg width="20" height="20" class="mr-1 text-success-8" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="7.5" cy="7.5" r="4.5" fill="white"></circle>
-                        <path d="M8.00065 1.3335C11.6825 1.3335 14.6673 4.31826 14.6673 8.00016C14.6673 11.6821 11.6825 14.6668 8.00065 14.6668C4.31875 14.6668 1.33398 11.6821 1.33398 8.00016C1.33398 4.31826 4.31875 1.3335 8.00065 1.3335ZM10.1471 5.97994L7.16732 8.95972L5.8542 7.64661C5.65894 7.45135 5.34236 7.45135 5.1471 7.64661C4.95184 7.84187 4.95184 8.15845 5.1471 8.35372L6.81376 10.0204C7.00903 10.2156 7.32561 10.2156 7.52087 10.0204L10.8542 6.68705C11.0495 6.49179 11.0495 6.17521 10.8542 5.97994C10.6589 5.78468 10.3424 5.78468 10.1471 5.97994Z" fill="currentColor"></path>
-                    </svg>
-                    <span class="verified-text">Đã kiểm duyệt nội dung</span>
-                </div>
+<div class="wp-inner mt-3">
+    <div class="row">
+        <div class="col-12 col-lg-2 px-0">
+            <div class="cat-content container-toc-list-post">
+                <p class="font-weight-bold pt-3 pl-3" style="font-size: 19px;">TÓM TẮT NỘI DUNG</p>
+                <ul class="list-content-product toc-list-post"></ul>
             </div>
         </div>
-        <p class="card-content">
-            {{$approver['meta_description']??'Có kinh nghiệm làm việc nhiều năm.'}}
-        </p>
-        <a href="{{route('fe.product.detailDoiNguChuyenMon',$approver->slug)}}" class="read-more">Xem thêm thông tin</a>
+        <div class="col-12 col-lg-8">
+            @if ((Session::has('user') && in_array(Session::get('user')['is_admin'], [1, 2])))
+                <a href="{{route('post.edit',$item->id)}}" class="btn btn-sm btn-secondary">chỉnh sửa</a>
+            @endif
+            <h1 class="title-name">{{$item['title']}}</h1>
+            <p>{{$timePost}}</p>
+            <div class="content-post mb-4" id="toc-content-post">
+                {!! $item['content'] !!}
+            </div>
+        </div>
+        <div class="col-12 col-lg-2">
+            @if(!empty($approver))
+                @php
+                if (!empty($approver) && isset($approver['details']['image']) && $approver['details']['image'] != '') {
+                $imageSrcApprover = route('home') . '/public' . $approver['details']['image'];
+                } else {
+                $imageSrcApprover = route('home') . '/public/fileUpload/nhathuoc/6875c9e1945c0.jpg';
+                }
+                @endphp
+                <div class="card-header mb-4 px-1" style="position: sticky !important;top: 0;">
+                    <div class="">
+                        <div class="avatar-wrap text-center mb-2">
+                            <a href="{{route('fe.product.detailDoiNguChuyenMon',$approver->slug)}}">
+                                <img src="{{$imageSrcApprover}}" alt="{{$approver['fullname']??'duoctot'}}">
+                            </a>
+                        </div>
+                        <div class="expert-info">
+                            <div class="expert-title text-center">Dược sĩ Đại học</div>
+                            <div class="text-center">
+                                <a href="{{route('fe.product.detailDoiNguChuyenMon',$approver->slug)}}" class="expert-name">{{$approver['fullname']??'duoctot'}}</a>
+                            </div>
+                            <div class="verified-badge">
+                                <svg width="20" height="20" class="mr-1 text-success-8" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="7.5" cy="7.5" r="4.5" fill="white"></circle>
+                                    <path d="M8.00065 1.3335C11.6825 1.3335 14.6673 4.31826 14.6673 8.00016C14.6673 11.6821 11.6825 14.6668 8.00065 14.6668C4.31875 14.6668 1.33398 11.6821 1.33398 8.00016C1.33398 4.31826 4.31875 1.3335 8.00065 1.3335ZM10.1471 5.97994L7.16732 8.95972L5.8542 7.64661C5.65894 7.45135 5.34236 7.45135 5.1471 7.64661C4.95184 7.84187 4.95184 8.15845 5.1471 8.35372L6.81376 10.0204C7.00903 10.2156 7.32561 10.2156 7.52087 10.0204L10.8542 6.68705C11.0495 6.49179 11.0495 6.17521 10.8542 5.97994C10.6589 5.78468 10.3424 5.78468 10.1471 5.97994Z" fill="currentColor"></path>
+                                </svg>
+                                <span class="verified-text">Đã kiểm duyệt nội dung</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="card-content">
+                        {{$approver['meta_description']??'Có kinh nghiệm làm việc nhiều năm.'}}
+                    </p>
+                    <a href="{{route('fe.product.detailDoiNguChuyenMon',$approver->slug)}}" class="read-more">Xem thêm thông tin</a>
+                </div>
+            @endif
+        </div>
     </div>
-    @endif
     @if(!empty($listItemRelate))
     @include("$moduleName.templates.box_title_product",['title' => 'Tin liên quan','img'=>'mat.png'])
     <div class="mb-2">
