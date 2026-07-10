@@ -5,7 +5,7 @@
         overflow: hidden;
     }
     .ls_chon_nha_cung_cap li .wp-img-thumb-product {
-        height: 180px;
+        height: 100px;
         display: flex;
         justify-content: center;
         align-items: center;

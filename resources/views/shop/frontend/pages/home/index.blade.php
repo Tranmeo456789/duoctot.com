@@ -8,10 +8,13 @@
 @endsection
 @section('content')
 <div class="wp-inner mt-2 mt-lg-3">
+    @include("$moduleName.pages.$controllerName.child_index.info_page",['items'=>$itemsProduct['new']])
+</div>
+<div class="wp-inner mt-3 mt-lg-4">
     @include("$moduleName.templates.box_title_product",['title' => 'CHỌN NHÀ CUNG CẤP','classBackground'=>'bg-danger'])
     @include("$moduleName.pages.$controllerName.child_index.chon_nha_cung_cap",['items'=>$productcers])
 </div>
-<div class="container-slider mt-3 mt-lg-4 pl-0 pl-lg-2 mb-2">
+<div class="wp-inner mt-3 mt-lg-4 mb-2">
     @include("$moduleName.templates.box_title_product",['title' => 'COMBO','classBackground'=>'bg-danger'])
     <div class="row">
         <div class="col-12">
@@ -83,9 +86,6 @@
 <div class="wp-inner mt-3 mt-lg-4">
     @include("$moduleName.templates.box_title_product",['title' => 'SẢN PHẨM MỚI/ BÁN CHẠY','classBackground'=>'bg-danger'])
     @include("$moduleName.pages.$controllerName.child_index.list_product_moi_ban_chay",['items'=>$itemsProduct['new']])
-</div>
-<div class="wp-inner mt-3 mt-lg-4">
-    @include("$moduleName.pages.$controllerName.child_index.info_page",['items'=>$itemsProduct['new']])
 </div>
 <div class="wp-inner mt-3 mt-lg-4">
     <div class="feedback-customer">

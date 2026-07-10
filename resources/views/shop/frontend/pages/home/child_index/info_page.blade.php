@@ -19,7 +19,7 @@
         padding-bottom: 10px;
     }
 </style>
-<div class="container bg-info_page">
+<div class="bg-info_page">
     <div class="has-bg clr row">
         <div class="span col-4 col-sm-2 m alone text-center mb-3">
             <a href="{{route('fe.product.listPhongKham')}}">
@@ -29,7 +29,7 @@
         </div>
         <div class="span col-4 col-sm-2 m alone text-center mb-3">
             <a href="{{route('fe.product.listBacSi')}}">
-                <h5 class="counter ctr2">3.530</h5>
+                <h5 class="counter ctr2">3.540</h5>
                 <em>Bác sĩ</em>
             </a>
         </div>
@@ -45,13 +45,13 @@
         </div>
         <div class="span col-4 col-sm-2 m alone text-center mb-3">
             <a href="{{route('fe.product.listNhaCungCap')}}">
-                <h5 class="counter ctr4">510</h5>
+                <h5 class="counter ctr4">520</h5>
                 <em>Nhà cung cấp</em>
             </a>
         </div>
         <div class="span col-4 col-sm-2 m alone text-center mb-3">
             <a href="">
-                <h5 class="counter ctr4">10.737</h5>
+                <h5 class="counter ctr4">11.300</h5>
                 <em>Sản phẩm</em>
             </a>
         </div>

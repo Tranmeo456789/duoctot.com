@@ -409,7 +409,6 @@ class OrderModel extends BackEndModel
             DB::beginTransaction();
             try {
                 $this->setCreatedHistory($params);
-                $params['buyer'] = json_encode($params['buyer']);
                 //$params['invoice'] = isset($params['export_tax'])?json_encode($params['invoice']) :null;
                 if ($params['delivery_method'] == 1){ //Nhận hàng tại nhà thuốc
                     $params['pharmacy'] = json_encode($params['pharmacy']);
@@ -434,7 +433,6 @@ class OrderModel extends BackEndModel
                 }
                 $cart = \Session::get('cart');
                 //$params['info_product'] = $cart[$params['user_sell']]['product'];
-                $params['info_product'] = json_encode($params['info_product']);
                 $params['total'] = $cart[$params['user_sell']]['total'];
                 $params['total_product'] = $cart[$params['user_sell']]['total_product'];
                 $paramsCode = [

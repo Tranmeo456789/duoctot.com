@@ -64,7 +64,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="ratingModalLabel">Đánh giá sản phẩm</h5>
+                <div class="modal-title" id="ratingModalLabel" style="font-size: 20px;">Đánh giá sản phẩm</div>
                 <button type="button" class="close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -106,7 +106,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Bình luận sản phẩm</h5>
+        <div class="modal-title" style="font-size: 20px;">Bình luận sản phẩm</div>
         <button type="button" class="close">
           <span>&times;</span>
         </button>
@@ -132,7 +132,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="replyModalLabel">Trả lời</h5>
+        <div class="modal-title" id="replyModalLabel" style="font-size: 20px;">Trả lời</div>
         <button type="button" class="close">
           <span>&times;</span>
         </button>

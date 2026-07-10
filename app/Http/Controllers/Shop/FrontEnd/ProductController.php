@@ -840,6 +840,8 @@ class ProductController extends ShopFrontEndController
             $imageSrc = route('home') .'/public'. $userInfo['details']['image'];
             } elseif ($userInfo['user_type_id'] == 2) {
                 $imageSrc = route('home') . '/public/fileUpload/nhathuoc/6898c9b8bf789.jpg';
+            }elseif ($userInfo['user_type_id'] == 4) {
+                $imageSrc = route('home') . '/public/fileUpload/nhathuoc/nhathuocmau11.jpg';
             }else{
                 $imageSrc = route('home') . '/public/fileUpload/nhathuoc/nhathuocmau10.jpg';
             }
@@ -1276,7 +1278,7 @@ class ProductController extends ShopFrontEndController
             $items->getCollection()->transform(function ($val) use ($phoneOfShopConfig) {
                 $val->imgThumb = !empty($val['details']['image'])
                     ? route('home') .'/public'.$val['details']['image']
-                    : route('home') . '/public/fileUpload/nhathuoc/nhathuocmau10.jpg';
+                    : route('home') . '/public/fileUpload/nhathuoc/nhathuocmau11.jpg';
 
                 $val->linkShop = route('fe.product.drugstore', $val['slug']);
                 $val->address = $this->buildAddress($val['details'] ?? null);

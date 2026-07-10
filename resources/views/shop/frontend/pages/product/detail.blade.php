@@ -434,7 +434,7 @@ $contact=MyFunction::formatPhoneNumber($contact);
                         <tr>
                             <td style="width: 40%;">Thương hiệu, NSX</td>
                             <td style="width: 60%;">
-                                {{$item['brand_manufacturer']}}
+                                {!!$item['brand_manufacturer']!!}
                             </td>
                         </tr>
                         @endif
