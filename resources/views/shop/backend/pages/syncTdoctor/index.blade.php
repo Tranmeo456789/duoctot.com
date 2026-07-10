@@ -157,6 +157,12 @@
                         <p>Xóa cache danh sách Thẩm Mỹ Viện</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('fe.SyncTdoctor.upKeySearchOrder')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Cập nhật key search tiếng việt đơn hàng</p>
+                    </a>
+                </li>
             </ul>
         </li>
     </ul>

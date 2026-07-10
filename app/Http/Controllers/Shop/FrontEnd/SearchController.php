@@ -581,34 +581,6 @@ class SearchController extends ShopFrontEndController
         //     return "Đã xảy ra lỗi khi thêm dữ liệu vào cơ sở dữ liệu: " . $e->getMessage();
         // }        
         // return 1;
-        // covert dữ liệu qua tiếng việt
-        // $orders = DB::table('orders')->select('id', 'info_product', 'buyer')->get();
-        // $updatedCount = 0;
-        // foreach ($orders as $order) {
-        //     $id = $order->id;
-        //     $updateData = [];
-        //     // Convert info_product
-        //     if ($order->info_product) {
-        //         $data = json_decode($order->info_product, true);
-        //         if ($data) {
-        //             $updateData['info_product'] = json_encode($data, JSON_UNESCAPED_UNICODE);
-        //         }
-        //     }
-        //     // Convert buyer
-        //     if ($order->buyer) {
-        //         $data = json_decode($order->buyer, true);
-        //         if ($data) {
-        //             $updateData['buyer'] = json_encode($data, JSON_UNESCAPED_UNICODE);
-        //         }
-        //     }
-        //     // Nếu có dữ liệu cần update
-        //     if (!empty($updateData)) {
-        //         DB::table('orders')->where('id', $id)->update($updateData);
-        //         $updatedCount++;
-        //     }
-        // }
-        // return response()->json([
-        //     'message' => "Đã convert xong $updatedCount đơn hàng (info_product & buyer)."
-        // ]);
+        
     }
 }
