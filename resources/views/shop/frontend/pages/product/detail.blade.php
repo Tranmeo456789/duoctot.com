@@ -110,6 +110,12 @@ $contact=MyFunction::formatPhoneNumber($contact);
         margin-left: 25px;
         padding-bottom: 6px;
     }
+    .dropdown-item-ncc{
+        width: 500px;
+        max-width: 90vw;
+        white-space: normal;
+        display: block;
+    }
     @media (max-width: 767px) {
         .product-tab-name {
             font-size: 18px;
@@ -528,7 +534,7 @@ $contact=MyFunction::formatPhoneNumber($contact);
                                 Xem Shop
                             </button>
                             <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="{{ route('fe.product.drugstore', ['slug' => $slugUserInfo]) }}" style="white-space: normal;width: 90vw; display: block;">{{$fullNameUserInfo}}</a>
+                                <a class="dropdown-item dropdown-item-ncc" href="{{ route('fe.product.drugstore', ['slug' => $slugUserInfo]) }}">{{$fullNameUserInfo}}</a>
                                 @foreach($listUserHasProduct as $val)
                                 @if(!empty($userInfo['user_id']) && $val['user_id'] != $userInfo['user_id'])
                                 @php
@@ -536,9 +542,8 @@ $contact=MyFunction::formatPhoneNumber($contact);
                                 $fullNameUserHasProduct = $val['fullname'] ?? 'unknow';
                                 @endphp
                                 <a
-                                    class="dropdown-item"
-                                    href="{{ route('fe.product.drugstore', ['slug' => $slugUserHasProduct]) }}"
-                                    style="white-space: normal; width: 90vw; display: block;">
+                                    class="dropdown-item dropdown-item-ncc"
+                                    href="{{ route('fe.product.drugstore', ['slug' => $slugUserHasProduct]) }}">
                                     {{ $fullNameUserHasProduct }}
                                 </a>
                                 @endif

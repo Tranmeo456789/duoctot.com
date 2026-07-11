@@ -366,7 +366,7 @@ $(document).ready(function() {
 
     // Initialize summernote with LFM button in the popover button group
     // Please note that you can add this button to any other button group you'd like
-    function sendFile(file) {
+    function sendFile(file, $editable) {
     var formData = new FormData();
     formData.append('file', file);
     $.ajax({
@@ -382,10 +382,8 @@ $(document).ready(function() {
             const fullUrl = response.url;
             let alt = prompt('Nhập ALT cho ảnh:', '') || '';
             let title = prompt('Nhập TITLE cho ảnh:', alt) || alt;
-            $('.editor').summernote('insertImage', fullUrl, function($image) {
-                $image.attr('alt', alt);
-                $image.attr('title', title);
-            });
+            const img = '<img src="' + fullUrl + '" alt="' + alt + '" title="' + title + '" style="max-width:100%;">';
+            $editable.summernote('pasteHTML', img);
         },
         error: function (xhr, status, error) {
         console.error('Lỗi khi tải ảnh lên:', error);
@@ -577,7 +575,7 @@ $(document).ready(function() {
         callbacks: {
             // Khi chọn ảnh thủ công từ nút Insert Image
             onImageUpload: function(files) {
-                sendFile(files[0]);
+                sendFile(files[0], $(this));
             },
             onPaste: function (e) {
                 var text = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
