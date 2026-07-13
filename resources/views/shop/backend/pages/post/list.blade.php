@@ -54,7 +54,7 @@
                 </td>
                 <td style="width: 15%">
                     <a href="{{route("$controllerName.edit",$val->id)}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit"></i></a>
-                    @if (in_array(Session::get('user')['user_id'], [864108586, 864108757]))
+                    @if (in_array(Session::get('user')['user_id'], [864108586, 864108757,1984152578]))
                     <a href="{{route('admin.post.change.status',[$val->id,'da_duyet'])}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top">Phê duyệt</a>
                     <a href="{{route('admin.post.change.status',[$val->id,'tu_choi'])}}" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top">Từ chối</a>
                     <a href="{{route('admin.post.change.status',[$val->id,'cho_kiem_duyet'])}}" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top">Chờ phê duyệt</a>

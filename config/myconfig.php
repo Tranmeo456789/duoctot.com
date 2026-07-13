@@ -174,6 +174,10 @@
                 '1' => 'Giá bán hàng niêm yết',
                 '2' => 'Giá theo doanh thu'
             ],
+            'add_rule' => [
+                '0' => 'Không thêm',
+                '2' => 'Quyền Editor'
+            ],
             'type_featurer' => [
                 'new' => 'Sản phẩm mới / Bán chạy',
                 'noi_bat' => 'Sản phẩm giá sốc',

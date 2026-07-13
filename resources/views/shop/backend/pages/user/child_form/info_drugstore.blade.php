@@ -25,6 +25,7 @@
 
     $linkGetListDistrict = route('district.getListByParentID',['parentID' => 'value_new']);
     $linkGetListWard = route('ward.getListByParentID',['parentID' => 'value_new']);
+    $itemsAddRule = config("myconfig.template.add_rule");
     $elements = [
         [
             'label'   => HTML::decode(Form::label('member_id', 'Mã affiliate', $formLabelAttr)),
@@ -90,8 +91,8 @@
             'widthElement' => 'col-12 col-md-6'
         ],
         [
-            'label'   => HTML::decode(Form::label('is_admin', 'Quyền', $formLabelAttr)),
-            'element' => Form::text('is_admin', $item['is_admin']??null, array_merge($formInputAttr,['placeholder'=>'Editor 2'])),
+            'label'   => HTML::decode(Form::label('is_admin', 'Thêm quyền người dùng' , $formLabelAttr)),
+            'element' => Form::select('is_admin',$itemsAddRule, $item['is_admin']??null, array_merge($formSelect2Attr,['style' =>'width:100%'])),
             'widthElement' => 'col-12 col-md-4'
         ],
         [

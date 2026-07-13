@@ -11,7 +11,7 @@
         color: white;
     }
 
-    .bg-info_page h5 {
+    .bg-info_page .data-counter {
         color: white;
         font-weight: bold;
         margin-bottom: 0;
@@ -19,39 +19,39 @@
         padding-bottom: 10px;
     }
 </style>
-<div class="bg-info_page">
+<div class="bg-info_page container-fluid">
     <div class="has-bg clr row">
-        <div class="span col-4 col-sm-2 m alone text-center mb-3">
+        <div class="span col-4 col-sm-2 m alone text-center py-2">
             <a href="{{route('fe.product.listPhongKham')}}">
-                <h5 class="counter ctr1">5.450</h5>
+                <div class="counter data-counter">5.450</div>
                 <em>Phòng khám</em>
             </a>
         </div>
-        <div class="span col-4 col-sm-2 m alone text-center mb-3">
+        <div class="span col-4 col-sm-2 m alone text-center py-2">
             <a href="{{route('fe.product.listBacSi')}}">
-                <h5 class="counter ctr2">3.540</h5>
+                <div class="counter data-counter">3.540</div>
                 <em>Bác sĩ</em>
             </a>
         </div>
-        <div class="span col-4 col-sm-2 m alone text-center mb-3">
+        <div class="span col-4 col-sm-2 m alone text-center py-2">
             <a href="{{route('fe.product.listDrugstore')}}">
-                <h5 class="counter ctr3">26.020</h5>
+                <div class="counter data-counter">26.020</div>
                 <em>Nhà thuốc</em>
             </a>
         </div>
-        <div class="span col-4 col-sm-2 m alone text-center mb-3">
-            <h5 class="counter ctr4">2,3 triệu</h5>
+        <div class="span col-4 col-sm-2 m alone text-center py-2">
+            <div class="counter data-counter">2,3 triệu</div>
             <em>Bệnh nhân</em>
         </div>
-        <div class="span col-4 col-sm-2 m alone text-center mb-3">
+        <div class="span col-4 col-sm-2 m alone text-center py-2">
             <a href="{{route('fe.product.listNhaCungCap')}}">
-                <h5 class="counter ctr4">520</h5>
+                <div class="counter data-counter">520</div>
                 <em>Nhà cung cấp</em>
             </a>
         </div>
-        <div class="span col-4 col-sm-2 m alone text-center mb-3">
+        <div class="span col-4 col-sm-2 m alone text-center py-2">
             <a href="">
-                <h5 class="counter ctr4">11.300</h5>
+                <div class="counter data-counter">11.300</div>
                 <em>Sản phẩm</em>
             </a>
         </div>

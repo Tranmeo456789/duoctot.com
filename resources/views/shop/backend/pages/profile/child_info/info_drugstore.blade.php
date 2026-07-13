@@ -9,7 +9,7 @@
                             ['class' => 'col-12']
                         );
     $formLabelAttr = MyFunction::array_fill_muti_values($formLabelAttr);
-
+    $formEditorAttr = config('myconfig.template.form_element.editor');
     $formInputAttr    = config('myconfig.template.form_element.input');
     $formSelect2Attr  = config('myconfig.template.form_element.select2');
     $formSelect2GetChildAttr  = array_merge_recursive(
@@ -26,6 +26,7 @@
 
     $linkGetListDistrict = route('district.getListByParentID',['parentID' => 'value_new']);
     $linkGetListWard = route('ward.getListByParentID',['parentID' => 'value_new']);
+    $itemsAddRule = config("myconfig.template.add_rule");
     $elements = [
         [
             'label'   => HTML::decode(Form::label('codeRef', 'Mã của tôi'.$noteCodeRef, $formLabelAttr)),
@@ -92,9 +93,19 @@
             'element' => Form::text('details[person_represent]', $details['person_represent']??null, array_merge($formInputAttr,['placeholder'=>$label['person_represent']])),
             'widthElement' => 'col-12 col-md-6'
         ],[
+            'label'   => HTML::decode(Form::label('education_level', $label['education_level'], $formLabelAttr)),
+            'element' => Form::text('education_level', $item['education_level']??null, array_merge($formInputAttr,['placeholder'=>$label['education_level']])),
+            'widthElement' => 'col-12 col-md-8'
+        ],[
             'label'   => HTML::decode(Form::label('image', 'Chọn ảnh đại diện', $formLabelAttr)),
             'element' => Template::showImageAndInputSingleFile('image', $item['image']?? ($item['details']['image']??null)),
             'widthInput' => 'col-11',
+        ],[
+            'label'   =>  HTML::decode(Form::label('meta_description', $label['meta_description'], $formLabelAttr)),
+            'element' => Form::textarea('meta_description', $item['meta_description']?? null, array_merge($formInputAttr,['placeholder'=>$label['meta_description'],"rows"=>"5"]))
+        ],[
+            'label'   =>  HTML::decode(Form::label('experience', $label['experience'] .  $star, $formLabelAttr)),
+            'element' => Form::textarea('experience', $item['experience']?? null, array_merge($formEditorAttr,['placeholder'=>$label['experience'],"rows"=>"5"]))
         ],[
                 'label'   => Form::label('map', 'Bản đồ', $formLabelAttr),
                 'element' => Form::textarea('details[map]', $item['details']['map']?? '', array_merge($formInputAttr,['placeholder'=>'Bản đồ',"rows"=>"5"]))

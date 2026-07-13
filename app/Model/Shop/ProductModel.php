@@ -896,7 +896,7 @@ class ProductModel extends BackEndModel
             if ($catProduct){
                 $params['cat_product_parent_id'] = $catProduct->parent_id;
             }
-            if (!in_array(Session::get('user')['user_id'], [864108586, 864108757])) {
+            if (!in_array(Session::get('user')['user_id'], [864108586, 864108757,1984152578])) {
                 if ($item['status_product'] == 'da_duyet') {
                     $params['status_product'] = 'cho_kiem_duyet';
                 }

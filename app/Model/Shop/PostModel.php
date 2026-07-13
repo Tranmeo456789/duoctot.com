@@ -187,7 +187,7 @@ class PostModel extends BackEndModel
         if ($options['task'] == 'edit-item') {
             $this->setModifiedHistory($params);
             $item = self::getItem($params,['task'=>'get-item']);
-            if (!in_array(Session::get('user')['user_id'], [864108586, 864108757])) {
+            if (!in_array(Session::get('user')['user_id'], [864108586, 864108757,1984152578])) {
                 if ($item['status_post'] == 'da_duyet') {
                     $params['status_post'] = 'cho_kiem_duyet';
                 }
