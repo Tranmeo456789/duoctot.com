@@ -38,7 +38,7 @@ class PostModel extends BackEndModel
         $result = null;
         $user = Session::get('user');
         if ($options['task'] == "user-list-items") {
-            $query = $this::with('catPost')->select('id','title','meta_keywords','description','content','slug','image','cat_post_id','created_at', 'updated_at','approver_by','updated_by','alt_image','title_image','status_post')->ofUser();
+            $query = $this::with('catPost')->select('id','title','meta_keywords','description','content','slug','image','cat_post_id','created_at', 'updated_at','approver_by','updated_by','alt_image','title_image','status_post','admin_approves')->ofUser();
             if (isset($params['group_id'])){
                 $query->whereIn('id',$params['group_id']);
             }
@@ -195,7 +195,11 @@ class PostModel extends BackEndModel
             self::where('id', $params['id'])->update($this->prepareParams($params));
         }
         if($options['task'] == 'update-status-item-of-admin'){
-            self::where('id', $params['id'])->update(['status_post' => $params['status_post']]);
+            self::where('id', $params['id'])
+            ->update([
+                'status_post' => $params['status_post'],
+                'admin_approves' => $params['admin_approves']
+                ]);
         }
     }
     public function deleteItem($params = null, $options = null)
@@ -214,5 +218,8 @@ class PostModel extends BackEndModel
     }
     public function userApproverPost(){
         return $this->belongsTo('App\Model\Shop\UsersModel','approver_by','user_id');
+    }
+    public function adminApproves(){
+        return $this->belongsTo('App\Model\Shop\UsersModel','admin_approves','user_id');
     }
 }

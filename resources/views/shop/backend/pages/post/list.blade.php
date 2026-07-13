@@ -10,7 +10,7 @@
                 <th>Tin tức</th>
                 <th>Danh mục</th>
                 <th>Người sửa gần nhất</br>BS, DS phê duyệt</th>
-                <th>Thời gian</br>Trạng thái</th>
+                <th>Thời gian</br>Trạng thái</br>Admin duyệt</th>
                 <th>Tác vụ</th>
             </tr>
         </thead>
@@ -28,6 +28,7 @@
                 $timePost = MyFunction::formatDateFrontend($val['updated_at']);
                 $personEdit = $val->userEditPost['fullname'] ?? '';
                 $personApprover = $val->userApproverPost['fullname'] ?? '';
+                $adminApproves = $val->adminApproves['fullname'] ?? '';
                 $statusPostValue = array_combine(array_keys(config("myconfig.template.column.status_post")),array_column(config("myconfig.template.column.status_post"),'name'));
                 unset($statusPostValue['all']);
             @endphp
@@ -44,13 +45,14 @@
                     </div>
                 </td>
                 <td style="width: 15%">{!! $nameCatPost !!}</td>
-                <td style="width: 20%">
+                <td style="width: 15%">
                     <div>{{$personEdit}}</div>
                     <div class="text-success">{{$personApprover}}</div>
                 </td>
-                <td style="width: 10%">
+                <td style="width: 15%">
                     <div>{{$timePost}}</div>
                     <div><span class="badge {{$val->status_post=='da_duyet'?'badge-success':'badge-warning'}} ">{!! $statusPostValue[$val['status_post']]!!}</span></div>
+                    <div>{{$adminApproves}}</div>
                 </td>
                 <td style="width: 15%">
                     <a href="{{route("$controllerName.edit",$val->id)}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit"></i></a>

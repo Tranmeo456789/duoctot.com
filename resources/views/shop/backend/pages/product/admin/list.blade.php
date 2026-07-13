@@ -11,7 +11,7 @@
                 <th>Thuốc</th>
                 <th>Giá bán</th>
                 <th>Người sửa gần nhất</br>BS, DS phê duyệt</th>
-                <th>Trạng thái</th>
+                <th>Trạng thái</br>Admin duyệt</th>
                 <th>Tác vụ</th>
             </tr>
         </thead>
@@ -29,10 +29,11 @@
                     $name = Hightlight::show($val->name, $params['search'], 'name');
                     $personEdit = $val->userEditProduct['fullname'] ?? '';
                     $personApprover = $val->userApproverProduct['fullname'] ?? '';
+                    $adminApproves = $val->adminApproves['fullname'] ?? '';
                 @endphp
                 <tr>
                     <td style="width: 3%">{{$temp}}</td>
-                    <td style="width: 35%" class="img-in-table">
+                    <td style="width: 33%" class="img-in-table">
                         <div class="d-flex">
                             <div class="align-items-center"  style="width:15%">
                                 {!! $image !!}
@@ -44,11 +45,14 @@
                         </div>
                     </td>
                     <td style="width: 10%" class="text-center">{{MyFunction::formatNumber($val->price) . ' đ'}}</td>
-                    <td style="width: 17%" >
+                    <td style="width: 15%" >
                         <div>{{$personEdit}}</div>
                         <div class="text-success">{{$personApprover}}</div>
                     </td>            
-                    <td style="width: 10%" class="text-center"><span class="badge {{$val->status_product=='da_duyet'?'badge-success':'badge-warning'}} ">{!! $statusProductValue[$val['status_product']]!!}</span></td>
+                    <td style="width: 14%" class="text-center">
+                        <span class="badge {{$val->status_product=='da_duyet'?'badge-success':'badge-warning'}} ">{!! $statusProductValue[$val['status_product']]!!}</span>
+                        <div>{{$adminApproves}}</div>
+                    </td>
                     <td style="width: 15%" class="text-center">
                         <a href="{{route('admin.product.change.status',[$val->id,'da_duyet'])}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top">Phê duyệt</a>
                         <a href="{{route('admin.product.change.status',[$val->id,'tu_choi'])}}" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top">Từ chối</a>

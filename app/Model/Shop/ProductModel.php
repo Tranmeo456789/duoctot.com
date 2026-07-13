@@ -82,7 +82,7 @@ class ProductModel extends BackEndModel
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
                                     'preserve','note','image','featurer','long','user_id','status_product','slug','wide','high',
-                                    'mass','quantity_in_stock','discount_ref','discount_tdoctor','created_at','updated_by', 'updated_at','show_price','approver_by')
+                                    'mass','quantity_in_stock','discount_ref','discount_tdoctor','created_at','updated_by', 'updated_at','show_price','approver_by','admin_approves')
                                     ->ofUser();
             if (isset($params['group_id'])){
                 $query->whereIn('id',$params['group_id']);
@@ -907,7 +907,11 @@ class ProductModel extends BackEndModel
             Cache::tags(['duoctot_product'])->flush();
         }
         if($options['task'] == 'update-status-item-of-admin'){
-            self::where('id', $params['id'])->update(['status_product' => $params['status_product']]);
+            self::where('id', $params['id'])
+            ->update([
+                'status_product' => $params['status_product'],
+                'admin_approves' => $params['admin_approves']
+                ]);
         }
     }
     public function uploadToImgBB($imageUrl)
@@ -983,5 +987,8 @@ class ProductModel extends BackEndModel
     }
     public function userApproverProduct(){
         return $this->belongsTo('App\Model\Shop\UsersModel','approver_by','user_id');
+    }
+    public function adminApproves(){
+        return $this->belongsTo('App\Model\Shop\UsersModel','admin_approves','user_id');
     }
 }

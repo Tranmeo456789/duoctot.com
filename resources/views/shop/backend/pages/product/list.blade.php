@@ -9,7 +9,7 @@
                 <th>Thuốc</th>
                 <th>Đơn vị</th>
                 <th>Người sửa gần nhất</br>BS, DS phê duyệt</th>
-                <th>Trạng thái</th>
+                <th>Trạng thái</br>Admin duyệt</th>
                 <th>Tác vụ</th>
             </tr>
         </thead>
@@ -27,10 +27,11 @@
                 $name = Hightlight::show($val->name, $params['search'], 'name');
                 $personEdit = $val->userEditProduct['fullname'] ?? '';
                 $personApprover = $val->userApproverProduct['fullname'] ?? '';
+                $adminApproves = $val->adminApproves['fullname'] ?? '';
             @endphp
             <tr>
                 <td style="width: 3%">{{$temp}}</td>
-                <td style="width: 35%" class="img-in-table">
+                <td style="width: 33%" class="img-in-table">
                     <div class="d-flex">
                         <div class="align-items-center"  style="width:15%">
                             {!! $image !!}
@@ -42,11 +43,14 @@
                     </div>
                 </td>
                 <td style="width: 5%">{{$val->unitProduct->name}}</td>
-                <td style="width: 19%" class="text-center">
+                <td style="width: 15%" class="text-center">
                     <div>{{$personEdit}}</div>
                     <div class="text-success">{{$personApprover}}</div>
                 </td>
-                <td style="width: 8%"><span class="badge {{$val->status_product=='da_duyet'?'badge-success':'badge-warning'}}">{!! $statusProductValue[$val['status_product']]!!}</span></td>
+                <td style="width: 14%" class="text-center">
+                    <span class="badge {{$val->status_product=='da_duyet'?'badge-success':'badge-warning'}}">{!! $statusProductValue[$val['status_product']]!!}</span>
+                    <div>{{$adminApproves}}</div>
+                </td>
                 <td style="width: 8%">
                     <a href="{{route("$controllerName.edit",$val->id)}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit"></i></a>
                     @if ((Session::has('user') && Session::get('user')['is_admin'] == 2) )

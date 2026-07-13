@@ -147,7 +147,8 @@ class PostController extends BackEndController
     }
     public function changeStatusPost(Request $request,$id,$status){
         $params['id']=$request->id;
-        $params['status_post']=$request->status;
+        $params['status_post']=$request->status??'';
+        $params['admin_approves'] = Session::get('user')['user_id'] ?? '';
         $this->model->saveItem($params, ['task' => 'update-status-item-of-admin']);
         $request->session()->put('app_notify', 'Thay đổi trạng thái bài viết thành công!');
         return back()->withInput();
