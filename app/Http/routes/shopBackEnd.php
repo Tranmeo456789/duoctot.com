@@ -29,6 +29,9 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
     Route::get('/trang-tong-quan-tai-khoan-affiliate', 'UserController@dashboardRef')->name('affiliate.dashboardRef');
     Route::get('/chi-tiet-hoa-hong-theo-san-pham-dai-ly-affiliate/{codeRef}', 'UserController@detailListProductAffiliate')->name('user.detailListProductAffiliate');
 
+    Route::post('/admin/seo-score/analyze', 'SeoScoreController@analyze')->name('admin.seo-score.analyze');
+    Route::post('/admin/article-seo-score/analyze', 'SeoScoreController@analyzeArticle')->name('admin.article-seo-score.analyze');
+
     Route::group(['middleware' => ['permission.shop']], function () {
 
         Route::get('/danh-sach-san-pham', 'ProductController@index')->name('product');

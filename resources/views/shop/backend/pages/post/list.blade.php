@@ -41,6 +41,7 @@
                         </div>
                         <div class="info-product ml-1">
                             <p class="text-primary font-weight-bold mb-1"><a href="{{route('fe.post.detail',$val['slug'])}}">{!! $title !!}</a></p>
+                            @include('shop.backend.blocks.seo-score-dot', ['score' => $val->score_seo])
                         </div>
                     </div>
                 </td>

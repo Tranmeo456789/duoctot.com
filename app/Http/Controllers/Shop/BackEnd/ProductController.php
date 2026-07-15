@@ -27,7 +27,7 @@ class ProductController extends BackEndController
     {
         $this->controllerName     = 'product';
         $this->pathViewController = "$this->moduleName.pages.$this->controllerName.";
-        $this->pageTitle          = 'Danh sách Thuốc';
+        $this->pageTitle          = 'Thuốc';
         $this->model = new MainModel();
         parent::__construct();
     }
@@ -148,7 +148,8 @@ class ProductController extends BackEndController
                         'message' => 'File không hợp lệ'
                     ]);
                 }
-                $fileName = time() . '.' . $ext;
+                //$fileName = time() . '.' . $ext;
+                $fileName = time() . '_' . $file->getClientOriginalName();
                 $file->move(public_path('fileUpload/product'), $fileName);
                 $params['image'] = '/fileUpload/product/'.$fileName;
             }

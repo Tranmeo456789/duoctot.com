@@ -39,6 +39,7 @@
                         <div class="info-product ml-1">
                             <p class="text-primary font-weight-bold mb-1"><a href="{{route('fe.product.detail',$val->slug)}}">{!! $name !!}</a></p>
                             <p mb-1>Giá: {{ number_format( $val->price, 0, "" ,"." )}}đ</p>
+                            @include('shop.backend.blocks.seo-score-dot', ['score' => $val->score_seo])
                         </div>
                     </div>
                 </td>

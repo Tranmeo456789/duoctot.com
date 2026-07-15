@@ -390,6 +390,7 @@ $contact=MyFunction::formatPhoneNumber($contact);
             <div class="col-md-7">
                 @if ((Session::has('user') && in_array(Session::get('user')['is_admin'], [1, 2])))
                 <a href="{{route('product.edit',$item->id)}}" class="btn btn-sm btn-secondary">chỉnh sửa</a>
+                <span>@include("$moduleName.block.seo-score-dot",['score' => $item->score_seo])</span>
                 @endif
                 <h1 class="mb-2">{{$item['name']}}</h1>
                 <div class="d-inline-flex align-items-center">

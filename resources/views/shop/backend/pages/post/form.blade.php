@@ -16,6 +16,11 @@
     $formSelect2Attr  = config('myconfig.template.form_element.select2');
     $elements = [
         [
+            'label'   => HTML::decode(Form::label('title_short', 'Từ khóa ngắn gọn', $formLabelAttr)),
+            'element' => Form::text('title_short', $item['title_short']??null, array_merge($formInputAttr,['placeholder'=>'Từ khóa ngắn gọn'])),
+            'widthElement' => 'col-12'
+        ],
+        [
             'label'   => HTML::decode(Form::label('title', 'Tiêu đề bài viết' .  $star, $formLabelAttr)),
             'element' => Form::text('title', $item['title']??null, array_merge($formInputAttr,['placeholder'=>'Tiêu đề bài viết'])),
             'widthElement' => 'col-12'
@@ -64,7 +69,7 @@
     ];
     $title = (!isset($item['id']) || $item['id'] == '')  ?'Thêm mới':'Sửa thông tin';
 @endphp
-@extends('shop.layouts.backend')
+@extends('shop.layouts.backend_score_seo_post')
 @section('title',$pageTitle)
 @section('content')
   @include ("$moduleName.blocks.page_header", ['pageIndex' => false])
@@ -83,7 +88,11 @@
                             'enctype'        => 'multipart/form-data',
                             'id'             => 'main-form' ])  }}
                             <div class="row">
+                                <input type="hidden" name="score_seo" id="score_seo" value="">
                                 {!! FormTemplate::show($elements,$formInputWidth)  !!}
+                            </div>
+                            <div>
+                                @include ("$moduleName.pages.post.child_form.article-seo-score-widget")
                             </div>
                         {{ Form::close() }}
                     </div>

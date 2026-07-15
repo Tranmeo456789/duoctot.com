@@ -38,7 +38,7 @@ class PostModel extends BackEndModel
         $result = null;
         $user = Session::get('user');
         if ($options['task'] == "user-list-items") {
-            $query = $this::with('catPost')->select('id','title','meta_keywords','description','content','slug','image','cat_post_id','created_at', 'updated_at','approver_by','updated_by','alt_image','title_image','status_post','admin_approves')->ofUser();
+            $query = $this::with('catPost')->select('id','title','meta_keywords','description','content','slug','image','cat_post_id','created_at', 'updated_at','approver_by','updated_by','alt_image','title_image','status_post','admin_approves','score_seo')->ofUser();
             if (isset($params['group_id'])){
                 $query->whereIn('id',$params['group_id']);
             }
@@ -124,7 +124,7 @@ class PostModel extends BackEndModel
     {
         $result = null;
         if ($options['task'] == 'get-item') {
-            $query = self::select('id','title','meta_keywords','description','content','slug','image','cat_post_id','created_at', 'updated_at','alt_image','title_image','approver_by','status_post');
+            $query = self::select('id','title','meta_keywords','description','content','slug','image','cat_post_id','created_at', 'updated_at','alt_image','title_image','approver_by','status_post','title_short','score_seo');
             if(isset($params['slug'])){
                 $query->where('slug', $params['slug']);
             }else{
@@ -133,7 +133,7 @@ class PostModel extends BackEndModel
              $result=$query ->first();
         }
         if ($options['task'] == 'frontend-get-item') {
-            $query = self::select('id','title','meta_keywords','description','content','slug','image','cat_post_id','created_at', 'updated_at','alt_image','title_image','approver_by','status_post')
+            $query = self::select('id','title','meta_keywords','description','content','slug','image','cat_post_id','created_at', 'updated_at','alt_image','title_image','approver_by','status_post','score_seo')
             ->where('status_post', 'da_duyet');
             if(isset($params['id'])){
                 $query->where('id', $params['id']);

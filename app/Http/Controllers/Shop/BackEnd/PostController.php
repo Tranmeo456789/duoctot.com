@@ -20,7 +20,7 @@ class PostController extends BackEndController
     {
         $this->controllerName     = 'post';
         $this->pathViewController = "$this->moduleName.pages.$this->controllerName.";
-        $this->pageTitle          = 'Danh sách tin tức';
+        $this->pageTitle          = 'Tin tức';
         $this->model = new MainModel();
         parent::__construct();
     }
@@ -87,7 +87,8 @@ class PostController extends BackEndController
                         'message' => 'File không hợp lệ'
                     ]);
                 }
-                $fileName = time() . '.' . $ext;
+                //$fileName = time() . '.' . $ext;
+                $fileName = time() . '_' . $file->getClientOriginalName();
                 $file->move(public_path('fileUpload/post'), $fileName);
                 $params['image'] = '/fileUpload/post/'.$fileName;
             }

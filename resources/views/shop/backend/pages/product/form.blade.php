@@ -23,7 +23,7 @@
             'element' => Form::text('code', $item['code']??$codeProduct, array_merge($formInputAttr,['placeholder'=>'Mã thuốc'])),
             'widthElement' => 'col-3'
         ],[
-            'label'   => HTML::decode(Form::label('name_short', 'Tên ngắn gọn thuốc', $formLabelAttr)),
+            'label'   => HTML::decode(Form::label('name_short', 'Từ khóa chính (tên thuốc ngắn gọn)', $formLabelAttr)),
             'element' => Form::text('name_short', $item['name_short']??null, array_merge($formInputAttr,['placeholder'=>'Tên ngắn gọn thuốc'])),
             'widthElement' => 'col-9'
         ],[
@@ -267,7 +267,7 @@
     );
     $title = (!isset($item['id']) || $item['id'] == '')  ?'Thêm mới':'Sửa thông tin';
 @endphp
-@extends('shop.layouts.backend')
+@extends('shop.layouts.backend_score_seo_product')
 @section('title',$pageTitle)
 @section('content')
 @if ((Session::has('user') && Session::get('user')['is_admin'] == 1))
@@ -303,6 +303,7 @@
                             <div class="row">
                                 {!! FormTemplate::show($elements,$formInputWidth)  !!}
                             </div>
+                            <input type="hidden" name="score_seo" id="score_seo" value="">
                             @foreach($elementsUnitPrice as $element)
                                 <div class="row row-detail">
                                     {!! FormTemplate::show($element,$formInputWidth)  !!}
@@ -310,6 +311,9 @@
                             @endforeach
                             <div class="row">
                                 {!! FormTemplate::show($elements2,$formInputWidth)  !!}
+                            </div>
+                            <div>
+                                @include ("$moduleName.pages.product.child_form.seo-score-widget")
                             </div>
                         {{ Form::close() }}
                     </div>

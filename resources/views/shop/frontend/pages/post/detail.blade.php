@@ -172,6 +172,7 @@ $timePost = MyFunction::formatDateLongTime($item['created_at']);
     <div class="d-md-none">
         @if ((Session::has('user') && in_array(Session::get('user')['is_admin'], [1, 2])))
             <a href="{{route('post.edit',$item->id)}}" class="btn btn-sm btn-secondary">chỉnh sửa</a>
+            <span>@include("$moduleName.block.seo-score-dot",['score' => $item->score_seo])</span>
         @endif
         <div class="title-name mb-3" style="color:#05afe3;font-weight:700;font-size: 2.5rem;line-height: 1.2;">{{$item['title']}}</div>
         <p class="mb-3">{{$timePost}}</p>
@@ -223,6 +224,7 @@ $timePost = MyFunction::formatDateLongTime($item['created_at']);
             <div class="d-none d-md-block">
                 @if ((Session::has('user') && in_array(Session::get('user')['is_admin'], [1, 2])))
                     <a href="{{route('post.edit',$item->id)}}" class="btn btn-sm btn-secondary">chỉnh sửa</a>
+                    <span>@include("$moduleName.block.seo-score-dot",['score' => $item->score_seo])</span>
                 @endif
                 <h1 class="title-name" style="color:#05afe3;font-weight:700">{{$item['title']}}</h1>
                 <p class="mb-3">{{$timePost}}</p>
