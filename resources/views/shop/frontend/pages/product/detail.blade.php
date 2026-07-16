@@ -25,6 +25,12 @@ $contact=MyFunction::formatPhoneNumber($contact);
     .content-detail-product h3 p {
         font-size: 1.75rem !important;
     }
+    .content-detail-product h2 b,
+    .content-detail-product h2 span,
+    .content-detail-product h2 p {
+        font-size: 2rem !important;
+        font-weight: 600!important;
+    }
     .submenua1.display-vis {
         font-size: 18px;
     }

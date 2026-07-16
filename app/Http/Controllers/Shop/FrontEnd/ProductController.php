@@ -862,7 +862,7 @@ class ProductController extends ShopFrontEndController
                 }
                 
                 $isPhone   = true;
-            } elseif ($userType == 6) {
+            } elseif ($userType == 6 || $userType==5) {
                 if (!empty($phone)) {
                     $len = strlen($phone);
                     if ($len > 3) {
@@ -1670,7 +1670,17 @@ class ProductController extends ShopFrontEndController
 
                 $val->linkShop = route('fe.product.drugstore', $val['slug']);
                 $val->address = $this->buildAddress($val['details'] ?? null);
-                $phoneOfShopShow = $val['phone'] ?? $phoneOfShopConfig;
+                $phoneShop = $val['phone'] ?? $phoneOfShopConfig;
+                if (!empty($phoneShop)) {
+                    $len = strlen($phoneShop);
+                    if ($len > 3) {
+                        $phoneOfShopShow = substr($phoneShop, 0, -3) . '***';
+                    } else {
+                        $phoneOfShopShow = str_repeat('*', $len);
+                    }
+                } else {
+                    $phoneOfShopShow = $phoneShop;
+                }
                 $val->phoneFormatted = MyFunction::formatPhoneNumber($phoneOfShopShow) ?? '';
                 return $val;
             });

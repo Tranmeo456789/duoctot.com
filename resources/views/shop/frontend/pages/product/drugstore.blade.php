@@ -15,11 +15,14 @@
         <div class="row">
             <div class="col-12">
                 @include("$moduleName.pages.$controllerName.child_drugstore.list_thumb",['albumImageCurrent'=>$albumImageCurrent])
-                <div class="mt-3 wp-info-shop text-center">
+                <div class="mt-3 wp-info-shop text-center mb-3">
                     <h6 class="text-danger text-center font-weight-bold">{{$userInfo['fullname']??''}}</h6>
                     <p class="font-weight-bold">*Số lượng sản phẩm: <span>{{count($productDrugstore)}}</span></p>
                     <p class="font-weight-bold">*Địa chỉ: <span>{{$address??''}}</span></p>
                     <p class="font-weight-bold">*Số điện thoại / Email: <span>{{$phoneShop}}</span></p>
+                </div>
+                <div class="text-center">
+                    {!! $userInfo['experience'] ??'' !!}
                 </div>
             </div>
         </div>

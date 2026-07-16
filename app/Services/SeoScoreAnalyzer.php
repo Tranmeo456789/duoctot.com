@@ -261,12 +261,13 @@ class SeoScoreAnalyzer
     {
         $text = $this->stripHtml($this->contentHtml);
         $words = $this->wordCount($text);
-        if ($words >= 700 && $words <= 800) {
-            $this->addCheck('content_length', 'Độ dài nội dung', 'good', "Nội dung có {$words} từ, nằm trong khoảng 700-800 từ.", 10);
-        } elseif (($words >= 500 && $words < 700) || ($words > 800 && $words <= 1000)) {
-            $this->addCheck('content_length', 'Độ dài nội dung', 'warning', "Nội dung có {$words} từ, gần đạt khoảng khuyến nghị 700-800 từ.", 6);
+
+        if ($words >= 1000 && $words <= 2000) {
+            $this->addCheck('content_length', 'Độ dài nội dung', 'good', "Nội dung có {$words} từ, nằm trong khoảng 1.000-2.000 từ.", 10);
+        } elseif (($words >= 700 && $words < 1000) || ($words > 2000 && $words <= 2500)) {
+            $this->addCheck('content_length', 'Độ dài nội dung', 'warning', "Nội dung có {$words} từ, gần đạt khoảng khuyến nghị 1.000-2.000 từ.", 6);
         } else {
-            $this->addCheck('content_length', 'Độ dài nội dung', 'bad', "Nội dung có {$words} từ, nên viết trong khoảng 700-800 từ.", $words > 0 ? 2 : 0);
+            $this->addCheck('content_length', 'Độ dài nội dung', 'bad', "Nội dung có {$words} từ, nên viết trong khoảng 1.000-2.000 từ.", $words > 0 ? 2 : 0);
         }
     }
 
