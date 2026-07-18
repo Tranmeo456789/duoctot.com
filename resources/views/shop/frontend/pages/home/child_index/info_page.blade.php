@@ -51,7 +51,7 @@
         </div>
         <div class="span col-4 col-sm-2 m alone text-center py-2">
             <a href="">
-                <div class="counter data-counter">11.300</div>
+                <div class="counter data-counter">11.360</div>
                 <em>Sản phẩm</em>
             </a>
         </div>

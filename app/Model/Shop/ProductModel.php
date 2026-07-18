@@ -674,7 +674,8 @@ class ProductModel extends BackEndModel
                                     'preserve','note','image','albumImage','albumImageHash','user_id','featurer','slug','long','wide','high',
                                     'mass','discount_ref','discount_tdoctor','contact','meta_keywords','meta_description','show_price',
                                     'prescription_drug','alt_image','title_image','created_by','approver_by','created_at','updated_at',
-                                    'brand_manufacturer','company_registered','number_registered','elements_mini','name_short','score_seo'
+                                    'brand_manufacturer','company_registered','number_registered','elements_mini','name_short','score_seo',
+                                    'status_product'
                                     );
             if(isset($params['slug'])){
                 $query->where('slug', $params['slug']);
@@ -896,11 +897,11 @@ class ProductModel extends BackEndModel
             if ($catProduct){
                 $params['cat_product_parent_id'] = $catProduct->parent_id;
             }
-            if (!in_array(Session::get('user')['user_id'], [864108586, 864108757,1984152578])) {
-                if ($item['status_product'] == 'da_duyet') {
-                    $params['status_product'] = 'cho_kiem_duyet';
-                }
-            }
+            // if (!in_array(Session::get('user')['user_id'], [864108586, 864108757,1984152578])) {
+            //     if ($item['status_product'] == 'da_duyet') {
+            //         $params['status_product'] = 'cho_kiem_duyet';
+            //     }
+            // }
             $params['keyword_search'] = self::buildKeywordSearch($params, $params['id']);
             
             self::where('id', $params['id'])->update($this->prepareParams($params));

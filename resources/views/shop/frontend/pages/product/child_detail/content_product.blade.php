@@ -13,7 +13,7 @@
 </div>
 <div class="col-12 col-lg-9">
     <div class="content-detail-product" id="toc-content-product">
-        <h2 class="pt-3">1 Thành phần</h2>
+        <h2 class="pt-3">1 Thành phần {{$item->name_short ?? ''}}</h2>
         <p>{!!$item->elements ?? ''!!}</p>
         <h2 class="mt-2">2 Tác dụng - Chỉ định {{$item->name_short ?? ''}}</h2>
         <p>{!!$item->benefit!!}</p>
