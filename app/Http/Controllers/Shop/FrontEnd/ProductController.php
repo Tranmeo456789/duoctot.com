@@ -20,6 +20,7 @@ use App\Model\Shop\WardModel;
 use App\Model\Shop\ConfigModel;
 use App\Helpers\MyFunction;
 use App\Model\Shop\PostModel;
+use App\Model\Shop\ProductModel;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Cache;
@@ -935,13 +936,25 @@ class ProductController extends ShopFrontEndController
         $arrTypeUser = config('myconfig.template.type_user');
         $userType=$arrTypeUser[$approver->user_type_id]??'';
         $approver['user_type']=$userType;
-        $listItemRelate = (new PostModel)->where('approver_by', $approver['user_id'])->take(4)->get();
+        $listItemRelate = (new PostModel)->where('approver_by', $approver['user_id'])->take(3)->get();
+        $listProductRelate = (new ProductModel)->where('approver_by', $approver['user_id'])->take(3)->get();
+        $listApprover = UsersModel::whereIn('user_id', [1984152592,1984152579,1984152536,1984152565,1984152534])->get();
+        $listApprover->transform(function ($val) {
+            $val->imgThumb = !empty($val['details']['image'])
+                ? route('home') . '/public'.$val['details']['image']
+                : route('home') . '/public/fileUpload/nhathuoc/6898c9b8bf789.jpg';
+
+            $val->linkDetailExpert = route('fe.product.detailDoiNguChuyenMon', $val['slug']);
+            return $val;
+        });
         return view($this->pathViewController . 'detail_expert', [
                     'approver' => $approver,
                     'imageSrcApprover' => $imageSrcApprover,
                     'title' => $title,
                     'item' => $item,
                     'listItemRelate' => $listItemRelate,
+                    'listProductRelate' => $listProductRelate,
+                    'listApprover' => $listApprover,
                 ]);
     }
     public function addCommentProduct(Request $request)

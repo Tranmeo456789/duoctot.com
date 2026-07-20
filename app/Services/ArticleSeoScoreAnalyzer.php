@@ -257,7 +257,22 @@ class ArticleSeoScoreAnalyzer
         }
         return $headings;
     }
-
+    /** Lấy nội dung HTML tính từ vị trí 1 thẻ H2 có chứa $keywordText trong tiêu đề, đến hết bài */
+    protected function getContentFromHeading($keywordText)
+    {
+        if (!preg_match_all('/<h2\b[^>]*>(.*?)<\/h2>/is', $this->contentHtml, $m, PREG_OFFSET_CAPTURE)) {
+            return null;
+        }
+        foreach ($m[1] as $match) {
+            $headingText = trim(strip_tags($match[0]));
+            $normalized = self::removeAccents($headingText);
+            if (strpos($normalized, $keywordText) !== false) {
+                $offset = $match[1];
+                return substr($this->contentHtml, $offset);
+            }
+        }
+        return null;
+    }
     protected function checkHeadingStructure()
     {
         $headings = $this->extractHeadings();
@@ -269,7 +284,6 @@ class ArticleSeoScoreAnalyzer
             if ($h['tag'] === 'h2') $h2s[] = $h['text'];
             if ($h['tag'] === 'h3') $h3s[] = $h['text'];
         }
-
         // H1
         if (count($h1s) > 0) {
             $this->addCheck('h1', 'Thẻ H1', 'warning', 'Có ' . count($h1s) . ' thẻ H1, chỉ nên dùng đúng 1 thẻ H1 duy nhất.', 2);
@@ -457,71 +471,38 @@ class ArticleSeoScoreAnalyzer
 
     protected function checkClosingParagraph()
     {
-        $paragraphs = $this->getParagraphs();
-        if (empty($paragraphs)) {
-            $this->addCheck('closing_paragraph', 'Kết bài', 'bad', 'Chưa có đoạn văn (thẻ <p>) nào trong nội dung.', 0);
+        $closingHtml = $this->getContentFromHeading('ket luan');
+
+        if ($closingHtml === null) {
+            $this->addCheck('closing_paragraph', 'Kết bài', 'bad', 'Chưa tìm thấy mục "Kết luận" (thẻ H2) trong nội dung.', 0);
             return;
         }
-        $last = $paragraphs[count($paragraphs) - 1];
-        if ($this->containsKeyword($last)) {
-            $this->addCheck('closing_paragraph', 'Kết bài', 'good', 'Đoạn kết bài có chứa từ khóa chính.', 7);
+        $closingText = $this->stripHtml($closingHtml);
+        if ($this->containsKeyword($closingText)) {
+            $this->addCheck('closing_paragraph', 'Kết bài', 'good', 'Đoạn kết bài (từ mục "Kết luận" trở xuống) có chứa từ khóa chính.', 7);
         } else {
-            $this->addCheck('closing_paragraph', 'Kết bài', 'warning', 'Đoạn kết bài chưa chứa từ khóa chính.', 3);
+            $this->addCheck('closing_paragraph', 'Kết bài', 'warning', 'Đoạn kết bài (từ mục "Kết luận" trở xuống) chưa chứa từ khóa chính.', 3);
         }
     }
-
-    /** Tìm mục "Câu hỏi thường gặp" (H2) và các câu hỏi con (H3) bên dưới nó */
+    
+    /** Chỉ cần có mục "Câu hỏi thường gặp" (thẻ H2) là tính đủ điểm */
     protected function checkFaq()
     {
         $headings = $this->extractHeadings();
-
-        $faqIndex = -1;
-        foreach ($headings as $i => $h) {
+        $hasFaq = false;
+        foreach ($headings as $h) {
             if ($h['tag'] === 'h2') {
                 $normalized = self::removeAccents($h['text']);
                 if (strpos($normalized, 'cau hoi thuong gap') !== false) {
-                    $faqIndex = $i;
+                    $hasFaq = true;
                     break;
                 }
             }
         }
-
-        if ($faqIndex === -1) {
-            $this->addCheck('faq', 'Câu hỏi thường gặp', 'bad', 'Chưa tìm thấy mục "Câu hỏi thường gặp" (thẻ H2) trong nội dung.', 0);
-            return;
-        }
-
-        $questions = array();
-        for ($i = $faqIndex + 1; $i < count($headings); $i++) {
-            if ($headings[$i]['tag'] === 'h2') {
-                break; // hết mục FAQ khi gặp H2 tiếp theo
-            }
-            if ($headings[$i]['tag'] === 'h3') {
-                $questions[] = $headings[$i]['text'];
-            }
-        }
-
-        $totalQuestions = count($questions);
-        $goodQuestions = 0;
-        foreach ($questions as $q) {
-            if ($this->containsKeyword($q)) {
-                $goodQuestions++;
-            }
-        }
-
-        if ($totalQuestions === 0) {
-            $this->addCheck('faq', 'Câu hỏi thường gặp', 'bad', 'Có mục "Câu hỏi thường gặp" nhưng chưa có câu hỏi (thẻ H3) nào bên dưới.', 0);
-        } elseif ($totalQuestions >= 5 && $goodQuestions >= 5) {
-            $this->addCheck('faq', 'Câu hỏi thường gặp', 'good', "Có {$totalQuestions} câu hỏi, tất cả đều chứa từ khóa chính.", 10);
+        if ($hasFaq) {
+            $this->addCheck('faq', 'Câu hỏi thường gặp', 'good', 'Đã có mục "Câu hỏi thường gặp" trong nội dung.', 10);
         } else {
-            $score = (int) round(10 * $goodQuestions / 5);
-            $this->addCheck(
-                'faq',
-                'Câu hỏi thường gặp',
-                $goodQuestions > 0 ? 'warning' : 'bad',
-                "Có {$totalQuestions} câu hỏi, trong đó {$goodQuestions} câu chứa từ khóa chính (mục tiêu: 5 câu, đều có từ khóa).",
-                $score
-            );
+            $this->addCheck('faq', 'Câu hỏi thường gặp', 'bad', 'Chưa tìm thấy mục "Câu hỏi thường gặp" (thẻ H2) trong nội dung.', 0);
         }
     }
 }
