@@ -825,7 +825,7 @@ class ProductModel extends BackEndModel
     }
     private static function buildKeywordSearch($params, $productId = null)
     {
-        //Xác định user_id
+        // Xác định user_id
         if (isset($params['user_id'])) {
             $userId = $params['user_id']; // trường hợp ADD
         } elseif ($productId) {
@@ -834,20 +834,26 @@ class ProductModel extends BackEndModel
         } else {
             $userId = null;
         }
-        //Lấy dữ liệu liên quan
+        // Xác định approver_id (khởi tạo mặc định null để tránh Undefined variable)
+        $approverId = isset($params['approver_by']) ? $params['approver_by'] : null;
+        // Lấy dữ liệu liên quan
         $trademark = isset($params['trademark_id'])
             ? TrademarkModel::find($params['trademark_id'])
             : null;
         $user = $userId
             ? UsersModel::where('user_id', $userId)->first()
             : null;
+        $approver = $approverId
+            ? UsersModel::where('user_id', $approverId)->first()
+            : null;
         $cat = isset($params['cat_product_id'])
             ? CatProductModel::find($params['cat_product_id'])
             : null;
-        //Build keyword
+        // Build keyword
         return trim(implode(' ', [
             $trademark ? $trademark->name : null,
             $user ? $user->fullname : null,
+            $approver ? $approver->fullname : null,
             $cat ? $cat->name : null,
             isset($params['name']) ? $params['name'] : null,
             isset($params['benefit']) ? $params['benefit'] : null,
@@ -889,7 +895,7 @@ class ProductModel extends BackEndModel
             // Cache::forget($keyCacheProductSlug);
             
             $this->setModifiedHistory($params);
-            $item = self::getItem($params,['task'=>'get-item']);
+            $item = self::getItem(['id' => $params['id']], ['task' => 'get-item']);
             $this->updateFileUpload($item,$params,'albumImage');
             $params['featurer'] = isset($params['featurer']) ? json_encode($params['featurer']) : NULL;
             $params['sell_area'] = (isset($params['sell_area']) && $params['sell_area'] !== '') ? json_encode($params['sell_area'], JSON_NUMERIC_CHECK) : 0;

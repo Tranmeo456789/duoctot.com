@@ -317,30 +317,40 @@ class SearchController extends ShopFrontEndController
         //add keywords product search
         if($request->product){
             try {
-                DB::beginTransaction();
-                $products = ProductModel::with('trademarkProduct')->select('id', 'name', 'benefit', 'trademark_id','user_id','cat_product_id','elements')->where('status_product', 'da_duyet')->get();
-                foreach ($products as $product) {
-                    $trademarkName = $product->trademarkProduct ? $product->trademarkProduct->name : '';
-                    $userSell = $product->userProduct ? $product->userProduct->fullname : '';
-                    $catProduct = $product->catProduct ? $product->catProduct->name : '';
-                    $keywordSearch = implode(' ', [
-                        $trademarkName,
-                        Str::ascii($trademarkName),
-                        $userSell,
-                        Str::ascii($userSell),
-                        $catProduct,
-                        Str::ascii($catProduct),
-                        Str::ascii($product->name),
-                        Str::ascii($product->benefit),
-                        Str::ascii($product->elements),
-                    ]);
+                $batchSize = 2000;
+                ProductModel::with('trademarkProduct')
+                    ->select('id', 'name', 'benefit', 'trademark_id', 'user_id', 'cat_product_id', 'elements', 'approver_by')
+                    ->chunkById($batchSize, function ($products) {
+                        DB::beginTransaction();
+                        try {
+                            foreach ($products as $product) {
+                                $trademarkName = $product->trademarkProduct ? $product->trademarkProduct->name : '';
+                                $userSell = $product->userProduct ? $product->userProduct->fullname : '';
+                                $userApprover = $product->userApproverProduct ? $product->userApproverProduct->fullname : '';
+                                $catProduct = $product->catProduct ? $product->catProduct->name : '';
+                                $keywordSearch = implode(' ', [
+                                    $trademarkName,
+                                    Str::ascii($trademarkName),
+                                    $userSell,
+                                    $userApprover,
+                                    Str::ascii($userSell),
+                                    $catProduct,
+                                    Str::ascii($catProduct),
+                                    Str::ascii($product->name),
+                                    Str::ascii($product->benefit),
+                                    Str::ascii($product->elements),
+                                ]);
 
-                    ProductModel::where('id', $product['id'])->update(['keyword_search' => $keywordSearch]);
-                }
-                DB::commit();
+                                ProductModel::where('id', $product->id)->update(['keyword_search' => $keywordSearch]);
+                            }
+                            DB::commit();
+                        } catch (\Exception $e) {
+                            DB::rollBack();
+                            throw $e; // ném ra ngoài để dừng toàn bộ tiến trình, tránh chạy tiếp khi có lỗi
+                        }
+                    });
                 return response()->json(['success' => true, 'message' => 'Cập nhật keyword product thành công']);
             } catch (\Exception $e) {
-                DB::rollBack();
                 return response()->json(['success' => false, 'message' => $e->getMessage()]);
             }
         }else if($request->cat){

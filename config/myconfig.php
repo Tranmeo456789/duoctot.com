@@ -239,6 +239,7 @@
                 'buyer'=> ['name'=>'Tìm kiếm'],
                 'code_order'=> ['name'=>'Tìm kiếm mã đơn hàng'],
                 'info_product'=> ['name'=>'Tìm kiếm sản phẩm'],
+                'keyword_search'=> ['name'=>'Tìm kiếm tất cả'],
             ],
         ],
         'folderUpload' => [
@@ -248,7 +249,7 @@
             'search' => [
                 'default'  => ['name'],
                 'user' => ['email','fullname','phone'],
-                'product'=>['name'],
+                'product'=>['keyword_search','name'],
                 'affiliate'=>['code_ref','info_user'],
                 'post'=>['key_search'],
                 'order'=>['buyer','code_order','info_product'],
