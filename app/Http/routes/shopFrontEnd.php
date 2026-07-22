@@ -128,6 +128,7 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('{slug}.html','ProductController@drugstore')->name('fe.product.drugstore');
     Route::get('doi-ngu-chuyen-mon/{slug}.html','ProductController@detailDoiNguChuyenMon')->name('fe.product.detailDoiNguChuyenMon');
     Route::get('/doi-ngu-chuyen-mon-ajax/{slug}/products-ajax', 'ProductController@ajaxProductRelate')->name('fe.product.detailDoiNguChuyenMon.ajax');
+    Route::get('/doi-ngu-chuyen-mon-ajax/{slug}/items-ajax', 'ProductController@ajaxItemRelate')->name('fe.post.detailDoiNguChuyenMon.ajax');
     Route::get('trang-chu-dong-du-lieu-tu-tdoctor','SyncTdoctorController@indexPage')->name('fe.SyncTdoctor.indexPage');
     Route::get('dong-du-lieu-bang-user','SyncTdoctorController@transferUsers')->name('fe.SyncTdoctor.transferUsers');
     Route::get('dong-du-lieu-bang-user_token','SyncTdoctorController@transferUserToken')->name('fe.SyncTdoctor.transferUserToken');

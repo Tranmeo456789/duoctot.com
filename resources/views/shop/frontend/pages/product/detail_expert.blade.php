@@ -96,19 +96,11 @@ use App\Helpers\MyFunction;
                     <div class="tab-content" id="healthTabContent">
                         <!-- Tab: Góc sức khỏe -->
                         <div class="tab-pane fade" id="goc-suc-khoe" role="tabpanel">
-                            <div class="article-list">
-                                @foreach($listItemRelate as $val)
-                                <a href="{{route('fe.post.detail',$val['slug'])}}" class="article-item">
-                                    <div class="article-thumb">
-                                        <img src="{{asset('public'.$val['image'])}}" alt="" title="">
-                                    </div>
-                                    <div class="article-body">
-                                        <span class="article-tag">{{$val->catPost->name??''}}</span>
-                                        <div class="article-title">{{$val['title']??''}}</div>
-                                        <div class="article-desc">{{$val['description']??''}}</div>
-                                    </div>
-                                </a>
-                                @endforeach
+                            <div class="article-list" id="itemListContainer">
+                                @include("$moduleName.pages.product.child_detail_expert.item-relate-list")
+                            </div>
+                            <div id="itemPaginationContainer" class="mt-3">
+                                @include("$moduleName.pages.product.child_detail_expert.item-relate-pagination")
                             </div>
                         </div>
                         <!-- Tab: Bệnh -->
@@ -209,6 +201,37 @@ use App\Helpers\MyFunction;
                 });
             }
             bindPaginationClick();
+        })();
+        (function(){
+            var slug = "{{ $approver->slug }}";
+            var itemAjaxUrlBase = "{{ url('/doi-ngu-chuyen-mon-ajax') }}/" + slug + "/items-ajax";
+            var itemListContainer = document.getElementById('itemListContainer');
+            var itemPaginationContainer = document.getElementById('itemPaginationContainer');
+            function loadItemPage(page){
+                fetch(itemAjaxUrlBase + "?page=" + page, {
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                })
+                .then(function(res){ return res.json(); })
+                .then(function(data){
+                    itemListContainer.innerHTML = data.html;
+                    itemPaginationContainer.innerHTML = data.pagination;
+                    bindItemPaginationClick();
+                    itemListContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                })
+                .catch(function(err){ console.error('Lỗi tải trang bài viết:', err); });
+            }
+            function bindItemPaginationClick(){
+                var links = itemPaginationContainer.querySelectorAll('.page-link');
+                links.forEach(function(link){
+                    link.addEventListener('click', function(e){
+                        e.preventDefault();
+                        var page = this.getAttribute('data-page');
+                        if(!page || this.parentElement.classList.contains('disabled')) return;
+                        loadItemPage(page);
+                    });
+                });
+            }
+            bindItemPaginationClick();
         })();
     </script>
 </div>

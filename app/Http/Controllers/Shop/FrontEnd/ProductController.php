@@ -936,11 +936,12 @@ class ProductController extends ShopFrontEndController
         $arrTypeUser = config('myconfig.template.type_user');
         $userType=$arrTypeUser[$approver->user_type_id]??'';
         $approver['user_type']=$userType;
-        $listItemRelate = (new PostModel)->where('approver_by', $approver['user_id'])->take(3)->get();
-        
-        // ĐỔI take(3) -> paginate(10)
+        $listItemRelate = (new PostModel)
+        ->where('approver_by', $approver['user_id'])->where('status_post','da_duyet')
+        ->orderBy('created_at', 'desc')
+        ->paginate(10, ['*'], 'page', $request->get('page', 1));
         $listProductRelate = (new ProductModel)
-            ->where('approver_by', $approver['user_id'])
+            ->where('approver_by', $approver['user_id'])->where('status_product','da_duyet')
             ->orderBy('created_at', 'desc')
             ->paginate(10, ['*'], 'page', $request->get('page', 1));
 
@@ -969,12 +970,26 @@ class ProductController extends ShopFrontEndController
             return response()->json(['html' => '', 'pagination' => ''], 404);
         }
         $listProductRelate = (new ProductModel)
-            ->where('approver_by', $approver['user_id'])
+            ->where('approver_by', $approver['user_id'])->where('status_product','da_duyet')
             ->orderBy('created_at', 'desc')
             ->paginate(10, ['*'], 'page', $request->get('page', 1));
         return response()->json([
             'html' => view($this->pathViewController . 'child_detail_expert.product-relate-list', compact('listProductRelate'))->render(),
             'pagination' => view($this->pathViewController . 'child_detail_expert.product-relate-pagination', compact('listProductRelate'))->render(),
+        ]);
+    }
+    public function ajaxItemRelate(Request $request, $slug){
+        $approver = UsersModel::where('slug', $slug)->first();
+        if (!$approver) {
+            return response()->json(['html' => '', 'pagination' => ''], 404);
+        }
+        $listItemRelate = (new PostModel)
+            ->where('approver_by', $approver['user_id'])->where('status_post','da_duyet')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10, ['*'], 'page', $request->get('page', 1));
+        return response()->json([
+            'html' => view($this->pathViewController . 'child_detail_expert.item-relate-list', compact('listItemRelate'))->render(),
+            'pagination' => view($this->pathViewController . 'child_detail_expert.item-relate-pagination', compact('listItemRelate'))->render(),
         ]);
     }
     public function addCommentProduct(Request $request)
