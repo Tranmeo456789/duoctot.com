@@ -73,8 +73,10 @@ use App\Helpers\MyFunction;
             </div>
         </div>
     </div>
-    @if(!empty($listItemRelate))
-    @include("$moduleName.templates.box_title_product",['title' => 'Bài viết cùng chuyên gia','img'=>'mat.png'])
+    @include("$moduleName.templates.box_title_product", [
+        'title' => 'Bài viết của ' . ($approver['fullname'] ?? ''),
+        'img' => 'mat.png'
+    ])
     <div class="container-fluid">
         <div class="row">
             <!-- ===== LEFT: Tabs + Article list ===== -->
@@ -124,19 +126,11 @@ use App\Helpers\MyFunction;
                         </div> -->
                         <!-- Tab: Thuốc -->
                         <div class="tab-pane fade show active" id="thuoc" role="tabpanel">
-                            <div class="article-list">
-                                @foreach($listProductRelate as $val)
-                                <a href="{{route('fe.product.detail',$val['slug'])}}" class="article-item">
-                                    <div class="article-thumb">
-                                        <img src="{{asset('public'.$val['image'])}}" alt="" title="">
-                                    </div>
-                                    <div class="article-body">
-                                        <span class="article-tag">{{$val->catPost->name??''}}</span>
-                                        <div class="article-title">{{$val['name']??''}}</div>
-                                        <div class="article-desc">{{$val['meta_description']??''}}</div>
-                                    </div>
-                                </a>
-                                @endforeach
+                            <div class="article-list" id="productListContainer">
+                                @include("$moduleName.pages.product.child_detail_expert.product-relate-list")
+                            </div>
+                            <div id="productPaginationContainer" class="mt-3">
+                                @include("$moduleName.pages.product.child_detail_expert.product-relate-pagination")
                             </div>
                         </div>
                     </div>
@@ -145,7 +139,7 @@ use App\Helpers\MyFunction;
             <!-- ===== RIGHT: Chuyên gia nổi bật ===== -->
             <div class="col-lg-3">
                 <div class="panel-card expert-panel">
-                    <div class="expert-panel-title mb-3 pt-2 pl-3">Chuyên gia nổi bật</div>
+                    <div class="expert-panel-title mb-3 pt-2 pl-3">Dược sĩ nổi bật</div>
                     @foreach($listApprover as $val)
                     <div class="mb-4">
                         <div class="d-flex">
@@ -185,8 +179,38 @@ use App\Helpers\MyFunction;
                 });
             });
         })();
+        (function(){
+            var slug = "{{ $approver->slug }}";
+            var ajaxUrlBase = "{{ url('/doi-ngu-chuyen-mon-ajax') }}/" + slug + "/products-ajax";
+            var listContainer = document.getElementById('productListContainer');
+            var paginationContainer = document.getElementById('productPaginationContainer');
+            function loadPage(page){
+                fetch(ajaxUrlBase + "?page=" + page, {
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                })
+                .then(function(res){ return res.json(); })
+                .then(function(data){
+                    listContainer.innerHTML = data.html;
+                    paginationContainer.innerHTML = data.pagination;
+                    bindPaginationClick();
+                    listContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                })
+                .catch(function(err){ console.error('Lỗi tải trang sản phẩm:', err); });
+            }
+            function bindPaginationClick(){
+                var links = paginationContainer.querySelectorAll('.page-link');
+                links.forEach(function(link){
+                    link.addEventListener('click', function(e){
+                        e.preventDefault();
+                        var page = this.getAttribute('data-page');
+                        if(!page || this.parentElement.classList.contains('disabled')) return;
+                        loadPage(page);
+                    });
+                });
+            }
+            bindPaginationClick();
+        })();
     </script>
-    @endif
 </div>
 <div class="local mt-3">
     @include("$moduleName.templates.local_drugstore")

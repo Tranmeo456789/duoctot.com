@@ -937,7 +937,13 @@ class ProductController extends ShopFrontEndController
         $userType=$arrTypeUser[$approver->user_type_id]??'';
         $approver['user_type']=$userType;
         $listItemRelate = (new PostModel)->where('approver_by', $approver['user_id'])->take(3)->get();
-        $listProductRelate = (new ProductModel)->where('approver_by', $approver['user_id'])->take(3)->get();
+        
+        // ĐỔI take(3) -> paginate(10)
+        $listProductRelate = (new ProductModel)
+            ->where('approver_by', $approver['user_id'])
+            ->orderBy('created_at', 'desc')
+            ->paginate(10, ['*'], 'page', $request->get('page', 1));
+
         $listApprover = UsersModel::whereIn('user_id', [1984152592,1984152579,1984152536,1984152565,1984152534])->get();
         $listApprover->transform(function ($val) {
             $val->imgThumb = !empty($val['details']['image'])
@@ -956,6 +962,20 @@ class ProductController extends ShopFrontEndController
                     'listProductRelate' => $listProductRelate,
                     'listApprover' => $listApprover,
                 ]);
+    }
+    public function ajaxProductRelate(Request $request, $slug){
+        $approver = UsersModel::where('slug', $slug)->first();
+        if (!$approver) {
+            return response()->json(['html' => '', 'pagination' => ''], 404);
+        }
+        $listProductRelate = (new ProductModel)
+            ->where('approver_by', $approver['user_id'])
+            ->orderBy('created_at', 'desc')
+            ->paginate(10, ['*'], 'page', $request->get('page', 1));
+        return response()->json([
+            'html' => view($this->pathViewController . 'child_detail_expert.product-relate-list', compact('listProductRelate'))->render(),
+            'pagination' => view($this->pathViewController . 'child_detail_expert.product-relate-pagination', compact('listProductRelate'))->render(),
+        ]);
     }
     public function addCommentProduct(Request $request)
     {
