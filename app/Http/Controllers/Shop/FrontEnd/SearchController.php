@@ -436,6 +436,17 @@ class SearchController extends ShopFrontEndController
             ]);
             return 'Ẩn sp + clear cache thành công';
         }
+        else if ($request->gia_0ncc) {
+            $idNCC0Product = 1144150836;
+            $products = ProductModel::where('user_id', $idNCC0Product)->get();
+            foreach ($products as $product) {
+                $slug = $product->slug;
+            }
+            ProductModel::where('user_id', $idNCC0Product)->update([
+                'show_price' => '2'
+            ]);
+            return 'giá 0d thành công';
+        }
         else if($request->shop){
             // add comment shop
             $comments = CommentModel::select('id', 'shop_id')->get()->groupBy('shop_id');
