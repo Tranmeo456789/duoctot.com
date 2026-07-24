@@ -998,4 +998,13 @@ class ProductModel extends BackEndModel
     public function adminApproves(){
         return $this->belongsTo('App\Model\Shop\UsersModel','admin_approves','user_id');
     }
+    protected static array $redirectSlugs = [
+        'perjeta-420mg14ml-dieu-tri-ung-thu' => 'thuoc-perjeta-420mg14ml-dieu-tri-ung-thu-vu-tai-phat',
+        // sau này thêm sản phẩm trùng mới, chỉ thêm 1 dòng (không cần .html):
+        // 'slug-cu' => 'slug-moi',
+    ];
+    public static function getRedirectSlug(string $slug): ?string
+    {
+        return self::$redirectSlugs[$slug] ?? null;
+    }
 }

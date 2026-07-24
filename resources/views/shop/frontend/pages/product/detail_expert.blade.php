@@ -37,10 +37,15 @@ use App\Helpers\MyFunction;
 .expert-panel-title { font-size: 18px; font-weight: 700;}
 .avatar-wrap {flex-shrink: 0;}
 .avatar-wrap img {width: 48px;height: 48px;border-radius: 50%;object-fit: cover;}
+.pagination-scroll-wrapper {overflow-x: auto;-webkit-overflow-scrolling: touch;scrollbar-width: none;}
+.pagination-scroll-wrapper::-webkit-scrollbar {display: none;}
+.pagination-scroll-wrapper .pagination {flex-wrap: nowrap;display: inline-flex;width: max-content;margin: 0 auto;}
+.pagination-scroll-wrapper .page-item .page-link {white-space: nowrap;}
 @media (max-width: 767px) {
   .article-thumb { flex-basis: 120px; width: 120px; height: 90px; }
   .article-title { font-size: 15px; }
   .article-desc { display: none; }
+  .pagination-scroll-wrapper {justify-content: flex-start;padding: 0 8px;}
 }
 </style>
 @endsection
