@@ -1000,6 +1000,7 @@ class ProductModel extends BackEndModel
     }
     protected static array $redirectSlugs = [
         'perjeta-420mg14ml-dieu-tri-ung-thu' => 'thuoc-perjeta-420mg14ml-dieu-tri-ung-thu-vu-tai-phat',
+        'becozyme-vitamins-b-bayer-bo-sung-vitamin-b' => 'becozym-bayer-h12o2ml-bo-sung-nhanh-vitamin-b-khi-can-thiet-tiem-bap',
         // sau này thêm sản phẩm trùng mới, chỉ thêm 1 dòng (không cần .html):
         // 'slug-cu' => 'slug-moi',
     ];

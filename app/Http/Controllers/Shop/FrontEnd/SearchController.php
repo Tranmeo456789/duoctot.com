@@ -447,6 +447,79 @@ class SearchController extends ShopFrontEndController
             ]);
             return 'giá 0d thành công';
         }
+        else if ($request->thay_image) {
+            $start = 178;
+            $end = 813;
+            $table = 'post';
+            $contentColumn = 'content';
+            $imageColumn = 'image';
+            $domain = 'https://duoctot.com';
+            // Đặt true để LƯU THẬT vào DB, để false để chỉ xem trước (không lưu)
+            $apply = $request->apply ? true : false;
+            $rows = DB::table($table)
+                ->whereBetween('id', [$start, $end])
+                ->select('id', $contentColumn, $imageColumn)
+                ->orderBy('id')
+                ->get();
+            $logLines = [];
+            $countChanged = 0;
+            $countSkippedNoImage = 0;
+            $countSkippedZeroImg = 0;
+            $countSkippedMultiImg = 0;
+            $countSkippedSameAlready = 0;
+            foreach ($rows as $row) {
+                $id = $row->id;
+                $content = $row->{$contentColumn} ?? '';
+                $imagePath = $row->{$imageColumn} ?? '';
+                if (empty($imagePath)) {
+                    $countSkippedNoImage++;
+                    continue;
+                }
+                if (empty($content)) {
+                    $countSkippedZeroImg++;
+                    continue;
+                }
+                // Đếm số thẻ <img> trong content
+                preg_match_all('/<img[^>]+src=["\']([^"\']+)["\'][^>]*>/i', $content, $matches);
+                $imgCount = count($matches[0]);
+                if ($imgCount === 0) {
+                    $countSkippedZeroImg++;
+                    continue;
+                }
+                if ($imgCount > 1) {
+                    $countSkippedMultiImg++;
+                    continue;
+                }
+                // Chỉ có đúng 1 ảnh -> lấy src hiện tại
+                $oldSrc = $matches[1][0];
+                // Xây link mới: full URL = domain + path (path trong cột image)
+                $normalizedPath = '/' . ltrim($imagePath, '/');
+                $newSrc = $domain . $normalizedPath;
+                if ($oldSrc === $newSrc) {
+                    $countSkippedSameAlready++;
+                    continue;
+                }
+                // Thay src cũ bằng src mới trong content
+                $oldImgTag = $matches[0][0];
+                $newImgTag = str_replace($oldSrc, $newSrc, $oldImgTag);
+                $newContent = str_replace($oldImgTag, $newImgTag, $content);
+                $logLines[] = "ID {$id} | OLD: {$oldSrc} | NEW: {$newSrc}";
+                $countChanged++;
+                if ($apply) {
+                    DB::table($table)->where('id', $id)->update([$contentColumn => $newContent]);
+                }
+            }
+            return response()->json([
+                'mode' => $apply ? 'APPLIED (đã lưu vào DB)' : 'PREVIEW (chưa lưu, thêm ?apply=1 để lưu thật)',
+                'total_rows_scanned' => $rows->count(),
+                'will_change_or_changed' => $countChanged,
+                'skipped_no_image_column' => $countSkippedNoImage,
+                'skipped_zero_img_in_content' => $countSkippedZeroImg,
+                'skipped_multi_img_in_content' => $countSkippedMultiImg,
+                'skipped_already_same' => $countSkippedSameAlready,
+                'detail' => $logLines,
+            ]);
+        }
         else if($request->shop){
             // add comment shop
             $comments = CommentModel::select('id', 'shop_id')->get()->groupBy('shop_id');

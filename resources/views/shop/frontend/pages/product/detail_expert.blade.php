@@ -41,6 +41,7 @@ use App\Helpers\MyFunction;
 .pagination-scroll-wrapper::-webkit-scrollbar {display: none;}
 .pagination-scroll-wrapper .pagination {flex-wrap: nowrap;display: inline-flex;width: max-content;margin: 0 auto;}
 .pagination-scroll-wrapper .page-item .page-link {white-space: nowrap;}
+.expert-phone{font-weight: bold;font-size: 16px;margin-top: 8px;}
 @media (max-width: 767px) {
   .article-thumb { flex-basis: 120px; width: 120px; height: 90px; }
   .article-title { font-size: 15px; }
@@ -61,7 +62,8 @@ use App\Helpers\MyFunction;
                 <div class="text-center mt-3">
                     <p class="expert-degree">{{$approver['education_level']??''}}</p>
                     <p class="expert-name">{{$approver['fullname']??''}}</p>
-                    <p class="expert-role">{{$approver['user_type']??''}}</p>
+                    <p class="expert-phone">*Số điện thoại / Email: <span>{{$phoneShop??''}}</span></p>
+                    <!-- <p class="expert-role">{{$approver['user_type']??''}}</p> -->
                 </div>
                 <div class="bio-box w-100">
                     {{$approver['meta_description']??''}}
@@ -152,6 +154,9 @@ use App\Helpers\MyFunction;
                         </div>
                     </div>
                     @endforeach
+                    <div class="text-center">
+                        <a href="{{route('fe.product.listDuocSi')}}">Xem thêm</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -239,6 +244,11 @@ use App\Helpers\MyFunction;
             bindItemPaginationClick();
         })();
     </script>
+     @if(!empty($map))
+    <div id="map-drugstore" class="text-centen my-4">
+        {!! $map ?? '' !!}
+    </div>
+    @endif
 </div>
 <div class="local mt-3">
     @include("$moduleName.templates.local_drugstore")

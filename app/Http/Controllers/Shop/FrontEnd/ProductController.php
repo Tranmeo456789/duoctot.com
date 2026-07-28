@@ -933,7 +933,25 @@ class ProductController extends ShopFrontEndController
             ->orderBy('created_at', 'desc')
             ->paginate(10, ['*'], 'page', $request->get('page', 1));
 
-        $listApprover = UsersModel::whereIn('user_id', [1984152592,1984152579,1984152536,1984152565,1984152534])->get();
+        $listApprover = UsersModel::select('user.*')
+        ->selectSub(function ($q) {
+            $q->from('products')
+            ->selectRaw('COUNT(*)')
+            ->whereColumn('products.approver_by', 'user.user_id')
+            ->where('products.status_product', 'da_duyet');
+        }, 'total_products_approved')
+        ->selectSub(function ($q) {
+            $q->from('posts')
+            ->selectRaw('COUNT(*)')
+            ->whereColumn('posts.approver_by', 'user.user_id')
+            ->where('posts.status_post', 'da_duyet');
+        }, 'total_posts_approved')
+        ->whereIn('user_type_id', [5])
+        ->havingRaw('(total_products_approved + total_posts_approved) > 0')
+        ->orderByRaw('(total_products_approved + total_posts_approved) DESC')
+        ->orderBy('created_at', 'DESC')
+        ->limit(5)
+        ->get();
         $listApprover->transform(function ($val) {
             $val->imgThumb = !empty($val['details']['image'])
                 ? route('home') . '/public'.$val['details']['image']
@@ -942,6 +960,22 @@ class ProductController extends ShopFrontEndController
             $val->linkDetailExpert = route('fe.product.detailDoiNguChuyenMon', $val['slug']);
             return $val;
         });
+        $phone = $approver['phone'] ?? '';
+        $email = $approver['email'] ?? 'Đang cập nhật';
+        if (!empty($phone)) {
+            $len = strlen($phone);
+            $phoneShop = $len > 3
+                ? substr($phone, 0, -3) . '***'
+                : str_repeat('*', $len);
+            $phoneShop = MyFunction::formatPhoneNumber($phoneShop);
+        } else {
+            $phoneShop = $email;
+        }
+        $map = '';
+        $details = $approver->details ?? [];
+        if (!empty($details)) {
+            $map     = $details['map'] ?? '';
+        }
         return view($this->pathViewController . 'detail_expert', [
                     'approver' => $approver,
                     'imageSrcApprover' => $imageSrcApprover,
@@ -950,6 +984,8 @@ class ProductController extends ShopFrontEndController
                     'listItemRelate' => $listItemRelate,
                     'listProductRelate' => $listProductRelate,
                     'listApprover' => $listApprover,
+                    'phoneShop' => $phoneShop,
+                    'map' => $map,
                 ]);
     }
     public function ajaxProductRelate(Request $request, $slug){
@@ -1585,149 +1621,169 @@ class ProductController extends ShopFrontEndController
     }
     public function listBacSi(Request $request)
     {
-        // Cache key theo full query (page + filter)
-        $cacheKey = 'duoctot_list_bacsi_' . md5(json_encode($request->all()));
-        $data = Cache::tags(['duoctot_bacsi'])->remember($cacheKey, 600, function () use ($request) {
-            $phoneOfShopConfig = Cache::tags(['duoctot_config'])->remember('duoctot_config_hotline_duoc', 3600, function () {
-                return ConfigModel::where('name', 'hotline_duoc')->value('content') ?? '';
-            });
-            $itemsProvince = (new ProvinceModel())->listItems(null, ['task' => 'admin-list-items-in-selectbox']);
-            $itemsDistrict = [];
-            $query = UsersModel::whereIn('user_type_id', [2])
-                ->orderBy('user_id', 'DESC');
-            // Cookie province
-            if (!empty($_COOKIE['province'])) {
-                $query->where('province_id', $this->getProvinceID($_COOKIE['province']));
-            }
-            // Province filter
-            if ($request->input('province_id')) {
-                $prv = ProvinceModel::find((int)$request->input('province_id'));
-                if ($prv) {
-                    $query->where('province_id', $prv->id);
-                    $itemsDistrict = (new DistrictModel())->listItems(
-                        ['parentID' => $prv->id],
-                        ['task' => 'admin-list-items-in-selectbox']
-                    );
-                }
-            }
-            // District filter
-            if ($request->input('district_id')) {
-                $itemDistrict = DistrictModel::find((int)$request->input('district_id'));
-                if ($itemDistrict) {
-                    $arrUserID = UserValuesModel::where('value', $itemDistrict->id)
-                        ->where('user_field', 'district_id')
-                        ->pluck('user_id')
-                        ->toArray();
-                    $query->whereIn('user_id', $arrUserID);
-                }
-            }
-            // Search
-            if ($request->input('fullname')) {
-                $fullname = htmlspecialchars($request->input('fullname'), ENT_QUOTES, 'UTF-8');
-                $query->where(function ($q) use ($fullname) {
-                    $q->where('fullname', 'like', "%$fullname%")
-                        ->orWhere('phone', 'like', "%$fullname%");
-                });
-            }
-            $items = $query->paginate(10);
-            // Transform
-            $items->getCollection()->transform(function ($val) use ($phoneOfShopConfig) {
-                $val->imgThumb = !empty($val['details']['image'])
-                    ? route('home') . '/public'.$val['details']['image']
-                    : route('home') . '/public/fileUpload/nhathuoc/6898c9b8bf789.jpg';
-
-                $val->linkShop = route('fe.product.drugstore', $val['slug']);
-                $val->address = $this->buildAddress($val['details'] ?? null);
-                $phoneOfShopShow = $val['phone'] ?? $phoneOfShopConfig;
-                $val->phoneFormatted = MyFunction::formatPhoneNumber($phoneOfShopShow) ?? '';
-                return $val;
-            });
-            return [
-                'itemsProvinces' => $itemsProvince,
-                'itemsDistricts' => $itemsDistrict,
-                'items' => $items,
-                'title' => 'Danh sách Bác Sĩ | Duoctot.com'
-            ];
+        $phoneOfShopConfig = Cache::tags(['duoctot_config'])->remember('duoctot_config_hotline_duoc', 3600, function () {
+            return ConfigModel::where('name', 'hotline_duoc')->value('content') ?? '';
         });
-        return view($this->pathViewController . 'ls_bacsi', $data);
+        $itemsProvince = (new ProvinceModel())->listItems(null, ['task' => 'admin-list-items-in-selectbox']);
+        $itemsDistrict = [];
+        $query = UsersModel::with('details')
+        ->select('user.*')
+        ->selectSub(function ($q) {
+            $q->from('products')
+            ->selectRaw('COUNT(*)')
+            ->whereColumn('products.approver_by', 'user.user_id')
+            ->where('products.status_product', 'da_duyet');
+        }, 'total_products_approved')
+        ->selectSub(function ($q) {
+            $q->from('posts')
+            ->selectRaw('COUNT(*)')
+            ->whereColumn('posts.approver_by', 'user.user_id')
+            ->where('posts.status_post', 'da_duyet');
+        }, 'total_posts_approved')
+        ->whereIn('user_type_id', [2]);
+        // Province filter (ưu tiên request, fallback cookie)
+        if ($request->input('province_id')) {
+            $prv = ProvinceModel::find((int)$request->input('province_id'));
+            if ($prv) {
+                $query->where('province_id', $prv->id);
+                $itemsDistrict = (new DistrictModel())->listItems(
+                    ['parentID' => $prv->id],
+                    ['task' => 'admin-list-items-in-selectbox']
+                );
+            }
+        } elseif (!empty($request->cookie('province'))) {
+            $query->where('province_id', $this->getProvinceID($request->cookie('province')));
+        }
+        // District filter
+        if ($request->input('district_id')) {
+            $itemDistrict = DistrictModel::find((int)$request->input('district_id'));
+            if ($itemDistrict) {
+                $arrUserID = UserValuesModel::where('value', $itemDistrict->id)
+                    ->where('user_field', 'district_id')
+                    ->pluck('user_id')
+                    ->toArray();
+                $query->whereIn('user_id', $arrUserID);
+            }
+        }
+        // Search
+        if ($request->input('fullname')) {
+            $fullname = $request->input('fullname');
+            $query->where(function ($q) use ($fullname) {
+                $q->where('fullname', 'like', "%$fullname%")
+                    ->orWhere('phone', 'like', "%$fullname%");
+            });
+        }
+        // Sắp xếp: ưu tiên người duyệt nhiều sản phẩm + bài viết nhất lên đầu
+        $query->orderByRaw('(total_products_approved + total_posts_approved) DESC')
+            ->orderBy('user_id', 'DESC'); // phụ, khi số duyệt bằng nhau thì user mới hơn lên trước
+        $items = $query->paginate(10)->appends($request->query());
+        $items->getCollection()->transform(function ($val) use ($phoneOfShopConfig) {
+            $val->imgThumb = !empty($val['details']['image'])
+                ? route('home') . '/public' . $val['details']['image']
+                : route('home') . '/public/fileUpload/nhathuoc/6898c9b8bf789.jpg';
+            if ((int)$val['is_admin'] === 2) {
+                $val->linkShop = route('fe.product.detailDoiNguChuyenMon', $val['slug']);
+            } else {
+                $val->linkShop = route('fe.product.drugstore', $val['slug']);
+            }
+            $val->address = $this->buildAddress($val['details'] ?? null);
+            $phoneOfShopShow = $val['phone'] ?? '';
+            $val->phoneFormatted = MyFunction::formatPhoneNumber($phoneOfShopShow) ?? '';
+            return $val;
+        });
+        return view($this->pathViewController . 'ls_bacsi', [
+            'itemsProvinces' => $itemsProvince,
+            'itemsDistricts' => $itemsDistrict,
+            'items' => $items,
+            'title' => 'Danh sách Dược Sĩ | Duoctot.com'
+        ]);
     }
     public function listDuocSi(Request $request)
     {
-        // Cache key theo full query (page + filter)
-        $cacheKey = 'duoctot_list_duocsi_' . md5(json_encode($request->all()));
-        $data = Cache::tags(['duoctot_duocsi'])->remember($cacheKey, 600, function () use ($request) {
-            $phoneOfShopConfig = Cache::tags(['duoctot_config'])->remember('duoctot_config_hotline_duoc', 3600, function () {
-                return ConfigModel::where('name', 'hotline_duoc')->value('content') ?? '';
-            });
-            $itemsProvince = (new ProvinceModel())->listItems(null, ['task' => 'admin-list-items-in-selectbox']);
-            $itemsDistrict = [];
-            $query = UsersModel::whereIn('user_type_id', [5])
-                ->orderBy('user_id', 'DESC');
-            // Cookie province
-            if (!empty($_COOKIE['province'])) {
-                $query->where('province_id', $this->getProvinceID($_COOKIE['province']));
-            }
-            // Province filter
-            if ($request->input('province_id')) {
-                $prv = ProvinceModel::find((int)$request->input('province_id'));
-                if ($prv) {
-                    $query->where('province_id', $prv->id);
-                    $itemsDistrict = (new DistrictModel())->listItems(
-                        ['parentID' => $prv->id],
-                        ['task' => 'admin-list-items-in-selectbox']
-                    );
-                }
-            }
-            // District filter
-            if ($request->input('district_id')) {
-                $itemDistrict = DistrictModel::find((int)$request->input('district_id'));
-                if ($itemDistrict) {
-                    $arrUserID = UserValuesModel::where('value', $itemDistrict->id)
-                        ->where('user_field', 'district_id')
-                        ->pluck('user_id')
-                        ->toArray();
-                    $query->whereIn('user_id', $arrUserID);
-                }
-            }
-            // Search
-            if ($request->input('fullname')) {
-                $fullname = htmlspecialchars($request->input('fullname'), ENT_QUOTES, 'UTF-8');
-                $query->where(function ($q) use ($fullname) {
-                    $q->where('fullname', 'like', "%$fullname%")
-                        ->orWhere('phone', 'like', "%$fullname%");
-                });
-            }
-            $items = $query->paginate(10);
-            // Transform
-            $items->getCollection()->transform(function ($val) use ($phoneOfShopConfig) {
-                $val->imgThumb = !empty($val['details']['image'])
-                    ? route('home') . '/public'.$val['details']['image']
-                    : route('home') . '/public/fileUpload/nhathuoc/6898c9b8bf789.jpg';
-
-                $val->linkShop = route('fe.product.drugstore', $val['slug']);
-                $val->address = $this->buildAddress($val['details'] ?? null);
-                $phoneShop = $val['phone'] ?? $phoneOfShopConfig;
-                if (!empty($phoneShop)) {
-                    $len = strlen($phoneShop);
-                    if ($len > 3) {
-                        $phoneOfShopShow = substr($phoneShop, 0, -3) . '***';
-                    } else {
-                        $phoneOfShopShow = str_repeat('*', $len);
-                    }
-                } else {
-                    $phoneOfShopShow = $phoneShop;
-                }
-                $val->phoneFormatted = MyFunction::formatPhoneNumber($phoneOfShopShow) ?? '';
-                return $val;
-            });
-            return [
-                'itemsProvinces' => $itemsProvince,
-                'itemsDistricts' => $itemsDistrict,
-                'items' => $items,
-                'title' => 'Danh sách Dược Sĩ | Duoctot.com'
-            ];
+        $phoneOfShopConfig = Cache::tags(['duoctot_config'])->remember('duoctot_config_hotline_duoc', 3600, function () {
+            return ConfigModel::where('name', 'hotline_duoc')->value('content') ?? '';
         });
-        return view($this->pathViewController . 'ls_duocsi', $data);
+        $itemsProvince = (new ProvinceModel())->listItems(null, ['task' => 'admin-list-items-in-selectbox']);
+        $itemsDistrict = [];
+        $query = UsersModel::with('details')
+        ->select('user.*')
+        ->selectSub(function ($q) {
+            $q->from('products')
+            ->selectRaw('COUNT(*)')
+            ->whereColumn('products.approver_by', 'user.user_id')
+            ->where('products.status_product', 'da_duyet');
+        }, 'total_products_approved')
+        ->selectSub(function ($q) {
+            $q->from('posts')
+            ->selectRaw('COUNT(*)')
+            ->whereColumn('posts.approver_by', 'user.user_id')
+            ->where('posts.status_post', 'da_duyet');
+        }, 'total_posts_approved')
+        ->whereIn('user_type_id', [5]);
+        // Province filter (ưu tiên request, fallback cookie)
+        if ($request->input('province_id')) {
+            $prv = ProvinceModel::find((int)$request->input('province_id'));
+            if ($prv) {
+                $query->where('province_id', $prv->id);
+                $itemsDistrict = (new DistrictModel())->listItems(
+                    ['parentID' => $prv->id],
+                    ['task' => 'admin-list-items-in-selectbox']
+                );
+            }
+        } elseif (!empty($request->cookie('province'))) {
+            $query->where('province_id', $this->getProvinceID($request->cookie('province')));
+        }
+        // District filter
+        if ($request->input('district_id')) {
+            $itemDistrict = DistrictModel::find((int)$request->input('district_id'));
+            if ($itemDistrict) {
+                $arrUserID = UserValuesModel::where('value', $itemDistrict->id)
+                    ->where('user_field', 'district_id')
+                    ->pluck('user_id')
+                    ->toArray();
+                $query->whereIn('user_id', $arrUserID);
+            }
+        }
+        // Search
+        if ($request->input('fullname')) {
+            $fullname = $request->input('fullname');
+            $query->where(function ($q) use ($fullname) {
+                $q->where('fullname', 'like', "%$fullname%")
+                    ->orWhere('phone', 'like', "%$fullname%");
+            });
+        }
+        // Sắp xếp: ưu tiên người duyệt nhiều sản phẩm + bài viết nhất lên đầu
+        $query->orderByRaw('(total_products_approved + total_posts_approved) DESC')
+            ->orderBy('user_id', 'DESC'); // phụ, khi số duyệt bằng nhau thì user mới hơn lên trước
+        $items = $query->paginate(10)->appends($request->query());
+        $items->getCollection()->transform(function ($val) use ($phoneOfShopConfig) {
+            $val->imgThumb = !empty($val['details']['image'])
+                ? route('home') . '/public' . $val['details']['image']
+                : route('home') . '/public/fileUpload/nhathuoc/6898c9b8bf789.jpg';
+            if ((int)$val['is_admin'] === 2) {
+                $val->linkShop = route('fe.product.detailDoiNguChuyenMon', $val['slug']);
+            } else {
+                $val->linkShop = route('fe.product.drugstore', $val['slug']);
+            }
+            $val->address = $this->buildAddress($val['details'] ?? null);
+            $phoneShop = $val['phone'] ?? $phoneOfShopConfig;
+            if (!empty($phoneShop)) {
+                $len = strlen($phoneShop);
+                $phoneOfShopShow = $len > 3
+                    ? substr($phoneShop, 0, -3) . '***'
+                    : str_repeat('*', $len);
+            } else {
+                $phoneOfShopShow = $phoneShop;
+            }
+            $val->phoneFormatted = MyFunction::formatPhoneNumber($phoneOfShopShow) ?? '';
+            return $val;
+        });
+        return view($this->pathViewController . 'ls_duocsi', [
+            'itemsProvinces' => $itemsProvince,
+            'itemsDistricts' => $itemsDistrict,
+            'items' => $items,
+            'title' => 'Danh sách Dược Sĩ | Duoctot.com'
+        ]);
     }
     public function contentIntroduce(Request $request)
     {
