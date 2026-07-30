@@ -186,7 +186,11 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
         Route::post('/luu-phieu-thanh-toan', 'CouponPaymentController@save')->name('couponPayment.save');
         Route::get('/xoa-phieu-thanh-toan/{id}', 'CouponPaymentController@delete')->name('couponPayment.delete');
 
-
+        Route::get('/danh-sach-url-chuyen-huong', 'RedirectController@index')->name('redirect');
+        Route::get('/them-url-chuyen-huong', 'RedirectController@form')->name('redirect.add');
+        Route::get('/sua-url-chuyen-huong/{id}', 'RedirectController@form')->name('redirect.edit');
+        Route::post('/luu-url-chuyen-huong', 'RedirectController@save')->name('redirect.save');
+        Route::get('/xoa-url-chuyen-huong/{id}', 'RedirectController@delete')->name('redirect.delete');
         // Route::get('/them-nguoi-dung', 'UserController@form')->name('user.add');
         // Route::get('/sua-nguoi-dung/{id}', 'UserController@form')->name('user.edit');
         // Route::post('/luu-nguoi-dung', 'UserController@save')->name('user.save');

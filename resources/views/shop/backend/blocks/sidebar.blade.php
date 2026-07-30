@@ -17,7 +17,6 @@
                 </a>
             </li>
             @endif
-
             <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-chalkboard-teacher"></i>
@@ -279,11 +278,17 @@
                 </a>
             </li>
             <li class="nav-item">
-                    <a href="{{route('customerFeedback')}}" class="nav-link">
-                        <i class="nav-icon fas fa-search-dollar"></i>
-                        <p>Phản hồi khách hàng</p>
-                    </a>
-                </li>
+                <a href="{{route('customerFeedback')}}" class="nav-link">
+                    <i class="nav-icon fas fa-search-dollar"></i>
+                    <p>Phản hồi khách hàng</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{route('redirect')}}" class="nav-link">
+                    <i class="nav-icon fas fa-search-dollar"></i>
+                    <p>Link chuyển hướng</p>
+                </a>
+            </li>
             <li class="nav-item">
                 <a href="{{route('fe.SyncTdoctor.indexPage')}}" class="nav-link">
                     <i class="nav-icon fas fa-sync"></i>
