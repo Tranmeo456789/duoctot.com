@@ -21,6 +21,7 @@ use App\Model\Shop\ConfigModel;
 use App\Helpers\MyFunction;
 use App\Model\Shop\PostModel;
 use App\Model\Shop\ProductModel;
+use App\Model\Shop\RedirectModel;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Cache;
@@ -352,14 +353,15 @@ class ProductController extends ShopFrontEndController
                 301
             );
         }
-        //=== THÊM ĐOẠN NÀY ===
-        if ($newSlug = ProductModel::getRedirectSlug($slug)) {
-            return redirect()->to(
-                url('/chi-tiet-san-pham/' . $newSlug . '.html'),
-                301
-            );
-        }
-        // ======================
+        // === Kiểm tra redirect, query trực tiếp từ DB ===
+            $newSlug = RedirectModel::where('old_slug', $slug)->value('new_slug');
+            if ($newSlug) {
+                return redirect()->to(
+                    url('/chi-tiet-san-pham/' . $newSlug . '.html'),
+                    301
+                );
+            }
+            // ==================================================
         $session = $request->session();
         $codeRefLogin = '';
         $codeRefRegister = '';

@@ -73,8 +73,8 @@
                         @endif
                     </div>
                     @else
-                    <span class="text-info">...</span>
-                    <div class="price-old">...</div>
+                    <span class="text-info">Giá liên hệ</span>
+                    <div class="price-old"></div>
                     @endif
                 </div>
             </a>
