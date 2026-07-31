@@ -195,7 +195,6 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
         // Route::get('/them-nguoi-dung', 'UserController@form')->name('user.add');
         // Route::get('/sua-nguoi-dung/{id}', 'UserController@form')->name('user.edit');
         // Route::post('/luu-nguoi-dung', 'UserController@save')->name('user.save');
-        // Route::get('/xoa-nguoi-dung/{id}', 'UserController@delete')->name('user.delete');
         // Route::get('/chi-tiet-nguoi-dung/{id}', 'UserController@getItem')->name('user.getItem');
     });
     Route::get('/loc-doanh-thu-theo-thoi-gian', 'DashboardController@filterInDay')->name('dashboard.filterInDay');

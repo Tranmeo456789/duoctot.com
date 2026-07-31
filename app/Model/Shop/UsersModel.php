@@ -402,6 +402,7 @@ class UsersModel extends BackEndModel
         if ($options['task'] == 'delete-item') {
             self::where('user_id', $params['user_id'])->delete();
         }
+        Cache::flush();
     }
     public function createPatient(){
         $patient = new PatientModel;
