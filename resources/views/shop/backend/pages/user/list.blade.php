@@ -44,6 +44,9 @@
                             @elseif($val['user_type_id'] > 0)
                             <a href="{{route('user.formAddProductShop',$val->user_id)}}" class="btn btn-primary btn-sm rounded-0 text-white p-2" type="button" data-toggle="tooltip" data-placement="top" title="Thêm thuốc hiển thị trong Shop">Thêm thuốc</a>
                             @endif
+                            <a data-href="{{route("$controllerName.delete",$val->user_id)}}" class="btn btn-sm btn-danger btn-delete text-white" data-id="{{$val->user_id}}" data-toggle="tooltip" data-placement="top" title="Xóa"  data-token="{{csrf_token()}}" >
+                                <i class="fa fa-trash"></i>
+                            </a>
                         </td>
                 </tr>
                 @endforeach

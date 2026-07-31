@@ -398,6 +398,7 @@ class UsersModel extends BackEndModel
     }
     public function deleteItem($params = null, $options = null)
     {
+        $params['user_id']=$params['id'];
         if ($options['task'] == 'delete-item') {
             self::where('user_id', $params['user_id'])->delete();
         }

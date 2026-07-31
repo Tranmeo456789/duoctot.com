@@ -155,7 +155,8 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
         Route::post('/luu-nguoi-dung', 'UserController@save')->name('user.save');
         Route::get('/them-san-pham-cho-shop-hien-thi/{userId}', 'UserController@formAddProductShop')->name('user.formAddProductShop');
         Route::post('/luu-san-pham-them-cho-shop-hien-thi', 'UserController@saveAddProductShop')->name('user.saveAddProductShop');
-        
+        Route::get('/xoa-nguoi-dung/{id}', 'UserController@delete')->name('user.delete');
+
         Route::get('/quan-ly-editor', 'EditorController@index')->name('editor');
         Route::get('/them-editor', 'EditorController@form')->name('editor.add');
         Route::get('/sua-editor/{id}', 'EditorController@form')->name('editor.edit');
