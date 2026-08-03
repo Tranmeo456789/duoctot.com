@@ -402,7 +402,15 @@ class UsersModel extends BackEndModel
         if ($options['task'] == 'delete-item') {
             self::where('user_id', $params['user_id'])->delete();
         }
-        Cache::flush();
+        Cache::tags(['duoctot_nhathuoc'])->flush();
+        Cache::tags(['duoctot_phongkham'])->flush();
+        Cache::tags(['duoctot_shopchung'])->flush();
+        Cache::tags(['duoctot_trinhduocvien'])->flush();
+        Cache::tags(['duoctot_mevabe'])->flush();
+        Cache::tags(['duoctot_thammy'])->flush();
+        Cache::tags(['duoctot_drugstore'])->flush();
+        Cache::tags(['duoctot_bacsi'])->flush();
+        Cache::tags(['duoctot_product'])->flush();
     }
     public function createPatient(){
         $patient = new PatientModel;

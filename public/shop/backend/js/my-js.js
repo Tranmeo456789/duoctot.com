@@ -96,6 +96,35 @@ $(document).on('click', '#btn-confim-delete', function(event) {
     ajaxDelete(url, $('#delete_token').val());
 });
 
+// function ajaxDelete(url, token, content) {
+//     $.ajax({
+//         type: 'GET',
+//         data: { _method: 'GET', _token: token },
+//         url: url,
+//         success: function(data) {
+//             $('#modalDelete').modal('hide');
+//             $page = $('.page-item.active span').html();
+//             if (typeof $page !== "undefined") { //Ton tai so trang
+//                 if ($('#tbList tbody').children('tr').length == 1) { //Con 1 phan tu trong trang
+//                     $page = $page - 1;
+//                 }
+//                 if ($page > 1) {
+//                     link = '?page=' + $page;
+//                     url = data.redirect_url + link;
+//                 } else {
+//                     url = data.redirect_url;
+//                 }
+//             } else {
+//                 url = data.redirect_url;
+//             }
+//             window.location.replace(url);
+//             //toastr.success(data.message);
+//         },
+//         error: function(xhr, status, error) {
+//             alert(xhr.responseText);
+//         }
+//     });
+// }
 function ajaxDelete(url, token, content) {
     $.ajax({
         type: 'GET',
@@ -103,22 +132,21 @@ function ajaxDelete(url, token, content) {
         url: url,
         success: function(data) {
             $('#modalDelete').modal('hide');
+            // Lấy toàn bộ query string hiện tại của trang (search_field, search_value, ...), bỏ page ra
+            let currentParams = new URLSearchParams(window.location.search);
+            currentParams.delete('page');
             $page = $('.page-item.active span').html();
-            if (typeof $page !== "undefined") { //Ton tai so trang
-                if ($('#tbList tbody').children('tr').length == 1) { //Con 1 phan tu trong trang
+            if (typeof $page !== "undefined") {
+                if ($('#tbList tbody').children('tr').length == 1) {
                     $page = $page - 1;
                 }
                 if ($page > 1) {
-                    link = '?page=' + $page;
-                    url = data.redirect_url + link;
-                } else {
-                    url = data.redirect_url;
+                    currentParams.set('page', $page);
                 }
-            } else {
-                url = data.redirect_url;
             }
+            let queryStr = currentParams.toString();
+            url = data.redirect_url + (queryStr ? '?' + queryStr : '');
             window.location.replace(url);
-            //toastr.success(data.message);
         },
         error: function(xhr, status, error) {
             alert(xhr.responseText);
