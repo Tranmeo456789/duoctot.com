@@ -434,7 +434,7 @@ $contact=MyFunction::formatPhoneNumber($contact);
                         <input type="hidden" id="product_id" value="{{$item['id']??''}}">
                         <input type="hidden" id="unit_id" value="{{$item['unit_id']??''}}">
                         <input type="hidden" id="code_ref" value="{{$codeRef??''}}">
-                        <input type="hidden" id="user_sell" value="{{$item->userProduct->user_id}}">
+                        <input type="hidden" id="user_sell" value="{{$item->userProduct->user_id??''}}">
                     </div>
                 </div>
                 @php

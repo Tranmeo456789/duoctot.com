@@ -19,6 +19,18 @@ use Illuminate\Support\Str;
 use App\Users as MainModel;
 class UserController extends Controller
 {
+    private function generateUniqueUserSlug($fullname)
+    {
+        $baseSlug = Str::slug($fullname) ?: 'user';
+        $slug = $baseSlug;
+        $i = 1;
+        // Kiểm tra trong bảng user (UsersModel), cột slug
+        while (UsersModel::where('slug', $slug)->exists()) {
+            $slug = $baseSlug . '-' . $i;
+            $i++;
+        }
+        return $slug;
+    }
     public function register(MainRequest $request)
     {
         if (!$request->ajax())  return redirect()->route('errors/notfound');
@@ -35,7 +47,7 @@ class UserController extends Controller
         $pointAdd=0;
         $numImportCodeRef=0;
         $params['domain_register'] = config("myconfig.url.prod");
-        $params['slug'] = Str::slug($params['fullname'])??'';
+        $params['slug'] = $this->generateUniqueUserSlug($params['fullname']);
         if ($request->method() == 'POST') {
             $task   = "register";
             if (!str_contains($params['email'],'@')){

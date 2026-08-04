@@ -23,9 +23,9 @@
                     $imgThumb = '';
 
                     if (isset($val['details']['image']) && $val['details']['image'] != ''){
-                        $imgThumb = route('home') . $val['details']['image'];
+                        $imgThumb = route('home') .'/public'. $val['details']['image'];
                     } else{
-                        $imgThumb = route('home') . '/laravel-filemanager/fileUpload/nhathuoc/6875c9e1945c0.jpg';
+                        $imgThumb = route('home') . '/public/fileUpload/nhathuoc/6875c9e1945c0.jpg';
                     }
                     $slug = $val['slug'];
                     $linkShop = route('fe.product.drugstore', $slug);
