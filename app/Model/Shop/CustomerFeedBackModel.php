@@ -8,6 +8,7 @@ use App\Model\Shop\BackEndModel;
 use App\Helpers\HttpClient;
 use Illuminate\Support\Str;
 use DB;
+use Illuminate\Support\Facades\Cache;
 class CustomerFeedBackModel extends BackEndModel
 {
     protected $casts = [];
@@ -139,6 +140,7 @@ class CustomerFeedBackModel extends BackEndModel
             $item = self::getItem($params,['task'=>'get-item']);
             self::where('id', $params['id'])->update($this->prepareParams($params));
         }
+        Cache::forget('duoctot_cache_list_image_phan_hoi');
     }
     public function deleteItem($params = null, $options = null)
     {

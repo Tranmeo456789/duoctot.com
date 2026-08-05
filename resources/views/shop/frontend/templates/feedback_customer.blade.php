@@ -41,12 +41,15 @@ $imgCustomer=['1.jpg', '2.jpg'];
         <div class="container-slider mt-0 mt-lg-2 position-relative px-md-5">
             <button class="prev-btn-thumb-feedback position-absolute" style="left: 0;">‹</button>
             <div class="list_thumb_feedback cS-hidden">
-                <div class="swiper-slide text-center">
-                    <img src="{{asset('images/shop/z7450288731436_f55d721b8c2df0e5a95d13fb9b65ad64.jpg')}}" class="img-thumbnail image-zoom-popup" loading="lazy" alt="phan hoi" />
-                </div>
-                <div class="swiper-slide text-center">
-                    <img src="{{asset('images/shop/z7450288736049_c81341310cd573feacc4e720abdfb4ea.jpg')}}" class="img-thumbnail image-zoom-popup" loading="lazy" alt="phan hoi" />
-                </div>
+                @if(!empty($listImagePhanHoi) && count($listImagePhanHoi) > 0)
+                    @foreach($listImagePhanHoi as $customerFeedBack)
+                        @if(!empty($customerFeedBack['image']))
+                            <div class="swiper-slide text-center">
+                                <img src="{{ asset('public'.$customerFeedBack['image']) }}" class="img-thumbnail image-zoom-popup" loading="lazy" alt="phan hoi" />
+                            </div>
+                        @endif
+                    @endforeach
+                @endif
             </div>
             <button class="next-btn-thumb-feedback position-absolute" style="right: 0;">›</button>
         </div>

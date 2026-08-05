@@ -89,7 +89,7 @@
 </div>
 <div class="wp-inner mt-3 mt-lg-4">
     <div class="feedback-customer">
-        @include("$moduleName.templates.feedback_customer")
+        @include("$moduleName.templates.feedback_customer",['listImagePhanHoi'=>$listImagePhanHoi])
     </div>
 </div>
 <div class="lc-mask-search"></div>

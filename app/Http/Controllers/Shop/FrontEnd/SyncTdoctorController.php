@@ -250,12 +250,19 @@ class SyncTdoctorController extends ShopFrontEndController
         // Lấy id lớn nhất hiện tại ở database chính
         $lastItemId = DB::connection('mysql')->table('products')->max('id');
         $totalInserted = 0;
+        // Load trước danh sách trademark và producer để tra cứu nhanh (tránh query lặp trong vòng lặp)
+        $trademarks = DB::connection('mysql')->table('trademarks')->pluck('name', 'id'); // [id => name]
+        $producers = DB::connection('mysql')->table('producers')->pluck('name', 'id'); // [id => name]
         // Lấy các item có id lớn hơn id lớn nhất ở database chính
         DB::connection('mysql_share_data')->table('products')
             ->where('id', '>', $lastItemId)
             ->orderBy('id', 'asc')
-            ->chunk(100, function ($items) use (&$totalInserted) {
+            ->chunk(100, function ($items) use (&$totalInserted, $trademarks, $producers) {
                 foreach ($items as $item) {
+                    // Tính brand_manufacturer từ tên trademark + producer tương ứng
+                    $trademarkName = $trademarks[$item->trademark_id] ?? null;
+                    $producerName = $producers[$item->producer_id] ?? null;
+                    $brandManufacturer = trim(implode(', ', array_filter([$trademarkName, $producerName], fn($v) => !is_null($v) && $v !== '')), ', ');
                     DB::connection('mysql')->table('products')->insert([
                         'id' => $item->id,
                         'name' => $item->name,
@@ -316,7 +323,8 @@ class SyncTdoctorController extends ShopFrontEndController
                         'updated_by' => $item->updated_by,
                         'updated_at' => $item->updated_at,
                         'alt_image' => $item->alt_image,
-                        'title_image' => $item->title_image
+                        'title_image' => $item->title_image,
+                        'brand_manufacturer' => $brandManufacturer,
                     ]);
                     $totalInserted++;
                 }
