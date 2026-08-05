@@ -399,24 +399,25 @@ $contact=MyFunction::formatPhoneNumber($contact);
                 <span>@include("$moduleName.block.seo-score-dot",['score' => $item->score_seo])</span>
                 @endif
                 <h1 class="mb-2">{{$item['name']}}</h1>
-                <div class="d-inline-flex align-items-center">
+                <div class="d-inline-flex align-items-center mb-3">
                     <span style="color: #ffc107; font-size: 1.75rem;">★★★★★</span>
                     <span class="lead font-weight-bold pl-2">5</span>
+                </div>
+                <div style="font-size: 22px" class="mb-2">Liên hệ mua lẻ <span class="font-weight-bold"><a href="tel:0345488247" style="font-size: 30px; color:red">0345.488.247</a></span></div>
+                <div style="font-size: 22px;border-bottom: 1px solid rgb(121, 145, 183);padding: 12px 0px;">Liên hệ mua sỉ
+                    <a class="image-contact" href='tel:0345488247' rel="nofollow" title="Gọi điện" previewlistener="true" style="padding-left: 15px">
+                        <img src="{{asset('images/shop/icon_goidien.png')}}" alt="Gọi điện Tdoctor" style="width: 38px;" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                    </a>
+                    <a class="image-contact" href="https://zalo.me/0345488247" rel="nofollow" target="_blank" title="Zalo" previewlistener="true" style="padding-left: 15px">
+                        <img src="{{asset('images/shop/icon_zalo.png')}}" alt="Zalo Tdoctor" style="width: 38px;padding-bottom: 5px;box-shadow: 0 2px 6px rgb(239 234 234 / 50%);">
+                    </a>
                 </div>
                 <div class="desc_product mb-3">
                     @if($item['show_price'] == 1)
                     <div id="show-price-buy-product" class="price_product mb-4 text-primary font-weight-bold">{{ number_format( $item['price'], 0, "" ,"." )}}đ </div>
                     @endif
                     @include("$moduleName.pages.$controllerName.child_detail.select_unit")
-                    <div class="mb-3 text-center rounded py-1" style="background: #05afe3;">
-                        <span class="contact-buy font-weight-bold">
-                            <span class="text-light pb-3">Liên hệ Hotline </span>
-                            <a href="tel:0345488247" class="d-inline-block py-2 px-3 bg-white rounded">
-                                <span class="phone">{{$contact}}</span>
-                            </a>
-                        </span>
-                    </div>
-                    <div class="btn-buy-search d-flex justify-content-between flex-wrap mb-3">
+                    <div class="btn-buy-search d-flex justify-content-between flex-wrap mb-3 mt-3">
                         {!! csrf_field() !!}
                         <div class="d-flex">
                             <label class="col-form-label d-none d-md-block" style="font-size:16px;">Chọn số lượng</label>
@@ -501,6 +502,14 @@ $contact=MyFunction::formatPhoneNumber($contact);
                         @endif
                     </tbody>
                 </table>
+                <div class="mb-3 text-center rounded py-1" style="background: #05afe3;">
+                    <span class="contact-buy font-weight-bold">
+                        <span class="text-light pb-3">Liên hệ Hotline </span>
+                        <a href="tel:0345488247" class="d-inline-block py-2 px-3 bg-white rounded">
+                            <span class="phone">{{$contact}}</span>
+                        </a>
+                    </span>
+                </div>
                 @if(!empty($approver))
                 @php
                 if (!empty($approver) && isset($approver['details']['image']) && $approver['details']['image'] != '') {
