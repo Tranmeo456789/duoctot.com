@@ -175,122 +175,113 @@ $contact=MyFunction::formatPhoneNumber($contact);
     });
 </script>
 <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Product",
-        "name": {
-            !!json_encode($title ?? '', JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!
-        },
-        "image": {
-            !!json_encode(asset('public'.$imageItem ?? ''), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!
-        },
-        "description": {
-            !!json_encode(strip_tags($description ?? ''), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!
-        },
-        "url": {
-            !!json_encode(url() - > current(), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!
-        },
-        "sku": {
-            !!json_encode($productCode ?? 'SKU-DEFAULT') !!
-        },
-        "brand": {
-            "@type": "Brand",
-            "name": "DuocTot"
-        },
-        "offers": {
-            "@type": "Offer",
-            "url": {
-                !!json_encode(url() - > current()) !!
+{
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": {!! json_encode($title ?? '', JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!},
+    "image": {!! json_encode(asset('public/'.($imageItem ?? '')), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!},
+    "description": {!! json_encode(strip_tags($description ?? ''), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!},
+    "url": {!! json_encode(url()->current(), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!},
+    "sku": {!! json_encode($productCode ?? 'SKU-DEFAULT') !!},
+    "brand": {
+        "@type": "Brand",
+        "name": "DuocTot"
+    },
+    "offers": {
+        "@type": "Offer",
+        "url": {!! json_encode(url()->current()) !!},
+        "priceCurrency": "VND",
+        "price": {{ (int)($price ?? 0) }},
+        "priceValidUntil": "{{ date('Y-12-31') }}",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition",
+        "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingRate": {
+                "@type": "MonetaryAmount",
+                "value": 0,
+                "currency": "VND"
             },
-            "priceCurrency": "VND",
-            "price": {
-                {
-                    (int)($price ?? 0)
-                }
+            "shippingDestination": {
+                "@type": "DefinedRegion",
+                "addressCountry": "VN"
             },
-            "priceValidUntil": "{{ date('Y-12-31') }}",
-            "availability": "https://schema.org/InStock",
-            "itemCondition": "https://schema.org/NewCondition",
-            "shippingDetails": {
-                "@type": "OfferShippingDetails",
-                "shippingRate": {
-                    "@type": "MonetaryAmount",
-                    "value": 0,
-                    "currency": "VND"
+            "deliveryTime": {
+                "@type": "ShippingDeliveryTime",
+                "handlingTime": {
+                    "@type": "QuantitativeValue",
+                    "minValue": 0,
+                    "maxValue": 1,
+                    "unitCode": "d"
                 },
-                "shippingDestination": {
-                    "@type": "DefinedRegion",
-                    "addressCountry": "VN"
-                },
-                "deliveryTime": {
-                    "@type": "ShippingDeliveryTime",
-                    "handlingTime": {
-                        "@type": "QuantitativeValue",
-                        "minValue": 0,
-                        "maxValue": 1,
-                        "unitCode": "d"
-                    },
-                    "transitTime": {
-                        "@type": "QuantitativeValue",
-                        "minValue": 1,
-                        "maxValue": 3,
-                        "unitCode": "d"
-                    }
+                "transitTime": {
+                    "@type": "QuantitativeValue",
+                    "minValue": 1,
+                    "maxValue": 3,
+                    "unitCode": "d"
                 }
-            },
-            "hasMerchantReturnPolicy": {
-                "@type": "MerchantReturnPolicy",
-                "applicableCountry": "VN",
-                "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-                "merchantReturnDays": 7,
-                "returnMethod": "https://schema.org/ReturnByMail",
-                "returnFees": "https://schema.org/FreeReturn"
             }
+        },
+        "hasMerchantReturnPolicy": {
+            "@type": "MerchantReturnPolicy",
+            "applicableCountry": "VN",
+            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+            "merchantReturnDays": 7,
+            "returnMethod": "https://schema.org/ReturnByMail",
+            "returnFees": "https://schema.org/FreeReturn"
         }
-    } {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [{
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Trang chủ",
-                "item": "{{ route('home') }}"
-            }
-            @if($itemCatParentLevel2['parent_id'] < 1),
-            {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "{{ $itemCatParentLevel1['name'] ?? '' }}",
-                "item": "{{ route('fe.cat', $itemCatParentLevel1['slug'] ?? '') }}"
-            },
-            {
-                "@type": "ListItem",
-                "position": 3,
-                "name": "{{ $itemCatCurent['name'] ?? '' }}",
-                "item": "{{ route('fe.cat2', [$itemCatParentLevel1['slug'] ?? '', $itemCatCurent['slug'] ?? '']) }}"
-            }
-            @else,
-            {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "{{ $itemCatParentLevel2['name'] ?? '' }}",
-                "item": "{{ route('fe.cat', $itemCatParentLevel2['slug'] ?? '') }}"
-            },
-            {
-                "@type": "ListItem",
-                "position": 3,
-                "name": "{{ $itemCatParentLevel1['name'] ?? '' }}",
-                "item": "{{ route('fe.cat2', [$itemCatParentLevel2['slug'] ?? '', $itemCatParentLevel1['slug'] ?? '']) }}"
-            },
-            {
-                "@type": "ListItem",
-                "position": 4,
-                "name": "{{ $itemCatCurent['name'] ?? '' }}",
-                "item": "{{ route('fe.cat3', [$itemCatParentLevel2['slug'] ?? '', $itemCatParentLevel1['slug'] ?? '', $itemCatCurent['slug'] ?? '']) }}"
-            }
-            @endif
-        ]
     }
+}
+</script>
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Trang chủ",
+            "item": "{{ route('home') }}"
+        }
+        @if(($itemCatParentLevel2['parent_id'] ?? 0) < 1)
+        ,
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "{{ $itemCatParentLevel1['name'] ?? '' }}",
+            "item": "{{ route('fe.cat', $itemCatParentLevel1['slug'] ?? '') }}"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "{{ $itemCatCurent['name'] ?? '' }}",
+            "item": "{{ route('fe.cat2', [$itemCatParentLevel1['slug'] ?? '', $itemCatCurent['slug'] ?? '']) }}"
+        }
+        @else
+        ,
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "{{ $itemCatParentLevel2['name'] ?? '' }}",
+            "item": "{{ route('fe.cat', $itemCatParentLevel2['slug'] ?? '') }}"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "{{ $itemCatParentLevel1['name'] ?? '' }}",
+            "item": "{{ route('fe.cat2', [$itemCatParentLevel2['slug'] ?? '', $itemCatParentLevel1['slug'] ?? '']) }}"
+        },
+        {
+            "@type": "ListItem",
+            "position": 4,
+            "name": "{{ $itemCatCurent['name'] ?? '' }}",
+            "item": "{{ route('fe.cat3', [$itemCatParentLevel2['slug'] ?? '', $itemCatParentLevel1['slug'] ?? '', $itemCatCurent['slug'] ?? '']) }}"
+        }
+        @endif
+    ]
+}
 </script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -399,12 +390,10 @@ $contact=MyFunction::formatPhoneNumber($contact);
                 <span>@include("$moduleName.block.seo-score-dot",['score' => $item->score_seo])</span>
                 @endif
                 <h1 class="mb-2">{{$item['name']}}</h1>
-                <div class="d-inline-flex align-items-center mb-3">
-                    <span style="color: #ffc107; font-size: 1.75rem;">★★★★★</span>
-                    <span class="lead font-weight-bold pl-2">5</span>
-                </div>
-                <div style="font-size: 22px" class="mb-2">Liên hệ mua lẻ <span class="font-weight-bold"><a href="tel:0345488247" style="font-size: 30px; color:red">0345.488.247</a></span></div>
-                <div style="font-size: 22px;border-bottom: 1px solid rgb(121, 145, 183);padding: 12px 0px;">Liên hệ mua sỉ
+                @if($item['prescription_drug']==1)
+                    <div style="font-size: 14px;color: #e41717;" class="mb-3">Thuốc này được bán theo đơn của bác sĩ</div>
+                    <div style="font-size: 22px" class="mb-2"><span class="font-weight-bold"><a href="tel:0345488247" style="font-size: 30px; color:red">0345.488.247</a></span></div>
+                    <div style="font-size: 22px;border-bottom: 1px solid rgb(121, 145, 183);padding: 12px 0px;">
                     <a class="image-contact" href='tel:0345488247' rel="nofollow" title="Gọi điện" previewlistener="true" style="padding-left: 15px">
                         <img src="{{asset('images/shop/icon_goidien.png')}}" alt="Gọi điện Tdoctor" style="width: 38px;" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
                     </a>
@@ -412,32 +401,48 @@ $contact=MyFunction::formatPhoneNumber($contact);
                         <img src="{{asset('images/shop/icon_zalo.png')}}" alt="Zalo Tdoctor" style="width: 38px;padding-bottom: 5px;box-shadow: 0 2px 6px rgb(239 234 234 / 50%);">
                     </a>
                 </div>
-                <div class="desc_product mb-3">
-                    @if($item['show_price'] == 1)
-                    <div id="show-price-buy-product" class="price_product mb-4 text-primary font-weight-bold">{{ number_format( $item['price'], 0, "" ,"." )}}đ </div>
-                    @endif
-                    @include("$moduleName.pages.$controllerName.child_detail.select_unit")
-                    <div class="btn-buy-search d-flex justify-content-between flex-wrap mb-3 mt-3">
-                        {!! csrf_field() !!}
-                        <div class="d-flex">
-                            <label class="col-form-label d-none d-md-block" style="font-size:16px;">Chọn số lượng</label>
-                            <div class="input-group" style="width:125px;margin-left:10px;flex-wrap: nowrap">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text minus"><i class="fa fa-minus"></i></span>
-                                </div>
-                                <input type="number" max="999" min="1" name="qty_product" value="1" class="form-control number-product text-center" style="height: calc(1.5em + .75rem + 10px);">
-                                <div class="input-group-append">
-                                    <span class="input-group-text plus"><i class="fa fa-plus"></i></span>
+                @else
+                    <div class="d-inline-flex align-items-center mb-3">
+                        <span style="color: #ffc107; font-size: 1.75rem;">★★★★★</span>
+                        <span class="lead font-weight-bold pl-2">5</span>
+                    </div>
+                    <div style="font-size: 22px" class="mb-2">Liên hệ mua lẻ  <span class="font-weight-bold"><a href="tel:0345488247" style="font-size: 30px; color:red">0345.488.247</a></span></div>
+                    <div style="font-size: 22px;border-bottom: 1px solid rgb(121, 145, 183);padding: 12px 0px;">Liên hệ mua sỉ
+                        <a class="image-contact" href='tel:0345488247' rel="nofollow" title="Gọi điện" previewlistener="true" style="padding-left: 15px">
+                            <img src="{{asset('images/shop/icon_goidien.png')}}" alt="Gọi điện Tdoctor" style="width: 38px;" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
+                        </a>
+                        <a class="image-contact" href="https://zalo.me/0345488247" rel="nofollow" target="_blank" title="Zalo" previewlistener="true" style="padding-left: 15px">
+                            <img src="{{asset('images/shop/icon_zalo.png')}}" alt="Zalo Tdoctor" style="width: 38px;padding-bottom: 5px;box-shadow: 0 2px 6px rgb(239 234 234 / 50%);">
+                        </a>
+                    </div>
+                    <div class="desc_product mb-3">
+                        @if($item['show_price'] == 1)
+                        <div id="show-price-buy-product" class="price_product mb-4 text-primary font-weight-bold">{{ number_format( $item['price'], 0, "" ,"." )}}đ </div>
+                        @endif
+                        @include("$moduleName.pages.$controllerName.child_detail.select_unit")
+                        <div class="btn-buy-search d-flex justify-content-between flex-wrap mb-3 mt-3">
+                            {!! csrf_field() !!}
+                            <div class="d-flex">
+                                <label class="col-form-label d-none d-md-block" style="font-size:16px;">Chọn số lượng</label>
+                                <div class="input-group" style="width:125px;margin-left:10px;flex-wrap: nowrap">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text minus"><i class="fa fa-minus"></i></span>
+                                    </div>
+                                    <input type="number" max="999" min="1" name="qty_product" value="1" class="form-control number-product text-center" style="height: calc(1.5em + .75rem + 10px);">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text plus"><i class="fa fa-plus"></i></span>
+                                    </div>
                                 </div>
                             </div>
+                            <span name="btn_selectbuy" class="btn-select-buy btn btn-primary text-light m-0" data-href="{{route('fe.cart.addproduct')}}">Chọn mua</span>
+                            <input type="hidden" id="product_id" value="{{$item['id']??''}}">
+                            <input type="hidden" id="unit_id" value="{{$item['unit_id']??''}}">
+                            <input type="hidden" id="code_ref" value="{{$codeRef??''}}">
+                            <input type="hidden" id="user_sell" value="{{$item->userProduct->user_id??''}}">
                         </div>
-                        <span name="btn_selectbuy" class="btn-select-buy btn btn-primary text-light m-0" data-href="{{route('fe.cart.addproduct')}}">Chọn mua</span>
-                        <input type="hidden" id="product_id" value="{{$item['id']??''}}">
-                        <input type="hidden" id="unit_id" value="{{$item['unit_id']??''}}">
-                        <input type="hidden" id="code_ref" value="{{$codeRef??''}}">
-                        <input type="hidden" id="user_sell" value="{{$item->userProduct->user_id??''}}">
                     </div>
-                </div>
+                @endif
+                
                 @php
                 $slugUserInfo = $userInfo['slug'] ?? 'unknow';
                 $fullNameUserInfo=$userInfo['fullname'] ?? 'unknow';

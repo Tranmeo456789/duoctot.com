@@ -72,6 +72,9 @@
                         {{ number_format( $priceOld, 0, "" ,"." )}}đ
                         @endif
                     </div>
+                    @elseif($val['prescription_drug'] == 1)
+                    <span class="text-info">Thuốc kê đơn</span>
+                    <div class="price-old"></div>
                     @else
                     <span class="text-info">Giá liên hệ</span>
                     <div class="price-old"></div>

@@ -177,10 +177,19 @@
                 'label'   => HTML::decode(Form::label('contact','SĐT liên hệ', $formLabelAttr)),
                 'element' => Form::text('contact', $item['contact']??'0345488247', array_merge($formInputAttr,['placeholder'=>'SĐT liên hệ'])),
                 'widthElement' => 'col-6'
+            ],
+            [
+                'label' => Form::label('prescription_drug', 'Thuốc cần kê toa',$formLabelAttr),
+                'element' => Form::radio('prescription_drug', 1,(!isset($item['prescription_drug']) || $item['prescription_drug'] == 1) ? true : false),
+                'type' =>'inline-text-right',
+                'widthElement' => 'col-6',
+                'styleFormGroup' => 'mb-1',
             ],[
-                'label'   => HTML::decode(Form::label('prescription_drug','Thuốc cần kê toa', $formLabelAttr)),
-                'element' => Form::text('prescription_drug', $item['prescription_drug']??'Không', array_merge($formInputAttr,['placeholder'=>'Thuốc cần kê toa'])),
-                'widthElement' => 'col-6'
+                'label' => Form::label('prescription_drug', 'Thuốc không kê toa',$formLabelAttr),
+                'element' => Form::radio('prescription_drug', 2,(isset($item['prescription_drug']) && $item['prescription_drug'] == 2) ? true : false),
+                'type' =>'inline-text-right',
+                'widthElement' => 'col-6',
+                'styleFormGroup' => 'mb-1',
             ],
             [
                 'label' => HTML::decode(Form::label('', 'Chọn đặc tính sản phẩm' , $formLabelAttr)),
