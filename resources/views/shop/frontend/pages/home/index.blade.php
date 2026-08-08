@@ -69,7 +69,7 @@
     </div>
 </div>
 <div class="wp-inner">
-    <h1 class="d-none">DƯỢC TỐT là Nền tảng kết nối y dược nhà thuốc, phòng khám , bệnh nhân với công ty dược và thực phẩm chức năng uy tín nhất Việt nam</h1>
+    <h1 class="d-none">DƯỢC TỐT là Nền tảng kết nối y dược nhà thuốc, phòng khám , bệnh nhân với công ty dược và thực phẩm chức năng uy tín hàng đầu Việt Nam</h1>
 </div>
 <div class="wp-inner mt-3 mt-lg-4">
     @include("$moduleName.templates.box_title_product",['title' => 'Giá sốc','classBackground'=>'bg-danger'])

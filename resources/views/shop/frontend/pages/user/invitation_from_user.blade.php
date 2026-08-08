@@ -1,7 +1,7 @@
 @php
 $title = 'Người hướng dẫn tại DUOCTOT.COM';
 $imageItem = 'images/shop/favicon.png';
-$description = 'DƯỢC TỐT là Nền tảng kết nối y dược nhà thuốc, phòng khám , bệnh nhân với công ty dược và thực phẩm chức năng uy tín nhất Việt nam.';
+$description = 'DƯỢC TỐT là Nền tảng kết nối y dược nhà thuốc, phòng khám , bệnh nhân với công ty dược và thực phẩm chức năng uy tín hàng đầu Việt Nam.';
 @endphp
 <!DOCTYPE html>
 <html>

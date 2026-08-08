@@ -311,7 +311,7 @@ class ProductController extends ShopFrontEndController
     //         Cache::put($keyCache,$dataCache,100000000);
     //     }
     //     $params['id']=$item['id'];
-    //     $title = $item['name'] ?? $item['title'] ?? $title ?? 'Sàn thương mại điện tử trong y dược số 1 Việt Nam';
+    //     $title = $item['name'] ?? $item['title'] ?? $title ?? 'Sàn thương mại điện tử trong y dược hàng đầu Việt Nam';
     //     $imageItem = isset($item['image']) ? $item['image'] : 'images/shop/logo-favicon.png';
     //     $description = $item['description'] ?? $item['meta_description'] ?? 'Duoctot.com là một giải pháp cho các nhà thuốc, các doanh nghiệp, công ty dược phẩm tăng doanh thu một cách nhanh chóng.';
     //     $metaKeywords = $item['meta_keywords']?? 'Shop trực tuyến, mua hàng online, tư vấn dược phẩm, giao hàng tận nhà, giảm đau, vitamin bổ sung';
@@ -516,7 +516,7 @@ class ProductController extends ShopFrontEndController
         $params['id'] = $item['id'];
         $title = $item['name']
             ?? $item['title']
-            ?? 'Sàn thương mại điện tử số 1 Việt Nam';
+            ?? 'Sàn thương mại điện tử hàng đầu Việt Nam';
         $imageItem = 'public'.$item['image'] ?? 'images/shop/logo-favicon.png';
 
         $description = $item['description']
@@ -685,7 +685,7 @@ class ProductController extends ShopFrontEndController
     //     // Tiêu đề trang
     //     $title = !empty($userInfo['fullname'])
     //         ? $userInfo['fullname']
-    //         : 'DƯỢC TỐT là Nền tảng kết nối y dược nhà thuốc, phòng khám , bệnh nhân với công ty dược và thực phẩm chức năng uy tín nhất Việt nam';
+    //         : 'DƯỢC TỐT là Nền tảng kết nối y dược nhà thuốc, phòng khám , bệnh nhân với công ty dược và thực phẩm chức năng uy tín hàng đầu Việt Nam';
     //     // Lấy đánh giá & bình luận shop
     //     $commentShop = (new CommentModel())->listItems([
     //         'shop_id' => $shopId
@@ -822,7 +822,7 @@ class ProductController extends ShopFrontEndController
             // TITLE
             $title = !empty($userInfo->fullname)
                 ? $userInfo->fullname
-                : 'Sàn thương mại điện tử trong y dược số 1 Việt Nam';
+                : 'Sàn thương mại điện tử trong y dược hàng đầu Việt Nam';
             $item['name']=$userInfo->fullname??'';
             $item['description']=$userInfo->fullname??'';
             
@@ -919,7 +919,7 @@ class ProductController extends ShopFrontEndController
         }
         $title = !empty($approver->fullname)
                 ? $approver->fullname
-                : 'Sàn thương mại điện tử trong y dược số 1 Việt Nam';
+                : 'Sàn thương mại điện tử trong y dược hàng đầu Việt Nam';
         $item['name']=$approver->fullname??'';
         $item['description']=$approver->meta_description??'';
         $item['image']=$imageSrcApprover??'';

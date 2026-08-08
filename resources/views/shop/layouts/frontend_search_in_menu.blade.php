@@ -1,5 +1,5 @@
 @php
-$title = $title ?? 'DƯỢC TỐT là Nền tảng kết nối y dược nhà thuốc, phòng khám , bệnh nhân với công ty dược và thực phẩm chức năng uy tín nhất Việt nam';
+$title = $title ?? 'DƯỢC TỐT là Nền tảng kết nối y dược nhà thuốc, phòng khám , bệnh nhân với công ty dược và thực phẩm chức năng uy tín hàng đầu Việt Nam';
 @endphp
 <!DOCTYPE html>
 <html>
