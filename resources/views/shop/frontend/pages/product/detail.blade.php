@@ -390,7 +390,7 @@ $contact=MyFunction::formatPhoneNumber($contact);
                 <span>@include("$moduleName.block.seo-score-dot",['score' => $item->score_seo])</span>
                 @endif
                 <h1 class="mb-2">{{$item['name']}}</h1>
-                @if($item['prescription_drug']==1)
+                @if($item['hidden_cart']==1)
                     <div style="font-size: 14px;color: #e41717;" class="mb-3">Thuốc này được bán theo đơn của bác sĩ</div>
                     <div style="font-size: 22px" class="mb-2"><span class="font-weight-bold"><a href="tel:0345488247" style="font-size: 30px; color:red">0345.488.247</a></span></div>
                     <div style="font-size: 22px;border-bottom: 1px solid rgb(121, 145, 183);padding: 12px 0px;">

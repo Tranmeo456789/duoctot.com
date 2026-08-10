@@ -194,7 +194,7 @@ class ProductModel extends BackEndModel
                                     ->toArray();
         }
         if ($options['task'] == "frontend-list-items") {
-            $query = $this::with('unitProduct')->select('id','name','price','percent_discount','unit_id','specification','image','slug','discount_ref','show_price','trademark_id','country_id','alt_image','title_image','prescription_drug')
+            $query = $this::with('unitProduct')->select('id','name','price','percent_discount','unit_id','specification','image','slug','discount_ref','show_price','trademark_id','country_id','alt_image','title_image','prescription_drug','hidden_cart')
                                 ->where('status_product','da_duyet');
             if (isset($params['cat_product_id']) && ($params['cat_product_id'] != 0)){
                 $query->whereIn('cat_product_id', CatProductModel::getChild($params['cat_product_id']));
@@ -238,7 +238,7 @@ class ProductModel extends BackEndModel
             }
         }
         if ($options['task'] == "frontend-list-items-api") {
-            $query = $this::with('unitProduct')->select('id','name','price','percent_discount','unit_id','image','slug','show_price')
+            $query = $this::with('unitProduct')->select('id','name','price','percent_discount','unit_id','image','slug','show_price','hidden_cart')
                                 ->where('status_product','da_duyet');
             if (isset($params['cat_product_id']) && ($params['cat_product_id'] != 0)){
                 $query->whereIn('cat_product_id', CatProductModel::getChild($params['cat_product_id']));
@@ -308,7 +308,7 @@ class ProductModel extends BackEndModel
             }
         }
         if ($options['task'] == "list-items-search-api") {
-            $query = $this::with('unitProduct')->select('id','name','price','percent_discount','unit_id','image','slug','show_price','prescription_drug')
+            $query = $this::with('unitProduct')->select('id','name','price','percent_discount','unit_id','image','slug','show_price','prescription_drug','hidden_cart')
                 ->where('status_product','da_duyet');
             if (isset($params['keyword'])) {
                 $keyword = $params['keyword'];
@@ -380,7 +380,7 @@ class ProductModel extends BackEndModel
             $result = $query->orderBy('id', 'desc')->get();
         }
         if ($options['task'] == "frontend-list-item-shop") {
-            $query = $this::with('unitProduct')->select('id', 'name', 'type', 'code', 'cat_product_id', 'price', 'percent_discount', 'unit_id', 'specification', 'image', 'user_id', 'featurer', 'slug', 'discount_ref','show_price','alt_image','title_image','prescription_drug')
+            $query = $this::with('unitProduct')->select('id', 'name', 'type', 'code', 'cat_product_id', 'price', 'percent_discount', 'unit_id', 'specification', 'image', 'user_id', 'featurer', 'slug', 'discount_ref','show_price','alt_image','title_image','prescription_drug','hidden_cart')
                 ->where('status_product', 'da_duyet');
             if (isset($params['group_id'])) {
                 $query->whereIn('id', $params['group_id']);
@@ -464,14 +464,14 @@ class ProductModel extends BackEndModel
         }
         if ($options['task'] == "frontend-list-items-by-groupID") {
 
-            $query = $this::with('unitProduct')->select('id','name','type','code','cat_product_id','price','price_vat','percent_discount','unit_id','specification','image','user_id','featurer','slug','discount_ref','show_price','alt_image','title_image')
+            $query = $this::with('unitProduct')->select('id','name','type','code','cat_product_id','price','price_vat','percent_discount','unit_id','specification','image','user_id','featurer','slug','discount_ref','show_price','alt_image','title_image','hidden_cart')
                                  ->whereIn('id', $params['groupID']);
             $result =  $query->orderBy('id', 'desc')
                              ->get();
         }
 
         if ($options['task'] == "frontend-list-items-by-id") {
-            $query = $this::with('unitProduct')->select('id','name','type','code','cat_product_id','price','price_vat','percent_discount','unit_id','specification','image','user_id','featurer','slug','discount_ref','show_price','alt_image','title_image')
+            $query = $this::with('unitProduct')->select('id','name','type','code','cat_product_id','price','price_vat','percent_discount','unit_id','specification','image','user_id','featurer','slug','discount_ref','show_price','alt_image','title_image','hidden_cart')
                                     ->whereIn("id",$params['id'])
                                     ->where('status_product','da_duyet');
           $result =  $query->orderBy('id', 'desc')
@@ -489,7 +489,7 @@ class ProductModel extends BackEndModel
             $result = $query->orderBy('id', 'asc')->pluck('name', 'id')->toArray();
         }
         if ($options['task'] == "list-items-search-truoc-dung") {
-            $query = $this::with(['unitProduct', 'trademarkProduct'])->select('id', 'name', 'image', 'price', 'percent_discount', 'unit_id','trademark_id', 'specification', 'slug','show_price','alt_image','title_image','prescription_drug')->where('status_product', 'da_duyet');
+            $query = $this::with(['unitProduct', 'trademarkProduct'])->select('id', 'name', 'image', 'price', 'percent_discount', 'unit_id','trademark_id', 'specification', 'slug','show_price','alt_image','title_image','prescription_drug','hidden_cart')->where('status_product', 'da_duyet');
             if (isset($params['keyword'])) {
                 $keyword = $params['keyword'];
                 $keyword = strip_tags($keyword);
@@ -525,7 +525,7 @@ class ProductModel extends BackEndModel
         if ($options['task'] == "list-items-search") {
             $query = $this::query()
                 ->with(['unitProduct'])
-                ->select('id','name','image','price','percent_discount','unit_id','specification','slug','show_price','alt_image','title_image','prescription_drug')
+                ->select('id','name','image','price','percent_discount','unit_id','specification','slug','show_price','alt_image','title_image','prescription_drug','hidden_cart')
                 ->where('status_product', 'da_duyet');
             // filter user bán trước để tận dụng index
             if (!empty($params['user_sell'])) {
@@ -570,7 +570,7 @@ class ProductModel extends BackEndModel
         if ($options['task'] == "list-items-search-user-has-login") {
             $query = $this::query()
                 ->with(['unitProduct'])
-                ->select('id','name','image','price','percent_discount','unit_id','specification','slug','show_price','alt_image','title_image','prescription_drug')
+                ->select('id','name','image','price','percent_discount','unit_id','specification','slug','show_price','alt_image','title_image','prescription_drug','hidden_cart')
                  ->whereIn('status_product', ['da_duyet', 'sp_an']);
             // filter user bán trước để tận dụng index
             if (!empty($params['user_sell'])) {
@@ -675,7 +675,7 @@ class ProductModel extends BackEndModel
                                     'mass','discount_ref','discount_tdoctor','contact','meta_keywords','meta_description','show_price',
                                     'prescription_drug','alt_image','title_image','created_by','approver_by','created_at','updated_at',
                                     'brand_manufacturer','company_registered','number_registered','elements_mini','name_short','score_seo',
-                                    'status_product'
+                                    'status_product','hidden_cart'
                                     );
             if(isset($params['slug'])){
                 $query->where('slug', $params['slug']);
@@ -701,7 +701,7 @@ class ProductModel extends BackEndModel
                 'featurer','slug','discount_ref','contact','meta_keywords','meta_description',
                 'show_price','prescription_drug','alt_image','title_image','created_by',
                 'approver_by','created_at','updated_at','brand_manufacturer','company_registered',
-                'number_registered','elements_mini','name_short','score_seo'
+                'number_registered','elements_mini','name_short','score_seo','hidden_cart'
                 )->where('status_product', 'da_duyet');
             if(isset($params['id'])){
                 $query->where('id', $params['id']);
@@ -722,7 +722,7 @@ class ProductModel extends BackEndModel
                 'albumImage','albumImageHash','user_id','featurer','slug','discount_ref','contact',
                 'meta_keywords','meta_description','show_price','prescription_drug','alt_image',
                 'title_image','created_by','approver_by','created_at','updated_at','brand_manufacturer',
-                'company_registered','number_registered','elements_mini','name_short','score_seo')
+                'company_registered','number_registered','elements_mini','name_short','score_seo','hidden_cart')
                 ->whereIn('status_product', ['da_duyet', 'sp_an']);
             if (isset($params['id'])) {
                 $query->where('id', $params['id']);
@@ -740,7 +740,7 @@ class ProductModel extends BackEndModel
                                     'inventory','inventory_min','general_info','prescribe','dosage','trademark_id','brand_origin_id',
                                     'dosage_forms','country_id','specification','benefit','elements',
                                     'preserve','note','image','albumImage','albumImageHash','user_id','slug','long','wide','high',
-                                    'mass','discount_ref','contact','show_price','prescription_drug','name_short','score_seo');
+                                    'mass','discount_ref','contact','show_price','prescription_drug','name_short','score_seo','hidden_cart');
             if(isset($params['id'])){
                 $query->where('id', $params['id']);
             }

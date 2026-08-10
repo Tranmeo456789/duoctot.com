@@ -180,13 +180,13 @@
             ],
             [
                 'label' => Form::label('prescription_drug', 'Thuốc cần kê toa',$formLabelAttr),
-                'element' => Form::radio('prescription_drug', 1,(!isset($item['prescription_drug']) || $item['prescription_drug'] == 1) ? true : false),
+                'element' => Form::radio('prescription_drug', 1,(isset($item['prescription_drug']) && $item['prescription_drug'] == 1) ? true : false),
                 'type' =>'inline-text-right',
                 'widthElement' => 'col-6',
                 'styleFormGroup' => 'mb-1',
             ],[
                 'label' => Form::label('prescription_drug', 'Thuốc không kê toa',$formLabelAttr),
-                'element' => Form::radio('prescription_drug', 2,(isset($item['prescription_drug']) && $item['prescription_drug'] == 2) ? true : false),
+                'element' => Form::radio('prescription_drug', 2,(!isset($item['prescription_drug']) || $item['prescription_drug'] == 2) ? true : false),
                 'type' =>'inline-text-right',
                 'widthElement' => 'col-6',
                 'styleFormGroup' => 'mb-1',
@@ -208,6 +208,20 @@
                 'styleFormGroup' => 'mb-1',
             ];
         }
+        $elements2[] = [
+                'label' => Form::label('hidden_cart', 'Ẩn giỏ hàng',$formLabelAttr),
+                'element' => Form::radio('hidden_cart', 1,(isset($item['hidden_cart']) && $item['hidden_cart'] == 1) ? true : false),
+                'type' =>'inline-text-right',
+                'widthElement' => 'col-6',
+                'styleFormGroup' => 'mb-1',
+            ];
+        $elements2[] = [
+                'label' => Form::label('hidden_cart', 'Hiện giỏ hàng',$formLabelAttr),
+                'element' => Form::radio('hidden_cart', 2,(!isset($item['hidden_cart']) || $item['hidden_cart'] == 2) ? true : false),
+                'type' =>'inline-text-right',
+                'widthElement' => 'col-6',
+                'styleFormGroup' => 'mb-1',
+            ];
     }
     $elements2 = array_merge($elements2,
         [
