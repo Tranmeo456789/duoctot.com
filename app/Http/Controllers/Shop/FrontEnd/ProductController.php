@@ -829,10 +829,16 @@ class ProductController extends ShopFrontEndController
             $imageSrc = isset($userInfo['details']['image']) ? $userInfo['details']['image'] : route('home') . '/public/fileUpload/nhathuoc/6875c9e1945c0.jpg';
             if (isset($userInfo['details']['image']) && $userInfo['details']['image'] != ''){
             $imageSrc = route('home') .'/public'. $userInfo['details']['image'];
-            } elseif ($userInfo['user_type_id'] == 2) {
+            } elseif ($userInfo['user_type_id'] == 3) {
+                $imageSrc = route('home') . '/public/fileUpload/nhathuoc/6880e04c0fa57.jpg';
+            }elseif ($userInfo['user_type_id'] == 2) {
                 $imageSrc = route('home') . '/public/fileUpload/nhathuoc/6898c9b8bf789.jpg';
             }elseif ($userInfo['user_type_id'] == 4) {
                 $imageSrc = route('home') . '/public/fileUpload/nhathuoc/nhathuocmau11.jpg';
+            }elseif ($userInfo['user_type_id'] == 8) {
+                $imageSrc = route('home') . '/public/fileUpload/nhathuoc/spa_tham_my_vien_mau.jpg';
+            }elseif ($userInfo['user_type_id'] == 11) {
+                $imageSrc = route('home') . '/public/fileUpload/nhathuoc/shop_me_va_be.jpg';
             }else{
                 $imageSrc = route('home') . '/public/fileUpload/nhathuoc/nhathuocmau10.jpg';
             }
@@ -1196,21 +1202,11 @@ class ProductController extends ShopFrontEndController
             $items->getCollection()->transform(function ($val) use ($phoneOfShopConfig) {
                 $val->imgThumb = !empty($val['details']['image'])
                     ? route('home') . '/public'.$val['details']['image']
-                    : route('home') . '/public/fileUpload/nhathuoc/nhathuocmau10.jpg';
+                    : route('home') . '/public/fileUpload/nhathuoc/shop_me_va_be.jpg';
 
                 $val->linkShop = route('fe.product.drugstore', $val['slug']);
                 $val->address = $this->buildAddress($val['details'] ?? null);
-                $phoneShop = $val['phone'] ?? $phoneOfShopConfig;
-                if (!empty($phoneShop)) {
-                    $len = strlen($phoneShop);
-                    if ($len > 3) {
-                        $phoneOfShopShow = substr($phoneShop, 0, -3) . '***';
-                    } else {
-                        $phoneOfShopShow = str_repeat('*', $len);
-                    }
-                } else {
-                    $phoneOfShopShow = $phoneShop;
-                }
+                $phoneOfShopShow = $val['phone'] ?? '';
                 $val->phoneFormatted = MyFunction::formatPhoneNumber($phoneOfShopShow) ?? '';
                 return $val;
             });
@@ -1221,7 +1217,7 @@ class ProductController extends ShopFrontEndController
                 'title' => 'Danh sách Mẹ và Bé | Duoctot.com'
             ];
         });
-        return view($this->pathViewController . 'ls_shop', $data);
+        return view($this->pathViewController . 'ls_mevabe', $data);
     }
     public function listTrinhDuocVien(Request $request)
     {
@@ -1468,11 +1464,11 @@ class ProductController extends ShopFrontEndController
             $items->getCollection()->transform(function ($val) use ($phoneOfShopConfig) {
                 $val->imgThumb = !empty($val['details']['image'])
                     ? route('home') . '/public'.$val['details']['image']
-                    : route('home') . '/public/fileUpload/nhathuoc/6898a7055dafb.jpg';
+                    : route('home') . '/public/fileUpload/nhathuoc/6880e04c0fa57.jpg';
 
                 $val->linkShop = route('fe.product.drugstore', $val['slug']);
                 $val->address = $this->buildAddress($val['details'] ?? null);
-                $phoneOfShopShow = $val['phone'] ?? $phoneOfShopConfig;
+                $phoneOfShopShow = $val['phone'] ?? '';
                 $val->phoneFormatted = MyFunction::formatPhoneNumber($phoneOfShopShow) ?? '';
                 return $val;
             });
@@ -1604,7 +1600,7 @@ class ProductController extends ShopFrontEndController
             $items->getCollection()->transform(function ($val) use ($phoneOfShopConfig) {
                 $val->imgThumb = !empty($val['details']['image'])
                     ? route('home') . '/public'.$val['details']['image']
-                    : route('home') . '/public/fileUpload/nhathuoc/6898a7055dafb.jpg';
+                    : route('home') . '/public/fileUpload/nhathuoc/spa_tham_my_vien_mau.jpg';
 
                 $val->linkShop = route('fe.product.drugstore', $val['slug']);
                 $val->address = $this->buildAddress($val['details'] ?? null);
