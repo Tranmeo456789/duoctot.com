@@ -44,6 +44,7 @@ $(document).ready(function() {
         $('#fixscreen-respon').css("display", "none");
     });
     $('.btn-register').click(function() {
+        $('html, body').animate({ scrollTop: 0 }, 300);
         $('.form-login').css("display", "block");
         $('.black-screen').css("display", "block");
         $('.wp-content-login').css("display", "none");

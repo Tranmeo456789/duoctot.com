@@ -1,16 +1,26 @@
 <div id="footer-wp">
     <div class="wp-inner">
         <div class="row">
-            <div class="col-xl-3 col-lg-12">
+            <div class="col-xl-4 col-lg-12">
                 <div class="mb-3 font-weight-bold" style="font-size: 1rem;">DUOCTOT.COM</div>
-                <p><a href="{{route('fe.home.pageAboutUs')}}">Về chúng tôi</a></p>
-                <p><a href="{{route('fe.home.pageContact')}}">Liên hệ</a></p>
-                <p><a href="{{route('fe.post')}}">Tin tức</a></p>
-                <p><a href="{{route('fe.home.pageQuytrinhGiaiquyetTranhchap')}}">Quy trình giải quyết tranh chấp</a></p>
-                <p><a href="{{route('fe.home.pageChinhsachBaomatThongtin')}}">Chính sách bảo mật</a></p>
-                <p><a href="{{route('fe.home.pageChinhsachGiaoNhan')}}">Chính sách giao nhận</a></p>
-                <p><a href="{{route('fe.home.pageChinhSachDoiTra')}}">Chính sách kiểm hàng, đổi trả</a></p>
-                <p><a href="{{route('fe.home.pageChinhsachThanhToan')}}">Chính sách thanh toán</a></p>
+                <div class="row">
+                    <div class="col-6 pl-4">
+                        <p><a href="{{route('fe.home.pageAboutUs')}}">Về chúng tôi</a></p>
+                        <p><a href="{{route('fe.home.pageContact')}}">Liên hệ</a></p>
+                        <p><a href="{{route('fe.post')}}">Tin tức</a></p>
+                        <p><a href="{{route('fe.home.pageChinhsachBaomatThongtin')}}">Chính sách bảo mật</a></p>
+                        <p><a href="{{route('fe.home.pageChinhsachGiaoNhan')}}">Chính sách giao nhận</a></p>
+                        <p><a href="{{route('fe.home.pageChinhsachThanhToan')}}">Chính sách thanh toán</a></p>
+                    </div>
+                    <div class="col-6">
+                        <p class="btn-register text-right"><a style="color: #007bff;cursor: pointer;">Đăng ký Nhà Thuốc</a></p>
+                        <p class="btn-register text-right"><a style="color: #007bff;cursor: pointer;">Đăng ký Thành Viên</a></p>
+                        <p class="btn-register text-right"><a style="color: #007bff;cursor: pointer;">Đăng ký Công Ty Dược</a></p>
+                        <p class="btn-register text-right"><a style="color: #007bff;cursor: pointer;">Đăng ký Shop Dược Phẩm</a></p>
+                        <p><a href="{{route('fe.home.pageChinhSachDoiTra')}}">Chính sách kiểm hàng, đổi trả</a></p>
+                        <p><a href="{{route('fe.home.pageQuytrinhGiaiquyetTranhchap')}}">Quy trình giải quyết tranh chấp</a></p>
+                    </div>
+                </div>
             </div>
             <div class="col-xl-3 col-lg-12">
                 <div class="mb-2 font-weight-bold" style="font-size: 1rem;">Liên hệ</div>
@@ -64,7 +74,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-xl-6 social2">
+            <div class="col-xl-5 social2">
                 <div class="mb-2">
                     <p class="font-weight-bold" style="font-size: 20px;">CÔNG TY CỔ PHẦN TDOCTOR PHARMA</p>
                 </div>
@@ -110,7 +120,7 @@
                         </div>
                     </div>
                     <p>Email: tdoctorvn@gmail.com</p>
-                </div>            
+                </div>
             </div>
         </div>
     </div>

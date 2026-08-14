@@ -400,6 +400,7 @@ class UsersModel extends BackEndModel
     {
         $params['user_id']=$params['id'];
         if ($options['task'] == 'delete-item') {
+            \App\Model\Shop\UserValuesModel::where('user_id', $params['user_id'])->delete();
             self::where('user_id', $params['user_id'])->delete();
         }
         Cache::tags(['duoctot_nhathuoc'])->flush();
