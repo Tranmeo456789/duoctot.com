@@ -4,6 +4,7 @@ namespace App\Model\Shop;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Model\Shop\BackEndModel;
+use Illuminate\Support\Facades\Cache;
 class CommentModel extends BackEndModel
 {
     public function __construct() {
@@ -15,7 +16,10 @@ class CommentModel extends BackEndModel
     public function listItems($params = null, $options = null) {
         $result = null;
         if($options['task'] == "user-list-items") {
-            $query = $this::select('id', 'content','created_by', 'created_at', 'updated_at');
+            $query = $this::select('id', 'content','product_id','created_by', 'created_at', 'updated_at');
+            if (isset($params['product_id'])) {
+                $query->where('product_id', $params['product_id']);
+            }
             $result =  $query->orderBy('id', 'desc')
                             ->paginate($params['pagination']['totalItemsPerPage']);
         }
@@ -102,12 +106,14 @@ class CommentModel extends BackEndModel
             $this->setModifiedHistory($params);
             self::where('id', $params['id'])->update($this->prepareParams($params));
         }
+        Cache::tags(['duoctot_product'])->flush();
     }
     public function deleteItem($params = null, $options = null)
     {
         if($options['task'] == 'delete-item') {
            self::where('id', $params['id'])->delete();
         }
+        Cache::tags(['duoctot_product'])->flush();
     }
     public function averageRating($params = null, $options = null) {
         $result = null;

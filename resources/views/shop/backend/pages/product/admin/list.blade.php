@@ -63,6 +63,7 @@
                         <a href="{{route('admin.product.change.status',[$val->id,'sp_an'])}}" class="btn btn-secondary btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top">Ẩn SP</a>
                         <a href="{{route('product.edit',$val->id)}}" class="btn btn-primary btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top">Chỉnh sửa</a>
                         <a href="{{route('question',$val->id)}}" class="btn btn-primary btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top">Câu hỏi</a>
+                        <a href="{{route('comment',$val->id)}}" class="btn btn-primary btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top">Bình luận, đánh giá</a>
                     </td>
                 </tr>
             @endforeach

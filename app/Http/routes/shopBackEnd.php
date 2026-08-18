@@ -148,6 +148,11 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
         Route::post('/luu-cau-hoi', 'QuestionController@save')->name('question.save');
         Route::get('/xoa-cau-hoi/product/{productId}/{id}', 'QuestionController@delete')->name('question.delete');
         
+        Route::get('/danh-sach-binh-luan-danh-gia/product/{productId}', 'CommentController@index')->name('comment');
+        Route::get('/them-binh-luan-danh-gia/product/{productId}', 'CommentController@form')->name('comment.add');
+        Route::get('/sua-binh-luan-danh-gia/product/{productId}/{id}', 'CommentController@form')->name('comment.edit');
+        Route::post('/luu-binh-luan-danh-gia', 'CommentController@save')->name('comment.save');
+        Route::get('/xoa-binh-luan-danh-gia/product/{productId}/{id}', 'CommentController@delete')->name('comment.delete');
     });
     Route::group(['middleware' => ['permission.admin']], function () {
         Route::get('/danh-sach-nguoi-dung', 'UserController@index')->name('user');
