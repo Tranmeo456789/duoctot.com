@@ -315,265 +315,230 @@ class SearchController extends ShopFrontEndController
         //     echo "Có lỗi xảy ra: " . $e->getMessage();
         // }
         //add keywords product search
-        if($request->product){
-            try {
-                $batchSize = 2000;
-                ProductModel::with('trademarkProduct')
-                    ->select('id', 'name', 'benefit', 'trademark_id', 'user_id', 'cat_product_id', 'elements', 'approver_by')
-                    ->chunkById($batchSize, function ($products) {
-                        DB::beginTransaction();
-                        try {
-                            foreach ($products as $product) {
-                                $trademarkName = $product->trademarkProduct ? $product->trademarkProduct->name : '';
-                                $userSell = $product->userProduct ? $product->userProduct->fullname : '';
-                                $userApprover = $product->userApproverProduct ? $product->userApproverProduct->fullname : '';
-                                $catProduct = $product->catProduct ? $product->catProduct->name : '';
-                                $keywordSearch = implode(' ', [
-                                    $trademarkName,
-                                    Str::ascii($trademarkName),
-                                    $userSell,
-                                    $userApprover,
-                                    Str::ascii($userSell),
-                                    $catProduct,
-                                    Str::ascii($catProduct),
-                                    Str::ascii($product->name),
-                                    Str::ascii($product->benefit),
-                                    Str::ascii($product->elements),
-                                ]);
+        // if($request->product){
+        //     try {
+        //         $batchSize = 2000;
+        //         ProductModel::with('trademarkProduct')
+        //             ->select('id', 'name', 'benefit', 'trademark_id', 'user_id', 'cat_product_id', 'elements', 'approver_by')
+        //             ->chunkById($batchSize, function ($products) {
+        //                 DB::beginTransaction();
+        //                 try {
+        //                     foreach ($products as $product) {
+        //                         $trademarkName = $product->trademarkProduct ? $product->trademarkProduct->name : '';
+        //                         $userSell = $product->userProduct ? $product->userProduct->fullname : '';
+        //                         $userApprover = $product->userApproverProduct ? $product->userApproverProduct->fullname : '';
+        //                         $catProduct = $product->catProduct ? $product->catProduct->name : '';
+        //                         $keywordSearch = implode(' ', [
+        //                             $trademarkName,
+        //                             Str::ascii($trademarkName),
+        //                             $userSell,
+        //                             $userApprover,
+        //                             Str::ascii($userSell),
+        //                             $catProduct,
+        //                             Str::ascii($catProduct),
+        //                             Str::ascii($product->name),
+        //                             Str::ascii($product->benefit),
+        //                             Str::ascii($product->elements),
+        //                         ]);
 
-                                ProductModel::where('id', $product->id)->update(['keyword_search' => $keywordSearch]);
-                            }
-                            DB::commit();
-                        } catch (\Exception $e) {
-                            DB::rollBack();
-                            throw $e; // ném ra ngoài để dừng toàn bộ tiến trình, tránh chạy tiếp khi có lỗi
-                        }
-                    });
-                return response()->json(['success' => true, 'message' => 'Cập nhật keyword product thành công']);
-            } catch (\Exception $e) {
-                return response()->json(['success' => false, 'message' => $e->getMessage()]);
-            }
-        }else if($request->cat){
-            try {
-                DB::beginTransaction();
+        //                         ProductModel::where('id', $product->id)->update(['keyword_search' => $keywordSearch]);
+        //                     }
+        //                     DB::commit();
+        //                 } catch (\Exception $e) {
+        //                     DB::rollBack();
+        //                     throw $e; // ném ra ngoài để dừng toàn bộ tiến trình, tránh chạy tiếp khi có lỗi
+        //                 }
+        //             });
+        //         return response()->json(['success' => true, 'message' => 'Cập nhật keyword product thành công']);
+        //     } catch (\Exception $e) {
+        //         return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        //     }
+        // }else if($request->cat){
+        //     try {
+        //         DB::beginTransaction();
 
-                $products = ProductModel::select('id', 'name','user_id','cat_product_id','show_price')->get();
-                $arrIdCatThuoc = [139,149,150,162,151,152,153,154,184,157,158,159,163,181,187,188,161,164,165,197,203,204,178,148,160,183,175,189,205,207,209]; // đã loại bỏ trùng
-                foreach ($products as $product) {
-                    $catId = (int)$product['cat_product_id']; // Ép kiểu int
-                    $showPrice = in_array($catId, $arrIdCatThuoc) ? 1 : 1;
-                    ProductModel::where('id', $product['id'])->update(['show_price' => $showPrice]);
-                }
-                DB::commit();
-                return response()->json(['success' => true, 'message' => 'Ẩn giá thuốc thành công']);
-            } catch (\Exception $e) {
-                DB::rollBack();
-                return response()->json(['success' => false, 'message' => $e->getMessage()]);
-            }
-        }else if($request->comment){
-            // add comment product
-            $comments = CommentModel::select('id', 'product_id')->get()->groupBy('product_id');
-            $products = ProductModel::where('status_product', 'da_duyet')->where('id','>',4500)->pluck('id');
-            $names = ['Nguyễn Ánh', 'Trần Thị Hằng', 'Xuân Cường', 'Tuấn Hùng', 'Hồng Hà'];
-            $phones = ['0936766561', '0988776651', '0911223341', '0977888991', '0909000011'];
-            $contents = [
-                'Cám ơn Tdoctor đã có sản phẩm tốt',
-                'Đã nhận hàng và dùng ổn',
-                'Sản phẩm tốt và dịch vụ giao hàng chu đáo',
-                'Dịch vụ quá tốt',
-                'Sản phẩm tốt. Cám ơn đã phân phối'
-            ];
-            $ratings = [4, 5, 5, 4, 5];
-            $created_at = ['2020-04-24 00:00:00', '2023-06-15 00:00:00', '2022-01-05 00:00:00', '2024-07-09 00:00:00', '2022-09-14 00:00:00'];
+        //         $products = ProductModel::select('id', 'name','user_id','cat_product_id','show_price')->get();
+        //         $arrIdCatThuoc = [139,149,150,162,151,152,153,154,184,157,158,159,163,181,187,188,161,164,165,197,203,204,178,148,160,183,175,189,205,207,209]; // đã loại bỏ trùng
+        //         foreach ($products as $product) {
+        //             $catId = (int)$product['cat_product_id']; // Ép kiểu int
+        //             $showPrice = in_array($catId, $arrIdCatThuoc) ? 1 : 1;
+        //             ProductModel::where('id', $product['id'])->update(['show_price' => $showPrice]);
+        //         }
+        //         DB::commit();
+        //         return response()->json(['success' => true, 'message' => 'Ẩn giá thuốc thành công']);
+        //     } catch (\Exception $e) {
+        //         DB::rollBack();
+        //         return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        //     }
+        // }else if ($request->thay_ncc) {
+        //     $LsIdProductChange = range(2868,2870);
+        //     $idNCCNew = 1124149604;
+        //     $newWarehouseId = 208;
 
-            foreach ($products as $productId) {
-                // Nếu sản phẩm này CHƯA có comment thì mới thêm
-                if (empty($comments[$productId])) {
-                    for ($i = 0; $i < 5; $i++) {
-                        $params = [
-                            'fullname'   => $names[$i],
-                            'user_id'    => '',
-                            'phone'      => $phones[$i],
-                            'content'    => $contents[$i],
-                            'rating'     => $ratings[$i],
-                            'parent_id'  => 0,
-                            'product_id' => $productId,
-                            'created_at' => $created_at[$i]
-                        ];
-                        (new CommentModel)->saveItem($params, ['task' => 'add-item']);
-                    }
-                }
-                }
-             return 'Đã thêm 5 comment cho các sản phẩm chưa có comment';
-        }else if ($request->thay_ncc) {
-            $LsIdProductChange = range(2868,2870);
-            $idNCCNew = 1124149604;
-            $newWarehouseId = 208;
+        //     // Cập nhật bảng products
+        //     ProductModel::whereIn('id', $LsIdProductChange)->update([
+        //         'user_id'    => $idNCCNew,
+        //         'created_by' => $idNCCNew,
+        //     ]);
 
-            // Cập nhật bảng products
-            ProductModel::whereIn('id', $LsIdProductChange)->update([
-                'user_id'    => $idNCCNew,
-                'created_by' => $idNCCNew,
-            ]);
+        //     // Cập nhật bảng product_warehouse
+        //     DB::table('product_warehouse')
+        //         ->whereIn('product_id', $LsIdProductChange)
+        //         ->update(['warehouse_id' => $newWarehouseId]);
 
-            // Cập nhật bảng product_warehouse
-            DB::table('product_warehouse')
-                ->whereIn('product_id', $LsIdProductChange)
-                ->update(['warehouse_id' => $newWarehouseId]);
-
-            return 'Đã thay đổi NCC và kho thành công';
-        }
-        else if ($request->an_ncc) {
-            $idNCCHideProduct = 1144150805;
-            $products = ProductModel::where('user_id', $idNCCHideProduct)->get();
-            foreach ($products as $product) {
-                $slug = $product->slug;
-                Cache::forget('duoctot_product_guest_' . $slug);
-                Cache::forget('duoctot_product_login_' . $slug);
-            }
-            ProductModel::where('user_id', $idNCCHideProduct)->update([
-                'status_product' => 'sp_an'
-            ]);
-            return 'Ẩn sp + clear cache thành công';
-        }
-        else if ($request->gia_0ncc) {
-            $idNCC0Product = 1144150836;
-            $products = ProductModel::where('user_id', $idNCC0Product)->get();
-            foreach ($products as $product) {
-                $slug = $product->slug;
-            }
-            ProductModel::where('user_id', $idNCC0Product)->update([
-                'show_price' => '2'
-            ]);
-            return 'giá 0d thành công';
-        }
-        else if ($request->thay_image) {
-            $start = 178;
-            $end = 813;
-            $table = 'post';
-            $contentColumn = 'content';
-            $imageColumn = 'image';
-            $domain = 'https://duoctot.com';
-            // Đặt true để LƯU THẬT vào DB, để false để chỉ xem trước (không lưu)
-            $apply = $request->apply ? true : false;
-            $rows = DB::table($table)
-                ->whereBetween('id', [$start, $end])
-                ->select('id', $contentColumn, $imageColumn)
-                ->orderBy('id')
-                ->get();
-            $logLines = [];
-            $countChanged = 0;
-            $countSkippedNoImage = 0;
-            $countSkippedZeroImg = 0;
-            $countSkippedMultiImg = 0;
-            $countSkippedSameAlready = 0;
-            foreach ($rows as $row) {
-                $id = $row->id;
-                $content = $row->{$contentColumn} ?? '';
-                $imagePath = $row->{$imageColumn} ?? '';
-                if (empty($imagePath)) {
-                    $countSkippedNoImage++;
-                    continue;
-                }
-                if (empty($content)) {
-                    $countSkippedZeroImg++;
-                    continue;
-                }
-                // Đếm số thẻ <img> trong content
-                preg_match_all('/<img[^>]+src=["\']([^"\']+)["\'][^>]*>/i', $content, $matches);
-                $imgCount = count($matches[0]);
-                if ($imgCount === 0) {
-                    $countSkippedZeroImg++;
-                    continue;
-                }
-                if ($imgCount > 1) {
-                    $countSkippedMultiImg++;
-                    continue;
-                }
-                // Chỉ có đúng 1 ảnh -> lấy src hiện tại
-                $oldSrc = $matches[1][0];
-                // Xây link mới: full URL = domain + path (path trong cột image)
-                $normalizedPath = '/' . ltrim($imagePath, '/');
-                $newSrc = $domain . $normalizedPath;
-                if ($oldSrc === $newSrc) {
-                    $countSkippedSameAlready++;
-                    continue;
-                }
-                // Thay src cũ bằng src mới trong content
-                $oldImgTag = $matches[0][0];
-                $newImgTag = str_replace($oldSrc, $newSrc, $oldImgTag);
-                $newContent = str_replace($oldImgTag, $newImgTag, $content);
-                $logLines[] = "ID {$id} | OLD: {$oldSrc} | NEW: {$newSrc}";
-                $countChanged++;
-                if ($apply) {
-                    DB::table($table)->where('id', $id)->update([$contentColumn => $newContent]);
-                }
-            }
-            return response()->json([
-                'mode' => $apply ? 'APPLIED (đã lưu vào DB)' : 'PREVIEW (chưa lưu, thêm ?apply=1 để lưu thật)',
-                'total_rows_scanned' => $rows->count(),
-                'will_change_or_changed' => $countChanged,
-                'skipped_no_image_column' => $countSkippedNoImage,
-                'skipped_zero_img_in_content' => $countSkippedZeroImg,
-                'skipped_multi_img_in_content' => $countSkippedMultiImg,
-                'skipped_already_same' => $countSkippedSameAlready,
-                'detail' => $logLines,
-            ]);
-        }
-        else if($request->shop){
-            // add comment shop
-            $comments = CommentModel::select('id', 'shop_id')->get()->groupBy('shop_id');
-            $users = UsersModel::where('user_type_id','=',9)->pluck('user_id');
-            $names = ['Đinh Văn Lượng', 'Duy Điều', 'Trần Thanh Sang', 'Lê Văn Sơn', 'Văn Thạch'];
-            $phones = ['0936766560', '0988776655', '0911223344', '0977888999', '0909000001'];
-            $contents = [
-                'Cảm ơn sản phẩm của Shop, tôi đã dùng và thấy tốt',
-                'Đã nhận hàng và dùng ổn Shop tư vấn nhiệt tình',
-                'Dịch vụ giao hàng chu đáo',
-                'Dịch vụ quá tốt có tư vấn miễn phí qua app Tdoctor',
-                'Sản phẩm tốt. Cám ơn đã phân phối'
-            ];
-            $ratings = [4, 5, 5, 4, 5];
-            $created_at = ['2020-04-24 00:00:00', '2023-06-15 00:00:00', '2022-01-05 00:00:00', '2024-07-09 00:00:00', '2022-09-14 00:00:00'];
-            foreach ($users as $userId) {
-                // Nếu shop này CHƯA có comment thì mới thêm
-                    for ($i = 0; $i < 5; $i++) {
-                        $params = [
-                            'fullname'   => $names[$i],
-                            'user_id'    => '',
-                            'phone'      => $phones[$i],
-                            'content'    => $contents[$i],
-                            'rating'     => $ratings[$i],
-                            'parent_id'  => 0,
-                            'shop_id' => $userId,
-                            'created_at' => $created_at[$i]
-                        ];
-                        (new CommentModel)->saveItem($params, ['task' => 'add-item']);
-                    }
-            }
-            return 'Đã thêm 5 comment cho các Shop chưa có comment';
-        }else{
-            try {
-                DB::beginTransaction();
-                $affiliates = AffiliateModel::with('userRef')->select('id', 'code_ref', 'user_id', 'info_user')->get();
-                foreach ($affiliates as $affiliate) {
-                    $fullname = $affiliate->userRef ? $affiliate->userRef->fullname : '';
-                    $phone = $affiliate->userRef ? $affiliate->userRef->phone : '';
-                    $email = $affiliate->userRef ? $affiliate->userRef->email : '';
-                    $infoUser = implode(' ', [
-                        $fullname,
-                        $phone,
-                        $email
-                    ]);
-                    AffiliateModel::where('id', $affiliate['id'])->update(['info_user' => $infoUser]);
-                }
-                DB::commit();
-                return response()->json(['success' => true, 'message' => 'Cập nhật info user affiliate thành công']);
-            } catch (\Exception $e) {
-                DB::rollBack();
-                return response()->json(['success' => false, 'message' => $e->getMessage()]);
-            }
-        }
+        //     return 'Đã thay đổi NCC và kho thành công';
+        // }
+        // else if ($request->an_ncc) {
+        //     $idNCCHideProduct = 1144150805;
+        //     $products = ProductModel::where('user_id', $idNCCHideProduct)->get();
+        //     foreach ($products as $product) {
+        //         $slug = $product->slug;
+        //         Cache::forget('duoctot_product_guest_' . $slug);
+        //         Cache::forget('duoctot_product_login_' . $slug);
+        //     }
+        //     ProductModel::where('user_id', $idNCCHideProduct)->update([
+        //         'status_product' => 'sp_an'
+        //     ]);
+        //     return 'Ẩn sp + clear cache thành công';
+        // }
+        // else if ($request->gia_0ncc) {
+        //     $idNCC0Product = 1144150836;
+        //     $products = ProductModel::where('user_id', $idNCC0Product)->get();
+        //     foreach ($products as $product) {
+        //         $slug = $product->slug;
+        //     }
+        //     ProductModel::where('user_id', $idNCC0Product)->update([
+        //         'show_price' => '2'
+        //     ]);
+        //     return 'giá 0d thành công';
+        // }
+        // else if ($request->thay_image) {
+        //     $start = 178;
+        //     $end = 813;
+        //     $table = 'post';
+        //     $contentColumn = 'content';
+        //     $imageColumn = 'image';
+        //     $domain = 'https://duoctot.com';
+        //     // Đặt true để LƯU THẬT vào DB, để false để chỉ xem trước (không lưu)
+        //     $apply = $request->apply ? true : false;
+        //     $rows = DB::table($table)
+        //         ->whereBetween('id', [$start, $end])
+        //         ->select('id', $contentColumn, $imageColumn)
+        //         ->orderBy('id')
+        //         ->get();
+        //     $logLines = [];
+        //     $countChanged = 0;
+        //     $countSkippedNoImage = 0;
+        //     $countSkippedZeroImg = 0;
+        //     $countSkippedMultiImg = 0;
+        //     $countSkippedSameAlready = 0;
+        //     foreach ($rows as $row) {
+        //         $id = $row->id;
+        //         $content = $row->{$contentColumn} ?? '';
+        //         $imagePath = $row->{$imageColumn} ?? '';
+        //         if (empty($imagePath)) {
+        //             $countSkippedNoImage++;
+        //             continue;
+        //         }
+        //         if (empty($content)) {
+        //             $countSkippedZeroImg++;
+        //             continue;
+        //         }
+        //         // Đếm số thẻ <img> trong content
+        //         preg_match_all('/<img[^>]+src=["\']([^"\']+)["\'][^>]*>/i', $content, $matches);
+        //         $imgCount = count($matches[0]);
+        //         if ($imgCount === 0) {
+        //             $countSkippedZeroImg++;
+        //             continue;
+        //         }
+        //         if ($imgCount > 1) {
+        //             $countSkippedMultiImg++;
+        //             continue;
+        //         }
+        //         // Chỉ có đúng 1 ảnh -> lấy src hiện tại
+        //         $oldSrc = $matches[1][0];
+        //         // Xây link mới: full URL = domain + path (path trong cột image)
+        //         $normalizedPath = '/' . ltrim($imagePath, '/');
+        //         $newSrc = $domain . $normalizedPath;
+        //         if ($oldSrc === $newSrc) {
+        //             $countSkippedSameAlready++;
+        //             continue;
+        //         }
+        //         // Thay src cũ bằng src mới trong content
+        //         $oldImgTag = $matches[0][0];
+        //         $newImgTag = str_replace($oldSrc, $newSrc, $oldImgTag);
+        //         $newContent = str_replace($oldImgTag, $newImgTag, $content);
+        //         $logLines[] = "ID {$id} | OLD: {$oldSrc} | NEW: {$newSrc}";
+        //         $countChanged++;
+        //         if ($apply) {
+        //             DB::table($table)->where('id', $id)->update([$contentColumn => $newContent]);
+        //         }
+        //     }
+        //     return response()->json([
+        //         'mode' => $apply ? 'APPLIED (đã lưu vào DB)' : 'PREVIEW (chưa lưu, thêm ?apply=1 để lưu thật)',
+        //         'total_rows_scanned' => $rows->count(),
+        //         'will_change_or_changed' => $countChanged,
+        //         'skipped_no_image_column' => $countSkippedNoImage,
+        //         'skipped_zero_img_in_content' => $countSkippedZeroImg,
+        //         'skipped_multi_img_in_content' => $countSkippedMultiImg,
+        //         'skipped_already_same' => $countSkippedSameAlready,
+        //         'detail' => $logLines,
+        //     ]);
+        // }
+        // else if($request->shop){
+        //     // add comment shop
+        //     $comments = CommentModel::select('id', 'shop_id')->get()->groupBy('shop_id');
+        //     $users = UsersModel::where('user_type_id','=',9)->pluck('user_id');
+        //     $names = ['Đinh Văn Lượng', 'Duy Điều', 'Trần Thanh Sang', 'Lê Văn Sơn', 'Văn Thạch'];
+        //     $phones = ['0936766560', '0988776655', '0911223344', '0977888999', '0909000001'];
+        //     $contents = [
+        //         'Cảm ơn sản phẩm của Shop, tôi đã dùng và thấy tốt',
+        //         'Đã nhận hàng và dùng ổn Shop tư vấn nhiệt tình',
+        //         'Dịch vụ giao hàng chu đáo',
+        //         'Dịch vụ quá tốt có tư vấn miễn phí qua app Tdoctor',
+        //         'Sản phẩm tốt. Cám ơn đã phân phối'
+        //     ];
+        //     $ratings = [4, 5, 5, 4, 5];
+        //     $created_at = ['2020-04-24 00:00:00', '2023-06-15 00:00:00', '2022-01-05 00:00:00', '2024-07-09 00:00:00', '2022-09-14 00:00:00'];
+        //     foreach ($users as $userId) {
+        //         // Nếu shop này CHƯA có comment thì mới thêm
+        //             for ($i = 0; $i < 5; $i++) {
+        //                 $params = [
+        //                     'fullname'   => $names[$i],
+        //                     'user_id'    => '',
+        //                     'phone'      => $phones[$i],
+        //                     'content'    => $contents[$i],
+        //                     'rating'     => $ratings[$i],
+        //                     'parent_id'  => 0,
+        //                     'shop_id' => $userId,
+        //                     'created_at' => $created_at[$i]
+        //                 ];
+        //                 (new CommentModel)->saveItem($params, ['task' => 'add-item']);
+        //             }
+        //     }
+        //     return 'Đã thêm 5 comment cho các Shop chưa có comment';
+        // }else{
+        //     try {
+        //         DB::beginTransaction();
+        //         $affiliates = AffiliateModel::with('userRef')->select('id', 'code_ref', 'user_id', 'info_user')->get();
+        //         foreach ($affiliates as $affiliate) {
+        //             $fullname = $affiliate->userRef ? $affiliate->userRef->fullname : '';
+        //             $phone = $affiliate->userRef ? $affiliate->userRef->phone : '';
+        //             $email = $affiliate->userRef ? $affiliate->userRef->email : '';
+        //             $infoUser = implode(' ', [
+        //                 $fullname,
+        //                 $phone,
+        //                 $email
+        //             ]);
+        //             AffiliateModel::where('id', $affiliate['id'])->update(['info_user' => $infoUser]);
+        //         }
+        //         DB::commit();
+        //         return response()->json(['success' => true, 'message' => 'Cập nhật info user affiliate thành công']);
+        //     } catch (\Exception $e) {
+        //         DB::rollBack();
+        //         return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        //     }
+        // }
 
         // add infomation for table order_product
         // $listOrders = OrderModel::all();

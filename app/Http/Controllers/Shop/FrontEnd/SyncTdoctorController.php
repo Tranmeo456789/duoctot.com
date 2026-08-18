@@ -9,6 +9,7 @@ use App\Http\Controllers\Shop\FrontEnd\ShopFrontEndController;
 use App\Model\Shop\UsersModel as MainModel;
 use App\Model\Shop\UsersModel;
 use App\Model\Shop\ProductModel;
+use App\Model\Shop\CommentModel;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
@@ -634,6 +635,51 @@ class SyncTdoctorController extends ShopFrontEndController
         $totalInserted=$updatedCount;
         $pageTitle = 'Cập nhật keysearch đơn hàng thành công';
         $notification = 'Cập nhật keysearch đơn hàng thành công';
+        return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalInserted', 'notification'));
+    }
+    public function addRatingProduct()
+    {
+        // add comment product
+        $comments = CommentModel::select('id', 'product_id')->get()->groupBy('product_id');
+        $products = ProductModel::where('id', '>', 11000)->pluck('id');
+        $names = ['Nguyễn Ánh', 'Trần Thị Hằng', 'Xuân Cường', 'Tuấn Hùng', 'Hồng Hà'];
+        $phones = ['0936766561', '0988776651', '0911223341', '0977888991', '0909000011'];
+        $contents = [
+            'Đúng như mô tả',
+            'Sản phẩm tốt và dịch vụ giao hàng chu đáo',
+            'Dùng thấy hiệu quả, sẽ ủng hộ tiếp',
+            'Đã nhận hàng và dùng ổn',
+            'Nhân viên tư vấn nhiệt tình, hài lòng'
+        ];
+        $ratings = [4, 5, 5, 4, 5];
+        $created_at = ['2024-04-24 00:00:00', '2025-01-15 00:00:00', '2025-04-05 00:00:00', '2026-05-03 00:00:00', '2026-07-08 00:00:00'];
+        $totalInserted = 0; // Số sản phẩm được bổ sung comment
+        $totalCommentInserted = 0; // Tổng số comment mới thêm
+        foreach ($products as $productId) {
+            // Đếm số comment hiện có của sản phẩm này (0 nếu chưa có)
+            $currentCount = isset($comments[$productId]) ? $comments[$productId]->count() : 0;
+            // Nếu sản phẩm này đang có DƯỚI 5 comment thì mới thêm
+            if ($currentCount < 5) {
+                $needed = 5 - $currentCount;
+                $totalInserted++;
+                for ($i = 0; $i < $needed; $i++) {
+                    $params = [
+                        'fullname'   => $names[$i],
+                        'user_id'    => '',
+                        'phone'      => $phones[$i],
+                        'content'    => $contents[$i],
+                        'rating'     => $ratings[$i],
+                        'parent_id'  => 0,
+                        'product_id' => $productId,
+                        'created_at' => $created_at[$i]
+                    ];
+                    (new CommentModel)->saveItem($params, ['task' => 'add-item']);
+                    $totalCommentInserted++;
+                }
+            }
+        }
+        $pageTitle = 'Thêm rating cho sp thành công';
+        $notification = "Đã bổ sung comment cho {$totalInserted} sản phẩm, tổng cộng {$totalCommentInserted} comment mới được thêm.";
         return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalInserted', 'notification'));
     }
     public function preloadProductImagesBatch($startId = 1, $endId = 100, $batchSize = 50, $sleep = 2)

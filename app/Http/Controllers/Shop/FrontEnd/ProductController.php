@@ -857,19 +857,20 @@ class ProductController extends ShopFrontEndController
                 if (in_array($userInfo['user_id'], [1984151811, 1984152436, 1984152512])) {
                     $phoneShop = $userInfo['phone'] ?? '';
                 }
-                
                 $isPhone   = true;
             } elseif ($userType == 6 || $userType==5) {
+                $soKhongAn = ['0393167234', '0345488247'];
                 if (!empty($phone)) {
-                    $len = strlen($phone);
-                    if ($len > 3) {
-                        $phoneShop = substr($phone, 0, -3) . '***';
+                    if (in_array($phone, $soKhongAn)) {
+                        $phoneShop = $phone; // Không ẩn nếu là số trong danh sách loại trừ
                     } else {
-                        $phoneShop = str_repeat('*', $len);
+                        $len = strlen($phone);
+                        if ($len > 3) {
+                            $phoneShop = substr($phone, 0, -3) . '***';
+                        } else {
+                            $phoneShop = str_repeat('*', $len);
+                        }
                     }
-                } else {
-                    // Không có phone → số mặc định
-                    $phoneShop = $defaultPhone;
                 }
                 $isPhone = true;
             }else {
