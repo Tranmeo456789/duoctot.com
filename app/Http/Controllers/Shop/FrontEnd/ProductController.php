@@ -847,7 +847,7 @@ class ProductController extends ShopFrontEndController
             $userType = $userInfo['user_type_id'] ?? null;
             $phone    = $userInfo['phone'] ?? '';
             $email    = $userInfo['email'] ?? 'Đang cập nhật';
-            $defaultPhone = '0345488247';
+            $defaultPhone = '0393167234';
             // Mặc định là email
             $phoneShop = $email;
             $isPhone   = false;
@@ -858,7 +858,7 @@ class ProductController extends ShopFrontEndController
                     $phoneShop = $userInfo['phone'] ?? '';
                 }
                 $isPhone   = true;
-            } elseif ($userType == 6 || $userType==5) {
+            } elseif ($userType == 6 || $userType == 5) {
                 $soKhongAn = ['0393167234', '0345488247'];
                 if (!empty($phone)) {
                     if (in_array($phone, $soKhongAn)) {
@@ -871,9 +871,10 @@ class ProductController extends ShopFrontEndController
                             $phoneShop = str_repeat('*', $len);
                         }
                     }
+                    $isPhone = true; // ← Chỉ set true khi thực sự có phone
                 }
-                $isPhone = true;
-            }else {
+                // Nếu không có phone → $phoneShop giữ nguyên là $email, $isPhone vẫn false
+            } else {
                 if (!empty($phone)) {
                     $phoneShop = $phone;
                     $isPhone   = true;
@@ -884,8 +885,7 @@ class ProductController extends ShopFrontEndController
             if ($isPhone) {
                 $phoneShop = MyFunction::formatPhoneNumber($phoneShop);
                 if (in_array($userInfo['user_id'], [1984152512])) {
-                    //$phoneShop = '0989966668 - 0902281251 - banquatang@vkdgroup.vn';
-                    $phoneShop = $phone.' - '.$email;
+                    $phoneShop = $phone . ' - ' . $email;
                 }
             }
             return [

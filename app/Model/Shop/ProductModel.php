@@ -90,15 +90,27 @@ class ProductModel extends BackEndModel
             if ((isset($params['filter']['status_product'])) && ($params['filter']['status_product'] != 'all')) {
                 $query = $query->where('status_product',$params['filter']['status_product']);
             }
-            if (isset($params['search']['value']) && ($params['search']['value'] !== ""))  {
-                if($params['search']['field'] == "all") {
-                    $query->where(function($query) use ($params){
-                        foreach($this->fieldSearchAccepted as $column){
-                            $query->orWhereRaw("LOWER($column)" . ' LIKE BINARY ' .  "LOWER('%{$params['search']['value']}%')" );
+            if (isset($params['search']['value']) && ($params['search']['value'] !== "")) {
+                // 1. Loại bỏ thẻ HTML/PHP/JS nếu có (chống XSS, chống nhúng mã độc)
+                $cleanValue = strip_tags($params['search']['value']);
+                // 2. Loại bỏ khoảng trắng thừa đầu/cuối
+                $cleanValue = trim($cleanValue);
+                // 3. Escape ký tự đặc biệt riêng của LIKE (% và _ là wildcard trong SQL LIKE)
+                $cleanValue = str_replace(['%', '_'], ['\%', '\_'], $cleanValue);
+                // 4. Giới hạn độ dài tối đa để tránh spam chuỗi quá dài gây chậm query
+                $cleanValue = mb_substr($cleanValue, 0, 255);
+                $searchValue = '%' . $cleanValue . '%';
+                if ($params['search']['field'] == "all") {
+                    $query->where(function ($query) use ($searchValue) {
+                        foreach ($this->fieldSearchAccepted as $column) {
+                            $query->orWhereRaw("LOWER($column) LIKE BINARY LOWER(?)", [$searchValue]);
                         }
                     });
-                } else if(in_array($params['search']['field'], $this->fieldSearchAccepted)) {
-                        $query->whereRaw("LOWER({$params['search']['field']})" . " LIKE BINARY " .  "LOWER('%{$params['search']['value']}%')" );
+                } else if (in_array($params['search']['field'], $this->fieldSearchAccepted)) {
+                    $query->whereRaw(
+                        "LOWER({$params['search']['field']}) LIKE BINARY LOWER(?)",
+                        [$searchValue]
+                    );
                 }
             }
             $query->orderBy('updated_at', 'desc');
