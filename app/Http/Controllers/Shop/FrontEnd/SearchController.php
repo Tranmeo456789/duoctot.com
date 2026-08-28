@@ -219,17 +219,18 @@ class SearchController extends ShopFrontEndController
         // }
         // return 'Đã xóa bớt các comment trùng lặp cho các tên trong danh sách.';
         // lấy sitemap product
-        // $slugs = ProductModel::orderBy('id', 'asc')->where('status_product','da_duyet')
-        // ->skip(10000)
-        // ->take(1000)
-        // ->pluck('slug');
-        // $urls = $slugs->map(function ($slug) {
-        //     return 'https://duoctot.com/chi-tiet-san-pham/' . $slug.'.html';
-        // });
-        // foreach ($urls as $url) {
-        //     echo $url . '<br>';
-        // }
-        // return 1;
+        $slugs = ProductModel::orderBy('id', 'asc')
+        ->whereIn('status_product', ['da_duyet', 'sp_an'])
+        ->skip(11000)
+        ->take(1000)
+        ->pluck('slug');
+        $urls = $slugs->map(function ($slug) {
+            return 'https://duoctot.com/chi-tiet-san-pham/' . $slug.'.html';
+        });
+        foreach ($urls as $url) {
+            echo $url . '<br>';
+        }
+        return 1;
     // lấy sitemap post
         // $slugs = PostModel::orderBy('id', 'asc')
         // ->take(1000)

@@ -423,6 +423,18 @@ class HomeController extends ShopFrontEndController
         $filePath = public_path('xml/product8.txt');
         return $this->getSitemap($filePath);
     }
+    public function siteProduct9(){
+        $filePath = public_path('xml/product9.txt');
+        return $this->getSitemap($filePath);
+    }
+    public function siteProduct10(){
+        $filePath = public_path('xml/product10.txt');
+        return $this->getSitemap($filePath);
+    }
+    public function siteProduct11(){
+        $filePath = public_path('xml/product11.txt');
+        return $this->getSitemap($filePath);
+    }
     public function siteUserBenhVien(){
         $filePath = public_path('xml/user_benhvien.txt');
         return $this->getSitemap($filePath);

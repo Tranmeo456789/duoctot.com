@@ -270,6 +270,9 @@
                 ['url' => env('APP_URL') . 'product6-sitemap.xml', 'last_modified' => '2026-01-01 04:57:00'],
                 ['url' => env('APP_URL') . 'product7-sitemap.xml', 'last_modified' => '2026-06-01 04:57:00'],
                 ['url' => env('APP_URL') . 'product8-sitemap.xml', 'last_modified' => '2026-06-01 04:57:00'],
+                ['url' => env('APP_URL') . 'product9-sitemap.xml', 'last_modified' => '2026-06-01 04:57:00'],
+                ['url' => env('APP_URL') . 'product10-sitemap.xml', 'last_modified' => '2026-06-01 04:57:00'],
+                ['url' => env('APP_URL') . 'product11-sitemap.xml', 'last_modified' => '2026-06-01 04:57:00'],
                 ['url' => env('APP_URL') . 'user_benhvien-sitemap.xml', 'last_modified' => '2026-06-01 04:57:00'],
         ],
     ];
