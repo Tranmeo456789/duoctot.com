@@ -4,3 +4,4 @@
 <link rel="canonical" href="{{ url()->current() }}">
 <link rel="stylesheet" href="{{ asset('/shop/template/css/combined_library.min.css')}}" type="text/css"/>
 <link href="{{ asset('/shop/frontend/css/my-style.min.css')}}?v={{ filemtime(public_path('shop/frontend/css/my-style.min.css')) }}" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">

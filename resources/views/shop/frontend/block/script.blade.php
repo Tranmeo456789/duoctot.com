@@ -42,6 +42,7 @@ window.addEventListener("load", function () {
 <script src="{{ asset('/shop/frontend/js/jquery-3.1.1.min.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/shop/frontend/js/combined_library.min.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/shop/frontend/js/my-js.min.js')}}?v={{ filemtime(public_path('/shop/frontend/js/my-js.min.js')) }}" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
 <script src="{{ asset('/shop/frontend/js/chat-widget.js')}}" type="text/javascript"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-96P2DL9CDP"></script>
 

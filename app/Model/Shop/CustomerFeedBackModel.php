@@ -153,4 +153,15 @@ class CustomerFeedBackModel extends BackEndModel
         return $this->belongsTo('App\Model\Shop\CatalogModel', 'cat_post_id', 'id')
                     ->select('id', 'name', 'name_url');
     }
+    const CACHE_KEY_LIST_IMAGE_PHAN_HOI = 'duoctot_cache_list_image_phan_hoi';
+    public static function getListImagePhanHoi()
+    {
+        //Cache::forget('duoctot_cache_list_image_phan_hoi');
+        return Cache::remember(self::CACHE_KEY_LIST_IMAGE_PHAN_HOI, 100000000, function () {
+            $arrayIdPhanHois = [145,144,143,142,141,140,139,138,137];
+            return self::whereIn('id', $arrayIdPhanHois)
+                ->orderByRaw('FIELD(id, ' . implode(',', $arrayIdPhanHois) . ')')
+                ->get();
+        });
+    }
 }

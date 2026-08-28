@@ -128,8 +128,6 @@ $contact=MyFunction::formatPhoneNumber($contact);
         }
     }
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         let e = tns({

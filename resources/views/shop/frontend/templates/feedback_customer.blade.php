@@ -1,28 +1,13 @@
 @php
-use Illuminate\Support\Facades\Cache;
 $feedbacks=[
 ['thumb'=>'phanhoi1.png','fullname'=>'Duy Nguyễn Nhất','content'=>'Rất tuyệt vời, đặc biệt trong mùa dịch đi lại khó khăn. Chúc Dược Tốt ngày càng phát triển và mở rộng phạm vi ra nhiều tỉnh hơn, nhất là vùng Đồng bằng sông Cửu Long.'],
 ['thumb'=>'phanhoi2.png','fullname'=>'Quốc Bình Vũ','content'=>'Ứng dụng rất hay. Giúp mọi người hạn chế bệnh gì cũng phải đến bệnh viện khám. Đỡ mất thời gian, công sức và tiền bạc vì nhiều khi vô gặp bs cũng chỉ cần hỏi vài câu và cho SP.'],
 ['thumb'=>'phanhoi3.png','fullname'=>'Nguyễn Ngọc Minh','content'=>'Em bị ung thư thấy bác sĩ tuyến trung ương trong hệ thống tdoctor, bác sĩ bên Dược Tốt rất nhiệt tình, rất tiện cho trường hợp mua sản phẩm dược và thực phẩm chức uy tín online.']
 ];
 $imgCustomer=['1.jpg', '2.jpg'];
-$keyCacheListImagePhanHoi = 'duoctot_cache_list_image_phan_hoi';
-$dataListImagePhanHoiCache = Cache::get($keyCacheListImagePhanHoi);
-if(!empty($dataListImagePhanHoiCache)){
-    $listImagePhanHoi = $dataListImagePhanHoiCache['listImagePhanHoi'];
-}else{
-    $arrayIdPhanHois = [145,144,143,142,141,140,139,138,137];
-    $listImagePhanHoi = CustomerFeedBackModel::whereIn('id', $arrayIdPhanHois)
-    ->orderByRaw('FIELD(id, ' . implode(',', $arrayIdPhanHois) . ')')
-    ->get();
-    $cacheDataListImagePhanHoi = [
-        'listImagePhanHoi' => $listImagePhanHoi,
-    ];
-    Cache::put($keyCacheListImagePhanHoi, $cacheDataListImagePhanHoi, 100000000);
-}
+$listImagePhanHoi = \App\Model\Shop\CustomerFeedBackModel::getListImagePhanHoi();
 @endphp
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
+
 <style>.prev-btn-thumb-feedback,.next-btn-thumb-feedback{top:50%;transform:translateY(-50%);border:none;padding:10px;cursor:pointer;z-index:10;font-size:30px}</style>
 <script>document.addEventListener("DOMContentLoaded",function(){var sliderListThumbFeedBack=tns({container:".list_thumb_feedback",items:1,slideBy:1,loop:!0,speed:600,autoplay:!0,autoplayTimeout:5e3,autoplayButtonOutput:!1,controls:!1,nav:!1,mouseDrag:!0,touch:!0,gutter:4,edgePadding:0,autoHeight:!1,onInit:function(){document.querySelector(".list_thumb_feedback").classList.remove("cS-hidden")}});document.querySelector(".prev-btn-thumb-feedback").addEventListener("click",function(){sliderListThumbFeedBack.goTo("prev")}),document.querySelector(".next-btn-thumb-feedback").addEventListener("click",function(){sliderListThumbFeedBack.goTo("next")})});</script>
 <div class="row mx-0">

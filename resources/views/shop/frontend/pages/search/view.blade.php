@@ -1,7 +1,5 @@
 @extends('shop.layouts.frontend_search_in_menu')
 @section('headadd')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
 <style>
     .prev-btn,.next-btn {top: 50%;transform: translateY(-50%);border: none;padding: 10px;cursor: pointer;z-index: 10;font-size: 30px;}
 </style>
