@@ -847,7 +847,7 @@ class ProductController extends ShopFrontEndController
             $userType = $userInfo['user_type_id'] ?? null;
             $phone    = $userInfo['phone'] ?? '';
             $email    = $userInfo['email'] ?? 'Đang cập nhật';
-            $defaultPhone = '0393167234';
+            $defaultPhone = '0345488247';
             // Mặc định là email
             $phoneShop = $email;
             $isPhone   = false;

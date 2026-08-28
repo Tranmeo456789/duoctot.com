@@ -1,10 +1,25 @@
 @php
+use Illuminate\Support\Facades\Cache;
 $feedbacks=[
 ['thumb'=>'phanhoi1.png','fullname'=>'Duy Nguyễn Nhất','content'=>'Rất tuyệt vời, đặc biệt trong mùa dịch đi lại khó khăn. Chúc Dược Tốt ngày càng phát triển và mở rộng phạm vi ra nhiều tỉnh hơn, nhất là vùng Đồng bằng sông Cửu Long.'],
 ['thumb'=>'phanhoi2.png','fullname'=>'Quốc Bình Vũ','content'=>'Ứng dụng rất hay. Giúp mọi người hạn chế bệnh gì cũng phải đến bệnh viện khám. Đỡ mất thời gian, công sức và tiền bạc vì nhiều khi vô gặp bs cũng chỉ cần hỏi vài câu và cho SP.'],
 ['thumb'=>'phanhoi3.png','fullname'=>'Nguyễn Ngọc Minh','content'=>'Em bị ung thư thấy bác sĩ tuyến trung ương trong hệ thống tdoctor, bác sĩ bên Dược Tốt rất nhiệt tình, rất tiện cho trường hợp mua sản phẩm dược và thực phẩm chức uy tín online.']
 ];
 $imgCustomer=['1.jpg', '2.jpg'];
+$keyCacheListImagePhanHoi = 'duoctot_cache_list_image_phan_hoi';
+$dataListImagePhanHoiCache = Cache::get($keyCacheListImagePhanHoi);
+if(!empty($dataListImagePhanHoiCache)){
+    $listImagePhanHoi = $dataListImagePhanHoiCache['listImagePhanHoi'];
+}else{
+    $arrayIdPhanHois = [145,144,143,142,141,140,139,138,137];
+    $listImagePhanHoi = CustomerFeedBackModel::whereIn('id', $arrayIdPhanHois)
+    ->orderByRaw('FIELD(id, ' . implode(',', $arrayIdPhanHois) . ')')
+    ->get();
+    $cacheDataListImagePhanHoi = [
+        'listImagePhanHoi' => $listImagePhanHoi,
+    ];
+    Cache::put($keyCacheListImagePhanHoi, $cacheDataListImagePhanHoi, 100000000);
+}
 @endphp
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>

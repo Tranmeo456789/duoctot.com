@@ -38,13 +38,11 @@ class HomeController extends ShopFrontEndController
         $keyCacheProductNew = 'duoctot_cache_product_new_data';
         $keyCacheProductBest = 'duoctot_cache_product_best_data';
         $keyCacheProductKhuyenMai = 'duoctot_cache_product_km_data';
-        $keyCacheListImagePhanHoi = 'duoctot_cache_list_image_phan_hoi';
 
         $dataNccCache = Cache::get($keyCacheNcc);
         $dataProductNewCache = Cache::get($keyCacheProductNew);
         $dataProductBestCache = Cache::get($keyCacheProductBest);
         $dataProductKhuyenMaiCache = Cache::get($keyCacheProductKhuyenMai);
-        $dataListImagePhanHoiCache = Cache::get($keyCacheListImagePhanHoi);
 
         if(!empty($dataNccCache)){
             $productcers = $dataNccCache['productcers'];
@@ -86,18 +84,7 @@ class HomeController extends ShopFrontEndController
             ];
             Cache::put($keyCacheProductKhuyenMai, $cacheDataProductKhuyenMai, 100000000);
         }
-        if(!empty($dataListImagePhanHoiCache)){
-            $listImagePhanHoi = $dataListImagePhanHoiCache['listImagePhanHoi'];
-        }else{
-            $arrayIdPhanHois = [145,144,143,142,141,140,139,138,137];
-            $listImagePhanHoi = CustomerFeedBackModel::whereIn('id', $arrayIdPhanHois)
-            ->orderByRaw('FIELD(id, ' . implode(',', $arrayIdPhanHois) . ')')
-            ->get();
-            $cacheDataListImagePhanHoi = [
-                'listImagePhanHoi' => $listImagePhanHoi,
-            ];
-            Cache::put($keyCacheListImagePhanHoi, $cacheDataListImagePhanHoi, 100000000);
-        }
+        
         if ($request->has('codeRef')) {
             $request->session()->put('codeRef', $request->query('codeRef'));
             $codeRef = $request->codeRef ?? ($request->session()->get('codeRef') ?? '');
@@ -108,7 +95,7 @@ class HomeController extends ShopFrontEndController
         }
         return view(
             $this->pathViewController . 'index',
-            compact('itemsProduct','formRegister','productcers','listImagePhanHoi')
+            compact('itemsProduct','formRegister','productcers')
         );
     }
     // public function ajaxHoverCatLevel1(Request $request)
