@@ -132,6 +132,8 @@
                 'company_registered'=>'Công ty đăng ký',
                 'elements_mini'=>'Hoạt chất dược liệu (điền ngắn gọn)',
                 'number_registered'=>'Số đăng ký',
+                'date_birth'=>'Ngày sinh',
+                'weight'=>'Cân nặng',
             ],
             'type_user' => [
                 '1' => 'Thành viên',

@@ -29,6 +29,13 @@ Route::group(['prefix' => $prefixShopBackEnd, 'namespace' => 'Shop\BackEnd', 'mi
     Route::get('/trang-tong-quan-tai-khoan-affiliate', 'UserController@dashboardRef')->name('affiliate.dashboardRef');
     Route::get('/chi-tiet-hoa-hong-theo-san-pham-dai-ly-affiliate/{codeRef}', 'UserController@detailListProductAffiliate')->name('user.detailListProductAffiliate');
 
+    Route::get('/danh-sach-don-thuoc', 'PrescriptionController@index')->name('prescription');
+    Route::get('/them-don-don-thuoc', 'PrescriptionController@form')->name('prescription.add');
+    Route::get('/sua-don-thuoc/{id}', 'PrescriptionController@form')->name('prescription.edit');
+    Route::post('/luu-don-thuoc', 'PrescriptionController@save')->name('prescription.save');
+    Route::get('/xoa-don-thuoc/{id}', 'PrescriptionController@delete')->name('prescription.delete');
+    Route::get('/api/danh-sach-thuoc-chung', 'PrescriptionController@getListThuocChung')->name('prescription.listThuocChung');
+    
     Route::post('/admin/seo-score/analyze', 'SeoScoreController@analyze')->name('admin.seo-score.analyze');
     Route::post('/admin/article-seo-score/analyze', 'SeoScoreController@analyzeArticle')->name('admin.article-seo-score.analyze');
 

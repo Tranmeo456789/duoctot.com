@@ -78,14 +78,14 @@
             <li class="position-relative">
                 <a href="{{route('fe.search.viewHome', ['keyword' => 'abbott'])}}" class="d-block">
                     <div class="wp-img-thumb-product mb-2">
-                        <img loading="lazy" src="{{asset('laravel-filemanager/fileUpload/banner/th_abbott.jpg')}}" alt="th_abbott" decoding="async">
+                        <img loading="lazy" src="{{asset('public/fileUpload/banner/th_abbott.jpg')}}" alt="th_abbott" decoding="async">
                     </div>
                 </a>
             </li>
             <li class="position-relative">
                 <a href="{{route('fe.search.viewHome', ['keyword' => 'boehringer'])}}" class="d-block">
                     <div class="wp-img-thumb-product mb-2">
-                        <img loading="lazy" src="{{asset('laravel-filemanager/fileUpload/banner/th_boehringer_ingelheim.jpg')}}" alt="th_boehringer_ingelheim" decoding="async">
+                        <img loading="lazy" src="{{asset('public/fileUpload/banner/th_boehringer_ingelheim.jpg')}}" alt="th_boehringer_ingelheim" decoding="async">
                     </div>
                 </a>
             </li>
@@ -94,14 +94,14 @@
             <li class="position-relative">
                 <a href="{{route('fe.search.viewHome', ['keyword' => 'servier'])}}" class="d-block">
                     <div class="wp-img-thumb-product mb-2">
-                        <img loading="lazy" src="{{asset('laravel-filemanager/fileUpload/banner/th_servier.jpg')}}" alt="servier" decoding="async">
+                        <img loading="lazy" src="{{asset('public/fileUpload/banner/th_servier.jpg')}}" alt="servier" decoding="async">
                     </div>
                 </a>
             </li>
             <li class="position-relative">
                 <a href="{{route('fe.search.viewHome', ['keyword' => 'uip'])}}" class="d-block">
                     <div class="wp-img-thumb-product mb-2">
-                        <img loading="lazy" src="{{asset('laravel-filemanager/fileUpload/banner/th_uip.jpg')}}" alt="uip" decoding="async">
+                        <img loading="lazy" src="{{asset('public/fileUpload/banner/th_uip.jpg')}}" alt="uip" decoding="async">
                     </div>
                 </a>
             </li>
@@ -110,14 +110,14 @@
             <li class="position-relative">
                 <a href="{{route('fe.search.viewHome', ['keyword' => 'nordisk'])}}" class="d-block">
                     <div class="wp-img-thumb-product mb-2">
-                        <img loading="lazy" src="{{asset('laravel-filemanager/fileUpload/banner/th_novo_nordisk.jpg')}}" alt="nordisk" decoding="async">
+                        <img loading="lazy" src="{{asset('public/fileUpload/banner/th_novo_nordisk.jpg')}}" alt="nordisk" decoding="async">
                     </div>
                 </a>
             </li>
             <li class="position-relative">
                 <a href="{{route('fe.search.viewHome', ['keyword' => 'santen'])}}" class="d-block">
                     <div class="wp-img-thumb-product mb-2">
-                        <img loading="lazy" src="{{asset('laravel-filemanager/fileUpload/banner/th_santen.jpg')}}" alt="santen" decoding="async">
+                        <img loading="lazy" src="{{asset('public/fileUpload/banner/th_santen.jpg')}}" alt="santen" decoding="async">
                     </div>
                 </a>
             </li>
@@ -126,14 +126,14 @@
             <li class="position-relative">
                 <a href="{{route('fe.search.viewHome', ['keyword' => 'pfizer'])}}" class="d-block">
                     <div class="wp-img-thumb-product mb-2">
-                        <img loading="lazy" src="{{asset('laravel-filemanager/fileUpload/banner/pfizer.jpg')}}" alt="nordisk" decoding="async">
+                        <img loading="lazy" src="{{asset('public/fileUpload/banner/pfizer.jpg')}}" alt="nordisk" decoding="async">
                     </div>
                 </a>
             </li>
             <li class="position-relative">
                 <a href="{{route('fe.search.viewHome', ['keyword' => 'sanofi'])}}" class="d-block">
                     <div class="wp-img-thumb-product mb-2">
-                        <img loading="lazy" src="{{asset('laravel-filemanager/fileUpload/banner/sanofi.jpg')}}" alt="santen" decoding="async">
+                        <img loading="lazy" src="{{asset('public/fileUpload/banner/sanofi.jpg')}}" alt="santen" decoding="async">
                     </div>
                 </a>
             </li>

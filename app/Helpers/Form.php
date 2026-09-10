@@ -283,6 +283,30 @@ class Form
                     $prefix,
                     $element['element']
                 );
+            break;
+            case 'date-picker':
+                $xhtml = sprintf(
+                    "
+                    <div class='%s'>
+                        <div class='form-group row $styleFormGroup'>
+                            %s
+                            <div class='%s'>
+                                <div class='input-group align-self-center'>
+                                    %s
+                                    <div class='input-group-append'>
+                                        <span class='input-group-text'><i class='fa fa-calendar'></i></span>
+                                    </div>
+                                    <span class='help-block'></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>",
+                    $widthElement,
+                    $element['label'],
+                    $widthInput,
+                    $element['element']
+                );
+                break;
         }
         return $xhtml;
     }
