@@ -550,29 +550,35 @@ class ProductModel extends BackEndModel
                 $keyword = trim($keyword);
                 if ($keyword !== '') {
                     $searchString = collect(explode(' ', $keyword))
-                        ->filter()
-                        ->map(fn($word) => '+' . $word . '*')
-                        ->implode(' ');
-                    $query->where(function ($q) use ($searchString, $keyword) {
-                        $q->whereRaw(
-                            "MATCH(keyword_search) AGAINST(? IN BOOLEAN MODE)",
+                    ->map(function ($word) {
+                        // Bỏ ký tự vận hành của FULLTEXT BOOLEAN MODE khỏi từng từ
+                        return preg_replace('/[+\-<>()~*"@]+/', '', $word);
+                    })
+                    ->filter(fn($word) => $word !== '')
+                    ->map(fn($word) => '+' . $word . '*')
+                    ->implode(' ');
+                    if ($searchString !== '') {
+                        $query->where(function ($q) use ($searchString, $keyword) {
+                            $q->whereRaw(
+                                "MATCH(keyword_search) AGAINST(? IN BOOLEAN MODE)",
+                                [$searchString]
+                            )
+                            ->orWhere('name', 'LIKE', '%' . $keyword . '%');
+                        });
+                        $query->orderByRaw(
+                            "CASE WHEN name LIKE ? THEN 1 ELSE 2 END",
+                            ['%' . $keyword . '%']
+                        );
+                        $query->orderByRaw(
+                            "MATCH(keyword_search) AGAINST(? IN BOOLEAN MODE) DESC",
                             [$searchString]
-                        )
-                        ->orWhere('name', 'LIKE', '%' . $keyword . '%');
-                    });
-                    // Ưu tiên name match trước
-                    $query->orderByRaw(
-                        "CASE WHEN name LIKE ? THEN 1 ELSE 2 END",
-                        ['%' . $keyword . '%']
-                    );
-                    // Sau đó mới tới điểm FULLTEXT
-                    $query->orderByRaw(
-                        "MATCH(keyword_search) AGAINST(? IN BOOLEAN MODE) DESC",
-                        [$searchString]
-                    );
+                        );
+                    } else {
+                        // Nếu sau khi lọc không còn từ nào hợp lệ, chỉ search bằng LIKE
+                        $query->where('name', 'LIKE', '%' . $keyword . '%');
+                    }
                 }
             } else {
-                // nếu không search thì sort bình thường
                 $query->orderBy('id', 'asc');
             }
             // limit cuối cùng
@@ -595,29 +601,35 @@ class ProductModel extends BackEndModel
                 $keyword = trim($keyword);
                 if ($keyword !== '') {
                     $searchString = collect(explode(' ', $keyword))
-                        ->filter()
-                        ->map(fn($word) => '+' . $word . '*')
-                        ->implode(' ');
-                    $query->where(function ($q) use ($searchString, $keyword) {
-                        $q->whereRaw(
-                            "MATCH(keyword_search) AGAINST(? IN BOOLEAN MODE)",
+                    ->map(function ($word) {
+                        // Bỏ ký tự vận hành của FULLTEXT BOOLEAN MODE khỏi từng từ
+                        return preg_replace('/[+\-<>()~*"@]+/', '', $word);
+                    })
+                    ->filter(fn($word) => $word !== '')
+                    ->map(fn($word) => '+' . $word . '*')
+                    ->implode(' ');
+                    if ($searchString !== '') {
+                        $query->where(function ($q) use ($searchString, $keyword) {
+                            $q->whereRaw(
+                                "MATCH(keyword_search) AGAINST(? IN BOOLEAN MODE)",
+                                [$searchString]
+                            )
+                            ->orWhere('name', 'LIKE', '%' . $keyword . '%');
+                        });
+                        $query->orderByRaw(
+                            "CASE WHEN name LIKE ? THEN 1 ELSE 2 END",
+                            ['%' . $keyword . '%']
+                        );
+                        $query->orderByRaw(
+                            "MATCH(keyword_search) AGAINST(? IN BOOLEAN MODE) DESC",
                             [$searchString]
-                        )
-                        ->orWhere('name', 'LIKE', '%' . $keyword . '%');
-                    });
-                    // Ưu tiên name match trước
-                    $query->orderByRaw(
-                        "CASE WHEN name LIKE ? THEN 1 ELSE 2 END",
-                        ['%' . $keyword . '%']
-                    );
-                    // Sau đó mới tới điểm FULLTEXT
-                    $query->orderByRaw(
-                        "MATCH(keyword_search) AGAINST(? IN BOOLEAN MODE) DESC",
-                        [$searchString]
-                    );
+                        );
+                    } else {
+                        // Nếu sau khi lọc không còn từ nào hợp lệ, chỉ search bằng LIKE
+                        $query->where('name', 'LIKE', '%' . $keyword . '%');
+                    }
                 }
             } else {
-                // nếu không search thì sort bình thường
                 $query->orderBy('id', 'asc');
             }
             // limit cuối cùng
