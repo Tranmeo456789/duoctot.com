@@ -39,7 +39,7 @@ $model = new \App\Model\Shop\CatProductModel();
 $modelCatalog = new \App\Model\Shop\CatalogModel();
 $listCatLevel1 = $model->getCatLevel1();
 $listCatAll    = $model->getAllCats();
-$listCatLieuThuocTay = $modelCatalog->getCatLieuThuocTay();
+$listCatBlog = $modelCatalog->getCatBlog();
 @endphp
 <ul id="main-menu" class="d-flex list-item">
     @foreach ($listCatLevel1 as $itemLevel1)
@@ -91,7 +91,7 @@ $listCatLieuThuocTay = $modelCatalog->getCatLieuThuocTay();
                         <span class="pl-2">Cắt liều thuốc tây</span>
                     </a>
                 </div>
-                @foreach ($listCatLieuThuocTay->chunk(2) as $pair)
+                @foreach ($listCatBlog->chunk(2) as $pair)
                     @foreach ($pair as $item)
                     <div class="col-6 px-0">
                         <a class="" href="{{route('fe.post.listPostOfCat',$item['name_url'])}}">
@@ -103,19 +103,6 @@ $listCatLieuThuocTay = $modelCatalog->getCatLieuThuocTay();
             </div>
         </div>
     </li>
-    <!-- <li class="align-self-center">
-        <div class="position-relative">
-            <div class="dropdown">
-                <button class="btn dropdown-toggle font-weight-bold text-secondary pl-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 15px;">Cắt Liều Thuốc Tây</button>
-                <div class="dropdown-menu dropdown-menu-right bg-light" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item font-weight-bold" href="{{route('fe.lieuThuocTay')}}"><span class="pl-2">Cắt Liều Thuốc Tây</span></a>
-                    @foreach ($listCatLieuThuocTay as $itemCatLieuThuocTay)
-                        <a class="dropdown-item" href="{{route('fe.post.listPostOfCat',$itemCatLieuThuocTay['name_url'])}}"><span class="pl-2">{{$itemCatLieuThuocTay['name']}}</span></a>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </li> -->
     <li class="align-self-center">
         <div class="position-relative">
             <div class="dropdown">

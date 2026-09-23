@@ -4,7 +4,7 @@ $model = new \App\Model\Shop\CatProductModel();
 $modelCatalog = new \App\Model\Shop\CatalogModel();
 $listCatLevel1 = $model->getCatLevel1();
 $listCatAll    = $model->getAllCats();
-$listCatLieuThuocTay = $modelCatalog->getCatLieuThuocTay();
+$listCatBlog = $modelCatalog->getCatBlog();
 $iconZalo=asset('images/shop/zalo-2.png');
 $iconCall=asset('images/shop/icon-call.png');
 $phoneContact=$phoneContact??'0345488247';
@@ -92,7 +92,7 @@ $phoneContact=$phoneContact??'0345488247';
             <div class="submenu1res">
                 <ul>
                     <li><a href="{{route('fe.lieuThuocTay')}}">Cắt liều thuốc tây</a></li>
-                    @foreach ($listCatLieuThuocTay as $itemCatLieuThuocTay)
+                    @foreach ($listCatBlog as $itemCatLieuThuocTay)
                     <li><a href="{{route('fe.post.listPostOfCat',$itemCatLieuThuocTay['name_url'])}}">{{$itemCatLieuThuocTay['name']}}</a></li>
                     @endforeach
                 </ul>
