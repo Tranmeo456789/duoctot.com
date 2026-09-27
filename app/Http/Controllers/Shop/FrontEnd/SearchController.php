@@ -219,18 +219,18 @@ class SearchController extends ShopFrontEndController
         // }
         // return 'Đã xóa bớt các comment trùng lặp cho các tên trong danh sách.';
         // lấy sitemap product
-        $slugs = ProductModel::orderBy('id', 'asc')
-        ->whereIn('status_product', ['da_duyet', 'sp_an'])
-        ->skip(11000)
-        ->take(1000)
-        ->pluck('slug');
-        $urls = $slugs->map(function ($slug) {
-            return 'https://duoctot.com/chi-tiet-san-pham/' . $slug.'.html';
-        });
-        foreach ($urls as $url) {
-            echo $url . '<br>';
-        }
-        return 1;
+        // $slugs = ProductModel::orderBy('id', 'asc')
+        // ->whereIn('status_product', ['da_duyet', 'sp_an'])
+        // ->skip(11000)
+        // ->take(1000)
+        // ->pluck('slug');
+        // $urls = $slugs->map(function ($slug) {
+        //     return 'https://duoctot.com/chi-tiet-san-pham/' . $slug.'.html';
+        // });
+        // foreach ($urls as $url) {
+        //     echo $url . '<br>';
+        // }
+        // return 1;
     // lấy sitemap post
         // $slugs = PostModel::orderBy('id', 'asc')
         // ->take(1000)
@@ -390,7 +390,7 @@ class SearchController extends ShopFrontEndController
             return 'Đã thay đổi NCC và kho thành công';
         }
         else if ($request->an_ncc) {
-            $idNCCHideProduct = 1144150805;
+            $idNCCHideProduct = 1984151214;
             $products = ProductModel::where('user_id', $idNCCHideProduct)->get();
             foreach ($products as $product) {
                 $slug = $product->slug;
@@ -398,7 +398,7 @@ class SearchController extends ShopFrontEndController
                 Cache::forget('duoctot_product_login_' . $slug);
             }
             ProductModel::where('user_id', $idNCCHideProduct)->update([
-                'status_product' => 'sp_an'
+                'status_product' => 'tu_choi'
             ]);
             return 'Ẩn sp + clear cache thành công';
         }

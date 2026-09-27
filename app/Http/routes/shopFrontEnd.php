@@ -159,4 +159,6 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('xoa-cache-danh-sach-tham-my-vien','SyncTdoctorController@clearListThamMyVien')->name('fe.SyncTdoctor.clearListThamMyVien');
     Route::get('cap-nhat-key-tieng-viet-search-don-hang','SyncTdoctorController@upKeySearchOrder')->name('fe.SyncTdoctor.upKeySearchOrder');
     Route::get('add-rating-product-co-duoi-5','SyncTdoctorController@addRatingProduct')->name('fe.SyncTdoctor.addRatingProduct');
+    Route::get('view-form-change-status-product-in-user','SyncTdoctorController@viewChangeStatusProductInUser')->name('fe.SyncTdoctor.viewChangeStatusProductInUser');
+    Route::post('update-change-status-product-in-user','SyncTdoctorController@updateChangeStatusProductInUser')->name('fe.SyncTdoctor.updateChangeStatusProductInUser');
     });

@@ -682,6 +682,25 @@ class SyncTdoctorController extends ShopFrontEndController
         $notification = "Đã bổ sung comment cho {$totalInserted} sản phẩm, tổng cộng {$totalCommentInserted} comment mới được thêm.";
         return view('shop.backend.pages.syncTdoctor.index', compact('pageTitle', 'totalInserted', 'notification'));
     }
+    public function viewChangeStatusProductInUser()
+    {
+        return view('shop.backend.pages.syncTdoctor.update_status_product_in_user');
+    }
+    public function updateStatusProduct(Request $request)
+    {
+        $idNCCHideProduct = $request->user_id;
+        $statusNhap = $request->status_product;
+        $totalInserted = ProductModel::where('user_id', $idNCCHideProduct)
+            ->update([
+                'status_product' => $statusNhap
+            ]);
+        $pageTitle = 'Cập nhật trạng thái sản phẩm theo user thành công';
+        $notification = "Đã cập nhật trạng thái sản phẩm thành công. Có {$totalInserted} sản phẩm được cập nhật.";
+        return view(
+            'shop.backend.pages.syncTdoctor.index',
+            compact('pageTitle', 'totalInserted', 'notification')
+        );
+    }
     public function preloadProductImagesBatch($startId = 1, $endId = 100, $batchSize = 50, $sleep = 2)
     {
         $products = DB::table('products')

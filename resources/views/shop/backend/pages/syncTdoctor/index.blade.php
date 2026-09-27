@@ -169,6 +169,12 @@
                         <p>Thêm 5 comment đánh giá cho các sp có dưới 5 đánh giá</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('fe.SyncTdoctor.viewChangeStatusProductInUser')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Form thay đổi status sản phẩm theo user</p>
+                    </a>
+                </li>
             </ul>
         </li>
     </ul>
