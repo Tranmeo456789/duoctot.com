@@ -231,16 +231,19 @@ class SearchController extends ShopFrontEndController
         //     echo $url . '<br>';
         // }
         // return 1;
-    // lấy sitemap post
-        // $slugs = PostModel::orderBy('id', 'asc')
-        // ->take(1000)
-        // ->pluck('slug');
-        // $urls = $slugs->map(function ($slug) {
-        //     return 'https://duoctot.com/tin-tuc/' . $slug.'.html';
-        // });
-        // foreach ($urls as $url) {
-        //     echo $url . '<br>';
-        // }
+
+        // lấy sitemap post
+        $slugs = PostModel::orderBy('id', 'asc')->where('status_post','da_duyet')
+        ->take(1000)
+        ->pluck('slug');
+        $urls = $slugs->map(function ($slug) {
+            return 'https://duoctot.com/tin-tuc/' . $slug.'.html';
+        });
+        foreach ($urls as $url) {
+            echo $url . '<br>';
+        }
+        return 1;
+
         // lấy sitemap user
         // $slugs = UsersModel::where('user_type_id',12)->orderBy('user_id', 'asc')
         // ->take(1000)
