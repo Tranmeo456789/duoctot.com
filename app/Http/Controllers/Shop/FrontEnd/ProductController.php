@@ -854,7 +854,7 @@ class ProductController extends ShopFrontEndController
             // USER TYPE 9 → luôn dùng số mặc định
             if ($userType == 9) {
                 $phoneShop = $defaultPhone;
-                if (in_array($userInfo['user_id'], [1984151811, 1984152436, 1984152512])) {
+                if (in_array($userInfo['user_id'], [1984151811, 1984152436, 1984152512,1984152856])) {
                     $phoneShop = $userInfo['phone'] ?? '';
                 }
                 $isPhone   = true;
