@@ -686,7 +686,7 @@ class SyncTdoctorController extends ShopFrontEndController
     {
         return view('shop.backend.pages.syncTdoctor.update_status_product_in_user');
     }
-    public function updateStatusProduct(Request $request)
+    public function updateChangeStatusProductInUser(Request $request)
     {
         $idNCCHideProduct = $request->user_id;
         $statusNhap = $request->status_product;
