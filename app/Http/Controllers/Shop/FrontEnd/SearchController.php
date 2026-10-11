@@ -219,30 +219,30 @@ class SearchController extends ShopFrontEndController
         // }
         // return 'Đã xóa bớt các comment trùng lặp cho các tên trong danh sách.';
         // lấy sitemap product
-        // $slugs = ProductModel::orderBy('id', 'asc')
-        // ->whereIn('status_product', ['da_duyet', 'sp_an'])
-        // ->skip(11000)
-        // ->take(1000)
-        // ->pluck('slug');
-        // $urls = $slugs->map(function ($slug) {
-        //     return 'https://duoctot.com/chi-tiet-san-pham/' . $slug.'.html';
-        // });
-        // foreach ($urls as $url) {
-        //     echo $url . '<br>';
-        // }
-        // return 1;
-
-        // lấy sitemap post
-        $slugs = PostModel::orderBy('id', 'asc')->where('status_post','da_duyet')
+        $slugs = ProductModel::orderBy('id', 'asc')
+        ->whereIn('status_product', ['da_duyet', 'sp_an'])
+        ->skip(11000)
         ->take(1000)
         ->pluck('slug');
         $urls = $slugs->map(function ($slug) {
-            return 'https://duoctot.com/tin-tuc/' . $slug.'.html';
+            return 'https://duoctot.com/chi-tiet-san-pham/' . $slug.'.html';
         });
         foreach ($urls as $url) {
             echo $url . '<br>';
         }
         return 1;
+
+        // lấy sitemap post
+        // $slugs = PostModel::orderBy('id', 'asc')->where('status_post','da_duyet')
+        // ->take(1000)
+        // ->pluck('slug');
+        // $urls = $slugs->map(function ($slug) {
+        //     return 'https://duoctot.com/tin-tuc/' . $slug.'.html';
+        // });
+        // foreach ($urls as $url) {
+        //     echo $url . '<br>';
+        // }
+        // return 1;
 
         // lấy sitemap user
         // $slugs = UsersModel::where('user_type_id',12)->orderBy('user_id', 'asc')

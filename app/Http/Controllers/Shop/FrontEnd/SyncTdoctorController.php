@@ -642,7 +642,7 @@ class SyncTdoctorController extends ShopFrontEndController
         // add comment product
         $comments = CommentModel::select('id', 'product_id')->get()->groupBy('product_id');
         $products = ProductModel::where('id', '>', 11000)->pluck('id');
-        $names = ['Nguyễn Ánh', 'Trần Thị Hằng', 'Xuân Cường', 'Tuấn Hùng', 'Hồng Hà'];
+        $names = ['Nguyễn Trường', 'Trần Thị Hằng', 'Xuân Cường', 'Tuấn Hùng', 'Hồng Hà'];
         $phones = ['0936766561', '0988776651', '0911223341', '0977888991', '0909000011'];
         $contents = [
             'Đúng như mô tả',
