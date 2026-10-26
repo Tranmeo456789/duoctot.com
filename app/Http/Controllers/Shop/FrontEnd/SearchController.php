@@ -83,6 +83,71 @@ class SearchController extends ShopFrontEndController
             return redirect()->back();
         }
     }
+    // public function search(Request $request)
+    // {
+    //     $keyword = trim($request->input('keyword'));
+    //     if (empty($keyword)) {
+    //         return redirect()->back();
+    //     }
+    //     $params['keyword'] = $keyword;
+    //     // Lưu lịch sử tìm kiếm
+    //     $keywordHistory = isset($_COOKIE["keywordHistory"])
+    //         ? json_decode($_COOKIE["keywordHistory"], true)
+    //         : [];
+    //     $keywordCurrent = [];
+    //     $keywordCurrent[$keyword] = [
+    //         'keyword' => $keyword
+    //     ];
+    //     unset($keywordHistory[$keyword]);
+    //     $keywordHistory = $keywordCurrent + $keywordHistory;
+    //     if (count($keywordHistory) > 5) {
+    //         array_pop($keywordHistory);
+    //     }
+    //     setcookie(
+    //         "keywordHistory",
+    //         json_encode($keywordHistory),
+    //         time() + config('myconfig.time_cookie'),
+    //         "/"
+    //     );
+    //     $_COOKIE["keywordHistory"] = json_encode($keywordHistory);
+    //     // Save keyword search most
+    //     // $itemExist = $this->model->getItem($params, ['task' => 'get-item']);
+    //     // if ($itemExist) {
+    //     //     $params['id'] = $itemExist['id'];
+    //     //     $params['number_search'] = $itemExist['number_search'];
+    //     //     $this->model->saveItem($params, [
+    //     //         'task' => 'update-number-search-item'
+    //     //     ]);
+    //     // } else {
+    //     //     $this->model->saveItem($params, [
+    //     //         'task' => 'add-item-home'
+    //     //     ]);
+    //     // }
+    //     //Cache::forget('duoctot_search_login_'.$keyword);
+    //     //Cache::forget('duoctot_search_guest_'.$keyword);
+    //     // Lấy sản phẩm
+    //     $session = $request->session();
+    //     if ($session->has('user')) {
+    //         $cacheKey = 'duoctot_search_login_'.$keyword;
+    //         $itemSearch = Cache::tags('duoctot_search')->remember($cacheKey, 1800, function () use ($params) {
+    //             return (new ProductModel)->listItems($params, [
+    //                 'task' => 'list-items-search-user-has-login'
+    //             ]);
+    //         });
+    //     } else {
+    //         $cacheKey = 'duoctot_search_guest_'.$keyword;
+    //         $itemSearch = Cache::tags('duoctot_search')->remember($cacheKey, 1800, function () use ($params) {
+    //             return (new ProductModel)->listItems($params, [
+    //                 'task' => 'list-items-search'
+    //             ]);
+    //         });
+    //     }
+    //     $title = 'Kết quả tìm kiếm';
+    //     return view(
+    //         $this->pathViewController . 'view',
+    //         compact('keyword', 'itemSearch', 'title')
+    //     );
+    // }
     public function search(Request $request)
     {
         $keyword = trim($request->input('keyword'));
@@ -94,6 +159,9 @@ class SearchController extends ShopFrontEndController
         $keywordHistory = isset($_COOKIE["keywordHistory"])
             ? json_decode($_COOKIE["keywordHistory"], true)
             : [];
+        if (!is_array($keywordHistory)) {
+            $keywordHistory = [];
+        }
         $keywordCurrent = [];
         $keywordCurrent[$keyword] = [
             'keyword' => $keyword
@@ -110,42 +178,70 @@ class SearchController extends ShopFrontEndController
             "/"
         );
         $_COOKIE["keywordHistory"] = json_encode($keywordHistory);
-        // Save keyword search most
-        // $itemExist = $this->model->getItem($params, ['task' => 'get-item']);
-        // if ($itemExist) {
-        //     $params['id'] = $itemExist['id'];
-        //     $params['number_search'] = $itemExist['number_search'];
-        //     $this->model->saveItem($params, [
-        //         'task' => 'update-number-search-item'
-        //     ]);
-        // } else {
-        //     $this->model->saveItem($params, [
-        //         'task' => 'add-item-home'
-        //     ]);
-        // }
-        //Cache::forget('duoctot_search_login_'.$keyword);
-        //Cache::forget('duoctot_search_guest_'.$keyword);
-        // Lấy sản phẩm
+        // Lấy sản phẩm: giữ nguyên logic hiện tại
         $session = $request->session();
         if ($session->has('user')) {
-            $cacheKey = 'duoctot_search_login_'.$keyword;
-            $itemSearch = Cache::tags('duoctot_search')->remember($cacheKey, 1800, function () use ($params) {
-                return (new ProductModel)->listItems($params, [
-                    'task' => 'list-items-search-user-has-login'
-                ]);
-            });
+            $cacheKey = 'duoctot_search_login_' . $keyword;
+            $itemSearch = Cache::tags('duoctot_search')->remember(
+                $cacheKey,
+                1800,
+                function () use ($params) {
+                    return (new ProductModel)->listItems($params, [
+                        'task' => 'list-items-search-user-has-login'
+                    ]);
+                }
+            );
         } else {
-            $cacheKey = 'duoctot_search_guest_'.$keyword;
-            $itemSearch = Cache::tags('duoctot_search')->remember($cacheKey, 1800, function () use ($params) {
-                return (new ProductModel)->listItems($params, [
-                    'task' => 'list-items-search'
-                ]);
-            });
+            $cacheKey = 'duoctot_search_guest_' . $keyword;
+            $itemSearch = Cache::tags('duoctot_search')->remember(
+                $cacheKey,
+                1800,
+                function () use ($params) {
+                    return (new ProductModel)->listItems($params, [
+                        'task' => 'list-items-search'
+                    ]);
+                }
+            );
         }
+        // Tìm người dùng theo họ tên hoặc số điện thoại
+        $userSearch = UsersModel::with('details')
+            ->whereIn('user_type_id', [2, 3, 4, 5, 9])
+            ->where(function ($query) use ($keyword) {
+                $query->where('fullname', 'like', '%' . $keyword . '%')
+                    ->orWhere('phone', 'like', '%' . $keyword . '%');
+            })
+            ->orderBy('user_id', 'DESC')
+            ->limit(2)
+            ->get();
+        // Chuẩn bị ảnh đại diện và đường dẫn
+        $userSearch->transform(function ($user) {
+        // Nếu user đã có ảnh đại diện thì dùng ảnh đó
+        if (!empty($user['details']['image'])) {
+            $user->imgThumb = route('home') . '/public' . $user['details']['image'];
+        } else {
+            // Chọn ảnh mặc định theo loại tài khoản
+            if ($user['user_type_id'] == 3) {
+                $imageSrc = '/public/fileUpload/nhathuoc/6880e04c0fa57.jpg';
+            } elseif ($user['user_type_id'] == 2) {
+                $imageSrc = '/public/fileUpload/nhathuoc/6898c9b8bf789.jpg';
+            } elseif ($user['user_type_id'] == 4) {
+                $imageSrc = '/public/fileUpload/nhathuoc/nhathuocmau11.jpg';
+            } elseif ($user['user_type_id'] == 8) {
+                $imageSrc = '/public/fileUpload/nhathuoc/spa_tham_my_vien_mau.jpg';
+            } elseif ($user['user_type_id'] == 11) {
+                $imageSrc = '/public/fileUpload/nhathuoc/shop_me_va_be.jpg';
+            } else {
+                $imageSrc = '/public/fileUpload/nhathuoc/nhathuocmau10.jpg';
+            }
+            $user->imgThumb = route('home') . $imageSrc;
+        }
+        $user->linkShop = route('fe.product.drugstore', $user['slug']);
+        return $user;
+    });
         $title = 'Kết quả tìm kiếm';
         return view(
             $this->pathViewController . 'view',
-            compact('keyword', 'itemSearch', 'title')
+            compact('keyword', 'itemSearch', 'userSearch', 'title')
         );
     }
     public function deleteHistory(Request $request)
