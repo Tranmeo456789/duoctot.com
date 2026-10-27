@@ -19,7 +19,7 @@ if(isset($_COOKIE["keywordHistory"])){
         </div>
         <ul class="ls-history-search">
             @foreach($listKeywordHistory as $val)
-             <li><a href="{{route('fe.search.viewHome',$val['keyword'])}}">{{$val['keyword']}}</a></li>
+             <li><a href="{{ route('fe.search.saveHome', ['keyword' => $val['keyword']]) }}">{{$val['keyword']}}</a></li>
             @endforeach
         </ul>
     </div>
@@ -32,7 +32,7 @@ if(isset($_COOKIE["keywordHistory"])){
         @if(isset($listKeywordHight))
         <div class="ls-top-keyword">
             @foreach($listKeywordHight as $val)
-            <a href="{{route('fe.search.viewHome',$val['keyword'])}}">{{$val['keyword']}}</a>
+            <a href="{{ route('fe.search.saveHome', ['keyword' => $val['keyword']]) }}">{{$val['keyword']}}</a>
             @endforeach
         </div>
         @endif

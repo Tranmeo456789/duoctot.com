@@ -31,7 +31,7 @@ $dataHref = route('fe.product.searchListProductShort');
     <ul class="d-flex justify-content-between list-hight-home">
         @foreach($listKeywordHight as $val)
         <li>
-            <a href="{{route('fe.search.viewHome',$val['keyword'])}}">{{$val['keyword']}}</a>
+            <a href="{{ route('fe.search.saveHome', ['keyword' => $val['keyword']]) }}">{{$val['keyword']}}</a>
         </li>
         @endforeach
     </ul>

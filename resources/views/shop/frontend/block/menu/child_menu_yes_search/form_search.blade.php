@@ -30,7 +30,7 @@
     @if(isset($listKeywordHight))
     <div class="ls-top-keyword">
         @foreach($listKeywordHight as $val)
-        <a href="{{route('fe.search.viewHome',$val['keyword'])}}">{{$val['keyword']}}</a>
+        <a href="{{ route('fe.search.saveHome', ['keyword' => $val['keyword']]) }}">{{$val['keyword']}}</a>
         @endforeach
     </div>
     @endif

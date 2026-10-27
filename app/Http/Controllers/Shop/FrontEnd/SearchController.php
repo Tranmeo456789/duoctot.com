@@ -148,6 +148,156 @@ class SearchController extends ShopFrontEndController
     //         compact('keyword', 'itemSearch', 'title')
     //     );
     // }
+    
+    // public function search(Request $request)
+    // {
+    //     $keyword = trim($request->input('keyword'));
+
+    //     if (empty($keyword)) {
+    //         return redirect()->back();
+    //     }
+
+    //     $params['keyword'] = $keyword;
+
+    //     // 1. Lưu lịch sử tìm kiếm
+    //     $keywordHistory = isset($_COOKIE["keywordHistory"])
+    //         ? json_decode($_COOKIE["keywordHistory"], true)
+    //         : [];
+
+    //     if (!is_array($keywordHistory)) {
+    //         $keywordHistory = [];
+    //     }
+
+    //     $keywordCurrent = [
+    //         $keyword => ['keyword' => $keyword]
+    //     ];
+
+    //     unset($keywordHistory[$keyword]);
+    //     $keywordHistory = $keywordCurrent + $keywordHistory;
+
+    //     if (count($keywordHistory) > 5) {
+    //         array_pop($keywordHistory);
+    //     }
+
+    //     setcookie(
+    //         "keywordHistory",
+    //         json_encode($keywordHistory),
+    //         time() + config('myconfig.time_cookie'),
+    //         "/"
+    //     );
+
+    //     $_COOKIE["keywordHistory"] = json_encode($keywordHistory);
+
+    //     // 2. Tìm sản phẩm - giữ nguyên logic hiện tại
+    //     $session = $request->session();
+
+    //     if ($session->has('user')) {
+    //         $cacheKey = 'duoctot_search_login_' . $keyword;
+
+    //         $itemSearch = Cache::tags('duoctot_search')->remember(
+    //             $cacheKey,
+    //             1800,
+    //             function () use ($params) {
+    //                 return (new ProductModel)->listItems($params, [
+    //                     'task' => 'list-items-search-user-has-login'
+    //                 ]);
+    //             }
+    //         );
+    //     } else {
+    //         $cacheKey = 'duoctot_search_guest_' . $keyword;
+
+    //         $itemSearch = Cache::tags('duoctot_search')->remember(
+    //             $cacheKey,
+    //             1800,
+    //             function () use ($params) {
+    //                 return (new ProductModel)->listItems($params, [
+    //                     'task' => 'list-items-search'
+    //                 ]);
+    //             }
+    //         );
+    //     }
+
+    //     // 3. Tách từ khóa để tìm theo từng từ
+    //     $words = preg_split('/\s+/u', $keyword);
+    //     $words = array_values(array_unique(array_filter($words)));
+
+    //     // 4. Tìm người dùng theo tên hoặc số điện thoại
+    //     $userSearch = UsersModel::with('details')
+    //         ->whereIn('user_type_id', [2, 3, 4, 5, 9])
+    //         ->where(function ($query) use ($keyword, $words) {
+    //             $query->where('fullname', 'like', '%' . $keyword . '%')
+    //                 ->orWhere('phone', 'like', '%' . $keyword . '%');
+
+    //             foreach ($words as $word) {
+    //                 $query->orWhere('fullname', 'like', '%' . $word . '%');
+    //             }
+    //         })
+    //         ->get();
+
+    //     // 5. Xếp hạng: khớp đầy đủ trước, nhiều từ khớp hơn xếp cao hơn
+    //     $keywordLower = mb_strtolower($keyword, 'UTF-8');
+
+    //     $userSearch = $userSearch->map(function ($user) use ($keywordLower, $words) {
+    //         $fullname = mb_strtolower(trim($user->fullname), 'UTF-8');
+    //         $matchedWords = 0;
+
+    //         foreach ($words as $word) {
+    //             if (mb_stripos($fullname, $word, 0, 'UTF-8') !== false) {
+    //                 $matchedWords++;
+    //             }
+    //         }
+
+    //         if ($fullname === $keywordLower) {
+    //             $user->searchRank = 1000;
+    //         } elseif ($matchedWords > 0) {
+    //             $user->searchRank = $matchedWords;
+    //         } else {
+    //             $user->searchRank = 0;
+    //         }
+
+    //         return $user;
+    //     })->sortByDesc('searchRank')->take(20)->values();
+
+    //     // 6. Chuẩn bị ảnh đại diện, đường dẫn và địa chỉ
+    //     $userSearch->transform(function ($user) {
+    //         // Ảnh đại diện
+    //         if (!empty($user['details']['image'])) {
+    //             $user->imgThumb = route('home') . '/public' . $user['details']['image'];
+    //         } else {
+    //             if ($user['user_type_id'] == 3) {
+    //                 $imageSrc = '/public/fileUpload/nhathuoc/6880e04c0fa57.jpg';
+    //             } elseif ($user['user_type_id'] == 2) {
+    //                 $imageSrc = '/public/fileUpload/nhathuoc/6898c9b8bf789.jpg';
+    //             } elseif ($user['user_type_id'] == 4) {
+    //                 $imageSrc = '/public/fileUpload/nhathuoc/nhathuocmau11.jpg';
+    //             } elseif ($user['user_type_id'] == 8) {
+    //                 $imageSrc = '/public/fileUpload/nhathuoc/spa_tham_my_vien_mau.jpg';
+    //             } elseif ($user['user_type_id'] == 11) {
+    //                 $imageSrc = '/public/fileUpload/nhathuoc/shop_me_va_be.jpg';
+    //             } else {
+    //                 $imageSrc = '/public/fileUpload/nhathuoc/nhathuocmau10.jpg';
+    //             }
+
+    //             $user->imgThumb = route('home') . $imageSrc;
+    //         }
+
+    //         // Đường dẫn trang người dùng/nhà thuốc
+    //         $user->linkShop = route('fe.product.drugstore', $user['slug']);
+
+    //         // Địa chỉ: sử dụng hàm buildAddress giống trang danh sách nhà thuốc
+    //         $user->address = $this->buildAddress($user['details'] ?? null);
+
+    //         return $user;
+    //     });
+
+    //     // 7. Trả dữ liệu ra giao diện
+    //     $title = 'Kết quả tìm kiếm';
+
+    //     return view(
+    //         $this->pathViewController . 'view',
+    //         compact('keyword', 'itemSearch', 'userSearch', 'title')
+    //     );
+    // }
     public function search(Request $request)
     {
         $keyword = trim($request->input('keyword'));
@@ -155,16 +305,15 @@ class SearchController extends ShopFrontEndController
             return redirect()->back();
         }
         $params['keyword'] = $keyword;
-        // Lưu lịch sử tìm kiếm
+        // 1. Lưu lịch sử tìm kiếm
         $keywordHistory = isset($_COOKIE["keywordHistory"])
             ? json_decode($_COOKIE["keywordHistory"], true)
             : [];
         if (!is_array($keywordHistory)) {
             $keywordHistory = [];
         }
-        $keywordCurrent = [];
-        $keywordCurrent[$keyword] = [
-            'keyword' => $keyword
+        $keywordCurrent = [
+            $keyword => ['keyword' => $keyword]
         ];
         unset($keywordHistory[$keyword]);
         $keywordHistory = $keywordCurrent + $keywordHistory;
@@ -178,7 +327,7 @@ class SearchController extends ShopFrontEndController
             "/"
         );
         $_COOKIE["keywordHistory"] = json_encode($keywordHistory);
-        // Lấy sản phẩm: giữ nguyên logic hiện tại
+        // 2. Tìm sản phẩm - giữ nguyên logic cũ
         $session = $request->session();
         if ($session->has('user')) {
             $cacheKey = 'duoctot_search_login_' . $keyword;
@@ -203,46 +352,131 @@ class SearchController extends ShopFrontEndController
                 }
             );
         }
-        // Tìm người dùng theo họ tên hoặc số điện thoại
+        // 3. Tách từ khóa để tìm thêm kết quả gần đúng
+        // Vẫn giữ nguyên $keyword để ưu tiên tìm nguyên cụm trước
+        $words = preg_split('/\s+/u', $keyword);
+        $words = array_values(array_unique(array_filter($words)));
+        // 4. Tìm người dùng theo tên hoặc số điện thoại
         $userSearch = UsersModel::with('details')
             ->whereIn('user_type_id', [2, 3, 4, 5, 9])
-            ->where(function ($query) use ($keyword) {
+            ->where(function ($query) use ($keyword, $words) {
+                // Tìm nguyên cụm từ khóa
                 $query->where('fullname', 'like', '%' . $keyword . '%')
                     ->orWhere('phone', 'like', '%' . $keyword . '%');
+                // Tìm thêm theo từng từ
+                foreach ($words as $word) {
+                    $query->orWhere('fullname', 'like', '%' . $word . '%');
+                }
             })
-            ->orderBy('user_id', 'DESC')
-            ->limit(2)
             ->get();
-        // Chuẩn bị ảnh đại diện và đường dẫn
-        $userSearch->transform(function ($user) {
-        // Nếu user đã có ảnh đại diện thì dùng ảnh đó
-        if (!empty($user['details']['image'])) {
-            $user->imgThumb = route('home') . '/public' . $user['details']['image'];
-        } else {
-            // Chọn ảnh mặc định theo loại tài khoản
-            if ($user['user_type_id'] == 3) {
-                $imageSrc = '/public/fileUpload/nhathuoc/6880e04c0fa57.jpg';
-            } elseif ($user['user_type_id'] == 2) {
-                $imageSrc = '/public/fileUpload/nhathuoc/6898c9b8bf789.jpg';
-            } elseif ($user['user_type_id'] == 4) {
-                $imageSrc = '/public/fileUpload/nhathuoc/nhathuocmau11.jpg';
-            } elseif ($user['user_type_id'] == 8) {
-                $imageSrc = '/public/fileUpload/nhathuoc/spa_tham_my_vien_mau.jpg';
-            } elseif ($user['user_type_id'] == 11) {
-                $imageSrc = '/public/fileUpload/nhathuoc/shop_me_va_be.jpg';
-            } else {
-                $imageSrc = '/public/fileUpload/nhathuoc/nhathuocmau10.jpg';
+        // 5. Xếp hạng kết quả tìm kiếm
+        $keywordLower = mb_strtolower($keyword, 'UTF-8');
+        $userSearch = $userSearch->map(function ($user) use ($keywordLower, $words) {
+            $fullname = mb_strtolower(trim($user->fullname), 'UTF-8');
+            $matchedWords = 0;
+            foreach ($words as $word) {
+                $wordLower = mb_strtolower($word, 'UTF-8');
+                if (mb_stripos($fullname, $wordLower, 0, 'UTF-8') !== false) {
+                    $matchedWords++;
+                }
             }
-            $user->imgThumb = route('home') . $imageSrc;
-        }
-        $user->linkShop = route('fe.product.drugstore', $user['slug']);
-        return $user;
-    });
+            // Ưu tiên theo thứ tự:
+            // 1000: Tên khớp chính xác toàn bộ từ khóa
+            // 900: Tên chứa nguyên cụm từ khóa
+            // Sau đó: Tên khớp nhiều từ hơn
+            if ($fullname === $keywordLower) {
+                $user->searchRank = 1000;
+            } elseif (mb_stripos($fullname, $keywordLower, 0, 'UTF-8') !== false) {
+                $user->searchRank = 900;
+            } else {
+                $user->searchRank = $matchedWords;
+            }
+            return $user;
+        })->sortByDesc('searchRank')->take(10)->values();
+        // 6. Chuẩn bị ảnh đại diện, đường dẫn và địa chỉ
+        $userSearch->transform(function ($user) {
+            // Ảnh đại diện
+            if (!empty($user['details']['image'])) {
+                $user->imgThumb = route('home') . '/public' . $user['details']['image'];
+            } else {
+                if ($user['user_type_id'] == 3) {
+                    $imageSrc = '/public/fileUpload/nhathuoc/6880e04c0fa57.jpg';
+                } elseif ($user['user_type_id'] == 2) {
+                    $imageSrc = '/public/fileUpload/nhathuoc/6898c9b8bf789.jpg';
+                } elseif ($user['user_type_id'] == 4) {
+                    $imageSrc = '/public/fileUpload/nhathuoc/nhathuocmau11.jpg';
+                } elseif ($user['user_type_id'] == 8) {
+                    $imageSrc = '/public/fileUpload/nhathuoc/spa_tham_my_vien_mau.jpg';
+                } elseif ($user['user_type_id'] == 11) {
+                    $imageSrc = '/public/fileUpload/nhathuoc/shop_me_va_be.jpg';
+                } else {
+                    $imageSrc = '/public/fileUpload/nhathuoc/nhathuocmau10.jpg';
+                }
+                $user->imgThumb = route('home') . $imageSrc;
+            }
+            // Đường dẫn trang nhà thuốc/người dùng
+            $user->linkShop = route('fe.product.drugstore', $user['slug']);
+            // Địa chỉ giống cách xây dựng trong listDrugstore()
+            $user->address = $this->buildAddress($user['details'] ?? null);
+            return $user;
+        });
+        // 7. Trả dữ liệu ra giao diện
         $title = 'Kết quả tìm kiếm';
+        $totalProduct = count($itemSearch);
+        $totalUser = isset($userSearch) ? $userSearch->count() : 0;
+        $totalResult = $totalProduct + $totalUser;
         return view(
             $this->pathViewController . 'view',
-            compact('keyword', 'itemSearch', 'userSearch', 'title')
+            compact('keyword', 'itemSearch', 'userSearch', 'title','totalResult')
         );
+    }
+    private function buildAddress($details)
+    {
+        if (empty($details)) return '';
+        $addressBase = trim($details['address'] ?? '');
+        $wardId     = $details['ward_id'] ?? null;
+        $districtId = $details['district_id'] ?? null;
+        $provinceId = $details['province_id'] ?? null;
+        $ward = '';
+        $district = '';
+        $province = '';
+        // ===== 1. Ưu tiên ward =====
+        if ($wardId) {
+            $wardDetail = Cache::remember('ward_full_' . $wardId, 3600, function () use ($wardId) {
+                return WardModel::with('district.province')->find($wardId) ?: '__null__';
+            });
+            if ($wardDetail !== '__null__' && $wardDetail) {
+                $ward     = $wardDetail->name ?? '';
+                $district = $wardDetail->district->name ?? '';
+                $province = $wardDetail->district->province->name ?? '';
+            }
+        }
+        // ===== 2. Fallback district =====
+        if (empty($district) && $districtId) {
+            $districtDetail = Cache::remember('district_full_' . $districtId, 3600, function () use ($districtId) {
+                return DistrictModel::with('province')->find($districtId) ?: '__null__';
+            });
+            if ($districtDetail !== '__null__' && $districtDetail) {
+                $district = $districtDetail->name ?? '';
+                $province = $districtDetail->province->name ?? '';
+            }
+        }
+        // ===== 3. Fallback province =====
+        if (empty($province) && $provinceId) {
+            $provinceDetail = Cache::remember('province_' . $provinceId, 3600, function () use ($provinceId) {
+                return ProvinceModel::find($provinceId) ?: '__null__';
+            });
+            if ($provinceDetail !== '__null__' && $provinceDetail) {
+                $province = $provinceDetail->name ?? '';
+            }
+        }
+        // ===== 4. Build chuỗi =====
+        $parts = [];
+        if ($addressBase) $parts[] = $addressBase;
+        if ($ward)        $parts[] = $ward;
+        if ($district)    $parts[] = $district;
+        if ($province)    $parts[] = $province;
+        return !empty($parts) ? implode(', ', $parts) : '';
     }
     public function deleteHistory(Request $request)
     {

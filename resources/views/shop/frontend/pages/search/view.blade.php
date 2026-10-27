@@ -18,14 +18,31 @@
     font-size: 15px;
     font-weight: 600;
 }
+.search-user-info {
+    min-width: 0;
+    flex: 1;
+}
+
+.search-user-name {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.search-user-detail {
+    font-size: 13px;
+    color: #666;
+    margin-top: 3px;
+    overflow-wrap: anywhere;
+}
 </style>
 <script>document.addEventListener("DOMContentLoaded",function(){if(document.querySelector(".banner_doitac")){var s1=tns({container:".banner_doitac",items:1,slideBy:1,loop:!0,speed:400,autoplay:!0,autoplayTimeout:5e3,autoplayButtonOutput:!1,controls:!1,nav:!1,mouseDrag:!0,touch:!0,gutter:4,edgePadding:0,onInit:function(){document.querySelector(".banner_doitac").classList.remove("cS-hidden")}})}if(document.querySelector(".banner_doitac_mobi")){var s2=tns({container:".banner_doitac_mobi",items:1,slideBy:1,loop:!0,speed:400,autoplay:!0,autoplayTimeout:5e3,autoplayButtonOutput:!1,controls:!1,nav:!1,mouseDrag:!0,touch:!0,gutter:4,edgePadding:0,onInit:function(){document.querySelector(".banner_doitac_mobi").classList.remove("cS-hidden")}})}var s3;if(document.querySelector(".list_thumb_user")){s3=tns({container:".list_thumb_user",items:1,slideBy:1,loop:!0,speed:400,autoplay:!1,autoplayTimeout:5e3,autoplayButtonOutput:!1,controls:!1,nav:!1,mouseDrag:!0,touch:!0,gutter:4,edgePadding:0,autoHeight:!0,onInit:function(){document.querySelector(".list_thumb_user").classList.remove("cS-hidden")}})}var pb=document.querySelector(".prev-btn"),nb=document.querySelector(".next-btn");if(s3&&pb)pb.addEventListener("click",function(){s3.goTo("prev")});if(s3&&nb)nb.addEventListener("click",function(){s3.goTo("next")})});</script>
 @endsection
 @section('content')
 <div>
     <div class="wp-inner">
-        @if(count($itemSearch) > 0)
-       <div class="title-header-search">Tìm thấy <span class="font-weight-bold">{{count($itemSearch)}}</span> kết quả với từ khóa "<span class="font-weight-bold">{{$keyword}}</span>"</div>
+        @if($totalResult > 0)
+       <div class="title-header-search">Tìm thấy <span class="font-weight-bold">{{$totalResult}}</span> kết quả với từ khóa "<span class="font-weight-bold">{{$keyword}}</span>"</div>
        @else
        <div class="title-header-search">Không tìm thấy kết quả với từ khóa "<span class="font-weight-bold">{{$keyword}}</span>"</div>
        <div class="lc-searchpost-inner py-2">
@@ -46,11 +63,32 @@
             @if(isset($userSearch) && $userSearch->count() > 0)
                 <div class="search-users mb-3">
                     @foreach($userSearch as $user)
-                        <a href="{{ $user->linkShop }}" class="search-user-item d-flex align-items-center mb-2 p-2">
-                            <img src="{{ $user->imgThumb }}" alt="{{ $user->fullname }}" class="search-user-avatar mr-3">
-                            <span class="search-user-name">
-                                {{ $user->fullname }}
-                            </span>
+                        <a href="{{ $user->linkShop }}"
+                        class="search-user-item d-flex align-items-center mb-2 p-2">
+
+                            <img
+                                src="{{ $user->imgThumb }}"
+                                alt="{{ $user->fullname }}"
+                                class="search-user-avatar mr-3"
+                            >
+
+                            <div class="search-user-info">
+                                <div class="search-user-name">
+                                    {{ $user->fullname }}
+                                </div>
+
+                                @if(!empty($user->phone))
+                                    <div class="search-user-detail">
+                                        SĐT: {{ $user->phone }}
+                                    </div>
+                                @endif
+
+                                @if(!empty($user->address))
+                                    <div class="search-user-detail">
+                                        Địa chỉ: {{ $user->address }}
+                                    </div>
+                                @endif
+                            </div>
                         </a>
                     @endforeach
                 </div>
