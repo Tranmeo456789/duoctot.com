@@ -3,7 +3,7 @@ use Illuminate\Support\Str;
 use App\Helpers\MyFunction;
 
 $contact=$item['contact']??'0345488247';
-$contact=MyFunction::formatPhoneNumber($contact);
+$contactFormat=MyFunction::formatPhoneNumber($contact);
 @endphp
 @extends('shop.layouts.frontend')
 @section('headadd')
@@ -388,26 +388,14 @@ $contact=MyFunction::formatPhoneNumber($contact);
                 <span>@include("$moduleName.block.seo-score-dot",['score' => $item->score_seo])</span>
                 @endif
                 <h1 class="mb-2">{{$item['name']}}</h1>
-                @php
-                $phoneOfShopConfig='0345488247';
-                $phoneShop=$contact??'';
-                $idShop=$item->userProduct->user_id??'';
-                @endphp
-                @php
-    if (in_array($idShop, [1984152952])) {
-        $phoneOfShopShow = $phoneShop;
-    } else {
-        $phoneOfShopShow = $phoneOfShopConfig;
-    }
-@endphp
                 @if($item['hidden_cart']==1)
                     <div style="font-size: 14px;color: #e41717;" class="mb-3">Thuốc này được bán theo đơn của bác sĩ</div>
-                    <div style="font-size: 22px" class="mb-2"><span class="font-weight-bold"><a href="tel:{{$phoneOfShopShow}}" style="font-size: 30px; color:red">{{$phoneOfShopShow}}</a></span></div>
+                    <div style="font-size: 22px" class="mb-2"><span class="font-weight-bold"><a href="tel:{{$contact}}" style="font-size: 30px; color:red">{{$contactFormat}}</a></span></div>
                     <div style="font-size: 22px;border-bottom: 1px solid rgb(121, 145, 183);padding: 12px 0px;">
-                    <a class="image-contact" href='tel:{{$phoneOfShopShow}}' rel="nofollow" title="Gọi điện" previewlistener="true" style="padding-left: 15px">
+                    <a class="image-contact" href='tel:{{$$contact}}' rel="nofollow" title="Gọi điện" previewlistener="true" style="padding-left: 15px">
                         <img src="{{asset('images/shop/icon_goidien.png')}}" alt="Gọi điện Tdoctor" style="width: 38px;" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
                     </a>
-                    <a class="image-contact" href="https://zalo.me/{{$phoneOfShopShow}}" rel="nofollow" target="_blank" title="Zalo" previewlistener="true" style="padding-left: 15px">
+                    <a class="image-contact" href="https://zalo.me/{{$contact}}" rel="nofollow" target="_blank" title="Zalo" previewlistener="true" style="padding-left: 15px">
                         <img src="{{asset('images/shop/icon_zalo.png')}}" alt="Zalo Tdoctor" style="width: 38px;padding-bottom: 5px;box-shadow: 0 2px 6px rgb(239 234 234 / 50%);">
                     </a>
                 </div>
@@ -416,12 +404,12 @@ $contact=MyFunction::formatPhoneNumber($contact);
                         <span style="color: #ffc107; font-size: 1.75rem;">★★★★★</span>
                         <span class="lead font-weight-bold pl-2">5</span>
                     </div>
-                    <div style="font-size: 22px" class="mb-2">Liên hệ mua lẻ  <span class="font-weight-bold"><a href="tel:{{$phoneOfShopShow}}" style="font-size: 30px; color:red">{{$phoneOfShopShow}}</a></span></div>
+                    <div style="font-size: 22px" class="mb-2">Liên hệ mua lẻ  <span class="font-weight-bold"><a href="tel:{{$contact}}" style="font-size: 30px; color:red">{{$contactFormat}}</a></span></div>
                     <div style="font-size: 22px;border-bottom: 1px solid rgb(121, 145, 183);padding: 12px 0px;">Liên hệ mua sỉ
-                        <a class="image-contact" href='tel:{{$phoneOfShopShow}}' rel="nofollow" title="Gọi điện" previewlistener="true" style="padding-left: 15px">
+                        <a class="image-contact" href='tel:{{$contact}}' rel="nofollow" title="Gọi điện" previewlistener="true" style="padding-left: 15px">
                             <img src="{{asset('images/shop/icon_goidien.png')}}" alt="Gọi điện Tdoctor" style="width: 38px;" alt="tdoctor" loading="lazy" width="30" height="30" decoding="async">
                         </a>
-                        <a class="image-contact" href="https://zalo.me/{{$phoneOfShopShow}}" rel="nofollow" target="_blank" title="Zalo" previewlistener="true" style="padding-left: 15px">
+                        <a class="image-contact" href="https://zalo.me/{{$contact}}" rel="nofollow" target="_blank" title="Zalo" previewlistener="true" style="padding-left: 15px">
                             <img src="{{asset('images/shop/icon_zalo.png')}}" alt="Zalo Tdoctor" style="width: 38px;padding-bottom: 5px;box-shadow: 0 2px 6px rgb(239 234 234 / 50%);">
                         </a>
                     </div>
@@ -520,8 +508,8 @@ $contact=MyFunction::formatPhoneNumber($contact);
                 <div class="mb-3 text-center rounded py-1" style="background: #05afe3;">
                     <span class="contact-buy font-weight-bold">
                         <span class="text-light pb-3">Liên hệ Hotline </span>
-                        <a href="tel:0345488247" class="d-inline-block py-2 px-3 bg-white rounded">
-                            <span class="phone">{{$contact}}</span>
+                        <a href="tel:{{$contact}}" class="d-inline-block py-2 px-3 bg-white rounded">
+                            <span class="phone">{{$contactFormat??''}}</span>
                         </a>
                     </span>
                 </div>

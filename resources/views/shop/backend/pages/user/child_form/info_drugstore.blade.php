@@ -116,6 +116,11 @@
         [
                 'label'   => Form::label('map', 'Bản đồ', $formLabelAttr),
                 'element' => Form::textarea('details[map]', $item['details']['map']?? '', array_merge($formInputAttr,['placeholder'=>'Bản đồ',"rows"=>"5"]))
+        ],
+        [
+            'label'   => HTML::decode(Form::label('show_phone', 'Trạng thái hiện SDT', $formLabelAttr)),
+            'element' => Form::text('show_phone', $item['show_phone']??null, array_merge($formInputAttr,['placeholder'=>'Trạng thái hiện SDT'])),
+            'widthElement' => 'col-12'
         ]
     ];
     $arrTypeUser = config('myconfig.template.type_user');
