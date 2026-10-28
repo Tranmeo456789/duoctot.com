@@ -45,7 +45,7 @@
                         }
                         $address=$val['details']['address'].$ward.$district.$province;
                     }
-                    if (in_array($val['user_id'], [1984151811, 1984152436, 1984152512,1984152856])){
+                    if (in_array($val['user_id'], [1984151811, 1984152436, 1984152512,1984152856,1984152952])){
                         $phoneOfShopShow = $val['phone'] ?? $val['email'];
                     }else{
                         $phoneOfShopShow = $phoneOfShopConfig;
