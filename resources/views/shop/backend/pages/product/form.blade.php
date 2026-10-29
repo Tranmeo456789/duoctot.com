@@ -174,11 +174,6 @@
                 'widthElement' => 'col-6'
             ],
             [
-                'label'   => HTML::decode(Form::label('contact','SĐT liên hệ', $formLabelAttr)),
-                'element' => Form::text('contact', $item['contact']??'0345488247', array_merge($formInputAttr,['placeholder'=>'SĐT liên hệ'])),
-                'widthElement' => 'col-6'
-            ],
-            [
                 'label' => Form::label('prescription_drug', 'Thuốc cần kê toa',$formLabelAttr),
                 'element' => Form::radio('prescription_drug', 1,(isset($item['prescription_drug']) && $item['prescription_drug'] == 1) ? true : false),
                 'type' =>'inline-text-right',
@@ -222,6 +217,15 @@
                 'widthElement' => 'col-6',
                 'styleFormGroup' => 'mb-1',
             ];
+          $elements2[] = [
+                'label'   => HTML::decode(Form::label('contact','SĐT liên hệ', $formLabelAttr)),
+                'element' => Form::text('contact', $item['contact']??'0345488247', array_merge($formInputAttr,['placeholder'=>'SĐT liên hệ'])),
+                'widthElement' => 'col-6'
+            ]; 
+            $elements2[] = [
+                'label'   => HTML::decode(Form::label('keyword_search', 'Từ khóa tìm kiếm', $formLabelAttr)),
+                'element' => Form::textarea('keyword_search', $item['keyword_search']?? null, array_merge($formEditorAttr,['placeholder'=>'Từ khóa tìm kiếm','id'=>'keyword_search']))
+            ];  
     }
     $elements2 = array_merge($elements2,
         [
@@ -281,10 +285,6 @@
             ],[
                 'label'   => HTML::decode(Form::label('general_info', $label['general_info'], $formLabelAttr)),
                 'element' => Form::textarea('general_info', $item['general_info']?? null, array_merge($formEditorAttr,['placeholder'=>$label['general_info'],'id'=>'general_info']))
-            ],
-            [
-                'label'   => HTML::decode(Form::label('keyword_search', 'Từ khóa tìm kiếm', $formLabelAttr)),
-                'element' => Form::textarea('keyword_search', $item['keyword_search']?? null, array_merge($formEditorAttr,['placeholder'=>'Từ khóa tìm kiếm','id'=>'keyword_search']))
             ],
             [
                 'element' => $inputHiddenID . $inputFileDel .Form::submit('Lưu', ['class'=>'btn btn-primary']),

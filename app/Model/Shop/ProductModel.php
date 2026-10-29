@@ -932,7 +932,7 @@ class ProductModel extends BackEndModel
             //         $params['status_product'] = 'cho_kiem_duyet';
             //     }
             // }
-            $params['keyword_search'] = $params['keyword_search'];
+            $params['keyword_search'] = $params['keyword_search']??$item['keyword_search'];
             
             self::where('id', $params['id'])->update($this->prepareParams($params));
             Cache::tags(['duoctot_product'])->flush();
