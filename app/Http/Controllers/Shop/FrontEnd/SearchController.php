@@ -352,6 +352,10 @@ class SearchController extends ShopFrontEndController
                 }
             );
         }
+        // Ưu tiên sản phẩm của user_id = 1984152952 lên đầu
+        $itemSearch = collect($itemSearch)->sortBy(function ($item) {
+            return (int) ($item['user_id'] ?? 0) === 1984152952 ? 0 : 1;
+        })->values();
         // 3. Tách từ khóa để tìm thêm kết quả gần đúng
         // Vẫn giữ nguyên $keyword để ưu tiên tìm nguyên cụm trước
         $words = preg_split('/\s+/u', $keyword);

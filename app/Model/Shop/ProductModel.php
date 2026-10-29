@@ -537,7 +537,7 @@ class ProductModel extends BackEndModel
         if ($options['task'] == "list-items-search") {
             $query = $this::query()
                 ->with(['unitProduct'])
-                ->select('id','name','image','price','percent_discount','unit_id','specification','slug','show_price','alt_image','title_image','prescription_drug','hidden_cart')
+                ->select('id','name','image','price','percent_discount','unit_id','specification','slug','show_price','alt_image','title_image','prescription_drug','hidden_cart','user_id')
                 ->where('status_product', 'da_duyet');
             // filter user bán trước để tận dụng index
             if (!empty($params['user_sell'])) {
@@ -588,7 +588,7 @@ class ProductModel extends BackEndModel
         if ($options['task'] == "list-items-search-user-has-login") {
             $query = $this::query()
                 ->with(['unitProduct'])
-                ->select('id','name','image','price','percent_discount','unit_id','specification','slug','show_price','alt_image','title_image','prescription_drug','hidden_cart')
+                ->select('id','name','image','price','percent_discount','unit_id','specification','slug','show_price','alt_image','title_image','prescription_drug','hidden_cart','user_id')
                  ->whereIn('status_product', ['da_duyet', 'sp_an']);
             // filter user bán trước để tận dụng index
             if (!empty($params['user_sell'])) {
@@ -699,7 +699,7 @@ class ProductModel extends BackEndModel
                                     'mass','discount_ref','discount_tdoctor','contact','meta_keywords','meta_description','show_price',
                                     'prescription_drug','alt_image','title_image','created_by','approver_by','created_at','updated_at',
                                     'brand_manufacturer','company_registered','number_registered','elements_mini','name_short','score_seo',
-                                    'status_product','hidden_cart'
+                                    'status_product','hidden_cart','keyword_search'
                                     );
             if(isset($params['slug'])){
                 $query->where('slug', $params['slug']);

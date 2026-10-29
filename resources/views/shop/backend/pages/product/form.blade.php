@@ -283,6 +283,10 @@
                 'element' => Form::textarea('general_info', $item['general_info']?? null, array_merge($formEditorAttr,['placeholder'=>$label['general_info'],'id'=>'general_info']))
             ],
             [
+                'label'   => HTML::decode(Form::label('keyword_search', 'Từ khóa tìm kiếm', $formLabelAttr)),
+                'element' => Form::textarea('keyword_search', $item['keyword_search']?? null, array_merge($formEditorAttr,['placeholder'=>'Từ khóa tìm kiếm','id'=>'keyword_search']))
+            ],
+            [
                 'element' => $inputHiddenID . $inputFileDel .Form::submit('Lưu', ['class'=>'btn btn-primary']),
                 'type'    => "btn-submit-center"
             ]
