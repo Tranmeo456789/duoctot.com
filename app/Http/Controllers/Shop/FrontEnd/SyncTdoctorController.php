@@ -701,6 +701,68 @@ class SyncTdoctorController extends ShopFrontEndController
             compact('pageTitle', 'totalInserted', 'notification')
         );
     }
+    public function viewChangeUserProduct()
+    {
+        return view('shop.backend.pages.syncTdoctor.form_change_user_product');
+    }
+    public function updateChangeUserProduct(Request $request)
+    {
+        $userId = $request->user_id;
+        $idProductStart = $request->id_product_start;
+        $idProductEnd = $request->id_product_end;
+        $warehouseId = $request->warehouse_id;
+        // Kiểm tra dữ liệu đầu vào
+        if (
+            !is_numeric($userId) ||
+            !is_numeric($idProductStart) ||
+            !is_numeric($idProductEnd) ||
+            !is_numeric($warehouseId)
+        ) {
+            return 'Dữ liệu không hợp lệ';
+        }
+        $userId = (int) $userId;
+        $idProductStart = (int) $idProductStart;
+        $idProductEnd = (int) $idProductEnd;
+        $warehouseId = (int) $warehouseId;
+        if (
+            $userId <= 0 ||
+            $warehouseId <= 0 ||
+            $idProductStart <= 0 ||
+            $idProductEnd < $idProductStart
+        ) {
+            return 'Dữ liệu không hợp lệ';
+        }
+        // Đếm số sản phẩm thực tế thuộc khoảng ID
+        $totalProducts = ProductModel::whereBetween('id', [
+            $idProductStart,
+            $idProductEnd
+        ])->count();
+        // Cập nhật NCC trong bảng products
+        ProductModel::whereBetween('id', [
+            $idProductStart,
+            $idProductEnd
+        ])->update([
+            'user_id'    => $userId,
+            'created_by' => $userId,
+        ]);
+        // Cập nhật kho hàng trong bảng product_warehouse
+        DB::table('product_warehouse')
+            ->whereBetween('product_id', [
+                $idProductStart,
+                $idProductEnd
+            ])
+            ->update([
+                'warehouse_id' => $warehouseId,
+            ]);
+        // Thông báo kết quả
+        $totalInserted = $totalProducts;
+        $pageTitle = 'Cập nhật NCC và kho sản phẩm thành công';
+        $notification = "Đã cập nhật NCC và kho hàng thành công. Có {$totalInserted} sản phẩm được cập nhật.";
+        return view(
+            'shop.backend.pages.syncTdoctor.index',
+            compact('pageTitle', 'totalInserted', 'notification')
+        );
+    }
     public function preloadProductImagesBatch($startId = 1, $endId = 100, $batchSize = 50, $sleep = 2)
     {
         $products = DB::table('products')

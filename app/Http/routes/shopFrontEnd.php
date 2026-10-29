@@ -161,4 +161,6 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::get('add-rating-product-co-duoi-5','SyncTdoctorController@addRatingProduct')->name('fe.SyncTdoctor.addRatingProduct');
     Route::get('view-form-change-status-product-in-user','SyncTdoctorController@viewChangeStatusProductInUser')->name('fe.SyncTdoctor.viewChangeStatusProductInUser');
     Route::post('update-change-status-product-in-user','SyncTdoctorController@updateChangeStatusProductInUser')->name('fe.SyncTdoctor.updateChangeStatusProductInUser');
+    Route::get('view-form-change-user-product','SyncTdoctorController@viewChangeUserProduct')->name('fe.SyncTdoctor.viewChangeUserProduct');
+    Route::post('update-change-user-product','SyncTdoctorController@updateChangeUserProduct')->name('fe.SyncTdoctor.updateChangeUserProduct');
     });
