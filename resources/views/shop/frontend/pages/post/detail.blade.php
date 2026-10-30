@@ -233,7 +233,7 @@ $timePost = MyFunction::formatDateLongTime($item['created_at']);
                 </div>
             </div>
             <div class="content-post pb-4" id="toc-content-post">
-                {!! $item['content'] !!}
+                {!! \App\Helpers\ShortcodeHelper::parse($item['content']) !!}
             </div>
         </div>
         <div class="col-12 col-lg-2">
