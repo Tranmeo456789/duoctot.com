@@ -153,7 +153,7 @@ class CatalogModel extends BackEndModel
     }
     public function getCatBlog()
     {
-        $catIds = [21,22,24,29,33,67,68,69,71,72,73,75,76,80];
+        $catIds = [21,22,24,29,33,67,68,69,71,72,73,75,76,80,82];
         return $this->whereIn('id', $catIds)->get();
     }
     public function customerFeedBack()
