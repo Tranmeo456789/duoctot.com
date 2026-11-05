@@ -805,6 +805,62 @@ class SearchController extends ShopFrontEndController
                 'show_price' => '2'
             ]);
             return 'giá 0d thành công';
+        }else if ($request->khoi_phuc) {
+            $file = storage_path('app/restore_product_statuses.json');
+
+if (!file_exists($file)) {
+    return 'Không tìm thấy file lưu trạng thái cũ!';
+}
+
+$restoreStatuses = json_decode(file_get_contents($file), true);
+
+if (empty($restoreStatuses) || !is_array($restoreStatuses)) {
+    return 'Danh sách khôi phục không hợp lệ!';
+}
+
+$count = 0;
+
+foreach (array_chunk($restoreStatuses, 500, true) as $chunk) {
+
+    $case = 'CASE id ';
+
+    foreach ($chunk as $id => $status) {
+        if (!in_array($status, array('da_duyet', 'tu_choi'))) {
+            continue;
+        }
+
+        $case .= 'WHEN ' . (int) $id . " THEN '" . $status . "' ";
+    }
+
+    $case .= 'ELSE status_product END';
+
+    $ids = array_map('intval', array_keys($chunk));
+
+    // Cập nhật dữ liệu
+    DB::table('products')->whereIn('id', $ids)->update(array(
+        'status_product' => DB::raw($case),
+        'show_price' => 2,
+        'prescription_drug' => 1,
+        'hidden_cart' => 1
+    ));
+
+    // Xóa cache sản phẩm
+    $products = DB::table('products')
+        ->select('slug')
+        ->whereIn('id', $ids)
+        ->get();
+
+    foreach ($products as $product) {
+        if ($product->slug) {
+            Cache::forget('duoctot_product_guest_' . $product->slug);
+            Cache::forget('duoctot_product_login_' . $product->slug);
+        }
+    }
+
+    $count += count($ids);
+}
+
+return 'Đã khôi phục trạng thái và cập nhật 3 cột cho ' . $count . ' sản phẩm thành công!';
         }
         else if ($request->thay_image) {
             $start = 178;
