@@ -795,13 +795,14 @@ return 'Đã khôi phục trạng thái và cập nhật 3 cột cho ' . $count 
         }
         else if($request->an_sp_thuoc){
             // Danh sách ID danh mục cần ẩn sản phẩm
-            //$catProductIds = [33,143,144,139, 149,150,162,151,152,152,154,184,157,158,159,163,187,153,188,161,164,165,197,203,178,148,160,183,175,189,205,207,209];
-            $catProductIds = [143,144,197];
+            $catProductIds = [33,143,144,139, 149,150,162,151,152,152,154,184,157,158,159,163,187,153,188,161,164,165,197,203,178,148,160,183,175,189,205,207,209];
+            //$catProductIds = [143,144,197];
             // Chỉ lấy sản phẩm đúng điều kiện và đang được duyệt
             $query = ProductModel::where('status_product', 'da_duyet')
                 ->where(function ($q) use ($catProductIds) {
                     $q->whereIn('cat_product_id', $catProductIds)
-                    ->orWhere('name', 'LIKE', '%điều trị ung thư%');
+                    ->orWhere('name', 'LIKE', '%điều trị ung thư%')
+                    ->orWhere('name', 'LIKE', '%thuốc%');
                 });
             // Lưu ID và trạng thái cũ để sau này khôi phục
             $restoreStatuses = array();
@@ -815,7 +816,7 @@ return 'Đã khôi phục trạng thái và cập nhật 3 cột cho ' . $count 
                     }
                 });
             // Lưu danh sách ID và trạng thái cũ vào file JSON
-            $file = storage_path('app/restore_product_statuses.json');
+            $file = storage_path('app/restore_product_statuses2.json');
             file_put_contents(
                 $file,
                 json_encode($restoreStatuses, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
@@ -826,7 +827,7 @@ return 'Đã khôi phục trạng thái và cập nhật 3 cột cho ' . $count 
                     ->update(array('status_product' => 'sp_an'));
             }
             return 'Đã ẩn ' . count($restoreStatuses) .
-                ' sản phẩm. Đã lưu ID và trạng thái cũ tại storage/app/restore_product_statuses.json';
+                ' sản phẩm. Đã lưu ID và trạng thái cũ tại storage/app/restore_product_statuses2.json';
         }
         else if ($request->gia_0ncc) {
             $idNCC0Product = 1144150836;
@@ -838,7 +839,102 @@ return 'Đã khôi phục trạng thái và cập nhật 3 cột cho ' . $count 
                 'show_price' => '2'
             ]);
             return 'giá 0d thành công';
-        }else if ($request->khoi_phuc) {
+        }else if ($request->khoi_phuc2file) {
+
+    // Hai file lưu trạng thái cũ
+    $files = array(
+        storage_path('app/restore_product_statuses1.json'),
+        storage_path('app/restore_product_statuses2.json')
+    );
+
+    $restoreStatuses = array();
+
+    // Đọc và gộp dữ liệu từ hai file
+    foreach ($files as $file) {
+
+        if (!file_exists($file)) {
+            return 'Không tìm thấy file: ' . basename($file);
+        }
+
+        $data = json_decode(file_get_contents($file), true);
+
+        if (!is_array($data)) {
+            return 'Dữ liệu JSON không hợp lệ tại file: ' . basename($file);
+        }
+
+        // Gộp danh sách ID và trạng thái
+        $restoreStatuses = array_merge($restoreStatuses, $data);
+    }
+
+    if (empty($restoreStatuses)) {
+        return 'Danh sách khôi phục không có dữ liệu!';
+    }
+
+    // Chỉ chấp nhận các trạng thái hợp lệ
+    $validStatuses = array('da_duyet', 'tu_choi');
+    $restoreStatuses = array_filter($restoreStatuses, function ($status) use ($validStatuses) {
+        return in_array($status, $validStatuses);
+    });
+
+    if (empty($restoreStatuses)) {
+        return 'Không có trạng thái hợp lệ để khôi phục!';
+    }
+
+    $count = 0;
+
+    // Cập nhật từng nhóm 500 sản phẩm
+    foreach (array_chunk($restoreStatuses, 500, true) as $chunk) {
+
+        $case = 'CASE id ';
+        $ids = array();
+
+        foreach ($chunk as $id => $status) {
+
+            $id = (int) $id;
+
+            if ($id <= 0) {
+                continue;
+            }
+
+            $case .= 'WHEN ' . $id . " THEN '" . $status . "' ";
+
+            $ids[] = $id;
+        }
+
+        if (empty($ids)) {
+            continue;
+        }
+
+        $case .= 'ELSE status_product END';
+
+        // Lấy slug để xóa cache
+        $products = DB::table('products')
+            ->select('slug')
+            ->whereIn('id', $ids)
+            ->get();
+
+        // Khôi phục trạng thái sản phẩm
+        DB::table('products')
+            ->whereIn('id', $ids)
+            ->update(array(
+                'status_product' => DB::raw($case)
+            ));
+
+        // Xóa cache sản phẩm
+        foreach ($products as $product) {
+
+            if (!empty($product->slug)) {
+                Cache::forget('duoctot_product_guest_' . $product->slug);
+                Cache::forget('duoctot_product_login_' . $product->slug);
+            }
+        }
+
+        $count += count($ids);
+    }
+
+    return 'Đã khôi phục trạng thái sản phẩm thành công cho ' . $count . ' ID từ 2 file JSON!';
+}
+        else if ($request->khoi_phuc) {
             $file = storage_path('app/restore_product_statuses.json');
 
 if (!file_exists($file)) {

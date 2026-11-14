@@ -66,17 +66,18 @@
                         <p class="truncate3">{{$val['name']}}</p>
                     </div>
                     @if($val['show_price'] == 1)
-                    <span class="text-info" style="font-size: 15px;font-weight:700">{{ number_format( $val['price'], 0, "" ,"." )}}đ / {{$val->unitProduct->name}}</span>
+                    <!-- <span class="text-info" style="font-size: 15px;font-weight:700">{{ number_format( $val['price'], 0, "" ,"." )}}đ / {{$val->unitProduct->name}}</span>
                     <div class="price-old">
                         @if(!empty($val['percent_discount']))
                         {{ number_format( $priceOld, 0, "" ,"." )}}đ
                         @endif
-                    </div>
+                    </div> -->
+                    <span class="text-info">Liên hệ</span>
                     @elseif($val['prescription_drug'] == 1)
                     <span class="text-info">Thuốc kê đơn</span>
                     <div class="price-old"></div>
                     @else
-                    <span class="text-info">Giá liên hệ</span>
+                    <span class="text-info">Liên hệ</span>
                     <div class="price-old"></div>
                     @endif
                 </div>
