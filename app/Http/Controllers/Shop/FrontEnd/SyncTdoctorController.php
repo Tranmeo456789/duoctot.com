@@ -763,6 +763,110 @@ class SyncTdoctorController extends ShopFrontEndController
             compact('pageTitle', 'totalInserted', 'notification')
         );
     }
+    /**
+     * Hiển thị form cập nhật trạng thái sản phẩm từ file JSON
+     */
+    public function viewChangeStatusProductInFile()
+    {
+        return view(
+            'shop.backend.pages.syncTdoctor.form_change_status_product_in_file'
+        );
+    }
+        /**
+         * Cập nhật trạng thái sản phẩm từ danh sách JSON
+         */
+    public function updateChangeStatusProductInFile(Request $request)
+    {
+        set_time_limit(300);
+        // 1. Nhận dữ liệu từ form
+        $productList = trim($request->product_list);
+        $statusProduct = trim($request->status_product);
+        if (empty($productList) || empty($statusProduct)) {
+            return 'Vui lòng nhập đầy đủ mã danh sách và trạng thái sản phẩm!';
+        }
+        // 2. Kiểm tra mã danh sách
+        // Chỉ chấp nhận mã bắt đầu bằng sp_
+        if (!preg_match('/^sp_[a-zA-Z0-9_-]+$/', $productList)) {
+            return 'Mã danh sách sản phẩm không hợp lệ!';
+        }
+        // 3. Tự động chuyển mã sp_ thành tên file product_
+        // Ví dụ: sp_ungthu => product_ungthu.json
+        $fileName = 'product_' . substr($productList, 3) . '.json';
+        $filePath = storage_path('app/' . $fileName);
+        // 4. Kiểm tra file tồn tại
+        if (!file_exists($filePath)) {
+            return 'Không tìm thấy file: ' . $fileName;
+        }
+        // 5. Đọc dữ liệu JSON
+        $jsonContent = file_get_contents($filePath);
+        if ($jsonContent === false || trim($jsonContent) === '') {
+            return 'File JSON không có dữ liệu!';
+        }
+        $restoreStatuses = json_decode($jsonContent, true);
+        if (!is_array($restoreStatuses) || empty($restoreStatuses)) {
+            return 'File JSON không hợp lệ hoặc không có dữ liệu!';
+        }
+        // 6. Lấy danh sách ID sản phẩm từ file JSON
+        $productIds = array();
+        foreach ($restoreStatuses as $productId => $oldStatus) {
+            if (is_numeric($productId) && (int) $productId > 0) {
+                $productIds[] = (int) $productId;
+            }
+        }
+        // Loại bỏ ID trùng lặp
+        $productIds = array_values(array_unique($productIds));
+        if (empty($productIds)) {
+            return 'Không tìm thấy ID sản phẩm hợp lệ trong file JSON!';
+        }
+        // 7. Chia danh sách thành từng nhóm 500 sản phẩm
+        $chunks = array_chunk($productIds, 500);
+        $totalUpdated = 0;
+        foreach ($chunks as $chunk) {
+            // Lấy những sản phẩm tồn tại trong database
+            $products = DB::table('products')
+                ->select('id', 'slug')
+                ->whereIn('id', $chunk)
+                ->get();
+            if ($products->isEmpty()) {
+                continue;
+            }
+            $existingIds = array();
+            // 8. Xóa cache sản phẩm
+            foreach ($products as $product) {
+                $existingIds[] = (int) $product->id;
+                if (!empty($product->slug)) {
+                    Cache::forget('duoctot_product_guest_' . $product->slug);
+                    Cache::forget('duoctot_product_login_' . $product->slug);
+                }
+            }
+            // 9. Cập nhật trạng thái sản phẩm
+            DB::table('products')
+                ->whereIn('id', $existingIds)
+                ->update(array(
+                    'status_product' => $statusProduct
+                ));
+            $totalUpdated += count($existingIds);
+        }
+        // 10. Thống kê kết quả
+        $totalInFile = count($productIds);
+        $totalNotFound = $totalInFile - $totalUpdated;
+        $pageTitle = 'Cập nhật trạng thái sản phẩm thành công';
+        $notification = "Đã xử lý cập nhật trạng thái sản phẩm thành công."
+            . " Mã danh sách: {$productList}."
+            . " File: {$fileName}."
+            . " Trạng thái cập nhật: {$statusProduct}."
+            . " Tổng ID trong file: {$totalInFile}."
+            . " Sản phẩm đã cập nhật: {$totalUpdated}."
+            . " ID không tồn tại trong database: {$totalNotFound}.";
+        return view(
+            'shop.backend.pages.syncTdoctor.index',
+            compact(
+                'pageTitle',
+                'totalUpdated',
+                'notification'
+            )
+        );
+    }
     public function preloadProductImagesBatch($startId = 1, $endId = 100, $batchSize = 50, $sleep = 2)
     {
         $products = DB::table('products')

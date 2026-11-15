@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đồng bộ từ Tdoctor</title>
 </head>
-
 <body>
     <h6>{{$notification ?? 'Trang chủ Sync'}}</h6>
     <h6>Đã đồng bộ {{$totalInserted ?? 0}} bản ghi</h6>
@@ -181,9 +179,14 @@
                         <p>Form thay đổi user sản phẩm</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('fe.SyncTdoctor.viewChangeStatusProductInFile')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Form thay đổi trạng thái sản phẩm theo file</p>
+                    </a>
+                </li>
             </ul>
         </li>
     </ul>
 </body>
-
 </html>

@@ -163,4 +163,6 @@ Route::group(['prefix' => $prefixShopFrontend,'namespace' => 'Shop\FrontEnd'], f
     Route::post('update-change-status-product-in-user','SyncTdoctorController@updateChangeStatusProductInUser')->name('fe.SyncTdoctor.updateChangeStatusProductInUser');
     Route::get('view-form-change-user-product','SyncTdoctorController@viewChangeUserProduct')->name('fe.SyncTdoctor.viewChangeUserProduct');
     Route::post('update-change-user-product','SyncTdoctorController@updateChangeUserProduct')->name('fe.SyncTdoctor.updateChangeUserProduct');
+    Route::get('view-form-change-status-product-in-file','SyncTdoctorController@viewChangeStatusProductInFile')->name('fe.SyncTdoctor.viewChangeStatusProductInFile');
+    Route::post('update-change-status-product-in-file','SyncTdoctorController@updateChangeStatusProductInFile')->name('fe.SyncTdoctor.updateChangeStatusProductInFile');
     });

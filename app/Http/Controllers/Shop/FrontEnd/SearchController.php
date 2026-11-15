@@ -828,6 +828,38 @@ return 'Đã khôi phục trạng thái và cập nhật 3 cột cho ' . $count 
             }
             return 'Đã ẩn ' . count($restoreStatuses) .
                 ' sản phẩm. Đã lưu ID và trạng thái cũ tại storage/app/restore_product_statuses2.json';
+        }else if($request->an_sp_ungthu){
+            $catProductIds = [143,144,197];
+            // Chỉ lấy sản phẩm đúng điều kiện và đang được duyệt
+            $query = ProductModel::where('status_product', 'da_duyet')
+                ->where(function ($q) use ($catProductIds) {
+                    $q->whereIn('cat_product_id', $catProductIds)
+                    ->orWhere('name', 'LIKE', '%điều trị ung thư%');
+                });
+            // Lưu ID và trạng thái cũ để sau này khôi phục
+            $restoreStatuses = array();
+            $query->select('id', 'slug', 'status_product')
+                ->chunk(500, function ($products) use (&$restoreStatuses) {
+                    foreach ($products as $product) {
+                        $restoreStatuses[$product->id] = $product->status_product;
+
+                        Cache::forget('duoctot_product_guest_' . $product->slug);
+                        Cache::forget('duoctot_product_login_' . $product->slug);
+                    }
+                });
+            // Lưu danh sách ID và trạng thái cũ vào file JSON
+            $file = storage_path('app/restore_product_statuses4.json');
+            file_put_contents(
+                $file,
+                json_encode($restoreStatuses, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
+            );
+            // Chỉ cập nhật các ID vừa lưu
+            if (!empty($restoreStatuses)) {
+                ProductModel::whereIn('id', array_keys($restoreStatuses))
+                    ->update(array('status_product' => 'sp_an'));
+            }
+            return 'Đã ẩn ' . count($restoreStatuses) .
+                ' sản phẩm. Đã lưu ID và trạng thái cũ tại storage/app/restore_product_statuses4.json';
         }
         else if ($request->gia_0ncc) {
             $idNCC0Product = 1144150836;
@@ -844,7 +876,7 @@ return 'Đã khôi phục trạng thái và cập nhật 3 cột cho ' . $count 
     // Hai file lưu trạng thái cũ
     $files = array(
         storage_path('app/restore_product_statuses1.json'),
-        storage_path('app/restore_product_statuses2.json')
+        storage_path('app/restore_product_statuses.json')
     );
 
     $restoreStatuses = array();
