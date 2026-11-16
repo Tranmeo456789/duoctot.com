@@ -1,4 +1,3 @@
-
 <div class="sc117-wrapper">
     <style>
         .sc117-wrapper {
@@ -113,7 +112,7 @@
             cursor: pointer;
         }
 
-        .sc117-wrapper.sc117-female .sc117-btn {
+        .sc117-wrapper.sc117-female .sc117-btn:not(.sc117-reset) {
             background: #d65d91;
         }
 
@@ -289,10 +288,10 @@
                     </tbody>
                 </table>
 
-                <div class="sc117-error"></div>
+                <div class="sc117-error" role="alert"></div>
 
                 <div class="sc117-actions">
-                    <button type="button" class="sc117-btn sc117-submit">
+                    <button type="submit" class="sc117-btn sc117-submit">
                         Tính chiều cao
                     </button>
 
@@ -352,123 +351,173 @@
     </div>
 
     <script>
-        jQuery(function ($) {
-            $('.sc117-wrapper').each(function () {
-                var $wrapper = $(this);
+        (function () {
+            'use strict';
 
-                if ($wrapper.data('sc117-initialized')) {
-                    return;
+            function initSC117() {
+                var wrappers = document.querySelectorAll('.sc117-wrapper');
+
+                for (var i = 0; i < wrappers.length; i++) {
+                    (function (wrapper) {
+
+                        if (wrapper.getAttribute('data-sc117-ready') === '1') {
+                            return;
+                        }
+
+                        wrapper.setAttribute('data-sc117-ready', '1');
+
+                        var form = wrapper.querySelector('.sc117-form');
+                        var result = wrapper.querySelector('.sc117-result');
+                        var error = wrapper.querySelector('.sc117-error');
+                        var fatherInput = wrapper.querySelector('.sc117-father');
+                        var motherInput = wrapper.querySelector('.sc117-mother');
+
+                        if (!form || !result || !error || !fatherInput || !motherInput) {
+                            return;
+                        }
+
+                        // Lấy giới tính đang chọn.
+                        function getGender() {
+                            var checked = form.querySelector(
+                                'input[name="sc117_gender"]:checked'
+                            );
+
+                            return checked ? checked.value : '';
+                        }
+
+                        // Định dạng số chiều cao.
+                        function formatHeight(value) {
+                            return (Math.round(value * 10) / 10).toFixed(1);
+                        }
+
+                        // Thay đổi giao diện theo giới tính.
+                        form.addEventListener('change', function (event) {
+                            if (
+                                event.target &&
+                                event.target.name === 'sc117_gender'
+                            ) {
+                                if (getGender() === 'female') {
+                                    wrapper.classList.add('sc117-female');
+                                } else {
+                                    wrapper.classList.remove('sc117-female');
+                                }
+                            }
+                        });
+
+                        // Xử lý khi nhấn nút tính chiều cao.
+                        form.addEventListener('submit', function (event) {
+                            event.preventDefault();
+                            event.stopPropagation();
+
+                            error.style.display = 'none';
+                            error.textContent = '';
+
+                            var fatherValue = fatherInput.value.trim();
+                            var motherValue = motherInput.value.trim();
+                            var gender = getGender();
+
+                            if (fatherValue === '') {
+                                error.textContent = 'Bạn chưa nhập chiều cao của bố!';
+                                error.style.display = 'block';
+                                fatherInput.focus();
+                                return;
+                            }
+
+                            if (motherValue === '') {
+                                error.textContent = 'Bạn chưa nhập chiều cao của mẹ!';
+                                error.style.display = 'block';
+                                motherInput.focus();
+                                return;
+                            }
+
+                            var father = Number(fatherValue);
+                            var mother = Number(motherValue);
+
+                            if (!isFinite(father) || father < 100 || father > 230) {
+                                error.textContent = 'Chiều cao của bố phải nằm trong khoảng 100–230 cm.';
+                                error.style.display = 'block';
+                                fatherInput.focus();
+                                return;
+                            }
+
+                            if (!isFinite(mother) || mother < 100 || mother > 230) {
+                                error.textContent = 'Chiều cao của mẹ phải nằm trong khoảng 100–230 cm.';
+                                error.style.display = 'block';
+                                motherInput.focus();
+                                return;
+                            }
+
+                            if (gender !== 'male' && gender !== 'female') {
+                                error.textContent = 'Bạn chưa chọn giới tính!';
+                                error.style.display = 'block';
+                                return;
+                            }
+
+                            // Công thức tính chiều cao tiềm năng.
+                            var average = (father + mother) / 2;
+                            var targetHeight;
+
+                            if (gender === 'male') {
+                                targetHeight = average + 6.5;
+                            } else {
+                                targetHeight = average - 6.5;
+                            }
+
+                            // Khoảng dao động tham khảo ±10.16 cm.
+                            var lowerHeight = targetHeight - 10.16;
+                            var upperHeight = targetHeight + 10.16;
+
+                            // Hiển thị kết quả.
+                            wrapper.querySelector('.sc117-result-sex').textContent =
+                                gender === 'male' ? 'Nam' : 'Nữ';
+
+                            wrapper.querySelector('.sc117-result-father').textContent =
+                                formatHeight(father) + ' cm';
+
+                            wrapper.querySelector('.sc117-result-mother').textContent =
+                                formatHeight(mother) + ' cm';
+
+                            wrapper.querySelector('.sc117-result-from').textContent =
+                                formatHeight(lowerHeight);
+
+                            wrapper.querySelector('.sc117-result-to').textContent =
+                                formatHeight(upperHeight);
+
+                            // Hiển thị bảng kết quả.
+                            result.style.display = 'block';
+
+                            // Cuộn xuống kết quả.
+                            setTimeout(function () {
+                                result.scrollIntoView({
+                                    behavior: 'smooth',
+                                    block: 'start'
+                                });
+                            }, 100);
+                        });
+
+                        // Xử lý nút nhập lại.
+                        form.addEventListener('reset', function () {
+                            setTimeout(function () {
+                                error.style.display = 'none';
+                                error.textContent = '';
+
+                                result.style.display = 'none';
+
+                                wrapper.classList.remove('sc117-female');
+                            }, 0);
+                        });
+
+                    })(wrappers[i]);
                 }
+            }
 
-                $wrapper.data('sc117-initialized', true);
+            // Khởi tạo khi DOM đã sẵn sàng.
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initSC117);
+            } else {
+                initSC117();
+            }
 
-                var $form = $wrapper.find('.sc117-form');
-                var $result = $wrapper.find('.sc117-result');
-                var $error = $wrapper.find('.sc117-error');
-
-                // Đổi màu theo giới tính.
-                $form.find('input[name="sc117_gender"]').on('change', function () {
-                    $wrapper.removeClass('sc117-female');
-
-                    if ($(this).val() === 'female') {
-                        $wrapper.addClass('sc117-female');
-                    }
-                });
-
-                // Tính chiều cao.
-                $wrapper.find('.sc117-submit').on('click', function () {
-                    var fatherValue = $.trim($wrapper.find('.sc117-father').val());
-                    var motherValue = $.trim($wrapper.find('.sc117-mother').val());
-                    var sex = $form.find('input[name="sc117_gender"]:checked').val();
-
-                    $error.hide().text('');
-
-                    if (fatherValue === '') {
-                        $error.text('Bạn chưa nhập chiều cao của bố!').show();
-                        $wrapper.find('.sc117-father').focus();
-                        return;
-                    }
-
-                    if (motherValue === '') {
-                        $error.text('Bạn chưa nhập chiều cao của mẹ!').show();
-                        $wrapper.find('.sc117-mother').focus();
-                        return;
-                    }
-
-                    var father = Number(fatherValue);
-                    var mother = Number(motherValue);
-
-                    if (!isFinite(father) || father < 100 || father > 230) {
-                        $error.text('Chiều cao của bố phải nằm trong khoảng 100–230 cm.').show();
-                        $wrapper.find('.sc117-father').focus();
-                        return;
-                    }
-
-                    if (!isFinite(mother) || mother < 100 || mother > 230) {
-                        $error.text('Chiều cao của mẹ phải nằm trong khoảng 100–230 cm.').show();
-                        $wrapper.find('.sc117-mother').focus();
-                        return;
-                    }
-
-                    if (sex !== 'male' && sex !== 'female') {
-                        $error.text('Bạn chưa chọn giới tính!').show();
-                        return;
-                    }
-
-                    // Công thức từ code gốc.
-                    var average = (father + mother) / 2;
-                    var targetHeight;
-
-                    if (sex === 'male') {
-                        targetHeight = average + 6.5;
-                    } else {
-                        targetHeight = average - 6.5;
-                    }
-
-                    var lowerHeight = targetHeight - 10.16;
-                    var upperHeight = targetHeight + 10.16;
-
-                    // Làm tròn đến 1 chữ số thập phân.
-                    function formatHeight(value) {
-                        return (Math.round(value * 10) / 10).toFixed(1);
-                    }
-
-                    $wrapper.find('.sc117-result-sex').text(
-                        sex === 'male' ? 'Nam' : 'Nữ'
-                    );
-
-                    $wrapper.find('.sc117-result-father').text(
-                        formatHeight(father) + ' cm'
-                    );
-
-                    $wrapper.find('.sc117-result-mother').text(
-                        formatHeight(mother) + ' cm'
-                    );
-
-                    $wrapper.find('.sc117-result-from').text(
-                        formatHeight(lowerHeight) + ' cm'
-                    );
-
-                    $wrapper.find('.sc117-result-to').text(
-                        formatHeight(upperHeight) + ' cm'
-                    );
-
-                    $result.stop(true, true).slideDown(200);
-
-                    $('html, body').animate({
-                        scrollTop: $result.offset().top - 100
-                    }, 300);
-                });
-
-                // Nhập lại.
-                $form.on('reset', function () {
-                    setTimeout(function () {
-                        $error.hide().text('');
-                        $result.hide();
-                        $wrapper.removeClass('sc117-female');
-                    }, 0);
-                });
-            });
-        });
+        })();
     </script>
 </div>

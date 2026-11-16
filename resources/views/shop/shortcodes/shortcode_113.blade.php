@@ -10,7 +10,9 @@
             line-height: 1.6;
         }
 
-        .sc113-wrapper * {
+        .sc113-wrapper *,
+        .sc113-wrapper *:before,
+        .sc113-wrapper *:after {
             box-sizing: border-box;
         }
 
@@ -81,6 +83,11 @@
             background: #105f94;
         }
 
+        .sc113-wrapper .sc113-button:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+        }
+
         .sc113-wrapper .sc113-result {
             display: none;
         }
@@ -103,6 +110,7 @@
 
         .sc113-wrapper .sc113-result-value {
             flex: 1;
+            min-width: 0;
         }
 
         .sc113-wrapper .sc113-vitamin {
@@ -123,6 +131,16 @@
             background: #fff8e6;
             color: #72530b;
             font-size: 13px;
+        }
+
+        .sc113-wrapper .sc113-error {
+            display: none;
+            margin-top: 12px;
+            padding: 10px 12px;
+            border: 1px solid #f1caca;
+            border-radius: 6px;
+            background: #fff0f0;
+            color: #a00000;
         }
 
         .sc113-wrapper .sc113-empty {
@@ -167,12 +185,12 @@
                 các vitamin có thể liên quan đến tình trạng đó.
             </p>
 
-            <label class="sc113-label" for="sc113-disease">
+            <label class="sc113-label">
                 Bệnh tật / Tình trạng sức khỏe
                 <span class="sc113-required">*</span>
             </label>
 
-            <select class="sc113-select" id="sc113-disease">
+            <select class="sc113-select sc113-disease">
                 <option value="">-- Chọn tình trạng sức khỏe --</option>
                 <option value="Thiếu máu hồng cầu to">Thiếu máu hồng cầu to</option>
                 <option value="Thiếu máu hồng cầu nhỏ">Thiếu máu hồng cầu nhỏ</option>
@@ -210,13 +228,15 @@
                 <option value="Tăng trưởng xương kém">Tăng trưởng xương kém</option>
             </select>
 
-            <button type="button" class="sc113-button" id="sc113-submit">
+            <button type="button" class="sc113-button sc113-submit">
                 Kiểm tra
             </button>
+
+            <div class="sc113-error" role="alert" aria-live="polite"></div>
         </div>
     </div>
 
-    <div class="sc113-card sc113-result" id="sc113-result" aria-live="polite">
+    <div class="sc113-card sc113-result" aria-live="polite">
         <div class="sc113-heading">Kết quả tra cứu</div>
 
         <div class="sc113-body">
@@ -224,21 +244,21 @@
                 <div class="sc113-result-label">
                     Bệnh tật / Tình trạng sức khỏe
                 </div>
-                <div class="sc113-result-value" id="sc113-result-name"></div>
+                <div class="sc113-result-value sc113-result-name"></div>
             </div>
 
             <div class="sc113-result-row">
                 <div class="sc113-result-label">
                     Vitamin được đề cập
                 </div>
-                <div class="sc113-result-value" id="sc113-result-vitamin"></div>
+                <div class="sc113-result-value sc113-result-vitamin"></div>
             </div>
 
             <div class="sc113-result-row">
                 <div class="sc113-result-label">
                     Thông tin tham khảo
                 </div>
-                <div class="sc113-result-value" id="sc113-result-content"></div>
+                <div class="sc113-result-value sc113-result-content"></div>
             </div>
 
             <div class="sc113-note">
@@ -253,12 +273,24 @@
     </div>
 
     <script>
-        jQuery(function ($) {
-            var $wrapper = $('.sc113-wrapper').last();
+    (function() {
+        'use strict';
 
-            if (!$wrapper.length) {
+        function initSC113(wrapper) {
+            if (!wrapper || wrapper.getAttribute('data-initialized') === '1') {
                 return;
             }
+
+            wrapper.setAttribute('data-initialized', '1');
+
+            var select = wrapper.querySelector('.sc113-disease');
+            var button = wrapper.querySelector('.sc113-submit');
+            var result = wrapper.querySelector('.sc113-result');
+            var error = wrapper.querySelector('.sc113-error');
+
+            var resultName = wrapper.querySelector('.sc113-result-name');
+            var resultVitamin = wrapper.querySelector('.sc113-result-vitamin');
+            var resultContent = wrapper.querySelector('.sc113-result-content');
 
             var vitaminData = {
                 'Thiếu máu hồng cầu to': ['Vitamin B9', 'Vitamin B12'],
@@ -297,33 +329,51 @@
                 'Tăng trưởng xương kém': ['Vitamin A']
             };
 
-            var $select = $wrapper.find('#sc113-disease');
-            var $result = $wrapper.find('#sc113-result');
+            function showError(message) {
+                error.textContent = message;
+                error.style.display = 'block';
+                result.style.display = 'none';
+            }
 
-            $wrapper.find('#sc113-submit').on('click', function () {
-                var disease = $select.val();
+            function clearError() {
+                error.textContent = '';
+                error.style.display = 'none';
+            }
+
+            function clearResult() {
+                clearError();
+                result.style.display = 'none';
+            }
+
+            function renderResult() {
+                clearError();
+
+                var disease = select.value;
 
                 if (!disease) {
-                    alert('Hãy chọn Bệnh tật/Tình trạng sức khỏe của bạn!');
-                    $select.focus();
+                    showError('Vui lòng chọn bệnh tật hoặc tình trạng sức khỏe.');
+                    select.focus();
                     return;
                 }
 
                 var vitamins = vitaminData[disease];
 
                 if (!vitamins || !vitamins.length) {
-                    $result.hide();
-                    alert('Không tìm thấy dữ liệu cho tình trạng đã chọn.');
+                    showError('Không tìm thấy dữ liệu cho tình trạng đã chọn.');
                     return;
                 }
 
-                var vitaminHtml = '';
+                resultName.textContent = disease;
 
-                $.each(vitamins, function (index, vitamin) {
-                    vitaminHtml += '<span class="sc113-vitamin">' +
-                        $('<div>').text(vitamin).html() +
-                        '</span>';
-                });
+                // Tạo danh sách vitamin an toàn, không đưa dữ liệu vào HTML trực tiếp.
+                resultVitamin.textContent = '';
+
+                for (var i = 0; i < vitamins.length; i++) {
+                    var tag = document.createElement('span');
+                    tag.className = 'sc113-vitamin';
+                    tag.textContent = vitamins[i];
+                    resultVitamin.appendChild(tag);
+                }
 
                 var content = 'Danh mục tham khảo ban đầu có đề cập đến ' +
                     vitamins.join(' và ') +
@@ -331,18 +381,59 @@
                     'chỉ dựa vào triệu chứng hoặc tên bệnh không thể kết luận ' +
                     'cơ thể đang thiếu các vitamin trên.';
 
-                $wrapper.find('#sc113-result-name').text(disease);
-                $wrapper.find('#sc113-result-vitamin').html(vitaminHtml);
-                $wrapper.find('#sc113-result-content').text(content);
+                resultContent.textContent = content;
 
-                $result.stop(true, true).slideDown(200);
+                result.style.display = 'block';
 
-                if ($result.length) {
-                    $('html, body').animate({
-                        scrollTop: $result.offset().top - 100
-                    }, 300);
+                // Cuộn đến kết quả.
+                setTimeout(function() {
+                    var position = result.getBoundingClientRect().top +
+                        window.pageYOffset - 100;
+
+                    if (typeof window.scrollTo === 'function') {
+                        try {
+                            window.scrollTo({
+                                top: position,
+                                behavior: 'smooth'
+                            });
+                        } catch (e) {
+                            window.scrollTo(0, position);
+                        }
+                    }
+                }, 100);
+            }
+
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+                renderResult();
+            });
+
+            select.addEventListener('change', function() {
+                clearResult();
+            });
+
+            // Hỗ trợ người dùng nhấn Enter khi đang chọn tình trạng.
+            select.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter' || event.keyCode === 13) {
+                    event.preventDefault();
+                    renderResult();
                 }
             });
-        });
+        }
+
+        function startSC113() {
+            var wrappers = document.querySelectorAll('.sc113-wrapper');
+
+            for (var i = 0; i < wrappers.length; i++) {
+                initSC113(wrappers[i]);
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', startSC113);
+        } else {
+            startSC113();
+        }
+    })();
     </script>
 </div>

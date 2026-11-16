@@ -64,12 +64,6 @@
             color: #8f365c;
         }
 
-        .sc115-wrapper .sc115-label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
         .sc115-wrapper .sc115-required {
             color: #dc3545;
         }
@@ -105,6 +99,7 @@
             width: 16px;
             height: 16px;
             margin: 0;
+            cursor: pointer;
         }
 
         .sc115-wrapper.sc115-female input[type="radio"] {
@@ -243,14 +238,14 @@
                 padding: 12px;
             }
 
-            .sc115-wrapper .sc115-question-table {
-                table-layout: auto;
-                min-width: 580px;
-            }
-
             .sc115-wrapper .sc115-question-scroll {
                 overflow-x: auto;
                 -webkit-overflow-scrolling: touch;
+            }
+
+            .sc115-wrapper .sc115-question-table {
+                table-layout: auto;
+                min-width: 580px;
             }
 
             .sc115-wrapper .sc115-table td,
@@ -338,9 +333,7 @@
                         </tr>
 
                         <tr>
-                            <td>
-                                Mối quan hệ của bạn với trẻ
-                            </td>
+                            <td>Mối quan hệ của bạn với trẻ</td>
                             <td>
                                 <div class="sc115-radio-group">
                                     <label>
@@ -428,14 +421,14 @@
                     </table>
                 </div>
 
-                <div class="sc115-error"></div>
+                <div class="sc115-error" role="alert"></div>
 
                 <div class="sc115-actions">
-                    <button type="button" class="sc115-btn sc115-btn-primary sc115-submit">
+                    <button type="submit" class="sc115-btn sc115-btn-primary">
                         Kiểm tra kết quả
                     </button>
 
-                    <button type="reset" class="sc115-btn sc115-btn-reset sc115-reset">
+                    <button type="reset" class="sc115-btn sc115-btn-reset">
                         Nhập lại
                     </button>
                 </div>
@@ -467,53 +460,84 @@
     </div>
 
     <script>
-        jQuery(function ($) {
-            $('.sc115-wrapper').each(function () {
-                var $wrapper = $(this);
+    (function () {
+        'use strict';
 
-                if ($wrapper.data('sc115-initialized')) {
+        function initSC115() {
+            var wrappers = document.querySelectorAll('.sc115-wrapper');
+
+            Array.prototype.forEach.call(wrappers, function (wrapper) {
+
+                if (wrapper.getAttribute('data-sc115-init') === '1') {
                     return;
                 }
 
-                $wrapper.data('sc115-initialized', true);
+                wrapper.setAttribute('data-sc115-init', '1');
 
-                var $form = $wrapper.find('.sc115-form');
-                var $result = $wrapper.find('.sc115-result');
-                var $error = $wrapper.find('.sc115-error');
+                var form = wrapper.querySelector('.sc115-form');
+                var result = wrapper.querySelector('.sc115-result');
+                var error = wrapper.querySelector('.sc115-error');
+                var totalElement = wrapper.querySelector('.sc115-total');
+                var resultContent = wrapper.querySelector('.sc115-result-content');
 
-                // Thay đổi màu giao diện theo giới tính.
-                $form.find('input[name="sc115_sex"]').on('change', function () {
-                    $wrapper.removeClass('sc115-male sc115-female');
+                if (!form || !result || !error) {
+                    return;
+                }
 
-                    if ($(this).val() === 'female') {
-                        $wrapper.addClass('sc115-female');
-                    } else {
-                        $wrapper.addClass('sc115-male');
-                    }
+                // Đổi màu giao diện theo giới tính.
+                var sexInputs = form.querySelectorAll('input[name="sc115_sex"]');
+
+                Array.prototype.forEach.call(sexInputs, function (input) {
+                    input.addEventListener('change', function () {
+                        wrapper.classList.remove('sc115-male', 'sc115-female');
+
+                        if (this.value === 'female') {
+                            wrapper.classList.add('sc115-female');
+                        } else {
+                            wrapper.classList.add('sc115-male');
+                        }
+                    });
                 });
 
-                // Kiểm tra kết quả.
-                $wrapper.find('.sc115-submit').on('click', function () {
-                    var ethnicity = $form.find('.sc115-ethnicity').val();
-                    var age = $form.find('.sc115-age').val();
-                    var sex = $form.find('input[name="sc115_sex"]:checked').val();
+                // Hàm hiển thị lỗi.
+                function showError(message, target) {
+                    error.textContent = message;
+                    error.style.display = 'block';
 
-                    $error.hide().text('');
+                    if (target) {
+                        target.focus();
+                    }
+                }
+
+                // Xử lý kiểm tra kết quả.
+                form.addEventListener('submit', function (event) {
+                    event.preventDefault();
+
+                    error.style.display = 'none';
+                    error.textContent = '';
+
+                    var ethnicity = form.querySelector('.sc115-ethnicity').value;
+                    var age = form.querySelector('.sc115-age').value;
+                    var sex = form.querySelector('input[name="sc115_sex"]:checked');
 
                     if (!ethnicity) {
-                        $error.text('Bạn chưa chọn chủng tộc của trẻ!').show();
-                        $form.find('.sc115-ethnicity').focus();
+                        showError(
+                            'Bạn chưa chọn chủng tộc của trẻ!',
+                            form.querySelector('.sc115-ethnicity')
+                        );
                         return;
                     }
 
                     if (!age) {
-                        $error.text('Bạn chưa chọn tuổi của trẻ!').show();
-                        $form.find('.sc115-age').focus();
+                        showError(
+                            'Bạn chưa chọn tuổi của trẻ!',
+                            form.querySelector('.sc115-age')
+                        );
                         return;
                     }
 
                     if (!sex) {
-                        $error.text('Bạn chưa chọn giới tính của trẻ!').show();
+                        showError('Bạn chưa chọn giới tính của trẻ!');
                         return;
                     }
 
@@ -521,23 +545,22 @@
                     var unanswered = [];
 
                     for (var i = 1; i <= 10; i++) {
-                        var answer = $form.find(
+                        var answer = form.querySelector(
                             'input[name="sc115_q' + i + '"]:checked'
-                        ).val();
+                        );
 
-                        if (typeof answer === 'undefined') {
+                        if (!answer) {
                             unanswered.push(i);
                         } else {
-                            total += parseInt(answer, 10);
+                            total += parseInt(answer.value, 10);
                         }
                     }
 
                     if (unanswered.length > 0) {
-                        $error.text(
-                            'Bạn vui lòng trả lời đầy đủ 10 câu hỏi. ' +
-                            'Chưa trả lời câu: ' + unanswered.join(', ') + '.'
-                        ).show();
-
+                        showError(
+                            'Bạn vui lòng trả lời đầy đủ 10 câu hỏi. Chưa trả lời câu: ' +
+                            unanswered.join(', ') + '.'
+                        );
                         return;
                     }
 
@@ -564,25 +587,49 @@
                             'đưa ra bất kỳ kết luận nào.</p>';
                     }
 
-                    $wrapper.find('.sc115-total').text(total);
-                    $wrapper.find('.sc115-result-content').html(content);
+                    totalElement.textContent = total;
+                    resultContent.innerHTML = content;
 
-                    $result.stop(true, true).slideDown(200);
+                    // Hiển thị kết quả.
+                    result.style.display = 'block';
 
-                    $('html, body').animate({
-                        scrollTop: $result.offset().top - 100
-                    }, 300);
+                    // Cuộn đến kết quả.
+                    setTimeout(function () {
+                        var rect = result.getBoundingClientRect();
+                        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+                        window.scrollTo({
+                            top: scrollTop + rect.top - 100,
+                            behavior: 'smooth'
+                        });
+                    }, 100);
                 });
 
-                // Nhập lại toàn bộ thông tin.
-                $form.on('reset', function () {
+                // Xử lý nút nhập lại.
+                form.addEventListener('reset', function () {
                     setTimeout(function () {
-                        $error.hide().text('');
-                        $result.hide();
-                        $wrapper.removeClass('sc115-male sc115-female');
+                        error.style.display = 'none';
+                        error.textContent = '';
+
+                        result.style.display = 'none';
+
+                        totalElement.textContent = '0';
+                        resultContent.innerHTML = '';
+
+                        wrapper.classList.remove('sc115-male', 'sc115-female');
                     }, 0);
                 });
+
             });
-        });
+        }
+
+        // Khởi tạo khi DOM đã sẵn sàng.
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initSC115);
+        } else {
+            initSC115();
+        }
+
+    })();
     </script>
 </div>

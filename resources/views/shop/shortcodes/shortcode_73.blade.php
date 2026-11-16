@@ -1,182 +1,737 @@
 
-<style>
-#adhd-screening-73 .calculator-table-form, #adhd-screening-73 .calculator-table {margin:0 auto 20px;color:#000;width:90%;line-height:130%;}
-#adhd-screening-73 .calculator-table-form table, #adhd-screening-73 .calculator-table table {width:100%;color:#000;}
-#adhd-screening-73 .calculator-table-form td, #adhd-screening-73 .calculator-table td {border-left:1px solid #fff;border-right:0;border-bottom:1px solid #fff;padding:10px 5px;vertical-align:top;text-align:left;}
-#adhd-screening-73 .calculator-table-form td:first-child, #adhd-screening-73 .calculator-table td:first-child {border-left:none;}
-#adhd-screening-73 .calculator-table-form tr:last-child td, #adhd-screening-73 .calculator-table:last-child td {border-bottom:none;}
-#adhd-screening-73 .calculator-table-form.blue table {background:#E6F4FE;border:1px solid #0F5885;}
-#adhd-screening-73 .calculator-table.blue table {background:#E6F4FE;}
-#adhd-screening-73 .calculator-table-form.pink table {background:#FBE4FD;border:1px solid #AD0054;}
-#adhd-screening-73 .calculator-table.pink table {background:#B30035;}
-#adhd-screening-73 .calculator-table-form.blue td:first-child {background:#CFEAFC;}
-#adhd-screening-73 .calculator-table-form.pink td:first-child {background:#FFD6EB;}
-#adhd-screening-73 .calculator-table-form tr.table-head td, #adhd-screening-73 .calculator-table tr.table-head td {color:#fff;font-weight:bold;}
-#adhd-screening-73 .calculator-table-form.blue tr.table-head td, #adhd-screening-73 .calculator-table.blue tr.table-head td {background:#0F5885;}
-#adhd-screening-73 .calculator-table-form.pink tr.table-head td, #adhd-screening-73 .calculator-table.pink tr.table-head td {background:#AD0054;}
-#adhd-screening-73 .calculator-table-form input[type=radio] {margin-right:5px;}
-#adhd-screening-73 .calculator-table-form.blue tr.table-head td, #adhd-screening-73 .calculator-table-form.pink tr.table-head td {font-size:14px;}
-#adhd-screening-73 .calculator-table-form tr:last-child td {text-align:center;}
-#adhd-screening-73 .calculator-table-form tr.leftalign td {text-align:left!important;}
-#adhd-screening-73 .mandatory-star {color:#f00;}
-#adhd-screening-73 .required {color:#B30000;text-align:left;float:left;padding-top:15px;}
-#adhd-screening-73 .flat-btn {border:0;color:#fff;margin-left:5px;cursor:pointer;background:#0F5885;font-size:13px;font-weight:600;padding:8px 15px;display:inline-block;}
-#adhd-screening-73 .calculator-table-form.pink .flat-btn {background:#AD0054;}
-#adhd-screening-73 .calculator-table-form.blue .flat-btn:hover {background:#0779A3;}
-#adhd-screening-73 .calculator-table-form.pink .flat-btn:hover {background:#D62060;}
-#adhd-screening-73 .flat-btn:hover {text-decoration:none;background:#333;color:#fff;}
-#adhd-screening-73 .calculator-table-form .form-control {font-size:18px!important;}
-#adhd-screening-73 .result-box {padding-top:20px;display:none;}
-#adhd-screening-73 .result-box p {margin:0 6px;}
-@media(max-width:767px) {
-    #adhd-screening-73 .calculator-table-form, #adhd-screening-73 .calculator-table {width:100%;}
-    #adhd-screening-73 table {font-size:13px;}
-    #adhd-screening-73 input[type=radio] {margin:2px;}
-}
-</style>
+<div class="sc73-wrapper" id="adhd-screening-73">
 
-<div id="adhd-screening-73" class="wpt_test fill_form">
-    <div class="content">
-        <div class="calculator-table-form blue" id="gendercolor_73">
-            <form id="adhd_form_73" method="post">
-                <div id="no-more-tables">
-                    <table class="display table">
-                        <tbody>
-                            <tr class="table-head">
-                                <td colspan="6" class="no-data-title">Nhập chi tiết của bạn</td>
-                            </tr>
-                            <tr>
-                                <td height="40" class="hide-data-title">Giới tính</td>
-                                <td colspan="5" data-title="Giới tính">
-                                    <label><input type="radio" name="sex_73" value="male"> Nam</label>
-                                    <label><input type="radio" name="sex_73" value="female"> Nữ</label>
-                                </td>
-                            </tr>
-                            <tr class="table-head hide-data-title">
-                                <td width="25%">Câu hỏi</td>
-                                <td width="15%" align="center">Không bao giờ</td>
-                                <td width="15%" align="center"></td>
-                                <td width="15%" align="center"></td>
-                                <td width="15%" align="center"></td>
-                                <td width="15%" align="center">Rất thường xuyên</td>
-                            </tr>
-                            <tr>
-                                <td class="no-data-title">1. Bạn có thường xuyên trì hoãn việc hoàn thành một dự án ngay cả khi các thách thức đã hoàn thành không? <span class="mandatory-star">*</span></td>
-                                <td align="center" data-title="Không bao giờ"><input name="rd1_73" type="radio" value="0"></td>
-                                <td align="center" data-title="Hiếm khi"><input name="rd1_73" type="radio" value="0"></td>
-                                <td align="center" data-title="Thỉnh thoảng"><input name="rd1_73" type="radio" value="1"></td>
-                                <td align="center" data-title="Thường xuyên"><input name="rd1_73" type="radio" value="1"></td>
-                                <td align="center" data-title="Rất thường xuyên"><input name="rd1_73" type="radio" value="1"></td>
-                            </tr>
-                            <tr>
-                                <td class="no-data-title">2. Bạn có thường gặp khó khăn trong việc sắp xếp mọi thứ theo thứ tự khi một nhiệm vụ yêu cầu tổ chức không? <span class="mandatory-star">*</span></td>
-                                <td align="center" data-title="Không bao giờ"><input name="rd2_73" type="radio" value="0"></td>
-                                <td align="center" data-title="Hiếm khi"><input name="rd2_73" type="radio" value="0"></td>
-                                <td align="center" data-title="Thỉnh thoảng"><input name="rd2_73" type="radio" value="1"></td>
-                                <td align="center" data-title="Thường xuyên"><input name="rd2_73" type="radio" value="1"></td>
-                                <td align="center" data-title="Rất thường xuyên"><input name="rd2_73" type="radio" value="1"></td>
-                            </tr>
-                            <tr>
-                                <td class="no-data-title">3. Bạn có thường quên các cuộc hẹn/nhiệm vụ không? <span class="mandatory-star">*</span></td>
-                                <td align="center" data-title="Không bao giờ"><input name="rd3_73" type="radio" value="0"></td>
-                                <td align="center" data-title="Hiếm khi"><input name="rd3_73" type="radio" value="0"></td>
-                                <td align="center" data-title="Thỉnh thoảng"><input name="rd3_73" type="radio" value="1"></td>
-                                <td align="center" data-title="Thường xuyên"><input name="rd3_73" type="radio" value="1"></td>
-                                <td align="center" data-title="Rất thường xuyên"><input name="rd3_73" type="radio" value="1"></td>
-                            </tr>
-                            <tr>
-                                <td class="no-data-title">4. Bạn có thường lên kế hoạch cho một công việc đòi hỏi nhiều suy nghĩ không? <span class="mandatory-star">*</span></td>
-                                <td align="center" data-title="Không bao giờ"><input name="rd4_73" type="radio" value="0"></td>
-                                <td align="center" data-title="Hiếm khi"><input name="rd4_73" type="radio" value="0"></td>
-                                <td align="center" data-title="Thỉnh thoảng"><input name="rd4_73" type="radio" value="0"></td>
-                                <td align="center" data-title="Thường xuyên"><input name="rd4_73" type="radio" value="1"></td>
-                                <td align="center" data-title="Rất thường xuyên"><input name="rd4_73" type="radio" value="1"></td>
-                            </tr>
-                            <tr>
-                                <td class="no-data-title">5. Bạn có thường xuyên vặn vẹo hay bồn chồn khi phải ngồi một chỗ trong thời gian dài không? <span class="mandatory-star">*</span></td>
-                                <td align="center" data-title="Không bao giờ"><input name="rd5_73" type="radio" value="0"></td>
-                                <td align="center" data-title="Hiếm khi"><input name="rd5_73" type="radio" value="0"></td>
-                                <td align="center" data-title="Thỉnh thoảng"><input name="rd5_73" type="radio" value="0"></td>
-                                <td align="center" data-title="Thường xuyên"><input name="rd5_73" type="radio" value="1"></td>
-                                <td align="center" data-title="Rất thường xuyên"><input name="rd5_73" type="radio" value="1"></td>
-                            </tr>
-                            <tr>
-                                <td class="no-data-title">6. Bạn có thường xuyên cảm thấy hiếu động như có động cơ đẩy không? <span class="mandatory-star">*</span></td>
-                                <td align="center" data-title="Không bao giờ"><input name="rd6_73" type="radio" value="0"></td>
-                                <td align="center" data-title="Hiếm khi"><input name="rd6_73" type="radio" value="0"></td>
-                                <td align="center" data-title="Thỉnh thoảng"><input name="rd6_73" type="radio" value="0"></td>
-                                <td align="center" data-title="Thường xuyên"><input name="rd6_73" type="radio" value="1"></td>
-                                <td align="center" data-title="Rất thường xuyên"><input name="rd6_73" type="radio" value="1"></td>
-                            </tr>
-                            <tr>
-                                <td colspan="6" class="no-data-title">
-                                    <span class="required">(* Yêu cầu)</span>
-                                    <input type="button" class="flat-btn" value="Kiểm tra" id="submit_btn_73">
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </form>
+    <style>
+        #adhd-screening-73 {
+            max-width: 900px;
+            margin: 20px auto;
+            color: #333;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        #adhd-screening-73 * {
+            box-sizing: border-box;
+        }
+
+        #adhd-screening-73 .sc73-card {
+            background: #fff;
+            border: 1px solid #dce5ed;
+            border-radius: 9px;
+            overflow: hidden;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.04);
+        }
+
+        #adhd-screening-73 .sc73-heading {
+            padding: 14px 18px;
+            background: #0F5885;
+            color: #fff;
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        #adhd-screening-73.sc73-female .sc73-heading {
+            background: #AD0054;
+        }
+
+        #adhd-screening-73 .sc73-body {
+            padding: 18px;
+        }
+
+        #adhd-screening-73 .sc73-intro {
+            margin: 0 0 16px;
+            color: #555;
+        }
+
+        #adhd-screening-73 .sc73-table {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            color: #333;
+        }
+
+        #adhd-screening-73 .sc73-table td,
+        #adhd-screening-73 .sc73-table th {
+            padding: 11px 9px;
+            border-bottom: 1px solid #e9edf1;
+            vertical-align: middle;
+            text-align: left;
+        }
+
+        #adhd-screening-73 .sc73-table th {
+            background: #edf5fb;
+            color: #244b66;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        #adhd-screening-73.sc73-female .sc73-table th {
+            background: #fff0f6;
+            color: #8f365c;
+        }
+
+        #adhd-screening-73 .sc73-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        #adhd-screening-73 .sc73-label {
+            font-weight: 600;
+        }
+
+        #adhd-screening-73 .sc73-required {
+            color: #dc3545;
+        }
+
+        #adhd-screening-73 .sc73-radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 20px;
+        }
+
+        #adhd-screening-73 .sc73-radio-group label {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            font-weight: normal;
+            margin: 0;
+        }
+
+        #adhd-screening-73 input[type="radio"] {
+            width: 16px;
+            height: 16px;
+            margin: 0;
+            accent-color: #0F5885;
+            cursor: pointer;
+        }
+
+        #adhd-screening-73.sc73-female input[type="radio"] {
+            accent-color: #AD0054;
+        }
+
+        #adhd-screening-73 .sc73-section-title {
+            margin: 22px 0 10px;
+            color: #0F5885;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        #adhd-screening-73.sc73-female .sc73-section-title {
+            color: #AD0054;
+        }
+
+        #adhd-screening-73 .sc73-question-scroll {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        #adhd-screening-73 .sc73-question-table {
+            table-layout: fixed;
+            min-width: 650px;
+        }
+
+        #adhd-screening-73 .sc73-question-table th:first-child {
+            width: 38px;
+        }
+
+        #adhd-screening-73 .sc73-question-table th:nth-child(2) {
+            width: 40%;
+            text-align: left;
+        }
+
+        #adhd-screening-73 .sc73-question-table td {
+            text-align: center;
+        }
+
+        #adhd-screening-73 .sc73-question-table td:nth-child(2) {
+            text-align: left;
+        }
+
+        #adhd-screening-73 .sc73-question-table td:first-child {
+            color: #777;
+        }
+
+        #adhd-screening-73 .sc73-question-table tr:hover td {
+            background: #f8fbfd;
+        }
+
+        #adhd-screening-73 .sc73-question-table input[type="radio"] {
+            display: inline-block;
+        }
+
+        #adhd-screening-73 .sc73-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        #adhd-screening-73 .sc73-btn {
+            display: inline-block;
+            border: 0;
+            border-radius: 5px;
+            padding: 11px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        #adhd-screening-73 .sc73-btn-primary {
+            background: #0F5885;
+            color: #fff;
+        }
+
+        #adhd-screening-73.sc73-female .sc73-btn-primary {
+            background: #AD0054;
+        }
+
+        #adhd-screening-73 .sc73-btn-primary:hover {
+            opacity: .88;
+        }
+
+        #adhd-screening-73 .sc73-btn-reset {
+            background: #edf0f3;
+            color: #444;
+        }
+
+        #adhd-screening-73 .sc73-btn-reset:hover {
+            background: #dfe4e8;
+        }
+
+        #adhd-screening-73 .sc73-error {
+            display: none;
+            margin-top: 14px;
+            padding: 10px 12px;
+            background: #fff0f0;
+            border: 1px solid #f1cccc;
+            border-radius: 5px;
+            color: #b42318;
+        }
+
+        #adhd-screening-73 .sc73-result {
+            display: none;
+        }
+
+        #adhd-screening-73 .sc73-result-content {
+            padding: 16px;
+            border-radius: 7px;
+            background: #f1f7fc;
+            border-left: 4px solid #0F5885;
+            line-height: 1.7;
+        }
+
+        #adhd-screening-73.sc73-female .sc73-result-content {
+            background: #fff3f7;
+            border-left-color: #AD0054;
+        }
+
+        #adhd-screening-73 .sc73-score {
+            display: inline-block;
+            margin-bottom: 14px;
+            padding: 7px 15px;
+            border-radius: 20px;
+            background: #e1f1fb;
+            color: #12649a;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        #adhd-screening-73.sc73-female .sc73-score {
+            background: #fce5ef;
+            color: #a43b68;
+        }
+
+        #adhd-screening-73 .sc73-result-content p {
+            margin: 8px 0;
+        }
+
+        #adhd-screening-73 .sc73-note {
+            margin-top: 15px;
+            padding: 12px 14px;
+            border-left: 4px solid #e2a329;
+            background: #fff8e8;
+            color: #70520d;
+            border-radius: 4px;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        @media(max-width: 650px) {
+            #adhd-screening-73 .sc73-body {
+                padding: 12px;
+            }
+
+            #adhd-screening-73 .sc73-heading {
+                font-size: 16px;
+                padding: 13px 14px;
+            }
+
+            #adhd-screening-73 .sc73-table td,
+            #adhd-screening-73 .sc73-table th {
+                padding: 9px 6px;
+                font-size: 12px;
+            }
+
+            #adhd-screening-73 .sc73-radio-group {
+                gap: 10px 14px;
+            }
+
+            #adhd-screening-73 .sc73-actions {
+                flex-direction: column;
+            }
+
+            #adhd-screening-73 .sc73-btn {
+                width: 100%;
+            }
+        }
+    </style>
+
+    <!-- PHẦN FORM -->
+    <div class="sc73-card">
+
+        <div class="sc73-heading">
+            Trắc nghiệm sàng lọc ADHD dành cho người lớn
         </div>
 
-        <div class="calculator-table-form blue result-box" id="form_kq2_73">
-            <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                <tbody>
-                    <tr class="table-head">
-                        <td height="20" colspan="2" align="center" width="100%">Máy tính sàng lọc ADHD dành cho người lớn</td>
-                    </tr>
-                    <tr>
-                        <td width="100%" colspan="2" class="content14">
-                            <p id="content_73"></p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="sc73-body">
+
+            <p class="sc73-intro">
+                Bài kiểm tra dưới đây giúp bạn tự đánh giá một số biểu hiện
+                thường gặp liên quan đến rối loạn tăng động giảm chú ý (ADHD)
+                ở người trưởng thành. Hãy lựa chọn câu trả lời phù hợp nhất
+                với tình trạng của bản thân.
+            </p>
+
+            <form class="sc73-form" autocomplete="off">
+
+                <!-- GIỚI TÍNH -->
+                <table class="sc73-table">
+                    <tbody>
+
+                        <tr>
+                            <td colspan="2" style="font-weight:600;background:#f5f8fa;">
+                                Nhập thông tin của bạn
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td width="35%">
+                                <span class="sc73-label">
+                                    Giới tính
+                                    <span class="sc73-required">*</span>
+                                </span>
+                            </td>
+
+                            <td>
+                                <div class="sc73-radio-group">
+                                    <label>
+                                        <input type="radio" name="sex_73" value="male">
+                                        Nam
+                                    </label>
+
+                                    <label>
+                                        <input type="radio" name="sex_73" value="female">
+                                        Nữ
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <!-- CÂU HỎI -->
+                <div class="sc73-section-title">
+                    Các câu hỏi đánh giá
+                </div>
+
+                <p>
+                    Vui lòng chọn một đáp án cho mỗi câu hỏi.
+                    Bạn cần hoàn thành cả 6 câu để xem kết quả.
+                </p>
+
+                <div class="sc73-question-scroll">
+
+                    <table class="sc73-table sc73-question-table">
+
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Câu hỏi</th>
+                                <th>Không bao giờ</th>
+                                <th>Hiếm khi</th>
+                                <th>Thỉnh thoảng</th>
+                                <th>Thường xuyên</th>
+                                <th>Rất thường xuyên</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>1.</td>
+                                <td>
+                                    Bạn có thường xuyên trì hoãn việc hoàn thành
+                                    một dự án ngay cả khi các thách thức đã hoàn thành không?
+                                </td>
+
+                                <td><input type="radio" name="rd1_73" value="0" aria-label="Câu 1 - Không bao giờ"></td>
+                                <td><input type="radio" name="rd1_73" value="0" aria-label="Câu 1 - Hiếm khi"></td>
+                                <td><input type="radio" name="rd1_73" value="1" aria-label="Câu 1 - Thỉnh thoảng"></td>
+                                <td><input type="radio" name="rd1_73" value="1" aria-label="Câu 1 - Thường xuyên"></td>
+                                <td><input type="radio" name="rd1_73" value="1" aria-label="Câu 1 - Rất thường xuyên"></td>
+                            </tr>
+
+                            <tr>
+                                <td>2.</td>
+                                <td>
+                                    Bạn có thường gặp khó khăn trong việc sắp xếp
+                                    mọi thứ theo thứ tự khi một nhiệm vụ yêu cầu tổ chức không?
+                                </td>
+
+                                <td><input type="radio" name="rd2_73" value="0" aria-label="Câu 2 - Không bao giờ"></td>
+                                <td><input type="radio" name="rd2_73" value="0" aria-label="Câu 2 - Hiếm khi"></td>
+                                <td><input type="radio" name="rd2_73" value="1" aria-label="Câu 2 - Thỉnh thoảng"></td>
+                                <td><input type="radio" name="rd2_73" value="1" aria-label="Câu 2 - Thường xuyên"></td>
+                                <td><input type="radio" name="rd2_73" value="1" aria-label="Câu 2 - Rất thường xuyên"></td>
+                            </tr>
+
+                            <tr>
+                                <td>3.</td>
+                                <td>
+                                    Bạn có thường quên các cuộc hẹn/nhiệm vụ không?
+                                </td>
+
+                                <td><input type="radio" name="rd3_73" value="0" aria-label="Câu 3 - Không bao giờ"></td>
+                                <td><input type="radio" name="rd3_73" value="0" aria-label="Câu 3 - Hiếm khi"></td>
+                                <td><input type="radio" name="rd3_73" value="1" aria-label="Câu 3 - Thỉnh thoảng"></td>
+                                <td><input type="radio" name="rd3_73" value="1" aria-label="Câu 3 - Thường xuyên"></td>
+                                <td><input type="radio" name="rd3_73" value="1" aria-label="Câu 3 - Rất thường xuyên"></td>
+                            </tr>
+
+                            <tr>
+                                <td>4.</td>
+                                <td>
+                                    Bạn có thường lên kế hoạch cho một công việc
+                                    đòi hỏi nhiều suy nghĩ không?
+                                </td>
+
+                                <td><input type="radio" name="rd4_73" value="0" aria-label="Câu 4 - Không bao giờ"></td>
+                                <td><input type="radio" name="rd4_73" value="0" aria-label="Câu 4 - Hiếm khi"></td>
+                                <td><input type="radio" name="rd4_73" value="0" aria-label="Câu 4 - Thỉnh thoảng"></td>
+                                <td><input type="radio" name="rd4_73" value="1" aria-label="Câu 4 - Thường xuyên"></td>
+                                <td><input type="radio" name="rd4_73" value="1" aria-label="Câu 4 - Rất thường xuyên"></td>
+                            </tr>
+
+                            <tr>
+                                <td>5.</td>
+                                <td>
+                                    Bạn có thường xuyên vặn vẹo hay bồn chồn
+                                    khi phải ngồi một chỗ trong thời gian dài không?
+                                </td>
+
+                                <td><input type="radio" name="rd5_73" value="0" aria-label="Câu 5 - Không bao giờ"></td>
+                                <td><input type="radio" name="rd5_73" value="0" aria-label="Câu 5 - Hiếm khi"></td>
+                                <td><input type="radio" name="rd5_73" value="0" aria-label="Câu 5 - Thỉnh thoảng"></td>
+                                <td><input type="radio" name="rd5_73" value="1" aria-label="Câu 5 - Thường xuyên"></td>
+                                <td><input type="radio" name="rd5_73" value="1" aria-label="Câu 5 - Rất thường xuyên"></td>
+                            </tr>
+
+                            <tr>
+                                <td>6.</td>
+                                <td>
+                                    Bạn có thường xuyên cảm thấy hiếu động
+                                    như có động cơ đẩy không?
+                                </td>
+
+                                <td><input type="radio" name="rd6_73" value="0" aria-label="Câu 6 - Không bao giờ"></td>
+                                <td><input type="radio" name="rd6_73" value="0" aria-label="Câu 6 - Hiếm khi"></td>
+                                <td><input type="radio" name="rd6_73" value="0" aria-label="Câu 6 - Thỉnh thoảng"></td>
+                                <td><input type="radio" name="rd6_73" value="1" aria-label="Câu 6 - Thường xuyên"></td>
+                                <td><input type="radio" name="rd6_73" value="1" aria-label="Câu 6 - Rất thường xuyên"></td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <!-- THÔNG BÁO LỖI -->
+                <div class="sc73-error" role="alert"></div>
+
+                <!-- NÚT CHỨC NĂNG -->
+                <div class="sc73-actions">
+
+                    <button type="submit" class="sc73-btn sc73-btn-primary">
+                        Kiểm tra kết quả
+                    </button>
+
+                    <button type="reset" class="sc73-btn sc73-btn-reset">
+                        Nhập lại
+                    </button>
+
+                </div>
+
+            </form>
+
         </div>
     </div>
-</div>
 
-<script>
-jQuery(function($) {
-    var $root = $('#adhd-screening-73');
+    <!-- PHẦN KẾT QUẢ -->
+    <div class="sc73-card sc73-result">
 
-    $root.find('input').on('focus', function() {
-        $(this).css('color', '#000');
-    });
+        <div class="sc73-heading">
+            Kết quả kiểm tra ADHD
+        </div>
 
-    $root.find('input[name="sex_73"]').on('change', function() {
-        var isMale = $(this).val() === 'male';
-        $root.find('#gendercolor_73, #form_kq2_73').removeClass('blue pink').addClass(isMale ? 'blue' : 'pink');
-    });
+        <div class="sc73-body">
 
-    $root.find('#submit_btn_73').on('click', function() {
-        var sex = $root.find('input[name="sex_73"]:checked').val();
+            <div class="sc73-score">
+                Tổng điểm:
+                <span class="sc73-total">0</span>/6
+            </div>
 
-        if (sex !== 'male' && sex !== 'female') {
-            alert('Bạn chưa chọn giới tính');
-            return;
-        }
+            <div class="sc73-result-content"></div>
 
-        var total = 0;
-        for (var i = 1; i <= 6; i++) {
-            var answer = $root.find('input[name="rd' + i + '_73"]:checked');
-            if (!answer.length) {
-                alert('Bạn chưa trả lời đầy đủ 6 câu hỏi!');
+            <div class="sc73-note">
+                <strong>Lưu ý:</strong>
+                Đây chỉ là công cụ tự sàng lọc tham khảo, không phải công cụ
+                chẩn đoán ADHD. Kết quả không thể xác định một người có mắc
+                ADHD hay không. Nếu các biểu hiện kéo dài, ảnh hưởng đến
+                công việc, học tập, sinh hoạt hoặc các mối quan hệ, bạn nên
+                trao đổi với bác sĩ chuyên khoa Tâm thần hoặc chuyên gia
+                y tế có chuyên môn để được đánh giá đầy đủ.
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+    (function () {
+        'use strict';
+
+        function initSC73() {
+
+            var root = document.getElementById('adhd-screening-73');
+
+            if (!root || root.getAttribute('data-sc73-init') === '1') {
                 return;
             }
-            total += parseInt(answer.val(), 10);
+
+            root.setAttribute('data-sc73-init', '1');
+
+            var form = root.querySelector('.sc73-form');
+            var resultBox = root.querySelector('.sc73-result');
+            var errorBox = root.querySelector('.sc73-error');
+            var totalElement = root.querySelector('.sc73-total');
+            var resultContent = root.querySelector('.sc73-result-content');
+
+            if (!form || !resultBox || !errorBox) {
+                return;
+            }
+
+            // HIỂN THỊ THÔNG BÁO LỖI.
+            function showError(message, target) {
+
+                errorBox.textContent = message;
+                errorBox.style.display = 'block';
+
+                if (target) {
+                    target.focus();
+                }
+            }
+
+            // ẨN THÔNG BÁO LỖI.
+            function hideError() {
+
+                errorBox.textContent = '';
+                errorBox.style.display = 'none';
+            }
+
+            // ẨN KẾT QUẢ CŨ.
+            function hideResult() {
+
+                resultBox.style.display = 'none';
+                totalElement.textContent = '0';
+                resultContent.innerHTML = '';
+            }
+
+            // ĐỔI MÀU THEO GIỚI TÍNH.
+            var genderInputs = form.querySelectorAll(
+                'input[name="sex_73"]'
+            );
+
+            Array.prototype.forEach.call(genderInputs, function (input) {
+
+                input.addEventListener('change', function () {
+
+                    root.classList.remove('sc73-male', 'sc73-female');
+
+                    if (this.value === 'female') {
+                        root.classList.add('sc73-female');
+                    } else {
+                        root.classList.add('sc73-male');
+                    }
+
+                    hideError();
+                    hideResult();
+                });
+
+            });
+
+            // KHI THAY ĐỔI CÂU TRẢ LỜI.
+            form.addEventListener('change', function (event) {
+
+                if (
+                    event.target &&
+                    event.target.type === 'radio'
+                ) {
+                    hideError();
+                    hideResult();
+                }
+
+            });
+
+            // XỬ LÝ TÍNH ĐIỂM.
+            form.addEventListener('submit', function (event) {
+
+                event.preventDefault();
+
+                hideError();
+
+                // Kiểm tra giới tính.
+                var sex = form.querySelector(
+                    'input[name="sex_73"]:checked'
+                );
+
+                if (!sex) {
+
+                    showError(
+                        'Bạn chưa chọn giới tính!',
+                        genderInputs[0]
+                    );
+
+                    return;
+                }
+
+                // Tính tổng điểm.
+                var total = 0;
+                var unanswered = [];
+
+                for (var i = 1; i <= 6; i++) {
+
+                    var answer = form.querySelector(
+                        'input[name="rd' + i + '_73"]:checked'
+                    );
+
+                    if (!answer) {
+
+                        unanswered.push(i);
+
+                    } else {
+
+                        total += parseInt(answer.value, 10);
+
+                    }
+
+                }
+
+                // Kiểm tra câu hỏi chưa trả lời.
+                if (unanswered.length > 0) {
+
+                    showError(
+                        'Bạn vui lòng trả lời đầy đủ 6 câu hỏi. ' +
+                        'Các câu chưa trả lời: ' +
+                        unanswered.join(', ') + '.'
+                    );
+
+                    return;
+                }
+
+                // PHÂN LOẠI KẾT QUẢ.
+                var content = '';
+
+                if (total < 4) {
+
+                    content =
+                        '<strong>Kết quả tham khảo: Tổng điểm dưới 4.</strong>' +
+                        '<p>Các triệu chứng hiện tại không chỉ ra ADHD theo cách ' +
+                        'tính điểm của bảng hỏi này.</p>' +
+                        '<p>Tuy nhiên, kết quả này không loại trừ hoàn toàn khả năng ' +
+                        'có vấn đề về chú ý hoặc hành vi. Nếu bạn vẫn gặp khó khăn ' +
+                        'trong công việc, học tập hoặc sinh hoạt, hãy cân nhắc trao ' +
+                        'đổi với chuyên gia y tế.</p>';
+
+                } else {
+
+                    content =
+                        '<strong>Kết quả tham khảo: Tổng điểm từ 4 trở lên.</strong>' +
+                        '<p>Trắc nghiệm sàng lọc cho thấy bạn có các triệu chứng ' +
+                        'cần được đánh giá thêm về ADHD.</p>' +
+                        '<p>Chúng tôi khuyên bạn nên tham khảo ý kiến của bác sĩ ' +
+                        'chuyên khoa Tâm thần hoặc chuyên gia có chuyên môn để ' +
+                        'được đánh giá toàn diện.</p>';
+
+                }
+
+                // HIỂN THỊ KẾT QUẢ.
+                totalElement.textContent = total;
+                resultContent.innerHTML = content;
+
+                resultBox.style.display = 'block';
+
+                // CUỘN ĐẾN KẾT QUẢ.
+                setTimeout(function () {
+
+                    var rect = resultBox.getBoundingClientRect();
+
+                    var scrollTop = window.pageYOffset ||
+                        document.documentElement.scrollTop;
+
+                    window.scrollTo({
+                        top: scrollTop + rect.top - 100,
+                        behavior: 'smooth'
+                    });
+
+                }, 100);
+
+            });
+
+            // XỬ LÝ NÚT NHẬP LẠI.
+            form.addEventListener('reset', function () {
+
+                setTimeout(function () {
+
+                    hideError();
+                    hideResult();
+
+                    root.classList.remove(
+                        'sc73-male',
+                        'sc73-female'
+                    );
+
+                }, 0);
+
+            });
+
         }
 
-        var result = '';
-        if (total < 4) {
-            result = 'Các triệu chứng hiện tại không chỉ ra ADHD theo cách tính điểm của bảng hỏi này.';
+        // KHỞI TẠO KHI DOM SẴN SÀNG.
+        if (document.readyState === 'loading') {
+
+            document.addEventListener('DOMContentLoaded', initSC73);
+
         } else {
-            result = 'Trắc nghiệm sàng lọc cho thấy bạn có các triệu chứng cần được đánh giá thêm về ADHD. Chúng tôi khuyên bạn nên tham khảo ý kiến của bác sĩ chuyên khoa Tâm thần.';
+
+            initSC73();
+
         }
 
-        $root.find('#content_73').text(result);
-        $root.find('#form_kq2_73').show();
-    });
-});
-</script>
+    })();
+    </script>
+
+</div>

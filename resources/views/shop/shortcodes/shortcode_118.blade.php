@@ -2,6 +2,7 @@
 <div class="sc118-wrapper">
     <style>
         .sc118-wrapper {
+            width: 100%;
             max-width: 900px;
             margin: 20px auto;
             color: #333;
@@ -9,7 +10,9 @@
             line-height: 1.6;
         }
 
-        .sc118-wrapper * {
+        .sc118-wrapper *,
+        .sc118-wrapper *:before,
+        .sc118-wrapper *:after {
             box-sizing: border-box;
         }
 
@@ -42,6 +45,7 @@
             width: 100%;
             border-collapse: collapse;
             border-spacing: 0;
+            margin: 0;
         }
 
         .sc118-wrapper .sc118-table td,
@@ -103,6 +107,7 @@
             gap: 5px;
             cursor: pointer;
             font-weight: normal;
+            margin: 0;
         }
 
         .sc118-wrapper input[type="radio"] {
@@ -140,12 +145,17 @@
             transition: .2s;
         }
 
-        .sc118-wrapper.sc118-female .sc118-btn {
+        .sc118-wrapper.sc118-female .sc118-btn:not(.sc118-btn-reset) {
             background: #d65d91;
         }
 
         .sc118-wrapper .sc118-btn:hover {
             opacity: .88;
+        }
+
+        .sc118-wrapper .sc118-btn:disabled {
+            opacity: .6;
+            cursor: not-allowed;
         }
 
         .sc118-wrapper .sc118-btn-reset {
@@ -339,7 +349,7 @@
                     </tbody>
                 </table>
 
-                <div class="sc118-error"></div>
+                <div class="sc118-error" role="alert" aria-live="polite"></div>
 
                 <div class="sc118-actions">
                     <button type="button" class="sc118-btn sc118-submit">
@@ -354,7 +364,7 @@
         </div>
     </div>
 
-    <div class="sc118-card sc118-result">
+    <div class="sc118-card sc118-result" aria-live="polite">
         <div class="sc118-heading">
             Kết quả các cột mốc phát triển
         </div>
@@ -507,181 +517,261 @@
     </div>
 
     <script>
-        jQuery(function ($) {
-            $('.sc118-wrapper').each(function () {
-                var $wrapper = $(this);
+    (function() {
+        'use strict';
 
-                if ($wrapper.data('sc118-initialized')) {
+        function initSC118(wrapper) {
+            if (!wrapper || wrapper.getAttribute('data-initialized') === '1') {
+                return;
+            }
+
+            wrapper.setAttribute('data-initialized', '1');
+
+            var form = wrapper.querySelector('.sc118-form');
+            var result = wrapper.querySelector('.sc118-result');
+            var error = wrapper.querySelector('.sc118-error');
+            var babyNameInput = wrapper.querySelector('.sc118-babyname');
+            var daySelect = wrapper.querySelector('.sc118-day');
+            var monthSelect = wrapper.querySelector('.sc118-month');
+            var yearSelect = wrapper.querySelector('.sc118-year');
+
+            var resultName = wrapper.querySelector('.sc118-result-name');
+            var resultSex = wrapper.querySelector('.sc118-result-sex');
+            var resultBirthday = wrapper.querySelector('.sc118-result-birthday');
+
+            var submitButton = wrapper.querySelector('.sc118-submit');
+
+            function showError(message) {
+                error.textContent = message;
+                error.style.display = 'block';
+                result.style.display = 'none';
+            }
+
+            function clearError() {
+                error.textContent = '';
+                error.style.display = 'none';
+            }
+
+            function formatDate(date) {
+                var day = ('0' + date.getDate()).slice(-2);
+                var month = ('0' + (date.getMonth() + 1)).slice(-2);
+                var year = date.getFullYear();
+
+                return day + '/' + month + '/' + year;
+            }
+
+            // Cộng tháng và giữ ngày hợp lệ ở cuối tháng.
+            function addMonths(date, months) {
+                var year = date.getFullYear();
+                var month = date.getMonth() + months;
+                var day = date.getDate();
+
+                var firstDay = new Date(year, month, 1);
+                var lastDay = new Date(
+                    firstDay.getFullYear(),
+                    firstDay.getMonth() + 1,
+                    0
+                ).getDate();
+
+                return new Date(
+                    firstDay.getFullYear(),
+                    firstDay.getMonth(),
+                    Math.min(day, lastDay)
+                );
+            }
+
+            function getGender() {
+                var selected = form.querySelector(
+                    'input[name="sc118_gender"]:checked'
+                );
+
+                return selected ? selected.value : '';
+            }
+
+            function updateGenderStyle() {
+                var sex = getGender();
+
+                if (sex === 'female') {
+                    wrapper.classList.add('sc118-female');
+                } else {
+                    wrapper.classList.remove('sc118-female');
+                }
+            }
+
+            function renderMilestones(birthday) {
+                for (var i = 0; i < 15; i++) {
+                    var startDate = addMonths(birthday, i + 1);
+                    var endDate = addMonths(birthday, i + 2);
+
+                    var ageText = (i + 1) + '–' + (i + 2) + ' tháng tuổi';
+
+                    var dateText = formatDate(startDate) +
+                        ' – ' + formatDate(endDate);
+
+                    var cell = wrapper.querySelector('.sc118-date-' + i);
+
+                    if (!cell) {
+                        continue;
+                    }
+
+                    var ageSpan = document.createElement('span');
+                    ageSpan.className = 'sc118-milestone-age';
+                    ageSpan.textContent = ageText;
+
+                    var dateSpan = document.createElement('span');
+                    dateSpan.className = 'sc118-milestone-date';
+                    dateSpan.textContent = dateText;
+
+                    cell.textContent = '';
+                    cell.appendChild(ageSpan);
+                    cell.appendChild(dateSpan);
+                }
+            }
+
+            function validateAndCalculate() {
+                clearError();
+
+                var babyname = babyNameInput.value.trim();
+                var sex = getGender();
+
+                var day = parseInt(daySelect.value, 10);
+                var month = parseInt(monthSelect.value, 10);
+                var year = parseInt(yearSelect.value, 10);
+
+                if (!babyname) {
+                    showError('Bạn chưa nhập tên của bé!');
+                    babyNameInput.focus();
                     return;
                 }
 
-                $wrapper.data('sc118-initialized', true);
-
-                var $form = $wrapper.find('.sc118-form');
-                var $result = $wrapper.find('.sc118-result');
-                var $error = $wrapper.find('.sc118-error');
-
-                // Đổi màu giao diện theo giới tính.
-                $form.find('input[name="sc118_gender"]').on('change', function () {
-                    $wrapper.removeClass('sc118-female');
-
-                    if ($(this).val() === 'female') {
-                        $wrapper.addClass('sc118-female');
-                    }
-                });
-
-                // Định dạng ngày tháng.
-                function formatDate(date) {
-                    var day = ('0' + date.getDate()).slice(-2);
-                    var month = ('0' + (date.getMonth() + 1)).slice(-2);
-                    var year = date.getFullYear();
-
-                    return day + '/' + month + '/' + year;
+                if (babyname.length > 50) {
+                    showError('Tên bé không được vượt quá 50 ký tự!');
+                    babyNameInput.focus();
+                    return;
                 }
 
-                // Cộng tháng, xử lý trường hợp ngày cuối tháng.
-                function addMonths(date, months) {
-                    var result = new Date(
-                        date.getFullYear(),
-                        date.getMonth(),
-                        1
-                    );
-
-                    result.setMonth(result.getMonth() + months);
-
-                    var lastDay = new Date(
-                        result.getFullYear(),
-                        result.getMonth() + 1,
-                        0
-                    ).getDate();
-
-                    result.setDate(Math.min(date.getDate(), lastDay));
-
-                    return result;
+                if (!sex) {
+                    showError('Bạn chưa chọn giới tính!');
+                    return;
                 }
 
-                // Xác nhận thông tin.
-                $wrapper.find('.sc118-submit').on('click', function () {
-                    var babyname = $.trim(
-                        $wrapper.find('.sc118-babyname').val()
-                    );
+                if (!day || !month || !year) {
+                    showError('Vui lòng nhập đầy đủ ngày, tháng và năm sinh!');
+                    return;
+                }
 
-                    var sex = $form.find(
-                        'input[name="sc118_gender"]:checked'
-                    ).val();
+                var birthday = new Date(year, month - 1, day);
 
-                    var day = parseInt($wrapper.find('.sc118-day').val(), 10);
-                    var month = parseInt($wrapper.find('.sc118-month').val(), 10);
-                    var year = parseInt($wrapper.find('.sc118-year').val(), 10);
+                if (
+                    birthday.getFullYear() !== year ||
+                    birthday.getMonth() !== month - 1 ||
+                    birthday.getDate() !== day
+                ) {
+                    showError('Ngày sinh không hợp lệ!');
+                    return;
+                }
 
-                    $error.hide().text('');
+                var today = new Date();
+                today.setHours(0, 0, 0, 0);
 
-                    if (!babyname) {
-                        $error.text('Bạn chưa nhập tên của bé!').show();
-                        $wrapper.find('.sc118-babyname').focus();
-                        return;
+                if (birthday > today) {
+                    showError('Ngày sinh không được lớn hơn ngày hiện tại!');
+                    return;
+                }
+
+                // Giữ giới hạn năm trong danh sách chọn ban đầu.
+                var minYear = new Date().getFullYear() - 10;
+
+                if (year < minYear || year > new Date().getFullYear()) {
+                    showError('Năm sinh không nằm trong phạm vi cho phép!');
+                    return;
+                }
+
+                resultName.textContent = babyname;
+                resultSex.textContent = sex === 'male' ? 'Nam' : 'Nữ';
+
+                resultBirthday.textContent =
+                    'Ngày ' + day + ' / Tháng ' + month + ' / Năm ' + year;
+
+                renderMilestones(birthday);
+
+                result.style.display = 'block';
+
+                setTimeout(function() {
+                    var top = result.getBoundingClientRect().top +
+                        window.pageYOffset - 100;
+
+                    try {
+                        window.scrollTo({
+                            top: top,
+                            behavior: 'smooth'
+                        });
+                    } catch (e) {
+                        window.scrollTo(0, top);
                     }
+                }, 100);
+            }
 
-                    // Hỗ trợ chữ cái tiếng Việt, dấu cách, dấu nháy và gạch nối.
-                    var namePattern = /^[a-zA-ZÀ-ỹ\s'-]+$/;
+            // Thay đổi giới tính.
+            var genderInputs = form.querySelectorAll(
+                'input[name="sc118_gender"]'
+            );
 
-                    if (!namePattern.test(babyname)) {
-                        $error.text(
-                            'Tên bé chỉ được chứa chữ cái, dấu cách và dấu gạch nối!'
-                        ).show();
-
-                        $wrapper.find('.sc118-babyname').focus();
-                        return;
-                    }
-
-                    if (!sex) {
-                        $error.text('Bạn chưa chọn giới tính!').show();
-                        return;
-                    }
-
-                    if (!day) {
-                        $error.text('Vui lòng chọn ngày sinh!').show();
-                        return;
-                    }
-
-                    if (!month) {
-                        $error.text('Vui lòng chọn tháng sinh!').show();
-                        return;
-                    }
-
-                    if (!year) {
-                        $error.text('Vui lòng chọn năm sinh!').show();
-                        return;
-                    }
-
-                    var birthday = new Date(year, month - 1, day);
-                    var today = new Date();
-
-                    today.setHours(0, 0, 0, 0);
-
-                    // Kiểm tra ngày hợp lệ.
-                    if (
-                        birthday.getFullYear() !== year ||
-                        birthday.getMonth() !== month - 1 ||
-                        birthday.getDate() !== day
-                    ) {
-                        $error.text('Ngày sinh không hợp lệ!').show();
-                        return;
-                    }
-
-                    if (birthday > today) {
-                        $error.text('Ngày sinh không được lớn hơn ngày hiện tại!').show();
-                        return;
-                    }
-
-                    // Hiển thị thông tin bé.
-                    $wrapper.find('.sc118-result-name').text(babyname);
-
-                    $wrapper.find('.sc118-result-sex').text(
-                        sex === 'male' ? 'Nam' : 'Nữ'
-                    );
-
-                    $wrapper.find('.sc118-result-birthday').text(
-                        'Ngày ' + day + ' / Tháng ' + month + ' / Năm ' + year
-                    );
-
-                    // Hiển thị 15 cột mốc phát triển.
-                    for (var i = 0; i < 15; i++) {
-                        var startDate = addMonths(birthday, i + 1);
-                        var endDate = addMonths(birthday, i + 2);
-
-                        var ageText = (i + 1) + '–' + (i + 2) + ' tháng tuổi';
-
-                        var dateText =
-                            formatDate(startDate) + ' – ' + formatDate(endDate);
-
-                        var html =
-                            '<span class="sc118-milestone-age">' +
-                            ageText +
-                            '</span>' +
-                            '<span class="sc118-milestone-date">' +
-                            dateText +
-                            '</span>';
-
-                        $wrapper.find('.sc118-date-' + i).html(html);
-                    }
-
-                    $result.stop(true, true).slideDown(200);
-
-                    $('html, body').animate({
-                        scrollTop: $result.offset().top - 100
-                    }, 300);
+            for (var i = 0; i < genderInputs.length; i++) {
+                genderInputs[i].addEventListener('change', function() {
+                    updateGenderStyle();
                 });
+            }
 
-                // Nhập lại.
-                $form.on('reset', function () {
-                    setTimeout(function () {
-                        $error.hide().text('');
-                        $result.hide();
-                        $wrapper.removeClass('sc118-female');
-                    }, 0);
-                });
+            // Xác nhận.
+            submitButton.addEventListener('click', function(event) {
+                event.preventDefault();
+                validateAndCalculate();
             });
-        });
+
+            // Không submit form ra ngoài.
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                validateAndCalculate();
+            });
+
+            // Nhập lại.
+            form.addEventListener('reset', function() {
+                setTimeout(function() {
+                    clearError();
+                    result.style.display = 'none';
+                    wrapper.classList.remove('sc118-female');
+                }, 0);
+            });
+
+            // Thay đổi thông tin sau khi đã tính sẽ ẩn kết quả cũ.
+            form.addEventListener('input', function() {
+                result.style.display = 'none';
+                clearError();
+            });
+
+            form.addEventListener('change', function() {
+                result.style.display = 'none';
+                clearError();
+                updateGenderStyle();
+            });
+
+            updateGenderStyle();
+        }
+
+        function startSC118() {
+            var wrappers = document.querySelectorAll('.sc118-wrapper');
+
+            for (var i = 0; i < wrappers.length; i++) {
+                initSC118(wrappers[i]);
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', startSC118);
+        } else {
+            startSC118();
+        }
+    })();
     </script>
 </div>
